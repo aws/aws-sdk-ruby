@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2019-05-30)
+------------------
+
+* Feature - IoT Analytics adds the option to use your own S3 bucket to store channel and data store resources. Previously, only service-managed storage was used.
+
+1.20.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-05-13)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-03-25)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.12.0 (2019-01-03)
+------------------
+
+* Feature - API update.
+
 1.11.0 (2018-11-27)
 ------------------
 

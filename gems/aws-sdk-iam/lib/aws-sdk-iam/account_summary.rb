@@ -20,7 +20,7 @@ module Aws::IAM
 
     # @!group Read-Only Attributes
 
-    # A set of key value pairs containing information about IAM entity usage
+    # A set of key–value pairs containing information about IAM entity usage
     # and IAM quotas.
     # @return [Hash<String,Integer>]
     def summary_map

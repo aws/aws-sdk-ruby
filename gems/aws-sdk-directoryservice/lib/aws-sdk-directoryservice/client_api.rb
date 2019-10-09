@@ -284,6 +284,10 @@ module Aws::DirectoryService
     AcceptSharedDirectoryResult.add_member(:shared_directory, Shapes::ShapeRef.new(shape: SharedDirectory, location_name: "SharedDirectory"))
     AcceptSharedDirectoryResult.struct_class = Types::AcceptSharedDirectoryResult
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AddIpRoutesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     AddIpRoutesRequest.add_member(:ip_routes, Shapes::ShapeRef.new(shape: IpRoutes, required: true, location_name: "IpRoutes"))
     AddIpRoutesRequest.add_member(:update_security_group_for_directory_controllers, Shapes::ShapeRef.new(shape: UpdateSecurityGroupForDirectoryControllers, location_name: "UpdateSecurityGroupForDirectoryControllers"))
@@ -303,6 +307,10 @@ module Aws::DirectoryService
 
     Attributes.member = Shapes::ShapeRef.new(shape: Attribute)
 
+    AuthenticationFailedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AuthenticationFailedException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    AuthenticationFailedException.struct_class = Types::AuthenticationFailedException
+
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
 
     CancelSchemaExtensionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
@@ -312,6 +320,10 @@ module Aws::DirectoryService
     CancelSchemaExtensionResult.struct_class = Types::CancelSchemaExtensionResult
 
     CidrIps.member = Shapes::ShapeRef.new(shape: CidrIp)
+
+    ClientException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ClientException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    ClientException.struct_class = Types::ClientException
 
     Computer.add_member(:computer_id, Shapes::ShapeRef.new(shape: SID, location_name: "ComputerId"))
     Computer.add_member(:computer_name, Shapes::ShapeRef.new(shape: ComputerName, location_name: "ComputerName"))
@@ -331,6 +343,7 @@ module Aws::DirectoryService
     ConnectDirectoryRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ConnectDirectoryRequest.add_member(:size, Shapes::ShapeRef.new(shape: DirectorySize, required: true, location_name: "Size"))
     ConnectDirectoryRequest.add_member(:connect_settings, Shapes::ShapeRef.new(shape: DirectoryConnectSettings, required: true, location_name: "ConnectSettings"))
+    ConnectDirectoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ConnectDirectoryRequest.struct_class = Types::ConnectDirectoryRequest
 
     ConnectDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -367,6 +380,7 @@ module Aws::DirectoryService
     CreateDirectoryRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateDirectoryRequest.add_member(:size, Shapes::ShapeRef.new(shape: DirectorySize, required: true, location_name: "Size"))
     CreateDirectoryRequest.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: "VpcSettings"))
+    CreateDirectoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateDirectoryRequest.struct_class = Types::CreateDirectoryRequest
 
     CreateDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -384,6 +398,7 @@ module Aws::DirectoryService
     CreateMicrosoftADRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateMicrosoftADRequest.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettings, required: true, location_name: "VpcSettings"))
     CreateMicrosoftADRequest.add_member(:edition, Shapes::ShapeRef.new(shape: DirectoryEdition, location_name: "Edition"))
+    CreateMicrosoftADRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateMicrosoftADRequest.struct_class = Types::CreateMicrosoftADRequest
 
     CreateMicrosoftADResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -507,6 +522,10 @@ module Aws::DirectoryService
     DescribeTrustsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeTrustsResult.struct_class = Types::DescribeTrustsResult
 
+    DirectoryAlreadySharedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DirectoryAlreadySharedException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryAlreadySharedException.struct_class = Types::DirectoryAlreadySharedException
+
     DirectoryConnectSettings.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     DirectoryConnectSettings.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
     DirectoryConnectSettings.add_member(:customer_dns_ips, Shapes::ShapeRef.new(shape: DnsIpAddrs, required: true, location_name: "CustomerDnsIps"))
@@ -551,6 +570,10 @@ module Aws::DirectoryService
 
     DirectoryIds.member = Shapes::ShapeRef.new(shape: DirectoryId)
 
+    DirectoryLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DirectoryLimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryLimitExceededException.struct_class = Types::DirectoryLimitExceededException
+
     DirectoryLimits.add_member(:cloud_only_directories_limit, Shapes::ShapeRef.new(shape: Limit, location_name: "CloudOnlyDirectoriesLimit"))
     DirectoryLimits.add_member(:cloud_only_directories_current_count, Shapes::ShapeRef.new(shape: Limit, location_name: "CloudOnlyDirectoriesCurrentCount"))
     DirectoryLimits.add_member(:cloud_only_directories_limit_reached, Shapes::ShapeRef.new(shape: CloudOnlyDirectoriesLimitReached, location_name: "CloudOnlyDirectoriesLimitReached"))
@@ -561,6 +584,14 @@ module Aws::DirectoryService
     DirectoryLimits.add_member(:connected_directories_current_count, Shapes::ShapeRef.new(shape: Limit, location_name: "ConnectedDirectoriesCurrentCount"))
     DirectoryLimits.add_member(:connected_directories_limit_reached, Shapes::ShapeRef.new(shape: ConnectedDirectoriesLimitReached, location_name: "ConnectedDirectoriesLimitReached"))
     DirectoryLimits.struct_class = Types::DirectoryLimits
+
+    DirectoryNotSharedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DirectoryNotSharedException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryNotSharedException.struct_class = Types::DirectoryNotSharedException
+
+    DirectoryUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DirectoryUnavailableException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryUnavailableException.struct_class = Types::DirectoryUnavailableException
 
     DirectoryVpcSettings.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     DirectoryVpcSettings.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
@@ -600,6 +631,10 @@ module Aws::DirectoryService
 
     DomainControllerIds.member = Shapes::ShapeRef.new(shape: DomainControllerId)
 
+    DomainControllerLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DomainControllerLimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DomainControllerLimitExceededException.struct_class = Types::DomainControllerLimitExceededException
+
     DomainControllers.member = Shapes::ShapeRef.new(shape: DomainController)
 
     EnableRadiusRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
@@ -614,6 +649,14 @@ module Aws::DirectoryService
     EnableSsoRequest.struct_class = Types::EnableSsoRequest
 
     EnableSsoResult.struct_class = Types::EnableSsoResult
+
+    EntityAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    EntityAlreadyExistsException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    EntityAlreadyExistsException.struct_class = Types::EntityAlreadyExistsException
+
+    EntityDoesNotExistException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    EntityDoesNotExistException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    EntityDoesNotExistException.struct_class = Types::EntityDoesNotExistException
 
     EventTopic.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     EventTopic.add_member(:topic_name, Shapes::ShapeRef.new(shape: TopicName, location_name: "TopicName"))
@@ -635,6 +678,26 @@ module Aws::DirectoryService
     GetSnapshotLimitsResult.add_member(:snapshot_limits, Shapes::ShapeRef.new(shape: SnapshotLimits, location_name: "SnapshotLimits"))
     GetSnapshotLimitsResult.struct_class = Types::GetSnapshotLimitsResult
 
+    InsufficientPermissionsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InsufficientPermissionsException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InsufficientPermissionsException.struct_class = Types::InsufficientPermissionsException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidNextTokenException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidParameterException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidPasswordException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidPasswordException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidPasswordException.struct_class = Types::InvalidPasswordException
+
+    InvalidTargetException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidTargetException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidTargetException.struct_class = Types::InvalidTargetException
+
     IpAddrs.member = Shapes::ShapeRef.new(shape: IpAddr)
 
     IpRoute.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: CidrIp, location_name: "CidrIp"))
@@ -648,6 +711,10 @@ module Aws::DirectoryService
     IpRouteInfo.add_member(:ip_route_status_reason, Shapes::ShapeRef.new(shape: IpRouteStatusReason, location_name: "IpRouteStatusReason"))
     IpRouteInfo.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     IpRouteInfo.struct_class = Types::IpRouteInfo
+
+    IpRouteLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    IpRouteLimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    IpRouteLimitExceededException.struct_class = Types::IpRouteLimitExceededException
 
     IpRoutes.member = Shapes::ShapeRef.new(shape: IpRoute)
 
@@ -695,6 +762,10 @@ module Aws::DirectoryService
     LogSubscription.struct_class = Types::LogSubscription
 
     LogSubscriptions.member = Shapes::ShapeRef.new(shape: LogSubscription)
+
+    OrganizationsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    OrganizationsException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    OrganizationsException.struct_class = Types::OrganizationsException
 
     OwnerDirectoryDescription.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     OwnerDirectoryDescription.add_member(:account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "AccountId"))
@@ -765,6 +836,10 @@ module Aws::DirectoryService
 
     Servers.member = Shapes::ShapeRef.new(shape: Server)
 
+    ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ServiceException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    ServiceException.struct_class = Types::ServiceException
+
     ShareDirectoryRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     ShareDirectoryRequest.add_member(:share_notes, Shapes::ShapeRef.new(shape: Notes, location_name: "ShareNotes"))
     ShareDirectoryRequest.add_member(:share_target, Shapes::ShapeRef.new(shape: ShareTarget, required: true, location_name: "ShareTarget"))
@@ -773,6 +848,10 @@ module Aws::DirectoryService
 
     ShareDirectoryResult.add_member(:shared_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId"))
     ShareDirectoryResult.struct_class = Types::ShareDirectoryResult
+
+    ShareLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ShareLimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    ShareLimitExceededException.struct_class = Types::ShareLimitExceededException
 
     ShareTarget.add_member(:id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "Id"))
     ShareTarget.add_member(:type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "Type"))
@@ -801,6 +880,10 @@ module Aws::DirectoryService
 
     SnapshotIds.member = Shapes::ShapeRef.new(shape: SnapshotId)
 
+    SnapshotLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    SnapshotLimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    SnapshotLimitExceededException.struct_class = Types::SnapshotLimitExceededException
+
     SnapshotLimits.add_member(:manual_snapshots_limit, Shapes::ShapeRef.new(shape: Limit, location_name: "ManualSnapshotsLimit"))
     SnapshotLimits.add_member(:manual_snapshots_current_count, Shapes::ShapeRef.new(shape: Limit, location_name: "ManualSnapshotsCurrentCount"))
     SnapshotLimits.add_member(:manual_snapshots_limit_reached, Shapes::ShapeRef.new(shape: ManualSnapshotsLimitReached, location_name: "ManualSnapshotsLimitReached"))
@@ -824,6 +907,10 @@ module Aws::DirectoryService
     Tag.struct_class = Types::Tag
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TagLimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    TagLimitExceededException.struct_class = Types::TagLimitExceededException
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
@@ -857,6 +944,10 @@ module Aws::DirectoryService
     UnshareTarget.add_member(:type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "Type"))
     UnshareTarget.struct_class = Types::UnshareTarget
 
+    UnsupportedOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    UnsupportedOperationException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
+
     UpdateConditionalForwarderRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     UpdateConditionalForwarderRequest.add_member(:remote_domain_name, Shapes::ShapeRef.new(shape: RemoteDomainName, required: true, location_name: "RemoteDomainName"))
     UpdateConditionalForwarderRequest.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, required: true, location_name: "DnsIpAddrs"))
@@ -883,6 +974,10 @@ module Aws::DirectoryService
     UpdateTrustResult.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     UpdateTrustResult.add_member(:trust_id, Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId"))
     UpdateTrustResult.struct_class = Types::UpdateTrustResult
+
+    UserDoesNotExistException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    UserDoesNotExistException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    UserDoesNotExistException.struct_class = Types::UserDoesNotExistException
 
     VerifyTrustRequest.add_member(:trust_id, Shapes::ShapeRef.new(shape: TrustId, required: true, location_name: "TrustId"))
     VerifyTrustRequest.struct_class = Types::VerifyTrustRequest

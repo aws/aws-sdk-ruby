@@ -25,15 +25,18 @@ module Aws
       # @option params [Time, DateTime, Date, String, Integer<timestamp>] :expires
       # @option params [String<JSON>] :policy
       def signed_cookie(url, params = {})
-        scheme, uri = scheme_and_uri(url)
-        signed_content = signature(
-          resource: resource(scheme, uri),
-          expires: time(params[:expires]),
-          policy: params[:policy]
-        )
+        content = {}.tap do |c|
+          if params[:policy]
+            c[:policy] = params[:policy]
+          elsif url && params[:expires]
+            scheme, uri = scheme_and_uri(url)
+            c[:resource] = resource(scheme, uri)
+            c[:expires] = time(params[:expires])
+          end
+        end
 
         cookie_parameters = {}
-        signed_content.each { |k, v|
+        signature(content).each { |k, v|
           cookie_parameters["CloudFront-#{k}"] = v.to_s.gsub("\n", '')
         }
         cookie_parameters

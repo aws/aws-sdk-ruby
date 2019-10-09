@@ -25,7 +25,8 @@
       "errors":[
         {"shape":"ServiceUnavailableException"},
         {"shape":"InternalServiceError"},
-        {"shape":"InvalidRequestException"}
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceExistsException"}
       ]
     },
     "CreateUser":{
@@ -287,6 +288,9 @@
     "CreateServerRequest":{
       "type":"structure",
       "members":{
+        "EndpointDetails":{"shape":"EndpointDetails"},
+        "EndpointType":{"shape":"EndpointType"},
+        "HostKey":{"shape":"HostKey"},
         "IdentityProviderDetails":{"shape":"IdentityProviderDetails"},
         "IdentityProviderType":{"shape":"IdentityProviderType"},
         "LoggingRole":{"shape":"Role"},
@@ -401,6 +405,9 @@
       "required":["Arn"],
       "members":{
         "Arn":{"shape":"Arn"},
+        "EndpointDetails":{"shape":"EndpointDetails"},
+        "EndpointType":{"shape":"EndpointType"},
+        "HostKeyFingerprint":{"shape":"HostKeyFingerprint"},
         "IdentityProviderDetails":{"shape":"IdentityProviderDetails"},
         "IdentityProviderType":{"shape":"IdentityProviderType"},
         "LoggingRole":{"shape":"Role"},
@@ -423,11 +430,30 @@
         "UserName":{"shape":"UserName"}
       }
     },
+    "EndpointDetails":{
+      "type":"structure",
+      "members":{
+        "VpcEndpointId":{"shape":"VpcEndpointId"}
+      }
+    },
+    "EndpointType":{
+      "type":"string",
+      "enum":[
+        "PUBLIC",
+        "VPC_ENDPOINT"
+      ]
+    },
     "HomeDirectory":{
       "type":"string",
       "max":1024,
       "pattern":"^$|/.*"
     },
+    "HostKey":{
+      "type":"string",
+      "max":4096,
+      "sensitive":true
+    },
+    "HostKeyFingerprint":{"type":"string"},
     "IdentityProviderDetails":{
       "type":"structure",
       "members":{
@@ -552,6 +578,7 @@
       "members":{
         "Arn":{"shape":"Arn"},
         "IdentityProviderType":{"shape":"IdentityProviderType"},
+        "EndpointType":{"shape":"EndpointType"},
         "LoggingRole":{"shape":"Role"},
         "ServerId":{"shape":"ServerId"},
         "State":{"shape":"State"},
@@ -585,7 +612,7 @@
     "Message":{"type":"string"},
     "NextToken":{
       "type":"string",
-      "max":256,
+      "max":6144,
       "min":1
     },
     "NullableRole":{
@@ -623,6 +650,7 @@
       "exception":true
     },
     "ResourceType":{"type":"string"},
+    "Response":{"type":"string"},
     "Role":{
       "type":"string",
       "pattern":"arn:.*role/.*"
@@ -750,8 +778,9 @@
         "Url"
       ],
       "members":{
-        "Message":{"shape":"Message"},
+        "Response":{"shape":"Response"},
         "StatusCode":{"shape":"StatusCode"},
+        "Message":{"shape":"Message"},
         "Url":{"shape":"Url"}
       }
     },
@@ -770,6 +799,9 @@
       "type":"structure",
       "required":["ServerId"],
       "members":{
+        "EndpointDetails":{"shape":"EndpointDetails"},
+        "EndpointType":{"shape":"EndpointType"},
+        "HostKey":{"shape":"HostKey"},
         "IdentityProviderDetails":{"shape":"IdentityProviderDetails"},
         "LoggingRole":{"shape":"NullableRole"},
         "ServerId":{"shape":"ServerId"}
@@ -811,8 +843,15 @@
     "UserCount":{"type":"integer"},
     "UserName":{
       "type":"string",
-      "pattern":"^[a-z0-9]{3,32}$"
+      "pattern":"^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$"
     },
-    "UserPassword":{"type":"string"}
+    "UserPassword":{
+      "type":"string",
+      "sensitive":true
+    },
+    "VpcEndpointId":{
+      "type":"string",
+      "pattern":"^vpce-[0-9a-f]{17}$"
+    }
   }
 }

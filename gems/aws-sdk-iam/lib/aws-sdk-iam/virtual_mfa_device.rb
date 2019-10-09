@@ -30,8 +30,8 @@ module Aws::IAM
       @serial_number
     end
 
-    # The Base32 seed defined as specified in [RFC3548][1]. The
-    # `Base32StringSeed` is Base64-encoded.
+    # The base32 seed defined as specified in [RFC3548][1]. The
+    # `Base32StringSeed` is base64-encoded.
     #
     #
     #
@@ -43,10 +43,10 @@ module Aws::IAM
 
     # A QR code PNG image that encodes
     # `otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String`
-    # where `$virtualMFADeviceName` is one of the create call arguments,
+    # where `$virtualMFADeviceName` is one of the create call arguments.
     # `AccountName` is the user name if set (otherwise, the account ID
-    # otherwise), and `Base32String` is the seed in Base32 format. The
-    # `Base32String` value is Base64-encoded.
+    # otherwise), and `Base32String` is the seed in base32 format. The
+    # `Base32String` value is base64-encoded.
     # @return [String]
     def qr_code_png
       data[:qr_code_png]

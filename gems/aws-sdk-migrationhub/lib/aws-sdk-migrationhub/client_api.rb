@@ -87,6 +87,9 @@ module Aws::MigrationHub
     UnauthorizedOperation = Shapes::StructureShape.new(name: 'UnauthorizedOperation')
     UpdateDateTime = Shapes::TimestampShape.new(name: 'UpdateDateTime')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AssociateCreatedArtifactRequest.add_member(:progress_update_stream, Shapes::ShapeRef.new(shape: ProgressUpdateStream, required: true, location_name: "ProgressUpdateStream"))
     AssociateCreatedArtifactRequest.add_member(:migration_task_name, Shapes::ShapeRef.new(shape: MigrationTaskName, required: true, location_name: "MigrationTaskName"))
     AssociateCreatedArtifactRequest.add_member(:created_artifact, Shapes::ShapeRef.new(shape: CreatedArtifact, required: true, location_name: "CreatedArtifact"))
@@ -157,12 +160,21 @@ module Aws::MigrationHub
 
     DiscoveredResourceList.member = Shapes::ShapeRef.new(shape: DiscoveredResource)
 
+    DryRunOperation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DryRunOperation.struct_class = Types::DryRunOperation
+
     ImportMigrationTaskRequest.add_member(:progress_update_stream, Shapes::ShapeRef.new(shape: ProgressUpdateStream, required: true, location_name: "ProgressUpdateStream"))
     ImportMigrationTaskRequest.add_member(:migration_task_name, Shapes::ShapeRef.new(shape: MigrationTaskName, required: true, location_name: "MigrationTaskName"))
     ImportMigrationTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
     ImportMigrationTaskRequest.struct_class = Types::ImportMigrationTaskRequest
 
     ImportMigrationTaskResult.struct_class = Types::ImportMigrationTaskResult
+
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidInputException.struct_class = Types::InvalidInputException
 
     LatestResourceAttributeList.member = Shapes::ShapeRef.new(shape: ResourceAttribute)
 
@@ -237,6 +249,9 @@ module Aws::MigrationHub
 
     NotifyMigrationTaskStateResult.struct_class = Types::NotifyMigrationTaskStateResult
 
+    PolicyErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PolicyErrorException.struct_class = Types::PolicyErrorException
+
     ProgressUpdateStreamSummary.add_member(:progress_update_stream_name, Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStreamName"))
     ProgressUpdateStreamSummary.struct_class = Types::ProgressUpdateStreamSummary
 
@@ -256,10 +271,19 @@ module Aws::MigrationHub
 
     ResourceAttributeList.member = Shapes::ShapeRef.new(shape: ResourceAttribute)
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     Task.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "Status"))
     Task.add_member(:status_detail, Shapes::ShapeRef.new(shape: StatusDetail, location_name: "StatusDetail"))
     Task.add_member(:progress_percent, Shapes::ShapeRef.new(shape: ProgressPercent, location_name: "ProgressPercent"))
     Task.struct_class = Types::Task
+
+    UnauthorizedOperation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnauthorizedOperation.struct_class = Types::UnauthorizedOperation
 
 
     # @api private

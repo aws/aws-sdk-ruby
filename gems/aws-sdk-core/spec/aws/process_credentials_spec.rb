@@ -15,6 +15,12 @@ module Aws
       expect(creds.session_token).to eq('TOKEN_PROC1')
     end
 
+    it 'will throw an error when invalid JSON is returned' do
+      expect {
+        creds = ProcessCredentials.new('echo \'{"Version":3,"AccessKeyId":"","SecretAccessKey":"","SessionToken":""\'').credentials
+      }.to raise_error(Errors::InvalidProcessCredentialsPayload)
+    end
+
     it 'will throw an error when the process credentials payload version is invalid' do 
       expect {
         creds = ProcessCredentials.new('echo \'{"Version":3,"AccessKeyId":"","SecretAccessKey":"","SessionToken":""}\'').credentials

@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::TranscribeService
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::TranscribeService
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::TranscribeService
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -216,10 +265,7 @@ module Aws::TranscribeService
     # @!group API Operations
 
     # Creates a new custom vocabulary that you can use to change the way
-    # Amazon Transcribe handles transcription of an audio file. Note that
-    # vocabularies for en-AU, en-UK, and fr-CA languages that are in preview
-    # are not available. In the console, the vocabulary section will be
-    # greyed-out and SDK will return error message.
+    # Amazon Transcribe handles transcription of an audio file.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary. The name must be unique within an AWS
@@ -228,8 +274,32 @@ module Aws::TranscribeService
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries.
     #
-    # @option params [required, Array<String>] :phrases
+    # @option params [Array<String>] :phrases
     #   An array of strings that contains the vocabulary entries.
+    #
+    # @option params [String] :vocabulary_file_uri
+    #   The S3 location of the text file that contains the definition of the
+    #   custom vocabulary. The URI must be in the same region as the API
+    #   endpoint that you are calling. The general form is
+    #
+    #   `
+    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   For example:
+    #
+    #   `https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #   For more information about custom vocabularies, see [Custom
+    #   Vocabularies][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -243,14 +313,15 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR
-    #     phrases: ["Phrase"], # required
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
+    #     phrases: ["Phrase"],
+    #     vocabulary_file_uri: "Uri",
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -331,7 +402,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -353,10 +424,7 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Gets information about a vocabulary. Note that vocabularies for en-AU,
-    # en-UK, and fr-CA languages that are in preview are not available. In
-    # the console, the vocabulary section will be greyed-out and SDK will
-    # return error message.
+    # Gets information about a vocabulary.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary to return information about. The name is
@@ -380,7 +448,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -399,7 +467,9 @@ module Aws::TranscribeService
     #
     # @option params [String] :status
     #   When specified, returns only transcription jobs with the specified
-    #   status.
+    #   status. Jobs are ordered by creation date, with the newest jobs
+    #   returned first. If you don’t specify a status, Amazon Transcribe
+    #   returns all transcription jobs ordered by creation date.
     #
     # @option params [String] :job_name_contains
     #   When specified, the jobs returned in the list are limited to jobs
@@ -437,7 +507,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].transcription_job_name #=> String
     #   resp.transcription_job_summaries[0].creation_time #=> Time
     #   resp.transcription_job_summaries[0].completion_time #=> Time
-    #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
     #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -494,7 +564,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -507,9 +577,7 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Starts an asynchronous job to transcribe speech to text. Note that
-    # en-AU, en-UK, and fr-CA languages are in preview and are only
-    # available to whitelisted customers.
+    # Starts an asynchronous job to transcribe speech to text.
     #
     # @option params [required, String] :transcription_job_name
     #   The name of the job. Note that you can't use the strings "." or
@@ -522,7 +590,13 @@ module Aws::TranscribeService
     # @option params [Integer] :media_sample_rate_hertz
     #   The sample rate, in Hertz, of the audio track in the input media file.
     #
-    # @option params [required, String] :media_format
+    #   If you do not specify the media sample rate, Amazon Transcribe
+    #   determines the sample rate. If you specify the sample rate, it must
+    #   match the sample rate detected by Amazon Transcribe. In most cases,
+    #   you should leave the `MediaSampleRateHertz` field blank and let Amazon
+    #   Transcribe determine the sample rate.
+    #
+    # @option params [String] :media_format
     #   The format of the input media file.
     #
     # @option params [required, Types::Media] :media
@@ -538,6 +612,10 @@ module Aws::TranscribeService
     #   that allow Amazon Transcribe to put files in the bucket. For more
     #   information, see [Permissions Required for IAM User Roles][1].
     #
+    #   Amazon Transcribe uses the default Amazon S3 key for server-side
+    #   encryption of transcripts that are placed in your S3 bucket. You
+    #   can't specify your own encryption key.
+    #
     #   If you don't set the `OutputBucketName`, Amazon Transcribe generates
     #   a pre-signed URL, a shareable URL that provides secure access to your
     #   transcription, and returns it in the `TranscriptFileUri` field. Use
@@ -545,7 +623,9 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
+    #
+    # @option params [String] :output_encryption_kms_key_id
     #
     # @option params [Types::Settings] :settings
     #   A `Settings` object that provides optional settings for a
@@ -559,13 +639,14 @@ module Aws::TranscribeService
     #
     #   resp = client.start_transcription_job({
     #     transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #     media_sample_rate_hertz: 1,
-    #     media_format: "mp3", # required, accepts mp3, mp4, wav, flac
+    #     media_format: "mp3", # accepts mp3, mp4, wav, flac
     #     media: { # required
     #       media_file_uri: "Uri",
     #     },
     #     output_bucket_name: "OutputBucketName",
+    #     output_encryption_kms_key_id: "KMSKeyId",
     #     settings: {
     #       vocabulary_name: "VocabularyName",
     #       show_speaker_labels: false,
@@ -578,7 +659,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -602,10 +683,7 @@ module Aws::TranscribeService
 
     # Updates an existing vocabulary with new values. The `UpdateVocabulary`
     # operation overwrites all of the existing information with the values
-    # that you provide in the request. Note that vocabularies for en-AU,
-    # en-UK, and fr-CA languages that are in preview are not available. In
-    # the console, the vocabulary section will be greyed-out and SDK will
-    # return error message.
+    # that you provide in the request.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary to update. The name is case-sensitive.
@@ -613,8 +691,32 @@ module Aws::TranscribeService
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries.
     #
-    # @option params [required, Array<String>] :phrases
+    # @option params [Array<String>] :phrases
     #   An array of strings containing the vocabulary entries.
+    #
+    # @option params [String] :vocabulary_file_uri
+    #   The S3 location of the text file that contains the definition of the
+    #   custom vocabulary. The URI must be in the same region as the API
+    #   endpoint that you are calling. The general form is
+    #
+    #   `
+    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   For example:
+    #
+    #   `https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #   For more information about custom vocabularies, see [Custom
+    #   Vocabularies][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
     #
     # @return [Types::UpdateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -627,14 +729,15 @@ module Aws::TranscribeService
     #
     #   resp = client.update_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR
-    #     phrases: ["Phrase"], # required
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
+    #     phrases: ["Phrase"],
+    #     vocabulary_file_uri: "Uri",
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -660,7 +763,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

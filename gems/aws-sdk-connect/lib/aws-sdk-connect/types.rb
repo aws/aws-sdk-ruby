@@ -8,6 +8,19 @@
 module Aws::Connect
   module Types
 
+    # The contact with the specified ID is not active or does not exist.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactNotFoundException AWS API Documentation
+    #
+    class ContactNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateUserRequest
     #   data as a hash:
     #
@@ -33,7 +46,10 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] username
-    #   The user name in Amazon Connect for the account to create.
+    #   The user name in Amazon Connect for the account to create. If you
+    #   are using SAML for identity management in your Amazon Connect, the
+    #   value for `Username` can include up to 64 characters from
+    #   \[a-zA-Z0-9\_-.\\@\]+.
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -50,8 +66,8 @@ module Aws::Connect
     #
     # @!attribute [rw] phone_config
     #   Specifies the phone settings for the user, including
-    #   AfterContactWorkTimeLimit, AutoAccept, DeskPhoneNumber, and
-    #   PhoneType.
+    #   `AfterContactWorkTimeLimit`, `AutoAccept`, `DeskPhoneNumber`, and
+    #   `PhoneType`.
     #   @return [Types::UserPhoneConfig]
     #
     # @!attribute [rw] directory_user_id
@@ -60,7 +76,7 @@ module Aws::Connect
     #   to access the existing directory, you can use the `DirectoryUserId`
     #   to authenticate users. If you include the parameter, it is assumed
     #   that Amazon Connect cannot access the directory. If the parameter is
-    #   not included, the UserIdentityInfo is used to authenticate users
+    #   not included, the `UserIdentityInfo` is used to authenticate users
     #   from your existing directory.
     #
     #   This parameter is required if you are using an existing directory
@@ -368,6 +384,19 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Outbound calls to the destination number are not allowed.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DestinationNotAllowedException AWS API Documentation
+    #
+    class DestinationNotAllowedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A `Dimensions` object that includes the Channel and Queue for the
     # metric.
     #
@@ -385,6 +414,18 @@ module Aws::Connect
     class Dimensions < Struct.new(
       :queue,
       :channel)
+      include Aws::Structure
+    end
+
+    # A resource with that name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DuplicateResourceException AWS API Documentation
+    #
+    class DuplicateResourceException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -414,6 +455,43 @@ module Aws::Connect
     class Filters < Struct.new(
       :queues,
       :channels)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContactAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         initial_contact_id: "ContactId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The instance ID for the instance from which to retrieve contact
+    #   attributes.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_contact_id
+    #   The ID for the initial contact in Amazon Connect associated with the
+    #   attributes to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributesRequest AWS API Documentation
+    #
+    class GetContactAttributesRequest < Struct.new(
+      :instance_id,
+      :initial_contact_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The attributes to update.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributesResponse AWS API Documentation
+    #
+    class GetContactAttributesResponse < Struct.new(
+      :attributes)
       include Aws::Structure
     end
 
@@ -478,7 +556,8 @@ module Aws::Connect
     # @!attribute [rw] current_metrics
     #   A list of `CurrentMetric` objects for the metrics to retrieve. Each
     #   `CurrentMetric` includes a name of a metric to retrieve and the unit
-    #   to use for it.
+    #   to use for it. You must list each metric to retrieve data for in the
+    #   request.
     #
     #   The following metrics are available:
     #
@@ -719,8 +798,9 @@ module Aws::Connect
     #   A `HistoricalMetric` object contains: `HistoricalMetricName`,
     #   `Statistic`, `Threshold`, and `Unit`.
     #
-    #   For each historical metric you include in the request, you must
-    #   include a `Unit` and a `Statistic`.
+    #   You must list each metric to retrieve data for in the request. For
+    #   each historical metric you include in the request, you must include
+    #   a `Unit` and a `Statistic`.
     #
     #   The following historical metrics are available:
     #
@@ -1125,11 +1205,11 @@ module Aws::Connect
     #   @return [Types::Threshold]
     #
     # @!attribute [rw] statistic
-    #   The statistic for the metric: SUM, MAX, or SUM.
+    #   The statistic for the metric.
     #   @return [String]
     #
     # @!attribute [rw] unit
-    #   The unit for the metric: COUNT, PERCENT, or SECONDS.
+    #   The unit for the metric.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetric AWS API Documentation
@@ -1176,6 +1256,58 @@ module Aws::Connect
     class HistoricalMetricResult < Struct.new(
       :dimensions,
       :collections)
+      include Aws::Structure
+    end
+
+    # Request processing failed due to an error or failure with the service.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more of the parameters provided to the operation are not valid.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The allowed limit for the resource has been reached.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1405,6 +1537,19 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The contact is not permitted.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/OutboundContactNotPermittedException AWS API Documentation
+    #
+    class OutboundContactNotPermittedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A QueueReference object that contains the the QueueId and ARN for the
     # queue resource for which metrics are returned.
     #
@@ -1421,6 +1566,19 @@ module Aws::Connect
     class QueueReference < Struct.new(
       :id,
       :arn)
+      include Aws::Structure
+    end
+
+    # The specified resource was not found.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1545,9 +1703,9 @@ module Aws::Connect
     #   attributes are standard Amazon Connect attributes, and can be
     #   accessed in contact flows just like any other contact attributes.
     #
-    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs.
-    #   Attribute keys can include only alphanumeric, dash, and underscore
-    #   characters.
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
     #
     #   For example, if you want play a greeting when the customer answers
     #   the call, you can pass the customer name in attributes similar to
@@ -1642,6 +1800,18 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The throttling limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateContactAttributesRequest
     #   data as a hash:
     #
@@ -1670,7 +1840,13 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   The key-value pairs for the attribute to update.
+    #   Specify a custom key-value pair using an attribute map. The
+    #   attributes are standard Amazon Connect attributes, and can be
+    #   accessed in contact flows just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesRequest AWS API Documentation
@@ -1968,6 +2144,19 @@ module Aws::Connect
       :first_name,
       :last_name,
       :email)
+      include Aws::Structure
+    end
+
+    # No user with the specified credentials was found in the Amazon Connect
+    # instance.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserNotFoundException AWS API Documentation
+    #
+    class UserNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

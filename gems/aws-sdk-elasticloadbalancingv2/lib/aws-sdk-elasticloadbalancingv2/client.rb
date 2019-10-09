@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -55,6 +56,7 @@ module Aws::ElasticLoadBalancingV2
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -113,6 +115,10 @@ module Aws::ElasticLoadBalancingV2
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,21 +205,72 @@ module Aws::ElasticLoadBalancingV2
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
 
-    # Adds the specified certificate to the specified secure listener.
+    # Adds the specified SSL server certificate to the certificate list for
+    # the specified HTTPS or TLS listener.
     #
-    # If the certificate was already added, the call is successful but the
-    # certificate is not added again.
+    # If the certificate in already in the certificate list, the call is
+    # successful but the certificate is not added again.
     #
-    # To list the certificates for your listener, use
-    # DescribeListenerCertificates. To remove certificates from your
-    # listener, use RemoveListenerCertificates. To specify the default SSL
-    # server certificate, use ModifyListener.
+    # To get the certificate list for a listener, use
+    # DescribeListenerCertificates. To remove certificates from the
+    # certificate list for a listener, use RemoveListenerCertificates. To
+    # replace the default certificate for a listener, use ModifyListener.
+    #
+    # For more information, see [SSL Certificates][1] in the *Application
+    # Load Balancers Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -332,8 +389,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -341,22 +398,24 @@ module Aws::ElasticLoadBalancingV2
     # @option params [required, String] :protocol
     #   The protocol for connections from clients to the load balancer. For
     #   Application Load Balancers, the supported protocols are HTTP and
-    #   HTTPS. For Network Load Balancers, the supported protocol is TCP.
+    #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
+    #   TLS, UDP, and TCP\_UDP.
     #
     # @option params [required, Integer] :port
     #   The port on which the load balancer is listening.
     #
     # @option params [String] :ssl_policy
-    #   \[HTTPS listeners\] The security policy that defines which ciphers and
-    #   protocols are supported. The default is the current predefined
-    #   security policy.
+    #   \[HTTPS and TLS listeners\] The security policy that defines which
+    #   ciphers and protocols are supported. The default is the current
+    #   predefined security policy.
     #
     # @option params [Array<Types::Certificate>] :certificates
-    #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. Set `CertificateArn` to the
+    #   \[HTTPS and TLS listeners\] The default certificate for the listener.
+    #   You must provide exactly one certificate. Set `CertificateArn` to the
     #   certificate ARN but do not set `IsDefault`.
     #
-    #   To create a certificate list, use AddListenerCertificates.
+    #   To create a certificate list for the listener, use
+    #   AddListenerCertificates.
     #
     # @option params [required, Array<Types::Action>] :default_actions
     #   The actions for the default rule. The rule must include one forward
@@ -364,13 +423,14 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer or TCP for a Network Load Balancer.
+    #   Load Balancer. The protocol of the target group must be TCP, TLS, UDP,
+    #   or TCP\_UDP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
     #   (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`, you
     #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -472,7 +532,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.create_listener({
     #     load_balancer_arn: "LoadBalancerArn", # required
-    #     protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP, TLS, UDP
+    #     protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP
     #     port: 1, # required
     #     ssl_policy: "SslPolicyName",
     #     certificates: [
@@ -483,7 +543,7 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #     default_actions: [ # required
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -537,13 +597,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -613,10 +673,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
-    # [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html
-    # [4]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
+    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html
+    # [4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html
     #
     # @option params [required, String] :name
     #   The name of the load balancer.
@@ -645,7 +705,8 @@ module Aws::ElasticLoadBalancingV2
     #   your subnets.
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones. You can specify one Elastic IP address per subnet.
+    #   Availability Zones. You can specify one Elastic IP address per subnet
+    #   if you need static IP addresses for your load balancer.
     #
     # @option params [Array<String>] :security_groups
     #   \[Application Load Balancers\] The IDs of the security groups for the
@@ -783,7 +844,6 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
-    #         static_ip: false,
     #       },
     #     ],
     #     security_groups: ["SecurityGroupId"],
@@ -817,7 +877,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses #=> Array
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
-    #   resp.load_balancers[0].availability_zones[0].static_ip #=> Boolean
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
@@ -846,42 +905,16 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #
     # @option params [required, Array<Types::RuleCondition>] :conditions
-    #   The conditions. Each condition specifies a field name and a single
-    #   value.
-    #
-    #   If the field name is `host-header`, you can specify a single host name
-    #   (for example, my.example.com). A host name is case insensitive, can be
-    #   up to 128 characters in length, and can contain any of the following
-    #   characters. You can include up to three wildcard characters.
-    #
-    #   * A-Z, a-z, 0-9
-    #
-    #   * \- .
-    #
-    #   * * (matches 0 or more characters)
-    #
-    #   * ? (matches exactly 1 character)
-    #
-    #   If the field name is `path-pattern`, you can specify a single path
-    #   pattern. A path pattern is case-sensitive, can be up to 128 characters
-    #   in length, and can contain any of the following characters. You can
-    #   include up to three wildcard characters.
-    #
-    #   * A-Z, a-z, 0-9
-    #
-    #   * \_ - . $ / ~ " ' @ : +
-    #
-    #   * &amp; (using &amp;amp;)
-    #
-    #   * * (matches 0 or more characters)
-    #
-    #   * ? (matches exactly 1 character)
+    #   The conditions. Each rule can include zero or one of the following
+    #   conditions: `http-request-method`, `host-header`, `path-pattern`, and
+    #   `source-ip`, and zero or more of the following conditions:
+    #   `http-header` and `query-string`.
     #
     # @option params [required, Integer] :priority
     #   The rule priority. A listener can't have multiple rules with the same
@@ -893,13 +926,14 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer or TCP for a Network Load Balancer.
+    #   Load Balancer. The protocol of the target group must be TCP, TLS, UDP,
+    #   or TCP\_UDP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
     #   (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`, you
     #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -981,17 +1015,25 @@ module Aws::ElasticLoadBalancingV2
     #           values: ["StringValue"],
     #         },
     #         query_string_config: {
-    #           values: ["StringValue"],
+    #           values: [
+    #             {
+    #               key: "StringValue",
+    #               value: "StringValue",
+    #             },
+    #           ],
     #         },
     #         http_request_method_config: {
-    #           values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           values: ["StringValue"],
+    #         },
+    #         source_ip_config: {
+    #           values: ["StringValue"],
     #         },
     #       },
     #     ],
     #     priority: 1, # required
     #     actions: [ # required
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -1056,11 +1098,14 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
-    #   resp.rules[0].conditions[0].query_string_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
     #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
+    #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -1128,8 +1173,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html
     #
     # @option params [required, String] :name
     #   The name of the target group.
@@ -1141,8 +1186,10 @@ module Aws::ElasticLoadBalancingV2
     # @option params [String] :protocol
     #   The protocol to use for routing traffic to the targets. For
     #   Application Load Balancers, the supported protocols are HTTP and
-    #   HTTPS. For Network Load Balancers, the supported protocol is TCP. If
-    #   the target is a Lambda function, this parameter does not apply.
+    #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
+    #   TLS, UDP, or TCP\_UDP. A TCP\_UDP listener must be associated with a
+    #   TCP\_UDP target group. If the target is a Lambda function, this
+    #   parameter does not apply.
     #
     # @option params [Integer] :port
     #   The port on which the targets receive traffic. This port is used
@@ -1151,13 +1198,16 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :vpc_id
     #   The identifier of the virtual private cloud (VPC). If the target is a
-    #   Lambda function, this parameter does not apply.
+    #   Lambda function, this parameter does not apply. Otherwise, this
+    #   parameter is required.
     #
     # @option params [String] :health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The TCP protocol is supported only if the protocol of the
-    #   target group is TCP. For Application Load Balancers, the default is
-    #   HTTP. For Network Load Balancers, the default is TCP.
+    #   targets. For Application Load Balancers, the default is HTTP. For
+    #   Network Load Balancers, the default is TCP. The TCP protocol is
+    #   supported for health checks only if the protocol of the target group
+    #   is TCP, TLS, UDP, or TCP\_UDP. The TLS, UDP, and TCP\_UDP protocols
+    #   are not supported for health checks.
     #
     # @option params [String] :health_check_port
     #   The port the load balancer uses when performing health checks on
@@ -1166,8 +1216,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Boolean] :health_check_enabled
     #   Indicates whether health checks are enabled. If the target type is
-    #   `instance` or `ip`, the default is `true`. If the target type is
-    #   `lambda`, the default is `false`.
+    #   `lambda`, health checks are disabled by default but can be enabled. If
+    #   the target type is `instance` or `ip`, health checks are always
+    #   enabled and cannot be disabled.
     #
     # @option params [String] :health_check_path
     #   \[HTTP/HTTPS health checks\] The ping path that is the destination on
@@ -1175,31 +1226,32 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For Application Load Balancers, the range is
-    #   5–300 seconds. For Network Load Balancers, the supported values are 10
-    #   or 30 seconds. If the target type is `instance` or `ip`, the default
-    #   is 30 seconds. If the target type is `lambda`, the default is 35
-    #   seconds.
+    #   an individual target. For HTTP and HTTPS health checks, the range is
+    #   5–300 seconds. For TCP health checks, the supported values are 10 and
+    #   30 seconds. If the target type is `instance` or `ip`, the default is
+    #   30 seconds. If the target type is `lambda`, the default is 35 seconds.
     #
     # @option params [Integer] :health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a target
-    #   means a failed health check. For Application Load Balancers, the range
-    #   is 2–120 seconds and the default is 5 seconds if the target type is
-    #   `instance` or `ip` and 30 seconds if the target type is `lambda`. For
-    #   Network Load Balancers, this is 10 seconds for TCP and HTTPS health
-    #   checks and 6 seconds for HTTP health checks.
+    #   means a failed health check. For target groups with a protocol of HTTP
+    #   or HTTPS, the default is 5 seconds. For target groups with a protocol
+    #   of TCP or TLS, this value must be 6 seconds for HTTP health checks and
+    #   10 seconds for TCP and HTTPS health checks. If the target type is
+    #   `lambda`, the default is 30 seconds.
     #
     # @option params [Integer] :healthy_threshold_count
     #   The number of consecutive health checks successes required before
-    #   considering an unhealthy target healthy. For Application Load
-    #   Balancers, the default is 5. For Network Load Balancers, the default
-    #   is 3.
+    #   considering an unhealthy target healthy. For target groups with a
+    #   protocol of HTTP or HTTPS, the default is 5. For target groups with a
+    #   protocol of TCP or TLS, the default is 3. If the target type is
+    #   `lambda`, the default is 5.
     #
     # @option params [Integer] :unhealthy_threshold_count
     #   The number of consecutive health check failures required before
-    #   considering a target unhealthy. For Application Load Balancers, the
-    #   default is 2. For Network Load Balancers, this value must be the same
-    #   as the healthy threshold count.
+    #   considering a target unhealthy. For target groups with a protocol of
+    #   HTTP or HTTPS, the default is 2. For target groups with a protocol of
+    #   TCP or TLS, this value must be the same as the healthy threshold
+    #   count. If the target type is `lambda`, the default is 2.
     #
     # @option params [Types::Matcher] :matcher
     #   \[HTTP/HTTPS health checks\] The HTTP codes to use when checking for a
@@ -1211,7 +1263,8 @@ module Aws::ElasticLoadBalancingV2
     #   more than one target type.
     #
     #   * `instance` - Targets are specified by instance ID. This is the
-    #     default value.
+    #     default value. If the target group protocol is UDP or TCP\_UDP, the
+    #     target type must be `instance`.
     #
     #   * `ip` - Targets are specified by IP address. You can specify IP
     #     addresses from the subnets of the virtual private cloud (VPC) for
@@ -1265,10 +1318,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.create_target_group({
     #     name: "TargetGroupName", # required
-    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP
     #     port: 1,
     #     vpc_id: "VpcId",
-    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP
     #     health_check_port: "HealthCheckPort",
     #     health_check_enabled: false,
     #     health_check_path: "Path",
@@ -1287,10 +1340,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -1511,8 +1564,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
     #
     # @option params [String] :marker
     #   The marker for the next set of results. (You received this marker from
@@ -1549,7 +1602,19 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Describes the certificates for the specified secure listener.
+    # Describes the default certificate and the certificate list for the
+    # specified HTTPS or TLS listener.
+    #
+    # If the default certificate is also in the certificate list, it appears
+    # twice in the results (once with `IsDefault` set to true and once with
+    # `IsDefault` set to false).
+    #
+    # For more information, see [SSL Certificates][1] in the *Application
+    # Load Balancers Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Names (ARN) of the listener.
@@ -1593,6 +1658,10 @@ module Aws::ElasticLoadBalancingV2
     # Describes the specified listeners or the listeners for the specified
     # Application Load Balancer or Network Load Balancer. You must specify
     # either a load balancer or one or more listeners.
+    #
+    # For an HTTPS or TLS listener, the output includes the default
+    # certificate for the listener. To describe the certificate list for the
+    # listener, use DescribeListenerCertificates.
     #
     # @option params [String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -1656,13 +1725,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -1716,8 +1785,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-attributes
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#load-balancer-attributes
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-attributes
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#load-balancer-attributes
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -1878,7 +1947,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses #=> Array
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
-    #   resp.load_balancers[0].availability_zones[0].static_ip #=> Boolean
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
@@ -1890,34 +1958,6 @@ module Aws::ElasticLoadBalancingV2
     # @param [Hash] params ({})
     def describe_load_balancers(params = {}, options = {})
       req = build_request(:describe_load_balancers, params)
-      req.send_request(options)
-    end
-
-    # @option params [required, String] :load_balancer_arn
-    #
-    # @return [Types::DescribeProvisionedCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribeProvisionedCapacityOutput#provisioned_capacity #provisioned_capacity} => Types::ProvisionedCapacity
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_provisioned_capacity({
-    #     load_balancer_arn: "LoadBalancerArn", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.provisioned_capacity.minimum_lb_capacity_units #=> Integer
-    #   resp.provisioned_capacity.status #=> String, one of "disabled", "pending", "provisioned", "pre-warmed"
-    #   resp.provisioned_capacity.decreases_remaining #=> Integer
-    #   resp.provisioned_capacity.last_modified_time #=> Time
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeProvisionedCapacity AWS API Documentation
-    #
-    # @overload describe_provisioned_capacity(params = {})
-    # @param [Hash] params ({})
-    def describe_provisioned_capacity(params = {}, options = {})
-      req = build_request(:describe_provisioned_capacity, params)
       req.send_request(options)
     end
 
@@ -2004,11 +2044,14 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
-    #   resp.rules[0].conditions[0].query_string_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
     #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
+    #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -2062,7 +2105,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #
     # @option params [Array<String>] :names
     #   The names of the policies.
@@ -2282,8 +2325,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes
     #
     # @option params [required, String] :target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
@@ -2427,10 +2470,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -2568,10 +2611,10 @@ module Aws::ElasticLoadBalancingV2
     # Modifies the specified properties of the specified listener.
     #
     # Any properties that you do not specify retain their current values.
-    # However, changing the protocol from HTTPS to HTTP removes the security
-    # policy and SSL certificate properties. If you change the protocol from
-    # HTTP to HTTPS, you must add the security policy and server
-    # certificate.
+    # However, changing the protocol from HTTPS to HTTP, or from TLS to TCP,
+    # removes the security policy and default certificate properties. If you
+    # change the protocol from HTTP to HTTPS, or from TCP to TLS, you must
+    # add the security policy and default certificate properties.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -2581,21 +2624,22 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :protocol
     #   The protocol for connections from clients to the load balancer.
-    #   Application Load Balancers support HTTP and HTTPS and Network Load
-    #   Balancers support TCP.
+    #   Application Load Balancers support the HTTP and HTTPS protocols.
+    #   Network Load Balancers support the TCP, TLS, UDP, and TCP\_UDP
+    #   protocols.
     #
     # @option params [String] :ssl_policy
-    #   \[HTTPS listeners\] The security policy that defines which protocols
-    #   and ciphers are supported. For more information, see [Security
-    #   Policies][1] in the *Application Load Balancers Guide*.
+    #   \[HTTPS and TLS listeners\] The security policy that defines which
+    #   protocols and ciphers are supported. For more information, see
+    #   [Security Policies][1] in the *Application Load Balancers Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #
     # @option params [Array<Types::Certificate>] :certificates
-    #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. Set `CertificateArn` to the
+    #   \[HTTPS and TLS listeners\] The default certificate for the listener.
+    #   You must provide exactly one certificate. Set `CertificateArn` to the
     #   certificate ARN but do not set `IsDefault`.
     #
     #   To create a certificate list, use AddListenerCertificates.
@@ -2606,13 +2650,14 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer or TCP for a Network Load Balancer.
+    #   Load Balancer. The protocol of the target group must be TCP, TLS, UDP,
+    #   or TCP\_UDP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
     #   (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`, you
     #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -2700,7 +2745,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp = client.modify_listener({
     #     listener_arn: "ListenerArn", # required
     #     port: 1,
-    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP
     #     ssl_policy: "SslPolicyName",
     #     certificates: [
     #       {
@@ -2710,7 +2755,7 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #     default_actions: [
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -2764,13 +2809,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -2988,37 +3033,6 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # @option params [required, String] :load_balancer_arn
-    #
-    # @option params [required, Integer] :minimum_lb_capacity_units
-    #
-    # @return [Types::ModifyProvisionedCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ModifyProvisionedCapacityOutput#provisioned_capacity #provisioned_capacity} => Types::ProvisionedCapacity
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.modify_provisioned_capacity({
-    #     load_balancer_arn: "LoadBalancerArn", # required
-    #     minimum_lb_capacity_units: 1, # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.provisioned_capacity.minimum_lb_capacity_units #=> Integer
-    #   resp.provisioned_capacity.status #=> String, one of "disabled", "pending", "provisioned", "pre-warmed"
-    #   resp.provisioned_capacity.decreases_remaining #=> Integer
-    #   resp.provisioned_capacity.last_modified_time #=> Time
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyProvisionedCapacity AWS API Documentation
-    #
-    # @overload modify_provisioned_capacity(params = {})
-    # @param [Hash] params ({})
-    def modify_provisioned_capacity(params = {}, options = {})
-      req = build_request(:modify_provisioned_capacity, params)
-      req.send_request(options)
-    end
-
     # Modifies the specified rule.
     #
     # Any existing properties that you do not modify retain their current
@@ -3030,49 +3044,25 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the rule.
     #
     # @option params [Array<Types::RuleCondition>] :conditions
-    #   The conditions. Each condition specifies a field name and a single
-    #   value.
-    #
-    #   If the field name is `host-header`, you can specify a single host name
-    #   (for example, my.example.com). A host name is case insensitive, can be
-    #   up to 128 characters in length, and can contain any of the following
-    #   characters. You can include up to three wildcard characters.
-    #
-    #   * A-Z, a-z, 0-9
-    #
-    #   * \- .
-    #
-    #   * * (matches 0 or more characters)
-    #
-    #   * ? (matches exactly 1 character)
-    #
-    #   If the field name is `path-pattern`, you can specify a single path
-    #   pattern. A path pattern is case-sensitive, can be up to 128 characters
-    #   in length, and can contain any of the following characters. You can
-    #   include up to three wildcard characters.
-    #
-    #   * A-Z, a-z, 0-9
-    #
-    #   * \_ - . $ / ~ " ' @ : +
-    #
-    #   * &amp; (using &amp;amp;)
-    #
-    #   * * (matches 0 or more characters)
-    #
-    #   * ? (matches exactly 1 character)
+    #   The conditions. Each rule can include zero or one of the following
+    #   conditions: `http-request-method`, `host-header`, `path-pattern`, and
+    #   `source-ip`, and zero or more of the following conditions:
+    #   `http-header` and `query-string`.
     #
     # @option params [Array<Types::Action>] :actions
-    #   The actions.
+    #   The actions. Each rule must include exactly one of the following types
+    #   of actions: `forward`, `fixed-response`, or `redirect`.
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer or TCP for a Network Load Balancer.
+    #   Load Balancer. The protocol of the target group must be TCP, TLS, UDP,
+    #   or TCP\_UDP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
     #   (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`, you
     #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -3146,16 +3136,24 @@ module Aws::ElasticLoadBalancingV2
     #           values: ["StringValue"],
     #         },
     #         query_string_config: {
-    #           values: ["StringValue"],
+    #           values: [
+    #             {
+    #               key: "StringValue",
+    #               value: "StringValue",
+    #             },
+    #           ],
     #         },
     #         http_request_method_config: {
-    #           values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           values: ["StringValue"],
+    #         },
+    #         source_ip_config: {
+    #           values: ["StringValue"],
     #         },
     #       },
     #     ],
     #     actions: [
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -3220,11 +3218,14 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
-    #   resp.rules[0].conditions[0].query_string_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
     #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
+    #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -3279,8 +3280,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The TCP protocol is supported only if the protocol of the
-    #   target group is TCP.
+    #   targets. The TCP protocol is supported for health checks only if the
+    #   protocol of the target group is TCP, TLS, UDP, or TCP\_UDP. The TLS,
+    #   UDP, and TCP\_UDP protocols are not supported for health checks.
     #
     #   If the protocol of the target group is TCP, you can't modify this
     #   setting.
@@ -3298,9 +3300,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For Application Load Balancers, the range is
-    #   5–300 seconds. For Network Load Balancers, the supported values are 10
-    #   or 30 seconds.
+    #   an individual target. For Application Load Balancers, the range is 5
+    #   to 300 seconds. For Network Load Balancers, the supported values are
+    #   10 or 30 seconds.
     #
     #   If the protocol of the target group is TCP, you can't modify this
     #   setting.
@@ -3373,7 +3375,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.modify_target_group({
     #     target_group_arn: "TargetGroupArn", # required
-    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP
     #     health_check_port: "HealthCheckPort",
     #     health_check_path: "Path",
     #     health_check_enabled: false,
@@ -3391,10 +3393,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -3580,7 +3582,8 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Removes the specified certificate from the specified secure listener.
+    # Removes the specified certificate from the certificate list for the
+    # specified HTTPS or TLS listener.
     #
     # You can't remove the default certificate for a listener. To replace
     # the default certificate, call ModifyListener.
@@ -3666,15 +3669,14 @@ module Aws::ElasticLoadBalancingV2
     # Sets the type of IP addresses used by the subnets of the specified
     # Application Load Balancer or Network Load Balancer.
     #
-    # Network Load Balancers must use `ipv4`.
-    #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #
     # @option params [required, String] :ip_address_type
     #   The IP address type. The possible values are `ipv4` (for IPv4
     #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). Internal
-    #   load balancers must use `ipv4`.
+    #   load balancers must use `ipv4`. Network Load Balancers must use
+    #   `ipv4`.
     #
     # @return [Types::SetIpAddressTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3780,11 +3782,14 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
-    #   resp.rules[0].conditions[0].query_string_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
     #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
+    #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -3946,7 +3951,6 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
-    #         static_ip: false,
     #       },
     #     ],
     #   })
@@ -3959,7 +3963,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.availability_zones[0].load_balancer_addresses #=> Array
     #   resp.availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
-    #   resp.availability_zones[0].static_ip #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnets AWS API Documentation
     #
@@ -3983,7 +3986,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4000,7 +4003,7 @@ module Aws::ElasticLoadBalancingV2
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

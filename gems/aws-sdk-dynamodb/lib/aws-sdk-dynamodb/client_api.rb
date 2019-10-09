@@ -61,6 +61,7 @@ module Aws::DynamoDB
     CancellationReason = Shapes::StructureShape.new(name: 'CancellationReason')
     CancellationReasonList = Shapes::ListShape.new(name: 'CancellationReasonList')
     Capacity = Shapes::StructureShape.new(name: 'Capacity')
+    ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     Code = Shapes::StringShape.new(name: 'Code')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     Condition = Shapes::StructureShape.new(name: 'Condition')
@@ -404,6 +405,12 @@ module Aws::DynamoDB
     BackupDetails.add_member(:backup_expiry_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "BackupExpiryDateTime"))
     BackupDetails.struct_class = Types::BackupDetails
 
+    BackupInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BackupInUseException.struct_class = Types::BackupInUseException
+
+    BackupNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BackupNotFoundException.struct_class = Types::BackupNotFoundException
+
     BackupSummaries.member = Shapes::ShapeRef.new(shape: BackupSummary)
 
     BackupSummary.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
@@ -476,6 +483,9 @@ module Aws::DynamoDB
     ConditionCheck.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
     ConditionCheck.struct_class = Types::ConditionCheck
 
+    ConditionalCheckFailedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConditionalCheckFailedException.struct_class = Types::ConditionalCheckFailedException
+
     ConsumedCapacity.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
     ConsumedCapacity.add_member(:capacity_units, Shapes::ShapeRef.new(shape: ConsumedCapacityUnits, location_name: "CapacityUnits"))
     ConsumedCapacity.add_member(:read_capacity_units, Shapes::ShapeRef.new(shape: ConsumedCapacityUnits, location_name: "ReadCapacityUnits"))
@@ -490,6 +500,9 @@ module Aws::DynamoDB
     ContinuousBackupsDescription.add_member(:continuous_backups_status, Shapes::ShapeRef.new(shape: ContinuousBackupsStatus, required: true, location_name: "ContinuousBackupsStatus"))
     ContinuousBackupsDescription.add_member(:point_in_time_recovery_description, Shapes::ShapeRef.new(shape: PointInTimeRecoveryDescription, location_name: "PointInTimeRecoveryDescription"))
     ContinuousBackupsDescription.struct_class = Types::ContinuousBackupsDescription
+
+    ContinuousBackupsUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ContinuousBackupsUnavailableException.struct_class = Types::ContinuousBackupsUnavailableException
 
     CreateBackupInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
     CreateBackupInput.add_member(:backup_name, Shapes::ShapeRef.new(shape: BackupName, required: true, location_name: "BackupName"))
@@ -523,6 +536,7 @@ module Aws::DynamoDB
     CreateTableInput.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
     CreateTableInput.add_member(:stream_specification, Shapes::ShapeRef.new(shape: StreamSpecification, location_name: "StreamSpecification"))
     CreateTableInput.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
+    CreateTableInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTableInput.struct_class = Types::CreateTableInput
 
     CreateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -707,6 +721,9 @@ module Aws::DynamoDB
     GlobalTable.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicaList, location_name: "ReplicationGroup"))
     GlobalTable.struct_class = Types::GlobalTable
 
+    GlobalTableAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    GlobalTableAlreadyExistsException.struct_class = Types::GlobalTableAlreadyExistsException
+
     GlobalTableDescription.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicaDescriptionList, location_name: "ReplicationGroup"))
     GlobalTableDescription.add_member(:global_table_arn, Shapes::ShapeRef.new(shape: GlobalTableArnString, location_name: "GlobalTableArn"))
     GlobalTableDescription.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationDateTime"))
@@ -723,6 +740,21 @@ module Aws::DynamoDB
 
     GlobalTableList.member = Shapes::ShapeRef.new(shape: GlobalTable)
 
+    GlobalTableNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    GlobalTableNotFoundException.struct_class = Types::GlobalTableNotFoundException
+
+    IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
+
+    IndexNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    IndexNotFoundException.struct_class = Types::IndexNotFoundException
+
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidRestoreTimeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidRestoreTimeException.struct_class = Types::InvalidRestoreTimeException
+
     ItemCollectionKeyAttributeMap.key = Shapes::ShapeRef.new(shape: AttributeName)
     ItemCollectionKeyAttributeMap.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
@@ -736,6 +768,9 @@ module Aws::DynamoDB
     ItemCollectionMetricsPerTable.value = Shapes::ShapeRef.new(shape: ItemCollectionMetricsMultiple)
 
     ItemCollectionSizeEstimateRange.member = Shapes::ShapeRef.new(shape: ItemCollectionSizeEstimateBound)
+
+    ItemCollectionSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ItemCollectionSizeLimitExceededException.struct_class = Types::ItemCollectionSizeLimitExceededException
 
     ItemList.member = Shapes::ShapeRef.new(shape: AttributeMap)
 
@@ -764,6 +799,9 @@ module Aws::DynamoDB
     KeysAndAttributes.add_member(:projection_expression, Shapes::ShapeRef.new(shape: ProjectionExpression, location_name: "ProjectionExpression"))
     KeysAndAttributes.add_member(:expression_attribute_names, Shapes::ShapeRef.new(shape: ExpressionAttributeNameMap, location_name: "ExpressionAttributeNames"))
     KeysAndAttributes.struct_class = Types::KeysAndAttributes
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAttributeValue.member = Shapes::ShapeRef.new(shape: AttributeValue)
 
@@ -843,6 +881,9 @@ module Aws::DynamoDB
     PointInTimeRecoverySpecification.add_member(:point_in_time_recovery_enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "PointInTimeRecoveryEnabled"))
     PointInTimeRecoverySpecification.struct_class = Types::PointInTimeRecoverySpecification
 
+    PointInTimeRecoveryUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    PointInTimeRecoveryUnavailableException.struct_class = Types::PointInTimeRecoveryUnavailableException
+
     Projection.add_member(:projection_type, Shapes::ShapeRef.new(shape: ProjectionType, location_name: "ProjectionType"))
     Projection.add_member(:non_key_attributes, Shapes::ShapeRef.new(shape: NonKeyAttributeNameList, location_name: "NonKeyAttributes"))
     Projection.struct_class = Types::Projection
@@ -857,6 +898,9 @@ module Aws::DynamoDB
     ProvisionedThroughputDescription.add_member(:read_capacity_units, Shapes::ShapeRef.new(shape: NonNegativeLongObject, location_name: "ReadCapacityUnits"))
     ProvisionedThroughputDescription.add_member(:write_capacity_units, Shapes::ShapeRef.new(shape: NonNegativeLongObject, location_name: "WriteCapacityUnits"))
     ProvisionedThroughputDescription.struct_class = Types::ProvisionedThroughputDescription
+
+    ProvisionedThroughputExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
     Put.add_member(:item, Shapes::ShapeRef.new(shape: PutItemInputAttributeMap, required: true, location_name: "Item"))
     Put.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
@@ -918,6 +962,9 @@ module Aws::DynamoDB
     Replica.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName"))
     Replica.struct_class = Types::Replica
 
+    ReplicaAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ReplicaAlreadyExistsException.struct_class = Types::ReplicaAlreadyExistsException
+
     ReplicaDescription.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName"))
     ReplicaDescription.struct_class = Types::ReplicaDescription
 
@@ -941,6 +988,9 @@ module Aws::DynamoDB
     ReplicaGlobalSecondaryIndexSettingsUpdateList.member = Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsUpdate)
 
     ReplicaList.member = Shapes::ShapeRef.new(shape: Replica)
+
+    ReplicaNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ReplicaNotFoundException.struct_class = Types::ReplicaNotFoundException
 
     ReplicaSettingsDescription.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
     ReplicaSettingsDescription.add_member(:replica_status, Shapes::ShapeRef.new(shape: ReplicaStatus, location_name: "ReplicaStatus"))
@@ -967,6 +1017,15 @@ module Aws::DynamoDB
     ReplicaUpdate.struct_class = Types::ReplicaUpdate
 
     ReplicaUpdateList.member = Shapes::ShapeRef.new(shape: ReplicaUpdate)
+
+    RequestLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    RequestLimitExceeded.struct_class = Types::RequestLimitExceeded
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RestoreSummary.add_member(:source_backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "SourceBackupArn"))
     RestoreSummary.add_member(:source_table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "SourceTableArn"))
@@ -1052,6 +1111,9 @@ module Aws::DynamoDB
 
     StringSetAttributeValue.member = Shapes::ShapeRef.new(shape: StringAttributeValue)
 
+    TableAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TableAlreadyExistsException.struct_class = Types::TableAlreadyExistsException
+
     TableDescription.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, location_name: "AttributeDefinitions"))
     TableDescription.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
     TableDescription.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, location_name: "KeySchema"))
@@ -1072,7 +1134,13 @@ module Aws::DynamoDB
     TableDescription.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
     TableDescription.struct_class = Types::TableDescription
 
+    TableInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TableInUseException.struct_class = Types::TableInUseException
+
     TableNameList.member = Shapes::ShapeRef.new(shape: TableName)
+
+    TableNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TableNotFoundException.struct_class = Types::TableNotFoundException
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKeyString, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValueString, required: true, location_name: "Value"))
@@ -1118,12 +1186,22 @@ module Aws::DynamoDB
     TransactWriteItemsInput.add_member(:transact_items, Shapes::ShapeRef.new(shape: TransactWriteItemList, required: true, location_name: "TransactItems"))
     TransactWriteItemsInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
     TransactWriteItemsInput.add_member(:return_item_collection_metrics, Shapes::ShapeRef.new(shape: ReturnItemCollectionMetrics, location_name: "ReturnItemCollectionMetrics"))
-    TransactWriteItemsInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    TransactWriteItemsInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     TransactWriteItemsInput.struct_class = Types::TransactWriteItemsInput
 
     TransactWriteItemsOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: ConsumedCapacityMultiple, location_name: "ConsumedCapacity"))
     TransactWriteItemsOutput.add_member(:item_collection_metrics, Shapes::ShapeRef.new(shape: ItemCollectionMetricsPerTable, location_name: "ItemCollectionMetrics"))
     TransactWriteItemsOutput.struct_class = Types::TransactWriteItemsOutput
+
+    TransactionCanceledException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TransactionCanceledException.add_member(:cancellation_reasons, Shapes::ShapeRef.new(shape: CancellationReasonList, location_name: "CancellationReasons"))
+    TransactionCanceledException.struct_class = Types::TransactionCanceledException
+
+    TransactionConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TransactionConflictException.struct_class = Types::TransactionConflictException
+
+    TransactionInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TransactionInProgressException.struct_class = Types::TransactionInProgressException
 
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
@@ -1625,6 +1703,7 @@ module Aws::DynamoDB
         o.output = Shapes::ShapeRef.new(shape: TransactGetItemsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TransactionCanceledException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -1640,6 +1719,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: TransactionCanceledException)
         o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

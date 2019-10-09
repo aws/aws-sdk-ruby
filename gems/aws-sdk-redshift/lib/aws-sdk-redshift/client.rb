@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -55,6 +56,7 @@ module Aws::Redshift
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -113,6 +115,10 @@ module Aws::Redshift
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::Redshift
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -281,7 +330,7 @@ module Aws::Redshift
     #
     #
     # [1]: http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
-    # [2]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
+    # [2]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
     #
     # @option params [required, String] :cluster_security_group_name
     #   The name of the security group to which the ingress rule is added.
@@ -351,7 +400,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
     #
     # @option params [required, String] :snapshot_identifier
     #   The identifier of the snapshot the account is authorized to restore.
@@ -545,6 +594,7 @@ module Aws::Redshift
     #   * {Types::ResizeProgressMessage#resize_type #resize_type} => String
     #   * {Types::ResizeProgressMessage#message #message} => String
     #   * {Types::ResizeProgressMessage#target_encryption_type #target_encryption_type} => String
+    #   * {Types::ResizeProgressMessage#data_transfer_progress_percent #data_transfer_progress_percent} => Float
     #
     # @example Request syntax with placeholder values
     #
@@ -572,6 +622,7 @@ module Aws::Redshift
     #   resp.resize_type #=> String
     #   resp.message #=> String
     #   resp.target_encryption_type #=> String
+    #   resp.data_transfer_progress_percent #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CancelResize AWS API Documentation
     #
@@ -599,7 +650,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
     #
     # @option params [required, String] :source_snapshot_identifier
     #   The identifier for the source snapshot.
@@ -720,7 +771,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
     #
     # @option params [String] :db_name
     #   The name of the first database to be created when the cluster is
@@ -745,8 +796,8 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html
-    #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html
+    #   [2]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
     # @option params [required, String] :cluster_identifier
     #   A unique identifier for the cluster. You use this identifier to refer
@@ -790,7 +841,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
     #
     # @option params [required, String] :master_username
     #   The user name associated with the master user account for the cluster
@@ -808,7 +859,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
     # @option params [required, String] :master_user_password
     #   The password associated with the master user account for the cluster
@@ -877,7 +928,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows
     #
     # @option params [String] :cluster_parameter_group_name
     #   The name of the parameter group to be associated with this cluster.
@@ -896,7 +947,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #
     # @option params [Integer] :automated_snapshot_retention_period
     #   The number of days that automated snapshots are retained. If the value
@@ -966,7 +1017,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
     #
     # @option params [Boolean] :publicly_accessible
     #   If `true`, the cluster can be accessed from a public network.
@@ -996,7 +1047,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag instances.
@@ -1018,7 +1069,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #
     # @option params [String] :additional_info
     #   Reserved.
@@ -1088,6 +1139,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -1174,6 +1226,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -1201,7 +1256,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #
     # @option params [required, String] :parameter_group_name
     #   The name of the cluster parameter group.
@@ -1284,7 +1339,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
     #
     # @option params [required, String] :cluster_security_group_name
     #   The name for the security group. Amazon Redshift stores the value as a
@@ -1363,7 +1418,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
     #
     # @option params [required, String] :snapshot_identifier
     #   A unique identifier for the snapshot that you are requesting. This
@@ -1472,7 +1527,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html
     #
     # @option params [required, String] :cluster_subnet_group_name
     #   The name for the subnet group. Amazon Redshift stores the value as a
@@ -1688,7 +1743,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html
     #
     # @option params [required, String] :hsm_client_certificate_identifier
     #   The identifier to be assigned to the new HSM client certificate that
@@ -1743,7 +1798,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html
     #
     # @option params [required, String] :hsm_configuration_identifier
     #   The identifier to be assigned to the new Amazon Redshift HSM
@@ -1820,7 +1875,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
     #
     # @option params [required, String] :snapshot_copy_grant_name
     #   The name of the snapshot copy grant. This name must be unique in the
@@ -1895,6 +1950,7 @@ module Aws::Redshift
     #   The description of the snapshot schedule.
     #
     # @option params [Array<Types::Tag>] :tags
+    #   An optional set of tags you can use to search for the schedule.
     #
     # @option params [Boolean] :dry_run
     #
@@ -1907,6 +1963,8 @@ module Aws::Redshift
     #   * {Types::SnapshotSchedule#schedule_description #schedule_description} => String
     #   * {Types::SnapshotSchedule#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::SnapshotSchedule#next_invocations #next_invocations} => Array&lt;Time&gt;
+    #   * {Types::SnapshotSchedule#associated_cluster_count #associated_cluster_count} => Integer
+    #   * {Types::SnapshotSchedule#associated_clusters #associated_clusters} => Array&lt;Types::ClusterAssociatedToSchedule&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1935,6 +1993,10 @@ module Aws::Redshift
     #   resp.tags[0].value #=> String
     #   resp.next_invocations #=> Array
     #   resp.next_invocations[0] #=> Time
+    #   resp.associated_cluster_count #=> Integer
+    #   resp.associated_clusters #=> Array
+    #   resp.associated_clusters[0].cluster_identifier #=> String
+    #   resp.associated_clusters[0].schedule_association_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotSchedule AWS API Documentation
     #
@@ -2009,7 +2071,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
     #
     # @option params [required, String] :cluster_identifier
     #   The identifier of the cluster to be deleted.
@@ -2076,6 +2138,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -2162,6 +2225,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -2220,7 +2286,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
     #
     # @option params [required, String] :cluster_security_group_name
     #   The name of the cluster security group to be deleted.
@@ -2610,7 +2676,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #
     # @option params [String] :parameter_group_name
     #   The name of a specific parameter group for which to return details. By
@@ -2706,7 +2772,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #
     # @option params [required, String] :parameter_group_name
     #   The name of a cluster parameter group for which to return details.
@@ -2798,7 +2864,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
     #
     # @option params [String] :cluster_security_group_name
     #   The name of a cluster security group for which you are requesting
@@ -2914,8 +2980,7 @@ module Aws::Redshift
     # associated with them.
     #
     # @option params [String] :cluster_identifier
-    #   The identifier of the cluster for which information about snapshots is
-    #   requested.
+    #   The identifier of the cluster which generated the requested snapshots.
     #
     # @option params [String] :snapshot_identifier
     #   The snapshot identifier of the snapshot about which to return
@@ -2996,10 +3061,23 @@ module Aws::Redshift
     #
     # @option params [Boolean] :cluster_exists
     #   A value that indicates whether to return snapshots only for an
-    #   existing cluster. Table-level restore can be performed only using a
+    #   existing cluster. You can perform table-level restore only by using a
     #   snapshot of an existing cluster, that is, a cluster that has not been
-    #   deleted. If `ClusterExists` is set to `true`, `ClusterIdentifier` is
-    #   required.
+    #   deleted. Values for this parameter work as follows:
+    #
+    #   * If `ClusterExists` is set to `true`, `ClusterIdentifier` is
+    #     required.
+    #
+    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` isn't
+    #     specified, all snapshots associated with deleted clusters (orphaned
+    #     snapshots) are returned.
+    #
+    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
+    #     specified for a deleted cluster, snapshots associated with that
+    #     cluster are returned.
+    #
+    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
+    #     specified for an existing cluster, no snapshots are returned.
     #
     # @option params [Array<Types::SnapshotSortingEntity>] :sorting_entities
     #
@@ -3240,7 +3318,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
     #
     # @option params [String] :cluster_version
     #   The specific cluster version to return.
@@ -3328,7 +3406,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
     #
     # @option params [String] :cluster_identifier
     #   The unique identifier of a cluster whose properties you are
@@ -3397,6 +3475,7 @@ module Aws::Redshift
     #   resp.clusters[0].cluster_identifier #=> String
     #   resp.clusters[0].node_type #=> String
     #   resp.clusters[0].cluster_status #=> String
+    #   resp.clusters[0].cluster_availability_status #=> String
     #   resp.clusters[0].modify_status #=> String
     #   resp.clusters[0].master_username #=> String
     #   resp.clusters[0].db_name #=> String
@@ -3483,6 +3562,9 @@ module Aws::Redshift
     #   resp.clusters[0].deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.clusters[0].snapshot_schedule_identifier #=> String
     #   resp.clusters[0].snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.clusters[0].expected_next_snapshot_schedule_time #=> Time
+    #   resp.clusters[0].expected_next_snapshot_schedule_time_status #=> String
+    #   resp.clusters[0].next_maintenance_window_start_time #=> Time
     #   resp.clusters[0].resize_info.resize_type #=> String
     #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
     #
@@ -3504,7 +3586,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #
     # @option params [required, String] :parameter_group_family
     #   The name of the cluster parameter group family.
@@ -3571,7 +3653,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html
     #
     # @option params [String] :source_type
     #   The source type, such as cluster or parameter group, to which the
@@ -4072,6 +4154,84 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Returns properties of possible node configurations such as node type,
+    # number of nodes, and disk usage for the specified action type.
+    #
+    # @option params [required, String] :action_type
+    #   The action type to evaluate for possible node configurations.
+    #   Currently, it must be "restore-cluster".
+    #
+    # @option params [String] :snapshot_identifier
+    #   The identifier of the snapshot to evaluate for possible node
+    #   configurations.
+    #
+    # @option params [String] :owner_account
+    #   The AWS customer account used to create or copy the snapshot. Required
+    #   if you are restoring a snapshot you do not own, optional if you own
+    #   the snapshot.
+    #
+    # @option params [Array<Types::NodeConfigurationOptionsFilter>] :filters
+    #   A set of name, operator, and value items to filter the results.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeNodeConfigurationOptions request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `500`
+    #
+    #   Constraints: minimum 100, maximum 500.
+    #
+    # @return [Types::NodeConfigurationOptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::NodeConfigurationOptionsMessage#node_configuration_option_list #node_configuration_option_list} => Array&lt;Types::NodeConfigurationOption&gt;
+    #   * {Types::NodeConfigurationOptionsMessage#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_node_configuration_options({
+    #     action_type: "restore-cluster", # required, accepts restore-cluster
+    #     snapshot_identifier: "String",
+    #     owner_account: "String",
+    #     filters: [
+    #       {
+    #         name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent
+    #         operator: "eq", # accepts eq, lt, gt, le, ge, in, between
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.node_configuration_option_list #=> Array
+    #   resp.node_configuration_option_list[0].node_type #=> String
+    #   resp.node_configuration_option_list[0].number_of_nodes #=> Integer
+    #   resp.node_configuration_option_list[0].estimated_disk_utilization_percent #=> Float
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeNodeConfigurationOptions AWS API Documentation
+    #
+    # @overload describe_node_configuration_options(params = {})
+    # @param [Hash] params ({})
+    def describe_node_configuration_options(params = {}, options = {})
+      req = build_request(:describe_node_configuration_options, params)
+      req.send_request(options)
+    end
+
     # Returns a list of orderable cluster options. Before you create a new
     # cluster you can use this operation to find what options are available,
     # such as the EC2 Availability Zones (AZ) in the specific AWS Region
@@ -4084,7 +4244,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
     #
     # @option params [String] :cluster_version
     #   The version filter value. Specify this parameter to show only the
@@ -4167,7 +4327,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html
     #
     # @option params [String] :reserved_node_offering_id
     #   The unique identifier for the offering.
@@ -4329,6 +4489,7 @@ module Aws::Redshift
     #   * {Types::ResizeProgressMessage#resize_type #resize_type} => String
     #   * {Types::ResizeProgressMessage#message #message} => String
     #   * {Types::ResizeProgressMessage#target_encryption_type #target_encryption_type} => String
+    #   * {Types::ResizeProgressMessage#data_transfer_progress_percent #data_transfer_progress_percent} => Float
     #
     # @example Request syntax with placeholder values
     #
@@ -4356,6 +4517,7 @@ module Aws::Redshift
     #   resp.resize_type #=> String
     #   resp.message #=> String
     #   resp.target_encryption_type #=> String
+    #   resp.data_transfer_progress_percent #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResize AWS API Documentation
     #
@@ -4375,7 +4537,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
     #
     # @option params [String] :snapshot_copy_grant_name
     #   The name of the snapshot copy grant.
@@ -4511,6 +4673,10 @@ module Aws::Redshift
     #   resp.snapshot_schedules[0].tags[0].value #=> String
     #   resp.snapshot_schedules[0].next_invocations #=> Array
     #   resp.snapshot_schedules[0].next_invocations[0] #=> Time
+    #   resp.snapshot_schedules[0].associated_cluster_count #=> Integer
+    #   resp.snapshot_schedules[0].associated_clusters #=> Array
+    #   resp.snapshot_schedules[0].associated_clusters[0].cluster_identifier #=> String
+    #   resp.snapshot_schedules[0].associated_clusters[0].schedule_association_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotSchedules AWS API Documentation
@@ -4522,8 +4688,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Returns the total amount of snapshot usage and provisioned storage for
-    # a user in megabytes.
+    # Returns the total amount of snapshot usage and provisioned storage in
+    # megabytes.
     #
     # @return [Types::CustomerStorageMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4676,7 +4842,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
     #
     # @option params [Integer] :max_records
     #   The maximum number or response records to return in each call. If the
@@ -4814,6 +4980,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -4900,6 +5067,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -5004,7 +5174,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region
     #
     # @option params [Integer] :retention_period
     #   The number of days to retain automated snapshots in the destination
@@ -5044,6 +5214,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -5130,6 +5301,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -5171,8 +5345,8 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html
-    # [2]: http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html
+    # [2]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources
     #
     # @option params [required, String] :db_user
     #   The name of a database user. If a user name matching `DbUser` exists
@@ -5204,7 +5378,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
     #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
     # @option params [String] :db_name
@@ -5371,7 +5545,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier of the cluster to be modified.
@@ -5536,7 +5710,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #
     # @option params [Boolean] :allow_version_upgrade
     #   If `true`, major version upgrades will be applied automatically to the
@@ -5585,7 +5759,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
     #
     # @option params [Boolean] :enhanced_vpc_routing
     #   An option that specifies whether to create the cluster with enhanced
@@ -5600,7 +5774,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #
     # @option params [String] :maintenance_track_name
     #   The name for the maintenance track that you want to assign for the
@@ -5658,6 +5832,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -5744,6 +5919,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -5785,6 +5963,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -5871,6 +6050,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -5919,6 +6101,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -6005,6 +6188,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6041,7 +6227,7 @@ module Aws::Redshift
     # @option params [Integer] :defer_maintenance_duration
     #   An integer indicating the duration of the maintenance window in days.
     #   If you specify a duration, you can't specify an end time. The
-    #   duration must be 14 days or less.
+    #   duration must be 45 days or less.
     #
     # @return [Types::ModifyClusterMaintenanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6063,6 +6249,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -6149,6 +6336,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6169,7 +6359,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #
     # @option params [required, String] :parameter_group_name
     #   The name of the parameter group to be modified.
@@ -6539,6 +6729,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -6625,6 +6816,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6655,6 +6849,8 @@ module Aws::Redshift
     #   * {Types::SnapshotSchedule#schedule_description #schedule_description} => String
     #   * {Types::SnapshotSchedule#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::SnapshotSchedule#next_invocations #next_invocations} => Array&lt;Time&gt;
+    #   * {Types::SnapshotSchedule#associated_cluster_count #associated_cluster_count} => Integer
+    #   * {Types::SnapshotSchedule#associated_clusters #associated_clusters} => Array&lt;Types::ClusterAssociatedToSchedule&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6674,6 +6870,10 @@ module Aws::Redshift
     #   resp.tags[0].value #=> String
     #   resp.next_invocations #=> Array
     #   resp.next_invocations[0] #=> Time
+    #   resp.associated_cluster_count #=> Integer
+    #   resp.associated_clusters #=> Array
+    #   resp.associated_clusters[0].cluster_identifier #=> String
+    #   resp.associated_clusters[0].schedule_association_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotSchedule AWS API Documentation
     #
@@ -6696,7 +6896,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html
     #
     # @option params [required, String] :reserved_node_offering_id
     #   The unique identifier of the reserved node offering you want to
@@ -6755,7 +6955,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
     #
     # @option params [required, String] :cluster_identifier
     #   The cluster identifier.
@@ -6775,6 +6975,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -6861,6 +7062,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6962,7 +7166,8 @@ module Aws::Redshift
     #   The new cluster type for the specified cluster.
     #
     # @option params [String] :node_type
-    #   The new node type for the nodes you are adding.
+    #   The new node type for the nodes you are adding. If not specified, the
+    #   cluster's current node type is used.
     #
     # @option params [required, Integer] :number_of_nodes
     #   The new number of nodes for the cluster.
@@ -6991,6 +7196,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -7077,6 +7283,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7108,7 +7317,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
     #
     # @option params [required, String] :cluster_identifier
     #   The identifier of the cluster that will be created from restoring the
@@ -7203,7 +7412,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #
     # @option params [Array<String>] :cluster_security_groups
     #   A list of security groups to be associated with this cluster.
@@ -7238,7 +7447,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows
     #
     # @option params [Integer] :automated_snapshot_retention_period
     #   The number of days that automated snapshots are retained. If the value
@@ -7252,6 +7461,11 @@ module Aws::Redshift
     #   Constraints: Must be a value from 0 to 35.
     #
     # @option params [Integer] :manual_snapshot_retention_period
+    #   The default number of days to retain a manual snapshot. If the value
+    #   is -1, the snapshot is retained indefinitely. This setting doesn't
+    #   change the retention period of existing snapshots.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
     #
     # @option params [String] :kms_key_id
     #   The AWS Key Management Service (KMS) key ID of the encryption key that
@@ -7276,7 +7490,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
     #
     # @option params [Boolean] :enhanced_vpc_routing
     #   An option that specifies whether to create the cluster with enhanced
@@ -7291,7 +7505,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #
     # @option params [String] :additional_info
     #   Reserved.
@@ -7315,6 +7529,9 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_schedule_identifier
     #   A unique identifier for the snapshot schedule.
+    #
+    # @option params [Integer] :number_of_nodes
+    #   The number of nodes specified when provisioning the restored cluster.
     #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7348,6 +7565,7 @@ module Aws::Redshift
     #     iam_roles: ["String"],
     #     maintenance_track_name: "String",
     #     snapshot_schedule_identifier: "String",
+    #     number_of_nodes: 1,
     #   })
     #
     # @example Response structure
@@ -7355,6 +7573,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -7441,6 +7660,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7549,7 +7771,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
     #
     # @option params [required, String] :cluster_security_group_name
     #   The name of the security Group from which to revoke the ingress rule.
@@ -7627,7 +7849,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
     #
     # @option params [required, String] :snapshot_identifier
     #   The identifier of the snapshot that the account can no longer access.
@@ -7728,6 +7950,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -7814,6 +8037,9 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7839,7 +8065,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -7856,7 +8082,7 @@ module Aws::Redshift
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

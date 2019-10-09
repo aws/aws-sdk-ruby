@@ -1,6 +1,7 @@
 require_relative 'spec_helper'
 
 require 'tempfile'
+require 'base64'
 
 module Aws
   module Sigv4
@@ -268,6 +269,29 @@ module Aws
           expect(signature.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=4a7d3e06d1950eb64a3daa1becaa8ba030d9099858516cb2fa4533fab4e8937d')
         end
 
+      end
+
+      context '#sign_event' do
+
+        before(:each) do
+          allow(Time).to receive(:now).and_return(now)
+          allow(now).to receive(:utc).and_return(utc)
+          allow(now).to receive(:to_i).and_return(time_i)
+          allow(utc).to receive(:strftime).and_return(datetime)
+        end
+
+        let(:now) { double('now') }
+        let(:utc) { double('utc-time') }
+        let(:time_i) { 1546045446 }
+        let(:datetime) { '20130524T000000Z' }
+
+        it 'support event signning' do
+          headers, signature = Signer.new(options).sign_event(
+            '', 'foo', Aws::EventStream::Encoder.new)
+          expect(headers[":date"].value).to eq(1546045446000)
+          expect(Base64.strict_encode64(headers[":chunk-signature"].value)).to eq("IEu14nE+lTVGgOlSKYbTrAMErq/TM5fznmVAylH/4iY=")
+          expect(signature).to eq("204bb5e2713e95354680e9522986d3ac0304aeafd33397f39e6540ca51ffe226")
+        end
       end
 
       context ':canonical_request' do

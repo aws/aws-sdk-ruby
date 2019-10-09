@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::IoT1ClickDevicesService
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::IoT1ClickDevicesService
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::IoT1ClickDevicesService
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -252,12 +301,15 @@ module Aws::IoT1ClickDevicesService
     #
     # @example Response structure
     #
+    #   resp.device_description.arn #=> String
     #   resp.device_description.attributes #=> Hash
     #   resp.device_description.attributes["__string"] #=> String
     #   resp.device_description.device_id #=> String
     #   resp.device_description.enabled #=> Boolean
     #   resp.device_description.remaining_life #=> Float
     #   resp.device_description.type #=> String
+    #   resp.device_description.tags #=> Hash
+    #   resp.device_description.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/DescribeDevice AWS API Documentation
     #
@@ -279,6 +331,8 @@ module Aws::IoT1ClickDevicesService
     #
     # @option params [required, String] :device_id
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::FinalizeDeviceClaimResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FinalizeDeviceClaimResponse#state #state} => String
@@ -287,6 +341,9 @@ module Aws::IoT1ClickDevicesService
     #
     #   resp = client.finalize_device_claim({
     #     device_id: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -475,12 +532,15 @@ module Aws::IoT1ClickDevicesService
     # @example Response structure
     #
     #   resp.devices #=> Array
+    #   resp.devices[0].arn #=> String
     #   resp.devices[0].attributes #=> Hash
     #   resp.devices[0].attributes["__string"] #=> String
     #   resp.devices[0].device_id #=> String
     #   resp.devices[0].enabled #=> Boolean
     #   resp.devices[0].remaining_life #=> Float
     #   resp.devices[0].type #=> String
+    #   resp.devices[0].tags #=> Hash
+    #   resp.devices[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListDevices AWS API Documentation
@@ -489,6 +549,66 @@ module Aws::IoT1ClickDevicesService
     # @param [Hash] params ({})
     def list_devices(params = {}, options = {})
       req = build_request(:list_devices, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags associated with the specified resource ARN.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates the tags associated with the resource ARN. See [AWS
+    # IoT 1-Click Service Limits][1] for the maximum number of tags allowed
+    # per resource.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: { # required
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
       req.send_request(options)
     end
 
@@ -516,6 +636,31 @@ module Aws::IoT1ClickDevicesService
     # @param [Hash] params ({})
     def unclaim_device(params = {}, options = {})
       req = build_request(:unclaim_device, params)
+      req.send_request(options)
+    end
+
+    # Using tag keys, deletes the tags (key/value pairs) associated with the
+    # specified resource ARN.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -558,7 +703,7 @@ module Aws::IoT1ClickDevicesService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot1clickdevicesservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

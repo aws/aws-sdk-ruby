@@ -25,13 +25,17 @@ module Aws::CostandUsageReportService
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    ModifyReportDefinitionRequest = Shapes::StructureShape.new(name: 'ModifyReportDefinitionRequest')
+    ModifyReportDefinitionResponse = Shapes::StructureShape.new(name: 'ModifyReportDefinitionResponse')
     PutReportDefinitionRequest = Shapes::StructureShape.new(name: 'PutReportDefinitionRequest')
     PutReportDefinitionResponse = Shapes::StructureShape.new(name: 'PutReportDefinitionResponse')
+    RefreshClosedReports = Shapes::BooleanShape.new(name: 'RefreshClosedReports')
     ReportDefinition = Shapes::StructureShape.new(name: 'ReportDefinition')
     ReportDefinitionList = Shapes::ListShape.new(name: 'ReportDefinitionList')
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
     ReportLimitReachedException = Shapes::StructureShape.new(name: 'ReportLimitReachedException')
     ReportName = Shapes::StringShape.new(name: 'ReportName')
+    ReportVersioning = Shapes::StringShape.new(name: 'ReportVersioning')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Prefix = Shapes::StringShape.new(name: 'S3Prefix')
     SchemaElement = Shapes::StringShape.new(name: 'SchemaElement')
@@ -55,6 +59,18 @@ module Aws::CostandUsageReportService
     DescribeReportDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     DescribeReportDefinitionsResponse.struct_class = Types::DescribeReportDefinitionsResponse
 
+    DuplicateReportNameException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DuplicateReportNameException.struct_class = Types::DuplicateReportNameException
+
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    ModifyReportDefinitionRequest.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, required: true, location_name: "ReportName"))
+    ModifyReportDefinitionRequest.add_member(:report_definition, Shapes::ShapeRef.new(shape: ReportDefinition, required: true, location_name: "ReportDefinition"))
+    ModifyReportDefinitionRequest.struct_class = Types::ModifyReportDefinitionRequest
+
+    ModifyReportDefinitionResponse.struct_class = Types::ModifyReportDefinitionResponse
+
     PutReportDefinitionRequest.add_member(:report_definition, Shapes::ShapeRef.new(shape: ReportDefinition, required: true, location_name: "ReportDefinition"))
     PutReportDefinitionRequest.struct_class = Types::PutReportDefinitionRequest
 
@@ -69,11 +85,19 @@ module Aws::CostandUsageReportService
     ReportDefinition.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3Prefix, required: true, location_name: "S3Prefix"))
     ReportDefinition.add_member(:s3_region, Shapes::ShapeRef.new(shape: AWSRegion, required: true, location_name: "S3Region"))
     ReportDefinition.add_member(:additional_artifacts, Shapes::ShapeRef.new(shape: AdditionalArtifactList, location_name: "AdditionalArtifacts"))
+    ReportDefinition.add_member(:refresh_closed_reports, Shapes::ShapeRef.new(shape: RefreshClosedReports, location_name: "RefreshClosedReports"))
+    ReportDefinition.add_member(:report_versioning, Shapes::ShapeRef.new(shape: ReportVersioning, location_name: "ReportVersioning"))
     ReportDefinition.struct_class = Types::ReportDefinition
 
     ReportDefinitionList.member = Shapes::ShapeRef.new(shape: ReportDefinition)
 
+    ReportLimitReachedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ReportLimitReachedException.struct_class = Types::ReportLimitReachedException
+
     SchemaElementList.member = Shapes::ShapeRef.new(shape: SchemaElement)
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private
@@ -87,6 +111,7 @@ module Aws::CostandUsageReportService
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Cost and Usage Report Service",
+        "serviceId" => "Cost and Usage Report Service",
         "signatureVersion" => "v4",
         "signingName" => "cur",
         "targetPrefix" => "AWSOrigamiServiceGatewayService",
@@ -116,6 +141,16 @@ module Aws::CostandUsageReportService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:modify_report_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyReportDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyReportDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyReportDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:put_report_definition, Seahorse::Model::Operation.new.tap do |o|

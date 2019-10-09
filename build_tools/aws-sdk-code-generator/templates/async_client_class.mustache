@@ -1,0 +1,125 @@
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+if RUBY_VERSION >= '2.1'
+  begin
+    require 'http/2'
+  rescue LoadError; end
+end
+{{#plugin_requires}}
+require '{{.}}'
+{{/plugin_requires}}
+
+Aws::Plugins::GlobalConfiguration.add_identifier(:{{service_identifier}})
+
+module {{module_name}}
+  class AsyncClient < Seahorse::Client::AsyncBase
+
+    include Aws::AsyncClientStubs
+
+    @identifier = :{{service_identifier}}
+
+    set_api(ClientApi::API)
+
+    {{#plugin_class_names}}
+    add_plugin({{{.}}})
+    {{/plugin_class_names}}
+
+    {{#client_constructor}}
+    {{>documentation}}
+    {{/client_constructor}}
+    def initialize(*args)
+      unless Kernel.const_defined?("HTTP2")
+        raise "Must include http/2 gem to use AsyncClient instances."
+      end
+      super
+    end
+
+    # @!group API Operations
+    {{#operations}}
+
+    {{#documentation}}
+    {{>documentation}}
+    {{/documentation}}
+    # @overload {{name}}(params = {})
+    # @param [Hash] params ({})
+    def {{name}}(params = {}, options = {}{{{block_option}}})
+      params = params.dup
+      {{#eventstream_input}}
+      input_event_stream_handler = _event_stream_handler(
+        :input,
+        params.delete(:input_event_stream_handler),
+        EventStreams::{{input_eventstream_member}}
+      )
+      {{/eventstream_input}}
+      {{#eventstream_output}}
+      output_event_stream_handler = _event_stream_handler(
+        :output,
+        params.delete(:output_event_stream_handler) || params.delete(:event_stream_handler),
+        EventStreams::{{output_eventstream_member}}
+      )
+      {{/eventstream_output}}
+
+      yield({{#eventstream_output}}output_event_stream_handler{{/eventstream_output}}) if block_given?
+
+      req = build_request(:{{name}}, params)
+
+      {{#eventstream_input}}
+      req.context[:input_event_stream_handler] = input_event_stream_handler
+      req.handlers.add(Aws::Binary::EncodeHandler, priority: 95)
+      {{/eventstream_input}}
+      {{#eventstream_output}}
+      req.context[:output_event_stream_handler] = output_event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+      {{/eventstream_output}}
+
+      req.send_request(options{{{block_option}}})
+    end
+    {{/operations}}
+
+    # @!endgroup
+
+    # @param params ({})
+    # @api private
+    def build_request(operation_name, params = {})
+      handlers = @handlers.for(operation_name)
+      context = Seahorse::Client::RequestContext.new(
+        operation_name: operation_name,
+        operation: config.api.operation(operation_name),
+        client: self,
+        params: params,
+        http_response: Seahorse::Client::Http::AsyncResponse.new,
+        config: config)
+      context[:gem_name] = '{{gem_name}}'
+      context[:gem_version] = '{{gem_version}}'
+      Seahorse::Client::Request.new(handlers, context)
+    end
+
+    private
+
+    def _event_stream_handler(type, handler, event_stream_class)
+      case handler
+      when event_stream_class then handler
+      when Proc then event_stream_class.new.tap(&handler)
+      when nil then event_stream_class.new
+      else
+        msg = "expected #{type}_event_stream_handler to be a block or "\
+          "instance of {{module_name}}::#{event_stream_class}"\
+          ", got `#{handler.inspect}` instead"
+        raise ArgumentError, msg
+      end
+    end
+
+    class << self
+
+      # @api private
+      attr_reader :identifier
+
+      # @api private
+      def errors_module
+        Errors
+      end
+
+    end
+  end
+end

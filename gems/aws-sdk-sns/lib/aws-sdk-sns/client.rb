@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -55,6 +56,7 @@ module Aws::SNS
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -113,6 +115,10 @@ module Aws::SNS
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -198,6 +204,49 @@ module Aws::SNS
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -322,7 +371,7 @@ module Aws::SNS
     end
 
     # Creates a platform application object for one of the supported push
-    # notification services, such as APNS and GCM, to which devices and
+    # notification services, such as APNS and FCM, to which devices and
     # mobile apps may register. You must specify PlatformPrincipal and
     # PlatformCredential attributes when using the
     # `CreatePlatformApplication` action. The PlatformPrincipal is received
@@ -352,13 +401,13 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
-    # [2]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-apns.html
-    # [3]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-adm.html
-    # [4]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-baidu.html
-    # [5]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-gcm.html
-    # [6]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-mpns.html
-    # [7]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-wns.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-apns.html
+    # [3]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-adm.html
+    # [4]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-baidu.html
+    # [5]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-gcm.html
+    # [6]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-mpns.html
+    # [7]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-wns.html
     #
     # @option params [required, String] :name
     #   Application names must be made up of only uppercase and lowercase
@@ -375,7 +424,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
     #
     # @return [Types::CreatePlatformApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -423,8 +472,8 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
-    # [2]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html
     #
     # @option params [required, String] :platform_application_arn
     #   PlatformApplicationArn returned from CreatePlatformApplication is used
@@ -447,7 +496,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
     #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -479,7 +528,7 @@ module Aws::SNS
 
     # Creates a topic to which notifications can be published. Users can
     # create at most 100,000 topics. For more information, see
-    # [http://aws.amazon.com/sns][1]. This action is idempotent, so if the
+    # [https://aws.amazon.com/sns][1]. This action is idempotent, so if the
     # requester already owns a topic with the specified name, that topic's
     # ARN is returned without creating a new topic.
     #
@@ -509,6 +558,24 @@ module Aws::SNS
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
+    #   The following attribute applies only to [server-side-encryption][1]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
+    #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The list of tags to add to a new topic.
+    #
     # @return [Types::CreateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTopicResponse#topic_arn #topic_arn} => String
@@ -520,6 +587,12 @@ module Aws::SNS
     #     attributes: {
     #       "attributeName" => "attributeValue",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -544,7 +617,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :endpoint_arn
     #   EndpointArn of endpoint to delete.
@@ -572,7 +645,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :platform_application_arn
     #   PlatformApplicationArn of platform application object to delete.
@@ -625,7 +698,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :endpoint_arn
     #   EndpointArn for GetEndpointAttributes input.
@@ -660,7 +733,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :platform_application_arn
     #   PlatformApplicationArn for GetPlatformApplicationAttributesInput.
@@ -704,7 +777,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
     #
     # @return [Types::GetSMSAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -804,7 +877,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :platform_application_arn
     #   PlatformApplicationArn for ListEndpointsByPlatformApplicationInput
@@ -900,7 +973,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [String] :next_token
     #   NextToken string is used when calling ListPlatformApplications action
@@ -1020,6 +1093,42 @@ module Aws::SNS
       req.send_request(options)
     end
 
+    # List all tags added to the specified Amazon SNS topic. For an
+    # overview, see [Amazon SNS Tags][1] in the *Amazon Simple Notification
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the topic for which to list tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the requester's topics. Each call returns a limited
     # list of topics, up to 100. If there are more topics, a `NextToken` is
     # also returned. Use the `NextToken` parameter in a new `ListTopics`
@@ -1103,7 +1212,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html
     #
     # @option params [String] :topic_arn
     #   The topic you want to publish to.
@@ -1112,8 +1221,6 @@ module Aws::SNS
     #   specify a value for the `PhoneNumber` or `TargetArn` parameters.
     #
     # @option params [String] :target_arn
-    #   Either TopicArn or EndpointArn, but not both.
-    #
     #   If you don't specify a value for the `TargetArn` parameter, you must
     #   specify a value for the `PhoneNumber` or `TopicArn` parameters.
     #
@@ -1217,7 +1324,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
+    #   [1]: https://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
     #
     # @option params [Hash<String,Types::MessageAttributeValue>] :message_attributes
     #   Message attributes for Publish action.
@@ -1289,7 +1396,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :endpoint_arn
     #   EndpointArn used for SetEndpointAttributes action.
@@ -1341,8 +1448,8 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
-    # [2]: http://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
     #
     # @option params [required, String] :platform_application_arn
     #   PlatformApplicationArn for SetPlatformApplicationAttributes action.
@@ -1413,7 +1520,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html
     #
     # @option params [required, Hash<String,String>] :attributes
     #   The default settings for sending SMS messages from your account. You
@@ -1497,7 +1604,7 @@ module Aws::SNS
     #
     #
     #   [1]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-sns
-    #   [2]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1584,6 +1691,21 @@ module Aws::SNS
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
+    #   The following attribute applies only to [server-side-encryption][1]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
+    #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #
     # @option params [String] :attribute_value
     #   The new value for the attribute.
     #
@@ -1643,7 +1765,7 @@ module Aws::SNS
     #   protocol:
     #
     #   * For the `http` protocol, the endpoint is an URL beginning with
-    #     "http://"
+    #     "https://"
     #
     #   * For the `https` protocol, the endpoint is a URL beginning with
     #     "https://"
@@ -1726,6 +1848,64 @@ module Aws::SNS
       req.send_request(options)
     end
 
+    # Add tags to the specified Amazon SNS topic. For an overview, see
+    # [Amazon SNS Tags][1] in the *Amazon SNS Developer Guide*.
+    #
+    # When you use topic tags, keep the following guidelines in mind:
+    #
+    # * Adding more than 50 tags to a topic isn't recommended.
+    #
+    # * Tags don't have any semantic meaning. Amazon SNS interprets tags as
+    #   character strings.
+    #
+    # * Tags are case-sensitive.
+    #
+    # * A new tag with a key identical to that of an existing tag overwrites
+    #   the existing tag.
+    #
+    # * Tagging actions are limited to 10 TPS per AWS account. If your
+    #   application requires a higher throughput, file a [technical support
+    #   request][2].
+    #
+    # For a full list of tag restrictions, see [Limits Related to Topics][3]
+    # in the *Amazon SNS Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html
+    # [2]: https://console.aws.amazon.com/support/home#/case/create?issueType=technical
+    # [3]: https://docs.aws.amazon.com/sns/latest/dg/sns-limits.html#limits-topics
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the topic to which to add tags.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to be added to the specified topic. A tag consists of a
+    #   required key and an optional value.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
     # Deletes a subscription. If the subscription requires authentication
     # for deletion, only the owner of the subscription or the topic's owner
     # can unsubscribe, and an AWS signature is required. If the
@@ -1756,6 +1936,37 @@ module Aws::SNS
       req.send_request(options)
     end
 
+    # Remove tags from the specified Amazon SNS topic. For an overview, see
+    # [Amazon SNS Tags][1] in the *Amazon SNS Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the topic from which to remove tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tag keys to remove from the specified topic.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1769,7 +1980,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

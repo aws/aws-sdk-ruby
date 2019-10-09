@@ -166,6 +166,91 @@ module Aws::Support
       include Aws::Structure
     end
 
+    # An attachment with the specified ID could not be found.
+    #
+    # @!attribute [rw] message
+    #   An attachment with the specified ID could not be found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentIdNotFound AWS API Documentation
+    #
+    class AttachmentIdNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The limit for the number of attachment sets created in a short period
+    # of time has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   The limit for the number of attachment sets created in a short
+    #   period of time has been exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentLimitExceeded AWS API Documentation
+    #
+    class AttachmentLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The expiration time of the attachment set has passed. The set expires
+    # 1 hour after it is created.
+    #
+    # @!attribute [rw] message
+    #   The expiration time of the attachment set has passed. The set
+    #   expires 1 hour after it is created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentSetExpired AWS API Documentation
+    #
+    class AttachmentSetExpired < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An attachment set with the specified ID could not be found.
+    #
+    # @!attribute [rw] message
+    #   An attachment set with the specified ID could not be found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentSetIdNotFound AWS API Documentation
+    #
+    class AttachmentSetIdNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A limit for the size of an attachment set has been exceeded. The
+    # limits are 3 attachments and 5 MB per attachment.
+    #
+    # @!attribute [rw] message
+    #   A limit for the size of an attachment set has been exceeded. The
+    #   limits are 3 attachments and 5 MB per attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentSetSizeLimitExceeded AWS API Documentation
+    #
+    class AttachmentSetSizeLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The case creation limit for the account has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   An error message that indicates that you have exceeded the number of
+    #   cases you can have open.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CaseCreationLimitExceeded AWS API Documentation
+    #
+    class CaseCreationLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A JSON-formatted object that contains the metadata for a support case.
     # It is contained the response from a DescribeCases request.
     # **CaseDetails** contains the following fields:
@@ -283,6 +368,19 @@ module Aws::Support
       :recent_communications,
       :cc_email_addresses,
       :language)
+      include Aws::Structure
+    end
+
+    # The requested `caseId` could not be located.
+    #
+    # @!attribute [rw] message
+    #   The requested `CaseId` could not be located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CaseIdNotFound AWS API Documentation
+    #
+    class CaseIdNotFound < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -439,6 +537,21 @@ module Aws::Support
     #
     class CreateCaseResponse < Struct.new(
       :case_id)
+      include Aws::Structure
+    end
+
+    # The limit for the number of DescribeAttachment requests in a short
+    # period of time has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   The limit for the number of DescribeAttachment requests in a short
+    #   period of time has been exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachmentLimitExceeded AWS API Documentation
+    #
+    class DescribeAttachmentLimitExceeded < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -853,6 +966,19 @@ module Aws::Support
     #
     class DescribeTrustedAdvisorChecksResponse < Struct.new(
       :checks)
+      include Aws::Structure
+    end
+
+    # An internal server error occurred.
+    #
+    # @!attribute [rw] message
+    #   An internal server error occurred.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
       include Aws::Structure
     end
 

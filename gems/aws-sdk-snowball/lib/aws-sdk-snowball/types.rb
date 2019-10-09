@@ -163,6 +163,21 @@ module Aws::Snowball
     #
     class CancelJobResult < Aws::EmptyStructure; end
 
+    # Job creation failed. Currently, clusters support five nodes. If you
+    # have less than five nodes for your cluster and you have more nodes to
+    # create for this cluster, try again and create jobs until your cluster
+    # has exactly five notes.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterLimitExceededException AWS API Documentation
+    #
+    class ClusterLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains a cluster's state, a cluster's ID, and other important
     # information.
     #
@@ -212,7 +227,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -222,7 +237,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] cluster_state
@@ -235,9 +250,8 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this cluster. The only
-    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
-    #   `EDGE_CG`.
+    #   The type of AWS Snowball device to use for this cluster. Currently,
+    #   the only supported device type for cluster jobs is `EDGE`.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -255,19 +269,20 @@ module Aws::Snowball
     #
     # @!attribute [rw] shipping_option
     #   The shipping speed for each node in this cluster. This speed
-    #   doesn't dictate how soon you'll get each device, rather it
-    #   represents how quickly each device moves to its destination while in
-    #   transit. Regional shipping speeds are as follows:
+    #   doesn't dictate how soon you'll get each Snowball Edge device,
+    #   rather it represents how quickly each device moves to its
+    #   destination while in transit. Regional shipping speeds are as
+    #   follows:
     #
     #   * In Australia, you have access to express shipping. Typically,
     #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, devices shipped express are delivered in about a day.
-    #     In addition, most countries in the EU have access to standard
+    #     Typically, Snowball Edges shipped express are delivered in about a
+    #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, devices are delivered in one to seven days.
+    #   * In India, Snowball Edges are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day
     #     shipping.
@@ -304,13 +319,9 @@ module Aws::Snowball
     end
 
     # A JSON-formatted object that describes a compatible Amazon Machine
-    # Image (AMI). For more information on compatible AMIs, see [Using
-    # Amazon EC2 Compute Instances][1] in the *AWS Snowball Developer
-    # Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html
+    # Image (AMI), including the ID and name for a Snowball Edge AMI. This
+    # AMI is compatible with the device's physical hardware requirements,
+    # and it should be able to be run in an SBE1 instance on the device.
     #
     # @!attribute [rw] ami_id
     #   The unique identifier for an individual Snowball Edge AMI.
@@ -447,7 +458,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -457,13 +468,12 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this cluster. The only
-    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
-    #   `EDGE_CG`.
+    #   The type of AWS Snowball device to use for this cluster. Currently,
+    #   the only supported device type for cluster jobs is `EDGE`.
     #   @return [String]
     #
     # @!attribute [rw] shipping_option
@@ -481,7 +491,7 @@ module Aws::Snowball
     #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, devices are delivered in one to seven days.
+    #   * In India, Snowball Edges are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day
     #     shipping.
@@ -606,7 +616,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -616,7 +626,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] snowball_capacity_preference
@@ -657,9 +667,8 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this job. The only
-    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
-    #   `EDGE_CG`.
+    #   The type of AWS Snowball device to use for this job. Currently, the
+    #   only supported device type for cluster jobs is `EDGE`.
     #   @return [String]
     #
     # @!attribute [rw] forwarding_address_id
@@ -892,7 +901,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_ami_id
-    #   The ID of the AMI on the supported device.
+    #   The ID of the AMI on the Snowball Edge device.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Ec2AmiResource AWS API Documentation
@@ -900,6 +909,19 @@ module Aws::Snowball
     class Ec2AmiResource < Struct.new(
       :ami_id,
       :snowball_ami_id)
+      include Aws::Structure
+    end
+
+    # Your IAM user lacks the necessary Amazon EC2 permissions to perform
+    # the attempted action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Ec2RequestFailedException AWS API Documentation
+    #
+    class Ec2RequestFailedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1006,6 +1028,112 @@ module Aws::Snowball
     class GetSnowballUsageResult < Struct.new(
       :snowball_limit,
       :snowballs_in_use)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSoftwareUpdatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID for a job that you want to get the software update file for,
+    #   for example `JID123e4567-e89b-12d3-a456-426655440000`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSoftwareUpdatesRequest AWS API Documentation
+    #
+    class GetSoftwareUpdatesRequest < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] updates_uri
+    #   The Amazon S3 presigned URL for the update file associated with the
+    #   specified `JobId` value. The software update will be available for 2
+    #   days after this request is made. To access an update after the 2
+    #   days have passed, you'll have to make another call to
+    #   `GetSoftwareUpdates`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSoftwareUpdatesResult AWS API Documentation
+    #
+    class GetSoftwareUpdatesResult < Struct.new(
+      :updates_uri)
+      include Aws::Structure
+    end
+
+    # The address provided was invalid. Check the address with your
+    # region's carrier, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidAddressException AWS API Documentation
+    #
+    class InvalidAddressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Job or cluster creation failed. One ore more inputs were invalid.
+    # Confirm that the CreateClusterRequest$SnowballType value supports your
+    # CreateJobRequest$JobType, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidInputCombinationException AWS API Documentation
+    #
+    class InvalidInputCombinationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The action can't be performed because the job's current state
+    # doesn't allow that action to be performed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidJobStateException AWS API Documentation
+    #
+    class InvalidJobStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The `NextToken` string was altered unexpectedly, and the operation has
+    # stopped. Run the operation without changing the `NextToken` string,
+    # and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource can't be found. Check the information you
+    # provided in your last request, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The provided resource value is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidResourceException AWS API Documentation
+    #
+    class InvalidResourceException < Struct.new(
+      :message,
+      :resource_type)
       include Aws::Structure
     end
 
@@ -1152,7 +1280,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1162,7 +1290,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] address_id
@@ -1289,6 +1417,19 @@ module Aws::Snowball
       :s3_resources,
       :lambda_resources,
       :ec2_ami_resources)
+      include Aws::Structure
+    end
+
+    # The provided AWS Key Management Service key lacks the permissions to
+    # perform the specified CreateJob or UpdateJob action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/KMSRequestFailedException AWS API Documentation
+    #
+    class KMSRequestFailedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1464,7 +1605,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] max_results
     #   The maximum number of results for the list of compatible images.
-    #   Currently, each supported device can store 10 AMIs.
+    #   Currently, a Snowball Edge device can store 10 AMIs.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1482,7 +1623,8 @@ module Aws::Snowball
     end
 
     # @!attribute [rw] compatible_images
-    #   A JSON-formatted object that describes a compatible AMI.
+    #   A JSON-formatted object that describes a compatible AMI, including
+    #   the ID and name for a Snowball Edge AMI.
     #   @return [Array<Types::CompatibleImage>]
     #
     # @!attribute [rw] next_token
@@ -1575,8 +1717,8 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html
-    #   [2]: http://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html
     #   @return [String]
     #
     # @!attribute [rw] job_states_to_notify
@@ -1700,6 +1842,20 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # The address is either outside the serviceable area for your region, or
+    # an error occurred. Check the address with your region's carrier and
+    # try again. If the issue persists, contact AWS Support.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UnsupportedAddressException AWS API Documentation
+    #
+    class UnsupportedAddressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateClusterRequest
     #   data as a hash:
     #
@@ -1756,7 +1912,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1861,7 +2017,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] notification

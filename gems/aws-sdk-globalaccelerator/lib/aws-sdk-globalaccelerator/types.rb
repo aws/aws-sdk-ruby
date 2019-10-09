@@ -18,9 +18,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the accelerator. The name can have a maximum of 32
-    #   characters, must contain only alphanumeric characters or hyphens
-    #   (-), and must not begin or end with a hyphen.
+    #   The name of the accelerator. The name must contain only alphanumeric
+    #   characters or hyphens (-), and must not begin or end with a hyphen.
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
@@ -28,7 +27,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Indicates whether theaccelerator is enabled. The value is true or
+    #   Indicates whether the accelerator is enabled. The value is true or
     #   false. The default value is true.
     #
     #   If the value is set to true, the accelerator cannot be deleted. If
@@ -36,8 +35,27 @@ module Aws::GlobalAccelerator
     #   @return [Boolean]
     #
     # @!attribute [rw] ip_sets
-    #   IP address set associated with the accelerator.
+    #   The static IP addresses that Global Accelerator associates with the
+    #   accelerator.
     #   @return [Array<Types::IpSet>]
+    #
+    # @!attribute [rw] dns_name
+    #   The Domain Name System (DNS) name that Global Accelerator creates
+    #   that points to your accelerator's static IP addresses.
+    #
+    #   The naming convention for the DNS name is: a lower case letter a,
+    #   followed by a 16-bit random hex string, followed by
+    #   .awsglobalaccelerator.com. For example:
+    #   a1234567890abcdef.awsglobalaccelerator.com.
+    #
+    #   For more information about the default DNS name, see [Support for
+    #   DNS Addressing in Global Accelerator][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing
+    #   @return [String]
     #
     # @!attribute [rw] status
     #   Describes the deployment status of the accelerator.
@@ -59,6 +77,7 @@ module Aws::GlobalAccelerator
       :ip_address_type,
       :enabled,
       :ip_sets,
+      :dns_name,
       :status,
       :created_time,
       :last_modified_time)
@@ -68,22 +87,30 @@ module Aws::GlobalAccelerator
     # Attributes of an accelerator.
     #
     # @!attribute [rw] flow_logs_enabled
-    #   Indicates whether flow logs are enabled. The value is true or false.
-    #   The default value is false. If the value is true, FlowLogsS3Bucket
-    #   and FlowLogsS3Prefix must be specified.
+    #   Indicates whether flow logs are enabled. The default value is false.
+    #   If the value is true, `FlowLogsS3Bucket` and `FlowLogsS3Prefix` must
+    #   be specified.
+    #
+    #   For more information, see [Flow Logs][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html
     #   @return [Boolean]
     #
     # @!attribute [rw] flow_logs_s3_bucket
-    #   The name of the Amazon S3 bucket for the flow logs. This attribute
-    #   is required if flow logs are enabled. The bucket must exist and have
-    #   a bucket policy that grants AWS Global Accelerator permission to
-    #   write to the bucket.
+    #   The name of the Amazon S3 bucket for the flow logs. Attribute is
+    #   required if `FlowLogsEnabled` is `true`. The bucket must exist and
+    #   have a bucket policy that grants AWS Global Accelerator permission
+    #   to write to the bucket.
     #   @return [String]
     #
     # @!attribute [rw] flow_logs_s3_prefix
     #   The prefix for the location in the Amazon S3 bucket for the flow
-    #   logs. If you don’t specify a prefix, the flow logs are stored in the
-    #   root of the bucket.
+    #   logs. Attribute is required if `FlowLogsEnabled` is `true`. If you
+    #   don’t specify a prefix, the flow logs are stored in the root of the
+    #   bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorAttributes AWS API Documentation
@@ -92,6 +119,70 @@ module Aws::GlobalAccelerator
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix)
+      include Aws::Structure
+    end
+
+    # The accelerator that you specified could not be disabled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorNotDisabledException AWS API Documentation
+    #
+    class AcceleratorNotDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The accelerator that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorNotFoundException AWS API Documentation
+    #
+    class AcceleratorNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You don't have access permission.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The listener that you specified has an endpoint group associated with
+    # it. You must remove all dependent resources from a listener before you
+    # can delete it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AssociatedEndpointGroupFoundException AWS API Documentation
+    #
+    class AssociatedEndpointGroupFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The accelerator that you specified has a listener associated with it.
+    # You must remove all dependent resources from an accelerator before you
+    # can delete it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AssociatedListenerFoundException AWS API Documentation
+    #
+    class AssociatedListenerFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -160,6 +251,7 @@ module Aws::GlobalAccelerator
     #           {
     #             endpoint_id: "GenericString",
     #             weight: 1,
+    #             client_ip_preservation_enabled: false,
     #           },
     #         ],
     #         traffic_dial_percentage: 1.0,
@@ -217,8 +309,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] health_check_interval_seconds
-    #   The time, in seconds, between each health check for an endpoint. The
-    #   default value is 30.
+    #   The time—10 seconds or 30 seconds—between each health check for an
+    #   endpoint. The default value is 30.
     #   @return [Integer]
     #
     # @!attribute [rw] threshold_count
@@ -298,7 +390,7 @@ module Aws::GlobalAccelerator
     #   AWS Global Accelerator uses a consistent-flow hashing algorithm to
     #   choose the optimal endpoint for a connection. If client affinity is
     #   `NONE`, Global Accelerator uses the "five-tuple" (5-tuple)
-    #   properties—client IP address, client port, destination IP address,
+    #   properties—source IP address, source port, destination IP address,
     #   destination port, and protocol—to select the hash value, and then
     #   chooses the best endpoint. However, with this setting, if someone
     #   uses different ports to connect to Global Accelerator, their
@@ -306,11 +398,10 @@ module Aws::GlobalAccelerator
     #   the hash value changes.
     #
     #   If you want a given client to always be routed to the same endpoint,
-    #   set client affinity to `CLIENT_IP` instead. When you use the
-    #   `CLIENT_IP` setting, Global Accelerator uses the "two-tuple"
-    #   (2-tuple) properties— client IP address and destination IP
-    #   address—to select the hash value. For UDP, Global Accelerator always
-    #   uses two-tuple properties to select the hash value.
+    #   set client affinity to `SOURCE_IP` instead. When you use the
+    #   `SOURCE_IP` setting, Global Accelerator uses the "two-tuple"
+    #   (2-tuple) properties— source (client) IP address and destination IP
+    #   address—to select the hash value.
     #
     #   The default value is `NONE`.
     #   @return [String]
@@ -400,7 +491,7 @@ module Aws::GlobalAccelerator
     #   data as a hash:
     #
     #       {
-    #         accelerator_arn: "GenericString",
+    #         accelerator_arn: "GenericString", # required
     #       }
     #
     # @!attribute [rw] accelerator_arn
@@ -521,6 +612,7 @@ module Aws::GlobalAccelerator
     #       {
     #         endpoint_id: "GenericString",
     #         weight: 1,
+    #         client_ip_preservation_enabled: false,
     #       }
     #
     # @!attribute [rw] endpoint_id
@@ -543,14 +635,34 @@ module Aws::GlobalAccelerator
     #
     #
     #
-    #   [1]: https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
     #   @return [Integer]
+    #
+    # @!attribute [rw] client_ip_preservation_enabled
+    #   Indicates whether client IP address preservation is enabled for an
+    #   Application Load Balancer endpoint. The value is true or false. The
+    #   default value is true for new accelerators.
+    #
+    #   If the value is set to true, the client's IP address is preserved
+    #   in the `X-Forwarded-For` request header as traffic travels to
+    #   applications on the Application Load Balancer endpoint fronted by
+    #   the accelerator.
+    #
+    #   For more information, see [ Viewing Client IP Addresses in AWS
+    #   Global Accelerator][1] in the *AWS Global Accelerator Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointConfiguration AWS API Documentation
     #
     class EndpointConfiguration < Struct.new(
       :endpoint_id,
-      :weight)
+      :weight,
+      :client_ip_preservation_enabled)
       include Aws::Structure
     end
 
@@ -561,7 +673,8 @@ module Aws::GlobalAccelerator
     #   An ID for the endpoint. If the endpoint is a Network Load Balancer
     #   or Application Load Balancer, this is the Amazon Resource Name (ARN)
     #   of the resource. If the endpoint is an Elastic IP address, this is
-    #   the Elastic IP address allocation ID.
+    #   the Elastic IP address allocation ID. An Application Load Balancer
+    #   can be either internal or internet-facing.
     #   @return [String]
     #
     # @!attribute [rw] weight
@@ -577,7 +690,7 @@ module Aws::GlobalAccelerator
     #
     #
     #
-    #   [1]: https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
     #   @return [Integer]
     #
     # @!attribute [rw] health_state
@@ -608,13 +721,33 @@ module Aws::GlobalAccelerator
     #     required to determine its health status.
     #   @return [String]
     #
+    # @!attribute [rw] client_ip_preservation_enabled
+    #   Indicates whether client IP address preservation is enabled for an
+    #   Application Load Balancer endpoint. The value is true or false. The
+    #   default value is true for new accelerators.
+    #
+    #   If the value is set to true, the client's IP address is preserved
+    #   in the `X-Forwarded-For` request header as traffic travels to
+    #   applications on the Application Load Balancer endpoint fronted by
+    #   the accelerator.
+    #
+    #   For more information, see [ Viewing Client IP Addresses in AWS
+    #   Global Accelerator][1] in the *AWS Global Accelerator Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointDescription AWS API Documentation
     #
     class EndpointDescription < Struct.new(
       :endpoint_id,
       :weight,
       :health_state,
-      :health_reason)
+      :health_reason,
+      :client_ip_preservation_enabled)
       include Aws::Structure
     end
 
@@ -667,7 +800,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] health_check_interval_seconds
-    #   The elapsed time, in seconds, between health checks for each
+    #   The time—10 seconds or 30 seconds—between health checks for each
     #   endpoint. The default value is 30.
     #   @return [Integer]
     #
@@ -692,6 +825,79 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # The endpoint group that you specified already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroupAlreadyExistsException AWS API Documentation
+    #
+    class EndpointGroupAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The endpoint group that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroupNotFoundException AWS API Documentation
+    #
+    class EndpointGroupNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There was an internal error for AWS Global Accelerator.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An argument that you specified is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There isn't another item to return.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The port numbers that you specified are not valid numbers or are not
+    # unique for this accelerator.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidPortRangeException AWS API Documentation
+    #
+    class InvalidPortRangeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type for the set of IP addresses for an accelerator.
     #
     # @!attribute [rw] ip_family
@@ -708,6 +914,19 @@ module Aws::GlobalAccelerator
     class IpSet < Struct.new(
       :ip_family,
       :ip_addresses)
+      include Aws::Structure
+    end
+
+    # Processing your request would cause you to exceed an AWS Global
+    # Accelerator limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -869,9 +1088,29 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] client_affinity
-    #   The client properties that Global Accelerator uses to select an
-    #   endpoint so that you can choose to route traffic from users to their
-    #   original endpoint. The default value is `NONE`.
+    #   Client affinity lets you direct all requests from a user to the same
+    #   endpoint, if you have stateful applications, regardless of the port
+    #   and protocol of the client request. Clienty affinity gives you
+    #   control over whether to always route each client to the same
+    #   specific endpoint.
+    #
+    #   AWS Global Accelerator uses a consistent-flow hashing algorithm to
+    #   choose the optimal endpoint for a connection. If client affinity is
+    #   `NONE`, Global Accelerator uses the "five-tuple" (5-tuple)
+    #   properties—source IP address, source port, destination IP address,
+    #   destination port, and protocol—to select the hash value, and then
+    #   chooses the best endpoint. However, with this setting, if someone
+    #   uses different ports to connect to Global Accelerator, their
+    #   connections might not be always routed to the same endpoint because
+    #   the hash value changes.
+    #
+    #   If you want a given client to always be routed to the same endpoint,
+    #   set client affinity to `SOURCE_IP` instead. When you use the
+    #   `SOURCE_IP` setting, Global Accelerator uses the "two-tuple"
+    #   (2-tuple) properties— source (client) IP address and destination IP
+    #   address—to select the hash value.
+    #
+    #   The default value is `NONE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/Listener AWS API Documentation
@@ -881,6 +1120,18 @@ module Aws::GlobalAccelerator
       :port_ranges,
       :protocol,
       :client_affinity)
+      include Aws::Structure
+    end
+
+    # The listener that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListenerNotFoundException AWS API Documentation
+    #
+    class ListenerNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -914,7 +1165,7 @@ module Aws::GlobalAccelerator
     #   data as a hash:
     #
     #       {
-    #         accelerator_arn: "GenericString",
+    #         accelerator_arn: "GenericString", # required
     #         flow_logs_enabled: false,
     #         flow_logs_s3_bucket: "GenericString",
     #         flow_logs_s3_prefix: "GenericString",
@@ -926,16 +1177,30 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] flow_logs_enabled
-    #   Update whether flow logs are enabled.
+    #   Update whether flow logs are enabled. The default value is false. If
+    #   the value is true, `FlowLogsS3Bucket` and `FlowLogsS3Prefix` must be
+    #   specified.
+    #
+    #   For more information, see [Flow Logs][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html
     #   @return [Boolean]
     #
     # @!attribute [rw] flow_logs_s3_bucket
-    #   Update the name of the Amazon S3 bucket for the flow logs.
+    #   The name of the Amazon S3 bucket for the flow logs. Attribute is
+    #   required if `FlowLogsEnabled` is `true`. The bucket must exist and
+    #   have a bucket policy that grants AWS Global Accelerator permission
+    #   to write to the bucket.
     #   @return [String]
     #
     # @!attribute [rw] flow_logs_s3_prefix
     #   Update the prefix for the location in the Amazon S3 bucket for the
-    #   flow logs.
+    #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`. If
+    #   you don’t specify a prefix, the flow logs are stored in the root of
+    #   the bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateAcceleratorAttributesRequest AWS API Documentation
@@ -1021,6 +1286,7 @@ module Aws::GlobalAccelerator
     #           {
     #             endpoint_id: "GenericString",
     #             weight: 1,
+    #             client_ip_preservation_enabled: false,
     #           },
     #         ],
     #         traffic_dial_percentage: 1.0,
@@ -1072,8 +1338,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] health_check_interval_seconds
-    #   The time, in seconds, between each health check for an endpoint. The
-    #   default value is 30.
+    #   The time—10 seconds or 30 seconds—between each health check for an
+    #   endpoint. The default value is 30.
     #   @return [Integer]
     #
     # @!attribute [rw] threshold_count
@@ -1138,10 +1404,26 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] client_affinity
     #   Client affinity lets you direct all requests from a user to the same
-    #   endpoint, if you have stateful applications, regardless of the
-    #   source port and protocol of the user request. This gives you control
-    #   over whether and how to maintain client affinity to a given
-    #   endpoint.
+    #   endpoint, if you have stateful applications, regardless of the port
+    #   and protocol of the client request. Clienty affinity gives you
+    #   control over whether to always route each client to the same
+    #   specific endpoint.
+    #
+    #   AWS Global Accelerator uses a consistent-flow hashing algorithm to
+    #   choose the optimal endpoint for a connection. If client affinity is
+    #   `NONE`, Global Accelerator uses the "five-tuple" (5-tuple)
+    #   properties—source IP address, source port, destination IP address,
+    #   destination port, and protocol—to select the hash value, and then
+    #   chooses the best endpoint. However, with this setting, if someone
+    #   uses different ports to connect to Global Accelerator, their
+    #   connections might not be always routed to the same endpoint because
+    #   the hash value changes.
+    #
+    #   If you want a given client to always be routed to the same endpoint,
+    #   set client affinity to `SOURCE_IP` instead. When you use the
+    #   `SOURCE_IP` setting, Global Accelerator uses the "two-tuple"
+    #   (2-tuple) properties— source (client) IP address and destination IP
+    #   address—to select the hash value.
     #
     #   The default value is `NONE`.
     #   @return [String]

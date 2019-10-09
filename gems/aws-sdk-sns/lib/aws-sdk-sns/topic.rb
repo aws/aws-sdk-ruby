@@ -178,8 +178,6 @@ module Aws::SNS
     #   })
     # @param [Hash] options ({})
     # @option options [String] :target_arn
-    #   Either TopicArn or EndpointArn, but not both.
-    #
     #   If you don't specify a value for the `TargetArn` parameter, you must
     #   specify a value for the `PhoneNumber` or `TopicArn` parameters.
     # @option options [String] :phone_number
@@ -279,7 +277,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
+    #   [1]: https://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
     # @option options [Hash<String,Types::MessageAttributeValue>] :message_attributes
     #   Message attributes for Publish action.
     # @return [Types::PublishResponse]
@@ -325,6 +323,21 @@ module Aws::SNS
     #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
+    #
+    #   The following attribute applies only to [server-side-encryption][1]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
+    #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     # @option options [String] :attribute_value
     #   The new value for the attribute.
     # @return [EmptyStructure]
@@ -370,7 +383,7 @@ module Aws::SNS
     #   protocol:
     #
     #   * For the `http` protocol, the endpoint is an URL beginning with
-    #     "http://"
+    #     "https://"
     #
     #   * For the `https` protocol, the endpoint is a URL beginning with
     #     "https://"

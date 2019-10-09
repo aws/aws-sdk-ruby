@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-10-08)
+------------------
+
+* Feature - With this release, you can use Amazon Kinesis Firehose delivery streams to deliver streaming data to Amazon Elasticsearch Service version 7.x clusters. For technical documentation, look for CreateDeliveryStream operation in Amazon Kinesis Firehose API reference.
+
+1.21.0 (2019-10-07)
+------------------
+
+* Feature - Amazon Kinesis Data Firehose now allows delivering data to Elasticsearch clusters set up in a different AWS account than the Firehose AWS account. For technical documentation, look for ElasticsearchDestinationConfiguration in the Amazon Kinesis Firehose API reference.
+
+1.20.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.12.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.11.0 (2018-12-20)
+------------------
+
+* Feature - API update.
+
 1.10.0 (2018-11-20)
 ------------------
 

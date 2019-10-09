@@ -46,6 +46,7 @@ module Aws::S3
       @id
     end
 
+    
     # @return [String]
     def etag
       data[:etag]
@@ -88,6 +89,7 @@ module Aws::S3
       data[:last_modified]
     end
 
+    
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -238,7 +240,7 @@ module Aws::S3
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
-    #   Indicates whether S3 Object Lock should bypass Governance-mode
+    #   Indicates whether Amazon S3 object lock should bypass governance-mode
     #   restrictions to process this operation.
     # @return [Types::DeleteObjectOutput]
     def delete(options = {})
@@ -481,7 +483,7 @@ module Aws::S3
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
-      #   Governance-type Object Lock in place. You must have sufficient
+      #   Governance-type object lock in place. You must have sufficient
       #   permissions to perform this operation.
       # @return [void]
       def batch_delete!(options = {})

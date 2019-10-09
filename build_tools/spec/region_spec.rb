@@ -9,13 +9,13 @@ end
 def whitelist
   {
     "core" => {
-      "errors.rb" => 165,
+      "errors.rb" => 209,
       "signature_v4.rb" => 35,
       "stub_responses.rb" => 19
     },
     "s3" => {
       "location_constraint.rb" => 12,
-      "s3_signer.rb" => 199
+      "s3_signer.rb" => 200
     },
     "s3control" => {
       "s3_signer.rb" => 70

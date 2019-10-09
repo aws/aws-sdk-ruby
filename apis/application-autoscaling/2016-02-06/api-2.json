@@ -240,7 +240,8 @@
       "required":[
         "ServiceNamespace",
         "ScheduledActionName",
-        "ResourceId"
+        "ResourceId",
+        "ScalableDimension"
       ],
       "members":{
         "ServiceNamespace":{"shape":"ServiceNamespace"},
@@ -492,7 +493,8 @@
       "required":[
         "ServiceNamespace",
         "ScheduledActionName",
-        "ResourceId"
+        "ResourceId",
+        "ScalableDimension"
       ],
       "members":{
         "ServiceNamespace":{"shape":"ServiceNamespace"},
@@ -523,7 +525,8 @@
         "ScalableDimension":{"shape":"ScalableDimension"},
         "MinCapacity":{"shape":"ResourceCapacity"},
         "MaxCapacity":{"shape":"ResourceCapacity"},
-        "RoleARN":{"shape":"ResourceIdMaxLen1600"}
+        "RoleARN":{"shape":"ResourceIdMaxLen1600"},
+        "SuspendedState":{"shape":"SuspendedState"}
       }
     },
     "RegisterScalableTargetResponse":{
@@ -585,7 +588,8 @@
         "MinCapacity":{"shape":"ResourceCapacity"},
         "MaxCapacity":{"shape":"ResourceCapacity"},
         "RoleARN":{"shape":"ResourceIdMaxLen1600"},
-        "CreationTime":{"shape":"TimestampType"}
+        "CreationTime":{"shape":"TimestampType"},
+        "SuspendedState":{"shape":"SuspendedState"}
       }
     },
     "ScalableTargetAction":{
@@ -669,6 +673,7 @@
         "CreationTime":{"shape":"TimestampType"}
       }
     },
+    "ScalingSuspended":{"type":"boolean"},
     "ScheduledAction":{
       "type":"structure",
       "required":[
@@ -736,6 +741,14 @@
         "MinAdjustmentMagnitude":{"shape":"MinAdjustmentMagnitude"},
         "Cooldown":{"shape":"Cooldown"},
         "MetricAggregationType":{"shape":"MetricAggregationType"}
+      }
+    },
+    "SuspendedState":{
+      "type":"structure",
+      "members":{
+        "DynamicScalingInSuspended":{"shape":"ScalingSuspended"},
+        "DynamicScalingOutSuspended":{"shape":"ScalingSuspended"},
+        "ScheduledScalingSuspended":{"shape":"ScalingSuspended"}
       }
     },
     "TargetTrackingScalingPolicyConfiguration":{

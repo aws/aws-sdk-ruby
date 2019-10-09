@@ -8,6 +8,135 @@
 module Aws::Lightsail
   module Types
 
+    # Lightsail throws this exception when the user cannot be authenticated
+    # or uses invalid credentials to access a resource.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when an account is still in the setup
+    # in progress state.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccountSetupInProgressException AWS API Documentation
+    #
+    class AccountSetupInProgressException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
+    # Describes an add-on that is enabled for an Amazon Lightsail resource.
+    #
+    # @!attribute [rw] name
+    #   The name of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_time_of_day
+    #   The daily time when an automatic snapshot is created.
+    #
+    #   The time shown is in `HH:00` format, and in Coordinated Universal
+    #   Time (UTC).
+    #
+    #   The snapshot is automatically created between the time shown and up
+    #   to 45 minutes after.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_snapshot_time_of_day
+    #   The next daily time an automatic snapshot will be created.
+    #
+    #   The time shown is in `HH:00` format, and in Coordinated Universal
+    #   Time (UTC).
+    #
+    #   The snapshot is automatically created between the time shown and up
+    #   to 45 minutes after.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AddOn AWS API Documentation
+    #
+    class AddOn < Struct.new(
+      :name,
+      :status,
+      :snapshot_time_of_day,
+      :next_snapshot_time_of_day)
+      include Aws::Structure
+    end
+
+    # Describes a request to enable, modify, or disable an add-on for an
+    # Amazon Lightsail resource.
+    #
+    # <note markdown="1"> An additional cost may be associated with enabling add-ons. For more
+    # information, see the [Lightsail pricing page][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/lightsail/pricing/
+    #
+    # @note When making an API call, you may pass AddOnRequest
+    #   data as a hash:
+    #
+    #       {
+    #         add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #         auto_snapshot_add_on_request: {
+    #           snapshot_time_of_day: "TimeOfDay",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] add_on_type
+    #   The add-on type.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_snapshot_add_on_request
+    #   An object that represents additional parameters when enabling or
+    #   modifying the automatic snapshot add-on.
+    #   @return [Types::AutoSnapshotAddOnRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AddOnRequest AWS API Documentation
+    #
+    class AddOnRequest < Struct.new(
+      :add_on_type,
+      :auto_snapshot_add_on_request)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AllocateStaticIpRequest
     #   data as a hash:
     #
@@ -196,6 +325,116 @@ module Aws::Lightsail
     #
     class AttachStaticIpResult < Struct.new(
       :operations)
+      include Aws::Structure
+    end
+
+    # Describes a block storage disk that is attached to an instance, and is
+    # included in an automatic snapshot.
+    #
+    # @!attribute [rw] path
+    #   The path of the disk (e.g., `/dev/xvdf`).
+    #   @return [String]
+    #
+    # @!attribute [rw] size_in_gb
+    #   The size of the disk in GB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachedDisk AWS API Documentation
+    #
+    class AttachedDisk < Struct.new(
+      :path,
+      :size_in_gb)
+      include Aws::Structure
+    end
+
+    # Describes a request to enable or modify the automatic snapshot add-on
+    # for an Amazon Lightsail instance or disk.
+    #
+    # When you modify the automatic snapshot time for a resource, it is
+    # typically effective immediately except under the following conditions:
+    #
+    # * If an automatic snapshot has been created for the current day, and
+    #   you change the snapshot time to a later time of day, then the new
+    #   snapshot time will be effective the following day. This ensures that
+    #   two snapshots are not created for the current day.
+    #
+    # * If an automatic snapshot has not yet been created for the current
+    #   day, and you change the snapshot time to an earlier time of day,
+    #   then the new snapshot time will be effective the following day and a
+    #   snapshot is automatically created at the previously set time for the
+    #   current day. This ensures that a snapshot is created for the current
+    #   day.
+    #
+    # * If an automatic snapshot has not yet been created for the current
+    #   day, and you change the snapshot time to a time that is within 30
+    #   minutes from your current time, then the new snapshot time will be
+    #   effective the following day and a snapshot is automatically created
+    #   at the previously set time for the current day. This ensures that a
+    #   snapshot is created for the current day, because 30 minutes is
+    #   required between your current time and the new snapshot time that
+    #   you specify.
+    #
+    # * If an automatic snapshot is scheduled to be created within 30
+    #   minutes from your current time and you change the snapshot time,
+    #   then the new snapshot time will be effective the following day and a
+    #   snapshot is automatically created at the previously set time for the
+    #   current day. This ensures that a snapshot is created for the current
+    #   day, because 30 minutes is required between your current time and
+    #   the new snapshot time that you specify.
+    #
+    # @note When making an API call, you may pass AutoSnapshotAddOnRequest
+    #   data as a hash:
+    #
+    #       {
+    #         snapshot_time_of_day: "TimeOfDay",
+    #       }
+    #
+    # @!attribute [rw] snapshot_time_of_day
+    #   The daily time when an automatic snapshot will be created.
+    #
+    #   Constraints:
+    #
+    #   * Must be in `HH:00` format, and in an hourly increment.
+    #
+    #   * Specified in Coordinated Universal Time (UTC).
+    #
+    #   * The snapshot will be automatically created between the time
+    #     specified and up to 45 minutes after.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AutoSnapshotAddOnRequest AWS API Documentation
+    #
+    class AutoSnapshotAddOnRequest < Struct.new(
+      :snapshot_time_of_day)
+      include Aws::Structure
+    end
+
+    # Describes an automatic snapshot.
+    #
+    # @!attribute [rw] date
+    #   The date of the automatic snapshot in `YYYY-MM-DD` format.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the automatic snapshot was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the automatic snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_attached_disks
+    #   An array of objects that describe the block storage disks attached
+    #   to the instance when the automatic snapshot was created.
+    #   @return [Array<Types::AttachedDisk>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AutoSnapshotDetails AWS API Documentation
+    #
+    class AutoSnapshotDetails < Struct.new(
+      :date,
+      :created_at,
+      :status,
+      :from_attached_disks)
       include Aws::Structure
     end
 
@@ -495,14 +734,83 @@ module Aws::Lightsail
     #   data as a hash:
     #
     #       {
-    #         source_snapshot_name: "ResourceName", # required
+    #         source_snapshot_name: "ResourceName",
+    #         source_resource_name: "string",
+    #         restore_date: "string",
+    #         use_latest_restorable_auto_snapshot: false,
     #         target_snapshot_name: "ResourceName", # required
     #         source_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2
     #       }
     #
     # @!attribute [rw] source_snapshot_name
     #   The name of the source instance or disk snapshot to be copied.
+    #
+    #   <note markdown="1"> Define this parameter only when copying a manual snapshot as another
+    #   manual snapshot.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] source_resource_name
+    #   The name of the source resource from which the automatic snapshot
+    #   was created.
+    #
+    #   <note markdown="1"> Define this parameter only when copying an automatic snapshot as a
+    #   manual snapshot. For more information, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_date
+    #   The date of the automatic snapshot to copy for the new manual
+    #   snapshot.
+    #
+    #   Use the `get auto snapshots` operation to identify the dates of the
+    #   available automatic snapshots.
+    #
+    #   Constraints:
+    #
+    #   * Must be specified in `YYYY-MM-DD` format.
+    #
+    #   * This parameter cannot be defined together with the `use latest
+    #     restorable auto snapshot` parameter. The `restore date` and `use
+    #     latest restorable auto snapshot` parameters are mutually
+    #     exclusive.
+    #
+    #   <note markdown="1"> Define this parameter only when copying an automatic snapshot as a
+    #   manual snapshot. For more information, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] use_latest_restorable_auto_snapshot
+    #   A Boolean value to indicate whether to use the latest available
+    #   automatic snapshot.
+    #
+    #   This parameter cannot be defined together with the `restore date`
+    #   parameter. The `use latest restorable auto snapshot` and `restore
+    #   date` parameters are mutually exclusive.
+    #
+    #   <note markdown="1"> Define this parameter only when copying an automatic snapshot as a
+    #   manual snapshot. For more information, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [Boolean]
     #
     # @!attribute [rw] target_snapshot_name
     #   The name of the new instance or disk snapshot to be created as a
@@ -510,13 +818,17 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] source_region
-    #   The AWS Region where the source snapshot is located.
+    #   The AWS Region where the source manual or automatic snapshot is
+    #   located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshotRequest AWS API Documentation
     #
     class CopySnapshotRequest < Struct.new(
       :source_snapshot_name,
+      :source_resource_name,
+      :restore_date,
+      :use_latest_restorable_auto_snapshot,
       :target_snapshot_name,
       :source_region)
       include Aws::Structure
@@ -541,7 +853,7 @@ module Aws::Lightsail
     #           {
     #             source_name: "ResourceName", # required
     #             instance_type: "NonEmptyString", # required
-    #             port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE
+    #             port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE, CLOSED
     #             user_data: "string",
     #             availability_zone: "string", # required
     #           },
@@ -578,7 +890,7 @@ module Aws::Lightsail
     #
     #       {
     #         disk_name: "ResourceName", # required
-    #         disk_snapshot_name: "ResourceName", # required
+    #         disk_snapshot_name: "ResourceName",
     #         availability_zone: "NonEmptyString", # required
     #         size_in_gb: 1, # required
     #         tags: [
@@ -587,6 +899,17 @@ module Aws::Lightsail
     #             value: "TagValue",
     #           },
     #         ],
+    #         add_ons: [
+    #           {
+    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #             auto_snapshot_add_on_request: {
+    #               snapshot_time_of_day: "TimeOfDay",
+    #             },
+    #           },
+    #         ],
+    #         source_disk_name: "string",
+    #         restore_date: "string",
+    #         use_latest_restorable_auto_snapshot: false,
     #       }
     #
     # @!attribute [rw] disk_name
@@ -596,6 +919,10 @@ module Aws::Lightsail
     # @!attribute [rw] disk_snapshot_name
     #   The name of the disk snapshot (e.g., `my-snapshot`) from which to
     #   create the new storage disk.
+    #
+    #   This parameter cannot be defined together with the `source disk
+    #   name` parameter. The `disk snapshot name` and `source disk name`
+    #   parameters are mutually exclusive.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -619,6 +946,75 @@ module Aws::Lightsail
     #   operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] add_ons
+    #   An array of objects that represent the add-ons to enable for the new
+    #   disk.
+    #   @return [Array<Types::AddOnRequest>]
+    #
+    # @!attribute [rw] source_disk_name
+    #   The name of the source disk from which the source automatic snapshot
+    #   was created.
+    #
+    #   This parameter cannot be defined together with the `disk snapshot
+    #   name` parameter. The `source disk name` and `disk snapshot name`
+    #   parameters are mutually exclusive.
+    #
+    #   <note markdown="1"> Define this parameter only when creating a new disk from an
+    #   automatic snapshot. For more information, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_date
+    #   The date of the automatic snapshot to use for the new disk.
+    #
+    #   Use the `get auto snapshots` operation to identify the dates of the
+    #   available automatic snapshots.
+    #
+    #   Constraints:
+    #
+    #   * Must be specified in `YYYY-MM-DD` format.
+    #
+    #   * This parameter cannot be defined together with the `use latest
+    #     restorable auto snapshot` parameter. The `restore date` and `use
+    #     latest restorable auto snapshot` parameters are mutually
+    #     exclusive.
+    #
+    #   <note markdown="1"> Define this parameter only when creating a new disk from an
+    #   automatic snapshot. For more information, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] use_latest_restorable_auto_snapshot
+    #   A Boolean value to indicate whether to use the latest available
+    #   automatic snapshot.
+    #
+    #   This parameter cannot be defined together with the `restore date`
+    #   parameter. The `use latest restorable auto snapshot` and `restore
+    #   date` parameters are mutually exclusive.
+    #
+    #   <note markdown="1"> Define this parameter only when creating a new disk from an
+    #   automatic snapshot. For more information, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskFromSnapshotRequest AWS API Documentation
     #
     class CreateDiskFromSnapshotRequest < Struct.new(
@@ -626,7 +1022,11 @@ module Aws::Lightsail
       :disk_snapshot_name,
       :availability_zone,
       :size_in_gb,
-      :tags)
+      :tags,
+      :add_ons,
+      :source_disk_name,
+      :restore_date,
+      :use_latest_restorable_auto_snapshot)
       include Aws::Structure
     end
 
@@ -654,6 +1054,14 @@ module Aws::Lightsail
     #             value: "TagValue",
     #           },
     #         ],
+    #         add_ons: [
+    #           {
+    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #             auto_snapshot_add_on_request: {
+    #               snapshot_time_of_day: "TimeOfDay",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] disk_name
@@ -662,10 +1070,10 @@ module Aws::Lightsail
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone where you want to create the disk (e.g.,
-    #   `us-east-2a`). Choose the same Availability Zone as the Lightsail
-    #   instance where you want to create the disk.
+    #   `us-east-2a`). Use the same Availability Zone as the Lightsail
+    #   instance to which you want to attach the disk.
     #
-    #   Use the GetRegions operation to list the Availability Zones where
+    #   Use the `get regions` operation to list the Availability Zones where
     #   Lightsail is currently available.
     #   @return [String]
     #
@@ -681,13 +1089,19 @@ module Aws::Lightsail
     #   operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] add_ons
+    #   An array of objects that represent the add-ons to enable for the new
+    #   disk.
+    #   @return [Array<Types::AddOnRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskRequest AWS API Documentation
     #
     class CreateDiskRequest < Struct.new(
       :disk_name,
       :availability_zone,
       :size_in_gb,
-      :tags)
+      :tags,
+      :add_ons)
       include Aws::Structure
     end
 
@@ -706,8 +1120,9 @@ module Aws::Lightsail
     #   data as a hash:
     #
     #       {
-    #         disk_name: "ResourceName", # required
+    #         disk_name: "ResourceName",
     #         disk_snapshot_name: "ResourceName", # required
+    #         instance_name: "ResourceName",
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -717,12 +1132,30 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] disk_name
-    #   The unique name of the source disk (e.g., `my-source-disk`).
+    #   The unique name of the source disk (e.g., `Disk-Virginia-1`).
+    #
+    #   <note markdown="1"> This parameter cannot be defined together with the `instance name`
+    #   parameter. The `disk name` and `instance name` parameters are
+    #   mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] disk_snapshot_name
     #   The name of the destination disk snapshot (e.g., `my-disk-snapshot`)
     #   based on the source disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_name
+    #   The unique name of the source instance (e.g.,
+    #   `Amazon_Linux-512MB-Virginia-1`). When this is defined, a snapshot
+    #   of the instance's system volume is created.
+    #
+    #   <note markdown="1"> This parameter cannot be defined together with the `disk name`
+    #   parameter. The `instance name` and `disk name` parameters are
+    #   mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -738,6 +1171,7 @@ module Aws::Lightsail
     class CreateDiskSnapshotRequest < Struct.new(
       :disk_name,
       :disk_snapshot_name,
+      :instance_name,
       :tags)
       include Aws::Structure
     end
@@ -918,7 +1352,7 @@ module Aws::Lightsail
     #           ],
     #         },
     #         availability_zone: "string", # required
-    #         instance_snapshot_name: "ResourceName", # required
+    #         instance_snapshot_name: "ResourceName",
     #         bundle_id: "NonEmptyString", # required
     #         user_data: "string",
     #         key_pair_name: "ResourceName",
@@ -928,6 +1362,17 @@ module Aws::Lightsail
     #             value: "TagValue",
     #           },
     #         ],
+    #         add_ons: [
+    #           {
+    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #             auto_snapshot_add_on_request: {
+    #               snapshot_time_of_day: "TimeOfDay",
+    #             },
+    #           },
+    #         ],
+    #         source_instance_name: "string",
+    #         restore_date: "string",
+    #         use_latest_restorable_auto_snapshot: false,
     #       }
     #
     # @!attribute [rw] instance_names
@@ -954,6 +1399,10 @@ module Aws::Lightsail
     #   The name of the instance snapshot on which you are basing your new
     #   instances. Use the get instance snapshots operation to return
     #   information about your existing snapshots.
+    #
+    #   This parameter cannot be defined together with the `source instance
+    #   name` parameter. The `instance snapshot name` and `source instance
+    #   name` parameters are mutually exclusive.
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -990,6 +1439,75 @@ module Aws::Lightsail
     #   operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] add_ons
+    #   An array of objects representing the add-ons to enable for the new
+    #   instance.
+    #   @return [Array<Types::AddOnRequest>]
+    #
+    # @!attribute [rw] source_instance_name
+    #   The name of the source instance from which the source automatic
+    #   snapshot was created.
+    #
+    #   This parameter cannot be defined together with the `instance
+    #   snapshot name` parameter. The `source instance name` and `instance
+    #   snapshot name` parameters are mutually exclusive.
+    #
+    #   <note markdown="1"> Define this parameter only when creating a new instance from an
+    #   automatic snapshot. For more information, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_date
+    #   The date of the automatic snapshot to use for the new instance.
+    #
+    #   Use the `get auto snapshots` operation to identify the dates of the
+    #   available automatic snapshots.
+    #
+    #   Constraints:
+    #
+    #   * Must be specified in `YYYY-MM-DD` format.
+    #
+    #   * This parameter cannot be defined together with the `use latest
+    #     restorable auto snapshot` parameter. The `restore date` and `use
+    #     latest restorable auto snapshot` parameters are mutually
+    #     exclusive.
+    #
+    #   <note markdown="1"> Define this parameter only when creating a new instance from an
+    #   automatic snapshot. For more information, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] use_latest_restorable_auto_snapshot
+    #   A Boolean value to indicate whether to use the latest available
+    #   automatic snapshot.
+    #
+    #   This parameter cannot be defined together with the `restore date`
+    #   parameter. The `use latest restorable auto snapshot` and `restore
+    #   date` parameters are mutually exclusive.
+    #
+    #   <note markdown="1"> Define this parameter only when creating a new instance from an
+    #   automatic snapshot. For more information, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesFromSnapshotRequest AWS API Documentation
     #
     class CreateInstancesFromSnapshotRequest < Struct.new(
@@ -1000,7 +1518,11 @@ module Aws::Lightsail
       :bundle_id,
       :user_data,
       :key_pair_name,
-      :tags)
+      :tags,
+      :add_ons,
+      :source_instance_name,
+      :restore_date,
+      :use_latest_restorable_auto_snapshot)
       include Aws::Structure
     end
 
@@ -1031,6 +1553,14 @@ module Aws::Lightsail
     #           {
     #             key: "TagKey",
     #             value: "TagValue",
+    #           },
+    #         ],
+    #         add_ons: [
+    #           {
+    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #             auto_snapshot_add_on_request: {
+    #               snapshot_time_of_day: "TimeOfDay",
+    #             },
     #           },
     #         ],
     #       }
@@ -1064,8 +1594,16 @@ module Aws::Lightsail
     #
     # @!attribute [rw] blueprint_id
     #   The ID for a virtual private server image (e.g., `app_wordpress_4_4`
-    #   or `app_lamp_7_0`). Use the get blueprints operation to return a
+    #   or `app_lamp_7_0`). Use the `get blueprints` operation to return a
     #   list of available images (or *blueprints*).
+    #
+    #   <note markdown="1"> Use active blueprints when creating new instances. Inactive
+    #   blueprints are listed to support customers with existing instances
+    #   and are not necessarily available to create new instances.
+    #   Blueprints are marked inactive when they become outdated due to
+    #   operating system updates or new application releases.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -1103,6 +1641,11 @@ module Aws::Lightsail
     #   operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] add_ons
+    #   An array of objects representing the add-ons to enable for the new
+    #   instance.
+    #   @return [Array<Types::AddOnRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesRequest AWS API Documentation
     #
     class CreateInstancesRequest < Struct.new(
@@ -1113,7 +1656,8 @@ module Aws::Lightsail
       :bundle_id,
       :user_data,
       :key_pair_name,
-      :tags)
+      :tags,
+      :add_ons)
       include Aws::Structure
     end
 
@@ -1433,7 +1977,7 @@ module Aws::Lightsail
     #   * Cannot be specified if the `use latest restorable time` parameter
     #     is `true`.
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Specified in the Unix time format.
     #
@@ -1601,7 +2145,7 @@ module Aws::Lightsail
     #
     #     Example: `16:00-16:30`
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -1628,7 +2172,7 @@ module Aws::Lightsail
     #
     #   * Must be at least 30 minutes.
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Example: `Tue:17:00-Tue:17:30`
     #   @return [String]
@@ -1735,26 +2279,72 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAutoSnapshotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_name: "ResourceName", # required
+    #         date: "AutoSnapshotDate", # required
+    #       }
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the source resource from which to delete the automatic
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] date
+    #   The date of the automatic snapshot to delete in `YYYY-MM-DD` format.
+    #
+    #   Use the `get auto snapshots` operation to get the available
+    #   automatic snapshots for a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteAutoSnapshotRequest AWS API Documentation
+    #
+    class DeleteAutoSnapshotRequest < Struct.new(
+      :resource_name,
+      :date)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of your request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteAutoSnapshotResult AWS API Documentation
+    #
+    class DeleteAutoSnapshotResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDiskRequest
     #   data as a hash:
     #
     #       {
     #         disk_name: "ResourceName", # required
+    #         force_delete_add_ons: false,
     #       }
     #
     # @!attribute [rw] disk_name
     #   The unique name of the disk you want to delete (e.g., `my-disk`).
     #   @return [String]
     #
+    # @!attribute [rw] force_delete_add_ons
+    #   A Boolean value to indicate whether to delete the enabled add-ons
+    #   for the disk.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskRequest AWS API Documentation
     #
     class DeleteDiskRequest < Struct.new(
-      :disk_name)
+      :disk_name,
+      :force_delete_add_ons)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of your request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskResult AWS API Documentation
@@ -1875,16 +2465,23 @@ module Aws::Lightsail
     #
     #       {
     #         instance_name: "ResourceName", # required
+    #         force_delete_add_ons: false,
     #       }
     #
     # @!attribute [rw] instance_name
     #   The name of the instance to delete.
     #   @return [String]
     #
+    # @!attribute [rw] force_delete_add_ons
+    #   A Boolean value to indicate whether to delete the enabled add-ons
+    #   for the disk.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceRequest AWS API Documentation
     #
     class DeleteInstanceRequest < Struct.new(
-      :instance_name)
+      :instance_name,
+      :force_delete_add_ons)
       include Aws::Structure
     end
 
@@ -1957,6 +2554,36 @@ module Aws::Lightsail
     #
     class DeleteKeyPairResult < Struct.new(
       :operation)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteKnownHostKeysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] instance_name
+    #   The name of the instance for which you want to reset the host key or
+    #   certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKnownHostKeysRequest AWS API Documentation
+    #
+    class DeleteKnownHostKeysRequest < Struct.new(
+      :instance_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   A list of objects describing the API operation.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKnownHostKeysResult AWS API Documentation
+    #
+    class DeleteKnownHostKeysResult < Struct.new(
+      :operations)
       include Aws::Structure
     end
 
@@ -2241,7 +2868,42 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes a system disk or an block storage disk.
+    # @note When making an API call, you may pass DisableAddOnRequest
+    #   data as a hash:
+    #
+    #       {
+    #         add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #         resource_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] add_on_type
+    #   The add-on type to disable.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the source resource from which to disable the add-on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DisableAddOnRequest AWS API Documentation
+    #
+    class DisableAddOnRequest < Struct.new(
+      :add_on_type,
+      :resource_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of your request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DisableAddOnResult AWS API Documentation
+    #
+    class DisableAddOnResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # Describes a system disk or a block storage disk.
     #
     # @!attribute [rw] name
     #   The unique name of the disk.
@@ -2279,6 +2941,10 @@ module Aws::Lightsail
     #
     #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] add_ons
+    #   An array of objects representing the add-ons enabled on the disk.
+    #   @return [Array<Types::AddOn>]
     #
     # @!attribute [rw] size_in_gb
     #   The size of the disk in GB.
@@ -2339,6 +3005,7 @@ module Aws::Lightsail
       :location,
       :resource_type,
       :tags,
+      :add_ons,
       :size_in_gb,
       :is_system_disk,
       :iops,
@@ -2460,14 +3127,29 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] from_disk_name
-    #   The unique name of the source disk from which you are creating the
-    #   disk snapshot.
+    #   The unique name of the source disk from which the disk snapshot was
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] from_disk_arn
-    #   The Amazon Resource Name (ARN) of the source disk from which you are
-    #   creating the disk snapshot.
+    #   The Amazon Resource Name (ARN) of the source disk from which the
+    #   disk snapshot was created.
     #   @return [String]
+    #
+    # @!attribute [rw] from_instance_name
+    #   The unique name of the source instance from which the disk (system
+    #   volume) snapshot was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_instance_arn
+    #   The Amazon Resource Name (ARN) of the source instance from which the
+    #   disk (system volume) snapshot was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_from_auto_snapshot
+    #   A Boolean value indicating whether the snapshot was created from an
+    #   automatic snapshot.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskSnapshot AWS API Documentation
     #
@@ -2483,7 +3165,10 @@ module Aws::Lightsail
       :state,
       :progress,
       :from_disk_name,
-      :from_disk_arn)
+      :from_disk_arn,
+      :from_instance_name,
+      :from_instance_arn,
+      :is_from_auto_snapshot)
       include Aws::Structure
     end
 
@@ -2601,7 +3286,25 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of domain entry (e.g., `SOA` or `NS`).
+    #   The type of domain entry, such as address (A), canonical name
+    #   (CNAME), mail exchanger (MX), name server (NS), start of authority
+    #   (SOA), service locator (SRV), or text (TXT).
+    #
+    #   The following domain entry types can be used:
+    #
+    #   * `A`
+    #
+    #   * `CNAME`
+    #
+    #   * `MX`
+    #
+    #   * `NS`
+    #
+    #   * `SOA`
+    #
+    #   * `SRV`
+    #
+    #   * `TXT`
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -2644,6 +3347,47 @@ module Aws::Lightsail
     class DownloadDefaultKeyPairResult < Struct.new(
       :public_key_base_64,
       :private_key_base_64)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableAddOnRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_name: "ResourceName", # required
+    #         add_on_request: { # required
+    #           add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #           auto_snapshot_add_on_request: {
+    #             snapshot_time_of_day: "TimeOfDay",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the source resource for which to enable or modify the
+    #   add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_on_request
+    #   An array of strings representing the add-on to enable or modify.
+    #   @return [Types::AddOnRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/EnableAddOnRequest AWS API Documentation
+    #
+    class EnableAddOnRequest < Struct.new(
+      :resource_name,
+      :add_on_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of your request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/EnableAddOnResult AWS API Documentation
+    #
+    class EnableAddOnResult < Struct.new(
+      :operations)
       include Aws::Structure
     end
 
@@ -2812,6 +3556,47 @@ module Aws::Lightsail
     class GetActiveNamesResult < Struct.new(
       :active_names,
       :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAutoSnapshotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the source resource from which to get automatic snapshot
+    #   information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetAutoSnapshotsRequest AWS API Documentation
+    #
+    class GetAutoSnapshotsRequest < Struct.new(
+      :resource_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_name
+    #   The name of the source resource for the automatic snapshots.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type (e.g., `Instance` or `Disk`).
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_snapshots
+    #   An array of objects that describe the automatic snapshots that are
+    #   available for the specified source resource.asdf
+    #   @return [Array<Types::AutoSnapshotDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetAutoSnapshotsResult AWS API Documentation
+    #
+    class GetAutoSnapshotsResult < Struct.new(
+      :resource_name,
+      :resource_type,
+      :auto_snapshots)
       include Aws::Structure
     end
 
@@ -4221,7 +5006,7 @@ module Aws::Lightsail
     #
     #   Constraints:
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Specified in the Unix time format.
     #
@@ -4234,7 +5019,7 @@ module Aws::Lightsail
     #
     #   Constraints:
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Specified in the Unix time format.
     #
@@ -4248,7 +5033,10 @@ module Aws::Lightsail
     #   If `false` is specified, the log event starts from the tail of the
     #   log.
     #
-    #   Default: `false`
+    #   <note markdown="1"> For PostgreSQL, the default value of `false` is the only option
+    #   available.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] page_token
@@ -4401,7 +5189,7 @@ module Aws::Lightsail
     #
     #   Constraints:
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Specified in the Unix time format.
     #
@@ -4414,7 +5202,7 @@ module Aws::Lightsail
     #
     #   Constraints:
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Specified in the Unix time format.
     #
@@ -4702,6 +5490,76 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the public SSH host keys or the RDP certificate.
+    #
+    # @!attribute [rw] algorithm
+    #   The SSH host key algorithm or the RDP certificate format.
+    #
+    #   For SSH host keys, the algorithm may be `ssh-rsa`,
+    #   `ecdsa-sha2-nistp256`, `ssh-ed25519`, etc. For RDP certificates, the
+    #   algorithm is always `x509-cert`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key
+    #   The public SSH host key or the RDP certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] witnessed_at
+    #   The time that the SSH host key or RDP certificate was recorded by
+    #   Lightsail.
+    #   @return [Time]
+    #
+    # @!attribute [rw] fingerprint_sha1
+    #   The SHA-1 fingerprint of the returned SSH host key or RDP
+    #   certificate.
+    #
+    #   * Example of an SHA-1 SSH fingerprint:
+    #
+    #     `SHA1:1CHH6FaAaXjtFOsR/t83vf91SR0`
+    #
+    #   * Example of an SHA-1 RDP fingerprint:
+    #
+    #     `af:34:51:fe:09:f0:e0:da:b8:4e:56:ca:60:c2:10:ff:38:06:db:45`
+    #   @return [String]
+    #
+    # @!attribute [rw] fingerprint_sha256
+    #   The SHA-256 fingerprint of the returned SSH host key or RDP
+    #   certificate.
+    #
+    #   * Example of an SHA-256 SSH fingerprint:
+    #
+    #     `SHA256:KTsMnRBh1IhD17HpdfsbzeGA4jOijm5tyXsMjKVbB8o`
+    #
+    #   * Example of an SHA-256 RDP fingerprint:
+    #
+    #     `03:9b:36:9f:4b:de:4e:61:70:fc:7c:c9:78:e7:d2:1a:1c:25:a8:0c:91:f6:7c:e4:d6:a0:85:c8:b4:53:99:68`
+    #   @return [String]
+    #
+    # @!attribute [rw] not_valid_before
+    #   The returned RDP certificate is valid after this point in time.
+    #
+    #   This value is listed only for RDP certificates.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_valid_after
+    #   The returned RDP certificate is not valid after this point in time.
+    #
+    #   This value is listed only for RDP certificates.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/HostKeyAttributes AWS API Documentation
+    #
+    class HostKeyAttributes < Struct.new(
+      :algorithm,
+      :public_key,
+      :witnessed_at,
+      :fingerprint_sha1,
+      :fingerprint_sha256,
+      :not_valid_before,
+      :not_valid_after)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportKeyPairRequest
     #   data as a hash:
     #
@@ -4792,6 +5650,11 @@ module Aws::Lightsail
     #   The bundle for the instance (e.g., `micro_1_0`).
     #   @return [String]
     #
+    # @!attribute [rw] add_ons
+    #   An array of objects representing the add-ons enabled on the
+    #   instance.
+    #   @return [Array<Types::AddOn>]
+    #
     # @!attribute [rw] is_static_ip
     #   A Boolean value indicating whether this instance has a static IP
     #   assigned to it.
@@ -4844,6 +5707,7 @@ module Aws::Lightsail
       :blueprint_id,
       :blueprint_name,
       :bundle_id,
+      :add_ons,
       :is_static_ip,
       :private_ip_address,
       :public_ip_address,
@@ -4917,6 +5781,10 @@ module Aws::Lightsail
     #   instance.
     #   @return [String]
     #
+    # @!attribute [rw] host_keys
+    #   Describes the public SSH host keys or the RDP certificate.
+    #   @return [Array<Types::HostKeyAttributes>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceAccessDetails AWS API Documentation
     #
     class InstanceAccessDetails < Struct.new(
@@ -4928,7 +5796,8 @@ module Aws::Lightsail
       :private_key,
       :protocol,
       :instance_name,
-      :username)
+      :username,
+      :host_keys)
       include Aws::Structure
     end
 
@@ -4942,7 +5811,7 @@ module Aws::Lightsail
     #       {
     #         source_name: "ResourceName", # required
     #         instance_type: "NonEmptyString", # required
-    #         port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE
+    #         port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE, CLOSED
     #         user_data: "string",
     #         availability_zone: "string", # required
     #       }
@@ -4973,6 +5842,8 @@ module Aws::Lightsail
     #     instance.
     #
     #   * NONE — Default to Amazon EC2.
+    #
+    #   * CLOSED — All ports closed.
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -5243,7 +6114,7 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes the snapshot of the virtual private server, or *instance*.
+    # Describes an instance snapshot.
     #
     # @!attribute [rw] name
     #   The name of the snapshot.
@@ -5319,6 +6190,11 @@ module Aws::Lightsail
     #   `micro_1_0`).
     #   @return [String]
     #
+    # @!attribute [rw] is_from_auto_snapshot
+    #   A Boolean value indicating whether the snapshot was created from an
+    #   automatic snapshot.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] size_in_gb
     #   The size in GB of the SSD.
     #   @return [Integer]
@@ -5340,6 +6216,7 @@ module Aws::Lightsail
       :from_instance_arn,
       :from_blueprint_id,
       :from_bundle_id,
+      :is_from_auto_snapshot,
       :size_in_gb)
       include Aws::Structure
     end
@@ -5385,6 +6262,37 @@ module Aws::Lightsail
     class InstanceState < Struct.new(
       :code,
       :name)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when user input does not conform to
+    # the validation rules of an input field.
+    #
+    # <note markdown="1"> Domain-related APIs are only available in the N. Virginia (us-east-1)
+    # Region. Please set your AWS Region configuration to us-east-1 to
+    # create, view, or edit these resources.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
       include Aws::Structure
     end
 
@@ -5929,6 +6837,30 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Lightsail throws this exception when it cannot find a resource.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass OpenInstancePublicPortsRequest
     #   data as a hash:
     #
@@ -5991,7 +6923,7 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] location
-    #   The region and Availability Zone.
+    #   The AWS Region and Availability Zone.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] is_terminal
@@ -6037,6 +6969,30 @@ module Aws::Lightsail
       :status_changed_at,
       :error_code,
       :error_details)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when an operation fails to execute.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OperationFailureException AWS API Documentation
+    #
+    class OperationFailureException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
       include Aws::Structure
     end
 
@@ -6859,6 +7815,30 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # A general service exception.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ServiceException AWS API Documentation
+    #
+    class ServiceException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartInstanceRequest
     #   data as a hash:
     #
@@ -7101,6 +8081,7 @@ module Aws::Lightsail
     #
     #       {
     #         resource_name: "ResourceName", # required
+    #         resource_arn: "ResourceArn",
     #         tags: [ # required
     #           {
     #             key: "TagKey",
@@ -7113,6 +8094,11 @@ module Aws::Lightsail
     #   The name of the resource to which you are adding tags.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   add a tag.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tag key and optional value.
     #   @return [Array<Types::Tag>]
@@ -7121,6 +8107,7 @@ module Aws::Lightsail
     #
     class TagResourceRequest < Struct.new(
       :resource_name,
+      :resource_arn,
       :tags)
       include Aws::Structure
     end
@@ -7133,6 +8120,31 @@ module Aws::Lightsail
     #
     class TagResourceResult < Struct.new(
       :operations)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when the user has not been
+    # authenticated.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnauthenticatedException AWS API Documentation
+    #
+    class UnauthenticatedException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
       include Aws::Structure
     end
 
@@ -7159,11 +8171,17 @@ module Aws::Lightsail
     #
     #       {
     #         resource_name: "ResourceName", # required
+    #         resource_arn: "ResourceArn",
     #         tag_keys: ["TagKey"], # required
     #       }
     #
     # @!attribute [rw] resource_name
     #   The name of the resource from which you are removing a tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which you want
+    #   to remove a tag.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -7174,6 +8192,7 @@ module Aws::Lightsail
     #
     class UntagResourceRequest < Struct.new(
       :resource_name,
+      :resource_arn,
       :tag_keys)
       include Aws::Structure
     end
@@ -7370,7 +8389,7 @@ module Aws::Lightsail
     #
     #     Example: `16:00-16:30`
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -7393,7 +8412,7 @@ module Aws::Lightsail
     #
     #   * Must be at least 30 minutes.
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Example: `Tue:17:00-Tue:17:30`
     #   @return [String]

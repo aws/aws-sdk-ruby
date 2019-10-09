@@ -91,7 +91,28 @@
         {"shape":"InvalidInputException"},
         {"shape":"FinalizingOrganizationException"},
         {"shape":"ServiceException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"UnsupportedAPIEndpointException"}
+      ]
+    },
+    "CreateGovCloudAccount":{
+      "name":"CreateGovCloudAccount",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateGovCloudAccountRequest"},
+      "output":{"shape":"CreateGovCloudAccountResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"AWSOrganizationsNotInUseException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ConstraintViolationException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"FinalizingOrganizationException"},
+        {"shape":"ServiceException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"UnsupportedAPIEndpointException"}
       ]
     },
     "CreateOrganization":{
@@ -256,7 +277,8 @@
         {"shape":"CreateAccountStatusNotFoundException"},
         {"shape":"InvalidInputException"},
         {"shape":"ServiceException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"UnsupportedAPIEndpointException"}
       ]
     },
     "DescribeHandshake":{
@@ -557,7 +579,8 @@
         {"shape":"AWSOrganizationsNotInUseException"},
         {"shape":"InvalidInputException"},
         {"shape":"ServiceException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"UnsupportedAPIEndpointException"}
       ]
     },
     "ListHandshakesForAccount":{
@@ -676,6 +699,23 @@
         {"shape":"TooManyRequestsException"}
       ]
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"AWSOrganizationsNotInUseException"},
+        {"shape":"TargetNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ServiceException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
     "ListTargetsForPolicy":{
       "name":"ListTargetsForPolicy",
       "http":{
@@ -728,6 +768,42 @@
         {"shape":"ConstraintViolationException"},
         {"shape":"InvalidInputException"},
         {"shape":"MasterCannotLeaveOrganizationException"},
+        {"shape":"ServiceException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"AWSOrganizationsNotInUseException"},
+        {"shape":"TargetNotFoundException"},
+        {"shape":"ConstraintViolationException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ServiceException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"AWSOrganizationsNotInUseException"},
+        {"shape":"TargetNotFoundException"},
+        {"shape":"ConstraintViolationException"},
+        {"shape":"InvalidInputException"},
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ]
@@ -975,9 +1051,13 @@
         "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED",
         "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE",
         "MASTER_ACCOUNT_MISSING_CONTACT_INFO",
+        "MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED",
         "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE",
+        "CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION",
         "EMAIL_VERIFICATION_CODE_EXPIRED",
-        "WAIT_PERIOD_ACTIVE"
+        "WAIT_PERIOD_ACTIVE",
+        "MAX_TAG_LIMIT_EXCEEDED",
+        "TAG_POLICY_VIOLATION"
       ]
     },
     "CreateAccountFailureReason":{
@@ -1035,6 +1115,7 @@
         "RequestedTimestamp":{"shape":"Timestamp"},
         "CompletedTimestamp":{"shape":"Timestamp"},
         "AccountId":{"shape":"AccountId"},
+        "GovCloudAccountId":{"shape":"AccountId"},
         "FailureReason":{"shape":"CreateAccountFailureReason"}
       }
     },
@@ -1048,6 +1129,25 @@
     "CreateAccountStatuses":{
       "type":"list",
       "member":{"shape":"CreateAccountStatus"}
+    },
+    "CreateGovCloudAccountRequest":{
+      "type":"structure",
+      "required":[
+        "Email",
+        "AccountName"
+      ],
+      "members":{
+        "Email":{"shape":"Email"},
+        "AccountName":{"shape":"AccountName"},
+        "RoleName":{"shape":"RoleName"},
+        "IamUserAccessToBilling":{"shape":"IAMUserAccessToBilling"}
+      }
+    },
+    "CreateGovCloudAccountResponse":{
+      "type":"structure",
+      "members":{
+        "CreateAccountStatus":{"shape":"CreateAccountStatus"}
+      }
     },
     "CreateOrganizationRequest":{
       "type":"structure",
@@ -1524,7 +1624,8 @@
         "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS",
         "INVALID_FULL_NAME_TARGET",
         "UNRECOGNIZED_SERVICE_PRINCIPAL",
-        "INVALID_ROLE_NAME"
+        "INVALID_ROLE_NAME",
+        "INVALID_SYSTEM_TAGS_PARAMETER"
       ]
     },
     "InviteAccountToOrganizationRequest":{
@@ -1729,6 +1830,21 @@
       "type":"structure",
       "members":{
         "Roots":{"shape":"Roots"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["ResourceId"],
+      "members":{
+        "ResourceId":{"shape":"TaggableResourceId"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"Tags"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -2074,6 +2190,52 @@
       },
       "exception":true
     },
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TagKeys":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceId",
+        "Tags"
+      ],
+      "members":{
+        "ResourceId":{"shape":"TaggableResourceId"},
+        "Tags":{"shape":"Tags"}
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TaggableResourceId":{
+      "type":"string",
+      "pattern":"^\\d{12}$"
+    },
+    "Tags":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
     "TargetName":{
       "type":"string",
       "max":128,
@@ -2102,6 +2264,24 @@
         "Message":{"shape":"ExceptionMessage"}
       },
       "exception":true
+    },
+    "UnsupportedAPIEndpointException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ExceptionMessage"}
+      },
+      "exception":true
+    },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceId",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceId":{"shape":"TaggableResourceId"},
+        "TagKeys":{"shape":"TagKeys"}
+      }
     },
     "UpdateOrganizationalUnitRequest":{
       "type":"structure",

@@ -30,6 +30,7 @@ module Aws::S3
       @bucket_name
     end
 
+    
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -206,6 +207,8 @@ module Aws::S3
     # @option options [String] :acl
     #   The canned ACL to apply to the bucket.
     # @option options [Types::AccessControlPolicy] :access_control_policy
+    #   Contains the elements that set the ACL permissions for an object per
+    #   grantee.
     # @option options [String] :content_md5
     # @option options [String] :grant_full_control
     #   Allows grantee the read, write, read ACP, and write ACP permissions on

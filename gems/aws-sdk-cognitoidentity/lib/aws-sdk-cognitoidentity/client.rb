@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::CognitoIdentity
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::CognitoIdentity
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::CognitoIdentity
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -255,11 +304,16 @@ module Aws::CognitoIdentity
     #   A list of OpendID Connect provider ARNs.
     #
     # @option params [Array<Types::CognitoIdentityProvider>] :cognito_identity_providers
-    #   An array of Amazon Cognito Identity user pools and their client IDs.
+    #   An array of Amazon Cognito user pools and their client IDs.
     #
     # @option params [Array<String>] :saml_provider_arns
     #   An array of Amazon Resource Names (ARNs) of the SAML provider for your
     #   identity pool.
+    #
+    # @option params [Hash<String,String>] :identity_pool_tags
+    #   Tags to assign to the identity pool. A tag is a label that you can
+    #   apply to identity pools to categorize and manage them in different
+    #   ways, such as by purpose, owner, environment, or other criteria.
     #
     # @return [Types::IdentityPool] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -271,6 +325,7 @@ module Aws::CognitoIdentity
     #   * {Types::IdentityPool#open_id_connect_provider_arns #open_id_connect_provider_arns} => Array&lt;String&gt;
     #   * {Types::IdentityPool#cognito_identity_providers #cognito_identity_providers} => Array&lt;Types::CognitoIdentityProvider&gt;
     #   * {Types::IdentityPool#saml_provider_arns #saml_provider_arns} => Array&lt;String&gt;
+    #   * {Types::IdentityPool#identity_pool_tags #identity_pool_tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -290,6 +345,9 @@ module Aws::CognitoIdentity
     #       },
     #     ],
     #     saml_provider_arns: ["ARNString"],
+    #     identity_pool_tags: {
+    #       "TagKeysType" => "TagValueType",
+    #     },
     #   })
     #
     # @example Response structure
@@ -308,6 +366,8 @@ module Aws::CognitoIdentity
     #   resp.cognito_identity_providers[0].server_side_token_check #=> Boolean
     #   resp.saml_provider_arns #=> Array
     #   resp.saml_provider_arns[0] #=> String
+    #   resp.identity_pool_tags #=> Hash
+    #   resp.identity_pool_tags["TagKeysType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/CreateIdentityPool AWS API Documentation
     #
@@ -351,8 +411,8 @@ module Aws::CognitoIdentity
       req.send_request(options)
     end
 
-    # Deletes a user pool. Once a pool is deleted, users will not be able to
-    # authenticate with the pool.
+    # Deletes an identity pool. Once a pool is deleted, users will not be
+    # able to authenticate with the pool.
     #
     # You must use AWS Developer credentials to call this API.
     #
@@ -432,6 +492,7 @@ module Aws::CognitoIdentity
     #   * {Types::IdentityPool#open_id_connect_provider_arns #open_id_connect_provider_arns} => Array&lt;String&gt;
     #   * {Types::IdentityPool#cognito_identity_providers #cognito_identity_providers} => Array&lt;Types::CognitoIdentityProvider&gt;
     #   * {Types::IdentityPool#saml_provider_arns #saml_provider_arns} => Array&lt;String&gt;
+    #   * {Types::IdentityPool#identity_pool_tags #identity_pool_tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -455,6 +516,8 @@ module Aws::CognitoIdentity
     #   resp.cognito_identity_providers[0].server_side_token_check #=> Boolean
     #   resp.saml_provider_arns #=> Array
     #   resp.saml_provider_arns[0] #=> String
+    #   resp.identity_pool_tags #=> Hash
+    #   resp.identity_pool_tags["TagKeysType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DescribeIdentityPool AWS API Documentation
     #
@@ -478,7 +541,20 @@ module Aws::CognitoIdentity
     #
     # @option params [Hash<String,String>] :logins
     #   A set of optional name-value pairs that map provider names to provider
-    #   tokens.
+    #   tokens. The name-value pair will follow the syntax "provider\_name":
+    #   "provider\_user\_identifier".
+    #
+    #   Logins should not be specified when trying to get credentials for an
+    #   unauthenticated identity.
+    #
+    #   The Logins parameter is required when using identities associated with
+    #   external identity providers such as FaceBook. For examples of `Logins`
+    #   maps, see the code examples in the [External Identity Providers][1]
+    #   section of the Amazon Cognito Developer Guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html
     #
     # @option params [String] :custom_role_arn
     #   The Amazon Resource Name (ARN) of the role to be assumed when multiple
@@ -536,8 +612,9 @@ module Aws::CognitoIdentity
     #
     #   * Facebook: `graph.facebook.com`
     #
-    #   * Amazon Cognito Identity Provider:
-    #     `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`
+    #   * Amazon Cognito user pool:
+    #     `cognito-idp.<region>.amazonaws.com/<YOUR_USER_POOL_ID>`, for
+    #     example, `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`.
     #
     #   * Google: `accounts.google.com`
     #
@@ -620,7 +697,7 @@ module Aws::CognitoIdentity
     # is returned by GetId. You can optionally add additional logins for the
     # identity. Supplying multiple logins creates an implicit link.
     #
-    # The OpenId token is valid for 15 minutes.
+    # The OpenId token is valid for 10 minutes.
     #
     # This is a public API. You do not need any credentials to call this
     # API.
@@ -632,8 +709,8 @@ module Aws::CognitoIdentity
     #   A set of optional name-value pairs that map provider names to provider
     #   tokens. When using graph.facebook.com and www.amazon.com, supply the
     #   access\_token returned from the provider's authflow. For
-    #   accounts.google.com, an Amazon Cognito Identity Provider, or any other
-    #   OpenId Connect provider, always include the `id_token`.
+    #   accounts.google.com, an Amazon Cognito user pool provider, or any
+    #   other OpenId Connect provider, always include the `id_token`.
     #
     # @return [Types::GetOpenIdTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -740,7 +817,7 @@ module Aws::CognitoIdentity
       req.send_request(options)
     end
 
-    # Lists the identities in a pool.
+    # Lists the identities in an identity pool.
     #
     # You must use AWS Developer credentials to call this API.
     #
@@ -831,8 +908,44 @@ module Aws::CognitoIdentity
       req.send_request(options)
     end
 
+    # Lists the tags that are assigned to an Amazon Cognito identity pool.
+    #
+    # A tag is a label that you can apply to identity pools to categorize
+    # and manage them in different ways, such as by purpose, owner,
+    # environment, or other criteria.
+    #
+    # You can use this action up to 10 times per second, per account.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the identity pool that the tags are
+    #   assigned to.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ARNString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKeysType"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Retrieves the `IdentityID` associated with a `DeveloperUserIdentifier`
-    # or the list of `DeveloperUserIdentifier`s associated with an
+    # or the list of `DeveloperUserIdentifier` values associated with an
     # `IdentityId` for an existing identity. Either `IdentityID` or
     # `DeveloperUserIdentifier` must not be null. If you supply only one of
     # these values, the other value will be searched in the database and
@@ -841,6 +954,13 @@ module Aws::CognitoIdentity
     # values are verified against the database, the response returns both
     # values and is the same as the request. Otherwise a
     # `ResourceConflictException` is thrown.
+    #
+    # `LookupDeveloperIdentity` is intended for low-throughput control plane
+    # operations: for example, to enable customer service to locate an
+    # identity ID by username. If you are using it for higher-volume
+    # operations such as user authentication, your requests are likely to be
+    # throttled. GetOpenIdTokenForDeveloperIdentity is a better option for
+    # higher-volume operations for user authentication.
     #
     # You must use AWS Developer credentials to call this API.
     #
@@ -908,6 +1028,11 @@ module Aws::CognitoIdentity
     # developer-authenticated users can be merged. If the users to be merged
     # are associated with the same public provider, but as two different
     # users, an exception will be thrown.
+    #
+    # The number of linked logins is limited to 20. So, the number of linked
+    # logins for the source user, `SourceUserIdentifier`, and the
+    # destination user, `DestinationUserIdentifier`, together should not be
+    # larger than 20. Otherwise, an exception will be thrown.
     #
     # You must use AWS Developer credentials to call this API.
     #
@@ -1013,6 +1138,54 @@ module Aws::CognitoIdentity
       req.send_request(options)
     end
 
+    # Assigns a set of tags to an Amazon Cognito identity pool. A tag is a
+    # label that you can use to categorize and manage identity pools in
+    # different ways, such as by purpose, owner, environment, or other
+    # criteria.
+    #
+    # Each tag consists of a key and value, both of which you define. A key
+    # is a general category for more specific values. For example, if you
+    # have two versions of an identity pool, one for testing and another for
+    # production, you might assign an `Environment` tag key to both identity
+    # pools. The value of this key might be `Test` for one identity pool and
+    # `Production` for the other.
+    #
+    # Tags are useful for cost tracking and access control. You can activate
+    # your tags so that they appear on the Billing and Cost Management
+    # console, where you can track the costs associated with your identity
+    # pools. In an IAM policy, you can constrain permissions for identity
+    # pools based on specific tags or tag values.
+    #
+    # You can use this action up to 5 times per second, per account. An
+    # identity pool can have as many as 50 tags.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the identity pool to assign the tags
+    #   to.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the identity pool.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ARNString", # required
+    #     tags: {
+    #       "TagKeysType" => "TagValueType",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
     # Unlinks a `DeveloperUserIdentifier` from an existing identity.
     # Unlinked developer users will be considered new identities next time
     # they are seen. If, for a given Cognito identity, you remove all
@@ -1092,7 +1265,35 @@ module Aws::CognitoIdentity
       req.send_request(options)
     end
 
-    # Updates a user pool.
+    # Removes the specified tags from an Amazon Cognito identity pool. You
+    # can use this action up to 5 times per second, per account
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the identity pool that the tags are
+    #   assigned to.
+    #
+    # @option params [Array<String>] :tag_keys
+    #   The keys of the tags to remove from the user pool.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ARNString", # required
+    #     tag_keys: ["TagKeysType"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an identity pool.
     #
     # You must use AWS Developer credentials to call this API.
     #
@@ -1115,12 +1316,17 @@ module Aws::CognitoIdentity
     #   A list of OpendID Connect provider ARNs.
     #
     # @option params [Array<Types::CognitoIdentityProvider>] :cognito_identity_providers
-    #   A list representing an Amazon Cognito Identity User Pool and its
-    #   client ID.
+    #   A list representing an Amazon Cognito user pool and its client ID.
     #
     # @option params [Array<String>] :saml_provider_arns
     #   An array of Amazon Resource Names (ARNs) of the SAML provider for your
     #   identity pool.
+    #
+    # @option params [Hash<String,String>] :identity_pool_tags
+    #   The tags that are assigned to the identity pool. A tag is a label that
+    #   you can apply to identity pools to categorize and manage them in
+    #   different ways, such as by purpose, owner, environment, or other
+    #   criteria.
     #
     # @return [Types::IdentityPool] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1132,6 +1338,7 @@ module Aws::CognitoIdentity
     #   * {Types::IdentityPool#open_id_connect_provider_arns #open_id_connect_provider_arns} => Array&lt;String&gt;
     #   * {Types::IdentityPool#cognito_identity_providers #cognito_identity_providers} => Array&lt;Types::CognitoIdentityProvider&gt;
     #   * {Types::IdentityPool#saml_provider_arns #saml_provider_arns} => Array&lt;String&gt;
+    #   * {Types::IdentityPool#identity_pool_tags #identity_pool_tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1152,6 +1359,9 @@ module Aws::CognitoIdentity
     #       },
     #     ],
     #     saml_provider_arns: ["ARNString"],
+    #     identity_pool_tags: {
+    #       "TagKeysType" => "TagValueType",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1170,6 +1380,8 @@ module Aws::CognitoIdentity
     #   resp.cognito_identity_providers[0].server_side_token_check #=> Boolean
     #   resp.saml_provider_arns #=> Array
     #   resp.saml_provider_arns[0] #=> String
+    #   resp.identity_pool_tags #=> Hash
+    #   resp.identity_pool_tags["TagKeysType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UpdateIdentityPool AWS API Documentation
     #
@@ -1193,7 +1405,7 @@ module Aws::CognitoIdentity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentity'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

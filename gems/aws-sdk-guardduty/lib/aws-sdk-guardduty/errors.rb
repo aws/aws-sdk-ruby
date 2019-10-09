@@ -10,5 +10,47 @@ module Aws::GuardDuty
 
     extend Aws::Errors::DynamicErrors
 
+    class BadRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GuardDuty::Types::BadRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+    end
+
+    class InternalServerErrorException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GuardDuty::Types::InternalServerErrorException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+    end
+
   end
 end

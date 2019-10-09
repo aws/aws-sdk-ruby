@@ -11,7 +11,9 @@ module Aws::Firehose
     # Describes hints for the buffering to perform before delivering data to
     # the destination. These options are treated as hints, and therefore
     # Kinesis Data Firehose might choose to use different values when it is
-    # optimal.
+    # optimal. The `SizeInMBs` and `IntervalInSeconds` parameters are
+    # optional. However, if specify a value for one of them, you must also
+    # provide a value for the other.
     #
     # @note When making an API call, you may pass BufferingHints
     #   data as a hash:
@@ -22,18 +24,22 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] size_in_m_bs
-    #   Buffer incoming data to the specified size, in MBs, before
-    #   delivering it to the destination. The default value is 5.
+    #   Buffer incoming data to the specified size, in MiBs, before
+    #   delivering it to the destination. The default value is 5. This
+    #   parameter is optional but if you specify a value for it, you must
+    #   also specify a value for `IntervalInSeconds`, and vice versa.
     #
     #   We recommend setting this parameter to a value greater than the
     #   amount of data you typically ingest into the delivery stream in 10
-    #   seconds. For example, if you typically ingest data at 1 MB/sec, the
-    #   value should be 10 MB or higher.
+    #   seconds. For example, if you typically ingest data at 1 MiB/sec, the
+    #   value should be 10 MiB or higher.
     #   @return [Integer]
     #
     # @!attribute [rw] interval_in_seconds
     #   Buffer incoming data for the specified period of time, in seconds,
     #   before delivering it to the destination. The default value is 300.
+    #   This parameter is optional but if you specify a value for it, you
+    #   must also specify a value for `SizeInMBs`, and vice versa.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/BufferingHints AWS API Documentation
@@ -76,6 +82,20 @@ module Aws::Firehose
       :enabled,
       :log_group_name,
       :log_stream_name)
+      include Aws::Structure
+    end
+
+    # Another modification has already happened. Fetch `VersionId` again and
+    # use it to update the destination.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -125,8 +145,8 @@ module Aws::Firehose
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
-    #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
+    #   [2]: https://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CopyCommand AWS API Documentation
@@ -152,6 +172,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -173,6 +194,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -208,6 +230,7 @@ module Aws::Firehose
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
@@ -292,6 +315,7 @@ module Aws::Firehose
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
@@ -328,6 +352,7 @@ module Aws::Firehose
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
@@ -353,9 +378,10 @@ module Aws::Firehose
     #         },
     #         elasticsearch_destination_configuration: {
     #           role_arn: "RoleARN", # required
-    #           domain_arn: "ElasticsearchDomainARN", # required
+    #           domain_arn: "ElasticsearchDomainARN",
+    #           cluster_endpoint: "ElasticsearchClusterEndpoint",
     #           index_name: "ElasticsearchIndexName", # required
-    #           type_name: "ElasticsearchTypeName", # required
+    #           type_name: "ElasticsearchTypeName",
     #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
     #           buffering_hints: {
     #             interval_in_seconds: 1,
@@ -369,6 +395,7 @@ module Aws::Firehose
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
@@ -419,6 +446,7 @@ module Aws::Firehose
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
@@ -942,9 +970,10 @@ module Aws::Firehose
     #
     #       {
     #         role_arn: "RoleARN", # required
-    #         domain_arn: "ElasticsearchDomainARN", # required
+    #         domain_arn: "ElasticsearchDomainARN",
+    #         cluster_endpoint: "ElasticsearchClusterEndpoint",
     #         index_name: "ElasticsearchIndexName", # required
-    #         type_name: "ElasticsearchTypeName", # required
+    #         type_name: "ElasticsearchTypeName",
     #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
     #         buffering_hints: {
     #           interval_in_seconds: 1,
@@ -958,6 +987,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -1005,7 +1035,7 @@ module Aws::Firehose
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
@@ -1016,9 +1046,16 @@ module Aws::Firehose
     #   specified in **RoleARN**. For more information, see [Amazon Resource
     #   Names (ARNs) and AWS Service Namespaces][1].
     #
+    #   Specify either `ClusterEndpoint` or `DomainARN`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_endpoint
+    #   The endpoint to use when communicating with the cluster. Specify
+    #   either this `ClusterEndpoint` or the `DomainARN` field.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -1030,17 +1067,19 @@ module Aws::Firehose
     #   only one type per index. If you try to specify a new type for an
     #   existing index that already has another type, Kinesis Data Firehose
     #   returns an error during run time.
+    #
+    #   For Elasticsearch 7.x, don't specify a `TypeName`.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
-    #   time stamp to the `IndexName` to facilitate the expiration of old
+    #   timestamp to the `IndexName` to facilitate the expiration of old
     #   data. For more information, see [Index Rotation for the Amazon ES
     #   Destination][1]. The default value is `OneDay`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1067,7 +1106,7 @@ module Aws::Firehose
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup
     #   @return [String]
     #
     # @!attribute [rw] s3_configuration
@@ -1087,6 +1126,7 @@ module Aws::Firehose
     class ElasticsearchDestinationConfiguration < Struct.new(
       :role_arn,
       :domain_arn,
+      :cluster_endpoint,
       :index_name,
       :type_name,
       :index_rotation_period,
@@ -1115,9 +1155,18 @@ module Aws::Firehose
     #   The ARN of the Amazon ES domain. For more information, see [Amazon
     #   Resource Names (ARNs) and AWS Service Namespaces][1].
     #
+    #   Kinesis Data Firehose uses either `ClusterEndpoint` or `DomainARN`
+    #   to send data to Amazon ES.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_endpoint
+    #   The endpoint to use when communicating with the cluster. Kinesis
+    #   Data Firehose uses either this `ClusterEndpoint` or the `DomainARN`
+    #   field to send data to Amazon ES.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -1125,7 +1174,9 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] type_name
-    #   The Elasticsearch type name.
+    #   The Elasticsearch type name. This applies to Elasticsearch 6.x and
+    #   lower versions. For Elasticsearch 7.x, there's no value for
+    #   `TypeName`.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
@@ -1161,6 +1212,7 @@ module Aws::Firehose
     class ElasticsearchDestinationDescription < Struct.new(
       :role_arn,
       :domain_arn,
+      :cluster_endpoint,
       :index_name,
       :type_name,
       :index_rotation_period,
@@ -1181,6 +1233,7 @@ module Aws::Firehose
     #       {
     #         role_arn: "RoleARN",
     #         domain_arn: "ElasticsearchDomainARN",
+    #         cluster_endpoint: "ElasticsearchClusterEndpoint",
     #         index_name: "ElasticsearchIndexName",
     #         type_name: "ElasticsearchTypeName",
     #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
@@ -1195,6 +1248,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -1242,7 +1296,7 @@ module Aws::Firehose
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
@@ -1250,12 +1304,19 @@ module Aws::Firehose
     #   The ARN of the Amazon ES domain. The IAM role must have permissions
     #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains`,
     #   and `DescribeElasticsearchDomainConfig` after assuming the IAM role
-    #   specified in **RoleARN**. For more information, see [Amazon Resource
+    #   specified in `RoleARN`. For more information, see [Amazon Resource
     #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #   Specify either `ClusterEndpoint` or `DomainARN`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_endpoint
+    #   The endpoint to use when communicating with the cluster. Specify
+    #   either this `ClusterEndpoint` or the `DomainARN` field.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -1267,22 +1328,28 @@ module Aws::Firehose
     #   only one type per index. If you try to specify a new type for an
     #   existing index that already has another type, Kinesis Data Firehose
     #   returns an error during runtime.
+    #
+    #   If you upgrade Elasticsearch from 6.x to 7.x and don’t update your
+    #   delivery stream, Kinesis Data Firehose still delivers data to
+    #   Elasticsearch with the old index name and type name. If you want to
+    #   update your delivery stream with a new index name, provide an empty
+    #   string for `TypeName`.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
-    #   time stamp to `IndexName` to facilitate the expiration of old data.
+    #   timestamp to `IndexName` to facilitate the expiration of old data.
     #   For more information, see [Index Rotation for the Amazon ES
     #   Destination][1]. Default value is `OneDay`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
     #   The buffering options. If no value is specified,
-    #   **ElasticsearchBufferingHints** object default values are used.
+    #   `ElasticsearchBufferingHints` object default values are used.
     #   @return [Types::ElasticsearchBufferingHints]
     #
     # @!attribute [rw] retry_options
@@ -1308,6 +1375,7 @@ module Aws::Firehose
     class ElasticsearchDestinationUpdate < Struct.new(
       :role_arn,
       :domain_arn,
+      :cluster_endpoint,
       :index_name,
       :type_name,
       :index_rotation_period,
@@ -1382,6 +1450,7 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         bucket_arn: "BucketARN", # required
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
@@ -1417,6 +1486,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -1506,15 +1576,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1559,6 +1637,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -1593,15 +1672,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1646,6 +1733,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -1666,6 +1754,7 @@ module Aws::Firehose
     #         role_arn: "RoleARN",
     #         bucket_arn: "BucketARN",
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
@@ -1701,6 +1790,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -1790,15 +1880,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1843,6 +1941,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -1870,11 +1969,11 @@ module Aws::Firehose
     #
     # @!attribute [rw] timestamp_formats
     #   Indicates how you want Kinesis Data Firehose to parse the date and
-    #   time stamps that may be present in your input data JSON. To specify
+    #   timestamps that may be present in your input data JSON. To specify
     #   these format strings, follow the pattern syntax of JodaTime's
     #   DateTimeFormat format strings. For more information, see [Class
     #   DateTimeFormat][1]. You can also use the special value `millis` to
-    #   parse time stamps in epoch milliseconds. If you don't specify a
+    #   parse timestamps in epoch milliseconds. If you don't specify a
     #   format, Kinesis Data Firehose uses `java.sql.Timestamp::valueOf` by
     #   default.
     #
@@ -1921,6 +2020,19 @@ module Aws::Firehose
     #
     class InputFormatConfiguration < Struct.new(
       :deserializer)
+      include Aws::Structure
+    end
+
+    # The specified input parameter has a value that is not valid.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2014,7 +2126,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] delivery_start_timestamp
     #   Kinesis Data Firehose starts retrieving records from the Kinesis
-    #   data stream starting with this time stamp.
+    #   data stream starting with this timestamp.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KinesisStreamSourceDescription AWS API Documentation
@@ -2023,6 +2135,19 @@ module Aws::Firehose
       :kinesis_stream_arn,
       :role_arn,
       :delivery_start_timestamp)
+      include Aws::Structure
+    end
+
+    # You have already reached the limit for a requested resource.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2670,6 +2795,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -2706,6 +2832,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -2894,6 +3021,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -2930,6 +3058,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -3054,6 +3183,32 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The resource is already in use and not available for this operation.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the configuration of a destination in Amazon S3.
     #
     # @note When making an API call, you may pass S3DestinationConfiguration
@@ -3063,6 +3218,7 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         bucket_arn: "BucketARN", # required
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
@@ -3102,15 +3258,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -3142,6 +3306,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -3172,15 +3337,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -3208,6 +3381,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -3224,6 +3398,7 @@ module Aws::Firehose
     #         role_arn: "RoleARN",
     #         bucket_arn: "BucketARN",
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
@@ -3263,15 +3438,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -3303,6 +3486,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -3433,6 +3617,27 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The service is unavailable. Back off and retry the operation. If you
+    # continue to see the exception, throughput limits for the delivery
+    # stream may have been exceeded. For more information about limits and
+    # how to request an increase, see [Amazon Kinesis Data Firehose
+    # Limits][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/limits.html
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Details about a Kinesis data stream used as the source for a Kinesis
     # Data Firehose delivery stream.
     #
@@ -3466,6 +3671,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -3650,6 +3856,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -3927,6 +4134,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -3948,6 +4156,7 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
@@ -3983,6 +4192,7 @@ module Aws::Firehose
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
@@ -4067,6 +4277,7 @@ module Aws::Firehose
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
@@ -4103,6 +4314,7 @@ module Aws::Firehose
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
@@ -4129,6 +4341,7 @@ module Aws::Firehose
     #         elasticsearch_destination_update: {
     #           role_arn: "RoleARN",
     #           domain_arn: "ElasticsearchDomainARN",
+    #           cluster_endpoint: "ElasticsearchClusterEndpoint",
     #           index_name: "ElasticsearchIndexName",
     #           type_name: "ElasticsearchTypeName",
     #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
@@ -4143,6 +4356,7 @@ module Aws::Firehose
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
@@ -4193,6 +4407,7 @@ module Aws::Firehose
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
@@ -4237,7 +4452,7 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] current_delivery_stream_version_id
-    #   Obtain this value from the **VersionId** result of
+    #   Obtain this value from the `VersionId` result of
     #   DeliveryStreamDescription. This value is required, and helps the
     #   service perform conditional operations. For example, if there is an
     #   interleaving update and this value is null, then the update

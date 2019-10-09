@@ -8,6 +8,18 @@
 module Aws::WorkSpaces
   module Types
 
+    # The user is not authorized to access a resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a modification to the configuration of bring your own
     # license (BYOL) for the specified account.
     #
@@ -165,6 +177,64 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CopyWorkspaceImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "WorkspaceImageName", # required
+    #         description: "WorkspaceImageDescription",
+    #         source_image_id: "WorkspaceImageId", # required
+    #         source_region: "Region", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_image_id
+    #   The identifier of the source image.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The identifier of the source Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the image.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CopyWorkspaceImageRequest AWS API Documentation
+    #
+    class CopyWorkspaceImageRequest < Struct.new(
+      :name,
+      :description,
+      :source_image_id,
+      :source_region,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The identifier of the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CopyWorkspaceImageResult AWS API Documentation
+    #
+    class CopyWorkspaceImageResult < Struct.new(
+      :image_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateIpGroupRequest
     #   data as a hash:
     #
@@ -175,6 +245,12 @@ module Aws::WorkSpaces
     #           {
     #             ip_rule: "IpRule",
     #             rule_desc: "IpRuleDesc",
+    #           },
+    #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
     #           },
     #         ],
     #       }
@@ -191,12 +267,17 @@ module Aws::WorkSpaces
     #   The rules to add to the group.
     #   @return [Array<Types::IpRuleItem>]
     #
+    # @!attribute [rw] tags
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroupRequest AWS API Documentation
     #
     class CreateIpGroupRequest < Struct.new(
       :group_name,
       :group_desc,
-      :user_rules)
+      :user_rules,
+      :tags)
       include Aws::Structure
     end
 
@@ -225,12 +306,13 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom
+    #   bundles, and IP access control groups.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags. Each WorkSpace can have a maximum of 50 tags.
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsRequest AWS API Documentation
@@ -374,8 +456,9 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom
+    #   bundles, and IP access control groups.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -488,7 +571,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_ids
-    #   The resource identifiers, in the form of directory IDs.
+    #   The resource identifier, in the form of directory IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientPropertiesRequest AWS API Documentation
@@ -565,8 +648,9 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom
+    #   bundles, and IP access control groups.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsRequest AWS API Documentation
@@ -729,6 +813,43 @@ module Aws::WorkSpaces
     class DescribeWorkspaceImagesResult < Struct.new(
       :images,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWorkspaceSnapshotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] workspace_id
+    #   The identifier of the WorkSpace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshotsRequest AWS API Documentation
+    #
+    class DescribeWorkspaceSnapshotsRequest < Struct.new(
+      :workspace_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rebuild_snapshots
+    #   Information about the snapshots that can be used to rebuild a
+    #   WorkSpace. These snapshots include the root volume.
+    #   @return [Array<Types::Snapshot>]
+    #
+    # @!attribute [rw] restore_snapshots
+    #   Information about the snapshots that can be used to restore a
+    #   WorkSpace. These snapshots include both the root volume and the user
+    #   volume.
+    #   @return [Array<Types::Snapshot>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshotsResult AWS API Documentation
+    #
+    class DescribeWorkspaceSnapshotsResult < Struct.new(
+      :rebuild_snapshots,
+      :restore_snapshots)
       include Aws::Structure
     end
 
@@ -908,8 +1029,9 @@ module Aws::WorkSpaces
     end
 
     # Describes a WorkSpace that could not be rebooted. (RebootWorkspaces),
-    # rebuilt (RebuildWorkspaces), terminated (TerminateWorkspaces), started
-    # (StartWorkspaces), or stopped (StopWorkspaces).
+    # rebuilt (RebuildWorkspaces), restored (RestoreWorkspace), terminated
+    # (TerminateWorkspaces), started (StartWorkspaces), or stopped
+    # (StopWorkspaces).
     #
     # @!attribute [rw] workspace_id
     #   The identifier of the WorkSpace.
@@ -941,6 +1063,12 @@ module Aws::WorkSpaces
     #         ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO
     #         image_name: "WorkspaceImageName", # required
     #         image_description: "WorkspaceImageDescription", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] ec2_image_id
@@ -959,13 +1087,18 @@ module Aws::WorkSpaces
     #   The description of the WorkSpace image.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportWorkspaceImageRequest AWS API Documentation
     #
     class ImportWorkspaceImageRequest < Struct.new(
       :ec2_image_id,
       :ingestion_process,
       :image_name,
-      :image_description)
+      :image_description,
+      :tags)
       include Aws::Structure
     end
 
@@ -977,6 +1110,31 @@ module Aws::WorkSpaces
     #
     class ImportWorkspaceImageResult < Struct.new(
       :image_id)
+      include Aws::Structure
+    end
+
+    # One or more parameter values are not valid.
+    #
+    # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/InvalidParameterValuesException AWS API Documentation
+    #
+    class InvalidParameterValuesException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The state of the resource is not valid for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/InvalidResourceStateException AWS API Documentation
+    #
+    class InvalidResourceStateException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1113,7 +1271,7 @@ module Aws::WorkSpaces
     #
     #       {
     #         resource_id: "NonEmptyString", # required
-    #         client_properties: {
+    #         client_properties: { # required
     #           reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       }
@@ -1210,6 +1368,31 @@ module Aws::WorkSpaces
     #
     class OperatingSystem < Struct.new(
       :type)
+      include Aws::Structure
+    end
+
+    # The properties of this WorkSpace are currently being modified. Try
+    # again in a moment.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/OperationInProgressException AWS API Documentation
+    #
+    class OperationInProgressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This operation is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/OperationNotSupportedException AWS API Documentation
+    #
+    class OperationNotSupportedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1319,6 +1502,113 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # The specified resource already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource is associated with a directory.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceAssociatedException AWS API Documentation
+    #
+    class ResourceAssociatedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource could not be created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceCreationFailedException AWS API Documentation
+    #
+    class ResourceCreationFailedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your resource limits have been exceeded.
+    #
+    # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   The resource could not be found.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that could not be found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource_id)
+      include Aws::Structure
+    end
+
+    # The specified resource is not available.
+    #
+    # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource that is not available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceUnavailableException AWS API Documentation
+    #
+    class ResourceUnavailableException < Struct.new(
+      :message,
+      :resource_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RestoreWorkspaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] workspace_id
+    #   The identifier of the WorkSpace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspaceRequest AWS API Documentation
+    #
+    class RestoreWorkspaceRequest < Struct.new(
+      :workspace_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspaceResult AWS API Documentation
+    #
+    class RestoreWorkspaceResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass RevokeIpRulesRequest
     #   data as a hash:
     #
@@ -1357,6 +1647,19 @@ module Aws::WorkSpaces
     #
     class RootStorage < Struct.new(
       :capacity)
+      include Aws::Structure
+    end
+
+    # Describes a snapshot.
+    #
+    # @!attribute [rw] snapshot_time
+    #   The time when the snapshot was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Snapshot AWS API Documentation
+    #
+    class Snapshot < Struct.new(
+      :snapshot_time)
       include Aws::Structure
     end
 
@@ -1542,6 +1845,24 @@ module Aws::WorkSpaces
     #
     class TerminateWorkspacesResult < Struct.new(
       :failed_requests)
+      include Aws::Structure
+    end
+
+    # The configuration of this WorkSpace is not supported for this
+    # operation. For more information, see the [Amazon WorkSpaces
+    # Administration Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UnsupportedWorkspaceConfigurationException AWS API Documentation
+    #
+    class UnsupportedWorkspaceConfigurationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1903,7 +2224,7 @@ module Aws::WorkSpaces
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html
     #   @return [String]
     #
     # @!attribute [rw] running_mode_auto_stop_timeout_in_minutes

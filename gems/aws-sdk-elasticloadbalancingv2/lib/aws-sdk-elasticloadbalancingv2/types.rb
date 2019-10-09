@@ -14,7 +14,7 @@ module Aws::ElasticLoadBalancingV2
     #   data as a hash:
     #
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -72,13 +72,13 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] authenticate_oidc_config
-    #   \[HTTPS listener\] Information about an identity provider that is
+    #   \[HTTPS listeners\] Information about an identity provider that is
     #   compliant with OpenID Connect (OIDC). Specify only when `Type` is
     #   `authenticate-oidc`.
     #   @return [Types::AuthenticateOidcActionConfig]
     #
     # @!attribute [rw] authenticate_cognito_config
-    #   \[HTTPS listener\] Information for using Amazon Cognito to
+    #   \[HTTPS listeners\] Information for using Amazon Cognito to
     #   authenticate users. Specify only when `Type` is
     #   `authenticate-cognito`.
     #   @return [Types::AuthenticateCognitoActionConfig]
@@ -146,7 +146,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # @!attribute [rw] certificates
-    #   Information about the certificates.
+    #   Information about the certificates in the certificate list.
     #   @return [Array<Types::Certificate>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddListenerCertificatesOutput AWS API Documentation
@@ -318,7 +318,9 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   The OAuth 2.0 client secret.
+    #   The OAuth 2.0 client secret. This parameter is required if you are
+    #   creating a rule. If you are modifying a rule, you can omit this
+    #   parameter if you set `UseExistingClientSecret` to true.
     #   @return [String]
     #
     # @!attribute [rw] session_cookie_name
@@ -357,6 +359,9 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] use_existing_client_secret
+    #   Indicates whether to use the existing client secret when modifying a
+    #   rule. If you are creating a rule, you can omit this parameter or set
+    #   it to false.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AuthenticateOidcActionConfig AWS API Documentation
@@ -384,23 +389,22 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The ID of the subnet.
+    #   The ID of the subnet. You can specify one subnet per Availability
+    #   Zone.
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_addresses
-    #   \[Network Load Balancers\] The static IP address.
+    #   \[Network Load Balancers\] If you need static IP addresses for your
+    #   load balancer, you can specify one Elastic IP address per
+    #   Availability Zone when you create the load balancer.
     #   @return [Array<Types::LoadBalancerAddress>]
-    #
-    # @!attribute [rw] static_ip
-    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :zone_name,
       :subnet_id,
-      :load_balancer_addresses,
-      :static_ip)
+      :load_balancer_addresses)
       include Aws::Structure
     end
 
@@ -420,7 +424,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] is_default
     #   Indicates whether the certificate is the default certificate. Do not
-    #   set `IsDefault` when specifying a certificate as an input parameter.
+    #   set this value when specifying a certificate as an input. This value
+    #   is not included in the output when describing a listener, but is
+    #   included when describing listener certificates.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Certificate AWS API Documentation
@@ -454,7 +460,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         load_balancer_arn: "LoadBalancerArn", # required
-    #         protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP, TLS, UDP
+    #         protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP
     #         port: 1, # required
     #         ssl_policy: "SslPolicyName",
     #         certificates: [
@@ -465,7 +471,7 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         default_actions: [ # required
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -520,7 +526,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] protocol
     #   The protocol for connections from clients to the load balancer. For
     #   Application Load Balancers, the supported protocols are HTTP and
-    #   HTTPS. For Network Load Balancers, the supported protocol is TCP.
+    #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
+    #   TLS, UDP, and TCP\_UDP.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -528,17 +535,18 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Integer]
     #
     # @!attribute [rw] ssl_policy
-    #   \[HTTPS listeners\] The security policy that defines which ciphers
-    #   and protocols are supported. The default is the current predefined
-    #   security policy.
+    #   \[HTTPS and TLS listeners\] The security policy that defines which
+    #   ciphers and protocols are supported. The default is the current
+    #   predefined security policy.
     #   @return [String]
     #
     # @!attribute [rw] certificates
-    #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. Set `CertificateArn` to the
-    #   certificate ARN but do not set `IsDefault`.
+    #   \[HTTPS and TLS listeners\] The default certificate for the
+    #   listener. You must provide exactly one certificate. Set
+    #   `CertificateArn` to the certificate ARN but do not set `IsDefault`.
     #
-    #   To create a certificate list, use AddListenerCertificates.
+    #   To create a certificate list for the listener, use
+    #   AddListenerCertificates.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] default_actions
@@ -547,14 +555,15 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
     #   Connect (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   authenticate users through the user pools supported by Amazon
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`,
+    #   you authenticate users through the user pools supported by Amazon
     #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -598,7 +607,6 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             subnet_id: "SubnetId",
     #             allocation_id: "AllocationId",
-    #             static_ip: false,
     #           },
     #         ],
     #         security_groups: ["SecurityGroupId"],
@@ -645,7 +653,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
     #   Availability Zones. You can specify one Elastic IP address per
-    #   subnet.
+    #   subnet if you need static IP addresses for your load balancer.
     #   @return [Array<Types::SubnetMapping>]
     #
     # @!attribute [rw] security_groups
@@ -729,17 +737,25 @@ module Aws::ElasticLoadBalancingV2
     #               values: ["StringValue"],
     #             },
     #             query_string_config: {
-    #               values: ["StringValue"],
+    #               values: [
+    #                 {
+    #                   key: "StringValue",
+    #                   value: "StringValue",
+    #                 },
+    #               ],
     #             },
     #             http_request_method_config: {
-    #               values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #               values: ["StringValue"],
+    #             },
+    #             source_ip_config: {
+    #               values: ["StringValue"],
     #             },
     #           },
     #         ],
     #         priority: 1, # required
     #         actions: [ # required
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -792,37 +808,10 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] conditions
-    #   The conditions. Each condition specifies a field name and a single
-    #   value.
-    #
-    #   If the field name is `host-header`, you can specify a single host
-    #   name (for example, my.example.com). A host name is case insensitive,
-    #   can be up to 128 characters in length, and can contain any of the
-    #   following characters. You can include up to three wildcard
-    #   characters.
-    #
-    #   * A-Z, a-z, 0-9
-    #
-    #   * \- .
-    #
-    #   * * (matches 0 or more characters)
-    #
-    #   * ? (matches exactly 1 character)
-    #
-    #   If the field name is `path-pattern`, you can specify a single path
-    #   pattern. A path pattern is case-sensitive, can be up to 128
-    #   characters in length, and can contain any of the following
-    #   characters. You can include up to three wildcard characters.
-    #
-    #   * A-Z, a-z, 0-9
-    #
-    #   * \_ - . $ / ~ " ' @ : +
-    #
-    #   * &amp; (using &amp;amp;)
-    #
-    #   * * (matches 0 or more characters)
-    #
-    #   * ? (matches exactly 1 character)
+    #   The conditions. Each rule can include zero or one of the following
+    #   conditions: `http-request-method`, `host-header`, `path-pattern`,
+    #   and `source-ip`, and zero or more of the following conditions:
+    #   `http-header` and `query-string`.
     #   @return [Array<Types::RuleCondition>]
     #
     # @!attribute [rw] priority
@@ -836,14 +825,15 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
     #   Connect (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   authenticate users through the user pools supported by Amazon
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`,
+    #   you authenticate users through the user pools supported by Amazon
     #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -880,10 +870,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         name: "TargetGroupName", # required
-    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP
     #         port: 1,
     #         vpc_id: "VpcId",
-    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP
     #         health_check_port: "HealthCheckPort",
     #         health_check_enabled: false,
     #         health_check_path: "Path",
@@ -908,8 +898,10 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] protocol
     #   The protocol to use for routing traffic to the targets. For
     #   Application Load Balancers, the supported protocols are HTTP and
-    #   HTTPS. For Network Load Balancers, the supported protocol is TCP. If
-    #   the target is a Lambda function, this parameter does not apply.
+    #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
+    #   TLS, UDP, or TCP\_UDP. A TCP\_UDP listener must be associated with a
+    #   TCP\_UDP target group. If the target is a Lambda function, this
+    #   parameter does not apply.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -920,14 +912,17 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] vpc_id
     #   The identifier of the virtual private cloud (VPC). If the target is
-    #   a Lambda function, this parameter does not apply.
+    #   a Lambda function, this parameter does not apply. Otherwise, this
+    #   parameter is required.
     #   @return [String]
     #
     # @!attribute [rw] health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The TCP protocol is supported only if the protocol of the
-    #   target group is TCP. For Application Load Balancers, the default is
-    #   HTTP. For Network Load Balancers, the default is TCP.
+    #   targets. For Application Load Balancers, the default is HTTP. For
+    #   Network Load Balancers, the default is TCP. The TCP protocol is
+    #   supported for health checks only if the protocol of the target group
+    #   is TCP, TLS, UDP, or TCP\_UDP. The TLS, UDP, and TCP\_UDP protocols
+    #   are not supported for health checks.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
@@ -938,8 +933,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_enabled
     #   Indicates whether health checks are enabled. If the target type is
-    #   `instance` or `ip`, the default is `true`. If the target type is
-    #   `lambda`, the default is `false`.
+    #   `lambda`, health checks are disabled by default but can be enabled.
+    #   If the target type is `instance` or `ip`, health checks are always
+    #   enabled and cannot be disabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] health_check_path
@@ -949,34 +945,36 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For Application Load Balancers, the range is
-    #   5–300 seconds. For Network Load Balancers, the supported values are
-    #   10 or 30 seconds. If the target type is `instance` or `ip`, the
+    #   an individual target. For HTTP and HTTPS health checks, the range is
+    #   5–300 seconds. For TCP health checks, the supported values are 10
+    #   and 30 seconds. If the target type is `instance` or `ip`, the
     #   default is 30 seconds. If the target type is `lambda`, the default
     #   is 35 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a
-    #   target means a failed health check. For Application Load Balancers,
-    #   the range is 2–120 seconds and the default is 5 seconds if the
-    #   target type is `instance` or `ip` and 30 seconds if the target type
-    #   is `lambda`. For Network Load Balancers, this is 10 seconds for TCP
-    #   and HTTPS health checks and 6 seconds for HTTP health checks.
+    #   target means a failed health check. For target groups with a
+    #   protocol of HTTP or HTTPS, the default is 5 seconds. For target
+    #   groups with a protocol of TCP or TLS, this value must be 6 seconds
+    #   for HTTP health checks and 10 seconds for TCP and HTTPS health
+    #   checks. If the target type is `lambda`, the default is 30 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] healthy_threshold_count
     #   The number of consecutive health checks successes required before
-    #   considering an unhealthy target healthy. For Application Load
-    #   Balancers, the default is 5. For Network Load Balancers, the default
-    #   is 3.
+    #   considering an unhealthy target healthy. For target groups with a
+    #   protocol of HTTP or HTTPS, the default is 5. For target groups with
+    #   a protocol of TCP or TLS, the default is 3. If the target type is
+    #   `lambda`, the default is 5.
     #   @return [Integer]
     #
     # @!attribute [rw] unhealthy_threshold_count
     #   The number of consecutive health check failures required before
-    #   considering a target unhealthy. For Application Load Balancers, the
-    #   default is 2. For Network Load Balancers, this value must be the
-    #   same as the healthy threshold count.
+    #   considering a target unhealthy. For target groups with a protocol of
+    #   HTTP or HTTPS, the default is 2. For target groups with a protocol
+    #   of TCP or TLS, this value must be the same as the healthy threshold
+    #   count. If the target type is `lambda`, the default is 2.
     #   @return [Integer]
     #
     # @!attribute [rw] matcher
@@ -990,7 +988,8 @@ module Aws::ElasticLoadBalancingV2
     #   group using more than one target type.
     #
     #   * `instance` - Targets are specified by instance ID. This is the
-    #     default value.
+    #     default value. If the target group protocol is UDP or TCP\_UDP,
+    #     the target type must be `instance`.
     #
     #   * `ip` - Targets are specified by IP address. You can specify IP
     #     addresses from the subnets of the virtual private cloud (VPC) for
@@ -1186,8 +1185,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Limit>]
     #
     # @!attribute [rw] next_marker
-    #   The marker to use when requesting the next set of results. If there
-    #   are no additional results, the string is empty.
+    #   If there are additional results, this is the marker for the next set
+    #   of results. Otherwise, this is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeAccountLimitsOutput AWS API Documentation
@@ -1234,8 +1233,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] next_marker
-    #   The marker to use when requesting the next set of results. If there
-    #   are no additional results, the string is empty.
+    #   If there are additional results, this is the marker for the next set
+    #   of results. Otherwise, this is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenerCertificatesOutput AWS API Documentation
@@ -1288,8 +1287,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Listener>]
     #
     # @!attribute [rw] next_marker
-    #   The marker to use when requesting the next set of results. If there
-    #   are no additional results, the string is empty.
+    #   If there are additional results, this is the marker for the next set
+    #   of results. Otherwise, this is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenersOutput AWS API Documentation
@@ -1372,8 +1371,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] next_marker
-    #   The marker to use when requesting the next set of results. If there
-    #   are no additional results, the string is empty.
+    #   If there are additional results, this is the marker for the next set
+    #   of results. Otherwise, this is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancersOutput AWS API Documentation
@@ -1381,33 +1380,6 @@ module Aws::ElasticLoadBalancingV2
     class DescribeLoadBalancersOutput < Struct.new(
       :load_balancers,
       :next_marker)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DescribeProvisionedCapacityInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #       }
-    #
-    # @!attribute [rw] load_balancer_arn
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeProvisionedCapacityInput AWS API Documentation
-    #
-    class DescribeProvisionedCapacityInput < Struct.new(
-      :load_balancer_arn)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] provisioned_capacity
-    #   @return [Types::ProvisionedCapacity]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeProvisionedCapacityOutput AWS API Documentation
-    #
-    class DescribeProvisionedCapacityOutput < Struct.new(
-      :provisioned_capacity)
       include Aws::Structure
     end
 
@@ -1453,8 +1425,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] next_marker
-    #   The marker to use when requesting the next set of results. If there
-    #   are no additional results, the string is empty.
+    #   If there are additional results, this is the marker for the next set
+    #   of results. Otherwise, this is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRulesOutput AWS API Documentation
@@ -1501,8 +1473,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::SslPolicy>]
     #
     # @!attribute [rw] next_marker
-    #   The marker to use when requesting the next set of results. If there
-    #   are no additional results, the string is empty.
+    #   If there are additional results, this is the marker for the next set
+    #   of results. Otherwise, this is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeSSLPoliciesOutput AWS API Documentation
@@ -1619,8 +1591,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TargetGroup>]
     #
     # @!attribute [rw] next_marker
-    #   The marker to use when requesting the next set of results. If there
-    #   are no additional results, the string is empty.
+    #   If there are additional results, this is the marker for the next set
+    #   of results. Otherwise, this is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroupsOutput AWS API Documentation
@@ -1707,6 +1679,8 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about a host header condition.
+    #
     # @note When making an API call, you may pass HostHeaderConditionConfig
     #   data as a hash:
     #
@@ -1715,6 +1689,13 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] values
+    #   One or more host names. The maximum size of each name is 128
+    #   characters. The comparison is case insensitive. The following
+    #   wildcard characters are supported: * (matches 0 or more characters)
+    #   and ? (matches exactly 1 character).
+    #
+    #   If you specify multiple strings, the condition is satisfied if one
+    #   of the strings matches the host name.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HostHeaderConditionConfig AWS API Documentation
@@ -1724,6 +1705,11 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about an HTTP header condition.
+    #
+    # There is a set of standard HTTP header fields. You can also define
+    # custom HTTP header fields.
+    #
     # @note When making an API call, you may pass HttpHeaderConditionConfig
     #   data as a hash:
     #
@@ -1733,9 +1719,27 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] http_header_name
+    #   The name of the HTTP header field. The maximum size is 40
+    #   characters. The header name is case insensitive. The allowed
+    #   characters are specified by RFC 7230. Wildcards are not supported.
+    #
+    #   You can't use an HTTP header condition to specify the host header.
+    #   Use HostHeaderConditionConfig to specify a host header condition.
     #   @return [String]
     #
     # @!attribute [rw] values
+    #   One or more strings to compare against the value of the HTTP header.
+    #   The maximum size of each string is 128 characters. The comparison
+    #   strings are case insensitive. The following wildcard characters are
+    #   supported: * (matches 0 or more characters) and ? (matches exactly
+    #   1 character).
+    #
+    #   If the same header appears multiple times in the request, we search
+    #   them in order until a match is found.
+    #
+    #   If you specify multiple strings, the condition is satisfied if one
+    #   of the strings matches the value of the HTTP header. To require that
+    #   all of the strings are a match, create one condition per string.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpHeaderConditionConfig AWS API Documentation
@@ -1746,14 +1750,33 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about an HTTP method condition.
+    #
+    # HTTP defines a set of request methods, also referred to as HTTP verbs.
+    # For more information, see the [HTTP Method Registry][1]. You can also
+    # define custom HTTP methods.
+    #
+    #
+    #
+    # [1]: https://www.iana.org/assignments/http-methods/http-methods.xhtml
+    #
     # @note When making an API call, you may pass HttpRequestMethodConditionConfig
     #   data as a hash:
     #
     #       {
-    #         values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #         values: ["StringValue"],
     #       }
     #
     # @!attribute [rw] values
+    #   The name of the request method. The maximum size is 40 characters.
+    #   The allowed characters are A-Z, hyphen (-), and underscore (\_). The
+    #   comparison is case sensitive. Wildcards are not supported;
+    #   therefore, the method name must be an exact match.
+    #
+    #   If you specify multiple strings, the condition is satisfied if one
+    #   of the strings matches the HTTP request method. We recommend that
+    #   you route GET and HEAD requests in the same way, because the
+    #   response to a HEAD request may be cached.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpRequestMethodConditionConfig AWS API Documentation
@@ -1819,13 +1842,13 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] certificates
-    #   The SSL server certificate. You must provide a certificate if the
-    #   protocol is HTTPS.
+    #   \[HTTPS or TLS listener\] The default certificate for the listener.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] ssl_policy
-    #   The security policy that defines which ciphers and protocols are
-    #   supported. The default is the current predefined security policy.
+    #   \[HTTPS or TLS listener\] The security policy that defines which
+    #   ciphers and protocols are supported. The default is the current
+    #   predefined security policy.
     #   @return [String]
     #
     # @!attribute [rw] default_actions
@@ -1961,15 +1984,6 @@ module Aws::ElasticLoadBalancingV2
     #   The following attributes are supported by both Application Load
     #   Balancers and Network Load Balancers:
     #
-    #   * `deletion_protection.enabled` - Indicates whether deletion
-    #     protection is enabled. The value is `true` or `false`. The default
-    #     is `false`.
-    #
-    #   ^
-    #
-    #   The following attributes are supported by only Application Load
-    #   Balancers:
-    #
     #   * `access_logs.s3.enabled` - Indicates whether access logs are
     #     enabled. The value is `true` or `false`. The default is `false`.
     #
@@ -1981,6 +1995,13 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * `access_logs.s3.prefix` - The prefix for the location in the S3
     #     bucket for the access logs.
+    #
+    #   * `deletion_protection.enabled` - Indicates whether deletion
+    #     protection is enabled. The value is `true` or `false`. The default
+    #     is `false`.
+    #
+    #   The following attributes are supported by only Application Load
+    #   Balancers:
     #
     #   * `idle_timeout.timeout_seconds` - The idle timeout value, in
     #     seconds. The valid range is 1-4000 seconds. The default is 60
@@ -2066,7 +2087,7 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         listener_arn: "ListenerArn", # required
     #         port: 1,
-    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP
     #         ssl_policy: "SslPolicyName",
     #         certificates: [
     #           {
@@ -2076,7 +2097,7 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         default_actions: [
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -2134,24 +2155,25 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] protocol
     #   The protocol for connections from clients to the load balancer.
-    #   Application Load Balancers support HTTP and HTTPS and Network Load
-    #   Balancers support TCP.
+    #   Application Load Balancers support the HTTP and HTTPS protocols.
+    #   Network Load Balancers support the TCP, TLS, UDP, and TCP\_UDP
+    #   protocols.
     #   @return [String]
     #
     # @!attribute [rw] ssl_policy
-    #   \[HTTPS listeners\] The security policy that defines which protocols
-    #   and ciphers are supported. For more information, see [Security
-    #   Policies][1] in the *Application Load Balancers Guide*.
+    #   \[HTTPS and TLS listeners\] The security policy that defines which
+    #   protocols and ciphers are supported. For more information, see
+    #   [Security Policies][1] in the *Application Load Balancers Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #   @return [String]
     #
     # @!attribute [rw] certificates
-    #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. Set `CertificateArn` to the
-    #   certificate ARN but do not set `IsDefault`.
+    #   \[HTTPS and TLS listeners\] The default certificate for the
+    #   listener. You must provide exactly one certificate. Set
+    #   `CertificateArn` to the certificate ARN but do not set `IsDefault`.
     #
     #   To create a certificate list, use AddListenerCertificates.
     #   @return [Array<Types::Certificate>]
@@ -2162,14 +2184,15 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
     #   Connect (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   authenticate users through the user pools supported by Amazon
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`,
+    #   you authenticate users through the user pools supported by Amazon
     #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -2243,38 +2266,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyProvisionedCapacityInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #         minimum_lb_capacity_units: 1, # required
-    #       }
-    #
-    # @!attribute [rw] load_balancer_arn
-    #   @return [String]
-    #
-    # @!attribute [rw] minimum_lb_capacity_units
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyProvisionedCapacityInput AWS API Documentation
-    #
-    class ModifyProvisionedCapacityInput < Struct.new(
-      :load_balancer_arn,
-      :minimum_lb_capacity_units)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] provisioned_capacity
-    #   @return [Types::ProvisionedCapacity]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyProvisionedCapacityOutput AWS API Documentation
-    #
-    class ModifyProvisionedCapacityOutput < Struct.new(
-      :provisioned_capacity)
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass ModifyRuleInput
     #   data as a hash:
     #
@@ -2295,16 +2286,24 @@ module Aws::ElasticLoadBalancingV2
     #               values: ["StringValue"],
     #             },
     #             query_string_config: {
-    #               values: ["StringValue"],
+    #               values: [
+    #                 {
+    #                   key: "StringValue",
+    #                   value: "StringValue",
+    #                 },
+    #               ],
     #             },
     #             http_request_method_config: {
-    #               values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #               values: ["StringValue"],
+    #             },
+    #             source_ip_config: {
+    #               values: ["StringValue"],
     #             },
     #           },
     #         ],
     #         actions: [
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -2357,52 +2356,27 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] conditions
-    #   The conditions. Each condition specifies a field name and a single
-    #   value.
-    #
-    #   If the field name is `host-header`, you can specify a single host
-    #   name (for example, my.example.com). A host name is case insensitive,
-    #   can be up to 128 characters in length, and can contain any of the
-    #   following characters. You can include up to three wildcard
-    #   characters.
-    #
-    #   * A-Z, a-z, 0-9
-    #
-    #   * \- .
-    #
-    #   * * (matches 0 or more characters)
-    #
-    #   * ? (matches exactly 1 character)
-    #
-    #   If the field name is `path-pattern`, you can specify a single path
-    #   pattern. A path pattern is case-sensitive, can be up to 128
-    #   characters in length, and can contain any of the following
-    #   characters. You can include up to three wildcard characters.
-    #
-    #   * A-Z, a-z, 0-9
-    #
-    #   * \_ - . $ / ~ " ' @ : +
-    #
-    #   * &amp; (using &amp;amp;)
-    #
-    #   * * (matches 0 or more characters)
-    #
-    #   * ? (matches exactly 1 character)
+    #   The conditions. Each rule can include zero or one of the following
+    #   conditions: `http-request-method`, `host-header`, `path-pattern`,
+    #   and `source-ip`, and zero or more of the following conditions:
+    #   `http-header` and `query-string`.
     #   @return [Array<Types::RuleCondition>]
     #
     # @!attribute [rw] actions
-    #   The actions.
+    #   The actions. Each rule must include exactly one of the following
+    #   types of actions: `forward`, `fixed-response`, or `redirect`.
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
     #   Connect (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   authenticate users through the user pools supported by Amazon
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`,
+    #   you authenticate users through the user pools supported by Amazon
     #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -2478,7 +2452,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         target_group_arn: "TargetGroupArn", # required
-    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP
     #         health_check_port: "HealthCheckPort",
     #         health_check_path: "Path",
     #         health_check_enabled: false,
@@ -2497,8 +2471,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The TCP protocol is supported only if the protocol of the
-    #   target group is TCP.
+    #   targets. The TCP protocol is supported for health checks only if the
+    #   protocol of the target group is TCP, TLS, UDP, or TCP\_UDP. The TLS,
+    #   UDP, and TCP\_UDP protocols are not supported for health checks.
     #
     #   If the protocol of the target group is TCP, you can't modify this
     #   setting.
@@ -2520,8 +2495,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For Application Load Balancers, the range is
-    #   5–300 seconds. For Network Load Balancers, the supported values are
+    #   an individual target. For Application Load Balancers, the range is 5
+    #   to 300 seconds. For Network Load Balancers, the supported values are
     #   10 or 30 seconds.
     #
     #   If the protocol of the target group is TCP, you can't modify this
@@ -2582,6 +2557,8 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about a path pattern condition.
+    #
     # @note When making an API call, you may pass PathPatternConditionConfig
     #   data as a hash:
     #
@@ -2590,6 +2567,15 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] values
+    #   One or more path patterns to compare against the request URL. The
+    #   maximum size of each string is 128 characters. The comparison is
+    #   case sensitive. The following wildcard characters are supported: *
+    #   (matches 0 or more characters) and ? (matches exactly 1 character).
+    #
+    #   If you specify multiple strings, the condition is satisfied if one
+    #   of them matches the request URL. The path pattern is compared only
+    #   to the path of the URL, not to its query string. To compare against
+    #   the query string, use QueryStringConditionConfig.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PathPatternConditionConfig AWS API Documentation
@@ -2599,42 +2585,69 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @!attribute [rw] minimum_lb_capacity_units
-    #   @return [Integer]
+    # Information about a query string condition.
     #
-    # @!attribute [rw] status
-    #   @return [String]
+    # The query string component of a URI starts after the first '?'
+    # character and is terminated by either a '#' character or the end of
+    # the URI. A typical query string contains key/value pairs separated by
+    # '&amp;' characters. The allowed characters are specified by RFC
+    # 3986. Any character can be percentage encoded.
     #
-    # @!attribute [rw] decreases_remaining
-    #   @return [Integer]
-    #
-    # @!attribute [rw] last_modified_time
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ProvisionedCapacity AWS API Documentation
-    #
-    class ProvisionedCapacity < Struct.new(
-      :minimum_lb_capacity_units,
-      :status,
-      :decreases_remaining,
-      :last_modified_time)
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass QueryStringConditionConfig
     #   data as a hash:
     #
     #       {
-    #         values: ["StringValue"],
+    #         values: [
+    #           {
+    #             key: "StringValue",
+    #             value: "StringValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] values
-    #   @return [Array<String>]
+    #   One or more key/value pairs or values to find in the query string.
+    #   The maximum size of each string is 128 characters. The comparison is
+    #   case insensitive. The following wildcard characters are supported:
+    #   * (matches 0 or more characters) and ? (matches exactly 1
+    #   character). To search for a literal '*' or '?' character in a
+    #   query string, you must escape these characters in `Values` using a
+    #   '\\' character.
+    #
+    #   If you specify multiple key/value pairs or values, the condition is
+    #   satisfied if one of them is found in the query string.
+    #   @return [Array<Types::QueryStringKeyValuePair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/QueryStringConditionConfig AWS API Documentation
     #
     class QueryStringConditionConfig < Struct.new(
       :values)
+      include Aws::Structure
+    end
+
+    # Information about a key/value pair.
+    #
+    # @note When making an API call, you may pass QueryStringKeyValuePair
+    #   data as a hash:
+    #
+    #       {
+    #         key: "StringValue",
+    #         value: "StringValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key. You can omit the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/QueryStringKeyValuePair AWS API Documentation
+    #
+    class QueryStringKeyValuePair < Struct.new(
+      :key,
+      :value)
       include Aws::Structure
     end
 
@@ -2830,11 +2843,16 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] conditions
-    #   The conditions.
+    #   The conditions. Each rule can include zero or one of the following
+    #   conditions: `http-request-method`, `host-header`, `path-pattern`,
+    #   and `source-ip`, and zero or more of the following conditions:
+    #   `http-header` and `query-string`.
     #   @return [Array<Types::RuleCondition>]
     #
     # @!attribute [rw] actions
-    #   The actions.
+    #   The actions. Each rule must include exactly one of the following
+    #   types of actions: `forward`, `redirect`, or `fixed-response`, and it
+    #   must be the last action to be performed.
     #   @return [Array<Types::Action>]
     #
     # @!attribute [rw] is_default
@@ -2871,25 +2889,47 @@ module Aws::ElasticLoadBalancingV2
     #           values: ["StringValue"],
     #         },
     #         query_string_config: {
-    #           values: ["StringValue"],
+    #           values: [
+    #             {
+    #               key: "StringValue",
+    #               value: "StringValue",
+    #             },
+    #           ],
     #         },
     #         http_request_method_config: {
-    #           values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           values: ["StringValue"],
+    #         },
+    #         source_ip_config: {
+    #           values: ["StringValue"],
     #         },
     #       }
     #
     # @!attribute [rw] field
-    #   The name of the field. The possible values are `host-header` and
-    #   `path-pattern`.
+    #   The field in the HTTP request. The following are the possible
+    #   values:
+    #
+    #   * `http-header`
+    #
+    #   * `http-request-method`
+    #
+    #   * `host-header`
+    #
+    #   * `path-pattern`
+    #
+    #   * `query-string`
+    #
+    #   * `source-ip`
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The condition value.
+    #   The condition value. You can use `Values` if the rule contains only
+    #   `host-header` and `path-pattern` conditions. Otherwise, you can use
+    #   `HostHeaderConfig` for `host-header` conditions and
+    #   `PathPatternConfig` for `path-pattern` conditions.
     #
-    #   If the field name is `host-header`, you can specify a single host
-    #   name (for example, my.example.com). A host name is case insensitive,
-    #   can be up to 128 characters in length, and can contain any of the
-    #   following characters. You can include up to three wildcard
+    #   If `Field` is `host-header`, you can specify a single host name (for
+    #   example, my.example.com). A host name is case insensitive, can be up
+    #   to 128 characters in length, and can contain any of the following
     #   characters.
     #
     #   * A-Z, a-z, 0-9
@@ -2900,10 +2940,9 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * ? (matches exactly 1 character)
     #
-    #   If the field name is `path-pattern`, you can specify a single path
-    #   pattern (for example, /img/*). A path pattern is case-sensitive,
-    #   can be up to 128 characters in length, and can contain any of the
-    #   following characters. You can include up to three wildcard
+    #   If `Field` is `path-pattern`, you can specify a single path pattern
+    #   (for example, /img/*). A path pattern is case-sensitive, can be up
+    #   to 128 characters in length, and can contain any of the following
     #   characters.
     #
     #   * A-Z, a-z, 0-9
@@ -2918,19 +2957,34 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] host_header_config
+    #   Information for a host header condition. Specify only when `Field`
+    #   is `host-header`.
     #   @return [Types::HostHeaderConditionConfig]
     #
     # @!attribute [rw] path_pattern_config
+    #   Information for a path pattern condition. Specify only when `Field`
+    #   is `path-pattern`.
     #   @return [Types::PathPatternConditionConfig]
     #
     # @!attribute [rw] http_header_config
+    #   Information for an HTTP header condition. Specify only when `Field`
+    #   is `http-header`.
     #   @return [Types::HttpHeaderConditionConfig]
     #
     # @!attribute [rw] query_string_config
+    #   Information for a query string condition. Specify only when `Field`
+    #   is `query-string`.
     #   @return [Types::QueryStringConditionConfig]
     #
     # @!attribute [rw] http_request_method_config
+    #   Information for an HTTP method condition. Specify only when `Field`
+    #   is `http-request-method`.
     #   @return [Types::HttpRequestMethodConditionConfig]
+    #
+    # @!attribute [rw] source_ip_config
+    #   Information for a source IP condition. Specify only when `Field` is
+    #   `source-ip`.
+    #   @return [Types::SourceIpConditionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleCondition AWS API Documentation
     #
@@ -2941,7 +2995,8 @@ module Aws::ElasticLoadBalancingV2
       :path_pattern_config,
       :http_header_config,
       :query_string_config,
-      :http_request_method_config)
+      :http_request_method_config,
+      :source_ip_config)
       include Aws::Structure
     end
 
@@ -2986,7 +3041,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] ip_address_type
     #   The IP address type. The possible values are `ipv4` (for IPv4
     #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). Internal
-    #   load balancers must use `ipv4`.
+    #   load balancers must use `ipv4`. Network Load Balancers must use
+    #   `ipv4`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressTypeInput AWS API Documentation
@@ -3087,7 +3143,6 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             subnet_id: "SubnetId",
     #             allocation_id: "AllocationId",
-    #             static_ip: false,
     #           },
     #         ],
     #       }
@@ -3132,6 +3187,38 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about a source IP condition.
+    #
+    # You can use this condition to route based on the IP address of the
+    # source that connects to the load balancer. If a client is behind a
+    # proxy, this is the IP address of the proxy not the IP address of the
+    # client.
+    #
+    # @note When making an API call, you may pass SourceIpConditionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         values: ["StringValue"],
+    #       }
+    #
+    # @!attribute [rw] values
+    #   One or more source IP addresses, in CIDR format. You can use both
+    #   IPv4 and IPv6 addresses. Wildcards are not supported.
+    #
+    #   If you specify multiple addresses, the condition is satisfied if the
+    #   source IP address of the request matches one of the CIDR blocks.
+    #   This condition is not satisfied by the addresses in the
+    #   X-Forwarded-For header. To search for addresses in the
+    #   X-Forwarded-For header, use HttpHeaderConditionConfig.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SourceIpConditionConfig AWS API Documentation
+    #
+    class SourceIpConditionConfig < Struct.new(
+      :values)
+      include Aws::Structure
+    end
+
     # Information about a policy used for SSL negotiation.
     #
     # @!attribute [rw] ssl_protocols
@@ -3163,7 +3250,6 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
-    #         static_ip: false,
     #       }
     #
     # @!attribute [rw] subnet_id
@@ -3175,15 +3261,11 @@ module Aws::ElasticLoadBalancingV2
     #   address.
     #   @return [String]
     #
-    # @!attribute [rw] static_ip
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SubnetMapping AWS API Documentation
     #
     class SubnetMapping < Struct.new(
       :subnet_id,
-      :allocation_id,
-      :static_ip)
+      :allocation_id)
       include Aws::Structure
     end
 
@@ -3491,10 +3573,9 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * `Target.Timeout` - The health check requests timed out.
     #
-    #   * `Target.FailedHealthChecks` - The health checks failed because the
-    #     connection to the target timed out, the target response was
-    #     malformed, or the target failed the health check for an unknown
-    #     reason.
+    #   * `Target.FailedHealthChecks` - The load balancer received an error
+    #     while establishing a connection to the target or the target
+    #     response was malformed.
     #
     #   * `Elb.InternalError` - The health checks failed due to an internal
     #     error.

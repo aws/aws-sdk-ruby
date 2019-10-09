@@ -39,13 +39,17 @@ module Aws::IoT1ClickDevicesService
     ListDeviceEventsResponse = Shapes::StructureShape.new(name: 'ListDeviceEventsResponse')
     ListDevicesRequest = Shapes::StructureShape.new(name: 'ListDevicesRequest')
     ListDevicesResponse = Shapes::StructureShape.new(name: 'ListDevicesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     RangeNotSatisfiableException = Shapes::StructureShape.new(name: 'RangeNotSatisfiableException')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     UnclaimDeviceRequest = Shapes::StructureShape.new(name: 'UnclaimDeviceRequest')
     UnclaimDeviceResponse = Shapes::StructureShape.new(name: 'UnclaimDeviceResponse')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateDeviceStateRequest = Shapes::StructureShape.new(name: 'UpdateDeviceStateRequest')
     UpdateDeviceStateResponse = Shapes::StructureShape.new(name: 'UpdateDeviceStateResponse')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
@@ -55,7 +59,9 @@ module Aws::IoT1ClickDevicesService
     __listOfDeviceDescription = Shapes::ListShape.new(name: '__listOfDeviceDescription')
     __listOfDeviceEvent = Shapes::ListShape.new(name: '__listOfDeviceEvent')
     __listOfDeviceMethod = Shapes::ListShape.new(name: '__listOfDeviceMethod')
+    __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
+    __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __stringMin12Max40 = Shapes::StringShape.new(name: '__stringMin12Max40')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
@@ -87,11 +93,13 @@ module Aws::IoT1ClickDevicesService
     DeviceClaimResponse.add_member(:state, Shapes::ShapeRef.new(shape: __string, location_name: "state"))
     DeviceClaimResponse.struct_class = Types::DeviceClaimResponse
 
+    DeviceDescription.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     DeviceDescription.add_member(:attributes, Shapes::ShapeRef.new(shape: DeviceAttributes, location_name: "attributes"))
     DeviceDescription.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, location_name: "deviceId"))
     DeviceDescription.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
     DeviceDescription.add_member(:remaining_life, Shapes::ShapeRef.new(shape: __doubleMin0Max100, location_name: "remainingLife"))
     DeviceDescription.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "type"))
+    DeviceDescription.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     DeviceDescription.struct_class = Types::DeviceDescription
 
     DeviceEvent.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "device"))
@@ -109,10 +117,15 @@ module Aws::IoT1ClickDevicesService
     Empty.struct_class = Types::Empty
 
     FinalizeDeviceClaimRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "deviceId"))
+    FinalizeDeviceClaimRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     FinalizeDeviceClaimRequest.struct_class = Types::FinalizeDeviceClaimRequest
 
     FinalizeDeviceClaimResponse.add_member(:state, Shapes::ShapeRef.new(shape: __string, location_name: "state"))
     FinalizeDeviceClaimResponse.struct_class = Types::FinalizeDeviceClaimResponse
+
+    ForbiddenException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
 
     GetDeviceMethodsRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "deviceId"))
     GetDeviceMethodsRequest.struct_class = Types::GetDeviceMethodsRequest
@@ -125,6 +138,14 @@ module Aws::IoT1ClickDevicesService
 
     InitiateDeviceClaimResponse.add_member(:state, Shapes::ShapeRef.new(shape: __string, location_name: "state"))
     InitiateDeviceClaimResponse.struct_class = Types::InitiateDeviceClaimResponse
+
+    InternalFailureException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    InvalidRequestException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
 
     InvokeDeviceMethodRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "deviceId"))
     InvokeDeviceMethodRequest.add_member(:device_method, Shapes::ShapeRef.new(shape: DeviceMethod, location_name: "deviceMethod"))
@@ -154,11 +175,41 @@ module Aws::IoT1ClickDevicesService
     ListDevicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListDevicesResponse.struct_class = Types::ListDevicesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    PreconditionFailedException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    PreconditionFailedException.struct_class = Types::PreconditionFailedException
+
+    RangeNotSatisfiableException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    RangeNotSatisfiableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    RangeNotSatisfiableException.struct_class = Types::RangeNotSatisfiableException
+
+    ResourceConflictException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ResourceConflictException.struct_class = Types::ResourceConflictException
+
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
     UnclaimDeviceRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "deviceId"))
     UnclaimDeviceRequest.struct_class = Types::UnclaimDeviceRequest
 
     UnclaimDeviceResponse.add_member(:state, Shapes::ShapeRef.new(shape: __string, location_name: "state"))
     UnclaimDeviceResponse.struct_class = Types::UnclaimDeviceResponse
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateDeviceStateRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "deviceId"))
     UpdateDeviceStateRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
@@ -171,6 +222,11 @@ module Aws::IoT1ClickDevicesService
     __listOfDeviceEvent.member = Shapes::ShapeRef.new(shape: DeviceEvent)
 
     __listOfDeviceMethod.member = Shapes::ShapeRef.new(shape: DeviceMethod)
+
+    __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
 
 
     # @api private
@@ -285,12 +341,44 @@ module Aws::IoT1ClickDevicesService
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:unclaim_device, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UnclaimDevice"
         o.http_method = "PUT"
         o.http_request_uri = "/devices/{deviceId}/unclaim"
         o.input = Shapes::ShapeRef.new(shape: UnclaimDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: UnclaimDeviceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)

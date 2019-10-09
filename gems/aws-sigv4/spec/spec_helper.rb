@@ -1,8 +1,10 @@
 # encoding: UTF-8
 $:.unshift(File.expand_path('../../lib', __FILE__))
+$LOAD_PATH.unshift(File.expand_path('../../../aws-eventstream/lib',  __FILE__))
 
 require 'rspec'
 require 'aws-sigv4'
+require 'aws-eventstream'
 
 module SpecHelper
   class << self

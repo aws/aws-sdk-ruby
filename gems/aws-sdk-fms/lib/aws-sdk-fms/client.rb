@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::FMS
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::FMS
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::FMS
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -274,12 +323,30 @@ module Aws::FMS
     #   The ID of the policy that you want to delete. `PolicyId` is returned
     #   by `PutPolicy` and by `ListPolicies`.
     #
+    # @option params [Boolean] :delete_all_policy_resources
+    #   If `True`, the request will also perform a clean-up process that will:
+    #
+    #   * Delete rule groups created by AWS Firewall Manager
+    #
+    #   * Remove web ACLs from in-scope resources
+    #
+    #   * Delete web ACLs that contain no rules or rule groups
+    #
+    #   After the cleanup, in-scope resources will no longer be protected by
+    #   web ACLs in this policy. Protection of out-of-scope resources will
+    #   remain unchanged. Scope is determined by tags and accounts associated
+    #   with the policy. When creating the policy, if you specified that only
+    #   resources in specific accounts or with specific tags be protected by
+    #   the policy, those resources are in-scope. All others are out of scope.
+    #   If you did not specify tags or accounts, all resources are in-scope.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_policy({
     #     policy_id: "PolicyId", # required
+    #     delete_all_policy_resources: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeletePolicy AWS API Documentation
@@ -292,9 +359,9 @@ module Aws::FMS
     end
 
     # Disassociates the account that has been set as the AWS Firewall
-    # Manager administrator account. You will need to submit an
-    # `AssociateAdminAccount` request to set a new account as the AWS
-    # Firewall administrator.
+    # Manager administrator account. To set a different account as the
+    # administrator account, you must submit an `AssociateAdminAccount`
+    # request .
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -360,7 +427,7 @@ module Aws::FMS
     #   resp.policy_compliance_detail.member_account #=> String
     #   resp.policy_compliance_detail.violators #=> Array
     #   resp.policy_compliance_detail.violators[0].resource_id #=> String
-    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL"
+    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION"
     #   resp.policy_compliance_detail.violators[0].resource_type #=> String
     #   resp.policy_compliance_detail.evaluation_limit_exceeded #=> Boolean
     #   resp.policy_compliance_detail.expired_at #=> Time
@@ -420,9 +487,11 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "SHIELD_ADVANCED"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
+    #   resp.policy.resource_type_list #=> Array
+    #   resp.policy.resource_type_list[0] #=> String
     #   resp.policy.resource_tags #=> Array
     #   resp.policy.resource_tags[0].key #=> String
     #   resp.policy.resource_tags[0].value #=> String
@@ -442,6 +511,77 @@ module Aws::FMS
     # @param [Hash] params ({})
     def get_policy(params = {}, options = {})
       req = build_request(:get_policy, params)
+      req.send_request(options)
+    end
+
+    # If you created a Shield Advanced policy, returns policy-level attack
+    # summary information in the event of a potential DDoS attack.
+    #
+    # @option params [required, String] :policy_id
+    #   The ID of the policy for which you want to get the attack information.
+    #
+    # @option params [String] :member_account_id
+    #   The AWS account that is in scope of the policy that you want to get
+    #   the details for.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start of the time period to query for the attacks. This is a
+    #   `timestamp` type. The sample request above indicates a number type
+    #   because the default used by AWS Firewall Manager is Unix time in
+    #   seconds. However, any valid `timestamp` format is allowed.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time period to query for the attacks. This is a
+    #   `timestamp` type. The sample request above indicates a number type
+    #   because the default used by AWS Firewall Manager is Unix time in
+    #   seconds. However, any valid `timestamp` format is allowed.
+    #
+    # @option params [String] :next_token
+    #   If you specify a value for `MaxResults` and you have more objects than
+    #   the number that you specify for `MaxResults`, AWS Firewall Manager
+    #   returns a `NextToken` value in the response that allows you to list
+    #   another group of objects. For the second and subsequent
+    #   `GetProtectionStatus` requests, specify the value of `NextToken` from
+    #   the previous response to get information about another batch of
+    #   objects.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the number of objects that you want AWS Firewall Manager to
+    #   return for this request. If you have more objects than the number that
+    #   you specify for `MaxResults`, the response includes a `NextToken`
+    #   value that you can use to get another batch of objects.
+    #
+    # @return [Types::GetProtectionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProtectionStatusResponse#admin_account_id #admin_account_id} => String
+    #   * {Types::GetProtectionStatusResponse#service_type #service_type} => String
+    #   * {Types::GetProtectionStatusResponse#data #data} => String
+    #   * {Types::GetProtectionStatusResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_protection_status({
+    #     policy_id: "PolicyId", # required
+    #     member_account_id: "AWSAccountId",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.admin_account_id #=> String
+    #   resp.service_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.data #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetProtectionStatus AWS API Documentation
+    #
+    # @overload get_protection_status(params = {})
+    # @param [Hash] params ({})
+    def get_protection_status(params = {}, options = {})
+      req = build_request(:get_protection_status, params)
       req.send_request(options)
     end
 
@@ -528,7 +668,7 @@ module Aws::FMS
     #   Manager to return for this request. If you have more IDs than the
     #   number that you specify for `MaxResults`, the response includes a
     #   `NextToken` value that you can use to get another batch of member
-    #   account IDs. The maximum value for `MaxResults` is 100.
+    #   account IDs.
     #
     # @return [Types::ListMemberAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -594,7 +734,7 @@ module Aws::FMS
     #   resp.policy_list[0].policy_id #=> String
     #   resp.policy_list[0].policy_name #=> String
     #   resp.policy_list[0].resource_type #=> String
-    #   resp.policy_list[0].security_service_type #=> String, one of "WAF"
+    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "SHIELD_ADVANCED"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.next_token #=> String
     #
@@ -638,6 +778,23 @@ module Aws::FMS
 
     # Creates an AWS Firewall Manager policy.
     #
+    # Firewall Manager provides two types of policies: A Shield Advanced
+    # policy, which applies Shield Advanced protection to specified accounts
+    # and resources, or a WAF policy, which contains a rule group and
+    # defines which resources are to be protected by that rule group. A
+    # policy is specific to either WAF or Shield Advanced. If you want to
+    # enforce both WAF rules and Shield Advanced protection across accounts,
+    # you can create multiple policies. You can create one or more policies
+    # for WAF rules, and one or more policies for Shield Advanced.
+    #
+    # You must be subscribed to Shield Advanced to create a Shield Advanced
+    # policy. For more information on subscribing to Shield Advanced, see
+    # [CreateSubscription][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html
+    #
     # @option params [required, Types::Policy] :policy
     #   The details of the AWS Firewall Manager policy to be created.
     #
@@ -654,10 +811,11 @@ module Aws::FMS
     #       policy_name: "ResourceName", # required
     #       policy_update_token: "PolicyUpdateToken",
     #       security_service_policy_data: { # required
-    #         type: "WAF", # required, accepts WAF
+    #         type: "WAF", # required, accepts WAF, SHIELD_ADVANCED
     #         managed_service_data: "ManagedServiceData",
     #       },
     #       resource_type: "ResourceType", # required
+    #       resource_type_list: ["ResourceType"],
     #       resource_tags: [
     #         {
     #           key: "TagKey", # required
@@ -680,9 +838,11 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "SHIELD_ADVANCED"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
+    #   resp.policy.resource_type_list #=> Array
+    #   resp.policy.resource_type_list[0] #=> String
     #   resp.policy.resource_tags #=> Array
     #   resp.policy.resource_tags[0].key #=> String
     #   resp.policy.resource_tags[0].value #=> String
@@ -718,7 +878,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::CodeDeploy
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::CodeDeploy
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::CodeDeploy
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -249,15 +298,17 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Gets information about one or more application revisions.
+    # Gets information about one or more application revisions. The maximum
+    # number of application revisions that can be returned is 25.
     #
     # @option params [required, String] :application_name
     #   The name of an AWS CodeDeploy application about which to get revision
     #   information.
     #
     # @option params [required, Array<Types::RevisionLocation>] :revisions
-    #   Information to get about the application revisions, including type and
-    #   location.
+    #   An array of `RevisionLocation` objects that specify information to get
+    #   about the application revisions, including type and location. The
+    #   maximum number of `RevisionLocation` objects you can specify is 25.
     #
     # @return [Types::BatchGetApplicationRevisionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -328,10 +379,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Gets information about one or more applications.
+    # Gets information about one or more applications. The maximum number of
+    # applications that can be returned is 25.
     #
     # @option params [required, Array<String>] :application_names
-    #   A list of application names separated by spaces.
+    #   A list of application names separated by spaces. The maximum number of
+    #   application names you can specify is 25.
     #
     # @return [Types::BatchGetApplicationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -369,7 +422,7 @@ module Aws::CodeDeploy
     #   applicable IAM user or AWS account.
     #
     # @option params [required, Array<String>] :deployment_group_names
-    #   The deployment groups' names.
+    #   The names of the deployment groups.
     #
     # @return [Types::BatchGetDeploymentGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -477,21 +530,23 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # <note markdown="1"> This method works, but is considered deprecated. Use
-    # `BatchGetDeploymentTargets` instead.
+    # <note markdown="1"> This method works, but is deprecated. Use `BatchGetDeploymentTargets`
+    # instead.
     #
     #  </note>
     #
-    # Returns an array of instances associated with a deployment. This
-    # method works with EC2/On-premises and AWS Lambda compute platforms.
-    # The newer `BatchGetDeploymentTargets` works with all compute
-    # platforms.
+    # Returns an array of one or more instances associated with a
+    # deployment. This method works with EC2/On-premises and AWS Lambda
+    # compute platforms. The newer `BatchGetDeploymentTargets` works with
+    # all compute platforms. The maximum number of instances that can be
+    # returned is 25.
     #
     # @option params [required, String] :deployment_id
     #   The unique ID of a deployment.
     #
     # @option params [required, Array<String>] :instance_ids
-    #   The unique IDs of instances of the deployment.
+    #   The unique IDs of instances used in the deployment. The maximum number
+    #   of instance IDs you can specify is 25.
     #
     # @return [Types::BatchGetDeploymentInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -533,32 +588,34 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Returns an array of targets associated with a deployment. This method
-    # works with all compute types and should be used instead of the
-    # deprecated `BatchGetDeploymentInstances`.
+    # Returns an array of one or more targets associated with a deployment.
+    # This method works with all compute types and should be used instead of
+    # the deprecated `BatchGetDeploymentInstances`. The maximum number of
+    # targets that can be returned is 25.
     #
     # The type of targets returned depends on the deployment's compute
     # platform:
     #
-    # * **EC2/On-premises** - Information about EC2 instance targets.
+    # * **EC2/On-premises**\: Information about EC2 instance targets.
     #
-    # * **AWS Lambda** - Information about Lambda functions targets.
+    # * **AWS Lambda**\: Information about Lambda functions targets.
     #
-    # * **Amazon ECS** - Information about ECS service targets.
+    # * **Amazon ECS**\: Information about Amazon ECS service targets.
     #
     # @option params [String] :deployment_id
     #   The unique ID of a deployment.
     #
     # @option params [Array<String>] :target_ids
     #   The unique IDs of the deployment targets. The compute platform of the
-    #   deployment determines the type of the targets and their formats.
+    #   deployment determines the type of the targets and their formats. The
+    #   maximum number of deployment target IDs you can specify is 25.
     #
     #   * For deployments that use the EC2/On-premises compute platform, the
-    #     target IDs are EC2 or on-premises instances IDs and their target
+    #     target IDs are EC2 or on-premises instances IDs, and their target
     #     type is `instanceTarget`.
     #
     #   * For deployments that use the AWS Lambda compute platform, the target
-    #     IDs are the names of Lambda functions and their target type is
+    #     IDs are the names of Lambda functions, and their target type is
     #     `instanceTarget`.
     #
     #   * For deployments that use the Amazon ECS compute platform, the target
@@ -610,6 +667,11 @@ module Aws::CodeDeploy
     #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].start_time #=> Time
     #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].end_time #=> Time
     #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.deployment_targets[0].lambda_target.lambda_function_info.function_name #=> String
+    #   resp.deployment_targets[0].lambda_target.lambda_function_info.function_alias #=> String
+    #   resp.deployment_targets[0].lambda_target.lambda_function_info.current_version #=> String
+    #   resp.deployment_targets[0].lambda_target.lambda_function_info.target_version #=> String
+    #   resp.deployment_targets[0].lambda_target.lambda_function_info.target_version_weight #=> Float
     #   resp.deployment_targets[0].ecs_target.deployment_id #=> String
     #   resp.deployment_targets[0].ecs_target.target_id #=> String
     #   resp.deployment_targets[0].ecs_target.target_arn #=> String
@@ -643,10 +705,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Gets information about one or more deployments.
+    # Gets information about one or more deployments. The maximum number of
+    # deployments that can be returned is 25.
     #
     # @option params [required, Array<String>] :deployment_ids
-    #   A list of deployment IDs, separated by spaces.
+    #   A list of deployment IDs, separated by spaces. The maximum number of
+    #   deployment IDs you can specify is 25.
     #
     # @return [Types::BatchGetDeploymentsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -690,7 +754,7 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].revision.app_spec_content.content #=> String
     #   resp.deployments_info[0].revision.app_spec_content.sha256 #=> String
     #   resp.deployments_info[0].status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
-    #   resp.deployments_info[0].error_information.code #=> String, one of "DEPLOYMENT_GROUP_MISSING", "APPLICATION_MISSING", "REVISION_MISSING", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "NO_EC2_SUBSCRIPTION", "OVER_MAX_INSTANCES", "NO_INSTANCES", "TIMEOUT", "HEALTH_CONSTRAINTS_INVALID", "HEALTH_CONSTRAINTS", "INTERNAL_ERROR", "THROTTLED", "ALARM_ACTIVE", "AGENT_ISSUE", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "AUTO_SCALING_CONFIGURATION", "MANUAL_STOP", "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION", "MISSING_ELB_INFORMATION", "MISSING_GITHUB_TOKEN", "ELASTIC_LOAD_BALANCING_INVALID", "ELB_INVALID_INSTANCE", "INVALID_LAMBDA_CONFIGURATION", "INVALID_LAMBDA_FUNCTION", "HOOK_EXECUTION_FAILURE", "AUTOSCALING_VALIDATION_ERROR", "INVALID_ECS_SERVICE", "ECS_UPDATE_ERROR", "INVALID_REVISION"
+    #   resp.deployments_info[0].error_information.code #=> String, one of "AGENT_ISSUE", "ALARM_ACTIVE", "APPLICATION_MISSING", "AUTOSCALING_VALIDATION_ERROR", "AUTO_SCALING_CONFIGURATION", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND", "CUSTOMER_APPLICATION_UNHEALTHY", "DEPLOYMENT_GROUP_MISSING", "ECS_UPDATE_ERROR", "ELASTIC_LOAD_BALANCING_INVALID", "ELB_INVALID_INSTANCE", "HEALTH_CONSTRAINTS", "HEALTH_CONSTRAINTS_INVALID", "HOOK_EXECUTION_FAILURE", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "INTERNAL_ERROR", "INVALID_ECS_SERVICE", "INVALID_LAMBDA_CONFIGURATION", "INVALID_LAMBDA_FUNCTION", "INVALID_REVISION", "MANUAL_STOP", "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION", "MISSING_ELB_INFORMATION", "MISSING_GITHUB_TOKEN", "NO_EC2_SUBSCRIPTION", "NO_INSTANCES", "OVER_MAX_INSTANCES", "RESOURCE_LIMIT_EXCEEDED", "REVISION_MISSING", "THROTTLED", "TIMEOUT"
     #   resp.deployments_info[0].error_information.message #=> String
     #   resp.deployments_info[0].create_time #=> Time
     #   resp.deployments_info[0].start_time #=> Time
@@ -756,10 +820,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Gets information about one or more on-premises instances.
+    # Gets information about one or more on-premises instances. The maximum
+    # number of on-premises instances that can be returned is 25.
     #
     # @option params [required, Array<String>] :instance_names
     #   The names of the on-premises instances about which to get information.
+    #   The maximum number of instance names you can specify is 25.
     #
     # @return [Types::BatchGetOnPremisesInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -835,8 +901,13 @@ module Aws::CodeDeploy
     #   applicable IAM user or AWS account.
     #
     # @option params [String] :compute_platform
-    #   The destination platform type for the deployment (`Lambda` or
-    #   `Server`).
+    #   The destination platform type for the deployment (`Lambda`, `Server`,
+    #   or `ECS`).
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to CodeDeploy applications to help you
+    #   organize and categorize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
     #
     # @return [Types::CreateApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -847,6 +918,12 @@ module Aws::CodeDeploy
     #   resp = client.create_application({
     #     application_name: "ApplicationName", # required
     #     compute_platform: "Server", # accepts Server, Lambda, ECS
+    #     tags: [
+    #       {
+    #         key: "Key",
+    #         value: "Value",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -866,8 +943,8 @@ module Aws::CodeDeploy
     # group.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [String] :deployment_group_name
     #   The name of the deployment group.
@@ -876,30 +953,47 @@ module Aws::CodeDeploy
     #   The type and location of the revision to deploy.
     #
     # @option params [String] :deployment_config_name
-    #   The name of a deployment configuration associated with the applicable
-    #   IAM user or AWS account.
+    #   The name of a deployment configuration associated with the IAM user or
+    #   AWS account.
     #
-    #   If not specified, the value configured in the deployment group will be
-    #   used as the default. If the deployment group does not have a
-    #   deployment configuration associated with it, then
-    #   CodeDeployDefault.OneAtATime will be used by default.
+    #   If not specified, the value configured in the deployment group is used
+    #   as the default. If the deployment group does not have a deployment
+    #   configuration associated with it, CodeDeployDefault.OneAtATime is used
+    #   by default.
     #
     # @option params [String] :description
     #   A comment about the deployment.
     #
     # @option params [Boolean] :ignore_application_stop_failures
-    #   If set to true, then if the deployment causes the ApplicationStop
-    #   deployment lifecycle event to an instance to fail, the deployment to
-    #   that instance will not be considered to have failed at that point and
-    #   will continue on to the BeforeInstall deployment lifecycle event.
+    #   If true, then if an ApplicationStop, BeforeBlockTraffic, or
+    #   AfterBlockTraffic deployment lifecycle event to an instance fails,
+    #   then the deployment continues to the next deployment lifecycle event.
+    #   For example, if ApplicationStop fails, the deployment continues with
+    #   DownloadBundle. If BeforeBlockTraffic fails, the deployment continues
+    #   with BlockTraffic. If AfterBlockTraffic fails, the deployment
+    #   continues with ApplicationStop.
     #
-    #   If set to false or not specified, then if the deployment causes the
-    #   ApplicationStop deployment lifecycle event to fail to an instance, the
-    #   deployment to that instance will stop, and the deployment to that
-    #   instance will be considered to have failed.
+    #   If false or not specified, then if a lifecycle event fails during a
+    #   deployment to an instance, that deployment fails. If deployment to
+    #   that instance is part of an overall deployment and the number of
+    #   healthy hosts is not less than the minimum number of healthy hosts,
+    #   then a deployment to the next instance is attempted.
+    #
+    #   During a deployment, the AWS CodeDeploy agent runs the scripts
+    #   specified for ApplicationStop, BeforeBlockTraffic, and
+    #   AfterBlockTraffic in the AppSpec file from the previous successful
+    #   deployment. (All other scripts are run from the AppSpec file in the
+    #   current deployment.) If one of these scripts contains an error and
+    #   does not run successfully, the deployment can fail.
+    #
+    #   If the cause of the failure is a script from the last successful
+    #   deployment that will never run successfully, create a new deployment
+    #   and use `ignoreApplicationStopFailures` to specify that the
+    #   ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic failures
+    #   should be ignored.
     #
     # @option params [Types::TargetInstances] :target_instances
-    #   Information about the instances that will belong to the replacement
+    #   Information about the instances that belong to the replacement
     #   environment in a blue/green deployment.
     #
     # @option params [Types::AutoRollbackConfiguration] :auto_rollback_configuration
@@ -1030,12 +1124,11 @@ module Aws::CodeDeploy
     #   of FLEET\_PERCENT and a value of 95.
     #
     # @option params [Types::TrafficRoutingConfig] :traffic_routing_config
-    #   The configuration that specifies how the deployment traffic will be
-    #   routed.
+    #   The configuration that specifies how the deployment traffic is routed.
     #
     # @option params [String] :compute_platform
-    #   The destination platform type for the deployment (`Lambda` or
-    #   `Server`&gt;).
+    #   The destination platform type for the deployment (`Lambda`, `Server`,
+    #   or `ECS`).
     #
     # @return [Types::CreateDeploymentConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1076,12 +1169,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Creates a deployment group to which application revisions will be
+    # Creates a deployment group to which application revisions are
     # deployed.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [required, String] :deployment_group_name
     #   The name of a new deployment group for the specified application.
@@ -1094,7 +1187,7 @@ module Aws::CodeDeploy
     #
     #   CodeDeployDefault.OneAtATime is the default deployment configuration.
     #   It is used if a configuration isn't specified for the deployment or
-    #   the deployment group.
+    #   deployment group.
     #
     #   For more information about the predefined deployment configurations in
     #   AWS CodeDeploy, see [Working with Deployment Groups in AWS
@@ -1102,20 +1195,20 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
     #
     # @option params [Array<Types::EC2TagFilter>] :ec2_tag_filters
-    #   The Amazon EC2 tags on which to filter. The deployment group will
-    #   include EC2 instances with any of the specified tags. Cannot be used
-    #   in the same call as ec2TagSet.
+    #   The Amazon EC2 tags on which to filter. The deployment group includes
+    #   EC2 instances with any of the specified tags. Cannot be used in the
+    #   same call as ec2TagSet.
     #
     # @option params [Array<Types::TagFilter>] :on_premises_instance_tag_filters
     #   The on-premises instance tags on which to filter. The deployment group
-    #   will include on-premises instances with any of the specified tags.
-    #   Cannot be used in the same call as OnPremisesTagSet.
+    #   includes on-premises instances with any of the specified tags. Cannot
+    #   be used in the same call as OnPremisesTagSet.
     #
     # @option params [Array<String>] :auto_scaling_groups
-    #   A list of associated Auto Scaling groups.
+    #   A list of associated Amazon EC2 Auto Scaling groups.
     #
     # @option params [required, String] :service_role_arn
     #   A service role ARN that allows AWS CodeDeploy to act on the user's
@@ -1128,7 +1221,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
     #   Information to add about Amazon CloudWatch alarms when the deployment
@@ -1152,20 +1245,25 @@ module Aws::CodeDeploy
     #
     # @option params [Types::EC2TagSet] :ec2_tag_set
     #   Information about groups of tags applied to EC2 instances. The
-    #   deployment group will include only EC2 instances identified by all the
-    #   tag groups. Cannot be used in the same call as ec2TagFilters.
+    #   deployment group includes only EC2 instances identified by all the tag
+    #   groups. Cannot be used in the same call as ec2TagFilters.
     #
     # @option params [Array<Types::ECSService>] :ecs_services
-    #   The target ECS services in the deployment group. This only applies to
-    #   deployment groups that use the Amazon ECS compute platform. A target
-    #   ECS service is specified as an Amazon ECS cluster and service name
-    #   pair using the format `<clustername>:<servicename>`.
+    #   The target Amazon ECS services in the deployment group. This applies
+    #   only to deployment groups that use the Amazon ECS compute platform. A
+    #   target Amazon ECS service is specified as an Amazon ECS cluster and
+    #   service name pair using the format `<clustername>:<servicename>`.
     #
     # @option params [Types::OnPremisesTagSet] :on_premises_tag_set
     #   Information about groups of tags applied to on-premises instances. The
-    #   deployment group will include only on-premises instances identified by
-    #   all the tag groups. Cannot be used in the same call as
+    #   deployment group includes only on-premises instances identified by all
+    #   of the tag groups. Cannot be used in the same call as
     #   onPremisesInstanceTagFilters.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to CodeDeploy deployment groups to help
+    #   you organize and categorize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
     #
     # @return [Types::CreateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1285,6 +1383,12 @@ module Aws::CodeDeploy
     #         ],
     #       ],
     #     },
+    #     tags: [
+    #       {
+    #         key: "Key",
+    #         value: "Value",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1303,8 +1407,8 @@ module Aws::CodeDeploy
     # Deletes an application.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1331,8 +1435,8 @@ module Aws::CodeDeploy
     #  </note>
     #
     # @option params [required, String] :deployment_config_name
-    #   The name of a deployment configuration associated with the applicable
-    #   IAM user or AWS account.
+    #   The name of a deployment configuration associated with the IAM user or
+    #   AWS account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1354,12 +1458,11 @@ module Aws::CodeDeploy
     # Deletes a deployment group.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [required, String] :deployment_group_name
-    #   The name of an existing deployment group for the specified
-    #   application.
+    #   The name of a deployment group for the specified application.
     #
     # @return [Types::DeleteDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1440,8 +1543,8 @@ module Aws::CodeDeploy
     # Gets information about an application.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @return [Types::GetApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1547,9 +1650,16 @@ module Aws::CodeDeploy
 
     # Gets information about a deployment.
     #
+    # <note markdown="1"> The `content` property of the `appSpecContent` object in the returned
+    # revision is always null. Use `GetApplicationRevision` and the `sha256`
+    # property of the returned `appSpecContent` object to get the content of
+    # the deployment’s AppSpec file.
+    #
+    #  </note>
+    #
     # @option params [required, String] :deployment_id
-    #   The unique ID of a deployment associated with the applicable IAM user
-    #   or AWS account.
+    #   The unique ID of a deployment associated with the IAM user or AWS
+    #   account.
     #
     # @return [Types::GetDeploymentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1592,7 +1702,7 @@ module Aws::CodeDeploy
     #   resp.deployment_info.revision.app_spec_content.content #=> String
     #   resp.deployment_info.revision.app_spec_content.sha256 #=> String
     #   resp.deployment_info.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
-    #   resp.deployment_info.error_information.code #=> String, one of "DEPLOYMENT_GROUP_MISSING", "APPLICATION_MISSING", "REVISION_MISSING", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "NO_EC2_SUBSCRIPTION", "OVER_MAX_INSTANCES", "NO_INSTANCES", "TIMEOUT", "HEALTH_CONSTRAINTS_INVALID", "HEALTH_CONSTRAINTS", "INTERNAL_ERROR", "THROTTLED", "ALARM_ACTIVE", "AGENT_ISSUE", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "AUTO_SCALING_CONFIGURATION", "MANUAL_STOP", "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION", "MISSING_ELB_INFORMATION", "MISSING_GITHUB_TOKEN", "ELASTIC_LOAD_BALANCING_INVALID", "ELB_INVALID_INSTANCE", "INVALID_LAMBDA_CONFIGURATION", "INVALID_LAMBDA_FUNCTION", "HOOK_EXECUTION_FAILURE", "AUTOSCALING_VALIDATION_ERROR", "INVALID_ECS_SERVICE", "ECS_UPDATE_ERROR", "INVALID_REVISION"
+    #   resp.deployment_info.error_information.code #=> String, one of "AGENT_ISSUE", "ALARM_ACTIVE", "APPLICATION_MISSING", "AUTOSCALING_VALIDATION_ERROR", "AUTO_SCALING_CONFIGURATION", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND", "CUSTOMER_APPLICATION_UNHEALTHY", "DEPLOYMENT_GROUP_MISSING", "ECS_UPDATE_ERROR", "ELASTIC_LOAD_BALANCING_INVALID", "ELB_INVALID_INSTANCE", "HEALTH_CONSTRAINTS", "HEALTH_CONSTRAINTS_INVALID", "HOOK_EXECUTION_FAILURE", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "INTERNAL_ERROR", "INVALID_ECS_SERVICE", "INVALID_LAMBDA_CONFIGURATION", "INVALID_LAMBDA_FUNCTION", "INVALID_REVISION", "MANUAL_STOP", "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION", "MISSING_ELB_INFORMATION", "MISSING_GITHUB_TOKEN", "NO_EC2_SUBSCRIPTION", "NO_INSTANCES", "OVER_MAX_INSTANCES", "RESOURCE_LIMIT_EXCEEDED", "REVISION_MISSING", "THROTTLED", "TIMEOUT"
     #   resp.deployment_info.error_information.message #=> String
     #   resp.deployment_info.create_time #=> Time
     #   resp.deployment_info.start_time #=> Time
@@ -1661,8 +1771,8 @@ module Aws::CodeDeploy
     # Gets information about a deployment configuration.
     #
     # @option params [required, String] :deployment_config_name
-    #   The name of a deployment configuration associated with the applicable
-    #   IAM user or AWS account.
+    #   The name of a deployment configuration associated with the IAM user or
+    #   AWS account.
     #
     # @return [Types::GetDeploymentConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1700,12 +1810,11 @@ module Aws::CodeDeploy
     # Gets information about a deployment group.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [required, String] :deployment_group_name
-    #   The name of an existing deployment group for the specified
-    #   application.
+    #   The name of a deployment group for the specified application.
     #
     # @return [Types::GetDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1906,6 +2015,11 @@ module Aws::CodeDeploy
     #   resp.deployment_target.lambda_target.lifecycle_events[0].start_time #=> Time
     #   resp.deployment_target.lambda_target.lifecycle_events[0].end_time #=> Time
     #   resp.deployment_target.lambda_target.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.deployment_target.lambda_target.lambda_function_info.function_name #=> String
+    #   resp.deployment_target.lambda_target.lambda_function_info.function_alias #=> String
+    #   resp.deployment_target.lambda_target.lambda_function_info.current_version #=> String
+    #   resp.deployment_target.lambda_target.lambda_function_info.target_version #=> String
+    #   resp.deployment_target.lambda_target.lambda_function_info.target_version_weight #=> Float
     #   resp.deployment_target.ecs_target.deployment_id #=> String
     #   resp.deployment_target.ecs_target.target_id #=> String
     #   resp.deployment_target.ecs_target.target_arn #=> String
@@ -1978,8 +2092,8 @@ module Aws::CodeDeploy
     # Lists information about revisions for an application.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [String] :sort_by
     #   The column name to use to sort the list results:
@@ -1993,7 +2107,7 @@ module Aws::CodeDeploy
     #   * lastUsedTime: Sort by the time the revisions were last used in a
     #     deployment.
     #
-    #   If not specified or set to null, the results will be returned in an
+    #   If not specified or set to null, the results are returned in an
     #   arbitrary order.
     #
     # @option params [String] :sort_order
@@ -2003,9 +2117,9 @@ module Aws::CodeDeploy
     #
     #   * descending: descending order.
     #
-    #   If not specified, the results will be sorted in ascending order.
+    #   If not specified, the results are sorted in ascending order.
     #
-    #   If set to null, the results will be sorted in an arbitrary order.
+    #   If set to null, the results are sorted in an arbitrary order.
     #
     # @option params [String] :s3_bucket
     #   An Amazon S3 bucket name to limit the search for revisions.
@@ -2076,8 +2190,7 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Lists the applications registered with the applicable IAM user or AWS
-    # account.
+    # Lists the applications registered with the IAM user or AWS account.
     #
     # @option params [String] :next_token
     #   An identifier returned from the previous list applications call. It
@@ -2109,8 +2222,7 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Lists the deployment configurations with the applicable IAM user or
-    # AWS account.
+    # Lists the deployment configurations with the IAM user or AWS account.
     #
     # @option params [String] :next_token
     #   An identifier returned from the previous `ListDeploymentConfigs` call.
@@ -2143,12 +2255,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Lists the deployment groups for an application registered with the
-    # applicable IAM user or AWS account.
+    # Lists the deployment groups for an application registered with the IAM
+    # user or AWS account.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [String] :next_token
     #   An identifier returned from the previous list deployment groups call.
@@ -2191,8 +2303,8 @@ module Aws::CodeDeploy
     #
     #  </note>
     #
-    # Lists the instance for a deployment associated with the applicable IAM
-    # user or AWS account.
+    # Lists the instance for a deployment associated with the IAM user or
+    # AWS account.
     #
     # @option params [required, String] :deployment_id
     #   The unique ID of a deployment.
@@ -2205,18 +2317,18 @@ module Aws::CodeDeploy
     # @option params [Array<String>] :instance_status_filter
     #   A subset of instances to list by status:
     #
-    #   * Pending: Include those instance with pending deployments.
+    #   * Pending: Include those instances with pending deployments.
     #
-    #   * InProgress: Include those instance where deployments are still in
+    #   * InProgress: Include those instances where deployments are still in
     #     progress.
     #
     #   * Succeeded: Include those instances with successful deployments.
     #
-    #   * Failed: Include those instance with failed deployments.
+    #   * Failed: Include those instances with failed deployments.
     #
-    #   * Skipped: Include those instance with skipped deployments.
+    #   * Skipped: Include those instances with skipped deployments.
     #
-    #   * Unknown: Include those instance with deployments in an unknown
+    #   * Unknown: Include those instances with deployments in an unknown
     #     state.
     #
     # @option params [Array<String>] :instance_type_filter
@@ -2265,7 +2377,14 @@ module Aws::CodeDeploy
     #   the list.
     #
     # @option params [Hash<String,Array>] :target_filters
-    #   A key used to filter the returned targets.
+    #   A key used to filter the returned targets. The two valid values are:
+    #
+    #   * `TargetStatus` - A `TargetStatus` filter string can be `Failed`,
+    #     `InProgress`, `Pending`, `Ready`, `Skipped`, `Succeeded`, or
+    #     `Unknown`.
+    #
+    #   * `ServerInstanceLabel` - A `ServerInstanceLabel` filter string can be
+    #     `Blue` or `Green`.
     #
     # @return [Types::ListDeploymentTargetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2298,15 +2417,26 @@ module Aws::CodeDeploy
     end
 
     # Lists the deployments in a deployment group for an application
-    # registered with the applicable IAM user or AWS account.
+    # registered with the IAM user or AWS account.
     #
     # @option params [String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
+    #
+    #   <note markdown="1"> If `applicationName` is specified, then `deploymentGroupName` must be
+    #   specified. If it is not specified, then `deploymentGroupName` must not
+    #   be specified.
+    #
+    #    </note>
     #
     # @option params [String] :deployment_group_name
-    #   The name of an existing deployment group for the specified
-    #   application.
+    #   The name of a deployment group for the specified application.
+    #
+    #   <note markdown="1"> If `deploymentGroupName` is specified, then `applicationName` must be
+    #   specified. If it is not specified, then `applicationName` must not be
+    #   specified.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :include_only_statuses
     #   A subset of deployments to list by status:
@@ -2399,7 +2529,7 @@ module Aws::CodeDeploy
     # Gets a list of names for one or more on-premises instances.
     #
     # Unless otherwise specified, both registered and deregistered
-    # on-premises instance names will be listed. To list only registered or
+    # on-premises instance names are listed. To list only registered or
     # deregistered on-premises instance names, use the registration status
     # parameter.
     #
@@ -2413,8 +2543,8 @@ module Aws::CodeDeploy
     #     resulting list.
     #
     # @option params [Array<Types::TagFilter>] :tag_filters
-    #   The on-premises instance tags that will be used to restrict the
-    #   corresponding on-premises instance names returned.
+    #   The on-premises instance tags that are used to restrict the
+    #   on-premises instance names returned.
     #
     # @option params [String] :next_token
     #   An identifier returned from the previous list on-premises instances
@@ -2452,6 +2582,46 @@ module Aws::CodeDeploy
     # @param [Hash] params ({})
     def list_on_premises_instances(params = {}, options = {})
       req = build_request(:list_on_premises_instances, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of tags for the resource identified by a specified ARN.
+    # Tags are used to organize and categorize your CodeDeploy resources.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of a CodeDeploy resource. `ListTagsForResource` returns all
+    #   the tags associated with the resource that is identified by the
+    #   `ResourceArn`.
+    #
+    # @option params [String] :next_token
+    #   An identifier returned from the previous `ListTagsForResource` call.
+    #   It can be used to return the next set of applications in the list.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -2501,8 +2671,8 @@ module Aws::CodeDeploy
     # application.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [String] :description
     #   A comment about the revision.
@@ -2619,7 +2789,7 @@ module Aws::CodeDeploy
 
     # In a blue/green deployment, overrides any specified wait time and
     # starts terminating instances immediately after the traffic routing is
-    # completed.
+    # complete.
     #
     # @option params [String] :deployment_id
     #   The unique ID of a blue/green deployment for which you want to skip
@@ -2678,6 +2848,71 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
+    # Associates the list of tags in the input `Tags` parameter with the
+    # resource identified by the `ResourceArn` input parameter.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of a resource, such as a CodeDeploy application or deployment
+    #   group.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A list of tags that `TagResource` associates with a resource. The
+    #   resource is identified by the `ResourceArn` input parameter.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "Key",
+    #         value: "Value",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a resource from a list of tags. The resource is
+    # identified by the `ResourceArn` input parameter. The tags are
+    # identfied by the list of keys in the `TagKeys` input parameter.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN that specifies from which resource to disassociate the tags
+    #   with the keys in the `TagKeys` input paramter.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of keys of `Tag` objects. The `Tag` objects identified by the
+    #   keys are disassociated from the resource specified by the
+    #   `ResourceArn` input parameter.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["Key"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Changes the name of an application.
     #
     # @option params [String] :application_name
@@ -2707,7 +2942,8 @@ module Aws::CodeDeploy
     # Changes information about a deployment group.
     #
     # @option params [required, String] :application_name
-    #   The application name corresponding to the deployment group to update.
+    #   The application name that corresponds to the deployment group to
+    #   update.
     #
     # @option params [required, String] :current_deployment_group_name
     #   The current name of the deployment group.
@@ -2745,7 +2981,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
     #   Information to add or change about Amazon CloudWatch alarms when the
@@ -2769,19 +3005,19 @@ module Aws::CodeDeploy
     #
     # @option params [Types::EC2TagSet] :ec2_tag_set
     #   Information about groups of tags applied to on-premises instances. The
-    #   deployment group will include only EC2 instances identified by all the
-    #   tag groups.
+    #   deployment group includes only EC2 instances identified by all the tag
+    #   groups.
     #
     # @option params [Array<Types::ECSService>] :ecs_services
-    #   The target ECS services in the deployment group. This only applies to
-    #   deployment groups that use the Amazon ECS compute platform. A target
-    #   ECS service is specified as an Amazon ECS cluster and service name
-    #   pair using the format `<clustername>:<servicename>`.
+    #   The target Amazon ECS services in the deployment group. This applies
+    #   only to deployment groups that use the Amazon ECS compute platform. A
+    #   target Amazon ECS service is specified as an Amazon ECS cluster and
+    #   service name pair using the format `<clustername>:<servicename>`.
     #
     # @option params [Types::OnPremisesTagSet] :on_premises_tag_set
     #   Information about an on-premises instance tag set. The deployment
-    #   group will include only on-premises instances identified by all the
-    #   tag groups.
+    #   group includes only on-premises instances identified by all the tag
+    #   groups.
     #
     # @return [Types::UpdateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2932,7 +3168,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2949,7 +3185,7 @@ module Aws::CodeDeploy
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

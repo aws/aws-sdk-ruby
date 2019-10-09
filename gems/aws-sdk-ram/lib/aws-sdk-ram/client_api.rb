@@ -40,6 +40,8 @@ module Aws::RAM
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidResourceTypeException = Shapes::StructureShape.new(name: 'InvalidResourceTypeException')
     InvalidStateTransitionException = Shapes::StructureShape.new(name: 'InvalidStateTransitionException')
+    ListPendingInvitationResourcesRequest = Shapes::StructureShape.new(name: 'ListPendingInvitationResourcesRequest')
+    ListPendingInvitationResourcesResponse = Shapes::StructureShape.new(name: 'ListPendingInvitationResourcesResponse')
     ListPrincipalsRequest = Shapes::StructureShape.new(name: 'ListPrincipalsRequest')
     ListPrincipalsResponse = Shapes::StructureShape.new(name: 'ListPrincipalsResponse')
     ListResourcesRequest = Shapes::StructureShape.new(name: 'ListResourcesRequest')
@@ -88,6 +90,7 @@ module Aws::RAM
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagLimitExceededException = Shapes::StructureShape.new(name: 'TagLimitExceededException')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    TagPolicyViolationException = Shapes::StructureShape.new(name: 'TagPolicyViolationException')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
@@ -197,6 +200,36 @@ module Aws::RAM
     GetResourceSharesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetResourceSharesResponse.struct_class = Types::GetResourceSharesResponse
 
+    IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
+
+    InvalidClientTokenException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InvalidClientTokenException.struct_class = Types::InvalidClientTokenException
+
+    InvalidMaxResultsException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InvalidMaxResultsException.struct_class = Types::InvalidMaxResultsException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidResourceTypeException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InvalidResourceTypeException.struct_class = Types::InvalidResourceTypeException
+
+    InvalidStateTransitionException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InvalidStateTransitionException.struct_class = Types::InvalidStateTransitionException
+
+    ListPendingInvitationResourcesRequest.add_member(:resource_share_invitation_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceShareInvitationArn"))
+    ListPendingInvitationResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListPendingInvitationResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListPendingInvitationResourcesRequest.struct_class = Types::ListPendingInvitationResourcesRequest
+
+    ListPendingInvitationResourcesResponse.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "resources"))
+    ListPendingInvitationResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListPendingInvitationResourcesResponse.struct_class = Types::ListPendingInvitationResourcesResponse
+
     ListPrincipalsRequest.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, required: true, location_name: "resourceOwner"))
     ListPrincipalsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
     ListPrincipalsRequest.add_member(:principals, Shapes::ShapeRef.new(shape: PrincipalArnOrIdList, location_name: "principals"))
@@ -222,6 +255,15 @@ module Aws::RAM
     ListResourcesResponse.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "resources"))
     ListResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListResourcesResponse.struct_class = Types::ListResourcesResponse
+
+    MalformedArnException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    MalformedArnException.struct_class = Types::MalformedArnException
+
+    MissingRequiredParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    MissingRequiredParameterException.struct_class = Types::MissingRequiredParameterException
+
+    OperationNotPermittedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    OperationNotPermittedException.struct_class = Types::OperationNotPermittedException
 
     PolicyList.member = Shapes::ShapeRef.new(shape: Policy)
 
@@ -255,6 +297,9 @@ module Aws::RAM
 
     ResourceArnList.member = Shapes::ShapeRef.new(shape: String)
 
+    ResourceArnNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ResourceArnNotFoundException.struct_class = Types::ResourceArnNotFoundException
+
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
 
     ResourceShare.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceShareArn"))
@@ -271,6 +316,7 @@ module Aws::RAM
     ResourceShareArnList.member = Shapes::ShapeRef.new(shape: String)
 
     ResourceShareAssociation.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceShareArn"))
+    ResourceShareAssociation.add_member(:resource_share_name, Shapes::ShapeRef.new(shape: String, location_name: "resourceShareName"))
     ResourceShareAssociation.add_member(:associated_entity, Shapes::ShapeRef.new(shape: String, location_name: "associatedEntity"))
     ResourceShareAssociation.add_member(:association_type, Shapes::ShapeRef.new(shape: ResourceShareAssociationType, location_name: "associationType"))
     ResourceShareAssociation.add_member(:status, Shapes::ShapeRef.new(shape: ResourceShareAssociationStatus, location_name: "status"))
@@ -289,14 +335,35 @@ module Aws::RAM
     ResourceShareInvitation.add_member(:receiver_account_id, Shapes::ShapeRef.new(shape: String, location_name: "receiverAccountId"))
     ResourceShareInvitation.add_member(:invitation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "invitationTimestamp"))
     ResourceShareInvitation.add_member(:status, Shapes::ShapeRef.new(shape: ResourceShareInvitationStatus, location_name: "status"))
-    ResourceShareInvitation.add_member(:resource_share_associations, Shapes::ShapeRef.new(shape: ResourceShareAssociationList, location_name: "resourceShareAssociations"))
+    ResourceShareInvitation.add_member(:resource_share_associations, Shapes::ShapeRef.new(shape: ResourceShareAssociationList, deprecated: true, location_name: "resourceShareAssociations", metadata: {"deprecatedMessage"=>"This member has been deprecated. Use ListPendingInvitationResources."}))
     ResourceShareInvitation.struct_class = Types::ResourceShareInvitation
+
+    ResourceShareInvitationAlreadyAcceptedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ResourceShareInvitationAlreadyAcceptedException.struct_class = Types::ResourceShareInvitationAlreadyAcceptedException
+
+    ResourceShareInvitationAlreadyRejectedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ResourceShareInvitationAlreadyRejectedException.struct_class = Types::ResourceShareInvitationAlreadyRejectedException
 
     ResourceShareInvitationArnList.member = Shapes::ShapeRef.new(shape: String)
 
+    ResourceShareInvitationArnNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ResourceShareInvitationArnNotFoundException.struct_class = Types::ResourceShareInvitationArnNotFoundException
+
+    ResourceShareInvitationExpiredException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ResourceShareInvitationExpiredException.struct_class = Types::ResourceShareInvitationExpiredException
+
     ResourceShareInvitationList.member = Shapes::ShapeRef.new(shape: ResourceShareInvitation)
 
+    ResourceShareLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ResourceShareLimitExceededException.struct_class = Types::ResourceShareLimitExceededException
+
     ResourceShareList.member = Shapes::ShapeRef.new(shape: ResourceShare)
+
+    ServerInternalException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ServerInternalException.struct_class = Types::ServerInternalException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
@@ -310,7 +377,13 @@ module Aws::RAM
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
+    TagLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    TagLimitExceededException.struct_class = Types::TagLimitExceededException
+
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagPolicyViolationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    TagPolicyViolationException.struct_class = Types::TagPolicyViolationException
 
     TagResourceRequest.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceShareArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
@@ -319,6 +392,9 @@ module Aws::RAM
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     TagValueList.member = Shapes::ShapeRef.new(shape: TagValue)
+
+    UnknownResourceException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    UnknownResourceException.struct_class = Types::UnknownResourceException
 
     UntagResourceRequest.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceShareArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
@@ -368,6 +444,8 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: ResourceShareInvitationExpiredException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClientTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
       end)
 
       api.add_operation(:associate_resource_share, Seahorse::Model::Operation.new.tap do |o|
@@ -404,6 +482,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceShareLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
@@ -535,6 +614,29 @@ module Aws::RAM
         )
       end)
 
+      api.add_operation(:list_pending_invitation_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPendingInvitationResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/listpendinginvitationresources"
+        o.input = Shapes::ShapeRef.new(shape: ListPendingInvitationResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPendingInvitationResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceShareInvitationArnNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceShareInvitationAlreadyRejectedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceShareInvitationExpiredException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_principals, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPrincipals"
         o.http_method = "POST"
@@ -590,6 +692,8 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: ResourceShareInvitationExpiredException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClientTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -602,6 +706,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
         o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceArnNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)

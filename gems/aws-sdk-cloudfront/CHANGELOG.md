@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.22.1 (2019-09-19)
+------------------
+
+* Issue - Fix url argument of #signed_cookie.
+
+1.22.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2019-06-14)
+------------------
+
+* Feature - A new datatype in the CloudFront API, AliasICPRecordal, provides the ICP recordal status for CNAMEs associated with distributions. AWS services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content publicly on an alternate domain name, also known as a CNAME, that they have added to CloudFront. The status value is returned in the CloudFront response; you cannot configure it yourself. The status is set to APPROVED for all CNAMEs (aliases) in regions outside of China.
+
+1.18.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2019-03-22)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.12.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
 1.11.0 (2018-11-20)
 ------------------
 

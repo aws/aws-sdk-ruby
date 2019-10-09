@@ -119,6 +119,8 @@ module Aws::Kinesis
     StreamStatus = Shapes::StringShape.new(name: 'StreamStatus')
     SubscribeToShardEvent = Shapes::StructureShape.new(name: 'SubscribeToShardEvent')
     SubscribeToShardEventStream = Shapes::StructureShape.new(name: 'SubscribeToShardEventStream')
+    SubscribeToShardInput = Shapes::StructureShape.new(name: 'SubscribeToShardInput')
+    SubscribeToShardOutput = Shapes::StructureShape.new(name: 'SubscribeToShardOutput')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -211,6 +213,12 @@ module Aws::Kinesis
     EnhancedMonitoringOutput.add_member(:desired_shard_level_metrics, Shapes::ShapeRef.new(shape: MetricsNameList, location_name: "DesiredShardLevelMetrics"))
     EnhancedMonitoringOutput.struct_class = Types::EnhancedMonitoringOutput
 
+    ExpiredIteratorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExpiredIteratorException.struct_class = Types::ExpiredIteratorException
+
+    ExpiredNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExpiredNextTokenException.struct_class = Types::ExpiredNextTokenException
+
     GetRecordsInput.add_member(:shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, required: true, location_name: "ShardIterator"))
     GetRecordsInput.add_member(:limit, Shapes::ShapeRef.new(shape: GetRecordsInputLimit, location_name: "Limit"))
     GetRecordsInput.struct_class = Types::GetRecordsInput
@@ -237,6 +245,33 @@ module Aws::Kinesis
     IncreaseStreamRetentionPeriodInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     IncreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
     IncreaseStreamRetentionPeriodInput.struct_class = Types::IncreaseStreamRetentionPeriodInput
+
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
+    KMSAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSAccessDeniedException.struct_class = Types::KMSAccessDeniedException
+
+    KMSDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSDisabledException.struct_class = Types::KMSDisabledException
+
+    KMSInvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSInvalidStateException.struct_class = Types::KMSInvalidStateException
+
+    KMSNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSNotFoundException.struct_class = Types::KMSNotFoundException
+
+    KMSOptInRequired.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSOptInRequired.struct_class = Types::KMSOptInRequired
+
+    KMSThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSThrottlingException.struct_class = Types::KMSThrottlingException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListShardsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     ListShardsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -282,6 +317,9 @@ module Aws::Kinesis
     MergeShardsInput.struct_class = Types::MergeShardsInput
 
     MetricsNameList.member = Shapes::ShapeRef.new(shape: MetricsName)
+
+    ProvisionedThroughputExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
     PutRecordInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     PutRecordInput.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
@@ -338,6 +376,12 @@ module Aws::Kinesis
     RemoveTagsFromStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     RemoveTagsFromStreamInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     RemoveTagsFromStreamInput.struct_class = Types::RemoveTagsFromStreamInput
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SequenceNumberRange.add_member(:starting_sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, required: true, location_name: "StartingSequenceNumber"))
     SequenceNumberRange.add_member(:ending_sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "EndingSequenceNumber"))
@@ -404,16 +448,24 @@ module Aws::Kinesis
     SubscribeToShardEvent.struct_class = Types::SubscribeToShardEvent
 
     SubscribeToShardEventStream.add_member(:subscribe_to_shard_event, Shapes::ShapeRef.new(shape: SubscribeToShardEvent, required: true, event: true, location_name: "SubscribeToShardEvent"))
-    SubscribeToShardEventStream.add_member(:resource_not_found_exception, Shapes::ShapeRef.new(shape: ResourceNotFoundException, location_name: "ResourceNotFoundException"))
-    SubscribeToShardEventStream.add_member(:resource_in_use_exception, Shapes::ShapeRef.new(shape: ResourceInUseException, location_name: "ResourceInUseException"))
-    SubscribeToShardEventStream.add_member(:kms_disabled_exception, Shapes::ShapeRef.new(shape: KMSDisabledException, location_name: "KMSDisabledException"))
-    SubscribeToShardEventStream.add_member(:kms_invalid_state_exception, Shapes::ShapeRef.new(shape: KMSInvalidStateException, location_name: "KMSInvalidStateException"))
-    SubscribeToShardEventStream.add_member(:kms_access_denied_exception, Shapes::ShapeRef.new(shape: KMSAccessDeniedException, location_name: "KMSAccessDeniedException"))
-    SubscribeToShardEventStream.add_member(:kms_not_found_exception, Shapes::ShapeRef.new(shape: KMSNotFoundException, location_name: "KMSNotFoundException"))
-    SubscribeToShardEventStream.add_member(:kms_opt_in_required, Shapes::ShapeRef.new(shape: KMSOptInRequired, location_name: "KMSOptInRequired"))
-    SubscribeToShardEventStream.add_member(:kms_throttling_exception, Shapes::ShapeRef.new(shape: KMSThrottlingException, location_name: "KMSThrottlingException"))
-    SubscribeToShardEventStream.add_member(:internal_failure_exception, Shapes::ShapeRef.new(shape: InternalFailureException, location_name: "InternalFailureException"))
+    SubscribeToShardEventStream.add_member(:resource_not_found_exception, Shapes::ShapeRef.new(shape: ResourceNotFoundException, event: true, location_name: "ResourceNotFoundException"))
+    SubscribeToShardEventStream.add_member(:resource_in_use_exception, Shapes::ShapeRef.new(shape: ResourceInUseException, event: true, location_name: "ResourceInUseException"))
+    SubscribeToShardEventStream.add_member(:kms_disabled_exception, Shapes::ShapeRef.new(shape: KMSDisabledException, event: true, location_name: "KMSDisabledException"))
+    SubscribeToShardEventStream.add_member(:kms_invalid_state_exception, Shapes::ShapeRef.new(shape: KMSInvalidStateException, event: true, location_name: "KMSInvalidStateException"))
+    SubscribeToShardEventStream.add_member(:kms_access_denied_exception, Shapes::ShapeRef.new(shape: KMSAccessDeniedException, event: true, location_name: "KMSAccessDeniedException"))
+    SubscribeToShardEventStream.add_member(:kms_not_found_exception, Shapes::ShapeRef.new(shape: KMSNotFoundException, event: true, location_name: "KMSNotFoundException"))
+    SubscribeToShardEventStream.add_member(:kms_opt_in_required, Shapes::ShapeRef.new(shape: KMSOptInRequired, event: true, location_name: "KMSOptInRequired"))
+    SubscribeToShardEventStream.add_member(:kms_throttling_exception, Shapes::ShapeRef.new(shape: KMSThrottlingException, event: true, location_name: "KMSThrottlingException"))
+    SubscribeToShardEventStream.add_member(:internal_failure_exception, Shapes::ShapeRef.new(shape: InternalFailureException, event: true, location_name: "InternalFailureException"))
     SubscribeToShardEventStream.struct_class = Types::SubscribeToShardEventStream
+
+    SubscribeToShardInput.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: ConsumerARN, required: true, location_name: "ConsumerARN"))
+    SubscribeToShardInput.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
+    SubscribeToShardInput.add_member(:starting_position, Shapes::ShapeRef.new(shape: StartingPosition, required: true, location_name: "StartingPosition"))
+    SubscribeToShardInput.struct_class = Types::SubscribeToShardInput
+
+    SubscribeToShardOutput.add_member(:event_stream, Shapes::ShapeRef.new(shape: SubscribeToShardEventStream, required: true, eventstream: true, location_name: "EventStream"))
+    SubscribeToShardOutput.struct_class = Types::SubscribeToShardOutput
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
@@ -794,6 +846,19 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:subscribe_to_shard, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SubscribeToShard"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SubscribeToShardInput)
+        o.output = Shapes::ShapeRef.new(shape: SubscribeToShardOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.async = true
       end)
 
       api.add_operation(:update_shard_count, Seahorse::Model::Operation.new.tap do |o|

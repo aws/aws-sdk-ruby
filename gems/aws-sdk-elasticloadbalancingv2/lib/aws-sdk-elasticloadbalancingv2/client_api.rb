@@ -70,7 +70,6 @@ module Aws::ElasticLoadBalancingV2
     CreateTargetGroupOutput = Shapes::StructureShape.new(name: 'CreateTargetGroupOutput')
     CreatedTime = Shapes::TimestampShape.new(name: 'CreatedTime')
     DNSName = Shapes::StringShape.new(name: 'DNSName')
-    DecreasesRemaining = Shapes::IntegerShape.new(name: 'DecreasesRemaining')
     Default = Shapes::BooleanShape.new(name: 'Default')
     DeleteListenerInput = Shapes::StructureShape.new(name: 'DeleteListenerInput')
     DeleteListenerOutput = Shapes::StructureShape.new(name: 'DeleteListenerOutput')
@@ -92,8 +91,6 @@ module Aws::ElasticLoadBalancingV2
     DescribeLoadBalancerAttributesOutput = Shapes::StructureShape.new(name: 'DescribeLoadBalancerAttributesOutput')
     DescribeLoadBalancersInput = Shapes::StructureShape.new(name: 'DescribeLoadBalancersInput')
     DescribeLoadBalancersOutput = Shapes::StructureShape.new(name: 'DescribeLoadBalancersOutput')
-    DescribeProvisionedCapacityInput = Shapes::StructureShape.new(name: 'DescribeProvisionedCapacityInput')
-    DescribeProvisionedCapacityOutput = Shapes::StructureShape.new(name: 'DescribeProvisionedCapacityOutput')
     DescribeRulesInput = Shapes::StructureShape.new(name: 'DescribeRulesInput')
     DescribeRulesOutput = Shapes::StructureShape.new(name: 'DescribeRulesOutput')
     DescribeSSLPoliciesInput = Shapes::StructureShape.new(name: 'DescribeSSLPoliciesInput')
@@ -126,10 +123,7 @@ module Aws::ElasticLoadBalancingV2
     HttpHeaderConditionConfig = Shapes::StructureShape.new(name: 'HttpHeaderConditionConfig')
     HttpHeaderConditionName = Shapes::StringShape.new(name: 'HttpHeaderConditionName')
     HttpRequestMethodConditionConfig = Shapes::StructureShape.new(name: 'HttpRequestMethodConditionConfig')
-    HttpRequestMethodEnum = Shapes::StringShape.new(name: 'HttpRequestMethodEnum')
-    HttpRequestMethodList = Shapes::ListShape.new(name: 'HttpRequestMethodList')
     IncompatibleProtocolsException = Shapes::StructureShape.new(name: 'IncompatibleProtocolsException')
-    InsufficientCapacityException = Shapes::StructureShape.new(name: 'InsufficientCapacityException')
     InvalidConfigurationRequestException = Shapes::StructureShape.new(name: 'InvalidConfigurationRequestException')
     InvalidLoadBalancerActionException = Shapes::StructureShape.new(name: 'InvalidLoadBalancerActionException')
     InvalidSchemeException = Shapes::StructureShape.new(name: 'InvalidSchemeException')
@@ -139,8 +133,6 @@ module Aws::ElasticLoadBalancingV2
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     IsDefault = Shapes::BooleanShape.new(name: 'IsDefault')
-    LBCapacityUnits = Shapes::IntegerShape.new(name: 'LBCapacityUnits')
-    LastModifiedTime = Shapes::TimestampShape.new(name: 'LastModifiedTime')
     Limit = Shapes::StructureShape.new(name: 'Limit')
     Limits = Shapes::ListShape.new(name: 'Limits')
     ListOfString = Shapes::ListShape.new(name: 'ListOfString')
@@ -169,14 +161,10 @@ module Aws::ElasticLoadBalancingV2
     Marker = Shapes::StringShape.new(name: 'Marker')
     Matcher = Shapes::StructureShape.new(name: 'Matcher')
     Max = Shapes::StringShape.new(name: 'Max')
-    MinimumLBCapacityUnitsDecreaseThrottlingException = Shapes::StructureShape.new(name: 'MinimumLBCapacityUnitsDecreaseThrottlingException')
-    MinimumLBCapacityUnitsLimitExceededException = Shapes::StructureShape.new(name: 'MinimumLBCapacityUnitsLimitExceededException')
     ModifyListenerInput = Shapes::StructureShape.new(name: 'ModifyListenerInput')
     ModifyListenerOutput = Shapes::StructureShape.new(name: 'ModifyListenerOutput')
     ModifyLoadBalancerAttributesInput = Shapes::StructureShape.new(name: 'ModifyLoadBalancerAttributesInput')
     ModifyLoadBalancerAttributesOutput = Shapes::StructureShape.new(name: 'ModifyLoadBalancerAttributesOutput')
-    ModifyProvisionedCapacityInput = Shapes::StructureShape.new(name: 'ModifyProvisionedCapacityInput')
-    ModifyProvisionedCapacityOutput = Shapes::StructureShape.new(name: 'ModifyProvisionedCapacityOutput')
     ModifyRuleInput = Shapes::StructureShape.new(name: 'ModifyRuleInput')
     ModifyRuleOutput = Shapes::StructureShape.new(name: 'ModifyRuleOutput')
     ModifyTargetGroupAttributesInput = Shapes::StructureShape.new(name: 'ModifyTargetGroupAttributesInput')
@@ -191,9 +179,9 @@ module Aws::ElasticLoadBalancingV2
     Port = Shapes::IntegerShape.new(name: 'Port')
     PriorityInUseException = Shapes::StructureShape.new(name: 'PriorityInUseException')
     ProtocolEnum = Shapes::StringShape.new(name: 'ProtocolEnum')
-    ProvisionedCapacity = Shapes::StructureShape.new(name: 'ProvisionedCapacity')
-    ProvisionedCapacityStatus = Shapes::StringShape.new(name: 'ProvisionedCapacityStatus')
     QueryStringConditionConfig = Shapes::StructureShape.new(name: 'QueryStringConditionConfig')
+    QueryStringKeyValuePair = Shapes::StructureShape.new(name: 'QueryStringKeyValuePair')
+    QueryStringKeyValuePairList = Shapes::ListShape.new(name: 'QueryStringKeyValuePairList')
     RedirectActionConfig = Shapes::StructureShape.new(name: 'RedirectActionConfig')
     RedirectActionHost = Shapes::StringShape.new(name: 'RedirectActionHost')
     RedirectActionPath = Shapes::StringShape.new(name: 'RedirectActionPath')
@@ -231,6 +219,7 @@ module Aws::ElasticLoadBalancingV2
     SetSecurityGroupsOutput = Shapes::StructureShape.new(name: 'SetSecurityGroupsOutput')
     SetSubnetsInput = Shapes::StructureShape.new(name: 'SetSubnetsInput')
     SetSubnetsOutput = Shapes::StructureShape.new(name: 'SetSubnetsOutput')
+    SourceIpConditionConfig = Shapes::StructureShape.new(name: 'SourceIpConditionConfig')
     SslPolicies = Shapes::ListShape.new(name: 'SslPolicies')
     SslPolicy = Shapes::StructureShape.new(name: 'SslPolicy')
     SslPolicyName = Shapes::StringShape.new(name: 'SslPolicyName')
@@ -238,7 +227,6 @@ module Aws::ElasticLoadBalancingV2
     SslProtocol = Shapes::StringShape.new(name: 'SslProtocol')
     SslProtocols = Shapes::ListShape.new(name: 'SslProtocols')
     StateReason = Shapes::StringShape.new(name: 'StateReason')
-    StaticIp = Shapes::BooleanShape.new(name: 'StaticIp')
     String = Shapes::StringShape.new(name: 'String')
     StringValue = Shapes::StringShape.new(name: 'StringValue')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -283,7 +271,6 @@ module Aws::ElasticLoadBalancingV2
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TooManyTargetGroupsException = Shapes::StructureShape.new(name: 'TooManyTargetGroupsException')
     TooManyTargetsException = Shapes::StructureShape.new(name: 'TooManyTargetsException')
-    UnsupportedCertificateException = Shapes::StructureShape.new(name: 'UnsupportedCertificateException')
     UnsupportedProtocolException = Shapes::StructureShape.new(name: 'UnsupportedProtocolException')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     ZoneName = Shapes::StringShape.new(name: 'ZoneName')
@@ -345,7 +332,6 @@ module Aws::ElasticLoadBalancingV2
     AvailabilityZone.add_member(:zone_name, Shapes::ShapeRef.new(shape: ZoneName, location_name: "ZoneName"))
     AvailabilityZone.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
     AvailabilityZone.add_member(:load_balancer_addresses, Shapes::ShapeRef.new(shape: LoadBalancerAddresses, location_name: "LoadBalancerAddresses"))
-    AvailabilityZone.add_member(:static_ip, Shapes::ShapeRef.new(shape: StaticIp, location_name: "StaticIp"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
@@ -483,12 +469,6 @@ module Aws::ElasticLoadBalancingV2
     DescribeLoadBalancersOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
     DescribeLoadBalancersOutput.struct_class = Types::DescribeLoadBalancersOutput
 
-    DescribeProvisionedCapacityInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
-    DescribeProvisionedCapacityInput.struct_class = Types::DescribeProvisionedCapacityInput
-
-    DescribeProvisionedCapacityOutput.add_member(:provisioned_capacity, Shapes::ShapeRef.new(shape: ProvisionedCapacity, location_name: "ProvisionedCapacity"))
-    DescribeProvisionedCapacityOutput.struct_class = Types::DescribeProvisionedCapacityOutput
-
     DescribeRulesInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, location_name: "ListenerArn"))
     DescribeRulesInput.add_member(:rule_arns, Shapes::ShapeRef.new(shape: RuleArns, location_name: "RuleArns"))
     DescribeRulesInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
@@ -550,10 +530,8 @@ module Aws::ElasticLoadBalancingV2
     HttpHeaderConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
     HttpHeaderConditionConfig.struct_class = Types::HttpHeaderConditionConfig
 
-    HttpRequestMethodConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: HttpRequestMethodList, location_name: "Values"))
+    HttpRequestMethodConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
     HttpRequestMethodConditionConfig.struct_class = Types::HttpRequestMethodConditionConfig
-
-    HttpRequestMethodList.member = Shapes::ShapeRef.new(shape: HttpRequestMethodEnum)
 
     Limit.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     Limit.add_member(:max, Shapes::ShapeRef.new(shape: Max, location_name: "Max"))
@@ -633,13 +611,6 @@ module Aws::ElasticLoadBalancingV2
     ModifyLoadBalancerAttributesOutput.add_member(:attributes, Shapes::ShapeRef.new(shape: LoadBalancerAttributes, location_name: "Attributes"))
     ModifyLoadBalancerAttributesOutput.struct_class = Types::ModifyLoadBalancerAttributesOutput
 
-    ModifyProvisionedCapacityInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
-    ModifyProvisionedCapacityInput.add_member(:minimum_lb_capacity_units, Shapes::ShapeRef.new(shape: LBCapacityUnits, required: true, location_name: "MinimumLBCapacityUnits"))
-    ModifyProvisionedCapacityInput.struct_class = Types::ModifyProvisionedCapacityInput
-
-    ModifyProvisionedCapacityOutput.add_member(:provisioned_capacity, Shapes::ShapeRef.new(shape: ProvisionedCapacity, location_name: "ProvisionedCapacity"))
-    ModifyProvisionedCapacityOutput.struct_class = Types::ModifyProvisionedCapacityOutput
-
     ModifyRuleInput.add_member(:rule_arn, Shapes::ShapeRef.new(shape: RuleArn, required: true, location_name: "RuleArn"))
     ModifyRuleInput.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleConditionList, location_name: "Conditions"))
     ModifyRuleInput.add_member(:actions, Shapes::ShapeRef.new(shape: Actions, location_name: "Actions"))
@@ -673,14 +644,14 @@ module Aws::ElasticLoadBalancingV2
     PathPatternConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
     PathPatternConditionConfig.struct_class = Types::PathPatternConditionConfig
 
-    ProvisionedCapacity.add_member(:minimum_lb_capacity_units, Shapes::ShapeRef.new(shape: LBCapacityUnits, location_name: "MinimumLBCapacityUnits"))
-    ProvisionedCapacity.add_member(:status, Shapes::ShapeRef.new(shape: ProvisionedCapacityStatus, location_name: "Status"))
-    ProvisionedCapacity.add_member(:decreases_remaining, Shapes::ShapeRef.new(shape: DecreasesRemaining, location_name: "DecreasesRemaining"))
-    ProvisionedCapacity.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
-    ProvisionedCapacity.struct_class = Types::ProvisionedCapacity
-
-    QueryStringConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    QueryStringConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: QueryStringKeyValuePairList, location_name: "Values"))
     QueryStringConditionConfig.struct_class = Types::QueryStringConditionConfig
+
+    QueryStringKeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: StringValue, location_name: "Key"))
+    QueryStringKeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: StringValue, location_name: "Value"))
+    QueryStringKeyValuePair.struct_class = Types::QueryStringKeyValuePair
+
+    QueryStringKeyValuePairList.member = Shapes::ShapeRef.new(shape: QueryStringKeyValuePair)
 
     RedirectActionConfig.add_member(:protocol, Shapes::ShapeRef.new(shape: RedirectActionProtocol, location_name: "Protocol"))
     RedirectActionConfig.add_member(:port, Shapes::ShapeRef.new(shape: RedirectActionPort, location_name: "Port"))
@@ -726,6 +697,7 @@ module Aws::ElasticLoadBalancingV2
     RuleCondition.add_member(:http_header_config, Shapes::ShapeRef.new(shape: HttpHeaderConditionConfig, location_name: "HttpHeaderConfig"))
     RuleCondition.add_member(:query_string_config, Shapes::ShapeRef.new(shape: QueryStringConditionConfig, location_name: "QueryStringConfig"))
     RuleCondition.add_member(:http_request_method_config, Shapes::ShapeRef.new(shape: HttpRequestMethodConditionConfig, location_name: "HttpRequestMethodConfig"))
+    RuleCondition.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConditionConfig, location_name: "SourceIpConfig"))
     RuleCondition.struct_class = Types::RuleCondition
 
     RuleConditionList.member = Shapes::ShapeRef.new(shape: RuleCondition)
@@ -768,6 +740,9 @@ module Aws::ElasticLoadBalancingV2
     SetSubnetsOutput.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     SetSubnetsOutput.struct_class = Types::SetSubnetsOutput
 
+    SourceIpConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    SourceIpConditionConfig.struct_class = Types::SourceIpConditionConfig
+
     SslPolicies.member = Shapes::ShapeRef.new(shape: SslPolicy)
 
     SslPolicy.add_member(:ssl_protocols, Shapes::ShapeRef.new(shape: SslProtocols, location_name: "SslProtocols"))
@@ -781,7 +756,6 @@ module Aws::ElasticLoadBalancingV2
 
     SubnetMapping.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
     SubnetMapping.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
-    SubnetMapping.add_member(:static_ip, Shapes::ShapeRef.new(shape: StaticIp, location_name: "StaticIp"))
     SubnetMapping.struct_class = Types::SubnetMapping
 
     SubnetMappings.member = Shapes::ShapeRef.new(shape: SubnetMapping)
@@ -878,8 +852,6 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCertificatesException)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCertificateException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
       end)
 
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -913,7 +885,6 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCertificateException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
       end)
@@ -1076,15 +1047,6 @@ module Aws::ElasticLoadBalancingV2
         )
       end)
 
-      api.add_operation(:describe_provisioned_capacity, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DescribeProvisionedCapacity"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DescribeProvisionedCapacityInput)
-        o.output = Shapes::ShapeRef.new(shape: DescribeProvisionedCapacityOutput)
-        o.errors << Shapes::ShapeRef.new(shape: LoadBalancerNotFoundException)
-      end)
-
       api.add_operation(:describe_rules, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeRules"
         o.http_method = "POST"
@@ -1171,7 +1133,6 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCertificateException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
       end)
@@ -1184,19 +1145,6 @@ module Aws::ElasticLoadBalancingV2
         o.output = Shapes::ShapeRef.new(shape: ModifyLoadBalancerAttributesOutput)
         o.errors << Shapes::ShapeRef.new(shape: LoadBalancerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
-      end)
-
-      api.add_operation(:modify_provisioned_capacity, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ModifyProvisionedCapacity"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ModifyProvisionedCapacityInput)
-        o.output = Shapes::ShapeRef.new(shape: ModifyProvisionedCapacityOutput)
-        o.errors << Shapes::ShapeRef.new(shape: LoadBalancerNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: MinimumLBCapacityUnitsDecreaseThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: MinimumLBCapacityUnitsLimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
       end)
 
       api.add_operation(:modify_rule, Seahorse::Model::Operation.new.tap do |o|

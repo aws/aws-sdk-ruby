@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::Comprehend
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::Comprehend
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::Comprehend
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -221,7 +270,7 @@ module Aws::Comprehend
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
     #
     # @option params [required, Array<String>] :text_list
     #   A list containing the text of the input documents. The list can
@@ -271,8 +320,10 @@ module Aws::Comprehend
     #   than 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -318,8 +369,10 @@ module Aws::Comprehend
     #   that 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectKeyPhrasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -366,8 +419,10 @@ module Aws::Comprehend
     #   that 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectSentimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -414,8 +469,10 @@ module Aws::Comprehend
     #   that 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectSyntaxResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -458,7 +515,8 @@ module Aws::Comprehend
     # documents. To create a classifier you provide a set of training
     # documents that labeled with the categories that you want to use. After
     # the classifier is trained you can use it to categorize a set of
-    # labeled documents into the categories.
+    # labeled documents into the categories. For more information, see
+    # how-document-classification.
     #
     # @option params [required, String] :document_classifier_name
     #   The name of the document classifier.
@@ -468,8 +526,18 @@ module Aws::Comprehend
     #   (IAM) role that grants Amazon Comprehend read access to your input
     #   data.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the document classifier being created. A
+    #   tag is a key-value pair that adds as a metadata to a resource used by
+    #   Amazon Comprehend. For example, a tag with "Sales" as the key might
+    #   be added to a resource to indicate its use by the sales department.
+    #
     # @option params [required, Types::DocumentClassifierInputDataConfig] :input_data_config
     #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [Types::DocumentClassifierOutputDataConfig] :output_data_config
+    #   Enables the addition of output results configuration parameters for
+    #   custom classifier jobs.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -479,8 +547,30 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
+    #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your custom
+    #   classifier. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @return [Types::CreateDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -491,11 +581,26 @@ module Aws::Comprehend
     #   resp = client.create_document_classifier({
     #     document_classifier_name: "ComprehendArnName", # required
     #     data_access_role_arn: "IamRoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #     },
+    #     output_data_config: {
+    #       s3_uri: "S3Uri",
+    #       kms_key_id: "KmsKeyId",
+    #     },
     #     client_request_token: "ClientRequestTokenString",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -526,6 +631,12 @@ module Aws::Comprehend
     #   (IAM) role that grants Amazon Comprehend read access to your input
     #   data.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the entity recognizer being created. A tag
+    #   is a key-value pair that adds as a metadata to a resource used by
+    #   Amazon Comprehend. For example, a tag with "Sales" as the key might
+    #   be added to a resource to indicate its use by the sales department.
+    #
     # @option params [required, Types::EntityRecognizerInputDataConfig] :input_data_config
     #   Specifies the format and location of the input data. The S3 bucket
     #   containing the input data must be located in the same region as the
@@ -542,6 +653,26 @@ module Aws::Comprehend
     #   The language of the input documents. All documents must be in the same
     #   language. Only English ("en") is currently supported.
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your custom entity
+    #   recognizer. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::CreateEntityRecognizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEntityRecognizerResponse#entity_recognizer_arn #entity_recognizer_arn} => String
@@ -551,6 +682,12 @@ module Aws::Comprehend
     #   resp = client.create_entity_recognizer({
     #     recognizer_name: "ComprehendArnName", # required
     #     data_access_role_arn: "IamRoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     input_data_config: { # required
     #       entity_types: [ # required
     #         {
@@ -569,6 +706,11 @@ module Aws::Comprehend
     #     },
     #     client_request_token: "ClientRequestTokenString",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -676,7 +818,13 @@ module Aws::Comprehend
     #   resp.document_classification_job_properties.input_data_config.s3_uri #=> String
     #   resp.document_classification_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.document_classification_job_properties.output_data_config.s3_uri #=> String
+    #   resp.document_classification_job_properties.output_data_config.kms_key_id #=> String
     #   resp.document_classification_job_properties.data_access_role_arn #=> String
+    #   resp.document_classification_job_properties.volume_kms_key_id #=> String
+    #   resp.document_classification_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.document_classification_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.document_classification_job_properties.vpc_config.subnets #=> Array
+    #   resp.document_classification_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassificationJob AWS API Documentation
     #
@@ -707,13 +855,15 @@ module Aws::Comprehend
     #
     #   resp.document_classifier_properties.document_classifier_arn #=> String
     #   resp.document_classifier_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
-    #   resp.document_classifier_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.document_classifier_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.document_classifier_properties.message #=> String
     #   resp.document_classifier_properties.submit_time #=> Time
     #   resp.document_classifier_properties.end_time #=> Time
     #   resp.document_classifier_properties.training_start_time #=> Time
     #   resp.document_classifier_properties.training_end_time #=> Time
     #   resp.document_classifier_properties.input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties.output_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties.output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties.classifier_metadata.number_of_labels #=> Integer
     #   resp.document_classifier_properties.classifier_metadata.number_of_trained_documents #=> Integer
     #   resp.document_classifier_properties.classifier_metadata.number_of_test_documents #=> Integer
@@ -722,6 +872,11 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.recall #=> Float
     #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.f1_score #=> Float
     #   resp.document_classifier_properties.data_access_role_arn #=> String
+    #   resp.document_classifier_properties.volume_kms_key_id #=> String
+    #   resp.document_classifier_properties.vpc_config.security_group_ids #=> Array
+    #   resp.document_classifier_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.document_classifier_properties.vpc_config.subnets #=> Array
+    #   resp.document_classifier_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier AWS API Documentation
     #
@@ -760,7 +915,13 @@ module Aws::Comprehend
     #   resp.dominant_language_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.dominant_language_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.dominant_language_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.dominant_language_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.dominant_language_detection_job_properties.data_access_role_arn #=> String
+    #   resp.dominant_language_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.dominant_language_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.dominant_language_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.dominant_language_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.dominant_language_detection_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDominantLanguageDetectionJob AWS API Documentation
     #
@@ -800,8 +961,14 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.entities_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.entities_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.entities_detection_job_properties.data_access_role_arn #=> String
+    #   resp.entities_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.entities_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.entities_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.entities_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.entities_detection_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntitiesDetectionJob AWS API Documentation
     #
@@ -833,7 +1000,7 @@ module Aws::Comprehend
     #
     #   resp.entity_recognizer_properties.entity_recognizer_arn #=> String
     #   resp.entity_recognizer_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
-    #   resp.entity_recognizer_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.entity_recognizer_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.entity_recognizer_properties.message #=> String
     #   resp.entity_recognizer_properties.submit_time #=> Time
     #   resp.entity_recognizer_properties.end_time #=> Time
@@ -851,7 +1018,16 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.recognizer_metadata.evaluation_metrics.f1_score #=> Float
     #   resp.entity_recognizer_properties.recognizer_metadata.entity_types #=> Array
     #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].type #=> String
+    #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].evaluation_metrics.precision #=> Float
+    #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].evaluation_metrics.recall #=> Float
+    #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].evaluation_metrics.f1_score #=> Float
+    #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].number_of_train_mentions #=> Integer
     #   resp.entity_recognizer_properties.data_access_role_arn #=> String
+    #   resp.entity_recognizer_properties.volume_kms_key_id #=> String
+    #   resp.entity_recognizer_properties.vpc_config.security_group_ids #=> Array
+    #   resp.entity_recognizer_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.entity_recognizer_properties.vpc_config.subnets #=> Array
+    #   resp.entity_recognizer_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizer AWS API Documentation
     #
@@ -890,8 +1066,14 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.key_phrases_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.key_phrases_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.key_phrases_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.key_phrases_detection_job_properties.data_access_role_arn #=> String
+    #   resp.key_phrases_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.key_phrases_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.key_phrases_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.key_phrases_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.key_phrases_detection_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeKeyPhrasesDetectionJob AWS API Documentation
     #
@@ -930,8 +1112,14 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.sentiment_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.sentiment_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.sentiment_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.sentiment_detection_job_properties.data_access_role_arn #=> String
+    #   resp.sentiment_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.sentiment_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.sentiment_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.sentiment_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.sentiment_detection_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeSentimentDetectionJob AWS API Documentation
     #
@@ -969,7 +1157,14 @@ module Aws::Comprehend
     #   resp.topics_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.topics_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.topics_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.topics_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.topics_detection_job_properties.number_of_topics #=> Integer
+    #   resp.topics_detection_job_properties.data_access_role_arn #=> String
+    #   resp.topics_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.topics_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.topics_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.topics_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.topics_detection_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeTopicsDetectionJob AWS API Documentation
     #
@@ -986,7 +1181,7 @@ module Aws::Comprehend
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
     #
     # @option params [required, String] :text
     #   A UTF-8 text string. Each string should contain at least 20 characters
@@ -1025,8 +1220,10 @@ module Aws::Comprehend
     #   of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::DetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1064,8 +1261,10 @@ module Aws::Comprehend
     #   of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::DetectKeyPhrasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1103,8 +1302,10 @@ module Aws::Comprehend
     #   of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::DetectSentimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1143,8 +1344,10 @@ module Aws::Comprehend
     #   encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language code of the input documents. You can specify English
-    #   ("en") or Spanish ("es").
+    #   The language code of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt").
     #
     # @return [Types::DetectSyntaxResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1222,7 +1425,13 @@ module Aws::Comprehend
     #   resp.document_classification_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.document_classification_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.document_classification_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.document_classification_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.document_classification_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.document_classification_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.document_classification_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.document_classification_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.document_classification_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.document_classification_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassificationJobs AWS API Documentation
@@ -1257,7 +1466,7 @@ module Aws::Comprehend
     #
     #   resp = client.list_document_classifiers({
     #     filter: {
-    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
     #     },
@@ -1270,13 +1479,15 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list #=> Array
     #   resp.document_classifier_properties_list[0].document_classifier_arn #=> String
     #   resp.document_classifier_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
-    #   resp.document_classifier_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.document_classifier_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.document_classifier_properties_list[0].message #=> String
     #   resp.document_classifier_properties_list[0].submit_time #=> Time
     #   resp.document_classifier_properties_list[0].end_time #=> Time
     #   resp.document_classifier_properties_list[0].training_start_time #=> Time
     #   resp.document_classifier_properties_list[0].training_end_time #=> Time
     #   resp.document_classifier_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_labels #=> Integer
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_trained_documents #=> Integer
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_test_documents #=> Integer
@@ -1285,6 +1496,11 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.recall #=> Float
     #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.f1_score #=> Float
     #   resp.document_classifier_properties_list[0].data_access_role_arn #=> String
+    #   resp.document_classifier_properties_list[0].volume_kms_key_id #=> String
+    #   resp.document_classifier_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.document_classifier_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.document_classifier_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.document_classifier_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers AWS API Documentation
@@ -1341,7 +1557,13 @@ module Aws::Comprehend
     #   resp.dominant_language_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.dominant_language_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.dominant_language_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.dominant_language_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.dominant_language_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.dominant_language_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDominantLanguageDetectionJobs AWS API Documentation
@@ -1398,8 +1620,14 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.entities_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.entities_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.entities_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.entities_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.entities_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.entities_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.entities_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntitiesDetectionJobs AWS API Documentation
@@ -1441,7 +1669,7 @@ module Aws::Comprehend
     #
     #   resp = client.list_entity_recognizers({
     #     filter: {
-    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
     #     },
@@ -1454,7 +1682,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list #=> Array
     #   resp.entity_recognizer_properties_list[0].entity_recognizer_arn #=> String
     #   resp.entity_recognizer_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
-    #   resp.entity_recognizer_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.entity_recognizer_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.entity_recognizer_properties_list[0].message #=> String
     #   resp.entity_recognizer_properties_list[0].submit_time #=> Time
     #   resp.entity_recognizer_properties_list[0].end_time #=> Time
@@ -1472,7 +1700,16 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.evaluation_metrics.f1_score #=> Float
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types #=> Array
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].type #=> String
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].evaluation_metrics.precision #=> Float
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].evaluation_metrics.recall #=> Float
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].evaluation_metrics.f1_score #=> Float
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].number_of_train_mentions #=> Integer
     #   resp.entity_recognizer_properties_list[0].data_access_role_arn #=> String
+    #   resp.entity_recognizer_properties_list[0].volume_kms_key_id #=> String
+    #   resp.entity_recognizer_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.entity_recognizer_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.entity_recognizer_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.entity_recognizer_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizers AWS API Documentation
@@ -1528,8 +1765,14 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.key_phrases_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.key_phrases_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.key_phrases_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.key_phrases_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.key_phrases_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListKeyPhrasesDetectionJobs AWS API Documentation
@@ -1585,8 +1828,14 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.sentiment_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.sentiment_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.sentiment_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.sentiment_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.sentiment_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.sentiment_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.sentiment_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.sentiment_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListSentimentDetectionJobs AWS API Documentation
@@ -1595,6 +1844,39 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def list_sentiment_detection_jobs(params = {}, options = {})
       req = build_request(:list_sentiment_detection_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists all tags associated with a given Amazon Comprehend resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend resource
+    #   you are querying.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#resource_arn #resource_arn} => String
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ComprehendArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1642,7 +1924,14 @@ module Aws::Comprehend
     #   resp.topics_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.topics_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.topics_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.topics_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.topics_detection_job_properties_list[0].number_of_topics #=> Integer
+    #   resp.topics_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.topics_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.topics_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.topics_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.topics_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.topics_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTopicsDetectionJobs AWS API Documentation
@@ -1682,6 +1971,26 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your document
+    #   classification job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::StartDocumentClassificationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentClassificationJobResponse#job_id #job_id} => String
@@ -1698,9 +2007,15 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1747,6 +2062,26 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your dominant
+    #   language detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::StartDominantLanguageDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDominantLanguageDetectionJobResponse#job_id #job_id} => String
@@ -1761,10 +2096,16 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1828,6 +2169,26 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your entity detection
+    #   job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::StartEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartEntitiesDetectionJobResponse#job_id #job_id} => String
@@ -1842,12 +2203,18 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     entity_recognizer_arn: "EntityRecognizerArn",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1887,8 +2254,10 @@ module Aws::Comprehend
     #   The identifier of the job.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -1896,6 +2265,26 @@ module Aws::Comprehend
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your key phrases
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @return [Types::StartKeyPhrasesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1911,11 +2300,17 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1955,8 +2350,10 @@ module Aws::Comprehend
     #   The identifier of the job.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -1964,6 +2361,26 @@ module Aws::Comprehend
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your sentiment
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @return [Types::StartSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1979,11 +2396,17 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2035,6 +2458,26 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your topic detection
+    #   job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::StartTopicsDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTopicsDetectionJobResponse#job_id #job_id} => String
@@ -2049,11 +2492,17 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     number_of_topics: 1,
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2238,6 +2687,134 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Stops a document classifier training job while in progress.
+    #
+    # If the training job state is `TRAINING`, the job is marked for
+    # termination and put into the `STOP_REQUESTED` state. If the training
+    # job completes before it can be stopped, it is put into the `TRAINED`;
+    # otherwise the training job is stopped and put into the `STOPPED` state
+    # and the service sends back an HTTP 200 response with an empty HTTP
+    # body.
+    #
+    # @option params [required, String] :document_classifier_arn
+    #   The Amazon Resource Name (ARN) that identifies the document classifier
+    #   currently being trained.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_training_document_classifier({
+    #     document_classifier_arn: "DocumentClassifierArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingDocumentClassifier AWS API Documentation
+    #
+    # @overload stop_training_document_classifier(params = {})
+    # @param [Hash] params ({})
+    def stop_training_document_classifier(params = {}, options = {})
+      req = build_request(:stop_training_document_classifier, params)
+      req.send_request(options)
+    end
+
+    # Stops an entity recognizer training job while in progress.
+    #
+    # If the training job state is `TRAINING`, the job is marked for
+    # termination and put into the `STOP_REQUESTED` state. If the training
+    # job completes before it can be stopped, it is put into the `TRAINED`;
+    # otherwise the training job is stopped and putted into the `STOPPED`
+    # state and the service sends back an HTTP 200 response with an empty
+    # HTTP body.
+    #
+    # @option params [required, String] :entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the entity recognizer
+    #   currently being trained.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_training_entity_recognizer({
+    #     entity_recognizer_arn: "EntityRecognizerArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingEntityRecognizer AWS API Documentation
+    #
+    # @overload stop_training_entity_recognizer(params = {})
+    # @param [Hash] params ({})
+    def stop_training_entity_recognizer(params = {}, options = {})
+      req = build_request(:stop_training_entity_recognizer, params)
+      req.send_request(options)
+    end
+
+    # Associates a specific tag with an Amazon Comprehend resource. A tag is
+    # a key-value pair that adds as a metadata to a resource used by Amazon
+    # Comprehend. For example, a tag with "Sales" as the key might be
+    # added to a resource to indicate its use by the sales department.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend resource
+    #   to which you want to associate the tags.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   Tags being associated with a specific Amazon Comprehend resource.
+    #   There can be a maximum of 50 tags (both existing and pending)
+    #   associated with a specific resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ComprehendArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes a specific tag associated with an Amazon Comprehend resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend resource
+    #   from which you want to remove the tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The initial part of a key-value pair that forms a tag being removed
+    #   from a given resource. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department. Keys must be unique and cannot be duplicated for a
+    #   particular resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ComprehendArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2251,7 +2828,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

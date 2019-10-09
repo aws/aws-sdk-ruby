@@ -8,6 +8,229 @@
 module Aws::CodeCommit
   module Types
 
+    # Information about errors in a BatchDescribeMergeConflicts operation.
+    #
+    # @!attribute [rw] file_path
+    #   The path to the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] exception_name
+    #   The name of the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message provided by the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchDescribeMergeConflictsError AWS API Documentation
+    #
+    class BatchDescribeMergeConflictsError < Struct.new(
+      :file_path,
+      :exception_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDescribeMergeConflictsInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         destination_commit_specifier: "CommitName", # required
+    #         source_commit_specifier: "CommitName", # required
+    #         merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE, SQUASH_MERGE, THREE_WAY_MERGE
+    #         max_merge_hunks: 1,
+    #         max_conflict_files: 1,
+    #         file_paths: ["Path"],
+    #         conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #         conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the merge conflicts you
+    #   want to review.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_option
+    #   The merge option or strategy you want to use to merge the code.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_merge_hunks
+    #   The maximum number of merge hunks to include in the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_conflict_files
+    #   The maximum number of files to include in the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_paths
+    #   The path of the target files used to describe the conflicts. If not
+    #   specified, the default is all conflict files.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether
+    #   to attempt automatically merging two versions of a file. The default
+    #   is NONE, which requires any conflicts to be resolved manually before
+    #   the merge operation will be successful.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchDescribeMergeConflictsInput AWS API Documentation
+    #
+    class BatchDescribeMergeConflictsInput < Struct.new(
+      :repository_name,
+      :destination_commit_specifier,
+      :source_commit_specifier,
+      :merge_option,
+      :max_merge_hunks,
+      :max_conflict_files,
+      :file_paths,
+      :conflict_detail_level,
+      :conflict_resolution_strategy,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conflicts
+    #   A list of conflicts for each file, including the conflict metadata
+    #   and the hunks of the differences between the files.
+    #   @return [Array<Types::Conflict>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used in a request to return the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   A list of any errors returned while describing the merge conflicts
+    #   for each file.
+    #   @return [Array<Types::BatchDescribeMergeConflictsError>]
+    #
+    # @!attribute [rw] destination_commit_id
+    #   The commit ID of the destination commit specifier that was used in
+    #   the merge evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_id
+    #   The commit ID of the source commit specifier that was used in the
+    #   merge evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_commit_id
+    #   The commit ID of the merge base.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchDescribeMergeConflictsOutput AWS API Documentation
+    #
+    class BatchDescribeMergeConflictsOutput < Struct.new(
+      :conflicts,
+      :next_token,
+      :errors,
+      :destination_commit_id,
+      :source_commit_id,
+      :base_commit_id)
+      include Aws::Structure
+    end
+
+    # Returns information about errors in a BatchGetCommits operation.
+    #
+    # @!attribute [rw] commit_id
+    #   A commit ID that either could not be found or was not in a valid
+    #   format.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   An error code that specifies whether the commit ID was not valid or
+    #   not found.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message that provides detail about why the commit ID either
+    #   was not found or was not valid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetCommitsError AWS API Documentation
+    #
+    class BatchGetCommitsError < Struct.new(
+      :commit_id,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetCommitsInput
+    #   data as a hash:
+    #
+    #       {
+    #         commit_ids: ["ObjectId"], # required
+    #         repository_name: "RepositoryName", # required
+    #       }
+    #
+    # @!attribute [rw] commit_ids
+    #   The full commit IDs of the commits to get information about.
+    #
+    #   <note markdown="1"> You must supply the full SHAs of each commit. You cannot use
+    #   shortened SHAs.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the commits.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetCommitsInput AWS API Documentation
+    #
+    class BatchGetCommitsInput < Struct.new(
+      :commit_ids,
+      :repository_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commits
+    #   An array of commit data type objects, each of which contains
+    #   information about a specified commit.
+    #   @return [Array<Types::Commit>]
+    #
+    # @!attribute [rw] errors
+    #   Returns any commit IDs for which information could not be found. For
+    #   example, if one of the commit IDs was a shortened SHA or that commit
+    #   was not found in the specified repository, the ID will return an
+    #   error object with additional information.
+    #   @return [Array<Types::BatchGetCommitsError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetCommitsOutput AWS API Documentation
+    #
+    class BatchGetCommitsOutput < Struct.new(
+      :commits,
+      :errors)
+      include Aws::Structure
+    end
+
     # Represents the input of a batch get repositories operation.
     #
     # @note When making an API call, you may pass BatchGetRepositoriesInput
@@ -318,6 +541,143 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # Information about conflicts in a merge operation.
+    #
+    # @!attribute [rw] conflict_metadata
+    #   Metadata about a conflict in a merge operation.
+    #   @return [Types::ConflictMetadata]
+    #
+    # @!attribute [rw] merge_hunks
+    #   A list of hunks that contain the differences between files or lines
+    #   causing the conflict.
+    #   @return [Array<Types::MergeHunk>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Conflict AWS API Documentation
+    #
+    class Conflict < Struct.new(
+      :conflict_metadata,
+      :merge_hunks)
+      include Aws::Structure
+    end
+
+    # Information about the metadata for a conflict in a merge operation.
+    #
+    # @!attribute [rw] file_path
+    #   The path of the file that contains conflicts.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_sizes
+    #   The file sizes of the file in the source, destination, and base of
+    #   the merge.
+    #   @return [Types::FileSizes]
+    #
+    # @!attribute [rw] file_modes
+    #   The file modes of the file in the source, destination, and base of
+    #   the merge.
+    #   @return [Types::FileModes]
+    #
+    # @!attribute [rw] object_types
+    #   Information about any object type conflicts in a merge operation.
+    #   @return [Types::ObjectTypes]
+    #
+    # @!attribute [rw] number_of_conflicts
+    #   The number of conflicts, including both hunk conflicts and metadata
+    #   conflicts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_binary_file
+    #   A boolean value (true or false) indicating whether the file is
+    #   binary or textual in the source, destination, and base of the merge.
+    #   @return [Types::IsBinaryFile]
+    #
+    # @!attribute [rw] content_conflict
+    #   A boolean value indicating whether there are conflicts in the
+    #   content of a file.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] file_mode_conflict
+    #   A boolean value indicating whether there are conflicts in the file
+    #   mode of a file.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] object_type_conflict
+    #   A boolean value (true or false) indicating whether there are
+    #   conflicts between the branches in the object type of a file, folder,
+    #   or submodule.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] merge_operations
+    #   Whether an add, modify, or delete operation caused the conflict
+    #   between the source and destination of the merge.
+    #   @return [Types::MergeOperations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ConflictMetadata AWS API Documentation
+    #
+    class ConflictMetadata < Struct.new(
+      :file_path,
+      :file_sizes,
+      :file_modes,
+      :object_types,
+      :number_of_conflicts,
+      :is_binary_file,
+      :content_conflict,
+      :file_mode_conflict,
+      :object_type_conflict,
+      :merge_operations)
+      include Aws::Structure
+    end
+
+    # A list of inputs to use when resolving conflicts during a merge if
+    # AUTOMERGE is chosen as the conflict resolution strategy.
+    #
+    # @note When making an API call, you may pass ConflictResolution
+    #   data as a hash:
+    #
+    #       {
+    #         replace_contents: [
+    #           {
+    #             file_path: "Path", # required
+    #             replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #             content: "data",
+    #             file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #           },
+    #         ],
+    #         delete_files: [
+    #           {
+    #             file_path: "Path", # required
+    #           },
+    #         ],
+    #         set_file_modes: [
+    #           {
+    #             file_path: "Path", # required
+    #             file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] replace_contents
+    #   Files that will have content replaced as part of the merge conflict
+    #   resolution.
+    #   @return [Array<Types::ReplaceContentEntry>]
+    #
+    # @!attribute [rw] delete_files
+    #   Files that will be deleted as part of the merge conflict resolution.
+    #   @return [Array<Types::DeleteFileEntry>]
+    #
+    # @!attribute [rw] set_file_modes
+    #   File modes that will be set as part of the merge conflict
+    #   resolution.
+    #   @return [Array<Types::SetFileModeEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ConflictResolution AWS API Documentation
+    #
+    class ConflictResolution < Struct.new(
+      :replace_contents,
+      :delete_files,
+      :set_file_modes)
+      include Aws::Structure
+    end
+
     # Represents the input of a create branch operation.
     #
     # @note When making an API call, you may pass CreateBranchInput
@@ -348,6 +708,138 @@ module Aws::CodeCommit
       :repository_name,
       :branch_name,
       :commit_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCommitInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         branch_name: "BranchName", # required
+    #         parent_commit_id: "CommitId",
+    #         author_name: "Name",
+    #         email: "Email",
+    #         commit_message: "Message",
+    #         keep_empty_folders: false,
+    #         put_files: [
+    #           {
+    #             file_path: "Path", # required
+    #             file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #             file_content: "data",
+    #             source_file: {
+    #               file_path: "Path", # required
+    #               is_move: false,
+    #             },
+    #           },
+    #         ],
+    #         delete_files: [
+    #           {
+    #             file_path: "Path", # required
+    #           },
+    #         ],
+    #         set_file_modes: [
+    #           {
+    #             file_path: "Path", # required
+    #             file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you will create the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   The name of the branch where you will create the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_commit_id
+    #   The ID of the commit that is the parent of the commit you will
+    #   create. If this is an empty repository, this is not required.
+    #   @return [String]
+    #
+    # @!attribute [rw] author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the person who created the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   The commit message you want to include as part of creating the
+    #   commit. Commit messages are limited to 256 KB. If no message is
+    #   specified, a default message will be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is
+    #   specified as true, a .gitkeep file will be created for empty
+    #   folders. The default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] put_files
+    #   The files to add or update in this commit.
+    #   @return [Array<Types::PutFileEntry>]
+    #
+    # @!attribute [rw] delete_files
+    #   The files to delete in this commit. These files will still exist in
+    #   prior commits.
+    #   @return [Array<Types::DeleteFileEntry>]
+    #
+    # @!attribute [rw] set_file_modes
+    #   The file modes to update for files in this commit.
+    #   @return [Array<Types::SetFileModeEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateCommitInput AWS API Documentation
+    #
+    class CreateCommitInput < Struct.new(
+      :repository_name,
+      :branch_name,
+      :parent_commit_id,
+      :author_name,
+      :email,
+      :commit_message,
+      :keep_empty_folders,
+      :put_files,
+      :delete_files,
+      :set_file_modes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commit_id
+    #   The full commit ID of the commit that contains your committed file
+    #   changes.
+    #   @return [String]
+    #
+    # @!attribute [rw] tree_id
+    #   The full SHA-1 pointer of the tree information for the commit that
+    #   contains the commited file changes.
+    #   @return [String]
+    #
+    # @!attribute [rw] files_added
+    #   The files added as part of the committed file changes.
+    #   @return [Array<Types::FileMetadata>]
+    #
+    # @!attribute [rw] files_updated
+    #   The files updated as part of the commited file changes.
+    #   @return [Array<Types::FileMetadata>]
+    #
+    # @!attribute [rw] files_deleted
+    #   The files deleted as part of the committed file changes.
+    #   @return [Array<Types::FileMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateCommitOutput AWS API Documentation
+    #
+    class CreateCommitOutput < Struct.new(
+      :commit_id,
+      :tree_id,
+      :files_added,
+      :files_updated,
+      :files_deleted)
       include Aws::Structure
     end
 
@@ -429,6 +921,9 @@ module Aws::CodeCommit
     #       {
     #         repository_name: "RepositoryName", # required
     #         repository_description: "RepositoryDescription",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] repository_name
@@ -445,7 +940,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
     #   @return [String]
     #
     # @!attribute [rw] repository_description
@@ -461,11 +956,16 @@ module Aws::CodeCommit
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more tag key-value pairs to use when tagging this repository.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepositoryInput AWS API Documentation
     #
     class CreateRepositoryInput < Struct.new(
       :repository_name,
-      :repository_description)
+      :repository_description,
+      :tags)
       include Aws::Structure
     end
 
@@ -479,6 +979,138 @@ module Aws::CodeCommit
     #
     class CreateRepositoryOutput < Struct.new(
       :repository_metadata)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUnreferencedMergeCommitInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         source_commit_specifier: "CommitName", # required
+    #         destination_commit_specifier: "CommitName", # required
+    #         merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE, SQUASH_MERGE, THREE_WAY_MERGE
+    #         conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #         conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #         author_name: "Name",
+    #         email: "Email",
+    #         commit_message: "Message",
+    #         keep_empty_folders: false,
+    #         conflict_resolution: {
+    #           replace_contents: [
+    #             {
+    #               file_path: "Path", # required
+    #               replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #               content: "data",
+    #               file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #             },
+    #           ],
+    #           delete_files: [
+    #             {
+    #               file_path: "Path", # required
+    #             },
+    #           ],
+    #           set_file_modes: [
+    #             {
+    #               file_path: "Path", # required
+    #               file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you want to create the unreferenced
+    #   merge commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_option
+    #   The merge option or strategy you want to use to merge the code.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether
+    #   to attempt automatically merging two versions of a file. The default
+    #   is NONE, which requires any conflicts to be resolved manually before
+    #   the merge operation will be successful.
+    #   @return [String]
+    #
+    # @!attribute [rw] author_name
+    #   The name of the author who created the unreferenced commit. This
+    #   information will be used as both the author and committer for the
+    #   commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address for the person who created the unreferenced
+    #   commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   The commit message for the unreferenced commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is
+    #   specified as true, a .gitkeep file will be created for empty
+    #   folders. The default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] conflict_resolution
+    #   A list of inputs to use when resolving conflicts during a merge if
+    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #   @return [Types::ConflictResolution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateUnreferencedMergeCommitInput AWS API Documentation
+    #
+    class CreateUnreferencedMergeCommitInput < Struct.new(
+      :repository_name,
+      :source_commit_specifier,
+      :destination_commit_specifier,
+      :merge_option,
+      :conflict_detail_level,
+      :conflict_resolution_strategy,
+      :author_name,
+      :email,
+      :commit_message,
+      :keep_empty_folders,
+      :conflict_resolution)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commit_id
+    #   The full commit ID of the commit that contains your merge results.
+    #   @return [String]
+    #
+    # @!attribute [rw] tree_id
+    #   The full SHA-1 pointer of the tree information for the commit that
+    #   contains the merge results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateUnreferencedMergeCommitOutput AWS API Documentation
+    #
+    class CreateUnreferencedMergeCommitOutput < Struct.new(
+      :commit_id,
+      :tree_id)
       include Aws::Structure
     end
 
@@ -549,6 +1181,27 @@ module Aws::CodeCommit
     #
     class DeleteCommentContentOutput < Struct.new(
       :comment)
+      include Aws::Structure
+    end
+
+    # A file that will be deleted as part of a commit.
+    #
+    # @note When making an API call, you may pass DeleteFileEntry
+    #   data as a hash:
+    #
+    #       {
+    #         file_path: "Path", # required
+    #       }
+    #
+    # @!attribute [rw] file_path
+    #   The full path of the file that will be deleted, including the name
+    #   of the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFileEntry AWS API Documentation
+    #
+    class DeleteFileEntry < Struct.new(
+      :file_path)
       include Aws::Structure
     end
 
@@ -692,6 +1345,122 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeMergeConflictsInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         destination_commit_specifier: "CommitName", # required
+    #         source_commit_specifier: "CommitName", # required
+    #         merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE, SQUASH_MERGE, THREE_WAY_MERGE
+    #         max_merge_hunks: 1,
+    #         file_path: "Path", # required
+    #         conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #         conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you want to get information about a
+    #   merge conflict.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_option
+    #   The merge option or strategy you want to use to merge the code.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_merge_hunks
+    #   The maximum number of merge hunks to include in the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_path
+    #   The path of the target files used to describe the conflicts.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether
+    #   to attempt automatically merging two versions of a file. The default
+    #   is NONE, which requires any conflicts to be resolved manually before
+    #   the merge operation will be successful.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DescribeMergeConflictsInput AWS API Documentation
+    #
+    class DescribeMergeConflictsInput < Struct.new(
+      :repository_name,
+      :destination_commit_specifier,
+      :source_commit_specifier,
+      :merge_option,
+      :max_merge_hunks,
+      :file_path,
+      :conflict_detail_level,
+      :conflict_resolution_strategy,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conflict_metadata
+    #   Contains metadata about the conflicts found in the merge.
+    #   @return [Types::ConflictMetadata]
+    #
+    # @!attribute [rw] merge_hunks
+    #   A list of merge hunks of the differences between the files or lines.
+    #   @return [Array<Types::MergeHunk>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used in a request to return the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_id
+    #   The commit ID of the destination commit specifier that was used in
+    #   the merge evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_id
+    #   The commit ID of the source commit specifier that was used in the
+    #   merge evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_commit_id
+    #   The commit ID of the merge base.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DescribeMergeConflictsOutput AWS API Documentation
+    #
+    class DescribeMergeConflictsOutput < Struct.new(
+      :conflict_metadata,
+      :merge_hunks,
+      :next_token,
+      :destination_commit_id,
+      :source_commit_id,
+      :base_commit_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribePullRequestEventsInput
     #   data as a hash:
     #
@@ -811,6 +1580,78 @@ module Aws::CodeCommit
       :absolute_path,
       :relative_path,
       :file_mode)
+      include Aws::Structure
+    end
+
+    # A file that will be added, updated, or deleted as part of a commit.
+    #
+    # @!attribute [rw] absolute_path
+    #   The full path to the file that will be added or updated, including
+    #   the name of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] blob_id
+    #   The blob ID that contains the file information.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The extrapolated file mode permissions for the file. Valid values
+    #   include EXECUTABLE and NORMAL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileMetadata AWS API Documentation
+    #
+    class FileMetadata < Struct.new(
+      :absolute_path,
+      :blob_id,
+      :file_mode)
+      include Aws::Structure
+    end
+
+    # Information about file modes in a merge or pull request.
+    #
+    # @!attribute [rw] source
+    #   The file mode of a file in the source of a merge or pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The file mode of a file in the destination of a merge or pull
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] base
+    #   The file mode of a file in the base of a merge or pull request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileModes AWS API Documentation
+    #
+    class FileModes < Struct.new(
+      :source,
+      :destination,
+      :base)
+      include Aws::Structure
+    end
+
+    # Information about the size of files in a merge or pull request.
+    #
+    # @!attribute [rw] source
+    #   The size of a file in the source of a merge or pull request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination
+    #   The size of a file in the destination of a merge or pull request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] base
+    #   The size of a file in the base of a merge or pull request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileSizes AWS API Documentation
+    #
+    class FileSizes < Struct.new(
+      :source,
+      :destination,
+      :base)
       include Aws::Structure
     end
 
@@ -1370,6 +2211,88 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMergeCommitInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         source_commit_specifier: "CommitName", # required
+    #         destination_commit_specifier: "CommitName", # required
+    #         conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #         conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the merge commit about
+    #   which you want to get information.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether
+    #   to attempt automatically merging two versions of a file. The default
+    #   is NONE, which requires any conflicts to be resolved manually before
+    #   the merge operation will be successful.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeCommitInput AWS API Documentation
+    #
+    class GetMergeCommitInput < Struct.new(
+      :repository_name,
+      :source_commit_specifier,
+      :destination_commit_specifier,
+      :conflict_detail_level,
+      :conflict_resolution_strategy)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_commit_id
+    #   The commit ID of the source commit specifier that was used in the
+    #   merge evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_id
+    #   The commit ID of the destination commit specifier that was used in
+    #   the merge evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_commit_id
+    #   The commit ID of the merge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] merged_commit_id
+    #   The commit ID for the merge commit created when the source branch
+    #   was merged into the destination branch. If the fast-forward merge
+    #   strategy was used, no merge commit exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeCommitOutput AWS API Documentation
+    #
+    class GetMergeCommitOutput < Struct.new(
+      :source_commit_id,
+      :destination_commit_id,
+      :base_commit_id,
+      :merged_commit_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMergeConflictsInput
     #   data as a hash:
     #
@@ -1377,7 +2300,11 @@ module Aws::CodeCommit
     #         repository_name: "RepositoryName", # required
     #         destination_commit_specifier: "CommitName", # required
     #         source_commit_specifier: "CommitName", # required
-    #         merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE
+    #         merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE, SQUASH_MERGE, THREE_WAY_MERGE
+    #         conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #         max_conflict_files: 1,
+    #         conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] repository_name
@@ -1395,8 +2322,31 @@ module Aws::CodeCommit
     #   @return [String]
     #
     # @!attribute [rw] merge_option
-    #   The merge option or strategy you want to use to merge the code. The
-    #   only valid value is FAST\_FORWARD\_MERGE.
+    #   The merge option or strategy you want to use to merge the code.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_conflict_files
+    #   The maximum number of files to include in the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether
+    #   to attempt automatically merging two versions of a file. The default
+    #   is NONE, which requires any conflicts to be resolved manually before
+    #   the merge operation will be successful.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeConflictsInput AWS API Documentation
@@ -1405,12 +2355,16 @@ module Aws::CodeCommit
       :repository_name,
       :destination_commit_specifier,
       :source_commit_specifier,
-      :merge_option)
+      :merge_option,
+      :conflict_detail_level,
+      :max_conflict_files,
+      :conflict_resolution_strategy,
+      :next_token)
       include Aws::Structure
     end
 
     # @!attribute [rw] mergeable
-    #   A Boolean value that indicates whether the code is mergable by the
+    #   A Boolean value that indicates whether the code is mergeable by the
     #   specified merge option.
     #   @return [Boolean]
     #
@@ -1424,12 +2378,109 @@ module Aws::CodeCommit
     #   merge evaluation.
     #   @return [String]
     #
+    # @!attribute [rw] base_commit_id
+    #   The commit ID of the merge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_metadata_list
+    #   A list of metadata for any conflicting files. If the specified merge
+    #   strategy is FAST\_FORWARD\_MERGE, this list will always be empty.
+    #   @return [Array<Types::ConflictMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used in a request to return the
+    #   next batch of the results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeConflictsOutput AWS API Documentation
     #
     class GetMergeConflictsOutput < Struct.new(
       :mergeable,
       :destination_commit_id,
-      :source_commit_id)
+      :source_commit_id,
+      :base_commit_id,
+      :conflict_metadata_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMergeOptionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         source_commit_specifier: "CommitName", # required
+    #         destination_commit_specifier: "CommitName", # required
+    #         conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #         conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the commits about which you
+    #   want to get merge options.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether
+    #   to attempt automatically merging two versions of a file. The default
+    #   is NONE, which requires any conflicts to be resolved manually before
+    #   the merge operation will be successful.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeOptionsInput AWS API Documentation
+    #
+    class GetMergeOptionsInput < Struct.new(
+      :repository_name,
+      :source_commit_specifier,
+      :destination_commit_specifier,
+      :conflict_detail_level,
+      :conflict_resolution_strategy)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] merge_options
+    #   The merge option or strategy used to merge the code.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_commit_id
+    #   The commit ID of the source commit specifier that was used in the
+    #   merge evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_id
+    #   The commit ID of the destination commit specifier that was used in
+    #   the merge evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_commit_id
+    #   The commit ID of the merge base.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeOptionsOutput AWS API Documentation
+    #
+    class GetMergeOptionsOutput < Struct.new(
+      :merge_options,
+      :source_commit_id,
+      :destination_commit_id,
+      :base_commit_id)
       include Aws::Structure
     end
 
@@ -1531,6 +2582,33 @@ module Aws::CodeCommit
     class GetRepositoryTriggersOutput < Struct.new(
       :configuration_id,
       :triggers)
+      include Aws::Structure
+    end
+
+    # Information about whether a file is binary or textual in a merge or
+    # pull request operation.
+    #
+    # @!attribute [rw] source
+    #   The binary or non-binary status of file in the source of a merge or
+    #   pull request.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] destination
+    #   The binary or non-binary status of a file in the destination of a
+    #   merge or pull request.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] base
+    #   The binary or non-binary status of a file in the base of a merge or
+    #   pull request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/IsBinaryFile AWS API Documentation
+    #
+    class IsBinaryFile < Struct.new(
+      :source,
+      :destination,
+      :base)
       include Aws::Structure
     end
 
@@ -1699,6 +2777,50 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   get information about tags, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with the specified
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that allows the operation to batch the next
+    #   results of the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Returns information about the location of a change or comment in the
     # comparison between two commits or a pull request.
     #
@@ -1735,6 +2857,381 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass MergeBranchesByFastForwardInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         source_commit_specifier: "CommitName", # required
+    #         destination_commit_specifier: "CommitName", # required
+    #         target_branch: "BranchName",
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you want to merge two branches.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_branch
+    #   The branch where the merge will be applied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeBranchesByFastForwardInput AWS API Documentation
+    #
+    class MergeBranchesByFastForwardInput < Struct.new(
+      :repository_name,
+      :source_commit_specifier,
+      :destination_commit_specifier,
+      :target_branch)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commit_id
+    #   The commit ID of the merge in the destination or target branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] tree_id
+    #   The tree ID of the merge in the destination or target branch.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeBranchesByFastForwardOutput AWS API Documentation
+    #
+    class MergeBranchesByFastForwardOutput < Struct.new(
+      :commit_id,
+      :tree_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass MergeBranchesBySquashInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         source_commit_specifier: "CommitName", # required
+    #         destination_commit_specifier: "CommitName", # required
+    #         target_branch: "BranchName",
+    #         conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #         conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #         author_name: "Name",
+    #         email: "Email",
+    #         commit_message: "Message",
+    #         keep_empty_folders: false,
+    #         conflict_resolution: {
+    #           replace_contents: [
+    #             {
+    #               file_path: "Path", # required
+    #               replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #               content: "data",
+    #               file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #             },
+    #           ],
+    #           delete_files: [
+    #             {
+    #               file_path: "Path", # required
+    #             },
+    #           ],
+    #           set_file_modes: [
+    #             {
+    #               file_path: "Path", # required
+    #               file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you want to merge two branches.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_branch
+    #   The branch where the merge will be applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether
+    #   to attempt automatically merging two versions of a file. The default
+    #   is NONE, which requires any conflicts to be resolved manually before
+    #   the merge operation will be successful.
+    #   @return [String]
+    #
+    # @!attribute [rw] author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the person merging the branches. This
+    #   information will be used in the commit information for the merge.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   The commit message for the merge.
+    #   @return [String]
+    #
+    # @!attribute [rw] keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is
+    #   specified as true, a .gitkeep file will be created for empty
+    #   folders. The default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] conflict_resolution
+    #   A list of inputs to use when resolving conflicts during a merge if
+    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #   @return [Types::ConflictResolution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeBranchesBySquashInput AWS API Documentation
+    #
+    class MergeBranchesBySquashInput < Struct.new(
+      :repository_name,
+      :source_commit_specifier,
+      :destination_commit_specifier,
+      :target_branch,
+      :conflict_detail_level,
+      :conflict_resolution_strategy,
+      :author_name,
+      :email,
+      :commit_message,
+      :keep_empty_folders,
+      :conflict_resolution)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commit_id
+    #   The commit ID of the merge in the destination or target branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] tree_id
+    #   The tree ID of the merge in the destination or target branch.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeBranchesBySquashOutput AWS API Documentation
+    #
+    class MergeBranchesBySquashOutput < Struct.new(
+      :commit_id,
+      :tree_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass MergeBranchesByThreeWayInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         source_commit_specifier: "CommitName", # required
+    #         destination_commit_specifier: "CommitName", # required
+    #         target_branch: "BranchName",
+    #         conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #         conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #         author_name: "Name",
+    #         email: "Email",
+    #         commit_message: "Message",
+    #         keep_empty_folders: false,
+    #         conflict_resolution: {
+    #           replace_contents: [
+    #             {
+    #               file_path: "Path", # required
+    #               replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #               content: "data",
+    #               file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #             },
+    #           ],
+    #           delete_files: [
+    #             {
+    #               file_path: "Path", # required
+    #             },
+    #           ],
+    #           set_file_modes: [
+    #             {
+    #               file_path: "Path", # required
+    #               file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you want to merge two branches.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_branch
+    #   The branch where the merge will be applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether
+    #   to attempt automatically merging two versions of a file. The default
+    #   is NONE, which requires any conflicts to be resolved manually before
+    #   the merge operation will be successful.
+    #   @return [String]
+    #
+    # @!attribute [rw] author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the person merging the branches. This
+    #   information will be used in the commit information for the merge.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   The commit message to include in the commit information for the
+    #   merge.
+    #   @return [String]
+    #
+    # @!attribute [rw] keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is
+    #   specified as true, a .gitkeep file will be created for empty
+    #   folders. The default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] conflict_resolution
+    #   A list of inputs to use when resolving conflicts during a merge if
+    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #   @return [Types::ConflictResolution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeBranchesByThreeWayInput AWS API Documentation
+    #
+    class MergeBranchesByThreeWayInput < Struct.new(
+      :repository_name,
+      :source_commit_specifier,
+      :destination_commit_specifier,
+      :target_branch,
+      :conflict_detail_level,
+      :conflict_resolution_strategy,
+      :author_name,
+      :email,
+      :commit_message,
+      :keep_empty_folders,
+      :conflict_resolution)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commit_id
+    #   The commit ID of the merge in the destination or target branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] tree_id
+    #   The tree ID of the merge in the destination or target branch.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeBranchesByThreeWayOutput AWS API Documentation
+    #
+    class MergeBranchesByThreeWayOutput < Struct.new(
+      :commit_id,
+      :tree_id)
+      include Aws::Structure
+    end
+
+    # Information about merge hunks in a merge or pull request operation.
+    #
+    # @!attribute [rw] is_conflict
+    #   A Boolean value indicating whether a combination of hunks contains a
+    #   conflict. Conflicts occur when the same file or the same lines in a
+    #   file were modified in both the source and destination of a merge or
+    #   pull request. Valid values include true, false, and null. This will
+    #   be true when the hunk represents a conflict and one or more files
+    #   contains a line conflict. File mode conflicts in a merge will not
+    #   set this to be true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] source
+    #   Information about the merge hunk in the source of a merge or pull
+    #   request.
+    #   @return [Types::MergeHunkDetail]
+    #
+    # @!attribute [rw] destination
+    #   Information about the merge hunk in the destination of a merge or
+    #   pull request.
+    #   @return [Types::MergeHunkDetail]
+    #
+    # @!attribute [rw] base
+    #   Information about the merge hunk in the base of a merge or pull
+    #   request.
+    #   @return [Types::MergeHunkDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeHunk AWS API Documentation
+    #
+    class MergeHunk < Struct.new(
+      :is_conflict,
+      :source,
+      :destination,
+      :base)
+      include Aws::Structure
+    end
+
+    # Information about the details of a merge hunk that contains a conflict
+    # in a merge or pull request operation.
+    #
+    # @!attribute [rw] start_line
+    #   The start position of the hunk in the merge result.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_line
+    #   The end position of the hunk in the merge result.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hunk_content
+    #   The base-64 encoded content of the hunk merged region that might or
+    #   might not contain a conflict.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeHunkDetail AWS API Documentation
+    #
+    class MergeHunkDetail < Struct.new(
+      :start_line,
+      :end_line,
+      :hunk_content)
+      include Aws::Structure
+    end
+
     # Returns information about a merge or potential merge between a source
     # reference and a destination reference in a pull request.
     #
@@ -1746,11 +3243,41 @@ module Aws::CodeCommit
     #   The Amazon Resource Name (ARN) of the user who merged the branches.
     #   @return [String]
     #
+    # @!attribute [rw] merge_commit_id
+    #   The commit ID for the merge commit, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_option
+    #   The merge strategy used in the merge.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeMetadata AWS API Documentation
     #
     class MergeMetadata < Struct.new(
       :is_merged,
-      :merged_by)
+      :merged_by,
+      :merge_commit_id,
+      :merge_option)
+      include Aws::Structure
+    end
+
+    # Information about the file operation conflicts in a merge operation.
+    #
+    # @!attribute [rw] source
+    #   The operation on a file (add, modify, or delete) of a file in the
+    #   source of a merge or pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The operation on a file in the destination of a merge or pull
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeOperations AWS API Documentation
+    #
+    class MergeOperations < Struct.new(
+      :source,
+      :destination)
       include Aws::Structure
     end
 
@@ -1760,7 +3287,7 @@ module Aws::CodeCommit
     #       {
     #         pull_request_id: "PullRequestId", # required
     #         repository_name: "RepositoryName", # required
-    #         source_commit_id: "CommitId",
+    #         source_commit_id: "ObjectId",
     #       }
     #
     # @!attribute [rw] pull_request_id
@@ -1800,6 +3327,271 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass MergePullRequestBySquashInput
+    #   data as a hash:
+    #
+    #       {
+    #         pull_request_id: "PullRequestId", # required
+    #         repository_name: "RepositoryName", # required
+    #         source_commit_id: "ObjectId",
+    #         conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #         conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #         commit_message: "Message",
+    #         author_name: "Name",
+    #         email: "Email",
+    #         keep_empty_folders: false,
+    #         conflict_resolution: {
+    #           replace_contents: [
+    #             {
+    #               file_path: "Path", # required
+    #               replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #               content: "data",
+    #               file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #             },
+    #           ],
+    #           delete_files: [
+    #             {
+    #               file_path: "Path", # required
+    #             },
+    #           ],
+    #           set_file_modes: [
+    #             {
+    #               file_path: "Path", # required
+    #               file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where the pull request was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_id
+    #   The full commit ID of the original or updated commit in the pull
+    #   request source branch. Pass this value if you want an exception
+    #   thrown if the current commit ID of the tip of the source branch does
+    #   not match this commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether
+    #   to attempt automatically merging two versions of a file. The default
+    #   is NONE, which requires any conflicts to be resolved manually before
+    #   the merge operation will be successful.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   The commit message to include in the commit information for the
+    #   merge.
+    #   @return [String]
+    #
+    # @!attribute [rw] author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the person merging the branches. This
+    #   information will be used in the commit information for the merge.
+    #   @return [String]
+    #
+    # @!attribute [rw] keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is
+    #   specified as true, a .gitkeep file will be created for empty
+    #   folders. The default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] conflict_resolution
+    #   A list of inputs to use when resolving conflicts during a merge if
+    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #   @return [Types::ConflictResolution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestBySquashInput AWS API Documentation
+    #
+    class MergePullRequestBySquashInput < Struct.new(
+      :pull_request_id,
+      :repository_name,
+      :source_commit_id,
+      :conflict_detail_level,
+      :conflict_resolution_strategy,
+      :commit_message,
+      :author_name,
+      :email,
+      :keep_empty_folders,
+      :conflict_resolution)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pull_request
+    #   Returns information about a pull request.
+    #   @return [Types::PullRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestBySquashOutput AWS API Documentation
+    #
+    class MergePullRequestBySquashOutput < Struct.new(
+      :pull_request)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass MergePullRequestByThreeWayInput
+    #   data as a hash:
+    #
+    #       {
+    #         pull_request_id: "PullRequestId", # required
+    #         repository_name: "RepositoryName", # required
+    #         source_commit_id: "ObjectId",
+    #         conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #         conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #         commit_message: "Message",
+    #         author_name: "Name",
+    #         email: "Email",
+    #         keep_empty_folders: false,
+    #         conflict_resolution: {
+    #           replace_contents: [
+    #             {
+    #               file_path: "Path", # required
+    #               replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #               content: "data",
+    #               file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #             },
+    #           ],
+    #           delete_files: [
+    #             {
+    #               file_path: "Path", # required
+    #             },
+    #           ],
+    #           set_file_modes: [
+    #             {
+    #               file_path: "Path", # required
+    #               file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where the pull request was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_id
+    #   The full commit ID of the original or updated commit in the pull
+    #   request source branch. Pass this value if you want an exception
+    #   thrown if the current commit ID of the tip of the source branch does
+    #   not match this commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether
+    #   to attempt automatically merging two versions of a file. The default
+    #   is NONE, which requires any conflicts to be resolved manually before
+    #   the merge operation will be successful.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   The commit message to include in the commit information for the
+    #   merge.
+    #   @return [String]
+    #
+    # @!attribute [rw] author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the person merging the branches. This
+    #   information will be used in the commit information for the merge.
+    #   @return [String]
+    #
+    # @!attribute [rw] keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is
+    #   specified as true, a .gitkeep file will be created for empty
+    #   folders. The default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] conflict_resolution
+    #   A list of inputs to use when resolving conflicts during a merge if
+    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #   @return [Types::ConflictResolution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByThreeWayInput AWS API Documentation
+    #
+    class MergePullRequestByThreeWayInput < Struct.new(
+      :pull_request_id,
+      :repository_name,
+      :source_commit_id,
+      :conflict_detail_level,
+      :conflict_resolution_strategy,
+      :commit_message,
+      :author_name,
+      :email,
+      :keep_empty_folders,
+      :conflict_resolution)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pull_request
+    #   Returns information about a pull request.
+    #   @return [Types::PullRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByThreeWayOutput AWS API Documentation
+    #
+    class MergePullRequestByThreeWayOutput < Struct.new(
+      :pull_request)
+      include Aws::Structure
+    end
+
+    # Information about the type of an object in a merge operation.
+    #
+    # @!attribute [rw] source
+    #   The type of the object in the source branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The type of the object in the destination branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] base
+    #   The type of the object in the base commit of the merge.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ObjectTypes AWS API Documentation
+    #
+    class ObjectTypes < Struct.new(
+      :source,
+      :destination,
+      :base)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PostCommentForComparedCommitInput
     #   data as a hash:
     #
@@ -1824,6 +3616,11 @@ module Aws::CodeCommit
     # @!attribute [rw] before_commit_id
     #   To establish the directionality of the comparison, the full commit
     #   ID of the 'before' commit.
+    #
+    #   <note markdown="1"> This is required for commenting on any commit unless that commit is
+    #   the initial commit.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] after_commit_id
@@ -2356,6 +4153,52 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # Information about a file that will be added or updated as part of a
+    # commit.
+    #
+    # @note When making an API call, you may pass PutFileEntry
+    #   data as a hash:
+    #
+    #       {
+    #         file_path: "Path", # required
+    #         file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #         file_content: "data",
+    #         source_file: {
+    #           file_path: "Path", # required
+    #           is_move: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_path
+    #   The full path to the file in the repository, including the name of
+    #   the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The extrapolated file mode permissions for the file. Valid values
+    #   include EXECUTABLE and NORMAL.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_content
+    #   The content of the file, if a source file is not specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_file
+    #   The name and full path of the file that contains the changes you
+    #   want to make as part of the commit, if you are not providing the
+    #   file content directly.
+    #   @return [Types::SourceFileSpecifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileEntry AWS API Documentation
+    #
+    class PutFileEntry < Struct.new(
+      :file_path,
+      :file_mode,
+      :file_content,
+      :source_file)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutFileInput
     #   data as a hash:
     #
@@ -2511,6 +4354,47 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # Information about a replacement content entry in the conflict of a
+    # merge or pull request operation.
+    #
+    # @note When making an API call, you may pass ReplaceContentEntry
+    #   data as a hash:
+    #
+    #       {
+    #         file_path: "Path", # required
+    #         replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #         content: "data",
+    #         file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #       }
+    #
+    # @!attribute [rw] file_path
+    #   The path of the conflicting file.
+    #   @return [String]
+    #
+    # @!attribute [rw] replacement_type
+    #   The replacement type to use when determining how to resolve the
+    #   conflict.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The base-64 encoded content to use when the replacement type is
+    #   USE\_NEW\_CONTENT.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The file mode to apply during conflict resoltion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReplaceContentEntry AWS API Documentation
+    #
+    class ReplaceContentEntry < Struct.new(
+      :file_path,
+      :replacement_type,
+      :content,
+      :file_mode)
+      include Aws::Structure
+    end
+
     # Information about a repository.
     #
     # @!attribute [rw] account_id
@@ -2607,8 +4491,7 @@ module Aws::CodeCommit
     #
     # @!attribute [rw] destination_arn
     #   The ARN of the resource that is the target for a trigger. For
-    #   example, the ARN of a topic in Amazon Simple Notification Service
-    #   (SNS).
+    #   example, the ARN of a topic in Amazon SNS.
     #   @return [String]
     #
     # @!attribute [rw] custom_data
@@ -2620,7 +4503,7 @@ module Aws::CodeCommit
     #   The branches that will be included in the trigger configuration. If
     #   you specify an empty array, the trigger will apply to all branches.
     #
-    #   <note markdown="1"> While no content is required in the array, you must include the
+    #   <note markdown="1"> Although no content is required in the array, you must include the
     #   array itself.
     #
     #    </note>
@@ -2628,8 +4511,7 @@ module Aws::CodeCommit
     #
     # @!attribute [rw] events
     #   The repository events that will cause the trigger to run actions in
-    #   another service, such as sending a notification through Amazon
-    #   Simple Notification Service (SNS).
+    #   another service, such as sending a notification through Amazon SNS.
     #
     #   <note markdown="1"> The valid value "all" cannot be used with any other values.
     #
@@ -2662,6 +4544,59 @@ module Aws::CodeCommit
     class RepositoryTriggerExecutionFailure < Struct.new(
       :trigger,
       :failure_message)
+      include Aws::Structure
+    end
+
+    # Information about the file mode changes.
+    #
+    # @note When making an API call, you may pass SetFileModeEntry
+    #   data as a hash:
+    #
+    #       {
+    #         file_path: "Path", # required
+    #         file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #       }
+    #
+    # @!attribute [rw] file_path
+    #   The full path to the file, including the name of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The file mode for the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SetFileModeEntry AWS API Documentation
+    #
+    class SetFileModeEntry < Struct.new(
+      :file_path,
+      :file_mode)
+      include Aws::Structure
+    end
+
+    # Information about a source file that is part of changes made in a
+    # commit.
+    #
+    # @note When making an API call, you may pass SourceFileSpecifier
+    #   data as a hash:
+    #
+    #       {
+    #         file_path: "Path", # required
+    #         is_move: false,
+    #       }
+    #
+    # @!attribute [rw] file_path
+    #   The full path to the file, including the name of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_move
+    #   Whether to remove the source file from the parent commit.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SourceFileSpecifier AWS API Documentation
+    #
+    class SourceFileSpecifier < Struct.new(
+      :file_path,
+      :is_move)
       include Aws::Structure
     end
 
@@ -2719,6 +4654,33 @@ module Aws::CodeCommit
       :absolute_path,
       :relative_path,
       :file_mode)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   add or update tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair to use when tagging this repository.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -2809,6 +4771,31 @@ module Aws::CodeCommit
     class TestRepositoryTriggersOutput < Struct.new(
       :successful_executions,
       :failed_executions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   remove tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag key for each tag that you want to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 

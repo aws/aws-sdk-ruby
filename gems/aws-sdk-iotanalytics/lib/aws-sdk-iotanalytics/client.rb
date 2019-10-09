@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::IoTAnalytics
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::IoTAnalytics
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::IoTAnalytics
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -213,6 +262,28 @@ module Aws::IoTAnalytics
     # @option params [required, Array<Types::Message>] :messages
     #   The list of messages to be sent. Each message has format: '\\\{
     #   "messageId": "string", "payload": "string"\\}'.
+    #
+    #   Note that the field names of message payloads (data) that you send to
+    #   AWS IoT Analytics:
+    #
+    #   * Must contain only alphanumeric characters and undescores (\_); no
+    #     other special characters are allowed.
+    #
+    #   * Must begin with an alphabetic character or single underscore (\_).
+    #
+    #   * Cannot contain hyphens (-).
+    #
+    #   * In regular expression terms:
+    #     "^\[A-Za-z\_\](\[A-Za-z0-9\]*\|\[A-Za-z0-9\]\[A-Za-z0-9\_\]*)$".
+    #
+    #   * Cannot be greater than 255 characters.
+    #
+    #   * Are case-insensitive. (Fields named "foo" and "FOO" in the same
+    #     payload are considered duplicates.)
+    #
+    #   For example, \\\{"temp\_01": 29\\} or \\\{"\_temp\_01": 29\\} are
+    #   valid, but \\\{"temp-01": 29\\}, \\\{"01\_temp": 29\\} or
+    #   \\\{"\_\_temp\_01": 29\\} are invalid in message payloads.
     #
     # @return [Types::BatchPutMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -276,6 +347,9 @@ module Aws::IoTAnalytics
     # @option params [required, String] :channel_name
     #   The name of the channel.
     #
+    # @option params [Types::ChannelStorage] :channel_storage
+    #   Where channel data is stored.
+    #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the channel.
     #
@@ -292,6 +366,15 @@ module Aws::IoTAnalytics
     #
     #   resp = client.create_channel({
     #     channel_name: "ChannelName", # required
+    #     channel_storage: {
+    #       service_managed_s3: {
+    #       },
+    #       customer_managed_s3: {
+    #         bucket: "BucketName", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
     #     retention_period: {
     #       unlimited: false,
     #       number_of_days: 1,
@@ -338,12 +421,24 @@ module Aws::IoTAnalytics
     #   **DataSetTrigger** objects.
     #
     # @option params [Array<Types::DatasetContentDeliveryRule>] :content_delivery_rules
+    #   When data set contents are created they are delivered to destinations
+    #   specified here.
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   \[Optional\] How long, in days, message data is kept for the data set.
-    #   If not given or set to null, the latest version of the dataset content
-    #   plus the latest succeeded version (if they are different) are retained
-    #   for at most 90 days.
+    #   \[Optional\] How long, in days, versions of data set contents are kept
+    #   for the data set. If not specified or set to null, versions of data
+    #   set contents are retained for at most 90 days. The number of versions
+    #   of data set contents retained is determined by the
+    #   `versioningConfiguration` parameter. (For more information, see
+    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+    #
+    # @option params [Types::VersioningConfiguration] :versioning_configuration
+    #   \[Optional\] How many versions of data set contents are kept. If not
+    #   specified or set to null, only the latest version plus the latest
+    #   succeeded version (if they are different) are kept for the time period
+    #   specified by the "retentionPeriod" parameter. (For more information,
+    #   see
+    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the data set.
@@ -413,12 +508,25 @@ module Aws::IoTAnalytics
     #             input_name: "IotEventsInputName", # required
     #             role_arn: "RoleArn", # required
     #           },
+    #           s3_destination_configuration: {
+    #             bucket: "BucketName", # required
+    #             key: "BucketKeyExpression", # required
+    #             glue_configuration: {
+    #               table_name: "GlueTableName", # required
+    #               database_name: "GlueDatabaseName", # required
+    #             },
+    #             role_arn: "RoleArn", # required
+    #           },
     #         },
     #       },
     #     ],
     #     retention_period: {
     #       unlimited: false,
     #       number_of_days: 1,
+    #     },
+    #     versioning_configuration: {
+    #       unlimited: false,
+    #       max_versions: 1,
     #     },
     #     tags: [
     #       {
@@ -442,7 +550,9 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates the content of a data set by applying a SQL action.
+    # Creates the content of a data set by applying a "queryAction" (a SQL
+    # query) or a "containerAction" (executing a containerized
+    # application).
     #
     # @option params [required, String] :dataset_name
     #   The name of the data set.
@@ -473,6 +583,9 @@ module Aws::IoTAnalytics
     # @option params [required, String] :datastore_name
     #   The name of the data store.
     #
+    # @option params [Types::DatastoreStorage] :datastore_storage
+    #   Where data store data is stored.
+    #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data store.
     #
@@ -489,6 +602,15 @@ module Aws::IoTAnalytics
     #
     #   resp = client.create_datastore({
     #     datastore_name: "DatastoreName", # required
+    #     datastore_storage: {
+    #       service_managed_s3: {
+    #       },
+    #       customer_managed_s3: {
+    #         bucket: "BucketName", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
     #     retention_period: {
     #       unlimited: false,
     #       number_of_days: 1,
@@ -517,20 +639,26 @@ module Aws::IoTAnalytics
 
     # Creates a pipeline. A pipeline consumes messages from one or more
     # channels and allows you to process the messages before storing them in
-    # a data store.
+    # a data store. You must specify both a `channel` and a `datastore`
+    # activity and, optionally, as many as 23 additional activities in the
+    # `pipelineActivities` array.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline.
     #
     # @option params [required, Array<Types::PipelineActivity>] :pipeline_activities
-    #   A list of pipeline activities.
+    #   A list of "PipelineActivity" objects. Activities perform
+    #   transformations on your messages, such as removing, renaming or adding
+    #   message attributes; filtering messages based on attribute values;
+    #   invoking your Lambda functions on messages for advanced processing; or
+    #   performing mathematical transformations to normalize device data.
     #
-    #   The list can be 1-25 **PipelineActivity** objects. Activities perform
-    #   transformations on your messages, such as removing, renaming, or
-    #   adding message attributes; filtering messages based on attribute
-    #   values; invoking your Lambda functions on messages for advanced
-    #   processing; or performing mathematical transformations to normalize
-    #   device data.
+    #   The list can be 2-25 **PipelineActivity** objects and must contain
+    #   both a `channel` and a `datastore` activity. Each entry in the list
+    #   must contain only one activity, for example:
+    #
+    #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
+    #   ... \} \}, ... ]`
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the pipeline.
@@ -759,6 +887,9 @@ module Aws::IoTAnalytics
     # @example Response structure
     #
     #   resp.channel.name #=> String
+    #   resp.channel.storage.customer_managed_s3.bucket #=> String
+    #   resp.channel.storage.customer_managed_s3.key_prefix #=> String
+    #   resp.channel.storage.customer_managed_s3.role_arn #=> String
     #   resp.channel.arn #=> String
     #   resp.channel.status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.channel.retention_period.unlimited #=> Boolean
@@ -817,11 +948,18 @@ module Aws::IoTAnalytics
     #   resp.dataset.content_delivery_rules[0].entry_name #=> String
     #   resp.dataset.content_delivery_rules[0].destination.iot_events_destination_configuration.input_name #=> String
     #   resp.dataset.content_delivery_rules[0].destination.iot_events_destination_configuration.role_arn #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.s3_destination_configuration.bucket #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.s3_destination_configuration.key #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.s3_destination_configuration.glue_configuration.table_name #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.s3_destination_configuration.glue_configuration.database_name #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.s3_destination_configuration.role_arn #=> String
     #   resp.dataset.status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.dataset.creation_time #=> Time
     #   resp.dataset.last_update_time #=> Time
     #   resp.dataset.retention_period.unlimited #=> Boolean
     #   resp.dataset.retention_period.number_of_days #=> Integer
+    #   resp.dataset.versioning_configuration.unlimited #=> Boolean
+    #   resp.dataset.versioning_configuration.max_versions #=> Integer
     #
     # @overload describe_dataset(params = {})
     # @param [Hash] params ({})
@@ -854,6 +992,9 @@ module Aws::IoTAnalytics
     # @example Response structure
     #
     #   resp.datastore.name #=> String
+    #   resp.datastore.storage.customer_managed_s3.bucket #=> String
+    #   resp.datastore.storage.customer_managed_s3.key_prefix #=> String
+    #   resp.datastore.storage.customer_managed_s3.role_arn #=> String
     #   resp.datastore.arn #=> String
     #   resp.datastore.status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.datastore.retention_period.unlimited #=> Boolean
@@ -1028,6 +1169,9 @@ module Aws::IoTAnalytics
     #
     #   resp.channel_summaries #=> Array
     #   resp.channel_summaries[0].channel_name #=> String
+    #   resp.channel_summaries[0].channel_storage.customer_managed_s3.bucket #=> String
+    #   resp.channel_summaries[0].channel_storage.customer_managed_s3.key_prefix #=> String
+    #   resp.channel_summaries[0].channel_storage.customer_managed_s3.role_arn #=> String
     #   resp.channel_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.channel_summaries[0].creation_time #=> Time
     #   resp.channel_summaries[0].last_update_time #=> Time
@@ -1051,6 +1195,16 @@ module Aws::IoTAnalytics
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this request.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :scheduled_on_or_after
+    #   A filter to limit results to those data set contents whose creation is
+    #   scheduled on or after the given time. See the field
+    #   `triggers.schedule` in the CreateDataset request. (timestamp)
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :scheduled_before
+    #   A filter to limit results to those data set contents whose creation is
+    #   scheduled before the given time. See the field `triggers.schedule` in
+    #   the CreateDataset request. (timestamp)
+    #
     # @return [Types::ListDatasetContentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDatasetContentsResponse#dataset_content_summaries #dataset_content_summaries} => Array&lt;Types::DatasetContentSummary&gt;
@@ -1062,6 +1216,8 @@ module Aws::IoTAnalytics
     #     dataset_name: "DatasetName", # required
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     scheduled_on_or_after: Time.now,
+    #     scheduled_before: Time.now,
     #   })
     #
     # @example Response structure
@@ -1151,6 +1307,9 @@ module Aws::IoTAnalytics
     #
     #   resp.datastore_summaries #=> Array
     #   resp.datastore_summaries[0].datastore_name #=> String
+    #   resp.datastore_summaries[0].datastore_storage.customer_managed_s3.bucket #=> String
+    #   resp.datastore_summaries[0].datastore_storage.customer_managed_s3.key_prefix #=> String
+    #   resp.datastore_summaries[0].datastore_storage.customer_managed_s3.role_arn #=> String
     #   resp.datastore_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.datastore_summaries[0].creation_time #=> Time
     #   resp.datastore_summaries[0].last_update_time #=> Time
@@ -1438,7 +1597,7 @@ module Aws::IoTAnalytics
     # which can be used to manage a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource whose tags will be modified.
+    #   The ARN of the resource whose tags you want to modify.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The new or modified tags for the resource.
@@ -1467,10 +1626,10 @@ module Aws::IoTAnalytics
     # Removes the given tags (metadata) from the resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource whose tags will be removed.
+    #   The ARN of the resource whose tags you want to remove.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The keys of those tags which will be removed.
+    #   The keys of those tags which you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1493,6 +1652,9 @@ module Aws::IoTAnalytics
     # @option params [required, String] :channel_name
     #   The name of the channel to be updated.
     #
+    # @option params [Types::ChannelStorage] :channel_storage
+    #   Where channel data is stored.
+    #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the channel.
     #
@@ -1502,6 +1664,15 @@ module Aws::IoTAnalytics
     #
     #   resp = client.update_channel({
     #     channel_name: "ChannelName", # required
+    #     channel_storage: {
+    #       service_managed_s3: {
+    #       },
+    #       customer_managed_s3: {
+    #         bucket: "BucketName", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
     #     retention_period: {
     #       unlimited: false,
     #       number_of_days: 1,
@@ -1528,9 +1699,19 @@ module Aws::IoTAnalytics
     #   contain up to five **DataSetTrigger** objects.
     #
     # @option params [Array<Types::DatasetContentDeliveryRule>] :content_delivery_rules
+    #   When data set contents are created they are delivered to destinations
+    #   specified here.
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   How long, in days, message data is kept for the data set.
+    #   How long, in days, data set contents are kept for the data set.
+    #
+    # @option params [Types::VersioningConfiguration] :versioning_configuration
+    #   \[Optional\] How many versions of data set contents are kept. If not
+    #   specified or set to null, only the latest version plus the latest
+    #   succeeded version (if they are different) are kept for the time period
+    #   specified by the "retentionPeriod" parameter. (For more information,
+    #   see
+    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1593,12 +1774,25 @@ module Aws::IoTAnalytics
     #             input_name: "IotEventsInputName", # required
     #             role_arn: "RoleArn", # required
     #           },
+    #           s3_destination_configuration: {
+    #             bucket: "BucketName", # required
+    #             key: "BucketKeyExpression", # required
+    #             glue_configuration: {
+    #               table_name: "GlueTableName", # required
+    #               database_name: "GlueDatabaseName", # required
+    #             },
+    #             role_arn: "RoleArn", # required
+    #           },
     #         },
     #       },
     #     ],
     #     retention_period: {
     #       unlimited: false,
     #       number_of_days: 1,
+    #     },
+    #     versioning_configuration: {
+    #       unlimited: false,
+    #       max_versions: 1,
     #     },
     #   })
     #
@@ -1617,6 +1811,9 @@ module Aws::IoTAnalytics
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data store.
     #
+    # @option params [Types::DatastoreStorage] :datastore_storage
+    #   Where data store data is stored.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1627,6 +1824,15 @@ module Aws::IoTAnalytics
     #       unlimited: false,
     #       number_of_days: 1,
     #     },
+    #     datastore_storage: {
+    #       service_managed_s3: {
+    #       },
+    #       customer_managed_s3: {
+    #         bucket: "BucketName", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
     #   })
     #
     # @overload update_datastore(params = {})
@@ -1636,19 +1842,26 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Updates the settings of a pipeline.
+    # Updates the settings of a pipeline. You must specify both a `channel`
+    # and a `datastore` activity and, optionally, as many as 23 additional
+    # activities in the `pipelineActivities` array.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline to update.
     #
     # @option params [required, Array<Types::PipelineActivity>] :pipeline_activities
-    #   A list of "PipelineActivity" objects.
-    #
-    #   The list can be 1-25 **PipelineActivity** objects. Activities perform
+    #   A list of "PipelineActivity" objects. Activities perform
     #   transformations on your messages, such as removing, renaming or adding
     #   message attributes; filtering messages based on attribute values;
     #   invoking your Lambda functions on messages for advanced processing; or
     #   performing mathematical transformations to normalize device data.
+    #
+    #   The list can be 2-25 **PipelineActivity** objects and must contain
+    #   both a `channel` and a `datastore` activity. Each entry in the list
+    #   must contain only one activity, for example:
+    #
+    #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
+    #   ... \} \}, ... ]`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1739,7 +1952,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

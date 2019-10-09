@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::Shield
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::Shield
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::Shield
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -216,8 +265,8 @@ module Aws::Shield
     # @!group API Operations
 
     # Authorizes the DDoS Response team (DRT) to access the specified Amazon
-    # S3 bucket containing your flow logs. You can associate up to 10 Amazon
-    # S3 buckets with your subscription.
+    # S3 bucket containing your AWS WAF logs. You can associate up to 10
+    # Amazon S3 buckets with your subscription.
     #
     # To use the services of the DRT and make an `AssociateDRTLogBucket`
     # request, you must be subscribed to the [Business Support plan][1] or
@@ -229,7 +278,7 @@ module Aws::Shield
     # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :log_bucket
-    #   The Amazon S3 bucket that contains your flow logs.
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -321,7 +370,8 @@ module Aws::Shield
 
     # Enables AWS Shield Advanced for a specific AWS resource. The resource
     # can be an Amazon CloudFront distribution, Elastic Load Balancing load
-    # balancer, Elastic IP Address, or an Amazon Route 53 hosted zone.
+    # balancer, AWS Global Accelerator accelerator, Elastic IP Address, or
+    # an Amazon Route 53 hosted zone.
     #
     # You can add protection to only a single resource with each
     # CreateProtection request. If you want to add protection to multiple
@@ -351,8 +401,11 @@ module Aws::Shield
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
     #     `
     #
-    #   * For AWS CloudFront distribution:
+    #   * For an AWS CloudFront distribution:
     #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #
+    #   * For an AWS Global Accelerator accelerator:
+    #     `arn:aws:globalaccelerator::account-id:accelerator/accelerator-id `
     #
     #   * For Amazon Route 53: `arn:aws:route53:::hostedzone/hosted-zone-id `
     #
@@ -391,6 +444,9 @@ module Aws::Shield
     # [Authorize the DDoS Response Team to Create Rules and Web ACLs on Your
     # Behalf][1].
     #
+    # To use the services of the DRT, you must be subscribed to the
+    # [Business Support plan][2] or the [Enterprise Support plan][3].
+    #
     # When you initally create a subscription, your subscription is set to
     # be automatically renewed at the end of the existing subscription
     # period. You can change this by submitting an `UpdateSubscription`
@@ -399,6 +455,8 @@ module Aws::Shield
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/authorize-DRT.html
+    # [2]: https://aws.amazon.com/premiumsupport/business-support/
+    # [3]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -497,7 +555,7 @@ module Aws::Shield
     #   resp.attack.attack_counters[0].unit #=> String
     #   resp.attack.attack_properties #=> Array
     #   resp.attack.attack_properties[0].attack_layer #=> String, one of "NETWORK", "APPLICATION"
-    #   resp.attack.attack_properties[0].attack_property_identifier #=> String, one of "DESTINATION_URL", "REFERRER", "SOURCE_ASN", "SOURCE_COUNTRY", "SOURCE_IP_ADDRESS", "SOURCE_USER_AGENT"
+    #   resp.attack.attack_properties[0].attack_property_identifier #=> String, one of "DESTINATION_URL", "REFERRER", "SOURCE_ASN", "SOURCE_COUNTRY", "SOURCE_IP_ADDRESS", "SOURCE_USER_AGENT", "WORDPRESS_PINGBACK_REFLECTOR", "WORDPRESS_PINGBACK_SOURCE"
     #   resp.attack.attack_properties[0].top_contributors #=> Array
     #   resp.attack.attack_properties[0].top_contributors[0].name #=> String
     #   resp.attack.attack_properties[0].top_contributors[0].value #=> Integer
@@ -562,9 +620,16 @@ module Aws::Shield
 
     # Lists the details of a Protection object.
     #
-    # @option params [required, String] :protection_id
+    # @option params [String] :protection_id
     #   The unique identifier (ID) for the Protection object that is
-    #   described.
+    #   described. When submitting the `DescribeProtection` request you must
+    #   provide either the `ResourceArn` or the `ProtectionID`, but not both.
+    #
+    # @option params [String] :resource_arn
+    #   The ARN (Amazon Resource Name) of the AWS resource for the Protection
+    #   object that is described. When submitting the `DescribeProtection`
+    #   request you must provide either the `ResourceArn` or the
+    #   `ProtectionID`, but not both.
     #
     # @return [Types::DescribeProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -573,7 +638,8 @@ module Aws::Shield
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_protection({
-    #     protection_id: "ProtectionId", # required
+    #     protection_id: "ProtectionId",
+    #     resource_arn: "ResourceArn",
     #   })
     #
     # @example Response structure
@@ -618,7 +684,7 @@ module Aws::Shield
     end
 
     # Removes the DDoS Response team's (DRT) access to the specified Amazon
-    # S3 bucket containing your flow logs.
+    # S3 bucket containing your AWS WAF logs.
     #
     # To make a `DisassociateDRTLogBucket` request, you must be subscribed
     # to the [Business Support plan][1] or the [Enterprise Support plan][2].
@@ -633,7 +699,7 @@ module Aws::Shield
     # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :log_bucket
-    #   The Amazon S3 bucket that contains your flow logs.
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -893,7 +959,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

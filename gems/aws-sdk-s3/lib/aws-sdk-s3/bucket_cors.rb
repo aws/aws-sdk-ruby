@@ -30,6 +30,7 @@ module Aws::S3
       @bucket_name
     end
 
+    
     # @return [Array<Types::CORSRule>]
     def cors_rules
       data[:cors_rules]

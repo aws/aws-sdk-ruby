@@ -29,6 +29,11 @@ module Aws::WAFRegional
     #           type: "NONE", # required, accepts NONE, COUNT
     #         },
     #         type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #         excluded_rules: [
+    #           {
+    #             rule_id: "ResourceId", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] priority
@@ -63,7 +68,7 @@ module Aws::WAFRegional
     #     request based on the remaining rules in the web ACL.
     #
     #   `ActivatedRule|OverrideAction` applies only when updating or adding
-    #   a `RuleGroup` to a `WebACL`. In this case you do not use
+    #   a `RuleGroup` to a `WebACL`. In this case, you do not use
     #   `ActivatedRule|Action`. For all other update requests,
     #   `ActivatedRule|Action` is used instead of
     #   `ActivatedRule|OverrideAction`.
@@ -99,6 +104,51 @@ module Aws::WAFRegional
     #   does not exist.
     #   @return [String]
     #
+    # @!attribute [rw] excluded_rules
+    #   An array of rules to exclude from a rule group. This is applicable
+    #   only when the `ActivatedRule` refers to a `RuleGroup`.
+    #
+    #   Sometimes it is necessary to troubleshoot rule groups that are
+    #   blocking traffic unexpectedly (false positives). One troubleshooting
+    #   technique is to identify the specific rule within the rule group
+    #   that is blocking the legitimate traffic and then disable (exclude)
+    #   that particular rule. You can exclude rules from both your own rule
+    #   groups and AWS Marketplace rule groups that have been associated
+    #   with a web ACL.
+    #
+    #   Specifying `ExcludedRules` does not remove those rules from the rule
+    #   group. Rather, it changes the action for the rules to `COUNT`.
+    #   Therefore, requests that match an `ExcludedRule` are counted but not
+    #   blocked. The `RuleGroup` owner will receive COUNT metrics for each
+    #   `ExcludedRule`.
+    #
+    #   If you want to exclude rules from a rule group that is already
+    #   associated with a web ACL, perform the following steps:
+    #
+    #   1.  Use the AWS WAF logs to identify the IDs of the rules that you
+    #       want to exclude. For more information about the logs, see
+    #       [Logging Web ACL Traffic Information][1].
+    #
+    #   2.  Submit an UpdateWebACL request that has two actions:
+    #
+    #       * The first action deletes the existing rule group from the web
+    #         ACL. That is, in the UpdateWebACL request, the first
+    #         `Updates:Action` should be `DELETE` and
+    #         `Updates:ActivatedRule:RuleId` should be the rule group that
+    #         contains the rules that you want to exclude.
+    #
+    #       * The second action inserts the same rule group back in, but
+    #         specifying the rules to exclude. That is, the second
+    #         `Updates:Action` should be `INSERT`,
+    #         `Updates:ActivatedRule:RuleId` should be the rule group that
+    #         you just removed, and `ExcludedRules` should contain the rules
+    #         that you want to exclude.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    #   @return [Array<Types::ExcludedRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ActivatedRule AWS API Documentation
     #
     class ActivatedRule < Struct.new(
@@ -106,7 +156,8 @@ module Aws::WAFRegional
       :rule_id,
       :action,
       :override_action,
-      :type)
+      :type,
+      :excluded_rules)
       include Aws::Structure
     end
 
@@ -123,7 +174,17 @@ module Aws::WAFRegional
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN (Amazon Resource Name) of the resource to be protected.
+    #   The ARN (Amazon Resource Name) of the resource to be protected,
+    #   either an application load balancer or Amazon API Gateway stage.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/AssociateWebACLRequest AWS API Documentation
@@ -325,7 +386,7 @@ module Aws::WAFRegional
     #   For example, suppose the value of `Type` is `HEADER` and the value
     #   of `Data` is `User-Agent`. If you want to search the `User-Agent`
     #   header for the value `BadBot`, you base64-encode `BadBot` using MIME
-    #   base64 encoding and include the resulting value, `QmFkQm90`, in the
+    #   base64-encoding and include the resulting value, `QmFkQm90`, in the
     #   value of `TargetString`.
     #
     #   **If you're using the AWS CLI or one of the AWS SDKs**
@@ -610,6 +671,12 @@ module Aws::WAFRegional
     #         rate_key: "IP", # required, accepts IP
     #         rate_limit: 1, # required
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -620,8 +687,10 @@ module Aws::WAFRegional
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this
     #   `RateBasedRule`. The name can contain only alphanumeric characters
-    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't
-    #   change the name of the metric after you create the `RateBasedRule`.
+    #   (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It
+    #   can't contain whitespace or metric names reserved for AWS WAF,
+    #   including "All" and "Default\_Action." You can't change the
+    #   name of the metric after you create the `RateBasedRule`.
     #   @return [String]
     #
     # @!attribute [rw] rate_key
@@ -646,6 +715,9 @@ module Aws::WAFRegional
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRateBasedRuleRequest AWS API Documentation
     #
     class CreateRateBasedRuleRequest < Struct.new(
@@ -653,7 +725,8 @@ module Aws::WAFRegional
       :metric_name,
       :rate_key,
       :rate_limit,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -770,6 +843,12 @@ module Aws::WAFRegional
     #         name: "ResourceName", # required
     #         metric_name: "MetricName", # required
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -779,21 +858,27 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change the name of
-    #   the metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `RuleGroup`.
     #   @return [String]
     #
     # @!attribute [rw] change_token
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRuleGroupRequest AWS API Documentation
     #
     class CreateRuleGroupRequest < Struct.new(
       :name,
       :metric_name,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -822,6 +907,12 @@ module Aws::WAFRegional
     #         name: "ResourceName", # required
     #         metric_name: "MetricName", # required
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -831,21 +922,27 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change the name of the
-    #   metric after you create the `Rule`.
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `Rule`.
     #   @return [String]
     #
     # @!attribute [rw] change_token
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRuleRequest AWS API Documentation
     #
     class CreateRuleRequest < Struct.new(
       :name,
       :metric_name,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -970,6 +1067,12 @@ module Aws::WAFRegional
     #           type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #         },
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -978,10 +1081,12 @@ module Aws::WAFRegional
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   A friendly name or description for the metrics for this `WebACL`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change `MetricName`
-    #   after you create the `WebACL`.
+    #   A friendly name or description for the metrics for this `WebACL`.The
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change `MetricName` after you
+    #   create the `WebACL`.
     #   @return [String]
     #
     # @!attribute [rw] default_action
@@ -994,13 +1099,17 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateWebACLRequest AWS API Documentation
     #
     class CreateWebACLRequest < Struct.new(
       :name,
       :metric_name,
       :default_action,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -1602,7 +1711,17 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] resource_arn
     #   The ARN (Amazon Resource Name) of the resource from which the web
-    #   ACL is being removed.
+    #   ACL is being removed, either an application load balancer or Amazon
+    #   API Gateway stage.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DisassociateWebACLRequest AWS API Documentation
@@ -1615,6 +1734,28 @@ module Aws::WAFRegional
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DisassociateWebACLResponse AWS API Documentation
     #
     class DisassociateWebACLResponse < Aws::EmptyStructure; end
+
+    # The rule to exclude from a rule group. This is applicable only when
+    # the `ActivatedRule` refers to a `RuleGroup`. The rule must belong to
+    # the `RuleGroup` that is specified by the `ActivatedRule`.
+    #
+    # @note When making an API call, you may pass ExcludedRule
+    #   data as a hash:
+    #
+    #       {
+    #         rule_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the rule to exclude from the rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ExcludedRule AWS API Documentation
+    #
+    class ExcludedRule < Struct.new(
+      :rule_id)
+      include Aws::Structure
+    end
 
     # Specifies where in a web request to look for `TargetString`.
     #
@@ -2411,7 +2552,17 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] resource_arn
     #   The ARN (Amazon Resource Name) of the resource for which to get the
-    #   web ACL.
+    #   web ACL, either an application load balancer or Amazon API Gateway
+    #   stage.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLForResourceRequest AWS API Documentation
@@ -2606,14 +2757,14 @@ module Aws::WAFRegional
     # Contains one or more IP addresses or blocks of IP addresses specified
     # in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
     # IPv4 address ranges: /8 and any range between /16 through /32. AWS WAF
-    # supports IPv6 address ranges: /16, /24, /32, /48, /56, /64, and /128.
+    # supports IPv6 address ranges: /24, /32, /48, /56, /64, and /128.
     #
     # To specify an individual IP address, you specify the four-part IP
-    # address followed by a `/32`, for example, 192.0.2.0/31. To block a
+    # address followed by a `/32`, for example, 192.0.2.0/32. To block a
     # range of IP addresses, you can specify /8 or any range between /16
-    # through /32 (for IPv4) or /16, /24, /32, /48, /56, /64, or /128 (for
-    # IPv6). For more information about CIDR notation, see the Wikipedia
-    # entry [Classless Inter-Domain Routing][1].
+    # through /32 (for IPv4) or /24, /32, /48, /56, /64, or /128 (for IPv6).
+    # For more information about CIDR notation, see the Wikipedia entry
+    # [Classless Inter-Domain Routing][1].
     #
     #
     #
@@ -2936,12 +3087,11 @@ module Aws::WAFRegional
     #       }
     #
     # @!attribute [rw] next_marker
-    #   If you specify a value for `Limit` and you have more `IPSets` than
-    #   the value of `Limit`, AWS WAF returns a `NextMarker` value in the
-    #   response that allows you to list another group of `IPSets`. For the
-    #   second and subsequent `ListIPSets` requests, specify the value of
-    #   `NextMarker` from the previous response to get information about
-    #   another batch of `IPSets`.
+    #   AWS WAF returns a `NextMarker` value in the response that allows you
+    #   to list another group of `IPSets`. For the second and subsequent
+    #   `ListIPSets` requests, specify the value of `NextMarker` from the
+    #   previous response to get information about another batch of
+    #   `IPSets`.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -2960,11 +3110,9 @@ module Aws::WAFRegional
     end
 
     # @!attribute [rw] next_marker
-    #   If you have more `IPSet` objects than the number that you specified
-    #   for `Limit` in the request, the response includes a `NextMarker`
-    #   value. To list more `IPSet` objects, submit another `ListIPSets`
-    #   request, and specify the `NextMarker` value from the response in the
-    #   `NextMarker` value in the next request.
+    #   To list more `IPSet` objects, submit another `ListIPSets` request,
+    #   and in the next request use the `NextMarker` response value as the
+    #   `NextMarker` value.
     #   @return [String]
     #
     # @!attribute [rw] ip_sets
@@ -3210,8 +3358,8 @@ module Aws::WAFRegional
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource to list, either and application load balancer
-    #   or Amazon API Gateway.
+    #   The type of resource to list, either an application load balancer or
+    #   Amazon API Gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListResourcesForWebACLRequest AWS API Documentation
@@ -3507,6 +3655,47 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :next_marker,
+      :limit,
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_info_for_resource
+    #   @return [Types::TagInfoForResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :next_marker,
+      :tag_info_for_resource)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListWebACLsRequest
     #   data as a hash:
     #
@@ -3730,6 +3919,11 @@ module Aws::WAFRegional
     #   The Amazon Kinesis Data Firehose that contains the inspected traffic
     #   information, the redacted fields details, and the Amazon Resource
     #   Name (ARN) of the web ACL to monitor.
+    #
+    #   <note markdown="1"> When specifying `Type` in `RedactedFields`, you must use one of the
+    #   following values: `URI`, `QUERY_STRING`, `HEADER`, or `METHOD`.
+    #
+    #    </note>
     #   @return [Types::LoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/PutLoggingConfigurationRequest AWS API Documentation
@@ -3812,8 +4006,10 @@ module Aws::WAFRegional
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for a
     #   `RateBasedRule`. The name can contain only alphanumeric characters
-    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't
-    #   change the name of the metric after you create the `RateBasedRule`.
+    #   (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It
+    #   can't contain whitespace or metric names reserved for AWS WAF,
+    #   including "All" and "Default\_Action." You can't change the
+    #   name of the metric after you create the `RateBasedRule`.
     #   @return [String]
     #
     # @!attribute [rw] match_predicates
@@ -4218,9 +4414,11 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change `MetricName` after
-    #   you create the `Rule`.
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change `MetricName` after you
+    #   create the `Rule`.
     #   @return [String]
     #
     # @!attribute [rw] predicates
@@ -4267,9 +4465,11 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change the name of
-    #   the metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `RuleGroup`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleGroup AWS API Documentation
@@ -4325,6 +4525,11 @@ module Aws::WAFRegional
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4936,9 +5141,11 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change the name of
-    #   the metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `RuleGroup`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SubscribedRuleGroupSummary AWS API Documentation
@@ -4949,6 +5156,73 @@ module Aws::WAFRegional
       :metric_name)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_list
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/TagInfoForResource AWS API Documentation
+    #
+    class TagInfoForResource < Struct.new(
+      :resource_arn,
+      :tag_list)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # In a GetSampledRequests request, the `StartTime` and `EndTime` objects
     # specify the time range for which you want AWS WAF to return a sample
@@ -4994,6 +5268,32 @@ module Aws::WAFRegional
       :end_time)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateByteMatchSetRequest
     #   data as a hash:
@@ -5379,6 +5679,11 @@ module Aws::WAFRegional
     #                 type: "NONE", # required, accepts NONE, COUNT
     #               },
     #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #               excluded_rules: [
+    #                 {
+    #                   rule_id: "ResourceId", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -5648,6 +5953,11 @@ module Aws::WAFRegional
     #                 type: "NONE", # required, accepts NONE, COUNT
     #               },
     #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #               excluded_rules: [
+    #                 {
+    #                   rule_id: "ResourceId", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -5676,7 +5986,7 @@ module Aws::WAFRegional
     #
     #   * ActivatedRule: Contains `Action`, `OverrideAction`, `Priority`,
     #     `RuleId`, and `Type`. `ActivatedRule|OverrideAction` applies only
-    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case
+    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case,
     #     you do not use `ActivatedRule|Action`. For all other update
     #     requests, `ActivatedRule|Action` is used instead of
     #     `ActivatedRule|OverrideAction`.
@@ -5747,7 +6057,7 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] updates
     #   An array of `XssMatchSetUpdate` objects that you want to insert into
-    #   or delete from a XssMatchSet. For more information, see the
+    #   or delete from an XssMatchSet. For more information, see the
     #   applicable data types:
     #
     #   * XssMatchSetUpdate: Contains `Action` and `XssMatchTuple`
@@ -5778,6 +6088,339 @@ module Aws::WAFRegional
     #
     class UpdateXssMatchSetResponse < Struct.new(
       :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFBadRequestException AWS API Documentation
+    #
+    class WAFBadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The name specified is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFDisallowedNameException AWS API Documentation
+    #
+    class WAFDisallowedNameException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because of a system problem, even though the
+    # request was valid. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFInternalErrorException AWS API Documentation
+    #
+    class WAFInternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because there was nothing to do. For example:
+    #
+    # * You tried to remove a `Rule` from a `WebACL`, but the `Rule` isn't
+    #   in the specified `WebACL`.
+    #
+    # * You tried to remove an IP address from an `IPSet`, but the IP
+    #   address isn't in the specified `IPSet`.
+    #
+    # * You tried to remove a `ByteMatchTuple` from a `ByteMatchSet`, but
+    #   the `ByteMatchTuple` isn't in the specified `WebACL`.
+    #
+    # * You tried to add a `Rule` to a `WebACL`, but the `Rule` already
+    #   exists in the specified `WebACL`.
+    #
+    # * You tried to add a `ByteMatchTuple` to a `ByteMatchSet`, but the
+    #   `ByteMatchTuple` already exists in the specified `WebACL`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFInvalidOperationException AWS API Documentation
+    #
+    class WAFInvalidOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because AWS WAF didn't recognize a parameter in
+    # the request. For example:
+    #
+    # * You specified an invalid parameter name.
+    #
+    # * You specified an invalid value.
+    #
+    # * You tried to update an object (`ByteMatchSet`, `IPSet`, `Rule`, or
+    #   `WebACL`) using an action other than `INSERT` or `DELETE`.
+    #
+    # * You tried to create a `WebACL` with a `DefaultAction` `Type` other
+    #   than `ALLOW`, `BLOCK`, or `COUNT`.
+    #
+    # * You tried to create a `RateBasedRule` with a `RateKey` value other
+    #   than `IP`.
+    #
+    # * You tried to update a `WebACL` with a `WafAction` `Type` other than
+    #   `ALLOW`, `BLOCK`, or `COUNT`.
+    #
+    # * You tried to update a `ByteMatchSet` with a `FieldToMatch` `Type`
+    #   other than HEADER, METHOD, QUERY\_STRING, URI, or BODY.
+    #
+    # * You tried to update a `ByteMatchSet` with a `Field` of `HEADER` but
+    #   no value for `Data`.
+    #
+    # * Your request references an ARN that is malformed, or corresponds to
+    #   a resource with which a web ACL cannot be associated.
+    #
+    # @!attribute [rw] field
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFInvalidParameterException AWS API Documentation
+    #
+    class WAFInvalidParameterException < Struct.new(
+      :field,
+      :parameter,
+      :reason)
+      include Aws::Structure
+    end
+
+    # The operation failed because the specified policy is not in the proper
+    # format.
+    #
+    # The policy is subject to the following restrictions:
+    #
+    # * You can attach only one policy with each `PutPermissionPolicy`
+    #   request.
+    #
+    # * The policy must include an `Effect`, `Action` and `Principal`.
+    #
+    # * `Effect` must specify `Allow`.
+    #
+    # * The `Action` in the policy must be `waf:UpdateWebACL`,
+    #   `waf-regional:UpdateWebACL`, `waf:GetRuleGroup` and
+    #   `waf-regional:GetRuleGroup` . Any extra or wildcard actions in the
+    #   policy will be rejected.
+    #
+    # * The policy cannot include a `Resource` parameter.
+    #
+    # * The ARN in the request must be a valid WAF RuleGroup ARN and the
+    #   RuleGroup must exist in the same region.
+    #
+    # * The user making the request must be the owner of the RuleGroup.
+    #
+    # * Your policy must be composed using IAM Policy version 2012-10-17.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFInvalidPermissionPolicyException AWS API Documentation
+    #
+    class WAFInvalidPermissionPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The regular expression (regex) you specified in `RegexPatternString`
+    # is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFInvalidRegexPatternException AWS API Documentation
+    #
+    class WAFInvalidRegexPatternException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation exceeds a resource limit, for example, the maximum
+    # number of `WebACL` objects that you can create for an AWS account. For
+    # more information, see [Limits][1] in the *AWS WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFLimitsExceededException AWS API Documentation
+    #
+    class WAFLimitsExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because you tried to delete an object that isn't
+    # empty. For example:
+    #
+    # * You tried to delete a `WebACL` that still contains one or more
+    #   `Rule` objects.
+    #
+    # * You tried to delete a `Rule` that still contains one or more
+    #   `ByteMatchSet` objects or other predicates.
+    #
+    # * You tried to delete a `ByteMatchSet` that contains one or more
+    #   `ByteMatchTuple` objects.
+    #
+    # * You tried to delete an `IPSet` that references one or more IP
+    #   addresses.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFNonEmptyEntityException AWS API Documentation
+    #
+    class WAFNonEmptyEntityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because you tried to add an object to or delete
+    # an object from another object that doesn't exist. For example:
+    #
+    # * You tried to add a `Rule` to or delete a `Rule` from a `WebACL` that
+    #   doesn't exist.
+    #
+    # * You tried to add a `ByteMatchSet` to or delete a `ByteMatchSet` from
+    #   a `Rule` that doesn't exist.
+    #
+    # * You tried to add an IP address to or delete an IP address from an
+    #   `IPSet` that doesn't exist.
+    #
+    # * You tried to add a `ByteMatchTuple` to or delete a `ByteMatchTuple`
+    #   from a `ByteMatchSet` that doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFNonexistentContainerException AWS API Documentation
+    #
+    class WAFNonexistentContainerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because the referenced object doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFNonexistentItemException AWS API Documentation
+    #
+    class WAFNonexistentItemException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because you tried to delete an object that is
+    # still in use. For example:
+    #
+    # * You tried to delete a `ByteMatchSet` that is still referenced by a
+    #   `Rule`.
+    #
+    # * You tried to delete a `Rule` that is still referenced by a `WebACL`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFReferencedItemException AWS API Documentation
+    #
+    class WAFReferencedItemException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS WAF is not able to access the service linked role. This can be
+    # caused by a previous `PutLoggingConfiguration` request, which can lock
+    # the service linked role for about 20 seconds. Please try your request
+    # again. The service linked role can also be locked by a previous
+    # `DeleteServiceLinkedRole` request, which can lock the role for 15
+    # minutes or more. If you recently made a `DeleteServiceLinkedRole`,
+    # wait at least 15 minutes and try the request again. If you receive
+    # this same exception again, you will have to wait additional time until
+    # the role is unlocked.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFServiceLinkedRoleErrorException AWS API Documentation
+    #
+    class WAFServiceLinkedRoleErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because you tried to create, update, or delete an
+    # object by using a change token that has already been used.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFStaleDataException AWS API Documentation
+    #
+    class WAFStaleDataException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified subscription does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFSubscriptionNotFoundException AWS API Documentation
+    #
+    class WAFSubscriptionNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFTagOperationException AWS API Documentation
+    #
+    class WAFTagOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFTagOperationInternalErrorException AWS API Documentation
+    #
+    class WAFTagOperationInternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because the entity referenced is temporarily
+    # unavailable. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFUnavailableEntityException AWS API Documentation
+    #
+    class WAFUnavailableEntityException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5867,9 +6510,11 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `WebACL`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change `MetricName`
-    #   after you create the `WebACL`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change `MetricName` after you
+    #   create the `WebACL`.
     #   @return [String]
     #
     # @!attribute [rw] default_action
@@ -5940,6 +6585,11 @@ module Aws::WAFRegional
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -6044,8 +6694,8 @@ module Aws::WAFRegional
     #       }
     #
     # @!attribute [rw] action
-    #   Specify `INSERT` to add a XssMatchSetUpdate to an XssMatchSet. Use
-    #   `DELETE` to remove a `XssMatchSetUpdate` from an `XssMatchSet`.
+    #   Specify `INSERT` to add an XssMatchSetUpdate to an XssMatchSet. Use
+    #   `DELETE` to remove an `XssMatchSetUpdate` from an `XssMatchSet`.
     #   @return [String]
     #
     # @!attribute [rw] xss_match_tuple

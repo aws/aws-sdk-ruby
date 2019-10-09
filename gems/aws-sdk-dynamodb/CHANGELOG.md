@@ -1,6 +1,101 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2019-10-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2019-09-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2019-06-27)
+------------------
+
+* Feature - Documentation updates for dynamodb
+
+1.31.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-06-06)
+------------------
+
+* Feature - Documentation updates for dynamodb
+
+1.29.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.28.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.27.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2019-04-25)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2019-03-22)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-02-13)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-01-16)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2018-12-21)
+------------------
+
+* Feature - API update.
+
+1.18.1 (2018-12-17)
+------------------
+
+* Issue - Change `BigDecimal` usage to be compliant with Ruby 2.6.
+
 1.18.0 (2018-11-28)
 ------------------
 

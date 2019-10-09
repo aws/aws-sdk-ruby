@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::MarketplaceMetering
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::MarketplaceMetering
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::MarketplaceMetering
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -249,7 +298,7 @@ module Aws::MarketplaceMetering
     #         timestamp: Time.now, # required
     #         customer_identifier: "CustomerIdentifier", # required
     #         dimension: "UsageDimension", # required
-    #         quantity: 1, # required
+    #         quantity: 1,
     #       },
     #     ],
     #     product_code: "ProductCode", # required
@@ -291,20 +340,22 @@ module Aws::MarketplaceMetering
     #   during the publishing of a new product.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :timestamp
-    #   Timestamp of the hour, recorded in UTC. The seconds and milliseconds
-    #   portions of the timestamp will be ignored.
+    #   Timestamp, in UTC, for which the usage is being reported. Your
+    #   application can meter usage for up to one hour in the past. Make sure
+    #   the timestamp value is not before the start of the software usage.
     #
     # @option params [required, String] :usage_dimension
     #   It will be one of the fcp dimension name provided during the
     #   publishing of the product.
     #
-    # @option params [required, Integer] :usage_quantity
-    #   Consumption value for the hour.
+    # @option params [Integer] :usage_quantity
+    #   Consumption value for the hour. Defaults to `0` if not specified.
     #
-    # @option params [required, Boolean] :dry_run
+    # @option params [Boolean] :dry_run
     #   Checks whether you have the permissions required for the action, but
     #   does not make the request. If you have the permissions, the request
     #   returns DryRunOperation; otherwise, it returns UnauthorizedException.
+    #   Defaults to `false` if not specified.
     #
     # @return [Types::MeterUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -316,8 +367,8 @@ module Aws::MarketplaceMetering
     #     product_code: "ProductCode", # required
     #     timestamp: Time.now, # required
     #     usage_dimension: "UsageDimension", # required
-    #     usage_quantity: 1, # required
-    #     dry_run: false, # required
+    #     usage_quantity: 1,
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -458,7 +509,7 @@ module Aws::MarketplaceMetering
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

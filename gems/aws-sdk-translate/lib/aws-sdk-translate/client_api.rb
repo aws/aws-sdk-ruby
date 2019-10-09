@@ -66,6 +66,10 @@ module Aws::Translate
     DeleteTerminologyRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     DeleteTerminologyRequest.struct_class = Types::DeleteTerminologyRequest
 
+    DetectedLanguageLowConfidenceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DetectedLanguageLowConfidenceException.add_member(:detected_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "DetectedLanguageCode"))
+    DetectedLanguageLowConfidenceException.struct_class = Types::DetectedLanguageLowConfidenceException
+
     EncryptionKey.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionKeyType, required: true, location_name: "Type"))
     EncryptionKey.add_member(:id, Shapes::ShapeRef.new(shape: EncryptionKeyID, required: true, location_name: "Id"))
     EncryptionKey.struct_class = Types::EncryptionKey
@@ -88,7 +92,19 @@ module Aws::Translate
     ImportTerminologyResponse.add_member(:terminology_properties, Shapes::ShapeRef.new(shape: TerminologyProperties, location_name: "TerminologyProperties"))
     ImportTerminologyResponse.struct_class = Types::ImportTerminologyResponse
 
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     LanguageCodeStringList.member = Shapes::ShapeRef.new(shape: LanguageCodeString)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListTerminologiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTerminologiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
@@ -99,6 +115,12 @@ module Aws::Translate
     ListTerminologiesResponse.struct_class = Types::ListTerminologiesResponse
 
     ResourceNameList.member = Shapes::ShapeRef.new(shape: ResourceName)
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     Term.add_member(:source_text, Shapes::ShapeRef.new(shape: String, location_name: "SourceText"))
     Term.add_member(:target_text, Shapes::ShapeRef.new(shape: String, location_name: "TargetText"))
@@ -128,6 +150,12 @@ module Aws::Translate
 
     TerminologyPropertiesList.member = Shapes::ShapeRef.new(shape: TerminologyProperties)
 
+    TextSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TextSizeLimitExceededException.struct_class = Types::TextSizeLimitExceededException
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
     TranslateTextRequest.add_member(:text, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Text"))
     TranslateTextRequest.add_member(:terminology_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
     TranslateTextRequest.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "SourceLanguageCode"))
@@ -139,6 +167,11 @@ module Aws::Translate
     TranslateTextResponse.add_member(:target_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "TargetLanguageCode"))
     TranslateTextResponse.add_member(:applied_terminologies, Shapes::ShapeRef.new(shape: AppliedTerminologyList, location_name: "AppliedTerminologies"))
     TranslateTextResponse.struct_class = Types::TranslateTextResponse
+
+    UnsupportedLanguagePairException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedLanguagePairException.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode"))
+    UnsupportedLanguagePairException.add_member(:target_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "TargetLanguageCode"))
+    UnsupportedLanguagePairException.struct_class = Types::UnsupportedLanguagePairException
 
 
     # @api private

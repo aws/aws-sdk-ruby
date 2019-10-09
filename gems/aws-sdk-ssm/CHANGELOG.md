@@ -1,6 +1,121 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2019-10-04)
+------------------
+
+* Feature - Documentation updates for Systems Manager / StartSession.
+
+1.56.0 (2019-09-26)
+------------------
+
+* Feature - This release updates the AWS Systems Manager Parameter Store PutParameter and LabelParameterVersion APIs to return the "Tier" of parameter created/updated and the "parameter version" labeled respectively.
+
+1.55.0 (2019-08-26)
+------------------
+
+* Feature - This feature adds "default tier" to the AWS Systems Manager Parameter Store for parameter creation and update. AWS customers can now set the "default tier" to one of the following values: Standard (default), Advanced or Intelligent-Tiering.  This allows customers to create advanced parameters or parameters in corresponding tiers with one setting rather than code change to specify parameter tiers.
+
+1.54.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2019-07-23)
+------------------
+
+* Feature - You can now use Maintenance Windows to select a resource group as the target. By selecting a resource group as the target of a Maintenance Window, customers can perform routine tasks across different resources such as Amazon Elastic Compute Cloud (AmazonEC2) instances, Amazon Elastic Block Store (Amazon EBS) volumes, and Amazon Simple Storage Service(Amazon S3) buckets within the same recurring time window.
+
+1.52.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2019-06-24)
+------------------
+
+* Feature - AWS Systems Manager now supports deleting a specific version of a SSM Document.
+
+1.50.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2019-06-06)
+------------------
+
+* Feature - OpsCenter is a new Systems Manager capability that allows you to view, diagnose, and remediate, operational issues, aka OpsItems, related to various AWS resources by bringing together contextually relevant investigation information. New APIs to create, update, describe, and get OpsItems as well as OpsItems summary API.
+
+1.48.0 (2019-05-29)
+------------------
+
+* Feature - Systems Manager - Documentation updates
+
+1.47.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.46.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.45.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.44.0 (2019-05-07)
+------------------
+
+* Feature - API update.
+
+1.43.0 (2019-04-24)
+------------------
+
+* Feature - API update.
+
+1.42.0 (2019-04-01)
+------------------
+
+* Feature - API update.
+
+1.41.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.40.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.39.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.38.0 (2019-03-04)
+------------------
+
+* Feature - API update.
+
+1.37.0 (2019-02-28)
+------------------
+
+* Feature - API update.
+
+1.36.0 (2019-02-19)
+------------------
+
+* Feature - API update.
+
+1.35.0 (2019-01-21)
+------------------
+
+* Feature - API update.
+
 1.34.0 (2018-11-20)
 ------------------
 

@@ -183,7 +183,7 @@ module Aws
         extend Forwardable
         def_delegators :@client, :delete_object, :head_object
 
-        # Creates a new encryption client. You must provide on of the following
+        # Creates a new encryption client. You must provide one of the following
         # options:
         #
         # * `:encryption_key`

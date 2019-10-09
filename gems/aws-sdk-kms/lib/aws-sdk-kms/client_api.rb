@@ -174,11 +174,29 @@ module Aws::KMS
     AliasListEntry.add_member(:target_key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "TargetKeyId"))
     AliasListEntry.struct_class = Types::AliasListEntry
 
+    AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
     CancelKeyDeletionRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     CancelKeyDeletionRequest.struct_class = Types::CancelKeyDeletionRequest
 
     CancelKeyDeletionResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     CancelKeyDeletionResponse.struct_class = Types::CancelKeyDeletionResponse
+
+    CloudHsmClusterInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    CloudHsmClusterInUseException.struct_class = Types::CloudHsmClusterInUseException
+
+    CloudHsmClusterInvalidConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    CloudHsmClusterInvalidConfigurationException.struct_class = Types::CloudHsmClusterInvalidConfigurationException
+
+    CloudHsmClusterNotActiveException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    CloudHsmClusterNotActiveException.struct_class = Types::CloudHsmClusterNotActiveException
+
+    CloudHsmClusterNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    CloudHsmClusterNotFoundException.struct_class = Types::CloudHsmClusterNotFoundException
+
+    CloudHsmClusterNotRelatedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    CloudHsmClusterNotRelatedException.struct_class = Types::CloudHsmClusterNotRelatedException
 
     ConnectCustomKeyStoreRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, required: true, location_name: "CustomKeyStoreId"))
     ConnectCustomKeyStoreRequest.struct_class = Types::ConnectCustomKeyStoreRequest
@@ -223,6 +241,18 @@ module Aws::KMS
     CreateKeyResponse.add_member(:key_metadata, Shapes::ShapeRef.new(shape: KeyMetadata, location_name: "KeyMetadata"))
     CreateKeyResponse.struct_class = Types::CreateKeyResponse
 
+    CustomKeyStoreHasCMKsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    CustomKeyStoreHasCMKsException.struct_class = Types::CustomKeyStoreHasCMKsException
+
+    CustomKeyStoreInvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    CustomKeyStoreInvalidStateException.struct_class = Types::CustomKeyStoreInvalidStateException
+
+    CustomKeyStoreNameInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    CustomKeyStoreNameInUseException.struct_class = Types::CustomKeyStoreNameInUseException
+
+    CustomKeyStoreNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    CustomKeyStoreNotFoundException.struct_class = Types::CustomKeyStoreNotFoundException
+
     CustomKeyStoresList.member = Shapes::ShapeRef.new(shape: CustomKeyStoresListEntry)
 
     CustomKeyStoresListEntry.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
@@ -254,6 +284,9 @@ module Aws::KMS
     DeleteImportedKeyMaterialRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     DeleteImportedKeyMaterialRequest.struct_class = Types::DeleteImportedKeyMaterialRequest
 
+    DependencyTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    DependencyTimeoutException.struct_class = Types::DependencyTimeoutException
+
     DescribeCustomKeyStoresRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
     DescribeCustomKeyStoresRequest.add_member(:custom_key_store_name, Shapes::ShapeRef.new(shape: CustomKeyStoreNameType, location_name: "CustomKeyStoreName"))
     DescribeCustomKeyStoresRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
@@ -278,6 +311,9 @@ module Aws::KMS
     DisableKeyRotationRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     DisableKeyRotationRequest.struct_class = Types::DisableKeyRotationRequest
 
+    DisabledException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    DisabledException.struct_class = Types::DisabledException
+
     DisconnectCustomKeyStoreRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, required: true, location_name: "CustomKeyStoreId"))
     DisconnectCustomKeyStoreRequest.struct_class = Types::DisconnectCustomKeyStoreRequest
 
@@ -301,6 +337,9 @@ module Aws::KMS
 
     EncryptionContextType.key = Shapes::ShapeRef.new(shape: EncryptionContextKey)
     EncryptionContextType.value = Shapes::ShapeRef.new(shape: EncryptionContextValue)
+
+    ExpiredImportTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    ExpiredImportTokenException.struct_class = Types::ExpiredImportTokenException
 
     GenerateDataKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     GenerateDataKeyRequest.add_member(:encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContext"))
@@ -386,6 +425,42 @@ module Aws::KMS
 
     ImportKeyMaterialResponse.struct_class = Types::ImportKeyMaterialResponse
 
+    IncorrectKeyMaterialException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    IncorrectKeyMaterialException.struct_class = Types::IncorrectKeyMaterialException
+
+    IncorrectTrustAnchorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    IncorrectTrustAnchorException.struct_class = Types::IncorrectTrustAnchorException
+
+    InvalidAliasNameException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    InvalidAliasNameException.struct_class = Types::InvalidAliasNameException
+
+    InvalidArnException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    InvalidArnException.struct_class = Types::InvalidArnException
+
+    InvalidCiphertextException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    InvalidCiphertextException.struct_class = Types::InvalidCiphertextException
+
+    InvalidGrantIdException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    InvalidGrantIdException.struct_class = Types::InvalidGrantIdException
+
+    InvalidGrantTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    InvalidGrantTokenException.struct_class = Types::InvalidGrantTokenException
+
+    InvalidImportTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    InvalidImportTokenException.struct_class = Types::InvalidImportTokenException
+
+    InvalidKeyUsageException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    InvalidKeyUsageException.struct_class = Types::InvalidKeyUsageException
+
+    InvalidMarkerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    InvalidMarkerException.struct_class = Types::InvalidMarkerException
+
+    KMSInternalException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    KMSInternalException.struct_class = Types::KMSInternalException
+
+    KMSInvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    KMSInvalidStateException.struct_class = Types::KMSInvalidStateException
+
     KeyList.member = Shapes::ShapeRef.new(shape: KeyListEntry)
 
     KeyListEntry.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
@@ -408,6 +483,12 @@ module Aws::KMS
     KeyMetadata.add_member(:expiration_model, Shapes::ShapeRef.new(shape: ExpirationModelType, location_name: "ExpirationModel"))
     KeyMetadata.add_member(:key_manager, Shapes::ShapeRef.new(shape: KeyManagerType, location_name: "KeyManager"))
     KeyMetadata.struct_class = Types::KeyMetadata
+
+    KeyUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    KeyUnavailableException.struct_class = Types::KeyUnavailableException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAliasesRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     ListAliasesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
@@ -463,6 +544,12 @@ module Aws::KMS
     ListRetirableGrantsRequest.add_member(:retiring_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, required: true, location_name: "RetiringPrincipal"))
     ListRetirableGrantsRequest.struct_class = Types::ListRetirableGrantsRequest
 
+    MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     PolicyNameList.member = Shapes::ShapeRef.new(shape: PolicyNameType)
 
     PutKeyPolicyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
@@ -504,6 +591,9 @@ module Aws::KMS
     Tag.add_member(:tag_value, Shapes::ShapeRef.new(shape: TagValueType, required: true, location_name: "TagValue"))
     Tag.struct_class = Types::Tag
 
+    TagException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    TagException.struct_class = Types::TagException
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKeyType)
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
@@ -511,6 +601,9 @@ module Aws::KMS
     TagResourceRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    UnsupportedOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
 
     UntagResourceRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))

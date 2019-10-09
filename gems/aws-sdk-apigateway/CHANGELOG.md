@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2019-09-18)
+------------------
+
+* Feature - Amazon API Gateway simplifies accessing PRIVATE APIs by allowing you to associate one or more Amazon Virtual Private Cloud (VPC) Endpoints to a private API. API Gateway will create and manage DNS alias records necessary for easily invoking the private APIs. With this feature, you can leverage private APIs in web applications hosted within your VPCs.
+
+1.34.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2019-06-24)
+------------------
+
+* Feature - Customers can pick different security policies (TLS version + cipher suite) for custom domains in API Gateway
+
+1.31.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-05-22)
+------------------
+
+* Feature - This release adds support for tagging of Amazon API Gateway resources.
+
+1.29.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.28.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.27.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
 1.23.0 (2018-11-20)
 ------------------
 

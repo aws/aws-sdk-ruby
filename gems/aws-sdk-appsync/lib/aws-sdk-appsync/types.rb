@@ -8,6 +8,60 @@
 module Aws::AppSync
   module Types
 
+    # You do not have access to perform this operation on this resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes an additional authentication provider.
+    #
+    # @note When making an API call, you may pass AdditionalAuthenticationProvider
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #         open_id_connect_config: {
+    #           issuer: "String", # required
+    #           client_id: "String",
+    #           iat_ttl: 1,
+    #           auth_ttl: 1,
+    #         },
+    #         user_pool_config: {
+    #           user_pool_id: "String", # required
+    #           aws_region: "String", # required
+    #           app_id_client_regex: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito
+    #   user pools.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_id_connect_config
+    #   The OpenID Connect configuration.
+    #   @return [Types::OpenIDConnectConfig]
+    #
+    # @!attribute [rw] user_pool_config
+    #   The Amazon Cognito user pool configuration.
+    #   @return [Types::CognitoUserPoolConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AdditionalAuthenticationProvider AWS API Documentation
+    #
+    class AdditionalAuthenticationProvider < Struct.new(
+      :authentication_type,
+      :open_id_connect_config,
+      :user_pool_config)
+      include Aws::Structure
+    end
+
     # Describes an API key.
     #
     # Customers invoke AWS AppSync GraphQL API operations with API keys as
@@ -70,6 +124,44 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # The API key exceeded a limit. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiKeyLimitExceededException AWS API Documentation
+    #
+    class ApiKeyLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The API key expiration must be set to a value between 1 and 365 days
+    # from creation (for `CreateApiKey`) or from update (for
+    # `UpdateApiKey`).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiKeyValidityOutOfBoundsException AWS API Documentation
+    #
+    class ApiKeyValidityOutOfBoundsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The GraphQL API exceeded a limit. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiLimitExceededException AWS API Documentation
+    #
+    class ApiLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The authorization config in case the HTTP endpoint requires
     # authorization.
     #
@@ -127,6 +219,65 @@ module Aws::AppSync
     class AwsIamConfig < Struct.new(
       :signing_region,
       :signing_service_name)
+      include Aws::Structure
+    end
+
+    # The request is not well formed. For example, a value is invalid or a
+    # required field is missing. Check the field values, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes an Amazon Cognito user pool configuration.
+    #
+    # @note When making an API call, you may pass CognitoUserPoolConfig
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "String", # required
+    #         aws_region: "String", # required
+    #         app_id_client_regex: "String",
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The AWS Region in which the user pool was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_id_client_regex
+    #   A regular expression for validating the incoming Amazon Cognito user
+    #   pool app client ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CognitoUserPoolConfig AWS API Documentation
+    #
+    class CognitoUserPoolConfig < Struct.new(
+      :user_pool_id,
+      :aws_region,
+      :app_id_client_regex)
+      include Aws::Structure
+    end
+
+    # Another modification is in progress at this time and it must complete
+    # before you can make your change.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -360,6 +511,7 @@ module Aws::AppSync
     #         log_config: {
     #           field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #           cloud_watch_logs_role_arn: "String", # required
+    #           exclude_verbose_content: false,
     #         },
     #         authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #         user_pool_config: {
@@ -374,6 +526,25 @@ module Aws::AppSync
     #           iat_ttl: 1,
     #           auth_ttl: 1,
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         additional_authentication_providers: [
+    #           {
+    #             authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #             open_id_connect_config: {
+    #               issuer: "String", # required
+    #               client_id: "String",
+    #               iat_ttl: 1,
+    #               auth_ttl: 1,
+    #             },
+    #             user_pool_config: {
+    #               user_pool_id: "String", # required
+    #               aws_region: "String", # required
+    #               app_id_client_regex: "String",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -385,8 +556,8 @@ module Aws::AppSync
     #   @return [Types::LogConfig]
     #
     # @!attribute [rw] authentication_type
-    #   The authentication type: API key, AWS IAM, or Amazon Cognito user
-    #   pools.
+    #   The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito
+    #   user pools.
     #   @return [String]
     #
     # @!attribute [rw] user_pool_config
@@ -397,6 +568,15 @@ module Aws::AppSync
     #   The OpenID Connect configuration.
     #   @return [Types::OpenIDConnectConfig]
     #
+    # @!attribute [rw] tags
+    #   A `TagMap` object.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] additional_authentication_providers
+    #   A list of additional authentication providers for the `GraphqlApi`
+    #   API.
+    #   @return [Array<Types::AdditionalAuthenticationProvider>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest AWS API Documentation
     #
     class CreateGraphqlApiRequest < Struct.new(
@@ -404,7 +584,9 @@ module Aws::AppSync
       :log_config,
       :authentication_type,
       :user_pool_config,
-      :open_id_connect_config)
+      :open_id_connect_config,
+      :tags,
+      :additional_authentication_providers)
       include Aws::Structure
     end
 
@@ -1012,6 +1194,7 @@ module Aws::AppSync
     #       {
     #         api_id: "String", # required
     #         format: "SDL", # required, accepts SDL, JSON
+    #         include_directives: false,
     #       }
     #
     # @!attribute [rw] api_id
@@ -1022,11 +1205,17 @@ module Aws::AppSync
     #   The schema format: SDL or JSON.
     #   @return [String]
     #
+    # @!attribute [rw] include_directives
+    #   A flag that specifies whether the schema introspection should
+    #   contain directives.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetIntrospectionSchemaRequest AWS API Documentation
     #
     class GetIntrospectionSchemaRequest < Struct.new(
       :api_id,
-      :format)
+      :format,
+      :include_directives)
       include Aws::Structure
     end
 
@@ -1107,8 +1296,9 @@ module Aws::AppSync
     end
 
     # @!attribute [rw] status
-    #   The current state of the schema (PROCESSING, ACTIVE, or DELETING).
-    #   Once the schema is in the ACTIVE state, you can add data.
+    #   The current state of the schema (PROCESSING, FAILED, SUCCESS, or
+    #   NOT\_APPLICABLE). When the schema is in the ACTIVE state, you can
+    #   add data.
     #   @return [String]
     #
     # @!attribute [rw] details
@@ -1165,6 +1355,18 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # The GraphQL schema is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphQLSchemaException AWS API Documentation
+    #
+    class GraphQLSchemaException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a GraphQL API.
     #
     # @!attribute [rw] name
@@ -1199,6 +1401,15 @@ module Aws::AppSync
     #   The URIs.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] additional_authentication_providers
+    #   A list of additional authentication providers for the `GraphqlApi`
+    #   API.
+    #   @return [Array<Types::AdditionalAuthenticationProvider>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi AWS API Documentation
     #
     class GraphqlApi < Struct.new(
@@ -1209,7 +1420,9 @@ module Aws::AppSync
       :user_pool_config,
       :open_id_connect_config,
       :arn,
-      :uris)
+      :uris,
+      :tags,
+      :additional_authentication_providers)
       include Aws::Structure
     end
 
@@ -1249,6 +1462,18 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # An internal AWS AppSync error occurred. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes an AWS Lambda data source configuration.
     #
     # @note When making an API call, you may pass LambdaDataSourceConfig
@@ -1266,6 +1491,18 @@ module Aws::AppSync
     #
     class LambdaDataSourceConfig < Struct.new(
       :lambda_function_arn)
+      include Aws::Structure
+    end
+
+    # The request exceeded a limit. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1570,6 +1807,35 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The `GraphqlApi` ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A `TagMap` object.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTypesRequest
     #   data as a hash:
     #
@@ -1633,6 +1899,7 @@ module Aws::AppSync
     #       {
     #         field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #         cloud_watch_logs_role_arn: "String", # required
+    #         exclude_verbose_content: false,
     #       }
     #
     # @!attribute [rw] field_log_level
@@ -1664,11 +1931,31 @@ module Aws::AppSync
     #   CloudWatch logs in your account.
     #   @return [String]
     #
+    # @!attribute [rw] exclude_verbose_content
+    #   Set to TRUE to exclude sections that contain information such as
+    #   headers, context, and evaluated mapping templates, regardless of
+    #   logging level.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LogConfig AWS API Documentation
     #
     class LogConfig < Struct.new(
       :field_log_level,
-      :cloud_watch_logs_role_arn)
+      :cloud_watch_logs_role_arn,
+      :exclude_verbose_content)
+      include Aws::Structure
+    end
+
+    # The resource specified in the request was not found. Check the
+    # resource, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1900,8 +2187,9 @@ module Aws::AppSync
     end
 
     # @!attribute [rw] status
-    #   The current state of the schema (PROCESSING, ACTIVE, or DELETING).
-    #   When the schema is in the ACTIVE state, you can add data.
+    #   The current state of the schema (PROCESSING, FAILED, SUCCESS, or
+    #   NOT\_APPLICABLE). When the schema is in the ACTIVE state, you can
+    #   add data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartSchemaCreationResponse AWS API Documentation
@@ -1910,6 +2198,36 @@ module Aws::AppSync
       :status)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The `GraphqlApi` ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A `TagMap` object.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # Describes a type.
     #
@@ -1943,6 +2261,46 @@ module Aws::AppSync
       :format)
       include Aws::Structure
     end
+
+    # You are not authorized to perform this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The `GraphqlApi` ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of `TagKey` objects.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateApiKeyRequest
     #   data as a hash:
@@ -2185,6 +2543,7 @@ module Aws::AppSync
     #         log_config: {
     #           field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #           cloud_watch_logs_role_arn: "String", # required
+    #           exclude_verbose_content: false,
     #         },
     #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #         user_pool_config: {
@@ -2199,6 +2558,22 @@ module Aws::AppSync
     #           iat_ttl: 1,
     #           auth_ttl: 1,
     #         },
+    #         additional_authentication_providers: [
+    #           {
+    #             authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #             open_id_connect_config: {
+    #               issuer: "String", # required
+    #               client_id: "String",
+    #               iat_ttl: 1,
+    #               auth_ttl: 1,
+    #             },
+    #             user_pool_config: {
+    #               user_pool_id: "String", # required
+    #               aws_region: "String", # required
+    #               app_id_client_regex: "String",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] api_id
@@ -2227,6 +2602,11 @@ module Aws::AppSync
     #   The OpenID Connect configuration for the `GraphqlApi` object.
     #   @return [Types::OpenIDConnectConfig]
     #
+    # @!attribute [rw] additional_authentication_providers
+    #   A list of additional authentication providers for the `GraphqlApi`
+    #   API.
+    #   @return [Array<Types::AdditionalAuthenticationProvider>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest AWS API Documentation
     #
     class UpdateGraphqlApiRequest < Struct.new(
@@ -2235,7 +2615,8 @@ module Aws::AppSync
       :log_config,
       :authentication_type,
       :user_pool_config,
-      :open_id_connect_config)
+      :open_id_connect_config,
+      :additional_authentication_providers)
       include Aws::Structure
     end
 

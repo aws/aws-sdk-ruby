@@ -23,6 +23,24 @@
         {"shape":"ResourceNotFound"}
       ]
     },
+    "DeleteAnomalyDetector":{
+      "name":"DeleteAnomalyDetector",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteAnomalyDetectorInput"},
+      "output":{
+        "shape":"DeleteAnomalyDetectorOutput",
+        "resultWrapper":"DeleteAnomalyDetectorResult"
+      },
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"MissingRequiredParameterException"}
+      ]
+    },
     "DeleteDashboards":{
       "name":"DeleteDashboards",
       "http":{
@@ -81,6 +99,23 @@
         "shape":"DescribeAlarmsForMetricOutput",
         "resultWrapper":"DescribeAlarmsForMetricResult"
       }
+    },
+    "DescribeAnomalyDetectors":{
+      "name":"DescribeAnomalyDetectors",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeAnomalyDetectorsInput"},
+      "output":{
+        "shape":"DescribeAnomalyDetectorsOutput",
+        "resultWrapper":"DescribeAnomalyDetectorsResult"
+      },
+      "errors":[
+        {"shape":"InvalidNextToken"},
+        {"shape":"InternalServiceFault"},
+        {"shape":"InvalidParameterValueException"}
+      ]
     },
     "DisableAlarmActions":{
       "name":"DisableAlarmActions",
@@ -192,6 +227,41 @@
         {"shape":"InvalidParameterValueException"}
       ]
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceInput"},
+      "output":{
+        "shape":"ListTagsForResourceOutput",
+        "resultWrapper":"ListTagsForResourceResult"
+      },
+      "errors":[
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceFault"}
+      ]
+    },
+    "PutAnomalyDetector":{
+      "name":"PutAnomalyDetector",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutAnomalyDetectorInput"},
+      "output":{
+        "shape":"PutAnomalyDetectorOutput",
+        "resultWrapper":"PutAnomalyDetectorResult"
+      },
+      "errors":[
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalServiceFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"MissingRequiredParameterException"}
+      ]
+    },
     "PutDashboard":{
       "name":"PutDashboard",
       "http":{
@@ -244,6 +314,42 @@
         {"shape":"ResourceNotFound"},
         {"shape":"InvalidFormatFault"}
       ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceInput"},
+      "output":{
+        "shape":"TagResourceOutput",
+        "resultWrapper":"TagResourceResult"
+      },
+      "errors":[
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"InternalServiceFault"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceInput"},
+      "output":{
+        "shape":"UntagResourceOutput",
+        "resultWrapper":"UntagResourceResult"
+      },
+      "errors":[
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"InternalServiceFault"}
+      ]
     }
   },
   "shapes":{
@@ -292,6 +398,37 @@
       "member":{"shape":"AlarmName"},
       "max":100
     },
+    "AmazonResourceName":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "AnomalyDetector":{
+      "type":"structure",
+      "members":{
+        "Namespace":{"shape":"Namespace"},
+        "MetricName":{"shape":"MetricName"},
+        "Dimensions":{"shape":"Dimensions"},
+        "Stat":{"shape":"Stat"},
+        "Configuration":{"shape":"AnomalyDetectorConfiguration"}
+      }
+    },
+    "AnomalyDetectorConfiguration":{
+      "type":"structure",
+      "members":{
+        "ExcludedTimeRanges":{"shape":"AnomalyDetectorExcludedTimeRanges"},
+        "MetricTimezone":{"shape":"AnomalyDetectorMetricTimezone"}
+      }
+    },
+    "AnomalyDetectorExcludedTimeRanges":{
+      "type":"list",
+      "member":{"shape":"Range"}
+    },
+    "AnomalyDetectorMetricTimezone":{"type":"string"},
+    "AnomalyDetectors":{
+      "type":"list",
+      "member":{"shape":"AnomalyDetector"}
+    },
     "AwsQueryErrorMessage":{"type":"string"},
     "ComparisonOperator":{
       "type":"string",
@@ -299,8 +436,22 @@
         "GreaterThanOrEqualToThreshold",
         "GreaterThanThreshold",
         "LessThanThreshold",
-        "LessThanOrEqualToThreshold"
+        "LessThanOrEqualToThreshold",
+        "LessThanLowerOrGreaterThanUpperThreshold",
+        "LessThanLowerThreshold",
+        "GreaterThanUpperThreshold"
       ]
+    },
+    "ConcurrentModificationException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"ConcurrentModificationException",
+        "httpStatusCode":429,
+        "senderFault":true
+      },
+      "exception":true
     },
     "Counts":{
       "type":"list",
@@ -413,6 +564,25 @@
         "AlarmNames":{"shape":"AlarmNames"}
       }
     },
+    "DeleteAnomalyDetectorInput":{
+      "type":"structure",
+      "required":[
+        "Namespace",
+        "MetricName",
+        "Stat"
+      ],
+      "members":{
+        "Namespace":{"shape":"Namespace"},
+        "MetricName":{"shape":"MetricName"},
+        "Dimensions":{"shape":"Dimensions"},
+        "Stat":{"shape":"Stat"}
+      }
+    },
+    "DeleteAnomalyDetectorOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteDashboardsInput":{
       "type":"structure",
       "required":["DashboardNames"],
@@ -480,6 +650,23 @@
       "type":"structure",
       "members":{
         "MetricAlarms":{"shape":"MetricAlarms"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "DescribeAnomalyDetectorsInput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxReturnedResultsCount"},
+        "Namespace":{"shape":"Namespace"},
+        "MetricName":{"shape":"MetricName"},
+        "Dimensions":{"shape":"Dimensions"}
+      }
+    },
+    "DescribeAnomalyDetectorsOutput":{
+      "type":"structure",
+      "members":{
+        "AnomalyDetectors":{"shape":"AnomalyDetectors"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -601,7 +788,8 @@
       "type":"structure",
       "members":{
         "MetricDataResults":{"shape":"MetricDataResults"},
-        "NextToken":{"shape":"NextToken"}
+        "NextToken":{"shape":"NextToken"},
+        "Messages":{"shape":"MetricDataResultMessages"}
       }
     },
     "GetMetricStatisticsInput":{
@@ -727,6 +915,17 @@
       "synthetic":true
     },
     "LastModified":{"type":"timestamp"},
+    "LimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"LimitExceededException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "LimitExceededFault":{
       "type":"structure",
       "members":{
@@ -773,9 +972,26 @@
         "NextToken"
       ]
     },
+    "ListTagsForResourceInput":{
+      "type":"structure",
+      "required":["ResourceARN"],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"}
+      }
+    },
+    "ListTagsForResourceOutput":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "MaxRecords":{
       "type":"integer",
       "max":100,
+      "min":1
+    },
+    "MaxReturnedResultsCount":{
+      "type":"integer",
       "min":1
     },
     "Message":{"type":"string"},
@@ -829,7 +1045,8 @@
         "ComparisonOperator":{"shape":"ComparisonOperator"},
         "TreatMissingData":{"shape":"TreatMissingData"},
         "EvaluateLowSampleCountPercentile":{"shape":"EvaluateLowSampleCountPercentile"},
-        "Metrics":{"shape":"MetricDataQueries"}
+        "Metrics":{"shape":"MetricDataQueries"},
+        "ThresholdMetricId":{"shape":"MetricId"}
       },
       "xmlOrder":[
         "AlarmName",
@@ -857,7 +1074,8 @@
         "TreatMissingData",
         "EvaluateLowSampleCountPercentile",
         "DatapointsToAlarm",
-        "Metrics"
+        "Metrics",
+        "ThresholdMetricId"
       ]
     },
     "MetricAlarms":{
@@ -972,15 +1190,31 @@
       "min":1,
       "pattern":"[^:].*"
     },
-    "NextToken":{
-      "type":"string",
-      "max":1024,
-      "min":0
-    },
+    "NextToken":{"type":"string"},
     "OutputFormat":{"type":"string"},
     "Period":{
       "type":"integer",
       "min":1
+    },
+    "PutAnomalyDetectorInput":{
+      "type":"structure",
+      "required":[
+        "Namespace",
+        "MetricName",
+        "Stat"
+      ],
+      "members":{
+        "Namespace":{"shape":"Namespace"},
+        "MetricName":{"shape":"MetricName"},
+        "Dimensions":{"shape":"Dimensions"},
+        "Stat":{"shape":"Stat"},
+        "Configuration":{"shape":"AnomalyDetectorConfiguration"}
+      }
+    },
+    "PutAnomalyDetectorOutput":{
+      "type":"structure",
+      "members":{
+      }
     },
     "PutDashboardInput":{
       "type":"structure",
@@ -1004,7 +1238,6 @@
       "required":[
         "AlarmName",
         "EvaluationPeriods",
-        "Threshold",
         "ComparisonOperator"
       ],
       "members":{
@@ -1027,7 +1260,9 @@
         "ComparisonOperator":{"shape":"ComparisonOperator"},
         "TreatMissingData":{"shape":"TreatMissingData"},
         "EvaluateLowSampleCountPercentile":{"shape":"EvaluateLowSampleCountPercentile"},
-        "Metrics":{"shape":"MetricDataQueries"}
+        "Metrics":{"shape":"MetricDataQueries"},
+        "Tags":{"shape":"TagList"},
+        "ThresholdMetricId":{"shape":"MetricId"}
       }
     },
     "PutMetricDataInput":{
@@ -1041,6 +1276,22 @@
         "MetricData":{"shape":"MetricData"}
       }
     },
+    "Range":{
+      "type":"structure",
+      "required":[
+        "StartTime",
+        "EndTime"
+      ],
+      "members":{
+        "StartTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"}
+      },
+      "xmlOrder":[
+        "StartTime",
+        "EndTime"
+      ]
+    },
+    "ResourceId":{"type":"string"},
     "ResourceList":{
       "type":"list",
       "member":{"shape":"ResourceName"},
@@ -1063,6 +1314,20 @@
       },
       "exception":true
     },
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+        "ResourceType":{"shape":"ResourceType"},
+        "ResourceId":{"shape":"ResourceId"}
+      },
+      "error":{
+        "code":"ResourceNotFoundException",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ResourceType":{"type":"string"},
     "ReturnData":{"type":"boolean"},
     "ScanBy":{
       "type":"string",
@@ -1180,6 +1445,51 @@
       "type":"integer",
       "min":1
     },
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
+    "TagResourceInput":{
+      "type":"structure",
+      "required":[
+        "ResourceARN",
+        "Tags"
+      ],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "TagResourceOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
     "Threshold":{"type":"double"},
     "Timestamp":{"type":"timestamp"},
     "Timestamps":{
@@ -1190,6 +1500,22 @@
       "type":"string",
       "max":255,
       "min":1
+    },
+    "UntagResourceInput":{
+      "type":"structure",
+      "required":[
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"},
+        "TagKeys":{"shape":"TagKeyList"}
+      }
+    },
+    "UntagResourceOutput":{
+      "type":"structure",
+      "members":{
+      }
     },
     "Values":{
       "type":"list",

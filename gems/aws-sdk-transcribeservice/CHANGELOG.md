@@ -1,6 +1,91 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2019-09-24)
+------------------
+
+* Feature - With this update Amazon Transcribe enables you to provide an AWS KMS key to encrypt your transcription output.
+
+1.28.0 (2019-09-04)
+------------------
+
+* Feature - MediaFormat is now optional for StartTranscriptionJob API.
+
+1.27.0 (2019-08-23)
+------------------
+
+* Feature - Amazon Transcribe - support transcriptions from audio sources in Russian (ru-RU) and Chinese (zh-CN).
+
+1.26.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2019-05-28)
+------------------
+
+* Feature - Amazon Transcribe - support transcriptions from audio sources in Modern Standard Arabic (ar-SA).
+
+1.22.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-04-19)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-03-25)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-03-22)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2018-12-20)
+------------------
+
+* Feature - API update.
+
 1.12.0 (2018-11-20)
 ------------------
 

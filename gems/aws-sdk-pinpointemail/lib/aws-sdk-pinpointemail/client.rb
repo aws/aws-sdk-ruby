@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::PinpointEmail
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::PinpointEmail
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::PinpointEmail
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -212,7 +261,7 @@ module Aws::PinpointEmail
     # configuration set to an email, all of the rules in that configuration
     # set are applied to the email.
     #
-    # @option params [String] :configuration_set_name
+    # @option params [required, String] :configuration_set_name
     #   The name of the configuration set.
     #
     # @option params [Types::TrackingOptions] :tracking_options
@@ -232,16 +281,21 @@ module Aws::PinpointEmail
     #   An object that defines whether or not Amazon Pinpoint can send email
     #   that you send using the configuration set.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of objects that define the tags (keys and values) that you
+    #   want to associate with the configuration set.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_configuration_set({
-    #     configuration_set_name: "ConfigurationSetName",
+    #     configuration_set_name: "ConfigurationSetName", # required
     #     tracking_options: {
     #       custom_redirect_domain: "CustomRedirectDomain", # required
     #     },
     #     delivery_options: {
+    #       tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #       sending_pool_name: "PoolName",
     #     },
     #     reputation_options: {
@@ -251,6 +305,12 @@ module Aws::PinpointEmail
     #     sending_options: {
     #       sending_enabled: false,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateConfigurationSet AWS API Documentation
@@ -334,12 +394,22 @@ module Aws::PinpointEmail
     # @option params [required, String] :pool_name
     #   The name of the dedicated IP pool.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An object that defines the tags (keys and values) that you want to
+    #   associate with the pool.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_dedicated_ip_pool({
     #     pool_name: "PoolName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDedicatedIpPool AWS API Documentation
@@ -348,6 +418,89 @@ module Aws::PinpointEmail
     # @param [Hash] params ({})
     def create_dedicated_ip_pool(params = {}, options = {})
       req = build_request(:create_dedicated_ip_pool, params)
+      req.send_request(options)
+    end
+
+    # Create a new predictive inbox placement test. Predictive inbox
+    # placement tests can help you predict how your messages will be handled
+    # by various email providers around the world. When you perform a
+    # predictive inbox placement test, you provide a sample message that
+    # contains the content that you plan to send to your customers. Amazon
+    # Pinpoint then sends that message to special email addresses spread
+    # across several major email providers. After about 24 hours, the test
+    # is complete, and you can use the `GetDeliverabilityTestReport`
+    # operation to view the results of the test.
+    #
+    # @option params [String] :report_name
+    #   A unique name that helps you to identify the predictive inbox
+    #   placement test when you retrieve the results.
+    #
+    # @option params [required, String] :from_email_address
+    #   The email address that the predictive inbox placement test email was
+    #   sent from.
+    #
+    # @option params [required, Types::EmailContent] :content
+    #   The HTML body of the message that you sent when you performed the
+    #   predictive inbox placement test.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of objects that define the tags (keys and values) that you
+    #   want to associate with the predictive inbox placement test.
+    #
+    # @return [Types::CreateDeliverabilityTestReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDeliverabilityTestReportResponse#report_id #report_id} => String
+    #   * {Types::CreateDeliverabilityTestReportResponse#deliverability_test_status #deliverability_test_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_deliverability_test_report({
+    #     report_name: "ReportName",
+    #     from_email_address: "EmailAddress", # required
+    #     content: { # required
+    #       simple: {
+    #         subject: { # required
+    #           data: "MessageData", # required
+    #           charset: "Charset",
+    #         },
+    #         body: { # required
+    #           text: {
+    #             data: "MessageData", # required
+    #             charset: "Charset",
+    #           },
+    #           html: {
+    #             data: "MessageData", # required
+    #             charset: "Charset",
+    #           },
+    #         },
+    #       },
+    #       raw: {
+    #         data: "data", # required
+    #       },
+    #       template: {
+    #         template_arn: "TemplateArn",
+    #         template_data: "TemplateData",
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_id #=> String
+    #   resp.deliverability_test_status #=> String, one of "IN_PROGRESS", "COMPLETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDeliverabilityTestReport AWS API Documentation
+    #
+    # @overload create_deliverability_test_report(params = {})
+    # @param [Hash] params ({})
+    def create_deliverability_test_report(params = {}, options = {})
+      req = build_request(:create_deliverability_test_report, params)
       req.send_request(options)
     end
 
@@ -373,6 +526,10 @@ module Aws::PinpointEmail
     # @option params [required, String] :email_identity
     #   The email address or domain that you want to verify.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of objects that define the tags (keys and values) that you
+    #   want to associate with the email identity.
+    #
     # @return [Types::CreateEmailIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEmailIdentityResponse#identity_type #identity_type} => String
@@ -383,6 +540,12 @@ module Aws::PinpointEmail
     #
     #   resp = client.create_email_identity({
     #     email_identity: "Identity", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -542,6 +705,41 @@ module Aws::PinpointEmail
       req.send_request(options)
     end
 
+    # Retrieve a list of the blacklists that your dedicated IP addresses
+    # appear on.
+    #
+    # @option params [required, Array<String>] :blacklist_item_names
+    #   A list of IP addresses that you want to retrieve blacklist information
+    #   about. You can only specify the dedicated IP addresses that you use to
+    #   send email using Amazon Pinpoint or Amazon SES.
+    #
+    # @return [Types::GetBlacklistReportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlacklistReportsResponse#blacklist_report #blacklist_report} => Hash&lt;String,Array&lt;Types::BlacklistEntry&gt;&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_blacklist_reports({
+    #     blacklist_item_names: ["BlacklistItemName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blacklist_report #=> Hash
+    #   resp.blacklist_report["BlacklistItemName"] #=> Array
+    #   resp.blacklist_report["BlacklistItemName"][0].rbl_name #=> String
+    #   resp.blacklist_report["BlacklistItemName"][0].listing_time #=> Time
+    #   resp.blacklist_report["BlacklistItemName"][0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetBlacklistReports AWS API Documentation
+    #
+    # @overload get_blacklist_reports(params = {})
+    # @param [Hash] params ({})
+    def get_blacklist_reports(params = {}, options = {})
+      req = build_request(:get_blacklist_reports, params)
+      req.send_request(options)
+    end
+
     # Get information about an existing configuration set, including the
     # dedicated IP pool that it's associated with, whether or not it's
     # enabled for sending email, and more.
@@ -563,6 +761,7 @@ module Aws::PinpointEmail
     #   * {Types::GetConfigurationSetResponse#delivery_options #delivery_options} => Types::DeliveryOptions
     #   * {Types::GetConfigurationSetResponse#reputation_options #reputation_options} => Types::ReputationOptions
     #   * {Types::GetConfigurationSetResponse#sending_options #sending_options} => Types::SendingOptions
+    #   * {Types::GetConfigurationSetResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -574,10 +773,14 @@ module Aws::PinpointEmail
     #
     #   resp.configuration_set_name #=> String
     #   resp.tracking_options.custom_redirect_domain #=> String
+    #   resp.delivery_options.tls_policy #=> String, one of "REQUIRE", "OPTIONAL"
     #   resp.delivery_options.sending_pool_name #=> String
     #   resp.reputation_options.reputation_metrics_enabled #=> Boolean
     #   resp.reputation_options.last_fresh_start #=> Time
     #   resp.sending_options.sending_enabled #=> Boolean
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetConfigurationSet AWS API Documentation
     #
@@ -719,6 +922,224 @@ module Aws::PinpointEmail
       req.send_request(options)
     end
 
+    # Retrieve information about the status of the Deliverability dashboard
+    # for your Amazon Pinpoint account. When the Deliverability dashboard is
+    # enabled, you gain access to reputation, deliverability, and other
+    # metrics for the domains that you use to send email using Amazon
+    # Pinpoint. You also gain the ability to perform predictive inbox
+    # placement tests.
+    #
+    # When you use the Deliverability dashboard, you pay a monthly
+    # subscription charge, in addition to any other fees that you accrue by
+    # using Amazon Pinpoint. For more information about the features and
+    # cost of a Deliverability dashboard subscription, see [Amazon Pinpoint
+    # Pricing][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/pinpoint/pricing/
+    #
+    # @return [Types::GetDeliverabilityDashboardOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeliverabilityDashboardOptionsResponse#dashboard_enabled #dashboard_enabled} => Boolean
+    #   * {Types::GetDeliverabilityDashboardOptionsResponse#subscription_expiry_date #subscription_expiry_date} => Time
+    #   * {Types::GetDeliverabilityDashboardOptionsResponse#account_status #account_status} => String
+    #   * {Types::GetDeliverabilityDashboardOptionsResponse#active_subscribed_domains #active_subscribed_domains} => Array&lt;Types::DomainDeliverabilityTrackingOption&gt;
+    #   * {Types::GetDeliverabilityDashboardOptionsResponse#pending_expiration_subscribed_domains #pending_expiration_subscribed_domains} => Array&lt;Types::DomainDeliverabilityTrackingOption&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.dashboard_enabled #=> Boolean
+    #   resp.subscription_expiry_date #=> Time
+    #   resp.account_status #=> String, one of "ACTIVE", "PENDING_EXPIRATION", "DISABLED"
+    #   resp.active_subscribed_domains #=> Array
+    #   resp.active_subscribed_domains[0].domain #=> String
+    #   resp.active_subscribed_domains[0].subscription_start_date #=> Time
+    #   resp.active_subscribed_domains[0].inbox_placement_tracking_option.global #=> Boolean
+    #   resp.active_subscribed_domains[0].inbox_placement_tracking_option.tracked_isps #=> Array
+    #   resp.active_subscribed_domains[0].inbox_placement_tracking_option.tracked_isps[0] #=> String
+    #   resp.pending_expiration_subscribed_domains #=> Array
+    #   resp.pending_expiration_subscribed_domains[0].domain #=> String
+    #   resp.pending_expiration_subscribed_domains[0].subscription_start_date #=> Time
+    #   resp.pending_expiration_subscribed_domains[0].inbox_placement_tracking_option.global #=> Boolean
+    #   resp.pending_expiration_subscribed_domains[0].inbox_placement_tracking_option.tracked_isps #=> Array
+    #   resp.pending_expiration_subscribed_domains[0].inbox_placement_tracking_option.tracked_isps[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityDashboardOptions AWS API Documentation
+    #
+    # @overload get_deliverability_dashboard_options(params = {})
+    # @param [Hash] params ({})
+    def get_deliverability_dashboard_options(params = {}, options = {})
+      req = build_request(:get_deliverability_dashboard_options, params)
+      req.send_request(options)
+    end
+
+    # Retrieve the results of a predictive inbox placement test.
+    #
+    # @option params [required, String] :report_id
+    #   A unique string that identifies the predictive inbox placement test.
+    #
+    # @return [Types::GetDeliverabilityTestReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeliverabilityTestReportResponse#deliverability_test_report #deliverability_test_report} => Types::DeliverabilityTestReport
+    #   * {Types::GetDeliverabilityTestReportResponse#overall_placement #overall_placement} => Types::PlacementStatistics
+    #   * {Types::GetDeliverabilityTestReportResponse#isp_placements #isp_placements} => Array&lt;Types::IspPlacement&gt;
+    #   * {Types::GetDeliverabilityTestReportResponse#message #message} => String
+    #   * {Types::GetDeliverabilityTestReportResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_deliverability_test_report({
+    #     report_id: "ReportId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deliverability_test_report.report_id #=> String
+    #   resp.deliverability_test_report.report_name #=> String
+    #   resp.deliverability_test_report.subject #=> String
+    #   resp.deliverability_test_report.from_email_address #=> String
+    #   resp.deliverability_test_report.create_date #=> Time
+    #   resp.deliverability_test_report.deliverability_test_status #=> String, one of "IN_PROGRESS", "COMPLETED"
+    #   resp.overall_placement.inbox_percentage #=> Float
+    #   resp.overall_placement.spam_percentage #=> Float
+    #   resp.overall_placement.missing_percentage #=> Float
+    #   resp.overall_placement.spf_percentage #=> Float
+    #   resp.overall_placement.dkim_percentage #=> Float
+    #   resp.isp_placements #=> Array
+    #   resp.isp_placements[0].isp_name #=> String
+    #   resp.isp_placements[0].placement_statistics.inbox_percentage #=> Float
+    #   resp.isp_placements[0].placement_statistics.spam_percentage #=> Float
+    #   resp.isp_placements[0].placement_statistics.missing_percentage #=> Float
+    #   resp.isp_placements[0].placement_statistics.spf_percentage #=> Float
+    #   resp.isp_placements[0].placement_statistics.dkim_percentage #=> Float
+    #   resp.message #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityTestReport AWS API Documentation
+    #
+    # @overload get_deliverability_test_report(params = {})
+    # @param [Hash] params ({})
+    def get_deliverability_test_report(params = {}, options = {})
+      req = build_request(:get_deliverability_test_report, params)
+      req.send_request(options)
+    end
+
+    # Retrieve all the deliverability data for a specific campaign. This
+    # data is available for a campaign only if the campaign sent email by
+    # using a domain that the Deliverability dashboard is enabled for
+    # (`PutDeliverabilityDashboardOption` operation).
+    #
+    # @option params [required, String] :campaign_id
+    #   The unique identifier for the campaign. Amazon Pinpoint automatically
+    #   generates and assigns this identifier to a campaign. This value is not
+    #   the same as the campaign identifier that Amazon Pinpoint assigns to
+    #   campaigns that you create and manage by using the Amazon Pinpoint API
+    #   or the Amazon Pinpoint console.
+    #
+    # @return [Types::GetDomainDeliverabilityCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainDeliverabilityCampaignResponse#domain_deliverability_campaign #domain_deliverability_campaign} => Types::DomainDeliverabilityCampaign
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain_deliverability_campaign({
+    #     campaign_id: "CampaignId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_deliverability_campaign.campaign_id #=> String
+    #   resp.domain_deliverability_campaign.image_url #=> String
+    #   resp.domain_deliverability_campaign.subject #=> String
+    #   resp.domain_deliverability_campaign.from_address #=> String
+    #   resp.domain_deliverability_campaign.sending_ips #=> Array
+    #   resp.domain_deliverability_campaign.sending_ips[0] #=> String
+    #   resp.domain_deliverability_campaign.first_seen_date_time #=> Time
+    #   resp.domain_deliverability_campaign.last_seen_date_time #=> Time
+    #   resp.domain_deliverability_campaign.inbox_count #=> Integer
+    #   resp.domain_deliverability_campaign.spam_count #=> Integer
+    #   resp.domain_deliverability_campaign.read_rate #=> Float
+    #   resp.domain_deliverability_campaign.delete_rate #=> Float
+    #   resp.domain_deliverability_campaign.read_delete_rate #=> Float
+    #   resp.domain_deliverability_campaign.projected_volume #=> Integer
+    #   resp.domain_deliverability_campaign.esps #=> Array
+    #   resp.domain_deliverability_campaign.esps[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainDeliverabilityCampaign AWS API Documentation
+    #
+    # @overload get_domain_deliverability_campaign(params = {})
+    # @param [Hash] params ({})
+    def get_domain_deliverability_campaign(params = {}, options = {})
+      req = build_request(:get_domain_deliverability_campaign, params)
+      req.send_request(options)
+    end
+
+    # Retrieve inbox placement and engagement rates for the domains that you
+    # use to send email.
+    #
+    # @option params [required, String] :domain
+    #   The domain that you want to obtain deliverability metrics for.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date
+    #   The first day (in Unix time) that you want to obtain domain
+    #   deliverability metrics for.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date
+    #   The last day (in Unix time) that you want to obtain domain
+    #   deliverability metrics for. The `EndDate` that you specify has to be
+    #   less than or equal to 30 days after the `StartDate`.
+    #
+    # @return [Types::GetDomainStatisticsReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainStatisticsReportResponse#overall_volume #overall_volume} => Types::OverallVolume
+    #   * {Types::GetDomainStatisticsReportResponse#daily_volumes #daily_volumes} => Array&lt;Types::DailyVolume&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain_statistics_report({
+    #     domain: "Identity", # required
+    #     start_date: Time.now, # required
+    #     end_date: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.overall_volume.volume_statistics.inbox_raw_count #=> Integer
+    #   resp.overall_volume.volume_statistics.spam_raw_count #=> Integer
+    #   resp.overall_volume.volume_statistics.projected_inbox #=> Integer
+    #   resp.overall_volume.volume_statistics.projected_spam #=> Integer
+    #   resp.overall_volume.read_rate_percent #=> Float
+    #   resp.overall_volume.domain_isp_placements #=> Array
+    #   resp.overall_volume.domain_isp_placements[0].isp_name #=> String
+    #   resp.overall_volume.domain_isp_placements[0].inbox_raw_count #=> Integer
+    #   resp.overall_volume.domain_isp_placements[0].spam_raw_count #=> Integer
+    #   resp.overall_volume.domain_isp_placements[0].inbox_percentage #=> Float
+    #   resp.overall_volume.domain_isp_placements[0].spam_percentage #=> Float
+    #   resp.daily_volumes #=> Array
+    #   resp.daily_volumes[0].start_date #=> Time
+    #   resp.daily_volumes[0].volume_statistics.inbox_raw_count #=> Integer
+    #   resp.daily_volumes[0].volume_statistics.spam_raw_count #=> Integer
+    #   resp.daily_volumes[0].volume_statistics.projected_inbox #=> Integer
+    #   resp.daily_volumes[0].volume_statistics.projected_spam #=> Integer
+    #   resp.daily_volumes[0].domain_isp_placements #=> Array
+    #   resp.daily_volumes[0].domain_isp_placements[0].isp_name #=> String
+    #   resp.daily_volumes[0].domain_isp_placements[0].inbox_raw_count #=> Integer
+    #   resp.daily_volumes[0].domain_isp_placements[0].spam_raw_count #=> Integer
+    #   resp.daily_volumes[0].domain_isp_placements[0].inbox_percentage #=> Float
+    #   resp.daily_volumes[0].domain_isp_placements[0].spam_percentage #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainStatisticsReport AWS API Documentation
+    #
+    # @overload get_domain_statistics_report(params = {})
+    # @param [Hash] params ({})
+    def get_domain_statistics_report(params = {}, options = {})
+      req = build_request(:get_domain_statistics_report, params)
+      req.send_request(options)
+    end
+
     # Provides information about a specific identity associated with your
     # Amazon Pinpoint account, including the identity's verification
     # status, its DKIM authentication status, and its custom Mail-From
@@ -734,6 +1155,7 @@ module Aws::PinpointEmail
     #   * {Types::GetEmailIdentityResponse#verified_for_sending_status #verified_for_sending_status} => Boolean
     #   * {Types::GetEmailIdentityResponse#dkim_attributes #dkim_attributes} => Types::DkimAttributes
     #   * {Types::GetEmailIdentityResponse#mail_from_attributes #mail_from_attributes} => Types::MailFromAttributes
+    #   * {Types::GetEmailIdentityResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -753,6 +1175,9 @@ module Aws::PinpointEmail
     #   resp.mail_from_attributes.mail_from_domain #=> String
     #   resp.mail_from_attributes.mail_from_domain_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE"
     #   resp.mail_from_attributes.behavior_on_mx_failure #=> String, one of "USE_DEFAULT_VALUE", "REJECT_MESSAGE"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetEmailIdentity AWS API Documentation
     #
@@ -849,6 +1274,133 @@ module Aws::PinpointEmail
       req.send_request(options)
     end
 
+    # Show a list of the predictive inbox placement tests that you've
+    # performed, regardless of their statuses. For predictive inbox
+    # placement tests that are complete, you can use the
+    # `GetDeliverabilityTestReport` operation to view the results.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to
+    #   `ListDeliverabilityTestReports` to indicate the position in the list
+    #   of predictive inbox placement tests.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to
+    #   `ListDeliverabilityTestReports`. If the number of results is larger
+    #   than the number you specified in this parameter, then the response
+    #   includes a `NextToken` element, which you can use to obtain additional
+    #   results.
+    #
+    #   The value you specify has to be at least 0, and can be no more than
+    #   1000.
+    #
+    # @return [Types::ListDeliverabilityTestReportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeliverabilityTestReportsResponse#deliverability_test_reports #deliverability_test_reports} => Array&lt;Types::DeliverabilityTestReport&gt;
+    #   * {Types::ListDeliverabilityTestReportsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_deliverability_test_reports({
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deliverability_test_reports #=> Array
+    #   resp.deliverability_test_reports[0].report_id #=> String
+    #   resp.deliverability_test_reports[0].report_name #=> String
+    #   resp.deliverability_test_reports[0].subject #=> String
+    #   resp.deliverability_test_reports[0].from_email_address #=> String
+    #   resp.deliverability_test_reports[0].create_date #=> Time
+    #   resp.deliverability_test_reports[0].deliverability_test_status #=> String, one of "IN_PROGRESS", "COMPLETED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDeliverabilityTestReports AWS API Documentation
+    #
+    # @overload list_deliverability_test_reports(params = {})
+    # @param [Hash] params ({})
+    def list_deliverability_test_reports(params = {}, options = {})
+      req = build_request(:list_deliverability_test_reports, params)
+      req.send_request(options)
+    end
+
+    # Retrieve deliverability data for all the campaigns that used a
+    # specific domain to send email during a specified time range. This data
+    # is available for a domain only if you enabled the Deliverability
+    # dashboard (`PutDeliverabilityDashboardOption` operation) for the
+    # domain.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date
+    #   The first day, in Unix time format, that you want to obtain
+    #   deliverability data for.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date
+    #   The last day, in Unix time format, that you want to obtain
+    #   deliverability data for. This value has to be less than or equal to 30
+    #   days after the value of the `StartDate` parameter.
+    #
+    # @option params [required, String] :subscribed_domain
+    #   The domain to obtain deliverability data for.
+    #
+    # @option params [String] :next_token
+    #   A token that’s returned from a previous call to the
+    #   `ListDomainDeliverabilityCampaigns` operation. This token indicates
+    #   the position of a campaign in the list of campaigns.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of results to include in response to a single call
+    #   to the `ListDomainDeliverabilityCampaigns` operation. If the number of
+    #   results is larger than the number that you specify in this parameter,
+    #   the response includes a `NextToken` element, which you can use to
+    #   obtain additional results.
+    #
+    # @return [Types::ListDomainDeliverabilityCampaignsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainDeliverabilityCampaignsResponse#domain_deliverability_campaigns #domain_deliverability_campaigns} => Array&lt;Types::DomainDeliverabilityCampaign&gt;
+    #   * {Types::ListDomainDeliverabilityCampaignsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domain_deliverability_campaigns({
+    #     start_date: Time.now, # required
+    #     end_date: Time.now, # required
+    #     subscribed_domain: "Domain", # required
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_deliverability_campaigns #=> Array
+    #   resp.domain_deliverability_campaigns[0].campaign_id #=> String
+    #   resp.domain_deliverability_campaigns[0].image_url #=> String
+    #   resp.domain_deliverability_campaigns[0].subject #=> String
+    #   resp.domain_deliverability_campaigns[0].from_address #=> String
+    #   resp.domain_deliverability_campaigns[0].sending_ips #=> Array
+    #   resp.domain_deliverability_campaigns[0].sending_ips[0] #=> String
+    #   resp.domain_deliverability_campaigns[0].first_seen_date_time #=> Time
+    #   resp.domain_deliverability_campaigns[0].last_seen_date_time #=> Time
+    #   resp.domain_deliverability_campaigns[0].inbox_count #=> Integer
+    #   resp.domain_deliverability_campaigns[0].spam_count #=> Integer
+    #   resp.domain_deliverability_campaigns[0].read_rate #=> Float
+    #   resp.domain_deliverability_campaigns[0].delete_rate #=> Float
+    #   resp.domain_deliverability_campaigns[0].read_delete_rate #=> Float
+    #   resp.domain_deliverability_campaigns[0].projected_volume #=> Integer
+    #   resp.domain_deliverability_campaigns[0].esps #=> Array
+    #   resp.domain_deliverability_campaigns[0].esps[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDomainDeliverabilityCampaigns AWS API Documentation
+    #
+    # @overload list_domain_deliverability_campaigns(params = {})
+    # @param [Hash] params ({})
+    def list_domain_deliverability_campaigns(params = {}, options = {})
+      req = build_request(:list_domain_deliverability_campaigns, params)
+      req.send_request(options)
+    end
+
     # Returns a list of all of the email identities that are associated with
     # your Amazon Pinpoint account. An identity can be either an email
     # address or a domain. This operation returns identities that are
@@ -893,6 +1445,42 @@ module Aws::PinpointEmail
     # @param [Hash] params ({})
     def list_email_identities(params = {}, options = {})
       req = build_request(:list_email_identities, params)
+      req.send_request(options)
+    end
+
+    # Retrieve a list of the tags (keys and values) that are associated with
+    # a specified resource. A *tag* is a label that you optionally define
+    # and associate with a resource in Amazon Pinpoint. Each tag consists of
+    # a required *tag key* and an optional associated *tag value*. A tag key
+    # is a general label that acts as a category for more specific tag
+    # values. A tag value acts as a descriptor within a tag key.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   retrieve tag information for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -959,6 +1547,13 @@ module Aws::PinpointEmail
     #   The name of the configuration set that you want to associate with a
     #   dedicated IP pool.
     #
+    # @option params [String] :tls_policy
+    #   Specifies whether messages that use the configuration set are required
+    #   to use Transport Layer Security (TLS). If the value is `Require`,
+    #   messages are only delivered if a TLS connection can be established. If
+    #   the value is `Optional`, messages can be delivered in plain text if a
+    #   TLS connection can't be established.
+    #
     # @option params [String] :sending_pool_name
     #   The name of the dedicated IP pool that you want to associate with the
     #   configuration set.
@@ -969,6 +1564,7 @@ module Aws::PinpointEmail
     #
     #   resp = client.put_configuration_set_delivery_options({
     #     configuration_set_name: "ConfigurationSetName", # required
+    #     tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #     sending_pool_name: "SendingPoolName",
     #   })
     #
@@ -1128,6 +1724,58 @@ module Aws::PinpointEmail
     # @param [Hash] params ({})
     def put_dedicated_ip_warmup_attributes(params = {}, options = {})
       req = build_request(:put_dedicated_ip_warmup_attributes, params)
+      req.send_request(options)
+    end
+
+    # Enable or disable the Deliverability dashboard for your Amazon
+    # Pinpoint account. When you enable the Deliverability dashboard, you
+    # gain access to reputation, deliverability, and other metrics for the
+    # domains that you use to send email using Amazon Pinpoint. You also
+    # gain the ability to perform predictive inbox placement tests.
+    #
+    # When you use the Deliverability dashboard, you pay a monthly
+    # subscription charge, in addition to any other fees that you accrue by
+    # using Amazon Pinpoint. For more information about the features and
+    # cost of a Deliverability dashboard subscription, see [Amazon Pinpoint
+    # Pricing][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/pinpoint/pricing/
+    #
+    # @option params [required, Boolean] :dashboard_enabled
+    #   Specifies whether to enable the Deliverability dashboard for your
+    #   Amazon Pinpoint account. To enable the dashboard, set this value to
+    #   `true`.
+    #
+    # @option params [Array<Types::DomainDeliverabilityTrackingOption>] :subscribed_domains
+    #   An array of objects, one for each verified domain that you use to send
+    #   email and enabled the Deliverability dashboard for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_deliverability_dashboard_option({
+    #     dashboard_enabled: false, # required
+    #     subscribed_domains: [
+    #       {
+    #         domain: "Domain",
+    #         subscription_start_date: Time.now,
+    #         inbox_placement_tracking_option: {
+    #           global: false,
+    #           tracked_isps: ["IspName"],
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDeliverabilityDashboardOption AWS API Documentation
+    #
+    # @overload put_deliverability_dashboard_option(params = {})
+    # @param [Hash] params ({})
+    def put_deliverability_dashboard_option(params = {}, options = {})
+      req = build_request(:put_deliverability_dashboard_option, params)
       req.send_request(options)
     end
 
@@ -1343,6 +1991,10 @@ module Aws::PinpointEmail
     #       raw: {
     #         data: "data", # required
     #       },
+    #       template: {
+    #         template_arn: "TemplateArn",
+    #         template_data: "TemplateData",
+    #       },
     #     },
     #     email_tags: [
     #       {
@@ -1363,6 +2015,84 @@ module Aws::PinpointEmail
     # @param [Hash] params ({})
     def send_email(params = {}, options = {})
       req = build_request(:send_email, params)
+      req.send_request(options)
+    end
+
+    # Add one or more tags (keys and values) to a specified resource. A
+    # *tag* is a label that you optionally define and associate with a
+    # resource in Amazon Pinpoint. Tags can help you categorize and manage
+    # resources in different ways, such as by purpose, owner, environment,
+    # or other criteria. A resource can have as many as 50 tags.
+    #
+    # Each tag consists of a required *tag key* and an associated *tag
+    # value*, both of which you define. A tag key is a general label that
+    # acts as a category for more specific tag values. A tag value acts as a
+    # descriptor within a tag key.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to add
+    #   one or more tags to.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A list of the tags that you want to add to the resource. A tag
+    #   consists of a required tag key (`Key`) and an associated tag value
+    #   (`Value`). The maximum length of a tag key is 128 characters. The
+    #   maximum length of a tag value is 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove one or more tags (keys and values) from a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to remove
+    #   one or more tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tags (tag keys) that you want to remove from the resource. When
+    #   you specify a tag key, the action removes both that key and its
+    #   associated tag value.
+    #
+    #   To remove more than one tag from the resource, append the `TagKeys`
+    #   parameter and argument for each additional tag to remove, separated by
+    #   an ampersand. For example:
+    #   `/v1/email/tags?ResourceArn=ResourceArn&TagKeys=Key1&TagKeys=Key2`
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1440,7 +2170,7 @@ module Aws::PinpointEmail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointemail'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

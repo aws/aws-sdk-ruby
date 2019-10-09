@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::MediaConnect
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::MediaConnect
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::MediaConnect
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -224,18 +273,25 @@ module Aws::MediaConnect
     #     flow_arn: "__string", # required
     #     outputs: [ # required
     #       {
+    #         cidr_allow_list: ["__string"],
     #         description: "__string",
-    #         destination: "__string", # required
+    #         destination: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         max_latency: 1,
     #         name: "__string",
-    #         port: 1, # required
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp
+    #         port: 1,
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
     #       },
@@ -246,20 +302,29 @@ module Aws::MediaConnect
     #
     #   resp.flow_arn #=> String
     #   resp.outputs #=> Array
+    #   resp.outputs[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].destination #=> String
     #   resp.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.outputs[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.outputs[0].encryption.constant_initialization_vector #=> String
+    #   resp.outputs[0].encryption.device_id #=> String
+    #   resp.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.outputs[0].encryption.region #=> String
+    #   resp.outputs[0].encryption.resource_id #=> String
     #   resp.outputs[0].encryption.role_arn #=> String
     #   resp.outputs[0].encryption.secret_arn #=> String
+    #   resp.outputs[0].encryption.url #=> String
     #   resp.outputs[0].entitlement_arn #=> String
     #   resp.outputs[0].media_live_input_arn #=> String
     #   resp.outputs[0].name #=> String
     #   resp.outputs[0].output_arn #=> String
     #   resp.outputs[0].port #=> Integer
+    #   resp.outputs[0].transport.cidr_allow_list #=> Array
+    #   resp.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.outputs[0].transport.max_bitrate #=> Integer
     #   resp.outputs[0].transport.max_latency #=> Integer
-    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.outputs[0].transport.remote_id #=> String
     #   resp.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.outputs[0].transport.stream_id #=> String
     #
@@ -302,12 +367,18 @@ module Aws::MediaConnect
     #     availability_zone: "__string",
     #     entitlements: [
     #       {
+    #         data_transfer_subscriber_fee_percent: 1,
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         name: "__string",
     #         subscribers: ["__string"], # required
@@ -316,18 +387,25 @@ module Aws::MediaConnect
     #     name: "__string", # required
     #     outputs: [
     #       {
+    #         cidr_allow_list: ["__string"],
     #         description: "__string",
-    #         destination: "__string", # required
+    #         destination: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         max_latency: 1,
     #         name: "__string",
-    #         port: 1, # required
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp
+    #         port: 1,
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
     #       },
@@ -335,9 +413,14 @@ module Aws::MediaConnect
     #     source: { # required
     #       decryption: {
     #         algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #         key_type: "static-key", # accepts static-key
+    #         constant_initialization_vector: "__string",
+    #         device_id: "__string",
+    #         key_type: "speke", # accepts speke, static-key
+    #         region: "__string",
+    #         resource_id: "__string",
     #         role_arn: "__string", # required
-    #         secret_arn: "__string", # required
+    #         secret_arn: "__string",
+    #         url: "__string",
     #       },
     #       description: "__string",
     #       entitlement_arn: "__string",
@@ -345,7 +428,7 @@ module Aws::MediaConnect
     #       max_bitrate: 1,
     #       max_latency: 1,
     #       name: "__string",
-    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #       stream_id: "__string",
     #       whitelist_cidr: "__string",
     #     },
@@ -357,11 +440,17 @@ module Aws::MediaConnect
     #   resp.flow.description #=> String
     #   resp.flow.egress_ip #=> String
     #   resp.flow.entitlements #=> Array
+    #   resp.flow.entitlements[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.entitlements[0].description #=> String
     #   resp.flow.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.flow.entitlements[0].encryption.constant_initialization_vector #=> String
+    #   resp.flow.entitlements[0].encryption.device_id #=> String
+    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.entitlements[0].encryption.region #=> String
+    #   resp.flow.entitlements[0].encryption.resource_id #=> String
     #   resp.flow.entitlements[0].encryption.role_arn #=> String
     #   resp.flow.entitlements[0].encryption.secret_arn #=> String
+    #   resp.flow.entitlements[0].encryption.url #=> String
     #   resp.flow.entitlements[0].entitlement_arn #=> String
     #   resp.flow.entitlements[0].name #=> String
     #   resp.flow.entitlements[0].subscribers #=> Array
@@ -369,35 +458,53 @@ module Aws::MediaConnect
     #   resp.flow.flow_arn #=> String
     #   resp.flow.name #=> String
     #   resp.flow.outputs #=> Array
+    #   resp.flow.outputs[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.outputs[0].description #=> String
     #   resp.flow.outputs[0].destination #=> String
     #   resp.flow.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.flow.outputs[0].encryption.constant_initialization_vector #=> String
+    #   resp.flow.outputs[0].encryption.device_id #=> String
+    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.outputs[0].encryption.region #=> String
+    #   resp.flow.outputs[0].encryption.resource_id #=> String
     #   resp.flow.outputs[0].encryption.role_arn #=> String
     #   resp.flow.outputs[0].encryption.secret_arn #=> String
+    #   resp.flow.outputs[0].encryption.url #=> String
     #   resp.flow.outputs[0].entitlement_arn #=> String
     #   resp.flow.outputs[0].media_live_input_arn #=> String
     #   resp.flow.outputs[0].name #=> String
     #   resp.flow.outputs[0].output_arn #=> String
     #   resp.flow.outputs[0].port #=> Integer
+    #   resp.flow.outputs[0].transport.cidr_allow_list #=> Array
+    #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
+    #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.source.decryption.key_type #=> String, one of "static-key"
+    #   resp.flow.source.decryption.constant_initialization_vector #=> String
+    #   resp.flow.source.decryption.device_id #=> String
+    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.source.decryption.region #=> String
+    #   resp.flow.source.decryption.resource_id #=> String
     #   resp.flow.source.decryption.role_arn #=> String
     #   resp.flow.source.decryption.secret_arn #=> String
+    #   resp.flow.source.decryption.url #=> String
     #   resp.flow.source.description #=> String
     #   resp.flow.source.entitlement_arn #=> String
     #   resp.flow.source.ingest_ip #=> String
     #   resp.flow.source.ingest_port #=> Integer
     #   resp.flow.source.name #=> String
     #   resp.flow.source.source_arn #=> String
+    #   resp.flow.source.transport.cidr_allow_list #=> Array
+    #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.whitelist_cidr #=> String
@@ -464,11 +571,17 @@ module Aws::MediaConnect
     #   resp.flow.description #=> String
     #   resp.flow.egress_ip #=> String
     #   resp.flow.entitlements #=> Array
+    #   resp.flow.entitlements[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.entitlements[0].description #=> String
     #   resp.flow.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.flow.entitlements[0].encryption.constant_initialization_vector #=> String
+    #   resp.flow.entitlements[0].encryption.device_id #=> String
+    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.entitlements[0].encryption.region #=> String
+    #   resp.flow.entitlements[0].encryption.resource_id #=> String
     #   resp.flow.entitlements[0].encryption.role_arn #=> String
     #   resp.flow.entitlements[0].encryption.secret_arn #=> String
+    #   resp.flow.entitlements[0].encryption.url #=> String
     #   resp.flow.entitlements[0].entitlement_arn #=> String
     #   resp.flow.entitlements[0].name #=> String
     #   resp.flow.entitlements[0].subscribers #=> Array
@@ -476,35 +589,53 @@ module Aws::MediaConnect
     #   resp.flow.flow_arn #=> String
     #   resp.flow.name #=> String
     #   resp.flow.outputs #=> Array
+    #   resp.flow.outputs[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.outputs[0].description #=> String
     #   resp.flow.outputs[0].destination #=> String
     #   resp.flow.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.flow.outputs[0].encryption.constant_initialization_vector #=> String
+    #   resp.flow.outputs[0].encryption.device_id #=> String
+    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.outputs[0].encryption.region #=> String
+    #   resp.flow.outputs[0].encryption.resource_id #=> String
     #   resp.flow.outputs[0].encryption.role_arn #=> String
     #   resp.flow.outputs[0].encryption.secret_arn #=> String
+    #   resp.flow.outputs[0].encryption.url #=> String
     #   resp.flow.outputs[0].entitlement_arn #=> String
     #   resp.flow.outputs[0].media_live_input_arn #=> String
     #   resp.flow.outputs[0].name #=> String
     #   resp.flow.outputs[0].output_arn #=> String
     #   resp.flow.outputs[0].port #=> Integer
+    #   resp.flow.outputs[0].transport.cidr_allow_list #=> Array
+    #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
+    #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.source.decryption.key_type #=> String, one of "static-key"
+    #   resp.flow.source.decryption.constant_initialization_vector #=> String
+    #   resp.flow.source.decryption.device_id #=> String
+    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.source.decryption.region #=> String
+    #   resp.flow.source.decryption.resource_id #=> String
     #   resp.flow.source.decryption.role_arn #=> String
     #   resp.flow.source.decryption.secret_arn #=> String
+    #   resp.flow.source.decryption.url #=> String
     #   resp.flow.source.description #=> String
     #   resp.flow.source.entitlement_arn #=> String
     #   resp.flow.source.ingest_ip #=> String
     #   resp.flow.source.ingest_port #=> Integer
     #   resp.flow.source.name #=> String
     #   resp.flow.source.source_arn #=> String
+    #   resp.flow.source.transport.cidr_allow_list #=> Array
+    #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.whitelist_cidr #=> String
@@ -538,12 +669,18 @@ module Aws::MediaConnect
     #   resp = client.grant_flow_entitlements({
     #     entitlements: [ # required
     #       {
+    #         data_transfer_subscriber_fee_percent: 1,
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         name: "__string",
     #         subscribers: ["__string"], # required
@@ -555,11 +692,17 @@ module Aws::MediaConnect
     # @example Response structure
     #
     #   resp.entitlements #=> Array
+    #   resp.entitlements[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.entitlements[0].description #=> String
     #   resp.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.entitlements[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.entitlements[0].encryption.constant_initialization_vector #=> String
+    #   resp.entitlements[0].encryption.device_id #=> String
+    #   resp.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.entitlements[0].encryption.region #=> String
+    #   resp.entitlements[0].encryption.resource_id #=> String
     #   resp.entitlements[0].encryption.role_arn #=> String
     #   resp.entitlements[0].encryption.secret_arn #=> String
+    #   resp.entitlements[0].encryption.url #=> String
     #   resp.entitlements[0].entitlement_arn #=> String
     #   resp.entitlements[0].name #=> String
     #   resp.entitlements[0].subscribers #=> Array
@@ -597,6 +740,7 @@ module Aws::MediaConnect
     # @example Response structure
     #
     #   resp.entitlements #=> Array
+    #   resp.entitlements[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.entitlements[0].entitlement_arn #=> String
     #   resp.entitlements[0].entitlement_name #=> String
     #   resp.next_token #=> String
@@ -646,6 +790,34 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def list_flows(params = {}, options = {})
       req = build_request(:list_flows, params)
+      req.send_request(options)
+    end
+
+    # List all tags on an AWS Elemental MediaConnect resource
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -777,6 +949,62 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Associates the specified tags to a resource with the specified
+    # resourceArn. If existing tags on a resource are not specified in the
+    # request parameters, they are not changed. When a resource is deleted,
+    # the tags associated with that resource are deleted as well.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   A map from tag keys to values. Tag keys can have a maximum character
+    #   length of 128 characters, and tag values can have a maximum length of
+    #   256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: { # required
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # You can change an entitlement's description, subscribers, and
     # encryption. If you change the subscribers, the service will remove the
     # outputs that are are used by the subscribers that are removed.
@@ -810,9 +1038,14 @@ module Aws::MediaConnect
     #     description: "__string",
     #     encryption: {
     #       algorithm: "aes128", # accepts aes128, aes192, aes256
-    #       key_type: "static-key", # accepts static-key
+    #       constant_initialization_vector: "__string",
+    #       device_id: "__string",
+    #       key_type: "speke", # accepts speke, static-key
+    #       region: "__string",
+    #       resource_id: "__string",
     #       role_arn: "__string",
     #       secret_arn: "__string",
+    #       url: "__string",
     #     },
     #     entitlement_arn: "__string", # required
     #     flow_arn: "__string", # required
@@ -821,11 +1054,17 @@ module Aws::MediaConnect
     #
     # @example Response structure
     #
+    #   resp.entitlement.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.entitlement.description #=> String
     #   resp.entitlement.encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.entitlement.encryption.key_type #=> String, one of "static-key"
+    #   resp.entitlement.encryption.constant_initialization_vector #=> String
+    #   resp.entitlement.encryption.device_id #=> String
+    #   resp.entitlement.encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.entitlement.encryption.region #=> String
+    #   resp.entitlement.encryption.resource_id #=> String
     #   resp.entitlement.encryption.role_arn #=> String
     #   resp.entitlement.encryption.secret_arn #=> String
+    #   resp.entitlement.encryption.url #=> String
     #   resp.entitlement.entitlement_arn #=> String
     #   resp.entitlement.name #=> String
     #   resp.entitlement.subscribers #=> Array
@@ -842,6 +1081,11 @@ module Aws::MediaConnect
     end
 
     # Updates an existing flow output.
+    #
+    # @option params [Array<String>] :cidr_allow_list
+    #   The range of IP addresses that should be allowed to initiate output
+    #   requests to this flow. These IP addresses should be in the form of a
+    #   Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
     #
     # @option params [String] :description
     #   A description of the output. This description appears only on the AWS
@@ -867,8 +1111,12 @@ module Aws::MediaConnect
     # @option params [String] :protocol
     #   The protocol to use for the output.
     #
+    # @option params [String] :remote_id
+    #   The remote ID for the Zixi-pull stream.
+    #
     # @option params [Integer] :smoothing_latency
-    #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+    #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
+    #   streams.
     #
     # @option params [String] :stream_id
     #   The stream ID that you want to use for this transport. This parameter
@@ -882,19 +1130,26 @@ module Aws::MediaConnect
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_flow_output({
+    #     cidr_allow_list: ["__string"],
     #     description: "__string",
     #     destination: "__string",
     #     encryption: {
     #       algorithm: "aes128", # accepts aes128, aes192, aes256
-    #       key_type: "static-key", # accepts static-key
+    #       constant_initialization_vector: "__string",
+    #       device_id: "__string",
+    #       key_type: "speke", # accepts speke, static-key
+    #       region: "__string",
+    #       resource_id: "__string",
     #       role_arn: "__string",
     #       secret_arn: "__string",
+    #       url: "__string",
     #     },
     #     flow_arn: "__string", # required
     #     max_latency: 1,
     #     output_arn: "__string", # required
     #     port: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #     remote_id: "__string",
     #     smoothing_latency: 1,
     #     stream_id: "__string",
     #   })
@@ -902,20 +1157,29 @@ module Aws::MediaConnect
     # @example Response structure
     #
     #   resp.flow_arn #=> String
+    #   resp.output.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.output.description #=> String
     #   resp.output.destination #=> String
     #   resp.output.encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.output.encryption.key_type #=> String, one of "static-key"
+    #   resp.output.encryption.constant_initialization_vector #=> String
+    #   resp.output.encryption.device_id #=> String
+    #   resp.output.encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.output.encryption.region #=> String
+    #   resp.output.encryption.resource_id #=> String
     #   resp.output.encryption.role_arn #=> String
     #   resp.output.encryption.secret_arn #=> String
+    #   resp.output.encryption.url #=> String
     #   resp.output.entitlement_arn #=> String
     #   resp.output.media_live_input_arn #=> String
     #   resp.output.name #=> String
     #   resp.output.output_arn #=> String
     #   resp.output.port #=> Integer
+    #   resp.output.transport.cidr_allow_list #=> Array
+    #   resp.output.transport.cidr_allow_list[0] #=> String
     #   resp.output.transport.max_bitrate #=> Integer
     #   resp.output.transport.max_latency #=> Integer
-    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.output.transport.remote_id #=> String
     #   resp.output.transport.smoothing_latency #=> Integer
     #   resp.output.transport.stream_id #=> String
     #
@@ -948,10 +1212,11 @@ module Aws::MediaConnect
     #   The port that the flow will be listening on for incoming content.
     #
     # @option params [Integer] :max_bitrate
-    #   The smoothing max bitrate for RTP and RTP-FEC streams.
+    #   The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
     #
     # @option params [Integer] :max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based and Zixi-based streams.
     #
     # @option params [String] :protocol
     #   The protocol that is used by the source.
@@ -964,8 +1229,8 @@ module Aws::MediaConnect
     #
     # @option params [String] :whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute content
-    #   to your source. These IP addresses should in the form of a Classless
-    #   Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+    #   to your source. These IP addresses should be in the form of a
+    #   Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
     #
     # @return [Types::UpdateFlowSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -977,9 +1242,14 @@ module Aws::MediaConnect
     #   resp = client.update_flow_source({
     #     decryption: {
     #       algorithm: "aes128", # accepts aes128, aes192, aes256
-    #       key_type: "static-key", # accepts static-key
+    #       constant_initialization_vector: "__string",
+    #       device_id: "__string",
+    #       key_type: "speke", # accepts speke, static-key
+    #       region: "__string",
+    #       resource_id: "__string",
     #       role_arn: "__string",
     #       secret_arn: "__string",
+    #       url: "__string",
     #     },
     #     description: "__string",
     #     entitlement_arn: "__string",
@@ -987,7 +1257,7 @@ module Aws::MediaConnect
     #     ingest_port: 1,
     #     max_bitrate: 1,
     #     max_latency: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #     source_arn: "__string", # required
     #     stream_id: "__string",
     #     whitelist_cidr: "__string",
@@ -996,19 +1266,28 @@ module Aws::MediaConnect
     # @example Response structure
     #
     #   resp.flow_arn #=> String
+    #   resp.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.source.decryption.key_type #=> String, one of "static-key"
+    #   resp.source.decryption.constant_initialization_vector #=> String
+    #   resp.source.decryption.device_id #=> String
+    #   resp.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.source.decryption.region #=> String
+    #   resp.source.decryption.resource_id #=> String
     #   resp.source.decryption.role_arn #=> String
     #   resp.source.decryption.secret_arn #=> String
+    #   resp.source.decryption.url #=> String
     #   resp.source.description #=> String
     #   resp.source.entitlement_arn #=> String
     #   resp.source.ingest_ip #=> String
     #   resp.source.ingest_port #=> Integer
     #   resp.source.name #=> String
     #   resp.source.source_arn #=> String
+    #   resp.source.transport.cidr_allow_list #=> Array
+    #   resp.source.transport.cidr_allow_list[0] #=> String
     #   resp.source.transport.max_bitrate #=> Integer
     #   resp.source.transport.max_latency #=> Integer
-    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.source.transport.remote_id #=> String
     #   resp.source.transport.smoothing_latency #=> Integer
     #   resp.source.transport.stream_id #=> String
     #   resp.source.whitelist_cidr #=> String
@@ -1035,7 +1314,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

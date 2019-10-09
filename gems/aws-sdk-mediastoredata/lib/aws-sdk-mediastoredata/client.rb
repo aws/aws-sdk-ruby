@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::MediaStoreData
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::MediaStoreData
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::MediaStoreData
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -267,7 +316,9 @@ module Aws::MediaStoreData
       req.send_request(options)
     end
 
-    # Downloads the object at the specified path.
+    # Downloads the object at the specified path. If the object’s upload
+    # availability is set to `streaming`, AWS Elemental MediaStore downloads
+    # the object even if it’s still uploading the object.
     #
     # @option params [required, String] :path
     #   The path (including the file name) where the object is stored in the
@@ -303,8 +354,10 @@ module Aws::MediaStoreData
     #
     # @option params [String] :range
     #   The range bytes of an object to retrieve. For more information about
-    #   the `Range` header, go to
+    #   the `Range` header, see
     #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #   AWS Elemental MediaStore ignores this header for partially uploaded
+    #   objects that have streaming upload availability.
     #
     #
     #
@@ -410,7 +463,8 @@ module Aws::MediaStoreData
     end
 
     # Uploads an object to the specified path. Object sizes are limited to
-    # 25 MB.
+    # 25 MB for standard upload availability and 10 MB for streaming upload
+    # availability.
     #
     # @option params [required, String, IO] :body
     #   The bytes to be stored.
@@ -467,6 +521,17 @@ module Aws::MediaStoreData
     #   high-performance temporal storage class, and objects are persisted
     #   into durable storage shortly after being received.
     #
+    # @option params [String] :upload_availability
+    #   Indicates the availability of an object while it is still uploading.
+    #   If the value is set to `streaming`, the object is available for
+    #   downloading after some initial buffering but before the object is
+    #   uploaded completely. If the value is set to `standard`, the object is
+    #   available for downloading only when it is uploaded completely. The
+    #   default value for this header is `standard`.
+    #
+    #   To use this header, you must also set the HTTP `Transfer-Encoding`
+    #   header to `chunked`.
+    #
     # @return [Types::PutObjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutObjectResponse#content_sha256 #content_sha256} => String
@@ -481,6 +546,7 @@ module Aws::MediaStoreData
     #     content_type: "ContentType",
     #     cache_control: "StringPrimitive",
     #     storage_class: "TEMPORAL", # accepts TEMPORAL
+    #     upload_availability: "STANDARD", # accepts STANDARD, STREAMING
     #   })
     #
     # @example Response structure
@@ -511,7 +577,7 @@ module Aws::MediaStoreData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastoredata'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

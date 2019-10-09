@@ -12,15 +12,6 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ### Credentials
 
-### Add Support for CLI Profile Environment Variable
-
-While the SDKs generally use `AWS_PROFILE` as the environment variable source of
-the shared config/credentials profile, the CLI promotes the
-`AWS_DEFAULT_PROFILE` environment variable. Request is to also support that as a
-secondary source.
-
-See [related GitHub issue #1452](https://github.com/aws/aws-sdk-ruby/issues/1452).
-
 ### Add Region Detection from EC2 Metadata
 
 We use instance metadata for credentials, feature request is to also use it for
@@ -28,28 +19,15 @@ region resolution.
 
 See [related GitHub issue #1455](https://github.com/aws/aws-sdk-ruby/issues/1455).
 
-### AssumeRole Integration with SharedConfig
-
-Support AssumeRole Integration with SharedConfig.
-
-See [related GitHub issue #1504](https://github.com/aws/aws-sdk-ruby/issues/1504).
-
-`Aws::AssumeRoleCredentials` allows for MFA support, but does not pull
-non-token values from SharedConfig in this case. Could be implemented as a new
-method.
-
-See [related GitHub issue #1480](https://github.com/aws/aws-sdk-ruby/issues/1480).
-
-### Add Proxy Option to Instance Profile Credentials
-
-The SDK ignores environment proxies by default for security reasons. Add the ability
-to configure a proxy or to enable the default proxy from the constructor.
-
-See [related GitHub issue #956](https://github.com/aws/aws-sdk-ruby/issues/956).
-
 ### Support Raw credential objects from AWS API responses in config
 
 See [related GitHub issue #1009](https://github.com/aws/aws-sdk-ruby/issues/1009).
+
+### Support ca_bundle in ~/.aws/config
+
+Match CLI support of ca_bundle being specified in config
+
+See [related GitHub issue #1907](https://github.com/aws/aws-sdk-ruby/issues/1907)
 
 ### Resource Model, Waiters and Paginators
 
@@ -94,15 +72,6 @@ existing client calls within the resource.
 
 See [related GitHub issue #1145](https://github.com/aws/aws-sdk-ruby/issues/1145).
 
-### Add Pagination Support for Amazon CloudSearch Domain Client
-
-The current spec for pagination is not able to support the response structure of
-the `Aws::CloudSearchDomain::Client#search` API, for example. The feature
-request is to either add a custom CloudSearch Domain pagination plugin, or to
-enhance pagination in general to support this type of response.
-
-See [related GitHub issue #984](https://github.com/aws/aws-sdk-ruby/issues/984).
-
 ### Add Support for Copying Object Versions to Aws::S3::Resource
 
 You can copy Amazon S3 object versions to a new Amazon S3 object using the
@@ -127,20 +96,6 @@ See [related GitHub issue #1449](https://github.com/aws/aws-sdk-ruby/issues/1449
 ### AWS Service
 
 ### S3 Presign
-
-### Cache-Friendly Presigned URLs
-
-Add functionality to the presigner to improve the experience of generating cache
-friendly presigned URLs. For example:
-
-```ruby
-req = s3.presigned_request(:get_object, bucket:'...', key: '...')
-req.uri #=> "https://..."
-req.headers #=> { ... } authorization in here
-```
-See [related Github issue #874](https://github.com/aws/aws-sdk-ruby/issues/874)
-See [related GitHub issue #1152](https://github.com/aws/aws-sdk-ruby/issues/1152)
-See [related GitHub issue #1556](https://github.com/aws/aws-sdk-ruby/issues/1556)
 
 ### Add Option to Create Unsigned Requests
 
@@ -171,10 +126,6 @@ support for an injectable timestamp into signing via the presigner.
 
 See [related GitHub issue #1013](https://github.com/aws/aws-sdk-ruby/issues/1013).
 
-Consider expose interface from `aws-sigv4` gem with `:time` option.
-
-See [related Github issue #1598](https://github.com/aws/aws-sdk-ruby/issues/1598).
-
 ### Add accelerate endpoint support to presigned POST requests
 
 The presigned POST utility does not support pre-signing Amazon S3 acclerated
@@ -197,13 +148,6 @@ See [related GitHub issue #1399](https://github.com/aws/aws-sdk-ruby/issues/1399
 
 ### S3 Multipart
 
-### Enhance Multipart Downloader Performance
-
-Make Multipart Downloader faster, reduce IO usage and make IO usage
-configurable etc.
-
-See [related GitHub issue #1552](https://github.com/aws/aws-sdk-ruby/issues/1552).
-
 ### Add ability to download to an IO object, provide helper to resume download
 
 Provide better streaming download options, imstead of having parts in /tmp
@@ -212,22 +156,21 @@ clean up.
 
 See [related GitHub issue #1535](https://github.com/aws/aws-sdk-ruby/issues/1535).
 
+### S3
+
+### Retrieve data from response headers for streaming S3 objects
+
+Pull in data from response headers on Object#get
+
+See [related GitHub issue #1913](https://github.com/aws/aws-sdk-ruby/issues/1913)
+
+### Add Aws::S3::Object#head method
+
+Add method for parity with Client#head_object
+
+See [related GitHub issue #1912](https://github.com/aws/aws-sdk-ruby/issues/1912)
+
 ### API Helper
-
-### Add a Way to Extract Queue Name from Aws::SQS::Errors::NonExistentQueue
-
-Currently available from `context`, but could some easier way to get this be
-added when exception functionality is enhanced?
-
-See [related GitHub issue #1352](https://github.com/aws/aws-sdk-ruby/issues/1352).
-
-### Add StringIO Support for Aws::S3::Object#upload_file
-
-See [related GitHub issue #1351](https://github.com/aws/aws-sdk-ruby/issues/1351).
-
-### Add JSON Serialization Helper (Related to SNS Client API)
-
-See [related GitHub issue #1299](https://github.com/aws/aws-sdk-ruby/issues/1299).
 
 ### Handle S3 #exists? Edge Cases
 
@@ -238,12 +181,6 @@ See [related GitHub issue #1267](https://github.com/aws/aws-sdk-ruby/issues/1267
 To enable users to track file upload process, it would be helpful to support a progress callback for `Aws::S3::Object#upload_file`.
 
 See [related GitHub issue #648](https://github.com/aws/aws-sdk-ruby/issues/648#issuecomment-78246370).
-
-### Aws::MachineLearning Booleans
-
-The `#predict` operation of `Aws::MachineLearning::Client` accepts a map of string-to-strings. When a user wishes to provide a boolean value, the API expects the boolean to be "1" or "0". It would be helpful if a plugin were added that converted the boolean values of the record map from `true` and `false` to their expected string formats.
-
-See [related GitHub issue #878](https://github.com/aws/aws-sdk-ruby/issues/878).
 
 ### Aws::Route53 `#list_resource_record_sets` domain name octal
 
@@ -259,23 +196,7 @@ See [related GitHub issue #1212](https://github.com/aws/aws-sdk-ruby/issues/1212
 
 See [related Github issue #1501](https://github.com/aws/aws-sdk-ruby/issues/1501).
 
-### Add SDK Performance Metrics in Amazon CloudWatch
-
-Similar to the
-[AWS SDK for Java's feature](https://java.awsblog.com/post/Tx3C0RV4NRRBKTG/Enabling-Metrics-with-the-AWS-SDK-for-Java).
-
-This would create a plugin that takes metrics about API call performance and
-possibly other SDK performance metrics, and would enable automatic uploads to
-Amazon CloudWatch.
-
 ### Retry Behavior
-
-### Add Randomness to Retry Backoff
-
-Currently, the default retry algorithm uses exactly the same backoff time for
-every execution. Adding some randomness to this would be accepted as a PR.
-
-See [related GitHub issue #1336](https://github.com/aws/aws-sdk-ruby/issues/1336).
 
 ### Retry S3 Transfers on BadDigest Error
 
@@ -292,16 +213,6 @@ Adding a retry limit for instance profile credentials might be a possible soluti
 See [related GitHub issue #717](https://github.com/aws/aws-sdk-ruby/issues/717).
 
 ### Util and Others
-
-### Lazy Building of Resource Objects from Raw Responses
-
-There are performance/memory questions around some very large responses (such
-as an unfiltered request to `Aws::EC2::Client#DescribeImages` API), especially
-when they are turned into even larger resource objects in memory. One feature
-request is to cut down on this memory usage, perhaps by lazily building resource
-objects, if possible. This feature request has an investigation component.
-
-See [related GitHub issue #1379](https://github.com/aws/aws-sdk-ruby/issues/1379).
 
 ### Provide an Interface to Interact With Shared Configuration Values
 
@@ -324,20 +235,6 @@ See [related GitHub issue #1189](https://github.com/aws/aws-sdk-ruby/issues/1189
 
 See [related GitHub issue #1376](https://github.com/aws/aws-sdk-ruby/issues/1376).
 
-### Customize Request HTTP Verbs
-
-Some services accept multiple HTTP verbs, potentially with differing behavior.
-This feature request would be to investigate how multiple HTTP verbs could be
-supported.
-
-See [related GitHub issue #1181](https://github.com/aws/aws-sdk-ruby/issues/1181).
-
-### Programmable Stubs
-
-Provide an easy way to create stubbed clients that have programmable behavior.
-
-See [related GitHub issue #1120](https://github.com/aws/aws-sdk-ruby/issues/1120).
-
 ### Accept AWS CLI Output for Stubbed Responses
 
 There are some format differences between the input/output shapes of the AWS CLI
@@ -345,12 +242,6 @@ and the AWS SDK for Ruby. Supporting a transformation between these two formats
 could be useful if using actual AWS CLI output as stubbed output for Ruby tests.
 
 See [related GitHub issue #970](https://github.com/aws/aws-sdk-ruby/issues/970).
-
-### Force Payload Signing for S3
-
-Support non-AWS S3 endpoints with forced payload signing using payload_signing_enabled configuration.
-
-See [related GitHub issue #1822](https://github.com/aws/aws-sdk-ruby/issues/1822).
 
 ### Support non-symbolized keys
 
@@ -364,27 +255,3 @@ See [related GitHub issue #1685](https://github.com/aws/aws-sdk-ruby/issues/1685
 Verifier currently makes http call directly, and does not use SNS client or Aws.config.
 
 See [related GitHub issue #1683](https://github.com/aws/aws-sdk-ruby/issues/1683).
-
-### Handle resource model typos
-
-Typos in resource models cannot be fixed directly without causing breaking changes.
-
-See [related GitHub issue #1837](https://github.com/aws/aws-sdk-ruby/issues/1837).
-
-### Support ca_bundle in ~/.aws/config
-
-Match CLI support of ca_bundle being specified in config
-
-See [related GitHub issue #1907](https://github.com/aws/aws-sdk-ruby/issues/1907)
-
-### Retrieve data from response headers for streaming S3 objects
-
-Pull in data from response headers on Object#get
-
-See [related GitHub issue #1913](https://github.com/aws/aws-sdk-ruby/issues/1913)
-
-### Add Aws::S3::Object#head method
-
-Add method for parity with Client#head_object
-
-See [related GitHub issue #1912](https://github.com/aws/aws-sdk-ruby/issues/1912)

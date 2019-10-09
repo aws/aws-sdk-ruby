@@ -8,27 +8,50 @@
 module Aws::CostExplorer
   module Types
 
+    # The requested report expired. Update the date interval and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/BillExpirationException AWS API Documentation
+    #
+    class BillExpirationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The amount of instance usage that a reservation covered.
     #
     # @!attribute [rw] coverage_hours
-    #   The amount of instance usage that a reservation covered, in hours.
+    #   The amount of instance usage that the reservation covered, in hours.
     #   @return [Types::CoverageHours]
+    #
+    # @!attribute [rw] coverage_normalized_units
+    #   The amount of instance usage that the reservation covered, in
+    #   normalized units.
+    #   @return [Types::CoverageNormalizedUnits]
+    #
+    # @!attribute [rw] coverage_cost
+    #   The amount of cost that the reservation covered.
+    #   @return [Types::CoverageCost]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Coverage AWS API Documentation
     #
     class Coverage < Struct.new(
-      :coverage_hours)
+      :coverage_hours,
+      :coverage_normalized_units,
+      :coverage_cost)
       include Aws::Structure
     end
 
     # Reservation coverage for a specified period, in hours.
     #
     # @!attribute [rw] time_period
-    #   The period over which this coverage was used.
+    #   The period that this coverage was used over.
     #   @return [Types::DateInterval]
     #
     # @!attribute [rw] groups
-    #   The groups of instances that are covered by a reservation.
+    #   The groups of instances that the reservation covered.
     #   @return [Array<Types::ReservationCoverageGroup>]
     #
     # @!attribute [rw] total
@@ -44,17 +67,29 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # How much it cost to run an instance.
+    #
+    # @!attribute [rw] on_demand_cost
+    #   How much an On-Demand instance cost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageCost AWS API Documentation
+    #
+    class CoverageCost < Struct.new(
+      :on_demand_cost)
+      include Aws::Structure
+    end
+
     # How long a running instance either used a reservation or was
     # On-Demand.
     #
     # @!attribute [rw] on_demand_hours
-    #   The number of instance running hours that are covered by On-Demand
-    #   Instances.
+    #   The number of instance running hours that On-Demand Instances
+    #   covered.
     #   @return [String]
     #
     # @!attribute [rw] reserved_hours
-    #   The number of instance running hours that are covered by
-    #   reservations.
+    #   The number of instance running hours that reservations covered.
     #   @return [String]
     #
     # @!attribute [rw] total_running_hours
@@ -62,7 +97,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] coverage_hours_percentage
-    #   The percentage of instance hours that are covered by a reservation.
+    #   The percentage of instance hours that a reservation covered.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageHours AWS API Documentation
@@ -72,6 +107,121 @@ module Aws::CostExplorer
       :reserved_hours,
       :total_running_hours,
       :coverage_hours_percentage)
+      include Aws::Structure
+    end
+
+    # The amount of instance usage, in normalized units. Normalized units
+    # enable you to see your EC2 usage for multiple sizes of instances in a
+    # uniform way. For example, suppose you run an xlarge instance and a
+    # 2xlarge instance. If you run both instances for the same amount of
+    # time, the 2xlarge instance uses twice as much of your reservation as
+    # the xlarge instance, even though both instances show only one
+    # instance-hour. Using normalized units instead of instance-hours, the
+    # xlarge instance used 8 normalized units, and the 2xlarge instance used
+    # 16 normalized units.
+    #
+    # For more information, see [Modifying Reserved Instances][1] in the
+    # *Amazon Elastic Compute Cloud User Guide for Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html
+    #
+    # @!attribute [rw] on_demand_normalized_units
+    #   The number of normalized units that are covered by On-Demand
+    #   Instances instead of a reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_normalized_units
+    #   The number of normalized units that a reservation covers.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_running_normalized_units
+    #   The total number of normalized units that you used.
+    #   @return [String]
+    #
+    # @!attribute [rw] coverage_normalized_units_percentage
+    #   The percentage of your used instance normalized units that a
+    #   reservation covers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageNormalizedUnits AWS API Documentation
+    #
+    class CoverageNormalizedUnits < Struct.new(
+      :on_demand_normalized_units,
+      :reserved_normalized_units,
+      :total_running_normalized_units,
+      :coverage_normalized_units_percentage)
+      include Aws::Structure
+    end
+
+    # Context about the current instance.
+    #
+    # @!attribute [rw] resource_id
+    #   Resource ID of the current instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Cost allocation resource tags applied to the instance.
+    #   @return [Array<Types::TagValues>]
+    #
+    # @!attribute [rw] resource_details
+    #   Details about the resource and utilization.
+    #   @return [Types::ResourceDetails]
+    #
+    # @!attribute [rw] resource_utilization
+    #   Utilization information of the current instance during the lookback
+    #   period.
+    #   @return [Types::ResourceUtilization]
+    #
+    # @!attribute [rw] reservation_covered_hours_in_lookback_period
+    #   Number of hours during the lookback period covered by reservations.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_demand_hours_in_lookback_period
+    #   Number of hours during the lookback period billed at On Demand
+    #   rates.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_running_hours_in_lookback_period
+    #   The total number of hours the instance ran during the lookback
+    #   period.
+    #   @return [String]
+    #
+    # @!attribute [rw] monthly_cost
+    #   Current On Demand cost of operating this instance on a monthly
+    #   basis.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code that Amazon Web Services used to calculate the
+    #   costs for this instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CurrentInstance AWS API Documentation
+    #
+    class CurrentInstance < Struct.new(
+      :resource_id,
+      :tags,
+      :resource_details,
+      :resource_utilization,
+      :reservation_covered_hours_in_lookback_period,
+      :on_demand_hours_in_lookback_period,
+      :total_running_hours_in_lookback_period,
+      :monthly_cost,
+      :currency_code)
+      include Aws::Structure
+    end
+
+    # The requested data is unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DataUnavailableException AWS API Documentation
+    #
+    class DataUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -114,7 +264,7 @@ module Aws::CostExplorer
     #   data as a hash:
     #
     #       {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         values: ["Value"],
     #       }
     #
@@ -162,7 +312,8 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the EC2 instances that AWS recommends that you purchase.
+    # Details about the Amazon EC2 instances that AWS recommends that you
+    # purchase.
     #
     # @!attribute [rw] family
     #   The instance family of the recommended reservation.
@@ -191,7 +342,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] current_generation
-    #   Whether the recommendation is for a current generation instance.
+    #   Whether the recommendation is for a current-generation instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] size_flex_eligible
@@ -212,7 +363,87 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # The EC2 hardware specifications that you want AWS to provide
+    # Details on the Amazon EC2 Resource.
+    #
+    # @!attribute [rw] hourly_on_demand_rate
+    #   Hourly public On Demand rate for the instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The type of Amazon Web Services instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform of the Amazon Web Services instance. The platform is
+    #   the specific combination of operating system, license model, and
+    #   software on an instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] sku
+    #   The SKU of the product.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory
+    #   Memory capacity of Amazon Web Services instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_performance
+    #   Network performance capacity of the Amazon Web Services instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage
+    #   The disk storage of the Amazon Web Services instance (Not EBS
+    #   storage).
+    #   @return [String]
+    #
+    # @!attribute [rw] vcpu
+    #   Number of VCPU cores in the Amazon Web Services instance type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2ResourceDetails AWS API Documentation
+    #
+    class EC2ResourceDetails < Struct.new(
+      :hourly_on_demand_rate,
+      :instance_type,
+      :platform,
+      :region,
+      :sku,
+      :memory,
+      :network_performance,
+      :storage,
+      :vcpu)
+      include Aws::Structure
+    end
+
+    # Utilization metrics of the instance.
+    #
+    # @!attribute [rw] max_cpu_utilization_percentage
+    #   Maximum observed or expected CPU utilization of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_memory_utilization_percentage
+    #   Maximum observed or expected memory utilization of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_storage_utilization_percentage
+    #   Maximum observed or expected storage utilization of the instance
+    #   (does not measure EBS storage).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2ResourceUtilization AWS API Documentation
+    #
+    class EC2ResourceUtilization < Struct.new(
+      :max_cpu_utilization_percentage,
+      :max_memory_utilization_percentage,
+      :max_storage_utilization_percentage)
+      include Aws::Structure
+    end
+
+    # The Amazon EC2 hardware specifications that you want AWS to provide
     # recommendations for.
     #
     # @note When making an API call, you may pass EC2Specification
@@ -234,7 +465,8 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the ES instances that AWS recommends that you purchase.
+    # Details about the Amazon ES instances that AWS recommends that you
+    # purchase.
     #
     # @!attribute [rw] instance_class
     #   The class of instance that AWS recommends.
@@ -249,7 +481,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] current_generation
-    #   Whether the recommendation is for a current generation instance.
+    #   Whether the recommendation is for a current-generation instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] size_flex_eligible
@@ -267,8 +499,8 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the ElastiCache instances that AWS recommends that you
-    # purchase.
+    # Details about the Amazon ElastiCache instances that AWS recommends
+    # that you purchase.
     #
     # @!attribute [rw] family
     #   The instance family of the recommended reservation.
@@ -311,11 +543,11 @@ module Aws::CostExplorer
     #
     # * Simple dimension values - You can set the dimension name and values
     #   for the filters that you plan to use. For example, you can filter
-    #   for `INSTANCE_TYPE==m4.xlarge OR INSTANCE_TYPE==c4.large`. The
-    #   `Expression` for that looks like this:
+    #   for `REGION==us-east-1 OR REGION==us-west-1`. The `Expression` for
+    #   that looks like this:
     #
-    #   `\{ "Dimensions": \{ "Key": "INSTANCE_TYPE", "Values": [
-    #   "m4.xlarge", “c4.large” ] \} \}`
+    #   `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #   “us-west-1” ] \} \}`
     #
     #   The list of dimension values are OR'd together to retrieve cost or
     #   usage data. You can create `Expression` and `DimensionValues`
@@ -326,14 +558,14 @@ module Aws::CostExplorer
     #   multiple `Expression` types and the logical operators `AND/OR/NOT`
     #   to create a list of one or more `Expression` objects. This allows
     #   you to filter on more advanced options. For example, you can filter
-    #   on `((INSTANCE_TYPE == m4.large OR INSTANCE_TYPE == m3.large) OR
-    #   (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)`. The
-    #   `Expression` for that looks like this:
+    #   on `((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type ==
+    #   Type1)) AND (USAGE_TYPE != DataTransfer)`. The `Expression` for that
+    #   looks like this:
     #
-    #   `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "INSTANCE_TYPE",
-    #   "Values": [ "m4.x.large", "c4.large" ] \}\}, \{"Tags": \{ "Key":
-    #   "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions":
-    #   \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
+    #   `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values":
+    #   [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
+    #   "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions": \{ "Key":
+    #   "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
     #
     #   <note markdown="1"> Because each `Expression` can have only one operator, the service
     #   returns an error if more than one is specified. The following
@@ -343,6 +575,13 @@ module Aws::CostExplorer
     #
     #   ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
     #   "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
+    #
+    # <note markdown="1"> For `GetRightsizingRecommendation` action, a combination of OR and NOT
+    # is not supported. OR is not supported between different dimensions, or
+    # dimensions and tags. NOT operators aren't supported. Dimentions are
+    # also limited to `LINKED_ACCOUNT`, `REGION`, or `RIGHTSIZING_TYPE`.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass Expression
     #   data as a hash:
@@ -360,7 +599,7 @@ module Aws::CostExplorer
     #               # recursive Expression
     #             },
     #             dimensions: {
-    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #               values: ["Value"],
     #             },
     #             tags: {
@@ -381,7 +620,7 @@ module Aws::CostExplorer
     #               # recursive Expression
     #             },
     #             dimensions: {
-    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #               values: ["Value"],
     #             },
     #             tags: {
@@ -405,7 +644,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -414,7 +653,7 @@ module Aws::CostExplorer
     #           },
     #         },
     #         dimensions: {
-    #           key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #           key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #           values: ["Value"],
     #         },
     #         tags: {
@@ -486,7 +725,7 @@ module Aws::CostExplorer
     #   data as a hash:
     #
     #       {
-    #         time_period: {
+    #         time_period: { # required
     #           start: "YearMonthDay", # required
     #           end: "YearMonthDay", # required
     #         },
@@ -506,7 +745,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -536,6 +775,9 @@ module Aws::CostExplorer
     #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`. If
     #   `Granularity` isn't set, the response object doesn't include the
     #   `Granularity`, either `MONTHLY` or `DAILY`.
+    #
+    #   The `GetCostAndUsageRequest` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -561,11 +803,11 @@ module Aws::CostExplorer
     #
     #   <note markdown="1"> If you return the `UsageQuantity` metric, the service aggregates all
     #   usage numbers without taking into account the units. For example, if
-    #   you aggregate `usageQuantity` across all of EC2, the results aren't
-    #   meaningful because EC2 compute hours and data transfer are measured
-    #   in different units (for example, hours vs. GB). To get more
-    #   meaningful `UsageQuantity` metrics, filter by `UsageType` or
-    #   `UsageTypeGroups`.
+    #   you aggregate `usageQuantity` across all of Amazon EC2, the results
+    #   aren't meaningful because Amazon EC2 compute hours and data
+    #   transfer are measured in different units (for example, hours vs.
+    #   GB). To get more meaningful `UsageQuantity` metrics, filter by
+    #   `UsageType` or `UsageTypeGroups`.
     #
     #    </note>
     #
@@ -655,7 +897,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -677,15 +919,15 @@ module Aws::CostExplorer
     #
     #   Valid values for a `GetCostForecast` call are the following:
     #
-    #   * AmortizedCost
+    #   * AMORTIZED\_COST
     #
-    #   * BlendedCost
+    #   * BLENDED\_COST
     #
-    #   * NetAmortizedCost
+    #   * NET\_AMORTIZED\_COST
     #
-    #   * NetUnblendedCost
+    #   * NET\_UNBLENDED\_COST
     #
-    #   * UnblendedCost
+    #   * UNBLENDED\_COST
     #
     #
     #
@@ -695,6 +937,9 @@ module Aws::CostExplorer
     # @!attribute [rw] granularity
     #   How granular you want the forecast to be. You can get 3 months of
     #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
+    #
+    #   The `GetCostForecast` operation supports only `DAILY` and `MONTHLY`
+    #   granularities.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -750,7 +995,7 @@ module Aws::CostExplorer
     #           start: "YearMonthDay", # required
     #           end: "YearMonthDay", # required
     #         },
-    #         dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         context: "COST_AND_USAGE", # accepts COST_AND_USAGE, RESERVATIONS
     #         next_page_token: "NextPageToken",
     #       }
@@ -768,8 +1013,8 @@ module Aws::CostExplorer
     #   @return [Types::DateInterval]
     #
     # @!attribute [rw] dimension
-    #   The name of the dimension. Each `Dimension` is available for
-    #   different a `Context`. For more information, see `Context`.
+    #   The name of the dimension. Each `Dimension` is available for a
+    #   different `Context`. For more information, see `Context`.
     #   @return [String]
     #
     # @!attribute [rw] context
@@ -778,7 +1023,7 @@ module Aws::CostExplorer
     #   `COST_AND_USAGE`. If the context is set to `RESERVATIONS`, the
     #   resulting dimension values can be used in the
     #   `GetReservationUtilization` operation. If the context is set to
-    #   `COST_AND_USAGE` the resulting dimension values can be used in the
+    #   `COST_AND_USAGE`, the resulting dimension values can be used in the
     #   `GetCostAndUsage` operation.
     #
     #   If you set the context to `COST_AND_USAGE`, you can use the
@@ -789,7 +1034,7 @@ module Aws::CostExplorer
     #   * DATABASE\_ENGINE - The Amazon Relational Database Service
     #     database. Examples are Aurora or MySQL.
     #
-    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
+    #   * INSTANCE\_TYPE - The type of Amazon EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LEGAL\_ENTITY\_NAME - The name of the organization that sells you
@@ -805,8 +1050,8 @@ module Aws::CostExplorer
     #   * OPERATION - The action performed. Examples include `RunInstance`
     #     and `CreateBucket`.
     #
-    #   * PLATFORM - The EC2 operating system. Examples are Windows or
-    #     Linux.
+    #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows
+    #     or Linux.
     #
     #   * PURCHASE\_TYPE - The reservation type of the purchase to which
     #     this usage is related. Examples include On-Demand Instances and
@@ -819,7 +1064,7 @@ module Aws::CostExplorer
     #     operation includes a unit attribute. Examples include GB and Hrs.
     #
     #   * USAGE\_TYPE\_GROUP - The grouping of common usage types. An
-    #     example is EC2: CloudWatch – Alarms. The response for this
+    #     example is Amazon EC2: CloudWatch – Alarms. The response for this
     #     operation includes a unit attribute.
     #
     #   * RECORD\_TYPE - The different types of charges such as RI fees,
@@ -836,15 +1081,15 @@ module Aws::CostExplorer
     #   * DEPLOYMENT\_OPTION - The scope of Amazon Relational Database
     #     Service deployments. Valid values are `SingleAZ` and `MultiAZ`.
     #
-    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
+    #   * INSTANCE\_TYPE - The type of Amazon EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that
     #     includes the full name of the member account. The value field
     #     contains the AWS ID of the member account.
     #
-    #   * PLATFORM - The EC2 operating system. Examples are Windows or
-    #     Linux.
+    #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows
+    #     or Linux.
     #
     #   * REGION - The AWS Region.
     #
@@ -877,7 +1122,7 @@ module Aws::CostExplorer
 
     # @!attribute [rw] dimension_values
     #   The filters that you used to filter your request. Some dimensions
-    #   are available only for a specific context:
+    #   are available only for a specific context.
     #
     #   If you set the context to `COST_AND_USAGE`, you can use the
     #   following dimensions for searching:
@@ -887,7 +1132,7 @@ module Aws::CostExplorer
     #   * DATABASE\_ENGINE - The Amazon Relational Database Service
     #     database. Examples are Aurora or MySQL.
     #
-    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
+    #   * INSTANCE\_TYPE - The type of Amazon EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LEGAL\_ENTITY\_NAME - The name of the organization that sells you
@@ -903,8 +1148,8 @@ module Aws::CostExplorer
     #   * OPERATION - The action performed. Examples include `RunInstance`
     #     and `CreateBucket`.
     #
-    #   * PLATFORM - The EC2 operating system. Examples are Windows or
-    #     Linux.
+    #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows
+    #     or Linux.
     #
     #   * PURCHASE\_TYPE - The reservation type of the purchase to which
     #     this usage is related. Examples include On-Demand Instances and
@@ -917,7 +1162,7 @@ module Aws::CostExplorer
     #     operation includes a unit attribute. Examples include GB and Hrs.
     #
     #   * USAGE\_TYPE\_GROUP - The grouping of common usage types. An
-    #     example is EC2: CloudWatch – Alarms. The response for this
+    #     example is Amazon EC2: CloudWatch – Alarms. The response for this
     #     operation includes a unit attribute.
     #
     #   * RECORD\_TYPE - The different types of charges such as RI fees,
@@ -934,15 +1179,15 @@ module Aws::CostExplorer
     #   * DEPLOYMENT\_OPTION - The scope of Amazon Relational Database
     #     Service deployments. Valid values are `SingleAZ` and `MultiAZ`.
     #
-    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
+    #   * INSTANCE\_TYPE - The type of Amazon EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that
     #     includes the full name of the member account. The value field
     #     contains the AWS ID of the member account.
     #
-    #   * PLATFORM - The EC2 operating system. Examples are Windows or
-    #     Linux.
+    #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows
+    #     or Linux.
     #
     #   * REGION - The AWS Region.
     #
@@ -981,7 +1226,7 @@ module Aws::CostExplorer
     end
 
     # You can use the following request parameters to query for how much of
-    # your instance usage is covered by a reservation.
+    # your instance usage a reservation covered.
     #
     # @note When making an API call, you may pass GetReservationCoverageRequest
     #   data as a hash:
@@ -1013,7 +1258,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -1021,12 +1266,13 @@ module Aws::CostExplorer
     #             values: ["Value"],
     #           },
     #         },
+    #         metrics: ["MetricName"],
     #         next_page_token: "NextPageToken",
     #       }
     #
     # @!attribute [rw] time_period
-    #   The start and end dates of the period for which you want to retrieve
-    #   data about reservation coverage. You can retrieve data for a maximum
+    #   The start and end dates of the period that you want to retrieve data
+    #   about reservation coverage for. You can retrieve data for a maximum
     #   of 13 months: the last 12 months and the current month. The start
     #   date is inclusive, but the end date is exclusive. For example, if
     #   `start` is `2017-01-01` and `end` is `2017-05-01`, then the cost and
@@ -1055,8 +1301,6 @@ module Aws::CostExplorer
     #
     #   * REGION
     #
-    #   * TAG
-    #
     #   * TENANCY
     #   @return [Array<Types::GroupDefinition>]
     #
@@ -1067,6 +1311,9 @@ module Aws::CostExplorer
     #   If `GroupBy` is set, `Granularity` can't be set. If `Granularity`
     #   isn't set, the response object doesn't include `Granularity`,
     #   either `MONTHLY` or `DAILY`.
+    #
+    #   The `GetReservationCoverage` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -1097,14 +1344,25 @@ module Aws::CostExplorer
     #
     #   * TENANCY
     #
-    #   `GetReservationCoverage` uses the same ` Expression ` object as the
+    #   `GetReservationCoverage` uses the same [Expression][1] object as the
     #   other operations, but only `AND` is supported among each dimension.
     #   You can nest only one level deep. If there are multiple values for a
     #   dimension, they are OR'd together.
     #
     #   If you don't provide a `SERVICE` filter, Cost Explorer defaults to
     #   EC2.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #   @return [Types::Expression]
+    #
+    # @!attribute [rw] metrics
+    #   The measurement that you want your reservation coverage reported in.
+    #
+    #   Valid values are `Hour`, `Unit`, and `Cost`. You can use multiple
+    #   values in a request.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] next_page_token
     #   The token to retrieve the next set of results. AWS provides the
@@ -1119,6 +1377,7 @@ module Aws::CostExplorer
       :group_by,
       :granularity,
       :filter,
+      :metrics,
       :next_page_token)
       include Aws::Structure
     end
@@ -1128,7 +1387,7 @@ module Aws::CostExplorer
     #   @return [Array<Types::CoverageByTime>]
     #
     # @!attribute [rw] total
-    #   The total amount of instance usage that is covered by a reservation.
+    #   The total amount of instance usage that a reservation covered.
     #   @return [Types::Coverage]
     #
     # @!attribute [rw] next_page_token
@@ -1197,7 +1456,8 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] service_specification
     #   The hardware specifications for the service instances that you want
-    #   recommendations for, such as standard or convertible EC2 instances.
+    #   recommendations for, such as standard or convertible Amazon EC2
+    #   instances.
     #   @return [Types::ServiceSpecification]
     #
     # @!attribute [rw] page_size
@@ -1277,7 +1537,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -1289,12 +1549,11 @@ module Aws::CostExplorer
     #       }
     #
     # @!attribute [rw] time_period
-    #   Sets the start and end dates for retrieving Reserved Instance (RI)
-    #   utilization. The start date is inclusive, but the end date is
-    #   exclusive. For example, if `start` is `2017-01-01` and `end` is
-    #   `2017-05-01`, then the cost and usage data is retrieved from
-    #   `2017-01-01` up to and including `2017-04-30` but not including
-    #   `2017-05-01`.
+    #   Sets the start and end dates for retrieving RI utilization. The
+    #   start date is inclusive, but the end date is exclusive. For example,
+    #   if `start` is `2017-01-01` and `end` is `2017-05-01`, then the cost
+    #   and usage data is retrieved from `2017-01-01` up to and including
+    #   `2017-04-30` but not including `2017-05-01`.
     #   @return [Types::DateInterval]
     #
     # @!attribute [rw] group_by
@@ -1306,6 +1565,9 @@ module Aws::CostExplorer
     #   isn't set, the response object doesn't include `Granularity`,
     #   either `MONTHLY` or `DAILY`. If both `GroupBy` and `Granularity`
     #   aren't set, `GetReservationUtilization` defaults to `DAILY`.
+    #
+    #   The `GetReservationUtilization` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -1336,10 +1598,14 @@ module Aws::CostExplorer
     #
     #   * TENANCY
     #
-    #   `GetReservationUtilization` uses the same ` Expression ` object as
+    #   `GetReservationUtilization` uses the same [Expression][1] object as
     #   the other operations, but only `AND` is supported among each
     #   dimension, and nesting is supported up to only one level deep. If
     #   there are multiple values for a dimension, they are OR'd together.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] next_page_token
@@ -1360,11 +1626,11 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] utilizations_by_time
-    #   The amount of time that you utilized your RIs.
+    #   The amount of time that you used your RIs.
     #   @return [Array<Types::UtilizationByTime>]
     #
     # @!attribute [rw] total
-    #   The total amount of time that you utilized your RIs.
+    #   The total amount of time that you used your RIs.
     #   @return [Types::ReservationAggregates]
     #
     # @!attribute [rw] next_page_token
@@ -1378,6 +1644,137 @@ module Aws::CostExplorer
     class GetReservationUtilizationResponse < Struct.new(
       :utilizations_by_time,
       :total,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRightsizingRecommendationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #             values: ["Value"],
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #         },
+    #         service: "GenericString", # required
+    #         page_size: 1,
+    #         next_page_token: "NextPageToken",
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Use `Expression` to filter by cost or by usage. There are two
+    #   patterns:
+    #
+    #   * Simple dimension values - You can set the dimension name and
+    #     values for the filters that you plan to use. For example, you can
+    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. The
+    #     `Expression` for that looks like this:
+    #
+    #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #     “us-west-1” ] \} \}`
+    #
+    #     The list of dimension values are OR'd together to retrieve cost
+    #     or usage data. You can create `Expression` and `DimensionValues`
+    #     objects using either `with*` methods or `set*` methods in multiple
+    #     lines.
+    #
+    #   * Compound dimension values with logical operations - You can use
+    #     multiple `Expression` types and the logical operators `AND/OR/NOT`
+    #     to create a list of one or more `Expression` objects. This allows
+    #     you to filter on more advanced options. For example, you can
+    #     filter on `((REGION == us-east-1 OR REGION == us-west-1) OR
+    #     (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)`. The
+    #     `Expression` for that looks like this:
+    #
+    #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
+    #     "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
+    #     "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
+    #     \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
+    #     \}\}\} ] \} `
+    #
+    #     <note markdown="1"> Because each `Expression` can have only one operator, the service
+    #     returns an error if more than one is specified. The following
+    #     example shows an `Expression` object that creates an error.
+    #
+    #      </note>
+    #
+    #     ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
+    #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
+    #
+    #   <note markdown="1"> For `GetRightsizingRecommendation` action, a combination of OR and
+    #   NOT is not supported. OR is not supported between different
+    #   dimensions, or dimensions and tags. NOT operators aren't supported.
+    #   Dimentions are also limited to `LINKED_ACCOUNT`, `REGION`, or
+    #   `RIGHTSIZING_TYPE`.
+    #
+    #    </note>
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] service
+    #   The specific service that you want recommendations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of recommendations that you want returned in a single
+    #   response object.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_page_token
+    #   The pagination token that indicates the next set of results that you
+    #   want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetRightsizingRecommendationRequest AWS API Documentation
+    #
+    class GetRightsizingRecommendationRequest < Struct.new(
+      :filter,
+      :service,
+      :page_size,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata
+    #   Information regarding this specific recommendation set.
+    #   @return [Types::RightsizingRecommendationMetadata]
+    #
+    # @!attribute [rw] summary
+    #   Summary of this recommendation set.
+    #   @return [Types::RightsizingRecommendationSummary]
+    #
+    # @!attribute [rw] rightsizing_recommendations
+    #   Recommendations to rightsize resources.
+    #   @return [Array<Types::RightsizingRecommendation>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetRightsizingRecommendationResponse AWS API Documentation
+    #
+    class GetRightsizingRecommendationResponse < Struct.new(
+      :metadata,
+      :summary,
+      :rightsizing_recommendations,
       :next_page_token)
       include Aws::Structure
     end
@@ -1455,7 +1852,113 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # One level of grouped data within the results.
+    # @note When making an API call, you may pass GetUsageForecastRequest
+    #   data as a hash:
+    #
+    #       {
+    #         time_period: { # required
+    #           start: "YearMonthDay", # required
+    #           end: "YearMonthDay", # required
+    #         },
+    #         metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT
+    #         granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
+    #         filter: {
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #             values: ["Value"],
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #         },
+    #         prediction_interval_level: 1,
+    #       }
+    #
+    # @!attribute [rw] time_period
+    #   The start and end dates of the period that you want to retrieve
+    #   usage forecast for. The start date is inclusive, but the end date is
+    #   exclusive. For example, if `start` is `2017-01-01` and `end` is
+    #   `2017-05-01`, then the cost and usage data is retrieved from
+    #   `2017-01-01` up to and including `2017-04-30` but not including
+    #   `2017-05-01`.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] metric
+    #   Which metric Cost Explorer uses to create your forecast.
+    #
+    #   Valid values for a `GetUsageForecast` call are the following:
+    #
+    #   * USAGE\_QUANTITY
+    #
+    #   * NORMALIZED\_USAGE\_AMOUNT
+    #   @return [String]
+    #
+    # @!attribute [rw] granularity
+    #   How granular you want the forecast to be. You can get 3 months of
+    #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
+    #
+    #   The `GetUsageForecast` operation supports only `DAILY` and `MONTHLY`
+    #   granularities.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The filters that you want to use to filter your forecast. Cost
+    #   Explorer API supports all of the Cost Explorer filters.
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] prediction_interval_level
+    #   Cost Explorer always returns the mean forecast as a single point.
+    #   You can request a prediction interval around the mean by specifying
+    #   a confidence level. The higher the confidence level, the more
+    #   confident Cost Explorer is about the actual value falling in the
+    #   prediction interval. Higher confidence levels result in wider
+    #   prediction intervals.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetUsageForecastRequest AWS API Documentation
+    #
+    class GetUsageForecastRequest < Struct.new(
+      :time_period,
+      :metric,
+      :granularity,
+      :filter,
+      :prediction_interval_level)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] total
+    #   How much you're forecasted to use over the forecast period.
+    #   @return [Types::MetricValue]
+    #
+    # @!attribute [rw] forecast_results_by_time
+    #   The forecasts for your query, in order. For `DAILY` forecasts, this
+    #   is a list of days. For `MONTHLY` forecasts, this is a list of
+    #   months.
+    #   @return [Array<Types::ForecastResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetUsageForecastResponse AWS API Documentation
+    #
+    class GetUsageForecastResponse < Struct.new(
+      :total,
+      :forecast_results_by_time)
+      include Aws::Structure
+    end
+
+    # One level of grouped data in the results.
     #
     # @!attribute [rw] keys
     #   The keys that are included in this group.
@@ -1473,7 +1976,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Represents a group when you specify a group by criteria, or in the
+    # Represents a group when you specify a group by criteria or in the
     # response to a query with a specific grouping.
     #
     # @note When making an API call, you may pass GroupDefinition
@@ -1503,11 +2006,11 @@ module Aws::CostExplorer
     # Details about the instances that AWS recommends that you purchase.
     #
     # @!attribute [rw] ec2_instance_details
-    #   The EC2 instances that AWS recommends that you purchase.
+    #   The Amazon EC2 instances that AWS recommends that you purchase.
     #   @return [Types::EC2InstanceDetails]
     #
     # @!attribute [rw] rds_instance_details
-    #   The RDS instances that AWS recommends that you purchase.
+    #   The Amazon RDS instances that AWS recommends that you purchase.
     #   @return [Types::RDSInstanceDetails]
     #
     # @!attribute [rw] redshift_instance_details
@@ -1533,6 +2036,30 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # The pagination token is invalid. Try again without a pagination token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You made too many calls in a short period of time. Try again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The aggregated value for a metric.
     #
     # @!attribute [rw] amount
@@ -1551,7 +2078,22 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the RDS instances that AWS recommends that you purchase.
+    # Details on the modification recommendation.
+    #
+    # @!attribute [rw] target_instances
+    #   Identifies whether this instance type is the Amazon Web Services
+    #   default recommendation.
+    #   @return [Array<Types::TargetInstance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ModifyRecommendationDetail AWS API Documentation
+    #
+    class ModifyRecommendationDetail < Struct.new(
+      :target_instances)
+      include Aws::Structure
+    end
+
+    # Details about the Amazon RDS instances that AWS recommends that you
+    # purchase.
     #
     # @!attribute [rw] family
     #   The instance family of the recommended reservation.
@@ -1584,7 +2126,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] current_generation
-    #   Whether the recommendation is for a current generation instance.
+    #   Whether the recommendation is for a current-generation instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] size_flex_eligible
@@ -1622,7 +2164,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] current_generation
-    #   Whether the recommendation is for a current generation instance.
+    #   Whether the recommendation is for a current-generation instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] size_flex_eligible
@@ -1640,30 +2182,67 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # The aggregated numbers for your Reserved Instance (RI) usage.
+    # Your request parameters changed between pages. Try again with the old
+    # parameters or without a pagination token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RequestChangedException AWS API Documentation
+    #
+    class RequestChangedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The aggregated numbers for your reservation usage.
     #
     # @!attribute [rw] utilization_percentage
-    #   The percentage of RI time that you used.
+    #   The percentage of reservation time that you used.
+    #   @return [String]
+    #
+    # @!attribute [rw] utilization_percentage_in_units
+    #   The percentage of Amazon EC2 reservation time that you used,
+    #   converted to normalized units. Normalized units are available only
+    #   for Amazon EC2 usage after November 11, 2017.
     #   @return [String]
     #
     # @!attribute [rw] purchased_hours
-    #   How many RI hours that you purchased.
+    #   How many reservation hours that you purchased.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchased_units
+    #   How many Amazon EC2 reservation hours that you purchased, converted
+    #   to normalized units. Normalized units are available only for Amazon
+    #   EC2 usage after November 11, 2017.
     #   @return [String]
     #
     # @!attribute [rw] total_actual_hours
-    #   The total number of RI hours that you used.
+    #   The total number of reservation hours that you used.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_actual_units
+    #   The total number of Amazon EC2 reservation hours that you used,
+    #   converted to normalized units. Normalized units are available only
+    #   for Amazon EC2 usage after November 11, 2017.
     #   @return [String]
     #
     # @!attribute [rw] unused_hours
-    #   The number of RI hours that you didn't use.
+    #   The number of reservation hours that you didn't use.
+    #   @return [String]
+    #
+    # @!attribute [rw] unused_units
+    #   The number of Amazon EC2 reservation hours that you didn't use,
+    #   converted to normalized units. Normalized units are available only
+    #   for Amazon EC2 usage after November 11, 2017.
     #   @return [String]
     #
     # @!attribute [rw] on_demand_cost_of_ri_hours_used
-    #   How much your RIs would cost if charged On-Demand rates.
+    #   How much your reservation would cost if charged On-Demand rates.
     #   @return [String]
     #
     # @!attribute [rw] net_ri_savings
-    #   How much you saved due to purchasing and utilizing RIs. AWS
+    #   How much you saved due to purchasing and utilizing reservation. AWS
     #   calculates this by subtracting `TotalAmortizedFee` from
     #   `OnDemandCostOfRIHoursUsed`.
     #   @return [String]
@@ -1673,24 +2252,31 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] amortized_upfront_fee
-    #   The upfront cost of your RI, amortized over the RI period.
+    #   The upfront cost of your reservation, amortized over the reservation
+    #   period.
     #   @return [String]
     #
     # @!attribute [rw] amortized_recurring_fee
-    #   The monthly cost of your RI, amortized over the RI period.
+    #   The monthly cost of your reservation, amortized over the reservation
+    #   period.
     #   @return [String]
     #
     # @!attribute [rw] total_amortized_fee
-    #   The total cost of your RI, amortized over the RI period.
+    #   The total cost of your reservation, amortized over the reservation
+    #   period.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationAggregates AWS API Documentation
     #
     class ReservationAggregates < Struct.new(
       :utilization_percentage,
+      :utilization_percentage_in_units,
       :purchased_hours,
+      :purchased_units,
       :total_actual_hours,
+      :total_actual_units,
       :unused_hours,
+      :unused_units,
       :on_demand_cost_of_ri_hours_used,
       :net_ri_savings,
       :total_potential_ri_savings,
@@ -1770,6 +2356,7 @@ module Aws::CostExplorer
     # Details about your recommended reservation purchase.
     #
     # @!attribute [rw] account_id
+    #   The account that this RI recommendation is for.
     #   @return [String]
     #
     # @!attribute [rw] instance_details
@@ -1792,9 +2379,9 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] minimum_normalized_units_used_per_hour
-    #   The minimum number of hours that you used in an hour during the
-    #   historical period. AWS uses this to calculate your recommended
-    #   reservation purchases.
+    #   The minimum number of normalized units that you used in an hour
+    #   during the historical period. AWS uses this to calculate your
+    #   recommended reservation purchases.
     #   @return [String]
     #
     # @!attribute [rw] maximum_number_of_instances_used_per_hour
@@ -1935,22 +2522,22 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # A group of Reserved Instances (RIs) that share a set of attributes.
+    # A group of reservations that share a set of attributes.
     #
     # @!attribute [rw] key
-    #   The key for a specific RI attribute.
+    #   The key for a specific reservation attribute.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of a specific RI attribute.
+    #   The value of a specific reservation attribute.
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   The attributes for this group of RIs.
+    #   The attributes for this group of reservations.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] utilization
-    #   How much you used this group of RIs.
+    #   How much you used this group of reservations.
     #   @return [Types::ReservationAggregates]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationUtilizationGroup AWS API Documentation
@@ -1963,10 +2550,36 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # Details on the resource.
+    #
+    # @!attribute [rw] ec2_resource_details
+    #   Details on the Amazon EC2 resource.
+    #   @return [Types::EC2ResourceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceDetails AWS API Documentation
+    #
+    class ResourceDetails < Struct.new(
+      :ec2_resource_details)
+      include Aws::Structure
+    end
+
+    # Resource utilization of current resource.
+    #
+    # @!attribute [rw] ec2_resource_utilization
+    #   Utilization of current Amazon EC2 Instance
+    #   @return [Types::EC2ResourceUtilization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceUtilization AWS API Documentation
+    #
+    class ResourceUtilization < Struct.new(
+      :ec2_resource_utilization)
+      include Aws::Structure
+    end
+
     # The result that is associated with a time period.
     #
     # @!attribute [rw] time_period
-    #   The time period covered by a result.
+    #   The time period that the result covers.
     #   @return [Types::DateInterval]
     #
     # @!attribute [rw] total
@@ -1974,11 +2587,11 @@ module Aws::CostExplorer
     #   @return [Hash<String,Types::MetricValue>]
     #
     # @!attribute [rw] groups
-    #   The groups that are included in this time period.
+    #   The groups that this time period includes.
     #   @return [Array<Types::Group>]
     #
     # @!attribute [rw] estimated
-    #   Whether this result is estimated.
+    #   Whether the result is estimated.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResultByTime AWS API Documentation
@@ -1988,6 +2601,95 @@ module Aws::CostExplorer
       :total,
       :groups,
       :estimated)
+      include Aws::Structure
+    end
+
+    # Recommendations to rightsize resources.
+    #
+    # @!attribute [rw] account_id
+    #   The account that this recommendation is for.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_instance
+    #   Context regarding the current instance.
+    #   @return [Types::CurrentInstance]
+    #
+    # @!attribute [rw] rightsizing_type
+    #   Recommendation to either terminate or modify the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] modify_recommendation_detail
+    #   Details for modification recommendations.
+    #   @return [Types::ModifyRecommendationDetail]
+    #
+    # @!attribute [rw] terminate_recommendation_detail
+    #   Details for termination recommendations.
+    #   @return [Types::TerminateRecommendationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendation AWS API Documentation
+    #
+    class RightsizingRecommendation < Struct.new(
+      :account_id,
+      :current_instance,
+      :rightsizing_type,
+      :modify_recommendation_detail,
+      :terminate_recommendation_detail)
+      include Aws::Structure
+    end
+
+    # Metadata for this recommendation set.
+    #
+    # @!attribute [rw] recommendation_id
+    #   The ID for this specific recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_timestamp
+    #   The time stamp for when Amazon Web Services made this
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] lookback_period_in_days
+    #   How many days of previous usage that Amazon Web Services considers
+    #   when making this recommendation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendationMetadata AWS API Documentation
+    #
+    class RightsizingRecommendationMetadata < Struct.new(
+      :recommendation_id,
+      :generation_timestamp,
+      :lookback_period_in_days)
+      include Aws::Structure
+    end
+
+    # Summary of rightsizing recommendations
+    #
+    # @!attribute [rw] total_recommendation_count
+    #   Total number of instance recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_total_monthly_savings_amount
+    #   Estimated total savings resulting from modifications, on a monthly
+    #   basis.
+    #   @return [String]
+    #
+    # @!attribute [rw] savings_currency_code
+    #   The currency code that Amazon Web Services used to calculate the
+    #   savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] savings_percentage
+    #   Savings percentage based on the recommended modifications, relative
+    #   to the total On Demand costs associated with these instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendationSummary AWS API Documentation
+    #
+    class RightsizingRecommendationSummary < Struct.new(
+      :total_recommendation_count,
+      :estimated_total_monthly_savings_amount,
+      :savings_currency_code,
+      :savings_percentage)
       include Aws::Structure
     end
 
@@ -2004,7 +2706,7 @@ module Aws::CostExplorer
     #       }
     #
     # @!attribute [rw] ec2_specification
-    #   The EC2 hardware specifications that you want AWS to provide
+    #   The Amazon EC2 hardware specifications that you want AWS to provide
     #   recommendations for.
     #   @return [Types::EC2Specification]
     #
@@ -2026,11 +2728,11 @@ module Aws::CostExplorer
     #       }
     #
     # @!attribute [rw] key
-    #   The key for a tag.
+    #   The key for the tag.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The specific value of a tag.
+    #   The specific value of the tag.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TagValues AWS API Documentation
@@ -2041,18 +2743,91 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # Details on recommended instance.
+    #
+    # @!attribute [rw] estimated_monthly_cost
+    #   Expected cost to operate this instance type on a monthly basis.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   Estimated savings resulting from modification, on a monthly basis.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code that Amazon Web Services used to calculate the
+    #   costs for this instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_target_instance
+    #   Indicates whether or not this recommendation is the defaulted Amazon
+    #   Web Services recommendation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] resource_details
+    #   Details on the target instance type.
+    #   @return [Types::ResourceDetails]
+    #
+    # @!attribute [rw] expected_resource_utilization
+    #   Expected utilization metrics for target instance type.
+    #   @return [Types::ResourceUtilization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TargetInstance AWS API Documentation
+    #
+    class TargetInstance < Struct.new(
+      :estimated_monthly_cost,
+      :estimated_monthly_savings,
+      :currency_code,
+      :default_target_instance,
+      :resource_details,
+      :expected_resource_utilization)
+      include Aws::Structure
+    end
+
+    # Details on termination recommendation.
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   Estimated savings resulting from modification, on a monthly basis.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code that Amazon Web Services used to calculate the
+    #   costs for this instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TerminateRecommendationDetail AWS API Documentation
+    #
+    class TerminateRecommendationDetail < Struct.new(
+      :estimated_monthly_savings,
+      :currency_code)
+      include Aws::Structure
+    end
+
+    # Cost Explorer was unable to identify the usage unit. Provide
+    # `UsageType/UsageTypeGroup` filter selections that contain matching
+    # units, for example: `hours`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UnresolvableUsageUnitException AWS API Documentation
+    #
+    class UnresolvableUsageUnitException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The amount of utilization, in hours.
     #
     # @!attribute [rw] time_period
-    #   The period of time over which this utilization was used.
+    #   The period of time that this utilization was used for.
     #   @return [Types::DateInterval]
     #
     # @!attribute [rw] groups
-    #   The groups that are included in this utilization result.
+    #   The groups that this utilization result uses.
     #   @return [Array<Types::ReservationUtilizationGroup>]
     #
     # @!attribute [rw] total
-    #   The total number of RI hours that were used.
+    #   The total number of reservation hours that were used.
     #   @return [Types::ReservationAggregates]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UtilizationByTime AWS API Documentation

@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::Batch
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::Batch
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -198,6 +204,49 @@ module Aws::Batch
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -300,9 +349,9 @@ module Aws::Batch
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
-    # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html
-    # [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
     #
     # @option params [required, String] :compute_environment_name
     #   The name for your compute environment. Up to 128 letters (uppercase
@@ -314,7 +363,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
     # @option params [String] :state
     #   The state of the compute environment. If the state is `ENABLED`, then
@@ -323,7 +372,13 @@ module Aws::Batch
     #
     # @option params [Types::ComputeResource] :compute_resources
     #   Details of the compute resources managed by the compute environment.
-    #   This parameter is required for managed compute environments.
+    #   This parameter is required for managed compute environments. For more
+    #   information, see [Compute Environments][1] in the *AWS Batch User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
     # @option params [required, String] :service_role
     #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
@@ -858,8 +913,8 @@ module Aws::Batch
     # as `ACTIVE`) to only return job definitions that match that status.
     #
     # @option params [Array<String>] :job_definitions
-    #   A space-separated list of up to 100 job definition names or full
-    #   Amazon Resource Name (ARN) entries.
+    #   A list of up to 100 job definition names or full Amazon Resource Name
+    #   (ARN) entries.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `DescribeJobDefinitions` in
@@ -980,6 +1035,14 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.ulimits[0].soft_limit #=> Integer
     #   resp.job_definitions[0].container_properties.user #=> String
     #   resp.job_definitions[0].container_properties.instance_type #=> String
+    #   resp.job_definitions[0].container_properties.resource_requirements #=> Array
+    #   resp.job_definitions[0].container_properties.resource_requirements[0].value #=> String
+    #   resp.job_definitions[0].container_properties.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices #=> Array
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].host_path #=> String
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].container_path #=> String
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].permissions #=> Array
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
     #   resp.job_definitions[0].node_properties.num_nodes #=> Integer
     #   resp.job_definitions[0].node_properties.main_node #=> Integer
@@ -1009,6 +1072,14 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ulimits[0].soft_limit #=> Integer
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.user #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.instance_type #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].value #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].host_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].container_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
@@ -1119,7 +1190,7 @@ module Aws::Batch
     # Describes a list of AWS Batch jobs.
     #
     # @option params [required, Array<String>] :jobs
-    #   A space-separated list of up to 100 job IDs.
+    #   A list of up to 100 job IDs.
     #
     # @return [Types::DescribeJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1245,6 +1316,14 @@ module Aws::Batch
     #   resp.jobs[0].container.network_interfaces[0].attachment_id #=> String
     #   resp.jobs[0].container.network_interfaces[0].ipv6_address #=> String
     #   resp.jobs[0].container.network_interfaces[0].private_ipv_4_address #=> String
+    #   resp.jobs[0].container.resource_requirements #=> Array
+    #   resp.jobs[0].container.resource_requirements[0].value #=> String
+    #   resp.jobs[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.jobs[0].container.linux_parameters.devices #=> Array
+    #   resp.jobs[0].container.linux_parameters.devices[0].host_path #=> String
+    #   resp.jobs[0].container.linux_parameters.devices[0].container_path #=> String
+    #   resp.jobs[0].container.linux_parameters.devices[0].permissions #=> Array
+    #   resp.jobs[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.jobs[0].node_details.node_index #=> Integer
     #   resp.jobs[0].node_details.is_main_node #=> Boolean
     #   resp.jobs[0].node_properties.num_nodes #=> Integer
@@ -1275,6 +1354,14 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.ulimits[0].soft_limit #=> Integer
     #   resp.jobs[0].node_properties.node_range_properties[0].container.user #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.instance_type #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].value #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].host_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].container_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -1458,7 +1545,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
     #
     # @option params [Types::RetryStrategy] :retry_strategy
     #   The retry strategy to use for failed jobs that are submitted with this
@@ -1478,7 +1565,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #
     # @return [Types::RegisterJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1558,6 +1645,21 @@ module Aws::Batch
     #       ],
     #       user: "String",
     #       instance_type: "String",
+    #       resource_requirements: [
+    #         {
+    #           value: "String", # required
+    #           type: "GPU", # required, accepts GPU
+    #         },
+    #       ],
+    #       linux_parameters: {
+    #         devices: [
+    #           {
+    #             host_path: "String", # required
+    #             container_path: "String",
+    #             permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #           },
+    #         ],
+    #       },
     #     },
     #     node_properties: {
     #       num_nodes: 1, # required
@@ -1603,6 +1705,21 @@ module Aws::Batch
     #             ],
     #             user: "String",
     #             instance_type: "String",
+    #             resource_requirements: [
+    #               {
+    #                 value: "String", # required
+    #                 type: "GPU", # required, accepts GPU
+    #               },
+    #             ],
+    #             linux_parameters: {
+    #               devices: [
+    #                 {
+    #                   host_path: "String", # required
+    #                   container_path: "String",
+    #                   permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #                 },
+    #               ],
+    #             },
     #           },
     #         },
     #       ],
@@ -1650,7 +1767,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
     #
     # @option params [Array<Types::JobDependency>] :depends_on
     #   A list of dependencies for the job. A job can depend upon a maximum of
@@ -1705,7 +1822,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #
     # @return [Types::SubmitJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1758,8 +1875,15 @@ module Aws::Batch
     #           value: "String",
     #         },
     #       ],
+    #       resource_requirements: [
+    #         {
+    #           value: "String", # required
+    #           type: "GPU", # required, accepts GPU
+    #         },
+    #       ],
     #     },
     #     node_overrides: {
+    #       num_nodes: 1,
     #       node_property_overrides: [
     #         {
     #           target_nodes: "String", # required
@@ -1772,6 +1896,12 @@ module Aws::Batch
     #               {
     #                 name: "String",
     #                 value: "String",
+    #               },
+    #             ],
+    #             resource_requirements: [
+    #               {
+    #                 value: "String", # required
+    #                 type: "GPU", # required, accepts GPU
     #               },
     #             ],
     #           },
@@ -2009,7 +2139,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::SecurityHub
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::SecurityHub
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,30 +205,74 @@ module Aws::SecurityHub
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
 
-    # Accepts the invitation to be monitored by a master SecurityHub
-    # account.
+    # Accepts the invitation to be a member account and be monitored by the
+    # Security Hub master account that the invitation was sent from. When
+    # the member account accepts the invitation, permission is granted to
+    # the master account to view findings generated in the member account.
     #
-    # @option params [String] :master_id
-    #   The account ID of the master Security Hub account whose invitation
-    #   you're accepting.
+    # @option params [required, String] :master_id
+    #   The account ID of the Security Hub master account that sent the
+    #   invitation.
     #
-    # @option params [String] :invitation_id
-    #   The ID of the invitation that is sent to the AWS account by the
-    #   Security Hub master account.
+    # @option params [required, String] :invitation_id
+    #   The ID of the invitation sent from the Security Hub master account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_invitation({
-    #     master_id: "NonEmptyString",
-    #     invitation_id: "NonEmptyString",
+    #     master_id: "NonEmptyString", # required
+    #     invitation_id: "NonEmptyString", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptInvitation AWS API Documentation
@@ -234,14 +284,16 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disables the standards specified by the standards subscription ARNs.
-    # In the context of Security Hub, supported standards (for example, CIS
-    # AWS Foundations) are automated and continuous checks that help
-    # determine your compliance status against security industry (including
-    # AWS) best practices.
+    # Disables the standards specified by the provided
+    # `StandardsSubscriptionArns`. For more information, see [Standards
+    # Supported in AWS Security Hub][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html
     #
     # @option params [required, Array<String>] :standards_subscription_arns
-    #   The ARNS of the standards subscriptions that you want to disable.
+    #   The ARNs of the standards subscriptions to disable.
     #
     # @return [Types::BatchDisableStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -260,7 +312,7 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_arn #=> String
     #   resp.standards_subscriptions[0].standards_input #=> Hash
     #   resp.standards_subscriptions[0].standards_input["NonEmptyString"] #=> String
-    #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING"
+    #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDisableStandards AWS API Documentation
     #
@@ -271,14 +323,22 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables the standards specified by the standards ARNs. In the context
-    # of Security Hub, supported standards (for example, CIS AWS
-    # Foundations) are automated and continuous checks that help determine
-    # your compliance status against security industry (including AWS) best
-    # practices.
+    # Enables the standards specified by the provided `standardsArn`. In
+    # this release, only CIS AWS Foundations standards are supported. For
+    # more information, see [Standards Supported in AWS Security Hub][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html
     #
     # @option params [required, Array<Types::StandardsSubscriptionRequest>] :standards_subscription_requests
-    #   The list of standards that you want to enable.
+    #   The list of standards compliance checks to enable.
+    #
+    #   In this release, Security Hub supports only the CIS AWS Foundations
+    #   standard.
+    #
+    #    The ARN for the standard is
+    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0`.
     #
     # @return [Types::BatchEnableStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -304,7 +364,7 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_arn #=> String
     #   resp.standards_subscriptions[0].standards_input #=> Hash
     #   resp.standards_subscriptions[0].standards_input["NonEmptyString"] #=> String
-    #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING"
+    #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchEnableStandards AWS API Documentation
     #
@@ -315,12 +375,19 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Imports security findings that are generated by the integrated
-    # third-party products into Security Hub.
+    # Imports security findings generated from an integrated third-party
+    # product into Security Hub. This action is requested by the integrated
+    # product to import its findings into Security Hub. The maximum allowed
+    # size for a finding is 240 Kb. An error is returned for any finding
+    # larger than 240 Kb.
     #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
-    #   A list of findings that you want to import. Must be submitted in the
-    #   AWSSecurityFinding format.
+    #   A list of findings to import. To successfully import a finding, it
+    #   must follow the [AWS Security Finding Format][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html
     #
     # @return [Types::BatchImportFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -349,8 +416,8 @@ module Aws::SecurityHub
     #         },
     #         confidence: 1,
     #         criticality: 1,
-    #         title: "NonEmptyString",
-    #         description: "NonEmptyString",
+    #         title: "NonEmptyString", # required
+    #         description: "NonEmptyString", # required
     #         remediation: {
     #           recommendation: {
     #             text: "NonEmptyString",
@@ -484,22 +551,60 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Creates an insight, which is a consolidation of findings that
-    # identifies a security area that requires attention or intervention.
+    # Creates a custom action target in Security Hub. You can use custom
+    # actions on findings and insights in Security Hub to trigger target
+    # actions in Amazon CloudWatch Events.
     #
     # @option params [required, String] :name
-    #   The user-defined name that identifies the insight that you want to
-    #   create.
+    #   The name of the custom action target.
+    #
+    # @option params [required, String] :description
+    #   The description for the custom action target.
+    #
+    # @option params [required, String] :id
+    #   The ID for the custom action target.
+    #
+    # @return [Types::CreateActionTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateActionTargetResponse#action_target_arn #action_target_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_action_target({
+    #     name: "NonEmptyString", # required
+    #     description: "NonEmptyString", # required
+    #     id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_target_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateActionTarget AWS API Documentation
+    #
+    # @overload create_action_target(params = {})
+    # @param [Hash] params ({})
+    def create_action_target(params = {}, options = {})
+      req = build_request(:create_action_target, params)
+      req.send_request(options)
+    end
+
+    # Creates a custom insight in Security Hub. An insight is a
+    # consolidation of findings that relate to a security issue that
+    # requires attention or remediation. Use the `GroupByAttribute` to group
+    # the related findings in the insight.
+    #
+    # @option params [required, String] :name
+    #   The name of the custom insight to create.
     #
     # @option params [required, Types::AwsSecurityFindingFilters] :filters
-    #   A collection of attributes that are applied to all active Security
-    #   Hub-aggregated findings and that result in a subset of findings that
-    #   are included in this insight.
+    #   One or more attributes used to filter the findings included in the
+    #   insight. Only findings that match the criteria defined in the filters
+    #   are included in the insight.
     #
     # @option params [required, String] :group_by_attribute
-    #   The attribute by which the insight's findings are grouped. This
-    #   attribute is used as a findings aggregator for the purposes of viewing
-    #   and managing multiple related findings under a single operand.
+    #   The attribute used as the aggregator to group related findings for the
+    #   insight.
     #
     # @return [Types::CreateInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -513,31 +618,31 @@ module Aws::SecurityHub
     #       product_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       aws_account_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       generator_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       first_observed_at: [
@@ -597,7 +702,7 @@ module Aws::SecurityHub
     #       severity_label: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       confidence: [
@@ -617,87 +722,87 @@ module Aws::SecurityHub
     #       title: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       description: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       recommendation_text: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       source_url: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       product_fields: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       product_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       company_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       user_defined_fields: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       malware_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_path: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_direction: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_protocol: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_source_ip_v4: [
@@ -720,13 +825,13 @@ module Aws::SecurityHub
     #       network_source_domain: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_source_mac: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_destination_ip_v4: [
@@ -749,19 +854,19 @@ module Aws::SecurityHub
     #       network_destination_domain: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_path: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_pid: [
@@ -801,19 +906,19 @@ module Aws::SecurityHub
     #       threat_intel_indicator_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_value: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_category: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_last_observed_at: [
@@ -829,56 +934,56 @@ module Aws::SecurityHub
     #       threat_intel_indicator_source: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_source_url: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_partition: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_region: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_tags: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       resource_aws_ec2_instance_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_image_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_ip_v4_addresses: [
@@ -894,25 +999,25 @@ module Aws::SecurityHub
     #       resource_aws_ec2_instance_key_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_iam_instance_profile_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_vpc_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_subnet_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_launched_at: [
@@ -928,25 +1033,25 @@ module Aws::SecurityHub
     #       resource_aws_s3_bucket_owner_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_s3_bucket_owner_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_user_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_status: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_created_at: [
@@ -962,19 +1067,19 @@ module Aws::SecurityHub
     #       resource_container_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_image_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_image_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_launched_at: [
@@ -991,49 +1096,49 @@ module Aws::SecurityHub
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       compliance_status: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       verification_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       workflow_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       record_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       related_findings_product_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       related_findings_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       note_text: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       note_updated_at: [
@@ -1049,7 +1154,7 @@ module Aws::SecurityHub
     #       note_updated_by: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       keyword: [
@@ -1074,13 +1179,29 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Creates member Security Hub accounts in the current AWS account (which
-    # becomes the master Security Hub account) that has Security Hub
-    # enabled.
+    # Creates a member association in Security Hub between the specified
+    # accounts and the account used to make the request, which is the master
+    # account. To successfully create a member, you must use this action
+    # from an account that already has Security Hub enabled. You can use the
+    # EnableSecurityHub to enable Security Hub.
+    #
+    # After you use `CreateMembers` to create member account associations in
+    # Security Hub, you need to use the InviteMembers action, which invites
+    # the accounts to enable Security Hub and become member accounts in
+    # Security Hub. If the invitation is accepted by the account owner, the
+    # account becomes a member account in Security Hub, and a permission
+    # policy is added that permits the master account to view the findings
+    # generated in the member account. When Security Hub is enabled in the
+    # invited account, findings start being sent to both the member and
+    # master accounts.
+    #
+    # You can remove the association between the master and member accounts
+    # by using the DisassociateFromMasterAccount or DisassociateMembers
+    # operation.
     #
     # @option params [Array<Types::AccountDetails>] :account_details
-    #   A list of account ID and email address pairs of the accounts that you
-    #   want to associate with the master Security Hub account.
+    #   A list of account ID and email address pairs of the accounts to
+    #   associate with the Security Hub master account.
     #
     # @return [Types::CreateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1112,12 +1233,11 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Declines invitations that are sent to this AWS account (invitee) by
-    # the AWS accounts (inviters) that are specified by the account IDs.
+    # Declines invitations to become a member account.
     #
-    # @option params [Array<String>] :account_ids
-    #   A list of account IDs specifying accounts whose invitations to
-    #   Security Hub you want to decline.
+    # @option params [required, Array<String>] :account_ids
+    #   A list of account IDs that specify the accounts that invitations to
+    #   Security Hub are declined from.
     #
     # @return [Types::DeclineInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1126,7 +1246,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.decline_invitations({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @example Response structure
@@ -1144,10 +1264,40 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes an insight that is specified by the insight ARN.
+    # Deletes a custom action target from Security Hub. Deleting a custom
+    # action target doesn't affect any findings or insights that were
+    # already sent to Amazon CloudWatch Events using the custom action.
+    #
+    # @option params [required, String] :action_target_arn
+    #   The ARN of the custom action target to delete.
+    #
+    # @return [Types::DeleteActionTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteActionTargetResponse#action_target_arn #action_target_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_action_target({
+    #     action_target_arn: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_target_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteActionTarget AWS API Documentation
+    #
+    # @overload delete_action_target(params = {})
+    # @param [Hash] params ({})
+    def delete_action_target(params = {}, options = {})
+      req = build_request(:delete_action_target, params)
+      req.send_request(options)
+    end
+
+    # Deletes the insight specified by the `InsightArn`.
     #
     # @option params [required, String] :insight_arn
-    #   The ARN of the insight that you want to delete.
+    #   The ARN of the insight to delete.
     #
     # @return [Types::DeleteInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1172,12 +1322,11 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes invitations that are sent to this AWS account (invitee) by the
-    # AWS accounts (inviters) that are specified by their account IDs.
+    # Deletes invitations received by the AWS account to become a member
+    # account.
     #
-    # @option params [Array<String>] :account_ids
-    #   A list of account IDs specifying accounts whose invitations to
-    #   Security Hub you want to delete.
+    # @option params [required, Array<String>] :account_ids
+    #   A list of the account IDs that sent the invitations to delete.
     #
     # @return [Types::DeleteInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1186,7 +1335,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_invitations({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @example Response structure
@@ -1204,12 +1353,10 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes the Security Hub member accounts that are specified by the
-    # account IDs.
+    # Deletes the specified member accounts from Security Hub.
     #
     # @option params [Array<String>] :account_ids
-    #   A list of account IDs of the Security Hub member accounts that you
-    #   want to delete.
+    #   A list of account IDs of the member accounts to delete.
     #
     # @return [Types::DeleteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1236,12 +1383,130 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Stops you from being able to import findings generated by integrated
-    # third-party providers into Security Hub.
+    # Returns a list of the custom action targets in Security Hub in your
+    # account.
+    #
+    # @option params [Array<String>] :action_target_arns
+    #   A list of custom action target ARNs for the custom action targets to
+    #   retrieve.
+    #
+    # @option params [String] :next_token
+    #   The token that is required for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::DescribeActionTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeActionTargetsResponse#action_targets #action_targets} => Array&lt;Types::ActionTarget&gt;
+    #   * {Types::DescribeActionTargetsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_action_targets({
+    #     action_target_arns: ["NonEmptyString"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_targets #=> Array
+    #   resp.action_targets[0].action_target_arn #=> String
+    #   resp.action_targets[0].name #=> String
+    #   resp.action_targets[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeActionTargets AWS API Documentation
+    #
+    # @overload describe_action_targets(params = {})
+    # @param [Hash] params ({})
+    def describe_action_targets(params = {}, options = {})
+      req = build_request(:describe_action_targets, params)
+      req.send_request(options)
+    end
+
+    # Returns details about the Hub resource in your account, including the
+    # `HubArn` and the time when you enabled Security Hub.
+    #
+    # @option params [String] :hub_arn
+    #   The ARN of the Hub resource to retrieve.
+    #
+    # @return [Types::DescribeHubResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeHubResponse#hub_arn #hub_arn} => String
+    #   * {Types::DescribeHubResponse#subscribed_at #subscribed_at} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_hub({
+    #     hub_arn: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_arn #=> String
+    #   resp.subscribed_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHub AWS API Documentation
+    #
+    # @overload describe_hub(params = {})
+    # @param [Hash] params ({})
+    def describe_hub(params = {}, options = {})
+      req = build_request(:describe_hub, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the products available that you can
+    # subscribe to and integrate with Security Hub to consolidate findings.
+    #
+    # @option params [String] :next_token
+    #   The token that is required for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::DescribeProductsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProductsResponse#products #products} => Array&lt;Types::Product&gt;
+    #   * {Types::DescribeProductsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_products({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.products #=> Array
+    #   resp.products[0].product_arn #=> String
+    #   resp.products[0].product_name #=> String
+    #   resp.products[0].company_name #=> String
+    #   resp.products[0].description #=> String
+    #   resp.products[0].categories #=> Array
+    #   resp.products[0].categories[0] #=> String
+    #   resp.products[0].marketplace_url #=> String
+    #   resp.products[0].activation_url #=> String
+    #   resp.products[0].product_subscription_resource_policy #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeProducts AWS API Documentation
+    #
+    # @overload describe_products(params = {})
+    # @param [Hash] params ({})
+    def describe_products(params = {}, options = {})
+      req = build_request(:describe_products, params)
+      req.send_request(options)
+    end
+
+    # Disables the integration of the specified product with Security Hub.
+    # Findings from that product are no longer sent to Security Hub after
+    # the integration is disabled.
     #
     # @option params [required, String] :product_subscription_arn
-    #   The ARN of a resource that represents your subscription to a supported
-    #   product.
+    #   The ARN of the integrated product to disable the integration for.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1260,7 +1525,18 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disables the AWS Security Hub Service.
+    # Disables Security Hub in your account only in the current Region. To
+    # disable Security Hub in all Regions, you must submit one request per
+    # Region where you have enabled Security Hub. When you disable Security
+    # Hub for a master account, it doesn't disable Security Hub for any
+    # associated member accounts.
+    #
+    # When you disable Security Hub, your existing findings and insights and
+    # any Security Hub configuration settings are deleted after 90 days and
+    # can't be recovered. Any standards that were enabled are disabled, and
+    # your master and member account associations are removed. If you want
+    # to save your existing findings, you must export them before you
+    # disable Security Hub.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1273,8 +1549,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disassociates the current Security Hub member account from its master
-    # account.
+    # Disassociates the current Security Hub member account from the
+    # associated master account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1287,12 +1563,12 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disassociates the Security Hub member accounts that are specified by
-    # the account IDs from their master account.
+    # Disassociates the specified member accounts from the associated master
+    # account.
     #
     # @option params [Array<String>] :account_ids
-    #   The account IDs of the member accounts that you want to disassociate
-    #   from the master account.
+    #   The account IDs of the member accounts to disassociate from the master
+    #   account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1311,12 +1587,13 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables you to import findings generated by integrated third-party
-    # providers into Security Hub.
+    # Enables the integration of a partner product with Security Hub.
+    # Integrated products send findings to Security Hub. When you enable a
+    # product integration, a permission policy that grants permission for
+    # the product to send findings to Security Hub is applied.
     #
     # @option params [required, String] :product_arn
-    #   The ARN of the product that generates findings that you want to import
-    #   into Security Hub.
+    #   The ARN of the product to enable the integration for.
     #
     # @return [Types::EnableImportFindingsForProductResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1341,9 +1618,28 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables the AWS Security Hub service.
+    # Enables Security Hub for your account in the current Region or the
+    # Region you specify in the request. When you enable Security Hub, you
+    # grant to Security Hub the permissions necessary to gather findings
+    # from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie.
+    # To learn more, see [Setting Up AWS Security Hub][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to the Hub resource when you enable Security Hub.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_security_hub({
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHub AWS API Documentation
     #
@@ -1354,20 +1650,20 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists and describes enabled standards.
+    # Returns a list of the standards that are currently enabled.
     #
     # @option params [Array<String>] :standards_subscription_arns
-    #   The list of standards subscription ARNS that you want to list and
-    #   describe.
+    #   A list of the standards subscription ARNs for the standards to
+    #   retrieve.
     #
     # @option params [String] :next_token
-    #   Paginates results. Set the value of this parameter to NULL on your
-    #   first call to the GetEnabledStandards operation. For subsequent calls
-    #   to the operation, fill nextToken in the request with the value of
-    #   nextToken from the previous response to continue listing data.
+    #   Paginates results. On your first call to the `GetEnabledStandards`
+    #   operation, set the value of this parameter to `NULL`. For subsequent
+    #   calls to the operation, fill `nextToken` in the request with the value
+    #   of `nextToken` from the previous response to continue listing data.
     #
     # @option params [Integer] :max_results
-    #   Indicates the maximum number of items that you want in the response.
+    #   The maximum number of results to return in the response.
     #
     # @return [Types::GetEnabledStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1389,7 +1685,7 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_arn #=> String
     #   resp.standards_subscriptions[0].standards_input #=> Hash
     #   resp.standards_subscriptions[0].standards_input["NonEmptyString"] #=> String
-    #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING"
+    #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandards AWS API Documentation
@@ -1401,23 +1697,23 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists and describes Security Hub-aggregated findings that are
-    # specified by filter attributes.
+    # Returns a list of findings that match the specified criteria.
     #
     # @option params [Types::AwsSecurityFindingFilters] :filters
-    #   A collection of attributes that is use for querying findings.
+    #   The findings attributes used to define a condition to filter the
+    #   findings returned.
     #
     # @option params [Array<Types::SortCriterion>] :sort_criteria
-    #   A collection of attributes used for sorting findings.
+    #   Findings attributes used to sort the list of findings returned.
     #
     # @option params [String] :next_token
-    #   Paginates results. Set the value of this parameter to NULL on your
-    #   first call to the GetFindings operation. For subsequent calls to the
-    #   operation, fill nextToken in the request with the value of nextToken
-    #   from the previous response to continue listing data.
+    #   Paginates results. On your first call to the `GetFindings` operation,
+    #   set the value of this parameter to `NULL`. For subsequent calls to the
+    #   operation, fill `nextToken` in the request with the value of
+    #   `nextToken` from the previous response to continue listing data.
     #
     # @option params [Integer] :max_results
-    #   Indicates the maximum number of items that you want in the response.
+    #   The maximum number of findings to return.
     #
     # @return [Types::GetFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1431,31 +1727,31 @@ module Aws::SecurityHub
     #       product_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       aws_account_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       generator_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       first_observed_at: [
@@ -1515,7 +1811,7 @@ module Aws::SecurityHub
     #       severity_label: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       confidence: [
@@ -1535,87 +1831,87 @@ module Aws::SecurityHub
     #       title: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       description: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       recommendation_text: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       source_url: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       product_fields: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       product_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       company_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       user_defined_fields: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       malware_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_path: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_direction: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_protocol: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_source_ip_v4: [
@@ -1638,13 +1934,13 @@ module Aws::SecurityHub
     #       network_source_domain: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_source_mac: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_destination_ip_v4: [
@@ -1667,19 +1963,19 @@ module Aws::SecurityHub
     #       network_destination_domain: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_path: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_pid: [
@@ -1719,19 +2015,19 @@ module Aws::SecurityHub
     #       threat_intel_indicator_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_value: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_category: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_last_observed_at: [
@@ -1747,56 +2043,56 @@ module Aws::SecurityHub
     #       threat_intel_indicator_source: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_source_url: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_partition: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_region: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_tags: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       resource_aws_ec2_instance_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_image_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_ip_v4_addresses: [
@@ -1812,25 +2108,25 @@ module Aws::SecurityHub
     #       resource_aws_ec2_instance_key_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_iam_instance_profile_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_vpc_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_subnet_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_launched_at: [
@@ -1846,25 +2142,25 @@ module Aws::SecurityHub
     #       resource_aws_s3_bucket_owner_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_s3_bucket_owner_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_user_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_status: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_created_at: [
@@ -1880,19 +2176,19 @@ module Aws::SecurityHub
     #       resource_container_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_image_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_image_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_launched_at: [
@@ -1909,49 +2205,49 @@ module Aws::SecurityHub
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       compliance_status: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       verification_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       workflow_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       record_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       related_findings_product_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       related_findings_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       note_text: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       note_updated_at: [
@@ -1967,7 +2263,7 @@ module Aws::SecurityHub
     #       note_updated_by: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       keyword: [
@@ -2092,8 +2388,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists the results of the Security Hub insight specified by the insight
-    # ARN.
+    # Lists the results of the Security Hub insight that the insight ARN
+    # specifies.
     #
     # @option params [required, String] :insight_arn
     #   The ARN of the insight whose results you want to see.
@@ -2125,19 +2421,19 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists and describes insights that are specified by insight ARNs.
+    # Lists and describes insights that insight ARNs specify.
     #
     # @option params [Array<String>] :insight_arns
-    #   The ARNS of the insights that you want to describe.
+    #   The ARNs of the insights that you want to describe.
     #
     # @option params [String] :next_token
-    #   Paginates results. Set the value of this parameter to NULL on your
-    #   first call to the GetInsights operation. For subsequent calls to the
-    #   operation, fill nextToken in the request with the value of nextToken
-    #   from the previous response to continue listing data.
+    #   Paginates results. On your first call to the `GetInsights` operation,
+    #   set the value of this parameter to `NULL`. For subsequent calls to the
+    #   operation, fill `nextToken` in the request with the value of
+    #   `nextToken` from the previous response to continue listing data.
     #
     # @option params [Integer] :max_results
-    #   Indicates the maximum number of items that you want in the response.
+    #   The maximum number of items that you want in the response.
     #
     # @return [Types::GetInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2159,19 +2455,19 @@ module Aws::SecurityHub
     #   resp.insights[0].name #=> String
     #   resp.insights[0].filters.product_arn #=> Array
     #   resp.insights[0].filters.product_arn[0].value #=> String
-    #   resp.insights[0].filters.product_arn[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.product_arn[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.aws_account_id #=> Array
     #   resp.insights[0].filters.aws_account_id[0].value #=> String
-    #   resp.insights[0].filters.aws_account_id[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.aws_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.id #=> Array
     #   resp.insights[0].filters.id[0].value #=> String
-    #   resp.insights[0].filters.id[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.id[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.generator_id #=> Array
     #   resp.insights[0].filters.generator_id[0].value #=> String
-    #   resp.insights[0].filters.generator_id[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.generator_id[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.type #=> Array
     #   resp.insights[0].filters.type[0].value #=> String
-    #   resp.insights[0].filters.type[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.type[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.first_observed_at #=> Array
     #   resp.insights[0].filters.first_observed_at[0].start #=> String
     #   resp.insights[0].filters.first_observed_at[0].end #=> String
@@ -2202,7 +2498,7 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.severity_normalized[0].eq #=> Float
     #   resp.insights[0].filters.severity_label #=> Array
     #   resp.insights[0].filters.severity_label[0].value #=> String
-    #   resp.insights[0].filters.severity_label[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.severity_label[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.confidence #=> Array
     #   resp.insights[0].filters.confidence[0].gte #=> Float
     #   resp.insights[0].filters.confidence[0].lte #=> Float
@@ -2213,48 +2509,48 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.criticality[0].eq #=> Float
     #   resp.insights[0].filters.title #=> Array
     #   resp.insights[0].filters.title[0].value #=> String
-    #   resp.insights[0].filters.title[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.title[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.description #=> Array
     #   resp.insights[0].filters.description[0].value #=> String
-    #   resp.insights[0].filters.description[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.description[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.recommendation_text #=> Array
     #   resp.insights[0].filters.recommendation_text[0].value #=> String
-    #   resp.insights[0].filters.recommendation_text[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.recommendation_text[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.source_url #=> Array
     #   resp.insights[0].filters.source_url[0].value #=> String
-    #   resp.insights[0].filters.source_url[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.source_url[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.product_fields #=> Array
     #   resp.insights[0].filters.product_fields[0].key #=> String
     #   resp.insights[0].filters.product_fields[0].value #=> String
-    #   resp.insights[0].filters.product_fields[0].comparison #=> String, one of "CONTAINS"
+    #   resp.insights[0].filters.product_fields[0].comparison #=> String, one of "EQUALS"
     #   resp.insights[0].filters.product_name #=> Array
     #   resp.insights[0].filters.product_name[0].value #=> String
-    #   resp.insights[0].filters.product_name[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.product_name[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.company_name #=> Array
     #   resp.insights[0].filters.company_name[0].value #=> String
-    #   resp.insights[0].filters.company_name[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.company_name[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.user_defined_fields #=> Array
     #   resp.insights[0].filters.user_defined_fields[0].key #=> String
     #   resp.insights[0].filters.user_defined_fields[0].value #=> String
-    #   resp.insights[0].filters.user_defined_fields[0].comparison #=> String, one of "CONTAINS"
+    #   resp.insights[0].filters.user_defined_fields[0].comparison #=> String, one of "EQUALS"
     #   resp.insights[0].filters.malware_name #=> Array
     #   resp.insights[0].filters.malware_name[0].value #=> String
-    #   resp.insights[0].filters.malware_name[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.malware_name[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.malware_type #=> Array
     #   resp.insights[0].filters.malware_type[0].value #=> String
-    #   resp.insights[0].filters.malware_type[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.malware_type[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.malware_path #=> Array
     #   resp.insights[0].filters.malware_path[0].value #=> String
-    #   resp.insights[0].filters.malware_path[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.malware_path[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.malware_state #=> Array
     #   resp.insights[0].filters.malware_state[0].value #=> String
-    #   resp.insights[0].filters.malware_state[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.malware_state[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.network_direction #=> Array
     #   resp.insights[0].filters.network_direction[0].value #=> String
-    #   resp.insights[0].filters.network_direction[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.network_direction[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.network_protocol #=> Array
     #   resp.insights[0].filters.network_protocol[0].value #=> String
-    #   resp.insights[0].filters.network_protocol[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.network_protocol[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.network_source_ip_v4 #=> Array
     #   resp.insights[0].filters.network_source_ip_v4[0].cidr #=> String
     #   resp.insights[0].filters.network_source_ip_v6 #=> Array
@@ -2265,10 +2561,10 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_source_port[0].eq #=> Float
     #   resp.insights[0].filters.network_source_domain #=> Array
     #   resp.insights[0].filters.network_source_domain[0].value #=> String
-    #   resp.insights[0].filters.network_source_domain[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.network_source_domain[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.network_source_mac #=> Array
     #   resp.insights[0].filters.network_source_mac[0].value #=> String
-    #   resp.insights[0].filters.network_source_mac[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.network_source_mac[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.network_destination_ip_v4 #=> Array
     #   resp.insights[0].filters.network_destination_ip_v4[0].cidr #=> String
     #   resp.insights[0].filters.network_destination_ip_v6 #=> Array
@@ -2279,13 +2575,13 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_destination_port[0].eq #=> Float
     #   resp.insights[0].filters.network_destination_domain #=> Array
     #   resp.insights[0].filters.network_destination_domain[0].value #=> String
-    #   resp.insights[0].filters.network_destination_domain[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.network_destination_domain[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.process_name #=> Array
     #   resp.insights[0].filters.process_name[0].value #=> String
-    #   resp.insights[0].filters.process_name[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.process_name[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.process_path #=> Array
     #   resp.insights[0].filters.process_path[0].value #=> String
-    #   resp.insights[0].filters.process_path[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.process_path[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.process_pid #=> Array
     #   resp.insights[0].filters.process_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_pid[0].lte #=> Float
@@ -2306,13 +2602,13 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.process_terminated_at[0].date_range.unit #=> String, one of "DAYS"
     #   resp.insights[0].filters.threat_intel_indicator_type #=> Array
     #   resp.insights[0].filters.threat_intel_indicator_type[0].value #=> String
-    #   resp.insights[0].filters.threat_intel_indicator_type[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.threat_intel_indicator_type[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.threat_intel_indicator_value #=> Array
     #   resp.insights[0].filters.threat_intel_indicator_value[0].value #=> String
-    #   resp.insights[0].filters.threat_intel_indicator_value[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.threat_intel_indicator_value[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.threat_intel_indicator_category #=> Array
     #   resp.insights[0].filters.threat_intel_indicator_category[0].value #=> String
-    #   resp.insights[0].filters.threat_intel_indicator_category[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.threat_intel_indicator_category[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.threat_intel_indicator_last_observed_at #=> Array
     #   resp.insights[0].filters.threat_intel_indicator_last_observed_at[0].start #=> String
     #   resp.insights[0].filters.threat_intel_indicator_last_observed_at[0].end #=> String
@@ -2320,48 +2616,48 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.threat_intel_indicator_last_observed_at[0].date_range.unit #=> String, one of "DAYS"
     #   resp.insights[0].filters.threat_intel_indicator_source #=> Array
     #   resp.insights[0].filters.threat_intel_indicator_source[0].value #=> String
-    #   resp.insights[0].filters.threat_intel_indicator_source[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.threat_intel_indicator_source[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.threat_intel_indicator_source_url #=> Array
     #   resp.insights[0].filters.threat_intel_indicator_source_url[0].value #=> String
-    #   resp.insights[0].filters.threat_intel_indicator_source_url[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.threat_intel_indicator_source_url[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_type #=> Array
     #   resp.insights[0].filters.resource_type[0].value #=> String
-    #   resp.insights[0].filters.resource_type[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_type[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_id #=> Array
     #   resp.insights[0].filters.resource_id[0].value #=> String
-    #   resp.insights[0].filters.resource_id[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_id[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_partition #=> Array
     #   resp.insights[0].filters.resource_partition[0].value #=> String
-    #   resp.insights[0].filters.resource_partition[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_partition[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_region #=> Array
     #   resp.insights[0].filters.resource_region[0].value #=> String
-    #   resp.insights[0].filters.resource_region[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_region[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_tags #=> Array
     #   resp.insights[0].filters.resource_tags[0].key #=> String
     #   resp.insights[0].filters.resource_tags[0].value #=> String
-    #   resp.insights[0].filters.resource_tags[0].comparison #=> String, one of "CONTAINS"
+    #   resp.insights[0].filters.resource_tags[0].comparison #=> String, one of "EQUALS"
     #   resp.insights[0].filters.resource_aws_ec2_instance_type #=> Array
     #   resp.insights[0].filters.resource_aws_ec2_instance_type[0].value #=> String
-    #   resp.insights[0].filters.resource_aws_ec2_instance_type[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_aws_ec2_instance_type[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_aws_ec2_instance_image_id #=> Array
     #   resp.insights[0].filters.resource_aws_ec2_instance_image_id[0].value #=> String
-    #   resp.insights[0].filters.resource_aws_ec2_instance_image_id[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_aws_ec2_instance_image_id[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_aws_ec2_instance_ip_v4_addresses #=> Array
     #   resp.insights[0].filters.resource_aws_ec2_instance_ip_v4_addresses[0].cidr #=> String
     #   resp.insights[0].filters.resource_aws_ec2_instance_ip_v6_addresses #=> Array
     #   resp.insights[0].filters.resource_aws_ec2_instance_ip_v6_addresses[0].cidr #=> String
     #   resp.insights[0].filters.resource_aws_ec2_instance_key_name #=> Array
     #   resp.insights[0].filters.resource_aws_ec2_instance_key_name[0].value #=> String
-    #   resp.insights[0].filters.resource_aws_ec2_instance_key_name[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_aws_ec2_instance_key_name[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_aws_ec2_instance_iam_instance_profile_arn #=> Array
     #   resp.insights[0].filters.resource_aws_ec2_instance_iam_instance_profile_arn[0].value #=> String
-    #   resp.insights[0].filters.resource_aws_ec2_instance_iam_instance_profile_arn[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_aws_ec2_instance_iam_instance_profile_arn[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_aws_ec2_instance_vpc_id #=> Array
     #   resp.insights[0].filters.resource_aws_ec2_instance_vpc_id[0].value #=> String
-    #   resp.insights[0].filters.resource_aws_ec2_instance_vpc_id[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_aws_ec2_instance_vpc_id[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_aws_ec2_instance_subnet_id #=> Array
     #   resp.insights[0].filters.resource_aws_ec2_instance_subnet_id[0].value #=> String
-    #   resp.insights[0].filters.resource_aws_ec2_instance_subnet_id[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_aws_ec2_instance_subnet_id[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_aws_ec2_instance_launched_at #=> Array
     #   resp.insights[0].filters.resource_aws_ec2_instance_launched_at[0].start #=> String
     #   resp.insights[0].filters.resource_aws_ec2_instance_launched_at[0].end #=> String
@@ -2369,16 +2665,16 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.resource_aws_ec2_instance_launched_at[0].date_range.unit #=> String, one of "DAYS"
     #   resp.insights[0].filters.resource_aws_s3_bucket_owner_id #=> Array
     #   resp.insights[0].filters.resource_aws_s3_bucket_owner_id[0].value #=> String
-    #   resp.insights[0].filters.resource_aws_s3_bucket_owner_id[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_aws_s3_bucket_owner_id[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_aws_s3_bucket_owner_name #=> Array
     #   resp.insights[0].filters.resource_aws_s3_bucket_owner_name[0].value #=> String
-    #   resp.insights[0].filters.resource_aws_s3_bucket_owner_name[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_aws_s3_bucket_owner_name[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_aws_iam_access_key_user_name #=> Array
     #   resp.insights[0].filters.resource_aws_iam_access_key_user_name[0].value #=> String
-    #   resp.insights[0].filters.resource_aws_iam_access_key_user_name[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_aws_iam_access_key_user_name[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_aws_iam_access_key_status #=> Array
     #   resp.insights[0].filters.resource_aws_iam_access_key_status[0].value #=> String
-    #   resp.insights[0].filters.resource_aws_iam_access_key_status[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_aws_iam_access_key_status[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_aws_iam_access_key_created_at #=> Array
     #   resp.insights[0].filters.resource_aws_iam_access_key_created_at[0].start #=> String
     #   resp.insights[0].filters.resource_aws_iam_access_key_created_at[0].end #=> String
@@ -2386,13 +2682,13 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.resource_aws_iam_access_key_created_at[0].date_range.unit #=> String, one of "DAYS"
     #   resp.insights[0].filters.resource_container_name #=> Array
     #   resp.insights[0].filters.resource_container_name[0].value #=> String
-    #   resp.insights[0].filters.resource_container_name[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_container_name[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_container_image_id #=> Array
     #   resp.insights[0].filters.resource_container_image_id[0].value #=> String
-    #   resp.insights[0].filters.resource_container_image_id[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_container_image_id[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_container_image_name #=> Array
     #   resp.insights[0].filters.resource_container_image_name[0].value #=> String
-    #   resp.insights[0].filters.resource_container_image_name[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.resource_container_image_name[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.resource_container_launched_at #=> Array
     #   resp.insights[0].filters.resource_container_launched_at[0].start #=> String
     #   resp.insights[0].filters.resource_container_launched_at[0].end #=> String
@@ -2401,28 +2697,28 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.resource_details_other #=> Array
     #   resp.insights[0].filters.resource_details_other[0].key #=> String
     #   resp.insights[0].filters.resource_details_other[0].value #=> String
-    #   resp.insights[0].filters.resource_details_other[0].comparison #=> String, one of "CONTAINS"
+    #   resp.insights[0].filters.resource_details_other[0].comparison #=> String, one of "EQUALS"
     #   resp.insights[0].filters.compliance_status #=> Array
     #   resp.insights[0].filters.compliance_status[0].value #=> String
-    #   resp.insights[0].filters.compliance_status[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.compliance_status[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.verification_state #=> Array
     #   resp.insights[0].filters.verification_state[0].value #=> String
-    #   resp.insights[0].filters.verification_state[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.verification_state[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.workflow_state #=> Array
     #   resp.insights[0].filters.workflow_state[0].value #=> String
-    #   resp.insights[0].filters.workflow_state[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.workflow_state[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.record_state #=> Array
     #   resp.insights[0].filters.record_state[0].value #=> String
-    #   resp.insights[0].filters.record_state[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.record_state[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.related_findings_product_arn #=> Array
     #   resp.insights[0].filters.related_findings_product_arn[0].value #=> String
-    #   resp.insights[0].filters.related_findings_product_arn[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.related_findings_product_arn[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.related_findings_id #=> Array
     #   resp.insights[0].filters.related_findings_id[0].value #=> String
-    #   resp.insights[0].filters.related_findings_id[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.related_findings_id[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.note_text #=> Array
     #   resp.insights[0].filters.note_text[0].value #=> String
-    #   resp.insights[0].filters.note_text[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.note_text[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.note_updated_at #=> Array
     #   resp.insights[0].filters.note_updated_at[0].start #=> String
     #   resp.insights[0].filters.note_updated_at[0].end #=> String
@@ -2430,7 +2726,7 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.note_updated_at[0].date_range.unit #=> String, one of "DAYS"
     #   resp.insights[0].filters.note_updated_by #=> Array
     #   resp.insights[0].filters.note_updated_by[0].value #=> String
-    #   resp.insights[0].filters.note_updated_by[0].comparison #=> String, one of "EQUALS", "CONTAINS", "PREFIX"
+    #   resp.insights[0].filters.note_updated_by[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.keyword #=> Array
     #   resp.insights[0].filters.keyword[0].value #=> String
     #   resp.insights[0].group_by_attribute #=> String
@@ -2489,12 +2785,12 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns the details on the Security Hub member accounts that are
-    # specified by the account IDs.
+    # Returns the details on the Security Hub member accounts that the
+    # account IDs specify.
     #
     # @option params [required, Array<String>] :account_ids
-    #   A list of account IDs for the Security Hub member accounts on which
-    #   you want to return the details.
+    #   A list of account IDs for the Security Hub member accounts that you
+    #   want to return the details for.
     #
     # @return [Types::GetMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2529,10 +2825,13 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Invites other AWS accounts to enable Security Hub and become Security
-    # Hub member accounts. When an account accepts the invitation and
-    # becomes a member account, the master account can view Security Hub
-    # findings of the member account.
+    # Invites other AWS accounts to become member accounts for the Security
+    # Hub master account that the invitation is sent from. Before you can
+    # use this action to invite a member, you must first create the member
+    # account in Security Hub by using the CreateMembers action. When the
+    # account owner accepts the invitation to become a member account and
+    # enables Security Hub, the master account can view the findings
+    # generated from member account.
     #
     # @option params [Array<String>] :account_ids
     #   A list of IDs of the AWS accounts that you want to invite to Security
@@ -2563,17 +2862,18 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists all Security Hub-integrated third-party findings providers.
+    # Lists all findings-generating solutions (products) whose findings you
+    # have subscribed to receive in Security Hub.
     #
     # @option params [String] :next_token
-    #   Paginates results. Set the value of this parameter to NULL on your
-    #   first call to the ListEnabledProductsForImport operation. For
-    #   subsequent calls to the operation, fill nextToken in the request with
-    #   the value of NextToken from the previous response to continue listing
-    #   data.
+    #   Paginates results. On your first call to the
+    #   `ListEnabledProductsForImport` operation, set the value of this
+    #   parameter to `NULL`. For subsequent calls to the operation, fill
+    #   `nextToken` in the request with the value of `NextToken` from the
+    #   previous response to continue listing data.
     #
     # @option params [Integer] :max_results
-    #   Indicates the maximum number of items that you want in the response.
+    #   The maximum number of items that you want in the response.
     #
     # @return [Types::ListEnabledProductsForImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2606,13 +2906,13 @@ module Aws::SecurityHub
     # current AWS account.
     #
     # @option params [Integer] :max_results
-    #   Indicates the maximum number of items that you want in the response.
+    #   The maximum number of items that you want in the response.
     #
     # @option params [String] :next_token
-    #   Paginates results. Set the value of this parameter to NULL on your
-    #   first call to the ListInvitations operation. For subsequent calls to
-    #   the operation, fill nextToken in the request with the value of
-    #   NextToken from the previous response to continue listing data.
+    #   Paginates results. On your first call to the `ListInvitations`
+    #   operation, set the value of this parameter to `NULL`. For subsequent
+    #   calls to the operation, fill `nextToken` in the request with the value
+    #   of `NextToken` from the previous response to continue listing data.
     #
     # @return [Types::ListInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2648,21 +2948,21 @@ module Aws::SecurityHub
     # master account.
     #
     # @option params [Boolean] :only_associated
-    #   Specifies what member accounts the response includes based on their
+    #   Specifies which member accounts the response includes based on their
     #   relationship status with the master account. The default value is
-    #   TRUE. If onlyAssociated is set to TRUE, the response includes member
-    #   accounts whose relationship status with the master is set to ENABLED
-    #   or DISABLED. If onlyAssociated is set to FALSE, the response includes
-    #   all existing member accounts.
+    #   `TRUE`. If `onlyAssociated` is set to `TRUE`, the response includes
+    #   member accounts whose relationship status with the master is set to
+    #   `ENABLED` or `DISABLED`. If `onlyAssociated` is set to `FALSE`, the
+    #   response includes all existing member accounts.
     #
     # @option params [Integer] :max_results
-    #   Indicates the maximum number of items that you want in the response.
+    #   The maximum number of items that you want in the response.
     #
     # @option params [String] :next_token
-    #   Paginates results. Set the value of this parameter to NULL on your
-    #   first call to the ListMembers operation. For subsequent calls to the
-    #   operation, fill nextToken in the request with the value of NextToken
-    #   from the previous response to continue listing data.
+    #   Paginates results. Set the value of this parameter to `NULL` on your
+    #   first call to the `ListMembers` operation. For subsequent calls to the
+    #   operation, fill `nextToken` in the request with the value of
+    #   `nextToken` from the previous response to continue listing data.
     #
     # @return [Types::ListMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2697,11 +2997,126 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates the AWS Security Hub-aggregated findings specified by the
-    # filter attributes.
+    # Returns a list of tags associated with a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource to retrieve tags for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds one or more tags to a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource to apply the tags to.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource to remove the tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys associated with the tags to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the name and description of a custom action target in Security
+    # Hub.
+    #
+    # @option params [required, String] :action_target_arn
+    #   The ARN of the custom action target to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the custom action target.
+    #
+    # @option params [String] :description
+    #   The updated description for the custom action target.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_action_target({
+    #     action_target_arn: "NonEmptyString", # required
+    #     name: "NonEmptyString",
+    #     description: "NonEmptyString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateActionTarget AWS API Documentation
+    #
+    # @overload update_action_target(params = {})
+    # @param [Hash] params ({})
+    def update_action_target(params = {}, options = {})
+      req = build_request(:update_action_target, params)
+      req.send_request(options)
+    end
+
+    # Updates the `Note` and `RecordState` of the Security Hub-aggregated
+    # findings that the filter attributes specify. Any member account that
+    # can view the finding also sees the update to the finding.
     #
     # @option params [required, Types::AwsSecurityFindingFilters] :filters
-    #   A collection of attributes that specify what findings you want to
+    #   A collection of attributes that specify which findings you want to
     #   update.
     #
     # @option params [Types::NoteUpdate] :note
@@ -2719,31 +3134,31 @@ module Aws::SecurityHub
     #       product_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       aws_account_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       generator_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       first_observed_at: [
@@ -2803,7 +3218,7 @@ module Aws::SecurityHub
     #       severity_label: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       confidence: [
@@ -2823,87 +3238,87 @@ module Aws::SecurityHub
     #       title: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       description: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       recommendation_text: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       source_url: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       product_fields: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       product_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       company_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       user_defined_fields: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       malware_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_path: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_direction: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_protocol: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_source_ip_v4: [
@@ -2926,13 +3341,13 @@ module Aws::SecurityHub
     #       network_source_domain: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_source_mac: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_destination_ip_v4: [
@@ -2955,19 +3370,19 @@ module Aws::SecurityHub
     #       network_destination_domain: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_path: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_pid: [
@@ -3007,19 +3422,19 @@ module Aws::SecurityHub
     #       threat_intel_indicator_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_value: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_category: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_last_observed_at: [
@@ -3035,56 +3450,56 @@ module Aws::SecurityHub
     #       threat_intel_indicator_source: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_source_url: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_partition: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_region: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_tags: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       resource_aws_ec2_instance_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_image_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_ip_v4_addresses: [
@@ -3100,25 +3515,25 @@ module Aws::SecurityHub
     #       resource_aws_ec2_instance_key_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_iam_instance_profile_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_vpc_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_subnet_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_launched_at: [
@@ -3134,25 +3549,25 @@ module Aws::SecurityHub
     #       resource_aws_s3_bucket_owner_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_s3_bucket_owner_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_user_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_status: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_created_at: [
@@ -3168,19 +3583,19 @@ module Aws::SecurityHub
     #       resource_container_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_image_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_image_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_launched_at: [
@@ -3197,49 +3612,49 @@ module Aws::SecurityHub
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       compliance_status: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       verification_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       workflow_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       record_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       related_findings_product_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       related_findings_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       note_text: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       note_updated_at: [
@@ -3255,7 +3670,7 @@ module Aws::SecurityHub
     #       note_updated_by: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       keyword: [
@@ -3280,7 +3695,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates the AWS Security Hub insight specified by the insight ARN.
+    # Updates the Security Hub insight that the insight ARN specifies.
     #
     # @option params [required, String] :insight_arn
     #   The ARN of the insight that you want to update.
@@ -3292,7 +3707,7 @@ module Aws::SecurityHub
     #   The updated filters that define this insight.
     #
     # @option params [String] :group_by_attribute
-    #   The updated GroupBy attribute that defines this insight.
+    #   The updated `GroupBy` attribute that defines this insight.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3305,31 +3720,31 @@ module Aws::SecurityHub
     #       product_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       aws_account_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       generator_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       first_observed_at: [
@@ -3389,7 +3804,7 @@ module Aws::SecurityHub
     #       severity_label: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       confidence: [
@@ -3409,87 +3824,87 @@ module Aws::SecurityHub
     #       title: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       description: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       recommendation_text: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       source_url: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       product_fields: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       product_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       company_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       user_defined_fields: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       malware_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_path: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       malware_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_direction: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_protocol: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_source_ip_v4: [
@@ -3512,13 +3927,13 @@ module Aws::SecurityHub
     #       network_source_domain: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_source_mac: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       network_destination_ip_v4: [
@@ -3541,19 +3956,19 @@ module Aws::SecurityHub
     #       network_destination_domain: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_path: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       process_pid: [
@@ -3593,19 +4008,19 @@ module Aws::SecurityHub
     #       threat_intel_indicator_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_value: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_category: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_last_observed_at: [
@@ -3621,56 +4036,56 @@ module Aws::SecurityHub
     #       threat_intel_indicator_source: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       threat_intel_indicator_source_url: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_partition: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_region: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_tags: [
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       resource_aws_ec2_instance_type: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_image_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_ip_v4_addresses: [
@@ -3686,25 +4101,25 @@ module Aws::SecurityHub
     #       resource_aws_ec2_instance_key_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_iam_instance_profile_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_vpc_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_subnet_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_ec2_instance_launched_at: [
@@ -3720,25 +4135,25 @@ module Aws::SecurityHub
     #       resource_aws_s3_bucket_owner_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_s3_bucket_owner_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_user_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_status: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_aws_iam_access_key_created_at: [
@@ -3754,19 +4169,19 @@ module Aws::SecurityHub
     #       resource_container_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_image_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_image_name: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       resource_container_launched_at: [
@@ -3783,49 +4198,49 @@ module Aws::SecurityHub
     #         {
     #           key: "NonEmptyString",
     #           value: "NonEmptyString",
-    #           comparison: "CONTAINS", # accepts CONTAINS
+    #           comparison: "EQUALS", # accepts EQUALS
     #         },
     #       ],
     #       compliance_status: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       verification_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       workflow_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       record_state: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       related_findings_product_arn: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       related_findings_id: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       note_text: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       note_updated_at: [
@@ -3841,7 +4256,7 @@ module Aws::SecurityHub
     #       note_updated_by: [
     #         {
     #           value: "NonEmptyString",
-    #           comparison: "EQUALS", # accepts EQUALS, CONTAINS, PREFIX
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
     #       keyword: [
@@ -3875,7 +4290,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

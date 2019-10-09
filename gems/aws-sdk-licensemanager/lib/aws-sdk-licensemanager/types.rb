@@ -8,6 +8,31 @@
 module Aws::LicenseManager
   module Types
 
+    # Access to resource denied.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The AWS user account does not have permission to perform the action.
+    # Check the IAM policy associated with this account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/AuthorizationException AWS API Documentation
+    #
+    class AuthorizationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Details about license consumption.
     #
     # @!attribute [rw] resource_type
@@ -124,6 +149,18 @@ module Aws::LicenseManager
     #
     class DeleteLicenseConfigurationResponse < Aws::EmptyStructure; end
 
+    # A dependency required to run the API is missing.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/FailedDependencyException AWS API Documentation
+    #
+    class FailedDependencyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A filter name and value pair that is used to return a more specific
     # list of results from a describe operation. Filters can be used to
     # match a set of resources by specific criteria, such as tags,
@@ -151,6 +188,18 @@ module Aws::LicenseManager
     class Filter < Struct.new(
       :name,
       :values)
+      include Aws::Structure
+    end
+
+    # The request uses too many filters or too many filter values.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/FilterLimitExceededException AWS API Documentation
+    #
+    class FilterLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -280,6 +329,34 @@ module Aws::LicenseManager
       :sns_topic_arn,
       :organization_configuration,
       :enable_cross_accounts_discovery)
+      include Aws::Structure
+    end
+
+    # One or more parameter values are not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # License Manager cannot allocate a license to a resource because of its
+    # state.
+    #
+    # For example, you cannot allocate a license to an instance in the
+    # process of shutting down.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/InvalidResourceStateException AWS API Documentation
+    #
+    class InvalidResourceStateException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -482,6 +559,19 @@ module Aws::LicenseManager
     #
     class LicenseSpecification < Struct.new(
       :license_configuration_arn)
+      include Aws::Structure
+    end
+
+    # You do not have enough licenses available to support a new resource
+    # launch.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseUsageException AWS API Documentation
+    #
+    class LicenseUsageException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -824,6 +914,18 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
+    # Too many requests have been submitted. Try again after a brief wait.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/RateLimitExceededException AWS API Documentation
+    #
+    class RateLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A set of attributes that describe a resource.
     #
     # @!attribute [rw] resource_id
@@ -859,6 +961,30 @@ module Aws::LicenseManager
       :platform,
       :platform_version,
       :resource_owning_account_id)
+      include Aws::Structure
+    end
+
+    # Your resource limits have been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The server experienced an internal error. Try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ServerInternalException AWS API Documentation
+    #
+    class ServerInternalException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

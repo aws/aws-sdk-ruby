@@ -51,6 +51,10 @@ module Aws::Macie
     UpdateS3ResourcesRequest = Shapes::StructureShape.new(name: 'UpdateS3ResourcesRequest')
     UpdateS3ResourcesResult = Shapes::StructureShape.new(name: 'UpdateS3ResourcesResult')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    AccessDeniedException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AssociateMemberAccountRequest.add_member(:member_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, required: true, location_name: "memberAccountId"))
     AssociateMemberAccountRequest.struct_class = Types::AssociateMemberAccountRequest
 
@@ -85,6 +89,20 @@ module Aws::Macie
     FailedS3Resource.struct_class = Types::FailedS3Resource
 
     FailedS3Resources.member = Shapes::ShapeRef.new(shape: FailedS3Resource)
+
+    InternalException.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
+    InternalException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InternalException.struct_class = Types::InternalException
+
+    InvalidInputException.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidInputException.add_member(:field_name, Shapes::ShapeRef.new(shape: FieldName, location_name: "fieldName"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
+    LimitExceededException.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListMemberAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListMemberAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
