@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2019-10-09)
+------------------
+
+* Feature - Updated documentation for Amazon Managed Streaming for Kafka service.
+
 1.12.0 (2019-07-25)
 ------------------
 

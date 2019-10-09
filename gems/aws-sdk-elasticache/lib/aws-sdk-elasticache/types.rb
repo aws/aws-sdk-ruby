@@ -150,12 +150,17 @@ module Aws::ElastiCache
     #   data as a hash:
     #
     #       {
-    #         replication_group_ids: ["String"], # required
+    #         replication_group_ids: ["String"],
+    #         cache_cluster_ids: ["String"],
     #         service_update_name: "String", # required
     #       }
     #
     # @!attribute [rw] replication_group_ids
     #   The replication group IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cache_cluster_ids
+    #   The cache cluster IDs
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_update_name
@@ -166,6 +171,7 @@ module Aws::ElastiCache
     #
     class BatchApplyUpdateActionMessage < Struct.new(
       :replication_group_ids,
+      :cache_cluster_ids,
       :service_update_name)
       include Aws::Structure
     end
@@ -174,12 +180,17 @@ module Aws::ElastiCache
     #   data as a hash:
     #
     #       {
-    #         replication_group_ids: ["String"], # required
+    #         replication_group_ids: ["String"],
+    #         cache_cluster_ids: ["String"],
     #         service_update_name: "String", # required
     #       }
     #
     # @!attribute [rw] replication_group_ids
     #   The replication group IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cache_cluster_ids
+    #   The cache cluster IDs
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_update_name
@@ -190,6 +201,7 @@ module Aws::ElastiCache
     #
     class BatchStopUpdateActionMessage < Struct.new(
       :replication_group_ids,
+      :cache_cluster_ids,
       :service_update_name)
       include Aws::Structure
     end
@@ -745,6 +757,55 @@ module Aws::ElastiCache
     class CacheNodeTypeSpecificValue < Struct.new(
       :cache_node_type,
       :value)
+      include Aws::Structure
+    end
+
+    # The status of the service update on the cache node
+    #
+    # @!attribute [rw] cache_node_id
+    #   The node ID of the cache cluster
+    #   @return [String]
+    #
+    # @!attribute [rw] node_update_status
+    #   The update status of the node
+    #   @return [String]
+    #
+    # @!attribute [rw] node_deletion_date
+    #   The deletion date of the node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_start_date
+    #   The start date of the update for a node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_end_date
+    #   The end date of the update for a node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_initiated_by
+    #   Reflects whether the update was initiated by the customer or
+    #   automatically applied
+    #   @return [String]
+    #
+    # @!attribute [rw] node_update_initiated_date
+    #   The date when the update is triggered
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_status_modified_date
+    #   The date when the NodeUpdateStatus was last modified&gt;
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNodeUpdateStatus AWS API Documentation
+    #
+    class CacheNodeUpdateStatus < Struct.new(
+      :cache_node_id,
+      :node_update_status,
+      :node_deletion_date,
+      :node_update_start_date,
+      :node_update_end_date,
+      :node_update_initiated_by,
+      :node_update_initiated_date,
+      :node_update_status_modified_date)
       include Aws::Structure
     end
 
@@ -3468,6 +3529,8 @@ module Aws::ElastiCache
     #       {
     #         service_update_name: "String",
     #         replication_group_ids: ["String"],
+    #         cache_cluster_ids: ["String"],
+    #         engine: "String",
     #         service_update_status: ["available"], # accepts available, cancelled, expired
     #         service_update_time_range: {
     #           start_time: Time.now,
@@ -3486,6 +3549,15 @@ module Aws::ElastiCache
     # @!attribute [rw] replication_group_ids
     #   The replication group IDs
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] cache_cluster_ids
+    #   The cache cluster IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] engine
+    #   The Elasticache engine to which the update applies. Either Redis or
+    #   Memcached
+    #   @return [String]
     #
     # @!attribute [rw] service_update_status
     #   The status of the service update
@@ -3520,6 +3592,8 @@ module Aws::ElastiCache
     class DescribeUpdateActionsMessage < Struct.new(
       :service_update_name,
       :replication_group_ids,
+      :cache_cluster_ids,
+      :engine,
       :service_update_status,
       :service_update_time_range,
       :update_action_status,
@@ -4994,6 +5068,10 @@ module Aws::ElastiCache
     #   The ID of the replication group
     #   @return [String]
     #
+    # @!attribute [rw] cache_cluster_id
+    #   The ID of the cache cluster
+    #   @return [String]
+    #
     # @!attribute [rw] service_update_name
     #   The unique ID of the service update
     #   @return [String]
@@ -5006,6 +5084,7 @@ module Aws::ElastiCache
     #
     class ProcessedUpdateAction < Struct.new(
       :replication_group_id,
+      :cache_cluster_id,
       :service_update_name,
       :update_action_status)
       include Aws::Structure
@@ -5876,11 +5955,13 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The Redis engine to which the service update applies
+    #   The Elasticache engine to which the update applies. Either Redis or
+    #   Memcached
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The Redis engine version to which the service update applies
+    #   The Elasticache engine version to which the update applies. Either
+    #   Redis or Memcached engine version
     #   @return [String]
     #
     # @!attribute [rw] auto_update_after_recommended_apply_by_date
@@ -6340,6 +6421,10 @@ module Aws::ElastiCache
     #   The replication group ID
     #   @return [String]
     #
+    # @!attribute [rw] cache_cluster_id
+    #   The ID of the cache cluster
+    #   @return [String]
+    #
     # @!attribute [rw] service_update_name
     #   The unique ID of the service update
     #   @return [String]
@@ -6357,6 +6442,7 @@ module Aws::ElastiCache
     #
     class UnprocessedUpdateAction < Struct.new(
       :replication_group_id,
+      :cache_cluster_id,
       :service_update_name,
       :error_type,
       :error_message)
@@ -6367,6 +6453,10 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] replication_group_id
     #   The ID of the replication group
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_cluster_id
+    #   The ID of the cache cluster
     #   @return [String]
     #
     # @!attribute [rw] service_update_name
@@ -6427,14 +6517,24 @@ module Aws::ElastiCache
     #   The status of the service update on the node group
     #   @return [Array<Types::NodeGroupUpdateStatus>]
     #
+    # @!attribute [rw] cache_node_update_status
+    #   The status of the service update on the cache node
+    #   @return [Array<Types::CacheNodeUpdateStatus>]
+    #
     # @!attribute [rw] estimated_update_time
     #   The estimated length of time for the update to complete
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The Elasticache engine to which the update applies. Either Redis or
+    #   Memcached
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UpdateAction AWS API Documentation
     #
     class UpdateAction < Struct.new(
       :replication_group_id,
+      :cache_cluster_id,
       :service_update_name,
       :service_update_release_date,
       :service_update_severity,
@@ -6447,7 +6547,9 @@ module Aws::ElastiCache
       :update_action_status_modified_date,
       :sla_met,
       :node_group_update_status,
-      :estimated_update_time)
+      :cache_node_update_status,
+      :estimated_update_time,
+      :engine)
       include Aws::Structure
     end
 
