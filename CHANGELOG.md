@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.372 (2019-10-10)
+------------------
+
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
