@@ -291,6 +291,7 @@ module Aws::Lex
     #         bot_name: "BotName", # required
     #         bot_alias: "BotAlias", # required
     #         user_id: "UserId", # required
+    #         checkpoint_label_filter: "IntentSummaryCheckpointLabel",
     #       }
     #
     # @!attribute [rw] bot_name
@@ -306,12 +307,21 @@ module Aws::Lex
     #   identify a user's conversation with your bot.
     #   @return [String]
     #
+    # @!attribute [rw] checkpoint_label_filter
+    #   A string used to filter the intents returned in the
+    #   `recentIntentSummaryView` structure.
+    #
+    #   When you specify a filter, only intents with their `checkpointLabel`
+    #   field set to that string are returned.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSessionRequest AWS API Documentation
     #
     class GetSessionRequest < Struct.new(
       :bot_name,
       :bot_alias,
-      :user_id)
+      :user_id,
+      :checkpoint_label_filter)
       include Aws::Structure
     end
 
@@ -320,6 +330,9 @@ module Aws::Lex
     #   array can contain a maximum of three summaries. If more than three
     #   intents are used in the session, the `recentIntentSummaryView`
     #   operation contains information about the last three intents used.
+    #
+    #   If you set the `checkpointLabelFilter` parameter in the request, the
+    #   array contains only the intents with the specified label.
     #   @return [Array<Types::IntentSummary>]
     #
     # @!attribute [rw] session_attributes
@@ -351,8 +364,32 @@ module Aws::Lex
     # process the intent, or so that you can return the intent to its
     # previous state.
     #
+    # @note When making an API call, you may pass IntentSummary
+    #   data as a hash:
+    #
+    #       {
+    #         intent_name: "IntentName",
+    #         checkpoint_label: "IntentSummaryCheckpointLabel",
+    #         slots: {
+    #           "String" => "String",
+    #         },
+    #         confirmation_status: "None", # accepts None, Confirmed, Denied
+    #         dialog_action_type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
+    #         fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
+    #         slot_to_elicit: "String",
+    #       }
+    #
     # @!attribute [rw] intent_name
     #   The name of the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] checkpoint_label
+    #   A user-defined label that identifies a particular intent. You can
+    #   use this label to return to a previous intent.
+    #
+    #   Use the `checkpointLabelFilter` parameter of the `GetSessionRequest`
+    #   operation to filter the intents returned by the operation to those
+    #   with only the specified label.
     #   @return [String]
     #
     # @!attribute [rw] slots
@@ -418,6 +455,7 @@ module Aws::Lex
     #
     class IntentSummary < Struct.new(
       :intent_name,
+      :checkpoint_label,
       :slots,
       :confirmation_status,
       :dialog_action_type,
@@ -1068,6 +1106,19 @@ module Aws::Lex
     #           message: "Text",
     #           message_format: "PlainText", # accepts PlainText, CustomPayload, SSML, Composite
     #         },
+    #         recent_intent_summary_view: [
+    #           {
+    #             intent_name: "IntentName",
+    #             checkpoint_label: "IntentSummaryCheckpointLabel",
+    #             slots: {
+    #               "String" => "String",
+    #             },
+    #             confirmation_status: "None", # accepts None, Confirmed, Denied
+    #             dialog_action_type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
+    #             fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
+    #             slot_to_elicit: "String",
+    #           },
+    #         ],
     #         accept: "Accept",
     #       }
     #
@@ -1094,6 +1145,30 @@ module Aws::Lex
     #   Sets the next action that the bot should take to fulfill the
     #   conversation.
     #   @return [Types::DialogAction]
+    #
+    # @!attribute [rw] recent_intent_summary_view
+    #   A summary of the recent intents for the bot. You can use the intent
+    #   summary view to set a checkpoint label on an intent and modify
+    #   attributes of intents. You can also use it to remove or add intent
+    #   summary objects to the list.
+    #
+    #   An intent that you modify or add to the list must make sense for the
+    #   bot. For example, the intent name must be valid for the bot. You
+    #   must provide valid values for:
+    #
+    #   * `intentName`
+    #
+    #   * slot names
+    #
+    #   * `slotToElict`
+    #
+    #   If you send the `recentIntentSummaryView` parameter in a
+    #   `PutSession` request, the contents of the new summary view replaces
+    #   the old summary view. For example, if a `GetSession` request returns
+    #   three intents in the summary view and you call `PutSession` with one
+    #   intent in the summary view, the next call to `GetSession` will only
+    #   return one intent.
+    #   @return [Array<Types::IntentSummary>]
     #
     # @!attribute [rw] accept
     #   The message that Amazon Lex returns in the response can be either
@@ -1132,6 +1207,7 @@ module Aws::Lex
       :user_id,
       :session_attributes,
       :dialog_action,
+      :recent_intent_summary_view,
       :accept)
       include Aws::Structure
     end

@@ -415,6 +415,7 @@ module Aws::IoTAnalytics
     DatasetContentSummary.add_member(:status, Shapes::ShapeRef.new(shape: DatasetContentStatus, location_name: "status"))
     DatasetContentSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     DatasetContentSummary.add_member(:schedule_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scheduleTime"))
+    DatasetContentSummary.add_member(:completion_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completionTime"))
     DatasetContentSummary.struct_class = Types::DatasetContentSummary
 
     DatasetContentVersionValue.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "datasetName"))

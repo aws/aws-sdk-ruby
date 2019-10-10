@@ -308,6 +308,13 @@ module Aws::Lex
     #   The ID of the client application user. Amazon Lex uses this to
     #   identify a user's conversation with your bot.
     #
+    # @option params [String] :checkpoint_label_filter
+    #   A string used to filter the intents returned in the
+    #   `recentIntentSummaryView` structure.
+    #
+    #   When you specify a filter, only intents with their `checkpointLabel`
+    #   field set to that string are returned.
+    #
     # @return [Types::GetSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetSessionResponse#recent_intent_summary_view #recent_intent_summary_view} => Array&lt;Types::IntentSummary&gt;
@@ -321,12 +328,14 @@ module Aws::Lex
     #     bot_name: "BotName", # required
     #     bot_alias: "BotAlias", # required
     #     user_id: "UserId", # required
+    #     checkpoint_label_filter: "IntentSummaryCheckpointLabel",
     #   })
     #
     # @example Response structure
     #
     #   resp.recent_intent_summary_view #=> Array
     #   resp.recent_intent_summary_view[0].intent_name #=> String
+    #   resp.recent_intent_summary_view[0].checkpoint_label #=> String
     #   resp.recent_intent_summary_view[0].slots #=> Hash
     #   resp.recent_intent_summary_view[0].slots["String"] #=> String
     #   resp.recent_intent_summary_view[0].confirmation_status #=> String, one of "None", "Confirmed", "Denied"
@@ -605,10 +614,9 @@ module Aws::Lex
       req.send_request(options, &block)
     end
 
-    # Sends user input (text or SSML) to Amazon Lex. Client applications can
-    # use this API to send requests to Amazon Lex at runtime. Amazon Lex
-    # then interprets the user input using the machine learning model it
-    # built for the bot.
+    # Sends user input to Amazon Lex. Client applications can use this API
+    # to send requests to Amazon Lex at runtime. Amazon Lex then interprets
+    # the user input using the machine learning model it built for the bot.
     #
     # In response, Amazon Lex returns the next `message` to convey to the
     # user an optional `responseCard` to display. Consider the following
@@ -807,6 +815,29 @@ module Aws::Lex
     #   Sets the next action that the bot should take to fulfill the
     #   conversation.
     #
+    # @option params [Array<Types::IntentSummary>] :recent_intent_summary_view
+    #   A summary of the recent intents for the bot. You can use the intent
+    #   summary view to set a checkpoint label on an intent and modify
+    #   attributes of intents. You can also use it to remove or add intent
+    #   summary objects to the list.
+    #
+    #   An intent that you modify or add to the list must make sense for the
+    #   bot. For example, the intent name must be valid for the bot. You must
+    #   provide valid values for:
+    #
+    #   * `intentName`
+    #
+    #   * slot names
+    #
+    #   * `slotToElict`
+    #
+    #   If you send the `recentIntentSummaryView` parameter in a `PutSession`
+    #   request, the contents of the new summary view replaces the old summary
+    #   view. For example, if a `GetSession` request returns three intents in
+    #   the summary view and you call `PutSession` with one intent in the
+    #   summary view, the next call to `GetSession` will only return one
+    #   intent.
+    #
     # @option params [String] :accept
     #   The message that Amazon Lex returns in the response can be either text
     #   or speech based depending on the value of this field.
@@ -868,6 +899,19 @@ module Aws::Lex
     #       message: "Text",
     #       message_format: "PlainText", # accepts PlainText, CustomPayload, SSML, Composite
     #     },
+    #     recent_intent_summary_view: [
+    #       {
+    #         intent_name: "IntentName",
+    #         checkpoint_label: "IntentSummaryCheckpointLabel",
+    #         slots: {
+    #           "String" => "String",
+    #         },
+    #         confirmation_status: "None", # accepts None, Confirmed, Denied
+    #         dialog_action_type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
+    #         fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
+    #         slot_to_elicit: "String",
+    #       },
+    #     ],
     #     accept: "Accept",
     #   })
     #
@@ -906,7 +950,7 @@ module Aws::Lex
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lex'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

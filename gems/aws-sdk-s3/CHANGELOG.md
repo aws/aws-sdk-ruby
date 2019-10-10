@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2019-10-10)
+------------------
+
 * Feature - Support `#delete_object` and `#head_object` for encryption client.
 
 1.48.0 (2019-08-30)
