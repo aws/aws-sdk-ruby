@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-10-11)
+------------------
+
+* Feature - Greengrass OTA service supports Raspbian/Armv6l platforms.
+
 1.25.0 (2019-09-20)
 ------------------
 
