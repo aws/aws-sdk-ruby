@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Greengrass - Updated the API for AWS Greengrass.
+
 2.11.372 (2019-10-10)
 ------------------
 
