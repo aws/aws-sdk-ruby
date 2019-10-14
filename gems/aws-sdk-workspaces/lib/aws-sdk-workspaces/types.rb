@@ -395,8 +395,21 @@ module Aws::WorkSpaces
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_internet_access
-    #   The public IP address to attach to all WorkSpaces that are created
-    #   or rebuilt.
+    #   Specifies whether to automatically assign a public IP address to
+    #   WorkSpaces in this directory by default. If enabled, the public IP
+    #   address allows outbound internet access from your WorkSpaces when
+    #   you’re using an internet gateway in the Amazon VPC in which your
+    #   WorkSpaces are located. If you're using a Network Address
+    #   Translation (NAT) gateway for outbound internet access from your
+    #   VPC, or if your WorkSpaces are in public subnets and you manually
+    #   assign them Elastic IP addresses, you should disable this setting.
+    #   This setting applies to new WorkSpaces that you launch or to
+    #   existing WorkSpaces that you rebuild. For more information, see [
+    #   Configure a VPC for Amazon WorkSpaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html
     #   @return [Boolean]
     #
     # @!attribute [rw] default_ou
@@ -836,7 +849,7 @@ module Aws::WorkSpaces
 
     # @!attribute [rw] rebuild_snapshots
     #   Information about the snapshots that can be used to rebuild a
-    #   WorkSpace. These snapshots include the root volume.
+    #   WorkSpace. These snapshots include the user volume.
     #   @return [Array<Types::Snapshot>]
     #
     # @!attribute [rw] restore_snapshots
@@ -2229,7 +2242,7 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] running_mode_auto_stop_timeout_in_minutes
     #   The time after a user logs off when WorkSpaces are automatically
-    #   stopped. Configured in 60 minute intervals.
+    #   stopped. Configured in 60-minute intervals.
     #   @return [Integer]
     #
     # @!attribute [rw] root_volume_size_gib

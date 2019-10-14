@@ -178,6 +178,7 @@ module Aws::Personalize
     TrackingId = Shapes::StringShape.new(name: 'TrackingId')
     TrainingHours = Shapes::FloatShape.new(name: 'TrainingHours')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
+    TrainingMode = Shapes::StringShape.new(name: 'TrainingMode')
     TransactionsPerSecond = Shapes::IntegerShape.new(name: 'TransactionsPerSecond')
     Tunable = Shapes::BooleanShape.new(name: 'Tunable')
     UpdateCampaignRequest = Shapes::StructureShape.new(name: 'UpdateCampaignRequest')
@@ -314,6 +315,7 @@ module Aws::Personalize
     CreateSolutionResponse.struct_class = Types::CreateSolutionResponse
 
     CreateSolutionVersionRequest.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionArn"))
+    CreateSolutionVersionRequest.add_member(:training_mode, Shapes::ShapeRef.new(shape: TrainingMode, location_name: "trainingMode"))
     CreateSolutionVersionRequest.struct_class = Types::CreateSolutionVersionRequest
 
     CreateSolutionVersionResponse.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
@@ -740,6 +742,7 @@ module Aws::Personalize
     SolutionVersion.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
     SolutionVersion.add_member(:solution_config, Shapes::ShapeRef.new(shape: SolutionConfig, location_name: "solutionConfig"))
     SolutionVersion.add_member(:training_hours, Shapes::ShapeRef.new(shape: TrainingHours, location_name: "trainingHours"))
+    SolutionVersion.add_member(:training_mode, Shapes::ShapeRef.new(shape: TrainingMode, location_name: "trainingMode"))
     SolutionVersion.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     SolutionVersion.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     SolutionVersion.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))

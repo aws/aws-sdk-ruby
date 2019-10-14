@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2019-10-14)
+------------------
+
+* Feature - Documentation updates for WorkSpaces
+
 1.28.0 (2019-09-20)
 ------------------
 
