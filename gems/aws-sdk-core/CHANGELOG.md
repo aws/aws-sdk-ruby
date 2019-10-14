@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix method redefinition warnings
+
 3.69.0 (2019-10-17)
 ------------------
 
