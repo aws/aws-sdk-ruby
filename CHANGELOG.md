@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.374 (2019-10-14)
+------------------
+
 * Feature - Aws::Personalize - Updated the API, and documentation for Amazon Personalize.
 
 * Feature - Aws::WorkSpaces - Updated the documentation for Amazon WorkSpaces.
