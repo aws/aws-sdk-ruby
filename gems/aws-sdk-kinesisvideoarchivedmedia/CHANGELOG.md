@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-10-15)
+------------------
+
+* Feature - Add ON_DISCONTINUITY mode to the GetHLSStreamingSessionURL API
+
 1.18.0 (2019-07-25)
 ------------------
 
