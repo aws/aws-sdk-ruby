@@ -8,10 +8,146 @@
 module Aws::KinesisVideoArchivedMedia
   module Types
 
+    # Kinesis Video Streams has throttled the request because you have
+    # exceeded the limit of allowed client calls. Try making the call later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ClientLimitExceededException AWS API Documentation
+    #
+    class ClientLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Contains the range of timestamps for the requested media, and the
+    # source of the timestamps.
+    #
+    # @note When making an API call, you may pass DASHFragmentSelector
+    #   data as a hash:
+    #
+    #       {
+    #         fragment_selector_type: "PRODUCER_TIMESTAMP", # accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
+    #         timestamp_range: {
+    #           start_timestamp: Time.now,
+    #           end_timestamp: Time.now,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] fragment_selector_type
+    #   The source of the timestamps for the requested media.
+    #
+    #   When `FragmentSelectorType` is set to `PRODUCER_TIMESTAMP` and
+    #   GetDASHStreamingSessionURLInput$PlaybackMode is `ON_DEMAND` or
+    #   `LIVE_REPLAY`, the first fragment ingested with a producer timestamp
+    #   within the specified FragmentSelector$TimestampRange is included in
+    #   the media playlist. In addition, the fragments with producer
+    #   timestamps within the `TimestampRange` ingested immediately
+    #   following the first fragment (up to the
+    #   GetDASHStreamingSessionURLInput$MaxManifestFragmentResults value)
+    #   are included.
+    #
+    #   Fragments that have duplicate producer timestamps are deduplicated.
+    #   This means that if producers are producing a stream of fragments
+    #   with producer timestamps that are approximately equal to the true
+    #   clock time, the MPEG-DASH manifest will contain all of the fragments
+    #   within the requested timestamp range. If some fragments are ingested
+    #   within the same time range and very different points in time, only
+    #   the oldest ingested collection of fragments are returned.
+    #
+    #   When `FragmentSelectorType` is set to `PRODUCER_TIMESTAMP` and
+    #   GetDASHStreamingSessionURLInput$PlaybackMode is `LIVE`, the producer
+    #   timestamps are used in the MP4 fragments and for deduplication. But
+    #   the most recently ingested fragments based on server timestamps are
+    #   included in the MPEG-DASH manifest. This means that even if
+    #   fragments ingested in the past have producer timestamps with values
+    #   now, they are not included in the HLS media playlist.
+    #
+    #   The default is `SERVER_TIMESTAMP`.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp_range
+    #   The start and end of the timestamp range for the requested media.
+    #
+    #   This value should not be present if `PlaybackType` is `LIVE`.
+    #   @return [Types::DASHTimestampRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/DASHFragmentSelector AWS API Documentation
+    #
+    class DASHFragmentSelector < Struct.new(
+      :fragment_selector_type,
+      :timestamp_range)
+      include Aws::Structure
+    end
+
+    # The start and end of the timestamp range for the requested media.
+    #
+    # This value should not be present if `PlaybackType` is `LIVE`.
+    #
+    # <note markdown="1"> The values in the `DASHimestampRange` are inclusive. Fragments that
+    # begin before the start time but continue past it, or fragments that
+    # begin before the end time but continue past it, are included in the
+    # session.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass DASHTimestampRange
+    #   data as a hash:
+    #
+    #       {
+    #         start_timestamp: Time.now,
+    #         end_timestamp: Time.now,
+    #       }
+    #
+    # @!attribute [rw] start_timestamp
+    #   The start of the timestamp range for the requested media.
+    #
+    #   If the `DASHTimestampRange` value is specified, the `StartTimestamp`
+    #   value is required.
+    #
+    #   <note markdown="1"> This value is inclusive. Fragments that start before the
+    #   `StartTimestamp` and continue past it are included in the session.
+    #   If `FragmentSelectorType` is `SERVER_TIMESTAMP`, the
+    #   `StartTimestamp` must be later than the stream head.
+    #
+    #    </note>
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_timestamp
+    #   The end of the timestamp range for the requested media. This value
+    #   must be within 3 hours of the specified `StartTimestamp`, and it
+    #   must be later than the `StartTimestamp` value.
+    #
+    #   If `FragmentSelectorType` for the request is `SERVER_TIMESTAMP`,
+    #   this value must be in the past.
+    #
+    #   The `EndTimestamp` value is required for `ON_DEMAND` mode, but
+    #   optional for `LIVE_REPLAY` mode. If the `EndTimestamp` is not set
+    #   for `LIVE_REPLAY` mode then the session will continue to include
+    #   newly ingested fragments until the session expires.
+    #
+    #   <note markdown="1"> This value is inclusive. The `EndTimestamp` is compared to the
+    #   (starting) timestamp of the fragment. Fragments that start before
+    #   the `EndTimestamp` value and continue past it are included in the
+    #   session.
+    #
+    #    </note>
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/DASHTimestampRange AWS API Documentation
+    #
+    class DASHTimestampRange < Struct.new(
+      :start_timestamp,
+      :end_timestamp)
+      include Aws::Structure
+    end
+
     # Represents a segment of video or other time-delimited data.
     #
     # @!attribute [rw] fragment_number
-    #   The index value of the fragment.
+    #   The unique identifier of the fragment. This value monotonically
+    #   increases based on the ingestion order.
     #   @return [String]
     #
     # @!attribute [rw] fragment_size_in_bytes
@@ -20,11 +156,11 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [Integer]
     #
     # @!attribute [rw] producer_timestamp
-    #   The time stamp from the producer corresponding to the fragment.
+    #   The timestamp from the producer corresponding to the fragment.
     #   @return [Time]
     #
     # @!attribute [rw] server_timestamp
-    #   The time stamp from the AWS server corresponding to the fragment.
+    #   The timestamp from the AWS server corresponding to the fragment.
     #   @return [Time]
     #
     # @!attribute [rw] fragment_length_in_milliseconds
@@ -43,8 +179,25 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # Describes the time stamp range and time stamp origin of a range of
+    # Describes the timestamp range and timestamp origin of a range of
     # fragments.
+    #
+    # Only fragments with a start timestamp greater than or equal to the
+    # given start time and less than or equal to the end time are returned.
+    # For example, if a stream contains fragments with the following start
+    # timestamps:
+    #
+    # * 00:00:00
+    #
+    # * 00:00:02
+    #
+    # * 00:00:04
+    #
+    # * 00:00:06
+    #
+    # A fragment selector range with a start time of 00:00:01 and end time
+    # of 00:00:04 would return the fragments with start times of 00:00:02
+    # and 00:00:04.
     #
     # @note When making an API call, you may pass FragmentSelector
     #   data as a hash:
@@ -58,11 +211,11 @@ module Aws::KinesisVideoArchivedMedia
     #       }
     #
     # @!attribute [rw] fragment_selector_type
-    #   The origin of the time stamps to use (Server or Producer).
+    #   The origin of the timestamps to use (Server or Producer).
     #   @return [String]
     #
     # @!attribute [rw] timestamp_range
-    #   The range of time stamps to return.
+    #   The range of timestamps to return.
     #   @return [Types::TimestampRange]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/FragmentSelector AWS API Documentation
@@ -73,13 +226,214 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetDASHStreamingSessionURLInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_name: "StreamName",
+    #         stream_arn: "ResourceARN",
+    #         playback_mode: "LIVE", # accepts LIVE, LIVE_REPLAY, ON_DEMAND
+    #         display_fragment_timestamp: "ALWAYS", # accepts ALWAYS, NEVER
+    #         display_fragment_number: "ALWAYS", # accepts ALWAYS, NEVER
+    #         dash_fragment_selector: {
+    #           fragment_selector_type: "PRODUCER_TIMESTAMP", # accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
+    #           timestamp_range: {
+    #             start_timestamp: Time.now,
+    #             end_timestamp: Time.now,
+    #           },
+    #         },
+    #         expires: 1,
+    #         max_manifest_fragment_results: 1,
+    #       }
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream for which to retrieve the MPEG-DASH manifest
+    #   URL.
+    #
+    #   You must specify either the `StreamName` or the `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream for which to retrieve
+    #   the MPEG-DASH manifest URL.
+    #
+    #   You must specify either the `StreamName` or the `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_mode
+    #   Whether to retrieve live, live replay, or archived, on-demand data.
+    #
+    #   Features of the three types of sessions include the following:
+    #
+    #   * <b> <code>LIVE</code> </b>\: For sessions of this type, the
+    #     MPEG-DASH manifest is continually updated with the latest
+    #     fragments as they become available. We recommend that the media
+    #     player retrieve a new manifest on a one-second interval. When this
+    #     type of session is played in a media player, the user interface
+    #     typically displays a "live" notification, with no scrubber
+    #     control for choosing the position in the playback window to
+    #     display.
+    #
+    #     <note markdown="1"> In `LIVE` mode, the newest available fragments are included in an
+    #     MPEG-DASH manifest, even if there is a gap between fragments (that
+    #     is, if a fragment is missing). A gap like this might cause a media
+    #     player to halt or cause a jump in playback. In this mode,
+    #     fragments are not added to the MPEG-DASH manifest if they are
+    #     older than the newest fragment in the playlist. If the missing
+    #     fragment becomes available after a subsequent fragment is added to
+    #     the manifest, the older fragment is not added, and the gap is not
+    #     filled.
+    #
+    #      </note>
+    #
+    #   * <b> <code>LIVE_REPLAY</code> </b>\: For sessions of this type, the
+    #     MPEG-DASH manifest is updated similarly to how it is updated for
+    #     `LIVE` mode except that it starts by including fragments from a
+    #     given start time. Instead of fragments being added as they are
+    #     ingested, fragments are added as the duration of the next fragment
+    #     elapses. For example, if the fragments in the session are two
+    #     seconds long, then a new fragment is added to the manifest every
+    #     two seconds. This mode is useful to be able to start playback from
+    #     when an event is detected and continue live streaming media that
+    #     has not yet been ingested as of the time of the session creation.
+    #     This mode is also useful to stream previously archived media
+    #     without being limited by the 1,000 fragment limit in the
+    #     `ON_DEMAND` mode.
+    #
+    #   * <b> <code>ON_DEMAND</code> </b>\: For sessions of this type, the
+    #     MPEG-DASH manifest contains all the fragments for the session, up
+    #     to the number that is specified in
+    #     `MaxMediaPlaylistFragmentResults`. The manifest must be retrieved
+    #     only once for each session. When this type of session is played in
+    #     a media player, the user interface typically displays a scrubber
+    #     control for choosing the position in the playback window to
+    #     display.
+    #
+    #   In all playback modes, if `FragmentSelectorType` is
+    #   `PRODUCER_TIMESTAMP`, and if there are multiple fragments with the
+    #   same start timestamp, the fragment that has the larger fragment
+    #   number (that is, the newer fragment) is included in the MPEG-DASH
+    #   manifest. The other fragments are not included. Fragments that have
+    #   different timestamps but have overlapping durations are still
+    #   included in the MPEG-DASH manifest. This can lead to unexpected
+    #   behavior in the media player.
+    #
+    #   The default is `LIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_fragment_timestamp
+    #   Per the MPEG-DASH specification, the wall-clock time of fragments in
+    #   the manifest file can be derived using attributes in the manifest
+    #   itself. However, typically, MPEG-DASH compatible media players do
+    #   not properly handle gaps in the media timeline. Kinesis Video
+    #   Streams adjusts the media timeline in the manifest file to enable
+    #   playback of media with discontinuities. Therefore, the wall-clock
+    #   time derived from the manifest file may be inaccurate. If
+    #   DisplayFragmentTimestamp is set to `ALWAYS`, the accurate fragment
+    #   timestamp is added to each S element in the manifest file with the
+    #   attribute name “kvs:ts”. A custom MPEG-DASH media player is
+    #   necessary to leverage this custom attribute.
+    #
+    #   The default value is `NEVER`. When DASHFragmentSelector is
+    #   `SERVER_TIMESTAMP`, the timestamps will be the server start
+    #   timestamps. Similarly, when DASHFragmentSelector is
+    #   `PRODUCER_TIMESTAMP`, the timestamps will be the producer start
+    #   timestamps.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_fragment_number
+    #   Fragments are identified in the manifest file based on their
+    #   sequence number in the session. If DisplayFragmentNumber is set to
+    #   `ALWAYS`, the Kinesis Video Streams fragment number is added to each
+    #   S element in the manifest file with the attribute name “kvs:fn”.
+    #   These fragment numbers can be used for logging or for use with other
+    #   APIs (e.g. `GetMedia` and `GetMediaForFragmentList`). A custom
+    #   MPEG-DASH media player is necessary to leverage these this custom
+    #   attribute.
+    #
+    #   The default value is `NEVER`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dash_fragment_selector
+    #   The time range of the requested fragment, and the source of the
+    #   timestamps.
+    #
+    #   This parameter is required if `PlaybackMode` is `ON_DEMAND` or
+    #   `LIVE_REPLAY`. This parameter is optional if PlaybackMode is` LIVE.
+    #   If PlaybackMode is LIVE, the FragmentSelectorType can be set, but
+    #   the TimestampRange should not be set. If PlaybackMode is ON_DEMAND
+    #   or LIVE_REPLAY, both FragmentSelectorType and TimestampRange must be
+    #   set.</p>
+    #   `
+    #   @return [Types::DASHFragmentSelector]
+    #
+    # @!attribute [rw] expires
+    #   The time in seconds until the requested session expires. This value
+    #   can be between 300 (5 minutes) and 43200 (12 hours).
+    #
+    #   When a session expires, no new calls to `GetDashManifest`,
+    #   `GetMP4InitFragment`, or `GetMP4MediaFragment` can be made for that
+    #   session.
+    #
+    #   The default is 300 (5 minutes).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_manifest_fragment_results
+    #   The maximum number of fragments that are returned in the MPEG-DASH
+    #   manifest.
+    #
+    #   When the `PlaybackMode` is `LIVE`, the most recent fragments are
+    #   returned up to this value. When the `PlaybackMode` is `ON_DEMAND`,
+    #   the oldest fragments are returned, up to this maximum number.
+    #
+    #   When there are a higher number of fragments available in a live
+    #   MPEG-DASH manifest, video players often buffer content before
+    #   starting playback. Increasing the buffer size increases the playback
+    #   latency, but it decreases the likelihood that rebuffering will occur
+    #   during playback. We recommend that a live MPEG-DASH manifest have a
+    #   minimum of 3 fragments and a maximum of 10 fragments.
+    #
+    #   The default is 5 fragments if `PlaybackMode` is `LIVE` or
+    #   `LIVE_REPLAY`, and 1,000 if `PlaybackMode` is `ON_DEMAND`.
+    #
+    #   The maximum value of 1,000 fragments corresponds to more than 16
+    #   minutes of video on streams with 1-second fragments, and more than 2
+    #   1/2 hours of video on streams with 10-second fragments.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetDASHStreamingSessionURLInput AWS API Documentation
+    #
+    class GetDASHStreamingSessionURLInput < Struct.new(
+      :stream_name,
+      :stream_arn,
+      :playback_mode,
+      :display_fragment_timestamp,
+      :display_fragment_number,
+      :dash_fragment_selector,
+      :expires,
+      :max_manifest_fragment_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dash_streaming_session_url
+    #   The URL (containing the session token) that a media player can use
+    #   to retrieve the MPEG-DASH manifest.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetDASHStreamingSessionURLOutput AWS API Documentation
+    #
+    class GetDASHStreamingSessionURLOutput < Struct.new(
+      :dash_streaming_session_url)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetHLSStreamingSessionURLInput
     #   data as a hash:
     #
     #       {
     #         stream_name: "StreamName",
     #         stream_arn: "ResourceARN",
-    #         playback_mode: "LIVE", # accepts LIVE, ON_DEMAND
+    #         playback_mode: "LIVE", # accepts LIVE, LIVE_REPLAY, ON_DEMAND
     #         hls_fragment_selector: {
     #           fragment_selector_type: "PRODUCER_TIMESTAMP", # accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
     #           timestamp_range: {
@@ -87,7 +441,9 @@ module Aws::KinesisVideoArchivedMedia
     #             end_timestamp: Time.now,
     #           },
     #         },
+    #         container_format: "FRAGMENTED_MP4", # accepts FRAGMENTED_MP4, MPEG_TS
     #         discontinuity_mode: "ALWAYS", # accepts ALWAYS, NEVER
+    #         display_fragment_timestamp: "ALWAYS", # accepts ALWAYS, NEVER
     #         expires: 1,
     #         max_media_playlist_fragment_results: 1,
     #       }
@@ -107,9 +463,9 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     #
     # @!attribute [rw] playback_mode
-    #   Whether to retrieve live or archived, on-demand data.
+    #   Whether to retrieve live, live replay, or archived, on-demand data.
     #
-    #   Features of the two types of session include the following:
+    #   Features of the three types of sessions include the following:
     #
     #   * <b> <code>LIVE</code> </b>\: For sessions of this type, the HLS
     #     media playlist is continually updated with the latest fragments as
@@ -131,6 +487,20 @@ module Aws::KinesisVideoArchivedMedia
     #
     #      </note>
     #
+    #   * <b> <code>LIVE_REPLAY</code> </b>\: For sessions of this type, the
+    #     HLS media playlist is updated similarly to how it is updated for
+    #     `LIVE` mode except that it starts by including fragments from a
+    #     given start time. Instead of fragments being added as they are
+    #     ingested, fragments are added as the duration of the next fragment
+    #     elapses. For example, if the fragments in the session are two
+    #     seconds long, then a new fragment is added to the media playlist
+    #     every two seconds. This mode is useful to be able to start
+    #     playback from when an event is detected and continue live
+    #     streaming media that has not yet been ingested as of the time of
+    #     the session creation. This mode is also useful to stream
+    #     previously archived media without being limited by the 1,000
+    #     fragment limit in the `ON_DEMAND` mode.
+    #
     #   * <b> <code>ON_DEMAND</code> </b>\: For sessions of this type, the
     #     HLS media playlist contains all the fragments for the session, up
     #     to the number that is specified in
@@ -140,12 +510,12 @@ module Aws::KinesisVideoArchivedMedia
     #     control for choosing the position in the playback window to
     #     display.
     #
-    #   In both playback modes, if `FragmentSelectorType` is
+    #   In all playback modes, if `FragmentSelectorType` is
     #   `PRODUCER_TIMESTAMP`, and if there are multiple fragments with the
-    #   same start time stamp, the fragment that has the larger fragment
+    #   same start timestamp, the fragment that has the larger fragment
     #   number (that is, the newer fragment) is included in the HLS media
     #   playlist. The other fragments are not included. Fragments that have
-    #   different time stamps but have overlapping durations are still
+    #   different timestamps but have overlapping durations are still
     #   included in the HLS media playlist. This can lead to unexpected
     #   behavior in the media player.
     #
@@ -153,16 +523,31 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     #
     # @!attribute [rw] hls_fragment_selector
-    #   The time range of the requested fragment, and the source of the time
-    #   stamps.
+    #   The time range of the requested fragment, and the source of the
+    #   timestamps.
     #
-    #   This parameter is required if `PlaybackMode` is `ON_DEMAND`. This
-    #   parameter is optional if `PlaybackMode` is `LIVE`. If `PlaybackMode`
-    #   is `LIVE`, the `FragmentSelectorType` can be set, but the
-    #   `TimestampRange` should not be set. If `PlaybackMode` is
-    #   `ON_DEMAND`, both `FragmentSelectorType` and `TimestampRange` must
-    #   be set.
+    #   This parameter is required if `PlaybackMode` is `ON_DEMAND` or
+    #   `LIVE_REPLAY`. This parameter is optional if PlaybackMode is` LIVE.
+    #   If PlaybackMode is LIVE, the FragmentSelectorType can be set, but
+    #   the TimestampRange should not be set. If PlaybackMode is ON_DEMAND
+    #   or LIVE_REPLAY, both FragmentSelectorType and TimestampRange must be
+    #   set.</p>
+    #   `
     #   @return [Types::HLSFragmentSelector]
+    #
+    # @!attribute [rw] container_format
+    #   Specifies which format should be used for packaging the media.
+    #   Specifying the `FRAGMENTED_MP4` container format packages the media
+    #   into MP4 fragments (fMP4 or CMAF). This is the recommended packaging
+    #   because there is minimal packaging overhead. The other container
+    #   format option is `MPEG_TS`. HLS has supported MPEG TS chunks since
+    #   it was released and is sometimes the only supported packaging on
+    #   older HLS players. MPEG TS typically has a 5-25 percent packaging
+    #   overhead. This means MPEG TS typically requires 5-25 percent more
+    #   bandwidth and cost than fMP4.
+    #
+    #   The default is `FRAGMENTED_MP4`.
+    #   @return [String]
     #
     # @!attribute [rw] discontinuity_mode
     #   Specifies when flags marking discontinuities between fragments will
@@ -171,7 +556,7 @@ module Aws::KinesisVideoArchivedMedia
     #   `PRODUCER_TIMESTAMP`.
     #
     #   Media players typically build a timeline of media content to play,
-    #   based on the time stamps of each fragment. This means that if there
+    #   based on the timestamps of each fragment. This means that if there
     #   is any overlap between fragments (as is typical if
     #   HLSFragmentSelector is `SERVER_TIMESTAMP`), the media player
     #   timeline has small gaps between fragments in some places, and
@@ -179,10 +564,27 @@ module Aws::KinesisVideoArchivedMedia
     #   flags between fragments, the media player is expected to reset the
     #   timeline, resulting in the fragment being played immediately after
     #   the previous fragment. We recommend that you always have
-    #   discontinuity flags between fragments if the fragment time stamps
-    #   are not accurate or if fragments might be missing. You should not
-    #   place discontinuity flags between fragments for the player timeline
-    #   to accurately map to the producer time stamps.
+    #   discontinuity flags between fragments if the fragment timestamps are
+    #   not accurate or if fragments might be missing. You should not place
+    #   discontinuity flags between fragments for the player timeline to
+    #   accurately map to the producer timestamps.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_fragment_timestamp
+    #   Specifies when the fragment start timestamps should be included in
+    #   the HLS media playlist. Typically, media players report the playhead
+    #   position as a time relative to the start of the first fragment in
+    #   the playback session. However, when the start timestamps are
+    #   included in the HLS media playlist, some media players might report
+    #   the current playhead as an absolute time based on the fragment
+    #   timestamps. This can be useful for creating a playback experience
+    #   that shows viewers the wall-clock time of the media.
+    #
+    #   The default is `NEVER`. When HLSFragmentSelector is
+    #   `SERVER_TIMESTAMP`, the timestamps will be the server start
+    #   timestamps. Similarly, when HLSFragmentSelector is
+    #   `PRODUCER_TIMESTAMP`, the timestamps will be the producer start
+    #   timestamps.
     #   @return [String]
     #
     # @!attribute [rw] expires
@@ -190,8 +592,8 @@ module Aws::KinesisVideoArchivedMedia
     #   can be between 300 (5 minutes) and 43200 (12 hours).
     #
     #   When a session expires, no new calls to `GetHLSMasterPlaylist`,
-    #   `GetHLSMediaPlaylist`, `GetMP4InitFragment`, or
-    #   `GetMP4MediaFragment` can be made for that session.
+    #   `GetHLSMediaPlaylist`, `GetMP4InitFragment`, `GetMP4MediaFragment`,
+    #   or `GetTSFragment` can be made for that session.
     #
     #   The default is 300 (5 minutes).
     #   @return [Integer]
@@ -211,8 +613,8 @@ module Aws::KinesisVideoArchivedMedia
     #   playback. We recommend that a live HLS media playlist have a minimum
     #   of 3 fragments and a maximum of 10 fragments.
     #
-    #   The default is 5 fragments if `PlaybackMode` is `LIVE`, and 1,000 if
-    #   `PlaybackMode` is `ON_DEMAND`.
+    #   The default is 5 fragments if `PlaybackMode` is `LIVE` or
+    #   `LIVE_REPLAY`, and 1,000 if `PlaybackMode` is `ON_DEMAND`.
     #
     #   The maximum value of 1,000 fragments corresponds to more than 16
     #   minutes of video on streams with 1-second fragments, and more than 2
@@ -226,7 +628,9 @@ module Aws::KinesisVideoArchivedMedia
       :stream_arn,
       :playback_mode,
       :hls_fragment_selector,
+      :container_format,
       :discontinuity_mode,
+      :display_fragment_timestamp,
       :expires,
       :max_media_playlist_fragment_results)
       include Aws::Structure
@@ -283,11 +687,11 @@ module Aws::KinesisVideoArchivedMedia
     #   * AWS\_KINESISVIDEO\_FRAGMENT\_NUMBER - Fragment number returned in
     #     the chunk.
     #
-    #   * AWS\_KINESISVIDEO\_SERVER\_SIDE\_TIMESTAMP - Server-side time
-    #     stamp of the fragment.
+    #   * AWS\_KINESISVIDEO\_SERVER\_SIDE\_TIMESTAMP - Server-side timestamp
+    #     of the fragment.
     #
-    #   * AWS\_KINESISVIDEO\_PRODUCER\_SIDE\_TIMESTAMP - Producer-side time
-    #     stamp of the fragment.
+    #   * AWS\_KINESISVIDEO\_PRODUCER\_SIDE\_TIMESTAMP - Producer-side
+    #     timestamp of the fragment.
     #
     #   The following tags will be included if an exception occurs:
     #
@@ -313,8 +717,8 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # Contains the range of time stamps for the requested media, and the
-    # source of the time stamps.
+    # Contains the range of timestamps for the requested media, and the
+    # source of the timestamps.
     #
     # @note When making an API call, you may pass HLSFragmentSelector
     #   data as a hash:
@@ -328,39 +732,39 @@ module Aws::KinesisVideoArchivedMedia
     #       }
     #
     # @!attribute [rw] fragment_selector_type
-    #   The source of the time stamps for the requested media.
+    #   The source of the timestamps for the requested media.
     #
     #   When `FragmentSelectorType` is set to `PRODUCER_TIMESTAMP` and
-    #   GetHLSStreamingSessionURLInput$PlaybackMode is `ON_DEMAND`, the
-    #   first fragment ingested with a producer time stamp within the
-    #   specified FragmentSelector$TimestampRange is included in the media
-    #   playlist. In addition, the fragments with producer time stamps
-    #   within the `TimestampRange` ingested immediately following the first
-    #   fragment (up to the
+    #   GetHLSStreamingSessionURLInput$PlaybackMode is `ON_DEMAND` or
+    #   `LIVE_REPLAY`, the first fragment ingested with a producer timestamp
+    #   within the specified FragmentSelector$TimestampRange is included in
+    #   the media playlist. In addition, the fragments with producer
+    #   timestamps within the `TimestampRange` ingested immediately
+    #   following the first fragment (up to the
     #   GetHLSStreamingSessionURLInput$MaxMediaPlaylistFragmentResults
     #   value) are included.
     #
-    #   Fragments that have duplicate producer time stamps are deduplicated.
+    #   Fragments that have duplicate producer timestamps are deduplicated.
     #   This means that if producers are producing a stream of fragments
-    #   with producer time stamps that are approximately equal to the true
+    #   with producer timestamps that are approximately equal to the true
     #   clock time, the HLS media playlists will contain all of the
-    #   fragments within the requested time stamp range. If some fragments
+    #   fragments within the requested timestamp range. If some fragments
     #   are ingested within the same time range and very different points in
     #   time, only the oldest ingested collection of fragments are returned.
     #
     #   When `FragmentSelectorType` is set to `PRODUCER_TIMESTAMP` and
     #   GetHLSStreamingSessionURLInput$PlaybackMode is `LIVE`, the producer
-    #   time stamps are used in the MP4 fragments and for deduplication. But
-    #   the most recently ingested fragments based on server time stamps are
+    #   timestamps are used in the MP4 fragments and for deduplication. But
+    #   the most recently ingested fragments based on server timestamps are
     #   included in the HLS media playlist. This means that even if
-    #   fragments ingested in the past have producer time stamps with values
+    #   fragments ingested in the past have producer timestamps with values
     #   now, they are not included in the HLS media playlist.
     #
     #   The default is `SERVER_TIMESTAMP`.
     #   @return [String]
     #
     # @!attribute [rw] timestamp_range
-    #   The start and end of the time stamp range for the requested media.
+    #   The start and end of the timestamp range for the requested media.
     #
     #   This value should not be present if `PlaybackType` is `LIVE`.
     #   @return [Types::HLSTimestampRange]
@@ -373,7 +777,7 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # The start and end of the time stamp range for the requested media.
+    # The start and end of the timestamp range for the requested media.
     #
     # This value should not be present if `PlaybackType` is `LIVE`.
     #
@@ -393,7 +797,7 @@ module Aws::KinesisVideoArchivedMedia
     #       }
     #
     # @!attribute [rw] start_timestamp
-    #   The start of the time stamp range for the requested media.
+    #   The start of the timestamp range for the requested media.
     #
     #   If the `HLSTimestampRange` value is specified, the `StartTimestamp`
     #   value is required.
@@ -407,18 +811,20 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [Time]
     #
     # @!attribute [rw] end_timestamp
-    #   The end of the time stamp range for the requested media. This value
+    #   The end of the timestamp range for the requested media. This value
     #   must be within 3 hours of the specified `StartTimestamp`, and it
     #   must be later than the `StartTimestamp` value.
     #
     #   If `FragmentSelectorType` for the request is `SERVER_TIMESTAMP`,
     #   this value must be in the past.
     #
-    #   If the `HLSTimestampRange` value is specified, the `EndTimestamp`
-    #   value is required.
+    #   The `EndTimestamp` value is required for `ON_DEMAND` mode, but
+    #   optional for `LIVE_REPLAY` mode. If the `EndTimestamp` is not set
+    #   for `LIVE_REPLAY` mode then the session will continue to include
+    #   newly ingested fragments until the session expires.
     #
     #   <note markdown="1"> This value is inclusive. The `EndTimestamp` is compared to the
-    #   (starting) time stamp of the fragment. Fragments that start before
+    #   (starting) timestamp of the fragment. Fragments that start before
     #   the `EndTimestamp` value and continue past it are included in the
     #   session.
     #
@@ -430,6 +836,32 @@ module Aws::KinesisVideoArchivedMedia
     class HLSTimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp)
+      include Aws::Structure
+    end
+
+    # A specified parameter exceeds its restrictions, is not supported, or
+    # can't be used.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The codec private data in at least one of the tracks of the video
+    # stream is not valid for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/InvalidCodecPrivateDataException AWS API Documentation
+    #
+    class InvalidCodecPrivateDataException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -466,8 +898,8 @@ module Aws::KinesisVideoArchivedMedia
     #   @return [String]
     #
     # @!attribute [rw] fragment_selector
-    #   Describes the time stamp range and time stamp origin for the range
-    #   of fragments to return.
+    #   Describes the timestamp range and timestamp origin for the range of
+    #   fragments to return.
     #   @return [Types::FragmentSelector]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ListFragmentsInput AWS API Documentation
@@ -481,8 +913,9 @@ module Aws::KinesisVideoArchivedMedia
     end
 
     # @!attribute [rw] fragments
-    #   A list of fragment numbers that correspond to the time stamp range
-    #   provided.
+    #   A list of archived Fragment objects from the stream that meet the
+    #   selector criteria. Results are in no specific order, even across
+    #   pages.
     #   @return [Array<Types::Fragment>]
     #
     # @!attribute [rw] next_token
@@ -499,7 +932,66 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # The range of time stamps for which to return fragments.
+    # No codec private data was found in at least one of tracks of the video
+    # stream.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/MissingCodecPrivateDataException AWS API Documentation
+    #
+    class MissingCodecPrivateDataException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A streaming session was requested for a stream that does not retain
+    # data (that is, has a `DataRetentionInHours` of 0).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/NoDataRetentionException AWS API Documentation
+    #
+    class NoDataRetentionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Status Code: 403, The caller is not authorized to perform an operation
+    # on the given stream, or the token has expired.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/NotAuthorizedException AWS API Documentation
+    #
+    class NotAuthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # `GetMedia` throws this error when Kinesis Video Streams can't find
+    # the stream that you specified.
+    #
+    # `GetHLSStreamingSessionURL` and `GetDASHStreamingSessionURL` throw
+    # this error if a session with a `PlaybackMode` of `ON_DEMAND` or
+    # `LIVE_REPLAY`is requested for a stream that has no fragments within
+    # the requested time range, or if a session with a `PlaybackMode` of
+    # `LIVE` is requested for a stream that has no fragments within the last
+    # 30 seconds.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The range of timestamps for which to return fragments.
     #
     # @note When making an API call, you may pass TimestampRange
     #   data as a hash:
@@ -510,13 +1002,13 @@ module Aws::KinesisVideoArchivedMedia
     #       }
     #
     # @!attribute [rw] start_timestamp
-    #   The starting time stamp in the range of time stamps for which to
+    #   The starting timestamp in the range of timestamps for which to
     #   return fragments.
     #   @return [Time]
     #
     # @!attribute [rw] end_timestamp
-    #   The ending time stamp in the range of time stamps for which to
-    #   return fragments.
+    #   The ending timestamp in the range of timestamps for which to return
+    #   fragments.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/TimestampRange AWS API Documentation
@@ -524,6 +1016,22 @@ module Aws::KinesisVideoArchivedMedia
     class TimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp)
+      include Aws::Structure
+    end
+
+    # The type of the media (for example, h.264 or h.265 video or ACC or
+    # G.711 audio) could not be determined from the codec IDs of the tracks
+    # in the first fragment for a playback session. The codec ID for track 1
+    # should be `V_MPEG/ISO/AVC` and, optionally, the codec ID for track 2
+    # should be `A_AAC`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/UnsupportedStreamMediaTypeException AWS API Documentation
+    #
+    class UnsupportedStreamMediaTypeException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

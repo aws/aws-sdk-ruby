@@ -42,7 +42,7 @@ module Aws
         end
 
         expect(e).to be_kind_of(Errors::NoSuchEndpointError)
-        expect(e.context.retries).to be(0) # should not retry these
+        expect(e.context.retries).to be(3) # updated to retry based on customer request 
         expect(e.message).to include('us-east-1')
         expect(e.message).to include('us-west-1')
         expect(e.message).to include('cn-north-1')

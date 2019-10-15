@@ -235,7 +235,7 @@ module Aws::Health
     #           ],
     #           entity_arns: ["entityArn"],
     #           entity_values: ["entityValue"],
-    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #           tags: [
     #             {
     #               "tagKey" => "tagValue",
@@ -350,7 +350,7 @@ module Aws::Health
     #         filter: {
     #           event_type_codes: ["eventTypeCode"],
     #           services: ["service"],
-    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #         },
     #         locale: "locale",
     #         next_token: "nextToken",
@@ -444,7 +444,7 @@ module Aws::Health
     #           ],
     #           entity_arns: ["entityArn"],
     #           entity_values: ["entityValue"],
-    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #           tags: [
     #             {
     #               "tagKey" => "tagValue",
@@ -782,7 +782,7 @@ module Aws::Health
     #         ],
     #         entity_arns: ["entityArn"],
     #         entity_values: ["entityValue"],
-    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #         tags: [
     #           {
     #             "tagKey" => "tagValue",
@@ -907,7 +907,7 @@ module Aws::Health
     #       {
     #         event_type_codes: ["eventTypeCode"],
     #         services: ["service"],
-    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #       }
     #
     # @!attribute [rw] event_type_codes
@@ -930,6 +930,30 @@ module Aws::Health
       :event_type_codes,
       :services,
       :event_type_categories)
+      include Aws::Structure
+    end
+
+    # The specified pagination token (`nextToken`) is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/InvalidPaginationToken AWS API Documentation
+    #
+    class InvalidPaginationToken < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified locale is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/UnsupportedLocale AWS API Documentation
+    #
+    class UnsupportedLocale < Struct.new(
+      :message)
       include Aws::Structure
     end
 

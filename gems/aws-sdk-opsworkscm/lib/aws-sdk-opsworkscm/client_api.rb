@@ -231,6 +231,21 @@ module Aws::OpsWorksCM
     ExportServerEngineAttributeResponse.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, location_name: "ServerName"))
     ExportServerEngineAttributeResponse.struct_class = Types::ExportServerEngineAttributeResponse
 
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidStateException.struct_class = Types::InvalidStateException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
+    ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     RestoreServerRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
     RestoreServerRequest.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, required: true, location_name: "ServerName"))
     RestoreServerRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
@@ -301,6 +316,9 @@ module Aws::OpsWorksCM
     UpdateServerResponse.add_member(:server, Shapes::ShapeRef.new(shape: Server, location_name: "Server"))
     UpdateServerResponse.struct_class = Types::UpdateServerResponse
 
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ValidationException.struct_class = Types::ValidationException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -313,7 +331,7 @@ module Aws::OpsWorksCM
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceAbbreviation" => "OpsWorksCM",
-        "serviceFullName" => "AWS OpsWorks for Chef Automate",
+        "serviceFullName" => "AWS OpsWorks CM",
         "serviceId" => "OpsWorksCM",
         "signatureVersion" => "v4",
         "signingName" => "opsworks-cm",

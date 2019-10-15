@@ -8,6 +8,94 @@
 module Aws::IAM
   module Types
 
+    # An object that contains details about when a principal in the reported
+    # AWS Organizations entity last attempted to access an AWS service. A
+    # principal can be an IAM user, an IAM role, or the AWS account root
+    # user within the reported Organizations entity.
+    #
+    # This data type is a response element in the
+    # GetOrganizationsAccessReport operation.
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service in which access was attempted.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_namespace
+    #   The namespace of the service in which access was attempted.
+    #
+    #   To learn the service namespace of a service, go to [Actions,
+    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
+    #   Guide*. Choose the name of the service to view details for that
+    #   service. In the first paragraph, find the service prefix. For
+    #   example, `(service prefix: a4b)`. For more information about service
+    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Region where the last service access attempt occurred.
+    #
+    #   This field is null if no principals in the reported Organizations
+    #   entity attempted to access the service within the [reporting
+    #   period][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_path
+    #   The path of the Organizations entity (root, organizational unit, or
+    #   account) from which an authenticated principal last attempted to
+    #   access the service. AWS does not report unauthenticated requests.
+    #
+    #   This field is null if no principals (IAM users, IAM roles, or root
+    #   users) in the reported Organizations entity attempted to access the
+    #   service within the [reporting period][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [String]
+    #
+    # @!attribute [rw] last_authenticated_time
+    #   The date and time, in [ISO 8601 date-time format][1], when an
+    #   authenticated principal most recently attempted to access the
+    #   service. AWS does not report unauthenticated requests.
+    #
+    #   This field is null if no principals in the reported Organizations
+    #   entity attempted to access the service within the [reporting
+    #   period][2].
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_authenticated_entities
+    #   The number of accounts with authenticated principals (root users,
+    #   IAM users, and IAM roles) that attempted to access the service in
+    #   the reporting period.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessDetail AWS API Documentation
+    #
+    class AccessDetail < Struct.new(
+      :service_name,
+      :service_namespace,
+      :region,
+      :entity_path,
+      :last_authenticated_time,
+      :total_authenticated_entities)
+      include Aws::Structure
+    end
+
     # Contains information about an AWS access key.
     #
     # This data type is used as a response element in the CreateAccessKey
@@ -68,7 +156,7 @@ module Aws::IAM
     #   * An access key exists but has not been used since IAM began
     #     tracking this information.
     #
-    #   * There is no sign-in data associated with the user
+    #   * There is no sign-in data associated with the user.
     #
     #
     #
@@ -85,11 +173,11 @@ module Aws::IAM
     #   * An access key exists but has not been used since IAM started
     #     tracking this information.
     #
-    #   * There is no sign-in data associated with the user
+    #   * There is no sign-in data associated with the user.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS region where this access key was most recently used. The
+    #   The AWS Region where this access key was most recently used. The
     #   value for this field is "N/A" in the following situations:
     #
     #   * The user does not have an access key.
@@ -97,14 +185,14 @@ module Aws::IAM
     #   * An access key exists but has not been used since IAM began
     #     tracking this information.
     #
-    #   * There is no sign-in data associated with the user
+    #   * There is no sign-in data associated with the user.
     #
-    #   For more information about AWS regions, see [Regions and
+    #   For more information about AWS Regions, see [Regions and
     #   Endpoints][1] in the Amazon Web Services General Reference.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessKeyLastUsed AWS API Documentation
@@ -290,7 +378,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicyRequest AWS API Documentation
@@ -331,7 +419,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicyRequest AWS API Documentation
@@ -372,7 +460,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicyRequest AWS API Documentation
@@ -393,7 +481,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #
     # @!attribute [rw] permissions_boundary_type
     #   The permissions boundary usage type that indicates what type of IAM
@@ -427,7 +515,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] policy_name
     #   The friendly name of the attached policy.
@@ -442,7 +530,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachedPolicy AWS API Documentation
@@ -492,6 +580,20 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because multiple requests to change this
+    # object were submitted simultaneously. Wait a few minutes and submit
+    # your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about a condition context key. It includes the
     # name of the key and specifies the value (or values, if the context key
     # supports multiple values) to use in the simulation. This information
@@ -499,7 +601,7 @@ module Aws::IAM
     # policies.
     #
     # This data type is used as an input parameter to ` SimulateCustomPolicy
-    # ` and ` SimulateCustomPolicy `.
+    # ` and ` SimulatePrincipalPolicy `.
     #
     # @note When making an API call, you may pass ContextEntry
     #   data as a hash:
@@ -626,7 +728,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -634,16 +736,10 @@ module Aws::IAM
     #   The name of the group to create. Do not include the path in this
     #   value.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-. The group name must be unique within the
-    #   account. Group names are not distinguished by case. For example, you
-    #   cannot create groups named both "ADMINS" and "admins".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroupRequest AWS API Documentation
@@ -704,7 +800,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -861,7 +957,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderRequest AWS API Documentation
@@ -902,14 +998,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The friendly name of the policy.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -930,13 +1022,18 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
     # @!attribute [rw] policy_document
     #   The JSON policy document that you want to use as the content for the
     #   new policy.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -1007,12 +1104,17 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] policy_document
     #   The JSON policy document that you want to use as the content for
     #   this new version of the policy.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -1044,7 +1146,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersionRequest AWS API Documentation
@@ -1103,29 +1205,28 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
     # @!attribute [rw] role_name
     #   The name of the role to create.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #   Role names are not distinguished by case. For example, you cannot
-    #   create roles named both "PRODROLE" and "prodrole".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @!attribute [rw] assume_role_policy_document
     #   The trust relationship policy document that grants an entity
     #   permission to assume the role.
+    #
+    #   In IAM, you must provide a JSON policy that has been converted to a
+    #   string. However, for AWS CloudFormation templates formatted in YAML,
+    #   you can provide the policy in JSON or YAML format. AWS
+    #   CloudFormation always converts a YAML policy to JSON format before
+    #   submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -1138,6 +1239,9 @@ module Aws::IAM
     #
     #   * The special characters tab (\\u0009), line feed (\\u000A), and
     #     carriage return (\\u000D)
+    #
+    #   Upon success, the response includes the same trust policy in JSON
+    #   format.
     #
     #
     #
@@ -1168,7 +1272,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #   @return [Integer]
     #
     # @!attribute [rw] permissions_boundary
@@ -1190,7 +1294,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleRequest AWS API Documentation
@@ -1240,7 +1344,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1294,14 +1398,14 @@ module Aws::IAM
     #
     #   Service principals are unique and case-sensitive. To find the exact
     #   service principal for your service-linked role, see [AWS Services
-    #   That Work with IAM][1] in the *IAM User Guide* and look for the
+    #   That Work with IAM][1] in the *IAM User Guide*. Look for the
     #   services that have <b>Yes </b>in the **Service-Linked Role** column.
     #   Choose the **Yes** link to view the service-linked role
     #   documentation for that service.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1384,8 +1488,8 @@ module Aws::IAM
     #   service-specific credential.
     #
     #   This is the only time that the password for this credential set is
-    #   available. It cannot be recovered later. Instead, you will have to
-    #   reset the password with ResetServiceSpecificCredential.
+    #   available. It cannot be recovered later. Instead, you must reset the
+    #   password with ResetServiceSpecificCredential.
     #   @return [Types::ServiceSpecificCredential]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredentialResponse AWS API Documentation
@@ -1426,23 +1530,17 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
     # @!attribute [rw] user_name
     #   The name of the user to create.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-. User names are not distinguished by case. For
-    #   example, you cannot create users named both "TESTUSER" and
-    #   "testuser".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @!attribute [rw] permissions_boundary
@@ -1464,7 +1562,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUserRequest AWS API Documentation
@@ -1514,7 +1612,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -1550,6 +1648,52 @@ module Aws::IAM
     #
     class CreateVirtualMFADeviceResponse < Struct.new(
       :virtual_mfa_device)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the most recent credential report has
+    # expired. To generate a new credential report, use
+    # GenerateCredentialReport. For more information about credential report
+    # expiration, see [Getting Credential Reports][1] in the *IAM User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CredentialReportExpiredException AWS API Documentation
+    #
+    class CredentialReportExpiredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the credential report does not exist.
+    # To generate a credential report, use GenerateCredentialReport.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CredentialReportNotPresentException AWS API Documentation
+    #
+    class CredentialReportNotPresentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the credential report is still being
+    # generated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CredentialReportNotReadyException AWS API Documentation
+    #
+    class CredentialReportNotReadyException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1662,6 +1806,20 @@ module Aws::IAM
     #
     class DeleteAccountAliasRequest < Struct.new(
       :account_alias)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to delete a resource
+    # that has attached subordinate entities. The error message describes
+    # these entities.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteConflictException AWS API Documentation
+    #
+    class DeleteConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1825,7 +1983,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyRequest AWS API Documentation
@@ -1852,7 +2010,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -1869,7 +2027,7 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersionRequest AWS API Documentation
@@ -2305,7 +2463,7 @@ module Aws::IAM
     #   resources that were used by the role have not been deleted from the
     #   linked service, the role can't be deleted. This parameter includes
     #   a list of the resources that are associated with the role and the
-    #   region in which the resources are being used.
+    #   Region in which the resources are being used.
     #   @return [Array<Types::RoleUsageType>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletionTaskFailureReasonType AWS API Documentation
@@ -2346,7 +2504,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicyRequest AWS API Documentation
@@ -2387,7 +2545,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicyRequest AWS API Documentation
@@ -2428,7 +2586,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicyRequest AWS API Documentation
@@ -2436,6 +2594,32 @@ module Aws::IAM
     class DetachUserPolicyRequest < Struct.new(
       :user_name,
       :policy_arn)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the same certificate is associated
+    # with an IAM user in the account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DuplicateCertificateException AWS API Documentation
+    #
+    class DuplicateCertificateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the SSH public key is already
+    # associated with the specified IAM user.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DuplicateSSHPublicKeyException AWS API Documentation
+    #
+    class DuplicateSSHPublicKeyException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2490,7 +2674,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     #   @return [String]
     #
     # @!attribute [rw] authentication_code_2
@@ -2507,7 +2691,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADeviceRequest AWS API Documentation
@@ -2517,6 +2701,19 @@ module Aws::IAM
       :serial_number,
       :authentication_code_1,
       :authentication_code_2)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create a resource
+    # that already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityAlreadyExistsException AWS API Documentation
+    #
+    class EntityAlreadyExistsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2543,7 +2740,7 @@ module Aws::IAM
     #
     #
     #   [1]: http://www.iso.org/iso/iso8601
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityDetails AWS API Documentation
@@ -2567,7 +2764,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2588,7 +2785,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityInfo AWS API Documentation
@@ -2602,11 +2799,27 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because it referenced an entity that is
+    # temporarily unmodifiable, such as a user name that was deleted and
+    # then recreated. The error indicates that the request is likely to
+    # succeed if you try again after waiting several minutes. The error
+    # message describes the entity.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityTemporarilyUnmodifiableException AWS API Documentation
+    #
+    class EntityTemporarilyUnmodifiableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about the reason that the operation failed.
     #
     # This data type is used as a response element in the
-    # GetServiceLastAccessedDetails operation and the
-    # GetServiceLastAccessedDetailsWithEntities operation.
+    # GetOrganizationsAccessReport, GetServiceLastAccessedDetails, and
+    # GetServiceLastAccessedDetailsWithEntities operations.
     #
     # @!attribute [rw] message
     #   Detailed information about the reason that the operation failed.
@@ -2646,8 +2859,8 @@ module Aws::IAM
     #   A list of the statements in the input policies that determine the
     #   result for this scenario. Remember that even if multiple statements
     #   allow the operation on the resource, if only one statement denies
-    #   that operation, then the explicit deny overrides any allow.
-    #   Inaddition, the deny statement is the only entry included in the
+    #   that operation, then the explicit deny overrides any allow. In
+    #   addition, the deny statement is the only entry included in the
     #   result.
     #   @return [Array<Types::Statement>]
     #
@@ -2663,9 +2876,9 @@ module Aws::IAM
     #   @return [Array<String>]
     #
     # @!attribute [rw] organizations_decision_detail
-    #   A structure that details how AWS Organizations and its service
-    #   control policies affect the results of the simulation. Only applies
-    #   if the simulated user's account is part of an organization.
+    #   A structure that details how Organizations and its service control
+    #   policies affect the results of the simulation. Only applies if the
+    #   simulated user's account is part of an organization.
     #   @return [Types::OrganizationsDecisionDetail]
     #
     # @!attribute [rw] eval_decision_details
@@ -2679,7 +2892,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] resource_specific_results
@@ -2717,6 +2930,53 @@ module Aws::IAM
     class GenerateCredentialReportResponse < Struct.new(
       :state,
       :description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GenerateOrganizationsAccessReportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entity_path: "organizationsEntityPathType", # required
+    #         organizations_policy_id: "organizationsPolicyIdType",
+    #       }
+    #
+    # @!attribute [rw] entity_path
+    #   The path of the AWS Organizations entity (root, OU, or account). You
+    #   can build an entity path using the known structure of your
+    #   organization. For example, assume that your account ID is
+    #   `123456789012` and its parent OU ID is `ou-rge0-awsabcde`. The
+    #   organization root ID is `r-f6g7h8i9j0example` and your organization
+    #   ID is `o-a1b2c3d4e5`. Your entity path is
+    #   `o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-rge0-awsabcde/123456789012`.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizations_policy_id
+    #   The identifier of the AWS Organizations service control policy
+    #   (SCP). This parameter is optional.
+    #
+    #   This ID is used to generate information about when an account
+    #   principal that is limited by the SCP attempted to access an AWS
+    #   service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateOrganizationsAccessReportRequest AWS API Documentation
+    #
+    class GenerateOrganizationsAccessReportRequest < Struct.new(
+      :entity_path,
+      :organizations_policy_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The job identifier that you can use in the
+    #   GetOrganizationsAccessReport operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateOrganizationsAccessReportResponse AWS API Documentation
+    #
+    class GenerateOrganizationsAccessReportResponse < Struct.new(
+      :job_id)
       include Aws::Structure
     end
 
@@ -2996,7 +3256,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] policy_input_list
@@ -3110,6 +3370,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   IAM stores policies in JSON format. However, resources that were
+    #   created using AWS CloudFormation templates can be formatted in YAML.
+    #   AWS CloudFormation always converts a YAML policy to JSON format
+    #   before submitting it to IAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicyResponse AWS API Documentation
@@ -3306,7 +3571,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProviderRequest AWS API Documentation
@@ -3351,6 +3616,137 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetOrganizationsAccessReportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "jobIDType", # required
+    #         max_items: 1,
+    #         marker: "markerType",
+    #         sort_key: "SERVICE_NAMESPACE_ASCENDING", # accepts SERVICE_NAMESPACE_ASCENDING, SERVICE_NAMESPACE_DESCENDING, LAST_AUTHENTICATED_TIME_ASCENDING, LAST_AUTHENTICATED_TIME_DESCENDING
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the request generated by the
+    #   GenerateOrganizationsAccessReport operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
+    #
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_key
+    #   The key that is used to sort the results. If you choose the
+    #   namespace key, the results are returned in alphabetical order. If
+    #   you choose the time key, the results are sorted numerically by the
+    #   date and time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOrganizationsAccessReportRequest AWS API Documentation
+    #
+    class GetOrganizationsAccessReportRequest < Struct.new(
+      :job_id,
+      :max_items,
+      :marker,
+      :sort_key)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   The status of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_creation_date
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   report job was created.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_completion_date
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   generated report job was completed or failed.
+    #
+    #   This field is null if the job is still in progress, as indicated by
+    #   a job status value of `IN_PROGRESS`.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] number_of_services_accessible
+    #   The number of services that the applicable SCPs allow account
+    #   principals to access.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_services_not_accessed
+    #   The number of services that account principals are allowed but did
+    #   not attempt to access.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] access_details
+    #   An object that contains details about the most recent attempt to
+    #   access the service.
+    #   @return [Array<Types::AccessDetail>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can make a subsequent pagination
+    #   request using the `Marker` request parameter to retrieve more items.
+    #   Note that IAM might return fewer than the `MaxItems` number of
+    #   results even when there are more results available. We recommend
+    #   that you check `IsTruncated` after every call to ensure that you
+    #   receive all your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   Contains information about the reason that the operation failed.
+    #
+    #   This data type is used as a response element in the
+    #   GetOrganizationsAccessReport, GetServiceLastAccessedDetails, and
+    #   GetServiceLastAccessedDetailsWithEntities operations.
+    #   @return [Types::ErrorDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOrganizationsAccessReportResponse AWS API Documentation
+    #
+    class GetOrganizationsAccessReportResponse < Struct.new(
+      :job_status,
+      :job_creation_date,
+      :job_completion_date,
+      :number_of_services_accessible,
+      :number_of_services_not_accessed,
+      :access_details,
+      :is_truncated,
+      :marker,
+      :error_details)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetPolicyRequest
     #   data as a hash:
     #
@@ -3367,7 +3763,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyRequest AWS API Documentation
@@ -3407,7 +3803,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -3498,6 +3894,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   IAM stores policies in JSON format. However, resources that were
+    #   created using AWS CloudFormation templates can be formatted in YAML.
+    #   AWS CloudFormation always converts a YAML policy to JSON format
+    #   before submitting it to IAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicyResponse AWS API Documentation
@@ -3565,7 +3966,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderRequest AWS API Documentation
@@ -3768,7 +4169,7 @@ module Aws::IAM
     #   generated report job was completed or failed.
     #
     #   This field is null if the job is still in progress, as indicated by
-    #   a `JobStatus` value of `IN_PROGRESS`.
+    #   a job status value of `IN_PROGRESS`.
     #
     #
     #
@@ -3831,7 +4232,7 @@ module Aws::IAM
     #
     #   To learn the service namespace for a service, go to [Actions,
     #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
-    #   Guide* and choose the name of the service to view details for that
+    #   Guide*. Choose the name of the service to view details for that
     #   service. In the first paragraph, find the service prefix. For
     #   example, `(service prefix: a4b)`. For more information about service
     #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
@@ -3839,8 +4240,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -3889,6 +4290,9 @@ module Aws::IAM
     # @!attribute [rw] job_completion_date
     #   The date and time, in [ISO 8601 date-time format][1], when the
     #   generated report job was completed or failed.
+    #
+    #   This field is null if the job is still in progress, as indicated by
+    #   a job status value of `IN_PROGRESS`.
     #
     #
     #
@@ -4026,6 +4430,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   IAM stores policies in JSON format. However, resources that were
+    #   created using AWS CloudFormation templates can be formatted in YAML.
+    #   AWS CloudFormation always converts a YAML policy to JSON format
+    #   before submitting it to IAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicyResponse AWS API Documentation
@@ -4090,8 +4499,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_finding-unused.html
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_finding-unused.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html
     #   @return [Types::User]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserResponse AWS API Documentation
@@ -4118,7 +4527,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -4132,7 +4541,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4142,7 +4551,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -4177,7 +4586,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -4191,7 +4600,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4203,7 +4612,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -4255,7 +4664,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_name
@@ -4269,7 +4678,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4279,7 +4688,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -4299,6 +4708,97 @@ module Aws::IAM
       :arn,
       :create_date,
       :roles)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the authentication code was not
+    # recognized. The error message describes the specific error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidAuthenticationCodeException AWS API Documentation
+    #
+    class InvalidAuthenticationCodeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the certificate is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidCertificateException AWS API Documentation
+    #
+    class InvalidCertificateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an invalid or out-of-range value was
+    # supplied for an input parameter.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the public key is malformed or
+    # otherwise invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidPublicKeyException AWS API Documentation
+    #
+    class InvalidPublicKeyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the type of user for the transaction
+    # was incorrect.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidUserTypeException AWS API Documentation
+    #
+    class InvalidUserTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the public key certificate and the
+    # private key do not match.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/KeyPairMismatchException AWS API Documentation
+    #
+    class KeyPairMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create resources
+    # beyond the current AWS account limits. The error message describes the
+    # limit exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4782,7 +5282,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] entity_filter
@@ -5451,8 +5951,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] policies
@@ -5503,8 +6003,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesGrantingServiceAccessRequest AWS API Documentation
@@ -5685,7 +6185,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -5727,7 +6227,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [Array<Types::PolicyVersion>]
     #
     # @!attribute [rw] is_truncated
@@ -5862,8 +6362,8 @@ module Aws::IAM
     # @!attribute [rw] marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
-    #   to the value of the `Marker` element in the response to indicate
-    #   where the next call should start.
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -6439,8 +6939,8 @@ module Aws::IAM
     # @!attribute [rw] marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
-    #   to the value of the `Marker` element in the response to indicate
-    #   where the next call should start.
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -6716,6 +7216,32 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because the certificate was malformed or
+    # expired. The error message describes the specific error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/MalformedCertificateException AWS API Documentation
+    #
+    class MalformedCertificateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the policy document was malformed.
+    # The error message describes the specific error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/MalformedPolicyDocumentException AWS API Documentation
+    #
+    class MalformedPolicyDocumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about a managed policy, including the policy's
     # ARN, versions, and the number of principal entities (users, groups,
     # and roles) that the policy is attached to.
@@ -6728,7 +7254,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] policy_name
     #   The friendly name (not ARN) identifying the policy.
@@ -6742,7 +7268,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -6754,7 +7280,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -6765,7 +7291,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] default_version_id
@@ -6777,7 +7303,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [String]
     #
     # @!attribute [rw] attachment_count
@@ -6794,7 +7320,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Integer]
     #
     # @!attribute [rw] is_attachable
@@ -6851,6 +7377,19 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because it referenced a resource entity that
+    # does not exist. The error message describes the resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/NoSuchEntityException AWS API Documentation
+    #
+    class NoSuchEntityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect
     # provider.
     #
@@ -6863,7 +7402,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OpenIDConnectProviderListEntry AWS API Documentation
@@ -6873,11 +7412,11 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # Contains information about AWS Organizations's effect on a policy
-    # simulation.
+    # Contains information about the effect that Organizations has on a
+    # policy simulation.
     #
     # @!attribute [rw] allowed_by_organizations
-    #   Specifies whether the simulated operation is allowed by the AWS
+    #   Specifies whether the simulated operation is allowed by the
     #   Organizations service control policies that impact the simulated
     #   user's account.
     #   @return [Boolean]
@@ -6957,6 +7496,19 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because the provided password did not meet
+    # the requirements imposed by the account password policy.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PasswordPolicyViolationException AWS API Documentation
+    #
+    class PasswordPolicyViolationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about a managed policy.
     #
     # This data type is used as a response element in the CreatePolicy,
@@ -6967,7 +7519,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] policy_name
     #   The friendly name (not ARN) identifying the policy.
@@ -6981,7 +7533,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -6993,7 +7545,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -7004,7 +7556,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] default_version_id
@@ -7026,7 +7578,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Integer]
     #
     # @!attribute [rw] is_attachable
@@ -7103,6 +7655,20 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request failed because a provided policy could not be successfully
+    # evaluated. An additional detailed message indicates the source of the
+    # failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyEvaluationException AWS API Documentation
+    #
+    class PolicyEvaluationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about the permissions policies that are attached to
     # the specified identity (user, group, or role).
     #
@@ -7119,7 +7685,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
@@ -7131,7 +7697,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] entity_type
@@ -7144,7 +7710,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
     #   @return [String]
     #
     # @!attribute [rw] entity_name
@@ -7157,7 +7723,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyGrantingServiceAccess AWS API Documentation
@@ -7182,7 +7748,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] group_name
     #   The name (friendly name, not ARN) identifying the group.
@@ -7195,7 +7761,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyGroup AWS API Documentation
@@ -7203,6 +7769,19 @@ module Aws::IAM
     class PolicyGroup < Struct.new(
       :group_name,
       :group_id)
+      include Aws::Structure
+    end
+
+    # The request failed because AWS service role policies can only be
+    # attached to the service-linked role for that service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyNotAttachableException AWS API Documentation
+    #
+    class PolicyNotAttachableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7217,7 +7796,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] role_name
     #   The name (friendly name, not ARN) identifying the role.
@@ -7230,7 +7809,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyRole AWS API Documentation
@@ -7252,7 +7831,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] user_name
     #   The name (friendly name, not ARN) identifying the user.
@@ -7265,7 +7844,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyUser AWS API Documentation
@@ -7287,7 +7866,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] document
     #   The policy document.
@@ -7377,7 +7956,7 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
+    #   characters: \_+=,.@-.
     #
     #
     #
@@ -7399,6 +7978,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -7490,6 +8074,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
     #
@@ -7580,6 +8169,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
     #
@@ -7624,7 +8218,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] client_id
@@ -7722,6 +8316,19 @@ module Aws::IAM
     class RemoveUserFromGroupRequest < Struct.new(
       :group_name,
       :user_name)
+      include Aws::Structure
+    end
+
+    # The request failed because the maximum number of concurrent requests
+    # for this account are already running.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ReportGenerationLimitExceededException AWS API Documentation
+    #
+    class ReportGenerationLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7906,7 +8513,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] role_name
@@ -7920,7 +8527,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -7930,7 +8537,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -7962,9 +8569,11 @@ module Aws::IAM
     #   role.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities
-    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
-    #   User Guide*.
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
@@ -7974,7 +8583,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role AWS API Documentation
@@ -8005,7 +8614,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] role_name
@@ -8019,7 +8628,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -8031,7 +8640,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -8066,9 +8675,11 @@ module Aws::IAM
     #   role.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities
-    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
-    #   User Guide*.
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
@@ -8078,7 +8689,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleDetail AWS API Documentation
@@ -8105,7 +8716,7 @@ module Aws::IAM
     # GetServiceLinkedRoleDeletionStatus operation.
     #
     # @!attribute [rw] region
-    #   The name of the region where the service-linked role is being used.
+    #   The name of the Region where the service-linked role is being used.
     #   @return [String]
     #
     # @!attribute [rw] resources
@@ -8269,7 +8880,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] server_certificate_name
@@ -8283,7 +8894,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -8293,7 +8904,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] upload_date
@@ -8313,6 +8924,19 @@ module Aws::IAM
       :arn,
       :upload_date,
       :expiration)
+      include Aws::Structure
+    end
+
+    # The request processing has failed because of an unknown error,
+    # exception or failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceFailureException AWS API Documentation
+    #
+    class ServiceFailureException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -8336,7 +8960,7 @@ module Aws::IAM
     #
     #
     #   [1]: http://www.iso.org/iso/iso8601
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
     #   @return [Time]
     #
     # @!attribute [rw] service_namespace
@@ -8352,8 +8976,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] last_authenticated_entity
@@ -8366,19 +8990,19 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
     #   @return [String]
     #
     # @!attribute [rw] total_authenticated_entities
-    #   The total number of authenticated entities that have attempted to
-    #   access the service.
+    #   The total number of authenticated principals (root user, IAM users,
+    #   or IAM roles) that have attempted to access the service.
     #
-    #   This field is null if no IAM entities attempted to access the
-    #   service within the [reporting period][1].
+    #   This field is null if no principals attempted to access the service
+    #   within the [reporting period][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceLastAccessed AWS API Documentation
@@ -8389,6 +9013,18 @@ module Aws::IAM
       :service_namespace,
       :last_authenticated_entity,
       :total_authenticated_entities)
+      include Aws::Structure
+    end
+
+    # The specified service does not support service-specific credentials.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceNotSupportedException AWS API Documentation
+    #
+    class ServiceNotSupportedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -8509,7 +9145,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -8520,7 +9156,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersionRequest AWS API Documentation
@@ -8528,6 +9164,36 @@ module Aws::IAM
     class SetDefaultPolicyVersionRequest < Struct.new(
       :policy_arn,
       :version_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SetSecurityTokenServicePreferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_endpoint_token_version: "v1Token", # required, accepts v1Token, v2Token
+    #       }
+    #
+    # @!attribute [rw] global_endpoint_token_version
+    #   The version of the global endpoint token. Version 1 tokens are valid
+    #   only in AWS Regions that are available by default. These tokens do
+    #   not work in manually enabled Regions, such as Asia Pacific (Hong
+    #   Kong). Version 2 tokens are valid in all Regions. However, version 2
+    #   tokens are longer and might affect systems where you temporarily
+    #   store tokens.
+    #
+    #   For information, see [Activating and Deactivating STS in an AWS
+    #   Region][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetSecurityTokenServicePreferencesRequest AWS API Documentation
+    #
+    class SetSecurityTokenServicePreferencesRequest < Struct.new(
+      :global_endpoint_token_version)
       include Aws::Structure
     end
 
@@ -8615,15 +9281,16 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html
     #   [3]: http://wikipedia.org/wiki/regex
     #   @return [Array<String>]
     #
     # @!attribute [rw] action_names
     #   A list of names of API operations to evaluate in the simulation.
     #   Each operation is evaluated against each resource. Each operation
-    #   must include the service identifier, such as `iam:CreateUser`.
+    #   must include the service identifier, such as `iam:CreateUser`. This
+    #   operation does not support using wildcards (*) in an action name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_arns
@@ -8648,7 +9315,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_policy
@@ -8677,15 +9344,15 @@ module Aws::IAM
     # @!attribute [rw] resource_owner
     #   An ARN representing the AWS account ID that specifies the owner of
     #   any simulated resource that does not identify its owner in the
-    #   resource ARN, such as an S3 bucket or object. If `ResourceOwner` is
-    #   specified, it is also used as the account owner of any
-    #   `ResourcePolicy` included in the simulation. If the `ResourceOwner`
-    #   parameter is not specified, then the owner of the resources and the
-    #   resource policy defaults to the account of the identity provided in
-    #   `CallerArn`. This parameter is required only if you specify a
-    #   resource-based policy and account that owns the resource is
-    #   different from the account that owns the simulated calling user
-    #   `CallerArn`.
+    #   resource ARN. Examples of resource ARNs include an S3 bucket or
+    #   object. If `ResourceOwner` is specified, it is also used as the
+    #   account owner of any `ResourcePolicy` included in the simulation. If
+    #   the `ResourceOwner` parameter is not specified, then the owner of
+    #   the resources and the resource policy defaults to the account of the
+    #   identity provided in `CallerArn`. This parameter is required only if
+    #   you specify a resource-based policy and account that owns the
+    #   resource is different from the account that owns the simulated
+    #   calling user `CallerArn`.
     #
     #   The ARN for an account uses the following syntax:
     #   `arn:aws:iam::AWS-account-ID:root`. For example, to represent the
@@ -8706,7 +9373,7 @@ module Aws::IAM
     # @!attribute [rw] context_entries
     #   A list of context keys and corresponding values for the simulation
     #   to use. Whenever a context key is evaluated in one of the simulated
-    #   IAM permission policies, the corresponding value is supplied.
+    #   IAM permissions policies, the corresponding value is supplied.
     #   @return [Array<Types::ContextEntry>]
     #
     # @!attribute [rw] resource_handling_option
@@ -8754,7 +9421,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -8861,7 +9528,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] policy_input_list
@@ -8910,7 +9577,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_policy
@@ -8938,15 +9605,16 @@ module Aws::IAM
     #
     # @!attribute [rw] resource_owner
     #   An AWS account ID that specifies the owner of any simulated resource
-    #   that does not identify its owner in the resource ARN, such as an S3
-    #   bucket or object. If `ResourceOwner` is specified, it is also used
-    #   as the account owner of any `ResourcePolicy` included in the
-    #   simulation. If the `ResourceOwner` parameter is not specified, then
-    #   the owner of the resources and the resource policy defaults to the
-    #   account of the identity provided in `CallerArn`. This parameter is
-    #   required only if you specify a resource-based policy and account
-    #   that owns the resource is different from the account that owns the
-    #   simulated calling user `CallerArn`.
+    #   that does not identify its owner in the resource ARN. Examples of
+    #   resource ARNs include an S3 bucket or object. If `ResourceOwner` is
+    #   specified, it is also used as the account owner of any
+    #   `ResourcePolicy` included in the simulation. If the `ResourceOwner`
+    #   parameter is not specified, then the owner of the resources and the
+    #   resource policy defaults to the account of the identity provided in
+    #   `CallerArn`. This parameter is required only if you specify a
+    #   resource-based policy and account that owns the resource is
+    #   different from the account that owns the simulated calling user
+    #   `CallerArn`.
     #   @return [String]
     #
     # @!attribute [rw] caller_arn
@@ -8973,13 +9641,13 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] context_entries
     #   A list of context keys and corresponding values for the simulation
     #   to use. Whenever a context key is evaluated in one of the simulated
-    #   IAM permission policies, the corresponding value is supplied.
+    #   IAM permissions policies, the corresponding value is supplied.
     #   @return [Array<Types::ContextEntry>]
     #
     # @!attribute [rw] resource_handling_option
@@ -9027,7 +9695,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -9107,7 +9775,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -9222,6 +9890,34 @@ module Aws::IAM
     class TagUserRequest < Struct.new(
       :user_name,
       :tags)
+      include Aws::Structure
+    end
+
+    # The request was rejected because only the service that depends on the
+    # service-linked role can modify or delete the role on your behalf. The
+    # error message includes the name of the service that depends on this
+    # service-linked role. You must request the change through that service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UnmodifiableEntityException AWS API Documentation
+    #
+    class UnmodifiableEntityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the public key encoding format is
+    # unsupported or unrecognized.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UnrecognizedPublicKeyEncodingException AWS API Documentation
+    #
+    class UnrecognizedPublicKeyEncodingException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -9415,7 +10111,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
     #   @return [Boolean]
     #
     # @!attribute [rw] max_password_age
@@ -9485,6 +10181,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy that grants an entity permission to assume the role.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
     #
@@ -9553,14 +10254,10 @@ module Aws::IAM
     #   New name for the IAM group. Only include this if changing the
     #   group's name.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroupRequest AWS API Documentation
@@ -9651,7 +10348,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] thumbprint_list
@@ -9740,7 +10437,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleRequest AWS API Documentation
@@ -9781,7 +10478,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderRequest AWS API Documentation
@@ -10058,14 +10755,10 @@ module Aws::IAM
     #   New name for the user. Include this parameter only if you're
     #   changing the user's name.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUserRequest AWS API Documentation
@@ -10174,7 +10867,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -10359,7 +11052,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -10373,7 +11066,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -10383,7 +11076,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -10410,7 +11103,7 @@ module Aws::IAM
     #   * A password exists but has not been used since IAM started tracking
     #     this information on October 20, 2014.
     #
-    #   A null valuedoes not mean that the user *never* had a password.
+    #   A null value does not mean that the user *never* had a password.
     #   Also, if the user does not currently have a password, but had one in
     #   the past, then this field contains the date and time the most recent
     #   password was used.
@@ -10420,7 +11113,7 @@ module Aws::IAM
     #
     #
     #   [1]: http://www.iso.org/iso/iso8601
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     #   @return [Time]
     #
     # @!attribute [rw] permissions_boundary
@@ -10428,9 +11121,11 @@ module Aws::IAM
     #   user.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities
-    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
-    #   User Guide*.
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
@@ -10440,7 +11135,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/User AWS API Documentation
@@ -10469,7 +11164,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -10483,7 +11178,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -10495,7 +11190,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -10524,9 +11219,11 @@ module Aws::IAM
     #   user.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities
-    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
-    #   User Guide*.
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
@@ -10536,7 +11233,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UserDetail AWS API Documentation

@@ -18,6 +18,8 @@ module Aws::Redshift
     AccountAttributeList = Shapes::StructureShape.new(name: 'AccountAttributeList')
     AccountWithRestoreAccess = Shapes::StructureShape.new(name: 'AccountWithRestoreAccess')
     AccountsWithRestoreAccessList = Shapes::ListShape.new(name: 'AccountsWithRestoreAccessList')
+    ActionType = Shapes::StringShape.new(name: 'ActionType')
+    AssociatedClusterList = Shapes::ListShape.new(name: 'AssociatedClusterList')
     AttributeList = Shapes::ListShape.new(name: 'AttributeList')
     AttributeNameList = Shapes::ListShape.new(name: 'AttributeNameList')
     AttributeValueList = Shapes::ListShape.new(name: 'AttributeValueList')
@@ -45,6 +47,7 @@ module Aws::Redshift
     CancelResizeMessage = Shapes::StructureShape.new(name: 'CancelResizeMessage')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
     ClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'ClusterAlreadyExistsFault')
+    ClusterAssociatedToSchedule = Shapes::StructureShape.new(name: 'ClusterAssociatedToSchedule')
     ClusterCredentials = Shapes::StructureShape.new(name: 'ClusterCredentials')
     ClusterDbRevision = Shapes::StructureShape.new(name: 'ClusterDbRevision')
     ClusterDbRevisionsList = Shapes::ListShape.new(name: 'ClusterDbRevisionsList')
@@ -155,6 +158,7 @@ module Aws::Redshift
     DescribeHsmClientCertificatesMessage = Shapes::StructureShape.new(name: 'DescribeHsmClientCertificatesMessage')
     DescribeHsmConfigurationsMessage = Shapes::StructureShape.new(name: 'DescribeHsmConfigurationsMessage')
     DescribeLoggingStatusMessage = Shapes::StructureShape.new(name: 'DescribeLoggingStatusMessage')
+    DescribeNodeConfigurationOptionsMessage = Shapes::StructureShape.new(name: 'DescribeNodeConfigurationOptionsMessage')
     DescribeOrderableClusterOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOrderableClusterOptionsMessage')
     DescribeReservedNodeOfferingsMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodeOfferingsMessage')
     DescribeReservedNodesMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodesMessage')
@@ -265,8 +269,15 @@ module Aws::Redshift
     ModifySnapshotCopyRetentionPeriodMessage = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodMessage')
     ModifySnapshotCopyRetentionPeriodResult = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodResult')
     ModifySnapshotScheduleMessage = Shapes::StructureShape.new(name: 'ModifySnapshotScheduleMessage')
+    NodeConfigurationOption = Shapes::StructureShape.new(name: 'NodeConfigurationOption')
+    NodeConfigurationOptionList = Shapes::ListShape.new(name: 'NodeConfigurationOptionList')
+    NodeConfigurationOptionsFilter = Shapes::StructureShape.new(name: 'NodeConfigurationOptionsFilter')
+    NodeConfigurationOptionsFilterList = Shapes::ListShape.new(name: 'NodeConfigurationOptionsFilterList')
+    NodeConfigurationOptionsFilterName = Shapes::StringShape.new(name: 'NodeConfigurationOptionsFilterName')
+    NodeConfigurationOptionsMessage = Shapes::StructureShape.new(name: 'NodeConfigurationOptionsMessage')
     NumberOfNodesPerClusterLimitExceededFault = Shapes::StructureShape.new(name: 'NumberOfNodesPerClusterLimitExceededFault')
     NumberOfNodesQuotaExceededFault = Shapes::StructureShape.new(name: 'NumberOfNodesQuotaExceededFault')
+    OperatorType = Shapes::StringShape.new(name: 'OperatorType')
     OrderableClusterOption = Shapes::StructureShape.new(name: 'OrderableClusterOption')
     OrderableClusterOptionsList = Shapes::ListShape.new(name: 'OrderableClusterOptionsList')
     OrderableClusterOptionsMessage = Shapes::StructureShape.new(name: 'OrderableClusterOptionsMessage')
@@ -386,6 +397,7 @@ module Aws::Redshift
     UnsupportedOperationFault = Shapes::StructureShape.new(name: 'UnsupportedOperationFault')
     UnsupportedOptionFault = Shapes::StructureShape.new(name: 'UnsupportedOptionFault')
     UpdateTarget = Shapes::StructureShape.new(name: 'UpdateTarget')
+    ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
     VpcSecurityGroupMembershipList = Shapes::ListShape.new(name: 'VpcSecurityGroupMembershipList')
@@ -409,6 +421,8 @@ module Aws::Redshift
     AccountWithRestoreAccess.struct_class = Types::AccountWithRestoreAccess
 
     AccountsWithRestoreAccessList.member = Shapes::ShapeRef.new(shape: AccountWithRestoreAccess, location_name: "AccountWithRestoreAccess")
+
+    AssociatedClusterList.member = Shapes::ShapeRef.new(shape: ClusterAssociatedToSchedule, location_name: "ClusterAssociatedToSchedule")
 
     AttributeList.member = Shapes::ShapeRef.new(shape: AccountAttribute, location_name: "AccountAttribute")
 
@@ -468,6 +482,7 @@ module Aws::Redshift
     Cluster.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
     Cluster.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     Cluster.add_member(:cluster_status, Shapes::ShapeRef.new(shape: String, location_name: "ClusterStatus"))
+    Cluster.add_member(:cluster_availability_status, Shapes::ShapeRef.new(shape: String, location_name: "ClusterAvailabilityStatus"))
     Cluster.add_member(:modify_status, Shapes::ShapeRef.new(shape: String, location_name: "ModifyStatus"))
     Cluster.add_member(:master_username, Shapes::ShapeRef.new(shape: String, location_name: "MasterUsername"))
     Cluster.add_member(:db_name, Shapes::ShapeRef.new(shape: String, location_name: "DBName"))
@@ -506,8 +521,15 @@ module Aws::Redshift
     Cluster.add_member(:deferred_maintenance_windows, Shapes::ShapeRef.new(shape: DeferredMaintenanceWindowsList, location_name: "DeferredMaintenanceWindows"))
     Cluster.add_member(:snapshot_schedule_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotScheduleIdentifier"))
     Cluster.add_member(:snapshot_schedule_state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "SnapshotScheduleState"))
+    Cluster.add_member(:expected_next_snapshot_schedule_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ExpectedNextSnapshotScheduleTime"))
+    Cluster.add_member(:expected_next_snapshot_schedule_time_status, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedNextSnapshotScheduleTimeStatus"))
+    Cluster.add_member(:next_maintenance_window_start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "NextMaintenanceWindowStartTime"))
     Cluster.add_member(:resize_info, Shapes::ShapeRef.new(shape: ResizeInfo, location_name: "ResizeInfo"))
     Cluster.struct_class = Types::Cluster
+
+    ClusterAssociatedToSchedule.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    ClusterAssociatedToSchedule.add_member(:schedule_association_state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "ScheduleAssociationState"))
+    ClusterAssociatedToSchedule.struct_class = Types::ClusterAssociatedToSchedule
 
     ClusterCredentials.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     ClusterCredentials.add_member(:db_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "DbPassword"))
@@ -943,6 +965,14 @@ module Aws::Redshift
     DescribeLoggingStatusMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     DescribeLoggingStatusMessage.struct_class = Types::DescribeLoggingStatusMessage
 
+    DescribeNodeConfigurationOptionsMessage.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "ActionType"))
+    DescribeNodeConfigurationOptionsMessage.add_member(:snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotIdentifier"))
+    DescribeNodeConfigurationOptionsMessage.add_member(:owner_account, Shapes::ShapeRef.new(shape: String, location_name: "OwnerAccount"))
+    DescribeNodeConfigurationOptionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: NodeConfigurationOptionsFilterList, location_name: "Filter"))
+    DescribeNodeConfigurationOptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeNodeConfigurationOptionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeNodeConfigurationOptionsMessage.struct_class = Types::DescribeNodeConfigurationOptionsMessage
+
     DescribeOrderableClusterOptionsMessage.add_member(:cluster_version, Shapes::ShapeRef.new(shape: String, location_name: "ClusterVersion"))
     DescribeOrderableClusterOptionsMessage.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     DescribeOrderableClusterOptionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -1266,6 +1296,24 @@ module Aws::Redshift
     ModifySnapshotScheduleMessage.add_member(:schedule_definitions, Shapes::ShapeRef.new(shape: ScheduleDefinitionList, required: true, location_name: "ScheduleDefinitions"))
     ModifySnapshotScheduleMessage.struct_class = Types::ModifySnapshotScheduleMessage
 
+    NodeConfigurationOption.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
+    NodeConfigurationOption.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfNodes"))
+    NodeConfigurationOption.add_member(:estimated_disk_utilization_percent, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "EstimatedDiskUtilizationPercent"))
+    NodeConfigurationOption.struct_class = Types::NodeConfigurationOption
+
+    NodeConfigurationOptionList.member = Shapes::ShapeRef.new(shape: NodeConfigurationOption, location_name: "NodeConfigurationOption")
+
+    NodeConfigurationOptionsFilter.add_member(:name, Shapes::ShapeRef.new(shape: NodeConfigurationOptionsFilterName, location_name: "Name"))
+    NodeConfigurationOptionsFilter.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorType, location_name: "Operator"))
+    NodeConfigurationOptionsFilter.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "Value"))
+    NodeConfigurationOptionsFilter.struct_class = Types::NodeConfigurationOptionsFilter
+
+    NodeConfigurationOptionsFilterList.member = Shapes::ShapeRef.new(shape: NodeConfigurationOptionsFilter, location_name: "NodeConfigurationOptionsFilter")
+
+    NodeConfigurationOptionsMessage.add_member(:node_configuration_option_list, Shapes::ShapeRef.new(shape: NodeConfigurationOptionList, location_name: "NodeConfigurationOptionList"))
+    NodeConfigurationOptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    NodeConfigurationOptionsMessage.struct_class = Types::NodeConfigurationOptionsMessage
+
     OrderableClusterOption.add_member(:cluster_version, Shapes::ShapeRef.new(shape: String, location_name: "ClusterVersion"))
     OrderableClusterOption.add_member(:cluster_type, Shapes::ShapeRef.new(shape: String, location_name: "ClusterType"))
     OrderableClusterOption.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
@@ -1399,6 +1447,7 @@ module Aws::Redshift
     ResizeProgressMessage.add_member(:resize_type, Shapes::ShapeRef.new(shape: String, location_name: "ResizeType"))
     ResizeProgressMessage.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResizeProgressMessage.add_member(:target_encryption_type, Shapes::ShapeRef.new(shape: String, location_name: "TargetEncryptionType"))
+    ResizeProgressMessage.add_member(:data_transfer_progress_percent, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "DataTransferProgressPercent"))
     ResizeProgressMessage.struct_class = Types::ResizeProgressMessage
 
     RestorableNodeTypeList.member = Shapes::ShapeRef.new(shape: String, location_name: "NodeType")
@@ -1428,6 +1477,7 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleArnList, location_name: "IamRoles"))
     RestoreFromClusterSnapshotMessage.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     RestoreFromClusterSnapshotMessage.add_member(:snapshot_schedule_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotScheduleIdentifier"))
+    RestoreFromClusterSnapshotMessage.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfNodes"))
     RestoreFromClusterSnapshotMessage.struct_class = Types::RestoreFromClusterSnapshotMessage
 
     RestoreFromClusterSnapshotResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -1553,6 +1603,8 @@ module Aws::Redshift
     SnapshotSchedule.add_member(:schedule_description, Shapes::ShapeRef.new(shape: String, location_name: "ScheduleDescription"))
     SnapshotSchedule.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     SnapshotSchedule.add_member(:next_invocations, Shapes::ShapeRef.new(shape: ScheduledSnapshotTimeList, location_name: "NextInvocations"))
+    SnapshotSchedule.add_member(:associated_cluster_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AssociatedClusterCount"))
+    SnapshotSchedule.add_member(:associated_clusters, Shapes::ShapeRef.new(shape: AssociatedClusterList, location_name: "AssociatedClusters"))
     SnapshotSchedule.struct_class = Types::SnapshotSchedule
 
     SnapshotScheduleList.member = Shapes::ShapeRef.new(shape: SnapshotSchedule, location_name: "SnapshotSchedule")
@@ -1637,6 +1689,8 @@ module Aws::Redshift
     UpdateTarget.add_member(:database_version, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseVersion"))
     UpdateTarget.add_member(:supported_operations, Shapes::ShapeRef.new(shape: SupportedOperationList, location_name: "SupportedOperations"))
     UpdateTarget.struct_class = Types::UpdateTarget
+
+    ValueStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId")
 
@@ -2259,6 +2313,22 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
       end)
 
+      api.add_operation(:describe_node_configuration_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNodeConfigurationOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNodeConfigurationOptionsMessage)
+        o.output = Shapes::ShapeRef.new(shape: NodeConfigurationOptionsMessage)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSnapshotStateFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_orderable_cluster_options, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeOrderableClusterOptions"
         o.http_method = "POST"
@@ -2661,6 +2731,8 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceRequestThrottlingFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterTrackFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotScheduleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
       api.add_operation(:restore_table_from_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|

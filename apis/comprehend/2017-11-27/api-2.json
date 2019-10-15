@@ -103,9 +103,11 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceInUseException"},
+        {"shape":"TooManyTagsException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"ResourceLimitExceededException"},
         {"shape":"UnsupportedLanguageException"},
+        {"shape":"KmsKeyValidationException"},
         {"shape":"InternalServerException"}
       ]
     },
@@ -120,9 +122,11 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceInUseException"},
+        {"shape":"TooManyTagsException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"ResourceLimitExceededException"},
         {"shape":"UnsupportedLanguageException"},
+        {"shape":"KmsKeyValidationException"},
         {"shape":"InternalServerException"}
       ]
     },
@@ -459,6 +463,20 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "ListTopicsDetectionJobs":{
       "name":"ListTopicsDetectionJobs",
       "http":{
@@ -487,6 +505,7 @@
         {"shape":"TooManyRequestsException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceUnavailableException"},
+        {"shape":"KmsKeyValidationException"},
         {"shape":"InternalServerException"}
       ]
     },
@@ -501,6 +520,7 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"KmsKeyValidationException"},
         {"shape":"InternalServerException"}
       ]
     },
@@ -517,6 +537,7 @@
         {"shape":"TooManyRequestsException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceUnavailableException"},
+        {"shape":"KmsKeyValidationException"},
         {"shape":"InternalServerException"}
       ]
     },
@@ -531,6 +552,7 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"KmsKeyValidationException"},
         {"shape":"InternalServerException"}
       ]
     },
@@ -545,6 +567,7 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"KmsKeyValidationException"},
         {"shape":"InternalServerException"}
       ]
     },
@@ -559,6 +582,7 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"KmsKeyValidationException"},
         {"shape":"InternalServerException"}
       ]
     },
@@ -644,6 +668,38 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "output":{"shape":"TagResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyTagsException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "output":{"shape":"UntagResourceResponse"},
+      "errors":[
+        {"shape":"TooManyTagKeysException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"}
       ]
@@ -836,10 +892,22 @@
       "min":1,
       "pattern":"^[a-zA-Z0-9-]+$"
     },
+    "ComprehendArn":{
+      "type":"string",
+      "max":256,
+      "pattern":"arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-]{1,64}/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
     "ComprehendArnName":{
       "type":"string",
       "max":63,
       "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "ConcurrentModificationException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "exception":true
     },
     "CreateDocumentClassifierRequest":{
       "type":"structure",
@@ -852,12 +920,16 @@
       "members":{
         "DocumentClassifierName":{"shape":"ComprehendArnName"},
         "DataAccessRoleArn":{"shape":"IamRoleArn"},
+        "Tags":{"shape":"TagList"},
         "InputDataConfig":{"shape":"DocumentClassifierInputDataConfig"},
+        "OutputDataConfig":{"shape":"DocumentClassifierOutputDataConfig"},
         "ClientRequestToken":{
           "shape":"ClientRequestTokenString",
           "idempotencyToken":true
         },
-        "LanguageCode":{"shape":"LanguageCode"}
+        "LanguageCode":{"shape":"LanguageCode"},
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "CreateDocumentClassifierResponse":{
@@ -877,12 +949,15 @@
       "members":{
         "RecognizerName":{"shape":"ComprehendArnName"},
         "DataAccessRoleArn":{"shape":"IamRoleArn"},
+        "Tags":{"shape":"TagList"},
         "InputDataConfig":{"shape":"EntityRecognizerInputDataConfig"},
         "ClientRequestToken":{
           "shape":"ClientRequestTokenString",
           "idempotencyToken":true
         },
-        "LanguageCode":{"shape":"LanguageCode"}
+        "LanguageCode":{"shape":"LanguageCode"},
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "CreateEntityRecognizerResponse":{
@@ -1122,7 +1197,9 @@
         "DocumentClassifierArn":{"shape":"DocumentClassifierArn"},
         "InputDataConfig":{"shape":"InputDataConfig"},
         "OutputDataConfig":{"shape":"OutputDataConfig"},
-        "DataAccessRoleArn":{"shape":"IamRoleArn"}
+        "DataAccessRoleArn":{"shape":"IamRoleArn"},
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "DocumentClassificationJobPropertiesList":{
@@ -1132,7 +1209,7 @@
     "DocumentClassifierArn":{
       "type":"string",
       "max":256,
-      "pattern":"arn:aws:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+      "pattern":"arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
     },
     "DocumentClassifierFilter":{
       "type":"structure",
@@ -1149,6 +1226,13 @@
         "S3Uri":{"shape":"S3Uri"}
       }
     },
+    "DocumentClassifierOutputDataConfig":{
+      "type":"structure",
+      "members":{
+        "S3Uri":{"shape":"S3Uri"},
+        "KmsKeyId":{"shape":"KmsKeyId"}
+      }
+    },
     "DocumentClassifierProperties":{
       "type":"structure",
       "members":{
@@ -1161,8 +1245,11 @@
         "TrainingStartTime":{"shape":"Timestamp"},
         "TrainingEndTime":{"shape":"Timestamp"},
         "InputDataConfig":{"shape":"DocumentClassifierInputDataConfig"},
+        "OutputDataConfig":{"shape":"DocumentClassifierOutputDataConfig"},
         "ClassifierMetadata":{"shape":"ClassifierMetadata"},
-        "DataAccessRoleArn":{"shape":"IamRoleArn"}
+        "DataAccessRoleArn":{"shape":"IamRoleArn"},
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "DocumentClassifierPropertiesList":{
@@ -1196,7 +1283,9 @@
         "EndTime":{"shape":"Timestamp"},
         "InputDataConfig":{"shape":"InputDataConfig"},
         "OutputDataConfig":{"shape":"OutputDataConfig"},
-        "DataAccessRoleArn":{"shape":"IamRoleArn"}
+        "DataAccessRoleArn":{"shape":"IamRoleArn"},
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "DominantLanguageDetectionJobPropertiesList":{
@@ -1226,7 +1315,9 @@
         "InputDataConfig":{"shape":"InputDataConfig"},
         "OutputDataConfig":{"shape":"OutputDataConfig"},
         "LanguageCode":{"shape":"LanguageCode"},
-        "DataAccessRoleArn":{"shape":"IamRoleArn"}
+        "DataAccessRoleArn":{"shape":"IamRoleArn"},
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "EntitiesDetectionJobPropertiesList":{
@@ -1253,7 +1344,7 @@
     "EntityRecognizerArn":{
       "type":"string",
       "max":256,
-      "pattern":"arn:aws:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+      "pattern":"arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
     },
     "EntityRecognizerDocuments":{
       "type":"structure",
@@ -1314,7 +1405,9 @@
     "EntityRecognizerMetadataEntityTypesListItem":{
       "type":"structure",
       "members":{
-        "Type":{"shape":"AnyLengthString"}
+        "Type":{"shape":"AnyLengthString"},
+        "EvaluationMetrics":{"shape":"EntityTypesEvaluationMetrics"},
+        "NumberOfTrainMentions":{"shape":"Integer"}
       }
     },
     "EntityRecognizerProperties":{
@@ -1330,7 +1423,9 @@
         "TrainingEndTime":{"shape":"Timestamp"},
         "InputDataConfig":{"shape":"EntityRecognizerInputDataConfig"},
         "RecognizerMetadata":{"shape":"EntityRecognizerMetadata"},
-        "DataAccessRoleArn":{"shape":"IamRoleArn"}
+        "DataAccessRoleArn":{"shape":"IamRoleArn"},
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "EntityRecognizerPropertiesList":{
@@ -1355,6 +1450,14 @@
       "type":"string",
       "max":64,
       "pattern":"[_A-Z0-9]+"
+    },
+    "EntityTypesEvaluationMetrics":{
+      "type":"structure",
+      "members":{
+        "Precision":{"shape":"Double"},
+        "Recall":{"shape":"Double"},
+        "F1Score":{"shape":"Double"}
+      }
     },
     "EntityTypesList":{
       "type":"list",
@@ -1472,12 +1575,25 @@
         "InputDataConfig":{"shape":"InputDataConfig"},
         "OutputDataConfig":{"shape":"OutputDataConfig"},
         "LanguageCode":{"shape":"LanguageCode"},
-        "DataAccessRoleArn":{"shape":"IamRoleArn"}
+        "DataAccessRoleArn":{"shape":"IamRoleArn"},
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "KeyPhrasesDetectionJobPropertiesList":{
       "type":"list",
       "member":{"shape":"KeyPhrasesDetectionJobProperties"}
+    },
+    "KmsKeyId":{
+      "type":"string",
+      "max":2048
+    },
+    "KmsKeyValidationException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "exception":true
     },
     "LanguageCode":{
       "type":"string",
@@ -1631,6 +1747,20 @@
         "NextToken":{"shape":"String"}
       }
     },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{"shape":"ComprehendArn"}
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "ResourceArn":{"shape":"ComprehendArn"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "ListTopicsDetectionJobsRequest":{
       "type":"structure",
       "members":{
@@ -1672,7 +1802,8 @@
       "type":"structure",
       "required":["S3Uri"],
       "members":{
-        "S3Uri":{"shape":"S3Uri"}
+        "S3Uri":{"shape":"S3Uri"},
+        "KmsKeyId":{"shape":"KmsKeyId"}
       }
     },
     "PartOfSpeechTag":{
@@ -1738,6 +1869,18 @@
       "max":1024,
       "pattern":"s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?"
     },
+    "SecurityGroupId":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"[-0-9a-zA-Z]+"
+    },
+    "SecurityGroupIds":{
+      "type":"list",
+      "member":{"shape":"SecurityGroupId"},
+      "max":5,
+      "min":1
+    },
     "SentimentDetectionJobFilter":{
       "type":"structure",
       "members":{
@@ -1759,7 +1902,9 @@
         "InputDataConfig":{"shape":"InputDataConfig"},
         "OutputDataConfig":{"shape":"OutputDataConfig"},
         "LanguageCode":{"shape":"LanguageCode"},
-        "DataAccessRoleArn":{"shape":"IamRoleArn"}
+        "DataAccessRoleArn":{"shape":"IamRoleArn"},
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "SentimentDetectionJobPropertiesList":{
@@ -1801,7 +1946,9 @@
         "ClientRequestToken":{
           "shape":"ClientRequestTokenString",
           "idempotencyToken":true
-        }
+        },
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "StartDocumentClassificationJobResponse":{
@@ -1826,7 +1973,9 @@
         "ClientRequestToken":{
           "shape":"ClientRequestTokenString",
           "idempotencyToken":true
-        }
+        },
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "StartDominantLanguageDetectionJobResponse":{
@@ -1854,7 +2003,9 @@
         "ClientRequestToken":{
           "shape":"ClientRequestTokenString",
           "idempotencyToken":true
-        }
+        },
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "StartEntitiesDetectionJobResponse":{
@@ -1881,7 +2032,9 @@
         "ClientRequestToken":{
           "shape":"ClientRequestTokenString",
           "idempotencyToken":true
-        }
+        },
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "StartKeyPhrasesDetectionJobResponse":{
@@ -1908,7 +2061,9 @@
         "ClientRequestToken":{
           "shape":"ClientRequestTokenString",
           "idempotencyToken":true
-        }
+        },
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "StartSentimentDetectionJobResponse":{
@@ -1934,7 +2089,9 @@
         "ClientRequestToken":{
           "shape":"ClientRequestTokenString",
           "idempotencyToken":true
-        }
+        },
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "StartTopicsDetectionJobResponse":{
@@ -2032,6 +2189,18 @@
       "type":"list",
       "member":{"shape":"String"}
     },
+    "SubnetId":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"[-0-9a-zA-Z]+"
+    },
+    "Subnets":{
+      "type":"list",
+      "member":{"shape":"SubnetId"},
+      "max":16,
+      "min":1
+    },
     "SyntaxLanguageCode":{
       "type":"string",
       "enum":[
@@ -2053,6 +2222,48 @@
         "PartOfSpeech":{"shape":"PartOfSpeechTag"}
       }
     },
+    "Tag":{
+      "type":"structure",
+      "required":["Key"],
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "Tags"
+      ],
+      "members":{
+        "ResourceArn":{"shape":"ComprehendArn"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
     "TextSizeLimitExceededException":{
       "type":"structure",
       "members":{
@@ -2062,6 +2273,20 @@
     },
     "Timestamp":{"type":"timestamp"},
     "TooManyRequestsException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "exception":true
+    },
+    "TooManyTagKeysException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "exception":true
+    },
+    "TooManyTagsException":{
       "type":"structure",
       "members":{
         "Message":{"shape":"String"}
@@ -2088,7 +2313,10 @@
         "EndTime":{"shape":"Timestamp"},
         "InputDataConfig":{"shape":"InputDataConfig"},
         "OutputDataConfig":{"shape":"OutputDataConfig"},
-        "NumberOfTopics":{"shape":"Integer"}
+        "NumberOfTopics":{"shape":"Integer"},
+        "DataAccessRoleArn":{"shape":"IamRoleArn"},
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "TopicsDetectionJobPropertiesList":{
@@ -2101,6 +2329,33 @@
         "Message":{"shape":"String"}
       },
       "exception":true
+    },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceArn":{"shape":"ComprehendArn"},
+        "TagKeys":{"shape":"TagKeyList"}
+      }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "VpcConfig":{
+      "type":"structure",
+      "required":[
+        "SecurityGroupIds",
+        "Subnets"
+      ],
+      "members":{
+        "SecurityGroupIds":{"shape":"SecurityGroupIds"},
+        "Subnets":{"shape":"Subnets"}
+      }
     }
   }
 }

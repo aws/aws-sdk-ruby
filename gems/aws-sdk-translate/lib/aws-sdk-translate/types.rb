@@ -52,6 +52,33 @@ module Aws::Translate
       include Aws::Structure
     end
 
+    # The confidence that Amazon Comprehend accurately detected the source
+    # language is low. If a low confidence level is acceptable for your
+    # application, you can use the language in the exception to call Amazon
+    # Translate again. For more information, see the
+    # [DetectDominantLanguage][1] operation in the *Amazon Comprehend
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectDominantLanguage.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] detected_language_code
+    #   The language code of the auto-detected language from Amazon
+    #   Comprehend.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DetectedLanguageLowConfidenceException AWS API Documentation
+    #
+    class DetectedLanguageLowConfidenceException < Struct.new(
+      :message,
+      :detected_language_code)
+      include Aws::Structure
+    end
+
     # The encryption key used to encrypt the custom terminologies used by
     # Amazon Translate.
     #
@@ -186,6 +213,57 @@ module Aws::Translate
       include Aws::Structure
     end
 
+    # An internal server error occurred. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value of the parameter is invalid. Review the value of the
+    # parameter you are using to correct it, and then retry your operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request that you made is invalid. Check your request to determine
+    # why it's invalid and then retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified limit has been exceeded. Review your request and retry
+    # it with a quantity below the stated limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTerminologiesRequest
     #   data as a hash:
     #
@@ -228,6 +306,33 @@ module Aws::Translate
     class ListTerminologiesResponse < Struct.new(
       :terminology_properties_list,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The resource you are looking for has not been found. Review the
+    # resource you're looking for and see if a different resource will
+    # accomplish your needs before retrying the revised request. .
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The Amazon Translate service is temporarily unavailable. Please wait a
+    # bit and then retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -358,6 +463,33 @@ module Aws::Translate
       include Aws::Structure
     end
 
+    # The size of the text you submitted exceeds the size limit. Reduce the
+    # size of the text or use a smaller document and then retry your
+    # request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TextSizeLimitExceededException AWS API Documentation
+    #
+    class TextSizeLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You have made too many requests within a short period of time. Wait
+    # for a short time and then try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TranslateTextRequest
     #   data as a hash:
     #
@@ -429,6 +561,30 @@ module Aws::Translate
       :source_language_code,
       :target_language_code,
       :applied_terminologies)
+      include Aws::Structure
+    end
+
+    # Amazon Translate does not support translation from the language of the
+    # source text into the requested target language. For more information,
+    # see how-to-error-msg.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] source_language_code
+    #   The language code for the language of the input text.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_language_code
+    #   The language code for the language of the translated text.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/UnsupportedLanguagePairException AWS API Documentation
+    #
+    class UnsupportedLanguagePairException < Struct.new(
+      :message,
+      :source_language_code,
+      :target_language_code)
       include Aws::Structure
     end
 

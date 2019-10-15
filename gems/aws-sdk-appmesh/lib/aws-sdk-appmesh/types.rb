@@ -8,14 +8,339 @@
 module Aws::AppMesh
   module Types
 
-    # @!attribute [rw] mesh
-    #   The service mesh that was deleted.
-    #   @return [Types::MeshData]
+    # An object representing a virtual router listener.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteMeshOutput AWS API Documentation
+    # @note When making an API call, you may pass VirtualRouterListener
+    #   data as a hash:
     #
-    class DeleteMeshOutput < Struct.new(
-      :mesh)
+    #       {
+    #         port_mapping: { # required
+    #           port: 1, # required
+    #           protocol: "http", # required, accepts http, tcp
+    #         },
+    #       }
+    #
+    # @!attribute [rw] port_mapping
+    #   An object representing a virtual node or virtual router listener
+    #   port mapping.
+    #   @return [Types::PortMapping]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterListener AWS API Documentation
+    #
+    class VirtualRouterListener < Struct.new(
+      :port_mapping)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateVirtualNodeInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         mesh_name: "ResourceName", # required
+    #         spec: { # required
+    #           backends: [
+    #             {
+    #               virtual_service: {
+    #                 virtual_service_name: "ServiceName", # required
+    #               },
+    #             },
+    #           ],
+    #           listeners: [
+    #             {
+    #               health_check: {
+    #                 healthy_threshold: 1, # required
+    #                 interval_millis: 1, # required
+    #                 path: "String",
+    #                 port: 1,
+    #                 protocol: "http", # required, accepts http, tcp
+    #                 timeout_millis: 1, # required
+    #                 unhealthy_threshold: 1, # required
+    #               },
+    #               port_mapping: { # required
+    #                 port: 1, # required
+    #                 protocol: "http", # required, accepts http, tcp
+    #               },
+    #             },
+    #           ],
+    #           logging: {
+    #             access_log: {
+    #               file: {
+    #                 path: "FilePath", # required
+    #               },
+    #             },
+    #           },
+    #           service_discovery: {
+    #             aws_cloud_map: {
+    #               attributes: [
+    #                 {
+    #                   key: "AwsCloudMapInstanceAttributeKey", # required
+    #                   value: "AwsCloudMapInstanceAttributeValue", # required
+    #                 },
+    #               ],
+    #               namespace_name: "AwsCloudMapName", # required
+    #               service_name: "AwsCloudMapName", # required
+    #             },
+    #             dns: {
+    #               hostname: "Hostname", # required
+    #             },
+    #           },
+    #         },
+    #         virtual_node_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual node resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The new virtual node specification to apply. This overwrites the
+    #   existing data.
+    #   @return [Types::VirtualNodeSpec]
+    #
+    # @!attribute [rw] virtual_node_name
+    #   The name of the virtual node to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualNodeInput AWS API Documentation
+    #
+    class UpdateVirtualNodeInput < Struct.new(
+      :client_token,
+      :mesh_name,
+      :spec,
+      :virtual_node_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteMeshInput
+    #   data as a hash:
+    #
+    #       {
+    #         mesh_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteMeshInput AWS API Documentation
+    #
+    class DeleteMeshInput < Struct.new(
+      :mesh_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateVirtualServiceInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         mesh_name: "ResourceName", # required
+    #         spec: { # required
+    #           provider: {
+    #             virtual_node: {
+    #               virtual_node_name: "ResourceName", # required
+    #             },
+    #             virtual_router: {
+    #               virtual_router_name: "ResourceName", # required
+    #             },
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         virtual_service_name: "ServiceName", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to create the virtual service in.
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The virtual service specification to apply.
+    #   @return [Types::VirtualServiceSpec]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the virtual service to
+    #   assist with categorization and organization. Each tag consists of a
+    #   key and an optional value, both of which you define. Tag keys can
+    #   have a maximum character length of 128 characters, and tag values
+    #   can have a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
+    #
+    # @!attribute [rw] virtual_service_name
+    #   The name to use for the virtual service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualServiceInput AWS API Documentation
+    #
+    class CreateVirtualServiceInput < Struct.new(
+      :client_token,
+      :mesh_name,
+      :spec,
+      :tags,
+      :virtual_service_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateVirtualRouterInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         mesh_name: "ResourceName", # required
+    #         spec: { # required
+    #           listeners: [
+    #             {
+    #               port_mapping: { # required
+    #                 port: 1, # required
+    #                 protocol: "http", # required, accepts http, tcp
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         virtual_router_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual router resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The new virtual router specification to apply. This overwrites the
+    #   existing data.
+    #   @return [Types::VirtualRouterSpec]
+    #
+    # @!attribute [rw] virtual_router_name
+    #   The name of the virtual router to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualRouterInput AWS API Documentation
+    #
+    class UpdateVirtualRouterInput < Struct.new(
+      :client_token,
+      :mesh_name,
+      :spec,
+      :virtual_router_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         limit: 1,
+    #         next_token: "String",
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of tag results returned by `ListTagsForResource`
+    #   in paginated output. When this parameter is used,
+    #   `ListTagsForResource` returns only `limit` results in a single page
+    #   along with a `nextToken` response element. You can see the remaining
+    #   results of the initial request by sending another
+    #   `ListTagsForResource` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If you don't use this
+    #   parameter, `ListTagsForResource` returns up to 100 results and a
+    #   `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListTagsForResource` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource to list
+    #   the tags for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :limit,
+      :next_token,
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_node
+    #   The full description of your virtual node following the create call.
+    #   @return [Types::VirtualNodeData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualNodeOutput AWS API Documentation
+    #
+    class CreateVirtualNodeOutput < Struct.new(
+      :virtual_node)
+      include Aws::Structure
+    end
+
+    # An object representing the logging information for a virtual node.
+    #
+    # @note When making an API call, you may pass Logging
+    #   data as a hash:
+    #
+    #       {
+    #         access_log: {
+    #           file: {
+    #             path: "FilePath", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] access_log
+    #   The access log configuration for a virtual node.
+    #   @return [Types::AccessLog]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Logging AWS API Documentation
+    #
+    class Logging < Struct.new(
+      :access_log)
+      include Aws::Structure
+    end
+
+    # The request has failed due to a temporary failure of the service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -23,94 +348,590 @@ module Aws::AppMesh
     #   A full description of the virtual router that was updated.
     #   @return [Types::VirtualRouterData]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualRouterOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualRouterOutput AWS API Documentation
     #
     class UpdateVirtualRouterOutput < Struct.new(
       :virtual_router)
       include Aws::Structure
     end
 
-    # An object representing a target and its relative weight. Traffic is
-    # distributed across targets according to their relative weight. For
-    # example, a weighted target with a relative weight of 50 receives five
-    # times as much traffic as one with a relative weight of 10.
+    # @!attribute [rw] mesh
+    #   The full description of your service mesh.
+    #   @return [Types::MeshData]
     #
-    # @note When making an API call, you may pass WeightedTarget
-    #   data as a hash:
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeMeshOutput AWS API Documentation
     #
-    #       {
-    #         virtual_node: "ResourceName",
-    #         weight: 1,
-    #       }
-    #
-    # @!attribute [rw] virtual_node
-    #   The virtual node to associate with the weighted target.
-    #   @return [String]
-    #
-    # @!attribute [rw] weight
-    #   The relative weight of the weighted target.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/WeightedTarget AWS API Documentation
-    #
-    class WeightedTarget < Struct.new(
-      :virtual_node,
-      :weight)
+    class DescribeMeshOutput < Struct.new(
+      :mesh)
       include Aws::Structure
     end
 
-    # @!attribute [rw] route
-    #   The full description of your mesh following the create call.
-    #   @return [Types::RouteData]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateRouteOutput AWS API Documentation
-    #
-    class CreateRouteOutput < Struct.new(
-      :route)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DeleteVirtualNodeInput
+    # @note When making an API call, you may pass DeleteVirtualRouterInput
     #   data as a hash:
     #
     #       {
     #         mesh_name: "ResourceName", # required
-    #         virtual_node_name: "ResourceName", # required
+    #         virtual_router_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to delete the virtual node.
+    #   The name of the service mesh to delete the virtual router in.
     #   @return [String]
     #
-    # @!attribute [rw] virtual_node_name
-    #   The name of the virtual node to delete.
+    # @!attribute [rw] virtual_router_name
+    #   The name of the virtual router to delete.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualNodeInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualRouterInput AWS API Documentation
     #
-    class DeleteVirtualNodeInput < Struct.new(
+    class DeleteVirtualRouterInput < Struct.new(
       :mesh_name,
-      :virtual_node_name)
+      :virtual_router_name)
       include Aws::Structure
     end
 
-    # The DNS service discovery information for your virtual node.
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListVirtualRouters`
+    #   request. When the results of a `ListVirtualRouters` request exceed
+    #   `limit`, you can use this value to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
     #
-    # @note When making an API call, you may pass DnsServiceDiscovery
+    # @!attribute [rw] virtual_routers
+    #   The list of existing virtual routers for the specified service mesh.
+    #   @return [Array<Types::VirtualRouterRef>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualRoutersOutput AWS API Documentation
+    #
+    class ListVirtualRoutersOutput < Struct.new(
+      :next_token,
+      :virtual_routers)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeRouteInput
     #   data as a hash:
     #
     #       {
-    #         service_name: "ServiceName",
+    #         mesh_name: "ResourceName", # required
+    #         route_name: "ResourceName", # required
+    #         virtual_router_name: "ResourceName", # required
     #       }
     #
-    # @!attribute [rw] service_name
-    #   The DNS service name for your virtual node.
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the route resides in.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DnsServiceDiscovery AWS API Documentation
+    # @!attribute [rw] route_name
+    #   The name of the route to describe.
+    #   @return [String]
     #
-    class DnsServiceDiscovery < Struct.new(
-      :service_name)
+    # @!attribute [rw] virtual_router_name
+    #   The name of the virtual router that the route is associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeRouteInput AWS API Documentation
+    #
+    class DescribeRouteInput < Struct.new(
+      :mesh_name,
+      :route_name,
+      :virtual_router_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] route
+    #   The route that was deleted.
+    #   @return [Types::RouteData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteRouteOutput AWS API Documentation
+    #
+    class DeleteRouteOutput < Struct.new(
+      :route)
+      include Aws::Structure
+    end
+
+    # An object representing metadata for a resource.
+    #
+    # @!attribute [rw] arn
+    #   The full Amazon Resource Name (ARN) for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the resource was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The Unix epoch timestamp in seconds for when the resource was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] uid
+    #   The unique identifier for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the resource. Resources are created at version 1, and
+    #   this version is incremented each time that they're updated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ResourceMetadata AWS API Documentation
+    #
+    class ResourceMetadata < Struct.new(
+      :arn,
+      :created_at,
+      :last_updated_at,
+      :uid,
+      :version)
+      include Aws::Structure
+    end
+
+    # You can't delete the specified resource because it's in use or
+    # required by another resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_node
+    #   A full description of the virtual node that was updated.
+    #   @return [Types::VirtualNodeData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualNodeOutput AWS API Documentation
+    #
+    class UpdateVirtualNodeOutput < Struct.new(
+      :virtual_node)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListRoutes` request.
+    #   When the results of a `ListRoutes` request exceed `limit`, you can
+    #   use this value to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   The list of existing routes for the specified service mesh and
+    #   virtual router.
+    #   @return [Array<Types::RouteRef>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListRoutesOutput AWS API Documentation
+    #
+    class ListRoutesOutput < Struct.new(
+      :next_token,
+      :routes)
+      include Aws::Structure
+    end
+
+    # An object representing a virtual service backend for a virtual node.
+    #
+    # @note When making an API call, you may pass VirtualServiceBackend
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_service_name: "ServiceName", # required
+    #       }
+    #
+    # @!attribute [rw] virtual_service_name
+    #   The name of the virtual service that is acting as a virtual node
+    #   backend.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceBackend AWS API Documentation
+    #
+    class VirtualServiceBackend < Struct.new(
+      :virtual_service_name)
+      include Aws::Structure
+    end
+
+    # The request syntax was malformed. Check your request syntax and try
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateVirtualServiceInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         mesh_name: "ResourceName", # required
+    #         spec: { # required
+    #           provider: {
+    #             virtual_node: {
+    #               virtual_node_name: "ResourceName", # required
+    #             },
+    #             virtual_router: {
+    #               virtual_router_name: "ResourceName", # required
+    #             },
+    #           },
+    #         },
+    #         virtual_service_name: "ServiceName", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual service resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The new virtual service specification to apply. This overwrites the
+    #   existing data.
+    #   @return [Types::VirtualServiceSpec]
+    #
+    # @!attribute [rw] virtual_service_name
+    #   The name of the virtual service to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualServiceInput AWS API Documentation
+    #
+    class UpdateVirtualServiceInput < Struct.new(
+      :client_token,
+      :mesh_name,
+      :spec,
+      :virtual_service_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] route
+    #   A full description of the route that was updated.
+    #   @return [Types::RouteData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateRouteOutput AWS API Documentation
+    #
+    class UpdateRouteOutput < Struct.new(
+      :route)
+      include Aws::Structure
+    end
+
+    # An object representing the traffic distribution requirements for
+    # matched HTTP requests.
+    #
+    # @note When making an API call, you may pass HttpRouteAction
+    #   data as a hash:
+    #
+    #       {
+    #         weighted_targets: [ # required
+    #           {
+    #             virtual_node: "ResourceName", # required
+    #             weight: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] weighted_targets
+    #   The targets that traffic is routed to when a request matches the
+    #   route. You can specify one or more targets and their relative
+    #   weights to distribute traffic with.
+    #   @return [Array<Types::WeightedTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteAction AWS API Documentation
+    #
+    class HttpRouteAction < Struct.new(
+      :weighted_targets)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRoutesInput
+    #   data as a hash:
+    #
+    #       {
+    #         limit: 1,
+    #         mesh_name: "ResourceName", # required
+    #         next_token: "String",
+    #         virtual_router_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of results returned by `ListRoutes` in paginated
+    #   output. When you use this parameter, `ListRoutes` returns only
+    #   `limit` results in a single page along with a `nextToken` response
+    #   element. You can see the remaining results of the initial request by
+    #   sending another `ListRoutes` request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, `ListRoutes` returns up to 100 results and a `nextToken`
+    #   value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to list routes in.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListRoutes` request where `limit` was used and the results exceeded
+    #   the value of that parameter. Pagination continues from the end of
+    #   the previous results that returned the `nextToken` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_router_name
+    #   The name of the virtual router to list routes in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListRoutesInput AWS API Documentation
+    #
+    class ListRoutesInput < Struct.new(
+      :limit,
+      :mesh_name,
+      :next_token,
+      :virtual_router_name)
+      include Aws::Structure
+    end
+
+    # An object representing the health check policy for a virtual node's
+    # listener.
+    #
+    # @note When making an API call, you may pass HealthCheckPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         healthy_threshold: 1, # required
+    #         interval_millis: 1, # required
+    #         path: "String",
+    #         port: 1,
+    #         protocol: "http", # required, accepts http, tcp
+    #         timeout_millis: 1, # required
+    #         unhealthy_threshold: 1, # required
+    #       }
+    #
+    # @!attribute [rw] healthy_threshold
+    #   The number of consecutive successful health checks that must occur
+    #   before declaring listener healthy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_millis
+    #   The time period in milliseconds between each health check execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path
+    #   The destination path for the health check request. This is required
+    #   only if the specified protocol is HTTP. If the protocol is TCP, this
+    #   parameter is ignored.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The destination port for the health check request. This port must
+    #   match the port defined in the PortMapping for the listener.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol for the health check request.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_millis
+    #   The amount of time to wait when receiving a response from the health
+    #   check, in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unhealthy_threshold
+    #   The number of consecutive failed health checks that must occur
+    #   before declaring a virtual node unhealthy.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HealthCheckPolicy AWS API Documentation
+    #
+    class HealthCheckPolicy < Struct.new(
+      :healthy_threshold,
+      :interval_millis,
+      :path,
+      :port,
+      :protocol,
+      :timeout_millis,
+      :unhealthy_threshold)
+      include Aws::Structure
+    end
+
+    # An object representing a virtual service returned by a list operation.
+    #
+    # @!attribute [rw] arn
+    #   The full Amazon Resource Name (ARN) for the virtual service.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual service resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_service_name
+    #   The name of the virtual service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceRef AWS API Documentation
+    #
+    class VirtualServiceRef < Struct.new(
+      :arn,
+      :mesh_name,
+      :virtual_service_name)
+      include Aws::Structure
+    end
+
+    # An object representing the egress filter rules for a service mesh.
+    #
+    # @note When making an API call, you may pass EgressFilter
+    #   data as a hash:
+    #
+    #       {
+    #         type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The egress filter type. By default, the type is `DROP_ALL`, which
+    #   allows egress only from virtual nodes to other defined resources in
+    #   the service mesh (and any traffic to `*.amazonaws.com` for AWS API
+    #   calls). You can set the egress filter type to `ALLOW_ALL` to allow
+    #   egress to any endpoint inside or outside of the service mesh.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/EgressFilter AWS API Documentation
+    #
+    class EgressFilter < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
+    # An object representing the current status of the virtual node.
+    #
+    # @!attribute [rw] status
+    #   The current status of the virtual node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeStatus AWS API Documentation
+    #
+    class VirtualNodeStatus < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # An object representing a virtual router returned by a list operation.
+    #
+    # @!attribute [rw] arn
+    #   The full Amazon Resource Name (ARN) for the virtual router.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual router resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_router_name
+    #   The name of the virtual router.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterRef AWS API Documentation
+    #
+    class VirtualRouterRef < Struct.new(
+      :arn,
+      :mesh_name,
+      :virtual_router_name)
+      include Aws::Structure
+    end
+
+    # An object representing a virtual service returned by a describe
+    # operation.
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual service resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   An object representing metadata for a resource.
+    #   @return [Types::ResourceMetadata]
+    #
+    # @!attribute [rw] spec
+    #   The specifications of the virtual service.
+    #   @return [Types::VirtualServiceSpec]
+    #
+    # @!attribute [rw] status
+    #   The current status of the virtual service.
+    #   @return [Types::VirtualServiceStatus]
+    #
+    # @!attribute [rw] virtual_service_name
+    #   The name of the virtual service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceData AWS API Documentation
+    #
+    class VirtualServiceData < Struct.new(
+      :mesh_name,
+      :metadata,
+      :spec,
+      :status,
+      :virtual_service_name)
+      include Aws::Structure
+    end
+
+    # An object representing the HTTP header in the request.
+    #
+    # @note When making an API call, you may pass HttpRouteHeader
+    #   data as a hash:
+    #
+    #       {
+    #         invert: false,
+    #         match: {
+    #           exact: "HeaderMatch",
+    #           prefix: "HeaderMatch",
+    #           range: {
+    #             end: 1, # required
+    #             start: 1, # required
+    #           },
+    #           regex: "HeaderMatch",
+    #           suffix: "HeaderMatch",
+    #         },
+    #         name: "HeaderName", # required
+    #       }
+    #
+    # @!attribute [rw] invert
+    #   Specify `True` to match the opposite of the `HeaderMatchMethod`
+    #   method and value. The default value is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] match
+    #   The `HeaderMatchMethod` object.
+    #   @return [Types::HeaderMatchMethod]
+    #
+    # @!attribute [rw] name
+    #   A name for the HTTP header in the client request that will be
+    #   matched on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteHeader AWS API Documentation
+    #
+    class HttpRouteHeader < Struct.new(
+      :invert,
+      :match,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_service
+    #   The full description of your virtual service.
+    #   @return [Types::VirtualServiceData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualServiceOutput AWS API Documentation
+    #
+    class DescribeVirtualServiceOutput < Struct.new(
+      :virtual_service)
       include Aws::Structure
     end
 
@@ -121,14 +942,14 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the virtual node resides.
+    #   The name of the service mesh that the virtual node resides in.
     #   @return [String]
     #
     # @!attribute [rw] virtual_node_name
     #   The name of the virtual node.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualNodeRef AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeRef AWS API Documentation
     #
     class VirtualNodeRef < Struct.new(
       :arn,
@@ -137,50 +958,183 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateMeshInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         mesh_name: "ResourceName", # required
+    #         spec: {
+    #           egress_filter: {
+    #             type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name to use for the service mesh.
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The service mesh specification to apply.
+    #   @return [Types::MeshSpec]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the service mesh to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateMeshInput AWS API Documentation
+    #
+    class CreateMeshInput < Struct.new(
+      :client_token,
+      :mesh_name,
+      :spec,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_node
+    #   The full description of your virtual node.
+    #   @return [Types::VirtualNodeData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualNodeOutput AWS API Documentation
+    #
+    class DescribeVirtualNodeOutput < Struct.new(
+      :virtual_node)
+      include Aws::Structure
+    end
+
+    # You have exceeded a service limit for your account. For more
+    # information, see [Service Limits][1] in the *AWS App Mesh User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/service_limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mesh
+    #   An object representing a service mesh returned by a describe
+    #   operation.
+    #   @return [Types::MeshData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateMeshOutput AWS API Documentation
+    #
+    class UpdateMeshOutput < Struct.new(
+      :mesh)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] route
-    #   The full description of your route.
+    #   The full description of your mesh following the create call.
     #   @return [Types::RouteData]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeRouteOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateRouteOutput AWS API Documentation
     #
-    class DescribeRouteOutput < Struct.new(
+    class CreateRouteOutput < Struct.new(
       :route)
       include Aws::Structure
     end
 
-    # An object representing the service discovery information for a virtual
-    # node.
+    # An object representing the DNS service discovery information for your
+    # virtual node.
     #
-    # @note When making an API call, you may pass ServiceDiscovery
+    # @note When making an API call, you may pass DnsServiceDiscovery
     #   data as a hash:
     #
     #       {
-    #         dns: {
-    #           service_name: "ServiceName",
-    #         },
+    #         hostname: "Hostname", # required
     #       }
     #
-    # @!attribute [rw] dns
-    #   Specifies the DNS service name for the virtual node.
-    #   @return [Types::DnsServiceDiscovery]
+    # @!attribute [rw] hostname
+    #   Specifies the DNS service discovery hostname for the virtual node.
+    #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ServiceDiscovery AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DnsServiceDiscovery AWS API Documentation
     #
-    class ServiceDiscovery < Struct.new(
-      :dns)
+    class DnsServiceDiscovery < Struct.new(
+      :hostname)
       include Aws::Structure
     end
 
-    # An object representing the status of a service mesh.
+    # @note When making an API call, you may pass DescribeVirtualServiceInput
+    #   data as a hash:
     #
-    # @!attribute [rw] status
-    #   The current mesh status.
+    #       {
+    #         mesh_name: "ResourceName", # required
+    #         virtual_service_name: "ServiceName", # required
+    #       }
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual service resides in.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/MeshStatus AWS API Documentation
+    # @!attribute [rw] virtual_service_name
+    #   The name of the virtual service to describe.
+    #   @return [String]
     #
-    class MeshStatus < Struct.new(
-      :status)
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualServiceInput AWS API Documentation
+    #
+    class DescribeVirtualServiceInput < Struct.new(
+      :mesh_name,
+      :virtual_service_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteRouteInput
+    #   data as a hash:
+    #
+    #       {
+    #         mesh_name: "ResourceName", # required
+    #         route_name: "ResourceName", # required
+    #         virtual_router_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to delete the route in.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_name
+    #   The name of the route to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_router_name
+    #   The name of the virtual router to delete the route in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteRouteInput AWS API Documentation
+    #
+    class DeleteRouteInput < Struct.new(
+      :mesh_name,
+      :route_name,
+      :virtual_router_name)
       include Aws::Structure
     end
 
@@ -188,7 +1142,7 @@ module Aws::AppMesh
     # operation.
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the virtual node resides.
+    #   The name of the service mesh that the virtual node resides in.
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -207,7 +1161,7 @@ module Aws::AppMesh
     #   The name of the virtual node.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualNodeData AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeData AWS API Documentation
     #
     class VirtualNodeData < Struct.new(
       :mesh_name,
@@ -218,161 +1172,337 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the specification of a virtual node.
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UntagResourceOutput AWS API Documentation
     #
-    # @note When making an API call, you may pass VirtualNodeSpec
+    class UntagResourceOutput < Aws::EmptyStructure; end
+
+    # An object representing the AWS Cloud Map attribute information for
+    # your virtual node.
+    #
+    # @note When making an API call, you may pass AwsCloudMapInstanceAttribute
     #   data as a hash:
     #
     #       {
-    #         backends: ["ServiceName"],
-    #         listeners: [
-    #           {
-    #             health_check: {
-    #               healthy_threshold: 1,
-    #               interval_millis: 1,
-    #               path: "String",
-    #               port: 1,
-    #               protocol: "http", # accepts http, tcp
-    #               timeout_millis: 1,
-    #               unhealthy_threshold: 1,
-    #             },
-    #             port_mapping: {
-    #               port: 1,
-    #               protocol: "http", # accepts http, tcp
-    #             },
+    #         key: "AwsCloudMapInstanceAttributeKey", # required
+    #         value: "AwsCloudMapInstanceAttributeValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of an AWS Cloud Map service instance attribute key. Any AWS
+    #   Cloud Map service instance that contains the specified key and value
+    #   is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of an AWS Cloud Map service instance attribute key. Any
+    #   AWS Cloud Map service instance that contains the specified key and
+    #   value is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapInstanceAttribute AWS API Documentation
+    #
+    class AwsCloudMapInstanceAttribute < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # An object representing the specification of a virtual service.
+    #
+    # @note When making an API call, you may pass VirtualServiceSpec
+    #   data as a hash:
+    #
+    #       {
+    #         provider: {
+    #           virtual_node: {
+    #             virtual_node_name: "ResourceName", # required
     #           },
-    #         ],
-    #         service_discovery: {
-    #           dns: {
-    #             service_name: "ServiceName",
+    #           virtual_router: {
+    #             virtual_router_name: "ResourceName", # required
     #           },
     #         },
     #       }
     #
-    # @!attribute [rw] backends
-    #   The backends to which the virtual node is expected to send outbound
-    #   traffic.
-    #   @return [Array<String>]
+    # @!attribute [rw] provider
+    #   The App Mesh object that is acting as the provider for a virtual
+    #   service. You can specify a single virtual node or virtual router.
+    #   @return [Types::VirtualServiceProvider]
     #
-    # @!attribute [rw] listeners
-    #   The listeners from which the virtual node is expected to receive
-    #   inbound traffic.
-    #   @return [Array<Types::Listener>]
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceSpec AWS API Documentation
     #
-    # @!attribute [rw] service_discovery
-    #   The service discovery information for the virtual node.
-    #   @return [Types::ServiceDiscovery]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualNodeSpec AWS API Documentation
-    #
-    class VirtualNodeSpec < Struct.new(
-      :backends,
-      :listeners,
-      :service_discovery)
+    class VirtualServiceSpec < Struct.new(
+      :provider)
       include Aws::Structure
     end
 
-    # An object representing a service mesh returned by a list operation.
+    # An object representing the backends that a virtual node is expected to
+    # send outbound traffic to.
     #
-    # @!attribute [rw] arn
-    #   The full Amazon Resource Name (ARN) of the service mesh.
-    #   @return [String]
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/MeshRef AWS API Documentation
-    #
-    class MeshRef < Struct.new(
-      :arn,
-      :mesh_name)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DescribeVirtualRouterInput
+    # @note When making an API call, you may pass Backend
     #   data as a hash:
     #
     #       {
-    #         mesh_name: "ResourceName", # required
-    #         virtual_router_name: "ResourceName", # required
+    #         virtual_service: {
+    #           virtual_service_name: "ServiceName", # required
+    #         },
     #       }
     #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the virtual router resides.
+    # @!attribute [rw] virtual_service
+    #   Specifies a virtual service to use as a backend for a virtual node.
+    #   @return [Types::VirtualServiceBackend]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Backend AWS API Documentation
+    #
+    class Backend < Struct.new(
+      :virtual_service)
+      include Aws::Structure
+    end
+
+    # The range of values to match on. The first character of the range is
+    # included in the range, though the last character is not. For example,
+    # if the range specified were 1-100, only values 1-99 would be matched.
+    #
+    # @note When making an API call, you may pass MatchRange
+    #   data as a hash:
+    #
+    #       {
+    #         end: 1, # required
+    #         start: 1, # required
+    #       }
+    #
+    # @!attribute [rw] end
+    #   The end of the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start
+    #   The start of the range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MatchRange AWS API Documentation
+    #
+    class MatchRange < Struct.new(
+      :end,
+      :start)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMeshesInput
+    #   data as a hash:
+    #
+    #       {
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of results returned by `ListMeshes` in paginated
+    #   output. When you use this parameter, `ListMeshes` returns only
+    #   `limit` results in a single page along with a `nextToken` response
+    #   element. You can see the remaining results of the initial request by
+    #   sending another `ListMeshes` request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, `ListMeshes` returns up to 100 results and a `nextToken`
+    #   value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListMeshes` request where `limit` was used and the results exceeded
+    #   the value of that parameter. Pagination continues from the end of
+    #   the previous results that returned the `nextToken` value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshesInput AWS API Documentation
+    #
+    class ListMeshesInput < Struct.new(
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # An object representing the TCP routing specification for a route.
+    #
+    # @note When making an API call, you may pass TcpRoute
+    #   data as a hash:
+    #
+    #       {
+    #         action: { # required
+    #           weighted_targets: [ # required
+    #             {
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to take if a match is determined.
+    #   @return [Types::TcpRouteAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRoute AWS API Documentation
+    #
+    class TcpRoute < Struct.new(
+      :action)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListVirtualRoutersInput
+    #   data as a hash:
+    #
+    #       {
+    #         limit: 1,
+    #         mesh_name: "ResourceName", # required
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of results returned by `ListVirtualRouters` in
+    #   paginated output. When you use this parameter, `ListVirtualRouters`
+    #   returns only `limit` results in a single page along with a
+    #   `nextToken` response element. You can see the remaining results of
+    #   the initial request by sending another `ListVirtualRouters` request
+    #   with the returned `nextToken` value. This value can be between 1 and
+    #   100. If you don't use this parameter, `ListVirtualRouters` returns
+    #   up to 100 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to list virtual routers in.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListVirtualRouters` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualRoutersInput AWS API Documentation
+    #
+    class ListVirtualRoutersInput < Struct.new(
+      :limit,
+      :mesh_name,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # An object representing a virtual router returned by a describe
+    # operation.
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual router resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The associated metadata for the virtual router.
+    #   @return [Types::ResourceMetadata]
+    #
+    # @!attribute [rw] spec
+    #   The specifications of the virtual router.
+    #   @return [Types::VirtualRouterSpec]
+    #
+    # @!attribute [rw] status
+    #   The current status of the virtual router.
+    #   @return [Types::VirtualRouterStatus]
     #
     # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router to describe.
+    #   The name of the virtual router.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualRouterInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterData AWS API Documentation
     #
-    class DescribeVirtualRouterInput < Struct.new(
+    class VirtualRouterData < Struct.new(
       :mesh_name,
+      :metadata,
+      :spec,
+      :status,
       :virtual_router_name)
       include Aws::Structure
     end
 
-    # @!attribute [rw] virtual_router
-    #   The full description of your virtual router.
-    #   @return [Types::VirtualRouterData]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualRouterOutput AWS API Documentation
-    #
-    class DescribeVirtualRouterOutput < Struct.new(
-      :virtual_router)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] route
-    #   A full description of the route that was updated.
-    #   @return [Types::RouteData]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateRouteOutput AWS API Documentation
-    #
-    class UpdateRouteOutput < Struct.new(
-      :route)
-      include Aws::Structure
-    end
-
-    # An object representing the traffic distribution requirements for
-    # matched HTTP requests.
-    #
-    # @note When making an API call, you may pass HttpRouteAction
+    # @note When making an API call, you may pass UpdateMeshInput
     #   data as a hash:
     #
     #       {
-    #         weighted_targets: [
-    #           {
-    #             virtual_node: "ResourceName",
-    #             weight: 1,
+    #         client_token: "String",
+    #         mesh_name: "ResourceName", # required
+    #         spec: {
+    #           egress_filter: {
+    #             type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
     #           },
-    #         ],
+    #         },
     #       }
     #
-    # @!attribute [rw] weighted_targets
-    #   The targets that traffic is routed to when a request matches the
-    #   route. You can specify one or more targets and their relative
-    #   weights with which to distribute traffic.
-    #   @return [Array<Types::WeightedTarget>]
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/HttpRouteAction AWS API Documentation
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
     #
-    class HttpRouteAction < Struct.new(
-      :weighted_targets)
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The service mesh specification to apply.
+    #   @return [Types::MeshSpec]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateMeshInput AWS API Documentation
+    #
+    class UpdateMeshInput < Struct.new(
+      :client_token,
+      :mesh_name,
+      :spec)
       include Aws::Structure
     end
 
-    # @!attribute [rw] virtual_router
-    #   The full description of your virtual router following the create
-    #   call.
-    #   @return [Types::VirtualRouterData]
+    # @note When making an API call, you may pass ListVirtualServicesInput
+    #   data as a hash:
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualRouterOutput AWS API Documentation
+    #       {
+    #         limit: 1,
+    #         mesh_name: "ResourceName", # required
+    #         next_token: "String",
+    #       }
     #
-    class CreateVirtualRouterOutput < Struct.new(
-      :virtual_router)
+    # @!attribute [rw] limit
+    #   The maximum number of results returned by `ListVirtualServices` in
+    #   paginated output. When you use this parameter, `ListVirtualServices`
+    #   returns only `limit` results in a single page along with a
+    #   `nextToken` response element. You can see the remaining results of
+    #   the initial request by sending another `ListVirtualServices` request
+    #   with the returned `nextToken` value. This value can be between 1 and
+    #   100. If you don't use this parameter, `ListVirtualServices` returns
+    #   up to 100 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to list virtual services in.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListVirtualServices` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualServicesInput AWS API Documentation
+    #
+    class ListVirtualServicesInput < Struct.new(
+      :limit,
+      :mesh_name,
+      :next_token)
       include Aws::Structure
     end
 
@@ -383,8 +1513,21 @@ module Aws::AppMesh
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
     #         spec: { # required
-    #           service_names: ["ServiceName"],
+    #           listeners: [
+    #             {
+    #               port_mapping: { # required
+    #                 port: 1, # required
+    #                 protocol: "http", # required, accepts http, tcp
+    #               },
+    #             },
+    #           ],
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         virtual_router_name: "ResourceName", # required
     #       }
     #
@@ -398,90 +1541,272 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to create the virtual router.
+    #   The name of the service mesh to create the virtual router in.
     #   @return [String]
     #
     # @!attribute [rw] spec
     #   The virtual router specification to apply.
     #   @return [Types::VirtualRouterSpec]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the virtual router to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
+    #
     # @!attribute [rw] virtual_router_name
     #   The name to use for the virtual router.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualRouterInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualRouterInput AWS API Documentation
     #
     class CreateVirtualRouterInput < Struct.new(
       :client_token,
       :mesh_name,
       :spec,
+      :tags,
       :virtual_router_name)
       include Aws::Structure
     end
 
-    # An object representing the current status of a route.
+    # An object representing the access logging information for a virtual
+    # node.
     #
-    # @!attribute [rw] status
-    #   The current status for the route.
-    #   @return [String]
+    # @note When making an API call, you may pass AccessLog
+    #   data as a hash:
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/RouteStatus AWS API Documentation
+    #       {
+    #         file: {
+    #           path: "FilePath", # required
+    #         },
+    #       }
     #
-    class RouteStatus < Struct.new(
-      :status)
+    # @!attribute [rw] file
+    #   The file object to send virtual node access logs to.
+    #   @return [Types::FileAccessLog]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AccessLog AWS API Documentation
+    #
+    class AccessLog < Struct.new(
+      :file)
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMeshesInput
+    # @note When making an API call, you may pass ListVirtualNodesInput
     #   data as a hash:
     #
     #       {
     #         limit: 1,
+    #         mesh_name: "ResourceName", # required
     #         next_token: "String",
     #       }
     #
     # @!attribute [rw] limit
-    #   The maximum number of mesh results returned by `ListMeshes` in
-    #   paginated output. When this parameter is used, `ListMeshes` only
-    #   returns `limit` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can
-    #   be seen by sending another `ListMeshes` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListMeshes` returns up to 100 results
-    #   and a `nextToken` value if applicable.
+    #   The maximum number of results returned by `ListVirtualNodes` in
+    #   paginated output. When you use this parameter, `ListVirtualNodes`
+    #   returns only `limit` results in a single page along with a
+    #   `nextToken` response element. You can see the remaining results of
+    #   the initial request by sending another `ListVirtualNodes` request
+    #   with the returned `nextToken` value. This value can be between 1 and
+    #   100. If you don't use this parameter, `ListVirtualNodes` returns up
+    #   to 100 results and a `nextToken` value if applicable.
     #   @return [Integer]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to list virtual nodes in.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   The `nextToken` value returned from a previous paginated
-    #   `ListMeshes` request where `limit` was used and the results exceeded
-    #   the value of that parameter. Pagination continues from the end of
-    #   the previous results that returned the `nextToken` value.
-    #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
-    #   used to retrieve the next items in a list and not for other
-    #   programmatic purposes.
-    #
-    #    </note>
+    #   `ListVirtualNodes` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListMeshesInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualNodesInput AWS API Documentation
     #
-    class ListMeshesInput < Struct.new(
+    class ListVirtualNodesInput < Struct.new(
       :limit,
+      :mesh_name,
       :next_token)
       include Aws::Structure
     end
 
-    # An object representing the status of a virtual router.
+    # @!attribute [rw] virtual_router
+    #   The full description of your virtual router.
+    #   @return [Types::VirtualRouterData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualRouterOutput AWS API Documentation
+    #
+    class DescribeVirtualRouterOutput < Struct.new(
+      :virtual_router)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mesh
+    #   The full description of your service mesh following the create call.
+    #   @return [Types::MeshData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateMeshOutput AWS API Documentation
+    #
+    class CreateMeshOutput < Struct.new(
+      :mesh)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_router
+    #   The full description of your virtual router following the create
+    #   call.
+    #   @return [Types::VirtualRouterData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualRouterOutput AWS API Documentation
+    #
+    class CreateVirtualRouterOutput < Struct.new(
+      :virtual_router)
+      include Aws::Structure
+    end
+
+    # An object representing the status of a virtual service.
     #
     # @!attribute [rw] status
-    #   The current status of the virtual router.
+    #   The current status of the virtual service.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualRouterStatus AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceStatus AWS API Documentation
     #
-    class VirtualRouterStatus < Struct.new(
+    class VirtualServiceStatus < Struct.new(
       :status)
+      include Aws::Structure
+    end
+
+    # An object representing the specification of a virtual router.
+    #
+    # @note When making an API call, you may pass VirtualRouterSpec
+    #   data as a hash:
+    #
+    #       {
+    #         listeners: [
+    #           {
+    #             port_mapping: { # required
+    #               port: 1, # required
+    #               protocol: "http", # required, accepts http, tcp
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] listeners
+    #   The listeners that the virtual router is expected to receive inbound
+    #   traffic from. Currently only one listener is supported per virtual
+    #   router.
+    #   @return [Array<Types::VirtualRouterListener>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterSpec AWS API Documentation
+    #
+    class VirtualRouterSpec < Struct.new(
+      :listeners)
+      include Aws::Structure
+    end
+
+    # The maximum request rate permitted by the App Mesh APIs has been
+    # exceeded for your account. For best results, use an increasing or
+    # variable sleep interval between requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An object representing the specification of a virtual node.
+    #
+    # @note When making an API call, you may pass VirtualNodeSpec
+    #   data as a hash:
+    #
+    #       {
+    #         backends: [
+    #           {
+    #             virtual_service: {
+    #               virtual_service_name: "ServiceName", # required
+    #             },
+    #           },
+    #         ],
+    #         listeners: [
+    #           {
+    #             health_check: {
+    #               healthy_threshold: 1, # required
+    #               interval_millis: 1, # required
+    #               path: "String",
+    #               port: 1,
+    #               protocol: "http", # required, accepts http, tcp
+    #               timeout_millis: 1, # required
+    #               unhealthy_threshold: 1, # required
+    #             },
+    #             port_mapping: { # required
+    #               port: 1, # required
+    #               protocol: "http", # required, accepts http, tcp
+    #             },
+    #           },
+    #         ],
+    #         logging: {
+    #           access_log: {
+    #             file: {
+    #               path: "FilePath", # required
+    #             },
+    #           },
+    #         },
+    #         service_discovery: {
+    #           aws_cloud_map: {
+    #             attributes: [
+    #               {
+    #                 key: "AwsCloudMapInstanceAttributeKey", # required
+    #                 value: "AwsCloudMapInstanceAttributeValue", # required
+    #               },
+    #             ],
+    #             namespace_name: "AwsCloudMapName", # required
+    #             service_name: "AwsCloudMapName", # required
+    #           },
+    #           dns: {
+    #             hostname: "Hostname", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] backends
+    #   The backends that the virtual node is expected to send outbound
+    #   traffic to.
+    #   @return [Array<Types::Backend>]
+    #
+    # @!attribute [rw] listeners
+    #   The listeners that the virtual node is expected to receive inbound
+    #   traffic from. Currently only one listener is supported per virtual
+    #   node.
+    #   @return [Array<Types::Listener>]
+    #
+    # @!attribute [rw] logging
+    #   The inbound and outbound access logging information for the virtual
+    #   node.
+    #   @return [Types::Logging]
+    #
+    # @!attribute [rw] service_discovery
+    #   The service discovery information for the virtual node. If your
+    #   virtual node does not expect ingress traffic, you can omit this
+    #   parameter.
+    #   @return [Types::ServiceDiscovery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeSpec AWS API Documentation
+    #
+    class VirtualNodeSpec < Struct.new(
+      :backends,
+      :listeners,
+      :logging,
+      :service_discovery)
       include Aws::Structure
     end
 
@@ -491,12 +1816,12 @@ module Aws::AppMesh
     #
     # @!attribute [rw] next_token
     #   The `nextToken` value to include in a future `ListMeshes` request.
-    #   When the results of a `ListMeshes` request exceed `limit`, this
-    #   value can be used to retrieve the next page of results. This value
-    #   is `null` when there are no more results to return.
+    #   When the results of a `ListMeshes` request exceed `limit`, you can
+    #   use this value to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListMeshesOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshesOutput AWS API Documentation
     #
     class ListMeshesOutput < Struct.new(
       :meshes,
@@ -504,32 +1829,444 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # @!attribute [rw] virtual_node
-    #   The full description of your virtual node.
-    #   @return [Types::VirtualNodeData]
+    # An object representing the duration between retry attempts.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualNodeOutput AWS API Documentation
+    # @note When making an API call, you may pass Duration
+    #   data as a hash:
     #
-    class DescribeVirtualNodeOutput < Struct.new(
-      :virtual_node)
+    #       {
+    #         unit: "ms", # accepts ms, s
+    #         value: 1,
+    #       }
+    #
+    # @!attribute [rw] unit
+    #   The unit of time between retry attempts.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The duration of time between retry attempts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Duration AWS API Documentation
+    #
+    class Duration < Struct.new(
+      :unit,
+      :value)
       include Aws::Structure
     end
 
-    # @!attribute [rw] mesh
-    #   The full description of your service mesh following the create call.
-    #   @return [Types::MeshData]
+    # The request contains a client token that was used for a previous
+    # update resource call with different specifications. Try the request
+    # again with a new client token.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateMeshOutput AWS API Documentation
+    # @!attribute [rw] message
+    #   @return [String]
     #
-    class CreateMeshOutput < Struct.new(
-      :mesh)
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] route
+    #   The full description of your route.
+    #   @return [Types::RouteData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeRouteOutput AWS API Documentation
+    #
+    class DescribeRouteOutput < Struct.new(
+      :route)
+      include Aws::Structure
+    end
+
+    # An object representing the requirements for a route to match HTTP
+    # requests for a virtual router.
+    #
+    # @note When making an API call, you may pass HttpRouteMatch
+    #   data as a hash:
+    #
+    #       {
+    #         headers: [
+    #           {
+    #             invert: false,
+    #             match: {
+    #               exact: "HeaderMatch",
+    #               prefix: "HeaderMatch",
+    #               range: {
+    #                 end: 1, # required
+    #                 start: 1, # required
+    #               },
+    #               regex: "HeaderMatch",
+    #               suffix: "HeaderMatch",
+    #             },
+    #             name: "HeaderName", # required
+    #           },
+    #         ],
+    #         method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
+    #         prefix: "String", # required
+    #         scheme: "http", # accepts http, https
+    #       }
+    #
+    # @!attribute [rw] headers
+    #   The client request headers to match on.
+    #   @return [Array<Types::HttpRouteHeader>]
+    #
+    # @!attribute [rw] method
+    #   The client request header method to match on.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   Specifies the path to match requests with. This parameter must
+    #   always start with `/`, which by itself matches all requests to the
+    #   virtual service name. You can also match for path-based routing of
+    #   requests. For example, if your virtual service name is
+    #   `my-service.local` and you want the route to match requests to
+    #   `my-service.local/metrics`, your prefix should be `/metrics`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheme
+    #   The client request header scheme to match on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteMatch AWS API Documentation
+    #
+    class HttpRouteMatch < Struct.new(
+      :headers,
+      :method,
+      :prefix,
+      :scheme)
+      include Aws::Structure
+    end
+
+    # Optional metadata that you apply to a resource to assist with
+    # categorization and organization. Each tag consists of a key and an
+    # optional value, both of which you define. Tag keys can have a maximum
+    # character length of 128 characters, and tag values can have a maximum
+    # length of 256 characters.
+    #
+    # @note When making an API call, you may pass TagRef
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that make up a tag. A `key` is a
+    #   general label that acts like a category for more specific tag
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that make up a tag. A `value`
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagRef AWS API Documentation
+    #
+    class TagRef < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # An object representing a service mesh returned by a list operation.
+    #
+    # @!attribute [rw] arn
+    #   The full Amazon Resource Name (ARN) of the service mesh.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshRef AWS API Documentation
+    #
+    class MeshRef < Struct.new(
+      :arn,
+      :mesh_name)
+      include Aws::Structure
+    end
+
+    # An object representing a virtual node or virtual router listener port
+    # mapping.
+    #
+    # @note When making an API call, you may pass PortMapping
+    #   data as a hash:
+    #
+    #       {
+    #         port: 1, # required
+    #         protocol: "http", # required, accepts http, tcp
+    #       }
+    #
+    # @!attribute [rw] port
+    #   The port used for the port mapping.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used for the port mapping.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/PortMapping AWS API Documentation
+    #
+    class PortMapping < Struct.new(
+      :port,
+      :protocol)
+      include Aws::Structure
+    end
+
+    # An object representing a service mesh returned by a describe
+    # operation.
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The associated metadata for the service mesh.
+    #   @return [Types::ResourceMetadata]
+    #
+    # @!attribute [rw] spec
+    #   The associated specification for the service mesh.
+    #   @return [Types::MeshSpec]
+    #
+    # @!attribute [rw] status
+    #   The status of the service mesh.
+    #   @return [Types::MeshStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshData AWS API Documentation
+    #
+    class MeshData < Struct.new(
+      :mesh_name,
+      :metadata,
+      :spec,
+      :status)
+      include Aws::Structure
+    end
+
+    # An object representing the status of a virtual router.
+    #
+    # @!attribute [rw] status
+    #   The current status of the virtual router.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterStatus AWS API Documentation
+    #
+    class VirtualRouterStatus < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListVirtualServices`
+    #   request. When the results of a `ListVirtualServices` request exceed
+    #   `limit`, you can use this value to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_services
+    #   The list of existing virtual services for the specified service
+    #   mesh.
+    #   @return [Array<Types::VirtualServiceRef>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualServicesOutput AWS API Documentation
+    #
+    class ListVirtualServicesOutput < Struct.new(
+      :next_token,
+      :virtual_services)
+      include Aws::Structure
+    end
+
+    # An object representing a target and its relative weight. Traffic is
+    # distributed across targets according to their relative weight. For
+    # example, a weighted target with a relative weight of 50 receives five
+    # times as much traffic as one with a relative weight of 10.
+    #
+    # @note When making an API call, you may pass WeightedTarget
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_node: "ResourceName", # required
+    #         weight: 1, # required
+    #       }
+    #
+    # @!attribute [rw] virtual_node
+    #   The virtual node to associate with the weighted target.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The relative weight of the weighted target.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/WeightedTarget AWS API Documentation
+    #
+    class WeightedTarget < Struct.new(
+      :virtual_node,
+      :weight)
+      include Aws::Structure
+    end
+
+    # An object representing the traffic distribution requirements for
+    # matched TCP requests.
+    #
+    # @note When making an API call, you may pass TcpRouteAction
+    #   data as a hash:
+    #
+    #       {
+    #         weighted_targets: [ # required
+    #           {
+    #             virtual_node: "ResourceName", # required
+    #             weight: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] weighted_targets
+    #   The targets that traffic is routed to when a request matches the
+    #   route. You can specify one or more targets and their relative
+    #   weights to distribute traffic with.
+    #   @return [Array<Types::WeightedTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRouteAction AWS API Documentation
+    #
+    class TcpRouteAction < Struct.new(
+      :weighted_targets)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeVirtualNodeInput
+    #   data as a hash:
+    #
+    #       {
+    #         mesh_name: "ResourceName", # required
+    #         virtual_node_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual node resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_node_name
+    #   The name of the virtual node to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualNodeInput AWS API Documentation
+    #
+    class DescribeVirtualNodeInput < Struct.new(
+      :mesh_name,
+      :virtual_node_name)
+      include Aws::Structure
+    end
+
+    # An object representing the current status of a route.
+    #
+    # @!attribute [rw] status
+    #   The current status for the route.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteStatus AWS API Documentation
+    #
+    class RouteStatus < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # An object representing a route returned by a list operation.
+    #
+    # @!attribute [rw] arn
+    #   The full Amazon Resource Name (ARN) for the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the route resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_name
+    #   The name of the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_router_name
+    #   The virtual router that the route is associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteRef AWS API Documentation
+    #
+    class RouteRef < Struct.new(
+      :arn,
+      :mesh_name,
+      :route_name,
+      :virtual_router_name)
+      include Aws::Structure
+    end
+
+    # An object representing a listener for a virtual node.
+    #
+    # @note When making an API call, you may pass Listener
+    #   data as a hash:
+    #
+    #       {
+    #         health_check: {
+    #           healthy_threshold: 1, # required
+    #           interval_millis: 1, # required
+    #           path: "String",
+    #           port: 1,
+    #           protocol: "http", # required, accepts http, tcp
+    #           timeout_millis: 1, # required
+    #           unhealthy_threshold: 1, # required
+    #         },
+    #         port_mapping: { # required
+    #           port: 1, # required
+    #           protocol: "http", # required, accepts http, tcp
+    #         },
+    #       }
+    #
+    # @!attribute [rw] health_check
+    #   The health check information for the listener.
+    #   @return [Types::HealthCheckPolicy]
+    #
+    # @!attribute [rw] port_mapping
+    #   The port mapping information for the listener.
+    #   @return [Types::PortMapping]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Listener AWS API Documentation
+    #
+    class Listener < Struct.new(
+      :health_check,
+      :port_mapping)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteVirtualNodeInput
+    #   data as a hash:
+    #
+    #       {
+    #         mesh_name: "ResourceName", # required
+    #         virtual_node_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to delete the virtual node in.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_node_name
+    #   The name of the virtual node to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualNodeInput AWS API Documentation
+    #
+    class DeleteVirtualNodeInput < Struct.new(
+      :mesh_name,
+      :virtual_node_name)
       include Aws::Structure
     end
 
     # An object representing a route returned by a describe operation.
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the route resides.
+    #   The name of the service mesh that the route resides in.
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -549,10 +2286,10 @@ module Aws::AppMesh
     #   @return [Types::RouteStatus]
     #
     # @!attribute [rw] virtual_router_name
-    #   The virtual router with which the route is associated.
+    #   The virtual router that the route is associated with.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/RouteData AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteData AWS API Documentation
     #
     class RouteData < Struct.new(
       :mesh_name,
@@ -564,322 +2301,318 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVirtualNodeInput
+    # @!attribute [rw] virtual_service
+    #   The virtual service that was deleted.
+    #   @return [Types::VirtualServiceData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualServiceOutput AWS API Documentation
+    #
+    class DeleteVirtualServiceOutput < Struct.new(
+      :virtual_service)
+      include Aws::Structure
+    end
+
+    # An object representing a virtual node service provider.
+    #
+    # @note When making an API call, you may pass VirtualNodeServiceProvider
     #   data as a hash:
     #
     #       {
-    #         client_token: "String",
-    #         mesh_name: "ResourceName", # required
-    #         spec: { # required
-    #           backends: ["ServiceName"],
-    #           listeners: [
-    #             {
-    #               health_check: {
-    #                 healthy_threshold: 1,
-    #                 interval_millis: 1,
-    #                 path: "String",
-    #                 port: 1,
-    #                 protocol: "http", # accepts http, tcp
-    #                 timeout_millis: 1,
-    #                 unhealthy_threshold: 1,
-    #               },
-    #               port_mapping: {
-    #                 port: 1,
-    #                 protocol: "http", # accepts http, tcp
-    #               },
-    #             },
-    #           ],
-    #           service_discovery: {
-    #             dns: {
-    #               service_name: "ServiceName",
-    #             },
-    #           },
-    #         },
     #         virtual_node_name: "ResourceName", # required
     #       }
     #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
-    #   underscores are allowed.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the virtual node resides.
-    #   @return [String]
-    #
-    # @!attribute [rw] spec
-    #   The new virtual node specification to apply. This overwrites the
-    #   existing data.
-    #   @return [Types::VirtualNodeSpec]
-    #
     # @!attribute [rw] virtual_node_name
-    #   The name of the virtual node to update.
+    #   The name of the virtual node that is acting as a service provider.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualNodeInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeServiceProvider AWS API Documentation
     #
-    class UpdateVirtualNodeInput < Struct.new(
-      :client_token,
-      :mesh_name,
-      :spec,
+    class VirtualNodeServiceProvider < Struct.new(
       :virtual_node_name)
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRouteInput
-    #   data as a hash:
+    # The request processing has failed because of an unknown error,
+    # exception, or failure.
     #
-    #       {
-    #         mesh_name: "ResourceName", # required
-    #         route_name: "ResourceName", # required
-    #         virtual_router_name: "ResourceName", # required
-    #       }
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to delete the route.
+    # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] route_name
-    #   The name of the route to delete.
-    #   @return [String]
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/InternalServerErrorException AWS API Documentation
     #
-    # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router in which to delete the route.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteRouteInput AWS API Documentation
-    #
-    class DeleteRouteInput < Struct.new(
-      :mesh_name,
-      :route_name,
-      :virtual_router_name)
+    class InternalServerErrorException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRoutesInput
+    # An object that represents a retry policy.
+    #
+    # @note When making an API call, you may pass HttpRetryPolicy
     #   data as a hash:
     #
     #       {
-    #         limit: 1,
-    #         mesh_name: "ResourceName", # required
-    #         next_token: "String",
-    #         virtual_router_name: "ResourceName", # required
+    #         http_retry_events: ["HttpRetryPolicyEvent"],
+    #         max_retries: 1, # required
+    #         per_retry_timeout: { # required
+    #           unit: "ms", # accepts ms, s
+    #           value: 1,
+    #         },
+    #         tcp_retry_events: ["connection-error"], # accepts connection-error
     #       }
     #
-    # @!attribute [rw] limit
-    #   The maximum number of mesh results returned by `ListRoutes` in
-    #   paginated output. When this parameter is used, `ListRoutes` only
-    #   returns `limit` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can
-    #   be seen by sending another `ListRoutes` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListRoutes` returns up to 100 results
-    #   and a `nextToken` value if applicable.
+    # @!attribute [rw] http_retry_events
+    #   Specify at least one of the following values.
+    #
+    #   * **server-error** – HTTP status codes 500, 501, 502, 503, 504, 505,
+    #     506, 507, 508, 510, and 511
+    #
+    #   * **gateway-error** – HTTP status codes 502, 503, and 504
+    #
+    #   * **client-error** – HTTP status code 409
+    #
+    #   * **stream-error** – Retry on refused stream
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_retries
+    #   The maximum number of retry attempts. If no value is specified, the
+    #   default is 1.
     #   @return [Integer]
     #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to list routes.
-    #   @return [String]
+    # @!attribute [rw] per_retry_timeout
+    #   An object that represents the retry duration.
+    #   @return [Types::Duration]
     #
-    # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListRoutes` request where `limit` was used and the results exceeded
-    #   the value of that parameter. Pagination continues from the end of
-    #   the previous results that returned the `nextToken` value.
-    #   @return [String]
+    # @!attribute [rw] tcp_retry_events
+    #   Specify a valid value.
+    #   @return [Array<String>]
     #
-    # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router in which to list routes.
-    #   @return [String]
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRetryPolicy AWS API Documentation
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListRoutesInput AWS API Documentation
-    #
-    class ListRoutesInput < Struct.new(
-      :limit,
-      :mesh_name,
-      :next_token,
-      :virtual_router_name)
+    class HttpRetryPolicy < Struct.new(
+      :http_retry_events,
+      :max_retries,
+      :per_retry_timeout,
+      :tcp_retry_events)
       include Aws::Structure
     end
 
-    # An object representing the HTTP routing specification for a route.
-    #
-    # @note When making an API call, you may pass HttpRoute
-    #   data as a hash:
-    #
-    #       {
-    #         action: {
-    #           weighted_targets: [
-    #             {
-    #               virtual_node: "ResourceName",
-    #               weight: 1,
-    #             },
-    #           ],
-    #         },
-    #         match: {
-    #           prefix: "String",
-    #         },
-    #       }
-    #
-    # @!attribute [rw] action
-    #   The action to take if a match is determined.
-    #   @return [Types::HttpRouteAction]
-    #
-    # @!attribute [rw] match
-    #   The criteria for determining an HTTP request match.
-    #   @return [Types::HttpRouteMatch]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/HttpRoute AWS API Documentation
-    #
-    class HttpRoute < Struct.new(
-      :action,
-      :match)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListRoutes` request.
-    #   When the results of a `ListRoutes` request exceed `limit`, this
-    #   value can be used to retrieve the next page of results. This value
-    #   is `null` when there are no more results to return.
-    #   @return [String]
-    #
-    # @!attribute [rw] routes
-    #   The list of existing routes for the specified service mesh and
-    #   virtual router.
-    #   @return [Array<Types::RouteRef>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListRoutesOutput AWS API Documentation
-    #
-    class ListRoutesOutput < Struct.new(
-      :next_token,
-      :routes)
-      include Aws::Structure
-    end
-
-    # An object representing the specification of a route.
-    #
-    # @note When making an API call, you may pass RouteSpec
-    #   data as a hash:
-    #
-    #       {
-    #         http_route: {
-    #           action: {
-    #             weighted_targets: [
-    #               {
-    #                 virtual_node: "ResourceName",
-    #                 weight: 1,
-    #               },
-    #             ],
-    #           },
-    #           match: {
-    #             prefix: "String",
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] http_route
-    #   The HTTP routing information for the route.
-    #   @return [Types::HttpRoute]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/RouteSpec AWS API Documentation
-    #
-    class RouteSpec < Struct.new(
-      :http_route)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DescribeVirtualNodeInput
+    # @note When making an API call, you may pass DescribeVirtualRouterInput
     #   data as a hash:
     #
     #       {
     #         mesh_name: "ResourceName", # required
-    #         virtual_node_name: "ResourceName", # required
+    #         virtual_router_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the virtual node resides.
-    #   @return [String]
-    #
-    # @!attribute [rw] virtual_node_name
-    #   The name of the virtual node to describe.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualNodeInput AWS API Documentation
-    #
-    class DescribeVirtualNodeInput < Struct.new(
-      :mesh_name,
-      :virtual_node_name)
-      include Aws::Structure
-    end
-
-    # An object representing a virtual router returned by a list operation.
-    #
-    # @!attribute [rw] arn
-    #   The full Amazon Resource Name (ARN) for the virtual router.
-    #   @return [String]
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the virtual router resides.
+    #   The name of the service mesh that the virtual router resides in.
     #   @return [String]
     #
     # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router.
+    #   The name of the virtual router to describe.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualRouterRef AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualRouterInput AWS API Documentation
     #
-    class VirtualRouterRef < Struct.new(
-      :arn,
+    class DescribeVirtualRouterInput < Struct.new(
       :mesh_name,
       :virtual_router_name)
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListVirtualNodes`
-    #   request. When the results of a `ListVirtualNodes` request exceed
-    #   `limit`, this value can be used to retrieve the next page of
-    #   results. This value is `null` when there are no more results to
-    #   return.
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
+    # You don't have permissions to perform this action.
+    #
+    # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] virtual_nodes
-    #   The list of existing virtual nodes for the specified service mesh.
-    #   @return [Array<Types::VirtualNodeRef>]
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ForbiddenException AWS API Documentation
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualNodesOutput AWS API Documentation
-    #
-    class ListVirtualNodesOutput < Struct.new(
-      :next_token,
-      :virtual_nodes)
+    class ForbiddenException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
-    # @!attribute [rw] virtual_node
-    #   The virtual node that was deleted.
-    #   @return [Types::VirtualNodeData]
+    # The request exceeds the maximum allowed number of tags allowed per
+    # resource. The current limit is 50 user tags per resource. You must
+    # reduce the number of tags in the request. None of the tags in this
+    # request were applied.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualNodeOutput AWS API Documentation
+    # @!attribute [rw] message
+    #   @return [String]
     #
-    class DeleteVirtualNodeOutput < Struct.new(
-      :virtual_node)
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVirtualRouterInput
+    # An object representing the method and value to match the header value
+    # sent with a request. Specify one match method.
+    #
+    # @note When making an API call, you may pass HeaderMatchMethod
+    #   data as a hash:
+    #
+    #       {
+    #         exact: "HeaderMatch",
+    #         prefix: "HeaderMatch",
+    #         range: {
+    #           end: 1, # required
+    #           start: 1, # required
+    #         },
+    #         regex: "HeaderMatch",
+    #         suffix: "HeaderMatch",
+    #       }
+    #
+    # @!attribute [rw] exact
+    #   The header value sent by the client must match the specified value
+    #   exactly.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The header value sent by the client must begin with the specified
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] range
+    #   The object that specifies the range of numbers that the header value
+    #   sent by the client must be included in.
+    #   @return [Types::MatchRange]
+    #
+    # @!attribute [rw] regex
+    #   The header value sent by the client must include the specified
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] suffix
+    #   The header value sent by the client must end with the specified
+    #   characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HeaderMatchMethod AWS API Documentation
+    #
+    class HeaderMatchMethod < Struct.new(
+      :exact,
+      :prefix,
+      :range,
+      :regex,
+      :suffix)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mesh
+    #   The service mesh that was deleted.
+    #   @return [Types::MeshData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteMeshOutput AWS API Documentation
+    #
+    class DeleteMeshOutput < Struct.new(
+      :mesh)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to add tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::TagRef>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateRouteInput
     #   data as a hash:
     #
     #       {
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
+    #         route_name: "ResourceName", # required
     #         spec: { # required
-    #           service_names: ["ServiceName"],
+    #           http_route: {
+    #             action: { # required
+    #               weighted_targets: [ # required
+    #                 {
+    #                   virtual_node: "ResourceName", # required
+    #                   weight: 1, # required
+    #                 },
+    #               ],
+    #             },
+    #             match: { # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
+    #               prefix: "String", # required
+    #               scheme: "http", # accepts http, https
+    #             },
+    #             retry_policy: {
+    #               http_retry_events: ["HttpRetryPolicyEvent"],
+    #               max_retries: 1, # required
+    #               per_retry_timeout: { # required
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               tcp_retry_events: ["connection-error"], # accepts connection-error
+    #             },
+    #           },
+    #           priority: 1,
+    #           tcp_route: {
+    #             action: { # required
+    #               weighted_targets: [ # required
+    #                 {
+    #                   virtual_node: "ResourceName", # required
+    #                   weight: 1, # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         virtual_router_name: "ResourceName", # required
     #       }
     #
@@ -893,247 +2626,120 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the virtual router resides.
-    #   @return [String]
-    #
-    # @!attribute [rw] spec
-    #   The new virtual router specification to apply. This overwrites the
-    #   existing data.
-    #   @return [Types::VirtualRouterSpec]
-    #
-    # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router to update.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualRouterInput AWS API Documentation
-    #
-    class UpdateVirtualRouterInput < Struct.new(
-      :client_token,
-      :mesh_name,
-      :spec,
-      :virtual_router_name)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DescribeRouteInput
-    #   data as a hash:
-    #
-    #       {
-    #         mesh_name: "ResourceName", # required
-    #         route_name: "ResourceName", # required
-    #         virtual_router_name: "ResourceName", # required
-    #       }
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the route resides.
+    #   The name of the service mesh to create the route in.
     #   @return [String]
     #
     # @!attribute [rw] route_name
-    #   The name of the route to describe.
+    #   The name to use for the route.
     #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The route specification to apply.
+    #   @return [Types::RouteSpec]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the route to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
     #
     # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router with which the route is associated.
+    #   The name of the virtual router in which to create the route.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeRouteInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateRouteInput AWS API Documentation
     #
-    class DescribeRouteInput < Struct.new(
+    class CreateRouteInput < Struct.new(
+      :client_token,
       :mesh_name,
       :route_name,
+      :spec,
+      :tags,
       :virtual_router_name)
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListVirtualRouters`
-    #   request. When the results of a `ListVirtualRouters` request exceed
-    #   `limit`, this value can be used to retrieve the next page of
-    #   results. This value is `null` when there are no more results to
-    #   return.
-    #   @return [String]
+    # An object representing the provider for a virtual service.
     #
-    # @!attribute [rw] virtual_routers
-    #   The list of existing virtual routers for the specified service mesh.
-    #   @return [Array<Types::VirtualRouterRef>]
+    # @note When making an API call, you may pass VirtualServiceProvider
+    #   data as a hash:
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualRoutersOutput AWS API Documentation
+    #       {
+    #         virtual_node: {
+    #           virtual_node_name: "ResourceName", # required
+    #         },
+    #         virtual_router: {
+    #           virtual_router_name: "ResourceName", # required
+    #         },
+    #       }
     #
-    class ListVirtualRoutersOutput < Struct.new(
-      :next_token,
-      :virtual_routers)
-      include Aws::Structure
-    end
-
     # @!attribute [rw] virtual_node
-    #   The full description of your virtual node following the create call.
-    #   @return [Types::VirtualNodeData]
+    #   The virtual node associated with a virtual service.
+    #   @return [Types::VirtualNodeServiceProvider]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualNodeOutput AWS API Documentation
-    #
-    class CreateVirtualNodeOutput < Struct.new(
-      :virtual_node)
-      include Aws::Structure
-    end
-
     # @!attribute [rw] virtual_router
-    #   The virtual router that was deleted.
-    #   @return [Types::VirtualRouterData]
+    #   The virtual router associated with a virtual service.
+    #   @return [Types::VirtualRouterServiceProvider]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualRouterOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceProvider AWS API Documentation
     #
-    class DeleteVirtualRouterOutput < Struct.new(
+    class VirtualServiceProvider < Struct.new(
+      :virtual_node,
       :virtual_router)
       include Aws::Structure
     end
 
-    # An object representing metadata for a resource.
+    # An object representing the AWS Cloud Map service discovery information
+    # for your virtual node.
     #
-    # @!attribute [rw] arn
-    #   The full Amazon Resource Name (ARN) for the resource.
-    #
-    #   <note markdown="1"> After you create a virtual node, set this value (either the full ARN
-    #   or the truncated resource name, for example,
-    #   `mesh/default/virtualNode/simpleapp`, as the
-    #   `APPMESH_VIRTUAL_NODE_NAME` environment variable for your task
-    #   group's Envoy proxy container in your task definition or pod spec.
-    #   This is then mapped to the `node.id` and `node.cluster` Envoy
-    #   parameters.
-    #
-    #    If you require your Envoy stats or tracing to use a different name,
-    #   you can override the `node.cluster` value that is set by
-    #   `APPMESH_VIRTUAL_NODE_NAME` with the `APPMESH_VIRTUAL_NODE_CLUSTER`
-    #   environment variable.
-    #
-    #    </note>
-    #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the cluster was
-    #   created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_updated_at
-    #   The Unix epoch timestamp in seconds for when the cluster was last
-    #   updated.
-    #   @return [Time]
-    #
-    # @!attribute [rw] uid
-    #   The unique identifier for the resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] version
-    #   The version of the resource. Resources are created at version 1, and
-    #   this version is incremented each time they are updated.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ResourceMetadata AWS API Documentation
-    #
-    class ResourceMetadata < Struct.new(
-      :arn,
-      :created_at,
-      :last_updated_at,
-      :uid,
-      :version)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass CreateMeshInput
+    # @note When making an API call, you may pass AwsCloudMapServiceDiscovery
     #   data as a hash:
     #
     #       {
-    #         client_token: "String",
-    #         mesh_name: "ResourceName", # required
+    #         attributes: [
+    #           {
+    #             key: "AwsCloudMapInstanceAttributeKey", # required
+    #             value: "AwsCloudMapInstanceAttributeValue", # required
+    #           },
+    #         ],
+    #         namespace_name: "AwsCloudMapName", # required
+    #         service_name: "AwsCloudMapName", # required
     #       }
     #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
-    #   underscores are allowed.
+    # @!attribute [rw] attributes
+    #   A string map that contains attributes with values that you can use
+    #   to filter instances by any custom attribute that you specified when
+    #   you registered the instance. Only instances that match all of the
+    #   specified key/value pairs will be returned.
+    #   @return [Array<Types::AwsCloudMapInstanceAttribute>]
     #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
+    # @!attribute [rw] namespace_name
+    #   The name of the AWS Cloud Map namespace to use.
     #   @return [String]
     #
-    # @!attribute [rw] mesh_name
-    #   The name to use for the service mesh.
+    # @!attribute [rw] service_name
+    #   The name of the AWS Cloud Map service to use.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateMeshInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapServiceDiscovery AWS API Documentation
     #
-    class CreateMeshInput < Struct.new(
-      :client_token,
-      :mesh_name)
+    class AwsCloudMapServiceDiscovery < Struct.new(
+      :attributes,
+      :namespace_name,
+      :service_name)
       include Aws::Structure
     end
 
-    # An object representing a virtual node listener port mapping.
+    # @!attribute [rw] virtual_service
+    #   A full description of the virtual service that was updated.
+    #   @return [Types::VirtualServiceData]
     #
-    # @note When making an API call, you may pass PortMapping
-    #   data as a hash:
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualServiceOutput AWS API Documentation
     #
-    #       {
-    #         port: 1,
-    #         protocol: "http", # accepts http, tcp
-    #       }
-    #
-    # @!attribute [rw] port
-    #   The port used for the port mapping.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] protocol
-    #   The protocol used for the port mapping.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/PortMapping AWS API Documentation
-    #
-    class PortMapping < Struct.new(
-      :port,
-      :protocol)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DeleteVirtualRouterInput
-    #   data as a hash:
-    #
-    #       {
-    #         mesh_name: "ResourceName", # required
-    #         virtual_router_name: "ResourceName", # required
-    #       }
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to delete the virtual router.
-    #   @return [String]
-    #
-    # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router to delete.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualRouterInput AWS API Documentation
-    #
-    class DeleteVirtualRouterInput < Struct.new(
-      :mesh_name,
-      :virtual_router_name)
-      include Aws::Structure
-    end
-
-    # An object representing the specification of a virtual router.
-    #
-    # @note When making an API call, you may pass VirtualRouterSpec
-    #   data as a hash:
-    #
-    #       {
-    #         service_names: ["ServiceName"],
-    #       }
-    #
-    # @!attribute [rw] service_names
-    #   The service mesh service names to associate with the virtual router.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualRouterSpec AWS API Documentation
-    #
-    class VirtualRouterSpec < Struct.new(
-      :service_names)
+    class UpdateVirtualServiceOutput < Struct.new(
+      :virtual_service)
       include Aws::Structure
     end
 
@@ -1146,16 +2752,54 @@ module Aws::AppMesh
     #         route_name: "ResourceName", # required
     #         spec: { # required
     #           http_route: {
-    #             action: {
-    #               weighted_targets: [
+    #             action: { # required
+    #               weighted_targets: [ # required
     #                 {
-    #                   virtual_node: "ResourceName",
-    #                   weight: 1,
+    #                   virtual_node: "ResourceName", # required
+    #                   weight: 1, # required
     #                 },
     #               ],
     #             },
-    #             match: {
-    #               prefix: "String",
+    #             match: { # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
+    #               prefix: "String", # required
+    #               scheme: "http", # accepts http, https
+    #             },
+    #             retry_policy: {
+    #               http_retry_events: ["HttpRetryPolicyEvent"],
+    #               max_retries: 1, # required
+    #               per_retry_timeout: { # required
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               tcp_retry_events: ["connection-error"], # accepts connection-error
+    #             },
+    #           },
+    #           priority: 1,
+    #           tcp_route: {
+    #             action: { # required
+    #               weighted_targets: [ # required
+    #                 {
+    #                   virtual_node: "ResourceName", # required
+    #                   weight: 1, # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         },
@@ -1172,7 +2816,7 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the route resides.
+    #   The name of the service mesh that the route resides in.
     #   @return [String]
     #
     # @!attribute [rw] route_name
@@ -1185,10 +2829,10 @@ module Aws::AppMesh
     #   @return [Types::RouteSpec]
     #
     # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router with which the route is associated.
+    #   The name of the virtual router that the route is associated with.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateRouteInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateRouteInput AWS API Documentation
     #
     class UpdateRouteInput < Struct.new(
       :client_token,
@@ -1196,6 +2840,283 @@ module Aws::AppMesh
       :route_name,
       :spec,
       :virtual_router_name)
+      include Aws::Structure
+    end
+
+    # An object representing the status of a service mesh.
+    #
+    # @!attribute [rw] status
+    #   The current mesh status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshStatus AWS API Documentation
+    #
+    class MeshStatus < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateVirtualNodeInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         mesh_name: "ResourceName", # required
+    #         spec: { # required
+    #           backends: [
+    #             {
+    #               virtual_service: {
+    #                 virtual_service_name: "ServiceName", # required
+    #               },
+    #             },
+    #           ],
+    #           listeners: [
+    #             {
+    #               health_check: {
+    #                 healthy_threshold: 1, # required
+    #                 interval_millis: 1, # required
+    #                 path: "String",
+    #                 port: 1,
+    #                 protocol: "http", # required, accepts http, tcp
+    #                 timeout_millis: 1, # required
+    #                 unhealthy_threshold: 1, # required
+    #               },
+    #               port_mapping: { # required
+    #                 port: 1, # required
+    #                 protocol: "http", # required, accepts http, tcp
+    #               },
+    #             },
+    #           ],
+    #           logging: {
+    #             access_log: {
+    #               file: {
+    #                 path: "FilePath", # required
+    #               },
+    #             },
+    #           },
+    #           service_discovery: {
+    #             aws_cloud_map: {
+    #               attributes: [
+    #                 {
+    #                   key: "AwsCloudMapInstanceAttributeKey", # required
+    #                   value: "AwsCloudMapInstanceAttributeValue", # required
+    #                 },
+    #               ],
+    #               namespace_name: "AwsCloudMapName", # required
+    #               service_name: "AwsCloudMapName", # required
+    #             },
+    #             dns: {
+    #               hostname: "Hostname", # required
+    #             },
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         virtual_node_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to create the virtual node in.
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The virtual node specification to apply.
+    #   @return [Types::VirtualNodeSpec]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the virtual node to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
+    #
+    # @!attribute [rw] virtual_node_name
+    #   The name to use for the virtual node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualNodeInput AWS API Documentation
+    #
+    class CreateVirtualNodeInput < Struct.new(
+      :client_token,
+      :mesh_name,
+      :spec,
+      :tags,
+      :virtual_node_name)
+      include Aws::Structure
+    end
+
+    # The specified resource doesn't exist. Check your request syntax and
+    # try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An object representing the specification of a route.
+    #
+    # @note When making an API call, you may pass RouteSpec
+    #   data as a hash:
+    #
+    #       {
+    #         http_route: {
+    #           action: { # required
+    #             weighted_targets: [ # required
+    #               {
+    #                 virtual_node: "ResourceName", # required
+    #                 weight: 1, # required
+    #               },
+    #             ],
+    #           },
+    #           match: { # required
+    #             headers: [
+    #               {
+    #                 invert: false,
+    #                 match: {
+    #                   exact: "HeaderMatch",
+    #                   prefix: "HeaderMatch",
+    #                   range: {
+    #                     end: 1, # required
+    #                     start: 1, # required
+    #                   },
+    #                   regex: "HeaderMatch",
+    #                   suffix: "HeaderMatch",
+    #                 },
+    #                 name: "HeaderName", # required
+    #               },
+    #             ],
+    #             method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
+    #             prefix: "String", # required
+    #             scheme: "http", # accepts http, https
+    #           },
+    #           retry_policy: {
+    #             http_retry_events: ["HttpRetryPolicyEvent"],
+    #             max_retries: 1, # required
+    #             per_retry_timeout: { # required
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #             tcp_retry_events: ["connection-error"], # accepts connection-error
+    #           },
+    #         },
+    #         priority: 1,
+    #         tcp_route: {
+    #           action: { # required
+    #             weighted_targets: [ # required
+    #               {
+    #                 virtual_node: "ResourceName", # required
+    #                 weight: 1, # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] http_route
+    #   The HTTP routing information for the route.
+    #   @return [Types::HttpRoute]
+    #
+    # @!attribute [rw] priority
+    #   The priority for the route. Routes are matched based on the
+    #   specified value, where 0 is the highest priority.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tcp_route
+    #   The TCP routing information for the route.
+    #   @return [Types::TcpRoute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteSpec AWS API Documentation
+    #
+    class RouteSpec < Struct.new(
+      :http_route,
+      :priority,
+      :tcp_route)
+      include Aws::Structure
+    end
+
+    # An object representing the HTTP routing specification for a route.
+    #
+    # @note When making an API call, you may pass HttpRoute
+    #   data as a hash:
+    #
+    #       {
+    #         action: { # required
+    #           weighted_targets: [ # required
+    #             {
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         match: { # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
+    #           prefix: "String", # required
+    #           scheme: "http", # accepts http, https
+    #         },
+    #         retry_policy: {
+    #           http_retry_events: ["HttpRetryPolicyEvent"],
+    #           max_retries: 1, # required
+    #           per_retry_timeout: { # required
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to take if a match is determined.
+    #   @return [Types::HttpRouteAction]
+    #
+    # @!attribute [rw] match
+    #   The criteria for determining an HTTP request match.
+    #   @return [Types::HttpRouteMatch]
+    #
+    # @!attribute [rw] retry_policy
+    #   An object that represents a retry policy.
+    #   @return [Types::HttpRetryPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRoute AWS API Documentation
+    #
+    class HttpRoute < Struct.new(
+      :action,
+      :match,
+      :retry_policy)
       include Aws::Structure
     end
 
@@ -1210,499 +3131,241 @@ module Aws::AppMesh
     #   The name of the service mesh to describe.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeMeshInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeMeshInput AWS API Documentation
     #
     class DescribeMeshInput < Struct.new(
       :mesh_name)
       include Aws::Structure
     end
 
-    # @!attribute [rw] mesh
-    #   The full description of your service mesh.
-    #   @return [Types::MeshData]
+    # An object representing the specification of a service mesh.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeMeshOutput AWS API Documentation
-    #
-    class DescribeMeshOutput < Struct.new(
-      :mesh)
-      include Aws::Structure
-    end
-
-    # An object representing a virtual router returned by a describe
-    # operation.
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the virtual router resides.
-    #   @return [String]
-    #
-    # @!attribute [rw] metadata
-    #   The associated metadata for the virtual router.
-    #   @return [Types::ResourceMetadata]
-    #
-    # @!attribute [rw] spec
-    #   The specifications of the virtual router.
-    #   @return [Types::VirtualRouterSpec]
-    #
-    # @!attribute [rw] status
-    #   The current status of the virtual router.
-    #   @return [Types::VirtualRouterStatus]
-    #
-    # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualRouterData AWS API Documentation
-    #
-    class VirtualRouterData < Struct.new(
-      :mesh_name,
-      :metadata,
-      :spec,
-      :status,
-      :virtual_router_name)
-      include Aws::Structure
-    end
-
-    # An object representing a listener for a virtual node.
-    #
-    # @note When making an API call, you may pass Listener
+    # @note When making an API call, you may pass MeshSpec
     #   data as a hash:
     #
     #       {
-    #         health_check: {
-    #           healthy_threshold: 1,
-    #           interval_millis: 1,
-    #           path: "String",
-    #           port: 1,
-    #           protocol: "http", # accepts http, tcp
-    #           timeout_millis: 1,
-    #           unhealthy_threshold: 1,
-    #         },
-    #         port_mapping: {
-    #           port: 1,
-    #           protocol: "http", # accepts http, tcp
+    #         egress_filter: {
+    #           type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
     #         },
     #       }
     #
-    # @!attribute [rw] health_check
-    #   The health check information for the listener.
+    # @!attribute [rw] egress_filter
+    #   The egress filter rules for the service mesh.
+    #   @return [Types::EgressFilter]
     #
-    #   <note markdown="1"> Listener health checks are not available during the App Mesh
-    #   preview.
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshSpec AWS API Documentation
     #
-    #    </note>
-    #   @return [Types::HealthCheckPolicy]
-    #
-    # @!attribute [rw] port_mapping
-    #   The port mapping information for the listener.
-    #   @return [Types::PortMapping]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/Listener AWS API Documentation
-    #
-    class Listener < Struct.new(
-      :health_check,
-      :port_mapping)
+    class MeshSpec < Struct.new(
+      :egress_filter)
       include Aws::Structure
     end
 
-    # An object representing the health check policy for a virtual node's
-    # listener.
+    # @!attribute [rw] virtual_service
+    #   The full description of your virtual service following the create
+    #   call.
+    #   @return [Types::VirtualServiceData]
     #
-    # <note markdown="1"> Listener health checks are not available during the App Mesh preview.
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualServiceOutput AWS API Documentation
     #
-    #  </note>
+    class CreateVirtualServiceOutput < Struct.new(
+      :virtual_service)
+      include Aws::Structure
+    end
+
+    # An object representing an access log file.
     #
-    # @note When making an API call, you may pass HealthCheckPolicy
+    # @note When making an API call, you may pass FileAccessLog
     #   data as a hash:
     #
     #       {
-    #         healthy_threshold: 1,
-    #         interval_millis: 1,
-    #         path: "String",
-    #         port: 1,
-    #         protocol: "http", # accepts http, tcp
-    #         timeout_millis: 1,
-    #         unhealthy_threshold: 1,
+    #         path: "FilePath", # required
     #       }
-    #
-    # @!attribute [rw] healthy_threshold
-    #   The number of consecutive successful health checks that must occur
-    #   before declaring listener healthy.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] interval_millis
-    #   The time period in milliseconds between each health check execution.
-    #   @return [Integer]
     #
     # @!attribute [rw] path
-    #   The destination path for the health check request.
+    #   The file path to write access logs to. You can use `/dev/stdout` to
+    #   send access logs to standard out and configure your Envoy container
+    #   to use a log driver, such as `awslogs`, to export the access logs to
+    #   a log storage service such as Amazon CloudWatch Logs. You can also
+    #   specify a path in the Envoy container's file system to write the
+    #   files to disk.
+    #
+    #   <note markdown="1"> The Envoy process must have write permissions to the path that you
+    #   specify here. Otherwise, Envoy fails to bootstrap properly.
+    #
+    #    </note>
     #   @return [String]
     #
-    # @!attribute [rw] port
-    #   The destination port for the health check request.
-    #   @return [Integer]
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/FileAccessLog AWS API Documentation
     #
-    # @!attribute [rw] protocol
-    #   The protocol for the health check request.
-    #   @return [String]
-    #
-    # @!attribute [rw] timeout_millis
-    #   The amount of time to wait when receiving a response from the health
-    #   check, in milliseconds.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] unhealthy_threshold
-    #   The number of consecutive failed health checks that must occur
-    #   before declaring a virtual node unhealthy.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/HealthCheckPolicy AWS API Documentation
-    #
-    class HealthCheckPolicy < Struct.new(
-      :healthy_threshold,
-      :interval_millis,
-      :path,
-      :port,
-      :protocol,
-      :timeout_millis,
-      :unhealthy_threshold)
+    class FileAccessLog < Struct.new(
+      :path)
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVirtualRoutersInput
+    # An object representing a virtual node service provider.
+    #
+    # @note When making an API call, you may pass VirtualRouterServiceProvider
     #   data as a hash:
     #
     #       {
-    #         limit: 1,
-    #         mesh_name: "ResourceName", # required
-    #         next_token: "String",
-    #       }
-    #
-    # @!attribute [rw] limit
-    #   The maximum number of mesh results returned by `ListVirtualRouters`
-    #   in paginated output. When this parameter is used,
-    #   `ListVirtualRouters` only returns `limit` results in a single page
-    #   along with a `nextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another
-    #   `ListVirtualRouters` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
-    #   then `ListVirtualRouters` returns up to 100 results and a
-    #   `nextToken` value if applicable.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to list virtual routers.
-    #   @return [String]
-    #
-    # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListVirtualRouters` request where `limit` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualRoutersInput AWS API Documentation
-    #
-    class ListVirtualRoutersInput < Struct.new(
-      :limit,
-      :mesh_name,
-      :next_token)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass CreateVirtualNodeInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "String",
-    #         mesh_name: "ResourceName", # required
-    #         spec: { # required
-    #           backends: ["ServiceName"],
-    #           listeners: [
-    #             {
-    #               health_check: {
-    #                 healthy_threshold: 1,
-    #                 interval_millis: 1,
-    #                 path: "String",
-    #                 port: 1,
-    #                 protocol: "http", # accepts http, tcp
-    #                 timeout_millis: 1,
-    #                 unhealthy_threshold: 1,
-    #               },
-    #               port_mapping: {
-    #                 port: 1,
-    #                 protocol: "http", # accepts http, tcp
-    #               },
-    #             },
-    #           ],
-    #           service_discovery: {
-    #             dns: {
-    #               service_name: "ServiceName",
-    #             },
-    #           },
-    #         },
-    #         virtual_node_name: "ResourceName", # required
-    #       }
-    #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
-    #   underscores are allowed.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to create the virtual node.
-    #   @return [String]
-    #
-    # @!attribute [rw] spec
-    #   The virtual node specification to apply.
-    #   @return [Types::VirtualNodeSpec]
-    #
-    # @!attribute [rw] virtual_node_name
-    #   The name to use for the virtual node.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualNodeInput AWS API Documentation
-    #
-    class CreateVirtualNodeInput < Struct.new(
-      :client_token,
-      :mesh_name,
-      :spec,
-      :virtual_node_name)
-      include Aws::Structure
-    end
-
-    # An object representing a service mesh returned by a describe
-    # operation.
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh.
-    #   @return [String]
-    #
-    # @!attribute [rw] metadata
-    #   The associated metadata for the service mesh.
-    #   @return [Types::ResourceMetadata]
-    #
-    # @!attribute [rw] status
-    #   The status of the service mesh.
-    #   @return [Types::MeshStatus]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/MeshData AWS API Documentation
-    #
-    class MeshData < Struct.new(
-      :mesh_name,
-      :metadata,
-      :status)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DeleteMeshInput
-    #   data as a hash:
-    #
-    #       {
-    #         mesh_name: "ResourceName", # required
-    #       }
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh to delete.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteMeshInput AWS API Documentation
-    #
-    class DeleteMeshInput < Struct.new(
-      :mesh_name)
-      include Aws::Structure
-    end
-
-    # An object representing the requirements for a route to match HTTP
-    # requests for a virtual router.
-    #
-    # @note When making an API call, you may pass HttpRouteMatch
-    #   data as a hash:
-    #
-    #       {
-    #         prefix: "String",
-    #       }
-    #
-    # @!attribute [rw] prefix
-    #   Specifies the path with which to match requests. This parameter must
-    #   always start with `/`, which by itself matches all requests to the
-    #   virtual router service name. You can also match for path-based
-    #   routing of requests. For example, if your virtual router service
-    #   name is `my-service.local`, and you want the route to match requests
-    #   to `my-service.local/metrics`, then your prefix should be
-    #   `/metrics`.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/HttpRouteMatch AWS API Documentation
-    #
-    class HttpRouteMatch < Struct.new(
-      :prefix)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] route
-    #   The route that was deleted.
-    #   @return [Types::RouteData]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteRouteOutput AWS API Documentation
-    #
-    class DeleteRouteOutput < Struct.new(
-      :route)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass CreateRouteInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "String",
-    #         mesh_name: "ResourceName", # required
-    #         route_name: "ResourceName", # required
-    #         spec: { # required
-    #           http_route: {
-    #             action: {
-    #               weighted_targets: [
-    #                 {
-    #                   virtual_node: "ResourceName",
-    #                   weight: 1,
-    #                 },
-    #               ],
-    #             },
-    #             match: {
-    #               prefix: "String",
-    #             },
-    #           },
-    #         },
     #         virtual_router_name: "ResourceName", # required
     #       }
     #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
-    #   underscores are allowed.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to create the route.
-    #   @return [String]
-    #
-    # @!attribute [rw] route_name
-    #   The name to use for the route.
-    #   @return [String]
-    #
-    # @!attribute [rw] spec
-    #   The route specification to apply.
-    #   @return [Types::RouteSpec]
-    #
     # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router in which to create the route.
+    #   The name of the virtual router that is acting as a service provider.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateRouteInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterServiceProvider AWS API Documentation
     #
-    class CreateRouteInput < Struct.new(
-      :client_token,
-      :mesh_name,
-      :route_name,
-      :spec,
+    class VirtualRouterServiceProvider < Struct.new(
       :virtual_router_name)
       include Aws::Structure
     end
 
-    # An object representing the current status of the virtual node.
-    #
-    # @!attribute [rw] status
-    #   The current status of the virtual node.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualNodeStatus AWS API Documentation
-    #
-    class VirtualNodeStatus < Struct.new(
-      :status)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass ListVirtualNodesInput
+    # @note When making an API call, you may pass DeleteVirtualServiceInput
     #   data as a hash:
     #
     #       {
-    #         limit: 1,
     #         mesh_name: "ResourceName", # required
-    #         next_token: "String",
+    #         virtual_service_name: "ServiceName", # required
     #       }
     #
-    # @!attribute [rw] limit
-    #   The maximum number of mesh results returned by `ListVirtualNodes` in
-    #   paginated output. When this parameter is used, `ListVirtualNodes`
-    #   only returns `limit` results in a single page along with a
-    #   `nextToken` response element. The remaining results of the initial
-    #   request can be seen by sending another `ListVirtualNodes` request
-    #   with the returned `nextToken` value. This value can be between 1 and
-    #   100. If this parameter is not used, then `ListVirtualNodes` returns
-    #   up to 100 results and a `nextToken` value if applicable.
-    #   @return [Integer]
-    #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to list virtual nodes.
+    #   The name of the service mesh to delete the virtual service in.
     #   @return [String]
     #
-    # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListVirtualNodes` request where `limit` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    # @!attribute [rw] virtual_service_name
+    #   The name of the virtual service to delete.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualNodesInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualServiceInput AWS API Documentation
     #
-    class ListVirtualNodesInput < Struct.new(
-      :limit,
+    class DeleteVirtualServiceInput < Struct.new(
       :mesh_name,
-      :next_token)
+      :virtual_service_name)
       include Aws::Structure
     end
 
-    # An object representing a route returned by a list operation.
-    #
-    # @!attribute [rw] arn
-    #   The full Amazon Resource Name (ARN) for the route.
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListTagsForResource`
+    #   request. When the results of a `ListTagsForResource` request exceed
+    #   `limit`, you can use this value to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
     #   @return [String]
     #
-    # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which the route resides.
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::TagRef>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :next_token,
+      :tags)
+      include Aws::Structure
+    end
+
+    # An object representing the service discovery information for a virtual
+    # node.
+    #
+    # @note When making an API call, you may pass ServiceDiscovery
+    #   data as a hash:
+    #
+    #       {
+    #         aws_cloud_map: {
+    #           attributes: [
+    #             {
+    #               key: "AwsCloudMapInstanceAttributeKey", # required
+    #               value: "AwsCloudMapInstanceAttributeValue", # required
+    #             },
+    #           ],
+    #           namespace_name: "AwsCloudMapName", # required
+    #           service_name: "AwsCloudMapName", # required
+    #         },
+    #         dns: {
+    #           hostname: "Hostname", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] aws_cloud_map
+    #   Specifies any AWS Cloud Map information for the virtual node.
+    #   @return [Types::AwsCloudMapServiceDiscovery]
+    #
+    # @!attribute [rw] dns
+    #   Specifies the DNS information for the virtual node.
+    #   @return [Types::DnsServiceDiscovery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ServiceDiscovery AWS API Documentation
+    #
+    class ServiceDiscovery < Struct.new(
+      :aws_cloud_map,
+      :dns)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListVirtualNodes`
+    #   request. When the results of a `ListVirtualNodes` request exceed
+    #   `limit`, you can use this value to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
     #   @return [String]
     #
-    # @!attribute [rw] route_name
-    #   The name of the route.
+    # @!attribute [rw] virtual_nodes
+    #   The list of existing virtual nodes for the specified service mesh.
+    #   @return [Array<Types::VirtualNodeRef>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualNodesOutput AWS API Documentation
+    #
+    class ListVirtualNodesOutput < Struct.new(
+      :next_token,
+      :virtual_nodes)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to delete tags from.
     #   @return [String]
     #
-    # @!attribute [rw] virtual_router_name
-    #   The virtual router with which the route is associated.
-    #   @return [String]
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/RouteRef AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UntagResourceInput AWS API Documentation
     #
-    class RouteRef < Struct.new(
-      :arn,
-      :mesh_name,
-      :route_name,
-      :virtual_router_name)
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_router
+    #   The virtual router that was deleted.
+    #   @return [Types::VirtualRouterData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualRouterOutput AWS API Documentation
+    #
+    class DeleteVirtualRouterOutput < Struct.new(
+      :virtual_router)
       include Aws::Structure
     end
 
     # @!attribute [rw] virtual_node
-    #   A full description of the virtual node that was updated.
+    #   The virtual node that was deleted.
     #   @return [Types::VirtualNodeData]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualNodeOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualNodeOutput AWS API Documentation
     #
-    class UpdateVirtualNodeOutput < Struct.new(
+    class DeleteVirtualNodeOutput < Struct.new(
       :virtual_node)
       include Aws::Structure
     end

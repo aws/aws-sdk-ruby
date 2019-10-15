@@ -13,32 +13,29 @@ module Aws
       !!credentials && credentials.set?
     end
 
-    # @deprecated Deprecated in 2.1.0. This method is subject to errors
-    #   from a race condition when called against refreshable credential
-    #   objects. Will be removed in 2.2.0.
+    # @deprecated This method is subject to errors from a race condition when
+    # called against refreshable credential objects. This will be removed.
     # @see #credentials
     def access_key_id
       credentials ? credentials.access_key_id : nil
     end
-    deprecated(:access_key_id, use: '#credentials')
+    deprecated(:access_key_id, use: '#credentials', version: '3.75')
 
-    # @deprecated Deprecated in 2.1.0. This method is subject to errors
-    #   from a race condition when called against refreshable credential
-    #   objects. Will be removed in 2.2.0.
+    # @deprecated This method is subject to errors from a race condition when
+    # called against refreshable credential objects. This will be removed.
     # @see #credentials
     def secret_access_key
       credentials ? credentials.secret_access_key : nil
     end
-    deprecated(:secret_access_key, use: '#credentials')
+    deprecated(:secret_access_key, use: '#credentials', version: '3.75')
 
-    # @deprecated Deprecated in 2.1.0. This method is subject to errors
-    #   from a race condition when called against refreshable credential
-    #   objects. Will be removed in 2.2.0.
+    # @deprecated This method is subject to errors from a race condition when
+    # called against refreshable credential objects. This will be removed.
     # @see #credentials
     def session_token
       credentials ? credentials.session_token : nil
     end
-    deprecated(:session_token, use: '#credentials')
+    deprecated(:session_token, use: '#credentials', version: '3.75')
 
   end
 end

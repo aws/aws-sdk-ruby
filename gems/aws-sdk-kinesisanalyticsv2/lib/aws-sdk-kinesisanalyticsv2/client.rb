@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::KinesisAnalyticsV2
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::KinesisAnalyticsV2
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -208,6 +214,49 @@ module Aws::KinesisAnalyticsV2
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -628,14 +677,9 @@ module Aws::KinesisAnalyticsV2
     # about creating a Kinesis Data Analytics application, see [Creating an
     # Application][1].
     #
-    # <note markdown="1"> SQL is not enabled for this private beta release. Using SQL parameters
-    # (such as SqlApplicationConfiguration) will result in an error.
-    #
-    #  </note>
     #
     #
-    #
-    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/Java/creating-app.html
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html
     #
     # @option params [required, String] :application_name
     #   The name of your application (for example, `sample-app`).
@@ -645,7 +689,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [required, String] :runtime_environment
     #   The runtime environment for the application (`SQL-1.0` or
-    #   `JAVA-8-FLINK-1.5`).
+    #   `FLINK-1_6`).
     #
     # @option params [required, String] :service_execution_role
     #   The IAM role used by the application to access Kinesis data streams,
@@ -658,6 +702,18 @@ module Aws::KinesisAnalyticsV2
     # @option params [Array<Types::CloudWatchLoggingOption>] :cloud_watch_logging_options
     #   Use this parameter to configure an Amazon CloudWatch log stream to
     #   monitor application configuration errors.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of one or more tags to assign to the application. A tag is a
+    #   key-value pair that identifies an application. Note that the maximum
+    #   number of application tags includes system tags. The maximum number of
+    #   user-defined application tags is 50. For more information, see [Using
+    #   Cost Allocation Tags][1] in the *AWS Billing and Cost Management
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
     #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -810,6 +866,12 @@ module Aws::KinesisAnalyticsV2
     #     cloud_watch_logging_options: [
     #       {
     #         log_stream_arn: "LogStreamARN", # required
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -1525,14 +1587,39 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
+    # Retrieves the list of key-value tags assigned to the application.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the application for which to retrieve tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "KinesisAnalyticsARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Starts the specified Amazon Kinesis Data Analytics application. After
     # creating an application, you must exclusively call this operation to
     # start your application.
-    #
-    # <note markdown="1"> SQL is not enabled for this private beta. Using SQL parameters (such
-    # as RunConfiguration$SqlRunConfigurations) will result in an error.
-    #
-    #  </note>
     #
     # @option params [required, String] :application_name
     #   The name of the application.
@@ -1596,17 +1683,72 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
+    # Adds one or more key-value tags to a Kinesis Analytics application.
+    # Note that the maximum number of application tags includes system tags.
+    # The maximum number of user-defined application tags is 50.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the application to assign the tags.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The key-value tags to assign to the application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "KinesisAnalyticsARN", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from a Kinesis Analytics application.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the Kinesis Analytics application from which to remove the
+    #   tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of keys of tags to remove from the specified application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "KinesisAnalyticsARN", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates an existing Amazon Kinesis Data Analytics application. Using
     # this operation, you can update application code, input configuration,
     # and output configuration.
     #
     # Kinesis Data Analytics updates the `ApplicationVersionId` each time
     # you update your application.
-    #
-    # <note markdown="1"> SQL is not enabled for this private beta. Using SQL parameters (such
-    # as SqlApplicationConfigurationUpdate) will result in an error.
-    #
-    #  </note>
     #
     # @option params [required, String] :application_name
     #   The name of the application to update.
@@ -1906,7 +2048,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

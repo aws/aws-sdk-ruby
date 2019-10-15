@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::OpsWorksCM
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::OpsWorksCM
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -208,6 +214,49 @@ module Aws::OpsWorksCM
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -410,7 +459,7 @@ module Aws::OpsWorksCM
     #
     # @option params [String] :engine
     #   The configuration management engine to use. Valid values include
-    #   `Chef` and `Puppet`.
+    #   `ChefAutomate` and `Puppet`.
     #
     # @option params [String] :engine_model
     #   The engine model of the server. Valid values in this release include
@@ -426,26 +475,33 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a Chef createServer request:**
     #
-    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
-    #     stored by AWS OpsWorks for Chef Automate. This private key is
-    #     required to access the Chef API. When no CHEF\_PIVOTAL\_KEY is set,
-    #     one is generated and returned in the response.
+    #   * `CHEF_AUTOMATE_PIVOTAL_KEY`\: A base64-encoded RSA public key. The
+    #     corresponding private key is required to access the Chef API. When
+    #     no CHEF\_AUTOMATE\_PIVOTAL\_KEY is set, a private key is generated
+    #     and returned in the response.
     #
-    #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the administrative
-    #     user in the Chef Automate GUI. The password length is a minimum of
-    #     eight characters, and a maximum of 32. The password can contain
-    #     letters, numbers, and special characters (!/@#$%^&amp;+=\_). The
-    #     password must contain at least one lower case letter, one upper case
-    #     letter, one number, and one special character. When no
-    #     CHEF\_DELIVERY\_ADMIN\_PASSWORD is set, one is generated and
-    #     returned in the response.
+    #   * `CHEF_AUTOMATE_ADMIN_PASSWORD`\: The password for the administrative
+    #     user in the Chef Automate web-based dashboard. The password length
+    #     is a minimum of eight characters, and a maximum of 32. The password
+    #     can contain letters, numbers, and special characters
+    #     (!/@#$%^&amp;+=\_). The password must contain at least one lower
+    #     case letter, one upper case letter, one number, and one special
+    #     character. When no CHEF\_AUTOMATE\_ADMIN\_PASSWORD is set, one is
+    #     generated and returned in the response.
     #
     #   **Attributes accepted in a Puppet createServer request:**
     #
     #   * `PUPPET_ADMIN_PASSWORD`\: To work with the Puppet Enterprise
     #     console, a password must use ASCII characters.
     #
-    #   ^
+    #   * `PUPPET_R10K_REMOTE`\: The r10k remote is the URL of your control
+    #     repository (for example,
+    #     ssh://git@your.git-repo.com:user/control-repo.git). Specifying an
+    #     r10k remote opens TCP port 8170.
+    #
+    #   * `PUPPET_R10K_PRIVATE_KEY`\: If you are using a private Git
+    #     repository, add PUPPET\_R10K\_PRIVATE\_KEY to specify a PEM-encoded
+    #     private SSH key.
     #
     # @option params [Integer] :backup_retention_count
     #   The number of automated backups that you want to keep. Whenever a new
@@ -468,9 +524,7 @@ module Aws::OpsWorksCM
     #   instance profile you need.
     #
     # @option params [required, String] :instance_type
-    #   The Amazon EC2 instance type to use. For example, `m4.large`.
-    #   Recommended instance types include `t2.medium` and greater, `m4.*`, or
-    #   `c4.xlarge` and greater.
+    #   The Amazon EC2 instance type to use. For example, `m5.large`.
     #
     # @option params [String] :key_pair
     #   The Amazon EC2 key pair to set for the instance. This parameter is
@@ -542,7 +596,7 @@ module Aws::OpsWorksCM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
     # @option params [String] :backup_id
     #   If you specify this field, AWS OpsWorks CM creates the server by using
@@ -681,8 +735,7 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Describes your account attributes, and creates requests to increase
-    # limits before they are reached or exceeded.
+    # Describes your OpsWorks-CM account attributes.
     #
     # This operation is synchronous.
     #
@@ -1031,27 +1084,34 @@ module Aws::OpsWorksCM
     # DELETING.
     #
     # @option params [required, String] :export_attribute_name
-    #   The name of the export attribute. Currently supported export attribute
-    #   is "Userdata" which exports a userdata script filled out with
-    #   parameters provided in the `InputAttributes` list.
+    #   The name of the export attribute. Currently, the supported export
+    #   attribute is `Userdata`. This exports a user data script that includes
+    #   parameters and values provided in the `InputAttributes` list.
     #
     # @option params [required, String] :server_name
-    #   The name of the Server to which the attribute is being exported from
+    #   The name of the server from which you are exporting the attribute.
     #
     # @option params [Array<Types::EngineAttribute>] :input_attributes
-    #   The list of engine attributes. The list type is `EngineAttribute`.
-    #   `EngineAttribute` is a pair of attribute name and value. For
-    #   `ExportAttributeName` "Userdata", currently supported input
-    #   attribute names are: - "RunList": For Chef, an ordered list of roles
-    #   and/or recipes that are run in the exact order. For Puppet, this
-    #   parameter is ignored. - "OrganizationName": For Chef, an
-    #   organization name. AWS OpsWorks for Chef Server always creates the
-    #   organization "default". For Puppet, this parameter is ignored. -
-    #   "NodeEnvironment": For Chef, a node environment (eg. development,
-    #   staging, onebox). For Puppet, this parameter is ignored. -
-    #   "NodeClientVersion": For Chef, version of Chef Engine (3 numbers
-    #   separated by dots, eg. "13.8.5"). If empty, it uses the latest one.
-    #   For Puppet, this parameter is ignored.
+    #   The list of engine attributes. The list type is `EngineAttribute`. An
+    #   `EngineAttribute` list item is a pair that includes an attribute name
+    #   and its value. For the `Userdata` ExportAttributeName, the following
+    #   are supported engine attribute names.
+    #
+    #   * **RunList** In Chef, a list of roles or recipes that are run in the
+    #     specified order. In Puppet, this parameter is ignored.
+    #
+    #   * **OrganizationName** In Chef, an organization name. AWS OpsWorks for
+    #     Chef Automate always creates the organization `default`. In Puppet,
+    #     this parameter is ignored.
+    #
+    #   * **NodeEnvironment** In Chef, a node environment (for example,
+    #     development, staging, or one-box). In Puppet, this parameter is
+    #     ignored.
+    #
+    #   * **NodeClientVersion** In Chef, the version of the Chef engine (three
+    #     numbers separated by dots, such as 13.8.5). If this attribute is
+    #     empty, OpsWorks for Chef Automate uses the most current version. In
+    #     Puppet, this parameter is ignored.
     #
     # @return [Types::ExportServerEngineAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1108,8 +1168,8 @@ module Aws::OpsWorksCM
     #
     # @option params [String] :instance_type
     #   The type of the instance to create. Valid values must be specified in
-    #   the following format: `^([cm][34]|t2).*` For example, `m4.large`.
-    #   Valid values are `t2.medium`, `m4.large`, and `m4.2xlarge`. If you do
+    #   the following format: `^([cm][34]|t2).*` For example, `m5.large`.
+    #   Valid values are `m5.large`, `r5.xlarge`, and `r5.2xlarge`. If you do
     #   not specify this parameter, RestoreServer uses the instance type from
     #   the specified backup.
     #
@@ -1294,8 +1354,7 @@ module Aws::OpsWorksCM
     # Updates engine-specific attributes on a specified server. The server
     # enters the `MODIFYING` state when this operation is in progress. Only
     # one update can occur at a time. You can use this command to reset a
-    # Chef server's private key (`CHEF_PIVOTAL_KEY`), a Chef server's
-    # admin password (`CHEF_DELIVERY_ADMIN_PASSWORD`), or a Puppet server's
+    # Chef server's public key (`CHEF_PIVOTAL_KEY`) or a Puppet server's
     # admin password (`PUPPET_ADMIN_PASSWORD`).
     #
     # This operation is asynchronous.
@@ -1379,7 +1438,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1396,7 +1455,7 @@ module Aws::OpsWorksCM
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

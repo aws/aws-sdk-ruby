@@ -45,7 +45,7 @@ module Aws::Glacier
       data[:sns_topic]
     end
 
-    # A list of one or more events for which Amazon Glacier will send a
+    # A list of one or more events for which Amazon S3 Glacier will send a
     # notification to the specified Amazon SNS topic.
     # @return [Array<String>]
     def events

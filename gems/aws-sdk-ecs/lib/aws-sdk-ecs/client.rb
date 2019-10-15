@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::ECS
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::ECS
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::ECS
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -232,20 +281,48 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [String] :cluster_name
     #   The name of your cluster. If you do not specify a name for your
     #   cluster, you create a cluster named `default`. Up to 255 letters
-    #   (uppercase and lowercase), numbers, hyphens, and underscores are
-    #   allowed.
+    #   (uppercase and lowercase), numbers, and hyphens are allowed.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the cluster to help you categorize and
     #   organize them. Each tag consists of a key and an optional value, both
-    #   of which you define. Tag keys can have a maximum character length of
-    #   128 characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
+    #
+    # @option params [Array<Types::ClusterSetting>] :settings
+    #   The setting to use when creating a cluster. This parameter is used to
+    #   enable CloudWatch Container Insights for a cluster. If this value is
+    #   specified, it will override the `containerInsights` value set with
+    #   PutAccountSetting or PutAccountSettingDefault.
     #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -283,6 +360,12 @@ module Aws::ECS
     #         value: "TagValue",
     #       },
     #     ],
+    #     settings: [
+    #       {
+    #         name: "containerInsights", # accepts containerInsights
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -300,6 +383,9 @@ module Aws::ECS
     #   resp.cluster.tags #=> Array
     #   resp.cluster.tags[0].key #=> String
     #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.settings #=> Array
+    #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
+    #   resp.cluster.settings[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster AWS API Documentation
     #
@@ -312,35 +398,62 @@ module Aws::ECS
 
     # Runs and maintains a desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
-    # `desiredCount`, Amazon ECS spawns another copy of the task in the
+    # the `desiredCount`, Amazon ECS runs another copy of the task in the
     # specified cluster. To update an existing service, see UpdateService.
     #
     # In addition to maintaining the desired count of tasks in your service,
-    # you can optionally run your service behind a load balancer. The load
-    # balancer distributes traffic across the tasks that are associated with
-    # the service. For more information, see [Service Load Balancing][1] in
-    # the *Amazon Elastic Container Service Developer Guide*.
+    # you can optionally run your service behind one or more load balancers.
+    # The load balancers distribute traffic across the tasks that are
+    # associated with the service. For more information, see [Service Load
+    # Balancing][1] in the *Amazon Elastic Container Service Developer
+    # Guide*.
+    #
+    # Tasks for services that *do not* use a load balancer are considered
+    # healthy if they're in the `RUNNING` state. Tasks for services that
+    # *do* use a load balancer are considered healthy if they're in the
+    # `RUNNING` state and the container instance that they're hosted on is
+    # reported as healthy by the load balancer.
+    #
+    # There are two service scheduler strategies available:
+    #
+    # * `REPLICA` - The replica scheduling strategy places and maintains the
+    #   desired number of tasks across your cluster. By default, the service
+    #   scheduler spreads tasks across Availability Zones. You can use task
+    #   placement strategies and constraints to customize task placement
+    #   decisions. For more information, see [Service Scheduler Concepts][2]
+    #   in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    # * `DAEMON` - The daemon scheduling strategy deploys exactly one task
+    #   on each active container instance that meets all of the task
+    #   placement constraints that you specify in your cluster. When using
+    #   this strategy, you don't need to specify a desired number of tasks,
+    #   a task placement strategy, or use Service Auto Scaling policies. For
+    #   more information, see [Service Scheduler Concepts][2] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
     #
     # You can optionally specify a deployment configuration for your
     # service. The deployment is triggered by changing properties, such as
     # the task definition or the desired count of a service, with an
-    # UpdateService operation.
+    # UpdateService operation. The default value for a replica service for
+    # `minimumHealthyPercent` is 100%. The default value for a daemon
+    # service for `minimumHealthyPercent` is 0%.
     #
-    # If a service is using the `ECS` deployment controller, the **minimum
-    # healthy percent** represents a lower limit on the number of tasks in a
+    # If a service is using the `ECS` deployment controller, the minimum
+    # healthy percent represents a lower limit on the number of tasks in a
     # service that must remain in the `RUNNING` state during a deployment,
     # as a percentage of the desired number of tasks (rounded up to the
     # nearest integer), and while any container instances are in the
     # `DRAINING` state if the service contains tasks using the EC2 launch
     # type. This parameter enables you to deploy without using additional
     # cluster capacity. For example, if your service has a desired number of
-    # four tasks and a minimum healthy percent of 50%, the scheduler may
+    # four tasks and a minimum healthy percent of 50%, the scheduler might
     # stop two existing tasks to free up cluster capacity before starting
     # two new tasks. Tasks for services that *do not* use a load balancer
-    # are considered healthy if they are in the `RUNNING` state; tasks for
-    # services that *do* use a load balancer are considered healthy if they
-    # are in the `RUNNING` state and they are reported as healthy by the
-    # load balancer. The default value for minimum healthy percent is 100%.
+    # are considered healthy if they're in the `RUNNING` state. Tasks for
+    # services that *do* use a load balancer are considered healthy if
+    # they're in the `RUNNING` state and they're reported as healthy by
+    # the load balancer. The default value for minimum healthy percent is
+    # 100%.
     #
     # If a service is using the `ECS` deployment controller, the **maximum
     # percent** parameter represents an upper limit on the number of tasks
@@ -355,23 +468,22 @@ module Aws::ECS
     # tasks (provided that the cluster resources required to do this are
     # available). The default value for maximum percent is 200%.
     #
-    # If a service is using the `CODE_DEPLOY` deployment controller and
-    # tasks that use the EC2 launch type, the **minimum healthy percent**
-    # and **maximum percent** values are only used to define the lower and
-    # upper limit on the number of the tasks in the service that remain in
-    # the `RUNNING` state while the container instances are in the
-    # `DRAINING` state. If the tasks in the service use the Fargate launch
-    # type, the minimum healthy percent and maximum percent values are not
-    # used, although they are currently visible when describing your
-    # service.
+    # If a service is using either the `CODE_DEPLOY` or `EXTERNAL`
+    # deployment controller types and tasks that use the EC2 launch type,
+    # the **minimum healthy percent** and **maximum percent** values are
+    # used only to define the lower and upper limit on the number of the
+    # tasks in the service that remain in the `RUNNING` state while the
+    # container instances are in the `DRAINING` state. If the tasks in the
+    # service use the Fargate launch type, the minimum healthy percent and
+    # maximum percent values aren't used, although they're currently
+    # visible when describing your service.
     #
-    # Tasks for services that *do not* use a load balancer are considered
-    # healthy if they are in the `RUNNING` state. Tasks for services that
-    # *do* use a load balancer are considered healthy if they are in the
-    # `RUNNING` state and the container instance they are hosted on is
-    # reported as healthy by the load balancer. The default value for a
-    # replica service for `minimumHealthyPercent` is 100%. The default value
-    # for a daemon service for `minimumHealthyPercent` is 0%.
+    # When creating a service that uses the `EXTERNAL` deployment
+    # controller, you can specify only parameters that aren't controlled at
+    # the task set level. The only required parameter is the service name.
+    # You control your services using the CreateTaskSet operation. For more
+    # information, see [Amazon ECS Deployment Types][3] in the *Amazon
+    # Elastic Container Service Developer Guide*.
     #
     # When the service scheduler launches new tasks, it determines task
     # placement in your cluster using the following logic:
@@ -399,7 +511,9 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -408,21 +522,30 @@ module Aws::ECS
     #
     # @option params [required, String] :service_name
     #   The name of your service. Up to 255 letters (uppercase and lowercase),
-    #   numbers, hyphens, and underscores are allowed. Service names must be
-    #   unique within a cluster, but you can have similarly named services in
-    #   multiple clusters within a Region or across multiple Regions.
+    #   numbers, and hyphens are allowed. Service names must be unique within
+    #   a cluster, but you can have similarly named services in multiple
+    #   clusters within a Region or across multiple Regions.
     #
-    # @option params [required, String] :task_definition
+    # @option params [String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full ARN of the
     #   task definition to run in your service. If a `revision` is not
     #   specified, the latest `ACTIVE` revision is used.
     #
-    # @option params [Array<Types::LoadBalancer>] :load_balancers
-    #   A load balancer object representing the load balancer to use with your
-    #   service.
+    #   A task definition must be specified if the service is using the `ECS`
+    #   deployment controller.
     #
-    #   If the service is using the `ECS` deployment controller, you are
-    #   limited to one load balancer or target group.
+    # @option params [Array<Types::LoadBalancer>] :load_balancers
+    #   A load balancer object representing the load balancers to use with
+    #   your service. For more information, see [Service Load Balancing][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #   If the service is using the rolling update (`ECS`) deployment
+    #   controller and using either an Application Load Balancer or Network
+    #   Load Balancer, you can specify multiple target groups to attach to the
+    #   service. The service-linked role is required for services that make
+    #   use of multiple target groups. For more information, see [Using
+    #   Service-Linked Roles for Amazon ECS][2] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #   If the service is using the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
@@ -442,18 +565,18 @@ module Aws::ECS
     #   using the `CODE_DEPLOY` deployment controller, these values can be
     #   changed when updating the service.
     #
-    #   For Classic Load Balancers, this object must contain the load balancer
-    #   name, the container name (as it appears in a container definition),
-    #   and the container port to access from the load balancer. When a task
-    #   from this service is placed on a container instance, the container
-    #   instance is registered with the load balancer specified here.
-    #
     #   For Application Load Balancers and Network Load Balancers, this object
     #   must contain the load balancer target group ARN, the container name
     #   (as it appears in a container definition), and the container port to
     #   access from the load balancer. When a task from this service is placed
     #   on a container instance, the container instance and port combination
     #   is registered as a target in the target group specified here.
+    #
+    #   For Classic Load Balancers, this object must contain the load balancer
+    #   name, the container name (as it appears in a container definition),
+    #   and the container port to access from the load balancer. When a task
+    #   from this service is placed on a container instance, the container
+    #   instance is registered with the load balancer specified here.
     #
     #   Services with tasks that use the `awsvpc` network mode (for example,
     #   those with the Fargate launch type) only support Application Load
@@ -462,6 +585,11 @@ module Aws::ECS
     #   you must choose `ip` as the target type, not `instance`, because tasks
     #   that use the `awsvpc` network mode are associated with an elastic
     #   network interface, not an Amazon EC2 instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
     #   The details of the service discovery registries to assign to this
@@ -475,12 +603,16 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
-    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
     #   and keep running on your cluster.
+    #
+    #   This is required if `schedulingStrategy` is `REPLICA` or is not
+    #   specified. If `schedulingStrategy` is `DAEMON` then this is not
+    #   required.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -493,19 +625,19 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #
     # @option params [String] :platform_version
-    #   The platform version on which your tasks in the service are running. A
-    #   platform version is only specified for tasks using the Fargate launch
-    #   type. If one is not specified, the `LATEST` platform version is used
+    #   The platform version that your tasks in the service are running on. A
+    #   platform version is specified only for tasks using the Fargate launch
+    #   type. If one isn't specified, the `LATEST` platform version is used
     #   by default. For more information, see [AWS Fargate Platform
     #   Versions][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [String] :role
     #   The name or full Amazon Resource Name (ARN) of the IAM role that
@@ -518,10 +650,12 @@ module Aws::ECS
     #   If your account has already created the Amazon ECS service-linked
     #   role, that role is used by default for your service unless you specify
     #   a role here. The service-linked role is required if your task
-    #   definition uses the `awsvpc` network mode, in which case you should
-    #   not specify a role here. For more information, see [Using
-    #   Service-Linked Roles for Amazon ECS][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   definition uses the `awsvpc` network mode or if the service is
+    #   configured to use service discovery, an external deployment
+    #   controller, or multiple target groups in which case you should not
+    #   specify a role here. For more information, see [Using Service-Linked
+    #   Roles for Amazon ECS][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
@@ -532,8 +666,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
     #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
@@ -558,7 +692,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [Integer] :health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service scheduler
@@ -566,11 +700,11 @@ module Aws::ECS
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 7,200 seconds.
-    #   During that time, the ECS service scheduler ignores health check
-    #   status. This grace period can prevent the ECS service scheduler from
-    #   marking tasks as unhealthy and stopping them before they have time to
-    #   come up.
+    #   you can specify a health check grace period of up to 2,147,483,647
+    #   seconds. During that time, the ECS service scheduler ignores health
+    #   check status. This grace period can prevent the ECS service scheduler
+    #   from marking tasks as unhealthy and stopping them before they have
+    #   time to come up.
     #
     # @option params [String] :scheduling_strategy
     #   The scheduling strategy to use for the service. For more information,
@@ -582,24 +716,24 @@ module Aws::ECS
     #     desired number of tasks across your cluster. By default, the service
     #     scheduler spreads tasks across Availability Zones. You can use task
     #     placement strategies and constraints to customize task placement
-    #     decisions. This scheduler strategy is required if using the
-    #     `CODE_DEPLOY` deployment controller.
+    #     decisions. This scheduler strategy is required if the service is
+    #     using the `CODE_DEPLOY` or `EXTERNAL` deployment controller types.
     #
     #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task on
     #     each active container instance that meets all of the task placement
-    #     constraints that you specify in your cluster. When you are using
-    #     this strategy, there is no need to specify a desired number of
-    #     tasks, a task placement strategy, or use Service Auto Scaling
-    #     policies.
+    #     constraints that you specify in your cluster. When you're using
+    #     this strategy, you don't need to specify a desired number of tasks,
+    #     a task placement strategy, or use Service Auto Scaling policies.
     #
-    #     <note markdown="1"> Tasks using the Fargate launch type or the `CODE_DEPLOY` deploymenet
-    #     controller do not support the `DAEMON` scheduling strategy.
+    #     <note markdown="1"> Tasks using the Fargate launch type or the `CODE_DEPLOY` or
+    #     `EXTERNAL` deployment controller types don't support the `DAEMON`
+    #     scheduling strategy.
     #
     #      </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
     #
     # @option params [Types::DeploymentController] :deployment_controller
     #   The deployment controller to use for the service.
@@ -608,9 +742,32 @@ module Aws::ECS
     #   The metadata that you apply to the service to help you categorize and
     #   organize them. Each tag consists of a key and an optional value, both
     #   of which you define. When a service is deleted, the tags are deleted
-    #   as well. Tag keys can have a maximum character length of 128
-    #   characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   as well.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
     #   Specifies whether to enable Amazon ECS managed tags for the tasks
@@ -620,14 +777,14 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the tasks. If no value is specified, the tags are not
-    #   propagated. Tags can only be propagated to the tasks within the
-    #   service during service creation. To add tags to a task after service
-    #   creation, use the TagResource API action.
+    #   the service to the tasks in the service. If no value is specified, the
+    #   tags are not propagated. Tags can only be propagated to the tasks
+    #   within the service during service creation. To add tags to a task
+    #   after service creation, use the TagResource API action.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -756,7 +913,7 @@ module Aws::ECS
     #   resp = client.create_service({
     #     cluster: "String",
     #     service_name: "String", # required
-    #     task_definition: "String", # required
+    #     task_definition: "String",
     #     load_balancers: [
     #       {
     #         target_group_arn: "String",
@@ -804,7 +961,7 @@ module Aws::ECS
     #     health_check_grace_period_seconds: 1,
     #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #     deployment_controller: {
-    #       type: "ECS", # required, accepts ECS, CODE_DEPLOY
+    #       type: "ECS", # required, accepts ECS, CODE_DEPLOY, EXTERNAL
     #     },
     #     tags: [
     #       {
@@ -843,6 +1000,8 @@ module Aws::ECS
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
+    #   resp.service.task_sets[0].service_arn #=> String
+    #   resp.service.task_sets[0].cluster_arn #=> String
     #   resp.service.task_sets[0].started_by #=> String
     #   resp.service.task_sets[0].external_id #=> String
     #   resp.service.task_sets[0].status #=> String
@@ -864,6 +1023,11 @@ module Aws::ECS
     #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].service_registries #=> Array
+    #   resp.service.task_sets[0].service_registries[0].registry_arn #=> String
+    #   resp.service.task_sets[0].service_registries[0].port #=> Integer
+    #   resp.service.task_sets[0].service_registries[0].container_name #=> String
+    #   resp.service.task_sets[0].service_registries[0].container_port #=> Integer
     #   resp.service.task_sets[0].scale.value #=> Float
     #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
@@ -903,7 +1067,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
-    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
+    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY", "EXTERNAL"
     #   resp.service.tags #=> Array
     #   resp.service.tags[0].key #=> String
     #   resp.service.tags[0].value #=> String
@@ -920,41 +1084,234 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Modifies the ARN and resource ID format of a resource for a specified
-    # IAM user, IAM role, or the root user for an account. You can specify
-    # whether the new ARN and resource ID format are disabled for new
-    # resources that are created.
+    # Create a task set in the specified cluster and service. This is used
+    # when a service uses the `EXTERNAL` deployment controller type. For
+    # more information, see [Amazon ECS Deployment Types][1] in the *Amazon
+    # Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @option params [required, String] :service
+    #   The short name or full Amazon Resource Name (ARN) of the service to
+    #   create the task set in.
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service to create the task set in.
+    #
+    # @option params [String] :external_id
+    #   An optional non-unique tag that identifies this task set in external
+    #   systems. If the task set is associated with a service discovery
+    #   registry, the tasks in this task set will have the
+    #   `ECS_TASK_SET_EXTERNAL_ID` AWS Cloud Map attribute set to the provided
+    #   value.
+    #
+    # @option params [required, String] :task_definition
+    #   The task definition for the tasks in the task set to use.
+    #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   An object representing the network configuration for a task or
+    #   service.
+    #
+    # @option params [Array<Types::LoadBalancer>] :load_balancers
+    #   A load balancer object representing the load balancer to use with the
+    #   task set. The supported load balancer types are either an Application
+    #   Load Balancer or a Network Load Balancer.
+    #
+    # @option params [Array<Types::ServiceRegistry>] :service_registries
+    #   The details of the service discovery registries to assign to this task
+    #   set. For more information, see [Service Discovery][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #
+    # @option params [String] :launch_type
+    #   The launch type that new tasks in the task set will use. For more
+    #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #
+    # @option params [String] :platform_version
+    #   The platform version that the tasks in the task set should use. A
+    #   platform version is specified only for tasks using the Fargate launch
+    #   type. If one isn't specified, the `LATEST` platform version is used
+    #   by default.
+    #
+    # @option params [Types::Scale] :scale
+    #   A floating-point percentage of the desired number of tasks to place
+    #   and keep running in the task set.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 32 ASCII characters are allowed.
+    #
+    # @return [Types::CreateTaskSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTaskSetResponse#task_set #task_set} => Types::TaskSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_task_set({
+    #     service: "String", # required
+    #     cluster: "String", # required
+    #     external_id: "String",
+    #     task_definition: "String", # required
+    #     network_configuration: {
+    #       awsvpc_configuration: {
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #     load_balancers: [
+    #       {
+    #         target_group_arn: "String",
+    #         load_balancer_name: "String",
+    #         container_name: "String",
+    #         container_port: 1,
+    #       },
+    #     ],
+    #     service_registries: [
+    #       {
+    #         registry_arn: "String",
+    #         port: 1,
+    #         container_name: "String",
+    #         container_port: 1,
+    #       },
+    #     ],
+    #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     platform_version: "String",
+    #     scale: {
+    #       value: 1.0,
+    #       unit: "PERCENT", # accepts PERCENT
+    #     },
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_set.id #=> String
+    #   resp.task_set.task_set_arn #=> String
+    #   resp.task_set.service_arn #=> String
+    #   resp.task_set.cluster_arn #=> String
+    #   resp.task_set.started_by #=> String
+    #   resp.task_set.external_id #=> String
+    #   resp.task_set.status #=> String
+    #   resp.task_set.task_definition #=> String
+    #   resp.task_set.computed_desired_count #=> Integer
+    #   resp.task_set.pending_count #=> Integer
+    #   resp.task_set.running_count #=> Integer
+    #   resp.task_set.created_at #=> Time
+    #   resp.task_set.updated_at #=> Time
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.platform_version #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_set.load_balancers #=> Array
+    #   resp.task_set.load_balancers[0].target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].load_balancer_name #=> String
+    #   resp.task_set.load_balancers[0].container_name #=> String
+    #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.service_registries #=> Array
+    #   resp.task_set.service_registries[0].registry_arn #=> String
+    #   resp.task_set.service_registries[0].port #=> Integer
+    #   resp.task_set.service_registries[0].container_name #=> String
+    #   resp.task_set.service_registries[0].container_port #=> Integer
+    #   resp.task_set.scale.value #=> Float
+    #   resp.task_set.scale.unit #=> String, one of "PERCENT"
+    #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.task_set.stability_status_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSet AWS API Documentation
+    #
+    # @overload create_task_set(params = {})
+    # @param [Hash] params ({})
+    def create_task_set(params = {}, options = {})
+      req = build_request(:create_task_set, params)
+      req.send_request(options)
+    end
+
+    # Disables an account setting for a specified IAM user, IAM role, or the
+    # root user for an account.
     #
     # @option params [required, String] :name
-    #   The resource name for which to disable the new format. If
+    #   The resource name for which to disable the account setting. If
     #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
     #   services is affected. If `taskLongArnFormat` is specified, the ARN and
     #   resource ID for your Amazon ECS tasks is affected. If
     #   `containerInstanceLongArnFormat` is specified, the ARN and resource ID
-    #   for your Amazon ECS container instances is affected.
+    #   for your Amazon ECS container instances is affected. If
+    #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
+    #   container instances is affected.
     #
     # @option params [String] :principal_arn
     #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. If you specify the root user, it modifies the ARN and
-    #   resource ID format for all IAM users, IAM roles, and the root user of
-    #   the account unless an IAM user or role explicitly overrides these
-    #   settings for themselves. If this field is omitted, the setting are
-    #   changed only for the authenticated user.
+    #   root user. If you specify the root user, it disables the account
+    #   setting for all IAM users, IAM roles, and the root user of the account
+    #   unless an IAM user or role explicitly overrides these settings. If
+    #   this field is omitted, the setting is changed only for the
+    #   authenticated user.
     #
     # @return [Types::DeleteAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteAccountSettingResponse#setting #setting} => Types::Setting
     #
+    #
+    # @example Example: To delete your account setting
+    #
+    #   # This example deletes the account setting for your user for the specified resource type.
+    #
+    #   resp = client.delete_account_setting({
+    #     name: "serviceLongArnFormat", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     setting: {
+    #       name: "serviceLongArnFormat", 
+    #       value: "enabled", 
+    #       principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To delete the account settings for a specific IAM user or IAM role
+    #
+    #   # This example deletes the account setting for a specific IAM user or IAM role for the specified resource type. Only the
+    #   # root user can view or modify the account settings for another user.
+    #
+    #   resp = client.delete_account_setting({
+    #     name: "containerInstanceLongArnFormat", 
+    #     principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     setting: {
+    #       name: "containerInstanceLongArnFormat", 
+    #       value: "enabled", 
+    #       principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -1071,6 +1428,9 @@ module Aws::ECS
     #   resp.cluster.tags #=> Array
     #   resp.cluster.tags[0].key #=> String
     #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.settings #=> Array
+    #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
+    #   resp.cluster.settings[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster AWS API Documentation
     #
@@ -1090,13 +1450,13 @@ module Aws::ECS
     # <note markdown="1"> When you delete a service, if there are still running tasks that
     # require cleanup, the service status moves from `ACTIVE` to `DRAINING`,
     # and the service is no longer visible in the console or in the
-    # ListServices API operation. After the tasks have stopped, then the
-    # service status moves from `DRAINING` to `INACTIVE`. Services in the
-    # `DRAINING` or `INACTIVE` status can still be viewed with the
-    # DescribeServices API operation. However, in the future, `INACTIVE`
-    # services may be cleaned up and purged from Amazon ECS record keeping,
-    # and DescribeServices calls on those services return a
-    # `ServiceNotFoundException` error.
+    # ListServices API operation. After all tasks have transitioned to
+    # either `STOPPING` or `STOPPED` status, the service status moves from
+    # `DRAINING` to `INACTIVE`. Services in the `DRAINING` or `INACTIVE`
+    # status can still be viewed with the DescribeServices API operation.
+    # However, in the future, `INACTIVE` services may be cleaned up and
+    # purged from Amazon ECS record keeping, and DescribeServices calls on
+    # those services return a `ServiceNotFoundException` error.
     #
     #  </note>
     #
@@ -1170,6 +1530,8 @@ module Aws::ECS
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
+    #   resp.service.task_sets[0].service_arn #=> String
+    #   resp.service.task_sets[0].cluster_arn #=> String
     #   resp.service.task_sets[0].started_by #=> String
     #   resp.service.task_sets[0].external_id #=> String
     #   resp.service.task_sets[0].status #=> String
@@ -1191,6 +1553,11 @@ module Aws::ECS
     #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].service_registries #=> Array
+    #   resp.service.task_sets[0].service_registries[0].registry_arn #=> String
+    #   resp.service.task_sets[0].service_registries[0].port #=> Integer
+    #   resp.service.task_sets[0].service_registries[0].container_name #=> String
+    #   resp.service.task_sets[0].service_registries[0].container_port #=> Integer
     #   resp.service.task_sets[0].scale.value #=> Float
     #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
@@ -1230,7 +1597,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
-    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
+    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY", "EXTERNAL"
     #   resp.service.tags #=> Array
     #   resp.service.tags[0].key #=> String
     #   resp.service.tags[0].value #=> String
@@ -1244,6 +1611,90 @@ module Aws::ECS
     # @param [Hash] params ({})
     def delete_service(params = {}, options = {})
       req = build_request(:delete_service, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specified task set within a service. This is used when a
+    # service uses the `EXTERNAL` deployment controller type. For more
+    # information, see [Amazon ECS Deployment Types][1] in the *Amazon
+    # Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service that the task set exists in to delete.
+    #
+    # @option params [required, String] :service
+    #   The short name or full Amazon Resource Name (ARN) of the service that
+    #   hosts the task set to delete.
+    #
+    # @option params [required, String] :task_set
+    #   The task set ID or full Amazon Resource Name (ARN) of the task set to
+    #   delete.
+    #
+    # @option params [Boolean] :force
+    #   If `true`, this allows you to delete a task set even if it hasn't
+    #   been scaled down to zero.
+    #
+    # @return [Types::DeleteTaskSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTaskSetResponse#task_set #task_set} => Types::TaskSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_task_set({
+    #     cluster: "String", # required
+    #     service: "String", # required
+    #     task_set: "String", # required
+    #     force: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_set.id #=> String
+    #   resp.task_set.task_set_arn #=> String
+    #   resp.task_set.service_arn #=> String
+    #   resp.task_set.cluster_arn #=> String
+    #   resp.task_set.started_by #=> String
+    #   resp.task_set.external_id #=> String
+    #   resp.task_set.status #=> String
+    #   resp.task_set.task_definition #=> String
+    #   resp.task_set.computed_desired_count #=> Integer
+    #   resp.task_set.pending_count #=> Integer
+    #   resp.task_set.running_count #=> Integer
+    #   resp.task_set.created_at #=> Time
+    #   resp.task_set.updated_at #=> Time
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.platform_version #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_set.load_balancers #=> Array
+    #   resp.task_set.load_balancers[0].target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].load_balancer_name #=> String
+    #   resp.task_set.load_balancers[0].container_name #=> String
+    #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.service_registries #=> Array
+    #   resp.task_set.service_registries[0].registry_arn #=> String
+    #   resp.task_set.service_registries[0].port #=> Integer
+    #   resp.task_set.service_registries[0].container_name #=> String
+    #   resp.task_set.service_registries[0].container_port #=> Integer
+    #   resp.task_set.scale.value #=> Float
+    #   resp.task_set.scale.unit #=> String, one of "PERCENT"
+    #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.task_set.stability_status_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskSet AWS API Documentation
+    #
+    # @overload delete_task_set(params = {})
+    # @param [Hash] params ({})
+    def delete_task_set(params = {}, options = {})
+      req = build_request(:delete_task_set, params)
       req.send_request(options)
     end
 
@@ -1278,8 +1729,7 @@ module Aws::ECS
     #   the Region of the container instance, the AWS account ID of the
     #   container instance owner, the `container-instance` namespace, and then
     #   the container instance ID. For example,
-    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
-    #   `.
+    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #
     # @option params [Boolean] :force
     #   Forces the deregistration of the container instance. If you have tasks
@@ -1349,6 +1799,7 @@ module Aws::ECS
     #   resp.container_instance.registered_resources[0].string_set_value #=> Array
     #   resp.container_instance.registered_resources[0].string_set_value[0] #=> String
     #   resp.container_instance.status #=> String
+    #   resp.container_instance.status_reason #=> String
     #   resp.container_instance.agent_connected #=> Boolean
     #   resp.container_instance.running_tasks_count #=> Integer
     #   resp.container_instance.pending_tasks_count #=> Integer
@@ -1461,9 +1912,16 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.max_swap #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.swappiness #=> Integer
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.task_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].stop_timeout #=> Integer
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1487,9 +1945,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
     #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
     #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].name #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].value_from #=> String
     #   resp.task_definition.container_definitions[0].health_check.command #=> Array
     #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
     #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
@@ -1499,6 +1960,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls #=> Array
     #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -1531,6 +1998,11 @@ module Aws::ECS
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
+    #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
+    #   resp.task_definition.proxy_configuration.container_name #=> String
+    #   resp.task_definition.proxy_configuration.properties #=> Array
+    #   resp.task_definition.proxy_configuration.properties[0].name #=> String
+    #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition AWS API Documentation
     #
@@ -1620,6 +2092,9 @@ module Aws::ECS
     #   resp.clusters[0].tags #=> Array
     #   resp.clusters[0].tags[0].key #=> String
     #   resp.clusters[0].tags[0].value #=> String
+    #   resp.clusters[0].settings #=> Array
+    #   resp.clusters[0].settings[0].name #=> String, one of "containerInsights"
+    #   resp.clusters[0].settings[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -1640,7 +2115,9 @@ module Aws::ECS
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
     #   hosts the container instances to describe. If you do not specify a
-    #   cluster, the default cluster is assumed.
+    #   cluster, the default cluster is assumed. This parameter is required if
+    #   the container instance or container instances you are describing were
+    #   launched in any cluster other than the default cluster.
     #
     # @option params [required, Array<String>] :container_instances
     #   A list of up to 100 container instance IDs or full Amazon Resource
@@ -1779,6 +2256,7 @@ module Aws::ECS
     #   resp.container_instances[0].registered_resources[0].string_set_value #=> Array
     #   resp.container_instances[0].registered_resources[0].string_set_value[0] #=> String
     #   resp.container_instances[0].status #=> String
+    #   resp.container_instances[0].status_reason #=> String
     #   resp.container_instances[0].agent_connected #=> Boolean
     #   resp.container_instances[0].running_tasks_count #=> Integer
     #   resp.container_instances[0].pending_tasks_count #=> Integer
@@ -1817,7 +2295,9 @@ module Aws::ECS
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN)the cluster that
     #   hosts the service to describe. If you do not specify a cluster, the
-    #   default cluster is assumed.
+    #   default cluster is assumed. This parameter is required if the service
+    #   or services you are describing were launched in any cluster other than
+    #   the default cluster.
     #
     # @option params [required, Array<String>] :services
     #   A list of services to describe. You may specify up to 10 services to
@@ -1924,6 +2404,8 @@ module Aws::ECS
     #   resp.services[0].task_sets #=> Array
     #   resp.services[0].task_sets[0].id #=> String
     #   resp.services[0].task_sets[0].task_set_arn #=> String
+    #   resp.services[0].task_sets[0].service_arn #=> String
+    #   resp.services[0].task_sets[0].cluster_arn #=> String
     #   resp.services[0].task_sets[0].started_by #=> String
     #   resp.services[0].task_sets[0].external_id #=> String
     #   resp.services[0].task_sets[0].status #=> String
@@ -1945,6 +2427,11 @@ module Aws::ECS
     #   resp.services[0].task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.services[0].task_sets[0].load_balancers[0].container_name #=> String
     #   resp.services[0].task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.services[0].task_sets[0].service_registries #=> Array
+    #   resp.services[0].task_sets[0].service_registries[0].registry_arn #=> String
+    #   resp.services[0].task_sets[0].service_registries[0].port #=> Integer
+    #   resp.services[0].task_sets[0].service_registries[0].container_name #=> String
+    #   resp.services[0].task_sets[0].service_registries[0].container_port #=> Integer
     #   resp.services[0].task_sets[0].scale.value #=> Float
     #   resp.services[0].task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.services[0].task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
@@ -1984,7 +2471,7 @@ module Aws::ECS
     #   resp.services[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.services[0].health_check_grace_period_seconds #=> Integer
     #   resp.services[0].scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
-    #   resp.services[0].deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
+    #   resp.services[0].deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY", "EXTERNAL"
     #   resp.services[0].tags #=> Array
     #   resp.services[0].tags[0].key #=> String
     #   resp.services[0].tags[0].value #=> String
@@ -2146,9 +2633,16 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.max_swap #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.swappiness #=> Integer
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.task_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].stop_timeout #=> Integer
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -2172,9 +2666,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
     #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
     #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].name #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].value_from #=> String
     #   resp.task_definition.container_definitions[0].health_check.command #=> Array
     #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
     #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
@@ -2184,6 +2681,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls #=> Array
     #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -2216,6 +2719,11 @@ module Aws::ECS
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
+    #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
+    #   resp.task_definition.proxy_configuration.container_name #=> String
+    #   resp.task_definition.proxy_configuration.properties #=> Array
+    #   resp.task_definition.proxy_configuration.properties[0].name #=> String
+    #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -2229,12 +2737,97 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Describes the task sets in the specified cluster and service. This is
+    # used when a service uses the `EXTERNAL` deployment controller type.
+    # For more information, see [Amazon ECS Deployment Types][1] in the
+    # *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service that the task sets exist in.
+    #
+    # @option params [required, String] :service
+    #   The short name or full Amazon Resource Name (ARN) of the service that
+    #   the task sets exist in.
+    #
+    # @option params [Array<String>] :task_sets
+    #   The ID or full Amazon Resource Name (ARN) of task sets to describe.
+    #
+    # @return [Types::DescribeTaskSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTaskSetsResponse#task_sets #task_sets} => Array&lt;Types::TaskSet&gt;
+    #   * {Types::DescribeTaskSetsResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_task_sets({
+    #     cluster: "String", # required
+    #     service: "String", # required
+    #     task_sets: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_sets #=> Array
+    #   resp.task_sets[0].id #=> String
+    #   resp.task_sets[0].task_set_arn #=> String
+    #   resp.task_sets[0].service_arn #=> String
+    #   resp.task_sets[0].cluster_arn #=> String
+    #   resp.task_sets[0].started_by #=> String
+    #   resp.task_sets[0].external_id #=> String
+    #   resp.task_sets[0].status #=> String
+    #   resp.task_sets[0].task_definition #=> String
+    #   resp.task_sets[0].computed_desired_count #=> Integer
+    #   resp.task_sets[0].pending_count #=> Integer
+    #   resp.task_sets[0].running_count #=> Integer
+    #   resp.task_sets[0].created_at #=> Time
+    #   resp.task_sets[0].updated_at #=> Time
+    #   resp.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_sets[0].platform_version #=> String
+    #   resp.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.task_sets[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.task_sets[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_sets[0].load_balancers #=> Array
+    #   resp.task_sets[0].load_balancers[0].target_group_arn #=> String
+    #   resp.task_sets[0].load_balancers[0].load_balancer_name #=> String
+    #   resp.task_sets[0].load_balancers[0].container_name #=> String
+    #   resp.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.task_sets[0].service_registries #=> Array
+    #   resp.task_sets[0].service_registries[0].registry_arn #=> String
+    #   resp.task_sets[0].service_registries[0].port #=> Integer
+    #   resp.task_sets[0].service_registries[0].container_name #=> String
+    #   resp.task_sets[0].service_registries[0].container_port #=> Integer
+    #   resp.task_sets[0].scale.value #=> Float
+    #   resp.task_sets[0].scale.unit #=> String, one of "PERCENT"
+    #   resp.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.task_sets[0].stability_status_at #=> Time
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskSets AWS API Documentation
+    #
+    # @overload describe_task_sets(params = {})
+    # @param [Hash] params ({})
+    def describe_task_sets(params = {}, options = {})
+      req = build_request(:describe_task_sets, params)
+      req.send_request(options)
+    end
+
     # Describes a specified task or tasks.
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
-    #   hosts the task to describe. If you do not specify a cluster, the
-    #   default cluster is assumed.
+    #   hosts the task or tasks to describe. If you do not specify a cluster,
+    #   the default cluster is assumed. This parameter is required if the task
+    #   or tasks you are describing were launched in any cluster other than
+    #   the default cluster.
     #
     # @option params [required, Array<String>] :tasks
     #   A list of up to 100 task IDs or full ARN entries.
@@ -2324,6 +2917,12 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -2334,6 +2933,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].image #=> String
+    #   resp.tasks[0].containers[0].image_digest #=> String
+    #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
     #   resp.tasks[0].containers[0].reason #=> String
@@ -2347,6 +2949,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].cpu #=> String
+    #   resp.tasks[0].containers[0].memory #=> String
+    #   resp.tasks[0].containers[0].memory_reservation #=> String
+    #   resp.tasks[0].containers[0].gpu_ids #=> Array
+    #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -2374,6 +2981,9 @@ module Aws::ECS
     #   resp.tasks[0].tags #=> Array
     #   resp.tasks[0].tags[0].key #=> String
     #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].inference_accelerators #=> Array
+    #   resp.tasks[0].inference_accelerators[0].device_name #=> String
+    #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -2400,8 +3010,7 @@ module Aws::ECS
     #   the container instance, the AWS account ID of the container instance
     #   owner, the `container-instance` namespace, and then the container
     #   instance ID. For example,
-    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
-    #   `.
+    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
@@ -2433,8 +3042,7 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Lists the account settings for an Amazon ECS resource for a specified
-    # principal.
+    # Lists the account settings for a specified principal.
     #
     # @option params [String] :name
     #   The resource name you want to list the account settings for.
@@ -2451,7 +3059,7 @@ module Aws::ECS
     # @option params [Boolean] :effective_settings
     #   Specifies whether to return the effective settings. If `true`, the
     #   account settings for the root user or the default setting for the
-    #   `principalArn`. If `false`, the account settings for the
+    #   `principalArn` are returned. If `false`, the account settings for the
     #   `principalArn` are returned if they are set. Otherwise, no account
     #   settings are returned.
     #
@@ -2484,10 +3092,70 @@ module Aws::ECS
     #   * {Types::ListAccountSettingsResponse#settings #settings} => Array&lt;Types::Setting&gt;
     #   * {Types::ListAccountSettingsResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To view your effective account settings
+    #
+    #   # This example displays the effective account settings for your account.
+    #
+    #   resp = client.list_account_settings({
+    #     effective_settings: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     settings: [
+    #       {
+    #         name: "containerInstanceLongArnFormat", 
+    #         value: "disabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #       {
+    #         name: "serviceLongArnFormat", 
+    #         value: "enabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #       {
+    #         name: "taskLongArnFormat", 
+    #         value: "disabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To view the effective account settings for a specific IAM user or IAM role
+    #
+    #   # This example displays the effective account settings for the specified user or role.
+    #
+    #   resp = client.list_account_settings({
+    #     effective_settings: true, 
+    #     principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     settings: [
+    #       {
+    #         name: "containerInstanceLongArnFormat", 
+    #         value: "disabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #       {
+    #         name: "serviceLongArnFormat", 
+    #         value: "enabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #       {
+    #         name: "taskLongArnFormat", 
+    #         value: "disabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_settings({
-    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #     value: "String",
     #     principal_arn: "String",
     #     effective_settings: false,
@@ -2498,7 +3166,7 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.settings #=> Array
-    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat"
+    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
     #   resp.settings[0].value #=> String
     #   resp.settings[0].principal_arn #=> String
     #   resp.next_token #=> String
@@ -2667,7 +3335,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -2682,7 +3350,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -2713,7 +3381,7 @@ module Aws::ECS
     #   the `DRAINING` status, the results include only container instances
     #   that have been set to `DRAINING` using UpdateContainerInstancesState.
     #   If you do not specify this parameter, the default is to include
-    #   container instances set to `ACTIVE` and `DRAINING`.
+    #   container instances set to all states other than `INACTIVE`.
     #
     # @return [Types::ListContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2744,7 +3412,7 @@ module Aws::ECS
     #     filter: "String",
     #     next_token: "String",
     #     max_results: 1,
-    #     status: "ACTIVE", # accepts ACTIVE, DRAINING
+    #     status: "ACTIVE", # accepts ACTIVE, DRAINING, REGISTERING, DEREGISTERING, REGISTRATION_FAILED
     #   })
     #
     # @example Response structure
@@ -3268,19 +3936,58 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Modifies the ARN and resource ID format of a resource for a specified
-    # IAM user, IAM role, or the root user for an account. You can specify
-    # whether the new ARN and resource ID format are enabled for new
-    # resources that are created. Enabling this setting is required to use
-    # new Amazon ECS features such as resource tagging.
+    # Modifies an account setting. Account settings are set on a per-Region
+    # basis.
+    #
+    # If you change the account setting for the root user, the default
+    # settings for all of the IAM users and roles for which no individual
+    # account setting has been specified are reset. For more information,
+    # see [Account Settings][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    # When `serviceLongArnFormat`, `taskLongArnFormat`, or
+    # `containerInstanceLongArnFormat` are specified, the Amazon Resource
+    # Name (ARN) and resource ID format of the resource type for a specified
+    # IAM user, IAM role, or the root user for an account is affected. The
+    # opt-in and opt-out account setting must be set for each Amazon ECS
+    # resource separately. The ARN and resource ID format of a resource will
+    # be defined by the opt-in status of the IAM user or role that created
+    # the resource. You must enable this setting to use Amazon ECS features
+    # such as resource tagging.
+    #
+    # When `awsvpcTrunking` is specified, the elastic network interface
+    # (ENI) limit for any new container instances that support the feature
+    # is changed. If `awsvpcTrunking` is enabled, any new container
+    # instances that support the feature are launched have the increased ENI
+    # limits available to them. For more information, see [Elastic Network
+    # Interface Trunking][2] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    # When `containerInsights` is specified, the default setting indicating
+    # whether CloudWatch Container Insights is enabled for your clusters is
+    # changed. If `containerInsights` is enabled, any new clusters that are
+    # created will have Container Insights enabled unless you disable it
+    # during cluster creation. For more information, see [CloudWatch
+    # Container Insights][3] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
     #
     # @option params [required, String] :name
-    #   The resource name for which to enable the new format. If
-    #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
+    #   The Amazon ECS resource name for which to modify the account setting.
+    #   If `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
     #   services is affected. If `taskLongArnFormat` is specified, the ARN and
     #   resource ID for your Amazon ECS tasks is affected. If
     #   `containerInstanceLongArnFormat` is specified, the ARN and resource ID
-    #   for your Amazon ECS container instances is affected.
+    #   for your Amazon ECS container instances is affected. If
+    #   `awsvpcTrunking` is specified, the elastic network interface (ENI)
+    #   limit for your Amazon ECS container instances is affected. If
+    #   `containerInsights` is specified, the default setting for CloudWatch
+    #   Container Insights for your clusters is affected.
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -3288,27 +3995,69 @@ module Aws::ECS
     #
     # @option params [String] :principal_arn
     #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. If you specify the root user, it modifies the ARN and
-    #   resource ID format for all IAM users, IAM roles, and the root user of
-    #   the account unless an IAM user or role explicitly overrides these
-    #   settings for themselves. If this field is omitted, the setting are
-    #   changed only for the authenticated user.
+    #   root user. If you specify the root user, it modifies the account
+    #   setting for all IAM users, IAM roles, and the root user of the account
+    #   unless an IAM user or role explicitly overrides these settings. If
+    #   this field is omitted, the setting is changed only for the
+    #   authenticated user.
     #
     # @return [Types::PutAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutAccountSettingResponse#setting #setting} => Types::Setting
     #
+    #
+    # @example Example: To modify your account settings
+    #
+    #   # This example modifies your account settings to opt in to the new ARN and resource ID format for Amazon ECS services. If
+    #   # you’re using this command as the root user, then changes apply to the entire AWS account, unless an IAM user or role
+    #   # explicitly overrides these settings for themselves.
+    #
+    #   resp = client.put_account_setting({
+    #     name: "serviceLongArnFormat", 
+    #     value: "enabled", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     setting: {
+    #       name: "serviceLongArnFormat", 
+    #       value: "enabled", 
+    #       principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To modify the account settings for a specific IAM user or IAM role
+    #
+    #   # This example modifies the account setting for a specific IAM user or IAM role to opt in to the new ARN and resource ID
+    #   # format for Amazon ECS container instances. If you’re using this command as the root user, then changes apply to the
+    #   # entire AWS account, unless an IAM user or role explicitly overrides these settings for themselves.
+    #
+    #   resp = client.put_account_setting({
+    #     name: "containerInstanceLongArnFormat", 
+    #     value: "enabled", 
+    #     principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     setting: {
+    #       name: "containerInstanceLongArnFormat", 
+    #       value: "enabled", 
+    #       principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #     value: "String", # required
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -3321,6 +4070,73 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Modifies an account setting for all IAM users on an account for whom
+    # no individual account setting has been specified. Account settings are
+    # set on a per-Region basis.
+    #
+    # @option params [required, String] :name
+    #   The resource name for which to modify the account setting. If
+    #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
+    #   services is affected. If `taskLongArnFormat` is specified, the ARN and
+    #   resource ID for your Amazon ECS tasks is affected. If
+    #   `containerInstanceLongArnFormat` is specified, the ARN and resource ID
+    #   for your Amazon ECS container instances is affected. If
+    #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
+    #   container instances is affected. If `containerInsights` is specified,
+    #   the default setting for CloudWatch Container Insights for your
+    #   clusters is affected.
+    #
+    # @option params [required, String] :value
+    #   The account setting value for the specified principal ARN. Accepted
+    #   values are `enabled` and `disabled`.
+    #
+    # @return [Types::PutAccountSettingDefaultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAccountSettingDefaultResponse#setting #setting} => Types::Setting
+    #
+    #
+    # @example Example: To modify the default account settings for all IAM users or roles on an account
+    #
+    #   # This example modifies the default account setting for the specified resource for all IAM users or roles on an account.
+    #   # These changes apply to the entire AWS account, unless an IAM user or role explicitly overrides these settings for
+    #   # themselves.
+    #
+    #   resp = client.put_account_setting_default({
+    #     name: "serviceLongArnFormat", 
+    #     value: "enabled", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     setting: {
+    #       name: "serviceLongArnFormat", 
+    #       value: "enabled", 
+    #       principal_arn: "arn:aws:iam::<aws_account_id>:root", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_setting_default({
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
+    #     value: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
+    #   resp.setting.value #=> String
+    #   resp.setting.principal_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefault AWS API Documentation
+    #
+    # @overload put_account_setting_default(params = {})
+    # @param [Hash] params ({})
+    def put_account_setting_default(params = {}, options = {})
+      req = build_request(:put_account_setting_default, params)
+      req.send_request(options)
+    end
+
     # Create or update an attribute on an Amazon ECS resource. If the
     # attribute does not exist, it is created. If the attribute exists, its
     # value is replaced with the specified value. To delete an attribute,
@@ -3329,7 +4145,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -3415,12 +4231,39 @@ module Aws::ECS
     #   The container instance attributes that this container instance
     #   supports.
     #
+    # @option params [Array<Types::PlatformDevice>] :platform_devices
+    #   The devices that are available on the container instance. The only
+    #   supported device type is a GPU.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the container instance to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a maximum
-    #   character length of 128 characters, and tag values can have a maximum
-    #   length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @return [Types::RegisterContainerInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3456,6 +4299,12 @@ module Aws::ECS
     #         target_id: "String",
     #       },
     #     ],
+    #     platform_devices: [
+    #       {
+    #         id: "String", # required
+    #         type: "GPU", # required, accepts GPU
+    #       },
+    #     ],
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -3489,6 +4338,7 @@ module Aws::ECS
     #   resp.container_instance.registered_resources[0].string_set_value #=> Array
     #   resp.container_instance.registered_resources[0].string_set_value[0] #=> String
     #   resp.container_instance.status #=> String
+    #   resp.container_instance.status_reason #=> String
     #   resp.container_instance.agent_connected #=> Boolean
     #   resp.container_instance.running_tasks_count #=> Integer
     #   resp.container_instance.pending_tasks_count #=> Integer
@@ -3545,16 +4395,16 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
-    # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
     # [3]: https://docs.docker.com/engine/reference/run/#/network-settings
-    # [4]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [required, String] :family
     #   You must specify a `family` for a task definition, which allows you to
     #   track multiple versions of the same task definition. The `family` is
     #   used as a name for your task definition. Up to 255 letters (uppercase
-    #   and lowercase), numbers, hyphens, and underscores are allowed.
+    #   and lowercase), numbers, and hyphens are allowed.
     #
     # @option params [String] :task_role_arn
     #   The short name or full Amazon Resource Name (ARN) of the IAM role that
@@ -3565,7 +4415,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
     #
     # @option params [String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the task execution role that the
@@ -3617,7 +4467,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #
     # @option params [required, Array<Types::ContainerDefinition>] :container_definitions
@@ -3710,15 +4560,38 @@ module Aws::ECS
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task definition to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a maximum
-    #   character length of 128 characters, and tag values can have a maximum
-    #   length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @option params [String] :pid_mode
     #   The process namespace to use for the containers in the task. The valid
     #   values are `host` or `task`. If `host` is specified, then all
     #   containers within the tasks that specified the `host` PID mode on the
-    #   same container instance share the same IPC resources with the host
+    #   same container instance share the same process namespace with the host
     #   Amazon EC2 instance. If `task` is specified, all containers within the
     #   specified task share the same process namespace. If no value is
     #   specified, the default is a private namespace. For more information,
@@ -3776,7 +4649,30 @@ module Aws::ECS
     #
     #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
     #   [2]: https://docs.docker.com/engine/security/security/
-    #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #
+    # @option params [Types::ProxyConfiguration] :proxy_configuration
+    #   The configuration details for the App Mesh proxy.
+    #
+    #   For tasks using the EC2 launch type, the container instances require
+    #   at least version 1.26.0 of the container agent and at least version
+    #   1.26.0-1 of the `ecs-init` package to enable a proxy configuration. If
+    #   your container instances are launched from the Amazon ECS-optimized
+    #   AMI version `20190301` or later, then they contain the required
+    #   versions of the container agent and `ecs-init`. For more information,
+    #   see [Amazon ECS-optimized Linux AMI][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #   For tasks using the Fargate launch type, the task or service requires
+    #   platform version 1.3.0 or later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #
+    # @option params [Array<Types::InferenceAccelerator>] :inference_accelerators
+    #   The Elastic Inference accelerators to use for the containers in the
+    #   task.
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3908,6 +4804,8 @@ module Aws::ECS
     #               mount_options: ["String"],
     #             },
     #           ],
+    #           max_swap: 1,
+    #           swappiness: 1,
     #         },
     #         secrets: [
     #           {
@@ -3915,6 +4813,14 @@ module Aws::ECS
     #             value_from: "String", # required
     #           },
     #         ],
+    #         depends_on: [
+    #           {
+    #             container_name: "String", # required
+    #             condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
+    #           },
+    #         ],
+    #         start_timeout: 1,
+    #         stop_timeout: 1,
     #         hostname: "String",
     #         user: "String",
     #         working_directory: "String",
@@ -3943,10 +4849,16 @@ module Aws::ECS
     #           },
     #         ],
     #         log_configuration: {
-    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #           options: {
     #             "String" => "String",
     #           },
+    #           secret_options: [
+    #             {
+    #               name: "String", # required
+    #               value_from: "String", # required
+    #             },
+    #           ],
     #         },
     #         health_check: {
     #           command: ["String"], # required
@@ -3961,6 +4873,18 @@ module Aws::ECS
     #             value: "String",
     #           },
     #         ],
+    #         resource_requirements: [
+    #           {
+    #             value: "String", # required
+    #             type: "GPU", # required, accepts GPU, InferenceAccelerator
+    #           },
+    #         ],
+    #         firelens_configuration: {
+    #           type: "fluentd", # required, accepts fluentd, fluentbit
+    #           options: {
+    #             "String" => "String",
+    #           },
+    #         },
     #       },
     #     ],
     #     volumes: [
@@ -3999,6 +4923,22 @@ module Aws::ECS
     #     ],
     #     pid_mode: "host", # accepts host, task
     #     ipc_mode: "host", # accepts host, task, none
+    #     proxy_configuration: {
+    #       type: "APPMESH", # accepts APPMESH
+    #       container_name: "String", # required
+    #       properties: [
+    #         {
+    #           name: "String",
+    #           value: "String",
+    #         },
+    #       ],
+    #     },
+    #     inference_accelerators: [
+    #       {
+    #         device_name: "String", # required
+    #         device_type: "String", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4048,9 +4988,16 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.max_swap #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.swappiness #=> Integer
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.task_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].stop_timeout #=> Integer
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -4074,9 +5021,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
     #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
     #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].name #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].value_from #=> String
     #   resp.task_definition.container_definitions[0].health_check.command #=> Array
     #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
     #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
@@ -4086,6 +5036,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls #=> Array
     #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -4118,6 +5074,11 @@ module Aws::ECS
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
+    #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
+    #   resp.task_definition.proxy_configuration.container_name #=> String
+    #   resp.task_definition.proxy_configuration.properties #=> Array
+    #   resp.task_definition.proxy_configuration.properties[0].name #=> String
+    #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -4165,7 +5126,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -4229,7 +5190,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #
     # @option params [String] :platform_version
     #   The platform version the task should run. A platform version is only
@@ -4240,7 +5201,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the task. This parameter is required for
@@ -4251,14 +5212,37 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value, both
-    #   of which you define. Tag keys can have a maximum character length of
-    #   128 characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
     #   Specifies whether to enable Amazon ECS managed tags for the task. For
@@ -4267,12 +5251,18 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
-    #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the task. If no value is specified, the tags are not
-    #   propagated.
+    #   Specifies whether to propagate the tags from the task definition to
+    #   the task. If no value is specified, the tags are not propagated. Tags
+    #   can only be propagated to the task during task creation. To add tags
+    #   to a task after task creation, use the TagResource API action.
+    #
+    #   <note markdown="1"> An error will be received if you specify the `SERVICE` option when
+    #   running a task.
+    #
+    #    </note>
     #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4336,6 +5326,18 @@ module Aws::ECS
     #           cpu: 1,
     #           memory: 1,
     #           memory_reservation: 1,
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU, InferenceAccelerator
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       inference_accelerator_overrides: [
+    #         {
+    #           device_name: "String",
+    #           device_type: "String",
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -4392,6 +5394,12 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -4402,6 +5410,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].image #=> String
+    #   resp.tasks[0].containers[0].image_digest #=> String
+    #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
     #   resp.tasks[0].containers[0].reason #=> String
@@ -4415,6 +5426,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].cpu #=> String
+    #   resp.tasks[0].containers[0].memory #=> String
+    #   resp.tasks[0].containers[0].memory_reservation #=> String
+    #   resp.tasks[0].containers[0].gpu_ids #=> Array
+    #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -4442,6 +5458,9 @@ module Aws::ECS
     #   resp.tasks[0].tags #=> Array
     #   resp.tasks[0].tags[0].key #=> String
     #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].inference_accelerators #=> Array
+    #   resp.tasks[0].inference_accelerators[0].device_name #=> String
+    #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4464,7 +5483,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -4521,9 +5540,32 @@ module Aws::ECS
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value, both
-    #   of which you define. Tag keys can have a maximum character length of
-    #   128 characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
     #   Specifies whether to enable Amazon ECS managed tags for the task. For
@@ -4532,7 +5574,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
@@ -4563,6 +5605,18 @@ module Aws::ECS
     #           cpu: 1,
     #           memory: 1,
     #           memory_reservation: 1,
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU, InferenceAccelerator
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       inference_accelerator_overrides: [
+    #         {
+    #           device_name: "String",
+    #           device_type: "String",
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -4605,6 +5659,12 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -4615,6 +5675,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].image #=> String
+    #   resp.tasks[0].containers[0].image_digest #=> String
+    #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
     #   resp.tasks[0].containers[0].reason #=> String
@@ -4628,6 +5691,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].cpu #=> String
+    #   resp.tasks[0].containers[0].memory #=> String
+    #   resp.tasks[0].containers[0].memory_reservation #=> String
+    #   resp.tasks[0].containers[0].gpu_ids #=> Array
+    #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -4655,6 +5723,9 @@ module Aws::ECS
     #   resp.tasks[0].tags #=> Array
     #   resp.tasks[0].tags[0].key #=> String
     #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].inference_accelerators #=> Array
+    #   resp.tasks[0].inference_accelerators[0].device_name #=> String
+    #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4687,7 +5758,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -4695,7 +5766,7 @@ module Aws::ECS
     #   cluster is assumed.
     #
     # @option params [required, String] :task
-    #   The task ID or full ARN entry of the task to stop.
+    #   The task ID or full Amazon Resource Name (ARN) of the task to stop.
     #
     # @option params [String] :reason
     #   An optional message specified when a task is stopped. For example, if
@@ -4732,6 +5803,12 @@ module Aws::ECS
     #   resp.task.overrides.container_overrides[0].cpu #=> Integer
     #   resp.task.overrides.container_overrides[0].memory #=> Integer
     #   resp.task.overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.task.overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task.overrides.inference_accelerator_overrides #=> Array
+    #   resp.task.overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.task.overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.task.overrides.task_role_arn #=> String
     #   resp.task.overrides.execution_role_arn #=> String
     #   resp.task.last_status #=> String
@@ -4742,6 +5819,9 @@ module Aws::ECS
     #   resp.task.containers[0].container_arn #=> String
     #   resp.task.containers[0].task_arn #=> String
     #   resp.task.containers[0].name #=> String
+    #   resp.task.containers[0].image #=> String
+    #   resp.task.containers[0].image_digest #=> String
+    #   resp.task.containers[0].runtime_id #=> String
     #   resp.task.containers[0].last_status #=> String
     #   resp.task.containers[0].exit_code #=> Integer
     #   resp.task.containers[0].reason #=> String
@@ -4755,6 +5835,11 @@ module Aws::ECS
     #   resp.task.containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.task.containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.task.containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.task.containers[0].cpu #=> String
+    #   resp.task.containers[0].memory #=> String
+    #   resp.task.containers[0].memory_reservation #=> String
+    #   resp.task.containers[0].gpu_ids #=> Array
+    #   resp.task.containers[0].gpu_ids[0] #=> String
     #   resp.task.started_by #=> String
     #   resp.task.version #=> Integer
     #   resp.task.stopped_reason #=> String
@@ -4782,6 +5867,9 @@ module Aws::ECS
     #   resp.task.tags #=> Array
     #   resp.task.tags[0].key #=> String
     #   resp.task.tags[0].value #=> String
+    #   resp.task.inference_accelerators #=> Array
+    #   resp.task.inference_accelerators[0].device_name #=> String
+    #   resp.task.inference_accelerators[0].device_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -4789,6 +5877,49 @@ module Aws::ECS
     # @param [Hash] params ({})
     def stop_task(params = {}, options = {})
       req = build_request(:stop_task, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # intended for use outside of the agent.
+    #
+    #  </note>
+    #
+    # Sent to acknowledge that an attachment changed states.
+    #
+    # @option params [String] :cluster
+    #   The short name or full ARN of the cluster that hosts the container
+    #   instance the attachment belongs to.
+    #
+    # @option params [required, Array<Types::AttachmentStateChange>] :attachments
+    #   Any attachments associated with the state change request.
+    #
+    # @return [Types::SubmitAttachmentStateChangesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SubmitAttachmentStateChangesResponse#acknowledgment #acknowledgment} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.submit_attachment_state_changes({
+    #     cluster: "String",
+    #     attachments: [ # required
+    #       {
+    #         attachment_arn: "String", # required
+    #         status: "String", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.acknowledgment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitAttachmentStateChanges AWS API Documentation
+    #
+    # @overload submit_attachment_state_changes(params = {})
+    # @param [Hash] params ({})
+    def submit_attachment_state_changes(params = {}, options = {})
+      req = build_request(:submit_attachment_state_changes, params)
       req.send_request(options)
     end
 
@@ -4808,6 +5939,9 @@ module Aws::ECS
     #
     # @option params [String] :container_name
     #   The name of the container.
+    #
+    # @option params [String] :runtime_id
+    #   The ID of the Docker container.
     #
     # @option params [String] :status
     #   The status of the state change request.
@@ -4831,6 +5965,7 @@ module Aws::ECS
     #     cluster: "String",
     #     task: "String",
     #     container_name: "String",
+    #     runtime_id: "String",
     #     status: "String",
     #     exit_code: 1,
     #     reason: "String",
@@ -4906,6 +6041,8 @@ module Aws::ECS
     #     containers: [
     #       {
     #         container_name: "String",
+    #         image_digest: "String",
+    #         runtime_id: "String",
     #         exit_code: 1,
     #         network_bindings: [
     #           {
@@ -4955,8 +6092,31 @@ module Aws::ECS
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to add to the resource. A tag is an array of key-value pairs.
-    #   Tag keys can have a maximum character length of 128 characters, and
-    #   tag values can have a maximum length of 256 characters.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5044,6 +6204,61 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Modifies the settings to use for a cluster.
+    #
+    # @option params [required, String] :cluster
+    #   The name of the cluster to modify the settings for.
+    #
+    # @option params [required, Array<Types::ClusterSetting>] :settings
+    #   The setting to use by default for a cluster. This parameter is used to
+    #   enable CloudWatch Container Insights for a cluster. If this value is
+    #   specified, it will override the `containerInsights` value set with
+    #   PutAccountSetting or PutAccountSettingDefault.
+    #
+    # @return [Types::UpdateClusterSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterSettingsResponse#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_settings({
+    #     cluster: "String", # required
+    #     settings: [ # required
+    #       {
+    #         name: "containerInsights", # accepts containerInsights
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_arn #=> String
+    #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.status #=> String
+    #   resp.cluster.registered_container_instances_count #=> Integer
+    #   resp.cluster.running_tasks_count #=> Integer
+    #   resp.cluster.pending_tasks_count #=> Integer
+    #   resp.cluster.active_services_count #=> Integer
+    #   resp.cluster.statistics #=> Array
+    #   resp.cluster.statistics[0].name #=> String
+    #   resp.cluster.statistics[0].value #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.settings #=> Array
+    #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
+    #   resp.cluster.settings[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettings AWS API Documentation
+    #
+    # @overload update_cluster_settings(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_settings(params = {}, options = {})
+      req = build_request(:update_cluster_settings, params)
+      req.send_request(options)
+    end
+
     # Updates the Amazon ECS container agent on a specified container
     # instance. Updating the Amazon ECS container agent does not interrupt
     # running tasks or services on the container instance. The process for
@@ -5059,7 +6274,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -5107,6 +6322,7 @@ module Aws::ECS
     #   resp.container_instance.registered_resources[0].string_set_value #=> Array
     #   resp.container_instance.registered_resources[0].string_set_value[0] #=> String
     #   resp.container_instance.status #=> String
+    #   resp.container_instance.status_reason #=> String
     #   resp.container_instance.agent_connected #=> Boolean
     #   resp.container_instance.running_tasks_count #=> Integer
     #   resp.container_instance.pending_tasks_count #=> Integer
@@ -5139,10 +6355,14 @@ module Aws::ECS
 
     # Modifies the status of an Amazon ECS container instance.
     #
-    # You can change the status of a container instance to `DRAINING` to
-    # manually remove an instance from a cluster, for example to perform
-    # system updates, update the Docker daemon, or scale down the cluster
-    # size.
+    # Once a container instance has reached an `ACTIVE` state, you can
+    # change the status of a container instance to `DRAINING` to manually
+    # remove an instance from a cluster, for example to perform system
+    # updates, update the Docker daemon, or scale down the cluster size.
+    #
+    # A container instance cannot be changed to `DRAINING` until it has
+    # reached an `ACTIVE` status. If the instance is in any other status, an
+    # error will be received.
     #
     # When you set a container instance to `DRAINING`, Amazon ECS prevents
     # new tasks from being scheduled for placement on the container instance
@@ -5184,8 +6404,9 @@ module Aws::ECS
     # A container instance has completed draining when it has no more
     # `RUNNING` tasks. You can verify this using ListTasks.
     #
-    # When you set a container instance to `ACTIVE`, the Amazon ECS
-    # scheduler can begin scheduling tasks on the instance again.
+    # When a container instance has been drained, you can set a container
+    # instance to `ACTIVE` status and once it has reached that status the
+    # Amazon ECS scheduler can begin scheduling tasks on the instance again.
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -5197,7 +6418,12 @@ module Aws::ECS
     #
     # @option params [required, String] :status
     #   The container instance state with which to update the container
-    #   instance.
+    #   instance. The only valid values for this action are `ACTIVE` and
+    #   `DRAINING`. A container instance can only be updated to `DRAINING`
+    #   status once it has reached an `ACTIVE` state. If a container instance
+    #   is in `REGISTERING`, `DEREGISTERING`, or `REGISTRATION_FAILED` state
+    #   you can describe the container instance but will be unable to update
+    #   the container instance state.
     #
     # @return [Types::UpdateContainerInstancesStateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5209,7 +6435,7 @@ module Aws::ECS
     #   resp = client.update_container_instances_state({
     #     cluster: "String",
     #     container_instances: ["String"], # required
-    #     status: "ACTIVE", # required, accepts ACTIVE, DRAINING
+    #     status: "ACTIVE", # required, accepts ACTIVE, DRAINING, REGISTERING, DEREGISTERING, REGISTRATION_FAILED
     #   })
     #
     # @example Response structure
@@ -5238,6 +6464,7 @@ module Aws::ECS
     #   resp.container_instances[0].registered_resources[0].string_set_value #=> Array
     #   resp.container_instances[0].registered_resources[0].string_set_value[0] #=> String
     #   resp.container_instances[0].status #=> String
+    #   resp.container_instances[0].status_reason #=> String
     #   resp.container_instances[0].agent_connected #=> Boolean
     #   resp.container_instances[0].running_tasks_count #=> Integer
     #   resp.container_instances[0].pending_tasks_count #=> Integer
@@ -5284,6 +6511,12 @@ module Aws::ECS
     # updated, a new AWS CodeDeploy deployment should be created. For more
     # information, see [CreateDeployment][1] in the *AWS CodeDeploy API
     # Reference*.
+    #
+    # For services using an external deployment controller, you can update
+    # only the desired count and health check grace period using this API.
+    # If the launch type, load balancer, network configuration, platform
+    # version, or task definition need to be updated, you should create a
+    # new task set. For more information, see CreateTaskSet.
     #
     # You can add to or subtract from the number of instantiations of a task
     # definition in a service by specifying the cluster that the service is
@@ -5416,7 +6649,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [String] :platform_version
     #   The platform version on which your tasks in the service are running. A
@@ -5428,7 +6661,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [Boolean] :force_new_deployment
     #   Whether to force a new deployment of the service. Deployments are not
@@ -5444,11 +6677,11 @@ module Aws::ECS
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 1,800 seconds.
-    #   During that time, the ECS service scheduler ignores the Elastic Load
-    #   Balancing health check status. This grace period can prevent the ECS
-    #   service scheduler from marking tasks as unhealthy and stopping them
-    #   before they have time to come up.
+    #   you can specify a health check grace period of up to 2,147,483,647
+    #   seconds. During that time, the ECS service scheduler ignores the
+    #   Elastic Load Balancing health check status. This grace period can
+    #   prevent the ECS service scheduler from marking tasks as unhealthy and
+    #   stopping them before they have time to come up.
     #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5531,6 +6764,8 @@ module Aws::ECS
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
+    #   resp.service.task_sets[0].service_arn #=> String
+    #   resp.service.task_sets[0].cluster_arn #=> String
     #   resp.service.task_sets[0].started_by #=> String
     #   resp.service.task_sets[0].external_id #=> String
     #   resp.service.task_sets[0].status #=> String
@@ -5552,6 +6787,11 @@ module Aws::ECS
     #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].service_registries #=> Array
+    #   resp.service.task_sets[0].service_registries[0].registry_arn #=> String
+    #   resp.service.task_sets[0].service_registries[0].port #=> Integer
+    #   resp.service.task_sets[0].service_registries[0].container_name #=> String
+    #   resp.service.task_sets[0].service_registries[0].container_port #=> Integer
     #   resp.service.task_sets[0].scale.value #=> Float
     #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
@@ -5591,7 +6831,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
-    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
+    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY", "EXTERNAL"
     #   resp.service.tags #=> Array
     #   resp.service.tags[0].key #=> String
     #   resp.service.tags[0].value #=> String
@@ -5608,6 +6848,174 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Modifies which task set in a service is the primary task set. Any
+    # parameters that are updated on the primary task set in a service will
+    # transition to the service. This is used when a service uses the
+    # `EXTERNAL` deployment controller type. For more information, see
+    # [Amazon ECS Deployment Types][1] in the *Amazon Elastic Container
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service that the task set exists in.
+    #
+    # @option params [required, String] :service
+    #   The short name or full Amazon Resource Name (ARN) of the service that
+    #   the task set exists in.
+    #
+    # @option params [required, String] :primary_task_set
+    #   The short name or full Amazon Resource Name (ARN) of the task set to
+    #   set as the primary task set in the deployment.
+    #
+    # @return [Types::UpdateServicePrimaryTaskSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateServicePrimaryTaskSetResponse#task_set #task_set} => Types::TaskSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_service_primary_task_set({
+    #     cluster: "String", # required
+    #     service: "String", # required
+    #     primary_task_set: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_set.id #=> String
+    #   resp.task_set.task_set_arn #=> String
+    #   resp.task_set.service_arn #=> String
+    #   resp.task_set.cluster_arn #=> String
+    #   resp.task_set.started_by #=> String
+    #   resp.task_set.external_id #=> String
+    #   resp.task_set.status #=> String
+    #   resp.task_set.task_definition #=> String
+    #   resp.task_set.computed_desired_count #=> Integer
+    #   resp.task_set.pending_count #=> Integer
+    #   resp.task_set.running_count #=> Integer
+    #   resp.task_set.created_at #=> Time
+    #   resp.task_set.updated_at #=> Time
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.platform_version #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_set.load_balancers #=> Array
+    #   resp.task_set.load_balancers[0].target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].load_balancer_name #=> String
+    #   resp.task_set.load_balancers[0].container_name #=> String
+    #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.service_registries #=> Array
+    #   resp.task_set.service_registries[0].registry_arn #=> String
+    #   resp.task_set.service_registries[0].port #=> Integer
+    #   resp.task_set.service_registries[0].container_name #=> String
+    #   resp.task_set.service_registries[0].container_port #=> Integer
+    #   resp.task_set.scale.value #=> Float
+    #   resp.task_set.scale.unit #=> String, one of "PERCENT"
+    #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.task_set.stability_status_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServicePrimaryTaskSet AWS API Documentation
+    #
+    # @overload update_service_primary_task_set(params = {})
+    # @param [Hash] params ({})
+    def update_service_primary_task_set(params = {}, options = {})
+      req = build_request(:update_service_primary_task_set, params)
+      req.send_request(options)
+    end
+
+    # Modifies a task set. This is used when a service uses the `EXTERNAL`
+    # deployment controller type. For more information, see [Amazon ECS
+    # Deployment Types][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service that the task set exists in.
+    #
+    # @option params [required, String] :service
+    #   The short name or full Amazon Resource Name (ARN) of the service that
+    #   the task set exists in.
+    #
+    # @option params [required, String] :task_set
+    #   The short name or full Amazon Resource Name (ARN) of the task set to
+    #   update.
+    #
+    # @option params [required, Types::Scale] :scale
+    #   A floating-point percentage of the desired number of tasks to place
+    #   and keep running in the task set.
+    #
+    # @return [Types::UpdateTaskSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTaskSetResponse#task_set #task_set} => Types::TaskSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_task_set({
+    #     cluster: "String", # required
+    #     service: "String", # required
+    #     task_set: "String", # required
+    #     scale: { # required
+    #       value: 1.0,
+    #       unit: "PERCENT", # accepts PERCENT
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_set.id #=> String
+    #   resp.task_set.task_set_arn #=> String
+    #   resp.task_set.service_arn #=> String
+    #   resp.task_set.cluster_arn #=> String
+    #   resp.task_set.started_by #=> String
+    #   resp.task_set.external_id #=> String
+    #   resp.task_set.status #=> String
+    #   resp.task_set.task_definition #=> String
+    #   resp.task_set.computed_desired_count #=> Integer
+    #   resp.task_set.pending_count #=> Integer
+    #   resp.task_set.running_count #=> Integer
+    #   resp.task_set.created_at #=> Time
+    #   resp.task_set.updated_at #=> Time
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.platform_version #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_set.load_balancers #=> Array
+    #   resp.task_set.load_balancers[0].target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].load_balancer_name #=> String
+    #   resp.task_set.load_balancers[0].container_name #=> String
+    #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.service_registries #=> Array
+    #   resp.task_set.service_registries[0].registry_arn #=> String
+    #   resp.task_set.service_registries[0].port #=> Integer
+    #   resp.task_set.service_registries[0].container_name #=> String
+    #   resp.task_set.service_registries[0].container_port #=> Integer
+    #   resp.task_set.scale.value #=> Float
+    #   resp.task_set.scale.unit #=> String, one of "PERCENT"
+    #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.task_set.stability_status_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskSet AWS API Documentation
+    #
+    # @overload update_task_set(params = {})
+    # @param [Hash] params ({})
+    def update_task_set(params = {}, options = {})
+      req = build_request(:update_task_set, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5621,7 +7029,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -5638,7 +7046,7 @@ module Aws::ECS
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

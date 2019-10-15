@@ -8,6 +8,31 @@
 module Aws::KinesisVideo
   module Types
 
+    # The number of streams created for the account is too high.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/AccountStreamLimitExceededException AWS API Documentation
+    #
+    class AccountStreamLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Kinesis Video Streams has throttled the request because you have
+    # exceeded the limit of allowed client calls. Try making the call later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ClientLimitExceededException AWS API Documentation
+    #
+    class ClientLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateStreamInput
     #   data as a hash:
     #
@@ -17,6 +42,9 @@ module Aws::KinesisVideo
     #         media_type: "MediaType",
     #         kms_key_id: "KmsKeyId",
     #         data_retention_in_hours: 1,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] device_name
@@ -41,10 +69,6 @@ module Aws::KinesisVideo
     #   media types, see [Media Types][1]. If you choose to specify the
     #   `MediaType`, see [Naming Requirements][2] for guidelines.
     #
-    #   To play video on the console, the media must be H.264 encoded, and
-    #   you need to specify this video type in this parameter as
-    #   `video/h264`.
-    #
     #   This parameter is optional; the default value is `null` (or empty in
     #   JSON).
     #
@@ -65,7 +89,7 @@ module Aws::KinesisVideo
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #   @return [String]
     #
     # @!attribute [rw] data_retention_in_hours
@@ -83,6 +107,11 @@ module Aws::KinesisVideo
     #   is reached.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to associate with the specified stream. Each tag is a
+    #   key-value pair (the value is optional).
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateStreamInput AWS API Documentation
     #
     class CreateStreamInput < Struct.new(
@@ -90,7 +119,8 @@ module Aws::KinesisVideo
       :stream_name,
       :media_type,
       :kms_key_id,
-      :data_retention_in_hours)
+      :data_retention_in_hours,
+      :tags)
       include Aws::Structure
     end
 
@@ -176,13 +206,25 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
+    # Not implemented.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeviceStreamLimitExceededException AWS API Documentation
+    #
+    class DeviceStreamLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDataEndpointInput
     #   data as a hash:
     #
     #       {
     #         stream_name: "StreamName",
     #         stream_arn: "ResourceARN",
-    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL
+    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL
     #       }
     #
     # @!attribute [rw] stream_name
@@ -218,6 +260,42 @@ module Aws::KinesisVideo
     #
     class GetDataEndpointOutput < Struct.new(
       :data_endpoint)
+      include Aws::Structure
+    end
+
+    # The value for this input parameter is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Not implemented.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/InvalidDeviceException AWS API Documentation
+    #
+    class InvalidDeviceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The format of the `StreamARN` is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/InvalidResourceFormatException AWS API Documentation
+    #
+    class InvalidResourceFormatException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -327,6 +405,43 @@ module Aws::KinesisVideo
     class ListTagsForStreamOutput < Struct.new(
       :next_token,
       :tags)
+      include Aws::Structure
+    end
+
+    # The caller is not authorized to perform this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/NotAuthorizedException AWS API Documentation
+    #
+    class NotAuthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The stream is currently not available for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Amazon Kinesis Video Streams can't find the stream that you
+    # specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -454,6 +569,19 @@ module Aws::KinesisVideo
     #
     class TagStreamOutput < Aws::EmptyStructure; end
 
+    # You have exceeded the limit of tags that you can associate with the
+    # resource. Kinesis video streams support up to 50 tags.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagsPerResourceExceededLimitException AWS API Documentation
+    #
+    class TagsPerResourceExceededLimitException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagStreamInput
     #   data as a hash:
     #
@@ -522,7 +650,8 @@ module Aws::KinesisVideo
     #
     # @!attribute [rw] data_retention_change_in_hours
     #   The retention period, in hours. The value you specify replaces the
-    #   current value.
+    #   current value. The maximum value for this parameter is 87600 (ten
+    #   years).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateDataRetentionInput AWS API Documentation
@@ -605,6 +734,23 @@ module Aws::KinesisVideo
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateStreamOutput AWS API Documentation
     #
     class UpdateStreamOutput < Aws::EmptyStructure; end
+
+    # The stream version that you specified is not the latest version. To
+    # get the latest version, use the [DescribeStream][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeStream.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/VersionMismatchException AWS API Documentation
+    #
+    class VersionMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
   end
 end

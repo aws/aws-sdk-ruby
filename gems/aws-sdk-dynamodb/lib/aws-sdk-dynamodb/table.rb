@@ -56,7 +56,7 @@ module Aws::DynamoDB
     #   * `RANGE` - sort key
     #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   The term "hash attribute" derives from DynamoDB's usage of an
     #   internal hash function to evenly distribute data items across
     #   partitions, based on their partition key values.
     #
@@ -72,7 +72,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
     # @return [Array<Types::KeySchemaElement>]
     def key_schema
       data[:key_schema]
@@ -495,7 +495,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
     # @option options [String] :conditional_operator
     #   This is a legacy parameter. Use `ConditionExpression` instead. For
     #   more information, see [ConditionalOperator][1] in the *Amazon DynamoDB
@@ -503,7 +503,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     # @option options [String] :return_values
     #   Use `ReturnValues` if you want to get the item attributes as they
     #   appeared before they were deleted. For `DeleteItem`, the valid values
@@ -556,12 +556,12 @@ module Aws::DynamoDB
     #
     #   * Logical operators: `AND | OR | NOT`
     #
-    #   For more information on condition expressions, see [Specifying
-    #   Conditions][1] in the *Amazon DynamoDB Developer Guide*.
+    #   For more information about condition expressions, see [Condition
+    #   Expressions][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
     #   The following are some use cases for using
@@ -605,13 +605,13 @@ module Aws::DynamoDB
     #
     #    </note>
     #
-    #   For more information on expression attribute names, see [Accessing
+    #   For more information on expression attribute names, see [Specifying
     #   Item Attributes][2] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     # @option options [Hash<String,Types::AttributeValue>] :expression_attribute_values
     #   One or more values that can be substituted in an expression.
     #
@@ -631,12 +631,12 @@ module Aws::DynamoDB
     #
     #   `ProductStatus IN (:avail, :back, :disc)`
     #
-    #   For more information on expression attribute values, see [Specifying
-    #   Conditions][1] in the *Amazon DynamoDB Developer Guide*.
+    #   For more information on expression attribute values, see [Condition
+    #   Expressions][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @return [Types::DeleteItemOutput]
     def delete_item(options = {})
       options = options.merge(table_name: @name)
@@ -674,7 +674,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     # @option options [Boolean] :consistent_read
     #   Determines the read consistency model: If set to `true`, then the
     #   operation uses strongly consistent reads; otherwise, the operation
@@ -701,16 +701,16 @@ module Aws::DynamoDB
     #   JSON document. The attributes in the expression must be separated by
     #   commas.
     #
-    #   If no attribute names are specified, then all attributes will be
-    #   returned. If any of the requested attributes are not found, they will
-    #   not appear in the result.
+    #   If no attribute names are specified, then all attributes are returned.
+    #   If any of the requested attributes are not found, they do not appear
+    #   in the result.
     #
-    #   For more information, see [Accessing Item Attributes][1] in the
+    #   For more information, see [Specifying Item Attributes][1] in the
     #   *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
     #   The following are some use cases for using
@@ -754,13 +754,13 @@ module Aws::DynamoDB
     #
     #    </note>
     #
-    #   For more information on expression attribute names, see [Accessing
+    #   For more information on expression attribute names, see [Specifying
     #   Item Attributes][2] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     # @return [Types::GetItemOutput]
     def get_item(options = {})
       options = options.merge(table_name: @name)
@@ -816,7 +816,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey
     # @option options [Hash<String,Types::ExpectedAttributeValue>] :expected
     #   This is a legacy parameter. Use `ConditionExpression` instead. For
     #   more information, see [Expected][1] in the *Amazon DynamoDB Developer
@@ -824,7 +824,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
     # @option options [String] :return_values
     #   Use `ReturnValues` if you want to get the item attributes as they
     #   appeared before they were updated with the `PutItem` request. For
@@ -870,7 +870,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     # @option options [String] :condition_expression
     #   A condition that must be satisfied in order for a conditional
     #   `PutItem` operation to succeed.
@@ -886,12 +886,12 @@ module Aws::DynamoDB
     #
     #   * Logical operators: `AND | OR | NOT`
     #
-    #   For more information on condition expressions, see [Specifying
-    #   Conditions][1] in the *Amazon DynamoDB Developer Guide*.
+    #   For more information on condition expressions, see [Condition
+    #   Expressions][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
     #   The following are some use cases for using
@@ -935,13 +935,13 @@ module Aws::DynamoDB
     #
     #    </note>
     #
-    #   For more information on expression attribute names, see [Accessing
+    #   For more information on expression attribute names, see [Specifying
     #   Item Attributes][2] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     # @option options [Hash<String,Types::AttributeValue>] :expression_attribute_values
     #   One or more values that can be substituted in an expression.
     #
@@ -961,12 +961,12 @@ module Aws::DynamoDB
     #
     #   `ProductStatus IN (:avail, :back, :disc)`
     #
-    #   For more information on expression attribute values, see [Specifying
-    #   Conditions][1] in the *Amazon DynamoDB Developer Guide*.
+    #   For more information on expression attribute values, see [Condition
+    #   Expressions][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @return [Types::PutItemOutput]
     def put_item(options = {})
       options = options.merge(table_name: @name)
@@ -1023,7 +1023,7 @@ module Aws::DynamoDB
     #
     #   * `ALL_ATTRIBUTES` - Returns all of the item attributes from the
     #     specified table or index. If you query a local secondary index, then
-    #     for each matching item in the index DynamoDB will fetch the entire
+    #     for each matching item in the index, DynamoDB fetches the entire
     #     item from the parent table. If the index is configured to project
     #     all item attributes, then all of the data can be obtained from the
     #     local secondary index, and no fetching is required.
@@ -1044,7 +1044,7 @@ module Aws::DynamoDB
     #     attributes that are projected into that index, the operation will
     #     read only the index and not the table. If any of the requested
     #     attributes are not projected into the local secondary index,
-    #     DynamoDB will fetch each of these attributes from the parent table.
+    #     DynamoDB fetches each of these attributes from the parent table.
     #     This extra fetching incurs additional throughput cost and latency.
     #
     #     If you query or scan a global secondary index, you can only request
@@ -1071,14 +1071,14 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     # @option options [Integer] :limit
     #   The maximum number of items to evaluate (not necessarily the number of
     #   matching items). If DynamoDB processes the number of items up to the
     #   limit while processing the results, it stops the operation and returns
     #   the matching values up to that point, and a key in `LastEvaluatedKey`
     #   to apply in a subsequent operation, so that you can pick up where you
-    #   left off. Also, if the processed data set size exceeds 1 MB before
+    #   left off. Also, if the processed dataset size exceeds 1 MB before
     #   DynamoDB reaches this limit, it stops the operation and returns the
     #   matching values up to the limit, and a key in `LastEvaluatedKey` to
     #   apply in a subsequent operation to continue the operation. For more
@@ -1087,7 +1087,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
     # @option options [Boolean] :consistent_read
     #   Determines the read consistency model: If set to `true`, then the
     #   operation uses strongly consistent reads; otherwise, the operation
@@ -1103,7 +1103,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html
     # @option options [Hash<String,Types::Condition>] :query_filter
     #   This is a legacy parameter. Use `FilterExpression` instead. For more
     #   information, see [QueryFilter][1] in the *Amazon DynamoDB Developer
@@ -1111,7 +1111,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html
     # @option options [String] :conditional_operator
     #   This is a legacy parameter. Use `FilterExpression` instead. For more
     #   information, see [ConditionalOperator][1] in the *Amazon DynamoDB
@@ -1119,7 +1119,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     # @option options [Boolean] :scan_index_forward
     #   Specifies the order for index traversal: If `true` (default), the
     #   traversal is performed in ascending order; if `false`, the traversal
@@ -1141,7 +1141,7 @@ module Aws::DynamoDB
     #   Use the value that was returned for `LastEvaluatedKey` in the previous
     #   operation.
     #
-    #   The data type for `ExclusiveStartKey` must be String, Number or
+    #   The data type for `ExclusiveStartKey` must be String, Number, or
     #   Binary. No set data types are allowed.
     # @option options [String] :return_consumed_capacity
     #   Determines the level of detail about provisioned throughput
@@ -1174,7 +1174,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     # @option options [String] :filter_expression
     #   A string that contains conditions that DynamoDB applies after the
     #   `Query` operation, but before the data is returned to you. Items that
@@ -1194,10 +1194,10 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
     # @option options [String] :key_condition_expression
-    #   The condition that specifies the key value(s) for items to be
-    #   retrieved by the `Query` action.
+    #   The condition that specifies the key values for items to be retrieved
+    #   by the `Query` action.
     #
     #   The condition must perform an equality test on a single partition key
     #   value.
@@ -1276,8 +1276,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
     #   The following are some use cases for using
@@ -1321,13 +1321,13 @@ module Aws::DynamoDB
     #
     #    </note>
     #
-    #   For more information on expression attribute names, see [Accessing
+    #   For more information on expression attribute names, see [Specifying
     #   Item Attributes][2] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     # @option options [Hash<String,Types::AttributeValue>] :expression_attribute_values
     #   One or more values that can be substituted in an expression.
     #
@@ -1352,7 +1352,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @return [Types::QueryOutput]
     def query(options = {})
       options = options.merge(table_name: @name)
@@ -1402,23 +1402,23 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     # @option options [Integer] :limit
     #   The maximum number of items to evaluate (not necessarily the number of
     #   matching items). If DynamoDB processes the number of items up to the
     #   limit while processing the results, it stops the operation and returns
     #   the matching values up to that point, and a key in `LastEvaluatedKey`
     #   to apply in a subsequent operation, so that you can pick up where you
-    #   left off. Also, if the processed data set size exceeds 1 MB before
+    #   left off. Also, if the processed dataset size exceeds 1 MB before
     #   DynamoDB reaches this limit, it stops the operation and returns the
     #   matching values up to the limit, and a key in `LastEvaluatedKey` to
     #   apply in a subsequent operation to continue the operation. For more
-    #   information, see [Query and Scan][1] in the *Amazon DynamoDB Developer
-    #   Guide*.
+    #   information, see [Working with Queries][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
     # @option options [String] :select
     #   The attributes to be returned in the result. You can retrieve all item
     #   attributes, specific item attributes, the count of matching items, or
@@ -1427,7 +1427,7 @@ module Aws::DynamoDB
     #
     #   * `ALL_ATTRIBUTES` - Returns all of the item attributes from the
     #     specified table or index. If you query a local secondary index, then
-    #     for each matching item in the index DynamoDB will fetch the entire
+    #     for each matching item in the index, DynamoDB fetches the entire
     #     item from the parent table. If the index is configured to project
     #     all item attributes, then all of the data can be obtained from the
     #     local secondary index, and no fetching is required.
@@ -1445,11 +1445,11 @@ module Aws::DynamoDB
     #     `AttributesToGet` without specifying any value for `Select`.
     #
     #     If you query or scan a local secondary index and request only
-    #     attributes that are projected into that index, the operation will
-    #     read only the index and not the table. If any of the requested
-    #     attributes are not projected into the local secondary index,
-    #     DynamoDB will fetch each of these attributes from the parent table.
-    #     This extra fetching incurs additional throughput cost and latency.
+    #     attributes that are projected into that index, the operation reads
+    #     only the index and not the table. If any of the requested attributes
+    #     are not projected into the local secondary index, DynamoDB fetches
+    #     each of these attributes from the parent table. This extra fetching
+    #     incurs additional throughput cost and latency.
     #
     #     If you query or scan a global secondary index, you can only request
     #     attributes that are projected into the index. Global secondary index
@@ -1475,7 +1475,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html
     # @option options [String] :conditional_operator
     #   This is a legacy parameter. Use `FilterExpression` instead. For more
     #   information, see [ConditionalOperator][1] in the *Amazon DynamoDB
@@ -1483,7 +1483,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     # @option options [Hash<String,Types::AttributeValue>] :exclusive_start_key
     #   The primary key of the first item that this operation will evaluate.
     #   Use the value that was returned for `LastEvaluatedKey` in the previous
@@ -1551,12 +1551,12 @@ module Aws::DynamoDB
     #   returned. If any of the requested attributes are not found, they will
     #   not appear in the result.
     #
-    #   For more information, see [Accessing Item Attributes][1] in the
+    #   For more information, see [Specifying Item Attributes][1] in the
     #   *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     # @option options [String] :filter_expression
     #   A string that contains conditions that DynamoDB applies after the
     #   `Scan` operation, but before the data is returned to you. Items that
@@ -1573,7 +1573,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
     #   The following are some use cases for using
@@ -1617,19 +1617,19 @@ module Aws::DynamoDB
     #
     #    </note>
     #
-    #   For more information on expression attribute names, see [Accessing
+    #   For more information on expression attribute names, see [Specifying
     #   Item Attributes][2] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     # @option options [Hash<String,Types::AttributeValue>] :expression_attribute_values
     #   One or more values that can be substituted in an expression.
     #
     #   Use the **\:** (colon) character in an expression to dereference an
     #   attribute value. For example, suppose that you wanted to check whether
-    #   the value of the *ProductStatus* attribute was one of the following:
+    #   the value of the `ProductStatus` attribute was one of the following:
     #
     #   `Available | Backordered | Discontinued`
     #
@@ -1643,19 +1643,19 @@ module Aws::DynamoDB
     #
     #   `ProductStatus IN (:avail, :back, :disc)`
     #
-    #   For more information on expression attribute values, see [Specifying
-    #   Conditions][1] in the *Amazon DynamoDB Developer Guide*.
+    #   For more information on expression attribute values, see [Condition
+    #   Expressions][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @option options [Boolean] :consistent_read
     #   A Boolean value that determines the read consistency model during the
     #   scan:
     #
     #   * If `ConsistentRead` is `false`, then the data returned from `Scan`
     #     might not contain the results from other recently completed write
-    #     operations (PutItem, UpdateItem or DeleteItem).
+    #     operations (`PutItem`, `UpdateItem`, or `DeleteItem`).
     #
     #   * If `ConsistentRead` is `true`, then all of the write operations that
     #     completed before the `Scan` began are guaranteed to be contained in
@@ -1766,13 +1766,13 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html
     # @option options [Types::StreamSpecification] :stream_specification
     #   Represents the DynamoDB Streams configuration for the table.
     #
-    #   <note markdown="1"> You will receive a `ResourceInUseException` if you attempt to enable a
-    #   stream on a table that already has a stream, or if you attempt to
-    #   disable a stream on a table which does not have a stream.
+    #   <note markdown="1"> You receive a `ResourceInUseException` if you try to enable a stream
+    #   on a table that already has a stream, or if you try to disable a
+    #   stream on a table that doesn't have a stream.
     #
     #    </note>
     # @option options [Types::SSESpecification] :sse_specification
@@ -1837,7 +1837,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html
     # @option options [Hash<String,Types::ExpectedAttributeValue>] :expected
     #   This is a legacy parameter. Use `ConditionExpression` instead. For
     #   more information, see [Expected][1] in the *Amazon DynamoDB Developer
@@ -1845,7 +1845,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
     # @option options [String] :conditional_operator
     #   This is a legacy parameter. Use `ConditionExpression` instead. For
     #   more information, see [ConditionalOperator][1] in the *Amazon DynamoDB
@@ -1853,7 +1853,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     # @option options [String] :return_values
     #   Use `ReturnValues` if you want to get the item attributes as they
     #   appear before or after they are updated. For `UpdateItem`, the valid
@@ -1903,12 +1903,12 @@ module Aws::DynamoDB
     #   response. If set to `NONE` (the default), no statistics are returned.
     # @option options [String] :update_expression
     #   An expression that defines one or more attributes to be updated, the
-    #   action to be performed on them, and new value(s) for them.
+    #   action to be performed on them, and new values for them.
     #
     #   The following action values are available for `UpdateExpression`.
     #
     #   * `SET` - Adds one or more attributes and values to an item. If any of
-    #     these attribute already exist, they are replaced by the new values.
+    #     these attributes already exist, they are replaced by the new values.
     #     You can also use `SET` to add or subtract from an attribute that is
     #     of type Number. For example: `SET myNum = myNum + :val`
     #
@@ -1945,10 +1945,10 @@ module Aws::DynamoDB
     #       decrement an attribute value that doesn't exist before the
     #       update, DynamoDB uses `0` as the initial value. For example,
     #       suppose that the item you want to update doesn't have an
-    #       attribute named *itemcount*, but you decide to `ADD` the number
-    #       `3` to this attribute anyway. DynamoDB will create the *itemcount*
+    #       attribute named `itemcount`, but you decide to `ADD` the number
+    #       `3` to this attribute anyway. DynamoDB will create the `itemcount`
     #       attribute, set its initial value to `0`, and finally add `3` to
-    #       it. The result will be a new *itemcount* attribute in the item,
+    #       it. The result will be a new `itemcount` attribute in the item,
     #       with a value of `3`.
     #
     #        </note>
@@ -1987,7 +1987,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html
     # @option options [String] :condition_expression
     #   A condition that must be satisfied in order for a conditional update
     #   to succeed.
@@ -2003,12 +2003,12 @@ module Aws::DynamoDB
     #
     #   * Logical operators: `AND | OR | NOT`
     #
-    #   For more information on condition expressions, see [Specifying
+    #   For more information about condition expressions, see [Specifying
     #   Conditions][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
     #   The following are some use cases for using
@@ -2033,7 +2033,7 @@ module Aws::DynamoDB
     #   The name of this attribute conflicts with a reserved word, so it
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
-    #   Developer Guide*). To work around this, you could specify the
+    #   Developer Guide*.) To work around this, you could specify the
     #   following for `ExpressionAttributeNames`\:
     #
     #   * `\{"#P":"Percentile"\}`
@@ -2052,19 +2052,19 @@ module Aws::DynamoDB
     #
     #    </note>
     #
-    #   For more information on expression attribute names, see [Accessing
+    #   For more information about expression attribute names, see [Specifying
     #   Item Attributes][2] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     # @option options [Hash<String,Types::AttributeValue>] :expression_attribute_values
     #   One or more values that can be substituted in an expression.
     #
     #   Use the **\:** (colon) character in an expression to dereference an
     #   attribute value. For example, suppose that you wanted to check whether
-    #   the value of the *ProductStatus* attribute was one of the following:
+    #   the value of the `ProductStatus` attribute was one of the following:
     #
     #   `Available | Backordered | Discontinued`
     #
@@ -2078,12 +2078,12 @@ module Aws::DynamoDB
     #
     #   `ProductStatus IN (:avail, :back, :disc)`
     #
-    #   For more information on expression attribute values, see [Specifying
-    #   Conditions][1] in the *Amazon DynamoDB Developer Guide*.
+    #   For more information on expression attribute values, see [Condition
+    #   Expressions][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @return [Types::UpdateItemOutput]
     def update_item(options = {})
       options = options.merge(table_name: @name)

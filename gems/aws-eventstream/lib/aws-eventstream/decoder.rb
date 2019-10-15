@@ -159,7 +159,7 @@ module Aws
         end
 
         buffer.rewind
-        total_len, headers_len, _ = buffer.read.unpack("N*")
+        total_len, headers_len, _ = buffer.read.unpack('N*')
         [total_len, headers_len, buffer]
       end
 
@@ -234,15 +234,15 @@ module Aws
       # overhead decode helpers
 
       def unpack_uint32(buffer)
-        buffer.read(4).unpack("N")[0]
+        buffer.read(4).unpack('N')[0]
       end
 
       def unpack_uint16(buffer)
-        buffer.read(2).unpack("S>")[0]
+        buffer.read(2).unpack('S>')[0]
       end
 
       def unpack_uint8(buffer)
-        buffer.readbyte.unpack("C")[0]
+        buffer.readbyte.unpack('C')[0]
       end
     end
 

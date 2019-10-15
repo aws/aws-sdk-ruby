@@ -27,7 +27,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKeyRequest AWS API Documentation
@@ -150,7 +150,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -187,6 +187,18 @@ module Aws::CloudWatchLogs
     class CreateLogStreamRequest < Struct.new(
       :log_group_name,
       :log_stream_name)
+      include Aws::Structure
+    end
+
+    # The event was already logged.
+    #
+    # @!attribute [rw] expected_sequence_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DataAlreadyAcceptedException AWS API Documentation
+    #
+    class DataAlreadyAcceptedException < Struct.new(
+      :expected_sequence_token)
       include Aws::Structure
     end
 
@@ -1014,7 +1026,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1034,6 +1046,11 @@ module Aws::CloudWatchLogs
     #   all the matched log events in the first log stream are searched
     #   first, then those in the next log stream, and so on. The default is
     #   false.
+    #
+    #   **IMPORTANT:** Starting on June 17, 2019, this parameter will be
+    #   ignored and the value will be assumed to be true. The response from
+    #   this operation will always interleave events from multiple log
+    #   streams within a log group.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEventsRequest AWS API Documentation
@@ -1158,6 +1175,9 @@ module Aws::CloudWatchLogs
     #   If the value is true, the earliest log events are returned first. If
     #   the value is false, the latest log events are returned first. The
     #   default value is false.
+    #
+    #   If you are using `nextToken` in this operation, you must specify
+    #   `true` for `startFromHead`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsRequest AWS API Documentation
@@ -1309,8 +1329,12 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] status
     #   The status of the most recent running of the query. Possible values
-    #   are `Cancelled`, `Complete`, `Failed`, `Running`, `Scheduled`, and
-    #   `Unknown`.
+    #   are `Cancelled`, `Complete`, `Failed`, `Running`, `Scheduled`,
+    #   `Timeout`, and `Unknown`.
+    #
+    #   Queries time out after 15 minutes of execution. To avoid having your
+    #   queries time out, reduce the time range being searched, or partition
+    #   your query into a number of queries.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResultsResponse AWS API Documentation
@@ -1347,6 +1371,18 @@ module Aws::CloudWatchLogs
     class InputLogEvent < Struct.new(
       :timestamp,
       :message)
+      include Aws::Structure
+    end
+
+    # The sequence token is not valid.
+    #
+    # @!attribute [rw] expected_sequence_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InvalidSequenceTokenException AWS API Documentation
+    #
+    class InvalidSequenceTokenException < Struct.new(
+      :expected_sequence_token)
       include Aws::Structure
     end
 
@@ -1487,6 +1523,11 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] stored_bytes
     #   The number of bytes stored.
+    #
+    #   **IMPORTANT:** Starting on June 17, 2019, this parameter will be
+    #   deprecated for log streams, and will be reported as zero. This
+    #   change applies only to log streams. The `storedBytes` parameter for
+    #   log groups is not affected.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogStream AWS API Documentation
@@ -1500,6 +1541,27 @@ module Aws::CloudWatchLogs
       :upload_sequence_token,
       :arn,
       :stored_bytes)
+      include Aws::Structure
+    end
+
+    # The query string is not valid. Details about this error are displayed
+    # in a `QueryCompileError` object. For more information, see .
+    #
+    # For more information about valid query syntax, see [CloudWatch Logs
+    # Insights Query Syntax][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #
+    # @!attribute [rw] query_compile_error
+    #   Reserved.
+    #   @return [Types::QueryCompileError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MalformedQueryException AWS API Documentation
+    #
+    class MalformedQueryException < Struct.new(
+      :query_compile_error)
       include Aws::Structure
     end
 
@@ -1565,7 +1627,7 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # Indicates how to transform ingested log eventsto metric data in a
+    # Indicates how to transform ingested log events to metric data in a
     # CloudWatch metric.
     #
     # @note When making an API call, you may pass MetricTransformation
@@ -1822,7 +1884,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] policy_document
     #   Details of the new policy, including the identity of the principal
     #   that is enabled to put logs to this account. This is formatted as a
-    #   JSON string.
+    #   JSON string. This parameter is required.
     #
     #   The following example creates a resource policy enabling the Route
     #   53 service to put DNS query logs in to the specified log group.
@@ -2137,7 +2199,8 @@ module Aws::CloudWatchLogs
     #   data as a hash:
     #
     #       {
-    #         log_group_name: "LogGroupName", # required
+    #         log_group_name: "LogGroupName",
+    #         log_group_names: ["LogGroupName"],
     #         start_time: 1, # required
     #         end_time: 1, # required
     #         query_string: "QueryString", # required
@@ -2146,17 +2209,30 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] log_group_name
     #   The log group on which to perform the query.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
     #   @return [String]
     #
+    # @!attribute [rw] log_group_names
+    #   The list of log groups to be queried. You can include up to 20 log
+    #   groups.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] start_time
-    #   The time to start the query. Specified as epoch time, the number of
-    #   seconds since January 1, 1970, 00:00:00 UTC.
+    #   The beginning of the time range to query. The range is inclusive, so
+    #   the specified start time is included in the query. Specified as
+    #   epoch time, the number of seconds since January 1, 1970, 00:00:00
+    #   UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
-    #   The time to end this query, if it is still running. Specified as
-    #   epoch time, the number of seconds since January 1, 1970, 00:00:00
-    #   UTC.
+    #   The end of the time range to query. The range is inclusive, so the
+    #   specified end time is included in the query. Specified as epoch
+    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] query_string
@@ -2165,7 +2241,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -2178,6 +2254,7 @@ module Aws::CloudWatchLogs
     #
     class StartQueryRequest < Struct.new(
       :log_group_name,
+      :log_group_names,
       :start_time,
       :end_time,
       :query_string,

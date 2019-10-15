@@ -11,7 +11,7 @@ module Aws::KMS
     # Contains information about an alias.
     #
     # @!attribute [rw] alias_name
-    #   String that contains the alias.
+    #   String that contains the alias. This value begins with `alias/`.
     #   @return [String]
     #
     # @!attribute [rw] alias_arn
@@ -28,6 +28,19 @@ module Aws::KMS
       :alias_name,
       :alias_arn,
       :target_key_id)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create a resource
+    # that already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -74,6 +87,143 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because the specified AWS CloudHSM cluster is
+    # already associated with a custom key store or it shares a backup
+    # history with a cluster that is associated with a custom key store.
+    # Each custom key store must be associated with a different AWS CloudHSM
+    # cluster.
+    #
+    # Clusters that share a backup history have the same cluster
+    # certificate. To view the cluster certificate of a cluster, use the
+    # [DescribeClusters][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CloudHsmClusterInUseException AWS API Documentation
+    #
+    class CloudHsmClusterInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the associated AWS CloudHSM cluster
+    # did not meet the configuration requirements for a custom key store.
+    #
+    # * The cluster must be configured with private subnets in at least two
+    #   different Availability Zones in the Region.
+    #
+    # * The [security group for the cluster][1]
+    #   (cloudhsm-cluster-*&lt;cluster-id&gt;*-sg) must include inbound
+    #   rules and outbound rules that allow TCP traffic on ports 2223-2225.
+    #   The **Source** in the inbound rules and the **Destination** in the
+    #   outbound rules must match the security group ID. These rules are set
+    #   by default when you create the cluster. Do not delete or change
+    #   them. To get information about a particular security group, use the
+    #   [DescribeSecurityGroups][2] operation.
+    #
+    # * The cluster must contain at least as many HSMs as the operation
+    #   requires. To add HSMs, use the AWS CloudHSM [CreateHsm][3]
+    #   operation.
+    #
+    #   For the CreateCustomKeyStore, UpdateCustomKeyStore, and CreateKey
+    #   operations, the AWS CloudHSM cluster must have at least two active
+    #   HSMs, each in a different Availability Zone. For the
+    #   ConnectCustomKeyStore operation, the AWS CloudHSM must contain at
+    #   least one active HSM.
+    #
+    # For information about the requirements for an AWS CloudHSM cluster
+    # that is associated with a custom key store, see [Assemble the
+    # Prerequisites][4] in the *AWS Key Management Service Developer Guide*.
+    # For information about creating a private subnet for an AWS CloudHSM
+    # cluster, see [Create a Private Subnet][5] in the *AWS CloudHSM User
+    # Guide*. For information about cluster security groups, see [Configure
+    # a Default Security Group][1] in the <i> <i>AWS CloudHSM User Guide</i>
+    # </i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html
+    # [3]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/create-subnets.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CloudHsmClusterInvalidConfigurationException AWS API Documentation
+    #
+    class CloudHsmClusterInvalidConfigurationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the AWS CloudHSM cluster that is
+    # associated with the custom key store is not active. Initialize and
+    # activate the cluster and try the command again. For detailed
+    # instructions, see [Getting Started][1] in the *AWS CloudHSM User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/getting-started.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CloudHsmClusterNotActiveException AWS API Documentation
+    #
+    class CloudHsmClusterNotActiveException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because AWS KMS cannot find the AWS CloudHSM
+    # cluster with the specified cluster ID. Retry the request with a
+    # different cluster ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CloudHsmClusterNotFoundException AWS API Documentation
+    #
+    class CloudHsmClusterNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified AWS CloudHSM cluster
+    # has a different cluster certificate than the original cluster. You
+    # cannot use the operation to specify an unrelated cluster.
+    #
+    # Specify a cluster that shares a backup history with the original
+    # cluster. This includes clusters that were created from a backup of the
+    # current cluster, and clusters that were created from the same backup
+    # that produced the current cluster.
+    #
+    # Clusters that share a backup history have the same cluster
+    # certificate. To view the cluster certificate of a cluster, use the
+    # [DescribeClusters][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CloudHsmClusterNotRelatedException AWS API Documentation
+    #
+    class CloudHsmClusterNotRelatedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ConnectCustomKeyStoreRequest
     #   data as a hash:
     #
@@ -107,26 +257,22 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] alias_name
-    #   String that contains the display name. The name must start with the
-    #   word "alias" followed by a forward slash (alias/). Aliases that
-    #   begin with "alias/AWS" are reserved.
+    #   Specifies the alias name. This value must begin with `alias/`
+    #   followed by a name, such as `alias/ExampleAlias`. The alias name
+    #   cannot begin with `alias/aws/`. The `alias/aws/` prefix is reserved
+    #   for AWS managed CMKs.
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
-    #   Identifies the CMK for which you are creating the alias. This value
-    #   cannot be an alias.
+    #   Identifies the CMK to which the alias refers. Specify the key ID or
+    #   the Amazon Resource Name (ARN) of the CMK. You cannot specify
+    #   another alias. For help finding the key ID and ARN, see [Finding the
+    #   Key ID and ARN][1] in the *AWS Key Management Service Developer
+    #   Guide*.
     #
-    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   For example:
     #
-    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
-    #
-    #   * Key ARN:
-    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
-    #
-    #   To get the key ID and key ARN for a CMK, use ListKeys or
-    #   DescribeKey.
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAliasRequest AWS API Documentation
@@ -160,7 +306,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #   [1]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
     #   @return [String]
     #
     # @!attribute [rw] trust_anchor_certificate
@@ -170,7 +316,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html
+    #   [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html
     #   @return [String]
     #
     # @!attribute [rw] key_store_password
@@ -183,7 +329,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateCustomKeyStoreRequest AWS API Documentation
@@ -258,8 +404,8 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
     #   @return [String]
     #
     # @!attribute [rw] retiring_principal
@@ -275,8 +421,8 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
     #   @return [String]
     #
     # @!attribute [rw] operations
@@ -284,14 +430,15 @@ module Aws::KMS
     #   @return [Array<String>]
     #
     # @!attribute [rw] constraints
-    #   A structure that you can use to allow certain operations in the
-    #   grant only when the desired encryption context is present. For more
-    #   information about encryption context, see [Encryption Context][1] in
-    #   the *AWS Key Management Service Developer Guide*.
+    #   Allows a cryptographic operation only when the encryption context
+    #   matches or includes the encryption context specified in this
+    #   structure. For more information about encryption context, see
+    #   [Encryption Context][1] in the <i> <i>AWS Key Management Service
+    #   Developer Guide</i> </i>.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #   @return [Types::GrantConstraints]
     #
     # @!attribute [rw] grant_tokens
@@ -302,12 +449,13 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
     #   A friendly name for identifying the grant. Use this value to prevent
-    #   unintended creation of duplicate grants when retrying this request.
+    #   the unintended creation of duplicate grants when retrying this
+    #   request.
     #
     #   When this value is absent, all `CreateGrant` requests result in a
     #   new grant with a unique `GrantId` even if all the supplied
@@ -343,7 +491,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [String]
     #
     # @!attribute [rw] grant_id
@@ -389,7 +537,8 @@ module Aws::KMS
     #     request to make a subsequent PutKeyPolicy request on the CMK. This
     #     reduces the risk that the CMK becomes unmanageable. For more
     #     information, refer to the scenario in the [Default Key Policy][1]
-    #     section of the *AWS Key Management Service Developer Guide*.
+    #     section of the <i> <i>AWS Key Management Service Developer
+    #     Guide</i> </i>.
     #
     #   * Each statement in the key policy must contain one or more
     #     principals. The principals in the key policy must exist and be
@@ -409,9 +558,9 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [3]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -422,14 +571,14 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_usage
-    #   The intended use of the CMK.
-    #
-    #   You can use CMKs only for symmetric encryption and decryption.
+    #   The cryptographic operations for which you can use the CMK. The only
+    #   valid value is `ENCRYPT_DECRYPT`, which means you can use the CMK to
+    #   encrypt and decrypt data.
     #   @return [String]
     #
     # @!attribute [rw] origin
-    #   The source of the CMK's key material. You cannot change the origin
-    #   after you create the CMK.
+    #   The source of the key material for the CMK. You cannot change the
+    #   origin after you create the CMK.
     #
     #   The default is `AWS_KMS`, which means AWS KMS creates the key
     #   material in its own key store.
@@ -441,14 +590,14 @@ module Aws::KMS
     #   in the *AWS Key Management Service Developer Guide*.
     #
     #   When the parameter value is `AWS_CLOUDHSM`, AWS KMS creates the CMK
-    #   in a AWS KMS [custom key store][2] and creates its key material in
+    #   in an AWS KMS [custom key store][2] and creates its key material in
     #   the associated AWS CloudHSM cluster. You must also use the
     #   `CustomKeyStoreId` parameter to identify the custom key store.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #   @return [String]
     #
     # @!attribute [rw] custom_key_store_id
@@ -465,15 +614,14 @@ module Aws::KMS
     #   The response includes the custom key store ID and the ID of the AWS
     #   CloudHSM cluster.
     #
-    #   This operation is part of the [Custom Key Store feature][2] feature
+    #   This operation is part of the [Custom Key Store feature][1] feature
     #   in AWS KMS, which combines the convenience and extensive integration
     #   of AWS KMS with the isolation and control of a single-tenant key
     #   store.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
-    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_policy_lockout_safety_check
@@ -484,8 +632,8 @@ module Aws::KMS
     #   unmanageable. Do not set this value to true indiscriminately.
     #
     #    For more information, refer to the scenario in the [Default Key
-    #   Policy][1] section in the *AWS Key Management Service Developer
-    #   Guide*.
+    #   Policy][1] section in the <i> <i>AWS Key Management Service
+    #   Developer Guide</i> </i>.
     #
     #   Use this parameter only when you include a policy in the request and
     #   you intend to prevent the principal that is making the request from
@@ -495,7 +643,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -532,6 +680,77 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because the custom key store contains AWS KMS
+    # customer master keys (CMKs). After verifying that you do not need to
+    # use the CMKs, use the ScheduleKeyDeletion operation to delete the
+    # CMKs. After they are deleted, you can delete the custom key store.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoreHasCMKsException AWS API Documentation
+    #
+    class CustomKeyStoreHasCMKsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because of the `ConnectionState` of the
+    # custom key store. To get the `ConnectionState` of a custom key store,
+    # use the DescribeCustomKeyStores operation.
+    #
+    # This exception is thrown under the following conditions:
+    #
+    # * You requested the CreateKey or GenerateRandom operation in a custom
+    #   key store that is not connected. These operations are valid only
+    #   when the custom key store `ConnectionState` is `CONNECTED`.
+    #
+    # * You requested the UpdateCustomKeyStore or DeleteCustomKeyStore
+    #   operation on a custom key store that is not disconnected. This
+    #   operation is valid only when the custom key store `ConnectionState`
+    #   is `DISCONNECTED`.
+    #
+    # * You requested the ConnectCustomKeyStore operation on a custom key
+    #   store with a `ConnectionState` of `DISCONNECTING` or `FAILED`. This
+    #   operation is valid for all other `ConnectionState` values.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoreInvalidStateException AWS API Documentation
+    #
+    class CustomKeyStoreInvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified custom key store name
+    # is already assigned to another custom key store in the account. Try
+    # again with a custom key store name that is unique in the account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoreNameInUseException AWS API Documentation
+    #
+    class CustomKeyStoreNameInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because AWS KMS cannot find a custom key
+    # store with the specified key store name or ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoreNotFoundException AWS API Documentation
+    #
+    class CustomKeyStoreNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about each custom key store in the custom key
     # store list.
     #
@@ -555,7 +774,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr
+    #   [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr
     #   @return [String]
     #
     # @!attribute [rw] connection_state
@@ -578,7 +797,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
     #   @return [String]
     #
     # @!attribute [rw] connection_error_code
@@ -591,6 +810,11 @@ module Aws::KMS
     #     does not contain any active HSMs. To connect a custom key store to
     #     its AWS CloudHSM cluster, the cluster must contain at least one
     #     active HSM.
+    #
+    #   * `INTERNAL_ERROR` - AWS KMS could not complete the request due to
+    #     an internal error. Retry the request. For `ConnectCustomKeyStore`
+    #     requests, disconnect the custom key store before trying to connect
+    #     again.
     #
     #   * `INVALID_CREDENTIALS` - AWS KMS does not have the correct password
     #     for the `kmsuser` crypto user in the AWS CloudHSM cluster.
@@ -609,7 +833,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -651,7 +875,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] grant_tokens
@@ -662,7 +886,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptRequest AWS API Documentation
@@ -681,7 +905,7 @@ module Aws::KMS
     #
     # @!attribute [rw] plaintext
     #   Decrypted plaintext data. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encdoded. Otherwise, it is not encoded.
+    #   the value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptResponse AWS API Documentation
@@ -700,9 +924,8 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] alias_name
-    #   The alias to be deleted. The name must start with the word "alias"
-    #   followed by a forward slash (alias/). Aliases that begin with
-    #   "alias/aws" are reserved.
+    #   The alias to be deleted. The alias name must begin with `alias/`
+    #   followed by the alias name, such as `alias/ExampleAlias`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteAliasRequest AWS API Documentation
@@ -743,8 +966,8 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The identifier of the CMK whose key material to delete. The CMK's
-    #   `Origin` must be `EXTERNAL`.
+    #   Identifies the CMK from which you are deleting imported key
+    #   material. The `Origin` of the CMK must be `EXTERNAL`.
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
@@ -763,6 +986,19 @@ module Aws::KMS
     #
     class DeleteImportedKeyMaterialRequest < Struct.new(
       :key_id)
+      include Aws::Structure
+    end
+
+    # The system timed out while trying to fulfill the request. The request
+    # can be retried.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DependencyTimeoutException AWS API Documentation
+    #
+    class DependencyTimeoutException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -830,8 +1066,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in this
-    #   response to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in
+    #   thisresponse to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeCustomKeyStoresResponse AWS API Documentation
@@ -860,7 +1096,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -879,7 +1115,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -890,7 +1126,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKeyRequest AWS API Documentation
@@ -969,6 +1205,18 @@ module Aws::KMS
     #
     class DisableKeyRotationRequest < Struct.new(
       :key_id)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified CMK is not enabled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisabledException AWS API Documentation
+    #
+    class DisabledException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1073,7 +1321,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -1103,7 +1351,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] grant_tokens
@@ -1114,7 +1362,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptRequest AWS API Documentation
@@ -1129,7 +1377,7 @@ module Aws::KMS
 
     # @!attribute [rw] ciphertext_blob
     #   The encrypted plaintext. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encdoded. Otherwise, it is not encoded.
+    #   the value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -1141,6 +1389,21 @@ module Aws::KMS
     class EncryptResponse < Struct.new(
       :ciphertext_blob,
       :key_id)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the provided import token is expired.
+    # Use GetParametersForImport to get a new import token and public key,
+    # use the new public key to encrypt the key material, and then try the
+    # request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ExpiredImportTokenException AWS API Documentation
+    #
+    class ExpiredImportTokenException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1158,12 +1421,11 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The identifier of the CMK under which to generate and encrypt the
-    #   data encryption key.
+    #   An identifier for the CMK that encrypts the data key.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -1190,20 +1452,19 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] number_of_bytes
-    #   The length of the data encryption key in bytes. For example, use the
-    #   value 64 to generate a 512-bit data key (64 bytes is 512 bits). For
-    #   common key lengths (128-bit and 256-bit symmetric keys), we
-    #   recommend that you use the `KeySpec` field instead of this one.
+    #   The length of the data key in bytes. For example, use the value 64
+    #   to generate a 512-bit data key (64 bytes is 512 bits). For common
+    #   key lengths (128-bit and 256-bit symmetric keys), we recommend that
+    #   you use the `KeySpec` field instead of this one.
     #   @return [Integer]
     #
     # @!attribute [rw] key_spec
-    #   The length of the data encryption key. Use `AES_128` to generate a
-    #   128-bit symmetric key, or `AES_256` to generate a 256-bit symmetric
-    #   key.
+    #   The length of the data key. Use `AES_128` to generate a 128-bit
+    #   symmetric key, or `AES_256` to generate a 256-bit symmetric key.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -1214,7 +1475,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyRequest AWS API Documentation
@@ -1229,20 +1490,19 @@ module Aws::KMS
     end
 
     # @!attribute [rw] ciphertext_blob
-    #   The encrypted data encryption key. When you use the HTTP API or the
-    #   AWS CLI, the value is Base64-encdoded. Otherwise, it is not encoded.
+    #   The encrypted copy of the data key. When you use the HTTP API or the
+    #   AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] plaintext
-    #   The data encryption key. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encdoded. Otherwise, it is not encoded. Use this
-    #   data key for local encryption and decryption, then remove it from
+    #   The plaintext data key. When you use the HTTP API or the AWS CLI,
+    #   the value is Base64-encoded. Otherwise, it is not encoded. Use this
+    #   data key to encrypt your data outside of KMS. Then, remove it from
     #   memory as soon as possible.
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The identifier of the CMK under which the data encryption key was
-    #   generated and encrypted.
+    #   The identifier of the CMK that encrypted the data key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyResponse AWS API Documentation
@@ -1268,12 +1528,12 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The identifier of the customer master key (CMK) under which to
-    #   generate and encrypt the data encryption key.
+    #   The identifier of the customer master key (CMK) that encrypts the
+    #   data key.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -1300,20 +1560,19 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] key_spec
-    #   The length of the data encryption key. Use `AES_128` to generate a
-    #   128-bit symmetric key, or `AES_256` to generate a 256-bit symmetric
-    #   key.
+    #   The length of the data key. Use `AES_128` to generate a 128-bit
+    #   symmetric key, or `AES_256` to generate a 256-bit symmetric key.
     #   @return [String]
     #
     # @!attribute [rw] number_of_bytes
-    #   The length of the data encryption key in bytes. For example, use the
-    #   value 64 to generate a 512-bit data key (64 bytes is 512 bits). For
-    #   common key lengths (128-bit and 256-bit symmetric keys), we
-    #   recommend that you use the `KeySpec` field instead of this one.
+    #   The length of the data key in bytes. For example, use the value 64
+    #   to generate a 512-bit data key (64 bytes is 512 bits). For common
+    #   key lengths (128-bit and 256-bit symmetric keys), we recommend that
+    #   you use the `KeySpec` field instead of this one.
     #   @return [Integer]
     #
     # @!attribute [rw] grant_tokens
@@ -1324,7 +1583,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintextRequest AWS API Documentation
@@ -1339,13 +1598,12 @@ module Aws::KMS
     end
 
     # @!attribute [rw] ciphertext_blob
-    #   The encrypted data encryption key. When you use the HTTP API or the
-    #   AWS CLI, the value is Base64-encdoded. Otherwise, it is not encoded.
+    #   The encrypted data key. When you use the HTTP API or the AWS CLI,
+    #   the value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The identifier of the CMK under which the data encryption key was
-    #   generated and encrypted.
+    #   The identifier of the CMK that encrypted the data key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintextResponse AWS API Documentation
@@ -1375,7 +1633,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomRequest AWS API Documentation
@@ -1388,7 +1646,7 @@ module Aws::KMS
 
     # @!attribute [rw] plaintext
     #   The random byte string. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encdoded. Otherwise, it is not encoded.
+    #   the value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomResponse AWS API Documentation
@@ -1522,7 +1780,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html
     #   @return [String]
     #
     # @!attribute [rw] wrapping_key_spec
@@ -1571,23 +1829,46 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # A structure that you can use to allow certain operations in the grant
-    # only when the desired encryption context is present. For more
-    # information about encryption context, see [Encryption Context][1] in
-    # the *AWS Key Management Service Developer Guide*.
+    # Use this structure to allow cryptographic operations in the grant only
+    # when the operation request includes the specified [encryption
+    # context][1].
     #
-    # Grant constraints apply only to operations that accept encryption
-    # context as input. For example, the ` DescribeKey ` operation does not
-    # accept encryption context as input. A grant that allows the
-    # `DescribeKey` operation does so regardless of the grant constraints.
-    # In constrast, the ` Encrypt ` operation accepts encryption context as
-    # input. A grant that allows the `Encrypt` operation does so only when
-    # the encryption context of the `Encrypt` operation satisfies the grant
-    # constraints.
+    # AWS KMS applies the grant constraints only when the grant allows a
+    # cryptographic operation that accepts an encryption context as input,
+    # such as the following.
+    #
+    # * Encrypt
+    #
+    # * Decrypt
+    #
+    # * GenerateDataKey
+    #
+    # * GenerateDataKeyWithoutPlaintext
+    #
+    # * ReEncrypt
+    #
+    # AWS KMS does not apply the grant constraints to other operations, such
+    # as DescribeKey or ScheduleKeyDeletion.
+    #
+    # In a cryptographic operation, the encryption context in the decryption
+    # operation must be an exact, case-sensitive match for the keys and
+    # values in the encryption context of the encryption operation. Only the
+    # order of the pairs can vary.
+    #
+    #  However, in a grant constraint, the key in each key-value pair is not
+    # case sensitive, but the value is case sensitive.
+    #
+    #  To avoid confusion, do not use multiple encryption context pairs that
+    # differ only by case. To require a fully case-sensitive encryption
+    # context, use the `kms:EncryptionContext:` and
+    # `kms:EncryptionContextKeys` conditions in an IAM or key policy. For
+    # details, see [kms:EncryptionContext:][2] in the <i> <i>AWS Key
+    # Management Service Developer Guide</i> </i>.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-context
     #
     # @note When making an API call, you may pass GrantConstraints
     #   data as a hash:
@@ -1602,20 +1883,18 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] encryption_context_subset
-    #   A list of key-value pairs, all of which must be present in the
-    #   encryption context of certain subsequent operations that the grant
-    #   allows. When certain subsequent operations allowed by the grant
-    #   include encryption context that matches this list or is a superset
-    #   of this list, the grant allows the operation. Otherwise, the grant
-    #   does not allow the operation.
+    #   A list of key-value pairs that must be included in the encryption
+    #   context of the cryptographic operation request. The grant allows the
+    #   cryptographic operation only when the encryption context in the
+    #   request includes the key-value pairs specified in this constraint,
+    #   although it can include additional key-value pairs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] encryption_context_equals
-    #   A list of key-value pairs that must be present in the encryption
-    #   context of certain subsequent operations that the grant allows. When
-    #   certain subsequent operations allowed by the grant include
-    #   encryption context that matches this list, the grant allows the
-    #   operation. Otherwise, the grant does not allow the operation.
+    #   A list of key-value pairs that must match the encryption context in
+    #   the cryptographic operation request. The grant allows the operation
+    #   only when the encryption context in the request is the same as the
+    #   encryption context specified in this constraint.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GrantConstraints AWS API Documentation
@@ -1756,6 +2035,180 @@ module Aws::KMS
     #
     class ImportKeyMaterialResponse < Aws::EmptyStructure; end
 
+    # The request was rejected because the provided key material is invalid
+    # or is not the same key material that was previously imported into this
+    # customer master key (CMK).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/IncorrectKeyMaterialException AWS API Documentation
+    #
+    class IncorrectKeyMaterialException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the trust anchor certificate in the
+    # request is not the trust anchor certificate for the specified AWS
+    # CloudHSM cluster.
+    #
+    # When you [initialize the cluster][1], you create the trust anchor
+    # certificate and save it in the `customerCA.crt` file.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/IncorrectTrustAnchorException AWS API Documentation
+    #
+    class IncorrectTrustAnchorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified alias name is not
+    # valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidAliasNameException AWS API Documentation
+    #
+    class InvalidAliasNameException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because a specified ARN, or an ARN in a key
+    # policy, is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidArnException AWS API Documentation
+    #
+    class InvalidArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified ciphertext, or
+    # additional authenticated data incorporated into the ciphertext, such
+    # as the encryption context, is corrupted, missing, or otherwise
+    # invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidCiphertextException AWS API Documentation
+    #
+    class InvalidCiphertextException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified `GrantId` is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidGrantIdException AWS API Documentation
+    #
+    class InvalidGrantIdException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified grant token is not
+    # valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidGrantTokenException AWS API Documentation
+    #
+    class InvalidGrantTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the provided import token is invalid
+    # or is associated with a different customer master key (CMK).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidImportTokenException AWS API Documentation
+    #
+    class InvalidImportTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified `KeySpec` value is not
+    # valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidKeyUsageException AWS API Documentation
+    #
+    class InvalidKeyUsageException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the marker that specifies where
+    # pagination should next begin is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidMarkerException AWS API Documentation
+    #
+    class InvalidMarkerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an internal exception occurred. The
+    # request can be retried.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KMSInternalException AWS API Documentation
+    #
+    class KMSInternalException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the state of the specified resource
+    # is not valid for this request.
+    #
+    # For more information about how key state affects the use of a CMK, see
+    # [How Key State Affects Use of a Customer Master Key][1] in the *AWS
+    # Key Management Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KMSInvalidStateException AWS API Documentation
+    #
+    class KMSInvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about each entry in the key list.
     #
     # @!attribute [rw] key_id
@@ -1794,7 +2247,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -1811,9 +2264,9 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_usage
-    #   The cryptographic operations for which you can use the CMK.
-    #   Currently the only allowed value is `ENCRYPT_DECRYPT`, which means
-    #   you can use the CMK for the Encrypt and Decrypt operations.
+    #   The cryptographic operations for which you can use the CMK. The only
+    #   valid value is `ENCRYPT_DECRYPT`, which means you can use the CMK to
+    #   encrypt and decrypt data.
     #   @return [String]
     #
     # @!attribute [rw] key_state
@@ -1825,7 +2278,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #   @return [String]
     #
     # @!attribute [rw] deletion_date
@@ -1857,7 +2310,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #   @return [String]
     #
     # @!attribute [rw] cloud_hsm_cluster_id
@@ -1869,7 +2322,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #   @return [String]
     #
     # @!attribute [rw] expiration_model
@@ -1879,13 +2332,14 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_manager
-    #   The CMK's manager. CMKs are either customer-managed or AWS-managed.
-    #   For more information about the difference, see [Customer Master
-    #   Keys][1] in the *AWS Key Management Service Developer Guide*.
+    #   The manager of the CMK. CMKs in your AWS account are either customer
+    #   managed or AWS managed. For more information about the difference,
+    #   see [Customer Master Keys][1] in the *AWS Key Management Service
+    #   Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyMetadata AWS API Documentation
@@ -1906,6 +2360,37 @@ module Aws::KMS
       :cloud_hsm_cluster_id,
       :expiration_model,
       :key_manager)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified CMK was not available.
+    # The request can be retried.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyUnavailableException AWS API Documentation
+    #
+    class KeyUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because a limit was exceeded. For more
+    # information, see [Limits][1] in the *AWS Key Management Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1965,8 +2450,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in this
-    #   response to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in
+    #   thisresponse to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesResponse AWS API Documentation
@@ -2041,8 +2526,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in this
-    #   response to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in
+    #   thisresponse to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsResponse AWS API Documentation
@@ -2088,7 +2573,7 @@ module Aws::KMS
     #   and 1000, inclusive. If you do not include a value, it defaults to
     #   100.
     #
-    #   Currently only 1 policy can be attached to a key.
+    #   Only one policy can be attached to a key.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -2107,8 +2592,7 @@ module Aws::KMS
     end
 
     # @!attribute [rw] policy_names
-    #   A list of key policy names. Currently, there is only one key policy
-    #   per CMK and it is always named `default`.
+    #   A list of key policy names. The only valid value is `default`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_marker
@@ -2119,8 +2603,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in this
-    #   response to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in
+    #   thisresponse to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesResponse AWS API Documentation
@@ -2176,8 +2660,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in this
-    #   response to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in
+    #   thisresponse to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysResponse AWS API Documentation
@@ -2255,8 +2739,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in this
-    #   response to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in
+    #   thisresponse to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTagsResponse AWS API Documentation
@@ -2305,8 +2789,8 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListRetirableGrantsRequest AWS API Documentation
@@ -2315,6 +2799,32 @@ module Aws::KMS
       :limit,
       :marker,
       :retiring_principal)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified policy is not
+    # syntactically or semantically correct.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/MalformedPolicyDocumentException AWS API Documentation
+    #
+    class MalformedPolicyDocumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified entity or resource
+    # could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2375,8 +2885,8 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
     #   @return [String]
     #
     # @!attribute [rw] bypass_policy_lockout_safety_check
@@ -2398,7 +2908,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicyRequest AWS API Documentation
@@ -2440,7 +2950,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -2470,7 +2980,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncryptRequest AWS API Documentation
@@ -2486,7 +2996,7 @@ module Aws::KMS
 
     # @!attribute [rw] ciphertext_blob
     #   The reencrypted data. When you use the HTTP API or the AWS CLI, the
-    #   value is Base64-encdoded. Otherwise, it is not encoded.
+    #   value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] source_key_id
@@ -2651,7 +3161,7 @@ module Aws::KMS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -2674,6 +3184,18 @@ module Aws::KMS
     class Tag < Struct.new(
       :tag_key,
       :tag_value)
+      include Aws::Structure
+    end
+
+    # The request was rejected because one or more tags are not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagException AWS API Documentation
+    #
+    class TagException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2715,6 +3237,19 @@ module Aws::KMS
     class TagResourceRequest < Struct.new(
       :key_id,
       :tags)
+      include Aws::Structure
+    end
+
+    # The request was rejected because a specified parameter is not
+    # supported or a specified resource is not valid for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2763,14 +3298,15 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] alias_name
-    #   String that contains the name of the alias to be modified. The name
-    #   must start with the word "alias" followed by a forward slash
-    #   (alias/). Aliases that begin with "alias/aws" are reserved.
+    #   Specifies the name of the alias to change. This value must begin
+    #   with `alias/` followed by the alias name, such as
+    #   `alias/ExampleAlias`.
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
-    #   Unique identifier of the customer master key to be mapped to the
-    #   alias.
+    #   Unique identifier of the customer master key (CMK) to be mapped to
+    #   the alias. When the update operation completes, the alias will point
+    #   to this CMK.
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
@@ -2831,17 +3367,18 @@ module Aws::KMS
     #   Associates the custom key store with a related AWS CloudHSM cluster.
     #
     #   Enter the cluster ID of the cluster that you used to create the
-    #   custom key store or a cluster that shares a backup history with the
-    #   original cluster. You cannot use this parameter to associate a
-    #   custom key store with a different cluster.
+    #   custom key store or a cluster that shares a backup history and has
+    #   the same cluster certificate as the original cluster. You cannot use
+    #   this parameter to associate a custom key store with an unrelated
+    #   cluster. In addition, the replacement cluster must [fulfill the
+    #   requirements][1] for a cluster associated with a custom key store.
+    #   To view the cluster certificate of a cluster, use the
+    #   [DescribeClusters][2] operation.
     #
-    #   Clusters that share a backup history have the same cluster
-    #   certificate. To view the cluster certificate of a cluster, use the
-    #   [DescribeClusters][1] operation.
     #
     #
-    #
-    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore
+    #   [2]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateCustomKeyStoreRequest AWS API Documentation

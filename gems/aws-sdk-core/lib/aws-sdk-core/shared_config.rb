@@ -99,12 +99,10 @@ module Aws
     def credentials(opts = {})
       p = opts[:profile] || @profile_name
       validate_profile_exists(p) if credentials_present?
-      if credentials = credentials_from_shared(p, opts)
+      if (credentials = credentials_from_shared(p, opts))
         credentials
-      elsif credentials = credentials_from_config(p, opts)
+      elsif (credentials = credentials_from_config(p, opts))
         credentials
-      else
-        nil
       end
     end
 
@@ -119,6 +117,25 @@ module Aws
         credentials ||= assume_role_from_profile(@parsed_config, p, opts, chain_config)
       end
       credentials
+    end
+
+    def assume_role_web_identity_credentials_from_config(profile)
+      p = profile || @profile_name
+      if @config_enabled && @parsed_config
+        entry = @parsed_config.fetch(p, {})
+        if entry['web_identity_token_file'] &&
+          entry['role_arn']
+          AssumeRoleWebIdentityCredentials.new(
+            role_arn: entry['role_arn'],
+            web_identity_token_file: entry['web_identity_token_file'],
+            role_session_name: entry['role_session_name']
+          )
+        else
+          nil
+        end
+      else
+        nil
+      end
     end
 
     def region(opts = {})
@@ -193,7 +210,23 @@ module Aws
       end
     end
 
+    def csm_host(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          value = @parsed_credentials.fetch(p, {})["csm_host"]
+        end
+        if @parsed_config
+          value ||= @parsed_config.fetch(p, {})["csm_host"]
+        end
+        value
+      else
+        nil
+      end
+    end
+
     private
+
     def credentials_present?
       (@parsed_credentials && !@parsed_credentials.empty?) ||
         (@parsed_config && !@parsed_config.empty?)
@@ -211,11 +244,12 @@ module Aws
               "provide only source_profile or credential_source, not both."
           )
         elsif opts[:source_profile]
-          opts[:credentials] = credentials(profile: opts[:source_profile])
+          opts[:credentials] = resolve_source_profile(opts[:source_profile])
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg["role_session_name"]
             opts[:role_session_name] ||= "default_session"
             opts[:role_arn] ||= prof_cfg["role_arn"]
+            opts[:duration_seconds] ||= prof_cfg["duration_seconds"]
             opts[:external_id] ||= prof_cfg["external_id"]
             opts[:serial_number] ||= prof_cfg["mfa_serial"]
             opts[:profile] = opts.delete(:source_profile)
@@ -235,6 +269,7 @@ module Aws
             opts[:role_session_name] ||= prof_cfg["role_session_name"]
             opts[:role_session_name] ||= "default_session"
             opts[:role_arn] ||= prof_cfg["role_arn"]
+            opts[:duration_seconds] ||= prof_cfg["duration_seconds"]
             opts[:external_id] ||= prof_cfg["external_id"]
             opts[:serial_number] ||= prof_cfg["mfa_serial"]
             opts.delete(:source_profile) # Cleanup
@@ -257,6 +292,20 @@ module Aws
       end
     end
 
+    def resolve_source_profile(profile)
+      if (creds = credentials(profile: profile))
+        creds # static credentials
+      elsif (provider = assume_role_web_identity_credentials_from_config(profile))
+        if provider.credentials.set?
+          provider.credentials
+        end
+      elsif (provider = assume_role_process_credentials_from_config(profile))
+        if provider.credentials.set?
+          provider.credentials
+        end
+      end
+    end
+
     def credentials_from_source(credential_source, config)
       case credential_source
       when "Ec2InstanceMetadata"
@@ -272,6 +321,11 @@ module Aws
           "Unsupported credential_source: #{credential_source}"
         )
       end
+    end
+
+    def assume_role_process_credentials_from_config(profile)
+      credential_process = credentials_process(profile)
+      ProcessCredentials.new(credential_process) if credential_process
     end
 
     def credentials_from_shared(profile, opts)

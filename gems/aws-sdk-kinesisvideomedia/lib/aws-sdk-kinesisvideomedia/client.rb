@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::KinesisVideoMedia
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::KinesisVideoMedia
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::KinesisVideoMedia
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -206,20 +255,21 @@ module Aws::KinesisVideoMedia
     # @!group API Operations
 
     # Use this API to retrieve media content from a Kinesis video stream. In
-    # the request, you identify stream name or stream Amazon Resource Name
-    # (ARN), and the starting chunk. Kinesis Video Streams then returns a
-    # stream of chunks in order by fragment number.
+    # the request, you identify the stream name or stream Amazon Resource
+    # Name (ARN), and the starting chunk. Kinesis Video Streams then returns
+    # a stream of chunks in order by fragment number.
     #
-    # <note markdown="1"> You must first call the `GetDataEndpoint` API to get an endpoint to
-    # which you can then send the `GetMedia` requests.
+    # <note markdown="1"> You must first call the `GetDataEndpoint` API to get an endpoint. Then
+    # send the `GetMedia` requests to this endpoint using the
+    # [--endpoint-url parameter][1].
     #
     #  </note>
     #
     # When you put media data (fragments) on a stream, Kinesis Video Streams
     # stores each incoming fragment and related metadata in what is called a
-    # "chunk." For more information, see . The `GetMedia` API returns a
-    # stream of these chunks starting from the chunk that you specify in the
-    # request.
+    # "chunk." For more information, see [PutMedia][2]. The `GetMedia` API
+    # returns a stream of these chunks starting from the chunk that you
+    # specify in the request.
     #
     # The following limits apply when using the `GetMedia` API:
     #
@@ -228,6 +278,34 @@ module Aws::KinesisVideoMedia
     # * Kinesis Video Streams sends media data at a rate of up to 25
     #   megabytes per second (or 200 megabits per second) during a
     #   `GetMedia` session.
+    #
+    # <note markdown="1"> If an error is thrown after invoking a Kinesis Video Streams media
+    # API, in addition to the HTTP status code and the response body, it
+    # includes the following pieces of information:
+    #
+    #  * `x-amz-ErrorType` HTTP header – contains a more specific error type
+    #   in addition to what the HTTP status code provides.
+    #
+    # * `x-amz-RequestId` HTTP header – if you want to report an issue to
+    #   AWS, the support team can better diagnose the problem if given the
+    #   Request Id.
+    #
+    #  Both the HTTP status code and the ErrorType header can be utilized to
+    # make programmatic decisions about whether errors are retry-able and
+    # under what conditions, as well as provide information on what actions
+    # the client programmer might need to take in order to successfully try
+    # again.
+    #
+    #  For more information, see the **Errors** section at the bottom of this
+    # topic, as well as [Common Errors][3].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/
+    # [2]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html
+    # [3]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html
     #
     # @option params [String] :stream_name
     #   The Kinesis video stream name from where you want to get the media
@@ -286,7 +364,7 @@ module Aws::KinesisVideoMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideomedia'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -32,6 +32,8 @@ module Aws::WorkSpaces
     ComputeType = Shapes::StructureShape.new(name: 'ComputeType')
     ComputerName = Shapes::StringShape.new(name: 'ComputerName')
     ConnectionState = Shapes::StringShape.new(name: 'ConnectionState')
+    CopyWorkspaceImageRequest = Shapes::StructureShape.new(name: 'CopyWorkspaceImageRequest')
+    CopyWorkspaceImageResult = Shapes::StructureShape.new(name: 'CopyWorkspaceImageResult')
     CreateIpGroupRequest = Shapes::StructureShape.new(name: 'CreateIpGroupRequest')
     CreateIpGroupResult = Shapes::StructureShape.new(name: 'CreateIpGroupResult')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
@@ -67,6 +69,8 @@ module Aws::WorkSpaces
     DescribeWorkspaceDirectoriesResult = Shapes::StructureShape.new(name: 'DescribeWorkspaceDirectoriesResult')
     DescribeWorkspaceImagesRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceImagesRequest')
     DescribeWorkspaceImagesResult = Shapes::StructureShape.new(name: 'DescribeWorkspaceImagesResult')
+    DescribeWorkspaceSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceSnapshotsRequest')
+    DescribeWorkspaceSnapshotsResult = Shapes::StructureShape.new(name: 'DescribeWorkspaceSnapshotsResult')
     DescribeWorkspacesConnectionStatusRequest = Shapes::StructureShape.new(name: 'DescribeWorkspacesConnectionStatusRequest')
     DescribeWorkspacesConnectionStatusResult = Shapes::StructureShape.new(name: 'DescribeWorkspacesConnectionStatusResult')
     DescribeWorkspacesRequest = Shapes::StructureShape.new(name: 'DescribeWorkspacesRequest')
@@ -136,6 +140,7 @@ module Aws::WorkSpaces
     RebuildWorkspacesRequest = Shapes::StructureShape.new(name: 'RebuildWorkspacesRequest')
     RebuildWorkspacesResult = Shapes::StructureShape.new(name: 'RebuildWorkspacesResult')
     ReconnectEnum = Shapes::StringShape.new(name: 'ReconnectEnum')
+    Region = Shapes::StringShape.new(name: 'Region')
     RegistrationCode = Shapes::StringShape.new(name: 'RegistrationCode')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceAssociatedException = Shapes::StructureShape.new(name: 'ResourceAssociatedException')
@@ -144,6 +149,8 @@ module Aws::WorkSpaces
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceUnavailableException = Shapes::StructureShape.new(name: 'ResourceUnavailableException')
+    RestoreWorkspaceRequest = Shapes::StructureShape.new(name: 'RestoreWorkspaceRequest')
+    RestoreWorkspaceResult = Shapes::StructureShape.new(name: 'RestoreWorkspaceResult')
     RevokeIpRulesRequest = Shapes::StructureShape.new(name: 'RevokeIpRulesRequest')
     RevokeIpRulesResult = Shapes::StructureShape.new(name: 'RevokeIpRulesResult')
     RootStorage = Shapes::StructureShape.new(name: 'RootStorage')
@@ -151,6 +158,8 @@ module Aws::WorkSpaces
     RunningMode = Shapes::StringShape.new(name: 'RunningMode')
     RunningModeAutoStopTimeoutInMinutes = Shapes::IntegerShape.new(name: 'RunningModeAutoStopTimeoutInMinutes')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
+    SnapshotList = Shapes::ListShape.new(name: 'SnapshotList')
     StartRequest = Shapes::StructureShape.new(name: 'StartRequest')
     StartWorkspaceRequests = Shapes::ListShape.new(name: 'StartWorkspaceRequests')
     StartWorkspacesRequest = Shapes::StructureShape.new(name: 'StartWorkspacesRequest')
@@ -207,6 +216,9 @@ module Aws::WorkSpaces
     WorkspacesIpGroup = Shapes::StructureShape.new(name: 'WorkspacesIpGroup')
     WorkspacesIpGroupsList = Shapes::ListShape.new(name: 'WorkspacesIpGroupsList')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AccountModification.add_member(:modification_state, Shapes::ShapeRef.new(shape: DedicatedTenancyModificationStateEnum, location_name: "ModificationState"))
     AccountModification.add_member(:dedicated_tenancy_support, Shapes::ShapeRef.new(shape: DedicatedTenancySupportResultEnum, location_name: "DedicatedTenancySupport"))
     AccountModification.add_member(:dedicated_tenancy_management_cidr_range, Shapes::ShapeRef.new(shape: DedicatedTenancyManagementCidrRange, location_name: "DedicatedTenancyManagementCidrRange"))
@@ -245,9 +257,20 @@ module Aws::WorkSpaces
     ComputeType.add_member(:name, Shapes::ShapeRef.new(shape: Compute, location_name: "Name"))
     ComputeType.struct_class = Types::ComputeType
 
+    CopyWorkspaceImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceImageName, required: true, location_name: "Name"))
+    CopyWorkspaceImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, location_name: "Description"))
+    CopyWorkspaceImageRequest.add_member(:source_image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "SourceImageId"))
+    CopyWorkspaceImageRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "SourceRegion"))
+    CopyWorkspaceImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CopyWorkspaceImageRequest.struct_class = Types::CopyWorkspaceImageRequest
+
+    CopyWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
+    CopyWorkspaceImageResult.struct_class = Types::CopyWorkspaceImageResult
+
     CreateIpGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: IpGroupName, required: true, location_name: "GroupName"))
     CreateIpGroupRequest.add_member(:group_desc, Shapes::ShapeRef.new(shape: IpGroupDesc, location_name: "GroupDesc"))
     CreateIpGroupRequest.add_member(:user_rules, Shapes::ShapeRef.new(shape: IpRuleList, location_name: "UserRules"))
+    CreateIpGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateIpGroupRequest.struct_class = Types::CreateIpGroupRequest
 
     CreateIpGroupResult.add_member(:group_id, Shapes::ShapeRef.new(shape: IpGroupId, location_name: "GroupId"))
@@ -351,6 +374,13 @@ module Aws::WorkSpaces
     DescribeWorkspaceImagesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     DescribeWorkspaceImagesResult.struct_class = Types::DescribeWorkspaceImagesResult
 
+    DescribeWorkspaceSnapshotsRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
+    DescribeWorkspaceSnapshotsRequest.struct_class = Types::DescribeWorkspaceSnapshotsRequest
+
+    DescribeWorkspaceSnapshotsResult.add_member(:rebuild_snapshots, Shapes::ShapeRef.new(shape: SnapshotList, location_name: "RebuildSnapshots"))
+    DescribeWorkspaceSnapshotsResult.add_member(:restore_snapshots, Shapes::ShapeRef.new(shape: SnapshotList, location_name: "RestoreSnapshots"))
+    DescribeWorkspaceSnapshotsResult.struct_class = Types::DescribeWorkspaceSnapshotsResult
+
     DescribeWorkspacesConnectionStatusRequest.add_member(:workspace_ids, Shapes::ShapeRef.new(shape: WorkspaceIdList, location_name: "WorkspaceIds"))
     DescribeWorkspacesConnectionStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     DescribeWorkspacesConnectionStatusRequest.struct_class = Types::DescribeWorkspacesConnectionStatusRequest
@@ -409,10 +439,17 @@ module Aws::WorkSpaces
     ImportWorkspaceImageRequest.add_member(:ingestion_process, Shapes::ShapeRef.new(shape: WorkspaceImageIngestionProcess, required: true, location_name: "IngestionProcess"))
     ImportWorkspaceImageRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: WorkspaceImageName, required: true, location_name: "ImageName"))
     ImportWorkspaceImageRequest.add_member(:image_description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, required: true, location_name: "ImageDescription"))
+    ImportWorkspaceImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ImportWorkspaceImageRequest.struct_class = Types::ImportWorkspaceImageRequest
 
     ImportWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
     ImportWorkspaceImageResult.struct_class = Types::ImportWorkspaceImageResult
+
+    InvalidParameterValuesException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidParameterValuesException.struct_class = Types::InvalidParameterValuesException
+
+    InvalidResourceStateException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidResourceStateException.struct_class = Types::InvalidResourceStateException
 
     IpGroupIdList.member = Shapes::ShapeRef.new(shape: IpGroupId)
 
@@ -446,7 +483,7 @@ module Aws::WorkSpaces
     ModifyAccountResult.struct_class = Types::ModifyAccountResult
 
     ModifyClientPropertiesRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceId"))
-    ModifyClientPropertiesRequest.add_member(:client_properties, Shapes::ShapeRef.new(shape: ClientProperties, location_name: "ClientProperties"))
+    ModifyClientPropertiesRequest.add_member(:client_properties, Shapes::ShapeRef.new(shape: ClientProperties, required: true, location_name: "ClientProperties"))
     ModifyClientPropertiesRequest.struct_class = Types::ModifyClientPropertiesRequest
 
     ModifyClientPropertiesResult.struct_class = Types::ModifyClientPropertiesResult
@@ -465,6 +502,12 @@ module Aws::WorkSpaces
 
     OperatingSystem.add_member(:type, Shapes::ShapeRef.new(shape: OperatingSystemType, location_name: "Type"))
     OperatingSystem.struct_class = Types::OperatingSystem
+
+    OperationInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    OperationInProgressException.struct_class = Types::OperationInProgressException
+
+    OperationNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    OperationNotSupportedException.struct_class = Types::OperationNotSupportedException
 
     RebootRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
     RebootRequest.struct_class = Types::RebootRequest
@@ -488,7 +531,32 @@ module Aws::WorkSpaces
     RebuildWorkspacesResult.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedRebuildWorkspaceRequests, location_name: "FailedRequests"))
     RebuildWorkspacesResult.struct_class = Types::RebuildWorkspacesResult
 
+    ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceAssociatedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ResourceAssociatedException.struct_class = Types::ResourceAssociatedException
+
+    ResourceCreationFailedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ResourceCreationFailedException.struct_class = Types::ResourceCreationFailedException
+
     ResourceIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceId"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ResourceUnavailableException.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceId"))
+    ResourceUnavailableException.struct_class = Types::ResourceUnavailableException
+
+    RestoreWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
+    RestoreWorkspaceRequest.struct_class = Types::RestoreWorkspaceRequest
+
+    RestoreWorkspaceResult.struct_class = Types::RestoreWorkspaceResult
 
     RevokeIpRulesRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: IpGroupId, required: true, location_name: "GroupId"))
     RevokeIpRulesRequest.add_member(:user_rules, Shapes::ShapeRef.new(shape: IpRevokedRuleList, required: true, location_name: "UserRules"))
@@ -498,6 +566,11 @@ module Aws::WorkSpaces
 
     RootStorage.add_member(:capacity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Capacity"))
     RootStorage.struct_class = Types::RootStorage
+
+    Snapshot.add_member(:snapshot_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SnapshotTime"))
+    Snapshot.struct_class = Types::Snapshot
+
+    SnapshotList.member = Shapes::ShapeRef.new(shape: Snapshot)
 
     StartRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "WorkspaceId"))
     StartRequest.struct_class = Types::StartRequest
@@ -541,6 +614,9 @@ module Aws::WorkSpaces
 
     TerminateWorkspacesResult.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedTerminateWorkspaceRequests, location_name: "FailedRequests"))
     TerminateWorkspacesResult.struct_class = Types::TerminateWorkspacesResult
+
+    UnsupportedWorkspaceConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UnsupportedWorkspaceConfigurationException.struct_class = Types::UnsupportedWorkspaceConfigurationException
 
     UpdateRulesOfIpGroupRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: IpGroupId, required: true, location_name: "GroupId"))
     UpdateRulesOfIpGroupRequest.add_member(:user_rules, Shapes::ShapeRef.new(shape: IpRuleList, required: true, location_name: "UserRules"))
@@ -688,6 +764,21 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:copy_workspace_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyWorkspaceImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyWorkspaceImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyWorkspaceImageResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
       end)
 
       api.add_operation(:create_ip_group, Seahorse::Model::Operation.new.tap do |o|
@@ -842,6 +933,17 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:describe_workspace_snapshots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeWorkspaceSnapshots"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeWorkspaceSnapshotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeWorkspaceSnapshotsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:describe_workspaces, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeWorkspaces"
         o.http_method = "POST"
@@ -890,6 +992,7 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
       end)
 
       api.add_operation(:list_available_management_cidr_ranges, Seahorse::Model::Operation.new.tap do |o|
@@ -966,6 +1069,17 @@ module Aws::WorkSpaces
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RebuildWorkspacesRequest)
         o.output = Shapes::ShapeRef.new(shape: RebuildWorkspacesResult)
+      end)
+
+      api.add_operation(:restore_workspace, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreWorkspace"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreWorkspaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreWorkspaceResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:revoke_ip_rules, Seahorse::Model::Operation.new.tap do |o|

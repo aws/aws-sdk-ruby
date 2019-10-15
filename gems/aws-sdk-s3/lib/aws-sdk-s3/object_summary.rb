@@ -38,16 +38,19 @@ module Aws::S3
       @key
     end
 
+    
     # @return [Time]
     def last_modified
       data[:last_modified]
     end
 
+    
     # @return [String]
     def etag
       data[:etag]
     end
 
+    
     # @return [Integer]
     def size
       data[:size]
@@ -59,6 +62,7 @@ module Aws::S3
       data[:storage_class]
     end
 
+    
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -114,10 +118,10 @@ module Aws::S3
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [ObjectSummary]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::ObjectExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(bucket: @bucket_name,
         key: @key))
       ObjectSummary.new({
@@ -133,10 +137,10 @@ module Aws::S3
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [ObjectSummary]
-    def wait_until_not_exists(options = {})
+    def wait_until_not_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::ObjectNotExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(bucket: @bucket_name,
         key: @key))
       ObjectSummary.new({
@@ -268,12 +272,13 @@ module Aws::S3
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
+    #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -358,6 +363,10 @@ module Aws::S3
     #   via SSL or using SigV4. Documentation on configuring any of the
     #   officially supported AWS SDKs and CLI can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    # @option options [String] :ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object encryption.
+    #   The value of this header is a base64-encoded UTF-8 string holding JSON
+    #   with the encryption context key-value pairs.
     # @option options [String] :copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object
     #   (e.g., AES256).
@@ -380,9 +389,9 @@ module Aws::S3
     #   in conjunction with the TaggingDirective. The tag-set must be encoded
     #   as URL Query parameters
     # @option options [String] :object_lock_mode
-    #   The Object Lock mode that you want to apply to the copied object.
+    #   The object lock mode that you want to apply to the copied object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want the copied object's Object Lock to
+    #   The date and time when you want the copied object's object lock to
     #   expire.
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the copied object.
@@ -417,7 +426,7 @@ module Aws::S3
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
-    #   Indicates whether S3 Object Lock should bypass Governance-mode
+    #   Indicates whether Amazon S3 object lock should bypass governance-mode
     #   restrictions to process this operation.
     # @return [Types::DeleteObjectOutput]
     def delete(options = {})
@@ -533,12 +542,13 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
+    #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -601,6 +611,10 @@ module Aws::S3
     #   via SSL or using SigV4. Documentation on configuring any of the
     #   officially supported AWS SDKs and CLI can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    # @option options [String] :ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object encryption.
+    #   The value of this header is a base64-encoded UTF-8 string holding JSON
+    #   with the encryption context key-value pairs.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -611,10 +625,10 @@ module Aws::S3
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters
     # @option options [String] :object_lock_mode
-    #   Specifies the Object Lock mode that you want to apply to the uploaded
+    #   Specifies the object lock mode that you want to apply to the uploaded
     #   object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   Specifies the date and time when you want the Object Lock to expire.
+    #   Specifies the date and time when you want the object lock to expire.
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the uploaded
     #   object.
@@ -654,12 +668,13 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
+    #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -685,7 +700,9 @@ module Aws::S3
     #   Size of the body in bytes. This parameter is useful when the size of
     #   the body cannot be determined automatically.
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data.
+    #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
+    #   is auto-populated when using the command from the CLI. This parameted
+    #   is required if object lock parameters are specified.
     # @option options [String] :content_type
     #   A standard MIME type describing the format of the object data.
     # @option options [Time,DateTime,Date,Integer,String] :expires
@@ -729,6 +746,10 @@ module Aws::S3
     #   via SSL or using SigV4. Documentation on configuring any of the
     #   officially supported AWS SDKs and CLI can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    # @option options [String] :ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object encryption.
+    #   The value of this header is a base64-encoded UTF-8 string holding JSON
+    #   with the encryption context key-value pairs.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -739,9 +760,9 @@ module Aws::S3
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")
     # @option options [String] :object_lock_mode
-    #   The Object Lock mode that you want to apply to this object.
+    #   The object lock mode that you want to apply to this object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want this object's Object Lock to expire.
+    #   The date and time when you want this object's object lock to expire.
     # @option options [String] :object_lock_legal_hold_status
     #   The Legal Hold status that you want to apply to the specified object.
     # @return [Types::PutObjectOutput]
@@ -835,7 +856,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #         },
     #       },
     #     },
@@ -844,7 +865,6 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :version_id
     # @option options [Types::RestoreRequest] :restore_request
-    #   Container for restore job parameters.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -993,7 +1013,7 @@ module Aws::S3
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
-      #   Governance-type Object Lock in place. You must have sufficient
+      #   Governance-type object lock in place. You must have sufficient
       #   permissions to perform this operation.
       # @return [void]
       def batch_delete!(options = {})

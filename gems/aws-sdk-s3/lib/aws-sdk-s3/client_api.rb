@@ -460,6 +460,7 @@ module Aws::S3
     SSECustomerKey = Shapes::StringShape.new(name: 'SSECustomerKey')
     SSECustomerKeyMD5 = Shapes::StringShape.new(name: 'SSECustomerKeyMD5')
     SSEKMS = Shapes::StructureShape.new(name: 'SSEKMS')
+    SSEKMSEncryptionContext = Shapes::StringShape.new(name: 'SSEKMSEncryptionContext')
     SSEKMSKeyId = Shapes::StringShape.new(name: 'SSEKMSKeyId')
     SSES3 = Shapes::StructureShape.new(name: 'SSES3')
     SelectObjectContentEventStream = Shapes::StructureShape.new(name: 'SelectObjectContentEventStream')
@@ -666,6 +667,7 @@ module Aws::S3
     CopyObjectOutput.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
     CopyObjectOutput.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     CopyObjectOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    CopyObjectOutput.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
     CopyObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     CopyObjectOutput.struct_class = Types::CopyObjectOutput
     CopyObjectOutput[:payload] = :copy_object_result
@@ -699,6 +701,7 @@ module Aws::S3
     CopyObjectRequest.add_member(:sse_customer_key, Shapes::ShapeRef.new(shape: SSECustomerKey, location: "header", location_name: "x-amz-server-side-encryption-customer-key"))
     CopyObjectRequest.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     CopyObjectRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    CopyObjectRequest.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
     CopyObjectRequest.add_member(:copy_source_sse_customer_algorithm, Shapes::ShapeRef.new(shape: CopySourceSSECustomerAlgorithm, location: "header", location_name: "x-amz-copy-source-server-side-encryption-customer-algorithm"))
     CopyObjectRequest.add_member(:copy_source_sse_customer_key, Shapes::ShapeRef.new(shape: CopySourceSSECustomerKey, location: "header", location_name: "x-amz-copy-source-server-side-encryption-customer-key"))
     CopyObjectRequest.add_member(:copy_source_sse_customer_key_md5, Shapes::ShapeRef.new(shape: CopySourceSSECustomerKeyMD5, location: "header", location_name: "x-amz-copy-source-server-side-encryption-customer-key-MD5"))
@@ -745,6 +748,7 @@ module Aws::S3
     CreateMultipartUploadOutput.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
     CreateMultipartUploadOutput.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     CreateMultipartUploadOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    CreateMultipartUploadOutput.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
     CreateMultipartUploadOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     CreateMultipartUploadOutput.struct_class = Types::CreateMultipartUploadOutput
 
@@ -769,6 +773,7 @@ module Aws::S3
     CreateMultipartUploadRequest.add_member(:sse_customer_key, Shapes::ShapeRef.new(shape: SSECustomerKey, location: "header", location_name: "x-amz-server-side-encryption-customer-key"))
     CreateMultipartUploadRequest.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     CreateMultipartUploadRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    CreateMultipartUploadRequest.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
     CreateMultipartUploadRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     CreateMultipartUploadRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: TaggingHeader, location: "header", location_name: "x-amz-tagging"))
     CreateMultipartUploadRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
@@ -1719,6 +1724,7 @@ module Aws::S3
     PutBucketReplicationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketReplicationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketReplicationRequest.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, required: true, location_name: "ReplicationConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutBucketReplicationRequest.add_member(:token, Shapes::ShapeRef.new(shape: ObjectLockToken, location: "header", location_name: "x-amz-bucket-object-lock-token"))
     PutBucketReplicationRequest.struct_class = Types::PutBucketReplicationRequest
     PutBucketReplicationRequest[:payload] = :replication_configuration
     PutBucketReplicationRequest[:payload_member] = PutBucketReplicationRequest.member(:replication_configuration)
@@ -1803,6 +1809,7 @@ module Aws::S3
     PutObjectOutput.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
     PutObjectOutput.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     PutObjectOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    PutObjectOutput.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
     PutObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     PutObjectOutput.struct_class = Types::PutObjectOutput
 
@@ -1830,6 +1837,7 @@ module Aws::S3
     PutObjectRequest.add_member(:sse_customer_key, Shapes::ShapeRef.new(shape: SSECustomerKey, location: "header", location_name: "x-amz-server-side-encryption-customer-key"))
     PutObjectRequest.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     PutObjectRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    PutObjectRequest.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
     PutObjectRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: TaggingHeader, location: "header", location_name: "x-amz-tagging"))
     PutObjectRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))

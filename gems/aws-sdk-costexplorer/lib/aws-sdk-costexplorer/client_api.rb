@@ -27,6 +27,7 @@ module Aws::CostExplorer
     CoverageNormalizedUnits = Shapes::StructureShape.new(name: 'CoverageNormalizedUnits')
     CoverageNormalizedUnitsPercentage = Shapes::StringShape.new(name: 'CoverageNormalizedUnitsPercentage')
     CoveragesByTime = Shapes::ListShape.new(name: 'CoveragesByTime')
+    CurrentInstance = Shapes::StructureShape.new(name: 'CurrentInstance')
     DataUnavailableException = Shapes::StructureShape.new(name: 'DataUnavailableException')
     DateInterval = Shapes::StructureShape.new(name: 'DateInterval')
     Dimension = Shapes::StringShape.new(name: 'Dimension')
@@ -34,6 +35,8 @@ module Aws::CostExplorer
     DimensionValuesWithAttributes = Shapes::StructureShape.new(name: 'DimensionValuesWithAttributes')
     DimensionValuesWithAttributesList = Shapes::ListShape.new(name: 'DimensionValuesWithAttributesList')
     EC2InstanceDetails = Shapes::StructureShape.new(name: 'EC2InstanceDetails')
+    EC2ResourceDetails = Shapes::StructureShape.new(name: 'EC2ResourceDetails')
+    EC2ResourceUtilization = Shapes::StructureShape.new(name: 'EC2ResourceUtilization')
     EC2Specification = Shapes::StructureShape.new(name: 'EC2Specification')
     ESInstanceDetails = Shapes::StructureShape.new(name: 'ESInstanceDetails')
     ElastiCacheInstanceDetails = Shapes::StructureShape.new(name: 'ElastiCacheInstanceDetails')
@@ -58,8 +61,12 @@ module Aws::CostExplorer
     GetReservationPurchaseRecommendationResponse = Shapes::StructureShape.new(name: 'GetReservationPurchaseRecommendationResponse')
     GetReservationUtilizationRequest = Shapes::StructureShape.new(name: 'GetReservationUtilizationRequest')
     GetReservationUtilizationResponse = Shapes::StructureShape.new(name: 'GetReservationUtilizationResponse')
+    GetRightsizingRecommendationRequest = Shapes::StructureShape.new(name: 'GetRightsizingRecommendationRequest')
+    GetRightsizingRecommendationResponse = Shapes::StructureShape.new(name: 'GetRightsizingRecommendationResponse')
     GetTagsRequest = Shapes::StructureShape.new(name: 'GetTagsRequest')
     GetTagsResponse = Shapes::StructureShape.new(name: 'GetTagsResponse')
+    GetUsageForecastRequest = Shapes::StructureShape.new(name: 'GetUsageForecastRequest')
+    GetUsageForecastResponse = Shapes::StructureShape.new(name: 'GetUsageForecastResponse')
     Granularity = Shapes::StringShape.new(name: 'Granularity')
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupDefinition = Shapes::StructureShape.new(name: 'GroupDefinition')
@@ -80,6 +87,7 @@ module Aws::CostExplorer
     MetricUnit = Shapes::StringShape.new(name: 'MetricUnit')
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
     Metrics = Shapes::MapShape.new(name: 'Metrics')
+    ModifyRecommendationDetail = Shapes::StructureShape.new(name: 'ModifyRecommendationDetail')
     NetRISavings = Shapes::StringShape.new(name: 'NetRISavings')
     NextPageToken = Shapes::StringShape.new(name: 'NextPageToken')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
@@ -111,20 +119,32 @@ module Aws::CostExplorer
     ReservationUtilizationGroups = Shapes::ListShape.new(name: 'ReservationUtilizationGroups')
     ReservedHours = Shapes::StringShape.new(name: 'ReservedHours')
     ReservedNormalizedUnits = Shapes::StringShape.new(name: 'ReservedNormalizedUnits')
+    ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
+    ResourceUtilization = Shapes::StructureShape.new(name: 'ResourceUtilization')
     ResultByTime = Shapes::StructureShape.new(name: 'ResultByTime')
     ResultsByTime = Shapes::ListShape.new(name: 'ResultsByTime')
+    RightsizingRecommendation = Shapes::StructureShape.new(name: 'RightsizingRecommendation')
+    RightsizingRecommendationList = Shapes::ListShape.new(name: 'RightsizingRecommendationList')
+    RightsizingRecommendationMetadata = Shapes::StructureShape.new(name: 'RightsizingRecommendationMetadata')
+    RightsizingRecommendationSummary = Shapes::StructureShape.new(name: 'RightsizingRecommendationSummary')
+    RightsizingType = Shapes::StringShape.new(name: 'RightsizingType')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
     ServiceSpecification = Shapes::StructureShape.new(name: 'ServiceSpecification')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValues = Shapes::StructureShape.new(name: 'TagValues')
+    TagValuesList = Shapes::ListShape.new(name: 'TagValuesList')
+    TargetInstance = Shapes::StructureShape.new(name: 'TargetInstance')
+    TargetInstancesList = Shapes::ListShape.new(name: 'TargetInstancesList')
     TermInYears = Shapes::StringShape.new(name: 'TermInYears')
+    TerminateRecommendationDetail = Shapes::StructureShape.new(name: 'TerminateRecommendationDetail')
     TotalActualHours = Shapes::StringShape.new(name: 'TotalActualHours')
     TotalActualUnits = Shapes::StringShape.new(name: 'TotalActualUnits')
     TotalAmortizedFee = Shapes::StringShape.new(name: 'TotalAmortizedFee')
     TotalPotentialRISavings = Shapes::StringShape.new(name: 'TotalPotentialRISavings')
     TotalRunningHours = Shapes::StringShape.new(name: 'TotalRunningHours')
     TotalRunningNormalizedUnits = Shapes::StringShape.new(name: 'TotalRunningNormalizedUnits')
+    UnresolvableUsageUnitException = Shapes::StructureShape.new(name: 'UnresolvableUsageUnitException')
     UnusedHours = Shapes::StringShape.new(name: 'UnusedHours')
     UnusedUnits = Shapes::StringShape.new(name: 'UnusedUnits')
     UtilizationByTime = Shapes::StructureShape.new(name: 'UtilizationByTime')
@@ -137,6 +157,9 @@ module Aws::CostExplorer
 
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeType)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
+
+    BillExpirationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BillExpirationException.struct_class = Types::BillExpirationException
 
     Coverage.add_member(:coverage_hours, Shapes::ShapeRef.new(shape: CoverageHours, location_name: "CoverageHours"))
     Coverage.add_member(:coverage_normalized_units, Shapes::ShapeRef.new(shape: CoverageNormalizedUnits, location_name: "CoverageNormalizedUnits"))
@@ -165,6 +188,20 @@ module Aws::CostExplorer
 
     CoveragesByTime.member = Shapes::ShapeRef.new(shape: CoverageByTime)
 
+    CurrentInstance.add_member(:resource_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "ResourceId"))
+    CurrentInstance.add_member(:tags, Shapes::ShapeRef.new(shape: TagValuesList, location_name: "Tags"))
+    CurrentInstance.add_member(:resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "ResourceDetails"))
+    CurrentInstance.add_member(:resource_utilization, Shapes::ShapeRef.new(shape: ResourceUtilization, location_name: "ResourceUtilization"))
+    CurrentInstance.add_member(:reservation_covered_hours_in_lookback_period, Shapes::ShapeRef.new(shape: GenericString, location_name: "ReservationCoveredHoursInLookbackPeriod"))
+    CurrentInstance.add_member(:on_demand_hours_in_lookback_period, Shapes::ShapeRef.new(shape: GenericString, location_name: "OnDemandHoursInLookbackPeriod"))
+    CurrentInstance.add_member(:total_running_hours_in_lookback_period, Shapes::ShapeRef.new(shape: GenericString, location_name: "TotalRunningHoursInLookbackPeriod"))
+    CurrentInstance.add_member(:monthly_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "MonthlyCost"))
+    CurrentInstance.add_member(:currency_code, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrencyCode"))
+    CurrentInstance.struct_class = Types::CurrentInstance
+
+    DataUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DataUnavailableException.struct_class = Types::DataUnavailableException
+
     DateInterval.add_member(:start, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "Start"))
     DateInterval.add_member(:end, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "End"))
     DateInterval.struct_class = Types::DateInterval
@@ -188,6 +225,22 @@ module Aws::CostExplorer
     EC2InstanceDetails.add_member(:current_generation, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "CurrentGeneration"))
     EC2InstanceDetails.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "SizeFlexEligible"))
     EC2InstanceDetails.struct_class = Types::EC2InstanceDetails
+
+    EC2ResourceDetails.add_member(:hourly_on_demand_rate, Shapes::ShapeRef.new(shape: GenericString, location_name: "HourlyOnDemandRate"))
+    EC2ResourceDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: GenericString, location_name: "InstanceType"))
+    EC2ResourceDetails.add_member(:platform, Shapes::ShapeRef.new(shape: GenericString, location_name: "Platform"))
+    EC2ResourceDetails.add_member(:region, Shapes::ShapeRef.new(shape: GenericString, location_name: "Region"))
+    EC2ResourceDetails.add_member(:sku, Shapes::ShapeRef.new(shape: GenericString, location_name: "Sku"))
+    EC2ResourceDetails.add_member(:memory, Shapes::ShapeRef.new(shape: GenericString, location_name: "Memory"))
+    EC2ResourceDetails.add_member(:network_performance, Shapes::ShapeRef.new(shape: GenericString, location_name: "NetworkPerformance"))
+    EC2ResourceDetails.add_member(:storage, Shapes::ShapeRef.new(shape: GenericString, location_name: "Storage"))
+    EC2ResourceDetails.add_member(:vcpu, Shapes::ShapeRef.new(shape: GenericString, location_name: "Vcpu"))
+    EC2ResourceDetails.struct_class = Types::EC2ResourceDetails
+
+    EC2ResourceUtilization.add_member(:max_cpu_utilization_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "MaxCpuUtilizationPercentage"))
+    EC2ResourceUtilization.add_member(:max_memory_utilization_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "MaxMemoryUtilizationPercentage"))
+    EC2ResourceUtilization.add_member(:max_storage_utilization_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "MaxStorageUtilizationPercentage"))
+    EC2ResourceUtilization.struct_class = Types::EC2ResourceUtilization
 
     EC2Specification.add_member(:offering_class, Shapes::ShapeRef.new(shape: OfferingClass, location_name: "OfferingClass"))
     EC2Specification.struct_class = Types::EC2Specification
@@ -224,7 +277,7 @@ module Aws::CostExplorer
 
     ForecastResultsByTime.member = Shapes::ShapeRef.new(shape: ForecastResult)
 
-    GetCostAndUsageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
+    GetCostAndUsageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetCostAndUsageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
     GetCostAndUsageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetCostAndUsageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
@@ -302,6 +355,18 @@ module Aws::CostExplorer
     GetReservationUtilizationResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetReservationUtilizationResponse.struct_class = Types::GetReservationUtilizationResponse
 
+    GetRightsizingRecommendationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetRightsizingRecommendationRequest.add_member(:service, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Service"))
+    GetRightsizingRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
+    GetRightsizingRecommendationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetRightsizingRecommendationRequest.struct_class = Types::GetRightsizingRecommendationRequest
+
+    GetRightsizingRecommendationResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: RightsizingRecommendationMetadata, location_name: "Metadata"))
+    GetRightsizingRecommendationResponse.add_member(:summary, Shapes::ShapeRef.new(shape: RightsizingRecommendationSummary, location_name: "Summary"))
+    GetRightsizingRecommendationResponse.add_member(:rightsizing_recommendations, Shapes::ShapeRef.new(shape: RightsizingRecommendationList, location_name: "RightsizingRecommendations"))
+    GetRightsizingRecommendationResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetRightsizingRecommendationResponse.struct_class = Types::GetRightsizingRecommendationResponse
+
     GetTagsRequest.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, location_name: "SearchString"))
     GetTagsRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetTagsRequest.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "TagKey"))
@@ -313,6 +378,17 @@ module Aws::CostExplorer
     GetTagsResponse.add_member(:return_size, Shapes::ShapeRef.new(shape: PageSize, required: true, location_name: "ReturnSize"))
     GetTagsResponse.add_member(:total_size, Shapes::ShapeRef.new(shape: PageSize, required: true, location_name: "TotalSize"))
     GetTagsResponse.struct_class = Types::GetTagsResponse
+
+    GetUsageForecastRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetUsageForecastRequest.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
+    GetUsageForecastRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, required: true, location_name: "Granularity"))
+    GetUsageForecastRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetUsageForecastRequest.add_member(:prediction_interval_level, Shapes::ShapeRef.new(shape: PredictionIntervalLevel, location_name: "PredictionIntervalLevel"))
+    GetUsageForecastRequest.struct_class = Types::GetUsageForecastRequest
+
+    GetUsageForecastResponse.add_member(:total, Shapes::ShapeRef.new(shape: MetricValue, location_name: "Total"))
+    GetUsageForecastResponse.add_member(:forecast_results_by_time, Shapes::ShapeRef.new(shape: ForecastResultsByTime, location_name: "ForecastResultsByTime"))
+    GetUsageForecastResponse.struct_class = Types::GetUsageForecastResponse
 
     Group.add_member(:keys, Shapes::ShapeRef.new(shape: Keys, location_name: "Keys"))
     Group.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
@@ -333,7 +409,13 @@ module Aws::CostExplorer
     InstanceDetails.add_member(:es_instance_details, Shapes::ShapeRef.new(shape: ESInstanceDetails, location_name: "ESInstanceDetails"))
     InstanceDetails.struct_class = Types::InstanceDetails
 
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
     Keys.member = Shapes::ShapeRef.new(shape: Key)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     MetricNames.member = Shapes::ShapeRef.new(shape: MetricName)
 
@@ -343,6 +425,9 @@ module Aws::CostExplorer
 
     Metrics.key = Shapes::ShapeRef.new(shape: MetricName)
     Metrics.value = Shapes::ShapeRef.new(shape: MetricValue)
+
+    ModifyRecommendationDetail.add_member(:target_instances, Shapes::ShapeRef.new(shape: TargetInstancesList, location_name: "TargetInstances"))
+    ModifyRecommendationDetail.struct_class = Types::ModifyRecommendationDetail
 
     RDSInstanceDetails.add_member(:family, Shapes::ShapeRef.new(shape: GenericString, location_name: "Family"))
     RDSInstanceDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: GenericString, location_name: "InstanceType"))
@@ -361,6 +446,9 @@ module Aws::CostExplorer
     RedshiftInstanceDetails.add_member(:current_generation, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "CurrentGeneration"))
     RedshiftInstanceDetails.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "SizeFlexEligible"))
     RedshiftInstanceDetails.struct_class = Types::RedshiftInstanceDetails
+
+    RequestChangedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RequestChangedException.struct_class = Types::RequestChangedException
 
     ReservationAggregates.add_member(:utilization_percentage, Shapes::ShapeRef.new(shape: UtilizationPercentage, location_name: "UtilizationPercentage"))
     ReservationAggregates.add_member(:utilization_percentage_in_units, Shapes::ShapeRef.new(shape: UtilizationPercentageInUnits, location_name: "UtilizationPercentageInUnits"))
@@ -435,6 +523,12 @@ module Aws::CostExplorer
 
     ReservationUtilizationGroups.member = Shapes::ShapeRef.new(shape: ReservationUtilizationGroup)
 
+    ResourceDetails.add_member(:ec2_resource_details, Shapes::ShapeRef.new(shape: EC2ResourceDetails, location_name: "EC2ResourceDetails"))
+    ResourceDetails.struct_class = Types::ResourceDetails
+
+    ResourceUtilization.add_member(:ec2_resource_utilization, Shapes::ShapeRef.new(shape: EC2ResourceUtilization, location_name: "EC2ResourceUtilization"))
+    ResourceUtilization.struct_class = Types::ResourceUtilization
+
     ResultByTime.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
     ResultByTime.add_member(:total, Shapes::ShapeRef.new(shape: Metrics, location_name: "Total"))
     ResultByTime.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "Groups"))
@@ -442,6 +536,26 @@ module Aws::CostExplorer
     ResultByTime.struct_class = Types::ResultByTime
 
     ResultsByTime.member = Shapes::ShapeRef.new(shape: ResultByTime)
+
+    RightsizingRecommendation.add_member(:account_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "AccountId"))
+    RightsizingRecommendation.add_member(:current_instance, Shapes::ShapeRef.new(shape: CurrentInstance, location_name: "CurrentInstance"))
+    RightsizingRecommendation.add_member(:rightsizing_type, Shapes::ShapeRef.new(shape: RightsizingType, location_name: "RightsizingType"))
+    RightsizingRecommendation.add_member(:modify_recommendation_detail, Shapes::ShapeRef.new(shape: ModifyRecommendationDetail, location_name: "ModifyRecommendationDetail"))
+    RightsizingRecommendation.add_member(:terminate_recommendation_detail, Shapes::ShapeRef.new(shape: TerminateRecommendationDetail, location_name: "TerminateRecommendationDetail"))
+    RightsizingRecommendation.struct_class = Types::RightsizingRecommendation
+
+    RightsizingRecommendationList.member = Shapes::ShapeRef.new(shape: RightsizingRecommendation)
+
+    RightsizingRecommendationMetadata.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "RecommendationId"))
+    RightsizingRecommendationMetadata.add_member(:generation_timestamp, Shapes::ShapeRef.new(shape: GenericString, location_name: "GenerationTimestamp"))
+    RightsizingRecommendationMetadata.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookbackPeriodInDays, location_name: "LookbackPeriodInDays"))
+    RightsizingRecommendationMetadata.struct_class = Types::RightsizingRecommendationMetadata
+
+    RightsizingRecommendationSummary.add_member(:total_recommendation_count, Shapes::ShapeRef.new(shape: GenericString, location_name: "TotalRecommendationCount"))
+    RightsizingRecommendationSummary.add_member(:estimated_total_monthly_savings_amount, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedTotalMonthlySavingsAmount"))
+    RightsizingRecommendationSummary.add_member(:savings_currency_code, Shapes::ShapeRef.new(shape: GenericString, location_name: "SavingsCurrencyCode"))
+    RightsizingRecommendationSummary.add_member(:savings_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "SavingsPercentage"))
+    RightsizingRecommendationSummary.struct_class = Types::RightsizingRecommendationSummary
 
     ServiceSpecification.add_member(:ec2_specification, Shapes::ShapeRef.new(shape: EC2Specification, location_name: "EC2Specification"))
     ServiceSpecification.struct_class = Types::ServiceSpecification
@@ -451,6 +565,25 @@ module Aws::CostExplorer
     TagValues.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     TagValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
     TagValues.struct_class = Types::TagValues
+
+    TagValuesList.member = Shapes::ShapeRef.new(shape: TagValues)
+
+    TargetInstance.add_member(:estimated_monthly_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedMonthlyCost"))
+    TargetInstance.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedMonthlySavings"))
+    TargetInstance.add_member(:currency_code, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrencyCode"))
+    TargetInstance.add_member(:default_target_instance, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "DefaultTargetInstance"))
+    TargetInstance.add_member(:resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "ResourceDetails"))
+    TargetInstance.add_member(:expected_resource_utilization, Shapes::ShapeRef.new(shape: ResourceUtilization, location_name: "ExpectedResourceUtilization"))
+    TargetInstance.struct_class = Types::TargetInstance
+
+    TargetInstancesList.member = Shapes::ShapeRef.new(shape: TargetInstance)
+
+    TerminateRecommendationDetail.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedMonthlySavings"))
+    TerminateRecommendationDetail.add_member(:currency_code, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrencyCode"))
+    TerminateRecommendationDetail.struct_class = Types::TerminateRecommendationDetail
+
+    UnresolvableUsageUnitException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnresolvableUsageUnitException.struct_class = Types::UnresolvableUsageUnitException
 
     UtilizationByTime.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
     UtilizationByTime.add_member(:groups, Shapes::ShapeRef.new(shape: ReservationUtilizationGroups, location_name: "Groups"))
@@ -550,6 +683,16 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
+      api.add_operation(:get_rightsizing_recommendation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRightsizingRecommendation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRightsizingRecommendationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRightsizingRecommendationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
       api.add_operation(:get_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTags"
         o.http_method = "POST"
@@ -561,6 +704,17 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
+      end)
+
+      api.add_operation(:get_usage_forecast, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUsageForecast"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetUsageForecastRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUsageForecastResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnresolvableUsageUnitException)
       end)
     end
 

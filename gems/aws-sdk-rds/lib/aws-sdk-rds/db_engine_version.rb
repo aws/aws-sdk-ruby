@@ -101,7 +101,7 @@ module Aws::RDS
       data[:supports_log_exports_to_cloudwatch_logs]
     end
 
-    # Indicates whether the database engine version supports read replicas.
+    # Indicates whether the database engine version supports Read Replicas.
     # @return [Boolean]
     def supports_read_replica
       data[:supports_read_replica]
@@ -111,6 +111,24 @@ module Aws::RDS
     # @return [Array<String>]
     def supported_engine_modes
       data[:supported_engine_modes]
+    end
+
+    # A list of features supported by the DB engine. Supported feature names
+    # include the following.
+    #
+    # * s3Import
+    #
+    # ^
+    # @return [Array<String>]
+    def supported_feature_names
+      data[:supported_feature_names]
+    end
+
+    # The status of the DB engine version, either `available` or
+    # `deprecated`.
+    # @return [String]
+    def status
+      data[:status]
     end
 
     # @!endgroup

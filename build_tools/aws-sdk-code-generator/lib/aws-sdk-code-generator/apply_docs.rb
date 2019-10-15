@@ -29,7 +29,7 @@ module AwsSdkCodeGenerator
           case @api['shapes'][ref_shape]['type']
           when 'structure'
             shape = @api['shapes'][ref_shape]
-            if shape
+            if shape && shape['members']
               member = shape['members'][ref_member]
               member['documentation'] = ref_docs if member
             end

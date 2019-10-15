@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -55,6 +56,7 @@ module Aws::ElasticBeanstalk
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -113,6 +115,10 @@ module Aws::ElasticBeanstalk
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -198,6 +204,49 @@ module Aws::ElasticBeanstalk
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -341,7 +390,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html
     #
     # @option params [String] :application_name
     #   The name of the application to which the specified source bundles
@@ -355,7 +404,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #
     # @option params [Array<String>] :version_labels
     #   A list of version labels, specifying one or more application source
@@ -436,6 +485,13 @@ module Aws::ElasticBeanstalk
     #   Specify an application resource lifecycle configuration to prevent
     #   your application from accumulating too many versions.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Specifies the tags applied to the application.
+    #
+    #   Elastic Beanstalk applies these tags only to the application.
+    #   Environments that you create in the application don't inherit the
+    #   tags.
+    #
     # @return [Types::ApplicationDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ApplicationDescriptionMessage#application #application} => Types::ApplicationDescription
@@ -482,6 +538,12 @@ module Aws::ElasticBeanstalk
     #         },
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -590,6 +652,12 @@ module Aws::ElasticBeanstalk
     #
     #    </note>
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Specifies the tags applied to the application version.
+    #
+    #   Elastic Beanstalk applies these tags only to the application version.
+    #   Environments that use the application version don't inherit the tags.
+    #
     # @return [Types::ApplicationVersionDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ApplicationVersionDescriptionMessage#application_version #application_version} => Types::ApplicationVersionDescription
@@ -650,6 +718,12 @@ module Aws::ElasticBeanstalk
     #     },
     #     auto_create_application: false,
     #     process: false,
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -752,6 +826,9 @@ module Aws::ElasticBeanstalk
     #   option to the requested value. The new value overrides the value
     #   obtained from the solution stack or the source configuration template.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Specifies the tags applied to the configuration template.
+    #
     # @return [Types::ConfigurationSettingsDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConfigurationSettingsDescription#solution_stack_name #solution_stack_name} => String
@@ -805,6 +882,12 @@ module Aws::ElasticBeanstalk
     #         namespace: "OptionNamespace",
     #         option_name: "ConfigurationOptionName",
     #         value: "ConfigurationOptionValue",
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -866,7 +949,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #
     # @option params [String] :description
     #   Describes this environment.
@@ -880,7 +963,7 @@ module Aws::ElasticBeanstalk
     #   This specifies the tier to use for creating this environment.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   This specifies the tags applied to resources in the environment.
+    #   Specifies the tags applied to resources in the environment.
     #
     # @option params [String] :version_label
     #   The name of the application version to deploy.
@@ -907,7 +990,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
     #
     # @option params [String] :platform_arn
     #   The ARN of the platform.
@@ -1074,6 +1157,13 @@ module Aws::ElasticBeanstalk
     # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
     #   The configuration option settings to apply to the builder environment.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Specifies the tags applied to the new platform version.
+    #
+    #   Elastic Beanstalk applies these tags only to the platform version.
+    #   Environments that you create using the platform version don't inherit
+    #   the tags.
+    #
     # @return [Types::CreatePlatformVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePlatformVersionResult#platform_summary #platform_summary} => Types::PlatformSummary
@@ -1095,6 +1185,12 @@ module Aws::ElasticBeanstalk
     #         namespace: "OptionNamespace",
     #         option_name: "ConfigurationOptionName",
     #         value: "ConfigurationOptionValue",
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -2451,7 +2547,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
     #
     # @option params [String] :environment_name
     #   Specify the AWS Elastic Beanstalk environment by name.
@@ -2791,7 +2887,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resouce for which a tag list is
@@ -3167,7 +3263,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/ug/
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/
     #
     # @option params [Boolean] :force_terminate
     #   Terminates the target environment even if another environment in the
@@ -3673,7 +3769,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #
     # @option params [String] :description
     #   If this parameter is specified, AWS Elastic Beanstalk updates the
@@ -3917,8 +4013,8 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
-    # [2]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resouce to be updated.
@@ -4058,7 +4154,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

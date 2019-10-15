@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::CostExplorer
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::CostExplorer
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::CostExplorer
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -228,7 +277,7 @@ module Aws::CostExplorer
     #
     # [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
     #
-    # @option params [Types::DateInterval] :time_period
+    # @option params [required, Types::DateInterval] :time_period
     #   Sets the start and end dates for retrieving AWS costs. The start date
     #   is inclusive, but the end date is exclusive. For example, if `start`
     #   is `2017-01-01` and `end` is `2017-05-01`, then the cost and usage
@@ -304,7 +353,7 @@ module Aws::CostExplorer
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_cost_and_usage({
-    #     time_period: {
+    #     time_period: { # required
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
@@ -324,7 +373,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -385,15 +434,15 @@ module Aws::CostExplorer
     #
     #   Valid values for a `GetCostForecast` call are the following:
     #
-    #   * AmortizedCost
+    #   * AMORTIZED\_COST
     #
-    #   * BlendedCost
+    #   * BLENDED\_COST
     #
-    #   * NetAmortizedCost
+    #   * NET\_AMORTIZED\_COST
     #
-    #   * NetUnblendedCost
+    #   * NET\_UNBLENDED\_COST
     #
-    #   * UnblendedCost
+    #   * UNBLENDED\_COST
     #
     #
     #
@@ -447,7 +496,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -601,7 +650,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #     context: "COST_AND_USAGE", # accepts COST_AND_USAGE, RESERVATIONS
     #     next_page_token: "NextPageToken",
     #   })
@@ -690,8 +739,6 @@ module Aws::CostExplorer
     #
     #   * REGION
     #
-    #   * TAG
-    #
     #   * TENANCY
     #
     # @option params [String] :granularity
@@ -746,6 +793,10 @@ module Aws::CostExplorer
     #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #
     # @option params [Array<String>] :metrics
+    #   The measurement that you want your reservation coverage reported in.
+    #
+    #   Valid values are `Hour`, `Unit`, and `Cost`. You can use multiple
+    #   values in a request.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -787,7 +838,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -1105,7 +1156,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -1179,6 +1230,177 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Creates recommendations that helps you save cost by identifying idle
+    # and underutilized Amazon EC2 instances.
+    #
+    # Recommendations are generated to either downsize or terminate
+    # instances, along with providing savings detail and metrics. For
+    # details on calculation and function, see [Optimizing Your Cost with
+    # Rightsizing Recommendations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-what-is.html
+    #
+    # @option params [Types::Expression] :filter
+    #   Use `Expression` to filter by cost or by usage. There are two
+    #   patterns:
+    #
+    #   * Simple dimension values - You can set the dimension name and values
+    #     for the filters that you plan to use. For example, you can filter
+    #     for `REGION==us-east-1 OR REGION==us-west-1`. The `Expression` for
+    #     that looks like this:
+    #
+    #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #     “us-west-1” ] \} \}`
+    #
+    #     The list of dimension values are OR'd together to retrieve cost or
+    #     usage data. You can create `Expression` and `DimensionValues`
+    #     objects using either `with*` methods or `set*` methods in multiple
+    #     lines.
+    #
+    #   * Compound dimension values with logical operations - You can use
+    #     multiple `Expression` types and the logical operators `AND/OR/NOT`
+    #     to create a list of one or more `Expression` objects. This allows
+    #     you to filter on more advanced options. For example, you can filter
+    #     on `((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type ==
+    #     Type1)) AND (USAGE_TYPE != DataTransfer)`. The `Expression` for that
+    #     looks like this:
+    #
+    #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values":
+    #     [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
+    #     "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions": \{ "Key":
+    #     "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
+    #
+    #     <note markdown="1"> Because each `Expression` can have only one operator, the service
+    #     returns an error if more than one is specified. The following
+    #     example shows an `Expression` object that creates an error.
+    #
+    #      </note>
+    #
+    #     ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
+    #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
+    #
+    #   <note markdown="1"> For `GetRightsizingRecommendation` action, a combination of OR and NOT
+    #   is not supported. OR is not supported between different dimensions, or
+    #   dimensions and tags. NOT operators aren't supported. Dimentions are
+    #   also limited to `LINKED_ACCOUNT`, `REGION`, or `RIGHTSIZING_TYPE`.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :service
+    #   The specific service that you want recommendations for.
+    #
+    # @option params [Integer] :page_size
+    #   The number of recommendations that you want returned in a single
+    #   response object.
+    #
+    # @option params [String] :next_page_token
+    #   The pagination token that indicates the next set of results that you
+    #   want to retrieve.
+    #
+    # @return [Types::GetRightsizingRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRightsizingRecommendationResponse#metadata #metadata} => Types::RightsizingRecommendationMetadata
+    #   * {Types::GetRightsizingRecommendationResponse#summary #summary} => Types::RightsizingRecommendationSummary
+    #   * {Types::GetRightsizingRecommendationResponse#rightsizing_recommendations #rightsizing_recommendations} => Array&lt;Types::RightsizingRecommendation&gt;
+    #   * {Types::GetRightsizingRecommendationResponse#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_rightsizing_recommendation({
+    #     filter: {
+    #       or: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       and: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive Expression
+    #       },
+    #       dimensions: {
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #         values: ["Value"],
+    #       },
+    #       tags: {
+    #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #     },
+    #     service: "GenericString", # required
+    #     page_size: 1,
+    #     next_page_token: "NextPageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metadata.recommendation_id #=> String
+    #   resp.metadata.generation_timestamp #=> String
+    #   resp.metadata.lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
+    #   resp.summary.total_recommendation_count #=> String
+    #   resp.summary.estimated_total_monthly_savings_amount #=> String
+    #   resp.summary.savings_currency_code #=> String
+    #   resp.summary.savings_percentage #=> String
+    #   resp.rightsizing_recommendations #=> Array
+    #   resp.rightsizing_recommendations[0].account_id #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_id #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.tags #=> Array
+    #   resp.rightsizing_recommendations[0].current_instance.tags[0].key #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.tags[0].values #=> Array
+    #   resp.rightsizing_recommendations[0].current_instance.tags[0].values[0] #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.hourly_on_demand_rate #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.instance_type #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.platform #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.region #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.sku #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.memory #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.network_performance #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.storage #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.vcpu #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_cpu_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_memory_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_storage_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.reservation_covered_hours_in_lookback_period #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.on_demand_hours_in_lookback_period #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.total_running_hours_in_lookback_period #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.monthly_cost #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.currency_code #=> String
+    #   resp.rightsizing_recommendations[0].rightsizing_type #=> String, one of "TERMINATE", "MODIFY"
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances #=> Array
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].estimated_monthly_cost #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].estimated_monthly_savings #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].currency_code #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].default_target_instance #=> Boolean
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.hourly_on_demand_rate #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.instance_type #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.platform #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.region #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.sku #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.memory #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.network_performance #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.storage #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.vcpu #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_cpu_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_memory_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_storage_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.estimated_monthly_savings #=> String
+    #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.currency_code #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetRightsizingRecommendation AWS API Documentation
+    #
+    # @overload get_rightsizing_recommendation(params = {})
+    # @param [Hash] params ({})
+    def get_rightsizing_recommendation(params = {}, options = {})
+      req = build_request(:get_rightsizing_recommendation, params)
+      req.send_request(options)
+    end
+
     # Queries for available tag keys and tag values for a specified period.
     # You can search the tag values for an arbitrary string.
     #
@@ -1236,6 +1458,106 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieves a forecast for how much Amazon Web Services predicts that
+    # you will use over the forecast time period that you select, based on
+    # your past usage.
+    #
+    # @option params [required, Types::DateInterval] :time_period
+    #   The start and end dates of the period that you want to retrieve usage
+    #   forecast for. The start date is inclusive, but the end date is
+    #   exclusive. For example, if `start` is `2017-01-01` and `end` is
+    #   `2017-05-01`, then the cost and usage data is retrieved from
+    #   `2017-01-01` up to and including `2017-04-30` but not including
+    #   `2017-05-01`.
+    #
+    # @option params [required, String] :metric
+    #   Which metric Cost Explorer uses to create your forecast.
+    #
+    #   Valid values for a `GetUsageForecast` call are the following:
+    #
+    #   * USAGE\_QUANTITY
+    #
+    #   * NORMALIZED\_USAGE\_AMOUNT
+    #
+    # @option params [required, String] :granularity
+    #   How granular you want the forecast to be. You can get 3 months of
+    #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
+    #
+    #   The `GetUsageForecast` operation supports only `DAILY` and `MONTHLY`
+    #   granularities.
+    #
+    # @option params [Types::Expression] :filter
+    #   The filters that you want to use to filter your forecast. Cost
+    #   Explorer API supports all of the Cost Explorer filters.
+    #
+    # @option params [Integer] :prediction_interval_level
+    #   Cost Explorer always returns the mean forecast as a single point. You
+    #   can request a prediction interval around the mean by specifying a
+    #   confidence level. The higher the confidence level, the more confident
+    #   Cost Explorer is about the actual value falling in the prediction
+    #   interval. Higher confidence levels result in wider prediction
+    #   intervals.
+    #
+    # @return [Types::GetUsageForecastResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUsageForecastResponse#total #total} => Types::MetricValue
+    #   * {Types::GetUsageForecastResponse#forecast_results_by_time #forecast_results_by_time} => Array&lt;Types::ForecastResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_usage_forecast({
+    #     time_period: { # required
+    #       start: "YearMonthDay", # required
+    #       end: "YearMonthDay", # required
+    #     },
+    #     metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT
+    #     granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
+    #     filter: {
+    #       or: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       and: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive Expression
+    #       },
+    #       dimensions: {
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #         values: ["Value"],
+    #       },
+    #       tags: {
+    #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #     },
+    #     prediction_interval_level: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.total.amount #=> String
+    #   resp.total.unit #=> String
+    #   resp.forecast_results_by_time #=> Array
+    #   resp.forecast_results_by_time[0].time_period.start #=> String
+    #   resp.forecast_results_by_time[0].time_period.end #=> String
+    #   resp.forecast_results_by_time[0].mean_value #=> String
+    #   resp.forecast_results_by_time[0].prediction_interval_lower_bound #=> String
+    #   resp.forecast_results_by_time[0].prediction_interval_upper_bound #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetUsageForecast AWS API Documentation
+    #
+    # @overload get_usage_forecast(params = {})
+    # @param [Hash] params ({})
+    def get_usage_forecast(params = {}, options = {})
+      req = build_request(:get_usage_forecast, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1249,7 +1571,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

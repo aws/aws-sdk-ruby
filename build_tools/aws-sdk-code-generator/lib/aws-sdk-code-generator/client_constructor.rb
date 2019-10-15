@@ -4,9 +4,9 @@ module AwsSdkCodeGenerator
     # @option options [required, PluginList] :plugins
     def initialize(options)
       plugin_options = documented_plugin_options(options.fetch(:plugins))
-      @documentation = []
+      documentation = {}
       plugin_options.each do |option|
-        @documentation << YardOptionTag.new(
+        documentation[option.name] = YardOptionTag.new(
           name: option.name,
           required: option.required,
           ruby_type: option.doc_type,
@@ -15,7 +15,7 @@ module AwsSdkCodeGenerator
           indent: "  "
         ).to_s
       end
-      @documentation = Docstring.join_docstrings(@documentation, block_comment: false)
+      @documentation = Docstring.join_docstrings(documentation.values, block_comment: false)
     end
 
     # @return [String]

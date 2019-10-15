@@ -14,6 +14,7 @@ module Aws::ApiGatewayV2
     AccessLogSettings = Shapes::StructureShape.new(name: 'AccessLogSettings')
     Api = Shapes::StructureShape.new(name: 'Api')
     ApiMapping = Shapes::StructureShape.new(name: 'ApiMapping')
+    ApiMappings = Shapes::StructureShape.new(name: 'ApiMappings')
     Apis = Shapes::StructureShape.new(name: 'Apis')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AuthorizationScopes = Shapes::ListShape.new(name: 'AuthorizationScopes')
@@ -75,6 +76,7 @@ module Aws::ApiGatewayV2
     DomainName = Shapes::StructureShape.new(name: 'DomainName')
     DomainNameConfiguration = Shapes::StructureShape.new(name: 'DomainNameConfiguration')
     DomainNameConfigurations = Shapes::ListShape.new(name: 'DomainNameConfigurations')
+    DomainNameStatus = Shapes::StringShape.new(name: 'DomainNameStatus')
     DomainNames = Shapes::StructureShape.new(name: 'DomainNames')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     GetApiMappingRequest = Shapes::StructureShape.new(name: 'GetApiMappingRequest')
@@ -123,6 +125,8 @@ module Aws::ApiGatewayV2
     GetStageResponse = Shapes::StructureShape.new(name: 'GetStageResponse')
     GetStagesRequest = Shapes::StructureShape.new(name: 'GetStagesRequest')
     GetStagesResponse = Shapes::StructureShape.new(name: 'GetStagesResponse')
+    GetTagsRequest = Shapes::StructureShape.new(name: 'GetTagsRequest')
+    GetTagsResponse = Shapes::StructureShape.new(name: 'GetTagsResponse')
     Id = Shapes::StringShape.new(name: 'Id')
     IdentitySourceList = Shapes::ListShape.new(name: 'IdentitySourceList')
     IntegerWithLengthBetween0And3600 = Shapes::IntegerShape.new(name: 'IntegerWithLengthBetween0And3600')
@@ -151,6 +155,7 @@ module Aws::ApiGatewayV2
     RouteSettings = Shapes::StructureShape.new(name: 'RouteSettings')
     RouteSettingsMap = Shapes::MapShape.new(name: 'RouteSettingsMap')
     Routes = Shapes::StructureShape.new(name: 'Routes')
+    SecurityPolicy = Shapes::StringShape.new(name: 'SecurityPolicy')
     SelectionExpression = Shapes::StringShape.new(name: 'SelectionExpression')
     SelectionKey = Shapes::StringShape.new(name: 'SelectionKey')
     Stage = Shapes::StructureShape.new(name: 'Stage')
@@ -161,12 +166,18 @@ module Aws::ApiGatewayV2
     StringWithLengthBetween0And32K = Shapes::StringShape.new(name: 'StringWithLengthBetween0And32K')
     StringWithLengthBetween1And1024 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And1024')
     StringWithLengthBetween1And128 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And128')
+    StringWithLengthBetween1And1600 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And1600')
     StringWithLengthBetween1And256 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And256')
     StringWithLengthBetween1And512 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And512')
     StringWithLengthBetween1And64 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And64')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    Tags = Shapes::MapShape.new(name: 'Tags')
     Template = Shapes::StructureShape.new(name: 'Template')
     TemplateMap = Shapes::MapShape.new(name: 'TemplateMap')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateApiInput = Shapes::StructureShape.new(name: 'UpdateApiInput')
     UpdateApiMappingInput = Shapes::StructureShape.new(name: 'UpdateApiMappingInput')
     UpdateApiMappingRequest = Shapes::StructureShape.new(name: 'UpdateApiMappingRequest')
@@ -205,6 +216,7 @@ module Aws::ApiGatewayV2
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __listOfApi = Shapes::ListShape.new(name: '__listOfApi')
+    __listOfApiMapping = Shapes::ListShape.new(name: '__listOfApiMapping')
     __listOfAuthorizer = Shapes::ListShape.new(name: '__listOfAuthorizer')
     __listOfDeployment = Shapes::ListShape.new(name: '__listOfDeployment')
     __listOfDomainName = Shapes::ListShape.new(name: '__listOfDomainName')
@@ -216,6 +228,7 @@ module Aws::ApiGatewayV2
     __listOfStage = Shapes::ListShape.new(name: '__listOfStage')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
+    __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
@@ -235,6 +248,7 @@ module Aws::ApiGatewayV2
     Api.add_member(:route_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, required: true, location_name: "routeSelectionExpression"))
     Api.add_member(:version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "version"))
     Api.add_member(:warnings, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "warnings"))
+    Api.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Api.struct_class = Types::Api
 
     ApiMapping.add_member(:api_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "apiId"))
@@ -242,6 +256,10 @@ module Aws::ApiGatewayV2
     ApiMapping.add_member(:api_mapping_key, Shapes::ShapeRef.new(shape: SelectionKey, location_name: "apiMappingKey"))
     ApiMapping.add_member(:stage, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "stage"))
     ApiMapping.struct_class = Types::ApiMapping
+
+    ApiMappings.add_member(:items, Shapes::ShapeRef.new(shape: __listOfApiMapping, location_name: "items"))
+    ApiMappings.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ApiMappings.struct_class = Types::ApiMappings
 
     Apis.add_member(:items, Shapes::ShapeRef.new(shape: __listOfApi, location_name: "items"))
     Apis.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -264,6 +282,12 @@ module Aws::ApiGatewayV2
     Authorizers.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     Authorizers.struct_class = Types::Authorizers
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateApiInput.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiKeySelectionExpression"))
     CreateApiInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateApiInput.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
@@ -271,6 +295,7 @@ module Aws::ApiGatewayV2
     CreateApiInput.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, required: true, location_name: "protocolType"))
     CreateApiInput.add_member(:route_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, required: true, location_name: "routeSelectionExpression"))
     CreateApiInput.add_member(:version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "version"))
+    CreateApiInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateApiInput.struct_class = Types::CreateApiInput
 
     CreateApiMappingInput.add_member(:api_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "apiId"))
@@ -362,15 +387,18 @@ module Aws::ApiGatewayV2
 
     CreateDomainNameInput.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, required: true, location_name: "domainName"))
     CreateDomainNameInput.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    CreateDomainNameInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDomainNameInput.struct_class = Types::CreateDomainNameInput
 
     CreateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, required: true, location_name: "domainName"))
     CreateDomainNameRequest.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    CreateDomainNameRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateDomainNameResponse.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     CreateDomainNameResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "domainName"))
     CreateDomainNameResponse.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    CreateDomainNameResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDomainNameResponse.struct_class = Types::CreateDomainNameResponse
 
     CreateIntegrationInput.add_member(:connection_id, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And1024, location_name: "connectionId"))
@@ -379,7 +407,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationInput.add_member(:credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "credentialsArn"))
     CreateIntegrationInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateIntegrationInput.add_member(:integration_method, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "integrationMethod"))
-    CreateIntegrationInput.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "integrationType"))
+    CreateIntegrationInput.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, required: true, location_name: "integrationType"))
     CreateIntegrationInput.add_member(:integration_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "integrationUri"))
     CreateIntegrationInput.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
     CreateIntegrationInput.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
@@ -395,7 +423,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationRequest.add_member(:credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "credentialsArn"))
     CreateIntegrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateIntegrationRequest.add_member(:integration_method, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "integrationMethod"))
-    CreateIntegrationRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "integrationType"))
+    CreateIntegrationRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, required: true, location_name: "integrationType"))
     CreateIntegrationRequest.add_member(:integration_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "integrationUri"))
     CreateIntegrationRequest.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
     CreateIntegrationRequest.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
@@ -448,14 +476,14 @@ module Aws::ApiGatewayV2
     CreateModelInput.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And256, location_name: "contentType"))
     CreateModelInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateModelInput.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
-    CreateModelInput.add_member(:schema, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And32K, location_name: "schema"))
+    CreateModelInput.add_member(:schema, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And32K, required: true, location_name: "schema"))
     CreateModelInput.struct_class = Types::CreateModelInput
 
     CreateModelRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
     CreateModelRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And256, location_name: "contentType"))
     CreateModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateModelRequest.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
-    CreateModelRequest.add_member(:schema, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And32K, location_name: "schema"))
+    CreateModelRequest.add_member(:schema, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And32K, required: true, location_name: "schema"))
     CreateModelRequest.struct_class = Types::CreateModelRequest
 
     CreateModelResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And256, location_name: "contentType"))
@@ -535,6 +563,7 @@ module Aws::ApiGatewayV2
     CreateStageInput.add_member(:route_settings, Shapes::ShapeRef.new(shape: RouteSettingsMap, location_name: "routeSettings"))
     CreateStageInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "stageName"))
     CreateStageInput.add_member(:stage_variables, Shapes::ShapeRef.new(shape: StageVariablesMap, location_name: "stageVariables"))
+    CreateStageInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateStageInput.struct_class = Types::CreateStageInput
 
     CreateStageRequest.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AccessLogSettings, location_name: "accessLogSettings"))
@@ -546,6 +575,7 @@ module Aws::ApiGatewayV2
     CreateStageRequest.add_member(:route_settings, Shapes::ShapeRef.new(shape: RouteSettingsMap, location_name: "routeSettings"))
     CreateStageRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "stageName"))
     CreateStageRequest.add_member(:stage_variables, Shapes::ShapeRef.new(shape: StageVariablesMap, location_name: "stageVariables"))
+    CreateStageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateStageRequest.struct_class = Types::CreateStageRequest
 
     CreateStageResponse.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AccessLogSettings, location_name: "accessLogSettings"))
@@ -558,9 +588,9 @@ module Aws::ApiGatewayV2
     CreateStageResponse.add_member(:route_settings, Shapes::ShapeRef.new(shape: RouteSettingsMap, location_name: "routeSettings"))
     CreateStageResponse.add_member(:stage_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "stageName"))
     CreateStageResponse.add_member(:stage_variables, Shapes::ShapeRef.new(shape: StageVariablesMap, location_name: "stageVariables"))
+    CreateStageResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateStageResponse.struct_class = Types::CreateStageResponse
 
-    DeleteApiMappingRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "apiId"))
     DeleteApiMappingRequest.add_member(:api_mapping_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiMappingId"))
     DeleteApiMappingRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
     DeleteApiMappingRequest.struct_class = Types::DeleteApiMappingRequest
@@ -619,6 +649,7 @@ module Aws::ApiGatewayV2
     DomainName.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     DomainName.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, required: true, location_name: "domainName"))
     DomainName.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    DomainName.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DomainName.struct_class = Types::DomainName
 
     DomainNameConfiguration.add_member(:api_gateway_domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "apiGatewayDomainName"))
@@ -627,6 +658,9 @@ module Aws::ApiGatewayV2
     DomainNameConfiguration.add_member(:certificate_upload_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "certificateUploadDate"))
     DomainNameConfiguration.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "endpointType"))
     DomainNameConfiguration.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: __string, location_name: "hostedZoneId"))
+    DomainNameConfiguration.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
+    DomainNameConfiguration.add_member(:domain_name_status, Shapes::ShapeRef.new(shape: DomainNameStatus, location_name: "domainNameStatus"))
+    DomainNameConfiguration.add_member(:domain_name_status_message, Shapes::ShapeRef.new(shape: __string, location_name: "domainNameStatusMessage"))
     DomainNameConfiguration.struct_class = Types::DomainNameConfiguration
 
     DomainNameConfigurations.member = Shapes::ShapeRef.new(shape: DomainNameConfiguration)
@@ -635,7 +669,6 @@ module Aws::ApiGatewayV2
     DomainNames.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DomainNames.struct_class = Types::DomainNames
 
-    GetApiMappingRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "apiId"))
     GetApiMappingRequest.add_member(:api_mapping_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiMappingId"))
     GetApiMappingRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
     GetApiMappingRequest.struct_class = Types::GetApiMappingRequest
@@ -651,10 +684,8 @@ module Aws::ApiGatewayV2
     GetApiMappingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     GetApiMappingsRequest.struct_class = Types::GetApiMappingsRequest
 
-    GetApiMappingsResponse.add_member(:api_id, Shapes::ShapeRef.new(shape: Id, location_name: "apiId"))
-    GetApiMappingsResponse.add_member(:api_mapping_id, Shapes::ShapeRef.new(shape: Id, location_name: "apiMappingId"))
-    GetApiMappingsResponse.add_member(:api_mapping_key, Shapes::ShapeRef.new(shape: SelectionKey, location_name: "apiMappingKey"))
-    GetApiMappingsResponse.add_member(:stage, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "stage"))
+    GetApiMappingsResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfApiMapping, location_name: "items"))
+    GetApiMappingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetApiMappingsResponse.struct_class = Types::GetApiMappingsResponse
 
     GetApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
@@ -671,6 +702,7 @@ module Aws::ApiGatewayV2
     GetApiResponse.add_member(:route_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "routeSelectionExpression"))
     GetApiResponse.add_member(:version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "version"))
     GetApiResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "warnings"))
+    GetApiResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetApiResponse.struct_class = Types::GetApiResponse
 
     GetApisRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maxResults"))
@@ -731,6 +763,7 @@ module Aws::ApiGatewayV2
     GetDomainNameResponse.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     GetDomainNameResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "domainName"))
     GetDomainNameResponse.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    GetDomainNameResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetDomainNameResponse.struct_class = Types::GetDomainNameResponse
 
     GetDomainNamesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maxResults"))
@@ -884,6 +917,7 @@ module Aws::ApiGatewayV2
     GetStageResponse.add_member(:route_settings, Shapes::ShapeRef.new(shape: RouteSettingsMap, location_name: "routeSettings"))
     GetStageResponse.add_member(:stage_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "stageName"))
     GetStageResponse.add_member(:stage_variables, Shapes::ShapeRef.new(shape: StageVariablesMap, location_name: "stageVariables"))
+    GetStageResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetStageResponse.struct_class = Types::GetStageResponse
 
     GetStagesRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
@@ -894,6 +928,12 @@ module Aws::ApiGatewayV2
     GetStagesResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfStage, location_name: "items"))
     GetStagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetStagesResponse.struct_class = Types::GetStagesResponse
+
+    GetTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    GetTagsRequest.struct_class = Types::GetTagsRequest
+
+    GetTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    GetTagsResponse.struct_class = Types::GetTagsResponse
 
     IdentitySourceList.member = Shapes::ShapeRef.new(shape: __string)
 
@@ -947,6 +987,10 @@ module Aws::ApiGatewayV2
     Models.add_member(:items, Shapes::ShapeRef.new(shape: __listOfModel, location_name: "items"))
     Models.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     Models.struct_class = Types::Models
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: __string, location_name: "resourceType"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     ParameterConstraints.add_member(:required, Shapes::ShapeRef.new(shape: __boolean, location_name: "required"))
     ParameterConstraints.struct_class = Types::ParameterConstraints
@@ -1008,6 +1052,7 @@ module Aws::ApiGatewayV2
     Stage.add_member(:route_settings, Shapes::ShapeRef.new(shape: RouteSettingsMap, location_name: "routeSettings"))
     Stage.add_member(:stage_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "stageName"))
     Stage.add_member(:stage_variables, Shapes::ShapeRef.new(shape: StageVariablesMap, location_name: "stageVariables"))
+    Stage.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Stage.struct_class = Types::Stage
 
     StageVariablesMap.key = Shapes::ShapeRef.new(shape: __string)
@@ -1017,11 +1062,31 @@ module Aws::ApiGatewayV2
     Stages.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     Stages.struct_class = Types::Stages
 
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    Tags.key = Shapes::ShapeRef.new(shape: __string)
+    Tags.value = Shapes::ShapeRef.new(shape: StringWithLengthBetween1And1600)
+
     Template.add_member(:value, Shapes::ShapeRef.new(shape: __string, location_name: "value"))
     Template.struct_class = Types::Template
 
     TemplateMap.key = Shapes::ShapeRef.new(shape: __string)
     TemplateMap.value = Shapes::ShapeRef.new(shape: StringWithLengthBetween0And32K)
+
+    TooManyRequestsException.add_member(:limit_type, Shapes::ShapeRef.new(shape: __string, location_name: "limitType"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateApiInput.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiKeySelectionExpression"))
     UpdateApiInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
@@ -1069,6 +1134,7 @@ module Aws::ApiGatewayV2
     UpdateApiResponse.add_member(:route_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "routeSelectionExpression"))
     UpdateApiResponse.add_member(:version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "version"))
     UpdateApiResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "warnings"))
+    UpdateApiResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateApiResponse.struct_class = Types::UpdateApiResponse
 
     UpdateAuthorizerInput.add_member(:authorizer_credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "authorizerCredentialsArn"))
@@ -1129,6 +1195,7 @@ module Aws::ApiGatewayV2
     UpdateDomainNameResponse.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     UpdateDomainNameResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "domainName"))
     UpdateDomainNameResponse.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    UpdateDomainNameResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateDomainNameResponse.struct_class = Types::UpdateDomainNameResponse
 
     UpdateIntegrationInput.add_member(:connection_id, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And1024, location_name: "connectionId"))
@@ -1320,9 +1387,12 @@ module Aws::ApiGatewayV2
     UpdateStageResponse.add_member(:route_settings, Shapes::ShapeRef.new(shape: RouteSettingsMap, location_name: "routeSettings"))
     UpdateStageResponse.add_member(:stage_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "stageName"))
     UpdateStageResponse.add_member(:stage_variables, Shapes::ShapeRef.new(shape: StageVariablesMap, location_name: "stageVariables"))
+    UpdateStageResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateStageResponse.struct_class = Types::UpdateStageResponse
 
     __listOfApi.member = Shapes::ShapeRef.new(shape: Api)
+
+    __listOfApiMapping.member = Shapes::ShapeRef.new(shape: ApiMapping)
 
     __listOfAuthorizer.member = Shapes::ShapeRef.new(shape: Authorizer)
 
@@ -1343,6 +1413,9 @@ module Aws::ApiGatewayV2
     __listOfStage.member = Shapes::ShapeRef.new(shape: Stage)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
 
 
     # @api private
@@ -1845,6 +1918,42 @@ module Aws::ApiGatewayV2
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:get_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTags"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: GetTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_api, Seahorse::Model::Operation.new.tap do |o|

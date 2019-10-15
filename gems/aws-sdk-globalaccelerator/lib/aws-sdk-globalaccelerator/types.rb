@@ -18,9 +18,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the accelerator. The name can have a maximum of 32
-    #   characters, must contain only alphanumeric characters or hyphens
-    #   (-), and must not begin or end with a hyphen.
+    #   The name of the accelerator. The name must contain only alphanumeric
+    #   characters or hyphens (-), and must not begin or end with a hyphen.
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
@@ -28,7 +27,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Indicates whether theaccelerator is enabled. The value is true or
+    #   Indicates whether the accelerator is enabled. The value is true or
     #   false. The default value is true.
     #
     #   If the value is set to true, the accelerator cannot be deleted. If
@@ -36,8 +35,27 @@ module Aws::GlobalAccelerator
     #   @return [Boolean]
     #
     # @!attribute [rw] ip_sets
-    #   IP address set associated with the accelerator.
+    #   The static IP addresses that Global Accelerator associates with the
+    #   accelerator.
     #   @return [Array<Types::IpSet>]
+    #
+    # @!attribute [rw] dns_name
+    #   The Domain Name System (DNS) name that Global Accelerator creates
+    #   that points to your accelerator's static IP addresses.
+    #
+    #   The naming convention for the DNS name is: a lower case letter a,
+    #   followed by a 16-bit random hex string, followed by
+    #   .awsglobalaccelerator.com. For example:
+    #   a1234567890abcdef.awsglobalaccelerator.com.
+    #
+    #   For more information about the default DNS name, see [Support for
+    #   DNS Addressing in Global Accelerator][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing
+    #   @return [String]
     #
     # @!attribute [rw] status
     #   Describes the deployment status of the accelerator.
@@ -59,6 +77,7 @@ module Aws::GlobalAccelerator
       :ip_address_type,
       :enabled,
       :ip_sets,
+      :dns_name,
       :status,
       :created_time,
       :last_modified_time)
@@ -100,6 +119,70 @@ module Aws::GlobalAccelerator
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix)
+      include Aws::Structure
+    end
+
+    # The accelerator that you specified could not be disabled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorNotDisabledException AWS API Documentation
+    #
+    class AcceleratorNotDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The accelerator that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorNotFoundException AWS API Documentation
+    #
+    class AcceleratorNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You don't have access permission.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The listener that you specified has an endpoint group associated with
+    # it. You must remove all dependent resources from a listener before you
+    # can delete it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AssociatedEndpointGroupFoundException AWS API Documentation
+    #
+    class AssociatedEndpointGroupFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The accelerator that you specified has a listener associated with it.
+    # You must remove all dependent resources from an accelerator before you
+    # can delete it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AssociatedListenerFoundException AWS API Documentation
+    #
+    class AssociatedListenerFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -168,6 +251,7 @@ module Aws::GlobalAccelerator
     #           {
     #             endpoint_id: "GenericString",
     #             weight: 1,
+    #             client_ip_preservation_enabled: false,
     #           },
     #         ],
     #         traffic_dial_percentage: 1.0,
@@ -407,12 +491,12 @@ module Aws::GlobalAccelerator
     #   data as a hash:
     #
     #       {
-    #         accelerator_arn: "GenericString",
+    #         accelerator_arn: "GenericString", # required
     #       }
     #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator with the
-    #   attributes that you want to describe. Value is required.
+    #   attributes that you want to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeAcceleratorAttributesRequest AWS API Documentation
@@ -528,6 +612,7 @@ module Aws::GlobalAccelerator
     #       {
     #         endpoint_id: "GenericString",
     #         weight: 1,
+    #         client_ip_preservation_enabled: false,
     #       }
     #
     # @!attribute [rw] endpoint_id
@@ -553,11 +638,31 @@ module Aws::GlobalAccelerator
     #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
     #   @return [Integer]
     #
+    # @!attribute [rw] client_ip_preservation_enabled
+    #   Indicates whether client IP address preservation is enabled for an
+    #   Application Load Balancer endpoint. The value is true or false. The
+    #   default value is true for new accelerators.
+    #
+    #   If the value is set to true, the client's IP address is preserved
+    #   in the `X-Forwarded-For` request header as traffic travels to
+    #   applications on the Application Load Balancer endpoint fronted by
+    #   the accelerator.
+    #
+    #   For more information, see [ Viewing Client IP Addresses in AWS
+    #   Global Accelerator][1] in the *AWS Global Accelerator Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointConfiguration AWS API Documentation
     #
     class EndpointConfiguration < Struct.new(
       :endpoint_id,
-      :weight)
+      :weight,
+      :client_ip_preservation_enabled)
       include Aws::Structure
     end
 
@@ -568,7 +673,8 @@ module Aws::GlobalAccelerator
     #   An ID for the endpoint. If the endpoint is a Network Load Balancer
     #   or Application Load Balancer, this is the Amazon Resource Name (ARN)
     #   of the resource. If the endpoint is an Elastic IP address, this is
-    #   the Elastic IP address allocation ID.
+    #   the Elastic IP address allocation ID. An Application Load Balancer
+    #   can be either internal or internet-facing.
     #   @return [String]
     #
     # @!attribute [rw] weight
@@ -615,13 +721,33 @@ module Aws::GlobalAccelerator
     #     required to determine its health status.
     #   @return [String]
     #
+    # @!attribute [rw] client_ip_preservation_enabled
+    #   Indicates whether client IP address preservation is enabled for an
+    #   Application Load Balancer endpoint. The value is true or false. The
+    #   default value is true for new accelerators.
+    #
+    #   If the value is set to true, the client's IP address is preserved
+    #   in the `X-Forwarded-For` request header as traffic travels to
+    #   applications on the Application Load Balancer endpoint fronted by
+    #   the accelerator.
+    #
+    #   For more information, see [ Viewing Client IP Addresses in AWS
+    #   Global Accelerator][1] in the *AWS Global Accelerator Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointDescription AWS API Documentation
     #
     class EndpointDescription < Struct.new(
       :endpoint_id,
       :weight,
       :health_state,
-      :health_reason)
+      :health_reason,
+      :client_ip_preservation_enabled)
       include Aws::Structure
     end
 
@@ -699,6 +825,79 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # The endpoint group that you specified already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroupAlreadyExistsException AWS API Documentation
+    #
+    class EndpointGroupAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The endpoint group that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroupNotFoundException AWS API Documentation
+    #
+    class EndpointGroupNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There was an internal error for AWS Global Accelerator.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An argument that you specified is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There isn't another item to return.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The port numbers that you specified are not valid numbers or are not
+    # unique for this accelerator.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidPortRangeException AWS API Documentation
+    #
+    class InvalidPortRangeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type for the set of IP addresses for an accelerator.
     #
     # @!attribute [rw] ip_family
@@ -715,6 +914,19 @@ module Aws::GlobalAccelerator
     class IpSet < Struct.new(
       :ip_family,
       :ip_addresses)
+      include Aws::Structure
+    end
+
+    # Processing your request would cause you to exceed an AWS Global
+    # Accelerator limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -911,6 +1123,18 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # The listener that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListenerNotFoundException AWS API Documentation
+    #
+    class ListenerNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type for a range of ports for a listener.
     #
     # @note When making an API call, you may pass PortRange
@@ -941,7 +1165,7 @@ module Aws::GlobalAccelerator
     #   data as a hash:
     #
     #       {
-    #         accelerator_arn: "GenericString",
+    #         accelerator_arn: "GenericString", # required
     #         flow_logs_enabled: false,
     #         flow_logs_s3_bucket: "GenericString",
     #         flow_logs_s3_prefix: "GenericString",
@@ -949,7 +1173,7 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator that you want to
-    #   update. Attribute is required.
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] flow_logs_enabled
@@ -1062,6 +1286,7 @@ module Aws::GlobalAccelerator
     #           {
     #             endpoint_id: "GenericString",
     #             weight: 1,
+    #             client_ip_preservation_enabled: false,
     #           },
     #         ],
     #         traffic_dial_percentage: 1.0,

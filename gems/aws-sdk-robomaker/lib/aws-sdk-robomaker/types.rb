@@ -43,6 +43,28 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelDeploymentJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] job
+    #   The deployment job ARN to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelDeploymentJobRequest AWS API Documentation
+    #
+    class CancelDeploymentJobRequest < Struct.new(
+      :job)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelDeploymentJobResponse AWS API Documentation
+    #
+    class CancelDeploymentJobResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CancelSimulationJobRequest
     #   data as a hash:
     #
@@ -65,6 +87,18 @@ module Aws::RoboMaker
     #
     class CancelSimulationJobResponse < Aws::EmptyStructure; end
 
+    # The failure percentage threshold percentage was met.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ConcurrentDeploymentException AWS API Documentation
+    #
+    class ConcurrentDeploymentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDeploymentJobRequest
     #   data as a hash:
     #
@@ -72,24 +106,28 @@ module Aws::RoboMaker
     #         deployment_config: {
     #           concurrent_deployment_percentage: 1,
     #           failure_threshold_percentage: 1,
+    #           robot_deployment_timeout_in_seconds: 1,
     #         },
     #         client_request_token: "ClientRequestToken", # required
     #         fleet: "Arn", # required
     #         deployment_application_configs: [ # required
     #           {
     #             application: "Arn", # required
-    #             application_version: "Version", # required
+    #             application_version: "DeploymentVersion", # required
     #             launch_config: { # required
-    #               package_name: "GenericString", # required
-    #               pre_launch_file: "GenericString",
-    #               launch_file: "GenericString", # required
-    #               post_launch_file: "GenericString",
+    #               package_name: "Command", # required
+    #               pre_launch_file: "Path",
+    #               launch_file: "Command", # required
+    #               post_launch_file: "Path",
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
     #             },
     #           },
     #         ],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] deployment_config
@@ -112,13 +150,19 @@ module Aws::RoboMaker
     #   The deployment application configuration.
     #   @return [Array<Types::DeploymentApplicationConfig>]
     #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   deployment job.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateDeploymentJobRequest AWS API Documentation
     #
     class CreateDeploymentJobRequest < Struct.new(
       :deployment_config,
       :client_request_token,
       :fleet,
-      :deployment_application_configs)
+      :deployment_application_configs,
+      :tags)
       include Aws::Structure
     end
 
@@ -143,7 +187,69 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_code
-    #   The failure code of the deployment job if it failed.
+    #   The failure code of the simulation job if it failed:
+    #
+    #   BadPermissionError
+    #
+    #   : AWS Greengrass requires a service-level role permission to access
+    #     other services. The role must include the [
+    #     `AWSGreengrassResourceAccessRolePolicy` managed policy][1].
+    #
+    #   ExtractingBundleFailure
+    #
+    #   : The robot application could not be extracted from the bundle.
+    #
+    #   FailureThresholdBreached
+    #
+    #   : The percentage of robots that could not be updated exceeded the
+    #     percentage set for the deployment.
+    #
+    #   GreengrassDeploymentFailed
+    #
+    #   : The robot application could not be deployed to the robot.
+    #
+    #   GreengrassGroupVersionDoesNotExist
+    #
+    #   : The AWS Greengrass group or version associated with a robot is
+    #     missing.
+    #
+    #   InternalServerError
+    #
+    #   : An internal error has occurred. Retry your request, but if the
+    #     problem persists, contact us with details.
+    #
+    #   MissingRobotApplicationArchitecture
+    #
+    #   : The robot application does not have a source that matches the
+    #     architecture of the robot.
+    #
+    #   MissingRobotDeploymentResource
+    #
+    #   : One or more of the resources specified for the robot application
+    #     are missing. For example, does the robot application have the
+    #     correct launch package and launch file?
+    #
+    #   PostLaunchFileFailure
+    #
+    #   : The post-launch script failed.
+    #
+    #   PreLaunchFileFailure
+    #
+    #   : The pre-launch script failed.
+    #
+    #   ResourceNotFound
+    #
+    #   : One or more deployment resources are missing. For example, do
+    #     robot application source bundles still exist?
+    #
+    #   RobotDeploymentNoResponse
+    #
+    #   : There is no response from the robot. It might not be powered on or
+    #     connected to the internet.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -155,6 +261,10 @@ module Aws::RoboMaker
     #   The deployment configuration.
     #   @return [Types::DeploymentConfig]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the deployment job.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateDeploymentJobResponse AWS API Documentation
     #
     class CreateDeploymentJobResponse < Struct.new(
@@ -165,7 +275,8 @@ module Aws::RoboMaker
       :failure_reason,
       :failure_code,
       :created_at,
-      :deployment_config)
+      :deployment_config,
+      :tags)
       include Aws::Structure
     end
 
@@ -174,16 +285,25 @@ module Aws::RoboMaker
     #
     #       {
     #         name: "Name", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
     #   The name of the fleet.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   fleet.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -200,12 +320,17 @@ module Aws::RoboMaker
     #   created.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the fleet.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateFleetResponse AWS API Documentation
     #
     class CreateFleetResponse < Struct.new(
       :arn,
       :name,
-      :created_at)
+      :created_at,
+      :tags)
       include Aws::Structure
     end
 
@@ -223,7 +348,10 @@ module Aws::RoboMaker
     #         ],
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic
+    #           version: "Kinetic", # accepts Kinetic, Melodic
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
     #         },
     #       }
     #
@@ -239,12 +367,18 @@ module Aws::RoboMaker
     #   The robot software suite used by the robot application.
     #   @return [Types::RobotSoftwareSuite]
     #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   robot application.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotApplicationRequest AWS API Documentation
     #
     class CreateRobotApplicationRequest < Struct.new(
       :name,
       :sources,
-      :robot_software_suite)
+      :robot_software_suite,
+      :tags)
       include Aws::Structure
     end
 
@@ -277,6 +411,10 @@ module Aws::RoboMaker
     #   The revision id of the robot application.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the robot application.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotApplicationResponse AWS API Documentation
     #
     class CreateRobotApplicationResponse < Struct.new(
@@ -286,7 +424,8 @@ module Aws::RoboMaker
       :sources,
       :robot_software_suite,
       :last_updated_at,
-      :revision_id)
+      :revision_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -365,6 +504,9 @@ module Aws::RoboMaker
     #         name: "Name", # required
     #         architecture: "X86_64", # required, accepts X86_64, ARM64, ARMHF
     #         greengrass_group_id: "Id", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -379,12 +521,18 @@ module Aws::RoboMaker
     #   The Greengrass group id.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   robot.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotRequest AWS API Documentation
     #
     class CreateRobotRequest < Struct.new(
       :name,
       :architecture,
-      :greengrass_group_id)
+      :greengrass_group_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -410,6 +558,10 @@ module Aws::RoboMaker
     #   The target architecture of the robot.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the robot.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotResponse AWS API Documentation
     #
     class CreateRobotResponse < Struct.new(
@@ -417,7 +569,8 @@ module Aws::RoboMaker
       :name,
       :created_at,
       :greengrass_group_id,
-      :architecture)
+      :architecture,
+      :tags)
       include Aws::Structure
     end
 
@@ -434,16 +587,19 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         simulation_software_suite: { # required
-    #           name: "Gazebo", # accepts Gazebo
+    #           name: "Gazebo", # accepts Gazebo, RosbagPlay
     #           version: "SimulationSoftwareSuiteVersionType",
     #         },
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic
+    #           version: "Kinetic", # accepts Kinetic, Melodic
     #         },
-    #         rendering_engine: { # required
+    #         rendering_engine: {
     #           name: "OGRE", # accepts OGRE
     #           version: "RenderingEngineVersionType",
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
     #         },
     #       }
     #
@@ -467,6 +623,11 @@ module Aws::RoboMaker
     #   The rendering engine for the simulation application.
     #   @return [Types::RenderingEngine]
     #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   simulation application.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationApplicationRequest AWS API Documentation
     #
     class CreateSimulationApplicationRequest < Struct.new(
@@ -474,7 +635,8 @@ module Aws::RoboMaker
       :sources,
       :simulation_software_suite,
       :robot_software_suite,
-      :rendering_engine)
+      :rendering_engine,
+      :tags)
       include Aws::Structure
     end
 
@@ -515,6 +677,10 @@ module Aws::RoboMaker
     #   The revision id of the simulation application.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the simulation application.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationApplicationResponse AWS API Documentation
     #
     class CreateSimulationApplicationResponse < Struct.new(
@@ -526,7 +692,8 @@ module Aws::RoboMaker
       :robot_software_suite,
       :rendering_engine,
       :last_updated_at,
-      :revision_id)
+      :revision_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -617,6 +784,9 @@ module Aws::RoboMaker
     #           s3_bucket: "S3Bucket",
     #           s3_prefix: "S3Key",
     #         },
+    #         logging_config: {
+    #           record_all_ros_topics: false, # required
+    #         },
     #         max_job_duration_in_seconds: 1, # required
     #         iam_role: "IamRole", # required
     #         failure_behavior: "Fail", # accepts Fail, Continue
@@ -625,10 +795,19 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "Version",
     #             launch_config: { # required
-    #               package_name: "GenericString", # required
-    #               launch_file: "GenericString", # required
+    #               package_name: "Command", # required
+    #               launch_file: "Command", # required
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #               },
+    #               port_forwarding_config: {
+    #                 port_mappings: [
+    #                   {
+    #                     job_port: 1, # required
+    #                     application_port: 1, # required
+    #                     enable_on_public_ip: false,
+    #                   },
+    #                 ],
     #               },
     #             },
     #           },
@@ -638,17 +817,36 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "Version",
     #             launch_config: { # required
-    #               package_name: "GenericString", # required
-    #               launch_file: "GenericString", # required
+    #               package_name: "Command", # required
+    #               launch_file: "Command", # required
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #               },
+    #               port_forwarding_config: {
+    #                 port_mappings: [
+    #                   {
+    #                     job_port: 1, # required
+    #                     application_port: 1, # required
+    #                     enable_on_public_ip: false,
+    #                   },
+    #                 ],
     #               },
     #             },
     #           },
     #         ],
+    #         data_sources: [
+    #           {
+    #             name: "Name", # required
+    #             s3_bucket: "S3Bucket", # required
+    #             s3_keys: ["S3Key"], # required
+    #           },
+    #         ],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #         vpc_config: {
-    #           subnets: ["GenericString"], # required
-    #           security_groups: ["GenericString"],
+    #           subnets: ["NonEmptyString"], # required
+    #           security_groups: ["NonEmptyString"],
     #           assign_public_ip: false,
     #         },
     #       }
@@ -665,6 +863,10 @@ module Aws::RoboMaker
     #   Location for output files generated by the simulation job.
     #   @return [Types::OutputLocation]
     #
+    # @!attribute [rw] logging_config
+    #   The logging configuration.
+    #   @return [Types::LoggingConfig]
+    #
     # @!attribute [rw] max_job_duration_in_seconds
     #   The maximum simulation job duration in seconds (up to 14 days or
     #   1,209,600 seconds. When `maxJobDurationInSeconds` is reached, the
@@ -672,14 +874,10 @@ module Aws::RoboMaker
     #   @return [Integer]
     #
     # @!attribute [rw] iam_role
-    #   The IAM role that allows the simulation instance to call the AWS
-    #   APIs that are specified in its associated policies on your behalf.
-    #   This is how credentials are passed in to your simulation job. See
-    #   how to [specify AWS security credentials for your application][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials
+    #   The IAM role name that allows the simulation instance to call the
+    #   AWS APIs that are specified in its associated policies on your
+    #   behalf. This is how credentials are passed in to your simulation
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] failure_behavior
@@ -702,6 +900,20 @@ module Aws::RoboMaker
     #   The simulation application to use in the simulation job.
     #   @return [Array<Types::SimulationApplicationConfig>]
     #
+    # @!attribute [rw] data_sources
+    #   The data sources for the simulation job.
+    #
+    #   <note markdown="1"> There is a limit of 100 files and a combined size of 25GB for all
+    #   `DataSourceConfig` objects.
+    #
+    #    </note>
+    #   @return [Array<Types::DataSourceConfig>]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   simulation job.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] vpc_config
     #   If your simulation job accesses resources in a VPC, you provide this
     #   parameter identifying the list of security group IDs and subnet IDs.
@@ -714,11 +926,14 @@ module Aws::RoboMaker
     class CreateSimulationJobRequest < Struct.new(
       :client_request_token,
       :output_location,
+      :logging_config,
       :max_job_duration_in_seconds,
       :iam_role,
       :failure_behavior,
       :robot_applications,
       :simulation_applications,
+      :data_sources,
+      :tags,
       :vpc_config)
       include Aws::Structure
     end
@@ -731,6 +946,11 @@ module Aws::RoboMaker
     #   The status of the simulation job.
     #   @return [String]
     #
+    # @!attribute [rw] last_started_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   was last started.
+    #   @return [Time]
+    #
     # @!attribute [rw] last_updated_at
     #   The time, in milliseconds since the epoch, when the simulation job
     #   was last updated.
@@ -741,7 +961,68 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_code
-    #   The failure code of the simulation job if it failed.
+    #   The failure code of the simulation job if it failed:
+    #
+    #   InternalServiceError
+    #
+    #   : Internal service error.
+    #
+    #   RobotApplicationCrash
+    #
+    #   : Robot application exited abnormally.
+    #
+    #   SimulationApplicationCrash
+    #
+    #   : Simulation application exited abnormally.
+    #
+    #   BadPermissionsRobotApplication
+    #
+    #   : Robot application bundle could not be downloaded.
+    #
+    #   BadPermissionsSimulationApplication
+    #
+    #   : Simulation application bundle could not be downloaded.
+    #
+    #   BadPermissionsS3Output
+    #
+    #   : Unable to publish outputs to customer-provided S3 bucket.
+    #
+    #   BadPermissionsCloudwatchLogs
+    #
+    #   : Unable to publish logs to customer-provided CloudWatch Logs
+    #     resource.
+    #
+    #   SubnetIpLimitExceeded
+    #
+    #   : Subnet IP limit exceeded.
+    #
+    #   ENILimitExceeded
+    #
+    #   : ENI limit exceeded.
+    #
+    #   BadPermissionsUserCredentials
+    #
+    #   : Unable to use the Role provided.
+    #
+    #   InvalidBundleRobotApplication
+    #
+    #   : Robot bundle cannot be extracted (invalid format, bundling error,
+    #     or other issue).
+    #
+    #   InvalidBundleSimulationApplication
+    #
+    #   : Simulation bundle cannot be extracted (invalid format, bundling
+    #     error, or other issue).
+    #
+    #   RobotApplicationVersionMismatchedEtag
+    #
+    #   : Etag for RobotApplication does not match value during version
+    #     creation.
+    #
+    #   SimulationApplicationVersionMismatchedEtag
+    #
+    #   : Etag for SimulationApplication does not match value during version
+    #     creation.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -753,9 +1034,12 @@ module Aws::RoboMaker
     #   Simulation job output files location.
     #   @return [Types::OutputLocation]
     #
+    # @!attribute [rw] logging_config
+    #   The logging configuration.
+    #   @return [Types::LoggingConfig]
+    #
     # @!attribute [rw] max_job_duration_in_seconds
-    #   The maximum simulation job duration in seconds. The value must be 8
-    #   days (691,200 seconds) or less.
+    #   The maximum simulation job duration in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] simulation_time_millis
@@ -775,6 +1059,14 @@ module Aws::RoboMaker
     #   The simulation application used by the simulation job.
     #   @return [Array<Types::SimulationApplicationConfig>]
     #
+    # @!attribute [rw] data_sources
+    #   The data sources for the simulation job.
+    #   @return [Array<Types::DataSource>]
+    #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the simulation job.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] vpc_config
     #   Information about the vpc configuration.
     #   @return [Types::VPCConfigResponse]
@@ -784,17 +1076,76 @@ module Aws::RoboMaker
     class CreateSimulationJobResponse < Struct.new(
       :arn,
       :status,
+      :last_started_at,
       :last_updated_at,
       :failure_behavior,
       :failure_code,
       :client_request_token,
       :output_location,
+      :logging_config,
       :max_job_duration_in_seconds,
       :simulation_time_millis,
       :iam_role,
       :robot_applications,
       :simulation_applications,
+      :data_sources,
+      :tags,
       :vpc_config)
+      include Aws::Structure
+    end
+
+    # Information about a data source.
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The S3 bucket where the data files are located.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_keys
+    #   The list of S3 keys identifying the data source files.
+    #   @return [Array<Types::S3KeyOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DataSource AWS API Documentation
+    #
+    class DataSource < Struct.new(
+      :name,
+      :s3_bucket,
+      :s3_keys)
+      include Aws::Structure
+    end
+
+    # Information about a data source.
+    #
+    # @note When making an API call, you may pass DataSourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         s3_bucket: "S3Bucket", # required
+    #         s3_keys: ["S3Key"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The S3 bucket where the data files are located.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_keys
+    #   The list of S3 keys identifying the data source files.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DataSourceConfig AWS API Documentation
+    #
+    class DataSourceConfig < Struct.new(
+      :name,
+      :s3_bucket,
+      :s3_keys)
       include Aws::Structure
     end
 
@@ -906,12 +1257,12 @@ module Aws::RoboMaker
     #
     #       {
     #         application: "Arn", # required
-    #         application_version: "Version", # required
+    #         application_version: "DeploymentVersion", # required
     #         launch_config: { # required
-    #           package_name: "GenericString", # required
-    #           pre_launch_file: "GenericString",
-    #           launch_file: "GenericString", # required
-    #           post_launch_file: "GenericString",
+    #           package_name: "Command", # required
+    #           pre_launch_file: "Path",
+    #           launch_file: "Command", # required
+    #           post_launch_file: "Path",
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
@@ -919,7 +1270,7 @@ module Aws::RoboMaker
     #       }
     #
     # @!attribute [rw] application
-    #   The application.
+    #   The Amazon Resource Name (ARN) of the robot application.
     #   @return [String]
     #
     # @!attribute [rw] application_version
@@ -927,7 +1278,7 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] launch_config
-    #   The launch configuration, usually `roslaunch`.
+    #   The launch configuration.
     #   @return [Types::DeploymentLaunchConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentApplicationConfig AWS API Documentation
@@ -947,6 +1298,7 @@ module Aws::RoboMaker
     #       {
     #         concurrent_deployment_percentage: 1,
     #         failure_threshold_percentage: 1,
+    #         robot_deployment_timeout_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] concurrent_deployment_percentage
@@ -958,11 +1310,18 @@ module Aws::RoboMaker
     #   deployment.
     #   @return [Integer]
     #
+    # @!attribute [rw] robot_deployment_timeout_in_seconds
+    #   The amount of time, in seconds, to wait for deployment to a single
+    #   robot to complete. Choose a time between 1 minute and 7 days. The
+    #   default is 5 hours.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentConfig AWS API Documentation
     #
     class DeploymentConfig < Struct.new(
       :concurrent_deployment_percentage,
-      :failure_threshold_percentage)
+      :failure_threshold_percentage,
+      :robot_deployment_timeout_in_seconds)
       include Aws::Structure
     end
 
@@ -1021,10 +1380,10 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         package_name: "GenericString", # required
-    #         pre_launch_file: "GenericString",
-    #         launch_file: "GenericString", # required
-    #         post_launch_file: "GenericString",
+    #         package_name: "Command", # required
+    #         pre_launch_file: "Path",
+    #         launch_file: "Command", # required
+    #         post_launch_file: "Path",
     #         environment_variables: {
     #           "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #         },
@@ -1036,21 +1395,21 @@ module Aws::RoboMaker
     #
     # @!attribute [rw] pre_launch_file
     #   The deployment pre-launch file. This file will be executed prior to
-    #   the deployment launch file.
+    #   the launch file.
     #   @return [String]
     #
     # @!attribute [rw] launch_file
-    #   The deployment launch file.
+    #   The launch file name.
     #   @return [String]
     #
     # @!attribute [rw] post_launch_file
     #   The deployment post-launch file. This file will be executed after
-    #   the deployment launch file.
+    #   the launch file.
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
     #   An array of key/value pairs specifying environment variables for the
-    #   deployment application.
+    #   robot application
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentLaunchConfig AWS API Documentation
@@ -1159,6 +1518,10 @@ module Aws::RoboMaker
     #   A list of robot deployment summaries.
     #   @return [Array<Types::RobotDeployment>]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the specified deployment job.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeDeploymentJobResponse AWS API Documentation
     #
     class DescribeDeploymentJobResponse < Struct.new(
@@ -1170,7 +1533,8 @@ module Aws::RoboMaker
       :failure_reason,
       :failure_code,
       :created_at,
-      :robot_deployment_summary)
+      :robot_deployment_summary,
+      :tags)
       include Aws::Structure
     end
 
@@ -1221,6 +1585,10 @@ module Aws::RoboMaker
     #   The time of the last deployment.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the specified fleet.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeFleetResponse AWS API Documentation
     #
     class DescribeFleetResponse < Struct.new(
@@ -1230,7 +1598,8 @@ module Aws::RoboMaker
       :created_at,
       :last_deployment_status,
       :last_deployment_job,
-      :last_deployment_time)
+      :last_deployment_time,
+      :tags)
       include Aws::Structure
     end
 
@@ -1287,6 +1656,10 @@ module Aws::RoboMaker
     #   application was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the specified robot application.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeRobotApplicationResponse AWS API Documentation
     #
     class DescribeRobotApplicationResponse < Struct.new(
@@ -1296,7 +1669,8 @@ module Aws::RoboMaker
       :sources,
       :robot_software_suite,
       :revision_id,
-      :last_updated_at)
+      :last_updated_at,
+      :tags)
       include Aws::Structure
     end
 
@@ -1355,6 +1729,10 @@ module Aws::RoboMaker
     #   The time of the last deployment job.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the specified robot.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeRobotResponse AWS API Documentation
     #
     class DescribeRobotResponse < Struct.new(
@@ -1366,7 +1744,8 @@ module Aws::RoboMaker
       :created_at,
       :architecture,
       :last_deployment_job,
-      :last_deployment_time)
+      :last_deployment_time,
+      :tags)
       include Aws::Structure
     end
 
@@ -1431,6 +1810,10 @@ module Aws::RoboMaker
     #   application was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the specified simulation application.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationApplicationResponse AWS API Documentation
     #
     class DescribeSimulationApplicationResponse < Struct.new(
@@ -1442,7 +1825,8 @@ module Aws::RoboMaker
       :robot_software_suite,
       :rendering_engine,
       :revision_id,
-      :last_updated_at)
+      :last_updated_at,
+      :tags)
       include Aws::Structure
     end
 
@@ -1477,6 +1861,11 @@ module Aws::RoboMaker
     #   The status of the simulation job.
     #   @return [String]
     #
+    # @!attribute [rw] last_started_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   was last started.
+    #   @return [Time]
+    #
     # @!attribute [rw] last_updated_at
     #   The time, in milliseconds since the epoch, when the simulation job
     #   was last updated.
@@ -1491,64 +1880,73 @@ module Aws::RoboMaker
     #
     #   InternalServiceError
     #
-    #   : Internal service error
+    #   : Internal service error.
     #
     #   RobotApplicationCrash
     #
-    #   : Robot application exited abnormally (segfault, etc.)
+    #   : Robot application exited abnormally.
     #
     #   SimulationApplicationCrash
     #
-    #   : Simulation application exited abnormally (segfault, etc.)
+    #   : Simulation application exited abnormally.
     #
     #   BadPermissionsRobotApplication
     #
-    #   : Robot application bundle could not be downloaded
+    #   : Robot application bundle could not be downloaded.
     #
     #   BadPermissionsSimulationApplication
     #
-    #   : Simulation application bundle could not be downloaded
+    #   : Simulation application bundle could not be downloaded.
     #
     #   BadPermissionsS3Output
     #
-    #   : Unable to publish outputs to customer-provided S3 bucket
+    #   : Unable to publish outputs to customer-provided S3 bucket.
     #
     #   BadPermissionsCloudwatchLogs
     #
     #   : Unable to publish logs to customer-provided CloudWatch Logs
-    #     resource
+    #     resource.
     #
     #   SubnetIpLimitExceeded
     #
-    #   : Subnet IP limit exceeded
+    #   : Subnet IP limit exceeded.
     #
     #   ENILimitExceeded
     #
-    #   : ENI limit exceeded
+    #   : ENI limit exceeded.
     #
     #   BadPermissionsUserCredentials
     #
-    #   : Unable to use the Role provided
+    #   : Unable to use the Role provided.
     #
     #   InvalidBundleRobotApplication
     #
     #   : Robot bundle cannot be extracted (invalid format, bundling error,
-    #     etc.)
+    #     or other issue).
     #
     #   InvalidBundleSimulationApplication
     #
     #   : Simulation bundle cannot be extracted (invalid format, bundling
-    #     error, etc.)
+    #     error, or other issue).
     #
     #   RobotApplicationVersionMismatchedEtag
     #
     #   : Etag for RobotApplication does not match value during version
-    #     creation
+    #     creation.
     #
     #   SimulationApplicationVersionMismatchedEtag
     #
     #   : Etag for SimulationApplication does not match value during version
-    #     creation
+    #     creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   Details about why the simulation job failed. For more information
+    #   about troubleshooting, see [Troubleshooting][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1559,6 +1957,10 @@ module Aws::RoboMaker
     # @!attribute [rw] output_location
     #   Location for output files generated by the simulation job.
     #   @return [Types::OutputLocation]
+    #
+    # @!attribute [rw] logging_config
+    #   The logging configuration.
+    #   @return [Types::LoggingConfig]
     #
     # @!attribute [rw] max_job_duration_in_seconds
     #   The maximum job duration in seconds. The value must be 8 days
@@ -1582,9 +1984,21 @@ module Aws::RoboMaker
     #   A list of simulation applications.
     #   @return [Array<Types::SimulationApplicationConfig>]
     #
+    # @!attribute [rw] data_sources
+    #   The data sources for the simulation job.
+    #   @return [Array<Types::DataSource>]
+    #
+    # @!attribute [rw] tags
+    #   The list of all tags added to the specified simulation job.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] vpc_config
     #   The VPC configuration.
     #   @return [Types::VPCConfigResponse]
+    #
+    # @!attribute [rw] network_interface
+    #   The network interface information for the simulation job.
+    #   @return [Types::NetworkInterface]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationJobResponse AWS API Documentation
     #
@@ -1592,17 +2006,23 @@ module Aws::RoboMaker
       :arn,
       :name,
       :status,
+      :last_started_at,
       :last_updated_at,
       :failure_behavior,
       :failure_code,
+      :failure_reason,
       :client_request_token,
       :output_location,
+      :logging_config,
       :max_job_duration_in_seconds,
       :simulation_time_millis,
       :iam_role,
       :robot_applications,
       :simulation_applications,
-      :vpc_config)
+      :data_sources,
+      :tags,
+      :vpc_config,
+      :network_interface)
       include Aws::Structure
     end
 
@@ -1671,16 +2091,65 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # The request uses the same client token as a previous, but
+    # non-identical request. Do not reuse a client token with different
+    # requests, unless the requests are identical.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/IdempotentParameterMismatchException AWS API Documentation
+    #
+    class IdempotentParameterMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS RoboMaker experienced a service issue. Try your call again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A parameter specified in a request is not valid, is unsupported, or
+    # cannot be used. The returned message provides an explanation of the
+    # error value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about a launch configuration.
     #
     # @note When making an API call, you may pass LaunchConfig
     #   data as a hash:
     #
     #       {
-    #         package_name: "GenericString", # required
-    #         launch_file: "GenericString", # required
+    #         package_name: "Command", # required
+    #         launch_file: "Command", # required
     #         environment_variables: {
     #           "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #         },
+    #         port_forwarding_config: {
+    #           port_mappings: [
+    #             {
+    #               job_port: 1, # required
+    #               application_port: 1, # required
+    #               enable_on_public_ip: false,
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -1689,19 +2158,38 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] launch_file
-    #   The launch file.
+    #   The launch file name.
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
     #   The environment variables for the application launch.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] port_forwarding_config
+    #   The port forwarding configuration.
+    #   @return [Types::PortForwardingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LaunchConfig AWS API Documentation
     #
     class LaunchConfig < Struct.new(
       :package_name,
       :launch_file,
-      :environment_variables)
+      :environment_variables,
+      :port_forwarding_config)
+      include Aws::Structure
+    end
+
+    # The requested resource exceeds the maximum number allowed, or the
+    # number of concurrent stream requests exceeds the maximum number
+    # allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1721,6 +2209,12 @@ module Aws::RoboMaker
     #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
+    #
+    #   The filter names `status` and `fleetName` are supported. When
+    #   filtering, you must use the complete value of the filtered item. You
+    #   can use up to three filters, but they must be for the same named
+    #   item. For example, if you are looking for items with the status
+    #   `InProgress` or the status `Pending`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -1818,6 +2312,10 @@ module Aws::RoboMaker
     #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
+    #
+    #   The filter name `name` is supported. When filtering, you must use
+    #   the complete value of the filtered item. You can use up to three
+    #   filters.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListFleetsRequest AWS API Documentation
@@ -1888,14 +2386,18 @@ module Aws::RoboMaker
     #   used, `ListRobotApplications` only returns `maxResults` results in a
     #   single page along with a `nextToken` response element. The remaining
     #   results of the initial request can be seen by sending another
-    #   `ListFleets` request with the returned `nextToken` value. This value
-    #   can be between 1 and 100. If this parameter is not used, then
-    #   `ListRobotApplications` returns up to 100 results and a `nextToken`
-    #   value if applicable.
+    #   `ListRobotApplications` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If this parameter is not used,
+    #   then `ListRobotApplications` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
+    #
+    #   The filter name `name` is supported. When filtering, you must use
+    #   the complete value of the filtered item. You can use up to three
+    #   filters.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotApplicationsRequest AWS API Documentation
@@ -1961,7 +2463,7 @@ module Aws::RoboMaker
     #   `ListRobots` in paginated output. When this parameter is used,
     #   `ListRobots` only returns `maxResults` results in a single page
     #   along with a `nextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another `ListFleets`
+    #   the initial request can be seen by sending another `ListRobots`
     #   request with the returned `nextToken` value. This value can be
     #   between 1 and 100. If this parameter is not used, then `ListRobots`
     #   returns up to 100 results and a `nextToken` value if applicable.
@@ -1969,6 +2471,12 @@ module Aws::RoboMaker
     #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
+    #
+    #   The filter names `status` and `fleetName` are supported. When
+    #   filtering, you must use the complete value of the filtered item. You
+    #   can use up to three filters, but they must be for the same named
+    #   item. For example, if you are looking for items with the status
+    #   `Registered` or the status `Available`.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotsRequest AWS API Documentation
@@ -2038,15 +2546,18 @@ module Aws::RoboMaker
     #   parameter is used, `ListSimulationApplications` only returns
     #   `maxResults` results in a single page along with a `nextToken`
     #   response element. The remaining results of the initial request can
-    #   be seen by sending another `ListFleets` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListSimulationApplications` returns up
-    #   to 100 results and a `nextToken` value if applicable.
+    #   be seen by sending another `ListSimulationApplications` request with
+    #   the returned `nextToken` value. This value can be between 1 and 100.
+    #   If this parameter is not used, then `ListSimulationApplications`
+    #   returns up to 100 results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
-    #   Optional list of filters to limit results. The only valid filter
-    #   name is `name`.
+    #   Optional list of filters to limit results.
+    #
+    #   The filter name `name` is supported. When filtering, you must use
+    #   the complete value of the filtered item. You can use up to three
+    #   filters.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationApplicationsRequest AWS API Documentation
@@ -2114,14 +2625,21 @@ module Aws::RoboMaker
     #   used, `ListSimulationJobs` only returns `maxResults` results in a
     #   single page along with a `nextToken` response element. The remaining
     #   results of the initial request can be seen by sending another
-    #   `ListFleets` request with the returned `nextToken` value. This value
-    #   can be between 1 and 100. If this parameter is not used, then
-    #   `ListSimulationJobs` returns up to 100 results and a `nextToken`
-    #   value if applicable.
+    #   `ListSimulationJobs` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If this parameter is not used,
+    #   then `ListSimulationJobs` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
+    #
+    #   The filter names `status` and `simulationApplicationName` and
+    #   `robotApplicationName` are supported. When filtering, you must use
+    #   the complete value of the filtered item. You can use up to three
+    #   filters, but they must be for the same named item. For example, if
+    #   you are looking for items with the status `Preparing` or the status
+    #   `Running`.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationJobsRequest AWS API Documentation
@@ -2154,6 +2672,78 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The AWS RoboMaker Amazon Resource Name (ARN) with tags to be listed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of all tags added to the specified resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # The logging configuration.
+    #
+    # @note When making an API call, you may pass LoggingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         record_all_ros_topics: false, # required
+    #       }
+    #
+    # @!attribute [rw] record_all_ros_topics
+    #   A boolean indicating whether to record all ROS topics.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LoggingConfig AWS API Documentation
+    #
+    class LoggingConfig < Struct.new(
+      :record_all_ros_topics)
+      include Aws::Structure
+    end
+
+    # Describes a network interface.
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The IPv4 address of the network interface within the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip_address
+    #   The IPv4 public address of the network interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/NetworkInterface AWS API Documentation
+    #
+    class NetworkInterface < Struct.new(
+      :network_interface_id,
+      :private_ip_address,
+      :public_ip_address)
+      include Aws::Structure
+    end
+
     # The output location.
     #
     # @note When making an API call, you may pass OutputLocation
@@ -2180,11 +2770,107 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # Configuration information for port forwarding.
+    #
+    # @note When making an API call, you may pass PortForwardingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         port_mappings: [
+    #           {
+    #             job_port: 1, # required
+    #             application_port: 1, # required
+    #             enable_on_public_ip: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] port_mappings
+    #   The port mappings for the configuration.
+    #   @return [Array<Types::PortMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/PortForwardingConfig AWS API Documentation
+    #
+    class PortForwardingConfig < Struct.new(
+      :port_mappings)
+      include Aws::Structure
+    end
+
+    # An object representing a port mapping.
+    #
+    # @note When making an API call, you may pass PortMapping
+    #   data as a hash:
+    #
+    #       {
+    #         job_port: 1, # required
+    #         application_port: 1, # required
+    #         enable_on_public_ip: false,
+    #       }
+    #
+    # @!attribute [rw] job_port
+    #   The port number on the simulation job instance to use as a remote
+    #   connection point.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] application_port
+    #   The port number on the application.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enable_on_public_ip
+    #   A Boolean indicating whether to enable this port mapping on public
+    #   IP.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/PortMapping AWS API Documentation
+    #
+    class PortMapping < Struct.new(
+      :job_port,
+      :application_port,
+      :enable_on_public_ip)
+      include Aws::Structure
+    end
+
     # Information about the progress of a deployment job.
     #
     # @!attribute [rw] current_progress
     #   The current progress status.
+    #
+    #   Validating
+    #
+    #   : Validating the deployment.
+    #
+    #   DownloadingExtracting
+    #
+    #   : Downloading and extracting the bundle on the robot.
+    #
+    #   ExecutingPreLaunch
+    #
+    #   : Executing pre-launch script(s) if provided.
+    #
+    #   Launching
+    #
+    #   : Launching the robot application.
+    #
+    #   ExecutingPostLaunch
+    #
+    #   : Executing post-launch script(s) if provided.
+    #
+    #   Finished
+    #
+    #   : Deployment is complete.
     #   @return [String]
+    #
+    # @!attribute [rw] percent_done
+    #   Precentage of the step that is done. This currently only applies to
+    #   the `Downloading/Extracting` step of the deployment. It is empty for
+    #   other steps.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_time_remaining_seconds
+    #   Estimated amount of time in seconds remaining in the step. This
+    #   currently only applies to the `Downloading/Extracting` step of the
+    #   deployment. It is empty for other steps.
+    #   @return [Integer]
     #
     # @!attribute [rw] target_resource
     #   The Amazon Resource Name (ARN) of the deployment job.
@@ -2194,6 +2880,8 @@ module Aws::RoboMaker
     #
     class ProgressDetail < Struct.new(
       :current_progress,
+      :percent_done,
+      :estimated_time_remaining_seconds,
       :target_resource)
       include Aws::Structure
     end
@@ -2262,6 +2950,30 @@ module Aws::RoboMaker
     class RenderingEngine < Struct.new(
       :name,
       :version)
+      include Aws::Structure
+    end
+
+    # The specified resource already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2350,10 +3062,19 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "Version",
     #         launch_config: { # required
-    #           package_name: "GenericString", # required
-    #           launch_file: "GenericString", # required
+    #           package_name: "Command", # required
+    #           launch_file: "Command", # required
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #           },
+    #           port_forwarding_config: {
+    #             port_mappings: [
+    #               {
+    #                 job_port: 1, # required
+    #                 application_port: 1, # required
+    #                 enable_on_public_ip: false,
+    #               },
+    #             ],
     #           },
     #         },
     #       }
@@ -2398,13 +3119,18 @@ module Aws::RoboMaker
     #   application was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] robot_software_suite
+    #   Information about a robot software suite.
+    #   @return [Types::RobotSoftwareSuite]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationSummary AWS API Documentation
     #
     class RobotApplicationSummary < Struct.new(
       :name,
       :arn,
       :version,
-      :last_updated_at)
+      :last_updated_at,
+      :robot_software_suite)
       include Aws::Structure
     end
 
@@ -2460,7 +3186,7 @@ module Aws::RoboMaker
     #
     #       {
     #         name: "ROS", # accepts ROS
-    #         version: "Kinetic", # accepts Kinetic
+    #         version: "Kinetic", # accepts Kinetic, Melodic
     #       }
     #
     # @!attribute [rw] name
@@ -2479,6 +3205,36 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # Information about S3 keys.
+    #
+    # @!attribute [rw] s3_key
+    #   The S3 key.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The etag for the object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/S3KeyOutput AWS API Documentation
+    #
+    class S3KeyOutput < Struct.new(
+      :s3_key,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request has failed due to a temporary failure of the server.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about a simulation application configuration.
     #
     # @note When making an API call, you may pass SimulationApplicationConfig
@@ -2488,10 +3244,19 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "Version",
     #         launch_config: { # required
-    #           package_name: "GenericString", # required
-    #           launch_file: "GenericString", # required
+    #           package_name: "Command", # required
+    #           launch_file: "Command", # required
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #           },
+    #           port_forwarding_config: {
+    #             port_mappings: [
+    #               {
+    #                 job_port: 1, # required
+    #                 application_port: 1, # required
+    #                 enable_on_public_ip: false,
+    #               },
+    #             ],
     #           },
     #         },
     #       }
@@ -2536,13 +3301,23 @@ module Aws::RoboMaker
     #   application was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] robot_software_suite
+    #   Information about a robot software suite.
+    #   @return [Types::RobotSoftwareSuite]
+    #
+    # @!attribute [rw] simulation_software_suite
+    #   Information about a simulation software suite.
+    #   @return [Types::SimulationSoftwareSuite]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationSummary AWS API Documentation
     #
     class SimulationApplicationSummary < Struct.new(
       :name,
       :arn,
       :version,
-      :last_updated_at)
+      :last_updated_at,
+      :robot_software_suite,
+      :simulation_software_suite)
       include Aws::Structure
     end
 
@@ -2559,6 +3334,11 @@ module Aws::RoboMaker
     # @!attribute [rw] status
     #   Status of the simulation job.
     #   @return [String]
+    #
+    # @!attribute [rw] last_started_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   was last started.
+    #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
     #   The time, in milliseconds since the epoch, when the simulation job
@@ -2581,6 +3361,10 @@ module Aws::RoboMaker
     #   The failure code of the simulation job if it failed.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reason
+    #   The reason why the simulation job failed.
+    #   @return [String]
+    #
     # @!attribute [rw] client_request_token
     #   A unique identifier for this `SimulationJob` request.
     #   @return [String]
@@ -2588,6 +3372,10 @@ module Aws::RoboMaker
     # @!attribute [rw] output_location
     #   Location for output files generated by the simulation job.
     #   @return [Types::OutputLocation]
+    #
+    # @!attribute [rw] logging_config
+    #   The logging configuration.
+    #   @return [Types::LoggingConfig]
     #
     # @!attribute [rw] max_job_duration_in_seconds
     #   The maximum simulation job duration in seconds. The value must be 8
@@ -2601,12 +3389,7 @@ module Aws::RoboMaker
     # @!attribute [rw] iam_role
     #   The IAM role that allows the simulation instance to call the AWS
     #   APIs that are specified in its associated policies on your behalf.
-    #   This is how credentials are passed in to your simulation job. See
-    #   how to [specify AWS security credentials for your application][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials
+    #   This is how credentials are passed in to your simulation job.
     #   @return [String]
     #
     # @!attribute [rw] robot_applications
@@ -2617,9 +3400,21 @@ module Aws::RoboMaker
     #   A list of simulation applications.
     #   @return [Array<Types::SimulationApplicationConfig>]
     #
+    # @!attribute [rw] data_sources
+    #   The data sources for the simulation job.
+    #   @return [Array<Types::DataSource>]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   simulation job.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] vpc_config
     #   VPC configuration information.
     #   @return [Types::VPCConfigResponse]
+    #
+    # @!attribute [rw] network_interface
+    #   @return [Types::NetworkInterface]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJob AWS API Documentation
     #
@@ -2627,17 +3422,23 @@ module Aws::RoboMaker
       :arn,
       :name,
       :status,
+      :last_started_at,
       :last_updated_at,
       :failure_behavior,
       :failure_code,
+      :failure_reason,
       :client_request_token,
       :output_location,
+      :logging_config,
       :max_job_duration_in_seconds,
       :simulation_time_millis,
       :iam_role,
       :robot_applications,
       :simulation_applications,
-      :vpc_config)
+      :data_sources,
+      :tags,
+      :vpc_config,
+      :network_interface)
       include Aws::Structure
     end
 
@@ -2668,6 +3469,10 @@ module Aws::RoboMaker
     #   A list of simulation job robot application names.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] data_source_names
+    #   The names of the data sources.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJobSummary AWS API Documentation
     #
     class SimulationJobSummary < Struct.new(
@@ -2676,7 +3481,8 @@ module Aws::RoboMaker
       :name,
       :status,
       :simulation_application_names,
-      :robot_application_names)
+      :robot_application_names,
+      :data_source_names)
       include Aws::Structure
     end
 
@@ -2686,7 +3492,7 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         name: "Gazebo", # accepts Gazebo
+    #         name: "Gazebo", # accepts Gazebo, RosbagPlay
     #         version: "SimulationSoftwareSuiteVersionType",
     #       }
     #
@@ -2819,7 +3625,68 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_code
-    #   The failure code if the job fails.
+    #   The failure code if the job fails:
+    #
+    #   InternalServiceError
+    #
+    #   : Internal service error.
+    #
+    #   RobotApplicationCrash
+    #
+    #   : Robot application exited abnormally.
+    #
+    #   SimulationApplicationCrash
+    #
+    #   : Simulation application exited abnormally.
+    #
+    #   BadPermissionsRobotApplication
+    #
+    #   : Robot application bundle could not be downloaded.
+    #
+    #   BadPermissionsSimulationApplication
+    #
+    #   : Simulation application bundle could not be downloaded.
+    #
+    #   BadPermissionsS3Output
+    #
+    #   : Unable to publish outputs to customer-provided S3 bucket.
+    #
+    #   BadPermissionsCloudwatchLogs
+    #
+    #   : Unable to publish logs to customer-provided CloudWatch Logs
+    #     resource.
+    #
+    #   SubnetIpLimitExceeded
+    #
+    #   : Subnet IP limit exceeded.
+    #
+    #   ENILimitExceeded
+    #
+    #   : ENI limit exceeded.
+    #
+    #   BadPermissionsUserCredentials
+    #
+    #   : Unable to use the Role provided.
+    #
+    #   InvalidBundleRobotApplication
+    #
+    #   : Robot bundle cannot be extracted (invalid format, bundling error,
+    #     or other issue).
+    #
+    #   InvalidBundleSimulationApplication
+    #
+    #   : Simulation bundle cannot be extracted (invalid format, bundling
+    #     error, or other issue).
+    #
+    #   RobotApplicationVersionMismatchedEtag
+    #
+    #   : Etag for RobotApplication does not match value during version
+    #     creation.
+    #
+    #   SimulationApplicationVersionMismatchedEtag
+    #
+    #   : Etag for SimulationApplication does not match value during version
+    #     creation.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -2841,6 +3708,81 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are
+    #   tagging.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # AWS RoboMaker is temporarily unable to process the request. Try your
+    # call again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are
+    #   removing tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A map that contains tag keys and tag values that will be unattached
+    #   from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateRobotApplicationRequest
     #   data as a hash:
     #
@@ -2855,7 +3797,7 @@ module Aws::RoboMaker
     #         ],
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic
+    #           version: "Kinetic", # accepts Kinetic, Melodic
     #         },
     #         current_revision_id: "RevisionId",
     #       }
@@ -2941,14 +3883,14 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         simulation_software_suite: { # required
-    #           name: "Gazebo", # accepts Gazebo
+    #           name: "Gazebo", # accepts Gazebo, RosbagPlay
     #           version: "SimulationSoftwareSuiteVersionType",
     #         },
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic
+    #           version: "Kinetic", # accepts Kinetic, Melodic
     #         },
-    #         rendering_engine: { # required
+    #         rendering_engine: {
     #           name: "OGRE", # accepts OGRE
     #           version: "RenderingEngineVersionType",
     #         },
@@ -3053,8 +3995,8 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         subnets: ["GenericString"], # required
-    #         security_groups: ["GenericString"],
+    #         subnets: ["NonEmptyString"], # required
+    #         security_groups: ["NonEmptyString"],
     #         assign_public_ip: false,
     #       }
     #

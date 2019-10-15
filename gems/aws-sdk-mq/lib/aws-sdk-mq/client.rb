@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::MQ
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::MQ
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::MQ
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -220,6 +269,9 @@ module Aws::MQ
     #
     # @option params [String] :deployment_mode
     #   The deployment mode of the broker.
+    #
+    # @option params [Types::EncryptionOptions] :encryption_options
+    #   Encryption options for the broker.
     #
     # @option params [String] :engine_type
     #   The type of broker engine. Note: Currently, Amazon MQ supports only
@@ -263,6 +315,10 @@ module Aws::MQ
     #     },
     #     creator_request_id: "__string",
     #     deployment_mode: "SINGLE_INSTANCE", # accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ
+    #     encryption_options: {
+    #       kms_key_id: "__string",
+    #       use_aws_owned_key: false, # required
+    #     },
     #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #     engine_version: "__string",
     #     host_instance_type: "__string",
@@ -443,7 +499,7 @@ module Aws::MQ
       req.send_request(options)
     end
 
-    # Remove a tag from a resource.
+    # Removes a tag from a resource.
     #
     # @option params [required, String] :resource_arn
     #
@@ -506,12 +562,15 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#configurations #configurations} => Types::Configurations
     #   * {Types::DescribeBrokerResponse#created #created} => Time
     #   * {Types::DescribeBrokerResponse#deployment_mode #deployment_mode} => String
+    #   * {Types::DescribeBrokerResponse#encryption_options #encryption_options} => Types::EncryptionOptions
     #   * {Types::DescribeBrokerResponse#engine_type #engine_type} => String
     #   * {Types::DescribeBrokerResponse#engine_version #engine_version} => String
     #   * {Types::DescribeBrokerResponse#host_instance_type #host_instance_type} => String
     #   * {Types::DescribeBrokerResponse#logs #logs} => Types::LogsSummary
     #   * {Types::DescribeBrokerResponse#maintenance_window_start_time #maintenance_window_start_time} => Types::WeeklyStartTime
     #   * {Types::DescribeBrokerResponse#pending_engine_version #pending_engine_version} => String
+    #   * {Types::DescribeBrokerResponse#pending_security_groups #pending_security_groups} => Array&lt;String&gt;
+    #   * {Types::DescribeBrokerResponse#pending_host_instance_type #pending_host_instance_type} => String
     #   * {Types::DescribeBrokerResponse#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DescribeBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
@@ -545,6 +604,8 @@ module Aws::MQ
     #   resp.configurations.pending.revision #=> Integer
     #   resp.created #=> Time
     #   resp.deployment_mode #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ"
+    #   resp.encryption_options.kms_key_id #=> String
+    #   resp.encryption_options.use_aws_owned_key #=> Boolean
     #   resp.engine_type #=> String, one of "ACTIVEMQ"
     #   resp.engine_version #=> String
     #   resp.host_instance_type #=> String
@@ -558,6 +619,9 @@ module Aws::MQ
     #   resp.maintenance_window_start_time.time_of_day #=> String
     #   resp.maintenance_window_start_time.time_zone #=> String
     #   resp.pending_engine_version #=> String
+    #   resp.pending_security_groups #=> Array
+    #   resp.pending_security_groups[0] #=> String
+    #   resp.pending_host_instance_type #=> String
     #   resp.publicly_accessible #=> Boolean
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
@@ -575,6 +639,92 @@ module Aws::MQ
     # @param [Hash] params ({})
     def describe_broker(params = {}, options = {})
       req = build_request(:describe_broker, params)
+      req.send_request(options)
+    end
+
+    # Describe available engine types and versions.
+    #
+    # @option params [String] :engine_type
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeBrokerEngineTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBrokerEngineTypesResponse#broker_engine_types #broker_engine_types} => Array&lt;Types::BrokerEngineType&gt;
+    #   * {Types::DescribeBrokerEngineTypesResponse#max_results #max_results} => Integer
+    #   * {Types::DescribeBrokerEngineTypesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_broker_engine_types({
+    #     engine_type: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.broker_engine_types #=> Array
+    #   resp.broker_engine_types[0].engine_type #=> String, one of "ACTIVEMQ"
+    #   resp.broker_engine_types[0].engine_versions #=> Array
+    #   resp.broker_engine_types[0].engine_versions[0].name #=> String
+    #   resp.max_results #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypes AWS API Documentation
+    #
+    # @overload describe_broker_engine_types(params = {})
+    # @param [Hash] params ({})
+    def describe_broker_engine_types(params = {}, options = {})
+      req = build_request(:describe_broker_engine_types, params)
+      req.send_request(options)
+    end
+
+    # Describe available broker instance options.
+    #
+    # @option params [String] :engine_type
+    #
+    # @option params [String] :host_instance_type
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeBrokerInstanceOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBrokerInstanceOptionsResponse#broker_instance_options #broker_instance_options} => Array&lt;Types::BrokerInstanceOption&gt;
+    #   * {Types::DescribeBrokerInstanceOptionsResponse#max_results #max_results} => Integer
+    #   * {Types::DescribeBrokerInstanceOptionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_broker_instance_options({
+    #     engine_type: "__string",
+    #     host_instance_type: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.broker_instance_options #=> Array
+    #   resp.broker_instance_options[0].availability_zones #=> Array
+    #   resp.broker_instance_options[0].availability_zones[0].name #=> String
+    #   resp.broker_instance_options[0].engine_type #=> String, one of "ACTIVEMQ"
+    #   resp.broker_instance_options[0].host_instance_type #=> String
+    #   resp.broker_instance_options[0].supported_engine_versions #=> Array
+    #   resp.broker_instance_options[0].supported_engine_versions[0] #=> String
+    #   resp.max_results #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptions AWS API Documentation
+    #
+    # @overload describe_broker_instance_options(params = {})
+    # @param [Hash] params ({})
+    def describe_broker_instance_options(params = {}, options = {})
+      req = build_request(:describe_broker_instance_options, params)
       req.send_request(options)
     end
 
@@ -931,9 +1081,13 @@ module Aws::MQ
     #
     # @option params [String] :engine_version
     #
+    # @option params [String] :host_instance_type
+    #
     # @option params [Types::Logs] :logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
+    #
+    # @option params [Array<String>] :security_groups
     #
     # @return [Types::UpdateBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -941,7 +1095,9 @@ module Aws::MQ
     #   * {Types::UpdateBrokerResponse#broker_id #broker_id} => String
     #   * {Types::UpdateBrokerResponse#configuration #configuration} => Types::ConfigurationId
     #   * {Types::UpdateBrokerResponse#engine_version #engine_version} => String
+    #   * {Types::UpdateBrokerResponse#host_instance_type #host_instance_type} => String
     #   * {Types::UpdateBrokerResponse#logs #logs} => Types::Logs
+    #   * {Types::UpdateBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -953,10 +1109,12 @@ module Aws::MQ
     #       revision: 1,
     #     },
     #     engine_version: "__string",
+    #     host_instance_type: "__string",
     #     logs: {
     #       audit: false,
     #       general: false,
     #     },
+    #     security_groups: ["__string"],
     #   })
     #
     # @example Response structure
@@ -966,8 +1124,11 @@ module Aws::MQ
     #   resp.configuration.id #=> String
     #   resp.configuration.revision #=> Integer
     #   resp.engine_version #=> String
+    #   resp.host_instance_type #=> String
     #   resp.logs.audit #=> Boolean
     #   resp.logs.general #=> Boolean
+    #   resp.security_groups #=> Array
+    #   resp.security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBroker AWS API Documentation
     #
@@ -1072,7 +1233,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

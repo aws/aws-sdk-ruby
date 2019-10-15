@@ -20,6 +20,7 @@ module Aws::DLM
     DeleteLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyResponse')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExcludeBootVolume = Shapes::BooleanShape.new(name: 'ExcludeBootVolume')
     ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
     GetLifecyclePoliciesRequest = Shapes::StructureShape.new(name: 'GetLifecyclePoliciesRequest')
     GetLifecyclePoliciesResponse = Shapes::StructureShape.new(name: 'GetLifecyclePoliciesResponse')
@@ -36,10 +37,12 @@ module Aws::DLM
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     Parameter = Shapes::StringShape.new(name: 'Parameter')
     ParameterList = Shapes::ListShape.new(name: 'ParameterList')
+    Parameters = Shapes::StructureShape.new(name: 'Parameters')
     PolicyDescription = Shapes::StringShape.new(name: 'PolicyDescription')
     PolicyDetails = Shapes::StructureShape.new(name: 'PolicyDetails')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     PolicyIdList = Shapes::ListShape.new(name: 'PolicyIdList')
+    PolicyTypeValues = Shapes::StringShape.new(name: 'PolicyTypeValues')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTypeValues = Shapes::StringShape.new(name: 'ResourceTypeValues')
     ResourceTypeValuesList = Shapes::ListShape.new(name: 'ResourceTypeValuesList')
@@ -57,9 +60,10 @@ module Aws::DLM
     TargetTagsFilterList = Shapes::ListShape.new(name: 'TargetTagsFilterList')
     Time = Shapes::StringShape.new(name: 'Time')
     TimesList = Shapes::ListShape.new(name: 'TimesList')
-    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     UpdateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyRequest')
     UpdateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyResponse')
+    VariableTagsList = Shapes::ListShape.new(name: 'VariableTagsList')
 
     CreateLifecyclePolicyRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, required: true, location_name: "Description"))
@@ -96,6 +100,16 @@ module Aws::DLM
     GetLifecyclePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: LifecyclePolicy, location_name: "Policy"))
     GetLifecyclePolicyResponse.struct_class = Types::GetLifecyclePolicyResponse
 
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    InvalidRequestException.add_member(:required_parameters, Shapes::ShapeRef.new(shape: ParameterList, location_name: "RequiredParameters"))
+    InvalidRequestException.add_member(:mutually_exclusive_parameters, Shapes::ShapeRef.new(shape: ParameterList, location_name: "MutuallyExclusiveParameters"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     LifecyclePolicy.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
     LifecyclePolicy.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "Description"))
     LifecyclePolicy.add_member(:state, Shapes::ShapeRef.new(shape: GettablePolicyStateValues, location_name: "State"))
@@ -112,14 +126,30 @@ module Aws::DLM
 
     LifecyclePolicySummaryList.member = Shapes::ShapeRef.new(shape: LifecyclePolicySummary)
 
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ParameterList.member = Shapes::ShapeRef.new(shape: Parameter)
 
+    Parameters.add_member(:exclude_boot_volume, Shapes::ShapeRef.new(shape: ExcludeBootVolume, location_name: "ExcludeBootVolume"))
+    Parameters.struct_class = Types::Parameters
+
+    PolicyDetails.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyTypeValues, location_name: "PolicyType"))
     PolicyDetails.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeValuesList, location_name: "ResourceTypes"))
     PolicyDetails.add_member(:target_tags, Shapes::ShapeRef.new(shape: TargetTagList, location_name: "TargetTags"))
     PolicyDetails.add_member(:schedules, Shapes::ShapeRef.new(shape: ScheduleList, location_name: "Schedules"))
+    PolicyDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
     PolicyDetails.struct_class = Types::PolicyDetails
 
     PolicyIdList.member = Shapes::ShapeRef.new(shape: PolicyId)
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    ResourceNotFoundException.add_member(:resource_ids, Shapes::ShapeRef.new(shape: PolicyIdList, location_name: "ResourceIds"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceTypeValuesList.member = Shapes::ShapeRef.new(shape: ResourceTypeValues)
 
@@ -129,6 +159,7 @@ module Aws::DLM
     Schedule.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleName, location_name: "Name"))
     Schedule.add_member(:copy_tags, Shapes::ShapeRef.new(shape: CopyTags, location_name: "CopyTags"))
     Schedule.add_member(:tags_to_add, Shapes::ShapeRef.new(shape: TagsToAddList, location_name: "TagsToAdd"))
+    Schedule.add_member(:variable_tags, Shapes::ShapeRef.new(shape: VariableTagsList, location_name: "VariableTags"))
     Schedule.add_member(:create_rule, Shapes::ShapeRef.new(shape: CreateRule, location_name: "CreateRule"))
     Schedule.add_member(:retain_rule, Shapes::ShapeRef.new(shape: RetainRule, location_name: "RetainRule"))
     Schedule.struct_class = Types::Schedule
@@ -157,6 +188,8 @@ module Aws::DLM
     UpdateLifecyclePolicyRequest.struct_class = Types::UpdateLifecyclePolicyRequest
 
     UpdateLifecyclePolicyResponse.struct_class = Types::UpdateLifecyclePolicyResponse
+
+    VariableTagsList.member = Shapes::ShapeRef.new(shape: Tag)
 
 
     # @api private

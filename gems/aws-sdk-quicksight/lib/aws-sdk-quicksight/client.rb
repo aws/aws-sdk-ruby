@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::QuickSight
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::QuickSight
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::QuickSight
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -253,6 +302,7 @@ module Aws::QuickSight
     #   resp.group.arn #=> String
     #   resp.group.group_name #=> String
     #   resp.group.description #=> String
+    #   resp.group.principal_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -487,6 +537,55 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Deletes a user identified by its principal ID.
+    #
+    # The permission resource is
+    # `arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name>
+    # `.
+    #
+    # **CLI Sample:**
+    #
+    # `aws quicksight delete-user-by-principal-id
+    # --aws-account-id=111122223333 --namespace=default
+    # --principal-id=ABCDEFJA26JLI7EUUOEHS `
+    #
+    # @option params [required, String] :principal_id
+    #   The principal ID of the user.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that the user is in. Currently, you use the
+    #   ID for the AWS account that contains your Amazon QuickSight account.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace. Currently, you should set this to `default`.
+    #
+    # @return [Types::DeleteUserByPrincipalIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteUserByPrincipalIdResponse#request_id #request_id} => String
+    #   * {Types::DeleteUserByPrincipalIdResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user_by_principal_id({
+    #     principal_id: "String", # required
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserByPrincipalId AWS API Documentation
+    #
+    # @overload delete_user_by_principal_id(params = {})
+    # @param [Hash] params ({})
+    def delete_user_by_principal_id(params = {}, options = {})
+      req = build_request(:delete_user_by_principal_id, params)
+      req.send_request(options)
+    end
+
     # Returns an Amazon QuickSight group's description and Amazon Resource
     # Name (ARN).
     #
@@ -531,6 +630,7 @@ module Aws::QuickSight
     #   resp.group.arn #=> String
     #   resp.group.group_name #=> String
     #   resp.group.description #=> String
+    #   resp.group.principal_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -590,6 +690,7 @@ module Aws::QuickSight
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user.active #=> Boolean
+    #   resp.user.principal_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -660,6 +761,21 @@ module Aws::QuickSight
     #   Remove the reset button on embedded dashboard. The default is FALSE,
     #   which allows the reset button.
     #
+    # @option params [String] :user_arn
+    #   The Amazon QuickSight user's ARN, for use with `QUICKSIGHT` identity
+    #   type. You can use this for any of the following:
+    #
+    #   * Amazon QuickSight users in your account (readers, authors, or
+    #     admins)
+    #
+    #   * AD users
+    #
+    #   * Invited non-federated users
+    #
+    #   * Federated IAM users
+    #
+    #   * Federated IAM role-based sessions
+    #
     # @return [Types::GetDashboardEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDashboardEmbedUrlResponse#embed_url #embed_url} => String
@@ -675,6 +791,7 @@ module Aws::QuickSight
     #     session_lifetime_in_minutes: 1,
     #     undo_redo_disabled: false,
     #     reset_disabled: false,
+    #     user_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -805,6 +922,7 @@ module Aws::QuickSight
     #   resp.group_list[0].arn #=> String
     #   resp.group_list[0].group_name #=> String
     #   resp.group_list[0].description #=> String
+    #   resp.group_list[0].principal_id #=> String
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -873,6 +991,7 @@ module Aws::QuickSight
     #   resp.group_list[0].arn #=> String
     #   resp.group_list[0].group_name #=> String
     #   resp.group_list[0].description #=> String
+    #   resp.group_list[0].principal_id #=> String
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -939,6 +1058,7 @@ module Aws::QuickSight
     #   resp.user_list[0].role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
     #   resp.user_list[0].identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user_list[0].active #=> Boolean
+    #   resp.user_list[0].principal_id #=> String
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -1001,11 +1121,13 @@ module Aws::QuickSight
     #   QuickSight.
     #
     # @option params [String] :session_name
-    #   The name of the session with the assumed IAM role. By using this
-    #   parameter, you can register multiple users with the same IAM role,
-    #   provided that each has a different session name. For more information
-    #   on assuming IAM roles, see [ `assume-role` ][1] in the *AWS CLI
-    #   Reference.*
+    #   You need to use this parameter only when you register one or more
+    #   users using an assumed IAM role. You don't need to provide the
+    #   session name for other scenarios, for example when you are registering
+    #   an IAM user or an Amazon QuickSight user. You can register multiple
+    #   users using the same IAM role if each user has a different session
+    #   name. For more information on assuming IAM roles, see [ `assume-role`
+    #   ][1] in the *AWS CLI Reference.*
     #
     #
     #
@@ -1036,7 +1158,7 @@ module Aws::QuickSight
     #     email: "String", # required
     #     user_role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
     #     iam_arn: "String",
-    #     session_name: "String",
+    #     session_name: "RoleSessionName",
     #     aws_account_id: "AwsAccountId", # required
     #     namespace: "Namespace", # required
     #     user_name: "UserName",
@@ -1050,6 +1172,7 @@ module Aws::QuickSight
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user.active #=> Boolean
+    #   resp.user.principal_id #=> String
     #   resp.user_invitation_url #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -1111,6 +1234,7 @@ module Aws::QuickSight
     #   resp.group.arn #=> String
     #   resp.group.group_name #=> String
     #   resp.group.description #=> String
+    #   resp.group.principal_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -1189,6 +1313,7 @@ module Aws::QuickSight
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user.active #=> Boolean
+    #   resp.user.principal_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -1214,7 +1339,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::RDSDataService
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::RDSDataService
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,30 +205,266 @@ module Aws::RDSDataService
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
 
-    # Executes any SQL statement on the target database synchronously
+    # Runs a batch SQL statement over an array of data.
     #
-    # @option params [required, String] :aws_secret_store_arn
-    #   ARN of the db credentials in AWS Secret Store or the friendly secret
-    #   name
+    # You can run bulk update and insert operations for multiple records
+    # using a DML statement with different parameter sets. Bulk operations
+    # can provide a significant performance improvement over individual
+    # insert and update operations.
+    #
+    # If a call isn't part of a transaction because it doesn't include the
+    # `transactionID` parameter, changes that result from the call are
+    # committed automatically.
     #
     # @option params [String] :database
-    #   Target DB name
+    #   The name of the database.
     #
-    # @option params [required, String] :db_cluster_or_instance_arn
-    #   ARN of the target db cluster or instance
+    # @option params [Array<Array>] :parameter_sets
+    #   The parameter set for the batch operation.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
     #
     # @option params [String] :schema
-    #   Target Schema name
+    #   The name of the database schema.
+    #
+    # @option params [required, String] :secret_arn
+    #   The name or ARN of the secret that enables access to the DB cluster.
+    #
+    # @option params [required, String] :sql
+    #   The SQL statement to run.
+    #
+    # @option params [String] :transaction_id
+    #   The identifier of a transaction that was started by using the
+    #   `BeginTransaction` operation. Specify the transaction ID of the
+    #   transaction that you want to include the SQL statement in.
+    #
+    #   If the SQL statement is not part of a transaction, don't set this
+    #   parameter.
+    #
+    # @return [Types::BatchExecuteStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchExecuteStatementResponse#update_results #update_results} => Array&lt;Types::UpdateResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_execute_statement({
+    #     database: "DbName",
+    #     parameter_sets: [
+    #       [
+    #         {
+    #           name: "ParameterName",
+    #           value: {
+    #             array_value: {
+    #               array_values: [
+    #                 {
+    #                   # recursive ArrayValue
+    #                 },
+    #               ],
+    #               boolean_values: [false],
+    #               double_values: [1.0],
+    #               long_values: [1],
+    #               string_values: ["String"],
+    #             },
+    #             blob_value: "data",
+    #             boolean_value: false,
+    #             double_value: 1.0,
+    #             is_null: false,
+    #             long_value: 1,
+    #             string_value: "String",
+    #           },
+    #         },
+    #       ],
+    #     ],
+    #     resource_arn: "Arn", # required
+    #     schema: "DbName",
+    #     secret_arn: "Arn", # required
+    #     sql: "SqlStatement", # required
+    #     transaction_id: "Id",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_results #=> Array
+    #   resp.update_results[0].generated_fields #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.array_values #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.array_values[0] #=> Types::ArrayValue
+    #   resp.update_results[0].generated_fields[0].array_value.boolean_values #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.boolean_values[0] #=> Boolean
+    #   resp.update_results[0].generated_fields[0].array_value.double_values #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.double_values[0] #=> Float
+    #   resp.update_results[0].generated_fields[0].array_value.long_values #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.long_values[0] #=> Integer
+    #   resp.update_results[0].generated_fields[0].array_value.string_values #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.string_values[0] #=> String
+    #   resp.update_results[0].generated_fields[0].blob_value #=> String
+    #   resp.update_results[0].generated_fields[0].boolean_value #=> Boolean
+    #   resp.update_results[0].generated_fields[0].double_value #=> Float
+    #   resp.update_results[0].generated_fields[0].is_null #=> Boolean
+    #   resp.update_results[0].generated_fields[0].long_value #=> Integer
+    #   resp.update_results[0].generated_fields[0].string_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BatchExecuteStatement AWS API Documentation
+    #
+    # @overload batch_execute_statement(params = {})
+    # @param [Hash] params ({})
+    def batch_execute_statement(params = {}, options = {})
+      req = build_request(:batch_execute_statement, params)
+      req.send_request(options)
+    end
+
+    # Starts a SQL transaction.
+    #
+    #      <important> <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.</p> <p>A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically.</p> <p>DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate <code>ExecuteStatement</code> call with <code>continueAfterTimeout</code> enabled.</p> </important>
+    #
+    # @option params [String] :database
+    #   The name of the database.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+    #
+    # @option params [String] :schema
+    #   The name of the database schema.
+    #
+    # @option params [required, String] :secret_arn
+    #   The name or ARN of the secret that enables access to the DB cluster.
+    #
+    # @return [Types::BeginTransactionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BeginTransactionResponse#transaction_id #transaction_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.begin_transaction({
+    #     database: "DbName",
+    #     resource_arn: "Arn", # required
+    #     schema: "DbName",
+    #     secret_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transaction_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BeginTransaction AWS API Documentation
+    #
+    # @overload begin_transaction(params = {})
+    # @param [Hash] params ({})
+    def begin_transaction(params = {}, options = {})
+      req = build_request(:begin_transaction, params)
+      req.send_request(options)
+    end
+
+    # Ends a SQL transaction started with the `BeginTransaction` operation
+    # and commits the changes.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+    #
+    # @option params [required, String] :secret_arn
+    #   The name or ARN of the secret that enables access to the DB cluster.
+    #
+    # @option params [required, String] :transaction_id
+    #   The identifier of the transaction to end and commit.
+    #
+    # @return [Types::CommitTransactionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CommitTransactionResponse#transaction_status #transaction_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.commit_transaction({
+    #     resource_arn: "Arn", # required
+    #     secret_arn: "Arn", # required
+    #     transaction_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transaction_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/CommitTransaction AWS API Documentation
+    #
+    # @overload commit_transaction(params = {})
+    # @param [Hash] params ({})
+    def commit_transaction(params = {}, options = {})
+      req = build_request(:commit_transaction, params)
+      req.send_request(options)
+    end
+
+    # Runs one or more SQL statements.
+    #
+    # This operation is deprecated. Use the `BatchExecuteStatement` or
+    # `ExecuteStatement` operation.
+    #
+    # @option params [required, String] :aws_secret_store_arn
+    #   The Amazon Resource Name (ARN) of the secret that enables access to
+    #   the DB cluster.
+    #
+    # @option params [String] :database
+    #   The name of the database.
+    #
+    # @option params [required, String] :db_cluster_or_instance_arn
+    #   The ARN of the Aurora Serverless DB cluster.
+    #
+    # @option params [String] :schema
+    #   The name of the database schema.
     #
     # @option params [required, String] :sql_statements
-    #   SQL statement(s) to be executed. Statements can be chained by using
-    #   semicolons
+    #   One or more SQL statements to run on the DB cluster.
+    #
+    #   You can separate SQL statements from each other with a semicolon (;).
+    #   Any valid SQL statement is permitted, including data definition, data
+    #   manipulation, and commit statements.
     #
     # @return [Types::ExecuteSqlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -231,11 +473,11 @@ module Aws::RDSDataService
     # @example Request syntax with placeholder values
     #
     #   resp = client.execute_sql({
-    #     aws_secret_store_arn: "String", # required
-    #     database: "String",
-    #     db_cluster_or_instance_arn: "String", # required
-    #     schema: "String",
-    #     sql_statements: "String", # required
+    #     aws_secret_store_arn: "Arn", # required
+    #     database: "DbName",
+    #     db_cluster_or_instance_arn: "Arn", # required
+    #     schema: "DbName",
+    #     sql_statements: "SqlStatement", # required
     #   })
     #
     # @example Response structure
@@ -282,6 +524,205 @@ module Aws::RDSDataService
       req.send_request(options)
     end
 
+    # Runs a SQL statement against a database.
+    #
+    # If a call isn't part of a transaction because it doesn't include the
+    # `transactionID` parameter, changes that result from the call are
+    # committed automatically.
+    #
+    # The response size limit is 1 MB or 1,000 records. If the call returns
+    # more than 1 MB of response data or over 1,000 records, the call is
+    # terminated.
+    #
+    # @option params [Boolean] :continue_after_timeout
+    #   A value that indicates whether to continue running the statement after
+    #   the call times out. By default, the statement stops running when the
+    #   call times out.
+    #
+    #   For DDL statements, we recommend continuing to run the statement after
+    #   the call times out. When a DDL statement terminates before it is
+    #   finished running, it can result in errors and possibly corrupted data
+    #   structures.
+    #
+    # @option params [String] :database
+    #   The name of the database.
+    #
+    # @option params [Boolean] :include_result_metadata
+    #   A value that indicates whether to include metadata in the results.
+    #
+    # @option params [Array<Types::SqlParameter>] :parameters
+    #   The parameters for the SQL statement.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+    #
+    # @option params [Types::ResultSetOptions] :result_set_options
+    #   Options that control how the result set is returned.
+    #
+    # @option params [String] :schema
+    #   The name of the database schema.
+    #
+    # @option params [required, String] :secret_arn
+    #   The name or ARN of the secret that enables access to the DB cluster.
+    #
+    # @option params [required, String] :sql
+    #   The SQL statement to run.
+    #
+    # @option params [String] :transaction_id
+    #   The identifier of a transaction that was started by using the
+    #   `BeginTransaction` operation. Specify the transaction ID of the
+    #   transaction that you want to include the SQL statement in.
+    #
+    #   If the SQL statement is not part of a transaction, don't set this
+    #   parameter.
+    #
+    # @return [Types::ExecuteStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteStatementResponse#column_metadata #column_metadata} => Array&lt;Types::ColumnMetadata&gt;
+    #   * {Types::ExecuteStatementResponse#generated_fields #generated_fields} => Array&lt;Types::Field&gt;
+    #   * {Types::ExecuteStatementResponse#number_of_records_updated #number_of_records_updated} => Integer
+    #   * {Types::ExecuteStatementResponse#records #records} => Array&lt;Array&lt;Types::Field&gt;&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_statement({
+    #     continue_after_timeout: false,
+    #     database: "DbName",
+    #     include_result_metadata: false,
+    #     parameters: [
+    #       {
+    #         name: "ParameterName",
+    #         value: {
+    #           array_value: {
+    #             array_values: [
+    #               {
+    #                 # recursive ArrayValue
+    #               },
+    #             ],
+    #             boolean_values: [false],
+    #             double_values: [1.0],
+    #             long_values: [1],
+    #             string_values: ["String"],
+    #           },
+    #           blob_value: "data",
+    #           boolean_value: false,
+    #           double_value: 1.0,
+    #           is_null: false,
+    #           long_value: 1,
+    #           string_value: "String",
+    #         },
+    #       },
+    #     ],
+    #     resource_arn: "Arn", # required
+    #     result_set_options: {
+    #       decimal_return_type: "DOUBLE_OR_LONG", # accepts DOUBLE_OR_LONG, STRING
+    #     },
+    #     schema: "DbName",
+    #     secret_arn: "Arn", # required
+    #     sql: "SqlStatement", # required
+    #     transaction_id: "Id",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_metadata #=> Array
+    #   resp.column_metadata[0].array_base_column_type #=> Integer
+    #   resp.column_metadata[0].is_auto_increment #=> Boolean
+    #   resp.column_metadata[0].is_case_sensitive #=> Boolean
+    #   resp.column_metadata[0].is_currency #=> Boolean
+    #   resp.column_metadata[0].is_signed #=> Boolean
+    #   resp.column_metadata[0].label #=> String
+    #   resp.column_metadata[0].name #=> String
+    #   resp.column_metadata[0].nullable #=> Integer
+    #   resp.column_metadata[0].precision #=> Integer
+    #   resp.column_metadata[0].scale #=> Integer
+    #   resp.column_metadata[0].schema_name #=> String
+    #   resp.column_metadata[0].table_name #=> String
+    #   resp.column_metadata[0].type #=> Integer
+    #   resp.column_metadata[0].type_name #=> String
+    #   resp.generated_fields #=> Array
+    #   resp.generated_fields[0].array_value.array_values #=> Array
+    #   resp.generated_fields[0].array_value.array_values[0] #=> Types::ArrayValue
+    #   resp.generated_fields[0].array_value.boolean_values #=> Array
+    #   resp.generated_fields[0].array_value.boolean_values[0] #=> Boolean
+    #   resp.generated_fields[0].array_value.double_values #=> Array
+    #   resp.generated_fields[0].array_value.double_values[0] #=> Float
+    #   resp.generated_fields[0].array_value.long_values #=> Array
+    #   resp.generated_fields[0].array_value.long_values[0] #=> Integer
+    #   resp.generated_fields[0].array_value.string_values #=> Array
+    #   resp.generated_fields[0].array_value.string_values[0] #=> String
+    #   resp.generated_fields[0].blob_value #=> String
+    #   resp.generated_fields[0].boolean_value #=> Boolean
+    #   resp.generated_fields[0].double_value #=> Float
+    #   resp.generated_fields[0].is_null #=> Boolean
+    #   resp.generated_fields[0].long_value #=> Integer
+    #   resp.generated_fields[0].string_value #=> String
+    #   resp.number_of_records_updated #=> Integer
+    #   resp.records #=> Array
+    #   resp.records[0] #=> Array
+    #   resp.records[0][0].array_value.array_values #=> Array
+    #   resp.records[0][0].array_value.array_values[0] #=> Types::ArrayValue
+    #   resp.records[0][0].array_value.boolean_values #=> Array
+    #   resp.records[0][0].array_value.boolean_values[0] #=> Boolean
+    #   resp.records[0][0].array_value.double_values #=> Array
+    #   resp.records[0][0].array_value.double_values[0] #=> Float
+    #   resp.records[0][0].array_value.long_values #=> Array
+    #   resp.records[0][0].array_value.long_values[0] #=> Integer
+    #   resp.records[0][0].array_value.string_values #=> Array
+    #   resp.records[0][0].array_value.string_values[0] #=> String
+    #   resp.records[0][0].blob_value #=> String
+    #   resp.records[0][0].boolean_value #=> Boolean
+    #   resp.records[0][0].double_value #=> Float
+    #   resp.records[0][0].is_null #=> Boolean
+    #   resp.records[0][0].long_value #=> Integer
+    #   resp.records[0][0].string_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteStatement AWS API Documentation
+    #
+    # @overload execute_statement(params = {})
+    # @param [Hash] params ({})
+    def execute_statement(params = {}, options = {})
+      req = build_request(:execute_statement, params)
+      req.send_request(options)
+    end
+
+    # Performs a rollback of a transaction. Rolling back a transaction
+    # cancels its changes.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+    #
+    # @option params [required, String] :secret_arn
+    #   The name or ARN of the secret that enables access to the DB cluster.
+    #
+    # @option params [required, String] :transaction_id
+    #   The identifier of the transaction to roll back.
+    #
+    # @return [Types::RollbackTransactionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RollbackTransactionResponse#transaction_status #transaction_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rollback_transaction({
+    #     resource_arn: "Arn", # required
+    #     secret_arn: "Arn", # required
+    #     transaction_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transaction_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/RollbackTransaction AWS API Documentation
+    #
+    # @overload rollback_transaction(params = {})
+    # @param [Hash] params ({})
+    def rollback_transaction(params = {}, options = {})
+      req = build_request(:rollback_transaction, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -295,7 +736,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -419,6 +419,20 @@ module Aws
             end
 
           end
+
+          describe '#delete_object' do
+            it "delegates to S3 client" do
+              expect(client.client).to receive(:delete_object)
+              client.delete_object(bucket:'bucket', key:'key')
+            end
+          end
+
+          describe '#head_object' do
+            it "delegates to S3 client" do
+              expect(client.client).to receive(:head_object)
+              client.head_object(bucket:'bucket', key:'key')
+            end
+          end
         end
 
         describe 'kms_CBC' do

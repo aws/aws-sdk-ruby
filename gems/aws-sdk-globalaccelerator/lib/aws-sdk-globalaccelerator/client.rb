@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::GlobalAccelerator
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::GlobalAccelerator
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::GlobalAccelerator
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -220,6 +269,9 @@ module Aws::GlobalAccelerator
     # endpoint groups, each of which includes endpoints, such as Network
     # Load Balancers. To see an AWS CLI example of creating an accelerator,
     # scroll down to **Example**.
+    #
+    # You must specify the US-West-2 (Oregon) Region to create or update
+    # accelerators.
     #
     # @option params [required, String] :name
     #   The name of an accelerator. The name can have a maximum of 32
@@ -263,6 +315,7 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
     #   resp.accelerator.last_modified_time #=> Time
@@ -343,6 +396,7 @@ module Aws::GlobalAccelerator
     #       {
     #         endpoint_id: "GenericString",
     #         weight: 1,
+    #         client_ip_preservation_enabled: false,
     #       },
     #     ],
     #     traffic_dial_percentage: 1.0,
@@ -363,6 +417,7 @@ module Aws::GlobalAccelerator
     #   resp.endpoint_group.endpoint_descriptions[0].weight #=> Integer
     #   resp.endpoint_group.endpoint_descriptions[0].health_state #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
     #   resp.endpoint_group.endpoint_descriptions[0].health_reason #=> String
+    #   resp.endpoint_group.endpoint_descriptions[0].client_ip_preservation_enabled #=> Boolean
     #   resp.endpoint_group.traffic_dial_percentage #=> Float
     #   resp.endpoint_group.health_check_port #=> Integer
     #   resp.endpoint_group.health_check_protocol #=> String, one of "TCP", "HTTP", "HTTPS"
@@ -554,6 +609,7 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
     #   resp.accelerator.last_modified_time #=> Time
@@ -569,9 +625,9 @@ module Aws::GlobalAccelerator
 
     # Describe the attributes of an accelerator.
     #
-    # @option params [String] :accelerator_arn
+    # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator with the attributes
-    #   that you want to describe. Value is required.
+    #   that you want to describe.
     #
     # @return [Types::DescribeAcceleratorAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -580,7 +636,7 @@ module Aws::GlobalAccelerator
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_accelerator_attributes({
-    #     accelerator_arn: "GenericString",
+    #     accelerator_arn: "GenericString", # required
     #   })
     #
     # @example Response structure
@@ -622,6 +678,7 @@ module Aws::GlobalAccelerator
     #   resp.endpoint_group.endpoint_descriptions[0].weight #=> Integer
     #   resp.endpoint_group.endpoint_descriptions[0].health_state #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
     #   resp.endpoint_group.endpoint_descriptions[0].health_reason #=> String
+    #   resp.endpoint_group.endpoint_descriptions[0].client_ip_preservation_enabled #=> Boolean
     #   resp.endpoint_group.traffic_dial_percentage #=> Float
     #   resp.endpoint_group.health_check_port #=> Integer
     #   resp.endpoint_group.health_check_protocol #=> String, one of "TCP", "HTTP", "HTTPS"
@@ -704,6 +761,7 @@ module Aws::GlobalAccelerator
     #   resp.accelerators[0].ip_sets[0].ip_family #=> String
     #   resp.accelerators[0].ip_sets[0].ip_addresses #=> Array
     #   resp.accelerators[0].ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerators[0].dns_name #=> String
     #   resp.accelerators[0].status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerators[0].created_time #=> Time
     #   resp.accelerators[0].last_modified_time #=> Time
@@ -754,6 +812,7 @@ module Aws::GlobalAccelerator
     #   resp.endpoint_groups[0].endpoint_descriptions[0].weight #=> Integer
     #   resp.endpoint_groups[0].endpoint_descriptions[0].health_state #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
     #   resp.endpoint_groups[0].endpoint_descriptions[0].health_reason #=> String
+    #   resp.endpoint_groups[0].endpoint_descriptions[0].client_ip_preservation_enabled #=> Boolean
     #   resp.endpoint_groups[0].traffic_dial_percentage #=> Float
     #   resp.endpoint_groups[0].health_check_port #=> Integer
     #   resp.endpoint_groups[0].health_check_protocol #=> String, one of "TCP", "HTTP", "HTTPS"
@@ -818,7 +877,11 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Update an accelerator.
+    # Update an accelerator. To see an AWS CLI example of updating an
+    # accelerator, scroll down to **Example**.
+    #
+    # You must specify the US-West-2 (Oregon) Region to create or update
+    # accelerators.
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator to update.
@@ -861,6 +924,7 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
     #   resp.accelerator.last_modified_time #=> Time
@@ -878,9 +942,9 @@ module Aws::GlobalAccelerator
     # updating an accelerator to enable flow logs, scroll down to
     # **Example**.
     #
-    # @option params [String] :accelerator_arn
+    # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator that you want to
-    #   update. Attribute is required.
+    #   update.
     #
     # @option params [Boolean] :flow_logs_enabled
     #   Update whether flow logs are enabled. The default value is false. If
@@ -913,7 +977,7 @@ module Aws::GlobalAccelerator
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_accelerator_attributes({
-    #     accelerator_arn: "GenericString",
+    #     accelerator_arn: "GenericString", # required
     #     flow_logs_enabled: false,
     #     flow_logs_s3_bucket: "GenericString",
     #     flow_logs_s3_prefix: "GenericString",
@@ -991,6 +1055,7 @@ module Aws::GlobalAccelerator
     #       {
     #         endpoint_id: "GenericString",
     #         weight: 1,
+    #         client_ip_preservation_enabled: false,
     #       },
     #     ],
     #     traffic_dial_percentage: 1.0,
@@ -1010,6 +1075,7 @@ module Aws::GlobalAccelerator
     #   resp.endpoint_group.endpoint_descriptions[0].weight #=> Integer
     #   resp.endpoint_group.endpoint_descriptions[0].health_state #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
     #   resp.endpoint_group.endpoint_descriptions[0].health_reason #=> String
+    #   resp.endpoint_group.endpoint_descriptions[0].client_ip_preservation_enabled #=> Boolean
     #   resp.endpoint_group.traffic_dial_percentage #=> Float
     #   resp.endpoint_group.health_check_port #=> Integer
     #   resp.endpoint_group.health_check_protocol #=> String, one of "TCP", "HTTP", "HTTPS"
@@ -1113,7 +1179,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

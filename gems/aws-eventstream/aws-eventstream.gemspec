@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'AWS Event Stream Library'
   spec.description   = 'Amazon Web Services event stream library. Decodes and encodes binary stream under `vnd.amazon.event-stream` content-type'
   spec.author        = 'Amazon Web Services'
-  spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
+  spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
   spec.files         = Dir['lib/**/*.rb']
 

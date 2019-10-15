@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::Budgets
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::Budgets
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::Budgets
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -216,6 +265,15 @@ module Aws::Budgets
     # @!group API Operations
 
     # Creates a budget and, if included, notifications and subscribers.
+    #
+    # Only one of `BudgetLimit` or `PlannedBudgetLimits` can be present in
+    # the syntax at one time. Use the syntax that matches your case. The
+    # Request Syntax section shows the `BudgetLimit` syntax. For
+    # `PlannedBudgetLimits`, see the [Examples][1] section.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget.
@@ -241,6 +299,12 @@ module Aws::Budgets
     #       budget_limit: {
     #         amount: "NumericValue", # required
     #         unit: "UnitValue", # required
+    #       },
+    #       planned_budget_limits: {
+    #         "GenericString" => {
+    #           amount: "NumericValue", # required
+    #           unit: "UnitValue", # required
+    #         },
     #       },
     #       cost_filters: {
     #         "GenericString" => ["GenericString"],
@@ -507,6 +571,13 @@ module Aws::Budgets
 
     # Describes a budget.
     #
+    # The Request Syntax section shows the `BudgetLimit` syntax. For
+    # `PlannedBudgetLimits`, see the [Examples][1] section.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples
+    #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget that you want a
     #   description of.
@@ -530,6 +601,9 @@ module Aws::Budgets
     #   resp.budget.budget_name #=> String
     #   resp.budget.budget_limit.amount #=> String
     #   resp.budget.budget_limit.unit #=> String
+    #   resp.budget.planned_budget_limits #=> Hash
+    #   resp.budget.planned_budget_limits["GenericString"].amount #=> String
+    #   resp.budget.planned_budget_limits["GenericString"].unit #=> String
     #   resp.budget.cost_filters #=> Hash
     #   resp.budget.cost_filters["GenericString"] #=> Array
     #   resp.budget.cost_filters["GenericString"][0] #=> String
@@ -637,6 +711,13 @@ module Aws::Budgets
 
     # Lists the budgets that are associated with an account.
     #
+    # The Request Syntax section shows the `BudgetLimit` syntax. For
+    # `PlannedBudgetLimits`, see the [Examples][1] section.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples
+    #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budgets that you want
     #   descriptions of.
@@ -668,6 +749,9 @@ module Aws::Budgets
     #   resp.budgets[0].budget_name #=> String
     #   resp.budgets[0].budget_limit.amount #=> String
     #   resp.budgets[0].budget_limit.unit #=> String
+    #   resp.budgets[0].planned_budget_limits #=> Hash
+    #   resp.budgets[0].planned_budget_limits["GenericString"].amount #=> String
+    #   resp.budgets[0].planned_budget_limits["GenericString"].unit #=> String
     #   resp.budgets[0].cost_filters #=> Hash
     #   resp.budgets[0].cost_filters["GenericString"] #=> Array
     #   resp.budgets[0].cost_filters["GenericString"][0] #=> String
@@ -808,6 +892,15 @@ module Aws::Budgets
     # `calculatedSpend` drops to zero until AWS has new usage data to use
     # for forecasting.
     #
+    # Only one of `BudgetLimit` or `PlannedBudgetLimits` can be present in
+    # the syntax at one time. Use the syntax that matches your case. The
+    # Request Syntax section shows the `BudgetLimit` syntax. For
+    # `PlannedBudgetLimits`, see the [Examples][1] section.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_UpdateBudget.html#API_UpdateBudget_Examples
+    #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget that you want to
     #   update.
@@ -826,6 +919,12 @@ module Aws::Budgets
     #       budget_limit: {
     #         amount: "NumericValue", # required
     #         unit: "UnitValue", # required
+    #       },
+    #       planned_budget_limits: {
+    #         "GenericString" => {
+    #           amount: "NumericValue", # required
+    #           unit: "UnitValue", # required
+    #         },
     #       },
     #       cost_filters: {
     #         "GenericString" => ["GenericString"],
@@ -977,7 +1076,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

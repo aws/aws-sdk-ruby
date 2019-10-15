@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::Pinpoint
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::Pinpoint
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,16 +205,60 @@ module Aws::Pinpoint
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
 
-    # Creates or updates an app.
+    # Creates an application.
     #
     # @option params [required, Types::CreateApplicationRequest] :create_application_request
-    #   Application Request.
+    #   Specifies the display name of an application and the tags to associate
+    #   with the application.
     #
     # @return [Types::CreateAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -218,14 +268,20 @@ module Aws::Pinpoint
     #
     #   resp = client.create_app({
     #     create_application_request: { # required
-    #       name: "__string",
+    #       name: "__string", # required
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.application_response.arn #=> String
     #   resp.application_response.id #=> String
     #   resp.application_response.name #=> String
+    #   resp.application_response.tags #=> Hash
+    #   resp.application_response.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApp AWS API Documentation
     #
@@ -236,12 +292,13 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Creates or updates a campaign.
+    # Creates a new campaign for an application or updates the settings of
+    # an existing campaign for an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::WriteCampaignRequest] :write_campaign_request
-    #   Used to create a campaign.
+    #   Specifies the configuration and other settings for a campaign.
     #
     # @return [Types::CreateCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -315,7 +372,7 @@ module Aws::Pinpoint
     #               body: "__string",
     #               from_address: "__string",
     #               html_body: "__string",
-    #               title: "__string",
+    #               title: "__string", # required
     #             },
     #             gcm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -340,25 +397,25 @@ module Aws::Pinpoint
     #           schedule: {
     #             end_time: "__string",
     #             event_filter: {
-    #               dimensions: {
+    #               dimensions: { # required
     #                 attributes: {
     #                   "__string" => {
     #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                 },
     #                 event_type: {
     #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                   values: ["__string"],
+    #                   values: ["__string"], # required
     #                 },
     #                 metrics: {
     #                   "__string" => {
-    #                     comparison_operator: "__string",
-    #                     value: 1.0,
+    #                     comparison_operator: "__string", # required
+    #                     value: 1.0, # required
     #                   },
     #                 },
     #               },
-    #               filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #               filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #             },
     #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #             is_local_time: false,
@@ -366,10 +423,21 @@ module Aws::Pinpoint
     #               end: "__string",
     #               start: "__string",
     #             },
-    #             start_time: "__string",
+    #             start_time: "__string", # required
     #             timezone: "__string",
     #           },
-    #           size_percent: 1,
+    #           size_percent: 1, # required
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -449,7 +517,7 @@ module Aws::Pinpoint
     #           body: "__string",
     #           from_address: "__string",
     #           html_body: "__string",
-    #           title: "__string",
+    #           title: "__string", # required
     #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -475,25 +543,25 @@ module Aws::Pinpoint
     #       schedule: {
     #         end_time: "__string",
     #         event_filter: {
-    #           dimensions: {
+    #           dimensions: { # required
     #             attributes: {
     #               "__string" => {
     #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                 values: ["__string"],
+    #                 values: ["__string"], # required
     #               },
     #             },
     #             event_type: {
     #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #               values: ["__string"],
+    #               values: ["__string"], # required
     #             },
     #             metrics: {
     #               "__string" => {
-    #                 comparison_operator: "__string",
-    #                 value: 1.0,
+    #                 comparison_operator: "__string", # required
+    #                 value: 1.0, # required
     #               },
     #             },
     #           },
-    #           filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #           filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #         },
     #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #         is_local_time: false,
@@ -501,11 +569,25 @@ module Aws::Pinpoint
     #           end: "__string",
     #           start: "__string",
     #         },
-    #         start_time: "__string",
+    #         start_time: "__string", # required
     #         timezone: "__string",
     #       },
     #       segment_id: "__string",
     #       segment_version: 1,
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #       template_configuration: {
+    #         email_template: {
+    #           name: "__string",
+    #         },
+    #         push_template: {
+    #           name: "__string",
+    #         },
+    #         sms_template: {
+    #           name: "__string",
+    #         },
+    #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
     #     },
@@ -602,9 +684,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
+    #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
@@ -708,6 +794,11 @@ module Aws::Pinpoint
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.tags #=> Hash
+    #   resp.campaign_response.tags["__string"] #=> String
+    #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -721,12 +812,55 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Creates an export job.
+    # Creates a message template that you can use in messages that are sent
+    # through the email channel.
+    #
+    # @option params [required, Types::EmailTemplateRequest] :email_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in messages that are sent through the email channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::CreateEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEmailTemplateResponse#create_template_message_body #create_template_message_body} => Types::CreateTemplateMessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_email_template({
+    #     email_template_request: { # required
+    #       html_part: "__string",
+    #       subject: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #       text_part: "__string",
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_template_message_body.arn #=> String
+    #   resp.create_template_message_body.message #=> String
+    #   resp.create_template_message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateEmailTemplate AWS API Documentation
+    #
+    # @overload create_email_template(params = {})
+    # @param [Hash] params ({})
+    def create_email_template(params = {}, options = {})
+      req = build_request(:create_email_template, params)
+      req.send_request(options)
+    end
+
+    # Creates an export job for an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::ExportJobRequest] :export_job_request
-    #   Export job request.
+    #   Specifies the settings for a job that exports endpoint definitions to
+    #   an Amazon Simple Storage Service (Amazon S3) bucket.
     #
     # @return [Types::CreateExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -737,8 +871,8 @@ module Aws::Pinpoint
     #   resp = client.create_export_job({
     #     application_id: "__string", # required
     #     export_job_request: { # required
-    #       role_arn: "__string",
-    #       s3_url_prefix: "__string",
+    #       role_arn: "__string", # required
+    #       s3_url_prefix: "__string", # required
     #       segment_id: "__string",
     #       segment_version: 1,
     #     },
@@ -773,12 +907,13 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Creates or updates an import job.
+    # Creates an import job for an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::ImportJobRequest] :import_job_request
-    #   Import job request.
+    #   Specifies the settings for a job that imports endpoint definitions
+    #   from an Amazon Simple Storage Service (Amazon S3) bucket.
     #
     # @return [Types::CreateImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -791,10 +926,10 @@ module Aws::Pinpoint
     #     import_job_request: { # required
     #       define_segment: false,
     #       external_id: "__string",
-    #       format: "CSV", # accepts CSV, JSON
+    #       format: "CSV", # required, accepts CSV, JSON
     #       register_endpoints: false,
-    #       role_arn: "__string",
-    #       s3_url: "__string",
+    #       role_arn: "__string", # required
+    #       s3_url: "__string", # required
     #       segment_id: "__string",
     #       segment_name: "__string",
     #     },
@@ -833,12 +968,100 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Used to create or update a segment.
+    # Creates a message template that you can use in messages that are sent
+    # through a push notification channel.
+    #
+    # @option params [required, Types::PushNotificationTemplateRequest] :push_notification_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in messages that are sent through a push notification channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::CreatePushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePushTemplateResponse#create_template_message_body #create_template_message_body} => Types::CreateTemplateMessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_push_template({
+    #     push_notification_template_request: { # required
+    #       adm: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       apns: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         media_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       baidu: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       default: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       gcm: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_template_message_body.arn #=> String
+    #   resp.create_template_message_body.message #=> String
+    #   resp.create_template_message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreatePushTemplate AWS API Documentation
+    #
+    # @overload create_push_template(params = {})
+    # @param [Hash] params ({})
+    def create_push_template(params = {}, options = {})
+      req = build_request(:create_push_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a new segment for an application or updates the configuration,
+    # dimension, and other settings for an existing segment that's
+    # associated with an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::WriteSegmentRequest] :write_segment_request
-    #   Segment definition.
+    #   Specifies the configuration, dimension, and other settings for a
+    #   segment. A WriteSegmentRequest object can include a Dimensions object
+    #   or a SegmentGroups object, but not both.
     #
     # @return [Types::CreateSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -853,64 +1076,64 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => {
     #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #         },
     #         behavior: {
     #           recency: {
-    #             duration: "HR_24", # accepts HR_24, DAY_7, DAY_14, DAY_30
-    #             recency_type: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #             duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #             recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
     #           },
     #         },
     #         demographic: {
     #           app_version: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           channel: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           device_type: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           make: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           model: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           platform: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #         },
     #         location: {
     #           country: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           gps_point: {
-    #             coordinates: {
-    #               latitude: 1.0,
-    #               longitude: 1.0,
+    #             coordinates: { # required
+    #               latitude: 1.0, # required
+    #               longitude: 1.0, # required
     #             },
     #             range_in_kilometers: 1.0,
     #           },
     #         },
     #         metrics: {
     #           "__string" => {
-    #             comparison_operator: "__string",
-    #             value: 1.0,
+    #             comparison_operator: "__string", # required
+    #             value: 1.0, # required
     #           },
     #         },
     #         user_attributes: {
     #           "__string" => {
     #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #         },
     #       },
@@ -923,71 +1146,71 @@ module Aws::Pinpoint
     #                 attributes: {
     #                   "__string" => {
     #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                 },
     #                 behavior: {
     #                   recency: {
-    #                     duration: "HR_24", # accepts HR_24, DAY_7, DAY_14, DAY_30
-    #                     recency_type: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #                     duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                     recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
     #                   },
     #                 },
     #                 demographic: {
     #                   app_version: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   channel: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   device_type: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   make: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   model: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   platform: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                 },
     #                 location: {
     #                   country: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   gps_point: {
-    #                     coordinates: {
-    #                       latitude: 1.0,
-    #                       longitude: 1.0,
+    #                     coordinates: { # required
+    #                       latitude: 1.0, # required
+    #                       longitude: 1.0, # required
     #                     },
     #                     range_in_kilometers: 1.0,
     #                   },
     #                 },
     #                 metrics: {
     #                   "__string" => {
-    #                     comparison_operator: "__string",
-    #                     value: 1.0,
+    #                     comparison_operator: "__string", # required
+    #                     value: 1.0, # required
     #                   },
     #                 },
     #                 user_attributes: {
     #                   "__string" => {
     #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                 },
     #               },
     #             ],
     #             source_segments: [
     #               {
-    #                 id: "__string",
+    #                 id: "__string", # required
     #                 version: 1,
     #               },
     #             ],
@@ -997,12 +1220,16 @@ module Aws::Pinpoint
     #         ],
     #         include: "ALL", # accepts ALL, ANY, NONE
     #       },
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.segment_response.application_id #=> String
+    #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
     #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -1097,6 +1324,8 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segment_response.tags #=> Hash
+    #   resp.segment_response.tags["__string"] #=> String
     #   resp.segment_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSegment AWS API Documentation
@@ -1108,7 +1337,48 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an ADM channel.
+    # Creates a message template that you can use in messages that are sent
+    # through the SMS channel.
+    #
+    # @option params [required, Types::SMSTemplateRequest] :sms_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in text messages that are sent through the SMS channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::CreateSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSmsTemplateResponse#create_template_message_body #create_template_message_body} => Types::CreateTemplateMessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_sms_template({
+    #     sms_template_request: { # required
+    #       body: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_template_message_body.arn #=> String
+    #   resp.create_template_message_body.message #=> String
+    #   resp.create_template_message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSmsTemplate AWS API Documentation
+    #
+    # @overload create_sms_template(params = {})
+    # @param [Hash] params ({})
+    def create_sms_template(params = {}, options = {})
+      req = build_request(:create_sms_template, params)
+      req.send_request(options)
+    end
+
+    # Disables the ADM channel for an application and deletes any existing
+    # settings for the channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1144,7 +1414,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes the APNs channel for an app.
+    # Disables the APNs channel for an application and deletes any existing
+    # settings for the channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1182,7 +1453,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an APNS sandbox channel.
+    # Disables the APNs sandbox channel for an application and deletes any
+    # existing settings for the channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1220,7 +1492,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an APNS VoIP channel
+    # Disables the APNs VoIP channel for an application and deletes any
+    # existing settings for the channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1258,7 +1531,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an APNS VoIP sandbox channel
+    # Disables the APNs VoIP sandbox channel for an application and deletes
+    # any existing settings for the channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1296,7 +1570,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes an app.
+    # Deletes an application.
     #
     # @option params [required, String] :application_id
     #
@@ -1312,8 +1586,11 @@ module Aws::Pinpoint
     #
     # @example Response structure
     #
+    #   resp.application_response.arn #=> String
     #   resp.application_response.id #=> String
     #   resp.application_response.name #=> String
+    #   resp.application_response.tags #=> Hash
+    #   resp.application_response.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApp AWS API Documentation
     #
@@ -1324,7 +1601,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete a BAIDU GCM channel
+    # Disables the Baidu channel for an application and deletes any existing
+    # settings for the channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1361,7 +1639,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes a campaign.
+    # Deletes a campaign from an application.
     #
     # @option params [required, String] :application_id
     #
@@ -1469,9 +1747,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
+    #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
@@ -1575,6 +1857,11 @@ module Aws::Pinpoint
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.tags #=> Hash
+    #   resp.campaign_response.tags["__string"] #=> String
+    #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -1588,7 +1875,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an email channel.
+    # Disables the email channel for an application and deletes any existing
+    # settings for the channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1629,7 +1917,36 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes an endpoint.
+    # Deletes a message template that was designed for use in messages that
+    # were sent through the email channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::DeleteEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteEmailTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_email_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailTemplate AWS API Documentation
+    #
+    # @overload delete_email_template(params = {})
+    # @param [Hash] params ({})
+    def delete_email_template(params = {}, options = {})
+      req = build_request(:delete_email_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes an endpoint from an application.
     #
     # @option params [required, String] :application_id
     #
@@ -1691,7 +2008,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes the event stream for an app.
+    # Deletes the event stream for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -1723,7 +2040,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes the GCM channel for an app.
+    # Disables the GCM channel for an application and deletes any existing
+    # settings for the channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1760,7 +2078,36 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes a segment.
+    # Deletes a message template that was designed for use in messages that
+    # were sent through a push notification channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::DeletePushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePushTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_push_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeletePushTemplate AWS API Documentation
+    #
+    # @overload delete_push_template(params = {})
+    # @param [Hash] params ({})
+    def delete_push_template(params = {}, options = {})
+      req = build_request(:delete_push_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes a segment from an application.
     #
     # @option params [required, String] :application_id
     #
@@ -1780,6 +2127,7 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.segment_response.application_id #=> String
+    #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
     #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -1874,6 +2222,8 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segment_response.tags #=> Hash
+    #   resp.segment_response.tags["__string"] #=> String
     #   resp.segment_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSegment AWS API Documentation
@@ -1885,7 +2235,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an SMS channel.
+    # Disables the SMS channel for an application and deletes any existing
+    # settings for the channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1925,7 +2276,36 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes endpoints that are associated with a User ID.
+    # Deletes a message template that was designed for use in messages that
+    # were sent through the SMS channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::DeleteSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSmsTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_sms_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsTemplate AWS API Documentation
+    #
+    # @overload delete_sms_template(params = {})
+    # @param [Hash] params ({})
+    def delete_sms_template(params = {}, options = {})
+      req = build_request(:delete_sms_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes all the endpoints that are associated with a specific user ID.
     #
     # @option params [required, String] :application_id
     #
@@ -1988,7 +2368,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an Voice channel
+    # Disables the voice channel for an application and deletes any existing
+    # settings for the channel.
     #
     # @option params [required, String] :application_id
     #
@@ -2012,6 +2393,7 @@ module Aws::Pinpoint
     #   resp.voice_channel_response.is_archived #=> Boolean
     #   resp.voice_channel_response.last_modified_by #=> String
     #   resp.voice_channel_response.last_modified_date #=> String
+    #   resp.voice_channel_response.origination_number #=> String
     #   resp.voice_channel_response.platform #=> String
     #   resp.voice_channel_response.version #=> Integer
     #
@@ -2024,7 +2406,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an ADM channel.
+    # Retrieves information about the status and settings of the ADM channel
+    # for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -2060,7 +2443,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about the APNs channel for an app.
+    # Retrieves information about the status and settings of the APNs
+    # channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -2098,7 +2482,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an APNS sandbox channel.
+    # Retrieves information about the status and settings of the APNs
+    # sandbox channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -2136,7 +2521,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an APNS VoIP channel
+    # Retrieves information about the status and settings of the APNs VoIP
+    # channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -2174,7 +2560,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an APNS VoIPSandbox channel
+    # Retrieves information about the status and settings of the APNs VoIP
+    # sandbox channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -2212,7 +2599,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about an app.
+    # Retrieves information about an application.
     #
     # @option params [required, String] :application_id
     #
@@ -2228,8 +2615,11 @@ module Aws::Pinpoint
     #
     # @example Response structure
     #
+    #   resp.application_response.arn #=> String
     #   resp.application_response.id #=> String
     #   resp.application_response.name #=> String
+    #   resp.application_response.tags #=> Hash
+    #   resp.application_response.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApp AWS API Documentation
     #
@@ -2240,7 +2630,63 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Used to request the settings for an app.
+    # Retrieves (queries) pre-aggregated data for a standard metric that
+    # applies to an application.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #
+    # @option params [required, String] :kpi_name
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #
+    # @return [Types::GetApplicationDateRangeKpiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApplicationDateRangeKpiResponse#application_date_range_kpi_response #application_date_range_kpi_response} => Types::ApplicationDateRangeKpiResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_application_date_range_kpi({
+    #     application_id: "__string", # required
+    #     end_time: Time.now,
+    #     kpi_name: "__string", # required
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #     start_time: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_date_range_kpi_response.application_id #=> String
+    #   resp.application_date_range_kpi_response.end_time #=> Time
+    #   resp.application_date_range_kpi_response.kpi_name #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows #=> Array
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].grouped_bys #=> Array
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].key #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].type #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].value #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].values #=> Array
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].values[0].key #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].values[0].type #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].values[0].value #=> String
+    #   resp.application_date_range_kpi_response.next_token #=> String
+    #   resp.application_date_range_kpi_response.start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationDateRangeKpi AWS API Documentation
+    #
+    # @overload get_application_date_range_kpi(params = {})
+    # @param [Hash] params ({})
+    def get_application_date_range_kpi(params = {}, options = {})
+      req = build_request(:get_application_date_range_kpi, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the settings for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -2277,7 +2723,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about your apps.
+    # Retrieves information about all of your applications.
     #
     # @option params [String] :page_size
     #
@@ -2297,8 +2743,11 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.applications_response.item #=> Array
+    #   resp.applications_response.item[0].arn #=> String
     #   resp.applications_response.item[0].id #=> String
     #   resp.applications_response.item[0].name #=> String
+    #   resp.applications_response.item[0].tags #=> Hash
+    #   resp.applications_response.item[0].tags["__string"] #=> String
     #   resp.applications_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApps AWS API Documentation
@@ -2310,7 +2759,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get a BAIDU GCM channel
+    # Retrieves information about the status and settings of the Baidu
+    # channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -2347,7 +2797,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about a campaign.
+    # Retrieves information about the status, configuration, and other
+    # settings for a campaign.
     #
     # @option params [required, String] :application_id
     #
@@ -2455,9 +2906,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
+    #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
@@ -2561,6 +3016,11 @@ module Aws::Pinpoint
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.tags #=> Hash
+    #   resp.campaign_response.tags["__string"] #=> String
+    #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -2574,7 +3034,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about the activity performed by a campaign.
+    # Retrieves information about the activity performed by a campaign.
     #
     # @option params [required, String] :application_id
     #
@@ -2624,7 +3084,68 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about a specific version of a campaign.
+    # Retrieves (queries) pre-aggregated data for a standard metric that
+    # applies to a campaign.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :campaign_id
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #
+    # @option params [required, String] :kpi_name
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #
+    # @return [Types::GetCampaignDateRangeKpiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCampaignDateRangeKpiResponse#campaign_date_range_kpi_response #campaign_date_range_kpi_response} => Types::CampaignDateRangeKpiResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_campaign_date_range_kpi({
+    #     application_id: "__string", # required
+    #     campaign_id: "__string", # required
+    #     end_time: Time.now,
+    #     kpi_name: "__string", # required
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #     start_time: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.campaign_date_range_kpi_response.application_id #=> String
+    #   resp.campaign_date_range_kpi_response.campaign_id #=> String
+    #   resp.campaign_date_range_kpi_response.end_time #=> Time
+    #   resp.campaign_date_range_kpi_response.kpi_name #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows #=> Array
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].grouped_bys #=> Array
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].key #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].type #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].value #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].values #=> Array
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].values[0].key #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].values[0].type #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].values[0].value #=> String
+    #   resp.campaign_date_range_kpi_response.next_token #=> String
+    #   resp.campaign_date_range_kpi_response.start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignDateRangeKpi AWS API Documentation
+    #
+    # @overload get_campaign_date_range_kpi(params = {})
+    # @param [Hash] params ({})
+    def get_campaign_date_range_kpi(params = {}, options = {})
+      req = build_request(:get_campaign_date_range_kpi, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the status, configuration, and other
+    # settings for a specific version of a campaign.
     #
     # @option params [required, String] :application_id
     #
@@ -2735,9 +3256,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
+    #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
@@ -2841,6 +3366,11 @@ module Aws::Pinpoint
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.tags #=> Hash
+    #   resp.campaign_response.tags["__string"] #=> String
+    #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -2854,7 +3384,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about your campaign versions.
+    # Retrieves information about the status, configuration, and other
+    # settings for all versions of a specific campaign.
     #
     # @option params [required, String] :application_id
     #
@@ -2969,9 +3500,13 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].size_percent #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
+    #   resp.campaigns_response.item[0].arn #=> String
     #   resp.campaigns_response.item[0].creation_date #=> String
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].description #=> String
@@ -3075,6 +3610,11 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].segment_id #=> String
     #   resp.campaigns_response.item[0].segment_version #=> Integer
     #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].tags #=> Hash
+    #   resp.campaigns_response.item[0].tags["__string"] #=> String
+    #   resp.campaigns_response.item[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.sms_template.name #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -3089,7 +3629,9 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about your campaigns.
+    # Retrieves information about the status, configuration, and other
+    # settings for all the campaigns that are associated with an
+    # application.
     #
     # @option params [required, String] :application_id
     #
@@ -3201,9 +3743,13 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].size_percent #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
+    #   resp.campaigns_response.item[0].arn #=> String
     #   resp.campaigns_response.item[0].creation_date #=> String
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].description #=> String
@@ -3307,6 +3853,11 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].segment_id #=> String
     #   resp.campaigns_response.item[0].segment_version #=> Integer
     #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].tags #=> Hash
+    #   resp.campaigns_response.item[0].tags["__string"] #=> String
+    #   resp.campaigns_response.item[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.sms_template.name #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -3321,7 +3872,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get all channels.
+    # Retrieves information about the history and status of each channel for
+    # an application.
     #
     # @option params [required, String] :application_id
     #
@@ -3357,7 +3909,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an email channel.
+    # Retrieves information about the status and settings of the email
+    # channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -3398,7 +3951,45 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about an endpoint.
+    # Retrieves the content and settings for a message template that you can
+    # use in messages that are sent through the email channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::GetEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEmailTemplateResponse#email_template_response #email_template_response} => Types::EmailTemplateResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_email_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.email_template_response.arn #=> String
+    #   resp.email_template_response.creation_date #=> String
+    #   resp.email_template_response.html_part #=> String
+    #   resp.email_template_response.last_modified_date #=> String
+    #   resp.email_template_response.subject #=> String
+    #   resp.email_template_response.tags #=> Hash
+    #   resp.email_template_response.tags["__string"] #=> String
+    #   resp.email_template_response.template_name #=> String
+    #   resp.email_template_response.template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #   resp.email_template_response.text_part #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailTemplate AWS API Documentation
+    #
+    # @overload get_email_template(params = {})
+    # @param [Hash] params ({})
+    def get_email_template(params = {}, options = {})
+      req = build_request(:get_email_template, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the settings and attributes of a specific
+    # endpoint for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -3460,7 +4051,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns the event stream for an app.
+    # Retrieves information about the event stream settings for an
+    # application.
     #
     # @option params [required, String] :application_id
     #
@@ -3492,7 +4084,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about an export job.
+    # Retrieves information about the status and settings of a specific
+    # export job for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -3538,7 +4131,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about your export jobs.
+    # Retrieves information about the status and settings of all the export
+    # jobs for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -3589,7 +4183,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about the GCM channel for an app.
+    # Retrieves information about the status and settings of the GCM channel
+    # for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -3626,7 +4221,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about an import job.
+    # Retrieves information about the status and settings of a specific
+    # import job for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -3676,7 +4272,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about your import jobs.
+    # Retrieves information about the status and settings of all the import
+    # jobs for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -3731,7 +4328,78 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about a segment.
+    # Retrieves the content and settings for a message template that you can
+    # use in messages that are sent through a push notification channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::GetPushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPushTemplateResponse#push_notification_template_response #push_notification_template_response} => Types::PushNotificationTemplateResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_push_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.push_notification_template_response.adm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.push_notification_template_response.adm.body #=> String
+    #   resp.push_notification_template_response.adm.image_icon_url #=> String
+    #   resp.push_notification_template_response.adm.image_url #=> String
+    #   resp.push_notification_template_response.adm.small_image_icon_url #=> String
+    #   resp.push_notification_template_response.adm.sound #=> String
+    #   resp.push_notification_template_response.adm.title #=> String
+    #   resp.push_notification_template_response.adm.url #=> String
+    #   resp.push_notification_template_response.apns.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.push_notification_template_response.apns.body #=> String
+    #   resp.push_notification_template_response.apns.media_url #=> String
+    #   resp.push_notification_template_response.apns.sound #=> String
+    #   resp.push_notification_template_response.apns.title #=> String
+    #   resp.push_notification_template_response.apns.url #=> String
+    #   resp.push_notification_template_response.arn #=> String
+    #   resp.push_notification_template_response.baidu.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.push_notification_template_response.baidu.body #=> String
+    #   resp.push_notification_template_response.baidu.image_icon_url #=> String
+    #   resp.push_notification_template_response.baidu.image_url #=> String
+    #   resp.push_notification_template_response.baidu.small_image_icon_url #=> String
+    #   resp.push_notification_template_response.baidu.sound #=> String
+    #   resp.push_notification_template_response.baidu.title #=> String
+    #   resp.push_notification_template_response.baidu.url #=> String
+    #   resp.push_notification_template_response.creation_date #=> String
+    #   resp.push_notification_template_response.default.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.push_notification_template_response.default.body #=> String
+    #   resp.push_notification_template_response.default.sound #=> String
+    #   resp.push_notification_template_response.default.title #=> String
+    #   resp.push_notification_template_response.default.url #=> String
+    #   resp.push_notification_template_response.gcm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.push_notification_template_response.gcm.body #=> String
+    #   resp.push_notification_template_response.gcm.image_icon_url #=> String
+    #   resp.push_notification_template_response.gcm.image_url #=> String
+    #   resp.push_notification_template_response.gcm.small_image_icon_url #=> String
+    #   resp.push_notification_template_response.gcm.sound #=> String
+    #   resp.push_notification_template_response.gcm.title #=> String
+    #   resp.push_notification_template_response.gcm.url #=> String
+    #   resp.push_notification_template_response.last_modified_date #=> String
+    #   resp.push_notification_template_response.tags #=> Hash
+    #   resp.push_notification_template_response.tags["__string"] #=> String
+    #   resp.push_notification_template_response.template_name #=> String
+    #   resp.push_notification_template_response.template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetPushTemplate AWS API Documentation
+    #
+    # @overload get_push_template(params = {})
+    # @param [Hash] params ({})
+    def get_push_template(params = {}, options = {})
+      req = build_request(:get_push_template, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the configuration, dimension, and other
+    # settings for a specific segment that's associated with an
+    # application.
     #
     # @option params [required, String] :application_id
     #
@@ -3751,6 +4419,7 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.segment_response.application_id #=> String
+    #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
     #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -3845,6 +4514,8 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segment_response.tags #=> Hash
+    #   resp.segment_response.tags["__string"] #=> String
     #   resp.segment_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegment AWS API Documentation
@@ -3856,7 +4527,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns a list of export jobs for a specific segment.
+    # Retrieves information about the status and settings of the export jobs
+    # for a segment.
     #
     # @option params [required, String] :application_id
     #
@@ -3910,7 +4582,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns a list of import jobs for a specific segment.
+    # Retrieves information about the status and settings of the import jobs
+    # for a segment.
     #
     # @option params [required, String] :application_id
     #
@@ -3968,7 +4641,9 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about a segment version.
+    # Retrieves information about the configuration, dimension, and other
+    # settings for a specific version of a segment that's associated with
+    # an application.
     #
     # @option params [required, String] :application_id
     #
@@ -3991,6 +4666,7 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.segment_response.application_id #=> String
+    #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
     #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4085,6 +4761,8 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segment_response.tags #=> Hash
+    #   resp.segment_response.tags["__string"] #=> String
     #   resp.segment_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersion AWS API Documentation
@@ -4096,7 +4774,9 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about your segment versions.
+    # Retrieves information about the configuration, dimension, and other
+    # settings for all versions of a specific segment that's associated
+    # with an application.
     #
     # @option params [required, String] :application_id
     #
@@ -4123,6 +4803,7 @@ module Aws::Pinpoint
     #
     #   resp.segments_response.item #=> Array
     #   resp.segments_response.item[0].application_id #=> String
+    #   resp.segments_response.item[0].arn #=> String
     #   resp.segments_response.item[0].creation_date #=> String
     #   resp.segments_response.item[0].dimensions.attributes #=> Hash
     #   resp.segments_response.item[0].dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4217,6 +4898,8 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segments_response.item[0].tags #=> Hash
+    #   resp.segments_response.item[0].tags["__string"] #=> String
     #   resp.segments_response.item[0].version #=> Integer
     #   resp.segments_response.next_token #=> String
     #
@@ -4229,7 +4912,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Used to get information about your segments.
+    # Retrieves information about the configuration, dimension, and other
+    # settings for all the segments that are associated with an application.
     #
     # @option params [required, String] :application_id
     #
@@ -4253,6 +4937,7 @@ module Aws::Pinpoint
     #
     #   resp.segments_response.item #=> Array
     #   resp.segments_response.item[0].application_id #=> String
+    #   resp.segments_response.item[0].arn #=> String
     #   resp.segments_response.item[0].creation_date #=> String
     #   resp.segments_response.item[0].dimensions.attributes #=> Hash
     #   resp.segments_response.item[0].dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4347,6 +5032,8 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segments_response.item[0].tags #=> Hash
+    #   resp.segments_response.item[0].tags["__string"] #=> String
     #   resp.segments_response.item[0].version #=> Integer
     #   resp.segments_response.next_token #=> String
     #
@@ -4359,7 +5046,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an SMS channel.
+    # Retrieves information about the status and settings of the SMS channel
+    # for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -4399,8 +5087,43 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about the endpoints that are associated with a
-    # User ID.
+    # Retrieves the content and settings for a message template that you can
+    # use in messages that are sent through the SMS channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::GetSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSmsTemplateResponse#sms_template_response #sms_template_response} => Types::SMSTemplateResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sms_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sms_template_response.arn #=> String
+    #   resp.sms_template_response.body #=> String
+    #   resp.sms_template_response.creation_date #=> String
+    #   resp.sms_template_response.last_modified_date #=> String
+    #   resp.sms_template_response.tags #=> Hash
+    #   resp.sms_template_response.tags["__string"] #=> String
+    #   resp.sms_template_response.template_name #=> String
+    #   resp.sms_template_response.template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplate AWS API Documentation
+    #
+    # @overload get_sms_template(params = {})
+    # @param [Hash] params ({})
+    def get_sms_template(params = {}, options = {})
+      req = build_request(:get_sms_template, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about all the endpoints that are associated with
+    # a specific user ID.
     #
     # @option params [required, String] :application_id
     #
@@ -4463,7 +5186,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get a Voice Channel
+    # Retrieves information about the status and settings of the voice
+    # channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -4487,6 +5211,7 @@ module Aws::Pinpoint
     #   resp.voice_channel_response.is_archived #=> Boolean
     #   resp.voice_channel_response.last_modified_by #=> String
     #   resp.voice_channel_response.last_modified_date #=> String
+    #   resp.voice_channel_response.origination_number #=> String
     #   resp.voice_channel_response.platform #=> String
     #   resp.voice_channel_response.version #=> Integer
     #
@@ -4499,10 +5224,84 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about the specified phone number.
+    # Retrieves all the tags (keys and values) that are associated with an
+    # application, campaign, message template, or segment.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags_model #tags_model} => Types::TagsModel
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags_model.tags #=> Hash
+    #   resp.tags_model.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about all the message templates that are
+    # associated with your Amazon Pinpoint account.
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [String] :prefix
+    #
+    # @option params [String] :template_type
+    #
+    # @return [Types::ListTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTemplatesResponse#templates_response #templates_response} => Types::TemplatesResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_templates({
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #     prefix: "__string",
+    #     template_type: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.templates_response.item #=> Array
+    #   resp.templates_response.item[0].arn #=> String
+    #   resp.templates_response.item[0].creation_date #=> String
+    #   resp.templates_response.item[0].last_modified_date #=> String
+    #   resp.templates_response.item[0].tags #=> Hash
+    #   resp.templates_response.item[0].tags["__string"] #=> String
+    #   resp.templates_response.item[0].template_name #=> String
+    #   resp.templates_response.item[0].template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #   resp.templates_response.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplates AWS API Documentation
+    #
+    # @overload list_templates(params = {})
+    # @param [Hash] params ({})
+    def list_templates(params = {}, options = {})
+      req = build_request(:list_templates, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a phone number.
     #
     # @option params [required, Types::NumberValidateRequest] :number_validate_request
-    #   Phone Number Validate request.
+    #   Specifies a phone number to validate and retrieve information about.
     #
     # @return [Types::PhoneNumberValidateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4543,12 +5342,15 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use to create or update the event stream for an app.
+    # Creates a new event stream for an application or updates the settings
+    # of an existing event stream for an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::WriteEventStream] :write_event_stream
-    #   Request to save an EventStream.
+    #   Specifies the Amazon Resource Name (ARN) of an event stream to publish
+    #   events to and the AWS Identity and Access Management (IAM) role to use
+    #   when publishing those events.
     #
     # @return [Types::PutEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4559,8 +5361,8 @@ module Aws::Pinpoint
     #   resp = client.put_event_stream({
     #     application_id: "__string", # required
     #     write_event_stream: { # required
-    #       destination_stream_arn: "__string",
-    #       role_arn: "__string",
+    #       destination_stream_arn: "__string", # required
+    #       role_arn: "__string", # required
     #     },
     #   })
     #
@@ -4582,14 +5384,13 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use to record events for endpoints. This method creates events and
-    # creates or updates the endpoints that those events are associated
-    # with.
+    # Creates a new event to record for endpoints, or creates or updates
+    # endpoint data that existing events are associated with.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::EventsRequest] :events_request
-    #   A set of events to process.
+    #   Specifies a batch of events to process.
     #
     # @return [Types::PutEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4600,9 +5401,9 @@ module Aws::Pinpoint
     #   resp = client.put_events({
     #     application_id: "__string", # required
     #     events_request: { # required
-    #       batch_item: {
+    #       batch_item: { # required
     #         "__string" => {
-    #           endpoint: {
+    #           endpoint: { # required
     #             address: "__string",
     #             attributes: {
     #               "__string" => ["__string"],
@@ -4640,23 +5441,27 @@ module Aws::Pinpoint
     #               user_id: "__string",
     #             },
     #           },
-    #           events: {
+    #           events: { # required
     #             "__string" => {
+    #               app_package_name: "__string",
+    #               app_title: "__string",
+    #               app_version_code: "__string",
     #               attributes: {
     #                 "__string" => "__string",
     #               },
     #               client_sdk_version: "__string",
-    #               event_type: "__string",
+    #               event_type: "__string", # required
     #               metrics: {
     #                 "__string" => 1.0,
     #               },
+    #               sdk_name: "__string",
     #               session: {
     #                 duration: 1,
-    #                 id: "__string",
-    #                 start_timestamp: "__string",
+    #                 id: "__string", # required
+    #                 start_timestamp: "__string", # required
     #                 stop_timestamp: "__string",
     #               },
-    #               timestamp: "__string",
+    #               timestamp: "__string", # required
     #             },
     #           },
     #         },
@@ -4682,14 +5487,16 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Used to remove the attributes for an app
+    # Removes one or more attributes, of the same attribute type, from all
+    # the endpoints that are associated with an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, String] :attribute_type
     #
     # @option params [required, Types::UpdateAttributesRequest] :update_attributes_request
-    #   Update attributes request
+    #   Specifies one or more attributes to remove from all the endpoints that
+    #   are associated with an application.
     #
     # @return [Types::RemoveAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4721,12 +5528,13 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Used to send a direct message.
+    # Creates and sends a direct message.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::MessageRequest] :message_request
-    #   Send message request.
+    #   Specifies the objects that define configuration and other settings for
+    #   a message.
     #
     # @return [Types::SendMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4767,7 +5575,7 @@ module Aws::Pinpoint
     #           title_override: "__string",
     #         },
     #       },
-    #       message_configuration: {
+    #       message_configuration: { # required
     #         adm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
@@ -4919,6 +5727,17 @@ module Aws::Pinpoint
     #             "__string" => ["__string"],
     #           },
     #           voice_id: "__string",
+    #         },
+    #       },
+    #       template_configuration: {
+    #         email_template: {
+    #           name: "__string",
+    #         },
+    #         push_template: {
+    #           name: "__string",
+    #         },
+    #         sms_template: {
+    #           name: "__string",
     #         },
     #       },
     #       trace_id: "__string",
@@ -4952,12 +5771,13 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Used to send a message to a list of users.
+    # Creates and sends a message to a list of users.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::SendUsersMessageRequest] :send_users_message_request
-    #   Send message request.
+    #   Specifies the configuration and other settings for a message to send
+    #   to all the endpoints that are associated with a list of users.
     #
     # @return [Types::SendUsersMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4971,7 +5791,7 @@ module Aws::Pinpoint
     #       context: {
     #         "__string" => "__string",
     #       },
-    #       message_configuration: {
+    #       message_configuration: { # required
     #         adm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
@@ -5125,8 +5945,19 @@ module Aws::Pinpoint
     #           voice_id: "__string",
     #         },
     #       },
+    #       template_configuration: {
+    #         email_template: {
+    #           name: "__string",
+    #         },
+    #         push_template: {
+    #           name: "__string",
+    #         },
+    #         sms_template: {
+    #           name: "__string",
+    #         },
+    #       },
     #       trace_id: "__string",
-    #       users: {
+    #       users: { # required
     #         "__string" => {
     #           body_override: "__string",
     #           context: {
@@ -5164,10 +5995,68 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an ADM channel.
+    # Adds one or more tags (keys and values) to an application, campaign,
+    # message template, or segment.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Types::TagsModel] :tags_model
+    #   Specifies the tags (keys and values) for an application, campaign,
+    #   message template, or segment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags_model: { # required
+    #       tags: { # required
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags (keys and values) from an application,
+    # campaign, message template, or segment.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Enables the ADM channel for an application or updates the status and
+    # settings of the ADM channel for an application.
     #
     # @option params [required, Types::ADMChannelRequest] :adm_channel_request
-    #   Amazon Device Messaging channel definition.
+    #   Specifies the status and settings of the ADM (Amazon Device Messaging)
+    #   channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -5179,8 +6068,8 @@ module Aws::Pinpoint
     #
     #   resp = client.update_adm_channel({
     #     adm_channel_request: { # required
-    #       client_id: "__string",
-    #       client_secret: "__string",
+    #       client_id: "__string", # required
+    #       client_secret: "__string", # required
     #       enabled: false,
     #     },
     #     application_id: "__string", # required
@@ -5208,10 +6097,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use to update the APNs channel for an app.
+    # Enables the APNs channel for an application or updates the status and
+    # settings of the APNs channel for an application.
     #
     # @option params [required, Types::APNSChannelRequest] :apns_channel_request
-    #   Apple Push Notification Service channel definition.
+    #   Specifies the status and settings of the APNs (Apple Push Notification
+    #   service) channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -5259,10 +6150,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an APNS sandbox channel.
+    # Enables the APNs sandbox channel for an application or updates the
+    # status and settings of the APNs sandbox channel for an application.
     #
     # @option params [required, Types::APNSSandboxChannelRequest] :apns_sandbox_channel_request
-    #   Apple Development Push Notification Service channel definition.
+    #   Specifies the status and settings of the APNs (Apple Push Notification
+    #   service) sandbox channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -5310,10 +6203,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an APNS VoIP channel
+    # Enables the APNs VoIP channel for an application or updates the status
+    # and settings of the APNs VoIP channel for an application.
     #
     # @option params [required, Types::APNSVoipChannelRequest] :apns_voip_channel_request
-    #   Apple VoIP Push Notification Service channel definition.
+    #   Specifies the status and settings of the APNs (Apple Push Notification
+    #   service) VoIP channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -5361,10 +6256,13 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an APNS VoIP sandbox channel
+    # Enables the APNs VoIP sandbox channel for an application or updates
+    # the status and settings of the APNs VoIP sandbox channel for an
+    # application.
     #
     # @option params [required, Types::APNSVoipSandboxChannelRequest] :apns_voip_sandbox_channel_request
-    #   Apple VoIP Developer Push Notification Service channel definition.
+    #   Specifies the status and settings of the APNs (Apple Push Notification
+    #   service) VoIP sandbox channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -5412,12 +6310,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Used to update the settings for an app.
+    # Updates the settings for an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::WriteApplicationSettingsRequest] :write_application_settings_request
-    #   Creating application setting request
+    #   Specifies the default settings for an application.
     #
     # @return [Types::UpdateApplicationSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5470,12 +6368,14 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update a BAIDU GCM channel
+    # Enables the Baidu channel for an application or updates the status and
+    # settings of the Baidu channel for an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::BaiduChannelRequest] :baidu_channel_request
-    #   Baidu Cloud Push credentials
+    #   Specifies the status and settings of the Baidu (Baidu Cloud Push)
+    #   channel for an application.
     #
     # @return [Types::UpdateBaiduChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5486,9 +6386,9 @@ module Aws::Pinpoint
     #   resp = client.update_baidu_channel({
     #     application_id: "__string", # required
     #     baidu_channel_request: { # required
-    #       api_key: "__string",
+    #       api_key: "__string", # required
     #       enabled: false,
-    #       secret_key: "__string",
+    #       secret_key: "__string", # required
     #     },
     #   })
     #
@@ -5515,14 +6415,14 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use to update a campaign.
+    # Updates the settings for a campaign.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, String] :campaign_id
     #
     # @option params [required, Types::WriteCampaignRequest] :write_campaign_request
-    #   Used to create a campaign.
+    #   Specifies the configuration and other settings for a campaign.
     #
     # @return [Types::UpdateCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5597,7 +6497,7 @@ module Aws::Pinpoint
     #               body: "__string",
     #               from_address: "__string",
     #               html_body: "__string",
-    #               title: "__string",
+    #               title: "__string", # required
     #             },
     #             gcm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -5622,25 +6522,25 @@ module Aws::Pinpoint
     #           schedule: {
     #             end_time: "__string",
     #             event_filter: {
-    #               dimensions: {
+    #               dimensions: { # required
     #                 attributes: {
     #                   "__string" => {
     #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                 },
     #                 event_type: {
     #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                   values: ["__string"],
+    #                   values: ["__string"], # required
     #                 },
     #                 metrics: {
     #                   "__string" => {
-    #                     comparison_operator: "__string",
-    #                     value: 1.0,
+    #                     comparison_operator: "__string", # required
+    #                     value: 1.0, # required
     #                   },
     #                 },
     #               },
-    #               filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #               filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #             },
     #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #             is_local_time: false,
@@ -5648,10 +6548,21 @@ module Aws::Pinpoint
     #               end: "__string",
     #               start: "__string",
     #             },
-    #             start_time: "__string",
+    #             start_time: "__string", # required
     #             timezone: "__string",
     #           },
-    #           size_percent: 1,
+    #           size_percent: 1, # required
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -5731,7 +6642,7 @@ module Aws::Pinpoint
     #           body: "__string",
     #           from_address: "__string",
     #           html_body: "__string",
-    #           title: "__string",
+    #           title: "__string", # required
     #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -5757,25 +6668,25 @@ module Aws::Pinpoint
     #       schedule: {
     #         end_time: "__string",
     #         event_filter: {
-    #           dimensions: {
+    #           dimensions: { # required
     #             attributes: {
     #               "__string" => {
     #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                 values: ["__string"],
+    #                 values: ["__string"], # required
     #               },
     #             },
     #             event_type: {
     #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #               values: ["__string"],
+    #               values: ["__string"], # required
     #             },
     #             metrics: {
     #               "__string" => {
-    #                 comparison_operator: "__string",
-    #                 value: 1.0,
+    #                 comparison_operator: "__string", # required
+    #                 value: 1.0, # required
     #               },
     #             },
     #           },
-    #           filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #           filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #         },
     #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #         is_local_time: false,
@@ -5783,11 +6694,25 @@ module Aws::Pinpoint
     #           end: "__string",
     #           start: "__string",
     #         },
-    #         start_time: "__string",
+    #         start_time: "__string", # required
     #         timezone: "__string",
     #       },
     #       segment_id: "__string",
     #       segment_version: 1,
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #       template_configuration: {
+    #         email_template: {
+    #           name: "__string",
+    #         },
+    #         push_template: {
+    #           name: "__string",
+    #         },
+    #         sms_template: {
+    #           name: "__string",
+    #         },
+    #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
     #     },
@@ -5884,9 +6809,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
+    #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
@@ -5990,6 +6919,11 @@ module Aws::Pinpoint
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.tags #=> Hash
+    #   resp.campaign_response.tags["__string"] #=> String
+    #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -6003,12 +6937,14 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an email channel.
+    # Enables the email channel for an application or updates the status and
+    # settings of the email channel for an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::EmailChannelRequest] :email_channel_request
-    #   Email Channel Request
+    #   Specifies the status and settings of the email channel for an
+    #   application.
     #
     # @return [Types::UpdateEmailChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6021,8 +6957,8 @@ module Aws::Pinpoint
     #     email_channel_request: { # required
     #       configuration_set: "__string",
     #       enabled: false,
-    #       from_address: "__string",
-    #       identity: "__string",
+    #       from_address: "__string", # required
+    #       identity: "__string", # required
     #       role_arn: "__string",
     #     },
     #   })
@@ -6054,14 +6990,58 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Creates or updates an endpoint.
+    # Updates an existing message template that you can use in messages that
+    # are sent through the email channel.
+    #
+    # @option params [required, Types::EmailTemplateRequest] :email_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in messages that are sent through the email channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::UpdateEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEmailTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_email_template({
+    #     email_template_request: { # required
+    #       html_part: "__string",
+    #       subject: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #       text_part: "__string",
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailTemplate AWS API Documentation
+    #
+    # @overload update_email_template(params = {})
+    # @param [Hash] params ({})
+    def update_email_template(params = {}, options = {})
+      req = build_request(:update_email_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a new endpoint for an application or updates the settings and
+    # attributes of an existing endpoint for an application. You can also
+    # use this operation to define custom attributes (Attributes, Metrics,
+    # and UserAttributes properties) for an endpoint.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, String] :endpoint_id
     #
     # @option params [required, Types::EndpointRequest] :endpoint_request
-    #   An endpoint update request.
+    #   Specifies the channel type and other settings for an endpoint.
     #
     # @return [Types::UpdateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6126,12 +7106,17 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use to update a batch of endpoints.
+    # Creates a new batch of endpoints for an application or updates the
+    # settings and attributes of a batch of existing endpoints for an
+    # application. You can also use this operation to define custom
+    # attributes (Attributes, Metrics, and UserAttributes properties) for a
+    # batch of endpoints.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::EndpointBatchRequest] :endpoint_batch_request
-    #   Endpoint batch update request.
+    #   Specifies a batch of endpoints to create or update and the settings
+    #   and attributes to set or change for each endpoint.
     #
     # @return [Types::UpdateEndpointsBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6142,7 +7127,7 @@ module Aws::Pinpoint
     #   resp = client.update_endpoints_batch({
     #     application_id: "__string", # required
     #     endpoint_batch_request: { # required
-    #       item: [
+    #       item: [ # required
     #         {
     #           address: "__string",
     #           attributes: {
@@ -6200,12 +7185,16 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use to update the GCM channel for an app.
+    # Enables the GCM channel for an application or updates the status and
+    # settings of the GCM channel for an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::GCMChannelRequest] :gcm_channel_request
-    #   Google Cloud Messaging credentials
+    #   Specifies the status and settings of the GCM channel for an
+    #   application. This channel enables Amazon Pinpoint to send push
+    #   notifications through the Firebase Cloud Messaging (FCM), formerly
+    #   Google Cloud Messaging (GCM), service.
     #
     # @return [Types::UpdateGcmChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6216,7 +7205,7 @@ module Aws::Pinpoint
     #   resp = client.update_gcm_channel({
     #     application_id: "__string", # required
     #     gcm_channel_request: { # required
-    #       api_key: "__string",
+    #       api_key: "__string", # required
     #       enabled: false,
     #     },
     #   })
@@ -6244,14 +7233,101 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Used to update a segment.
+    # Updates an existing message template that you can use in messages that
+    # are sent through a push notification channel.
+    #
+    # @option params [required, Types::PushNotificationTemplateRequest] :push_notification_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in messages that are sent through a push notification channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::UpdatePushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePushTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_push_template({
+    #     push_notification_template_request: { # required
+    #       adm: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       apns: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         media_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       baidu: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       default: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       gcm: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdatePushTemplate AWS API Documentation
+    #
+    # @overload update_push_template(params = {})
+    # @param [Hash] params ({})
+    def update_push_template(params = {}, options = {})
+      req = build_request(:update_push_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a new segment for an application or updates the configuration,
+    # dimension, and other settings for an existing segment that's
+    # associated with an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, String] :segment_id
     #
     # @option params [required, Types::WriteSegmentRequest] :write_segment_request
-    #   Segment definition.
+    #   Specifies the configuration, dimension, and other settings for a
+    #   segment. A WriteSegmentRequest object can include a Dimensions object
+    #   or a SegmentGroups object, but not both.
     #
     # @return [Types::UpdateSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6267,64 +7343,64 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => {
     #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #         },
     #         behavior: {
     #           recency: {
-    #             duration: "HR_24", # accepts HR_24, DAY_7, DAY_14, DAY_30
-    #             recency_type: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #             duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #             recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
     #           },
     #         },
     #         demographic: {
     #           app_version: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           channel: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           device_type: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           make: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           model: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           platform: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #         },
     #         location: {
     #           country: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #           gps_point: {
-    #             coordinates: {
-    #               latitude: 1.0,
-    #               longitude: 1.0,
+    #             coordinates: { # required
+    #               latitude: 1.0, # required
+    #               longitude: 1.0, # required
     #             },
     #             range_in_kilometers: 1.0,
     #           },
     #         },
     #         metrics: {
     #           "__string" => {
-    #             comparison_operator: "__string",
-    #             value: 1.0,
+    #             comparison_operator: "__string", # required
+    #             value: 1.0, # required
     #           },
     #         },
     #         user_attributes: {
     #           "__string" => {
     #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #             values: ["__string"],
+    #             values: ["__string"], # required
     #           },
     #         },
     #       },
@@ -6337,71 +7413,71 @@ module Aws::Pinpoint
     #                 attributes: {
     #                   "__string" => {
     #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                 },
     #                 behavior: {
     #                   recency: {
-    #                     duration: "HR_24", # accepts HR_24, DAY_7, DAY_14, DAY_30
-    #                     recency_type: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #                     duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                     recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
     #                   },
     #                 },
     #                 demographic: {
     #                   app_version: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   channel: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   device_type: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   make: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   model: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   platform: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                 },
     #                 location: {
     #                   country: {
     #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                   gps_point: {
-    #                     coordinates: {
-    #                       latitude: 1.0,
-    #                       longitude: 1.0,
+    #                     coordinates: { # required
+    #                       latitude: 1.0, # required
+    #                       longitude: 1.0, # required
     #                     },
     #                     range_in_kilometers: 1.0,
     #                   },
     #                 },
     #                 metrics: {
     #                   "__string" => {
-    #                     comparison_operator: "__string",
-    #                     value: 1.0,
+    #                     comparison_operator: "__string", # required
+    #                     value: 1.0, # required
     #                   },
     #                 },
     #                 user_attributes: {
     #                   "__string" => {
     #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
-    #                     values: ["__string"],
+    #                     values: ["__string"], # required
     #                   },
     #                 },
     #               },
     #             ],
     #             source_segments: [
     #               {
-    #                 id: "__string",
+    #                 id: "__string", # required
     #                 version: 1,
     #               },
     #             ],
@@ -6411,12 +7487,16 @@ module Aws::Pinpoint
     #         ],
     #         include: "ALL", # accepts ALL, ANY, NONE
     #       },
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.segment_response.application_id #=> String
+    #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
     #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -6511,6 +7591,8 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segment_response.tags #=> Hash
+    #   resp.segment_response.tags["__string"] #=> String
     #   resp.segment_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSegment AWS API Documentation
@@ -6522,12 +7604,14 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an SMS channel.
+    # Enables the SMS channel for an application or updates the status and
+    # settings of the SMS channel for an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::SMSChannelRequest] :sms_channel_request
-    #   SMS Channel Request
+    #   Specifies the status and settings of the SMS channel for an
+    #   application.
     #
     # @return [Types::UpdateSmsChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6570,12 +7654,53 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an Voice channel
+    # Updates an existing message template that you can use in messages that
+    # are sent through the SMS channel.
+    #
+    # @option params [required, Types::SMSTemplateRequest] :sms_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in text messages that are sent through the SMS channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::UpdateSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSmsTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sms_template({
+    #     sms_template_request: { # required
+    #       body: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsTemplate AWS API Documentation
+    #
+    # @overload update_sms_template(params = {})
+    # @param [Hash] params ({})
+    def update_sms_template(params = {}, options = {})
+      req = build_request(:update_sms_template, params)
+      req.send_request(options)
+    end
+
+    # Enables the voice channel for an application or updates the status and
+    # settings of the voice channel for an application.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::VoiceChannelRequest] :voice_channel_request
-    #   Voice Channel Request
+    #   Specifies the status and settings of the voice channel for an
+    #   application.
     #
     # @return [Types::UpdateVoiceChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6600,6 +7725,7 @@ module Aws::Pinpoint
     #   resp.voice_channel_response.is_archived #=> Boolean
     #   resp.voice_channel_response.last_modified_by #=> String
     #   resp.voice_channel_response.last_modified_date #=> String
+    #   resp.voice_channel_response.origination_number #=> String
     #   resp.voice_channel_response.platform #=> String
     #   resp.voice_channel_response.version #=> Integer
     #
@@ -6625,7 +7751,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

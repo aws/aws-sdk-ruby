@@ -136,7 +136,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
     # @option options [Integer] :max_password_age
     #   The number of days that an IAM user password is valid.
     #
@@ -188,22 +188,15 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :group_name
     #   The name of the group to create. Do not include the path in this
     #   value.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-. The group name must be unique within the account. Group
-    #   names are not distinguished by case. For example, you cannot create
-    #   groups named both "ADMINS" and "admins".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @return [Group]
     def create_group(options = {})
       resp = @client.create_group(options)
@@ -248,7 +241,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @return [InstanceProfile]
     def create_instance_profile(options = {})
@@ -272,14 +265,9 @@ module Aws::IAM
     # @option options [required, String] :policy_name
     #   The friendly name of the policy.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @option options [String] :path
     #   The path for the policy.
     #
@@ -298,11 +286,16 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :policy_document
     #   The JSON policy document that you want to use as the content for the
     #   new policy.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the policy
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
@@ -370,25 +363,23 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :role_name
     #   The name of the role to create.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-
-    #
-    #   Role names are not distinguished by case. For example, you cannot
-    #   create roles named both "PRODROLE" and "prodrole".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @option options [required, String] :assume_role_policy_document
     #   The trust relationship policy document that grants an entity
     #   permission to assume the role.
+    #
+    #   In IAM, you must provide a JSON policy that has been converted to a
+    #   string. However, for AWS CloudFormation templates formatted in YAML,
+    #   you can provide the policy in JSON or YAML format. AWS CloudFormation
+    #   always converts a YAML policy to JSON format before submitting it to
+    #   IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
@@ -401,6 +392,9 @@ module Aws::IAM
     #
     #   * The special characters tab (\\u0009), line feed (\\u000A), and
     #     carriage return (\\u000D)
+    #
+    #   Upon success, the response includes the same trust policy in JSON
+    #   format.
     #
     #
     #
@@ -426,7 +420,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     # @option options [String] :permissions_boundary
     #   The ARN of the policy that is used to set the permissions boundary for
     #   the role.
@@ -444,7 +438,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Role]
     def create_role(options = {})
       resp = @client.create_role(options)
@@ -475,7 +469,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
     # @option options [required, String] :name
     #   The name of the provider to create.
     #
@@ -527,7 +521,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :server_certificate_name
     #   The name for the server certificate. Do not include the path in this
@@ -681,20 +675,14 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :user_name
     #   The name of the user to create.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-. User names are not distinguished by case. For example, you
-    #   cannot create users named both "TESTUSER" and "testuser".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @option options [String] :permissions_boundary
     #   The ARN of the policy that is used to set the permissions boundary for
     #   the user.
@@ -712,7 +700,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [User]
     def create_user(options = {})
       resp = @client.create_user(options)
@@ -746,7 +734,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :virtual_mfa_device_name
     #   The name of the virtual MFA device. Use with path to uniquely identify

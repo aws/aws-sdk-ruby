@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::Transfer
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::Transfer
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::Transfer
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -216,30 +265,50 @@ module Aws::Transfer
     # @!group API Operations
 
     # Instantiates an autoscaling virtual server based on Secure File
-    # Transfer Protocol (SFTP) in AWS. The call returns the `ServerId`
-    # property assigned by the service to the newly created server.
-    # Reference this `ServerId` property when you make updates to your
-    # server, or work with users.
+    # Transfer Protocol (SFTP) in AWS. When you make updates to your server
+    # or when you work with users, use the service-generated `ServerId`
+    # property that is assigned to the newly created server.
     #
-    # The response returns the `ServerId` value for the newly created
-    # server.
+    # @option params [Types::EndpointDetails] :endpoint_details
+    #   The virtual private cloud (VPC) endpoint settings that you want to
+    #   configure for your SFTP server. This parameter is required when you
+    #   specify a value for the `EndpointType` parameter.
+    #
+    # @option params [String] :endpoint_type
+    #   The type of VPC endpoint that you want your SFTP server to connect to.
+    #   If you connect to a VPC endpoint, your SFTP server isn't accessible
+    #   over the public internet.
+    #
+    # @option params [String] :host_key
+    #   The RSA private key as generated by the `ssh-keygen -N "" -f
+    #   my-new-server-key` command.
+    #
+    #   If you aren't planning to migrate existing users from an existing
+    #   SFTP server to a new AWS SFTP server, don't update the host key.
+    #   Accidentally changing a server's host key can be disruptive.
+    #
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/transfer/latest/userguide/change-host-key"
+    #   in the *AWS SFTP User Guide.*
     #
     # @option params [Types::IdentityProviderDetails] :identity_provider_details
-    #   An array containing all of the information required to call a
-    #   customer-supplied authentication API. This parameter is not required
-    #   when the `IdentityProviderType` value of server that is created uses
-    #   the `SERVICE_MANAGED` authentication method.
+    #   This parameter is required when the `IdentityProviderType` is set to
+    #   `API_GATEWAY`. Accepts an array containing all of the information
+    #   required to call a customer-supplied authentication API, including the
+    #   API Gateway URL. This property is not required when the
+    #   `IdentityProviderType` is set to `SERVICE_MANAGED`.
     #
     # @option params [String] :identity_provider_type
-    #   The mode of authentication enabled for this service. The default value
-    #   is `SERVICE_MANAGED`, which allows you to store and access SFTP user
-    #   credentials within the service. An `IdentityProviderType` value of
-    #   `API_GATEWAY` indicates that user authentication requires a call to an
-    #   API Gateway endpoint URL provided by you to integrate an identity
-    #   provider of your choice.
+    #   Specifies the mode of authentication for the SFTP server. The default
+    #   value is `SERVICE_MANAGED`, which allows you to store and access SFTP
+    #   user credentials within the AWS Transfer for SFTP service. Use the
+    #   `API_GATEWAY` value to integrate with an identity provider of your
+    #   choosing. The `API_GATEWAY` setting requires you to provide an API
+    #   Gateway endpoint URL to call for authentication using the
+    #   `IdentityProviderDetails` parameter.
     #
     # @option params [String] :logging_role
-    #   A value that allows the service to write your SFTP users’ activity to
+    #   A value that allows the service to write your SFTP users' activity to
     #   your Amazon CloudWatch logs for monitoring and auditing purposes.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -252,6 +321,11 @@ module Aws::Transfer
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_server({
+    #     endpoint_details: {
+    #       vpc_endpoint_id: "VpcEndpointId",
+    #     },
+    #     endpoint_type: "PUBLIC", # accepts PUBLIC, VPC_ENDPOINT
+    #     host_key: "HostKey",
     #     identity_provider_details: {
     #       url: "Url",
     #       invocation_role: "Role",
@@ -279,16 +353,14 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Adds a user and associate them with an existing Secure File Transfer
-    # Protocol (SFTP) server. Using parameters for `CreateUser`, you can
-    # specify the user name, set the home directory, store the user's
-    # public key, and assign the user's AWS Identity and Access Management
-    # (IAM) role. You can also optionally add a scope-down policy, and
-    # assign metadata with tags that can be used to group and search for
-    # users.
-    #
-    # The response returns the `UserName` and `ServerId` values of the new
-    # user for that server.
+    # Creates a user and associates them with an existing Secure File
+    # Transfer Protocol (SFTP) server. You can only create and associate
+    # users with SFTP servers that have the `IdentityProviderType` set to
+    # `SERVICE_MANAGED`. Using parameters for `CreateUser`, you can specify
+    # the user name, set the home directory, store the user's public key,
+    # and assign the user's AWS Identity and Access Management (IAM) role.
+    # You can also optionally add a scope-down policy, and assign metadata
+    # with tags that can be used to group and search for users.
     #
     # @option params [String] :home_directory
     #   The landing directory (folder) for a user when they log in to the
@@ -297,24 +369,39 @@ module Aws::Transfer
     # @option params [String] :policy
     #   A scope-down policy for your user so you can use the same IAM role
     #   across multiple users. This policy scopes down user access to portions
-    #   of their Amazon S3 bucket. Variables you can use inside this policy
-    #   include `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   of their Amazon S3 bucket. Variables that you can use inside this
+    #   policy include `$\{Transfer:UserName\}`,
+    #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
+    #
+    #   <note markdown="1"> For scope-down policies, AWS Transfer for SFTP stores the policy as a
+    #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
+    #   You save the policy as a JSON blob and pass it in the `Policy`
+    #   argument.
+    #
+    #    For an example of a scope-down policy, see
+    #   "https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down"&gt;Creating
+    #   a Scope-Down Policy.
+    #
+    #    For more information, see
+    #   "https://docs.aws.amazon.com/STS/latest/APIReference/API\_AssumeRole.html"
+    #   in the *AWS Security Token Service API Reference*.
+    #
+    #    </note>
     #
     # @option params [required, String] :role
-    #   The IAM role that controls your user’s access to your Amazon S3
+    #   The IAM role that controls your user's access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level of
     #   access you want to provide your users when transferring files into and
     #   out of your Amazon S3 bucket or buckets. The IAM role should also
     #   contain a trust relationship that allows the SFTP server to access
-    #   your resources when servicing your SFTP user’s transfer requests.
+    #   your resources when servicing your SFTP user's transfer requests.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for an SFTP server instance. This
     #   is the specific SFTP server that you added your user to.
     #
     # @option params [String] :ssh_public_key_body
-    #   The public portion of the Secure Shall (SSH) key used to authenticate
+    #   The public portion of the Secure Shell (SSH) key used to authenticate
     #   the user to the SFTP server.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -323,7 +410,10 @@ module Aws::Transfer
     #
     # @option params [required, String] :user_name
     #   A unique string that identifies a user and is associated with a server
-    #   as specified by the `ServerId`.
+    #   as specified by the `ServerId`. This user name must be a minimum of 3
+    #   and a maximum of 32 characters long. The following are valid
+    #   characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name
+    #   can't start with a hyphen.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -362,11 +452,9 @@ module Aws::Transfer
     end
 
     # Deletes the Secure File Transfer Protocol (SFTP) server that you
-    # specify. If you used `SERVICE_MANAGED` as your `IdentityProviderType`,
-    # you need to delete all users associated with this server before
-    # deleting the server itself
+    # specify.
     #
-    # No response returns from this call.
+    # No response returns from this operation.
     #
     # @option params [required, String] :server_id
     #   A unique system-assigned identifier for an SFTP server instance.
@@ -390,14 +478,14 @@ module Aws::Transfer
 
     # Deletes a user's Secure Shell (SSH) public key.
     #
-    # No response is returned from this call.
+    # No response is returned from this operation.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a Secure File Transfer
     #   Protocol (SFTP) server instance that has the user assigned to it.
     #
     # @option params [required, String] :ssh_public_key_id
-    #   A unique identifier used to reference your user’s specific SSH key.
+    #   A unique identifier used to reference your user's specific SSH key.
     #
     # @option params [required, String] :user_name
     #   A unique string that identifies a user whose public key is being
@@ -424,7 +512,7 @@ module Aws::Transfer
 
     # Deletes the user belonging to the server you specify.
     #
-    # No response returns from this call.
+    # No response returns from this operation.
     #
     # <note markdown="1"> When you delete a user from a server, the user's information is lost.
     #
@@ -477,6 +565,9 @@ module Aws::Transfer
     # @example Response structure
     #
     #   resp.server.arn #=> String
+    #   resp.server.endpoint_details.vpc_endpoint_id #=> String
+    #   resp.server.endpoint_type #=> String, one of "PUBLIC", "VPC_ENDPOINT"
+    #   resp.server.host_key_fingerprint #=> String
     #   resp.server.identity_provider_details.url #=> String
     #   resp.server.identity_provider_details.invocation_role #=> String
     #   resp.server.identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY"
@@ -509,8 +600,8 @@ module Aws::Transfer
     #
     # @option params [required, String] :user_name
     #   The name of the user assigned to one or more servers. User names are
-    #   part of the sign-in credentials to use the AWS Transfer service and
-    #   perform file transfer tasks.
+    #   part of the sign-in credentials to use the AWS Transfer for SFTP
+    #   service and perform file transfer tasks.
     #
     # @return [Types::DescribeUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -602,7 +693,7 @@ module Aws::Transfer
     #   `ListServers` query.
     #
     # @option params [String] :next_token
-    #   When additional results are obtained from the ListServers command, a
+    #   When additional results are obtained from the `ListServers` command, a
     #   `NextToken` parameter is returned in the output. You can then pass the
     #   `NextToken` parameter in a subsequent command to continue listing
     #   additional servers.
@@ -625,6 +716,7 @@ module Aws::Transfer
     #   resp.servers #=> Array
     #   resp.servers[0].arn #=> String
     #   resp.servers[0].identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY"
+    #   resp.servers[0].endpoint_type #=> String, one of "PUBLIC", "VPC_ENDPOINT"
     #   resp.servers[0].logging_role #=> String
     #   resp.servers[0].server_id #=> String
     #   resp.servers[0].state #=> String, one of "OFFLINE", "ONLINE", "STARTING", "STOPPING", "START_FAILED", "STOP_FAILED"
@@ -648,8 +740,14 @@ module Aws::Transfer
     #   server, user, or role.
     #
     # @option params [Integer] :max_results
+    #   Specifies the number of tags to return as a response to the
+    #   `ListTagsForResource` request.
     #
     # @option params [String] :next_token
+    #   When you request additional results from the `ListTagsForResource`
+    #   operation, a `NextToken` parameter is returned in the input. You can
+    #   then pass in a subsequent command to the `NextToken` parameter to
+    #   continue listing additional tags.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -690,14 +788,14 @@ module Aws::Transfer
     #   `ListUsers` request.
     #
     # @option params [String] :next_token
-    #   When you can get additional results from the `ListUsers`ListUsers
-    #   call, a `NextToken` parameter is returned in the output. You can then
-    #   pass in a subsequent command the `NextToken` parameter to continue
-    #   listing additional users.
+    #   When you can get additional results from the `ListUsers` call, a
+    #   `NextToken` parameter is returned in the output. You can then pass in
+    #   a subsequent command to the `NextToken` parameter to continue listing
+    #   additional users.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a Secure File Transfer
-    #   Protocol (SFTP) server that has users are assigned to it.
+    #   Protocol (SFTP) server that has users assigned to it.
     #
     # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -771,7 +869,7 @@ module Aws::Transfer
     # reduce or impact your Secure File Transfer Protocol (SFTP) endpoint
     # billing.
     #
-    # The states of `STOPPING` indicates that the server is in an
+    # The state of `STOPPING` indicates that the server is in an
     # intermediate state, either not fully able to respond, or not fully
     # offline. The values of `STOP_FAILED` can indicate an error condition.
     #
@@ -838,25 +936,26 @@ module Aws::Transfer
 
     # If the `IdentityProviderType` of the server is `API_Gateway`, tests
     # whether your API Gateway is set up successfully. We highly recommend
-    # that you call this method to test your authentication method as soon
-    # as you create your server. By doing so, you can troubleshoot issues
-    # with the API Gateway integration to ensure that your users can
+    # that you call this operation to test your authentication method as
+    # soon as you create your server. By doing so, you can troubleshoot
+    # issues with the API Gateway integration to ensure that your users can
     # successfully use the service.
     #
     # @option params [required, String] :server_id
-    #   A system assigned identifier for a specific server. That server's
+    #   A system-assigned identifier for a specific server. That server's
     #   user authentication method is tested with a user name and password.
     #
     # @option params [required, String] :user_name
-    #   This request parameter is name of the user account to be tested.
+    #   This request parameter is the name of the user account to be tested.
     #
     # @option params [String] :user_password
     #   The password of the user account to be tested.
     #
     # @return [Types::TestIdentityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::TestIdentityProviderResponse#message #message} => String
+    #   * {Types::TestIdentityProviderResponse#response #response} => String
     #   * {Types::TestIdentityProviderResponse#status_code #status_code} => Integer
+    #   * {Types::TestIdentityProviderResponse#message #message} => String
     #   * {Types::TestIdentityProviderResponse#url #url} => String
     #
     # @example Request syntax with placeholder values
@@ -869,8 +968,9 @@ module Aws::Transfer
     #
     # @example Response structure
     #
-    #   resp.message #=> String
+    #   resp.response #=> String
     #   resp.status_code #=> Integer
+    #   resp.message #=> String
     #   resp.url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TestIdentityProvider AWS API Documentation
@@ -921,14 +1021,37 @@ module Aws::Transfer
     # The `UpdateServer` call returns the `ServerId` of the Secure File
     # Transfer Protocol (SFTP) server you updated.
     #
+    # @option params [Types::EndpointDetails] :endpoint_details
+    #   The virtual private cloud (VPC) endpoint settings that are configured
+    #   for your SFTP server. With a VPC endpoint, your SFTP server isn't
+    #   accessible over the public internet.
+    #
+    # @option params [String] :endpoint_type
+    #   The type of endpoint that you want your SFTP server to connect to. You
+    #   can choose to connect to the public internet or a virtual private
+    #   cloud (VPC) endpoint. With a VPC endpoint, your SFTP server isn't
+    #   accessible over the public internet.
+    #
+    # @option params [String] :host_key
+    #   The RSA private key as generated by `ssh-keygen -N "" -f
+    #   my-new-server-key`.
+    #
+    #   If you aren't planning to migrate existing users from an existing
+    #   SFTP server to a new AWS SFTP server, don't update the host key.
+    #   Accidentally changing a server's host key can be disruptive.
+    #
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key"
+    #   in the *AWS SFTP User Guide.*
+    #
     # @option params [Types::IdentityProviderDetails] :identity_provider_details
     #   This response parameter is an array containing all of the information
     #   required to call a customer's authentication API method.
     #
     # @option params [String] :logging_role
-    #   Changes the AWS Identity and Access Management (IAM) role that allows
-    #   Amazon S3 events to be logged in Amazon CloudWatch, turning logging on
-    #   or off.
+    #   A value that changes the AWS Identity and Access Management (IAM) role
+    #   that allows Amazon S3 events to be logged in Amazon CloudWatch,
+    #   turning logging on or off.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for an SFTP server instance that
@@ -941,6 +1064,11 @@ module Aws::Transfer
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_server({
+    #     endpoint_details: {
+    #       vpc_endpoint_id: "VpcEndpointId",
+    #     },
+    #     endpoint_type: "PUBLIC", # accepts PUBLIC, VPC_ENDPOINT
+    #     host_key: "HostKey",
     #     identity_provider_details: {
     #       url: "Url",
     #       invocation_role: "Role",
@@ -970,26 +1098,41 @@ module Aws::Transfer
     # user.
     #
     # @option params [String] :home_directory
-    #   The HomeDirectory parameter specifies the landing directory (folder)
-    #   for a user when they log in to the server using their client. An
-    #   example would be: `/home/username `.
+    #   A parameter that specifies the landing directory (folder) for a user
+    #   when they log in to the server using their client. An example is
+    #   `/home/username `.
     #
     # @option params [String] :policy
     #   Allows you to supply a scope-down policy for your user so you can use
     #   the same AWS Identity and Access Management (IAM) role across multiple
-    #   users. The policy scopes down users access to portions of your Amazon
+    #   users. The policy scopes down user access to portions of your Amazon
     #   S3 bucket. Variables you can use inside this policy include
     #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
     #   `$\{Transfer:HomeBucket\}`.
     #
+    #   <note markdown="1"> For scope-down policies, AWS Transfer for SFTP stores the policy as a
+    #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
+    #   You save the policy as a JSON blob and pass it in the `Policy`
+    #   argument.
+    #
+    #    For an example of a scope-down policy, see
+    #   "https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down"&gt;Creating
+    #   a Scope-Down Policy.
+    #
+    #    For more information, see
+    #   "https://docs.aws.amazon.com/STS/latest/APIReference/API\_AssumeRole.html"
+    #   in the *AWS Security Token Service API Reference*.
+    #
+    #    </note>
+    #
     # @option params [String] :role
-    #   The IAM role that controls your user’s access to your Amazon S3
+    #   The IAM role that controls your user's access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level of
     #   access you want to provide your users when transferring files into and
     #   out of your Amazon S3 bucket or buckets. The IAM role should also
     #   contain a trust relationship that allows the Secure File Transfer
     #   Protocol (SFTP) server to access your resources when servicing your
-    #   SFTP user’s transfer requests.
+    #   SFTP user's transfer requests.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for an SFTP server instance that
@@ -997,8 +1140,11 @@ module Aws::Transfer
     #
     # @option params [required, String] :user_name
     #   A unique string that identifies a user and is associated with a server
-    #   as specified by the ServerId. This is the string that will be used by
-    #   your user when they log in to your SFTP server.
+    #   as specified by the `ServerId`. This is the string that will be used
+    #   by your user when they log in to your SFTP server. This user name is a
+    #   minimum of 3 and a maximum of 32 characters long. The following are
+    #   valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name
+    #   can't start with a hyphen.
     #
     # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1042,7 +1188,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

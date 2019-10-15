@@ -30,16 +30,22 @@ module Aws::S3
       @bucket_name
     end
 
+    # The topic to which notifications are sent and the events for which
+    # notifications are generated.
     # @return [Array<Types::TopicConfiguration>]
     def topic_configurations
       data[:topic_configurations]
     end
 
+    # The Amazon Simple Queue Service queues to publish messages to and the
+    # events for which to publish messages.
     # @return [Array<Types::QueueConfiguration>]
     def queue_configurations
       data[:queue_configurations]
     end
 
+    # Describes the AWS Lambda functions to invoke and the events for which
+    # to invoke them.
     # @return [Array<Types::LambdaFunctionConfiguration>]
     def lambda_function_configurations
       data[:lambda_function_configurations]
@@ -236,9 +242,6 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [required, Types::NotificationConfiguration] :notification_configuration
-    #   A container for specifying the notification configuration of the
-    #   bucket. If this element is empty, notifications are turned off for the
-    #   bucket.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

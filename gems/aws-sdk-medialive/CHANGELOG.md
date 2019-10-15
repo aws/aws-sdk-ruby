@@ -1,6 +1,101 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2019-09-12)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports High Efficiency Video Coding (HEVC) for standard-definition (SD), high-definition (HD), and ultra-high-definition (UHD) encoding with HDR support.Encoding with HEVC offers a number of advantages. While UHD video requires an advanced codec beyond H.264 (AVC), high frame rate (HFR) or High Dynamic Range (HDR) content in HD also benefit from HEVC's advancements. In addition, benefits can be achieved with HD and SD content even if HDR and HFR are not needed.
+
+1.36.0 (2019-07-25)
+------------------
+
+* Feature - AWS Elemental MediaLive is adding Input Clipping, Immediate Mode Input Switching, and Dynamic Inputs.
+
+1.35.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.32.0 (2019-05-16)
+------------------
+
+* Feature - API update.
+
+1.31.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.30.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.29.0 (2019-05-03)
+------------------
+
+* Feature - API update.
+
+1.28.0 (2019-04-05)
+------------------
+
+* Feature - API update.
+
+1.27.0 (2019-03-28)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-03-07)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-03-05)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-02-20)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-02-07)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-01-25)
+------------------
+
+* Feature - API update.
+
 1.18.0 (2018-12-20)
 ------------------
 

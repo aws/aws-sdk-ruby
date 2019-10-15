@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::ApiGatewayV2
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::ApiGatewayV2
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::ApiGatewayV2
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -213,7 +262,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [String] :description
     #   A string with a length between \[0-1024\].
@@ -231,7 +280,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [String] :version
     #   A string with a length between \[1-64\].
@@ -287,7 +336,7 @@ module Aws::ApiGatewayV2
     # Creates an API mapping.
     #
     # @option params [required, String] :api_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #
     # @option params [String] :api_mapping_key
     #   After evaulating a selection expression, the result is compared
@@ -297,7 +346,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [required, String] :domain_name
     #
@@ -352,13 +401,12 @@ module Aws::ApiGatewayV2
     #   A string representation of a URI with a length between \[1-2048\].
     #
     # @option params [required, Array<String>] :identity_source
-    #   The identity source for which authorization is requested.
-    #
-    #   For the REQUEST authorizer, this is required when authorization
-    #   caching is enabled. The value is a comma-separated string of one or
-    #   more mapping expressions of the specified request parameters. For
-    #   example, if an Auth header, a Name query string parameter are defined
-    #   as identity sources, this value is $method.request.header.Auth,
+    #   The identity source for which authorization is requested. For the
+    #   REQUEST authorizer, this is required when authorization caching is
+    #   enabled. The value is a comma-separated string of one or more mapping
+    #   expressions of the specified request parameters. For example, if an
+    #   Auth header, a Name query string parameter are defined as identity
+    #   sources, this value is $method.request.header.Auth,
     #   $method.request.querystring.Name. These parameters will be used to
     #   derive the authorization caching key and to perform runtime validation
     #   of the REQUEST authorizer by verifying all of the identity-related
@@ -474,11 +522,16 @@ module Aws::ApiGatewayV2
     # @option params [Array<Types::DomainNameConfiguration>] :domain_name_configurations
     #   The domain name configurations.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A key value pair of string with key length between\[1-128\] and value
+    #   length between\[1-256\]
+    #
     # @return [Types::CreateDomainNameResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::CreateDomainNameResponse#domain_name #domain_name} => String
     #   * {Types::CreateDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
+    #   * {Types::CreateDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -492,8 +545,14 @@ module Aws::ApiGatewayV2
     #         certificate_upload_date: Time.now,
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
+    #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #         domain_name_status_message: "__string",
     #       },
     #     ],
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600",
+    #     },
     #   })
     #
     # @example Response structure
@@ -507,6 +566,11 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].certificate_upload_date #=> Time
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
+    #   resp.domain_name_configurations[0].domain_name_status_message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -537,7 +601,7 @@ module Aws::ApiGatewayV2
     # @option params [String] :integration_method
     #   A string with a length between \[1-64\].
     #
-    # @option params [String] :integration_type
+    # @option params [required, String] :integration_type
     #   Represents an API method integration type.
     #
     # @option params [String] :integration_uri
@@ -570,7 +634,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Integer] :timeout_in_millis
     #   An integer with a value between \[50-29000\].
@@ -603,7 +667,7 @@ module Aws::ApiGatewayV2
     #     credentials_arn: "Arn",
     #     description: "StringWithLengthBetween0And1024",
     #     integration_method: "StringWithLengthBetween1And64",
-    #     integration_type: "AWS", # accepts AWS, HTTP, MOCK, HTTP_PROXY, AWS_PROXY
+    #     integration_type: "AWS", # required, accepts AWS, HTTP, MOCK, HTTP_PROXY, AWS_PROXY
     #     integration_uri: "UriWithLengthBetween1And2048",
     #     passthrough_behavior: "WHEN_NO_MATCH", # accepts WHEN_NO_MATCH, NEVER, WHEN_NO_TEMPLATES
     #     request_parameters: {
@@ -660,7 +724,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Hash<String,String>] :response_parameters
     #   A key-value map specifying response parameters that are passed to the
@@ -686,7 +750,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @return [Types::CreateIntegrationResponseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -744,7 +808,7 @@ module Aws::ApiGatewayV2
     # @option params [required, String] :name
     #   A string with a length between \[1-128\].
     #
-    # @option params [String] :schema
+    # @option params [required, String] :schema
     #   A string with a length between \[0-32768\].
     #
     # @return [Types::CreateModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -762,7 +826,7 @@ module Aws::ApiGatewayV2
     #     content_type: "StringWithLengthBetween1And256",
     #     description: "StringWithLengthBetween0And1024",
     #     name: "StringWithLengthBetween1And128", # required
-    #     schema: "StringWithLengthBetween0And32K",
+    #     schema: "StringWithLengthBetween0And32K", # required
     #   })
     #
     # @example Response structure
@@ -803,7 +867,7 @@ module Aws::ApiGatewayV2
     #   authorizer.
     #
     # @option params [String] :authorizer_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #
     # @option params [String] :model_selection_expression
     #   An expression used to extract information at runtime. See [Selection
@@ -811,7 +875,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [String] :operation_name
     #   A string with a length between \[1-64\].
@@ -830,7 +894,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [String] :route_response_selection_expression
     #   An expression used to extract information at runtime. See [Selection
@@ -838,7 +902,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [String] :target
     #   A string with a length between \[1-128\].
@@ -916,7 +980,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Hash<String,String>] :response_models
     #   The route models.
@@ -934,7 +998,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @return [Types::CreateRouteResponseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -986,13 +1050,13 @@ module Aws::ApiGatewayV2
     # @option params [required, String] :api_id
     #
     # @option params [String] :client_certificate_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #
     # @option params [Types::RouteSettings] :default_route_settings
     #   Represents a collection of route settings.
     #
     # @option params [String] :deployment_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #
     # @option params [String] :description
     #   A string with a length between \[0-1024\].
@@ -1006,6 +1070,10 @@ module Aws::ApiGatewayV2
     # @option params [Hash<String,String>] :stage_variables
     #   The stage variable map.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A key value pair of string with key length between\[1-128\] and value
+    #   length between\[1-256\]
+    #
     # @return [Types::CreateStageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStageResponse#access_log_settings #access_log_settings} => Types::AccessLogSettings
@@ -1018,6 +1086,7 @@ module Aws::ApiGatewayV2
     #   * {Types::CreateStageResponse#route_settings #route_settings} => Hash&lt;String,Types::RouteSettings&gt;
     #   * {Types::CreateStageResponse#stage_name #stage_name} => String
     #   * {Types::CreateStageResponse#stage_variables #stage_variables} => Hash&lt;String,String&gt;
+    #   * {Types::CreateStageResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1050,6 +1119,9 @@ module Aws::ApiGatewayV2
     #     stage_variables: {
     #       "__string" => "StringWithLengthBetween0And2048",
     #     },
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1075,6 +1147,8 @@ module Aws::ApiGatewayV2
     #   resp.stage_name #=> String
     #   resp.stage_variables #=> Hash
     #   resp.stage_variables["__string"] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload create_stage(params = {})
     # @param [Hash] params ({})
@@ -1104,8 +1178,6 @@ module Aws::ApiGatewayV2
 
     # Deletes an API mapping.
     #
-    # @option params [required, String] :api_id
-    #
     # @option params [required, String] :api_mapping_id
     #
     # @option params [required, String] :domain_name
@@ -1115,7 +1187,6 @@ module Aws::ApiGatewayV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_api_mapping({
-    #     api_id: "__string", # required
     #     api_mapping_id: "__string", # required
     #     domain_name: "__string", # required
     #   })
@@ -1345,6 +1416,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetApiResponse#route_selection_expression #route_selection_expression} => String
     #   * {Types::GetApiResponse#version #version} => String
     #   * {Types::GetApiResponse#warnings #warnings} => Array&lt;String&gt;
+    #   * {Types::GetApiResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1366,6 +1438,8 @@ module Aws::ApiGatewayV2
     #   resp.version #=> String
     #   resp.warnings #=> Array
     #   resp.warnings[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload get_api(params = {})
     # @param [Hash] params ({})
@@ -1375,8 +1449,6 @@ module Aws::ApiGatewayV2
     end
 
     # The API mapping.
-    #
-    # @option params [required, String] :api_id
     #
     # @option params [required, String] :api_mapping_id
     #
@@ -1392,7 +1464,6 @@ module Aws::ApiGatewayV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_api_mapping({
-    #     api_id: "__string", # required
     #     api_mapping_id: "__string", # required
     #     domain_name: "__string", # required
     #   })
@@ -1421,10 +1492,8 @@ module Aws::ApiGatewayV2
     #
     # @return [Types::GetApiMappingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetApiMappingsResponse#api_id #api_id} => String
-    #   * {Types::GetApiMappingsResponse#api_mapping_id #api_mapping_id} => String
-    #   * {Types::GetApiMappingsResponse#api_mapping_key #api_mapping_key} => String
-    #   * {Types::GetApiMappingsResponse#stage #stage} => String
+    #   * {Types::GetApiMappingsResponse#items #items} => Array&lt;Types::ApiMapping&gt;
+    #   * {Types::GetApiMappingsResponse#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1436,10 +1505,12 @@ module Aws::ApiGatewayV2
     #
     # @example Response structure
     #
-    #   resp.api_id #=> String
-    #   resp.api_mapping_id #=> String
-    #   resp.api_mapping_key #=> String
-    #   resp.stage #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].api_id #=> String
+    #   resp.items[0].api_mapping_id #=> String
+    #   resp.items[0].api_mapping_key #=> String
+    #   resp.items[0].stage #=> String
+    #   resp.next_token #=> String
     #
     # @overload get_api_mappings(params = {})
     # @param [Hash] params ({})
@@ -1481,6 +1552,8 @@ module Aws::ApiGatewayV2
     #   resp.items[0].version #=> String
     #   resp.items[0].warnings #=> Array
     #   resp.items[0].warnings[0] #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @overload get_apis(params = {})
@@ -1663,6 +1736,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::GetDomainNameResponse#domain_name #domain_name} => String
     #   * {Types::GetDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
+    #   * {Types::GetDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1681,6 +1755,11 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].certificate_upload_date #=> Time
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
+    #   resp.domain_name_configurations[0].domain_name_status_message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -1719,6 +1798,11 @@ module Aws::ApiGatewayV2
     #   resp.items[0].domain_name_configurations[0].certificate_upload_date #=> Time
     #   resp.items[0].domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.items[0].domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.items[0].domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.items[0].domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
+    #   resp.items[0].domain_name_configurations[0].domain_name_status_message #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @overload get_domain_names(params = {})
@@ -2228,6 +2312,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetStageResponse#route_settings #route_settings} => Hash&lt;String,Types::RouteSettings&gt;
     #   * {Types::GetStageResponse#stage_name #stage_name} => String
     #   * {Types::GetStageResponse#stage_variables #stage_variables} => Hash&lt;String,String&gt;
+    #   * {Types::GetStageResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2259,6 +2344,8 @@ module Aws::ApiGatewayV2
     #   resp.stage_name #=> String
     #   resp.stage_variables #=> Hash
     #   resp.stage_variables["__string"] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload get_stage(params = {})
     # @param [Hash] params ({})
@@ -2312,12 +2399,84 @@ module Aws::ApiGatewayV2
     #   resp.items[0].stage_name #=> String
     #   resp.items[0].stage_variables #=> Hash
     #   resp.items[0].stage_variables["__string"] #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @overload get_stages(params = {})
     # @param [Hash] params ({})
     def get_stages(params = {}, options = {})
       req = build_request(:get_stages, params)
+      req.send_request(options)
+    end
+
+    # Gets the Tags for a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::GetTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTagsResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_tags({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @overload get_tags(params = {})
+    # @param [Hash] params ({})
+    def get_tags(params = {}, options = {})
+      req = build_request(:get_tags, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A key value pair of string with key length between\[1-128\] and value
+    #   length between\[1-256\]
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600",
+    #     },
+    #   })
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2331,7 +2490,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [String] :description
     #   A string with a length between \[0-1024\].
@@ -2347,7 +2506,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [String] :version
     #   A string with a length between \[1-64\].
@@ -2365,6 +2524,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateApiResponse#route_selection_expression #route_selection_expression} => String
     #   * {Types::UpdateApiResponse#version #version} => String
     #   * {Types::UpdateApiResponse#warnings #warnings} => Array&lt;String&gt;
+    #   * {Types::UpdateApiResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2392,6 +2552,8 @@ module Aws::ApiGatewayV2
     #   resp.version #=> String
     #   resp.warnings #=> Array
     #   resp.warnings[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload update_api(params = {})
     # @param [Hash] params ({})
@@ -2403,7 +2565,7 @@ module Aws::ApiGatewayV2
     # The API mapping.
     #
     # @option params [required, String] :api_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #
     # @option params [required, String] :api_mapping_id
     #
@@ -2415,7 +2577,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [required, String] :domain_name
     #
@@ -2473,13 +2635,12 @@ module Aws::ApiGatewayV2
     #   A string representation of a URI with a length between \[1-2048\].
     #
     # @option params [Array<String>] :identity_source
-    #   The identity source for which authorization is requested.
-    #
-    #   For the REQUEST authorizer, this is required when authorization
-    #   caching is enabled. The value is a comma-separated string of one or
-    #   more mapping expressions of the specified request parameters. For
-    #   example, if an Auth header, a Name query string parameter are defined
-    #   as identity sources, this value is $method.request.header.Auth,
+    #   The identity source for which authorization is requested. For the
+    #   REQUEST authorizer, this is required when authorization caching is
+    #   enabled. The value is a comma-separated string of one or more mapping
+    #   expressions of the specified request parameters. For example, if an
+    #   Auth header, a Name query string parameter are defined as identity
+    #   sources, this value is $method.request.header.Auth,
     #   $method.request.querystring.Name. These parameters will be used to
     #   derive the authorization caching key and to perform runtime validation
     #   of the REQUEST authorizer by verifying all of the identity-related
@@ -2599,6 +2760,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::UpdateDomainNameResponse#domain_name #domain_name} => String
     #   * {Types::UpdateDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
+    #   * {Types::UpdateDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2612,6 +2774,9 @@ module Aws::ApiGatewayV2
     #         certificate_upload_date: Time.now,
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
+    #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #         domain_name_status_message: "__string",
     #       },
     #     ],
     #   })
@@ -2627,6 +2792,11 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].certificate_upload_date #=> Time
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
+    #   resp.domain_name_configurations[0].domain_name_status_message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -2692,7 +2862,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Integer] :timeout_in_millis
     #   An integer with a value between \[50-29000\].
@@ -2785,7 +2955,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Hash<String,String>] :response_parameters
     #   A key-value map specifying response parameters that are passed to the
@@ -2811,7 +2981,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @return [Types::UpdateIntegrationResponseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2932,7 +3102,7 @@ module Aws::ApiGatewayV2
     #   authorizer.
     #
     # @option params [String] :authorizer_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #
     # @option params [String] :model_selection_expression
     #   An expression used to extract information at runtime. See [Selection
@@ -2940,7 +3110,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [String] :operation_name
     #   A string with a length between \[1-64\].
@@ -2961,7 +3131,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [String] :route_response_selection_expression
     #   An expression used to extract information at runtime. See [Selection
@@ -2969,7 +3139,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [String] :target
     #   A string with a length between \[1-128\].
@@ -3048,7 +3218,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Hash<String,String>] :response_models
     #   The route models.
@@ -3068,7 +3238,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @return [Types::UpdateRouteResponseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3121,13 +3291,13 @@ module Aws::ApiGatewayV2
     # @option params [required, String] :api_id
     #
     # @option params [String] :client_certificate_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #
     # @option params [Types::RouteSettings] :default_route_settings
     #   Represents a collection of route settings.
     #
     # @option params [String] :deployment_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #
     # @option params [String] :description
     #   A string with a length between \[0-1024\].
@@ -3152,6 +3322,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateStageResponse#route_settings #route_settings} => Hash&lt;String,Types::RouteSettings&gt;
     #   * {Types::UpdateStageResponse#stage_name #stage_name} => String
     #   * {Types::UpdateStageResponse#stage_variables #stage_variables} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateStageResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3209,6 +3380,8 @@ module Aws::ApiGatewayV2
     #   resp.stage_name #=> String
     #   resp.stage_variables #=> Hash
     #   resp.stage_variables["__string"] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload update_stage(params = {})
     # @param [Hash] params ({})
@@ -3230,7 +3403,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

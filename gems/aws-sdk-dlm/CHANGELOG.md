@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2019-05-29)
+------------------
+
+* Feature - Customers can now simultaneously take snapshots of multiple EBS volumes attached to an EC2 instance. With this new capability, snapshots guarantee crash-consistency across multiple volumes by preserving the order of IO operations. This new feature is fully integrated with Amazon Data Lifecycle Manager (DLM) allowing customers to automatically manage snapshots by creating lifecycle policies.
+
+1.14.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.12.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.11.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.10.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.9.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.8.0 (2019-02-08)
+------------------
+
+* Feature - API update.
+
 1.7.0 (2018-11-20)
 ------------------
 

@@ -25,7 +25,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
@@ -43,7 +43,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def user_id
       data[:user_id]
@@ -55,7 +55,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -85,7 +85,7 @@ module Aws::IAM
     # * A password exists but has not been used since IAM started tracking
     #   this information on October 20, 2014.
     #
-    # A null valuedoes not mean that the user *never* had a password. Also,
+    # A null value does not mean that the user *never* had a password. Also,
     # if the user does not currently have a password, but had one in the
     # past, then this field contains the date and time the most recent
     # password was used.
@@ -95,7 +95,7 @@ module Aws::IAM
     #
     #
     # [1]: http://www.iso.org/iso/iso8601
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     # @return [Time]
     def password_last_used
       data[:password_last_used]
@@ -105,9 +105,11 @@ module Aws::IAM
     # user.
     #
     # For more information about permissions boundaries, see [Permissions
-    # Boundaries for IAM Identities
-    # ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
-    # User Guide*.
+    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     # @return [Types::AttachedPermissionsBoundary]
     def permissions_boundary
       data[:permissions_boundary]
@@ -119,7 +121,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]

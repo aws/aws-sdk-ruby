@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::MediaStore
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::MediaStore
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::MediaStore
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -225,6 +274,19 @@ module Aws::MediaStore
     #   every region, as long as you don’t have an existing container with
     #   that name.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key:value pairs that you define. These values can be
+    #   anything that you want. Typically, the tag key represents a category
+    #   (such as "environment") and the tag value represents a specific
+    #   value within that category (such as "test," "development," or
+    #   "production"). You can add up to 50 tags to each container. For more
+    #   information about tagging, including naming and usage conventions, see
+    #   [Tagging Resources in MediaStore][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/documentation/mediastore/tagging
+    #
     # @return [Types::CreateContainerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateContainerOutput#container #container} => Types::Container
@@ -233,6 +295,12 @@ module Aws::MediaStore
     #
     #   resp = client.create_container({
     #     container_name: "ContainerName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -242,6 +310,7 @@ module Aws::MediaStore
     #   resp.container.arn #=> String
     #   resp.container.name #=> String
     #   resp.container.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.container.access_logging_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CreateContainer AWS API Documentation
     #
@@ -326,7 +395,8 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
-    # Removes an object lifecycle policy from a container.
+    # Removes an object lifecycle policy from a container. It takes up to 20
+    # minutes for the change to take effect.
     #
     # @option params [required, String] :container_name
     #   The name of the container that holds the object lifecycle policy.
@@ -376,6 +446,7 @@ module Aws::MediaStore
     #   resp.container.arn #=> String
     #   resp.container.name #=> String
     #   resp.container.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.container.access_logging_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DescribeContainer AWS API Documentation
     #
@@ -534,6 +605,7 @@ module Aws::MediaStore
     #   resp.containers[0].arn #=> String
     #   resp.containers[0].name #=> String
     #   resp.containers[0].status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.containers[0].access_logging_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ListContainers AWS API Documentation
@@ -542,6 +614,36 @@ module Aws::MediaStore
     # @param [Hash] params ({})
     def list_containers(params = {}, options = {})
       req = build_request(:list_containers, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the tags assigned to the specified container.
+    #
+    # @option params [required, String] :resource
+    #   The Amazon Resource Name (ARN) for the container.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource: "ContainerARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -600,6 +702,13 @@ module Aws::MediaStore
     # rules to a CORS policy. If more than one rule applies, the service
     # uses the first applicable rule listed.
     #
+    # To learn more about CORS, see [Cross-Origin Resource Sharing (CORS) in
+    # AWS Elemental MediaStore][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html
+    #
     # @option params [required, String] :container_name
     #   The name of the container that you want to assign the CORS policy to.
     #
@@ -634,7 +743,15 @@ module Aws::MediaStore
 
     # Writes an object lifecycle policy to a container. If the container
     # already has an object lifecycle policy, the service replaces the
-    # existing policy with the new policy.
+    # existing policy with the new policy. It takes up to 20 minutes for the
+    # change to take effect.
+    #
+    # For information about how to construct an object lifecycle policy, see
+    # [Components of an Object Lifecycle Policy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html
     #
     # @option params [required, String] :container_name
     #   The name of the container that you want to assign the object lifecycle
@@ -661,6 +778,134 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
+    # Starts access logging on the specified container. When you enable
+    # access logging on a container, MediaStore delivers access logs for
+    # objects stored in that container to Amazon CloudWatch Logs.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that you want to start access logging on.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_access_logging({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StartAccessLogging AWS API Documentation
+    #
+    # @overload start_access_logging(params = {})
+    # @param [Hash] params ({})
+    def start_access_logging(params = {}, options = {})
+      req = build_request(:start_access_logging, params)
+      req.send_request(options)
+    end
+
+    # Stops access logging on the specified container. When you stop access
+    # logging on a container, MediaStore stops sending access logs to Amazon
+    # CloudWatch Logs. These access logs are not saved and are not
+    # retrievable.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that you want to stop access logging on.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_access_logging({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StopAccessLogging AWS API Documentation
+    #
+    # @overload stop_access_logging(params = {})
+    # @param [Hash] params ({})
+    def stop_access_logging(params = {}, options = {})
+      req = build_request(:stop_access_logging, params)
+      req.send_request(options)
+    end
+
+    # Adds tags to the specified AWS Elemental MediaStore container. Tags
+    # are key:value pairs that you can associate with AWS resources. For
+    # example, the tag key might be "customer" and the tag value might be
+    # "companyA." You can specify one or more tags to add to each
+    # container. You can add up to 50 tags to each container. For more
+    # information about tagging, including naming and usage conventions, see
+    # [Tagging Resources in MediaStore][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/documentation/mediastore/tagging
+    #
+    # @option params [required, String] :resource
+    #   The Amazon Resource Name (ARN) for the container.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   An array of key:value pairs that you want to add to the container. You
+    #   need to specify only the tags that you want to add or update. For
+    #   example, suppose a container already has two tags (customer:CompanyA
+    #   and priority:High). You want to change the priority tag and also add a
+    #   third tag (type:Contract). For TagResource, you specify the following
+    #   tags: priority:Medium, type:Contract. The result is that your
+    #   container has three tags: customer:CompanyA, priority:Medium, and
+    #   type:Contract.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource: "ContainerARN", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from the specified container. You can specify one or more
+    # tags to remove.
+    #
+    # @option params [required, String] :resource
+    #   The Amazon Resource Name (ARN) for the container.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A comma-separated list of keys for tags that you want to remove from
+    #   the container. For example, if your container has two tags
+    #   (customer:CompanyA and priority:High) and you want to remove one of
+    #   the tags (priority:High), you specify the key for the tag that you
+    #   want to remove (priority).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource: "ContainerARN", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -674,7 +919,7 @@ module Aws::MediaStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastore'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

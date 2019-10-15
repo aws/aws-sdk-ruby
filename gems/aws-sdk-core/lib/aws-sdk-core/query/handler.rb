@@ -27,7 +27,12 @@ module Aws
         build_request(context)
         @handler.call(context).on_success do |response|
           response.error = nil
-          response.data = parse_xml(context) || EmptyStructure.new
+          parsed = parse_xml(context)
+          if parsed.nil? || parsed == EmptyStructure
+            response.data = EmptyStructure.new
+          else
+            response.data = parsed
+          end
         end
       end
 

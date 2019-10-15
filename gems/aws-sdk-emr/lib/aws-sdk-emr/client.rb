@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::EMR
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::EMR
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -208,6 +214,49 @@ module Aws::EMR
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -431,7 +480,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
     #
     # @option params [required, String] :job_flow_id
     #   A string that uniquely identifies the job flow. This identifier is
@@ -488,7 +537,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #
     # @option params [required, String] :resource_id
     #   The Amazon EMR resource identifier to which tags will be added. This
@@ -578,7 +627,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
     #
     # @return [Types::CreateSecurityConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -790,7 +839,7 @@ module Aws::EMR
     #   resp.job_flows[0].instances.instance_groups[0].instance_type #=> String
     #   resp.job_flows[0].instances.instance_groups[0].instance_request_count #=> Integer
     #   resp.job_flows[0].instances.instance_groups[0].instance_running_count #=> Integer
-    #   resp.job_flows[0].instances.instance_groups[0].state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED", "ARRESTED", "SHUTTING_DOWN", "ENDED"
+    #   resp.job_flows[0].instances.instance_groups[0].state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RECONFIGURING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED", "ARRESTED", "SHUTTING_DOWN", "ENDED"
     #   resp.job_flows[0].instances.instance_groups[0].last_state_change_reason #=> String
     #   resp.job_flows[0].instances.instance_groups[0].creation_date_time #=> Time
     #   resp.job_flows[0].instances.instance_groups[0].start_date_time #=> Time
@@ -921,6 +970,38 @@ module Aws::EMR
     # @param [Hash] params ({})
     def describe_step(params = {}, options = {})
       req = build_request(:describe_step, params)
+      req.send_request(options)
+    end
+
+    # Returns the Amazon EMR block public access configuration for your AWS
+    # account in the current Region. For more information see [Configure
+    # Block Public Access for Amazon EMR][1] in the *Amazon EMR Management
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html
+    #
+    # @return [Types::GetBlockPublicAccessConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlockPublicAccessConfigurationOutput#block_public_access_configuration #block_public_access_configuration} => Types::BlockPublicAccessConfiguration
+    #   * {Types::GetBlockPublicAccessConfigurationOutput#block_public_access_configuration_metadata #block_public_access_configuration_metadata} => Types::BlockPublicAccessConfigurationMetadata
+    #
+    # @example Response structure
+    #
+    #   resp.block_public_access_configuration.block_public_security_group_rules #=> Boolean
+    #   resp.block_public_access_configuration.permitted_public_security_group_rule_ranges #=> Array
+    #   resp.block_public_access_configuration.permitted_public_security_group_rule_ranges[0].min_range #=> Integer
+    #   resp.block_public_access_configuration.permitted_public_security_group_rule_ranges[0].max_range #=> Integer
+    #   resp.block_public_access_configuration_metadata.creation_date_time #=> Time
+    #   resp.block_public_access_configuration_metadata.created_by_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfiguration AWS API Documentation
+    #
+    # @overload get_block_public_access_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_block_public_access_configuration(params = {}, options = {})
+      req = build_request(:get_block_public_access_configuration, params)
       req.send_request(options)
     end
 
@@ -1126,7 +1207,7 @@ module Aws::EMR
     #   resp.instance_groups[0].instance_type #=> String
     #   resp.instance_groups[0].requested_instance_count #=> Integer
     #   resp.instance_groups[0].running_instance_count #=> Integer
-    #   resp.instance_groups[0].status.state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED", "ARRESTED", "SHUTTING_DOWN", "ENDED"
+    #   resp.instance_groups[0].status.state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RECONFIGURING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED", "ARRESTED", "SHUTTING_DOWN", "ENDED"
     #   resp.instance_groups[0].status.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "VALIDATION_ERROR", "INSTANCE_FAILURE", "CLUSTER_TERMINATED"
     #   resp.instance_groups[0].status.state_change_reason.message #=> String
     #   resp.instance_groups[0].status.timeline.creation_date_time #=> Time
@@ -1137,6 +1218,13 @@ module Aws::EMR
     #   resp.instance_groups[0].configurations[0].configurations #=> Types::ConfigurationList
     #   resp.instance_groups[0].configurations[0].properties #=> Hash
     #   resp.instance_groups[0].configurations[0].properties["String"] #=> String
+    #   resp.instance_groups[0].configurations_version #=> Integer
+    #   resp.instance_groups[0].last_successfully_applied_configurations #=> Array
+    #   resp.instance_groups[0].last_successfully_applied_configurations[0].classification #=> String
+    #   resp.instance_groups[0].last_successfully_applied_configurations[0].configurations #=> Types::ConfigurationList
+    #   resp.instance_groups[0].last_successfully_applied_configurations[0].properties #=> Hash
+    #   resp.instance_groups[0].last_successfully_applied_configurations[0].properties["String"] #=> String
+    #   resp.instance_groups[0].last_successfully_applied_configurations_version #=> Integer
     #   resp.instance_groups[0].ebs_block_devices #=> Array
     #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.volume_type #=> String
     #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.iops #=> Integer
@@ -1429,6 +1517,17 @@ module Aws::EMR
     #             instance_termination_timeout: 1,
     #           },
     #         },
+    #         configurations: [
+    #           {
+    #             classification: "String",
+    #             configurations: {
+    #               # recursive ConfigurationList
+    #             },
+    #             properties: {
+    #               "String" => "String",
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -1547,6 +1646,53 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Creates or updates an Amazon EMR block public access configuration for
+    # your AWS account in the current Region. For more information see
+    # [Configure Block Public Access for Amazon EMR][1] in the *Amazon EMR
+    # Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html
+    #
+    # @option params [required, Types::BlockPublicAccessConfiguration] :block_public_access_configuration
+    #   A configuration for Amazon EMR block public access. The configuration
+    #   applies to all clusters created in your account for the current
+    #   Region. The configuration specifies whether block public access is
+    #   enabled. If block public access is enabled, security groups associated
+    #   with the cluster cannot have rules that allow inbound traffic from
+    #   0.0.0.0/0 or ::/0 on a port, unless the port is specified as an
+    #   exception using `PermittedPublicSecurityGroupRuleRanges` in the
+    #   `BlockPublicAccessConfiguration`. By default, Port 22 (SSH) is an
+    #   exception, and public access is allowed on this port. You can change
+    #   this by updating `BlockPublicSecurityGroupRules` to remove the
+    #   exception.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_block_public_access_configuration({
+    #     block_public_access_configuration: { # required
+    #       block_public_security_group_rules: false, # required
+    #       permitted_public_security_group_rule_ranges: [
+    #         {
+    #           min_range: 1, # required
+    #           max_range: 1,
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfiguration AWS API Documentation
+    #
+    # @overload put_block_public_access_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_block_public_access_configuration(params = {}, options = {})
+      req = build_request(:put_block_public_access_configuration, params)
+      req.send_request(options)
+    end
+
     # Removes an automatic scaling policy from a specified instance group
     # within an EMR cluster.
     #
@@ -1586,7 +1732,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #
     # @option params [required, String] :resource_id
     #   The Amazon EMR resource identifier from which tags will be removed.
@@ -1648,7 +1794,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
     #
     # @option params [required, String] :name
     #   The name of the job flow.
@@ -1669,16 +1815,16 @@ module Aws::EMR
     #   The Amazon EMR release label, which determines the version of
     #   open-source application packages installed on the cluster. Release
     #   labels are in the form `emr-x.x.x`, where x.x.x is an Amazon EMR
-    #   release version, for example, `emr-5.14.0`. For more information about
+    #   release version such as `emr-5.14.0`. For more information about
     #   Amazon EMR release versions and included application versions and
     #   features, see
-    #   [http://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The release
-    #   label applies only to Amazon EMR releases versions 4.x and later.
+    #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The release
+    #   label applies only to Amazon EMR releases version 4.0 and later.
     #   Earlier versions use `AmiVersion`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #
     # @option params [required, Types::JobFlowInstancesConfig] :instances
     #   A specification of the number and type of Amazon EC2 instances.
@@ -1706,7 +1852,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
+    #   [1]: https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #
     # @option params [Array<Types::SupportedProductConfig>] :new_supported_products
     #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
@@ -1743,18 +1889,25 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
+    #   [1]: https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #
     # @option params [Array<Types::Application>] :applications
-    #   For Amazon EMR releases 4.0 and later. A list of applications for the
-    #   cluster. Valid values are: "Hadoop", "Hive", "Mahout", "Pig",
-    #   and "Spark." They are case insensitive.
+    #   Applies to Amazon EMR releases 4.0 and later. A case-insensitive list
+    #   of applications for Amazon EMR to install and configure when launching
+    #   the cluster. For a list of applications available for each Amazon EMR
+    #   release version, see the [Amazon EMR Release Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #
     # @option params [Array<Types::Configuration>] :configurations
     #   For Amazon EMR releases 4.0 and later. The list of configurations
     #   supplied for the EMR cluster you are creating.
     #
     # @option params [Boolean] :visible_to_all_users
+    #   *This member will be deprecated.*
+    #
     #   Whether the cluster is visible to all IAM users of the AWS account
     #   associated with the cluster. If this value is set to `true`, all IAM
     #   users of that AWS account can view and (if they have the proper policy
@@ -1816,9 +1969,9 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
-    #   [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
     #
     # @option params [Integer] :ebs_root_volume_size
     #   The size, in GiB, of the EBS root device volume of the Linux AMI that
@@ -1840,7 +1993,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2107,7 +2260,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html
     #
     # @option params [required, Array<String>] :job_flow_ids
     #   A list of strings that uniquely identify the clusters to protect. This
@@ -2137,6 +2290,8 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # *This member will be deprecated.*
+    #
     # Sets whether all AWS Identity and Access Management (IAM) users under
     # your account can access the specified clusters (job flows). This
     # action works on running clusters. You can also set the visibility of a
@@ -2149,6 +2304,8 @@ module Aws::EMR
     #   Identifiers of the job flows to receive the new visibility setting.
     #
     # @option params [required, Boolean] :visible_to_all_users
+    #   *This member will be deprecated.*
+    #
     #   Whether the specified clusters are visible to all IAM users of the AWS
     #   account associated with the cluster. If this value is set to True, all
     #   IAM users of that AWS account can view and, if they have the proper
@@ -2219,7 +2376,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2236,7 +2393,7 @@ module Aws::EMR
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

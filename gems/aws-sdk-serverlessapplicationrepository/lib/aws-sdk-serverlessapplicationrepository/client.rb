@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::ServerlessApplicationRepository
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::ServerlessApplicationRepository
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::ServerlessApplicationRepository
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -227,6 +276,8 @@ module Aws::ServerlessApplicationRepository
     # @option params [String] :readme_url
     #
     # @option params [String] :semantic_version
+    #
+    # @option params [String] :source_code_archive_url
     #
     # @option params [String] :source_code_url
     #
@@ -263,6 +314,7 @@ module Aws::ServerlessApplicationRepository
     #     readme_body: "__string",
     #     readme_url: "__string",
     #     semantic_version: "__string",
+    #     source_code_archive_url: "__string",
     #     source_code_url: "__string",
     #     spdx_license_id: "__string",
     #     template_body: "__string",
@@ -304,6 +356,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
+    #   resp.version.source_code_archive_url #=> String
     #   resp.version.source_code_url #=> String
     #   resp.version.template_url #=> String
     #
@@ -322,6 +375,8 @@ module Aws::ServerlessApplicationRepository
     #
     # @option params [required, String] :semantic_version
     #
+    # @option params [String] :source_code_archive_url
+    #
     # @option params [String] :source_code_url
     #
     # @option params [String] :template_body
@@ -336,6 +391,7 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::CreateApplicationVersionResponse#required_capabilities #required_capabilities} => Array&lt;String&gt;
     #   * {Types::CreateApplicationVersionResponse#resources_supported #resources_supported} => Boolean
     #   * {Types::CreateApplicationVersionResponse#semantic_version #semantic_version} => String
+    #   * {Types::CreateApplicationVersionResponse#source_code_archive_url #source_code_archive_url} => String
     #   * {Types::CreateApplicationVersionResponse#source_code_url #source_code_url} => String
     #   * {Types::CreateApplicationVersionResponse#template_url #template_url} => String
     #
@@ -344,6 +400,7 @@ module Aws::ServerlessApplicationRepository
     #   resp = client.create_application_version({
     #     application_id: "__string", # required
     #     semantic_version: "__string", # required
+    #     source_code_archive_url: "__string",
     #     source_code_url: "__string",
     #     template_body: "__string",
     #     template_url: "__string",
@@ -373,6 +430,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.resources_supported #=> Boolean
     #   resp.semantic_version #=> String
+    #   resp.source_code_archive_url #=> String
     #   resp.source_code_url #=> String
     #   resp.template_url #=> String
     #
@@ -404,12 +462,9 @@ module Aws::ServerlessApplicationRepository
     # @option params [Array<String>] :resource_types
     #
     # @option params [Types::RollbackConfiguration] :rollback_configuration
-    #   This property corresponds to the *AWS CloudFormation
-    #   [RollbackConfiguration][1]* Data Type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration
+    #   This property corresponds to the <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    #   </i> Data Type.
     #
     # @option params [String] :semantic_version
     #
@@ -603,6 +658,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
+    #   resp.version.source_code_archive_url #=> String
     #   resp.version.source_code_url #=> String
     #   resp.version.template_url #=> String
     #
@@ -933,6 +989,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
+    #   resp.version.source_code_archive_url #=> String
     #   resp.version.source_code_url #=> String
     #   resp.version.template_url #=> String
     #
@@ -958,7 +1015,7 @@ module Aws::ServerlessApplicationRepository
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

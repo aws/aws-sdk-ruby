@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-apigateway/plugins/apply_content_type_header.rb'
@@ -56,6 +57,7 @@ module Aws::APIGateway
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::APIGateway::Plugins::ApplyContentTypeHeader)
@@ -115,6 +117,10 @@ module Aws::APIGateway
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -201,6 +207,49 @@ module Aws::APIGateway
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -241,6 +290,11 @@ module Aws::APIGateway
     #   An AWS Marketplace customer identifier , when integrating with the AWS
     #   SaaS Marketplace.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #
     # @return [Types::ApiKey] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ApiKey#id #id} => String
@@ -252,6 +306,7 @@ module Aws::APIGateway
     #   * {Types::ApiKey#created_date #created_date} => Time
     #   * {Types::ApiKey#last_updated_date #last_updated_date} => Time
     #   * {Types::ApiKey#stage_keys #stage_keys} => Array&lt;String&gt;
+    #   * {Types::ApiKey#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -268,6 +323,9 @@ module Aws::APIGateway
     #       },
     #     ],
     #     customer_id: "String",
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -282,6 +340,8 @@ module Aws::APIGateway
     #   resp.last_updated_date #=> Time
     #   resp.stage_keys #=> Array
     #   resp.stage_keys[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload create_api_key(params = {})
     # @param [Hash] params ({})
@@ -367,12 +427,13 @@ module Aws::APIGateway
     #
     # @option params [String] :identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. API Gateway will
-    #   match the `aud` field of the incoming token from the client against
-    #   the specified regular expression. It will invoke the authorizer's
-    #   Lambda function when there is a match. Otherwise, it will return a 401
-    #   Unauthorized response without calling the Lambda function. The
-    #   validation expression does not apply to the `REQUEST` authorizer.
+    #   authorizers, this value is a regular expression. For
+    #   `COGNITO_USER_POOLS` authorizers, API Gateway will match the `aud`
+    #   field of the incoming token from the client against the specified
+    #   regular expression. It will invoke the authorizer's Lambda function
+    #   when there is a match. Otherwise, it will return a 401 Unauthorized
+    #   response without calling the Lambda function. The validation
+    #   expression does not apply to the `REQUEST` authorizer.
     #
     # @option params [Integer] :authorizer_result_ttl_in_seconds
     #   The TTL in seconds of cached authorizer results. If it equals 0,
@@ -438,7 +499,7 @@ module Aws::APIGateway
     # @option params [String] :base_path
     #   The base path name that callers of the API must provide as part of the
     #   URL after the domain name. This value must be unique for all of the
-    #   mappings across a single API. Leave this blank if you do not want
+    #   mappings across a single API. Specify '(none)' if you do not want
     #   callers to specify a base path name after the domain name.
     #
     # @option params [required, String] :rest_api_id
@@ -446,8 +507,8 @@ module Aws::APIGateway
     #
     # @option params [String] :stage
     #   The name of the API's stage that you want to use for this mapping.
-    #   Leave this blank if you do not want callers to explicitly specify the
-    #   stage name after any base path name.
+    #   Specify '(none)' if you do not want callers to explicitly specify
+    #   the stage name after any base path name.
     #
     # @return [Types::BasePathMapping] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -694,6 +755,15 @@ module Aws::APIGateway
     #   The endpoint configuration of this DomainName showing the endpoint
     #   types of the domain name.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #
+    # @option params [String] :security_policy
+    #   The Transport Layer Security (TLS) version + cipher suite for this
+    #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
+    #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DomainName#domain_name #domain_name} => String
@@ -707,6 +777,10 @@ module Aws::APIGateway
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
     #   * {Types::DomainName#distribution_hosted_zone_id #distribution_hosted_zone_id} => String
     #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::DomainName#domain_name_status #domain_name_status} => String
+    #   * {Types::DomainName#domain_name_status_message #domain_name_status_message} => String
+    #   * {Types::DomainName#security_policy #security_policy} => String
+    #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -721,7 +795,12 @@ module Aws::APIGateway
     #     regional_certificate_arn: "String",
     #     endpoint_configuration: {
     #       types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #       vpc_endpoint_ids: ["String"],
     #     },
+    #     tags: {
+    #       "String" => "String",
+    #     },
+    #     security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #   })
     #
     # @example Response structure
@@ -738,6 +817,13 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.domain_name_status_message #=> String
+    #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -974,6 +1060,11 @@ module Aws::APIGateway
     # @option params [String] :policy
     #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestApi#id #id} => String
@@ -987,6 +1078,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #   * {Types::RestApi#policy #policy} => String
+    #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1000,8 +1092,12 @@ module Aws::APIGateway
     #     api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
     #     endpoint_configuration: {
     #       types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #       vpc_endpoint_ids: ["String"],
     #     },
     #     policy: "String",
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1019,7 +1115,11 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload create_rest_api(params = {})
     # @param [Hash] params ({})
@@ -1035,7 +1135,9 @@ module Aws::APIGateway
     #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
-    #   \[Required\] The name for the Stage resource.
+    #   \[Required\] The name for the Stage resource. Stage names can only
+    #   contain alphanumeric characters, hyphens, and underscores. Maximum
+    #   length is 128 characters.
     #
     # @option params [required, String] :deployment_id
     #   \[Required\] The identifier of the Deployment resource for the Stage
@@ -1178,6 +1280,11 @@ module Aws::APIGateway
     # @option params [Types::QuotaSettings] :quota
     #   The quota of the usage plan.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #
     # @return [Types::UsagePlan] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UsagePlan#id #id} => String
@@ -1187,6 +1294,7 @@ module Aws::APIGateway
     #   * {Types::UsagePlan#throttle #throttle} => Types::ThrottleSettings
     #   * {Types::UsagePlan#quota #quota} => Types::QuotaSettings
     #   * {Types::UsagePlan#product_code #product_code} => String
+    #   * {Types::UsagePlan#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1214,6 +1322,9 @@ module Aws::APIGateway
     #       offset: 1,
     #       period: "DAY", # accepts DAY, WEEK, MONTH
     #     },
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1233,6 +1344,8 @@ module Aws::APIGateway
     #   resp.quota.offset #=> Integer
     #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
     #   resp.product_code #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload create_usage_plan(params = {})
     # @param [Hash] params ({})
@@ -1301,6 +1414,11 @@ module Aws::APIGateway
     #   the VPC link. The network load balancers must be owned by the same AWS
     #   account of the API owner.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #
     # @return [Types::VpcLink] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::VpcLink#id #id} => String
@@ -1309,6 +1427,7 @@ module Aws::APIGateway
     #   * {Types::VpcLink#target_arns #target_arns} => Array&lt;String&gt;
     #   * {Types::VpcLink#status #status} => String
     #   * {Types::VpcLink#status_message #status_message} => String
+    #   * {Types::VpcLink#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1316,6 +1435,9 @@ module Aws::APIGateway
     #     name: "String", # required
     #     description: "String",
     #     target_arns: ["String"], # required
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1327,6 +1449,8 @@ module Aws::APIGateway
     #   resp.target_arns[0] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "PENDING", "DELETING", "FAILED"
     #   resp.status_message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload create_vpc_link(params = {})
     # @param [Hash] params ({})
@@ -1396,6 +1520,8 @@ module Aws::APIGateway
     # @option params [required, String] :base_path
     #   \[Required\] The base path name of the BasePathMapping resource to
     #   delete.
+    #
+    #   To specify an empty base path, set this parameter to `'(none)'`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1932,6 +2058,11 @@ module Aws::APIGateway
     # @option params [String] :description
     #   The description of the ClientCertificate.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #
     # @return [Types::ClientCertificate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ClientCertificate#client_certificate_id #client_certificate_id} => String
@@ -1939,11 +2070,15 @@ module Aws::APIGateway
     #   * {Types::ClientCertificate#pem_encoded_certificate #pem_encoded_certificate} => String
     #   * {Types::ClientCertificate#created_date #created_date} => Time
     #   * {Types::ClientCertificate#expiration_date #expiration_date} => Time
+    #   * {Types::ClientCertificate#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.generate_client_certificate({
     #     description: "String",
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1953,6 +2088,8 @@ module Aws::APIGateway
     #   resp.pem_encoded_certificate #=> String
     #   resp.created_date #=> Time
     #   resp.expiration_date #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload generate_client_certificate(params = {})
     # @param [Hash] params ({})
@@ -2006,6 +2143,7 @@ module Aws::APIGateway
     #   * {Types::ApiKey#created_date #created_date} => Time
     #   * {Types::ApiKey#last_updated_date #last_updated_date} => Time
     #   * {Types::ApiKey#stage_keys #stage_keys} => Array&lt;String&gt;
+    #   * {Types::ApiKey#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2026,6 +2164,8 @@ module Aws::APIGateway
     #   resp.last_updated_date #=> Time
     #   resp.stage_keys #=> Array
     #   resp.stage_keys[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload get_api_key(params = {})
     # @param [Hash] params ({})
@@ -2086,6 +2226,8 @@ module Aws::APIGateway
     #   resp.items[0].last_updated_date #=> Time
     #   resp.items[0].stage_keys #=> Array
     #   resp.items[0].stage_keys[0] #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["String"] #=> String
     #
     # @overload get_api_keys(params = {})
     # @param [Hash] params ({})
@@ -2216,7 +2358,7 @@ module Aws::APIGateway
     # @option params [required, String] :base_path
     #   \[Required\] The base path name that callers of the API must provide
     #   as part of the URL after the domain name. This value must be unique
-    #   for all of the mappings across a single API. Leave this blank if you
+    #   for all of the mappings across a single API. Specify '(none)' if you
     #   do not want callers to specify any base path name after the domain
     #   name.
     #
@@ -2299,6 +2441,7 @@ module Aws::APIGateway
     #   * {Types::ClientCertificate#pem_encoded_certificate #pem_encoded_certificate} => String
     #   * {Types::ClientCertificate#created_date #created_date} => Time
     #   * {Types::ClientCertificate#expiration_date #expiration_date} => Time
+    #   * {Types::ClientCertificate#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2313,6 +2456,8 @@ module Aws::APIGateway
     #   resp.pem_encoded_certificate #=> String
     #   resp.created_date #=> Time
     #   resp.expiration_date #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload get_client_certificate(params = {})
     # @param [Hash] params ({})
@@ -2351,6 +2496,8 @@ module Aws::APIGateway
     #   resp.items[0].pem_encoded_certificate #=> String
     #   resp.items[0].created_date #=> Time
     #   resp.items[0].expiration_date #=> Time
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["String"] #=> String
     #
     # @overload get_client_certificates(params = {})
     # @param [Hash] params ({})
@@ -2644,6 +2791,10 @@ module Aws::APIGateway
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
     #   * {Types::DomainName#distribution_hosted_zone_id #distribution_hosted_zone_id} => String
     #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::DomainName#domain_name_status #domain_name_status} => String
+    #   * {Types::DomainName#domain_name_status_message #domain_name_status_message} => String
+    #   * {Types::DomainName#security_policy #security_policy} => String
+    #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2665,6 +2816,13 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.domain_name_status_message #=> String
+    #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -2710,6 +2868,13 @@ module Aws::APIGateway
     #   resp.items[0].distribution_hosted_zone_id #=> String
     #   resp.items[0].endpoint_configuration.types #=> Array
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.items[0].endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.items[0].endpoint_configuration.vpc_endpoint_ids[0] #=> String
+    #   resp.items[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.items[0].domain_name_status_message #=> String
+    #   resp.items[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["String"] #=> String
     #
     # @overload get_domain_names(params = {})
     # @param [Hash] params ({})
@@ -3536,6 +3701,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #   * {Types::RestApi#policy #policy} => String
+    #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3558,7 +3724,11 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload get_rest_api(params = {})
     # @param [Hash] params ({})
@@ -3605,7 +3775,11 @@ module Aws::APIGateway
     #   resp.items[0].api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.items[0].endpoint_configuration.types #=> Array
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.items[0].endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.items[0].endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.items[0].policy #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["String"] #=> String
     #
     # @overload get_rest_apis(params = {})
     # @param [Hash] params ({})
@@ -3888,8 +4062,7 @@ module Aws::APIGateway
     #
     # @option params [required, String] :resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #
     # @option params [String] :position
     #   (Not currently supported) The current pagination position in the paged
@@ -3995,6 +4168,7 @@ module Aws::APIGateway
     #   * {Types::UsagePlan#throttle #throttle} => Types::ThrottleSettings
     #   * {Types::UsagePlan#quota #quota} => Types::QuotaSettings
     #   * {Types::UsagePlan#product_code #product_code} => String
+    #   * {Types::UsagePlan#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4019,6 +4193,8 @@ module Aws::APIGateway
     #   resp.quota.offset #=> Integer
     #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
     #   resp.product_code #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload get_usage_plan(params = {})
     # @param [Hash] params ({})
@@ -4159,6 +4335,8 @@ module Aws::APIGateway
     #   resp.items[0].quota.offset #=> Integer
     #   resp.items[0].quota.period #=> String, one of "DAY", "WEEK", "MONTH"
     #   resp.items[0].product_code #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["String"] #=> String
     #
     # @overload get_usage_plans(params = {})
     # @param [Hash] params ({})
@@ -4181,6 +4359,7 @@ module Aws::APIGateway
     #   * {Types::VpcLink#target_arns #target_arns} => Array&lt;String&gt;
     #   * {Types::VpcLink#status #status} => String
     #   * {Types::VpcLink#status_message #status_message} => String
+    #   * {Types::VpcLink#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4197,6 +4376,8 @@ module Aws::APIGateway
     #   resp.target_arns[0] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "PENDING", "DELETING", "FAILED"
     #   resp.status_message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload get_vpc_link(params = {})
     # @param [Hash] params ({})
@@ -4238,6 +4419,8 @@ module Aws::APIGateway
     #   resp.items[0].target_arns[0] #=> String
     #   resp.items[0].status #=> String, one of "AVAILABLE", "PENDING", "DELETING", "FAILED"
     #   resp.items[0].status_message #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["String"] #=> String
     #
     # @overload get_vpc_links(params = {})
     # @param [Hash] params ({})
@@ -4359,8 +4542,8 @@ module Aws::APIGateway
     #   `endpointConfigurationTypes=PRIVATE`. The default endpoint type is
     #   `EDGE`.
     #
-    #   To handle imported `basePath`, set `parameters` as `basePath=ignore`,
-    #   `basePath=prepend` or `basePath=split`.
+    #   To handle imported `basepath`, set `parameters` as `basepath=ignore`,
+    #   `basepath=prepend` or `basepath=split`.
     #
     #   For example, the AWS CLI command to exclude documentation from the
     #   imported API is:
@@ -4390,6 +4573,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #   * {Types::RestApi#policy #policy} => String
+    #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4416,7 +4600,11 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload import_rest_api(params = {})
     # @param [Hash] params ({})
@@ -4608,10 +4796,10 @@ module Aws::APIGateway
     #     the same 415 response.
     #
     # @option params [String] :cache_namespace
-    #   Specifies a put integration input's cache namespace.
+    #   A list of request parameters whose values are to be cached.
     #
     # @option params [Array<String>] :cache_key_parameters
-    #   Specifies a put integration input's cache key parameters.
+    #   An API-specific tag group of related cached parameters.
     #
     # @option params [String] :content_handling
     #   Specifies how to handle request payload content type conversions.
@@ -4626,8 +4814,8 @@ module Aws::APIGateway
     #
     #   If this property is not defined, the request payload will be passed
     #   through from the method request to integration request without
-    #   modification, provided that the `passthroughBehaviors` is configured
-    #   to support payload pass-through.
+    #   modification, provided that the `passthroughBehavior` is configured to
+    #   support payload pass-through.
     #
     # @option params [Integer] :timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
@@ -4830,11 +5018,7 @@ module Aws::APIGateway
     # @option params [String] :operation_name
     #   A human-friendly operation identifier for the method. For example, you
     #   can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore][1] example.
-    #
-    #
-    #
-    #   [1]: https://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   method in the `PetStore` example.
     #
     # @option params [Hash<String,Boolean>] :request_parameters
     #   A key-value map defining required or optional method request
@@ -5068,6 +5252,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #   * {Types::RestApi#policy #policy} => String
+    #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5096,7 +5281,11 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload put_rest_api(params = {})
     # @param [Hash] params ({})
@@ -5109,8 +5298,7 @@ module Aws::APIGateway
     #
     # @option params [required, String] :resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #
     # @option params [required, Hash<String,String>] :tags
     #   \[Required\] The key-value map of strings. The valid character set is
@@ -5139,12 +5327,14 @@ module Aws::APIGateway
     # parameters, and an incoming request body.
     #
     # <div class="seeAlso">
-    # [Enable custom authorizers][1]
+    # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
+    # Authorizer][2]
     # </div>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -5318,8 +5508,7 @@ module Aws::APIGateway
     #
     # @option params [required, String] :resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #
     # @option params [required, Array<String>] :tag_keys
     #   \[Required\] The Tag keys to delete.
@@ -5402,6 +5591,7 @@ module Aws::APIGateway
     #   * {Types::ApiKey#created_date #created_date} => Time
     #   * {Types::ApiKey#last_updated_date #last_updated_date} => Time
     #   * {Types::ApiKey#stage_keys #stage_keys} => Array&lt;String&gt;
+    #   * {Types::ApiKey#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5429,6 +5619,8 @@ module Aws::APIGateway
     #   resp.last_updated_date #=> Time
     #   resp.stage_keys #=> Array
     #   resp.stage_keys[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload update_api_key(params = {})
     # @param [Hash] params ({})
@@ -5515,6 +5707,8 @@ module Aws::APIGateway
     # @option params [required, String] :base_path
     #   \[Required\] The base path of the BasePathMapping resource to change.
     #
+    #   To specify an empty base path, set this parameter to `'(none)'`.
+    #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
     #   and in the order specified in this list.
@@ -5570,6 +5764,7 @@ module Aws::APIGateway
     #   * {Types::ClientCertificate#pem_encoded_certificate #pem_encoded_certificate} => String
     #   * {Types::ClientCertificate#created_date #created_date} => Time
     #   * {Types::ClientCertificate#expiration_date #expiration_date} => Time
+    #   * {Types::ClientCertificate#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5592,6 +5787,8 @@ module Aws::APIGateway
     #   resp.pem_encoded_certificate #=> String
     #   resp.created_date #=> Time
     #   resp.expiration_date #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload update_client_certificate(params = {})
     # @param [Hash] params ({})
@@ -5767,6 +5964,10 @@ module Aws::APIGateway
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
     #   * {Types::DomainName#distribution_hosted_zone_id #distribution_hosted_zone_id} => String
     #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::DomainName#domain_name_status #domain_name_status} => String
+    #   * {Types::DomainName#domain_name_status_message #domain_name_status_message} => String
+    #   * {Types::DomainName#security_policy #security_policy} => String
+    #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5796,6 +5997,13 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.domain_name_status_message #=> String
+    #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -6389,6 +6597,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #   * {Types::RestApi#policy #policy} => String
+    #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6419,7 +6628,11 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload update_rest_api(params = {})
     # @param [Hash] params ({})
@@ -6593,6 +6806,7 @@ module Aws::APIGateway
     #   * {Types::UsagePlan#throttle #throttle} => Types::ThrottleSettings
     #   * {Types::UsagePlan#quota #quota} => Types::QuotaSettings
     #   * {Types::UsagePlan#product_code #product_code} => String
+    #   * {Types::UsagePlan#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6625,6 +6839,8 @@ module Aws::APIGateway
     #   resp.quota.offset #=> Integer
     #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
     #   resp.product_code #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload update_usage_plan(params = {})
     # @param [Hash] params ({})
@@ -6651,6 +6867,7 @@ module Aws::APIGateway
     #   * {Types::VpcLink#target_arns #target_arns} => Array&lt;String&gt;
     #   * {Types::VpcLink#status #status} => String
     #   * {Types::VpcLink#status_message #status_message} => String
+    #   * {Types::VpcLink#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6675,6 +6892,8 @@ module Aws::APIGateway
     #   resp.target_arns[0] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "PENDING", "DELETING", "FAILED"
     #   resp.status_message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @overload update_vpc_link(params = {})
     # @param [Hash] params ({})
@@ -6696,7 +6915,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

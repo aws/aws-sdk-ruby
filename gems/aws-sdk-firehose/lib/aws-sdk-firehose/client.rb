@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::Firehose
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::Firehose
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::Firehose
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -281,7 +330,7 @@ module Aws::Firehose
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream. This name must be unique per AWS
@@ -559,9 +608,10 @@ module Aws::Firehose
     #     },
     #     elasticsearch_destination_configuration: {
     #       role_arn: "RoleARN", # required
-    #       domain_arn: "ElasticsearchDomainARN", # required
+    #       domain_arn: "ElasticsearchDomainARN",
+    #       cluster_endpoint: "ElasticsearchClusterEndpoint",
     #       index_name: "ElasticsearchIndexName", # required
-    #       type_name: "ElasticsearchTypeName", # required
+    #       type_name: "ElasticsearchTypeName",
     #       index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
     #       buffering_hints: {
     #         interval_in_seconds: 1,
@@ -879,6 +929,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.domain_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cluster_endpoint #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.index_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.type_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.index_rotation_period #=> String, one of "NoRotation", "OneHour", "OneDay", "OneWeek", "OneMonth"
@@ -1096,7 +1147,7 @@ module Aws::Firehose
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/limits.html
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
@@ -1205,7 +1256,7 @@ module Aws::Firehose
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/limits.html
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
@@ -1705,6 +1756,7 @@ module Aws::Firehose
     #     elasticsearch_destination_update: {
     #       role_arn: "RoleARN",
     #       domain_arn: "ElasticsearchDomainARN",
+    #       cluster_endpoint: "ElasticsearchClusterEndpoint",
     #       index_name: "ElasticsearchIndexName",
     #       type_name: "ElasticsearchTypeName",
     #       index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
@@ -1832,7 +1884,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

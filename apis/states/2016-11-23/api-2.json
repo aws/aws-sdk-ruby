@@ -23,7 +23,8 @@
       "output":{"shape":"CreateActivityOutput"},
       "errors":[
         {"shape":"ActivityLimitExceeded"},
-        {"shape":"InvalidName"}
+        {"shape":"InvalidName"},
+        {"shape":"TooManyTags"}
       ],
       "idempotent":true
     },
@@ -41,7 +42,8 @@
         {"shape":"InvalidName"},
         {"shape":"StateMachineAlreadyExists"},
         {"shape":"StateMachineDeleting"},
-        {"shape":"StateMachineLimitExceeded"}
+        {"shape":"StateMachineLimitExceeded"},
+        {"shape":"TooManyTags"}
       ],
       "idempotent":true
     },
@@ -423,7 +425,8 @@
       "type":"structure",
       "required":["name"],
       "members":{
-        "name":{"shape":"Name"}
+        "name":{"shape":"Name"},
+        "tags":{"shape":"TagList"}
       }
     },
     "CreateActivityOutput":{
@@ -447,7 +450,8 @@
       "members":{
         "name":{"shape":"Name"},
         "definition":{"shape":"Definition"},
-        "roleArn":{"shape":"Arn"}
+        "roleArn":{"shape":"Arn"},
+        "tags":{"shape":"TagList"}
       }
     },
     "CreateStateMachineOutput":{
@@ -688,7 +692,7 @@
       "type":"structure",
       "members":{
         "taskToken":{"shape":"TaskToken"},
-        "input":{"shape":"SensitiveData"}
+        "input":{"shape":"SensitiveDataJobInput"}
       }
     },
     "GetExecutionHistoryInput":{
@@ -740,6 +744,11 @@
         "executionSucceededEventDetails":{"shape":"ExecutionSucceededEventDetails"},
         "executionAbortedEventDetails":{"shape":"ExecutionAbortedEventDetails"},
         "executionTimedOutEventDetails":{"shape":"ExecutionTimedOutEventDetails"},
+        "mapStateStartedEventDetails":{"shape":"MapStateStartedEventDetails"},
+        "mapIterationStartedEventDetails":{"shape":"MapIterationEventDetails"},
+        "mapIterationSucceededEventDetails":{"shape":"MapIterationEventDetails"},
+        "mapIterationFailedEventDetails":{"shape":"MapIterationEventDetails"},
+        "mapIterationAbortedEventDetails":{"shape":"MapIterationEventDetails"},
         "lambdaFunctionFailedEventDetails":{"shape":"LambdaFunctionFailedEventDetails"},
         "lambdaFunctionScheduleFailedEventDetails":{"shape":"LambdaFunctionScheduleFailedEventDetails"},
         "lambdaFunctionScheduledEventDetails":{"shape":"LambdaFunctionScheduledEventDetails"},
@@ -758,47 +767,57 @@
       "type":"string",
       "enum":[
         "ActivityFailed",
-        "ActivityScheduleFailed",
         "ActivityScheduled",
+        "ActivityScheduleFailed",
         "ActivityStarted",
         "ActivitySucceeded",
         "ActivityTimedOut",
         "ChoiceStateEntered",
         "ChoiceStateExited",
-        "TaskFailed",
-        "TaskScheduled",
-        "TaskStartFailed",
-        "TaskStarted",
-        "TaskSubmitFailed",
-        "TaskSubmitted",
-        "TaskSucceeded",
-        "TaskTimedOut",
+        "ExecutionAborted",
         "ExecutionFailed",
         "ExecutionStarted",
         "ExecutionSucceeded",
-        "ExecutionAborted",
         "ExecutionTimedOut",
         "FailStateEntered",
         "LambdaFunctionFailed",
-        "LambdaFunctionScheduleFailed",
         "LambdaFunctionScheduled",
-        "LambdaFunctionStartFailed",
+        "LambdaFunctionScheduleFailed",
         "LambdaFunctionStarted",
+        "LambdaFunctionStartFailed",
         "LambdaFunctionSucceeded",
         "LambdaFunctionTimedOut",
-        "SucceedStateEntered",
-        "SucceedStateExited",
-        "TaskStateAborted",
-        "TaskStateEntered",
-        "TaskStateExited",
-        "PassStateEntered",
-        "PassStateExited",
+        "MapIterationAborted",
+        "MapIterationFailed",
+        "MapIterationStarted",
+        "MapIterationSucceeded",
+        "MapStateAborted",
+        "MapStateEntered",
+        "MapStateExited",
+        "MapStateFailed",
+        "MapStateStarted",
+        "MapStateSucceeded",
         "ParallelStateAborted",
         "ParallelStateEntered",
         "ParallelStateExited",
         "ParallelStateFailed",
         "ParallelStateStarted",
         "ParallelStateSucceeded",
+        "PassStateEntered",
+        "PassStateExited",
+        "SucceedStateEntered",
+        "SucceedStateExited",
+        "TaskFailed",
+        "TaskScheduled",
+        "TaskStarted",
+        "TaskStartFailed",
+        "TaskStateAborted",
+        "TaskStateEntered",
+        "TaskStateExited",
+        "TaskSubmitFailed",
+        "TaskSubmitted",
+        "TaskSucceeded",
+        "TaskTimedOut",
         "WaitStateAborted",
         "WaitStateEntered",
         "WaitStateExited"
@@ -918,7 +937,7 @@
         "stateMachineArn":{"shape":"Arn"},
         "statusFilter":{"shape":"ExecutionStatus"},
         "maxResults":{"shape":"PageSize"},
-        "nextToken":{"shape":"PageToken"}
+        "nextToken":{"shape":"ListExecutionsPageToken"}
       }
     },
     "ListExecutionsOutput":{
@@ -926,8 +945,13 @@
       "required":["executions"],
       "members":{
         "executions":{"shape":"ExecutionList"},
-        "nextToken":{"shape":"PageToken"}
+        "nextToken":{"shape":"ListExecutionsPageToken"}
       }
+    },
+    "ListExecutionsPageToken":{
+      "type":"string",
+      "max":3096,
+      "min":1
     },
     "ListStateMachinesInput":{
       "type":"structure",
@@ -955,6 +979,19 @@
       "type":"structure",
       "members":{
         "tags":{"shape":"TagList"}
+      }
+    },
+    "MapIterationEventDetails":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"Name"},
+        "index":{"shape":"UnsignedInteger"}
+      }
+    },
+    "MapStateStartedEventDetails":{
+      "type":"structure",
+      "members":{
+        "length":{"shape":"UnsignedInteger"}
       }
     },
     "MissingRequiredParameter":{
@@ -1039,6 +1076,11 @@
     "SensitiveData":{
       "type":"string",
       "max":32768,
+      "sensitive":true
+    },
+    "SensitiveDataJobInput":{
+      "type":"string",
+      "max":65536,
       "sensitive":true
     },
     "SensitiveError":{
@@ -1326,6 +1368,10 @@
         "resourceName":{"shape":"Arn"}
       },
       "exception":true
+    },
+    "UnsignedInteger":{
+      "type":"integer",
+      "min":0
     },
     "UntagResourceInput":{
       "type":"structure",

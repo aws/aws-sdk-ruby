@@ -895,6 +895,86 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTimeSeriesServiceStatisticsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         group_name: "GroupName",
+    #         group_arn: "GroupARN",
+    #         entity_selector_expression: "EntitySelectorExpression",
+    #         period: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time frame for which to aggregate statistics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time frame for which to aggregate statistics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] group_name
+    #   The case-sensitive name of the group for which to pull statistics
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN of the group for which to pull statistics from.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_selector_expression
+    #   A filter expression defining entities that will be aggregated for
+    #   statistics. Supports ID, service, and edge functions. If no selector
+    #   expression is specified, edge statistics are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   Aggregation period in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Not used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTimeSeriesServiceStatisticsRequest AWS API Documentation
+    #
+    class GetTimeSeriesServiceStatisticsRequest < Struct.new(
+      :start_time,
+      :end_time,
+      :group_name,
+      :group_arn,
+      :entity_selector_expression,
+      :period,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] time_series_service_statistics
+    #   The collection of statistics.
+    #   @return [Array<Types::TimeSeriesServiceStatistics>]
+    #
+    # @!attribute [rw] contains_old_group_versions
+    #   A flag indicating whether or not a group's filter expression has
+    #   been consistent, or if a returned aggregation may show statistics
+    #   from an older version of the group's filter expression.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Not used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTimeSeriesServiceStatisticsResult AWS API Documentation
+    #
+    class GetTimeSeriesServiceStatisticsResult < Struct.new(
+      :time_series_service_statistics,
+      :contains_old_group_versions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTraceGraphRequest
     #   data as a hash:
     #
@@ -941,7 +1021,12 @@ module Aws::XRay
     #       {
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
+    #         time_range_type: "TraceId", # accepts TraceId, Event
     #         sampling: false,
+    #         sampling_strategy: {
+    #           name: "PartialScan", # accepts PartialScan, FixedRate
+    #           value: 1.0,
+    #         },
     #         filter_expression: "FilterExpression",
     #         next_token: "String",
     #       }
@@ -954,10 +1039,20 @@ module Aws::XRay
     #   The end of the time frame for which to retrieve traces.
     #   @return [Time]
     #
+    # @!attribute [rw] time_range_type
+    #   A parameter to indicate whether to query trace summaries by TraceId
+    #   or Event time.
+    #   @return [String]
+    #
     # @!attribute [rw] sampling
     #   Set to `true` to get summaries for only a subset of available
     #   traces.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] sampling_strategy
+    #   A paramater to indicate whether to enable sampling on trace
+    #   summaries. Input parameters are Name and Value.
+    #   @return [Types::SamplingStrategy]
     #
     # @!attribute [rw] filter_expression
     #   Specify a filter expression to retrieve trace summaries for services
@@ -974,7 +1069,9 @@ module Aws::XRay
     class GetTraceSummariesRequest < Struct.new(
       :start_time,
       :end_time,
+      :time_range_type,
       :sampling,
+      :sampling_strategy,
       :filter_expression,
       :next_token)
       include Aws::Structure
@@ -1120,6 +1217,18 @@ module Aws::XRay
     #
     class InstanceIdDetail < Struct.new(
       :id)
+      include Aws::Structure
+    end
+
+    # The request is missing required parameters or has invalid parameters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1359,6 +1468,18 @@ module Aws::XRay
     #
     class RootCauseException < Struct.new(
       :name,
+      :message)
+      include Aws::Structure
+    end
+
+    # You have reached the maximum number of sampling rules.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/RuleLimitExceededException AWS API Documentation
+    #
+    class RuleLimitExceededException < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -1671,6 +1792,32 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # The name and value of a sampling rule to apply to a trace summary.
+    #
+    # @note When making an API call, you may pass SamplingStrategy
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PartialScan", # accepts PartialScan, FixedRate
+    #         value: 1.0,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of a sampling rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of a sampling rule.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingStrategy AWS API Documentation
+    #
+    class SamplingStrategy < Struct.new(
+      :name,
+      :value)
+      include Aws::Structure
+    end
+
     # Temporary changes to a sampling rule configuration. To meet the global
     # sampling target for a rule, X-Ray calculates a new reservoir for each
     # service based on the recent sampling results of all services that
@@ -1934,6 +2081,46 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # The request exceeds the maximum number of requests per second.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ThrottledException AWS API Documentation
+    #
+    class ThrottledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A list of TimeSeriesStatistic structures.
+    #
+    # @!attribute [rw] timestamp
+    #   Timestamp of the window for which statistics are aggregated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] edge_summary_statistics
+    #   Response statistics for an edge.
+    #   @return [Types::EdgeStatistics]
+    #
+    # @!attribute [rw] service_summary_statistics
+    #   Response statistics for a service.
+    #   @return [Types::ServiceStatistics]
+    #
+    # @!attribute [rw] response_time_histogram
+    #   The response time histogram for the selected entities.
+    #   @return [Array<Types::HistogramEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TimeSeriesServiceStatistics AWS API Documentation
+    #
+    class TimeSeriesServiceStatistics < Struct.new(
+      :timestamp,
+      :edge_summary_statistics,
+      :service_summary_statistics,
+      :response_time_histogram)
+      include Aws::Structure
+    end
+
     # A collection of segment documents with matching trace IDs.
     #
     # @!attribute [rw] id
@@ -2050,6 +2237,10 @@ module Aws::XRay
     #   The revision number of a trace.
     #   @return [Integer]
     #
+    # @!attribute [rw] matched_event_time
+    #   The matched time stamp of a defined event.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TraceSummary AWS API Documentation
     #
     class TraceSummary < Struct.new(
@@ -2071,7 +2262,8 @@ module Aws::XRay
       :fault_root_causes,
       :error_root_causes,
       :response_time_root_causes,
-      :revision)
+      :revision,
+      :matched_event_time)
       include Aws::Structure
     end
 

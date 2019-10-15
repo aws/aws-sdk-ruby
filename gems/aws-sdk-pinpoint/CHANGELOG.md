@@ -1,6 +1,76 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-10-07)
+------------------
+
+* Feature - This release of the Amazon Pinpoint API introduces support for using and managing message templates.
+
+1.27.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-07-24)
+------------------
+
+* Feature - This release adds support for programmatic access to many of the same campaign metrics that are displayed on the Amazon Pinpoint console. You can now use the Amazon Pinpoint API to monitor and assess performance data for campaigns, and integrate metrics data with other reporting tools. We update the metrics data continuously, resulting in a data latency timeframe that is limited to approximately two hours.
+
+1.25.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2019-06-27)
+------------------
+
+* Feature - This release includes editorial updates for the Amazon Pinpoint API documentation.
+
+1.23.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-02-26)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2019-01-17)
+------------------
+
+* Feature - API update.
+
 1.14.0 (2018-11-20)
 ------------------
 

@@ -13,9 +13,12 @@ module Aws
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      def initialize(context, message)
+      # @param [Aws::Structure] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
         @code = self.class.code
+        @message = message if message && !message.empty?
         @context = context
+        @data = data
         super(message)
       end
 
@@ -26,11 +29,32 @@ module Aws
       #   that triggered the remote service to return this error.
       attr_reader :context
 
+      # @return [Aws::Structure]
+      attr_reader :data
+
       class << self
 
         # @return [String]
         attr_accessor :code
 
+      end
+    end
+
+    # Raised when InstanceProfileCredentialsProvider or
+    # EcsCredentialsProvider fails to parse the metadata response after retries
+    class MetadataParserError < RuntimeError
+      def initialize(*args)
+        msg = "Failed to parse metadata service response."
+        super(msg)
+      end
+    end
+
+    # Raised when a `streaming` operation has `requiresLength` trait
+    # enabled but request payload size/length cannot be calculated
+    class MissingContentLength < RuntimeError
+      def initialize(*args)
+        msg = 'Required `Content-Length` value missing for the request.'
+        super(msg)
       end
     end
 
@@ -58,9 +82,17 @@ module Aws
 
     end
 
+    # Raised when attempting to #signal an event before
+    # making an async request
+    class SignalEventError < RuntimeError; end
+
     # Raised when EventStream Parser failed to parse
     # a raw event message
     class EventStreamParserError < RuntimeError; end
+
+    # Raise when EventStream Builder failed to build
+    # an event message with parameters provided
+    class EventStreamBuilderError < RuntimeError; end
 
     # Error event in an event stream which has event_type :error
     # error code and error message can be retrieved when available.
@@ -122,6 +154,18 @@ module Aws
     class MissingCredentialsError < RuntimeError
       def initialize(*args)
         msg = 'unable to sign request without credentials set'
+        super(msg)
+      end
+    end
+
+    # Raised when :web_identity_token_file parameter is not
+    # provided or the file doesn't exist when initializing
+    # AssumeRoleWebIdentityCredentials credential provider
+    class MissingWebIdentityTokenFile < RuntimeError
+      def initialize(*args)
+        msg = 'Missing :web_identity_token_file parameter or'\
+          ' invalid file path provided for'\
+          ' Aws::AssumeRoleWebIdentityCredentials provider'
         super(msg)
       end
     end
@@ -223,7 +267,11 @@ Known AWS regions include (not specific to this service):
       def error_class(error_code)
         constant = error_class_constant(error_code)
         if error_const_set?(constant)
-          const_get(constant)
+          # modeled error class exist
+          # set code attribute
+          err_class = const_get(constant)
+          err_class.code = constant.to_s
+          err_class
         else
           set_error_constant(constant)
         end

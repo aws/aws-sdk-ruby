@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::Athena
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::Athena
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::Athena
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -216,14 +265,15 @@ module Aws::Athena
     # @!group API Operations
 
     # Returns the details of a single named query or a list of up to 50
-    # queries, which you provide as an array of query ID strings. Use
-    # ListNamedQueries to get the list of named query IDs. If information
-    # could not be retrieved for a submitted query ID, information about the
-    # query ID submitted is listed under UnprocessedNamedQueryId. Named
-    # queries are different from executed queries. Use
-    # BatchGetQueryExecution to get details about each unique query
-    # execution, and ListQueryExecutions to get a list of query execution
-    # IDs.
+    # queries, which you provide as an array of query ID strings. Requires
+    # you to have access to the workgroup in which the queries were saved.
+    # Use ListNamedQueriesInput to get the list of named query IDs in the
+    # specified workgroup. If information could not be retrieved for a
+    # submitted query ID, information about the query ID submitted is listed
+    # under UnprocessedNamedQueryId. Named queries differ from executed
+    # queries. Use BatchGetQueryExecutionInput to get details about each
+    # unique query execution, and ListQueryExecutionsInput to get a list of
+    # query execution IDs.
     #
     # @option params [required, Array<String>] :named_query_ids
     #   An array of query IDs.
@@ -247,6 +297,7 @@ module Aws::Athena
     #   resp.named_queries[0].database #=> String
     #   resp.named_queries[0].query_string #=> String
     #   resp.named_queries[0].named_query_id #=> String
+    #   resp.named_queries[0].work_group #=> String
     #   resp.unprocessed_named_query_ids #=> Array
     #   resp.unprocessed_named_query_ids[0].named_query_id #=> String
     #   resp.unprocessed_named_query_ids[0].error_code #=> String
@@ -263,9 +314,11 @@ module Aws::Athena
 
     # Returns the details of a single query execution or a list of up to 50
     # query executions, which you provide as an array of query execution ID
-    # strings. To get a list of query execution IDs, use
-    # ListQueryExecutions. Query executions are different from named (saved)
-    # queries. Use BatchGetNamedQuery to get details about named queries.
+    # strings. Requires you to have access to the workgroup in which the
+    # queries ran. To get a list of query execution IDs, use
+    # ListQueryExecutionsInput$WorkGroup. Query executions differ from named
+    # (saved) queries. Use BatchGetNamedQueryInput to get details about
+    # named queries.
     #
     # @option params [required, Array<String>] :query_execution_ids
     #   An array of query execution IDs.
@@ -297,6 +350,8 @@ module Aws::Athena
     #   resp.query_executions[0].status.completion_date_time #=> Time
     #   resp.query_executions[0].statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.data_scanned_in_bytes #=> Integer
+    #   resp.query_executions[0].statistics.data_manifest_location #=> String
+    #   resp.query_executions[0].work_group #=> String
     #   resp.unprocessed_query_execution_ids #=> Array
     #   resp.unprocessed_query_execution_ids[0].query_execution_id #=> String
     #   resp.unprocessed_query_execution_ids[0].error_code #=> String
@@ -311,7 +366,8 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Creates a named query.
+    # Creates a named query in the specified workgroup. Requires that you
+    # have access to the workgroup.
     #
     # For code samples using the AWS SDK for Java, see [Examples and Code
     # Samples][1] in the *Amazon Athena User Guide*.
@@ -321,16 +377,16 @@ module Aws::Athena
     # [1]: http://docs.aws.amazon.com/athena/latest/ug/code-samples.html
     #
     # @option params [required, String] :name
-    #   The plain language name for the query.
+    #   The query name.
     #
     # @option params [String] :description
-    #   A brief explanation of the query.
+    #   The query description.
     #
     # @option params [required, String] :database
     #   The database to which the query belongs.
     #
     # @option params [required, String] :query_string
-    #   The text of the query itself. In other words, all query statements.
+    #   The contents of the query with all query statements.
     #
     # @option params [String] :client_request_token
     #   A unique case-sensitive string used to ensure the request to create
@@ -347,6 +403,9 @@ module Aws::Athena
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup in which the named query is being created.
+    #
     # @return [Types::CreateNamedQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNamedQueryOutput#named_query_id #named_query_id} => String
@@ -359,6 +418,7 @@ module Aws::Athena
     #     database: "DatabaseString", # required
     #     query_string: "QueryString", # required
     #     client_request_token: "IdempotencyToken",
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -374,7 +434,68 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Deletes a named query.
+    # Creates a workgroup with the specified name.
+    #
+    # @option params [required, String] :name
+    #   The workgroup name.
+    #
+    # @option params [Types::WorkGroupConfiguration] :configuration
+    #   The configuration for the workgroup, which includes the location in
+    #   Amazon S3 where query results are stored, the encryption
+    #   configuration, if any, used for encrypting query results, whether the
+    #   Amazon CloudWatch Metrics are enabled for the workgroup, the limit for
+    #   the amount of bytes scanned (cutoff) per query, if it is specified,
+    #   and whether workgroup's settings (specified with
+    #   EnforceWorkGroupConfiguration) in the WorkGroupConfiguration override
+    #   client-side settings. See
+    #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+    #
+    # @option params [String] :description
+    #   The workgroup description.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags, separated by commas, that you want to attach to the
+    #   workgroup as you create it.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_work_group({
+    #     name: "WorkGroupName", # required
+    #     configuration: {
+    #       result_configuration: {
+    #         output_location: "String",
+    #         encryption_configuration: {
+    #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
+    #           kms_key: "String",
+    #         },
+    #       },
+    #       enforce_work_group_configuration: false,
+    #       publish_cloud_watch_metrics_enabled: false,
+    #       bytes_scanned_cutoff_per_query: 1,
+    #       requester_pays_enabled: false,
+    #     },
+    #     description: "WorkGroupDescriptionString",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateWorkGroup AWS API Documentation
+    #
+    # @overload create_work_group(params = {})
+    # @param [Hash] params ({})
+    def create_work_group(params = {}, options = {})
+      req = build_request(:create_work_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes the named query if you have access to the workgroup in which
+    # the query was saved.
     #
     # For code samples using the AWS SDK for Java, see [Examples and Code
     # Samples][1] in the *Amazon Athena User Guide*.
@@ -406,7 +527,36 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Returns information about a single query.
+    # Deletes the workgroup with the specified name. The primary workgroup
+    # cannot be deleted.
+    #
+    # @option params [required, String] :work_group
+    #   The unique name of the workgroup to delete.
+    #
+    # @option params [Boolean] :recursive_delete_option
+    #   The option to delete the workgroup and its contents even if the
+    #   workgroup contains any named queries.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_work_group({
+    #     work_group: "WorkGroupName", # required
+    #     recursive_delete_option: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteWorkGroup AWS API Documentation
+    #
+    # @overload delete_work_group(params = {})
+    # @param [Hash] params ({})
+    def delete_work_group(params = {}, options = {})
+      req = build_request(:delete_work_group, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a single query. Requires that you have
+    # access to the workgroup in which the query was saved.
     #
     # @option params [required, String] :named_query_id
     #   The unique ID of the query. Use ListNamedQueries to get query IDs.
@@ -428,6 +578,7 @@ module Aws::Athena
     #   resp.named_query.database #=> String
     #   resp.named_query.query_string #=> String
     #   resp.named_query.named_query_id #=> String
+    #   resp.named_query.work_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetNamedQuery AWS API Documentation
     #
@@ -438,9 +589,10 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Returns information about a single execution of a query. Each time a
-    # query executes, information about the query execution is saved with a
-    # unique ID.
+    # Returns information about a single execution of a query if you have
+    # access to the workgroup in which the query ran. Each time a query
+    # executes, information about the query execution is saved with a unique
+    # ID.
     #
     # @option params [required, String] :query_execution_id
     #   The unique ID of the query execution.
@@ -470,6 +622,8 @@ module Aws::Athena
     #   resp.query_execution.status.completion_date_time #=> Time
     #   resp.query_execution.statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_execution.statistics.data_scanned_in_bytes #=> Integer
+    #   resp.query_execution.statistics.data_manifest_location #=> String
+    #   resp.query_execution.work_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution AWS API Documentation
     #
@@ -480,9 +634,25 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Returns the results of a single query execution specified by
-    # `QueryExecutionId`. This request does not execute the query but
-    # returns results. Use StartQueryExecution to run a query.
+    # Streams the results of a single query execution specified by
+    # `QueryExecutionId` from the Athena query results location in Amazon
+    # S3. For more information, see [Query Results][1] in the *Amazon Athena
+    # User Guide*. This request does not execute the query but returns
+    # results. Use StartQueryExecution to run a query.
+    #
+    # To stream query results successfully, the IAM principal with
+    # permission to call `GetQueryResults` also must have permissions to the
+    # Amazon S3 `GetObject` action for the Athena query results location.
+    #
+    # IAM principals with permission to the Amazon S3 `GetObject` action for
+    # the query results location are able to retrieve query results from
+    # Amazon S3 even if permission to the `GetQueryResults` action is
+    # denied. To restrict user or role access, ensure that Amazon S3
+    # permissions to the Athena query location are denied.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
     #
     # @option params [required, String] :query_execution_id
     #   The unique ID of the query execution.
@@ -536,7 +706,46 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Provides a list of all available query IDs.
+    # Returns information about the workgroup with the specified name.
+    #
+    # @option params [required, String] :work_group
+    #   The name of the workgroup.
+    #
+    # @return [Types::GetWorkGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkGroupOutput#work_group #work_group} => Types::WorkGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_work_group({
+    #     work_group: "WorkGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.work_group.name #=> String
+    #   resp.work_group.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.work_group.configuration.result_configuration.output_location #=> String
+    #   resp.work_group.configuration.result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
+    #   resp.work_group.configuration.result_configuration.encryption_configuration.kms_key #=> String
+    #   resp.work_group.configuration.enforce_work_group_configuration #=> Boolean
+    #   resp.work_group.configuration.publish_cloud_watch_metrics_enabled #=> Boolean
+    #   resp.work_group.configuration.bytes_scanned_cutoff_per_query #=> Integer
+    #   resp.work_group.configuration.requester_pays_enabled #=> Boolean
+    #   resp.work_group.description #=> String
+    #   resp.work_group.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetWorkGroup AWS API Documentation
+    #
+    # @overload get_work_group(params = {})
+    # @param [Hash] params ({})
+    def get_work_group(params = {}, options = {})
+      req = build_request(:get_work_group, params)
+      req.send_request(options)
+    end
+
+    # Provides a list of available query IDs only for queries saved in the
+    # specified workgroup. Requires that you have access to the workgroup.
     #
     # For code samples using the AWS SDK for Java, see [Examples and Code
     # Samples][1] in the *Amazon Athena User Guide*.
@@ -552,6 +761,10 @@ module Aws::Athena
     # @option params [Integer] :max_results
     #   The maximum number of queries to return in this request.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup from which the named queries are being
+    #   returned.
+    #
     # @return [Types::ListNamedQueriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListNamedQueriesOutput#named_query_ids #named_query_ids} => Array&lt;String&gt;
@@ -562,6 +775,7 @@ module Aws::Athena
     #   resp = client.list_named_queries({
     #     next_token: "Token",
     #     max_results: 1,
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -579,7 +793,9 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Provides a list of all available query execution IDs.
+    # Provides a list of available query execution IDs for the queries in
+    # the specified workgroup. Requires you to have access to the workgroup
+    # in which the queries ran.
     #
     # For code samples using the AWS SDK for Java, see [Examples and Code
     # Samples][1] in the *Amazon Athena User Guide*.
@@ -595,6 +811,9 @@ module Aws::Athena
     # @option params [Integer] :max_results
     #   The maximum number of query executions to return in this request.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup from which queries are being returned.
+    #
     # @return [Types::ListQueryExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListQueryExecutionsOutput#query_execution_ids #query_execution_ids} => Array&lt;String&gt;
@@ -605,6 +824,7 @@ module Aws::Athena
     #   resp = client.list_query_executions({
     #     next_token: "Token",
     #     max_results: 1,
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -622,8 +842,89 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Runs (executes) the SQL query statements contained in the `Query`
-    # string.
+    # Lists the tags associated with this workgroup.
+    #
+    # @option params [required, String] :resource_arn
+    #   Lists the tags for the workgroup resource with the specified ARN.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results for this request, where the request lists the tags
+    #   for the workgroup resource with the specified ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request that lists
+    #   the tags for the workgroup resource.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Lists available workgroups for the account.
+    #
+    # @option params [String] :next_token
+    #   A token to be used by the next request if this request is truncated.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of workgroups to return in this request.
+    #
+    # @return [Types::ListWorkGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkGroupsOutput#work_groups #work_groups} => Array&lt;Types::WorkGroupSummary&gt;
+    #   * {Types::ListWorkGroupsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_work_groups({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.work_groups #=> Array
+    #   resp.work_groups[0].name #=> String
+    #   resp.work_groups[0].state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.work_groups[0].description #=> String
+    #   resp.work_groups[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListWorkGroups AWS API Documentation
+    #
+    # @overload list_work_groups(params = {})
+    # @param [Hash] params ({})
+    def list_work_groups(params = {}, options = {})
+      req = build_request(:list_work_groups, params)
+      req.send_request(options)
+    end
+
+    # Runs the SQL query statements contained in the `Query`. Requires you
+    # to have access to the workgroup in which the query ran.
     #
     # For code samples using the AWS SDK for Java, see [Examples and Code
     # Samples][1] in the *Amazon Athena User Guide*.
@@ -653,9 +954,17 @@ module Aws::Athena
     # @option params [Types::QueryExecutionContext] :query_execution_context
     #   The database within which the query executes.
     #
-    # @option params [required, Types::ResultConfiguration] :result_configuration
+    # @option params [Types::ResultConfiguration] :result_configuration
     #   Specifies information about where and how to save the results of the
-    #   query execution.
+    #   query execution. If the query runs in a workgroup, then workgroup's
+    #   settings may override query settings. This affects the query results
+    #   location. The workgroup settings override is specified in
+    #   EnforceWorkGroupConfiguration (true/false) in the
+    #   WorkGroupConfiguration. See
+    #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+    #
+    # @option params [String] :work_group
+    #   The name of the workgroup in which the query is being started.
     #
     # @return [Types::StartQueryExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -669,13 +978,14 @@ module Aws::Athena
     #     query_execution_context: {
     #       database: "DatabaseString",
     #     },
-    #     result_configuration: { # required
-    #       output_location: "String", # required
+    #     result_configuration: {
+    #       output_location: "String",
     #       encryption_configuration: {
     #         encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #         kms_key: "String",
     #       },
     #     },
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -691,7 +1001,8 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Stops a query execution.
+    # Stops a query execution. Requires you to have access to the workgroup
+    # in which the query ran.
     #
     # For code samples using the AWS SDK for Java, see [Examples and Code
     # Samples][1] in the *Amazon Athena User Guide*.
@@ -723,6 +1034,136 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Adds one or more tags to the resource, such as a workgroup. A tag is a
+    # label that you assign to an AWS Athena resource (a workgroup). Each
+    # tag consists of a key and an optional value, both of which you define.
+    # Tags enable you to categorize resources (workgroups) in Athena, for
+    # example, by purpose, owner, or environment. Use a consistent set of
+    # tag keys to make it easier to search and filter workgroups in your
+    # account. For best practices, see [AWS Tagging Strategies][1]. The key
+    # length is from 1 (minimum) to 128 (maximum) Unicode characters in
+    # UTF-8. The tag value length is from 0 (minimum) to 256 (maximum)
+    # Unicode characters in UTF-8. You can use letters and numbers
+    # representable in UTF-8, and the following characters: + - = . \_ : /
+    # @. Tag keys and values are case-sensitive. Tag keys must be unique per
+    # resource. If you specify more than one, separate them by commas.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+    #
+    # @option params [required, String] :resource_arn
+    #   Requests that one or more tags are added to the resource (such as a
+    #   workgroup) for the specified ARN.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   One or more tags, separated by commas, to be added to the resource,
+    #   such as a workgroup.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from the workgroup resource. Takes as an
+    # input a list of TagKey Strings separated by commas, and removes their
+    # tags at the same time.
+    #
+    # @option params [required, String] :resource_arn
+    #   Removes one or more tags from the workgroup resource for the specified
+    #   ARN.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   Removes the tags associated with one or more tag keys from the
+    #   workgroup resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the workgroup with the specified name. The workgroup's name
+    # cannot be changed.
+    #
+    # @option params [required, String] :work_group
+    #   The specified workgroup that will be updated.
+    #
+    # @option params [String] :description
+    #   The workgroup description.
+    #
+    # @option params [Types::WorkGroupConfigurationUpdates] :configuration_updates
+    #   The workgroup configuration that will be updated for the given
+    #   workgroup.
+    #
+    # @option params [String] :state
+    #   The workgroup state that will be updated for the given workgroup.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_work_group({
+    #     work_group: "WorkGroupName", # required
+    #     description: "WorkGroupDescriptionString",
+    #     configuration_updates: {
+    #       enforce_work_group_configuration: false,
+    #       result_configuration_updates: {
+    #         output_location: "String",
+    #         remove_output_location: false,
+    #         encryption_configuration: {
+    #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
+    #           kms_key: "String",
+    #         },
+    #         remove_encryption_configuration: false,
+    #       },
+    #       publish_cloud_watch_metrics_enabled: false,
+    #       bytes_scanned_cutoff_per_query: 1,
+    #       remove_bytes_scanned_cutoff_per_query: false,
+    #       requester_pays_enabled: false,
+    #     },
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateWorkGroup AWS API Documentation
+    #
+    # @overload update_work_group(params = {})
+    # @param [Hash] params ({})
+    def update_work_group(params = {}, options = {})
+      req = build_request(:update_work_group, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -736,7 +1177,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -40,8 +40,8 @@ module Aws::RDS
     end
     alias :db_cluster_snapshot_identifier :snapshot_id
 
-    # Provides the list of EC2 Availability Zones that instances in the DB
-    # cluster snapshot can be restored in.
+    # Provides the list of Availability Zones (AZs) where instances in the
+    # DB cluster snapshot can be restored.
     # @return [Array<String>]
     def availability_zones
       data[:availability_zones]
@@ -407,18 +407,19 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # @option options [Boolean] :copy_tags
-    #   True to copy all tags from the source DB cluster snapshot to the
-    #   target DB cluster snapshot, and otherwise false. The default is false.
+    #   A value that indicates whether to copy all tags from the source DB
+    #   cluster snapshot to the target DB cluster snapshot. By default, tags
+    #   are not copied.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
     #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -479,14 +480,16 @@ module Aws::RDS
     #       max_capacity: 1,
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
+    #       timeout_action: "String",
     #     },
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
+    #     copy_tags_to_snapshot: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
-    #   Provides the list of Amazon EC2 Availability Zones that instances in
-    #   the restored DB cluster can be created in.
+    #   Provides the list of Availability Zones (AZs) where instances in the
+    #   restored DB cluster can be created.
     # @option options [required, String] :db_cluster_identifier
     #   The name of the DB cluster to create from the DB snapshot or DB
     #   cluster snapshot. This parameter isn't case-sensitive.
@@ -508,6 +511,33 @@ module Aws::RDS
     #   Constraint: Must be compatible with the engine of the source
     # @option options [String] :engine_version
     #   The version of the database engine to use for the new DB cluster.
+    #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
+    #   **Aurora MySQL**
+    #
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
+    #   `5.7.mysql_aurora.2.04.5`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`, `10.7`
     # @option options [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
@@ -549,10 +579,16 @@ module Aws::RDS
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
     #     not encrypted, then the restored DB cluster is not encrypted.
     # @option options [Boolean] :enable_iam_database_authentication
-    #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts, and otherwise false.
+    #   A value that indicates whether to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts. By default,
+    #   mapping is disabled.
     #
-    #   Default: `false`
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
@@ -573,10 +609,10 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, or `parallelquery`.
+    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
@@ -596,9 +632,13 @@ module Aws::RDS
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
     # @option options [Boolean] :deletion_protection
-    #   Indicates if the DB cluster should have deletion protection enabled.
-    #   The database can't be deleted when this value is set to true. The
-    #   default is false.
+    #   A value that indicates whether the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
+    # @option options [Boolean] :copy_tags_to_snapshot
+    #   A value that indicates whether to copy all tags from the restored DB
+    #   cluster to snapshots of the restored DB cluster. The default is not to
+    #   copy them.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)

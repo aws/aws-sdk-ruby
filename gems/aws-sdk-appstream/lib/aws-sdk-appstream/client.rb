@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::AppStream
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::AppStream
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -208,6 +214,49 @@ module Aws::AppStream
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -372,8 +421,8 @@ module Aws::AppStream
     end
 
     # Creates a Directory Config object in AppStream 2.0. This object
-    # includes the information required to join streaming instances to an
-    # Active Directory domain.
+    # includes the configuration information required to join fleets and
+    # image builders to Microsoft Active Directory domains.
     #
     # @option params [required, String] :directory_name
     #   The fully qualified name of the directory (for example,
@@ -384,8 +433,8 @@ module Aws::AppStream
     #   accounts.
     #
     # @option params [required, Types::ServiceAccountCredentials] :service_account_credentials
-    #   The credentials for the service account used by the streaming instance
-    #   to connect to the directory.
+    #   The credentials for the service account used by the fleet or image
+    #   builder to connect to the directory.
     #
     # @return [Types::CreateDirectoryConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -499,26 +548,89 @@ module Aws::AppStream
     #   The VPC configuration for the fleet.
     #
     # @option params [Integer] :max_user_duration_in_seconds
-    #   The maximum time that a streaming session can run, in seconds. Specify
-    #   a value between 600 and 57600.
+    #   The maximum amount of time that a streaming session can remain active,
+    #   in seconds. If users are still connected to a streaming instance five
+    #   minutes before this limit is reached, they are prompted to save any
+    #   open documents before being disconnected. After this time elapses, the
+    #   instance is terminated and replaced by a new instance.
+    #
+    #   Specify a value between 600 and 360000.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
-    #   The time after disconnection when a session is considered to have
-    #   ended, in seconds. If a user who was disconnected reconnects within
-    #   this time interval, the user is connected to their previous session.
-    #   Specify a value between 60 and 57600.
+    #   The amount of time that a streaming session remains active after users
+    #   disconnect. If users try to reconnect to the streaming session after a
+    #   disconnection or network interruption within this time interval, they
+    #   are connected to their previous session. Otherwise, they are connected
+    #   to a new session with a new streaming instance.
+    #
+    #   Specify a value between 60 and 360000.
     #
     # @option params [String] :description
-    #   The description for display.
+    #   The description to display.
     #
     # @option params [String] :display_name
-    #   The fleet name for display.
+    #   The fleet name to display.
     #
     # @option params [Boolean] :enable_default_internet_access
     #   Enables or disables default internet access for the fleet.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to join
+    #   the fleet to a Microsoft Active Directory domain.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to associate with the fleet. A tag is a key-value pair, and
+    #   the value is optional. For example, Environment=Test. If you do not
+    #   specify a value, Environment=.
+    #
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
+    #   For more information, see [Tagging Your Resources][1] in the *Amazon
+    #   AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #
+    # @option params [Integer] :idle_disconnect_timeout_in_seconds
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the
+    #   `DisconnectTimeoutInSeconds` time interval begins. Users are notified
+    #   before they are disconnected due to inactivity. If they try to
+    #   reconnect to the streaming session before the time interval specified
+    #   in `DisconnectTimeoutInSeconds` elapses, they are connected to their
+    #   previous session. Users are considered idle when they stop providing
+    #   keyboard or mouse input during their streaming session. File uploads
+    #   and downloads, audio in, audio out, and pixels changing do not qualify
+    #   as user activity. If users continue to be idle after the time interval
+    #   in `IdleDisconnectTimeoutInSeconds` elapses, they are disconnected.
+    #
+    #   To prevent users from being disconnected due to inactivity, specify a
+    #   value of 0. Otherwise, specify a value between 60 and 3600. The
+    #   default value is 0.
+    #
+    #   <note markdown="1"> If you enable this feature, we recommend that you specify a value that
+    #   corresponds exactly to a whole number of minutes (for example, 60,
+    #   120, and 180). If you don't do this, the value is rounded to the
+    #   nearest minute. For example, if you specify a value of 70, users are
+    #   disconnected after 1 minute of inactivity. If you specify a value that
+    #   is at the midpoint between two different minutes, the value is rounded
+    #   up. For example, if you specify a value of 90, users are disconnected
+    #   after 2 minutes of inactivity.
+    #
+    #    </note>
+    #
+    # @option params [String] :iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to apply to the fleet.
+    #   To assume a role, a fleet instance calls the AWS Security Token
+    #   Service (STS) `AssumeRole` API operation and passes the ARN of the
+    #   role to use. The operation creates a new session with temporary
+    #   credentials.
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -548,6 +660,11 @@ module Aws::AppStream
     #       directory_name: "DirectoryName",
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     idle_disconnect_timeout_in_seconds: 1,
+    #     iam_role_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -573,11 +690,13 @@ module Aws::AppStream
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
     #   resp.fleet.created_time #=> Time
     #   resp.fleet.fleet_errors #=> Array
-    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.fleet.fleet_errors[0].error_message #=> String
     #   resp.fleet.enable_default_internet_access #=> Boolean
     #   resp.fleet.domain_join_info.directory_name #=> String
     #   resp.fleet.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
+    #   resp.fleet.iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -598,7 +717,7 @@ module Aws::AppStream
     #   A unique name for the image builder.
     #
     # @option params [String] :image_name
-    #   The name of the image used to create the builder.
+    #   The name of the image used to create the image builder.
     #
     # @option params [String] :image_arn
     #   The ARN of the public, private, or shared image to use.
@@ -607,25 +726,57 @@ module Aws::AppStream
     #   The instance type to use when launching the image builder.
     #
     # @option params [String] :description
-    #   The description for display.
+    #   The description to display.
     #
     # @option params [String] :display_name
-    #   The image builder name for display.
+    #   The image builder name to display.
     #
     # @option params [Types::VpcConfig] :vpc_config
     #   The VPC configuration for the image builder. You can specify only one
     #   subnet.
     #
+    # @option params [String] :iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to apply to the image
+    #   builder. To assume a role, the image builder calls the AWS Security
+    #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
+    #   the role to use. The operation creates a new session with temporary
+    #   credentials.
+    #
     # @option params [Boolean] :enable_default_internet_access
     #   Enables or disables default internet access for the image builder.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to join
+    #   the image builder to a Microsoft Active Directory domain.
     #
     # @option params [String] :appstream_agent_version
     #   The version of the AppStream 2.0 agent to use for this image builder.
     #   To use the latest version of the AppStream 2.0 agent, specify
     #   \[LATEST\].
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to associate with the image builder. A tag is a key-value
+    #   pair, and the value is optional. For example, Environment=Test. If you
+    #   do not specify a value, Environment=.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   For more information about tags, see [Tagging Your Resources][1] in
+    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #
+    # @option params [Array<Types::AccessEndpoint>] :access_endpoints
+    #   The list of interface VPC endpoint (interface endpoint) objects.
+    #   Administrators can connect to the image builder only through the
+    #   specified endpoints.
     #
     # @return [Types::CreateImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -644,12 +795,22 @@ module Aws::AppStream
     #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
     #     },
+    #     iam_role_arn: "Arn",
     #     enable_default_internet_access: false,
     #     domain_join_info: {
     #       directory_name: "DirectoryName",
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
     #     appstream_agent_version: "AppstreamAgentVersion",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     access_endpoints: [
+    #       {
+    #         endpoint_type: "STREAMING", # required, accepts STREAMING
+    #         vpce_id: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -664,7 +825,8 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
@@ -672,11 +834,16 @@ module Aws::AppStream
     #   resp.image_builder.enable_default_internet_access #=> Boolean
     #   resp.image_builder.domain_join_info.directory_name #=> String
     #   resp.image_builder.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builder.network_access_configuration.eni_private_ip_address #=> String
+    #   resp.image_builder.network_access_configuration.eni_id #=> String
     #   resp.image_builder.image_builder_errors #=> Array
-    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
     #   resp.image_builder.appstream_agent_version #=> String
+    #   resp.image_builder.access_endpoints #=> Array
+    #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder AWS API Documentation
     #
@@ -730,10 +897,10 @@ module Aws::AppStream
     #   The name of the stack.
     #
     # @option params [String] :description
-    #   The description for display.
+    #   The description to display.
     #
     # @option params [String] :display_name
-    #   The stack name for display.
+    #   The stack name to display.
     #
     # @option params [Array<Types::StorageConnector>] :storage_connectors
     #   The storage connectors to enable.
@@ -756,6 +923,30 @@ module Aws::AppStream
     #   settings are enabled, changes that users make to applications and
     #   Windows settings are automatically saved after each session and
     #   applied to the next session.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to associate with the stack. A tag is a key-value pair, and
+    #   the value is optional. For example, Environment=Test. If you do not
+    #   specify a value, Environment=.
+    #
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
+    #   For more information about tags, see [Tagging Your Resources][1] in
+    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #
+    # @option params [Array<Types::AccessEndpoint>] :access_endpoints
+    #   The list of interface VPC endpoint (interface endpoint) objects. Users
+    #   of the stack can connect to AppStream 2.0 only through the specified
+    #   endpoints.
     #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -786,6 +977,15 @@ module Aws::AppStream
     #       enabled: false, # required
     #       settings_group: "SettingsGroup",
     #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     access_endpoints: [
+    #       {
+    #         endpoint_type: "STREAMING", # required, accepts STREAMING
+    #         vpce_id: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -811,6 +1011,9 @@ module Aws::AppStream
     #   resp.stack.application_settings.enabled #=> Boolean
     #   resp.stack.application_settings.settings_group #=> String
     #   resp.stack.application_settings.s3_bucket_name #=> String
+    #   resp.stack.access_endpoints #=> Array
+    #   resp.stack.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.stack.access_endpoints[0].vpce_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -832,7 +1035,7 @@ module Aws::AppStream
     #   The name of the fleet.
     #
     # @option params [required, String] :user_id
-    #   The ID of the user.
+    #   The identifier of the user.
     #
     # @option params [String] :application_id
     #   The name of the application to launch after the session starts. This
@@ -844,11 +1047,11 @@ module Aws::AppStream
     #
     # @option params [String] :session_context
     #   The session context. For more information, see [Session Context][1] in
-    #   the *Amazon AppStream 2.0 Developer Guide*.
+    #   the *Amazon AppStream 2.0 Administration Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters
     #
     # @return [Types::CreateStreamingURLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -880,10 +1083,39 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Creates a usage report subscription. Usage reports are generated
+    # daily.
+    #
+    # @return [Types::CreateUsageReportSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUsageReportSubscriptionResult#s3_bucket_name #s3_bucket_name} => String
+    #   * {Types::CreateUsageReportSubscriptionResult#schedule #schedule} => String
+    #
+    # @example Response structure
+    #
+    #   resp.s3_bucket_name #=> String
+    #   resp.schedule #=> String, one of "DAILY"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUsageReportSubscription AWS API Documentation
+    #
+    # @overload create_usage_report_subscription(params = {})
+    # @param [Hash] params ({})
+    def create_usage_report_subscription(params = {}, options = {})
+      req = build_request(:create_usage_report_subscription, params)
+      req.send_request(options)
+    end
+
     # Creates a new user in the user pool.
     #
     # @option params [required, String] :user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive. During login, if they
+    #   specify an email address that doesn't use the same capitalization as
+    #   the email address specified when their user pool account was created,
+    #   a "user does not exist" error message displays.
+    #
+    #    </note>
     #
     # @option params [String] :message_action
     #   The action to take for the welcome email that is sent to a user after
@@ -999,7 +1231,8 @@ module Aws::AppStream
     #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING"
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
-    #   resp.image.platform #=> String, one of "WINDOWS"
+    #   resp.image.image_builder_name #=> String
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -1054,7 +1287,8 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
@@ -1062,11 +1296,16 @@ module Aws::AppStream
     #   resp.image_builder.enable_default_internet_access #=> Boolean
     #   resp.image_builder.domain_join_info.directory_name #=> String
     #   resp.image_builder.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builder.network_access_configuration.eni_private_ip_address #=> String
+    #   resp.image_builder.network_access_configuration.eni_id #=> String
     #   resp.image_builder.image_builder_errors #=> Array
-    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
     #   resp.image_builder.appstream_agent_version #=> String
+    #   resp.image_builder.access_endpoints #=> Array
+    #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder AWS API Documentation
     #
@@ -1085,7 +1324,7 @@ module Aws::AppStream
     #   The name of the private image.
     #
     # @option params [required, String] :shared_account_id
-    #   The 12-digit ID of the AWS account for which to delete image
+    #   The 12-digit identifier of the AWS account for which to delete image
     #   permissions.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1131,10 +1370,27 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Disables usage report generation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUsageReportSubscription AWS API Documentation
+    #
+    # @overload delete_usage_report_subscription(params = {})
+    # @param [Hash] params ({})
+    def delete_usage_report_subscription(params = {}, options = {})
+      req = build_request(:delete_usage_report_subscription, params)
+      req.send_request(options)
+    end
+
     # Deletes a user from the user pool.
     #
     # @option params [required, String] :user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
     #
     # @option params [required, String] :authentication_type
     #   The authentication type for the user. You must specify USERPOOL.
@@ -1160,8 +1416,9 @@ module Aws::AppStream
     # Retrieves a list that describes one or more specified Directory Config
     # objects for AppStream 2.0, if the names for these objects are
     # provided. Otherwise, all Directory Config objects in the account are
-    # described. These objects include the information required to join
-    # streaming instances to an Active Directory domain.
+    # described. These objects include the configuration information
+    # required to join fleets and image builders to Microsoft Active
+    # Directory domains.
     #
     # Although the response syntax in this topic includes the account
     # password, this password is not returned in the actual response.
@@ -1256,11 +1513,13 @@ module Aws::AppStream
     #   resp.fleets[0].vpc_config.security_group_ids[0] #=> String
     #   resp.fleets[0].created_time #=> Time
     #   resp.fleets[0].fleet_errors #=> Array
-    #   resp.fleets[0].fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.fleets[0].fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.fleets[0].fleet_errors[0].error_message #=> String
     #   resp.fleets[0].enable_default_internet_access #=> Boolean
     #   resp.fleets[0].domain_join_info.directory_name #=> String
     #   resp.fleets[0].domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.fleets[0].idle_disconnect_timeout_in_seconds #=> Integer
+    #   resp.fleets[0].iam_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleets AWS API Documentation
@@ -1312,7 +1571,8 @@ module Aws::AppStream
     #   resp.image_builders[0].vpc_config.security_group_ids #=> Array
     #   resp.image_builders[0].vpc_config.security_group_ids[0] #=> String
     #   resp.image_builders[0].instance_type #=> String
-    #   resp.image_builders[0].platform #=> String, one of "WINDOWS"
+    #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image_builders[0].iam_role_arn #=> String
     #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
     #   resp.image_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builders[0].state_change_reason.message #=> String
@@ -1320,11 +1580,16 @@ module Aws::AppStream
     #   resp.image_builders[0].enable_default_internet_access #=> Boolean
     #   resp.image_builders[0].domain_join_info.directory_name #=> String
     #   resp.image_builders[0].domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builders[0].network_access_configuration.eni_private_ip_address #=> String
+    #   resp.image_builders[0].network_access_configuration.eni_id #=> String
     #   resp.image_builders[0].image_builder_errors #=> Array
-    #   resp.image_builders[0].image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builders[0].image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image_builders[0].image_builder_errors[0].error_message #=> String
     #   resp.image_builders[0].image_builder_errors[0].error_timestamp #=> Time
     #   resp.image_builders[0].appstream_agent_version #=> String
+    #   resp.image_builders[0].access_endpoints #=> Array
+    #   resp.image_builders[0].access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.image_builders[0].access_endpoints[0].vpce_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders AWS API Documentation
@@ -1347,8 +1612,8 @@ module Aws::AppStream
     #   The maximum size of each page of results.
     #
     # @option params [Array<String>] :shared_aws_account_ids
-    #   The 12-digit ID of one or more AWS accounts with which the image is
-    #   shared.
+    #   The 12-digit identifier of one or more AWS accounts with which the
+    #   image is shared.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -1432,7 +1697,8 @@ module Aws::AppStream
     #   resp.images[0].state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING"
     #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.images[0].image_builder_supported #=> Boolean
-    #   resp.images[0].platform #=> String, one of "WINDOWS"
+    #   resp.images[0].image_builder_name #=> String
+    #   resp.images[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
     #   resp.images[0].description #=> String
     #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.images[0].state_change_reason.message #=> String
@@ -1462,10 +1728,10 @@ module Aws::AppStream
     end
 
     # Retrieves a list that describes the streaming sessions for a specified
-    # stack and fleet. If a user ID is provided for the stack and fleet,
-    # only streaming sessions for that user are described. If an
-    # authentication type is not provided, the default is to authenticate
-    # users using a streaming URL.
+    # stack and fleet. If a UserId is provided for the stack and fleet, only
+    # streaming sessions for that user are described. If an authentication
+    # type is not provided, the default is to authenticate users using a
+    # streaming URL.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack. This value is case-sensitive.
@@ -1474,7 +1740,7 @@ module Aws::AppStream
     #   The name of the fleet. This value is case-sensitive.
     #
     # @option params [String] :user_id
-    #   The user ID.
+    #   The user identifier.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -1513,6 +1779,9 @@ module Aws::AppStream
     #   resp.sessions[0].stack_name #=> String
     #   resp.sessions[0].fleet_name #=> String
     #   resp.sessions[0].state #=> String, one of "ACTIVE", "PENDING", "EXPIRED"
+    #   resp.sessions[0].connection_state #=> String, one of "CONNECTED", "NOT_CONNECTED"
+    #   resp.sessions[0].start_time #=> Time
+    #   resp.sessions[0].max_expiration_time #=> Time
     #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
     #   resp.sessions[0].network_access_configuration.eni_private_ip_address #=> String
     #   resp.sessions[0].network_access_configuration.eni_id #=> String
@@ -1574,6 +1843,9 @@ module Aws::AppStream
     #   resp.stacks[0].application_settings.enabled #=> Boolean
     #   resp.stacks[0].application_settings.settings_group #=> String
     #   resp.stacks[0].application_settings.s3_bucket_name #=> String
+    #   resp.stacks[0].access_endpoints #=> Array
+    #   resp.stacks[0].access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.stacks[0].access_endpoints[0].vpce_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -1582,6 +1854,48 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def describe_stacks(params = {}, options = {})
       req = build_request(:describe_stacks, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes one or more usage report
+    # subscriptions.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::DescribeUsageReportSubscriptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUsageReportSubscriptionsResult#usage_report_subscriptions #usage_report_subscriptions} => Array&lt;Types::UsageReportSubscription&gt;
+    #   * {Types::DescribeUsageReportSubscriptionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_usage_report_subscriptions({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage_report_subscriptions #=> Array
+    #   resp.usage_report_subscriptions[0].s3_bucket_name #=> String
+    #   resp.usage_report_subscriptions[0].schedule #=> String, one of "DAILY"
+    #   resp.usage_report_subscriptions[0].last_generated_report_date #=> Time
+    #   resp.usage_report_subscriptions[0].subscription_errors #=> Array
+    #   resp.usage_report_subscriptions[0].subscription_errors[0].error_code #=> String, one of "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_SERVICE_ERROR"
+    #   resp.usage_report_subscriptions[0].subscription_errors[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsageReportSubscriptions AWS API Documentation
+    #
+    # @overload describe_usage_report_subscriptions(params = {})
+    # @param [Hash] params ({})
+    def describe_usage_report_subscriptions(params = {}, options = {})
+      req = build_request(:describe_usage_report_subscriptions, params)
       req.send_request(options)
     end
 
@@ -1598,6 +1912,10 @@ module Aws::AppStream
     #
     # @option params [String] :user_name
     #   The email address of the user who is associated with the stack.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
     #
     # @option params [String] :authentication_type
     #   The authentication type for the user who is associated with the stack.
@@ -1644,8 +1962,7 @@ module Aws::AppStream
     end
 
     # Retrieves a list that describes one or more specified users in the
-    # user pool, if user names are provided. Otherwise, all users in the
-    # user pool are described.
+    # user pool.
     #
     # @option params [required, String] :authentication_type
     #   The authentication type for the users in the user pool to describe.
@@ -1699,6 +2016,10 @@ module Aws::AppStream
     #
     # @option params [required, String] :user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
     #
     # @option params [required, String] :authentication_type
     #   The authentication type for the user. You must specify USERPOOL.
@@ -1754,6 +2075,13 @@ module Aws::AppStream
     # @option params [required, String] :user_name
     #   The email address of the user.
     #
+    #   <note markdown="1"> Users' email addresses are case-sensitive. During login, if they
+    #   specify an email address that doesn't use the same capitalization as
+    #   the email address specified when their user pool account was created,
+    #   a "user does not exist" error message displays.
+    #
+    #    </note>
+    #
     # @option params [required, String] :authentication_type
     #   The authentication type for the user. You must specify USERPOOL.
     #
@@ -1778,7 +2106,7 @@ module Aws::AppStream
     # Immediately stops the specified streaming session.
     #
     # @option params [required, String] :session_id
-    #   The ID of the streaming session.
+    #   The identifier of the streaming session.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1875,11 +2203,11 @@ module Aws::AppStream
     # You can tag AppStream 2.0 image builders, images, fleets, and stacks.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
-    # the *Amazon AppStream 2.0 Developer Guide*.
+    # the *Amazon AppStream 2.0 Administration Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    # [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -1963,7 +2291,8 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
@@ -1971,11 +2300,16 @@ module Aws::AppStream
     #   resp.image_builder.enable_default_internet_access #=> Boolean
     #   resp.image_builder.domain_join_info.directory_name #=> String
     #   resp.image_builder.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builder.network_access_configuration.eni_private_ip_address #=> String
+    #   resp.image_builder.network_access_configuration.eni_id #=> String
     #   resp.image_builder.image_builder_errors #=> Array
-    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
     #   resp.image_builder.appstream_agent_version #=> String
+    #   resp.image_builder.access_endpoints #=> Array
+    #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder AWS API Documentation
     #
@@ -2035,7 +2369,8 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
@@ -2043,11 +2378,16 @@ module Aws::AppStream
     #   resp.image_builder.enable_default_internet_access #=> Boolean
     #   resp.image_builder.domain_join_info.directory_name #=> String
     #   resp.image_builder.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builder.network_access_configuration.eni_private_ip_address #=> String
+    #   resp.image_builder.network_access_configuration.eni_id #=> String
     #   resp.image_builder.image_builder_errors #=> Array
-    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
     #   resp.image_builder.appstream_agent_version #=> String
+    #   resp.image_builder.access_endpoints #=> Array
+    #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder AWS API Documentation
     #
@@ -2069,21 +2409,26 @@ module Aws::AppStream
     # To disassociate tags from your resources, use UntagResource.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
-    # the *Amazon AppStream 2.0 Developer Guide*.
+    # the *Amazon AppStream 2.0 Administration Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    # [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   The tags to associate. A tag is a key-value pair (the value is
-    #   optional). For example, `Environment=Test`, or, if you do not specify
-    #   a value, `Environment=`.
+    #   The tags to associate. A tag is a key-value pair, and the value is
+    #   optional. For example, Environment=Test. If you do not specify a
+    #   value, Environment=.
     #
-    #   If you do not specify a value, we set the value to an empty string.
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2111,11 +2456,11 @@ module Aws::AppStream
     # To list the current tags for your resources, use ListTagsForResource.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
-    # the *Amazon AppStream 2.0 Developer Guide*.
+    # the *Amazon AppStream 2.0 Administration Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    # [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -2142,8 +2487,8 @@ module Aws::AppStream
     end
 
     # Updates the specified Directory Config object in AppStream 2.0. This
-    # object includes the information required to join streaming instances
-    # to an Active Directory domain.
+    # object includes the configuration information required to join fleets
+    # and image builders to Microsoft Active Directory domains.
     #
     # @option params [required, String] :directory_name
     #   The name of the Directory Config object.
@@ -2153,8 +2498,8 @@ module Aws::AppStream
     #   accounts.
     #
     # @option params [Types::ServiceAccountCredentials] :service_account_credentials
-    #   The credentials for the service account used by the streaming instance
-    #   to connect to the directory.
+    #   The credentials for the service account used by the fleet or image
+    #   builder to connect to the directory.
     #
     # @return [Types::UpdateDirectoryConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2193,8 +2538,10 @@ module Aws::AppStream
     #
     # If the fleet is in the `STOPPED` state, you can update any attribute
     # except the fleet name. If the fleet is in the `RUNNING` state, you can
-    # update the `DisplayName` and `ComputeCapacity` attributes. If the
-    # fleet is in the `STARTING` or `STOPPING` state, you can't update it.
+    # update the `DisplayName`, `ComputeCapacity`, `ImageARN`, `ImageName`,
+    # `IdleDisconnectTimeoutInSeconds`, and `DisconnectTimeoutInSeconds`
+    # attributes. If the fleet is in the `STARTING` or `STOPPING` state, you
+    # can't update it.
     #
     # @option params [String] :image_name
     #   The name of the image used to create the fleet.
@@ -2256,32 +2603,76 @@ module Aws::AppStream
     #   The VPC configuration for the fleet.
     #
     # @option params [Integer] :max_user_duration_in_seconds
-    #   The maximum time that a streaming session can run, in seconds. Specify
-    #   a value between 600 and 57600.
+    #   The maximum amount of time that a streaming session can remain active,
+    #   in seconds. If users are still connected to a streaming instance five
+    #   minutes before this limit is reached, they are prompted to save any
+    #   open documents before being disconnected. After this time elapses, the
+    #   instance is terminated and replaced by a new instance.
+    #
+    #   Specify a value between 600 and 360000.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
-    #   The time after disconnection when a session is considered to have
-    #   ended, in seconds. If a user who was disconnected reconnects within
-    #   this time interval, the user is connected to their previous session.
-    #   Specify a value between 60 and 57600.
+    #   The amount of time that a streaming session remains active after users
+    #   disconnect. If users try to reconnect to the streaming session after a
+    #   disconnection or network interruption within this time interval, they
+    #   are connected to their previous session. Otherwise, they are connected
+    #   to a new session with a new streaming instance.
+    #
+    #   Specify a value between 60 and 360000.
     #
     # @option params [Boolean] :delete_vpc_config
     #   Deletes the VPC association for the specified fleet.
     #
     # @option params [String] :description
-    #   The description for display.
+    #   The description to display.
     #
     # @option params [String] :display_name
-    #   The fleet name for display.
+    #   The fleet name to display.
     #
     # @option params [Boolean] :enable_default_internet_access
     #   Enables or disables default internet access for the fleet.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to join
+    #   the fleet to a Microsoft Active Directory domain.
+    #
+    # @option params [Integer] :idle_disconnect_timeout_in_seconds
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the
+    #   `DisconnectTimeoutInSeconds` time interval begins. Users are notified
+    #   before they are disconnected due to inactivity. If users try to
+    #   reconnect to the streaming session before the time interval specified
+    #   in `DisconnectTimeoutInSeconds` elapses, they are connected to their
+    #   previous session. Users are considered idle when they stop providing
+    #   keyboard or mouse input during their streaming session. File uploads
+    #   and downloads, audio in, audio out, and pixels changing do not qualify
+    #   as user activity. If users continue to be idle after the time interval
+    #   in `IdleDisconnectTimeoutInSeconds` elapses, they are disconnected.
+    #
+    #   To prevent users from being disconnected due to inactivity, specify a
+    #   value of 0. Otherwise, specify a value between 60 and 3600. The
+    #   default value is 0.
+    #
+    #   <note markdown="1"> If you enable this feature, we recommend that you specify a value that
+    #   corresponds exactly to a whole number of minutes (for example, 60,
+    #   120, and 180). If you don't do this, the value is rounded to the
+    #   nearest minute. For example, if you specify a value of 70, users are
+    #   disconnected after 1 minute of inactivity. If you specify a value that
+    #   is at the midpoint between two different minutes, the value is rounded
+    #   up. For example, if you specify a value of 90, users are disconnected
+    #   after 2 minutes of inactivity.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :attributes_to_delete
     #   The fleet attributes to delete.
+    #
+    # @option params [String] :iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to apply to the fleet.
+    #   To assume a role, a fleet instance calls the AWS Security Token
+    #   Service (STS) `AssumeRole` API operation and passes the ARN of the
+    #   role to use. The operation creates a new session with temporary
+    #   credentials.
     #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2311,7 +2702,9 @@ module Aws::AppStream
     #       directory_name: "DirectoryName",
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
-    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO
+    #     idle_disconnect_timeout_in_seconds: 1,
+    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN
+    #     iam_role_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -2337,11 +2730,13 @@ module Aws::AppStream
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
     #   resp.fleet.created_time #=> Time
     #   resp.fleet.fleet_errors #=> Array
-    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.fleet.fleet_errors[0].error_message #=> String
     #   resp.fleet.enable_default_internet_access #=> Boolean
     #   resp.fleet.domain_join_info.directory_name #=> String
     #   resp.fleet.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
+    #   resp.fleet.iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -2358,8 +2753,8 @@ module Aws::AppStream
     #   The name of the private image.
     #
     # @option params [required, String] :shared_account_id
-    #   The 12-digit ID of the AWS account for which you want add or update
-    #   image permissions.
+    #   The 12-digit identifier of the AWS account for which you want add or
+    #   update image permissions.
     #
     # @option params [required, Types::ImagePermissions] :image_permissions
     #   The permissions for the image.
@@ -2389,10 +2784,10 @@ module Aws::AppStream
     # Updates the specified fields for the specified stack.
     #
     # @option params [String] :display_name
-    #   The stack name for display.
+    #   The stack name to display.
     #
     # @option params [String] :description
-    #   The description for display.
+    #   The description to display.
     #
     # @option params [required, String] :name
     #   The name of the stack.
@@ -2408,7 +2803,7 @@ module Aws::AppStream
     #   ends.
     #
     # @option params [String] :feedback_url
-    #   The URL that users are redirected to after they click the Send
+    #   The URL that users are redirected to after they choose the Send
     #   Feedback link. If no URL is specified, no Send Feedback link is
     #   displayed.
     #
@@ -2424,6 +2819,11 @@ module Aws::AppStream
     #   settings are enabled, changes that users make to applications and
     #   Windows settings are automatically saved after each session and
     #   applied to the next session.
+    #
+    # @option params [Array<Types::AccessEndpoint>] :access_endpoints
+    #   The list of interface VPC endpoint (interface endpoint) objects. Users
+    #   of the stack can connect to AppStream 2.0 only through the specified
+    #   endpoints.
     #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2445,7 +2845,7 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
     #     user_settings: [
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
@@ -2456,6 +2856,12 @@ module Aws::AppStream
     #       enabled: false, # required
     #       settings_group: "SettingsGroup",
     #     },
+    #     access_endpoints: [
+    #       {
+    #         endpoint_type: "STREAMING", # required, accepts STREAMING
+    #         vpce_id: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2481,6 +2887,9 @@ module Aws::AppStream
     #   resp.stack.application_settings.enabled #=> Boolean
     #   resp.stack.application_settings.settings_group #=> String
     #   resp.stack.application_settings.s3_bucket_name #=> String
+    #   resp.stack.access_endpoints #=> Array
+    #   resp.stack.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.stack.access_endpoints[0].vpce_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -2504,7 +2913,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2521,7 +2930,7 @@ module Aws::AppStream
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

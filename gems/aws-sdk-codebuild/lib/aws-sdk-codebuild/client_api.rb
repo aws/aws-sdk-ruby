@@ -33,6 +33,7 @@ module Aws::CodeBuild
     BuildPhases = Shapes::ListShape.new(name: 'BuildPhases')
     Builds = Shapes::ListShape.new(name: 'Builds')
     BuildsNotDeleted = Shapes::ListShape.new(name: 'BuildsNotDeleted')
+    CacheMode = Shapes::StringShape.new(name: 'CacheMode')
     CacheType = Shapes::StringShape.new(name: 'CacheType')
     CloudWatchLogsConfig = Shapes::StructureShape.new(name: 'CloudWatchLogsConfig')
     ComputeType = Shapes::StringShape.new(name: 'ComputeType')
@@ -40,6 +41,7 @@ module Aws::CodeBuild
     CreateProjectOutput = Shapes::StructureShape.new(name: 'CreateProjectOutput')
     CreateWebhookInput = Shapes::StructureShape.new(name: 'CreateWebhookInput')
     CreateWebhookOutput = Shapes::StructureShape.new(name: 'CreateWebhookOutput')
+    CredentialProviderType = Shapes::StringShape.new(name: 'CredentialProviderType')
     DeleteProjectInput = Shapes::StructureShape.new(name: 'DeleteProjectInput')
     DeleteProjectOutput = Shapes::StructureShape.new(name: 'DeleteProjectOutput')
     DeleteSourceCredentialsInput = Shapes::StructureShape.new(name: 'DeleteSourceCredentialsInput')
@@ -56,7 +58,11 @@ module Aws::CodeBuild
     EnvironmentVariable = Shapes::StructureShape.new(name: 'EnvironmentVariable')
     EnvironmentVariableType = Shapes::StringShape.new(name: 'EnvironmentVariableType')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
+    FilterGroup = Shapes::ListShape.new(name: 'FilterGroup')
+    FilterGroups = Shapes::ListShape.new(name: 'FilterGroups')
     GitCloneDepth = Shapes::IntegerShape.new(name: 'GitCloneDepth')
+    GitSubmodulesConfig = Shapes::StructureShape.new(name: 'GitSubmodulesConfig')
+    ImagePullCredentialsType = Shapes::StringShape.new(name: 'ImagePullCredentialsType')
     ImageVersions = Shapes::ListShape.new(name: 'ImageVersions')
     ImportSourceCredentialsInput = Shapes::StructureShape.new(name: 'ImportSourceCredentialsInput')
     ImportSourceCredentialsOutput = Shapes::StructureShape.new(name: 'ImportSourceCredentialsOutput')
@@ -89,6 +95,7 @@ module Aws::CodeBuild
     ProjectArtifactsList = Shapes::ListShape.new(name: 'ProjectArtifactsList')
     ProjectBadge = Shapes::StructureShape.new(name: 'ProjectBadge')
     ProjectCache = Shapes::StructureShape.new(name: 'ProjectCache')
+    ProjectCacheModes = Shapes::ListShape.new(name: 'ProjectCacheModes')
     ProjectDescription = Shapes::StringShape.new(name: 'ProjectDescription')
     ProjectEnvironment = Shapes::StructureShape.new(name: 'ProjectEnvironment')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
@@ -99,6 +106,7 @@ module Aws::CodeBuild
     ProjectSourceVersion = Shapes::StructureShape.new(name: 'ProjectSourceVersion')
     ProjectSources = Shapes::ListShape.new(name: 'ProjectSources')
     Projects = Shapes::ListShape.new(name: 'Projects')
+    RegistryCredential = Shapes::StructureShape.new(name: 'RegistryCredential')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3LogsConfig = Shapes::StructureShape.new(name: 'S3LogsConfig')
@@ -129,6 +137,8 @@ module Aws::CodeBuild
     ValueInput = Shapes::StringShape.new(name: 'ValueInput')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     Webhook = Shapes::StructureShape.new(name: 'Webhook')
+    WebhookFilter = Shapes::StructureShape.new(name: 'WebhookFilter')
+    WebhookFilterType = Shapes::StringShape.new(name: 'WebhookFilterType')
     WrapperBoolean = Shapes::BooleanShape.new(name: 'WrapperBoolean')
     WrapperInt = Shapes::IntegerShape.new(name: 'WrapperInt')
     WrapperLong = Shapes::IntegerShape.new(name: 'WrapperLong')
@@ -221,6 +231,8 @@ module Aws::CodeBuild
     CreateProjectInput.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     CreateProjectInput.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, required: true, location_name: "source"))
     CreateProjectInput.add_member(:secondary_sources, Shapes::ShapeRef.new(shape: ProjectSources, location_name: "secondarySources"))
+    CreateProjectInput.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "sourceVersion"))
+    CreateProjectInput.add_member(:secondary_source_versions, Shapes::ShapeRef.new(shape: ProjectSecondarySourceVersions, location_name: "secondarySourceVersions"))
     CreateProjectInput.add_member(:artifacts, Shapes::ShapeRef.new(shape: ProjectArtifacts, required: true, location_name: "artifacts"))
     CreateProjectInput.add_member(:secondary_artifacts, Shapes::ShapeRef.new(shape: ProjectArtifactsList, location_name: "secondaryArtifacts"))
     CreateProjectInput.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
@@ -240,6 +252,7 @@ module Aws::CodeBuild
 
     CreateWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     CreateWebhookInput.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
+    CreateWebhookInput.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     CreateWebhookInput.struct_class = Types::CreateWebhookInput
 
     CreateWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
@@ -287,12 +300,20 @@ module Aws::CodeBuild
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: EnvironmentVariable)
 
+    FilterGroup.member = Shapes::ShapeRef.new(shape: WebhookFilter)
+
+    FilterGroups.member = Shapes::ShapeRef.new(shape: FilterGroup)
+
+    GitSubmodulesConfig.add_member(:fetch_submodules, Shapes::ShapeRef.new(shape: WrapperBoolean, required: true, location_name: "fetchSubmodules"))
+    GitSubmodulesConfig.struct_class = Types::GitSubmodulesConfig
+
     ImageVersions.member = Shapes::ShapeRef.new(shape: String)
 
     ImportSourceCredentialsInput.add_member(:username, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "username"))
     ImportSourceCredentialsInput.add_member(:token, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "token"))
     ImportSourceCredentialsInput.add_member(:server_type, Shapes::ShapeRef.new(shape: ServerType, required: true, location_name: "serverType"))
     ImportSourceCredentialsInput.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, required: true, location_name: "authType"))
+    ImportSourceCredentialsInput.add_member(:should_overwrite, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "shouldOverwrite"))
     ImportSourceCredentialsInput.struct_class = Types::ImportSourceCredentialsInput
 
     ImportSourceCredentialsOutput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
@@ -366,6 +387,8 @@ module Aws::CodeBuild
     Project.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     Project.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, location_name: "source"))
     Project.add_member(:secondary_sources, Shapes::ShapeRef.new(shape: ProjectSources, location_name: "secondarySources"))
+    Project.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "sourceVersion"))
+    Project.add_member(:secondary_source_versions, Shapes::ShapeRef.new(shape: ProjectSecondarySourceVersions, location_name: "secondarySourceVersions"))
     Project.add_member(:artifacts, Shapes::ShapeRef.new(shape: ProjectArtifacts, location_name: "artifacts"))
     Project.add_member(:secondary_artifacts, Shapes::ShapeRef.new(shape: ProjectArtifactsList, location_name: "secondaryArtifacts"))
     Project.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
@@ -402,7 +425,10 @@ module Aws::CodeBuild
 
     ProjectCache.add_member(:type, Shapes::ShapeRef.new(shape: CacheType, required: true, location_name: "type"))
     ProjectCache.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
+    ProjectCache.add_member(:modes, Shapes::ShapeRef.new(shape: ProjectCacheModes, location_name: "modes"))
     ProjectCache.struct_class = Types::ProjectCache
+
+    ProjectCacheModes.member = Shapes::ShapeRef.new(shape: CacheMode)
 
     ProjectEnvironment.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentType, required: true, location_name: "type"))
     ProjectEnvironment.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "image"))
@@ -410,6 +436,8 @@ module Aws::CodeBuild
     ProjectEnvironment.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
     ProjectEnvironment.add_member(:privileged_mode, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "privilegedMode"))
     ProjectEnvironment.add_member(:certificate, Shapes::ShapeRef.new(shape: String, location_name: "certificate"))
+    ProjectEnvironment.add_member(:registry_credential, Shapes::ShapeRef.new(shape: RegistryCredential, location_name: "registryCredential"))
+    ProjectEnvironment.add_member(:image_pull_credentials_type, Shapes::ShapeRef.new(shape: ImagePullCredentialsType, location_name: "imagePullCredentialsType"))
     ProjectEnvironment.struct_class = Types::ProjectEnvironment
 
     ProjectNames.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -419,6 +447,7 @@ module Aws::CodeBuild
     ProjectSource.add_member(:type, Shapes::ShapeRef.new(shape: SourceType, required: true, location_name: "type"))
     ProjectSource.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
     ProjectSource.add_member(:git_clone_depth, Shapes::ShapeRef.new(shape: GitCloneDepth, location_name: "gitCloneDepth"))
+    ProjectSource.add_member(:git_submodules_config, Shapes::ShapeRef.new(shape: GitSubmodulesConfig, location_name: "gitSubmodulesConfig"))
     ProjectSource.add_member(:buildspec, Shapes::ShapeRef.new(shape: String, location_name: "buildspec"))
     ProjectSource.add_member(:auth, Shapes::ShapeRef.new(shape: SourceAuth, location_name: "auth"))
     ProjectSource.add_member(:report_build_status, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "reportBuildStatus"))
@@ -434,8 +463,13 @@ module Aws::CodeBuild
 
     Projects.member = Shapes::ShapeRef.new(shape: Project)
 
+    RegistryCredential.add_member(:credential, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "credential"))
+    RegistryCredential.add_member(:credential_provider, Shapes::ShapeRef.new(shape: CredentialProviderType, required: true, location_name: "credentialProvider"))
+    RegistryCredential.struct_class = Types::RegistryCredential
+
     S3LogsConfig.add_member(:status, Shapes::ShapeRef.new(shape: LogsConfigStatusType, required: true, location_name: "status"))
     S3LogsConfig.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
+    S3LogsConfig.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
     S3LogsConfig.struct_class = Types::S3LogsConfig
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -462,6 +496,7 @@ module Aws::CodeBuild
     StartBuildInput.add_member(:source_location_override, Shapes::ShapeRef.new(shape: String, location_name: "sourceLocationOverride"))
     StartBuildInput.add_member(:source_auth_override, Shapes::ShapeRef.new(shape: SourceAuth, location_name: "sourceAuthOverride"))
     StartBuildInput.add_member(:git_clone_depth_override, Shapes::ShapeRef.new(shape: GitCloneDepth, location_name: "gitCloneDepthOverride"))
+    StartBuildInput.add_member(:git_submodules_config_override, Shapes::ShapeRef.new(shape: GitSubmodulesConfig, location_name: "gitSubmodulesConfigOverride"))
     StartBuildInput.add_member(:buildspec_override, Shapes::ShapeRef.new(shape: String, location_name: "buildspecOverride"))
     StartBuildInput.add_member(:insecure_ssl_override, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "insecureSslOverride"))
     StartBuildInput.add_member(:report_build_status_override, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "reportBuildStatusOverride"))
@@ -476,6 +511,8 @@ module Aws::CodeBuild
     StartBuildInput.add_member(:queued_timeout_in_minutes_override, Shapes::ShapeRef.new(shape: TimeOut, location_name: "queuedTimeoutInMinutesOverride"))
     StartBuildInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: String, location_name: "idempotencyToken"))
     StartBuildInput.add_member(:logs_config_override, Shapes::ShapeRef.new(shape: LogsConfig, location_name: "logsConfigOverride"))
+    StartBuildInput.add_member(:registry_credential_override, Shapes::ShapeRef.new(shape: RegistryCredential, location_name: "registryCredentialOverride"))
+    StartBuildInput.add_member(:image_pull_credentials_type_override, Shapes::ShapeRef.new(shape: ImagePullCredentialsType, location_name: "imagePullCredentialsTypeOverride"))
     StartBuildInput.struct_class = Types::StartBuildInput
 
     StartBuildOutput.add_member(:build, Shapes::ShapeRef.new(shape: Build, location_name: "build"))
@@ -499,6 +536,8 @@ module Aws::CodeBuild
     UpdateProjectInput.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     UpdateProjectInput.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, location_name: "source"))
     UpdateProjectInput.add_member(:secondary_sources, Shapes::ShapeRef.new(shape: ProjectSources, location_name: "secondarySources"))
+    UpdateProjectInput.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "sourceVersion"))
+    UpdateProjectInput.add_member(:secondary_source_versions, Shapes::ShapeRef.new(shape: ProjectSecondarySourceVersions, location_name: "secondarySourceVersions"))
     UpdateProjectInput.add_member(:artifacts, Shapes::ShapeRef.new(shape: ProjectArtifacts, location_name: "artifacts"))
     UpdateProjectInput.add_member(:secondary_artifacts, Shapes::ShapeRef.new(shape: ProjectArtifactsList, location_name: "secondaryArtifacts"))
     UpdateProjectInput.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
@@ -519,6 +558,7 @@ module Aws::CodeBuild
     UpdateWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     UpdateWebhookInput.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
     UpdateWebhookInput.add_member(:rotate_secret, Shapes::ShapeRef.new(shape: Boolean, location_name: "rotateSecret"))
+    UpdateWebhookInput.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     UpdateWebhookInput.struct_class = Types::UpdateWebhookInput
 
     UpdateWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
@@ -533,8 +573,14 @@ module Aws::CodeBuild
     Webhook.add_member(:payload_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "payloadUrl"))
     Webhook.add_member(:secret, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "secret"))
     Webhook.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
+    Webhook.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     Webhook.add_member(:last_modified_secret, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedSecret"))
     Webhook.struct_class = Types::Webhook
+
+    WebhookFilter.add_member(:type, Shapes::ShapeRef.new(shape: WebhookFilterType, required: true, location_name: "type"))
+    WebhookFilter.add_member(:pattern, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pattern"))
+    WebhookFilter.add_member(:exclude_matched_pattern, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "excludeMatchedPattern"))
+    WebhookFilter.struct_class = Types::WebhookFilter
 
 
     # @api private
@@ -642,6 +688,7 @@ module Aws::CodeBuild
         o.output = Shapes::ShapeRef.new(shape: ImportSourceCredentialsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccountLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
       end)
 
       api.add_operation(:invalidate_project_cache, Seahorse::Model::Operation.new.tap do |o|

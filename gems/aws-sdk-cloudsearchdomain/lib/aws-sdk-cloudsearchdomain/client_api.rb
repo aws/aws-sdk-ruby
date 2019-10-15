@@ -12,7 +12,7 @@ module Aws::CloudSearchDomain
     include Seahorse::Model
 
     Adds = Shapes::IntegerShape.new(name: 'Adds')
-    Blob = Shapes::BlobShape.new(name: 'Blob')
+    Blob = Shapes::BlobShape.new(name: 'Blob', streaming: true)
     Bucket = Shapes::StructureShape.new(name: 'Bucket')
     BucketInfo = Shapes::StructureShape.new(name: 'BucketInfo')
     BucketList = Shapes::ListShape.new(name: 'BucketList')
@@ -72,6 +72,10 @@ module Aws::CloudSearchDomain
 
     BucketList.member = Shapes::ShapeRef.new(shape: Bucket)
 
+    DocumentServiceException.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    DocumentServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DocumentServiceException.struct_class = Types::DocumentServiceException
+
     DocumentServiceWarning.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     DocumentServiceWarning.struct_class = Types::DocumentServiceWarning
 
@@ -114,6 +118,9 @@ module Aws::CloudSearchDomain
     Hits.add_member(:cursor, Shapes::ShapeRef.new(shape: String, location_name: "cursor"))
     Hits.add_member(:hit, Shapes::ShapeRef.new(shape: HitList, location_name: "hit"))
     Hits.struct_class = Types::Hits
+
+    SearchException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    SearchException.struct_class = Types::SearchException
 
     SearchRequest.add_member(:cursor, Shapes::ShapeRef.new(shape: Cursor, location: "querystring", location_name: "cursor"))
     SearchRequest.add_member(:expr, Shapes::ShapeRef.new(shape: Expr, location: "querystring", location_name: "expr"))

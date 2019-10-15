@@ -301,7 +301,7 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
     #   @return [Array<Types::OutputDescription>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationOutputResponse AWS API Documentation
@@ -915,7 +915,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] runtime_environment
     #   The runtime environment for the application (`SQL-1.0` or
-    #   `JAVA-8-FLINK-1.5`).
+    #   `FLINK-1_6`).
     #   @return [String]
     #
     # @!attribute [rw] service_execution_role
@@ -1077,7 +1077,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] runtime_environment
     #   The runtime environment for the application (`SQL-1.0` or
-    #   `JAVA-8-FLINK-1.5`).
+    #   `FLINK-1_6`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSummary AWS API Documentation
@@ -1450,6 +1450,33 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # The user-provided application code (query) is not valid. This can be a
+    # simple syntax error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CodeValidationException AWS API Documentation
+    #
+    class CodeValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception thrown as a result of concurrent modifications to an
+    # application. This error can be the result of attempting to modify an
+    # application without using the current application ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateApplicationRequest
     #   data as a hash:
     #
@@ -1600,6 +1627,12 @@ module Aws::KinesisAnalyticsV2
     #             log_stream_arn: "LogStreamARN", # required
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] application_name
@@ -1612,7 +1645,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] runtime_environment
     #   The runtime environment for the application (`SQL-1.0` or
-    #   `JAVA-8-FLINK-1.5`).
+    #   `FLINK-1_6`).
     #   @return [String]
     #
     # @!attribute [rw] service_execution_role
@@ -1630,6 +1663,19 @@ module Aws::KinesisAnalyticsV2
     #   monitor application configuration errors.
     #   @return [Array<Types::CloudWatchLoggingOption>]
     #
+    # @!attribute [rw] tags
+    #   A list of one or more tags to assign to the application. A tag is a
+    #   key-value pair that identifies an application. Note that the maximum
+    #   number of application tags includes system tags. The maximum number
+    #   of user-defined application tags is 50. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
+    #   Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -1638,7 +1684,8 @@ module Aws::KinesisAnalyticsV2
       :runtime_environment,
       :service_execution_role,
       :application_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :tags)
       include Aws::Structure
     end
 
@@ -2538,6 +2585,13 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] resource_arn
     #   The ARN of the AWS Lambda function that operates on records in the
     #   stream.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InputLambdaProcessor AWS API Documentation
@@ -2554,6 +2608,13 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] resource_arn
     #   The ARN of the AWS Lambda function that is used to preprocess the
     #   records in the stream.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2589,6 +2650,13 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] resource_arn_update
     #   The Amazon Resource Name (ARN) of the new AWS Lambda function that
     #   is used to preprocess the records in the stream.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InputLambdaProcessorUpdate AWS API Documentation
@@ -2894,6 +2962,42 @@ module Aws::KinesisAnalyticsV2
       :kinesis_firehose_input_update,
       :input_schema_update,
       :input_parallelism_update)
+      include Aws::Structure
+    end
+
+    # The user-provided application configuration is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InvalidApplicationConfigurationException AWS API Documentation
+    #
+    class InvalidApplicationConfigurationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified input parameter value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request JSON is not valid for the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3222,6 +3326,13 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the destination Lambda function to
     #   write to.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/LambdaOutput AWS API Documentation
@@ -3273,12 +3384,31 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] resource_arn_update
     #   The Amazon Resource Name (ARN) of the destination AWS Lambda
     #   function.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/LambdaOutputUpdate AWS API Documentation
     #
     class LambdaOutputUpdate < Struct.new(
       :resource_arn_update)
+      include Aws::Structure
+    end
+
+    # The number of allowed resources has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3388,6 +3518,35 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "KinesisAnalyticsARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the application for which to retrieve tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The key-value tags assigned to the application.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # When you configure an SQL-based Amazon Kinesis Data Analytics
     # application's input at the time of creating or updating an
     # application, provides additional mapping information specific to the
@@ -3431,7 +3590,7 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/Java/monitoring-overview.html
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html
     #
     # @note When making an API call, you may pass MonitoringConfiguration
     #   data as a hash:
@@ -3889,7 +4048,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] mapping
-    #   A reference to the data element in the streaming input of the
+    #   A reference to the data element in the streaming input or the
     #   reference data source.
     #   @return [String]
     #
@@ -4116,6 +4275,49 @@ module Aws::KinesisAnalyticsV2
       :table_name_update,
       :s3_reference_data_source_update,
       :reference_schema_update)
+      include Aws::Structure
+    end
+
+    # The application is not available for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Specified application can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Discovery failed to get a record from the streaming source because of
+    # the Amazon Kinesis Streams `ProvisionedThroughputExceededException`.
+    # For more information, see [GetRecords][1] in the Amazon Kinesis
+    # Streams API Reference.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ResourceProvisionedThroughputExceededException AWS API Documentation
+    #
+    class ResourceProvisionedThroughputExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4409,6 +4611,18 @@ module Aws::KinesisAnalyticsV2
     class S3ReferenceDataSourceUpdate < Struct.new(
       :bucket_arn_update,
       :file_key_update)
+      include Aws::Structure
+    end
+
+    # The service cannot complete the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4862,6 +5076,156 @@ module Aws::KinesisAnalyticsV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StopApplicationResponse AWS API Documentation
     #
     class StopApplicationResponse < Aws::EmptyStructure; end
+
+    # A key-value pair (the value is optional) that you can define and
+    # assign to AWS resources. If you specify a tag that already exists, the
+    # tag value is replaced with the value that you specify in the request.
+    # Note that the maximum number of application tags includes system tags.
+    # The maximum number of user-defined application tags is 50. For more
+    # information, see [Using Cost Allocation Tags][1] in the *AWS Billing
+    # and Cost Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the key-value tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the key-value tag. The value is optional.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "KinesisAnalyticsARN", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the application to assign the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value tags to assign to the application.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Application created with too many tags, or too many tags added to an
+    # application. Note that the maximum number of application tags includes
+    # system tags. The maximum number of user-defined application tags is
+    # 50.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The data format is not valid. Amazon Kinesis Data Analytics cannot
+    # detect the schema for the given streaming source.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_input_records
+    #   Raw stream data that was sampled to infer the schema.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] processed_input_records
+    #   Stream data that was modified by the processor specified in the
+    #   `InputProcessingConfiguration` parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UnableToDetectSchemaException AWS API Documentation
+    #
+    class UnableToDetectSchemaException < Struct.new(
+      :message,
+      :raw_input_records,
+      :processed_input_records)
+      include Aws::Structure
+    end
+
+    # The request was rejected because a specified parameter is not
+    # supported or a specified resource is not valid for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "KinesisAnalyticsARN", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the Kinesis Analytics application from which to remove
+    #   the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of keys of tags to remove from the specified application.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateApplicationRequest
     #   data as a hash:

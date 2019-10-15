@@ -76,6 +76,15 @@ module Aws
         ])
       end
 
+      it 'raises an error when providing eventstream at input' do
+        validate({event_stream: [].each }, 'instead of providing value directly for eventstreams at input, expected to use #signal events per stream')
+      end
+
+      it 'accepts no eventstream input even when marked required' do
+        shapes['StructureShape']['required'] = %w(EventStream)
+        validate({})
+      end
+
     end
 
     describe 'lists' do
@@ -175,7 +184,7 @@ module Aws
         validate(blob: double('d', :read => 'abc', :size => 3, :rewind => 0))
         validate({ blob: 'abc' })
         validate({ blob: 123 },
-          [/expected params\[:blob\] to be a String or IO object, got value 123 \(class: (Fixnum|Integer)\) instead./])
+          [/expected params\[:blob\] to be a String or File object, got value 123 \(class: (Fixnum|Integer)\) instead./])
       end
 
     end

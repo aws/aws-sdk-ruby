@@ -73,7 +73,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
-    #   The API protocol: HTTP or WEBSOCKET.
+    #   The API protocol: Currently only WEBSOCKET is supported.
     #   @return [String]
     #
     # @!attribute [rw] route_selection_expression
@@ -89,6 +89,10 @@ module Aws::ApiGatewayV2
     #   during API import.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   Tags for the API.
+    #   @return [Hash<String,String>]
+    #
     class Api < Struct.new(
       :api_endpoint,
       :api_id,
@@ -100,7 +104,8 @@ module Aws::ApiGatewayV2
       :protocol_type,
       :route_selection_expression,
       :version,
-      :warnings)
+      :warnings,
+      :tags)
       include Aws::Structure
     end
 
@@ -127,6 +132,23 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :api_mapping_key,
       :stage)
+      include Aws::Structure
+    end
+
+    # Represents a collection of ApiMappings resources.
+    #
+    # @!attribute [rw] items
+    #   The elements from this collection.
+    #   @return [Array<Types::ApiMapping>]
+    #
+    # @!attribute [rw] next_token
+    #   The next page of elements from this collection. Not valid for the
+    #   last element of the collection.
+    #   @return [String]
+    #
+    class ApiMappings < Struct.new(
+      :items,
+      :next_token)
       include Aws::Structure
     end
 
@@ -249,6 +271,32 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # The request is not valid, for example, the input is incomplete or
+    # incorrect. See the accompanying error message for details.
+    #
+    # @!attribute [rw] message
+    #   Describes the error encountered.
+    #   @return [String]
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation would cause a conflict with the current state
+    # of a service resource associated with the request. Resolve the
+    # conflict before retrying this request. See the accompanying error
+    # message for details.
+    #
+    # @!attribute [rw] message
+    #   Describes the error encountered.
+    #   @return [String]
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input parameters for a CreateApi request.
     #
     # @!attribute [rw] api_key_selection_expression
@@ -273,7 +321,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
-    #   The API protocol: HTTP or WEBSOCKET.
+    #   The API protocol: Currently only WEBSOCKET is supported.
     #   @return [String]
     #
     # @!attribute [rw] route_selection_expression
@@ -284,6 +332,10 @@ module Aws::ApiGatewayV2
     #   A version identifier for the API.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags for the API.
+    #   @return [Hash<String,String>]
+    #
     class CreateApiInput < Struct.new(
       :api_key_selection_expression,
       :description,
@@ -291,7 +343,8 @@ module Aws::ApiGatewayV2
       :name,
       :protocol_type,
       :route_selection_expression,
-      :version)
+      :version,
+      :tags)
       include Aws::Structure
     end
 
@@ -326,7 +379,7 @@ module Aws::ApiGatewayV2
     #       }
     #
     # @!attribute [rw] api_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_key
@@ -337,7 +390,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -356,11 +409,11 @@ module Aws::ApiGatewayV2
     end
 
     # @!attribute [rw] api_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_key
@@ -371,7 +424,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] stage
@@ -405,7 +458,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -428,7 +481,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -450,7 +503,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] api_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_key_selection_expression
@@ -459,7 +512,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -485,7 +538,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -626,11 +679,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] identity_source
-    #   The identity source for which authorization is requested.
-    #
-    #   For the REQUEST authorizer, this is required when authorization
-    #   caching is enabled. The value is a comma-separated string of one or
-    #   more mapping expressions of the specified request parameters. For
+    #   The identity source for which authorization is requested. For the
+    #   REQUEST authorizer, this is required when authorization caching is
+    #   enabled. The value is a comma-separated string of one or more
+    #   mapping expressions of the specified request parameters. For
     #   example, if an Auth header, a Name query string parameter are
     #   defined as identity sources, this value is
     #   $method.request.header.Auth, $method.request.querystring.Name. These
@@ -675,7 +727,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -692,11 +744,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] identity_source
-    #   The identity source for which authorization is requested.
-    #
-    #   For the REQUEST authorizer, this is required when authorization
-    #   caching is enabled. The value is a comma-separated string of one or
-    #   more mapping expressions of the specified request parameters. For
+    #   The identity source for which authorization is requested. For the
+    #   REQUEST authorizer, this is required when authorization caching is
+    #   enabled. The value is a comma-separated string of one or more
+    #   mapping expressions of the specified request parameters. For
     #   example, if an Auth header, a Name query string parameter are
     #   defined as identity sources, this value is
     #   $method.request.header.Auth, $method.request.querystring.Name. These
@@ -784,7 +835,7 @@ module Aws::ApiGatewayV2
     #   @return [Time]
     #
     # @!attribute [rw] deployment_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] deployment_status
@@ -817,9 +868,14 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] tags
+    #   Tags for the DomainName.
+    #   @return [Hash<String,String>]
+    #
     class CreateDomainNameInput < Struct.new(
       :domain_name,
-      :domain_name_configurations)
+      :domain_name_configurations,
+      :tags)
       include Aws::Structure
     end
 
@@ -836,8 +892,14 @@ module Aws::ApiGatewayV2
     #             certificate_upload_date: Time.now,
     #             endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #             hosted_zone_id: "__string",
+    #             security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #             domain_name_status_message: "__string",
     #           },
     #         ],
+    #         tags: {
+    #           "__string" => "StringWithLengthBetween1And1600",
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -848,9 +910,15 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
-      :domain_name_configurations)
+      :domain_name_configurations,
+      :tags)
       include Aws::Structure
     end
 
@@ -860,7 +928,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -871,25 +939,29 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class CreateDomainNameResponse < Struct.new(
       :api_mapping_selection_expression,
       :domain_name,
-      :domain_name_configurations)
+      :domain_name_configurations,
+      :tags)
       include Aws::Structure
     end
 
     # Represents the input parameters for a CreateIntegration request.
     #
     # @!attribute [rw] connection_id
-    #   The identifier of the VpcLink used for the integration when the
-    #   connectionType is VPC\_LINK; otherwise undefined.
+    #   The connection ID.
     #   @return [String]
     #
     # @!attribute [rw] connection_type
-    #   The type of the network connection to the integration endpoint. The
-    #   valid value is INTERNET for connections through the public routable
-    #   internet or VPC\_LINK for private connections between API Gateway
-    #   and a network load balancer in a VPC. The default value is INTERNET.
+    #   The type of the network connection to the integration endpoint.
+    #   Currently the only valid value is INTERNET, for connections through
+    #   the public routable internet.
     #   @return [String]
     #
     # @!attribute [rw] content_handling_strategy
@@ -940,50 +1012,20 @@ module Aws::ApiGatewayV2
     #   integration.
     #
     #   HTTP: for integrating the route or method request with an HTTP
-    #   endpoint, including a private HTTP endpoint within a VPC. This
-    #   integration is also referred to as the HTTP custom integration.
+    #   endpoint. This integration is also referred to as HTTP custom
+    #   integration.
     #
     #   HTTP\_PROXY: for integrating route or method request with an HTTP
-    #   endpoint, including a private HTTP endpoint within a VPC, with the
-    #   client request passed through as-is. This is also referred to as
-    #   HTTP proxy integration.
+    #   endpoint, with the client request passed through as-is. This is also
+    #   referred to as HTTP proxy integration.
     #
     #   MOCK: for integrating the route or method request with API Gateway
     #   as a "loopback" endpoint without invoking any backend.
     #   @return [String]
     #
     # @!attribute [rw] integration_uri
-    #   Specifies the Uniform Resource Identifier (URI) of the integration
-    #   endpoint.
-    #
-    #   For HTTP or HTTP\_PROXY integrations, the URI must be a fully
-    #   formed, encoded HTTP(S) URL according to the [RFC-3986
-    #   specification][1], for either standard integration, where
-    #   connectionType is not VPC\_LINK, or private integration, where
-    #   connectionType is VPC\_LINK. For a private HTTP integration, the URI
-    #   is not used for routing.
-    #
-    #   For AWS or AWS\_PROXY integrations, the URI is of the form
-    #   arn:aws:apigateway:\\\{region\\}:\\\{subdomain.service\|service\\}:path\|action/\\\{service\_api\\}.
-    #   Here, \\\{Region\\} is the API Gateway region (e.g., us-east-1);
-    #   \\\{service\\} is the name of the integrated AWS service (e.g., s3);
-    #   and \\\{subdomain\\} is a designated subdomain supported by certain
-    #   AWS service for fast host-name lookup. action can be used for an AWS
-    #   service action-based API, using an
-    #   Action=\\\{name\\}&\\\{p1\\}=\\\{v1\\}&p2=\\\{v2\\}... query string.
-    #   The ensuing \\\{service\_api\\} refers to a supported action
-    #   \\\{name\\} plus any required input parameters. Alternatively, path
-    #   can be used for an AWS service path-based API. The ensuing
-    #   service\_api refers to the path to an AWS service resource,
-    #   including the region of the integrated AWS service, if applicable.
-    #   For example, for integration with the S3 API of GetObject, the URI
-    #   can be either
-    #   arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\\\{bucket\\}&Key=\\\{key\\}
-    #   or arn:aws:apigateway:us-west-2:s3:path/\\\{bucket\\}/\\\{key\\}
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
+    #   For a Lambda proxy integration, this is the URI of the Lambda
+    #   function.
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -1061,7 +1103,7 @@ module Aws::ApiGatewayV2
     #         credentials_arn: "Arn",
     #         description: "StringWithLengthBetween0And1024",
     #         integration_method: "StringWithLengthBetween1And64",
-    #         integration_type: "AWS", # accepts AWS, HTTP, MOCK, HTTP_PROXY, AWS_PROXY
+    #         integration_type: "AWS", # required, accepts AWS, HTTP, MOCK, HTTP_PROXY, AWS_PROXY
     #         integration_uri: "UriWithLengthBetween1And2048",
     #         passthrough_behavior: "WHEN_NO_MATCH", # accepts WHEN_NO_MATCH, NEVER, WHEN_NO_TEMPLATES
     #         request_parameters: {
@@ -1140,7 +1182,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
@@ -1186,7 +1228,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] integration_method
@@ -1199,7 +1241,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] integration_type
@@ -1241,7 +1283,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
@@ -1361,7 +1403,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] response_parameters
@@ -1391,7 +1433,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     class CreateIntegrationResponseRequest < Struct.new(
@@ -1410,7 +1452,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_response_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] integration_response_key
@@ -1421,7 +1463,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] response_parameters
@@ -1451,7 +1493,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     class CreateIntegrationResponseResponse < Struct.new(
@@ -1499,7 +1541,7 @@ module Aws::ApiGatewayV2
     #         content_type: "StringWithLengthBetween1And256",
     #         description: "StringWithLengthBetween0And1024",
     #         name: "StringWithLengthBetween1And128", # required
-    #         schema: "StringWithLengthBetween0And32K",
+    #         schema: "StringWithLengthBetween0And32K", # required
     #       }
     #
     # @!attribute [rw] api_id
@@ -1539,7 +1581,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] model_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1571,12 +1613,15 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_type
     #   The authorization type for the route. Valid values are NONE for open
-    #   access, AWS\_IAM for using AWS IAM permissions.
+    #   access, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
+    #   a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
     #   The identifier of the Authorizer resource to be associated with this
-    #   route.
+    #   route, if the authorizationType is CUSTOM . The authorizer
+    #   identifier is generated by API Gateway when you created the
+    #   authorizer.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
@@ -1671,7 +1716,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
@@ -1680,7 +1725,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] operation_name
@@ -1703,7 +1748,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
@@ -1712,7 +1757,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -1757,7 +1802,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
@@ -1766,7 +1811,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] operation_name
@@ -1782,7 +1827,7 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] route_key
@@ -1793,7 +1838,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
@@ -1802,7 +1847,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -1878,7 +1923,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] response_models
@@ -1900,7 +1945,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     class CreateRouteResponseRequest < Struct.new(
@@ -1919,7 +1964,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] response_models
@@ -1931,7 +1976,7 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_response_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] route_response_key
@@ -1942,7 +1987,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     class CreateRouteResponseResponse < Struct.new(
@@ -1990,6 +2035,10 @@ module Aws::ApiGatewayV2
     #   match \[A-Za-z0-9-.\_~:/?#&=,\]+.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   Tags for the Stage.
+    #   @return [Hash<String,String>]
+    #
     class CreateStageInput < Struct.new(
       :access_log_settings,
       :client_certificate_id,
@@ -1998,7 +2047,8 @@ module Aws::ApiGatewayV2
       :description,
       :route_settings,
       :stage_name,
-      :stage_variables)
+      :stage_variables,
+      :tags)
       include Aws::Structure
     end
 
@@ -2034,6 +2084,9 @@ module Aws::ApiGatewayV2
     #         stage_variables: {
     #           "__string" => "StringWithLengthBetween0And2048",
     #         },
+    #         tags: {
+    #           "__string" => "StringWithLengthBetween1And1600",
+    #         },
     #       }
     #
     # @!attribute [rw] access_log_settings
@@ -2044,7 +2097,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] client_certificate_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] default_route_settings
@@ -2052,7 +2105,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::RouteSettings]
     #
     # @!attribute [rw] deployment_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2071,6 +2124,11 @@ module Aws::ApiGatewayV2
     #   The stage variable map.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class CreateStageRequest < Struct.new(
       :access_log_settings,
       :api_id,
@@ -2080,7 +2138,8 @@ module Aws::ApiGatewayV2
       :description,
       :route_settings,
       :stage_name,
-      :stage_variables)
+      :stage_variables,
+      :tags)
       include Aws::Structure
     end
 
@@ -2089,7 +2148,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::AccessLogSettings]
     #
     # @!attribute [rw] client_certificate_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -2100,7 +2159,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::RouteSettings]
     #
     # @!attribute [rw] deployment_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2122,6 +2181,11 @@ module Aws::ApiGatewayV2
     #   The stage variable map.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class CreateStageResponse < Struct.new(
       :access_log_settings,
       :client_certificate_id,
@@ -2132,7 +2196,8 @@ module Aws::ApiGatewayV2
       :last_updated_date,
       :route_settings,
       :stage_name,
-      :stage_variables)
+      :stage_variables,
+      :tags)
       include Aws::Structure
     end
 
@@ -2140,13 +2205,9 @@ module Aws::ApiGatewayV2
     #   data as a hash:
     #
     #       {
-    #         api_id: "__string", # required
     #         api_mapping_id: "__string", # required
     #         domain_name: "__string", # required
     #       }
-    #
-    # @!attribute [rw] api_id
-    #   @return [String]
     #
     # @!attribute [rw] api_mapping_id
     #   @return [String]
@@ -2155,7 +2216,6 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class DeleteApiMappingRequest < Struct.new(
-      :api_id,
       :api_mapping_id,
       :domain_name)
       include Aws::Structure
@@ -2428,10 +2488,15 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] tags
+    #   Tags for the DomainName.
+    #   @return [Hash<String,String>]
+    #
     class DomainName < Struct.new(
       :api_mapping_selection_expression,
       :domain_name,
-      :domain_name_configurations)
+      :domain_name_configurations,
+      :tags)
       include Aws::Structure
     end
 
@@ -2447,6 +2512,9 @@ module Aws::ApiGatewayV2
     #         certificate_upload_date: Time.now,
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
+    #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #         domain_name_status_message: "__string",
     #       }
     #
     # @!attribute [rw] api_gateway_domain_name
@@ -2474,9 +2542,24 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] hosted_zone_id
-    #   The Amazon Route 53 Hosted Zone ID of the endpoint. See [AWS Regions
-    #   and Endpoints for API
-    #   Gateway](docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
+    #   The Amazon Route 53 Hosted Zone ID of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_policy
+    #   The Transport Layer Security (TLS) version of the security policy
+    #   for this domain name. The valid values are TLS\_1\_0 and TLS\_1\_2.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_status
+    #   The status of the domain name migration. The valid values are
+    #   AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot
+    #   be modified further until the existing operation is complete. If it
+    #   is AVAILABLE, the domain can be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_status_message
+    #   An optional text message containing detailed information about
+    #   status of the domain name migration.
     #   @return [String]
     #
     class DomainNameConfiguration < Struct.new(
@@ -2485,7 +2568,10 @@ module Aws::ApiGatewayV2
       :certificate_name,
       :certificate_upload_date,
       :endpoint_type,
-      :hosted_zone_id)
+      :hosted_zone_id,
+      :security_policy,
+      :domain_name_status,
+      :domain_name_status_message)
       include Aws::Structure
     end
 
@@ -2510,13 +2596,9 @@ module Aws::ApiGatewayV2
     #   data as a hash:
     #
     #       {
-    #         api_id: "__string", # required
     #         api_mapping_id: "__string", # required
     #         domain_name: "__string", # required
     #       }
-    #
-    # @!attribute [rw] api_id
-    #   @return [String]
     #
     # @!attribute [rw] api_mapping_id
     #   @return [String]
@@ -2525,18 +2607,17 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class GetApiMappingRequest < Struct.new(
-      :api_id,
       :api_mapping_id,
       :domain_name)
       include Aws::Structure
     end
 
     # @!attribute [rw] api_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_key
@@ -2547,7 +2628,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] stage
@@ -2587,34 +2668,17 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
-    # @!attribute [rw] api_id
-    #   An API Gateway-generated, unique identifier.
-    #   @return [String]
+    # @!attribute [rw] items
+    #   @return [Array<Types::ApiMapping>]
     #
-    # @!attribute [rw] api_mapping_id
-    #   An API Gateway-generated, unique identifier.
-    #   @return [String]
-    #
-    # @!attribute [rw] api_mapping_key
-    #   After evaulating a selection expression, the result is compared
-    #   against one or more selection keys to find a matching key. See
-    #   [Selection Expressions][1] for a list of expressions and each
-    #   expression's associated selection key type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
-    #   @return [String]
-    #
-    # @!attribute [rw] stage
-    #   A string with a length between \[1-128\].
+    # @!attribute [rw] next_token
+    #   The next page of elements from this collection. Not valid for the
+    #   last element of the collection.
     #   @return [String]
     #
     class GetApiMappingsResponse < Struct.new(
-      :api_id,
-      :api_mapping_id,
-      :api_mapping_key,
-      :stage)
+      :items,
+      :next_token)
       include Aws::Structure
     end
 
@@ -2637,7 +2701,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] api_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_key_selection_expression
@@ -2646,7 +2710,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -2672,7 +2736,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -2681,6 +2745,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] warnings
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
     #
     class GetApiResponse < Struct.new(
       :api_endpoint,
@@ -2693,7 +2762,8 @@ module Aws::ApiGatewayV2
       :protocol_type,
       :route_selection_expression,
       :version,
-      :warnings)
+      :warnings,
+      :tags)
       include Aws::Structure
     end
 
@@ -2756,7 +2826,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -2773,11 +2843,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] identity_source
-    #   The identity source for which authorization is requested.
-    #
-    #   For the REQUEST authorizer, this is required when authorization
-    #   caching is enabled. The value is a comma-separated string of one or
-    #   more mapping expressions of the specified request parameters. For
+    #   The identity source for which authorization is requested. For the
+    #   REQUEST authorizer, this is required when authorization caching is
+    #   enabled. The value is a comma-separated string of one or more
+    #   mapping expressions of the specified request parameters. For
     #   example, if an Auth header, a Name query string parameter are
     #   defined as identity sources, this value is
     #   $method.request.header.Auth, $method.request.querystring.Name. These
@@ -2880,7 +2949,7 @@ module Aws::ApiGatewayV2
     #   @return [Time]
     #
     # @!attribute [rw] deployment_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] deployment_status
@@ -2963,7 +3032,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -2974,10 +3043,16 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class GetDomainNameResponse < Struct.new(
       :api_mapping_selection_expression,
       :domain_name,
-      :domain_name_configurations)
+      :domain_name_configurations,
+      :tags)
       include Aws::Structure
     end
 
@@ -3056,7 +3131,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] integration_method
@@ -3069,7 +3144,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] integration_type
@@ -3111,7 +3186,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
@@ -3167,7 +3242,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_response_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] integration_response_key
@@ -3178,7 +3253,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] response_parameters
@@ -3208,7 +3283,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     class GetIntegrationResponseResponse < Struct.new(
@@ -3333,7 +3408,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] model_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3462,7 +3537,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
@@ -3471,7 +3546,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] operation_name
@@ -3487,7 +3562,7 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] route_key
@@ -3498,7 +3573,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
@@ -3507,7 +3582,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -3561,7 +3636,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] response_models
@@ -3573,7 +3648,7 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_response_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] route_response_key
@@ -3584,7 +3659,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     class GetRouteResponseResponse < Struct.new(
@@ -3704,7 +3779,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::AccessLogSettings]
     #
     # @!attribute [rw] client_certificate_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -3715,7 +3790,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::RouteSettings]
     #
     # @!attribute [rw] deployment_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3737,6 +3812,11 @@ module Aws::ApiGatewayV2
     #   The stage variable map.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class GetStageResponse < Struct.new(
       :access_log_settings,
       :client_certificate_id,
@@ -3747,7 +3827,8 @@ module Aws::ApiGatewayV2
       :last_updated_date,
       :route_settings,
       :stage_name,
-      :stage_variables)
+      :stage_variables,
+      :tags)
       include Aws::Structure
     end
 
@@ -3793,15 +3874,13 @@ module Aws::ApiGatewayV2
     # Represents an integration.
     #
     # @!attribute [rw] connection_id
-    #   The identifier of the VpcLink used for the integration when the
-    #   connectionType is VPC\_LINK; otherwise undefined.
+    #   The connection ID.
     #   @return [String]
     #
     # @!attribute [rw] connection_type
-    #   The type of the network connection to the integration endpoint. The
-    #   valid value is INTERNET for connections through the public routable
-    #   internet or VPC\_LINK for private connections between API Gateway
-    #   and a network load balancer in a VPC. The default value is INTERNET.
+    #   The type of the network connection to the integration endpoint.
+    #   Currently the only valid value is INTERNET, for connections through
+    #   the public routable internet.
     #   @return [String]
     #
     # @!attribute [rw] content_handling_strategy
@@ -3842,6 +3921,12 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_response_selection_expression
+    #   The integration response selection expression for the integration.
+    #   See [Integration Response Selection Expressions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] integration_type
@@ -3859,50 +3944,20 @@ module Aws::ApiGatewayV2
     #   integration.
     #
     #   HTTP: for integrating the route or method request with an HTTP
-    #   endpoint, including a private HTTP endpoint within a VPC. This
-    #   integration is also referred to as the HTTP custom integration.
+    #   endpoint. This integration is also referred to as the HTTP custom
+    #   integration.
     #
     #   HTTP\_PROXY: for integrating route or method request with an HTTP
-    #   endpoint, including a private HTTP endpoint within a VPC, with the
-    #   client request passed through as-is. This is also referred to as
-    #   HTTP proxy integration.
+    #   endpoint, with the client request passed through as-is. This is also
+    #   referred to as HTTP proxy integration.
     #
     #   MOCK: for integrating the route or method request with API Gateway
     #   as a "loopback" endpoint without invoking any backend.
     #   @return [String]
     #
     # @!attribute [rw] integration_uri
-    #   Specifies the Uniform Resource Identifier (URI) of the integration
-    #   endpoint.
-    #
-    #   For HTTP or HTTP\_PROXY integrations, the URI must be a fully
-    #   formed, encoded HTTP(S) URL according to the [RFC-3986
-    #   specification][1], for either standard integration, where
-    #   connectionType is not VPC\_LINK, or private integration, where
-    #   connectionType is VPC\_LINK. For a private HTTP integration, the URI
-    #   is not used for routing.
-    #
-    #   For AWS or AWS\_PROXY integrations, the URI is of the form
-    #   arn:aws:apigateway:\\\{region\\}:\\\{subdomain.service\|service\\}:path\|action/\\\{service\_api\\}.
-    #   Here, \\\{Region\\} is the API Gateway region (e.g., us-east-1);
-    #   \\\{service\\} is the name of the integrated AWS service (e.g., s3);
-    #   and \\\{subdomain\\} is a designated subdomain supported by certain
-    #   AWS service for fast host-name lookup. action can be used for an AWS
-    #   service action-based API, using an
-    #   Action=\\\{name\\}&\\\{p1\\}=\\\{v1\\}&p2=\\\{v2\\}... query string.
-    #   The ensuing \\\{service\_api\\} refers to a supported action
-    #   \\\{name\\} plus any required input parameters. Alternatively, path
-    #   can be used for an AWS service path-based API. The ensuing
-    #   service\_api refers to the path to an AWS service resource,
-    #   including the region of the integrated AWS service, if applicable.
-    #   For example, for integration with the S3 API of GetObject, the URI
-    #   can be either
-    #   arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\\\{bucket\\}&Key=\\\{key\\}
-    #   or arn:aws:apigateway:us-west-2:s3:path/\\\{bucket\\}/\\\{key\\}
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
+    #   For a Lambda proxy integration, this is the URI of the Lambda
+    #   function.
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -4084,6 +4139,29 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    class GetTagsRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    class GetTagsResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Represents a data model for an API. See [Create Models and Mapping
     # Templates for Request and Response Mappings][1].
     #
@@ -4143,6 +4221,23 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # The resource specified in the request was not found. See the message
+    # field for more information.
+    #
+    # @!attribute [rw] message
+    #   Describes the error encountered.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    class NotFoundException < Struct.new(
+      :message,
+      :resource_type)
+      include Aws::Structure
+    end
+
     # Validation constraints imposed on parameters of a request (path, query
     # string, headers).
     #
@@ -4169,17 +4264,28 @@ module Aws::ApiGatewayV2
     #   @return [Boolean]
     #
     # @!attribute [rw] authorization_scopes
-    #   The authorization scopes supported by this route.
+    #   A list of authorization scopes configured on a route. The scopes are
+    #   used with a COGNITO\_USER\_POOLS authorizer to authorize the method
+    #   invocation. The authorization works by matching the route scopes
+    #   against the scopes parsed from the access token in the incoming
+    #   request. The method invocation is authorized if any route scope
+    #   matches a claimed scope in the access token. Otherwise, the
+    #   invocation is not authorized. When the route scope is configured,
+    #   the client must provide an access token instead of an identity token
+    #   for authorization purposes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] authorization_type
     #   The authorization type for the route. Valid values are NONE for open
-    #   access, AWS\_IAM for using AWS IAM permissions.
+    #   access, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
+    #   a Lambda authorizer
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
     #   The identifier of the Authorizer resource to be associated with this
-    #   route.
+    #   route, if the authorizationType is CUSTOM . The authorizer
+    #   identifier is generated by API Gateway when you created the
+    #   authorizer.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
@@ -4385,6 +4491,10 @@ module Aws::ApiGatewayV2
     #   the values must match \[A-Za-z0-9-.\_~:/?#&=,\]+.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   Tags for the Stage.
+    #   @return [Hash<String,String>]
+    #
     class Stage < Struct.new(
       :access_log_settings,
       :client_certificate_id,
@@ -4395,7 +4505,8 @@ module Aws::ApiGatewayV2
       :last_updated_date,
       :route_settings,
       :stage_name,
-      :stage_variables)
+      :stage_variables,
+      :tags)
       include Aws::Structure
     end
 
@@ -4417,6 +4528,63 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # Represents the input parameters for a TagResource request.
+    #
+    # @!attribute [rw] tags
+    #   Tags for the resource arn.
+    #   @return [Hash<String,String>]
+    #
+    class TagResourceInput < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: {
+    #           "__string" => "StringWithLengthBetween1And1600",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
     # Represents a template.
     #
     # @!attribute [rw] value
@@ -4425,6 +4593,21 @@ module Aws::ApiGatewayV2
     #
     class Template < Struct.new(
       :value)
+      include Aws::Structure
+    end
+
+    # A limit has been exceeded. See the accompanying error message for
+    # details.
+    #
+    # @!attribute [rw] limit_type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TooManyRequestsException < Struct.new(
+      :limit_type,
+      :message)
       include Aws::Structure
     end
 
@@ -4502,7 +4685,7 @@ module Aws::ApiGatewayV2
     #       }
     #
     # @!attribute [rw] api_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_id
@@ -4516,7 +4699,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -4536,11 +4719,11 @@ module Aws::ApiGatewayV2
     end
 
     # @!attribute [rw] api_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_key
@@ -4551,7 +4734,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] stage
@@ -4588,7 +4771,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4608,7 +4791,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -4630,7 +4813,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] api_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] api_key_selection_expression
@@ -4639,7 +4822,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -4665,7 +4848,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -4674,6 +4857,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] warnings
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
     #
     class UpdateApiResponse < Struct.new(
       :api_endpoint,
@@ -4686,7 +4874,8 @@ module Aws::ApiGatewayV2
       :protocol_type,
       :route_selection_expression,
       :version,
-      :warnings)
+      :warnings,
+      :tags)
       include Aws::Structure
     end
 
@@ -4810,11 +4999,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] identity_source
-    #   The identity source for which authorization is requested.
-    #
-    #   For the REQUEST authorizer, this is required when authorization
-    #   caching is enabled. The value is a comma-separated string of one or
-    #   more mapping expressions of the specified request parameters. For
+    #   The identity source for which authorization is requested. For the
+    #   REQUEST authorizer, this is required when authorization caching is
+    #   enabled. The value is a comma-separated string of one or more
+    #   mapping expressions of the specified request parameters. For
     #   example, if an Auth header, a Name query string parameter are
     #   defined as identity sources, this value is
     #   $method.request.header.Auth, $method.request.querystring.Name. These
@@ -4860,7 +5048,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -4877,11 +5065,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] identity_source
-    #   The identity source for which authorization is requested.
-    #
-    #   For the REQUEST authorizer, this is required when authorization
-    #   caching is enabled. The value is a comma-separated string of one or
-    #   more mapping expressions of the specified request parameters. For
+    #   The identity source for which authorization is requested. For the
+    #   REQUEST authorizer, this is required when authorization caching is
+    #   enabled. The value is a comma-separated string of one or more
+    #   mapping expressions of the specified request parameters. For
     #   example, if an Auth header, a Name query string parameter are
     #   defined as identity sources, this value is
     #   $method.request.header.Auth, $method.request.querystring.Name. These
@@ -4962,7 +5149,7 @@ module Aws::ApiGatewayV2
     #   @return [Time]
     #
     # @!attribute [rw] deployment_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] deployment_status
@@ -5009,6 +5196,9 @@ module Aws::ApiGatewayV2
     #             certificate_upload_date: Time.now,
     #             endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #             hosted_zone_id: "__string",
+    #             security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #             domain_name_status_message: "__string",
     #           },
     #         ],
     #       }
@@ -5032,7 +5222,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -5043,25 +5233,29 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class UpdateDomainNameResponse < Struct.new(
       :api_mapping_selection_expression,
       :domain_name,
-      :domain_name_configurations)
+      :domain_name_configurations,
+      :tags)
       include Aws::Structure
     end
 
     # Represents the input parameters for an UpdateIntegration request.
     #
     # @!attribute [rw] connection_id
-    #   The identifier of the VpcLink used for the integration when the
-    #   connectionType is VPC\_LINK; otherwise undefined.
+    #   The connection ID.
     #   @return [String]
     #
     # @!attribute [rw] connection_type
-    #   The type of the network connection to the integration endpoint. The
-    #   valid value is INTERNET for connections through the public routable
-    #   internet or VPC\_LINK for private connections between API Gateway
-    #   and a network load balancer in a VPC. The default value is INTERNET.
+    #   The type of the network connection to the integration endpoint.
+    #   Currently the only valid value is INTERNET, for connections through
+    #   the public routable internet.
     #   @return [String]
     #
     # @!attribute [rw] content_handling_strategy
@@ -5112,50 +5306,20 @@ module Aws::ApiGatewayV2
     #   integration.
     #
     #   HTTP: for integrating the route or method request with an HTTP
-    #   endpoint, including a private HTTP endpoint within a VPC. This
-    #   integration is also referred to as the HTTP custom integration.
+    #   endpoint. This integration is also referred to as the HTTP custom
+    #   integration.
     #
     #   HTTP\_PROXY: for integrating route or method request with an HTTP
-    #   endpoint, including a private HTTP endpoint within a VPC, with the
-    #   client request passed through as-is. This is also referred to as
-    #   HTTP proxy integration.
+    #   endpoint, with the client request passed through as-is. This is also
+    #   referred to as HTTP proxy integration.
     #
     #   MOCK: for integrating the route or method request with API Gateway
     #   as a "loopback" endpoint without invoking any backend.
     #   @return [String]
     #
     # @!attribute [rw] integration_uri
-    #   Specifies the Uniform Resource Identifier (URI) of the integration
-    #   endpoint.
-    #
-    #   For HTTP or HTTP\_PROXY integrations, the URI must be a fully
-    #   formed, encoded HTTP(S) URL according to the [RFC-3986
-    #   specification][1], for either standard integration, where
-    #   connectionType is not VPC\_LINK, or private integration, where
-    #   connectionType is VPC\_LINK. For a private HTTP integration, the URI
-    #   is not used for routing.
-    #
-    #   For AWS or AWS\_PROXY integrations, the URI is of the form
-    #   arn:aws:apigateway:\\\{region\\}:\\\{subdomain.service\|service\\}:path\|action/\\\{service\_api\\}.
-    #   Here, \\\{Region\\} is the API Gateway region (e.g., us-east-1);
-    #   \\\{service\\} is the name of the integrated AWS service (e.g., s3);
-    #   and \\\{subdomain\\} is a designated subdomain supported by certain
-    #   AWS service for fast host-name lookup. action can be used for an AWS
-    #   service action-based API, using an
-    #   Action=\\\{name\\}&\\\{p1\\}=\\\{v1\\}&p2=\\\{v2\\}... query string.
-    #   The ensuing \\\{service\_api\\} refers to a supported action
-    #   \\\{name\\} plus any required input parameters. Alternatively, path
-    #   can be used for an AWS service path-based API. The ensuing
-    #   service\_api refers to the path to an AWS service resource,
-    #   including the region of the integrated AWS service, if applicable.
-    #   For example, for integration with the S3 API of GetObject, the URI
-    #   can be either
-    #   arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\\\{bucket\\}&Key=\\\{key\\}
-    #   or arn:aws:apigateway:us-west-2:s3:path/\\\{bucket\\}/\\\{key\\}
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
+    #   For a Lambda proxy integration, this is the URI of the Lambda
+    #   function.
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -5316,7 +5480,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
@@ -5363,7 +5527,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] integration_method
@@ -5376,7 +5540,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] integration_type
@@ -5418,7 +5582,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
@@ -5542,7 +5706,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] response_parameters
@@ -5572,7 +5736,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     class UpdateIntegrationResponseRequest < Struct.new(
@@ -5592,7 +5756,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_response_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] integration_response_key
@@ -5603,7 +5767,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] response_parameters
@@ -5633,7 +5797,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     class UpdateIntegrationResponseResponse < Struct.new(
@@ -5726,7 +5890,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] model_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -5758,12 +5922,15 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_type
     #   The authorization type for the route. Valid values are NONE for open
-    #   access, AWS\_IAM for using AWS IAM permissions.
+    #   access, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
+    #   a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
     #   The identifier of the Authorizer resource to be associated with this
-    #   route.
+    #   route, if the authorizationType is CUSTOM . The authorizer
+    #   identifier is generated by API Gateway when you created the
+    #   authorizer.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
@@ -5859,7 +6026,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
@@ -5868,7 +6035,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] operation_name
@@ -5894,7 +6061,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
@@ -5903,7 +6070,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -5949,7 +6116,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
@@ -5958,7 +6125,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] operation_name
@@ -5974,7 +6141,7 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] route_key
@@ -5985,7 +6152,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
@@ -5994,7 +6161,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -6071,7 +6238,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] response_models
@@ -6096,7 +6263,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     class UpdateRouteResponseRequest < Struct.new(
@@ -6116,7 +6283,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] response_models
@@ -6128,7 +6295,7 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_response_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] route_response_key
@@ -6139,7 +6306,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     class UpdateRouteResponseResponse < Struct.new(
@@ -6236,7 +6403,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] client_certificate_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] default_route_settings
@@ -6244,7 +6411,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::RouteSettings]
     #
     # @!attribute [rw] deployment_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6280,7 +6447,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::AccessLogSettings]
     #
     # @!attribute [rw] client_certificate_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -6291,7 +6458,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::RouteSettings]
     #
     # @!attribute [rw] deployment_id
-    #   An API Gateway-generated, unique identifier.
+    #   The identifier.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6313,6 +6480,11 @@ module Aws::ApiGatewayV2
     #   The stage variable map.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class UpdateStageResponse < Struct.new(
       :access_log_settings,
       :client_certificate_id,
@@ -6323,7 +6495,8 @@ module Aws::ApiGatewayV2
       :last_updated_date,
       :route_settings,
       :stage_name,
-      :stage_variables)
+      :stage_variables,
+      :tags)
       include Aws::Structure
     end
 

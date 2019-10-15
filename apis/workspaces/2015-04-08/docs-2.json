@@ -4,31 +4,34 @@
   "operations": {
     "AssociateIpGroups": "<p>Associates the specified IP access control group with the specified directory.</p>",
     "AuthorizeIpRules": "<p>Adds one or more rules to the specified IP access control group.</p> <p>This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.</p>",
+    "CopyWorkspaceImage": "<p>Copies the specified image from the specified Region to the current Region.</p>",
     "CreateIpGroup": "<p>Creates an IP access control group.</p> <p>An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using <a>AuthorizeIpRules</a>.</p> <p>There is a default IP access control group associated with your directory. If you don't associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.</p>",
-    "CreateTags": "<p>Creates the specified tags for the specified WorkSpace.</p>",
+    "CreateTags": "<p>Creates the specified tags for the specified WorkSpaces resource.</p>",
     "CreateWorkspaces": "<p>Creates one or more WorkSpaces.</p> <p>This operation is asynchronous and returns before the WorkSpaces are created.</p>",
     "DeleteIpGroup": "<p>Deletes the specified IP access control group.</p> <p>You cannot delete an IP access control group that is associated with a directory.</p>",
-    "DeleteTags": "<p>Deletes the specified tags from the specified WorkSpace.</p>",
-    "DeleteWorkspaceImage": "<p>Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image. </p>",
+    "DeleteTags": "<p>Deletes the specified tags from the specified WorkSpaces resource.</p>",
+    "DeleteWorkspaceImage": "<p>Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and un-share the image if it is shared with other accounts. </p>",
     "DescribeAccount": "<p>Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.</p>",
     "DescribeAccountModifications": "<p>Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.</p>",
     "DescribeClientProperties": "<p>Retrieves a list that describes one or more specified Amazon WorkSpaces clients.</p>",
     "DescribeIpGroups": "<p>Describes one or more of your IP access control groups.</p>",
-    "DescribeTags": "<p>Describes the specified tags for the specified WorkSpace.</p>",
+    "DescribeTags": "<p>Describes the specified tags for the specified WorkSpaces resource.</p>",
     "DescribeWorkspaceBundles": "<p>Retrieves a list that describes the available WorkSpace bundles.</p> <p>You can filter the results using either bundle ID or owner, but not both.</p>",
     "DescribeWorkspaceDirectories": "<p>Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.</p>",
     "DescribeWorkspaceImages": "<p>Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. </p>",
+    "DescribeWorkspaceSnapshots": "<p>Describes the snapshots for the specified WorkSpace.</p>",
     "DescribeWorkspaces": "<p>Describes the specified WorkSpaces.</p> <p>You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.</p>",
     "DescribeWorkspacesConnectionStatus": "<p>Describes the connection status of the specified WorkSpaces.</p>",
     "DisassociateIpGroups": "<p>Disassociates the specified IP access control group from the specified directory.</p>",
     "ImportWorkspaceImage": "<p>Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. </p>",
     "ListAvailableManagementCidrRanges": "<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL). </p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>",
     "ModifyAccount": "<p>Modifies the configuration of bring your own license (BYOL) for the specified account.</p>",
-    "ModifyClientProperties": "<p>Modifies the properties of the specified Amazon WorkSpaces client.</p>",
+    "ModifyClientProperties": "<p>Modifies the properties of the specified Amazon WorkSpaces clients.</p>",
     "ModifyWorkspaceProperties": "<p>Modifies the specified WorkSpace properties.</p>",
-    "ModifyWorkspaceState": "<p>Sets the state of the specified WorkSpace.</p> <p>To maintain a WorkSpace without being interrupted, set the WorkSpace state to <code>ADMIN_MAINTENANCE</code>. WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the <code>ADMIN_MAINTENANCE</code> state.</p>",
+    "ModifyWorkspaceState": "<p>Sets the state of the specified WorkSpace.</p> <p>To maintain a WorkSpace without being interrupted, set the WorkSpace state to <code>ADMIN_MAINTENANCE</code>. WorkSpaces in this state do not respond to requests to reboot, stop, start, rebuild, or restore. An AutoStop WorkSpace in this state is not stopped. Users cannot log into a WorkSpace in the <code>ADMIN_MAINTENANCE</code> state.</p>",
     "RebootWorkspaces": "<p>Reboots the specified WorkSpaces.</p> <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code> or <code>UNHEALTHY</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>",
-    "RebuildWorkspaces": "<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href=\"http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html\">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>",
+    "RebuildWorkspaces": "<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html\">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>",
+    "RestoreWorkspace": "<p>Restores the specified WorkSpace to its last known healthy state.</p> <p>You cannot restore a WorkSpace unless its state is <code> AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html\">Restore a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpace is completely restored.</p>",
     "RevokeIpRules": "<p>Removes one or more rules from the specified IP access control group.</p>",
     "StartWorkspaces": "<p>Starts the specified WorkSpaces.</p> <p>You cannot start a WorkSpace unless it has a running mode of <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>",
     "StopWorkspaces": "<p> Stops the specified WorkSpaces.</p> <p>You cannot stop a WorkSpace unless it has a running mode of <code>AutoStop</code> and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>",
@@ -89,7 +92,7 @@
       "base": null,
       "refs": {
         "DefaultWorkspaceCreationProperties$EnableWorkDocs": "<p>Specifies whether the directory is enabled for Amazon WorkDocs.</p>",
-        "DefaultWorkspaceCreationProperties$EnableInternetAccess": "<p>The public IP address to attach to all WorkSpaces that are created or rebuilt.</p>",
+        "DefaultWorkspaceCreationProperties$EnableInternetAccess": "<p>Specifies whether to automatically assign a public IP address to WorkSpaces in this directory by default. If enabled, the public IP address allows outbound internet access from your WorkSpaces when you’re using an internet gateway in the Amazon VPC in which your WorkSpaces are located. If you're using a Network Address Translation (NAT) gateway for outbound internet access from your VPC, or if your WorkSpaces are in public subnets and you manually assign them Elastic IP addresses, you should disable this setting. This setting applies to new WorkSpaces that you launch or to existing WorkSpaces that you rebuild. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html\"> Configure a VPC for Amazon WorkSpaces</a>.</p>",
         "DefaultWorkspaceCreationProperties$UserEnabledAsLocalAdministrator": "<p>Specifies whether the WorkSpace user is an administrator on the WorkSpace.</p>",
         "Workspace$UserVolumeEncryptionEnabled": "<p>Indicates whether the data stored on the user volume is encrypted.</p>",
         "Workspace$RootVolumeEncryptionEnabled": "<p>Indicates whether the data stored on the root volume is encrypted.</p>",
@@ -168,6 +171,16 @@
       "base": null,
       "refs": {
         "WorkspaceConnectionStatus$ConnectionState": "<p>The connection state of the WorkSpace. The connection state is unknown if the WorkSpace is stopped.</p>"
+      }
+    },
+    "CopyWorkspaceImageRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CopyWorkspaceImageResult": {
+      "base": null,
+      "refs": {
       }
     },
     "CreateIpGroupRequest": {
@@ -356,6 +369,16 @@
       "refs": {
       }
     },
+    "DescribeWorkspaceSnapshotsRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DescribeWorkspaceSnapshotsResult": {
+      "base": null,
+      "refs": {
+      }
+    },
     "DescribeWorkspacesConnectionStatusRequest": {
       "base": null,
       "refs": {
@@ -506,7 +529,7 @@
       }
     },
     "FailedWorkspaceChangeRequest": {
-      "base": "<p>Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).</p>",
+      "base": "<p>Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), restored (<a>RestoreWorkspace</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).</p>",
       "refs": {
         "FailedRebootWorkspaceRequests$member": null,
         "FailedRebuildWorkspaceRequests$member": null,
@@ -709,9 +732,9 @@
       "base": null,
       "refs": {
         "ClientPropertiesResult$ResourceId": "<p>The resource identifier, in the form of a directory ID.</p>",
-        "CreateTagsRequest$ResourceId": "<p>The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>",
-        "DeleteTagsRequest$ResourceId": "<p>The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>",
-        "DescribeTagsRequest$ResourceId": "<p>The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>",
+        "CreateTagsRequest$ResourceId": "<p>The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.</p>",
+        "DeleteTagsRequest$ResourceId": "<p>The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.</p>",
+        "DescribeTagsRequest$ResourceId": "<p>The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.</p>",
         "ModifyClientPropertiesRequest$ResourceId": "<p>The resource identifiers, in the form of directory IDs.</p>",
         "ResourceIdList$member": null,
         "ResourceNotFoundException$ResourceId": "<p>The ID of the resource that could not be found.</p>",
@@ -815,6 +838,12 @@
         "ClientProperties$ReconnectEnabled": "<p>Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. </p>"
       }
     },
+    "Region": {
+      "base": null,
+      "refs": {
+        "CopyWorkspaceImageRequest$SourceRegion": "<p>The identifier of the source Region.</p>"
+      }
+    },
     "RegistrationCode": {
       "base": null,
       "refs": {
@@ -839,7 +868,7 @@
     "ResourceIdList": {
       "base": null,
       "refs": {
-        "DescribeClientPropertiesRequest$ResourceIds": "<p>The resource identifiers, in the form of directory IDs.</p>"
+        "DescribeClientPropertiesRequest$ResourceIds": "<p>The resource identifier, in the form of directory IDs.</p>"
       }
     },
     "ResourceLimitExceededException": {
@@ -854,6 +883,16 @@
     },
     "ResourceUnavailableException": {
       "base": "<p>The specified resource is not available.</p>",
+      "refs": {
+      }
+    },
+    "RestoreWorkspaceRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "RestoreWorkspaceResult": {
+      "base": null,
       "refs": {
       }
     },
@@ -882,13 +921,13 @@
     "RunningMode": {
       "base": null,
       "refs": {
-        "WorkspaceProperties$RunningMode": "<p>The running mode. For more information, see <a href=\"http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html\">Manage the WorkSpace Running Mode</a>.</p>"
+        "WorkspaceProperties$RunningMode": "<p>The running mode. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html\">Manage the WorkSpace Running Mode</a>.</p>"
       }
     },
     "RunningModeAutoStopTimeoutInMinutes": {
       "base": null,
       "refs": {
-        "WorkspaceProperties$RunningModeAutoStopTimeoutInMinutes": "<p>The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.</p>"
+        "WorkspaceProperties$RunningModeAutoStopTimeoutInMinutes": "<p>The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60-minute intervals.</p>"
       }
     },
     "SecurityGroupId": {
@@ -896,6 +935,19 @@
       "refs": {
         "DefaultWorkspaceCreationProperties$CustomSecurityGroupId": "<p>The identifier of any security groups to apply to WorkSpaces when they are created.</p>",
         "WorkspaceDirectory$WorkspaceSecurityGroupId": "<p>The identifier of the security group that is assigned to new WorkSpaces.</p>"
+      }
+    },
+    "Snapshot": {
+      "base": "<p>Describes a snapshot.</p>",
+      "refs": {
+        "SnapshotList$member": null
+      }
+    },
+    "SnapshotList": {
+      "base": null,
+      "refs": {
+        "DescribeWorkspaceSnapshotsResult$RebuildSnapshots": "<p>Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots include the user volume.</p>",
+        "DescribeWorkspaceSnapshotsResult$RestoreSnapshots": "<p>Information about the snapshots that can be used to restore a WorkSpace. These snapshots include both the root volume and the user volume.</p>"
       }
     },
     "StartRequest": {
@@ -976,8 +1028,11 @@
     "TagList": {
       "base": null,
       "refs": {
-        "CreateTagsRequest$Tags": "<p>The tags. Each WorkSpace can have a maximum of 50 tags.</p>",
+        "CopyWorkspaceImageRequest$Tags": "<p>The tags for the image.</p>",
+        "CreateIpGroupRequest$Tags": "<p>The tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>",
+        "CreateTagsRequest$Tags": "<p>The tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>",
         "DescribeTagsResult$TagList": "<p>The tags.</p>",
+        "ImportWorkspaceImageRequest$Tags": "<p>The tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>",
         "WorkspaceRequest$Tags": "<p>The tags for the WorkSpace.</p>"
       }
     },
@@ -1019,12 +1074,13 @@
       "base": null,
       "refs": {
         "AccountModification$StartTime": "<p>The timestamp when the modification of the BYOL configuration was started.</p>",
+        "Snapshot$SnapshotTime": "<p>The time when the snapshot was created.</p>",
         "WorkspaceConnectionStatus$ConnectionStateCheckTimestamp": "<p>The timestamp of the connection status check.</p>",
         "WorkspaceConnectionStatus$LastKnownUserConnectionTimestamp": "<p>The timestamp of the last known user connection.</p>"
       }
     },
     "UnsupportedWorkspaceConfigurationException": {
-      "base": "<p>The configuration of this WorkSpace is not supported for this operation. For more information, see the <a href=\"http://docs.aws.amazon.com/workspaces/latest/adminguide/\">Amazon WorkSpaces Administration Guide</a>. </p>",
+      "base": "<p>The configuration of this WorkSpace is not supported for this operation. For more information, see the <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/\">Amazon WorkSpaces Administration Guide</a>. </p>",
       "refs": {
       }
     },
@@ -1118,11 +1174,13 @@
     "WorkspaceId": {
       "base": null,
       "refs": {
+        "DescribeWorkspaceSnapshotsRequest$WorkspaceId": "<p>The identifier of the WorkSpace.</p>",
         "FailedWorkspaceChangeRequest$WorkspaceId": "<p>The identifier of the WorkSpace.</p>",
         "ModifyWorkspacePropertiesRequest$WorkspaceId": "<p>The identifier of the WorkSpace.</p>",
         "ModifyWorkspaceStateRequest$WorkspaceId": "<p>The identifier of the WorkSpace.</p>",
         "RebootRequest$WorkspaceId": "<p>The identifier of the WorkSpace.</p>",
         "RebuildRequest$WorkspaceId": "<p>The identifier of the WorkSpace.</p>",
+        "RestoreWorkspaceRequest$WorkspaceId": "<p>The identifier of the WorkSpace.</p>",
         "StartRequest$WorkspaceId": "<p>The identifier of the WorkSpace.</p>",
         "StopRequest$WorkspaceId": "<p>The identifier of the WorkSpace.</p>",
         "TerminateRequest$WorkspaceId": "<p>The identifier of the WorkSpace.</p>",
@@ -1147,6 +1205,7 @@
     "WorkspaceImageDescription": {
       "base": null,
       "refs": {
+        "CopyWorkspaceImageRequest$Description": "<p>A description of the image.</p>",
         "ImportWorkspaceImageRequest$ImageDescription": "<p>The description of the WorkSpace image.</p>",
         "WorkspaceImage$Description": "<p>The description of the image.</p>"
       }
@@ -1160,6 +1219,8 @@
     "WorkspaceImageId": {
       "base": null,
       "refs": {
+        "CopyWorkspaceImageRequest$SourceImageId": "<p>The identifier of the source image.</p>",
+        "CopyWorkspaceImageResult$ImageId": "<p>The identifier of the image.</p>",
         "DeleteWorkspaceImageRequest$ImageId": "<p>The identifier of the image.</p>",
         "ImportWorkspaceImageResult$ImageId": "<p>The identifier of the WorkSpace image.</p>",
         "WorkspaceImage$ImageId": "<p>The identifier of the image.</p>",
@@ -1187,6 +1248,7 @@
     "WorkspaceImageName": {
       "base": null,
       "refs": {
+        "CopyWorkspaceImageRequest$Name": "<p>The name of the image.</p>",
         "ImportWorkspaceImageRequest$ImageName": "<p>The name of the WorkSpace image.</p>",
         "WorkspaceImage$Name": "<p>The name of the image.</p>"
       }

@@ -51,6 +51,9 @@
       "members":{
         "TableStatus":{"shape":"String"}
       }
+    },
+    "ErrorMessage": {
+      "type": "string"
     }
   }
 }

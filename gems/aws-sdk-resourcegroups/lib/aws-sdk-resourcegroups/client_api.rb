@@ -79,6 +79,9 @@ module Aws::ResourceGroups
     UpdateGroupQueryInput = Shapes::StructureShape.new(name: 'UpdateGroupQueryInput')
     UpdateGroupQueryOutput = Shapes::StructureShape.new(name: 'UpdateGroupQueryOutput')
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     CreateGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "Name"))
     CreateGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: GroupDescription, location_name: "Description"))
     CreateGroupInput.add_member(:resource_query, Shapes::ShapeRef.new(shape: ResourceQuery, required: true, location_name: "ResourceQuery"))
@@ -95,6 +98,9 @@ module Aws::ResourceGroups
 
     DeleteGroupOutput.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
     DeleteGroupOutput.struct_class = Types::DeleteGroupOutput
+
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
 
     GetGroupInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     GetGroupInput.struct_class = Types::GetGroupInput
@@ -140,6 +146,9 @@ module Aws::ResourceGroups
     GroupQuery.add_member(:resource_query, Shapes::ShapeRef.new(shape: ResourceQuery, required: true, location_name: "ResourceQuery"))
     GroupQuery.struct_class = Types::GroupQuery
 
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
     ListGroupResourcesInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     ListGroupResourcesInput.add_member(:filters, Shapes::ShapeRef.new(shape: ResourceFilterList, location_name: "Filters"))
     ListGroupResourcesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -160,6 +169,12 @@ module Aws::ResourceGroups
     ListGroupsOutput.add_member(:groups, Shapes::ShapeRef.new(shape: GroupList, deprecated: true, location_name: "Groups", metadata: {"deprecatedMessage"=>"This field is deprecated, use GroupIdentifiers instead."}))
     ListGroupsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupsOutput.struct_class = Types::ListGroupsOutput
+
+    MethodNotAllowedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MethodNotAllowedException.struct_class = Types::MethodNotAllowedException
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     QueryError.add_member(:error_code, Shapes::ShapeRef.new(shape: QueryErrorCode, location_name: "ErrorCode"))
     QueryError.add_member(:message, Shapes::ShapeRef.new(shape: QueryErrorMessage, location_name: "Message"))
@@ -207,6 +222,12 @@ module Aws::ResourceGroups
 
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
 
     UntagInput.add_member(:arn, Shapes::ShapeRef.new(shape: GroupArn, required: true, location: "uri", location_name: "Arn"))
     UntagInput.add_member(:keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "Keys"))

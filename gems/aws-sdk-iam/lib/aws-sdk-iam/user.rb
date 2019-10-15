@@ -36,7 +36,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
@@ -48,7 +48,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def user_id
       data[:user_id]
@@ -60,7 +60,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -90,7 +90,7 @@ module Aws::IAM
     # * A password exists but has not been used since IAM started tracking
     #   this information on October 20, 2014.
     #
-    # A null valuedoes not mean that the user *never* had a password. Also,
+    # A null value does not mean that the user *never* had a password. Also,
     # if the user does not currently have a password, but had one in the
     # past, then this field contains the date and time the most recent
     # password was used.
@@ -100,7 +100,7 @@ module Aws::IAM
     #
     #
     # [1]: http://www.iso.org/iso/iso8601
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     # @return [Time]
     def password_last_used
       data[:password_last_used]
@@ -110,9 +110,11 @@ module Aws::IAM
     # user.
     #
     # For more information about permissions boundaries, see [Permissions
-    # Boundaries for IAM Identities
-    # ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
-    # User Guide*.
+    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     # @return [Types::AttachedPermissionsBoundary]
     def permissions_boundary
       data[:permissions_boundary]
@@ -124,7 +126,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]
@@ -185,10 +187,10 @@ module Aws::IAM
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [User]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::UserExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(user_name: @name))
       User.new({
         name: @name,
@@ -331,7 +333,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(user_name: @name)
@@ -368,7 +370,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [String] :permissions_boundary
     #   The ARN of the policy that is used to set the permissions boundary for
@@ -387,7 +389,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [User]
     def create(options = {})
       options = options.merge(user_name: @name)
@@ -473,6 +475,11 @@ module Aws::IAM
     # @option options [required, String] :policy_document
     #   The policy document.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the policy
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
     #
@@ -524,7 +531,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(user_name: @name)
@@ -566,7 +573,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     # @option options [required, String] :authentication_code_2
     #   A subsequent authentication code emitted by the device.
     #
@@ -581,7 +588,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     # @return [MfaDevice]
     def enable_mfa(options = {})
       options = options.merge(user_name: @name)
@@ -642,14 +649,9 @@ module Aws::IAM
     #   New name for the user. Include this parameter only if you're changing
     #   the user's name.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @return [User]
     def update(options = {})
       options = options.merge(user_name: @name)

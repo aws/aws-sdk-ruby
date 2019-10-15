@@ -46,6 +46,27 @@
         {"shape":"AccessDeniedException"}
       ]
     },
+    "CreateTaskSet":{
+      "name":"CreateTaskSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateTaskSetRequest"},
+      "output":{"shape":"CreateTaskSetResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClusterNotFoundException"},
+        {"shape":"UnsupportedFeatureException"},
+        {"shape":"PlatformUnknownException"},
+        {"shape":"PlatformTaskDefinitionIncompatibilityException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceNotFoundException"},
+        {"shape":"ServiceNotActiveException"}
+      ]
+    },
     "DeleteAccountSetting":{
       "name":"DeleteAccountSetting",
       "http":{
@@ -106,6 +127,26 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ClusterNotFoundException"},
         {"shape":"ServiceNotFoundException"}
+      ]
+    },
+    "DeleteTaskSet":{
+      "name":"DeleteTaskSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTaskSetRequest"},
+      "output":{"shape":"DeleteTaskSetResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClusterNotFoundException"},
+        {"shape":"UnsupportedFeatureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceNotFoundException"},
+        {"shape":"ServiceNotActiveException"},
+        {"shape":"TaskSetNotFoundException"}
       ]
     },
     "DeregisterContainerInstance":{
@@ -193,6 +234,25 @@
         {"shape":"ServerException"},
         {"shape":"ClientException"},
         {"shape":"InvalidParameterException"}
+      ]
+    },
+    "DescribeTaskSets":{
+      "name":"DescribeTaskSets",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTaskSetsRequest"},
+      "output":{"shape":"DescribeTaskSetsResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClusterNotFoundException"},
+        {"shape":"UnsupportedFeatureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceNotFoundException"},
+        {"shape":"ServiceNotActiveException"}
       ]
     },
     "DescribeTasks":{
@@ -367,6 +427,20 @@
         {"shape":"InvalidParameterException"}
       ]
     },
+    "PutAccountSettingDefault":{
+      "name":"PutAccountSettingDefault",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutAccountSettingDefaultRequest"},
+      "output":{"shape":"PutAccountSettingDefaultResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"InvalidParameterException"}
+      ]
+    },
     "PutAttributes":{
       "name":"PutAttributes",
       "http":{
@@ -460,6 +534,21 @@
         {"shape":"ClusterNotFoundException"}
       ]
     },
+    "SubmitAttachmentStateChanges":{
+      "name":"SubmitAttachmentStateChanges",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SubmitAttachmentStateChangesRequest"},
+      "output":{"shape":"SubmitAttachmentStateChangesResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterException"}
+      ]
+    },
     "SubmitContainerStateChange":{
       "name":"SubmitContainerStateChange",
       "http":{
@@ -485,7 +574,8 @@
       "errors":[
         {"shape":"ServerException"},
         {"shape":"ClientException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterException"}
       ]
     },
     "TagResource":{
@@ -517,6 +607,21 @@
         {"shape":"ClientException"},
         {"shape":"ClusterNotFoundException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"}
+      ]
+    },
+    "UpdateClusterSettings":{
+      "name":"UpdateClusterSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateClusterSettingsRequest"},
+      "output":{"shape":"UpdateClusterSettingsResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"ClusterNotFoundException"},
         {"shape":"InvalidParameterException"}
       ]
     },
@@ -571,6 +676,47 @@
         {"shape":"PlatformUnknownException"},
         {"shape":"PlatformTaskDefinitionIncompatibilityException"},
         {"shape":"AccessDeniedException"}
+      ]
+    },
+    "UpdateServicePrimaryTaskSet":{
+      "name":"UpdateServicePrimaryTaskSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateServicePrimaryTaskSetRequest"},
+      "output":{"shape":"UpdateServicePrimaryTaskSetResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClusterNotFoundException"},
+        {"shape":"UnsupportedFeatureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceNotFoundException"},
+        {"shape":"ServiceNotActiveException"},
+        {"shape":"TaskSetNotFoundException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "UpdateTaskSet":{
+      "name":"UpdateTaskSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateTaskSetRequest"},
+      "output":{"shape":"UpdateTaskSetResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClusterNotFoundException"},
+        {"shape":"UnsupportedFeatureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceNotFoundException"},
+        {"shape":"ServiceNotActiveException"},
+        {"shape":"TaskSetNotFoundException"}
       ]
     }
   },
@@ -693,7 +839,8 @@
         "pendingTasksCount":{"shape":"Integer"},
         "activeServicesCount":{"shape":"Integer"},
         "statistics":{"shape":"Statistics"},
-        "tags":{"shape":"Tags"}
+        "tags":{"shape":"Tags"},
+        "settings":{"shape":"ClusterSettings"}
       }
     },
     "ClusterContainsContainerInstancesException":{
@@ -731,6 +878,21 @@
       },
       "exception":true
     },
+    "ClusterSetting":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"ClusterSettingName"},
+        "value":{"shape":"String"}
+      }
+    },
+    "ClusterSettingName":{
+      "type":"string",
+      "enum":["containerInsights"]
+    },
+    "ClusterSettings":{
+      "type":"list",
+      "member":{"shape":"ClusterSetting"}
+    },
     "Clusters":{
       "type":"list",
       "member":{"shape":"Cluster"}
@@ -759,13 +921,29 @@
         "containerArn":{"shape":"String"},
         "taskArn":{"shape":"String"},
         "name":{"shape":"String"},
+        "image":{"shape":"String"},
+        "imageDigest":{"shape":"String"},
+        "runtimeId":{"shape":"String"},
         "lastStatus":{"shape":"String"},
         "exitCode":{"shape":"BoxedInteger"},
         "reason":{"shape":"String"},
         "networkBindings":{"shape":"NetworkBindings"},
         "networkInterfaces":{"shape":"NetworkInterfaces"},
-        "healthStatus":{"shape":"HealthStatus"}
+        "healthStatus":{"shape":"HealthStatus"},
+        "cpu":{"shape":"String"},
+        "memory":{"shape":"String"},
+        "memoryReservation":{"shape":"String"},
+        "gpuIds":{"shape":"GpuIds"}
       }
+    },
+    "ContainerCondition":{
+      "type":"string",
+      "enum":[
+        "START",
+        "COMPLETE",
+        "SUCCESS",
+        "HEALTHY"
+      ]
     },
     "ContainerDefinition":{
       "type":"structure",
@@ -786,6 +964,9 @@
         "volumesFrom":{"shape":"VolumeFromList"},
         "linuxParameters":{"shape":"LinuxParameters"},
         "secrets":{"shape":"SecretList"},
+        "dependsOn":{"shape":"ContainerDependencies"},
+        "startTimeout":{"shape":"BoxedInteger"},
+        "stopTimeout":{"shape":"BoxedInteger"},
         "hostname":{"shape":"String"},
         "user":{"shape":"String"},
         "workingDirectory":{"shape":"String"},
@@ -802,12 +983,29 @@
         "ulimits":{"shape":"UlimitList"},
         "logConfiguration":{"shape":"LogConfiguration"},
         "healthCheck":{"shape":"HealthCheck"},
-        "systemControls":{"shape":"SystemControls"}
+        "systemControls":{"shape":"SystemControls"},
+        "resourceRequirements":{"shape":"ResourceRequirements"},
+        "firelensConfiguration":{"shape":"FirelensConfiguration"}
       }
     },
     "ContainerDefinitions":{
       "type":"list",
       "member":{"shape":"ContainerDefinition"}
+    },
+    "ContainerDependencies":{
+      "type":"list",
+      "member":{"shape":"ContainerDependency"}
+    },
+    "ContainerDependency":{
+      "type":"structure",
+      "required":[
+        "containerName",
+        "condition"
+      ],
+      "members":{
+        "containerName":{"shape":"String"},
+        "condition":{"shape":"ContainerCondition"}
+      }
     },
     "ContainerInstance":{
       "type":"structure",
@@ -819,6 +1017,7 @@
         "remainingResources":{"shape":"Resources"},
         "registeredResources":{"shape":"Resources"},
         "status":{"shape":"String"},
+        "statusReason":{"shape":"String"},
         "agentConnected":{"shape":"Boolean"},
         "runningTasksCount":{"shape":"Integer"},
         "pendingTasksCount":{"shape":"Integer"},
@@ -841,7 +1040,10 @@
       "type":"string",
       "enum":[
         "ACTIVE",
-        "DRAINING"
+        "DRAINING",
+        "REGISTERING",
+        "DEREGISTERING",
+        "REGISTRATION_FAILED"
       ]
     },
     "ContainerInstances":{
@@ -856,7 +1058,8 @@
         "environment":{"shape":"EnvironmentVariables"},
         "cpu":{"shape":"BoxedInteger"},
         "memory":{"shape":"BoxedInteger"},
-        "memoryReservation":{"shape":"BoxedInteger"}
+        "memoryReservation":{"shape":"BoxedInteger"},
+        "resourceRequirements":{"shape":"ResourceRequirements"}
       }
     },
     "ContainerOverrides":{
@@ -867,6 +1070,8 @@
       "type":"structure",
       "members":{
         "containerName":{"shape":"String"},
+        "imageDigest":{"shape":"String"},
+        "runtimeId":{"shape":"String"},
         "exitCode":{"shape":"BoxedInteger"},
         "networkBindings":{"shape":"NetworkBindings"},
         "reason":{"shape":"String"},
@@ -885,7 +1090,8 @@
       "type":"structure",
       "members":{
         "clusterName":{"shape":"String"},
-        "tags":{"shape":"Tags"}
+        "tags":{"shape":"Tags"},
+        "settings":{"shape":"ClusterSettings"}
       }
     },
     "CreateClusterResponse":{
@@ -896,10 +1102,7 @@
     },
     "CreateServiceRequest":{
       "type":"structure",
-      "required":[
-        "serviceName",
-        "taskDefinition"
-      ],
+      "required":["serviceName"],
       "members":{
         "cluster":{"shape":"String"},
         "serviceName":{"shape":"String"},
@@ -927,6 +1130,33 @@
       "type":"structure",
       "members":{
         "service":{"shape":"Service"}
+      }
+    },
+    "CreateTaskSetRequest":{
+      "type":"structure",
+      "required":[
+        "service",
+        "cluster",
+        "taskDefinition"
+      ],
+      "members":{
+        "service":{"shape":"String"},
+        "cluster":{"shape":"String"},
+        "externalId":{"shape":"String"},
+        "taskDefinition":{"shape":"String"},
+        "networkConfiguration":{"shape":"NetworkConfiguration"},
+        "loadBalancers":{"shape":"LoadBalancers"},
+        "serviceRegistries":{"shape":"ServiceRegistries"},
+        "launchType":{"shape":"LaunchType"},
+        "platformVersion":{"shape":"String"},
+        "scale":{"shape":"Scale"},
+        "clientToken":{"shape":"String"}
+      }
+    },
+    "CreateTaskSetResponse":{
+      "type":"structure",
+      "members":{
+        "taskSet":{"shape":"TaskSet"}
       }
     },
     "DeleteAccountSettingRequest":{
@@ -985,6 +1215,26 @@
         "service":{"shape":"Service"}
       }
     },
+    "DeleteTaskSetRequest":{
+      "type":"structure",
+      "required":[
+        "cluster",
+        "service",
+        "taskSet"
+      ],
+      "members":{
+        "cluster":{"shape":"String"},
+        "service":{"shape":"String"},
+        "taskSet":{"shape":"String"},
+        "force":{"shape":"BoxedBoolean"}
+      }
+    },
+    "DeleteTaskSetResponse":{
+      "type":"structure",
+      "members":{
+        "taskSet":{"shape":"TaskSet"}
+      }
+    },
     "Deployment":{
       "type":"structure",
       "members":{
@@ -1019,7 +1269,8 @@
       "type":"string",
       "enum":[
         "ECS",
-        "CODE_DEPLOY"
+        "CODE_DEPLOY",
+        "EXTERNAL"
       ]
     },
     "Deployments":{
@@ -1113,6 +1364,25 @@
       "members":{
         "taskDefinition":{"shape":"TaskDefinition"},
         "tags":{"shape":"Tags"}
+      }
+    },
+    "DescribeTaskSetsRequest":{
+      "type":"structure",
+      "required":[
+        "cluster",
+        "service"
+      ],
+      "members":{
+        "cluster":{"shape":"String"},
+        "service":{"shape":"String"},
+        "taskSets":{"shape":"StringList"}
+      }
+    },
+    "DescribeTaskSetsResponse":{
+      "type":"structure",
+      "members":{
+        "taskSets":{"shape":"TaskSets"},
+        "failures":{"shape":"Failures"}
       }
     },
     "DescribeTasksRequest":{
@@ -1209,6 +1479,30 @@
       "type":"list",
       "member":{"shape":"Failure"}
     },
+    "FirelensConfiguration":{
+      "type":"structure",
+      "required":["type"],
+      "members":{
+        "type":{"shape":"FirelensConfigurationType"},
+        "options":{"shape":"FirelensConfigurationOptionsMap"}
+      }
+    },
+    "FirelensConfigurationOptionsMap":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
+    },
+    "FirelensConfigurationType":{
+      "type":"string",
+      "enum":[
+        "fluentd",
+        "fluentbit"
+      ]
+    },
+    "GpuIds":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "HealthCheck":{
       "type":"structure",
       "required":["command"],
@@ -1248,6 +1542,32 @@
       "members":{
         "sourcePath":{"shape":"String"}
       }
+    },
+    "InferenceAccelerator":{
+      "type":"structure",
+      "required":[
+        "deviceName",
+        "deviceType"
+      ],
+      "members":{
+        "deviceName":{"shape":"String"},
+        "deviceType":{"shape":"String"}
+      }
+    },
+    "InferenceAcceleratorOverride":{
+      "type":"structure",
+      "members":{
+        "deviceName":{"shape":"String"},
+        "deviceType":{"shape":"String"}
+      }
+    },
+    "InferenceAcceleratorOverrides":{
+      "type":"list",
+      "member":{"shape":"InferenceAcceleratorOverride"}
+    },
+    "InferenceAccelerators":{
+      "type":"list",
+      "member":{"shape":"InferenceAccelerator"}
     },
     "Integer":{"type":"integer"},
     "InvalidParameterException":{
@@ -1292,7 +1612,9 @@
         "devices":{"shape":"DevicesList"},
         "initProcessEnabled":{"shape":"BoxedBoolean"},
         "sharedMemorySize":{"shape":"BoxedInteger"},
-        "tmpfs":{"shape":"TmpfsList"}
+        "tmpfs":{"shape":"TmpfsList"},
+        "maxSwap":{"shape":"BoxedInteger"},
+        "swappiness":{"shape":"BoxedInteger"}
       }
     },
     "ListAccountSettingsRequest":{
@@ -1465,7 +1787,8 @@
       "required":["logDriver"],
       "members":{
         "logDriver":{"shape":"LogDriver"},
-        "options":{"shape":"LogConfigurationOptionsMap"}
+        "options":{"shape":"LogConfigurationOptionsMap"},
+        "secretOptions":{"shape":"SecretList"}
       }
     },
     "LogConfigurationOptionsMap":{
@@ -1482,7 +1805,8 @@
         "gelf",
         "fluentd",
         "awslogs",
-        "splunk"
+        "splunk",
+        "awsfirelens"
       ]
     },
     "Long":{"type":"long"},
@@ -1594,6 +1918,25 @@
         "binpack"
       ]
     },
+    "PlatformDevice":{
+      "type":"structure",
+      "required":[
+        "id",
+        "type"
+      ],
+      "members":{
+        "id":{"shape":"String"},
+        "type":{"shape":"PlatformDeviceType"}
+      }
+    },
+    "PlatformDeviceType":{
+      "type":"string",
+      "enum":["GPU"]
+    },
+    "PlatformDevices":{
+      "type":"list",
+      "member":{"shape":"PlatformDevice"}
+    },
     "PlatformTaskDefinitionIncompatibilityException":{
       "type":"structure",
       "members":{
@@ -1624,6 +1967,40 @@
         "TASK_DEFINITION",
         "SERVICE"
       ]
+    },
+    "ProxyConfiguration":{
+      "type":"structure",
+      "required":["containerName"],
+      "members":{
+        "type":{"shape":"ProxyConfigurationType"},
+        "containerName":{"shape":"String"},
+        "properties":{"shape":"ProxyConfigurationProperties"}
+      }
+    },
+    "ProxyConfigurationProperties":{
+      "type":"list",
+      "member":{"shape":"KeyValuePair"}
+    },
+    "ProxyConfigurationType":{
+      "type":"string",
+      "enum":["APPMESH"]
+    },
+    "PutAccountSettingDefaultRequest":{
+      "type":"structure",
+      "required":[
+        "name",
+        "value"
+      ],
+      "members":{
+        "name":{"shape":"SettingName"},
+        "value":{"shape":"String"}
+      }
+    },
+    "PutAccountSettingDefaultResponse":{
+      "type":"structure",
+      "members":{
+        "setting":{"shape":"Setting"}
+      }
     },
     "PutAccountSettingRequest":{
       "type":"structure",
@@ -1667,6 +2044,7 @@
         "versionInfo":{"shape":"VersionInfo"},
         "containerInstanceArn":{"shape":"String"},
         "attributes":{"shape":"Attributes"},
+        "platformDevices":{"shape":"PlatformDevices"},
         "tags":{"shape":"Tags"}
       }
     },
@@ -1695,7 +2073,9 @@
         "memory":{"shape":"String"},
         "tags":{"shape":"Tags"},
         "pidMode":{"shape":"PidMode"},
-        "ipcMode":{"shape":"IpcMode"}
+        "ipcMode":{"shape":"IpcMode"},
+        "proxyConfiguration":{"shape":"ProxyConfiguration"},
+        "inferenceAccelerators":{"shape":"InferenceAccelerators"}
       }
     },
     "RegisterTaskDefinitionResponse":{
@@ -1732,6 +2112,28 @@
       "members":{
       },
       "exception":true
+    },
+    "ResourceRequirement":{
+      "type":"structure",
+      "required":[
+        "value",
+        "type"
+      ],
+      "members":{
+        "value":{"shape":"String"},
+        "type":{"shape":"ResourceType"}
+      }
+    },
+    "ResourceRequirements":{
+      "type":"list",
+      "member":{"shape":"ResourceRequirement"}
+    },
+    "ResourceType":{
+      "type":"string",
+      "enum":[
+        "GPU",
+        "InferenceAccelerator"
+      ]
     },
     "Resources":{
       "type":"list",
@@ -1907,7 +2309,9 @@
       "enum":[
         "serviceLongArnFormat",
         "taskLongArnFormat",
-        "containerInstanceLongArnFormat"
+        "containerInstanceLongArnFormat",
+        "awsvpcTrunking",
+        "containerInsights"
       ]
     },
     "Settings":{
@@ -1983,12 +2387,27 @@
       "key":{"shape":"String"},
       "value":{"shape":"String"}
     },
+    "SubmitAttachmentStateChangesRequest":{
+      "type":"structure",
+      "required":["attachments"],
+      "members":{
+        "cluster":{"shape":"String"},
+        "attachments":{"shape":"AttachmentStateChanges"}
+      }
+    },
+    "SubmitAttachmentStateChangesResponse":{
+      "type":"structure",
+      "members":{
+        "acknowledgment":{"shape":"String"}
+      }
+    },
     "SubmitContainerStateChangeRequest":{
       "type":"structure",
       "members":{
         "cluster":{"shape":"String"},
         "task":{"shape":"String"},
         "containerName":{"shape":"String"},
+        "runtimeId":{"shape":"String"},
         "status":{"shape":"String"},
         "exitCode":{"shape":"BoxedInteger"},
         "reason":{"shape":"String"},
@@ -2118,7 +2537,8 @@
         "platformVersion":{"shape":"String"},
         "attachments":{"shape":"Attachments"},
         "healthStatus":{"shape":"HealthStatus"},
-        "tags":{"shape":"Tags"}
+        "tags":{"shape":"Tags"},
+        "inferenceAccelerators":{"shape":"InferenceAccelerators"}
       }
     },
     "TaskDefinition":{
@@ -2140,7 +2560,8 @@
         "cpu":{"shape":"String"},
         "memory":{"shape":"String"},
         "pidMode":{"shape":"PidMode"},
-        "ipcMode":{"shape":"IpcMode"}
+        "ipcMode":{"shape":"IpcMode"},
+        "proxyConfiguration":{"shape":"ProxyConfiguration"}
       }
     },
     "TaskDefinitionFamilyStatus":{
@@ -2193,6 +2614,7 @@
       "type":"structure",
       "members":{
         "containerOverrides":{"shape":"ContainerOverrides"},
+        "inferenceAcceleratorOverrides":{"shape":"InferenceAcceleratorOverrides"},
         "taskRoleArn":{"shape":"String"},
         "executionRoleArn":{"shape":"String"}
       }
@@ -2202,6 +2624,8 @@
       "members":{
         "id":{"shape":"String"},
         "taskSetArn":{"shape":"String"},
+        "serviceArn":{"shape":"String"},
+        "clusterArn":{"shape":"String"},
         "startedBy":{"shape":"String"},
         "externalId":{"shape":"String"},
         "status":{"shape":"String"},
@@ -2215,10 +2639,17 @@
         "platformVersion":{"shape":"String"},
         "networkConfiguration":{"shape":"NetworkConfiguration"},
         "loadBalancers":{"shape":"LoadBalancers"},
+        "serviceRegistries":{"shape":"ServiceRegistries"},
         "scale":{"shape":"Scale"},
         "stabilityStatus":{"shape":"StabilityStatus"},
         "stabilityStatusAt":{"shape":"Timestamp"}
       }
+    },
+    "TaskSetNotFoundException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
     },
     "TaskSets":{
       "type":"list",
@@ -2319,6 +2750,23 @@
       "members":{
       }
     },
+    "UpdateClusterSettingsRequest":{
+      "type":"structure",
+      "required":[
+        "cluster",
+        "settings"
+      ],
+      "members":{
+        "cluster":{"shape":"String"},
+        "settings":{"shape":"ClusterSettings"}
+      }
+    },
+    "UpdateClusterSettingsResponse":{
+      "type":"structure",
+      "members":{
+        "cluster":{"shape":"Cluster"}
+      }
+    },
     "UpdateContainerAgentRequest":{
       "type":"structure",
       "required":["containerInstance"],
@@ -2358,6 +2806,25 @@
       },
       "exception":true
     },
+    "UpdateServicePrimaryTaskSetRequest":{
+      "type":"structure",
+      "required":[
+        "cluster",
+        "service",
+        "primaryTaskSet"
+      ],
+      "members":{
+        "cluster":{"shape":"String"},
+        "service":{"shape":"String"},
+        "primaryTaskSet":{"shape":"String"}
+      }
+    },
+    "UpdateServicePrimaryTaskSetResponse":{
+      "type":"structure",
+      "members":{
+        "taskSet":{"shape":"TaskSet"}
+      }
+    },
     "UpdateServiceRequest":{
       "type":"structure",
       "required":["service"],
@@ -2377,6 +2844,27 @@
       "type":"structure",
       "members":{
         "service":{"shape":"Service"}
+      }
+    },
+    "UpdateTaskSetRequest":{
+      "type":"structure",
+      "required":[
+        "cluster",
+        "service",
+        "taskSet",
+        "scale"
+      ],
+      "members":{
+        "cluster":{"shape":"String"},
+        "service":{"shape":"String"},
+        "taskSet":{"shape":"String"},
+        "scale":{"shape":"Scale"}
+      }
+    },
+    "UpdateTaskSetResponse":{
+      "type":"structure",
+      "members":{
+        "taskSet":{"shape":"TaskSet"}
       }
     },
     "VersionInfo":{

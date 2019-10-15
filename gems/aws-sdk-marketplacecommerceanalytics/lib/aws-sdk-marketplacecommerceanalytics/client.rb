@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::MarketplaceCommerceAnalytics
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::MarketplaceCommerceAnalytics
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::MarketplaceCommerceAnalytics
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -232,54 +281,60 @@ module Aws::MarketplaceCommerceAnalytics
     #   The desired data set type.
     #
     #   * **customer\_subscriber\_hourly\_monthly\_subscriptions**
-    #     From 2014-07-21 to present: Available daily by 5:00 PM Pacific Time.
+    #     From 2014-07-21 to present: Available daily by 24:00 UTC.
     #
     #   * **customer\_subscriber\_annual\_subscriptions**
-    #     From 2014-07-21 to present: Available daily by 5:00 PM Pacific Time.
+    #     From 2014-07-21 to present: Available daily by 24:00 UTC.
     #
     #   * **daily\_business\_usage\_by\_instance\_type**
-    #     From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time.
+    #     From 2015-01-26 to present: Available daily by 24:00 UTC.
     #
     #   * **daily\_business\_fees**
-    #     From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time.
+    #     From 2015-01-26 to present: Available daily by 24:00 UTC.
     #
     #   * **daily\_business\_free\_trial\_conversions**
-    #     From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time.
+    #     From 2015-01-26 to present: Available daily by 24:00 UTC.
     #
     #   * **daily\_business\_new\_instances**
-    #     From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time.
+    #     From 2015-01-26 to present: Available daily by 24:00 UTC.
     #
     #   * **daily\_business\_new\_product\_subscribers**
-    #     From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time.
+    #     From 2015-01-26 to present: Available daily by 24:00 UTC.
     #
     #   * **daily\_business\_canceled\_product\_subscribers**
-    #     From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time.
+    #     From 2015-01-26 to present: Available daily by 24:00 UTC.
     #
     #   * **monthly\_revenue\_billing\_and\_revenue\_data**
     #     From 2015-02 to 2017-06: Available monthly on the 4th day of the
-    #     month by 5:00pm Pacific Time. Data includes metered transactions
-    #     (e.g. hourly) from two months prior.
+    #     month by 24:00 UTC. Data includes metered transactions (e.g. hourly)
+    #     from two months prior.
     #
     #     From 2017-07 to present: Available monthly on the 15th day of the
-    #     month by 5:00pm Pacific Time. Data includes metered transactions
-    #     (e.g. hourly) from one month prior.
+    #     month by 24:00 UTC. Data includes metered transactions (e.g. hourly)
+    #     from one month prior.
     #
     #   * **monthly\_revenue\_annual\_subscriptions**
     #     From 2015-02 to 2017-06: Available monthly on the 4th day of the
-    #     month by 5:00pm Pacific Time. Data includes up-front software
-    #     charges (e.g. annual) from one month prior.
+    #     month by 24:00 UTC. Data includes up-front software charges (e.g.
+    #     annual) from one month prior.
     #
     #     From 2017-07 to present: Available monthly on the 15th day of the
-    #     month by 5:00pm Pacific Time. Data includes up-front software
-    #     charges (e.g. annual) from one month prior.
+    #     month by 24:00 UTC. Data includes up-front software charges (e.g.
+    #     annual) from one month prior.
+    #
+    #   * **monthly\_revenue\_field\_demonstration\_usage**
+    #     From 2018-03-15 to present: Available monthly on the 15th day of the
+    #     month by 24:00 UTC.
+    #
+    #   * **monthly\_revenue\_flexible\_payment\_schedule**
+    #     From 2018-11-15 to present: Available monthly on the 15th day of the
+    #     month by 24:00 UTC.
     #
     #   * **disbursed\_amount\_by\_product**
-    #     From 2015-01-26 to present: Available every 30 days by 5:00 PM
-    #     Pacific Time.
+    #     From 2015-01-26 to present: Available every 30 days by 24:00 UTC.
     #
     #   * **disbursed\_amount\_by\_product\_with\_uncollected\_funds**
-    #     From 2012-04-19 to 2015-01-25: Available every 30 days by 5:00 PM
-    #     Pacific Time.
+    #     From 2012-04-19 to 2015-01-25: Available every 30 days by 24:00 UTC.
     #
     #     From 2015-01-26 to present: This data set was split into three data
     #     sets: disbursed\_amount\_by\_product,
@@ -287,53 +342,46 @@ module Aws::MarketplaceCommerceAnalytics
     #     disbursed\_amount\_by\_age\_of\_disbursed\_funds.
     #
     #   * **disbursed\_amount\_by\_instance\_hours**
-    #     From 2012-09-04 to present: Available every 30 days by 5:00 PM
-    #     Pacific Time.
+    #     From 2012-09-04 to present: Available every 30 days by 24:00 UTC.
     #
     #   * **disbursed\_amount\_by\_customer\_geo**
-    #     From 2012-04-19 to present: Available every 30 days by 5:00 PM
-    #     Pacific Time.
+    #     From 2012-04-19 to present: Available every 30 days by 24:00 UTC.
     #
     #   * **disbursed\_amount\_by\_age\_of\_uncollected\_funds**
-    #     From 2015-01-26 to present: Available every 30 days by 5:00 PM
-    #     Pacific Time.
+    #     From 2015-01-26 to present: Available every 30 days by 24:00 UTC.
     #
     #   * **disbursed\_amount\_by\_age\_of\_disbursed\_funds**
-    #     From 2015-01-26 to present: Available every 30 days by 5:00 PM
-    #     Pacific Time.
+    #     From 2015-01-26 to present: Available every 30 days by 24:00 UTC.
     #
     #   * **customer\_profile\_by\_industry**
-    #     From 2015-10-01 to 2017-06-29: Available daily by 5:00 PM Pacific
-    #     Time.
+    #     From 2015-10-01 to 2017-06-29: Available daily by 24:00 UTC.
     #
     #     From 2017-06-30 to present: This data set is no longer available.
     #
     #   * **customer\_profile\_by\_revenue**
-    #     From 2015-10-01 to 2017-06-29: Available daily by 5:00 PM Pacific
-    #     Time.
+    #     From 2015-10-01 to 2017-06-29: Available daily by 24:00 UTC.
     #
     #     From 2017-06-30 to present: This data set is no longer available.
     #
     #   * **customer\_profile\_by\_geography**
-    #     From 2015-10-01 to 2017-06-29: Available daily by 5:00 PM Pacific
-    #     Time.
+    #     From 2015-10-01 to 2017-06-29: Available daily by 24:00 UTC.
     #
     #     From 2017-06-30 to present: This data set is no longer available.
     #
     #   * **sales\_compensation\_billed\_revenue**
     #     From 2016-12 to 2017-06: Available monthly on the 4th day of the
-    #     month by 5:00pm Pacific Time. Data includes metered transactions
-    #     (e.g. hourly) from two months prior, and up-front software charges
-    #     (e.g. annual) from one month prior.
+    #     month by 24:00 UTC. Data includes metered transactions (e.g. hourly)
+    #     from two months prior, and up-front software charges (e.g. annual)
+    #     from one month prior.
     #
     #     From 2017-06 to present: Available monthly on the 15th day of the
-    #     month by 5:00pm Pacific Time. Data includes metered transactions
-    #     (e.g. hourly) from one month prior, and up-front software charges
-    #     (e.g. annual) from one month prior.
+    #     month by 24:00 UTC. Data includes metered transactions (e.g. hourly)
+    #     from one month prior, and up-front software charges (e.g. annual)
+    #     from one month prior.
     #
     #   * **us\_sales\_and\_use\_tax\_records**
     #     From 2017-02-15 to present: Available monthly on the 15th day of the
-    #     month by 5:00 PM Pacific Time.
+    #     month by 24:00 UTC.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :data_set_publication_date
     #   The date a data set was published. For daily data sets, provide a date
@@ -376,7 +424,7 @@ module Aws::MarketplaceCommerceAnalytics
     # @example Request syntax with placeholder values
     #
     #   resp = client.generate_data_set({
-    #     data_set_type: "customer_subscriber_hourly_monthly_subscriptions", # required, accepts customer_subscriber_hourly_monthly_subscriptions, customer_subscriber_annual_subscriptions, daily_business_usage_by_instance_type, daily_business_fees, daily_business_free_trial_conversions, daily_business_new_instances, daily_business_new_product_subscribers, daily_business_canceled_product_subscribers, monthly_revenue_billing_and_revenue_data, monthly_revenue_annual_subscriptions, disbursed_amount_by_product, disbursed_amount_by_product_with_uncollected_funds, disbursed_amount_by_instance_hours, disbursed_amount_by_customer_geo, disbursed_amount_by_age_of_uncollected_funds, disbursed_amount_by_age_of_disbursed_funds, customer_profile_by_industry, customer_profile_by_revenue, customer_profile_by_geography, sales_compensation_billed_revenue, us_sales_and_use_tax_records
+    #     data_set_type: "customer_subscriber_hourly_monthly_subscriptions", # required, accepts customer_subscriber_hourly_monthly_subscriptions, customer_subscriber_annual_subscriptions, daily_business_usage_by_instance_type, daily_business_fees, daily_business_free_trial_conversions, daily_business_new_instances, daily_business_new_product_subscribers, daily_business_canceled_product_subscribers, monthly_revenue_billing_and_revenue_data, monthly_revenue_annual_subscriptions, monthly_revenue_field_demonstration_usage, monthly_revenue_flexible_payment_schedule, disbursed_amount_by_product, disbursed_amount_by_product_with_uncollected_funds, disbursed_amount_by_instance_hours, disbursed_amount_by_customer_geo, disbursed_amount_by_age_of_uncollected_funds, disbursed_amount_by_age_of_disbursed_funds, customer_profile_by_industry, customer_profile_by_revenue, customer_profile_by_geography, sales_compensation_billed_revenue, us_sales_and_use_tax_records
     #     data_set_publication_date: Time.now, # required
     #     role_name_arn: "RoleNameArn", # required
     #     destination_s3_bucket_name: "DestinationS3BucketName", # required
@@ -504,7 +552,7 @@ module Aws::MarketplaceCommerceAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecommerceanalytics'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

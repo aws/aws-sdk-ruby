@@ -8,11 +8,25 @@
 module Aws::EKS
   module Types
 
+    # This exception is thrown if the request contains a semantic error. The
+    # precise meaning will depend on the API, and will be documented in the
+    # error message.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing the `certificate-authority-data` for your
     # cluster.
     #
     # @!attribute [rw] data
-    #   The base64 encoded certificate data required to communicate with
+    #   The Base64-encoded certificate data required to communicate with
     #   your cluster. Add this to the `certificate-authority-data` section
     #   of the `kubeconfig` file for your cluster.
     #   @return [String]
@@ -21,6 +35,26 @@ module Aws::EKS
     #
     class Certificate < Struct.new(
       :data)
+      include Aws::Structure
+    end
+
+    # These errors are usually caused by a client action. Actions can
+    # include using an action or resource on behalf of a user that doesn't
+    # have permissions to use the action or resource or specifying an
+    # identifier that is not valid.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ClientException AWS API Documentation
+    #
+    class ClientException < Struct.new(
+      :cluster_name,
+      :message)
       include Aws::Structure
     end
 
@@ -54,17 +88,25 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] resources_vpc_config
-    #   The VPC subnets and security groups used by the cluster control
-    #   plane. Amazon EKS VPC resources have specific requirements to work
-    #   properly with Kubernetes. For more information, see [Cluster VPC
+    #   The VPC configuration used by the cluster control plane. Amazon EKS
+    #   VPC resources have specific requirements to work properly with
+    #   Kubernetes. For more information, see [Cluster VPC
     #   Considerations][1] and [Cluster Security Group Considerations][2] in
     #   the *Amazon EKS User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
-    #   [2]: http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #   @return [Types::VpcConfigResponse]
+    #
+    # @!attribute [rw] logging
+    #   The logging configuration for your cluster.
+    #   @return [Types::Logging]
+    #
+    # @!attribute [rw] identity
+    #   The identity provider information for the cluster.
+    #   @return [Types::Identity]
     #
     # @!attribute [rw] status
     #   The current status of the cluster.
@@ -86,8 +128,14 @@ module Aws::EKS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the cluster to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
@@ -99,10 +147,13 @@ module Aws::EKS
       :endpoint,
       :role_arn,
       :resources_vpc_config,
+      :logging,
+      :identity,
       :status,
       :certificate_authority,
       :client_request_token,
-      :platform_version)
+      :platform_version,
+      :tags)
       include Aws::Structure
     end
 
@@ -114,10 +165,23 @@ module Aws::EKS
     #         version: "String",
     #         role_arn: "String", # required
     #         resources_vpc_config: { # required
-    #           subnet_ids: ["String"], # required
+    #           subnet_ids: ["String"],
     #           security_group_ids: ["String"],
+    #           endpoint_public_access: false,
+    #           endpoint_private_access: false,
+    #         },
+    #         logging: {
+    #           cluster_logging: [
+    #             {
+    #               types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #               enabled: false,
+    #             },
+    #           ],
     #         },
     #         client_request_token: "String",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -125,7 +189,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The desired Kubernetes version for your cluster. If you do not
+    #   The desired Kubernetes version for your cluster. If you don't
     #   specify a value here, the latest version available in Amazon EKS is
     #   used.
     #   @return [String]
@@ -138,23 +202,42 @@ module Aws::EKS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] resources_vpc_config
-    #   The VPC subnets and security groups used by the cluster control
-    #   plane. Amazon EKS VPC resources have specific requirements to work
-    #   properly with Kubernetes. For more information, see [Cluster VPC
+    #   The VPC configuration used by the cluster control plane. Amazon EKS
+    #   VPC resources have specific requirements to work properly with
+    #   Kubernetes. For more information, see [Cluster VPC
     #   Considerations][1] and [Cluster Security Group Considerations][2] in
     #   the *Amazon EKS User Guide*. You must specify at least two subnets.
-    #   You may specify up to five security groups, but we recommend that
+    #   You can specify up to five security groups, but we recommend that
     #   you use a dedicated security group for your cluster control plane.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
-    #   [2]: http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #   @return [Types::VpcConfigRequest]
+    #
+    # @!attribute [rw] logging
+    #   Enable or disable exporting the Kubernetes control plane logs for
+    #   your cluster to CloudWatch Logs. By default, cluster control plane
+    #   logs aren't exported to CloudWatch Logs. For more information, see
+    #   [Amazon EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS
+    #   User Guide</i> </i>.
+    #
+    #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    #   apply to exported control plane logs. For more information, see
+    #   [Amazon CloudWatch Pricing][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    #   [2]: http://aws.amazon.com/cloudwatch/pricing/
+    #   @return [Types::Logging]
     #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -164,6 +247,12 @@ module Aws::EKS
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The metadata to apply to the cluster to assist with categorization
+    #   and organization. Each tag consists of a key and an optional value,
+    #   both of which you define.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -171,7 +260,9 @@ module Aws::EKS
       :version,
       :role_arn,
       :resources_vpc_config,
-      :client_request_token)
+      :logging,
+      :client_request_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -284,27 +375,27 @@ module Aws::EKS
     # @!attribute [rw] error_code
     #   A brief description of the error.
     #
-    #   * **SubnetNotFound**\: One of the subnets associated with the
-    #     cluster could not be found.
+    #   * **SubnetNotFound**\: We couldn't find one of the subnets
+    #     associated with the cluster.
     #
-    #   * **SecurityGroupNotFound**\: One of the security groups associated
-    #     with the cluster could not be found.
+    #   * **SecurityGroupNotFound**\: We couldn't find one of the security
+    #     groups associated with the cluster.
     #
     #   * **EniLimitReached**\: You have reached the elastic network
     #     interface limit for your account.
     #
-    #   * **IpNotAvailable**\: A subnet associated with the cluster does not
+    #   * **IpNotAvailable**\: A subnet associated with the cluster doesn't
     #     have any free IP addresses.
     #
-    #   * **AccessDenied**\: You do not have permissions to perform the
+    #   * **AccessDenied**\: You don't have permissions to perform the
     #     specified operation.
     #
     #   * **OperationNotPermitted**\: The service role associated with the
-    #     cluster does not have the required access permissions for Amazon
+    #     cluster doesn't have the required access permissions for Amazon
     #     EKS.
     #
-    #   * **VpcIdNotFound**\: The VPC associated with the cluster could not
-    #     be found.
+    #   * **VpcIdNotFound**\: We couldn't find the VPC associated with the
+    #     cluster.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -325,6 +416,61 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An object representing an identity provider for authentication
+    # credentials.
+    #
+    # @!attribute [rw] oidc
+    #   The [OpenID Connect][1] identity provider information for the
+    #   cluster.
+    #
+    #
+    #
+    #   [1]: https://openid.net/connect/
+    #   @return [Types::OIDC]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Identity AWS API Documentation
+    #
+    class Identity < Struct.new(
+      :oidc)
+      include Aws::Structure
+    end
+
+    # The specified parameter is invalid. Review the available parameters
+    # for the API request.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is invalid given the state of the cluster. Check the state
+    # of the cluster and the associated operations.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListClustersRequest
     #   data as a hash:
     #
@@ -335,12 +481,12 @@ module Aws::EKS
     #
     # @!attribute [rw] max_results
     #   The maximum number of cluster results returned by `ListClusters` in
-    #   paginated output. When this parameter is used, `ListClusters` only
-    #   returns `maxResults` results in a single page along with a
-    #   `nextToken` response element. The remaining results of the initial
-    #   request can be seen by sending another `ListClusters` request with
+    #   paginated output. When you use this parameter, `ListClusters`
+    #   returns only `maxResults` results in a single page along with a
+    #   `nextToken` response element. You can see the remaining results of
+    #   the initial request by sending another `ListClusters` request with
     #   the returned `nextToken` value. This value can be between 1 and 100.
-    #   If this parameter is not used, then `ListClusters` returns up to 100
+    #   If you don't use this parameter, `ListClusters` returns up to 100
     #   results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
@@ -350,8 +496,8 @@ module Aws::EKS
     #   exceeded the value of that parameter. Pagination continues from the
     #   end of the previous results that returned the `nextToken` value.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
-    #   used to retrieve the next items in a list and not for other
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
     #   programmatic purposes.
     #
     #    </note>
@@ -373,7 +519,7 @@ module Aws::EKS
     # @!attribute [rw] next_token
     #   The `nextToken` value to include in a future `ListClusters` request.
     #   When the results of a `ListClusters` request exceed `maxResults`,
-    #   this value can be used to retrieve the next page of results. This
+    #   you can use this value to retrieve the next page of results. This
     #   value is `null` when there are no more results to return.
     #   @return [String]
     #
@@ -382,6 +528,37 @@ module Aws::EKS
     class ListClustersResponse < Struct.new(
       :clusters,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   Amazon EKS clusters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -395,7 +572,7 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Amazon EKS cluster for which to list updates.
+    #   The name of the Amazon EKS cluster to list updates for.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -407,13 +584,13 @@ module Aws::EKS
     #
     # @!attribute [rw] max_results
     #   The maximum number of update results returned by `ListUpdates` in
-    #   paginated output. When this parameter is used, `ListUpdates` only
-    #   returns `maxResults` results in a single page along with a
-    #   `nextToken` response element. The remaining results of the initial
-    #   request can be seen by sending another `ListUpdates` request with
-    #   the returned `nextToken` value. This value can be between 1 and 100.
-    #   If this parameter is not used, then `ListUpdates` returns up to 100
-    #   results and a `nextToken` value if applicable.
+    #   paginated output. When you use this parameter, `ListUpdates` returns
+    #   only `maxResults` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListUpdates` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If you
+    #   don't use this parameter, `ListUpdates` returns up to 100 results
+    #   and a `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesRequest AWS API Documentation
@@ -431,9 +608,9 @@ module Aws::EKS
     #
     # @!attribute [rw] next_token
     #   The `nextToken` value to include in a future `ListUpdates` request.
-    #   When the results of a `ListUpdates` request exceed `maxResults`,
-    #   this value can be used to retrieve the next page of results. This
-    #   value is `null` when there are no more results to return.
+    #   When the results of a `ListUpdates` request exceed `maxResults`, you
+    #   can use this value to retrieve the next page of results. This value
+    #   is `null` when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesResponse AWS API Documentation
@@ -443,6 +620,261 @@ module Aws::EKS
       :next_token)
       include Aws::Structure
     end
+
+    # An object representing the enabled or disabled Kubernetes control
+    # plane logs for your cluster.
+    #
+    # @note When making an API call, you may pass LogSetup
+    #   data as a hash:
+    #
+    #       {
+    #         types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] types
+    #   The available cluster control plane log types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enabled
+    #   If a log type is enabled, that log type exports its control plane
+    #   logs to CloudWatch Logs. If a log type isn't enabled, that log type
+    #   doesn't export its control plane logs. Each individual log type can
+    #   be enabled or disabled independently.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/LogSetup AWS API Documentation
+    #
+    class LogSetup < Struct.new(
+      :types,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # An object representing the logging configuration for resources in your
+    # cluster.
+    #
+    # @note When making an API call, you may pass Logging
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_logging: [
+    #           {
+    #             types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #             enabled: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cluster_logging
+    #   The cluster control plane logging configuration for your cluster.
+    #   @return [Array<Types::LogSetup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Logging AWS API Documentation
+    #
+    class Logging < Struct.new(
+      :cluster_logging)
+      include Aws::Structure
+    end
+
+    # A service resource associated with the request could not be found.
+    # Clients should not retry such requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An object representing the [OpenID Connect][1] identity provider
+    # information for the cluster.
+    #
+    #
+    #
+    # [1]: https://openid.net/connect/
+    #
+    # @!attribute [rw] issuer
+    #   The issuer URL for the OpenID Connect identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/OIDC AWS API Documentation
+    #
+    class OIDC < Struct.new(
+      :issuer)
+      include Aws::Structure
+    end
+
+    # The specified resource is in use.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # You have encountered a service limit on the specified resource.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource could not be found. You can view your available
+    # clusters with ListClusters. Amazon EKS clusters are Region-specific.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # These errors are usually caused by a server-side issue.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ServerException AWS API Documentation
+    #
+    class ServerException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # The service is unavailable. Back off and retry the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   Currently, the supported resources are Amazon EKS clusters.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # At least one of your specified cluster subnets is in an Availability
+    # Zone that does not support Amazon EKS. The exception output specifies
+    # the supported Availability Zones for your account, from which you can
+    # choose subnets for your cluster.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_zones
+    #   The supported Availability Zones for your account. Choose subnets in
+    #   these Availability Zones for your cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UnsupportedAvailabilityZoneException AWS API Documentation
+    #
+    class UnsupportedAvailabilityZoneException < Struct.new(
+      :message,
+      :cluster_name,
+      :valid_zones)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to delete
+    #   tags. Currently, the supported resources are Amazon EKS clusters.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # An object representing an asynchronous update.
     #
@@ -480,6 +912,85 @@ module Aws::EKS
       :params,
       :created_at,
       :errors)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateClusterConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         resources_vpc_config: {
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
+    #           endpoint_public_access: false,
+    #           endpoint_private_access: false,
+    #         },
+    #         logging: {
+    #           cluster_logging: [
+    #             {
+    #               types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #               enabled: false,
+    #             },
+    #           ],
+    #         },
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon EKS cluster to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources_vpc_config
+    #   An object representing the VPC configuration to use for an Amazon
+    #   EKS cluster.
+    #   @return [Types::VpcConfigRequest]
+    #
+    # @!attribute [rw] logging
+    #   Enable or disable exporting the Kubernetes control plane logs for
+    #   your cluster to CloudWatch Logs. By default, cluster control plane
+    #   logs aren't exported to CloudWatch Logs. For more information, see
+    #   [Amazon EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS
+    #   User Guide</i> </i>.
+    #
+    #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    #   apply to exported control plane logs. For more information, see
+    #   [Amazon CloudWatch Pricing][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    #   [2]: http://aws.amazon.com/cloudwatch/pricing/
+    #   @return [Types::Logging]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigRequest AWS API Documentation
+    #
+    class UpdateClusterConfigRequest < Struct.new(
+      :name,
+      :resources_vpc_config,
+      :logging,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigResponse AWS API Documentation
+    #
+    class UpdateClusterConfigResponse < Struct.new(
+      :update)
       include Aws::Structure
     end
 
@@ -546,15 +1057,17 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing an Amazon EKS cluster VPC configuration
-    # request.
+    # An object representing the VPC configuration to use for an Amazon EKS
+    # cluster.
     #
     # @note When making an API call, you may pass VpcConfigRequest
     #   data as a hash:
     #
     #       {
-    #         subnet_ids: ["String"], # required
+    #         subnet_ids: ["String"],
     #         security_group_ids: ["String"],
+    #         endpoint_public_access: false,
+    #         endpoint_private_access: false,
     #       }
     #
     # @!attribute [rw] subnet_ids
@@ -568,15 +1081,45 @@ module Aws::EKS
     #   Specify one or more security groups for the cross-account elastic
     #   network interfaces that Amazon EKS creates to use to allow
     #   communication between your worker nodes and the Kubernetes control
-    #   plane. If you do not specify a security group, the default security
+    #   plane. If you don't specify a security group, the default security
     #   group for your VPC is used.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] endpoint_public_access
+    #   Set this value to `false` to disable public access for your
+    #   cluster's Kubernetes API server endpoint. If you disable public
+    #   access, your cluster's Kubernetes API server can receive only
+    #   requests from within the cluster VPC. The default value for this
+    #   parameter is `true`, which enables public access for your Kubernetes
+    #   API server. For more information, see [Amazon EKS Cluster Endpoint
+    #   Access Control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] endpoint_private_access
+    #   Set this value to `true` to enable private access for your
+    #   cluster's Kubernetes API server endpoint. If you enable private
+    #   access, Kubernetes API requests from within your cluster's VPC use
+    #   the private VPC endpoint. The default value for this parameter is
+    #   `false`, which disables private access for your Kubernetes API
+    #   server. For more information, see [Amazon EKS Cluster Endpoint
+    #   Access Control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigRequest AWS API Documentation
     #
     class VpcConfigRequest < Struct.new(
       :subnet_ids,
-      :security_group_ids)
+      :security_group_ids,
+      :endpoint_public_access,
+      :endpoint_private_access)
       include Aws::Structure
     end
 
@@ -597,12 +1140,29 @@ module Aws::EKS
     #   The VPC associated with your cluster.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_public_access
+    #   This parameter indicates whether the Amazon EKS public API server
+    #   endpoint is enabled. If the Amazon EKS public API server endpoint is
+    #   disabled, your cluster's Kubernetes API server can receive only
+    #   requests that originate from within the cluster VPC.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] endpoint_private_access
+    #   This parameter indicates whether the Amazon EKS private API server
+    #   endpoint is enabled. If the Amazon EKS private API server endpoint
+    #   is enabled, Kubernetes API requests that originate from within your
+    #   cluster's VPC use the private VPC endpoint instead of traversing
+    #   the internet.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigResponse AWS API Documentation
     #
     class VpcConfigResponse < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      :vpc_id)
+      :vpc_id,
+      :endpoint_public_access,
+      :endpoint_private_access)
       include Aws::Structure
     end
 

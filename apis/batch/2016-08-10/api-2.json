@@ -431,7 +431,9 @@
         "taskArn":{"shape":"String"},
         "logStreamName":{"shape":"String"},
         "instanceType":{"shape":"String"},
-        "networkInterfaces":{"shape":"NetworkInterfaceList"}
+        "networkInterfaces":{"shape":"NetworkInterfaceList"},
+        "resourceRequirements":{"shape":"ResourceRequirements"},
+        "linuxParameters":{"shape":"LinuxParameters"}
       }
     },
     "ContainerOverrides":{
@@ -441,7 +443,8 @@
         "memory":{"shape":"Integer"},
         "command":{"shape":"StringList"},
         "instanceType":{"shape":"String"},
-        "environment":{"shape":"EnvironmentVariables"}
+        "environment":{"shape":"EnvironmentVariables"},
+        "resourceRequirements":{"shape":"ResourceRequirements"}
       }
     },
     "ContainerProperties":{
@@ -459,7 +462,9 @@
         "privileged":{"shape":"Boolean"},
         "ulimits":{"shape":"Ulimits"},
         "user":{"shape":"String"},
-        "instanceType":{"shape":"String"}
+        "instanceType":{"shape":"String"},
+        "resourceRequirements":{"shape":"ResourceRequirements"},
+        "linuxParameters":{"shape":"LinuxParameters"}
       }
     },
     "ContainerSummary":{
@@ -611,6 +616,31 @@
       "members":{
         "jobs":{"shape":"JobDetailList"}
       }
+    },
+    "Device":{
+      "type":"structure",
+      "required":["hostPath"],
+      "members":{
+        "hostPath":{"shape":"String"},
+        "containerPath":{"shape":"String"},
+        "permissions":{"shape":"DeviceCgroupPermissions"}
+      }
+    },
+    "DeviceCgroupPermission":{
+      "type":"string",
+      "enum":[
+        "READ",
+        "WRITE",
+        "MKNOD"
+      ]
+    },
+    "DeviceCgroupPermissions":{
+      "type":"list",
+      "member":{"shape":"DeviceCgroupPermission"}
+    },
+    "DevicesList":{
+      "type":"list",
+      "member":{"shape":"Device"}
     },
     "EnvironmentVariables":{
       "type":"list",
@@ -798,6 +828,12 @@
         "version":{"shape":"String"}
       }
     },
+    "LinuxParameters":{
+      "type":"structure",
+      "members":{
+        "devices":{"shape":"DevicesList"}
+      }
+    },
     "ListJobsRequest":{
       "type":"structure",
       "members":{
@@ -852,6 +888,7 @@
     "NodeOverrides":{
       "type":"structure",
       "members":{
+        "numNodes":{"shape":"Integer"},
         "nodePropertyOverrides":{"shape":"NodePropertyOverrides"}
       }
     },
@@ -933,6 +970,25 @@
         "jobDefinitionArn":{"shape":"String"},
         "revision":{"shape":"Integer"}
       }
+    },
+    "ResourceRequirement":{
+      "type":"structure",
+      "required":[
+        "value",
+        "type"
+      ],
+      "members":{
+        "value":{"shape":"String"},
+        "type":{"shape":"ResourceType"}
+      }
+    },
+    "ResourceRequirements":{
+      "type":"list",
+      "member":{"shape":"ResourceRequirement"}
+    },
+    "ResourceType":{
+      "type":"string",
+      "enum":["GPU"]
     },
     "RetryStrategy":{
       "type":"structure",

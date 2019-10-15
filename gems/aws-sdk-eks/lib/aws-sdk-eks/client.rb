@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::EKS
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -113,6 +115,10 @@ module Aws::EKS
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -199,6 +205,49 @@ module Aws::EKS
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -208,13 +257,11 @@ module Aws::EKS
     # Creates an Amazon EKS control plane.
     #
     # The Amazon EKS control plane consists of control plane instances that
-    # run the Kubernetes software, like `etcd` and the API server. The
+    # run the Kubernetes software, such as `etcd` and the API server. The
     # control plane runs in an account managed by AWS, and the Kubernetes
-    # API is exposed via the Amazon EKS API server endpoint.
-    #
-    # Amazon EKS worker nodes run in your AWS account and connect to your
-    # cluster's control plane via the Kubernetes API server endpoint and a
-    # certificate file that is created for your cluster.
+    # API is exposed via the Amazon EKS API server endpoint. Each Amazon EKS
+    # cluster control plane is single-tenant and unique and runs on its own
+    # set of Amazon EC2 instances.
     #
     # The cluster control plane is provisioned across multiple Availability
     # Zones and fronted by an Elastic Load Balancing Network Load Balancer.
@@ -223,22 +270,49 @@ module Aws::EKS
     # the worker nodes (for example, to support `kubectl exec`, `logs`, and
     # `proxy` data flows).
     #
-    # After you create an Amazon EKS cluster, you must configure your
-    # Kubernetes tooling to communicate with the API server and launch
-    # worker nodes into your cluster. For more information, see [Managing
-    # Cluster Authentication][1] and [Launching Amazon EKS Worker
-    # Nodes][2]in the *Amazon EKS User Guide*.
+    # Amazon EKS worker nodes run in your AWS account and connect to your
+    # cluster's control plane via the Kubernetes API server endpoint and a
+    # certificate file that is created for your cluster.
+    #
+    # You can use the `endpointPublicAccess` and `endpointPrivateAccess`
+    # parameters to enable or disable public and private access to your
+    # cluster's Kubernetes API server endpoint. By default, public access
+    # is enabled, and private access is disabled. For more information, see
+    # [Amazon EKS Cluster Endpoint Access Control][1] in the <i> <i>Amazon
+    # EKS User Guide</i> </i>.
+    #
+    # You can use the `logging` parameter to enable or disable exporting the
+    # Kubernetes control plane logs for your cluster to CloudWatch Logs. By
+    # default, cluster control plane logs aren't exported to CloudWatch
+    # Logs. For more information, see [Amazon EKS Cluster Control Plane
+    # Logs][2] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    # <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    # apply to exported control plane logs. For more information, see
+    # [Amazon CloudWatch Pricing][3].
+    #
+    #  </note>
+    #
+    # Cluster creation typically takes between 10 and 15 minutes. After you
+    # create an Amazon EKS cluster, you must configure your Kubernetes
+    # tooling to communicate with the API server and launch worker nodes
+    # into your cluster. For more information, see [Managing Cluster
+    # Authentication][4] and [Launching Amazon EKS Worker Nodes][5] in the
+    # *Amazon EKS User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
-    # [2]: http://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    # [3]: http://aws.amazon.com/cloudwatch/pricing/
+    # [4]: https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
+    # [5]: https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
     #
     # @option params [required, String] :name
     #   The unique name to give to your cluster.
     #
     # @option params [String] :version
-    #   The desired Kubernetes version for your cluster. If you do not specify
+    #   The desired Kubernetes version for your cluster. If you don't specify
     #   a value here, the latest version available in Amazon EKS is used.
     #
     # @option params [required, String] :role_arn
@@ -249,21 +323,39 @@ module Aws::EKS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
     #
     # @option params [required, Types::VpcConfigRequest] :resources_vpc_config
-    #   The VPC subnets and security groups used by the cluster control plane.
-    #   Amazon EKS VPC resources have specific requirements to work properly
-    #   with Kubernetes. For more information, see [Cluster VPC
-    #   Considerations][1] and [Cluster Security Group Considerations][2] in
-    #   the *Amazon EKS User Guide*. You must specify at least two subnets.
-    #   You may specify up to five security groups, but we recommend that you
-    #   use a dedicated security group for your cluster control plane.
+    #   The VPC configuration used by the cluster control plane. Amazon EKS
+    #   VPC resources have specific requirements to work properly with
+    #   Kubernetes. For more information, see [Cluster VPC Considerations][1]
+    #   and [Cluster Security Group Considerations][2] in the *Amazon EKS User
+    #   Guide*. You must specify at least two subnets. You can specify up to
+    #   five security groups, but we recommend that you use a dedicated
+    #   security group for your cluster control plane.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
-    #   [2]: http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
+    #
+    # @option params [Types::Logging] :logging
+    #   Enable or disable exporting the Kubernetes control plane logs for your
+    #   cluster to CloudWatch Logs. By default, cluster control plane logs
+    #   aren't exported to CloudWatch Logs. For more information, see [Amazon
+    #   EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS User
+    #   Guide</i> </i>.
+    #
+    #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    #   apply to exported control plane logs. For more information, see
+    #   [Amazon CloudWatch Pricing][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    #   [2]: http://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [String] :client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -271,6 +363,11 @@ module Aws::EKS
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata to apply to the cluster to assist with categorization and
+    #   organization. Each tag consists of a key and an optional value, both
+    #   of which you define.
     #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -308,10 +405,23 @@ module Aws::EKS
     #     version: "String",
     #     role_arn: "String", # required
     #     resources_vpc_config: { # required
-    #       subnet_ids: ["String"], # required
+    #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
+    #       endpoint_public_access: false,
+    #       endpoint_private_access: false,
+    #     },
+    #     logging: {
+    #       cluster_logging: [
+    #         {
+    #           types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #           enabled: false,
+    #         },
+    #       ],
     #     },
     #     client_request_token: "String",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -327,10 +437,19 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
     #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
+    #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
+    #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
+    #   resp.cluster.logging.cluster_logging #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
+    #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
+    #   resp.cluster.identity.oidc.issuer #=> String
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
+    #   resp.cluster.tags #=> Hash
+    #   resp.cluster.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCluster AWS API Documentation
     #
@@ -354,7 +473,7 @@ module Aws::EKS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html
     #
     # @option params [required, String] :name
     #   The name of the cluster to delete.
@@ -395,10 +514,19 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
     #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
+    #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
+    #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
+    #   resp.cluster.logging.cluster_logging #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
+    #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
+    #   resp.cluster.identity.oidc.issuer #=> String
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
+    #   resp.cluster.tags #=> Hash
+    #   resp.cluster.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCluster AWS API Documentation
     #
@@ -416,14 +544,14 @@ module Aws::EKS
     # with your Kubernetes API server. For more information, see [Create a
     # kubeconfig for Amazon EKS][1].
     #
-    # <note markdown="1"> The API server endpoint and certificate authority data are not
+    # <note markdown="1"> The API server endpoint and certificate authority data aren't
     # available until the cluster reaches the `ACTIVE` state.
     #
     #  </note>
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
     #
     # @option params [required, String] :name
     #   The name of the cluster to describe.
@@ -486,10 +614,19 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
     #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
+    #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
+    #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
+    #   resp.cluster.logging.cluster_logging #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
+    #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
+    #   resp.cluster.identity.oidc.issuer #=> String
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
+    #   resp.cluster.tags #=> Hash
+    #   resp.cluster.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCluster AWS API Documentation
     #
@@ -528,9 +665,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -553,13 +690,13 @@ module Aws::EKS
     #
     # @option params [Integer] :max_results
     #   The maximum number of cluster results returned by `ListClusters` in
-    #   paginated output. When this parameter is used, `ListClusters` only
-    #   returns `maxResults` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListClusters` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListClusters` returns up to 100 results
-    #   and a `nextToken` value if applicable.
+    #   paginated output. When you use this parameter, `ListClusters` returns
+    #   only `maxResults` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListClusters` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If you don't
+    #   use this parameter, `ListClusters` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -567,7 +704,7 @@ module Aws::EKS
     #   exceeded the value of that parameter. Pagination continues from the
     #   end of the previous results that returned the `nextToken` value.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -616,11 +753,42 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # List the tags for an Amazon EKS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for which
+    #   to list the tags. Currently, the supported resources are Amazon EKS
+    #   clusters.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Lists the updates associated with an Amazon EKS cluster in your AWS
     # account, in the specified Region.
     #
     # @option params [required, String] :name
-    #   The name of the Amazon EKS cluster for which to list updates.
+    #   The name of the Amazon EKS cluster to list updates for.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated `ListUpdates`
@@ -630,13 +798,13 @@ module Aws::EKS
     #
     # @option params [Integer] :max_results
     #   The maximum number of update results returned by `ListUpdates` in
-    #   paginated output. When this parameter is used, `ListUpdates` only
-    #   returns `maxResults` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListUpdates` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListUpdates` returns up to 100 results
-    #   and a `nextToken` value if applicable.
+    #   paginated output. When you use this parameter, `ListUpdates` returns
+    #   only `maxResults` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListUpdates` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If you don't
+    #   use this parameter, `ListUpdates` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #
     # @return [Types::ListUpdatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -663,6 +831,184 @@ module Aws::EKS
     # @param [Hash] params ({})
     def list_updates(params = {}, options = {})
       req = build_request(:list_updates, params)
+      req.send_request(options)
+    end
+
+    # Associates the specified tags to a resource with the specified
+    # `resourceArn`. If existing tags on a resource are not specified in the
+    # request parameters, they are not changed. When a resource is deleted,
+    # the tags associated with that resource are deleted as well.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   Currently, the supported resources are Amazon EKS clusters.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to add to the resource. A tag is an array of key-value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to delete
+    #   tags. Currently, the supported resources are Amazon EKS clusters.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon EKS cluster configuration. Your cluster continues to
+    # function during the update. The response output includes an update ID
+    # that you can use to track the status of your cluster update with the
+    # DescribeUpdate API operation.
+    #
+    # You can use this API operation to enable or disable exporting the
+    # Kubernetes control plane logs for your cluster to CloudWatch Logs. By
+    # default, cluster control plane logs aren't exported to CloudWatch
+    # Logs. For more information, see [Amazon EKS Cluster Control Plane
+    # Logs][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    # <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    # apply to exported control plane logs. For more information, see
+    # [Amazon CloudWatch Pricing][2].
+    #
+    #  </note>
+    #
+    # You can also use this API operation to enable or disable public and
+    # private access to your cluster's Kubernetes API server endpoint. By
+    # default, public access is enabled, and private access is disabled. For
+    # more information, see [Amazon EKS Cluster Endpoint Access Control][3]
+    # in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    # At this time, you can not update the subnets or security group IDs for
+    # an existing cluster.
+    #
+    # Cluster updates are asynchronous, and they should finish within a few
+    # minutes. During an update, the cluster status moves to `UPDATING`
+    # (this status transition is eventually consistent). When the update is
+    # complete (either `Failed` or `Successful`), the cluster status moves
+    # to `Active`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    # [2]: http://aws.amazon.com/cloudwatch/pricing/
+    # [3]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    #
+    # @option params [required, String] :name
+    #   The name of the Amazon EKS cluster to update.
+    #
+    # @option params [Types::VpcConfigRequest] :resources_vpc_config
+    #   An object representing the VPC configuration to use for an Amazon EKS
+    #   cluster.
+    #
+    # @option params [Types::Logging] :logging
+    #   Enable or disable exporting the Kubernetes control plane logs for your
+    #   cluster to CloudWatch Logs. By default, cluster control plane logs
+    #   aren't exported to CloudWatch Logs. For more information, see [Amazon
+    #   EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS User
+    #   Guide</i> </i>.
+    #
+    #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    #   apply to exported control plane logs. For more information, see
+    #   [Amazon CloudWatch Pricing][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    #   [2]: http://aws.amazon.com/cloudwatch/pricing/
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateClusterConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterConfigResponse#update #update} => Types::Update
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_config({
+    #     name: "String", # required
+    #     resources_vpc_config: {
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
+    #       endpoint_public_access: false,
+    #       endpoint_private_access: false,
+    #     },
+    #     logging: {
+    #       cluster_logging: [
+    #         {
+    #           types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #           enabled: false,
+    #         },
+    #       ],
+    #     },
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfig AWS API Documentation
+    #
+    # @overload update_cluster_config(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_config(params = {}, options = {})
+      req = build_request(:update_cluster_config, params)
       req.send_request(options)
     end
 
@@ -706,9 +1052,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -739,7 +1085,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -756,7 +1102,7 @@ module Aws::EKS
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

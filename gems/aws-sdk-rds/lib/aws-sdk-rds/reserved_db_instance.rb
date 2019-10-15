@@ -115,6 +115,18 @@ module Aws::RDS
       data[:reserved_db_instance_arn]
     end
 
+    # The unique identifier for the lease associated with the reserved DB
+    # instance.
+    #
+    # <note markdown="1"> AWS Support might request the lease ID for an issue related to a
+    # reserved DB instance.
+    #
+    #  </note>
+    # @return [String]
+    def lease_id
+      data[:lease_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

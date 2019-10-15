@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-09-25)
+------------------
+
+* Feature - This release adds a new DeleteConnection API to delete the connection between a replication instance and an endpoint. It also adds an optional S3 setting to specify the precision of any TIMESTAMP column values written to an S3 object file in .parquet format.
+
+1.27.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-07-17)
+------------------
+
+* Feature - S3 endpoint settings update: 1) Option to append operation column to full-load files. 2) Option to add a commit timestamp column to full-load and cdc files. Updated DescribeAccountAttributes to include UniqueAccountIdentifier.
+
+1.25.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-03-22)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-01-21)
+------------------
+
+* Feature - API update.
+
 1.15.0 (2018-11-20)
 ------------------
 

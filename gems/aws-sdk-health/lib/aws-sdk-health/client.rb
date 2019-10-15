@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::Health
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::Health
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -208,6 +214,49 @@ module Aws::Health
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -386,7 +435,7 @@ module Aws::Health
     #       ],
     #       entity_arns: ["entityArn"],
     #       entity_values: ["entityValue"],
-    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #       tags: [
     #         {
     #           "tagKey" => "tagValue",
@@ -452,7 +501,7 @@ module Aws::Health
     #   resp.successful_set[0].event.arn #=> String
     #   resp.successful_set[0].event.service #=> String
     #   resp.successful_set[0].event.event_type_code #=> String
-    #   resp.successful_set[0].event.event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange"
+    #   resp.successful_set[0].event.event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
     #   resp.successful_set[0].event.region #=> String
     #   resp.successful_set[0].event.availability_zone #=> String
     #   resp.successful_set[0].event.start_time #=> Time
@@ -509,7 +558,7 @@ module Aws::Health
     #     filter: {
     #       event_type_codes: ["eventTypeCode"],
     #       services: ["service"],
-    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #     },
     #     locale: "locale",
     #     next_token: "nextToken",
@@ -521,7 +570,7 @@ module Aws::Health
     #   resp.event_types #=> Array
     #   resp.event_types[0].service #=> String
     #   resp.event_types[0].code #=> String
-    #   resp.event_types[0].category #=> String, one of "issue", "accountNotification", "scheduledChange"
+    #   resp.event_types[0].category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypes AWS API Documentation
@@ -594,7 +643,7 @@ module Aws::Health
     #       ],
     #       entity_arns: ["entityArn"],
     #       entity_values: ["entityValue"],
-    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #       tags: [
     #         {
     #           "tagKey" => "tagValue",
@@ -613,7 +662,7 @@ module Aws::Health
     #   resp.events[0].arn #=> String
     #   resp.events[0].service #=> String
     #   resp.events[0].event_type_code #=> String
-    #   resp.events[0].event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange"
+    #   resp.events[0].event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
     #   resp.events[0].region #=> String
     #   resp.events[0].availability_zone #=> String
     #   resp.events[0].start_time #=> Time
@@ -644,7 +693,7 @@ module Aws::Health
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

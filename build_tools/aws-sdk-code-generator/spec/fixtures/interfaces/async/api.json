@@ -1,0 +1,120 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "endpointPrefix": "svc",
+    "protocol": "rest-json",
+    "protocolSettings":{"h2":"eventstream"},
+    "signatureVersion":"v4"
+  },
+  "operations": {
+    "Foo": {
+      "name": "Foo",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": { "shape": "FooRequest" },
+      "output": { "shape": "FooResponse" }
+    },
+    "Baz": {
+      "name": "Baz",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "BazRequest"},
+      "output": {"shape": "BazResponse"}
+    }
+  },
+  "shapes": {
+    "BazRequest": {
+      "type": "structure",
+      "members": {
+        "Stream": { "shape": "BazStream"}
+      },
+      "payload": "Stream"
+    },
+    "BazResponse": {
+      "type": "structure",
+      "members": {
+        "Stream": { "shape": "BazStream"}
+      },
+      "payload": "Stream"
+    },
+    "FooRequest": {
+      "type": "structure",
+      "members": {
+        "MemberA": {
+          "shape": "StringShape",
+          "location": "header",
+          "locationName": "x-amzn-member-a"
+        },
+        "FooStream": { "shape": "FooStream" }
+      }
+    },
+    "StringShape": { "type": "string" },
+    "FooStream": {
+      "type": "structure",
+      "members": {
+        "Bar": { "shape": "BarEvent" }
+      },
+      "eventstream": true
+    },
+    "BazStream": {
+      "type": "structure",
+      "members": {
+        "Bar": { "shape": "BarEvent"}
+      },
+      "eventstream": true
+    },
+    "BarEvent": {
+      "type": "structure",
+      "members": {
+        "BarChunk": {
+          "shape": "BarChunk",
+          "eventpayload": true
+        }
+      },
+      "event": true
+    },
+    "BarChunk": { "type": "blob" },
+    "FooResponse": {
+      "type": "structure",
+      "members": {
+        "MemberB": {
+          "shape": "StringShape",
+          "location": "header",
+          "locationName": "x-amzn-member-b"
+        },
+        "BazStream": { "shape": "BazStream" }
+      },
+      "payload": "BazStream"
+    },
+    "BazStream": {
+      "type": "structure",
+      "members": {
+        "BazResult": { "shape": "BazEvent" }
+      },
+      "eventstream": true
+    },
+    "BazEvent": {
+      "type": "structure",
+      "members": {
+        "Result": { 
+          "shape": "Result"
+        }
+      },
+      "event": true
+    },
+    "Result": {
+      "type": "structure",
+      "members": {
+        "Details": { "shape": "ListShape" }
+      }
+    },
+    "ListShape": {
+      "type": "list",
+      "member": { "shape": "StringShape" }
+    }
+  }
+}

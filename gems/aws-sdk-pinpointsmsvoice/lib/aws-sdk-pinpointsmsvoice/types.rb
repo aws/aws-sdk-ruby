@@ -8,6 +8,30 @@
 module Aws::PinpointSMSVoice
   module Types
 
+    # The resource specified in your request already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The input you provided is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object that defines a message that contains text formatted using
     # Amazon Pinpoint Voice Instructions markup.
     #
@@ -328,6 +352,20 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
+    # The API encountered an unexpected error and couldn't complete the
+    # request. You might be able to successfully issue the request again in
+    # the future.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object that contains information about an event destination that
     # sends data to Amazon Kinesis Data Firehose.
     #
@@ -354,6 +392,73 @@ module Aws::PinpointSMSVoice
     class KinesisFirehoseDestination < Struct.new(
       :delivery_stream_arn,
       :iam_role_arn)
+      include Aws::Structure
+    end
+
+    # There are too many instances of the specified resource type.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListConfigurationSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSetsRequest AWS API Documentation
+    #
+    class ListConfigurationSetsRequest < Struct.new(
+      :next_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # An object that contains information about the configuration sets for
+    # your account in the current region.
+    #
+    # @!attribute [rw] configuration_sets
+    #   An object that contains a list of configuration sets for your
+    #   account in the current region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to ListConfigurationSets to
+    #   indicate the position in the list of configuration sets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSetsResponse AWS API Documentation
+    #
+    class ListConfigurationSetsResponse < Struct.new(
+      :configuration_sets,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # The resource you attempted to access doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -524,6 +629,19 @@ module Aws::PinpointSMSVoice
     #
     class SnsDestination < Struct.new(
       :topic_arn)
+      include Aws::Structure
+    end
+
+    # You've issued too many requests to the resource. Wait a few minutes,
+    # and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

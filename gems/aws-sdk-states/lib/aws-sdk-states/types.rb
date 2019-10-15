@@ -8,6 +8,18 @@
 module Aws::States
   module Types
 
+    # The specified activity does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityDoesNotExist AWS API Documentation
+    #
+    class ActivityDoesNotExist < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about an activity that failed during an execution.
     #
     # @!attribute [rw] error
@@ -26,6 +38,19 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The maximum number of activities has been reached. Existing activities
+    # must be deleted before a new activity can be created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityLimitExceeded AWS API Documentation
+    #
+    class ActivityLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about an activity.
     #
     # @!attribute [rw] activity_arn
@@ -37,7 +62,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -156,11 +181,30 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The maximum number of workers concurrently polling for activity tasks
+    # has been reached.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityWorkerLimitExceeded AWS API Documentation
+    #
+    class ActivityWorkerLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateActivityInput
     #   data as a hash:
     #
     #       {
     #         name: "Name", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -171,7 +215,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -183,13 +227,30 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags to add to a resource.
+    #
+    #   An array of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivityInput AWS API Documentation
     #
     class CreateActivityInput < Struct.new(
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -216,6 +277,12 @@ module Aws::States
     #         name: "Name", # required
     #         definition: "Definition", # required
     #         role_arn: "Arn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -223,7 +290,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -240,7 +307,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -248,12 +315,29 @@ module Aws::States
     #   machine.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags to be added when creating a state machine.
+    #
+    #   An array of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineInput AWS API Documentation
     #
     class CreateStateMachineInput < Struct.new(
       :name,
       :definition,
-      :role_arn)
+      :role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -345,7 +429,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -400,7 +484,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -484,7 +568,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -536,7 +620,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -557,7 +641,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -600,6 +684,35 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The execution has the same `name` as another execution (but a
+    # different `input`).
+    #
+    # <note markdown="1"> Executions with the same `name` and `input` are considered idempotent.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionAlreadyExists AWS API Documentation
+    #
+    class ExecutionAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified execution does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionDoesNotExist AWS API Documentation
+    #
+    class ExecutionDoesNotExist < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about an execution failure event.
     #
     # @!attribute [rw] error
@@ -618,6 +731,20 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The maximum number of running executions has been reached. Running
+    # executions must end or be stopped before a new execution can be
+    # started.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionLimitExceeded AWS API Documentation
+    #
+    class ExecutionLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about an execution.
     #
     # @!attribute [rw] execution_arn
@@ -633,7 +760,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -880,38 +1007,35 @@ module Aws::States
     #   @return [Types::ActivityTimedOutEventDetails]
     #
     # @!attribute [rw] task_failed_event_details
-    #   Contains details about a task failure event.
+    #   Contains details about the failure of a task.
     #   @return [Types::TaskFailedEventDetails]
     #
     # @!attribute [rw] task_scheduled_event_details
-    #   Contains details about a task scheduled during an execution.
+    #   Contains details about a task that was scheduled.
     #   @return [Types::TaskScheduledEventDetails]
     #
     # @!attribute [rw] task_start_failed_event_details
-    #   Contains details about a task that failed to start during an
-    #   execution.
+    #   Contains details about a task that failed to start.
     #   @return [Types::TaskStartFailedEventDetails]
     #
     # @!attribute [rw] task_started_event_details
-    #   Contains details about the start of a task during an execution.
+    #   Contains details about a task that was started.
     #   @return [Types::TaskStartedEventDetails]
     #
     # @!attribute [rw] task_submit_failed_event_details
-    #   Contains details about a task that failed to submit during an
-    #   execution.
+    #   Contains details about a task that where the submit failed.
     #   @return [Types::TaskSubmitFailedEventDetails]
     #
     # @!attribute [rw] task_submitted_event_details
-    #   Contains details about a task submitted to a resource .
+    #   Contains details about a submitted task.
     #   @return [Types::TaskSubmittedEventDetails]
     #
     # @!attribute [rw] task_succeeded_event_details
-    #   Contains details about the successful completion of a task state.
+    #   Contains details about a task that succeeded.
     #   @return [Types::TaskSucceededEventDetails]
     #
     # @!attribute [rw] task_timed_out_event_details
-    #   Contains details about a resource timeout that occurred during an
-    #   execution.
+    #   Contains details about a task that timed out.
     #   @return [Types::TaskTimedOutEventDetails]
     #
     # @!attribute [rw] execution_failed_event_details
@@ -934,6 +1058,26 @@ module Aws::States
     #   Contains details about the execution timeout that occurred during
     #   the execution.
     #   @return [Types::ExecutionTimedOutEventDetails]
+    #
+    # @!attribute [rw] map_state_started_event_details
+    #   Contains details about Map state that was started.
+    #   @return [Types::MapStateStartedEventDetails]
+    #
+    # @!attribute [rw] map_iteration_started_event_details
+    #   Contains details about an iteration of a Map state that was started.
+    #   @return [Types::MapIterationEventDetails]
+    #
+    # @!attribute [rw] map_iteration_succeeded_event_details
+    #   Contains details about an iteration of a Map state that succeeded.
+    #   @return [Types::MapIterationEventDetails]
+    #
+    # @!attribute [rw] map_iteration_failed_event_details
+    #   Contains details about an iteration of a Map state that failed.
+    #   @return [Types::MapIterationEventDetails]
+    #
+    # @!attribute [rw] map_iteration_aborted_event_details
+    #   Contains details about an iteration of a Map state that was aborted.
+    #   @return [Types::MapIterationEventDetails]
     #
     # @!attribute [rw] lambda_function_failed_event_details
     #   Contains details about a lambda function that failed during an
@@ -999,6 +1143,11 @@ module Aws::States
       :execution_succeeded_event_details,
       :execution_aborted_event_details,
       :execution_timed_out_event_details,
+      :map_state_started_event_details,
+      :map_iteration_started_event_details,
+      :map_iteration_succeeded_event_details,
+      :map_iteration_failed_event_details,
+      :map_iteration_aborted_event_details,
       :lambda_function_failed_event_details,
       :lambda_function_schedule_failed_event_details,
       :lambda_function_scheduled_event_details,
@@ -1007,6 +1156,78 @@ module Aws::States
       :lambda_function_timed_out_event_details,
       :state_entered_event_details,
       :state_exited_event_details)
+      include Aws::Structure
+    end
+
+    # The provided Amazon Resource Name (ARN) is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidArn AWS API Documentation
+    #
+    class InvalidArn < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided Amazon States Language definition is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidDefinition AWS API Documentation
+    #
+    class InvalidDefinition < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided JSON input data is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidExecutionInput AWS API Documentation
+    #
+    class InvalidExecutionInput < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided name is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidName AWS API Documentation
+    #
+    class InvalidName < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided JSON output data is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidOutput AWS API Documentation
+    #
+    class InvalidOutput < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided token is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidToken AWS API Documentation
+    #
+    class InvalidToken < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1187,7 +1408,7 @@ module Aws::States
     #         state_machine_arn: "Arn", # required
     #         status_filter: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, ABORTED
     #         max_results: 1,
-    #         next_token: "PageToken",
+    #         next_token: "ListExecutionsPageToken",
     #       }
     #
     # @!attribute [rw] state_machine_arn
@@ -1335,6 +1556,67 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Contains details about an iteration of a Map state.
+    #
+    # @!attribute [rw] name
+    #   The name of the iteration’s parent Map state.
+    #   @return [String]
+    #
+    # @!attribute [rw] index
+    #   The index of the array belonging to the Map state iteration.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapIterationEventDetails AWS API Documentation
+    #
+    class MapIterationEventDetails < Struct.new(
+      :name,
+      :index)
+      include Aws::Structure
+    end
+
+    # Details about a Map state that was started.
+    #
+    # @!attribute [rw] length
+    #   The size of the array for Map state iterations.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapStateStartedEventDetails AWS API Documentation
+    #
+    class MapStateStartedEventDetails < Struct.new(
+      :length)
+      include Aws::Structure
+    end
+
+    # Request is missing a required parameter. This error occurs if both
+    # `definition` and `roleArn` are not specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MissingRequiredParameter AWS API Documentation
+    #
+    class MissingRequiredParameter < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Could not find the referenced resource. Only state machine and
+    # activity ARNs are supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ResourceNotFound AWS API Documentation
+    #
+    class ResourceNotFound < Struct.new(
+      :message,
+      :resource_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SendTaskFailureInput
     #   data as a hash:
     #
@@ -1346,8 +1628,13 @@ module Aws::States
     #
     # @!attribute [rw] task_token
     #   The token that represents this task. Task tokens are generated by
-    #   the service when the tasks are assigned to a worker (see
-    #   GetActivityTask::taskToken).
+    #   Step Functions when tasks are assigned to a worker, or in the
+    #   [context object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -1380,8 +1667,13 @@ module Aws::States
     #
     # @!attribute [rw] task_token
     #   The token that represents this task. Task tokens are generated by
-    #   the service when the tasks are assigned to a worker (see
-    #   GetActivityTaskOutput$taskToken).
+    #   Step Functions when tasks are assigned to a worker, or in the
+    #   [context object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeatInput AWS API Documentation
@@ -1405,8 +1697,13 @@ module Aws::States
     #
     # @!attribute [rw] task_token
     #   The token that represents this task. Task tokens are generated by
-    #   the service when the tasks are assigned to a worker (see
-    #   GetActivityTaskOutput$taskToken).
+    #   Step Functions when tasks are assigned to a worker, or in the
+    #   [context object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #   @return [String]
     #
     # @!attribute [rw] output
@@ -1440,13 +1737,13 @@ module Aws::States
     #
     # @!attribute [rw] name
     #   The name of the execution. This name must be unique for your AWS
-    #   account and region for 90 days. For more information, see [ Limits
-    #   Related to State Machine Executions][1] in the *AWS Step Functions
-    #   Developer Guide*.
+    #   account, region, and state machine for 90 days. For more
+    #   information, see [ Limits Related to State Machine Executions][1] in
+    #   the *AWS Step Functions Developer Guide*.
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -1458,7 +1755,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #   @return [String]
     #
     # @!attribute [rw] input
@@ -1523,7 +1820,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -1546,6 +1843,56 @@ module Aws::States
       include Aws::Structure
     end
 
+    # A state machine with the same name but a different definition or role
+    # ARN already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineAlreadyExists AWS API Documentation
+    #
+    class StateMachineAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified state machine is being deleted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineDeleting AWS API Documentation
+    #
+    class StateMachineDeleting < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified state machine does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineDoesNotExist AWS API Documentation
+    #
+    class StateMachineDoesNotExist < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of state machines has been reached. Existing state
+    # machines must be deleted before a new state machine can be created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineLimitExceeded AWS API Documentation
+    #
+    class StateMachineLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about the state machine.
     #
     # @!attribute [rw] state_machine_arn
@@ -1557,7 +1904,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -1625,6 +1972,18 @@ module Aws::States
     # Tags are key-value pairs that can be associated with Step Functions
     # state machines and activities.
     #
+    # An array of key-value pairs. For more information, see [Using Cost
+    # Allocation Tags][1] in the *AWS Billing and Cost Management User
+    # Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    # Tags may only contain Unicode letters, digits, white space, or these
+    # symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
+    #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
     #
@@ -1670,7 +2029,7 @@ module Aws::States
     # @!attribute [rw] tags
     #   The list of tags to add to a resource.
     #
-    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   Tags may only contain Unicode letters, digits, white space, or these
     #   symbols: `_ . : / = + - @`.
     #   @return [Array<Types::Tag>]
     #
@@ -1685,6 +2044,16 @@ module Aws::States
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TagResourceOutput AWS API Documentation
     #
     class TagResourceOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskDoesNotExist AWS API Documentation
+    #
+    class TaskDoesNotExist < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # Contains details about a task failure event.
     #
@@ -1870,6 +2239,16 @@ module Aws::States
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskTimedOut AWS API Documentation
+    #
+    class TaskTimedOut < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about a resource timeout that occurred during an
     # execution.
     #
@@ -1896,6 +2275,27 @@ module Aws::States
       :resource,
       :error,
       :cause)
+      include Aws::Structure
+    end
+
+    # You've exceeded the number of tags allowed for a resource. See the [
+    # Limits Topic][1] in the AWS Step Functions Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TooManyTags AWS API Documentation
+    #
+    class TooManyTags < Struct.new(
+      :message,
+      :resource_name)
       include Aws::Structure
     end
 
@@ -1947,7 +2347,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn

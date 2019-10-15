@@ -141,6 +141,8 @@ module Aws
                   if Tempfile === body
                     body.close
                     body.unlink
+                  elsif StringIO === body
+                    body.string.clear
                   end
                 end
               end

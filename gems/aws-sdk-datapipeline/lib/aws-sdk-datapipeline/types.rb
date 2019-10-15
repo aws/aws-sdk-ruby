@@ -497,6 +497,35 @@ module Aws::DataPipeline
       include Aws::Structure
     end
 
+    # An internal service error occurred.
+    #
+    # @!attribute [rw] message
+    #   Description of the error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/InternalServiceError AWS API Documentation
+    #
+    class InternalServiceError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was not valid. Verify that your request was properly
+    # formatted, that the signature was generated with the correct
+    # credentials, and that you haven't exceeded any of the service limits
+    # for your account.
+    #
+    # @!attribute [rw] message
+    #   Description of the error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains the parameters for ListPipelines.
     #
     # @note When making an API call, you may pass ListPipelinesInput
@@ -690,6 +719,19 @@ module Aws::DataPipeline
       include Aws::Structure
     end
 
+    # The specified pipeline has been deleted.
+    #
+    # @!attribute [rw] message
+    #   Description of the error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PipelineDeletedException AWS API Documentation
+    #
+    class PipelineDeletedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains pipeline metadata.
     #
     # @!attribute [rw] pipeline_id
@@ -747,6 +789,20 @@ module Aws::DataPipeline
     class PipelineIdName < Struct.new(
       :id,
       :name)
+      include Aws::Structure
+    end
+
+    # The specified pipeline was not found. Verify that you used the correct
+    # user and account identifiers.
+    #
+    # @!attribute [rw] message
+    #   Description of the error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PipelineNotFoundException AWS API Documentation
+    #
+    class PipelineNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1375,6 +1431,19 @@ module Aws::DataPipeline
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # The specified task was not found.
+    #
+    # @!attribute [rw] message
+    #   Description of the error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/TaskNotFoundException AWS API Documentation
+    #
+    class TaskNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

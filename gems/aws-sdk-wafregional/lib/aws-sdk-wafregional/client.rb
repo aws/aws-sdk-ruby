@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::WAFRegional
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -113,6 +115,10 @@ module Aws::WAFRegional
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -209,6 +215,49 @@ module Aws::WAFRegional
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -278,7 +327,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the ByteMatchSet. You can't change
@@ -345,7 +394,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the GeoMatchSet. You can't change
@@ -410,7 +459,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the IPSet. You can't change `Name`
@@ -543,7 +592,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RateBasedRule. You can't change
@@ -552,8 +601,10 @@ module Aws::WAFRegional
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this
     #   `RateBasedRule`. The name can contain only alphanumeric characters
-    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change
-    #   the name of the metric after you create the `RateBasedRule`.
+    #   (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It
+    #   can't contain whitespace or metric names reserved for AWS WAF,
+    #   including "All" and "Default\_Action." You can't change the name
+    #   of the metric after you create the `RateBasedRule`.
     #
     # @option params [required, String] :rate_key
     #   The field that AWS WAF uses to determine if requests are likely
@@ -574,6 +625,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Types::CreateRateBasedRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRateBasedRuleResponse#rule #rule} => Types::RateBasedRule
@@ -587,6 +640,12 @@ module Aws::WAFRegional
     #     rate_key: "IP", # required, accepts IP
     #     rate_limit: 1, # required
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -640,7 +699,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RegexMatchSet. You can't change
@@ -705,7 +764,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RegexPatternSet. You can't
@@ -783,7 +842,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the Rule. You can't change the name
@@ -791,12 +850,16 @@ module Aws::WAFRegional
     #
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain white space. You can't change the name of the
-    #   metric after you create the `Rule`.
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All" and
+    #   "Default\_Action." You can't change the name of the metric after
+    #   you create the `Rule`.
     #
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @option params [Array<Types::Tag>] :tags
     #
     # @return [Types::CreateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -837,6 +900,12 @@ module Aws::WAFRegional
     #     name: "ResourceName", # required
     #     metric_name: "MetricName", # required
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -877,7 +946,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RuleGroup. You can't change
@@ -885,12 +954,16 @@ module Aws::WAFRegional
     #
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change the name of the
-    #   metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All" and
+    #   "Default\_Action." You can't change the name of the metric after
+    #   you create the `RuleGroup`.
     #
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @option params [Array<Types::Tag>] :tags
     #
     # @return [Types::CreateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -903,6 +976,12 @@ module Aws::WAFRegional
     #     name: "ResourceName", # required
     #     metric_name: "MetricName", # required
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -950,7 +1029,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the SizeConstraintSet. You can't
@@ -1047,7 +1126,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description for the SqlInjectionMatchSet that
@@ -1151,17 +1230,19 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the WebACL. You can't change `Name`
     #   after you create the `WebACL`.
     #
     # @option params [required, String] :metric_name
-    #   A friendly name or description for the metrics for this `WebACL`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain white space. You can't change `MetricName` after
-    #   you create the `WebACL`.
+    #   A friendly name or description for the metrics for this `WebACL`.The
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All" and
+    #   "Default\_Action." You can't change `MetricName` after you create
+    #   the `WebACL`.
     #
     # @option params [required, Types::WafAction] :default_action
     #   The action that you want AWS WAF to take when a request doesn't match
@@ -1170,6 +1251,8 @@ module Aws::WAFRegional
     #
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @option params [Array<Types::Tag>] :tags
     #
     # @return [Types::CreateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1221,6 +1304,12 @@ module Aws::WAFRegional
     #       type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #     },
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1273,7 +1362,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description for the XssMatchSet that you're
@@ -2221,7 +2310,7 @@ module Aws::WAFRegional
     # * `PENDING`\: AWS WAF is propagating the create, update, or delete
     #   request to all AWS WAF servers.
     #
-    # * `IN_SYNC`\: Propagation is complete.
+    # * `INSYNC`\: Propagation is complete.
     #
     # @option params [required, String] :change_token
     #   The change token for which you want to get the status. This change
@@ -3241,12 +3330,10 @@ module Aws::WAFRegional
     # Returns an array of IPSetSummary objects in the response.
     #
     # @option params [String] :next_marker
-    #   If you specify a value for `Limit` and you have more `IPSets` than the
-    #   value of `Limit`, AWS WAF returns a `NextMarker` value in the response
-    #   that allows you to list another group of `IPSets`. For the second and
-    #   subsequent `ListIPSets` requests, specify the value of `NextMarker`
-    #   from the previous response to get information about another batch of
-    #   `IPSets`.
+    #   AWS WAF returns a `NextMarker` value in the response that allows you
+    #   to list another group of `IPSets`. For the second and subsequent
+    #   `ListIPSets` requests, specify the value of `NextMarker` from the
+    #   previous response to get information about another batch of `IPSets`.
     #
     # @option params [Integer] :limit
     #   Specifies the number of `IPSet` objects that you want AWS WAF to
@@ -3804,6 +3891,42 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # @option params [String] :next_marker
+    #
+    # @option params [Integer] :limit
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#next_marker #next_marker} => String
+    #   * {Types::ListTagsForResourceResponse#tag_info_for_resource #tag_info_for_resource} => Types::TagInfoForResource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.tag_info_for_resource.resource_arn #=> String
+    #   resp.tag_info_for_resource.tag_list #=> Array
+    #   resp.tag_info_for_resource.tag_list[0].key #=> String
+    #   resp.tag_info_for_resource.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Returns an array of WebACLSummary objects in the response.
     #
     # @option params [String] :next_marker
@@ -3936,7 +4059,16 @@ module Aws::WAFRegional
     # You can access information about all traffic that AWS WAF inspects
     # using the following steps:
     #
-    # 1.  Create an Amazon Kinesis Data Firehose .
+    # 1.  Create an Amazon Kinesis Data Firehose.
+    #
+    #     Create the data firehose with a PUT source and in the region that
+    #     you are operating. However, if you are capturing logs for Amazon
+    #     CloudFront, always create the firehose in US East (N. Virginia).
+    #
+    #     <note markdown="1"> Do not create the data firehose using a `Kinesis stream` as your
+    #     source.
+    #
+    #      </note>
     #
     # 2.  Associate that firehose to your web ACL using a
     #     `PutLoggingConfiguration` request.
@@ -3949,12 +4081,17 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
     #
     # @option params [required, Types::LoggingConfiguration] :logging_configuration
     #   The Amazon Kinesis Data Firehose that contains the inspected traffic
     #   information, the redacted fields details, and the Amazon Resource Name
     #   (ARN) of the web ACL to monitor.
+    #
+    #   <note markdown="1"> When specifying `Type` in `RedactedFields`, you must use one of the
+    #   following values: `URI`, `QUERY_STRING`, `HEADER`, or `METHOD`.
+    #
+    #    </note>
     #
     # @return [Types::PutLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4053,6 +4190,55 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Inserts or deletes ByteMatchTuple objects (filters) in a ByteMatchSet.
     # For each `ByteMatchTuple` object, you specify the following values:
     #
@@ -4096,7 +4282,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :byte_match_set_id
     #   The `ByteMatchSetId` of the ByteMatchSet that you want to update.
@@ -4218,7 +4404,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :geo_match_set_id
     #   The `GeoMatchSetId` of the GeoMatchSet that you want to update.
@@ -4288,8 +4474,8 @@ module Aws::WAFRegional
     #   `192.0.2.44/32` (for the individual IP address `192.0.2.44`).
     #
     # AWS WAF supports IPv4 address ranges: /8 and any range between /16
-    # through /32. AWS WAF supports IPv6 address ranges: /16, /24, /32, /48,
-    # /56, /64, and /128. For more information about CIDR notation, see the
+    # through /32. AWS WAF supports IPv6 address ranges: /24, /32, /48, /56,
+    # /64, and /128. For more information about CIDR notation, see the
     # Wikipedia entry [Classless Inter-Domain Routing][1].
     #
     # IPv6 addresses can be represented using any of the following formats:
@@ -4332,7 +4518,7 @@ module Aws::WAFRegional
     #
     #
     # [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
-    # [2]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :ip_set_id
     #   The `IPSetId` of the IPSet that you want to update. `IPSetId` is
@@ -4548,7 +4734,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :regex_match_set_id
     #   The `RegexMatchSetId` of the RegexMatchSet that you want to update.
@@ -4637,7 +4823,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :regex_pattern_set_id
     #   The `RegexPatternSetId` of the RegexPatternSet that you want to
@@ -4721,7 +4907,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :rule_id
     #   The `RuleId` of the `Rule` that you want to update. `RuleId` is
@@ -4828,7 +5014,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :rule_group_id
     #   The `RuleGroupId` of the RuleGroup that you want to update.
@@ -4946,7 +5132,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :size_constraint_set_id
     #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
@@ -5077,7 +5263,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :sql_injection_match_set_id
     #   The `SqlInjectionMatchSetId` of the `SqlInjectionMatchSet` that you
@@ -5228,7 +5414,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :web_acl_id
     #   The `WebACLId` of the WebACL that you want to update. `WebACLId` is
@@ -5378,7 +5564,7 @@ module Aws::WAFRegional
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :xss_match_set_id
     #   The `XssMatchSetId` of the `XssMatchSet` that you want to update.
@@ -5475,7 +5661,7 @@ module Aws::WAFRegional
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafregional'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -761,6 +761,22 @@
         {"shape":"ClusterNotFoundFault"}
       ]
     },
+    "DescribeNodeConfigurationOptions":{
+      "name":"DescribeNodeConfigurationOptions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeNodeConfigurationOptionsMessage"},
+      "output":{
+        "shape":"NodeConfigurationOptionsMessage",
+        "resultWrapper":"DescribeNodeConfigurationOptionsResult"
+      },
+      "errors":[
+        {"shape":"ClusterSnapshotNotFoundFault"},
+        {"shape":"InvalidClusterSnapshotStateFault"}
+      ]
+    },
     "DescribeOrderableClusterOptions":{
       "name":"DescribeOrderableClusterOptions",
       "http":{
@@ -1319,7 +1335,9 @@
         {"shape":"LimitExceededFault"},
         {"shape":"DependentServiceRequestThrottlingFault"},
         {"shape":"InvalidClusterTrackFault"},
-        {"shape":"SnapshotScheduleNotFoundFault"}
+        {"shape":"SnapshotScheduleNotFoundFault"},
+        {"shape":"TagLimitExceededFault"},
+        {"shape":"InvalidTagFault"}
       ]
     },
     "RestoreTableFromClusterSnapshot":{
@@ -1449,6 +1467,17 @@
       "member":{
         "shape":"AccountWithRestoreAccess",
         "locationName":"AccountWithRestoreAccess"
+      }
+    },
+    "ActionType":{
+      "type":"string",
+      "enum":["restore-cluster"]
+    },
+    "AssociatedClusterList":{
+      "type":"list",
+      "member":{
+        "shape":"ClusterAssociatedToSchedule",
+        "locationName":"ClusterAssociatedToSchedule"
       }
     },
     "AttributeList":{
@@ -1652,6 +1681,7 @@
         "ClusterIdentifier":{"shape":"String"},
         "NodeType":{"shape":"String"},
         "ClusterStatus":{"shape":"String"},
+        "ClusterAvailabilityStatus":{"shape":"String"},
         "ModifyStatus":{"shape":"String"},
         "MasterUsername":{"shape":"String"},
         "DBName":{"shape":"String"},
@@ -1690,6 +1720,9 @@
         "DeferredMaintenanceWindows":{"shape":"DeferredMaintenanceWindowsList"},
         "SnapshotScheduleIdentifier":{"shape":"String"},
         "SnapshotScheduleState":{"shape":"ScheduleState"},
+        "ExpectedNextSnapshotScheduleTime":{"shape":"TStamp"},
+        "ExpectedNextSnapshotScheduleTimeStatus":{"shape":"String"},
+        "NextMaintenanceWindowStartTime":{"shape":"TStamp"},
         "ResizeInfo":{"shape":"ResizeInfo"}
       },
       "wrapper":true
@@ -1704,6 +1737,13 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "ClusterAssociatedToSchedule":{
+      "type":"structure",
+      "members":{
+        "ClusterIdentifier":{"shape":"String"},
+        "ScheduleAssociationState":{"shape":"ScheduleState"}
+      }
     },
     "ClusterCredentials":{
       "type":"structure",
@@ -2710,6 +2750,21 @@
         "ClusterIdentifier":{"shape":"String"}
       }
     },
+    "DescribeNodeConfigurationOptionsMessage":{
+      "type":"structure",
+      "required":["ActionType"],
+      "members":{
+        "ActionType":{"shape":"ActionType"},
+        "SnapshotIdentifier":{"shape":"String"},
+        "OwnerAccount":{"shape":"String"},
+        "Filters":{
+          "shape":"NodeConfigurationOptionsFilterList",
+          "locationName":"Filter"
+        },
+        "Marker":{"shape":"String"},
+        "MaxRecords":{"shape":"IntegerOptional"}
+      }
+    },
     "DescribeOrderableClusterOptionsMessage":{
       "type":"structure",
       "members":{
@@ -3697,6 +3752,54 @@
         "ScheduleDefinitions":{"shape":"ScheduleDefinitionList"}
       }
     },
+    "NodeConfigurationOption":{
+      "type":"structure",
+      "members":{
+        "NodeType":{"shape":"String"},
+        "NumberOfNodes":{"shape":"Integer"},
+        "EstimatedDiskUtilizationPercent":{"shape":"DoubleOptional"}
+      }
+    },
+    "NodeConfigurationOptionList":{
+      "type":"list",
+      "member":{
+        "shape":"NodeConfigurationOption",
+        "locationName":"NodeConfigurationOption"
+      }
+    },
+    "NodeConfigurationOptionsFilter":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"NodeConfigurationOptionsFilterName"},
+        "Operator":{"shape":"OperatorType"},
+        "Values":{
+          "shape":"ValueStringList",
+          "locationName":"Value"
+        }
+      }
+    },
+    "NodeConfigurationOptionsFilterList":{
+      "type":"list",
+      "member":{
+        "shape":"NodeConfigurationOptionsFilter",
+        "locationName":"NodeConfigurationOptionsFilter"
+      }
+    },
+    "NodeConfigurationOptionsFilterName":{
+      "type":"string",
+      "enum":[
+        "NodeType",
+        "NumberOfNodes",
+        "EstimatedDiskUtilizationPercent"
+      ]
+    },
+    "NodeConfigurationOptionsMessage":{
+      "type":"structure",
+      "members":{
+        "NodeConfigurationOptionList":{"shape":"NodeConfigurationOptionList"},
+        "Marker":{"shape":"String"}
+      }
+    },
     "NumberOfNodesPerClusterLimitExceededFault":{
       "type":"structure",
       "members":{
@@ -3718,6 +3821,18 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "OperatorType":{
+      "type":"string",
+      "enum":[
+        "eq",
+        "lt",
+        "gt",
+        "le",
+        "ge",
+        "in",
+        "between"
+      ]
     },
     "OrderableClusterOption":{
       "type":"structure",
@@ -4028,7 +4143,8 @@
         "EstimatedTimeToCompletionInSeconds":{"shape":"LongOptional"},
         "ResizeType":{"shape":"String"},
         "Message":{"shape":"String"},
-        "TargetEncryptionType":{"shape":"String"}
+        "TargetEncryptionType":{"shape":"String"},
+        "DataTransferProgressPercent":{"shape":"DoubleOptional"}
       }
     },
     "ResourceNotFoundFault":{
@@ -4080,7 +4196,8 @@
         "AdditionalInfo":{"shape":"String"},
         "IamRoles":{"shape":"IamRoleArnList"},
         "MaintenanceTrackName":{"shape":"String"},
-        "SnapshotScheduleIdentifier":{"shape":"String"}
+        "SnapshotScheduleIdentifier":{"shape":"String"},
+        "NumberOfNodes":{"shape":"IntegerOptional"}
       }
     },
     "RestoreFromClusterSnapshotResult":{
@@ -4431,7 +4548,9 @@
         "ScheduleIdentifier":{"shape":"String"},
         "ScheduleDescription":{"shape":"String"},
         "Tags":{"shape":"TagList"},
-        "NextInvocations":{"shape":"ScheduledSnapshotTimeList"}
+        "NextInvocations":{"shape":"ScheduledSnapshotTimeList"},
+        "AssociatedClusterCount":{"shape":"IntegerOptional"},
+        "AssociatedClusters":{"shape":"AssociatedClusterList"}
       }
     },
     "SnapshotScheduleAlreadyExistsFault":{
@@ -4842,6 +4961,13 @@
         "MaintenanceTrackName":{"shape":"String"},
         "DatabaseVersion":{"shape":"String"},
         "SupportedOperations":{"shape":"SupportedOperationList"}
+      }
+    },
+    "ValueStringList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
       }
     },
     "VpcSecurityGroupIdList":{
