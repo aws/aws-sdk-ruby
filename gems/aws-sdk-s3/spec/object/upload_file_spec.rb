@@ -100,6 +100,7 @@ module Aws
               body: file)
             object.upload_file(ten_meg_file.path)
           end
+
         end
 
         describe 'large objects' do
@@ -163,6 +164,7 @@ module Aws
               object.upload_file(seventeen_meg_file)
             }.to raise_error(S3::MultipartUploadError, 'failed to abort multipart upload: network-error')
           end
+
         end
       end
     end
