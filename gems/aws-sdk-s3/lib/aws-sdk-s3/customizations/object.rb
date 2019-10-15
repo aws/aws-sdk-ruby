@@ -282,6 +282,13 @@ module Aws
       #     # and the parts are uploaded in parallel
       #     obj.upload_file('/path/to/very_large_file')
       #
+      # The response of the S3 upload API is yielded if a block given.
+      #
+      #     # API response will have etag value of the file
+      #     obj.upload_file('/path/to/file') do |response|
+      #       etag = response.etag
+      #     end
+      #
       # @param [String,Pathname,File,Tempfile] source A file or path to a file
       #   on the local file system that should be uploaded to this object.
       #   If you pass an open file object, then it is your responsibility
@@ -305,7 +312,9 @@ module Aws
         uploader = FileUploader.new(
           multipart_threshold: uploading_options.delete(:multipart_threshold),
           client: client)
-        response = uploader.upload(source, uploading_options.merge(bucket: bucket_name, key: key))
+        response = uploader.upload(
+          source,
+          uploading_options.merge(bucket: bucket_name, key: key))
         yield response if block_given?
         true
       end

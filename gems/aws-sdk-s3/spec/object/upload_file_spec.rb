@@ -64,6 +64,13 @@ module Aws
 
         end
 
+        it 'yields the response to the given block' do
+          object.upload_file(ten_meg_file) do |response|
+            expect(response).to be_kind_of(Seahorse::Client::Response)
+            expect(response.etag).to eq("ETag")
+          end
+        end
+
         describe 'small objects' do
 
           it 'uploads small objects using Client#put_object' do
@@ -92,13 +99,6 @@ module Aws
               key: 'key',
               body: file)
             object.upload_file(ten_meg_file.path)
-          end
-
-          it 'yields the response to the given block' do
-            object.upload_file(ten_meg_file) do |response|
-              expect(response).to be_kind_of(Seahorse::Client::Response)
-              expect(response.etag).to eq("ETag")
-            end
           end
         end
 
@@ -162,12 +162,6 @@ module Aws
             expect {
               object.upload_file(seventeen_meg_file)
             }.to raise_error(S3::MultipartUploadError, 'failed to abort multipart upload: network-error')
-          end
-
-          it 'yields the response to the given block' do
-            object.upload_file(seventeen_meg_file) do |response|
-              expect(response.etag).to eq("ETag")
-            end
           end
         end
       end
