@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.375 (2019-10-15)
+------------------
+
 * Feature - Aws::KinesisVideoArchivedMedia - Updated the API, and documentation for Amazon Kinesis Video Streams Archived Media.
 
 2.11.374 (2019-10-14)
