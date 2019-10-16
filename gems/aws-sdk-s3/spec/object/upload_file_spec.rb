@@ -64,6 +64,13 @@ module Aws
 
         end
 
+        it 'yields the response to the given block' do
+          object.upload_file(ten_meg_file) do |response|
+            expect(response).to be_kind_of(Seahorse::Client::Response)
+            expect(response.etag).to eq("ETag")
+          end
+        end
+
         describe 'small objects' do
 
           it 'uploads small objects using Client#put_object' do
