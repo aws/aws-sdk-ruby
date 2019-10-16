@@ -347,8 +347,8 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic, Melodic
+    #           name: "ROS", # accepts ROS, ROS2
+    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -591,8 +591,8 @@ module Aws::RoboMaker
     #           version: "SimulationSoftwareSuiteVersionType",
     #         },
     #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic, Melodic
+    #           name: "ROS", # accepts ROS, ROS2
+    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing
     #         },
     #         rendering_engine: {
     #           name: "OGRE", # accepts OGRE
@@ -3185,8 +3185,8 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         name: "ROS", # accepts ROS
-    #         version: "Kinetic", # accepts Kinetic, Melodic
+    #         name: "ROS", # accepts ROS, ROS2
+    #         version: "Kinetic", # accepts Kinetic, Melodic, Dashing
     #       }
     #
     # @!attribute [rw] name
@@ -3796,8 +3796,8 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic, Melodic
+    #           name: "ROS", # accepts ROS, ROS2
+    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing
     #         },
     #         current_revision_id: "RevisionId",
     #       }
@@ -3887,8 +3887,8 @@ module Aws::RoboMaker
     #           version: "SimulationSoftwareSuiteVersionType",
     #         },
     #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic, Melodic
+    #           name: "ROS", # accepts ROS, ROS2
+    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing
     #         },
     #         rendering_engine: {
     #           name: "OGRE", # accepts OGRE

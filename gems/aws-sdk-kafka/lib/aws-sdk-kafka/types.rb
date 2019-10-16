@@ -70,14 +70,7 @@ module Aws::Kafka
     #       }
     #
     # @!attribute [rw] broker_az_distribution
-    #   The distribution of broker nodes across Availability Zones. This is
-    #   an optional parameter. If you don't specify it, Amazon MSK gives it
-    #   the value DEFAULT. You can also explicitly set this parameter to the
-    #   value DEFAULT. No other values are currently allowed.
-    #
-    #   Amazon MSK distributes the broker nodes evenly across the
-    #   Availability Zones that correspond to the subnets you provide when
-    #   you create the cluster.
+    #   The distribution of broker nodes across Availability Zones.
     #   @return [String]
     #
     # @!attribute [rw] client_subnets
@@ -100,6 +93,9 @@ module Aws::Kafka
     #   interfaces in order to specify who can connect to and communicate
     #   with the Amazon MSK cluster. If you don't specify a security group,
     #   Amazon MSK uses the default security group associated with the VPC.
+    #   If you specify security groups that were shared with you, you must
+    #   ensure that you have permissions to them. Specifically, you need the
+    #   ec2:DescribeSecurityGroups permission.
     #   @return [Array<String>]
     #
     # @!attribute [rw] storage_info
@@ -236,7 +232,9 @@ module Aws::Kafka
     #   @return [Types::BrokerSoftwareInfo]
     #
     # @!attribute [rw] current_version
-    #   The current version of the MSK cluster.
+    #   The current version of the MSK cluster. Cluster versions aren't
+    #   simple integers. You can obtain the current version by describing
+    #   the cluster. An example version is KTVPDKIKX0DER.
     #   @return [String]
     #
     # @!attribute [rw] encryption_info
@@ -375,7 +373,8 @@ module Aws::Kafka
     #   @return [Types::ConfigurationRevision]
     #
     # @!attribute [rw] name
-    #   The name of the configuration.
+    #   The name of the configuration. Configuration names are strings that
+    #   match the regex "^\[0-9A-Za-z-\]+$".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Configuration AWS API Documentation
@@ -513,7 +512,7 @@ module Aws::Kafka
     #
     # @!attribute [rw] configuration_info
     #   Represents the configuration that you want MSK to use for the
-    #   brokers in a cluster.
+    #   cluster.
     #   @return [Types::ConfigurationInfo]
     #
     # @!attribute [rw] encryption_info
@@ -598,7 +597,8 @@ module Aws::Kafka
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
-    #   The name of the configuration.
+    #   The name of the configuration. Configuration names are strings that
+    #   match the regex "^\[0-9A-Za-z-\]+$".
     #   @return [String]
     #
     # @!attribute [rw] server_properties
@@ -629,7 +629,8 @@ module Aws::Kafka
     #   @return [Types::ConfigurationRevision]
     #
     # @!attribute [rw] name
-    #   The name of the configuration.
+    #   The name of the configuration. Configuration names are strings that
+    #   match the regex "^\[0-9A-Za-z-\]+$".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateConfigurationResponse AWS API Documentation
@@ -784,7 +785,8 @@ module Aws::Kafka
     #   @return [Types::ConfigurationRevision]
     #
     # @!attribute [rw] name
-    #   The name of the configuration.
+    #   The name of the configuration. Configuration names are strings that
+    #   match the regex "^\[0-9A-Za-z-\]+$".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationResponse AWS API Documentation
@@ -908,7 +910,7 @@ module Aws::Kafka
     #
     # @!attribute [rw] client_broker
     #   Indicates the encryption setting for data in transit between clients
-    #   and brokers. The following are the possible values.
+    #   and brokers. You must set it to one of the following values.
     #
     #   TLS means that client-broker communication is enabled with TLS only.
     #
@@ -918,7 +920,7 @@ module Aws::Kafka
     #   PLAINTEXT means that client-broker communication is enabled in
     #   plaintext only.
     #
-    #   The default value is TLS\_PLAINTEXT.
+    #   The default value is TLS.
     #   @return [String]
     #
     # @!attribute [rw] in_cluster
@@ -1047,7 +1049,9 @@ module Aws::Kafka
     #
     # @!attribute [rw] bootstrap_broker_string_tls
     #   A string containing one or more DNS names (or IP) and TLS port
-    #   pairs.
+    #   pairs. The following is an example.
+    #
+    #   <programlisting>\{ "BootstrapBrokerStringTls": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094" \}</programlisting>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokersResponse AWS API Documentation
@@ -1557,6 +1561,56 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for UpdateBrokerCount.
+    #
+    # @note When making an API call, you may pass UpdateBrokerCountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         current_version: "__string", # required
+    #         target_number_of_broker_nodes: 1, # required
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_number_of_broker_nodes
+    #   The number of broker nodes that you want the cluster to have after
+    #   this operation completes successfully.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerCountRequest AWS API Documentation
+    #
+    class UpdateBrokerCountRequest < Struct.new(
+      :cluster_arn,
+      :current_version,
+      :target_number_of_broker_nodes)
+      include Aws::Structure
+    end
+
+    # Response body for UpdateBrokerCount.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerCountResponse AWS API Documentation
+    #
+    class UpdateBrokerCountResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
+      include Aws::Structure
+    end
+
     # Request object for UpdateBrokerStorage.
     #
     # @note When making an API call, you may pass UpdateBrokerStorageRequest
@@ -1584,6 +1638,12 @@ module Aws::Kafka
     # @!attribute [rw] target_broker_ebs_volume_info
     #   Describes the target volume size and the ID of the broker to apply
     #   the update to.
+    #
+    #   The value you specify for Target-Volume-in-GiB must be a whole
+    #   number that is greater than 100 GiB.
+    #
+    #   The storage per broker after the update operation can't exceed
+    #   16384 GiB.
     #   @return [Array<Types::BrokerEBSVolumeInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerStorageRequest AWS API Documentation
@@ -1632,11 +1692,11 @@ module Aws::Kafka
     #
     # @!attribute [rw] configuration_info
     #   Represents the configuration that you want MSK to use for the
-    #   brokers in a cluster.
+    #   cluster.
     #   @return [Types::ConfigurationInfo]
     #
     # @!attribute [rw] current_version
-    #   The version of the cluster that needs to be updated.
+    #   The version of the cluster that you want to update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterConfigurationRequest AWS API Documentation

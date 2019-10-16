@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2019-10-16)
+------------------
+
+* Feature - AWS MSK has added support for adding brokers to a cluster.
+
 1.13.0 (2019-10-09)
 ------------------
 

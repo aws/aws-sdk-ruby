@@ -75,6 +75,8 @@ module Aws::Kafka
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UpdateBrokerCountRequest = Shapes::StructureShape.new(name: 'UpdateBrokerCountRequest')
+    UpdateBrokerCountResponse = Shapes::StructureShape.new(name: 'UpdateBrokerCountResponse')
     UpdateBrokerStorageRequest = Shapes::StructureShape.new(name: 'UpdateBrokerStorageRequest')
     UpdateBrokerStorageResponse = Shapes::StructureShape.new(name: 'UpdateBrokerStorageResponse')
     UpdateClusterConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateClusterConfigurationRequest')
@@ -100,7 +102,6 @@ module Aws::Kafka
     __stringMin1Max64 = Shapes::StringShape.new(name: '__stringMin1Max64')
     __stringMin5Max32 = Shapes::StringShape.new(name: '__stringMin5Max32')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
-    __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
     BadRequestException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -381,6 +382,15 @@ module Aws::Kafka
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UpdateBrokerCountRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    UpdateBrokerCountRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
+    UpdateBrokerCountRequest.add_member(:target_number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integerMin1Max15, required: true, location_name: "targetNumberOfBrokerNodes"))
+    UpdateBrokerCountRequest.struct_class = Types::UpdateBrokerCountRequest
+
+    UpdateBrokerCountResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    UpdateBrokerCountResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
+    UpdateBrokerCountResponse.struct_class = Types::UpdateBrokerCountResponse
 
     UpdateBrokerStorageRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     UpdateBrokerStorageRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
@@ -676,6 +686,19 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:update_broker_count, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBrokerCount"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/nodes/count"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBrokerCountRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBrokerCountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
       api.add_operation(:update_broker_storage, Seahorse::Model::Operation.new.tap do |o|
