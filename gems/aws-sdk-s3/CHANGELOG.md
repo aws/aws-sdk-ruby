@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support to yield the response in #upload_file if a block is given.
+
+
 1.49.0 (2019-10-10)
 ------------------
 
