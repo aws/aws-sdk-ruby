@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.376 (2019-10-16)
+------------------
+
 * Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
 
 * Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, and documentation for AWS Marketplace Commerce Analytics.
