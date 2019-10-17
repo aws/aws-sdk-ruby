@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.377 (2019-10-17)
+------------------
+
 * Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
