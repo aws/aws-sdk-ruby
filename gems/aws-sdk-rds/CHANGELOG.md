@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2019-10-17)
+------------------
+
+* Feature - Amazon RDS now supports Amazon RDS on VMware with the introduction of APIs related to Custom Availability Zones and Media installation.
+
 1.67.0 (2019-09-30)
 ------------------
 

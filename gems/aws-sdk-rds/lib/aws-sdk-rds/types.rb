@@ -1298,6 +1298,68 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateCustomAvailabilityZoneMessage
+    #   data as a hash:
+    #
+    #       {
+    #         custom_availability_zone_name: "String", # required
+    #         existing_vpn_id: "String",
+    #         new_vpn_tunnel_name: "String",
+    #         vpn_tunnel_originator_ip: "String",
+    #       }
+    #
+    # @!attribute [rw] custom_availability_zone_name
+    #   The name of the custom Availability Zone (AZ).
+    #   @return [String]
+    #
+    # @!attribute [rw] existing_vpn_id
+    #   The ID of an existing virtual private network (VPN) between the
+    #   Amazon RDS website and the VMware vSphere cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_vpn_tunnel_name
+    #   The name of a new VPN tunnel between the Amazon RDS website and the
+    #   VMware vSphere cluster.
+    #
+    #   Specify this parameter only if `ExistingVpnId` is not specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_tunnel_originator_ip
+    #   The IP address of network traffic from your on-premises data center.
+    #   A custom AZ receives the network traffic.
+    #
+    #   Specify this parameter only if `ExistingVpnId` is not specified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomAvailabilityZoneMessage AWS API Documentation
+    #
+    class CreateCustomAvailabilityZoneMessage < Struct.new(
+      :custom_availability_zone_name,
+      :existing_vpn_id,
+      :new_vpn_tunnel_name,
+      :vpn_tunnel_originator_ip)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_availability_zone
+    #   A custom Availability Zone (AZ) is an on-premises AZ that is
+    #   integrated with a VMware vSphere cluster.
+    #
+    #   For more information about RDS on VMware, see the [ *RDS on VMware
+    #   User Guide.* ][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
+    #   @return [Types::CustomAvailabilityZone]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomAvailabilityZoneResult AWS API Documentation
+    #
+    class CreateCustomAvailabilityZoneResult < Struct.new(
+      :custom_availability_zone)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDBClusterEndpointMessage
     #   data as a hash:
     #
@@ -2381,9 +2443,19 @@ module Aws::RDS
     #   the DB instance is a Multi-AZ deployment. The specified Availability
     #   Zone must be in the same AWS Region as the current endpoint.
     #
+    #   <note markdown="1"> If you're creating a DB instance in an RDS on VMware environment,
+    #   specify the identifier of the custom Availability Zone to create the
+    #   DB instance in.
+    #
+    #    For more information about RDS on VMware, see the [ *RDS on VMware
+    #   User Guide.* ][2]
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
@@ -3993,6 +4065,65 @@ module Aws::RDS
     #
     class CreateOptionGroupResult < Struct.new(
       :option_group)
+      include Aws::Structure
+    end
+
+    # A custom Availability Zone (AZ) is an on-premises AZ that is
+    # integrated with a VMware vSphere cluster.
+    #
+    # For more information about RDS on VMware, see the [ *RDS on VMware
+    # User Guide.* ][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
+    #
+    # @!attribute [rw] custom_availability_zone_id
+    #   The identifier of the custom AZ.
+    #
+    #   Amazon RDS generates a unique identifier when a custom AZ is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_availability_zone_name
+    #   The name of the custom AZ.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_availability_zone_status
+    #   The status of the custom AZ.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_details
+    #   Information about the virtual private network (VPN) between the
+    #   VMware vSphere cluster and the AWS website.
+    #   @return [Types::VpnDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZone AWS API Documentation
+    #
+    class CustomAvailabilityZone < Struct.new(
+      :custom_availability_zone_id,
+      :custom_availability_zone_name,
+      :custom_availability_zone_status,
+      :vpn_details)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeCustomAvailabilityZones` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_availability_zones
+    #   The list of CustomAvailabilityZone objects for the AWS account.
+    #   @return [Array<Types::CustomAvailabilityZone>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneMessage AWS API Documentation
+    #
+    class CustomAvailabilityZoneMessage < Struct.new(
+      :marker,
+      :custom_availability_zones)
       include Aws::Structure
     end
 
@@ -6295,6 +6426,43 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteCustomAvailabilityZoneMessage
+    #   data as a hash:
+    #
+    #       {
+    #         custom_availability_zone_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] custom_availability_zone_id
+    #   The custom AZ identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomAvailabilityZoneMessage AWS API Documentation
+    #
+    class DeleteCustomAvailabilityZoneMessage < Struct.new(
+      :custom_availability_zone_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_availability_zone
+    #   A custom Availability Zone (AZ) is an on-premises AZ that is
+    #   integrated with a VMware vSphere cluster.
+    #
+    #   For more information about RDS on VMware, see the [ *RDS on VMware
+    #   User Guide.* ][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
+    #   @return [Types::CustomAvailabilityZone]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomAvailabilityZoneResult AWS API Documentation
+    #
+    class DeleteCustomAvailabilityZoneResult < Struct.new(
+      :custom_availability_zone)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDBClusterEndpointMessage
     #   data as a hash:
     #
@@ -6759,6 +6927,24 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteInstallationMediaMessage
+    #   data as a hash:
+    #
+    #       {
+    #         installation_media_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] installation_media_id
+    #   The installation media ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteInstallationMediaMessage AWS API Documentation
+    #
+    class DeleteInstallationMediaMessage < Struct.new(
+      :installation_media_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteOptionGroupMessage
     #   data as a hash:
     #
@@ -6821,8 +7007,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -6840,6 +7026,58 @@ module Aws::RDS
     #
     class DescribeCertificatesMessage < Struct.new(
       :certificate_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeCustomAvailabilityZonesMessage
+    #   data as a hash:
+    #
+    #       {
+    #         custom_availability_zone_id: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] custom_availability_zone_id
+    #   The custom AZ identifier. If this parameter is specified,
+    #   information from only the specific custom AZ is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more custom AZs to describe.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeCustomAvailabilityZones` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCustomAvailabilityZonesMessage AWS API Documentation
+    #
+    class DescribeCustomAvailabilityZonesMessage < Struct.new(
+      :custom_availability_zone_id,
       :filters,
       :max_records,
       :marker)
@@ -6922,8 +7160,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -6993,8 +7231,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7053,8 +7291,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7118,8 +7356,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7277,8 +7515,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7369,8 +7607,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7449,8 +7687,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   than the `MaxRecords` value is available, a pagination token called
-    #   a marker is included in the response so that the following results
-    #   can be retrieved.
+    #   a marker is included in the response so that you can retrieve the
+    #   remaining results.
     #
     #   Default: 100
     #
@@ -7570,8 +7808,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -7647,8 +7885,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7746,8 +7984,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified MaxRecords value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -7821,8 +8059,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7887,8 +8125,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7939,8 +8177,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8105,8 +8343,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8185,8 +8423,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8237,8 +8475,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8300,8 +8538,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8396,8 +8634,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8511,8 +8749,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8583,8 +8821,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8602,6 +8840,64 @@ module Aws::RDS
     #
     class DescribeGlobalClustersMessage < Struct.new(
       :global_cluster_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstallationMediaMessage
+    #   data as a hash:
+    #
+    #       {
+    #         installation_media_id: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] installation_media_id
+    #   The installation media ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more installation media to describe.
+    #   Supported filters include the following:
+    #
+    #   * `custom-availability-zone-id` - Accepts custom Availability Zone
+    #     (AZ) identifiers. The results list includes information about only
+    #     the custom AZs identified by these identifiers.
+    #
+    #   * `engine` - Accepts database engines. The results list includes
+    #     information about only the database engines identified by these
+    #     identifiers.
+    #
+    #     For more information about the valid engines for installation
+    #     media, see ImportInstallationMedia.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   An optional pagination token provided by a previous
+    #   DescribeInstallationMedia request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeInstallationMediaMessage AWS API Documentation
+    #
+    class DescribeInstallationMediaMessage < Struct.new(
+      :installation_media_id,
       :filters,
       :max_records,
       :marker)
@@ -8641,8 +8937,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8702,8 +8998,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8784,8 +9080,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8858,8 +9154,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8956,8 +9252,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   than the `MaxRecords` value is available, a pagination token called
-    #   a marker is included in the response so that the following results
-    #   can be retrieved.
+    #   a marker is included in the response so that you can retrieve the
+    #   remaining results.
     #
     #   Default: 100
     #
@@ -9057,8 +9353,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   than the `MaxRecords` value is available, a pagination token called
-    #   a marker is included in the response so that the following results
-    #   can be retrieved.
+    #   a marker is included in the response so that you can retrieve the
+    #   reamaining results.
     #
     #   Default: 100
     #
@@ -9114,8 +9410,8 @@ module Aws::RDS
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -9822,6 +10118,168 @@ module Aws::RDS
     class IPRange < Struct.new(
       :status,
       :cidrip)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportInstallationMediaMessage
+    #   data as a hash:
+    #
+    #       {
+    #         custom_availability_zone_id: "String", # required
+    #         engine: "String", # required
+    #         engine_version: "String", # required
+    #         engine_installation_media_path: "String", # required
+    #         os_installation_media_path: "String", # required
+    #       }
+    #
+    # @!attribute [rw] custom_availability_zone_id
+    #   The identifier of the custom Availability Zone (AZ) to import the
+    #   installation media to.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine to be used for this instance.
+    #
+    #   The list only includes supported on-premises, bring your own media
+    #   (BYOM) DB engines.
+    #
+    #   Valid Values:
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The version number of the database engine to use.
+    #
+    #   For a list of valid engine versions, call DescribeDBEngineVersions.
+    #
+    #   The following are the database engines and links to information
+    #   about the major and minor versions. The list only includes supported
+    #   on-premises, bring your own media (BYOM) DB engines.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   See [Version and Feature Support on Amazon RDS][1] in the *Amazon
+    #   RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_installation_media_path
+    #   The path to the installation media for the specified DB engine.
+    #
+    #   Example:
+    #   `SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso`
+    #   @return [String]
+    #
+    # @!attribute [rw] os_installation_media_path
+    #   The path to the installation media for the operating system
+    #   associated with the specified DB engine.
+    #
+    #   Example: `WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ImportInstallationMediaMessage AWS API Documentation
+    #
+    class ImportInstallationMediaMessage < Struct.new(
+      :custom_availability_zone_id,
+      :engine,
+      :engine_version,
+      :engine_installation_media_path,
+      :os_installation_media_path)
+      include Aws::Structure
+    end
+
+    # Contains the installation media for on-premises, bring your own media
+    # (BYOM) DB engines, such as Microsoft SQL Server.
+    #
+    # @!attribute [rw] installation_media_id
+    #   The installation media ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_availability_zone_id
+    #   The custom Availability Zone (AZ) that contains the installation
+    #   media.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The DB engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The engine version of the DB engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_installation_media_path
+    #   The path to the installation media for the DB engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_installation_media_path
+    #   The path to the installation media for the operating system
+    #   associated with the DB engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the installation media.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_cause
+    #   If an installation media failure occurred, the cause of the failure.
+    #   @return [Types::InstallationMediaFailureCause]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMedia AWS API Documentation
+    #
+    class InstallationMedia < Struct.new(
+      :installation_media_id,
+      :custom_availability_zone_id,
+      :engine,
+      :engine_version,
+      :engine_installation_media_path,
+      :os_installation_media_path,
+      :status,
+      :failure_cause)
+      include Aws::Structure
+    end
+
+    # Contains the cause of an installation media failure. Installation
+    # media is used for on-premises, bring your own media (BYOM) DB engines,
+    # such as Microsoft SQL Server.
+    #
+    # @!attribute [rw] message
+    #   The reason that an installation media import failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMediaFailureCause AWS API Documentation
+    #
+    class InstallationMediaFailureCause < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   DescribeInstallationMedia request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] installation_media
+    #   The list of InstallationMedia objects for the AWS account.
+    #   @return [Array<Types::InstallationMedia>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMediaMessage AWS API Documentation
+    #
+    class InstallationMediaMessage < Struct.new(
+      :marker,
+      :installation_media)
       include Aws::Structure
     end
 
@@ -16458,6 +16916,54 @@ module Aws::RDS
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status)
+      include Aws::Structure
+    end
+
+    # Information about the virtual private network (VPN) between the VMware
+    # vSphere cluster and the AWS website.
+    #
+    # For more information about RDS on VMware, see the [ *RDS on VMware
+    # User Guide.* ][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
+    #
+    # @!attribute [rw] vpn_id
+    #   The ID of the VPN.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_tunnel_originator_ip
+    #   The IP address of network traffic from your on-premises data center.
+    #   A custom AZ receives the network traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_gateway_ip
+    #   The IP address of network traffic from AWS to your on-premises data
+    #   center.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_psk
+    #   The preshared key (PSK) for the VPN.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_name
+    #   The name of the VPN.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_state
+    #   The state of the VPN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/VpnDetails AWS API Documentation
+    #
+    class VpnDetails < Struct.new(
+      :vpn_id,
+      :vpn_tunnel_originator_ip,
+      :vpn_gateway_ip,
+      :vpn_psk,
+      :vpn_name,
+      :vpn_state)
       include Aws::Structure
     end
 

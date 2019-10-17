@@ -497,6 +497,7 @@ module Aws::Batch
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #     compute_resources: {
     #       type: "EC2", # required, accepts EC2, SPOT
+    #       allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
     #       minv_cpus: 1, # required
     #       maxv_cpus: 1, # required
     #       desiredv_cpus: 1,
@@ -877,6 +878,7 @@ module Aws::Batch
     #   resp.compute_environments[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "DELETED", "VALID", "INVALID"
     #   resp.compute_environments[0].status_reason #=> String
     #   resp.compute_environments[0].compute_resources.type #=> String, one of "EC2", "SPOT"
+    #   resp.compute_environments[0].compute_resources.allocation_strategy #=> String, one of "BEST_FIT", "BEST_FIT_PROGRESSIVE", "SPOT_CAPACITY_OPTIMIZED"
     #   resp.compute_environments[0].compute_resources.minv_cpus #=> Integer
     #   resp.compute_environments[0].compute_resources.maxv_cpus #=> Integer
     #   resp.compute_environments[0].compute_resources.desiredv_cpus #=> Integer
@@ -2139,7 +2141,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
