@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
 2.11.377 (2019-10-17)
 ------------------
 
