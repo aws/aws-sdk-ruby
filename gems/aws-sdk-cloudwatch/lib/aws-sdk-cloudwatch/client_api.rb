@@ -458,6 +458,7 @@ module Aws::CloudWatch
     MetricDataQuery.add_member(:expression, Shapes::ShapeRef.new(shape: MetricExpression, location_name: "Expression"))
     MetricDataQuery.add_member(:label, Shapes::ShapeRef.new(shape: MetricLabel, location_name: "Label"))
     MetricDataQuery.add_member(:return_data, Shapes::ShapeRef.new(shape: ReturnData, location_name: "ReturnData"))
+    MetricDataQuery.add_member(:period, Shapes::ShapeRef.new(shape: Period, location_name: "Period"))
     MetricDataQuery.struct_class = Types::MetricDataQuery
 
     MetricDataResult.add_member(:id, Shapes::ShapeRef.new(shape: MetricId, location_name: "Id"))

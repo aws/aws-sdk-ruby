@@ -344,6 +344,7 @@ module Aws::CloudWatch
     #         expression: "MetricExpression",
     #         label: "MetricLabel",
     #         return_data: false,
+    #         period: 1,
     #       },
     #     ],
     #     tags: [
