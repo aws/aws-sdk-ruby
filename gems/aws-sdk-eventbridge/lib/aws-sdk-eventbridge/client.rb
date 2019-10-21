@@ -1331,8 +1331,8 @@ module Aws::EventBridge
     #   rules that might match undesirable events. To create more secure
     #   rules, make sure that the event pattern for each rule contains an
     #   `account` field with a specific account ID to receive events from.
-    #   Rules with an account field don't match any events sent from other
-    #   accounts.
+    #   Rules that have an account field match events sent only from accounts
+    #   that are listed in the rule's `account` field.
     #
     # @option params [required, String] :statement_id
     #   An identifier string for the external account that you're granting
@@ -1448,6 +1448,9 @@ module Aws::EventBridge
     #
     # @option params [required, String] :name
     #   The name of the rule that you're creating or updating.
+    #
+    #   A rule can't have the same name as another rule in the same Region or
+    #   on the same event bus.
     #
     # @option params [String] :schedule_expression
     #   The scheduling expression: for example, `"cron(0 20 * * ? *)"` or
@@ -1942,7 +1945,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

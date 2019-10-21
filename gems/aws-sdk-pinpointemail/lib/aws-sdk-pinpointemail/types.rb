@@ -399,6 +399,10 @@ module Aws::PinpointEmail
     #           raw: {
     #             data: "data", # required
     #           },
+    #           template: {
+    #             template_arn: "TemplateArn",
+    #             template_data: "TemplateData",
+    #           },
     #         },
     #         tags: [
     #           {
@@ -778,11 +782,11 @@ module Aws::PinpointEmail
     #       }
     #
     # @!attribute [rw] tls_policy
-    #   Specifies whether Amazon Pinpoint should require that incoming email
-    #   is delivered over a connection that’s encrypted by using Transport
-    #   Layer Security (TLS). If this value is set to `Require`, Amazon
-    #   Pinpoint will bounce email messages that cannot be delivered over
-    #   TLS. The default value is `Optional`.
+    #   Specifies whether messages that use the configuration set are
+    #   required to use Transport Layer Security (TLS). If the value is
+    #   `Require`, messages are only delivered if a TLS connection can be
+    #   established. If the value is `Optional`, messages can be delivered
+    #   in plain text if a TLS connection can't be established.
     #   @return [String]
     #
     # @!attribute [rw] sending_pool_name
@@ -1104,6 +1108,10 @@ module Aws::PinpointEmail
     #         raw: {
     #           data: "data", # required
     #         },
+    #         template: {
+    #           template_arn: "TemplateArn",
+    #           template_data: "TemplateData",
+    #         },
     #       }
     #
     # @!attribute [rw] simple
@@ -1140,11 +1148,16 @@ module Aws::PinpointEmail
     #   [1]: https://tools.ietf.org/html/rfc5321
     #   @return [Types::RawMessage]
     #
+    # @!attribute [rw] template
+    #   The template to use for the email message.
+    #   @return [Types::Template]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/EmailContent AWS API Documentation
     #
     class EmailContent < Struct.new(
       :simple,
-      :raw)
+      :raw,
+      :template)
       include Aws::Structure
     end
 
@@ -2685,9 +2698,11 @@ module Aws::PinpointEmail
     #   @return [String]
     #
     # @!attribute [rw] tls_policy
-    #   Whether Amazon Pinpoint should require that incoming email is
-    #   delivered over a connection encrypted with Transport Layer Security
-    #   (TLS).
+    #   Specifies whether messages that use the configuration set are
+    #   required to use Transport Layer Security (TLS). If the value is
+    #   `Require`, messages are only delivered if a TLS connection can be
+    #   established. If the value is `Optional`, messages can be delivered
+    #   in plain text if a TLS connection can't be established.
     #   @return [String]
     #
     # @!attribute [rw] sending_pool_name
@@ -3207,6 +3222,10 @@ module Aws::PinpointEmail
     #           raw: {
     #             data: "data", # required
     #           },
+    #           template: {
+    #             template_arn: "TemplateArn",
+    #             template_data: "TemplateData",
+    #           },
     #         },
     #         email_tags: [
     #           {
@@ -3465,6 +3484,33 @@ module Aws::PinpointEmail
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass Template
+    #   data as a hash:
+    #
+    #       {
+    #         template_arn: "TemplateArn",
+    #         template_data: "TemplateData",
+    #       }
+    #
+    # @!attribute [rw] template_arn
+    #   The Amazon Resource Name (ARN) of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_data
+    #   An object that defines the values to use for message variables in
+    #   the template. This object is a set of key-value pairs. Each key
+    #   defines a message variable in the template. The corresponding value
+    #   defines the value to use for that variable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/Template AWS API Documentation
+    #
+    class Template < Struct.new(
+      :template_arn,
+      :template_data)
+      include Aws::Structure
+    end
 
     # An object that defines the tracking options for a configuration set.
     # When you use Amazon Pinpoint to send an email, it contains an

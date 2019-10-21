@@ -360,13 +360,13 @@ module Aws::DataSync
     #
     # @option params [Array<String>] :subnet_arns
     #   The Amazon Resource Names (ARNs) of the subnets in which DataSync will
-    #   create Elastic Network Interfaces (ENIs) for each data transfer task.
-    #   The agent that runs a task must be private. When you start a task that
-    #   is associated with an agent created in a VPC, or one that has access
-    #   to an IP address in a VPC, then the task is also private. In this
-    #   case, DataSync creates four ENIs for each task in your subnet. For a
-    #   data transfer to work, the agent must be able to route to all these
-    #   four ENIs.
+    #   create elastic network interfaces for each data transfer task. The
+    #   agent that runs a task must be private. When you start a task that is
+    #   associated with an agent created in a VPC, or one that has access to
+    #   an IP address in a VPC, then the task is also private. In this case,
+    #   DataSync creates four network interfaces for each task in your subnet.
+    #   For a data transfer to work, the agent must be able to route to all
+    #   these four network interfaces.
     #
     # @option params [Array<String>] :security_group_arns
     #   The ARNs of the security groups used to protect your data transfer
@@ -479,7 +479,8 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for a Network File System (NFS) file system.
+    # Defines a file system on a Network File System (NFS) server that can
+    # be read from or written to
     #
     # @option params [required, String] :subdirectory
     #   The subdirectory in the NFS file system that is used to read data from
@@ -573,8 +574,9 @@ module Aws::DataSync
     # policy to the role. An example of such a policy is shown in the
     # examples section.
     #
-    # For more information, see Configuring Amazon S3 Location Settings in
-    # the *AWS DataSync User Guide.*
+    # For more information, see
+    # https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location
+    # in the *AWS DataSync User Guide.*
     #
     # @option params [String] :subdirectory
     #   A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3
@@ -583,6 +585,18 @@ module Aws::DataSync
     #
     # @option params [required, String] :s3_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+    #
+    # @option params [String] :s3_storage_class
+    #   The Amazon S3 storage class that you want to store your files in when
+    #   this location is used as a task destination. For more information
+    #   about S3 storage classes, see [Amazon S3 Storage Classes][1] in the
+    #   *Amazon Simple Storage Service Developer Guide*. Some storage classes
+    #   have behaviors that can affect your S3 storage cost. For detailed
+    #   information, see using-storage-classes.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/s3/storage-classes/
     #
     # @option params [required, Types::S3Config] :s3_config
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
@@ -605,6 +619,7 @@ module Aws::DataSync
     #   resp = client.create_location_s3({
     #     subdirectory: "Subdirectory",
     #     s3_bucket_arn: "S3BucketArn", # required
+    #     s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #     s3_config: { # required
     #       bucket_access_role_arn: "IamRoleArn", # required
     #     },
@@ -629,7 +644,8 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for a Server Message Block (SMB) file system.
+    # Defines a file system on an Server Message Block (SMB) server that can
+    # be read from or written to
     #
     # @option params [required, String] :subdirectory
     #   The subdirectory in the SMB file system that is used to read data from
@@ -651,7 +667,7 @@ module Aws::DataSync
     # @option params [required, String] :server_hostname
     #   The name of the SMB server. This value is the IP address or Domain
     #   Name Service (DNS) name of the SMB server. An agent that is installed
-    #   on-premises uses this host name to mount the SMB server in a network.
+    #   on-premises uses this hostname to mount the SMB server in a network.
     #
     #   <note markdown="1"> This name must either be DNS-compliant or must be an IP version 4
     #   (IPv4) address.
@@ -660,21 +676,21 @@ module Aws::DataSync
     #
     # @option params [required, String] :user
     #   The user who can mount the share, has the permissions to access files
-    #   and directories in the SMB share.
+    #   and folders in the SMB share.
     #
     # @option params [String] :domain
-    #   The name of the domain that the SMB server belongs to.
+    #   The name of the Windows domain that the SMB server belongs to.
     #
     # @option params [required, String] :password
-    #   The password of the user who has permission to access the SMB server.
+    #   The password of the user who can mount the share, has the permissions
+    #   to access files and folders in the SMB share.
     #
     # @option params [required, Array<String>] :agent_arns
     #   The Amazon Resource Names (ARNs) of agents to use for a Simple Message
     #   Block (SMB) location.
     #
     # @option params [Types::SmbMountOptions] :mount_options
-    #   The mount options that are available for DataSync to use to access an
-    #   SMB location.
+    #   The mount options used by DataSync to access the SMB server.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents the tag that you want to add to the
@@ -790,7 +806,8 @@ module Aws::DataSync
     #     cloud_watch_log_group_arn: "LogGroupArn",
     #     name: "TagValue",
     #     options: {
-    #       verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, NONE
+    #       verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #       overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
     #       atime: "NONE", # accepts NONE, BEST_EFFORT
     #       mtime: "NONE", # accepts NONE, PRESERVE
     #       uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
@@ -799,6 +816,7 @@ module Aws::DataSync
     #       preserve_devices: "NONE", # accepts NONE, PRESERVE
     #       posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #       bytes_per_second: 1,
+    #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     excludes: [
     #       {
@@ -1032,6 +1050,7 @@ module Aws::DataSync
     #
     #   * {Types::DescribeLocationS3Response#location_arn #location_arn} => String
     #   * {Types::DescribeLocationS3Response#location_uri #location_uri} => String
+    #   * {Types::DescribeLocationS3Response#s3_storage_class #s3_storage_class} => String
     #   * {Types::DescribeLocationS3Response#s3_config #s3_config} => Types::S3Config
     #   * {Types::DescribeLocationS3Response#creation_time #creation_time} => Time
     #
@@ -1045,6 +1064,7 @@ module Aws::DataSync
     #
     #   resp.location_arn #=> String
     #   resp.location_uri #=> String
+    #   resp.s3_storage_class #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"
     #   resp.s3_config.bucket_access_role_arn #=> String
     #   resp.creation_time #=> Time
     #
@@ -1130,7 +1150,7 @@ module Aws::DataSync
     # @example Response structure
     #
     #   resp.task_arn #=> String
-    #   resp.status #=> String, one of "AVAILABLE", "CREATING", "RUNNING", "UNAVAILABLE"
+    #   resp.status #=> String, one of "AVAILABLE", "CREATING", "QUEUED", "RUNNING", "UNAVAILABLE"
     #   resp.name #=> String
     #   resp.current_task_execution_arn #=> String
     #   resp.source_location_arn #=> String
@@ -1140,7 +1160,8 @@ module Aws::DataSync
     #   resp.source_network_interface_arns[0] #=> String
     #   resp.destination_network_interface_arns #=> Array
     #   resp.destination_network_interface_arns[0] #=> String
-    #   resp.options.verify_mode #=> String, one of "POINT_IN_TIME_CONSISTENT", "NONE"
+    #   resp.options.verify_mode #=> String, one of "POINT_IN_TIME_CONSISTENT", "ONLY_FILES_TRANSFERRED", "NONE"
+    #   resp.options.overwrite_mode #=> String, one of "ALWAYS", "NEVER"
     #   resp.options.atime #=> String, one of "NONE", "BEST_EFFORT"
     #   resp.options.mtime #=> String, one of "NONE", "PRESERVE"
     #   resp.options.uid #=> String, one of "NONE", "INT_VALUE", "NAME", "BOTH"
@@ -1149,6 +1170,7 @@ module Aws::DataSync
     #   resp.options.preserve_devices #=> String, one of "NONE", "PRESERVE"
     #   resp.options.posix_permissions #=> String, one of "NONE", "BEST_EFFORT", "PRESERVE"
     #   resp.options.bytes_per_second #=> Integer
+    #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -1194,8 +1216,9 @@ module Aws::DataSync
     # @example Response structure
     #
     #   resp.task_execution_arn #=> String
-    #   resp.status #=> String, one of "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
-    #   resp.options.verify_mode #=> String, one of "POINT_IN_TIME_CONSISTENT", "NONE"
+    #   resp.status #=> String, one of "QUEUED", "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
+    #   resp.options.verify_mode #=> String, one of "POINT_IN_TIME_CONSISTENT", "ONLY_FILES_TRANSFERRED", "NONE"
+    #   resp.options.overwrite_mode #=> String, one of "ALWAYS", "NEVER"
     #   resp.options.atime #=> String, one of "NONE", "BEST_EFFORT"
     #   resp.options.mtime #=> String, one of "NONE", "PRESERVE"
     #   resp.options.uid #=> String, one of "NONE", "INT_VALUE", "NAME", "BOTH"
@@ -1204,6 +1227,7 @@ module Aws::DataSync
     #   resp.options.preserve_devices #=> String, one of "NONE", "PRESERVE"
     #   resp.options.posix_permissions #=> String, one of "NONE", "BEST_EFFORT", "PRESERVE"
     #   resp.options.bytes_per_second #=> Integer
+    #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -1396,7 +1420,7 @@ module Aws::DataSync
     #
     #   resp.task_executions #=> Array
     #   resp.task_executions[0].task_execution_arn #=> String
-    #   resp.task_executions[0].status #=> String, one of "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
+    #   resp.task_executions[0].status #=> String, one of "QUEUED", "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTaskExecutions AWS API Documentation
@@ -1433,7 +1457,7 @@ module Aws::DataSync
     #
     #   resp.tasks #=> Array
     #   resp.tasks[0].task_arn #=> String
-    #   resp.tasks[0].status #=> String, one of "AVAILABLE", "CREATING", "RUNNING", "UNAVAILABLE"
+    #   resp.tasks[0].status #=> String, one of "AVAILABLE", "CREATING", "QUEUED", "RUNNING", "UNAVAILABLE"
     #   resp.tasks[0].name #=> String
     #   resp.next_token #=> String
     #
@@ -1486,7 +1510,8 @@ module Aws::DataSync
     #   resp = client.start_task_execution({
     #     task_arn: "TaskArn", # required
     #     override_options: {
-    #       verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, NONE
+    #       verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #       overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
     #       atime: "NONE", # accepts NONE, BEST_EFFORT
     #       mtime: "NONE", # accepts NONE, PRESERVE
     #       uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
@@ -1495,6 +1520,7 @@ module Aws::DataSync
     #       preserve_devices: "NONE", # accepts NONE, PRESERVE
     #       posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #       bytes_per_second: 1,
+    #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     includes: [
     #       {
@@ -1638,7 +1664,8 @@ module Aws::DataSync
     #   resp = client.update_task({
     #     task_arn: "TaskArn", # required
     #     options: {
-    #       verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, NONE
+    #       verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #       overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
     #       atime: "NONE", # accepts NONE, BEST_EFFORT
     #       mtime: "NONE", # accepts NONE, PRESERVE
     #       uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
@@ -1647,6 +1674,7 @@ module Aws::DataSync
     #       preserve_devices: "NONE", # accepts NONE, PRESERVE
     #       posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #       bytes_per_second: 1,
+    #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     excludes: [
     #       {
@@ -1680,7 +1708,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

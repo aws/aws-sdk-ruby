@@ -119,7 +119,7 @@ module Seahorse
         attr_accessor :default_block
         attr_accessor :required
         attr_accessor :doc_type
-        attr_accessor :doc_default
+        attr_writer :doc_default
         attr_accessor :docstring
 
         def doc_default

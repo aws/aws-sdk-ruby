@@ -23,6 +23,7 @@ module Aws::Batch
     CEState = Shapes::StringShape.new(name: 'CEState')
     CEStatus = Shapes::StringShape.new(name: 'CEStatus')
     CEType = Shapes::StringShape.new(name: 'CEType')
+    CRAllocationStrategy = Shapes::StringShape.new(name: 'CRAllocationStrategy')
     CRType = Shapes::StringShape.new(name: 'CRType')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     CancelJobResponse = Shapes::StructureShape.new(name: 'CancelJobResponse')
@@ -179,6 +180,7 @@ module Aws::Batch
     ComputeEnvironmentOrders.member = Shapes::ShapeRef.new(shape: ComputeEnvironmentOrder)
 
     ComputeResource.add_member(:type, Shapes::ShapeRef.new(shape: CRType, required: true, location_name: "type"))
+    ComputeResource.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: CRAllocationStrategy, location_name: "allocationStrategy"))
     ComputeResource.add_member(:minv_cpus, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "minvCpus"))
     ComputeResource.add_member(:maxv_cpus, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxvCpus"))
     ComputeResource.add_member(:desiredv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredvCpus"))

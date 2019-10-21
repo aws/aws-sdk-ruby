@@ -424,8 +424,11 @@ module Aws::ElastiCache
     #
     # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/applying-updates.html
     #
-    # @option params [required, Array<String>] :replication_group_ids
+    # @option params [Array<String>] :replication_group_ids
     #   The replication group IDs
+    #
+    # @option params [Array<String>] :cache_cluster_ids
+    #   The cache cluster IDs
     #
     # @option params [required, String] :service_update_name
     #   The unique ID of the service update
@@ -438,7 +441,8 @@ module Aws::ElastiCache
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_apply_update_action({
-    #     replication_group_ids: ["String"], # required
+    #     replication_group_ids: ["String"],
+    #     cache_cluster_ids: ["String"],
     #     service_update_name: "String", # required
     #   })
     #
@@ -446,10 +450,12 @@ module Aws::ElastiCache
     #
     #   resp.processed_update_actions #=> Array
     #   resp.processed_update_actions[0].replication_group_id #=> String
+    #   resp.processed_update_actions[0].cache_cluster_id #=> String
     #   resp.processed_update_actions[0].service_update_name #=> String
     #   resp.processed_update_actions[0].update_action_status #=> String, one of "not-applied", "waiting-to-start", "in-progress", "stopping", "stopped", "complete"
     #   resp.unprocessed_update_actions #=> Array
     #   resp.unprocessed_update_actions[0].replication_group_id #=> String
+    #   resp.unprocessed_update_actions[0].cache_cluster_id #=> String
     #   resp.unprocessed_update_actions[0].service_update_name #=> String
     #   resp.unprocessed_update_actions[0].error_type #=> String
     #   resp.unprocessed_update_actions[0].error_message #=> String
@@ -470,8 +476,11 @@ module Aws::ElastiCache
     #
     # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/stopping-self-service-updates.html
     #
-    # @option params [required, Array<String>] :replication_group_ids
+    # @option params [Array<String>] :replication_group_ids
     #   The replication group IDs
+    #
+    # @option params [Array<String>] :cache_cluster_ids
+    #   The cache cluster IDs
     #
     # @option params [required, String] :service_update_name
     #   The unique ID of the service update
@@ -484,7 +493,8 @@ module Aws::ElastiCache
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_stop_update_action({
-    #     replication_group_ids: ["String"], # required
+    #     replication_group_ids: ["String"],
+    #     cache_cluster_ids: ["String"],
     #     service_update_name: "String", # required
     #   })
     #
@@ -492,10 +502,12 @@ module Aws::ElastiCache
     #
     #   resp.processed_update_actions #=> Array
     #   resp.processed_update_actions[0].replication_group_id #=> String
+    #   resp.processed_update_actions[0].cache_cluster_id #=> String
     #   resp.processed_update_actions[0].service_update_name #=> String
     #   resp.processed_update_actions[0].update_action_status #=> String, one of "not-applied", "waiting-to-start", "in-progress", "stopping", "stopped", "complete"
     #   resp.unprocessed_update_actions #=> Array
     #   resp.unprocessed_update_actions[0].replication_group_id #=> String
+    #   resp.unprocessed_update_actions[0].cache_cluster_id #=> String
     #   resp.unprocessed_update_actions[0].service_update_name #=> String
     #   resp.unprocessed_update_actions[0].error_type #=> String
     #   resp.unprocessed_update_actions[0].error_message #=> String
@@ -5982,6 +5994,13 @@ module Aws::ElastiCache
     # @option params [Array<String>] :replication_group_ids
     #   The replication group IDs
     #
+    # @option params [Array<String>] :cache_cluster_ids
+    #   The cache cluster IDs
+    #
+    # @option params [String] :engine
+    #   The Elasticache engine to which the update applies. Either Redis or
+    #   Memcached
+    #
     # @option params [Array<String>] :service_update_status
     #   The status of the service update
     #
@@ -6014,6 +6033,8 @@ module Aws::ElastiCache
     #   resp = client.describe_update_actions({
     #     service_update_name: "String",
     #     replication_group_ids: ["String"],
+    #     cache_cluster_ids: ["String"],
+    #     engine: "String",
     #     service_update_status: ["available"], # accepts available, cancelled, expired
     #     service_update_time_range: {
     #       start_time: Time.now,
@@ -6030,6 +6051,7 @@ module Aws::ElastiCache
     #   resp.marker #=> String
     #   resp.update_actions #=> Array
     #   resp.update_actions[0].replication_group_id #=> String
+    #   resp.update_actions[0].cache_cluster_id #=> String
     #   resp.update_actions[0].service_update_name #=> String
     #   resp.update_actions[0].service_update_release_date #=> Time
     #   resp.update_actions[0].service_update_severity #=> String, one of "critical", "important", "medium", "low"
@@ -6053,7 +6075,17 @@ module Aws::ElastiCache
     #   resp.update_actions[0].node_group_update_status[0].node_group_member_update_status[0].node_update_initiated_by #=> String, one of "system", "customer"
     #   resp.update_actions[0].node_group_update_status[0].node_group_member_update_status[0].node_update_initiated_date #=> Time
     #   resp.update_actions[0].node_group_update_status[0].node_group_member_update_status[0].node_update_status_modified_date #=> Time
+    #   resp.update_actions[0].cache_node_update_status #=> Array
+    #   resp.update_actions[0].cache_node_update_status[0].cache_node_id #=> String
+    #   resp.update_actions[0].cache_node_update_status[0].node_update_status #=> String, one of "not-applied", "waiting-to-start", "in-progress", "stopping", "stopped", "complete"
+    #   resp.update_actions[0].cache_node_update_status[0].node_deletion_date #=> Time
+    #   resp.update_actions[0].cache_node_update_status[0].node_update_start_date #=> Time
+    #   resp.update_actions[0].cache_node_update_status[0].node_update_end_date #=> Time
+    #   resp.update_actions[0].cache_node_update_status[0].node_update_initiated_by #=> String, one of "system", "customer"
+    #   resp.update_actions[0].cache_node_update_status[0].node_update_initiated_date #=> Time
+    #   resp.update_actions[0].cache_node_update_status[0].node_update_status_modified_date #=> Time
     #   resp.update_actions[0].estimated_update_time #=> String
+    #   resp.update_actions[0].engine #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUpdateActions AWS API Documentation
     #
@@ -7889,7 +7921,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

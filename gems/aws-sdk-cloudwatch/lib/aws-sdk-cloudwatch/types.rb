@@ -776,6 +776,7 @@ module Aws::CloudWatch
     #             expression: "MetricExpression",
     #             label: "MetricLabel",
     #             return_data: false,
+    #             period: 1,
     #           },
     #         ],
     #         start_time: Time.now, # required
@@ -1638,6 +1639,7 @@ module Aws::CloudWatch
     #         expression: "MetricExpression",
     #         label: "MetricLabel",
     #         return_data: false,
+    #         period: 1,
     #       }
     #
     # @!attribute [rw] id
@@ -1695,6 +1697,22 @@ module Aws::CloudWatch
     #   the same `PutMetricAlarm` operation, specify `ReturnData` as False.
     #   @return [Boolean]
     #
+    # @!attribute [rw] period
+    #   The granularity, in seconds, of the returned data points. For
+    #   metrics with regular resolution, a period can be as short as one
+    #   minute (60 seconds) and must be a multiple of 60. For
+    #   high-resolution metrics that are collected at intervals of less than
+    #   one minute, the period can be 1, 5, 10, 30, 60, or any multiple of
+    #   60. High-resolution metrics are those metrics stored by a
+    #   `PutMetricData` operation that includes a `StorageResolution of 1
+    #   second`.
+    #
+    #   Use this field only when you are performing a `GetMetricData`
+    #   operation, and only when you are specifying the `Expression` field.
+    #   Do not use this field with a `PutMetricAlarm` operation or when you
+    #   are specifying a `MetricStat` in a `GetMetricData` operation.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataQuery AWS API Documentation
     #
     class MetricDataQuery < Struct.new(
@@ -1702,7 +1720,8 @@ module Aws::CloudWatch
       :metric_stat,
       :expression,
       :label,
-      :return_data)
+      :return_data,
+      :period)
       include Aws::Structure
     end
 
@@ -1907,7 +1926,27 @@ module Aws::CloudWatch
     #   @return [Types::Metric]
     #
     # @!attribute [rw] period
-    #   The period, in seconds, to use when retrieving the metric.
+    #   The granularity, in seconds, of the returned data points. For
+    #   metrics with regular resolution, a period can be as short as one
+    #   minute (60 seconds) and must be a multiple of 60. For
+    #   high-resolution metrics that are collected at intervals of less than
+    #   one minute, the period can be 1, 5, 10, 30, 60, or any multiple of
+    #   60. High-resolution metrics are those metrics stored by a
+    #   `PutMetricData` call that includes a `StorageResolution` of 1
+    #   second.
+    #
+    #   If the `StartTime` parameter specifies a time stamp that is greater
+    #   than 3 hours ago, you must specify the period as follows or no data
+    #   points in that time range is returned:
+    #
+    #   * Start time between 3 hours and 15 days ago - Use a multiple of 60
+    #     seconds (1 minute).
+    #
+    #   * Start time between 15 and 63 days ago - Use a multiple of 300
+    #     seconds (5 minutes).
+    #
+    #   * Start time greater than 63 days ago - Use a multiple of 3600
+    #     seconds (1 hour).
     #   @return [Integer]
     #
     # @!attribute [rw] stat
@@ -2119,6 +2158,7 @@ module Aws::CloudWatch
     #             expression: "MetricExpression",
     #             label: "MetricLabel",
     #             return_data: false,
+    #             period: 1,
     #           },
     #         ],
     #         tags: [
@@ -2658,17 +2698,12 @@ module Aws::CloudWatch
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the CloudWatch resource that you're adding tags to. For
-    #   more information on ARN format, see [Example ARNs][1] in the *Amazon
-    #   Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch
+    #   The ARN of the CloudWatch alarm that you're adding tags to. The ARN
+    #   format is `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The list of key-value pairs to associate with the resource.
+    #   The list of key-value pairs to associate with the alarm.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/TagResourceInput AWS API Documentation

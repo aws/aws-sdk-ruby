@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2019-09-23)
+------------------
+
+* Feature - RDS Data API now supports Amazon Aurora Serverless PostgreSQL databases.
+
 1.11.0 (2019-07-25)
 ------------------
 

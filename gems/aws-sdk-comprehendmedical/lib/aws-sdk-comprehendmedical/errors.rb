@@ -58,6 +58,22 @@ module Aws::ComprehendMedical
 
     end
 
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ComprehendMedical::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class ServiceUnavailableException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -95,6 +111,22 @@ module Aws::ComprehendMedical
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ComprehendMedical::Types::TooManyRequestsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ComprehendMedical::Types::ValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

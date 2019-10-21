@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-10-04)
+------------------
+
+* Feature - This release adds ClientMetadata input parameter to multiple Cognito User Pools operations, making this parameter available to the customer configured lambda triggers as applicable.
+
 1.25.0 (2019-07-25)
 ------------------
 

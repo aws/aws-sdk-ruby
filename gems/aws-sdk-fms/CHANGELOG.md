@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-10-10)
+------------------
+
+* Feature - Firewall Manager now supports Amazon VPC security groups, making it easier to configure and manage security groups across multiple accounts from a single place.
+
 1.18.0 (2019-07-25)
 ------------------
 

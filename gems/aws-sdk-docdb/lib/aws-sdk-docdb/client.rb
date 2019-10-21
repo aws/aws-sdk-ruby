@@ -642,7 +642,7 @@ module Aws::DocDB
     #
     #   Constraints:
     #
-    #   * Must be from 1 to 16 letters or numbers.
+    #   * Must be from 1 to 63 letters or numbers.
     #
     #   * The first character must be a letter.
     #
@@ -653,7 +653,7 @@ module Aws::DocDB
     #   any printable ASCII character except forward slash (/), double quote
     #   ("), or the "at" symbol (@).
     #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   Constraints: Must contain from 8 to 100 characters.
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -1031,7 +1031,8 @@ module Aws::DocDB
     #   Default: `true`
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be assigned to the DB instance.
+    #   The tags to be assigned to the DB instance. You can assign up to 10
+    #   tags to an instance.
     #
     # @option params [required, String] :db_cluster_identifier
     #   The identifier of the DB cluster that the instance will belong to.
@@ -1124,6 +1125,7 @@ module Aws::DocDB
     #   resp.db_instance.storage_encrypted #=> Boolean
     #   resp.db_instance.kms_key_id #=> String
     #   resp.db_instance.dbi_resource_id #=> String
+    #   resp.db_instance.ca_certificate_identifier #=> String
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
@@ -1470,6 +1472,7 @@ module Aws::DocDB
     #   resp.db_instance.storage_encrypted #=> Boolean
     #   resp.db_instance.kms_key_id #=> String
     #   resp.db_instance.dbi_resource_id #=> String
+    #   resp.db_instance.ca_certificate_identifier #=> String
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
@@ -1519,6 +1522,83 @@ module Aws::DocDB
     # @param [Hash] params ({})
     def delete_db_subnet_group(params = {}, options = {})
       req = build_request(:delete_db_subnet_group, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of certificate authority (CA) certificates provided by
+    # Amazon RDS for this AWS account.
+    #
+    # @option params [String] :certificate_identifier
+    #   The user-supplied certificate identifier. If this parameter is
+    #   specified, information for only the specified certificate is returned.
+    #   If this parameter is omitted, a list of up to `MaxRecords`
+    #   certificates is returned. This parameter is not case sensitive.
+    #
+    #   Constraints
+    #
+    #   * Must match an existing `CertificateIdentifier`.
+    #
+    #   ^
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   This parameter is not currently supported.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints:
+    #
+    #   * Minimum: 20
+    #
+    #   * Maximum: 100
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeCertificates` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @return [Types::CertificateMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CertificateMessage#certificates #certificates} => Array&lt;Types::Certificate&gt;
+    #   * {Types::CertificateMessage#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_certificates({
+    #     certificate_identifier: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificates #=> Array
+    #   resp.certificates[0].certificate_identifier #=> String
+    #   resp.certificates[0].certificate_type #=> String
+    #   resp.certificates[0].thumbprint #=> String
+    #   resp.certificates[0].valid_from #=> Time
+    #   resp.certificates[0].valid_till #=> Time
+    #   resp.certificates[0].certificate_arn #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeCertificates AWS API Documentation
+    #
+    # @overload describe_certificates(params = {})
+    # @param [Hash] params ({})
+    def describe_certificates(params = {}, options = {})
+      req = build_request(:describe_certificates, params)
       req.send_request(options)
     end
 
@@ -2189,6 +2269,7 @@ module Aws::DocDB
     #   resp.db_instances[0].storage_encrypted #=> Boolean
     #   resp.db_instances[0].kms_key_id #=> String
     #   resp.db_instances[0].dbi_resource_id #=> String
+    #   resp.db_instances[0].ca_certificate_identifier #=> String
     #   resp.db_instances[0].promotion_tier #=> Integer
     #   resp.db_instances[0].db_instance_arn #=> String
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports #=> Array
@@ -2865,7 +2946,7 @@ module Aws::DocDB
     #   any printable ASCII character except forward slash (/), double quote
     #   ("), or the "at" symbol (@).
     #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   Constraints: Must contain from 8 to 100 characters.
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -3217,6 +3298,10 @@ module Aws::DocDB
     #
     #   Example: `mydbinstance`
     #
+    # @option params [String] :ca_certificate_identifier
+    #   Indicates the certificate that needs to be associated with the
+    #   instance.
+    #
     # @option params [Integer] :promotion_tier
     #   A value that specifies the order in which an Amazon DocumentDB replica
     #   is promoted to the primary instance after a failure of the existing
@@ -3239,6 +3324,7 @@ module Aws::DocDB
     #     preferred_maintenance_window: "String",
     #     auto_minor_version_upgrade: false,
     #     new_db_instance_identifier: "String",
+    #     ca_certificate_identifier: "String",
     #     promotion_tier: 1,
     #   })
     #
@@ -3298,6 +3384,7 @@ module Aws::DocDB
     #   resp.db_instance.storage_encrypted #=> Boolean
     #   resp.db_instance.kms_key_id #=> String
     #   resp.db_instance.dbi_resource_id #=> String
+    #   resp.db_instance.ca_certificate_identifier #=> String
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
@@ -3455,6 +3542,7 @@ module Aws::DocDB
     #   resp.db_instance.storage_encrypted #=> Boolean
     #   resp.db_instance.kms_key_id #=> String
     #   resp.db_instance.dbi_resource_id #=> String
+    #   resp.db_instance.ca_certificate_identifier #=> String
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
@@ -4092,7 +4180,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

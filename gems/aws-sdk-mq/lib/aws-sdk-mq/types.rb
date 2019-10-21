@@ -1114,6 +1114,12 @@ module Aws::MQ
     #   brokers.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] pending_host_instance_type
+    #   The host instance type of the broker to upgrade to. For a list of
+    #   supported instance types, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+    #   @return [String]
+    #
     # @!attribute [rw] publicly_accessible
     #   Required. Enables connections from applications outside of the VPC
     #   that hosts the broker's subnets.
@@ -1160,6 +1166,7 @@ module Aws::MQ
       :maintenance_window_start_time,
       :pending_engine_version,
       :pending_security_groups,
+      :pending_host_instance_type,
       :publicly_accessible,
       :security_groups,
       :subnet_ids,
@@ -1246,6 +1253,9 @@ module Aws::MQ
     # @!attribute [rw] pending_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] pending_host_instance_type
+    #   @return [String]
+    #
     # @!attribute [rw] publicly_accessible
     #   @return [Boolean]
     #
@@ -1281,6 +1291,7 @@ module Aws::MQ
       :maintenance_window_start_time,
       :pending_engine_version,
       :pending_security_groups,
+      :pending_host_instance_type,
       :publicly_accessible,
       :security_groups,
       :subnet_ids,
@@ -2110,6 +2121,12 @@ module Aws::MQ
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
+    # @!attribute [rw] host_instance_type
+    #   The host instance type of the broker to upgrade to. For a list of
+    #   supported instance types, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+    #   @return [String]
+    #
     # @!attribute [rw] logs
     #   Enables Amazon CloudWatch logging for brokers.
     #   @return [Types::Logs]
@@ -2125,6 +2142,7 @@ module Aws::MQ
       :auto_minor_version_upgrade,
       :configuration,
       :engine_version,
+      :host_instance_type,
       :logs,
       :security_groups)
       include Aws::Structure
@@ -2151,6 +2169,12 @@ module Aws::MQ
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
+    # @!attribute [rw] host_instance_type
+    #   The host instance type of the broker to upgrade to. For a list of
+    #   supported instance types, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+    #   @return [String]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
@@ -2168,6 +2192,7 @@ module Aws::MQ
       :broker_id,
       :configuration,
       :engine_version,
+      :host_instance_type,
       :logs,
       :security_groups)
       include Aws::Structure
@@ -2184,6 +2209,7 @@ module Aws::MQ
     #           revision: 1,
     #         },
     #         engine_version: "__string",
+    #         host_instance_type: "__string",
     #         logs: {
     #           audit: false,
     #           general: false,
@@ -2204,6 +2230,9 @@ module Aws::MQ
     # @!attribute [rw] engine_version
     #   @return [String]
     #
+    # @!attribute [rw] host_instance_type
+    #   @return [String]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
@@ -2219,6 +2248,7 @@ module Aws::MQ
       :broker_id,
       :configuration,
       :engine_version,
+      :host_instance_type,
       :logs,
       :security_groups)
       include Aws::Structure
@@ -2237,6 +2267,9 @@ module Aws::MQ
     # @!attribute [rw] engine_version
     #   @return [String]
     #
+    # @!attribute [rw] host_instance_type
+    #   @return [String]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
@@ -2252,6 +2285,7 @@ module Aws::MQ
       :broker_id,
       :configuration,
       :engine_version,
+      :host_instance_type,
       :logs,
       :security_groups)
       include Aws::Structure

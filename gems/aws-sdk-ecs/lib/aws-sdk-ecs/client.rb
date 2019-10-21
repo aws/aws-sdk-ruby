@@ -2954,9 +2954,6 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
-    #   resp.tasks[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
-    #   resp.tasks[0].containers[0].firelens_configuration.options #=> Hash
-    #   resp.tasks[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -4594,7 +4591,7 @@ module Aws::ECS
     #   The process namespace to use for the containers in the task. The valid
     #   values are `host` or `task`. If `host` is specified, then all
     #   containers within the tasks that specified the `host` PID mode on the
-    #   same container instance share the same IPC resources with the host
+    #   same container instance share the same process namespace with the host
     #   Amazon EC2 instance. If `task` is specified, all containers within the
     #   specified task share the same process namespace. If no value is
     #   specified, the default is a private namespace. For more information,
@@ -5434,9 +5431,6 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
-    #   resp.tasks[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
-    #   resp.tasks[0].containers[0].firelens_configuration.options #=> Hash
-    #   resp.tasks[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -5702,9 +5696,6 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
-    #   resp.tasks[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
-    #   resp.tasks[0].containers[0].firelens_configuration.options #=> Hash
-    #   resp.tasks[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -5849,9 +5840,6 @@ module Aws::ECS
     #   resp.task.containers[0].memory_reservation #=> String
     #   resp.task.containers[0].gpu_ids #=> Array
     #   resp.task.containers[0].gpu_ids[0] #=> String
-    #   resp.task.containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
-    #   resp.task.containers[0].firelens_configuration.options #=> Hash
-    #   resp.task.containers[0].firelens_configuration.options["String"] #=> String
     #   resp.task.started_by #=> String
     #   resp.task.version #=> Integer
     #   resp.task.stopped_reason #=> String
@@ -7041,7 +7029,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

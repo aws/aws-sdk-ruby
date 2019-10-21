@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-09-23)
+------------------
+
+* Feature - Adds API operation DescribeNodeConfigurationOptions and associated data structures.
+
 1.31.0 (2019-08-09)
 ------------------
 

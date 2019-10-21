@@ -427,6 +427,17 @@ module Aws::Pinpoint
     #             timezone: "__string",
     #           },
     #           size_percent: 1, # required
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -566,6 +577,17 @@ module Aws::Pinpoint
     #       tags: {
     #         "__string" => "__string",
     #       },
+    #       template_configuration: {
+    #         email_template: {
+    #           name: "__string",
+    #         },
+    #         push_template: {
+    #           name: "__string",
+    #         },
+    #         sms_template: {
+    #           name: "__string",
+    #         },
+    #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
     #     },
@@ -662,6 +684,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -771,6 +796,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
+    #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -784,7 +812,49 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Creates a new export job for an application.
+    # Creates a message template that you can use in messages that are sent
+    # through the email channel.
+    #
+    # @option params [required, Types::EmailTemplateRequest] :email_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in messages that are sent through the email channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::CreateEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEmailTemplateResponse#create_template_message_body #create_template_message_body} => Types::CreateTemplateMessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_email_template({
+    #     email_template_request: { # required
+    #       html_part: "__string",
+    #       subject: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #       text_part: "__string",
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_template_message_body.arn #=> String
+    #   resp.create_template_message_body.message #=> String
+    #   resp.create_template_message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateEmailTemplate AWS API Documentation
+    #
+    # @overload create_email_template(params = {})
+    # @param [Hash] params ({})
+    def create_email_template(params = {}, options = {})
+      req = build_request(:create_email_template, params)
+      req.send_request(options)
+    end
+
+    # Creates an export job for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -837,7 +907,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Creates a new import job for an application.
+    # Creates an import job for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -895,6 +965,90 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def create_import_job(params = {}, options = {})
       req = build_request(:create_import_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a message template that you can use in messages that are sent
+    # through a push notification channel.
+    #
+    # @option params [required, Types::PushNotificationTemplateRequest] :push_notification_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in messages that are sent through a push notification channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::CreatePushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePushTemplateResponse#create_template_message_body #create_template_message_body} => Types::CreateTemplateMessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_push_template({
+    #     push_notification_template_request: { # required
+    #       adm: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       apns: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         media_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       baidu: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       default: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       gcm: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_template_message_body.arn #=> String
+    #   resp.create_template_message_body.message #=> String
+    #   resp.create_template_message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreatePushTemplate AWS API Documentation
+    #
+    # @overload create_push_template(params = {})
+    # @param [Hash] params ({})
+    def create_push_template(params = {}, options = {})
+      req = build_request(:create_push_template, params)
       req.send_request(options)
     end
 
@@ -1180,6 +1334,46 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def create_segment(params = {}, options = {})
       req = build_request(:create_segment, params)
+      req.send_request(options)
+    end
+
+    # Creates a message template that you can use in messages that are sent
+    # through the SMS channel.
+    #
+    # @option params [required, Types::SMSTemplateRequest] :sms_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in text messages that are sent through the SMS channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::CreateSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSmsTemplateResponse#create_template_message_body #create_template_message_body} => Types::CreateTemplateMessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_sms_template({
+    #     sms_template_request: { # required
+    #       body: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_template_message_body.arn #=> String
+    #   resp.create_template_message_body.message #=> String
+    #   resp.create_template_message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSmsTemplate AWS API Documentation
+    #
+    # @overload create_sms_template(params = {})
+    # @param [Hash] params ({})
+    def create_sms_template(params = {}, options = {})
+      req = build_request(:create_sms_template, params)
       req.send_request(options)
     end
 
@@ -1553,6 +1747,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -1662,6 +1859,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
+    #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -1714,6 +1914,35 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def delete_email_channel(params = {}, options = {})
       req = build_request(:delete_email_channel, params)
+      req.send_request(options)
+    end
+
+    # Deletes a message template that was designed for use in messages that
+    # were sent through the email channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::DeleteEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteEmailTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_email_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailTemplate AWS API Documentation
+    #
+    # @overload delete_email_template(params = {})
+    # @param [Hash] params ({})
+    def delete_email_template(params = {}, options = {})
+      req = build_request(:delete_email_template, params)
       req.send_request(options)
     end
 
@@ -1846,6 +2075,35 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def delete_gcm_channel(params = {}, options = {})
       req = build_request(:delete_gcm_channel, params)
+      req.send_request(options)
+    end
+
+    # Deletes a message template that was designed for use in messages that
+    # were sent through a push notification channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::DeletePushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePushTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_push_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeletePushTemplate AWS API Documentation
+    #
+    # @overload delete_push_template(params = {})
+    # @param [Hash] params ({})
+    def delete_push_template(params = {}, options = {})
+      req = build_request(:delete_push_template, params)
       req.send_request(options)
     end
 
@@ -2015,6 +2273,35 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def delete_sms_channel(params = {}, options = {})
       req = build_request(:delete_sms_channel, params)
+      req.send_request(options)
+    end
+
+    # Deletes a message template that was designed for use in messages that
+    # were sent through the SMS channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::DeleteSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSmsTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_sms_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsTemplate AWS API Documentation
+    #
+    # @overload delete_sms_template(params = {})
+    # @param [Hash] params ({})
+    def delete_sms_template(params = {}, options = {})
+      req = build_request(:delete_sms_template, params)
       req.send_request(options)
     end
 
@@ -2472,8 +2759,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Retrieves information about the status and settings of the Baidu Cloud
-    # Push channel for an application.
+    # Retrieves information about the status and settings of the Baidu
+    # channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -2619,6 +2906,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -2728,6 +3018,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
+    #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -2963,6 +3256,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -3072,6 +3368,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
+    #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -3201,6 +3500,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].size_percent #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
@@ -3310,6 +3612,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].tags #=> Hash
     #   resp.campaigns_response.item[0].tags["__string"] #=> String
+    #   resp.campaigns_response.item[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.sms_template.name #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -3438,6 +3743,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].size_percent #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
@@ -3547,6 +3855,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].tags #=> Hash
     #   resp.campaigns_response.item[0].tags["__string"] #=> String
+    #   resp.campaigns_response.item[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.sms_template.name #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -3637,6 +3948,43 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_email_channel(params = {}, options = {})
       req = build_request(:get_email_channel, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the content and settings for a message template that you can
+    # use in messages that are sent through the email channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::GetEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEmailTemplateResponse#email_template_response #email_template_response} => Types::EmailTemplateResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_email_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.email_template_response.arn #=> String
+    #   resp.email_template_response.creation_date #=> String
+    #   resp.email_template_response.html_part #=> String
+    #   resp.email_template_response.last_modified_date #=> String
+    #   resp.email_template_response.subject #=> String
+    #   resp.email_template_response.tags #=> Hash
+    #   resp.email_template_response.tags["__string"] #=> String
+    #   resp.email_template_response.template_name #=> String
+    #   resp.email_template_response.template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #   resp.email_template_response.text_part #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailTemplate AWS API Documentation
+    #
+    # @overload get_email_template(params = {})
+    # @param [Hash] params ({})
+    def get_email_template(params = {}, options = {})
+      req = build_request(:get_email_template, params)
       req.send_request(options)
     end
 
@@ -3977,6 +4325,75 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_import_jobs(params = {}, options = {})
       req = build_request(:get_import_jobs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the content and settings for a message template that you can
+    # use in messages that are sent through a push notification channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::GetPushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPushTemplateResponse#push_notification_template_response #push_notification_template_response} => Types::PushNotificationTemplateResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_push_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.push_notification_template_response.adm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.push_notification_template_response.adm.body #=> String
+    #   resp.push_notification_template_response.adm.image_icon_url #=> String
+    #   resp.push_notification_template_response.adm.image_url #=> String
+    #   resp.push_notification_template_response.adm.small_image_icon_url #=> String
+    #   resp.push_notification_template_response.adm.sound #=> String
+    #   resp.push_notification_template_response.adm.title #=> String
+    #   resp.push_notification_template_response.adm.url #=> String
+    #   resp.push_notification_template_response.apns.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.push_notification_template_response.apns.body #=> String
+    #   resp.push_notification_template_response.apns.media_url #=> String
+    #   resp.push_notification_template_response.apns.sound #=> String
+    #   resp.push_notification_template_response.apns.title #=> String
+    #   resp.push_notification_template_response.apns.url #=> String
+    #   resp.push_notification_template_response.arn #=> String
+    #   resp.push_notification_template_response.baidu.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.push_notification_template_response.baidu.body #=> String
+    #   resp.push_notification_template_response.baidu.image_icon_url #=> String
+    #   resp.push_notification_template_response.baidu.image_url #=> String
+    #   resp.push_notification_template_response.baidu.small_image_icon_url #=> String
+    #   resp.push_notification_template_response.baidu.sound #=> String
+    #   resp.push_notification_template_response.baidu.title #=> String
+    #   resp.push_notification_template_response.baidu.url #=> String
+    #   resp.push_notification_template_response.creation_date #=> String
+    #   resp.push_notification_template_response.default.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.push_notification_template_response.default.body #=> String
+    #   resp.push_notification_template_response.default.sound #=> String
+    #   resp.push_notification_template_response.default.title #=> String
+    #   resp.push_notification_template_response.default.url #=> String
+    #   resp.push_notification_template_response.gcm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.push_notification_template_response.gcm.body #=> String
+    #   resp.push_notification_template_response.gcm.image_icon_url #=> String
+    #   resp.push_notification_template_response.gcm.image_url #=> String
+    #   resp.push_notification_template_response.gcm.small_image_icon_url #=> String
+    #   resp.push_notification_template_response.gcm.sound #=> String
+    #   resp.push_notification_template_response.gcm.title #=> String
+    #   resp.push_notification_template_response.gcm.url #=> String
+    #   resp.push_notification_template_response.last_modified_date #=> String
+    #   resp.push_notification_template_response.tags #=> Hash
+    #   resp.push_notification_template_response.tags["__string"] #=> String
+    #   resp.push_notification_template_response.template_name #=> String
+    #   resp.push_notification_template_response.template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetPushTemplate AWS API Documentation
+    #
+    # @overload get_push_template(params = {})
+    # @param [Hash] params ({})
+    def get_push_template(params = {}, options = {})
+      req = build_request(:get_push_template, params)
       req.send_request(options)
     end
 
@@ -4670,6 +5087,41 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Retrieves the content and settings for a message template that you can
+    # use in messages that are sent through the SMS channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::GetSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSmsTemplateResponse#sms_template_response #sms_template_response} => Types::SMSTemplateResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sms_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sms_template_response.arn #=> String
+    #   resp.sms_template_response.body #=> String
+    #   resp.sms_template_response.creation_date #=> String
+    #   resp.sms_template_response.last_modified_date #=> String
+    #   resp.sms_template_response.tags #=> Hash
+    #   resp.sms_template_response.tags["__string"] #=> String
+    #   resp.sms_template_response.template_name #=> String
+    #   resp.sms_template_response.template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplate AWS API Documentation
+    #
+    # @overload get_sms_template(params = {})
+    # @param [Hash] params ({})
+    def get_sms_template(params = {}, options = {})
+      req = build_request(:get_sms_template, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about all the endpoints that are associated with
     # a specific user ID.
     #
@@ -4773,7 +5225,7 @@ module Aws::Pinpoint
     end
 
     # Retrieves all the tags (keys and values) that are associated with an
-    # application, campaign, or segment.
+    # application, campaign, message template, or segment.
     #
     # @option params [required, String] :resource_arn
     #
@@ -4798,6 +5250,51 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about all the message templates that are
+    # associated with your Amazon Pinpoint account.
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [String] :prefix
+    #
+    # @option params [String] :template_type
+    #
+    # @return [Types::ListTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTemplatesResponse#templates_response #templates_response} => Types::TemplatesResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_templates({
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #     prefix: "__string",
+    #     template_type: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.templates_response.item #=> Array
+    #   resp.templates_response.item[0].arn #=> String
+    #   resp.templates_response.item[0].creation_date #=> String
+    #   resp.templates_response.item[0].last_modified_date #=> String
+    #   resp.templates_response.item[0].tags #=> Hash
+    #   resp.templates_response.item[0].tags["__string"] #=> String
+    #   resp.templates_response.item[0].template_name #=> String
+    #   resp.templates_response.item[0].template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #   resp.templates_response.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplates AWS API Documentation
+    #
+    # @overload list_templates(params = {})
+    # @param [Hash] params ({})
+    def list_templates(params = {}, options = {})
+      req = build_request(:list_templates, params)
       req.send_request(options)
     end
 
@@ -5232,6 +5729,17 @@ module Aws::Pinpoint
     #           voice_id: "__string",
     #         },
     #       },
+    #       template_configuration: {
+    #         email_template: {
+    #           name: "__string",
+    #         },
+    #         push_template: {
+    #           name: "__string",
+    #         },
+    #         sms_template: {
+    #           name: "__string",
+    #         },
+    #       },
     #       trace_id: "__string",
     #     },
     #   })
@@ -5437,6 +5945,17 @@ module Aws::Pinpoint
     #           voice_id: "__string",
     #         },
     #       },
+    #       template_configuration: {
+    #         email_template: {
+    #           name: "__string",
+    #         },
+    #         push_template: {
+    #           name: "__string",
+    #         },
+    #         sms_template: {
+    #           name: "__string",
+    #         },
+    #       },
     #       trace_id: "__string",
     #       users: { # required
     #         "__string" => {
@@ -5477,13 +5996,13 @@ module Aws::Pinpoint
     end
 
     # Adds one or more tags (keys and values) to an application, campaign,
-    # or segment.
+    # message template, or segment.
     #
     # @option params [required, String] :resource_arn
     #
     # @option params [required, Types::TagsModel] :tags_model
-    #   Specifies the tags (keys and values) for an application, campaign, or
-    #   segment.
+    #   Specifies the tags (keys and values) for an application, campaign,
+    #   message template, or segment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5508,7 +6027,7 @@ module Aws::Pinpoint
     end
 
     # Removes one or more tags (keys and values) from an application,
-    # campaign, or segment.
+    # campaign, message template, or segment.
     #
     # @option params [required, String] :resource_arn
     #
@@ -5532,7 +6051,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the ADM channel settings for an application.
+    # Enables the ADM channel for an application or updates the status and
+    # settings of the ADM channel for an application.
     #
     # @option params [required, Types::ADMChannelRequest] :adm_channel_request
     #   Specifies the status and settings of the ADM (Amazon Device Messaging)
@@ -5577,7 +6097,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the APNs channel settings for an application.
+    # Enables the APNs channel for an application or updates the status and
+    # settings of the APNs channel for an application.
     #
     # @option params [required, Types::APNSChannelRequest] :apns_channel_request
     #   Specifies the status and settings of the APNs (Apple Push Notification
@@ -5629,7 +6150,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the APNs sandbox channel settings for an application.
+    # Enables the APNs sandbox channel for an application or updates the
+    # status and settings of the APNs sandbox channel for an application.
     #
     # @option params [required, Types::APNSSandboxChannelRequest] :apns_sandbox_channel_request
     #   Specifies the status and settings of the APNs (Apple Push Notification
@@ -5681,7 +6203,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the APNs VoIP channel settings for an application.
+    # Enables the APNs VoIP channel for an application or updates the status
+    # and settings of the APNs VoIP channel for an application.
     #
     # @option params [required, Types::APNSVoipChannelRequest] :apns_voip_channel_request
     #   Specifies the status and settings of the APNs (Apple Push Notification
@@ -5733,7 +6256,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the settings for the APNs VoIP sandbox channel for an
+    # Enables the APNs VoIP sandbox channel for an application or updates
+    # the status and settings of the APNs VoIP sandbox channel for an
     # application.
     #
     # @option params [required, Types::APNSVoipSandboxChannelRequest] :apns_voip_sandbox_channel_request
@@ -5844,7 +6368,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the settings of the Baidu channel for an application.
+    # Enables the Baidu channel for an application or updates the status and
+    # settings of the Baidu channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -6027,6 +6552,17 @@ module Aws::Pinpoint
     #             timezone: "__string",
     #           },
     #           size_percent: 1, # required
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -6166,6 +6702,17 @@ module Aws::Pinpoint
     #       tags: {
     #         "__string" => "__string",
     #       },
+    #       template_configuration: {
+    #         email_template: {
+    #           name: "__string",
+    #         },
+    #         push_template: {
+    #           name: "__string",
+    #         },
+    #         sms_template: {
+    #           name: "__string",
+    #         },
+    #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
     #     },
@@ -6262,6 +6809,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -6371,6 +6921,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
+    #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -6384,8 +6937,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the status and settings of the email channel for an
-    # application.
+    # Enables the email channel for an application or updates the status and
+    # settings of the email channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -6434,6 +6987,47 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def update_email_channel(params = {}, options = {})
       req = build_request(:update_email_channel, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing message template that you can use in messages that
+    # are sent through the email channel.
+    #
+    # @option params [required, Types::EmailTemplateRequest] :email_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in messages that are sent through the email channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::UpdateEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEmailTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_email_template({
+    #     email_template_request: { # required
+    #       html_part: "__string",
+    #       subject: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #       text_part: "__string",
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailTemplate AWS API Documentation
+    #
+    # @overload update_email_template(params = {})
+    # @param [Hash] params ({})
+    def update_email_template(params = {}, options = {})
+      req = build_request(:update_email_template, params)
       req.send_request(options)
     end
 
@@ -6591,7 +7185,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the status and settings of the GCM channel for an application.
+    # Enables the GCM channel for an application or updates the status and
+    # settings of the GCM channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -6635,6 +7230,89 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def update_gcm_channel(params = {}, options = {})
       req = build_request(:update_gcm_channel, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing message template that you can use in messages that
+    # are sent through a push notification channel.
+    #
+    # @option params [required, Types::PushNotificationTemplateRequest] :push_notification_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in messages that are sent through a push notification channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::UpdatePushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePushTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_push_template({
+    #     push_notification_template_request: { # required
+    #       adm: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       apns: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         media_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       baidu: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       default: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       gcm: {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       },
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdatePushTemplate AWS API Documentation
+    #
+    # @overload update_push_template(params = {})
+    # @param [Hash] params ({})
+    def update_push_template(params = {}, options = {})
+      req = build_request(:update_push_template, params)
       req.send_request(options)
     end
 
@@ -6926,7 +7604,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the status and settings of the SMS channel for an application.
+    # Enables the SMS channel for an application or updates the status and
+    # settings of the SMS channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -6975,8 +7654,47 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the status and settings of the voice channel for an
-    # application.
+    # Updates an existing message template that you can use in messages that
+    # are sent through the SMS channel.
+    #
+    # @option params [required, Types::SMSTemplateRequest] :sms_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in text messages that are sent through the SMS channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::UpdateSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSmsTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sms_template({
+    #     sms_template_request: { # required
+    #       body: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsTemplate AWS API Documentation
+    #
+    # @overload update_sms_template(params = {})
+    # @param [Hash] params ({})
+    def update_sms_template(params = {}, options = {})
+      req = build_request(:update_sms_template, params)
+      req.send_request(options)
+    end
+
+    # Enables the voice channel for an application or updates the status and
+    # settings of the voice channel for an application.
     #
     # @option params [required, String] :application_id
     #
@@ -7033,7 +7751,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

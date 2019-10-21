@@ -25,6 +25,7 @@ module Aws::TranscribeService
     GetVocabularyRequest = Shapes::StructureShape.new(name: 'GetVocabularyRequest')
     GetVocabularyResponse = Shapes::StructureShape.new(name: 'GetVocabularyResponse')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
+    KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListTranscriptionJobsRequest = Shapes::StructureShape.new(name: 'ListTranscriptionJobsRequest')
@@ -150,6 +151,7 @@ module Aws::TranscribeService
     StartTranscriptionJobRequest.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, location_name: "MediaFormat"))
     StartTranscriptionJobRequest.add_member(:media, Shapes::ShapeRef.new(shape: Media, required: true, location_name: "Media"))
     StartTranscriptionJobRequest.add_member(:output_bucket_name, Shapes::ShapeRef.new(shape: OutputBucketName, location_name: "OutputBucketName"))
+    StartTranscriptionJobRequest.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "OutputEncryptionKMSKeyId"))
     StartTranscriptionJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "Settings"))
     StartTranscriptionJobRequest.struct_class = Types::StartTranscriptionJobRequest
 

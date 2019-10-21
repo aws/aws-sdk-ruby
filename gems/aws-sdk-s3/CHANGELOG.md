@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2019-10-17)
+------------------
+
+* Feature - Add support to yield the response in #upload_file if a block is given.
+
+1.49.0 (2019-10-10)
+------------------
+
+* Feature - Support `#delete_object` and `#head_object` for encryption client.
+
 1.48.0 (2019-08-30)
 ------------------
 

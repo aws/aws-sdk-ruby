@@ -30,6 +30,7 @@ module Aws::ElastiCache
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
     CacheCluster = Shapes::StructureShape.new(name: 'CacheCluster')
     CacheClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'CacheClusterAlreadyExistsFault')
+    CacheClusterIdList = Shapes::ListShape.new(name: 'CacheClusterIdList')
     CacheClusterList = Shapes::ListShape.new(name: 'CacheClusterList')
     CacheClusterMessage = Shapes::StructureShape.new(name: 'CacheClusterMessage')
     CacheClusterNotFoundFault = Shapes::StructureShape.new(name: 'CacheClusterNotFoundFault')
@@ -43,6 +44,8 @@ module Aws::ElastiCache
     CacheNodeTypeSpecificParametersList = Shapes::ListShape.new(name: 'CacheNodeTypeSpecificParametersList')
     CacheNodeTypeSpecificValue = Shapes::StructureShape.new(name: 'CacheNodeTypeSpecificValue')
     CacheNodeTypeSpecificValueList = Shapes::ListShape.new(name: 'CacheNodeTypeSpecificValueList')
+    CacheNodeUpdateStatus = Shapes::StructureShape.new(name: 'CacheNodeUpdateStatus')
+    CacheNodeUpdateStatusList = Shapes::ListShape.new(name: 'CacheNodeUpdateStatusList')
     CacheParameterGroup = Shapes::StructureShape.new(name: 'CacheParameterGroup')
     CacheParameterGroupAlreadyExistsFault = Shapes::StructureShape.new(name: 'CacheParameterGroupAlreadyExistsFault')
     CacheParameterGroupDetails = Shapes::StructureShape.new(name: 'CacheParameterGroupDetails')
@@ -281,11 +284,13 @@ module Aws::ElastiCache
 
     AvailabilityZonesList.member = Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone")
 
-    BatchApplyUpdateActionMessage.add_member(:replication_group_ids, Shapes::ShapeRef.new(shape: ReplicationGroupIdList, required: true, location_name: "ReplicationGroupIds"))
+    BatchApplyUpdateActionMessage.add_member(:replication_group_ids, Shapes::ShapeRef.new(shape: ReplicationGroupIdList, location_name: "ReplicationGroupIds"))
+    BatchApplyUpdateActionMessage.add_member(:cache_cluster_ids, Shapes::ShapeRef.new(shape: CacheClusterIdList, location_name: "CacheClusterIds"))
     BatchApplyUpdateActionMessage.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceUpdateName"))
     BatchApplyUpdateActionMessage.struct_class = Types::BatchApplyUpdateActionMessage
 
-    BatchStopUpdateActionMessage.add_member(:replication_group_ids, Shapes::ShapeRef.new(shape: ReplicationGroupIdList, required: true, location_name: "ReplicationGroupIds"))
+    BatchStopUpdateActionMessage.add_member(:replication_group_ids, Shapes::ShapeRef.new(shape: ReplicationGroupIdList, location_name: "ReplicationGroupIds"))
+    BatchStopUpdateActionMessage.add_member(:cache_cluster_ids, Shapes::ShapeRef.new(shape: CacheClusterIdList, location_name: "CacheClusterIds"))
     BatchStopUpdateActionMessage.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceUpdateName"))
     BatchStopUpdateActionMessage.struct_class = Types::BatchStopUpdateActionMessage
 
@@ -315,6 +320,8 @@ module Aws::ElastiCache
     CacheCluster.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     CacheCluster.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AtRestEncryptionEnabled"))
     CacheCluster.struct_class = Types::CacheCluster
+
+    CacheClusterIdList.member = Shapes::ShapeRef.new(shape: String)
 
     CacheClusterList.member = Shapes::ShapeRef.new(shape: CacheCluster, location_name: "CacheCluster")
 
@@ -366,6 +373,18 @@ module Aws::ElastiCache
     CacheNodeTypeSpecificValue.struct_class = Types::CacheNodeTypeSpecificValue
 
     CacheNodeTypeSpecificValueList.member = Shapes::ShapeRef.new(shape: CacheNodeTypeSpecificValue, location_name: "CacheNodeTypeSpecificValue")
+
+    CacheNodeUpdateStatus.add_member(:cache_node_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeId"))
+    CacheNodeUpdateStatus.add_member(:node_update_status, Shapes::ShapeRef.new(shape: NodeUpdateStatus, location_name: "NodeUpdateStatus"))
+    CacheNodeUpdateStatus.add_member(:node_deletion_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeDeletionDate"))
+    CacheNodeUpdateStatus.add_member(:node_update_start_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeUpdateStartDate"))
+    CacheNodeUpdateStatus.add_member(:node_update_end_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeUpdateEndDate"))
+    CacheNodeUpdateStatus.add_member(:node_update_initiated_by, Shapes::ShapeRef.new(shape: NodeUpdateInitiatedBy, location_name: "NodeUpdateInitiatedBy"))
+    CacheNodeUpdateStatus.add_member(:node_update_initiated_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeUpdateInitiatedDate"))
+    CacheNodeUpdateStatus.add_member(:node_update_status_modified_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeUpdateStatusModifiedDate"))
+    CacheNodeUpdateStatus.struct_class = Types::CacheNodeUpdateStatus
+
+    CacheNodeUpdateStatusList.member = Shapes::ShapeRef.new(shape: CacheNodeUpdateStatus, location_name: "CacheNodeUpdateStatus")
 
     CacheParameterGroup.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupName"))
     CacheParameterGroup.add_member(:cache_parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupFamily"))
@@ -671,6 +690,8 @@ module Aws::ElastiCache
 
     DescribeUpdateActionsMessage.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     DescribeUpdateActionsMessage.add_member(:replication_group_ids, Shapes::ShapeRef.new(shape: ReplicationGroupIdList, location_name: "ReplicationGroupIds"))
+    DescribeUpdateActionsMessage.add_member(:cache_cluster_ids, Shapes::ShapeRef.new(shape: CacheClusterIdList, location_name: "CacheClusterIds"))
+    DescribeUpdateActionsMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     DescribeUpdateActionsMessage.add_member(:service_update_status, Shapes::ShapeRef.new(shape: ServiceUpdateStatusList, location_name: "ServiceUpdateStatus"))
     DescribeUpdateActionsMessage.add_member(:service_update_time_range, Shapes::ShapeRef.new(shape: TimeRangeFilter, location_name: "ServiceUpdateTimeRange"))
     DescribeUpdateActionsMessage.add_member(:update_action_status, Shapes::ShapeRef.new(shape: UpdateActionStatusList, location_name: "UpdateActionStatus"))
@@ -896,6 +917,7 @@ module Aws::ElastiCache
     PreferredAvailabilityZoneList.member = Shapes::ShapeRef.new(shape: String, location_name: "PreferredAvailabilityZone")
 
     ProcessedUpdateAction.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+    ProcessedUpdateAction.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     ProcessedUpdateAction.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     ProcessedUpdateAction.add_member(:update_action_status, Shapes::ShapeRef.new(shape: UpdateActionStatus, location_name: "UpdateActionStatus"))
     ProcessedUpdateAction.struct_class = Types::ProcessedUpdateAction
@@ -1115,6 +1137,7 @@ module Aws::ElastiCache
     TimeRangeFilter.struct_class = Types::TimeRangeFilter
 
     UnprocessedUpdateAction.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+    UnprocessedUpdateAction.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     UnprocessedUpdateAction.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     UnprocessedUpdateAction.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location_name: "ErrorType"))
     UnprocessedUpdateAction.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -1123,6 +1146,7 @@ module Aws::ElastiCache
     UnprocessedUpdateActionList.member = Shapes::ShapeRef.new(shape: UnprocessedUpdateAction, location_name: "UnprocessedUpdateAction")
 
     UpdateAction.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+    UpdateAction.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     UpdateAction.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     UpdateAction.add_member(:service_update_release_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ServiceUpdateReleaseDate"))
     UpdateAction.add_member(:service_update_severity, Shapes::ShapeRef.new(shape: ServiceUpdateSeverity, location_name: "ServiceUpdateSeverity"))
@@ -1135,7 +1159,9 @@ module Aws::ElastiCache
     UpdateAction.add_member(:update_action_status_modified_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "UpdateActionStatusModifiedDate"))
     UpdateAction.add_member(:sla_met, Shapes::ShapeRef.new(shape: SlaMet, location_name: "SlaMet"))
     UpdateAction.add_member(:node_group_update_status, Shapes::ShapeRef.new(shape: NodeGroupUpdateStatusList, location_name: "NodeGroupUpdateStatus"))
+    UpdateAction.add_member(:cache_node_update_status, Shapes::ShapeRef.new(shape: CacheNodeUpdateStatusList, location_name: "CacheNodeUpdateStatus"))
     UpdateAction.add_member(:estimated_update_time, Shapes::ShapeRef.new(shape: String, location_name: "EstimatedUpdateTime"))
+    UpdateAction.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     UpdateAction.struct_class = Types::UpdateAction
 
     UpdateActionList.member = Shapes::ShapeRef.new(shape: UpdateAction, location_name: "UpdateAction")

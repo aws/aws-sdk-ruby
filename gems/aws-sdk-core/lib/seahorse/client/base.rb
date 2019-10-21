@@ -194,13 +194,15 @@ module Seahorse
         private
 
         def define_operation_methods
+          operations_module = Module.new
           @api.operation_names.each do |method_name|
-            define_method(method_name) do |*args, &block|
+            operations_module.send(:define_method, method_name) do |*args, &block|
               params = args[0] || {}
               options = args[1] || {}
               build_request(method_name, params).send_request(options, &block)
             end
           end
+          include(operations_module)
         end
 
         def build_plugins

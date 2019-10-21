@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-10-02)
+------------------
+
+* Feature - This release adds support for the automatic snapshots add-on for instances and block storage disks.
+
 1.24.0 (2019-07-25)
 ------------------
 

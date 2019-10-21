@@ -404,10 +404,6 @@ module Aws::ECS
     #   The IDs of each GPU assigned to the container.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] firelens_configuration
-    #   The FireLens configuration for the container.
-    #   @return [Types::FirelensConfiguration]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container AWS API Documentation
     #
     class Container < Struct.new(
@@ -426,8 +422,7 @@ module Aws::ECS
       :cpu,
       :memory,
       :memory_reservation,
-      :gpu_ids,
-      :firelens_configuration)
+      :gpu_ids)
       include Aws::Structure
     end
 
@@ -4945,8 +4940,8 @@ module Aws::ECS
     #   are `awslogs`, `splunk`, and `awsfirelens`.
     #
     #   For tasks using the EC2 launch type, the supported log drivers are
-    #   `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`, `syslog`,
-    #   `splunk`, and `awsfirelens`.
+    #   `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`, `logentries`,
+    #   `syslog`, `splunk`, and `awsfirelens`.
     #
     #   For more information about using the `awslogs` log driver, see
     #   [Using the awslogs Log Driver][1] in the *Amazon Elastic Container
@@ -4989,7 +4984,13 @@ module Aws::ECS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] secret_options
-    #   The secrets to pass to the log configuration.
+    #   The secrets to pass to the log configuration. For more information,
+    #   see [Specifying Sensitive Data][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
     #   @return [Array<Types::Secret>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LogConfiguration AWS API Documentation
@@ -6136,8 +6137,8 @@ module Aws::ECS
     #   The process namespace to use for the containers in the task. The
     #   valid values are `host` or `task`. If `host` is specified, then all
     #   containers within the tasks that specified the `host` PID mode on
-    #   the same container instance share the same IPC resources with the
-    #   host Amazon EC2 instance. If `task` is specified, all containers
+    #   the same container instance share the same process namespace with
+    #   the host Amazon EC2 instance. If `task` is specified, all containers
     #   within the specified task share the same process namespace. If no
     #   value is specified, the default is a private namespace. For more
     #   information, see [PID settings][1] in the *Docker run reference*.
@@ -8249,8 +8250,8 @@ module Aws::ECS
     #   The process namespace to use for the containers in the task. The
     #   valid values are `host` or `task`. If `host` is specified, then all
     #   containers within the tasks that specified the `host` PID mode on
-    #   the same container instance share the same IPC resources with the
-    #   host Amazon EC2 instance. If `task` is specified, all containers
+    #   the same container instance share the same process namespace with
+    #   the host Amazon EC2 instance. If `task` is specified, all containers
     #   within the specified task share the same process namespace. If no
     #   value is specified, the default is a private namespace. For more
     #   information, see [PID settings][1] in the *Docker run reference*.

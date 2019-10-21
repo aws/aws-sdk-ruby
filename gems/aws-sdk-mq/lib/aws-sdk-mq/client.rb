@@ -570,6 +570,7 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#maintenance_window_start_time #maintenance_window_start_time} => Types::WeeklyStartTime
     #   * {Types::DescribeBrokerResponse#pending_engine_version #pending_engine_version} => String
     #   * {Types::DescribeBrokerResponse#pending_security_groups #pending_security_groups} => Array&lt;String&gt;
+    #   * {Types::DescribeBrokerResponse#pending_host_instance_type #pending_host_instance_type} => String
     #   * {Types::DescribeBrokerResponse#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DescribeBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
@@ -620,6 +621,7 @@ module Aws::MQ
     #   resp.pending_engine_version #=> String
     #   resp.pending_security_groups #=> Array
     #   resp.pending_security_groups[0] #=> String
+    #   resp.pending_host_instance_type #=> String
     #   resp.publicly_accessible #=> Boolean
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
@@ -1079,6 +1081,8 @@ module Aws::MQ
     #
     # @option params [String] :engine_version
     #
+    # @option params [String] :host_instance_type
+    #
     # @option params [Types::Logs] :logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
@@ -1091,6 +1095,7 @@ module Aws::MQ
     #   * {Types::UpdateBrokerResponse#broker_id #broker_id} => String
     #   * {Types::UpdateBrokerResponse#configuration #configuration} => Types::ConfigurationId
     #   * {Types::UpdateBrokerResponse#engine_version #engine_version} => String
+    #   * {Types::UpdateBrokerResponse#host_instance_type #host_instance_type} => String
     #   * {Types::UpdateBrokerResponse#logs #logs} => Types::Logs
     #   * {Types::UpdateBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
     #
@@ -1104,6 +1109,7 @@ module Aws::MQ
     #       revision: 1,
     #     },
     #     engine_version: "__string",
+    #     host_instance_type: "__string",
     #     logs: {
     #       audit: false,
     #       general: false,
@@ -1118,6 +1124,7 @@ module Aws::MQ
     #   resp.configuration.id #=> String
     #   resp.configuration.revision #=> Integer
     #   resp.engine_version #=> String
+    #   resp.host_instance_type #=> String
     #   resp.logs.audit #=> Boolean
     #   resp.logs.general #=> Boolean
     #   resp.security_groups #=> Array
@@ -1226,7 +1233,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

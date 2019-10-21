@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2019-10-08)
+------------------
+
+* Feature - Add Sync options to enable/disable TaskQueueing
+
+1.13.0 (2019-09-24)
+------------------
+
+* Feature - Added S3StorageClass, OverwriteMode sync option, and ONLY_FILES_TRANSFERRED setting for the VerifyMode sync option.
+
 1.12.0 (2019-08-22)
 ------------------
 

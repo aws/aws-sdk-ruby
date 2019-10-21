@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2019-10-16)
+------------------
+
+* Feature - This release adds support for ROS2 Dashing as a beta feature
+
 1.15.0 (2019-09-09)
 ------------------
 

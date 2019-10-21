@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2019-10-17)
+------------------
+
+* Feature - Amazon RDS now supports Amazon RDS on VMware with the introduction of APIs related to Custom Availability Zones and Media installation.
+
+1.67.0 (2019-09-30)
+------------------
+
+* Feature - This release adds support for creating a Read Replica with Active Directory domain information. This release updates RDS API to indicate whether an OrderableDBInstanceOption supports Kerberos Authentication.
+
+1.66.0 (2019-09-20)
+------------------
+
+* Feature - Add a new LeaseID output field to DescribeReservedDBInstances, which shows the unique identifier for the lease associated with the reserved DB instance. AWS Support might request the lease ID for an issue related to a reserved DB instance.
+
 1.65.0 (2019-09-11)
 ------------------
 

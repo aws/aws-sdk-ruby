@@ -126,13 +126,13 @@ module Aws::DataSync
     #
     # @!attribute [rw] subnet_arns
     #   The Amazon Resource Names (ARNs) of the subnets in which DataSync
-    #   will create Elastic Network Interfaces (ENIs) for each data transfer
-    #   task. The agent that runs a task must be private. When you start a
-    #   task that is associated with an agent created in a VPC, or one that
-    #   has access to an IP address in a VPC, then the task is also private.
-    #   In this case, DataSync creates four ENIs for each task in your
-    #   subnet. For a data transfer to work, the agent must be able to route
-    #   to all these four ENIs.
+    #   will create elastic network interfaces for each data transfer task.
+    #   The agent that runs a task must be private. When you start a task
+    #   that is associated with an agent created in a VPC, or one that has
+    #   access to an IP address in a VPC, then the task is also private. In
+    #   this case, DataSync creates four network interfaces for each task in
+    #   your subnet. For a data transfer to work, the agent must be able to
+    #   route to all these four network interfaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_arns
@@ -362,6 +362,7 @@ module Aws::DataSync
     #       {
     #         subdirectory: "Subdirectory",
     #         s3_bucket_arn: "S3BucketArn", # required
+    #         s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #         s3_config: { # required
     #           bucket_access_role_arn: "IamRoleArn", # required
     #         },
@@ -383,6 +384,19 @@ module Aws::DataSync
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] s3_storage_class
+    #   The Amazon S3 storage class that you want to store your files in
+    #   when this location is used as a task destination. For more
+    #   information about S3 storage classes, see [Amazon S3 Storage
+    #   Classes][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Some storage classes have behaviors that can affect your S3 storage
+    #   cost. For detailed information, see using-storage-classes.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/s3/storage-classes/
+    #   @return [String]
+    #
     # @!attribute [rw] s3_config
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
     #   Management (IAM) role that is used to access an Amazon S3 bucket.
@@ -402,6 +416,7 @@ module Aws::DataSync
     class CreateLocationS3Request < Struct.new(
       :subdirectory,
       :s3_bucket_arn,
+      :s3_storage_class,
       :s3_config,
       :tags)
       include Aws::Structure
@@ -465,7 +480,7 @@ module Aws::DataSync
     # @!attribute [rw] server_hostname
     #   The name of the SMB server. This value is the IP address or Domain
     #   Name Service (DNS) name of the SMB server. An agent that is
-    #   installed on-premises uses this host name to mount the SMB server in
+    #   installed on-premises uses this hostname to mount the SMB server in
     #   a network.
     #
     #   <note markdown="1"> This name must either be DNS-compliant or must be an IP version 4
@@ -476,16 +491,16 @@ module Aws::DataSync
     #
     # @!attribute [rw] user
     #   The user who can mount the share, has the permissions to access
-    #   files and directories in the SMB share.
+    #   files and folders in the SMB share.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The name of the domain that the SMB server belongs to.
+    #   The name of the Windows domain that the SMB server belongs to.
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   The password of the user who has permission to access the SMB
-    #   server.
+    #   The password of the user who can mount the share, has the
+    #   permissions to access files and folders in the SMB share.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
@@ -494,8 +509,7 @@ module Aws::DataSync
     #   @return [Array<String>]
     #
     # @!attribute [rw] mount_options
-    #   The mount options that are available for DataSync to use to access
-    #   an SMB location.
+    #   The mount options used by DataSync to access the SMB server.
     #   @return [Types::SmbMountOptions]
     #
     # @!attribute [rw] tags
@@ -543,7 +557,8 @@ module Aws::DataSync
     #         cloud_watch_log_group_arn: "LogGroupArn",
     #         name: "TagValue",
     #         options: {
-    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, NONE
+    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #           overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
     #           atime: "NONE", # accepts NONE, BEST_EFFORT
     #           mtime: "NONE", # accepts NONE, PRESERVE
     #           uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
@@ -552,6 +567,7 @@ module Aws::DataSync
     #           preserve_devices: "NONE", # accepts NONE, PRESERVE
     #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #           bytes_per_second: 1,
+    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         excludes: [
     #           {
@@ -771,8 +787,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] private_link_config
-    #   The VPC endpoint, subnet and security group that an agent uses to
-    #   access IP addresses in a VPC (Virtual Private Cloud).
+    #   The subnet and the security group that DataSync used to access a VPC
+    #   endpoint.
     #   @return [Types::PrivateLinkConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgentResponse AWS API Documentation
@@ -927,6 +943,19 @@ module Aws::DataSync
     #   The URL of the Amazon S3 location that was described.
     #   @return [String]
     #
+    # @!attribute [rw] s3_storage_class
+    #   The Amazon S3 storage class that you chose to store your files in
+    #   when this location is used as a task destination. For more
+    #   information about S3 storage classes, see [Amazon S3 Storage
+    #   Classes][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Some storage classes have behaviors that can affect your S3 storage
+    #   cost. For detailed information, see using-storage-classes.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/s3/storage-classes/
+    #   @return [String]
+    #
     # @!attribute [rw] s3_config
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
     #   Management (IAM) role that is used to access an Amazon S3 bucket.
@@ -944,6 +973,7 @@ module Aws::DataSync
     class DescribeLocationS3Response < Struct.new(
       :location_arn,
       :location_uri,
+      :s3_storage_class,
       :s3_config,
       :creation_time)
       include Aws::Structure
@@ -986,11 +1016,12 @@ module Aws::DataSync
     #   @return [Array<String>]
     #
     # @!attribute [rw] user
-    #   The user who is logged on the SMB server.
+    #   The user who can mount the share, has the permissions to access
+    #   files and folders in the SMB share.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The name of the domain that the SMB server belongs to.
+    #   The name of the Windows domain that the SMB server belongs to.
     #   @return [String]
     #
     # @!attribute [rw] mount_options
@@ -1659,9 +1690,25 @@ module Aws::DataSync
     #
     # @!attribute [rw] version
     #   The specific NFS version that you want DataSync to use to mount your
-    #   NFS share. If you don't specify a version, DataSync defaults to
-    #   `AUTOMATIC`. That is, DataSync automatically selects a version based
-    #   on negotiation with the NFS server.
+    #   NFS share. If the server refuses to use the version specified, the
+    #   sync will fail. If you don't specify a version, DataSync defaults
+    #   to `AUTOMATIC`. That is, DataSync automatically selects a version
+    #   based on negotiation with the NFS server.
+    #
+    #   You can specify the following NFS versions:
+    #
+    #   * <b> <a href="https://tools.ietf.org/html/rfc1813">NFSv3</a> </b> -
+    #     stateless protocol version that allows for asynchronous writes on
+    #     the server.
+    #
+    #   * <b> <a href="https://tools.ietf.org/html/rfc3530">NFSv4.0</a> </b>
+    #     - stateful, firewall-friendly protocol version that supports
+    #     delegations and pseudo filesystems.
+    #
+    #   * <b> <a href="https://tools.ietf.org/html/rfc5661">NFSv4.1</a> </b>
+    #     - stateful protocol version that supports sessions, directory
+    #     delegations, and parallel data processing. Version 4.1 also
+    #     includes all features available in version 4.0.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/NfsMountOptions AWS API Documentation
@@ -1707,7 +1754,8 @@ module Aws::DataSync
     #   data as a hash:
     #
     #       {
-    #         verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, NONE
+    #         verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #         overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
     #         atime: "NONE", # accepts NONE, BEST_EFFORT
     #         mtime: "NONE", # accepts NONE, PRESERVE
     #         uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
@@ -1716,6 +1764,7 @@ module Aws::DataSync
     #         preserve_devices: "NONE", # accepts NONE, PRESERVE
     #         posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #         bytes_per_second: 1,
+    #         task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #       }
     #
     # @!attribute [rw] verify_mode
@@ -1727,7 +1776,23 @@ module Aws::DataSync
     #
     #   POINT\_IN\_TIME\_CONSISTENT: Perform verification (recommended).
     #
+    #   ONLY\_FILES\_TRANSFERRED: Perform verification on only files that
+    #   were transferred.
+    #
     #   NONE: Skip verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] overwrite_mode
+    #   A value that determines whether files at the destination should be
+    #   overwritten or preserved when copying files. If set to `NEVER` a
+    #   destination file will not be replaced by a source file, even if the
+    #   destination file differs from the source file. If you modify files
+    #   in the destination and you sync the files, you can use this value to
+    #   protect against overwriting those changes.
+    #
+    #   Some storage classes have specific behaviors that can affect your S3
+    #   storage cost. For detailed information, see using-storage-classes in
+    #   the *AWS DataSync User Guide*.
     #   @return [String]
     #
     # @!attribute [rw] atime
@@ -1796,7 +1861,11 @@ module Aws::DataSync
     #
     # @!attribute [rw] preserve_deleted_files
     #   A value that specifies whether files in the destination that don't
-    #   exist in the source file system should be preserved.
+    #   exist in the source file system should be preserved. This option can
+    #   affect your storage cost. If your task deletes objects, you might
+    #   incur minimum storage duration charges for certain storage classes.
+    #   For detailed information, see using-storage-classes in the *AWS
+    #   DataSync User Guide*.
     #
     #   Default value: PRESERVE.
     #
@@ -1847,10 +1916,20 @@ module Aws::DataSync
     #   `1048576` (`=1024*1024`).
     #   @return [Integer]
     #
+    # @!attribute [rw] task_queueing
+    #   A value that determines whether tasks should be queued before
+    #   executing the tasks. If set to `Enabled`, the tasks will queued. The
+    #   default is `Enabled`.
+    #
+    #   If you use the same agent to run multiple tasks you can enable the
+    #   tasks to run in series. For more information see task-queue.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options AWS API Documentation
     #
     class Options < Struct.new(
       :verify_mode,
+      :overwrite_mode,
       :atime,
       :mtime,
       :uid,
@@ -1858,7 +1937,8 @@ module Aws::DataSync
       :preserve_deleted_files,
       :preserve_devices,
       :posix_permissions,
-      :bytes_per_second)
+      :bytes_per_second,
+      :task_queueing)
       include Aws::Structure
     end
 
@@ -1942,7 +2022,7 @@ module Aws::DataSync
     #   The specific SMB version that you want DataSync to use to mount your
     #   SMB share. If you don't specify a version, DataSync defaults to
     #   `AUTOMATIC`. That is, DataSync automatically selects a version based
-    #   on negotiation with the SMB Server server.
+    #   on negotiation with the SMB server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/SmbMountOptions AWS API Documentation
@@ -1960,7 +2040,8 @@ module Aws::DataSync
     #       {
     #         task_arn: "TaskArn", # required
     #         override_options: {
-    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, NONE
+    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #           overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
     #           atime: "NONE", # accepts NONE, BEST_EFFORT
     #           mtime: "NONE", # accepts NONE, PRESERVE
     #           uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
@@ -1969,6 +2050,7 @@ module Aws::DataSync
     #           preserve_devices: "NONE", # accepts NONE, PRESERVE
     #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #           bytes_per_second: 1,
+    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         includes: [
     #           {
@@ -2260,7 +2342,8 @@ module Aws::DataSync
     #       {
     #         task_arn: "TaskArn", # required
     #         options: {
-    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, NONE
+    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #           overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
     #           atime: "NONE", # accepts NONE, BEST_EFFORT
     #           mtime: "NONE", # accepts NONE, PRESERVE
     #           uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
@@ -2269,6 +2352,7 @@ module Aws::DataSync
     #           preserve_devices: "NONE", # accepts NONE, PRESERVE
     #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #           bytes_per_second: 1,
+    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         excludes: [
     #           {

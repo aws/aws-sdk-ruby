@@ -347,7 +347,7 @@ module Aws::Amplify
     #     enable_auto_branch_creation: false,
     #     auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
     #     auto_branch_creation_config: {
-    #       stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #       stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #       framework: "Framework",
     #       enable_auto_build: false,
     #       environment_variables: {
@@ -356,6 +356,7 @@ module Aws::Amplify
     #       basic_auth_credentials: "BasicAuthCredentials",
     #       enable_basic_auth: false,
     #       build_spec: "BuildSpec",
+    #       enable_pull_request_preview: false,
     #     },
     #   })
     #
@@ -391,7 +392,7 @@ module Aws::Amplify
     #   resp.app.enable_auto_branch_creation #=> Boolean
     #   resp.app.auto_branch_creation_patterns #=> Array
     #   resp.app.auto_branch_creation_patterns[0] #=> String
-    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL", "PULL_REQUEST"
     #   resp.app.auto_branch_creation_config.framework #=> String
     #   resp.app.auto_branch_creation_config.enable_auto_build #=> Boolean
     #   resp.app.auto_branch_creation_config.environment_variables #=> Hash
@@ -399,6 +400,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
+    #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateApp AWS API Documentation
     #
@@ -453,6 +455,9 @@ module Aws::Amplify
     # @option params [String] :display_name
     #   Display name for a branch, will use as the default domain prefix.
     #
+    # @option params [Boolean] :enable_pull_request_preview
+    #   Enables Pull Request Preview for this branch.
+    #
     # @return [Types::CreateBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBranchResult#branch #branch} => Types::Branch
@@ -463,7 +468,7 @@ module Aws::Amplify
     #     app_id: "AppId", # required
     #     branch_name: "BranchName", # required
     #     description: "Description",
-    #     stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #     stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #     framework: "Framework",
     #     enable_notification: false,
     #     enable_auto_build: false,
@@ -478,6 +483,7 @@ module Aws::Amplify
     #     build_spec: "BuildSpec",
     #     ttl: "TTL",
     #     display_name: "DisplayName",
+    #     enable_pull_request_preview: false,
     #   })
     #
     # @example Response structure
@@ -487,7 +493,7 @@ module Aws::Amplify
     #   resp.branch.description #=> String
     #   resp.branch.tags #=> Hash
     #   resp.branch.tags["TagKey"] #=> String
-    #   resp.branch.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.branch.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL", "PULL_REQUEST"
     #   resp.branch.display_name #=> String
     #   resp.branch.enable_notification #=> Boolean
     #   resp.branch.create_time #=> Time
@@ -507,6 +513,9 @@ module Aws::Amplify
     #   resp.branch.ttl #=> String
     #   resp.branch.associated_resources #=> Array
     #   resp.branch.associated_resources[0] #=> String
+    #   resp.branch.enable_pull_request_preview #=> Boolean
+    #   resp.branch.destination_branch #=> String
+    #   resp.branch.source_branch #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranch AWS API Documentation
     #
@@ -708,7 +717,7 @@ module Aws::Amplify
     #   resp.app.enable_auto_branch_creation #=> Boolean
     #   resp.app.auto_branch_creation_patterns #=> Array
     #   resp.app.auto_branch_creation_patterns[0] #=> String
-    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL", "PULL_REQUEST"
     #   resp.app.auto_branch_creation_config.framework #=> String
     #   resp.app.auto_branch_creation_config.enable_auto_build #=> Boolean
     #   resp.app.auto_branch_creation_config.environment_variables #=> Hash
@@ -716,6 +725,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
+    #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteApp AWS API Documentation
     #
@@ -752,7 +762,7 @@ module Aws::Amplify
     #   resp.branch.description #=> String
     #   resp.branch.tags #=> Hash
     #   resp.branch.tags["TagKey"] #=> String
-    #   resp.branch.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.branch.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL", "PULL_REQUEST"
     #   resp.branch.display_name #=> String
     #   resp.branch.enable_notification #=> Boolean
     #   resp.branch.create_time #=> Time
@@ -772,6 +782,9 @@ module Aws::Amplify
     #   resp.branch.ttl #=> String
     #   resp.branch.associated_resources #=> Array
     #   resp.branch.associated_resources[0] #=> String
+    #   resp.branch.enable_pull_request_preview #=> Boolean
+    #   resp.branch.destination_branch #=> String
+    #   resp.branch.source_branch #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBranch AWS API Documentation
     #
@@ -902,6 +915,47 @@ module Aws::Amplify
       req.send_request(options)
     end
 
+    # Retrieve website access logs for a specific time range via a
+    # pre-signed URL. Optionally, deliver the logs to a given S3 bucket.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The time at which the logs should start, inclusive.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The time at which the logs should end, inclusive.
+    #
+    # @option params [required, String] :domain_name
+    #   Name of the domain.
+    #
+    # @option params [required, String] :app_id
+    #   Unique Id for an Amplify App.
+    #
+    # @return [Types::GenerateAccessLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GenerateAccessLogsResult#log_url #log_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_access_logs({
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     domain_name: "DomainName", # required
+    #     app_id: "AppId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GenerateAccessLogs AWS API Documentation
+    #
+    # @overload generate_access_logs(params = {})
+    # @param [Hash] params ({})
+    def generate_access_logs(params = {}, options = {})
+      req = build_request(:generate_access_logs, params)
+      req.send_request(options)
+    end
+
     # Retrieves an existing Amplify App by appId.
     #
     # @option params [required, String] :app_id
@@ -949,7 +1003,7 @@ module Aws::Amplify
     #   resp.app.enable_auto_branch_creation #=> Boolean
     #   resp.app.auto_branch_creation_patterns #=> Array
     #   resp.app.auto_branch_creation_patterns[0] #=> String
-    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL", "PULL_REQUEST"
     #   resp.app.auto_branch_creation_config.framework #=> String
     #   resp.app.auto_branch_creation_config.enable_auto_build #=> Boolean
     #   resp.app.auto_branch_creation_config.environment_variables #=> Hash
@@ -957,6 +1011,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
+    #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetApp AWS API Documentation
     #
@@ -964,6 +1019,36 @@ module Aws::Amplify
     # @param [Hash] params ({})
     def get_app(params = {}, options = {})
       req = build_request(:get_app, params)
+      req.send_request(options)
+    end
+
+    # Retrieves artifact info that corresponds to a artifactId.
+    #
+    # @option params [required, String] :artifact_id
+    #   Unique Id for a artifact.
+    #
+    # @return [Types::GetArtifactUrlResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetArtifactUrlResult#artifact_id #artifact_id} => String
+    #   * {Types::GetArtifactUrlResult#artifact_url #artifact_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_artifact_url({
+    #     artifact_id: "ArtifactId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.artifact_id #=> String
+    #   resp.artifact_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetArtifactUrl AWS API Documentation
+    #
+    # @overload get_artifact_url(params = {})
+    # @param [Hash] params ({})
+    def get_artifact_url(params = {}, options = {})
+      req = build_request(:get_artifact_url, params)
       req.send_request(options)
     end
 
@@ -993,7 +1078,7 @@ module Aws::Amplify
     #   resp.branch.description #=> String
     #   resp.branch.tags #=> Hash
     #   resp.branch.tags["TagKey"] #=> String
-    #   resp.branch.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.branch.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL", "PULL_REQUEST"
     #   resp.branch.display_name #=> String
     #   resp.branch.enable_notification #=> Boolean
     #   resp.branch.create_time #=> Time
@@ -1013,6 +1098,9 @@ module Aws::Amplify
     #   resp.branch.ttl #=> String
     #   resp.branch.associated_resources #=> Array
     #   resp.branch.associated_resources[0] #=> String
+    #   resp.branch.enable_pull_request_preview #=> Boolean
+    #   resp.branch.destination_branch #=> String
+    #   resp.branch.source_branch #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBranch AWS API Documentation
     #
@@ -1106,6 +1194,8 @@ module Aws::Amplify
     #   resp.job.steps[0].end_time #=> Time
     #   resp.job.steps[0].log_url #=> String
     #   resp.job.steps[0].artifacts_url #=> String
+    #   resp.job.steps[0].test_artifacts_url #=> String
+    #   resp.job.steps[0].test_config_url #=> String
     #   resp.job.steps[0].screenshots #=> Hash
     #   resp.job.steps[0].screenshots["ThumbnailName"] #=> String
     #   resp.job.steps[0].status_reason #=> String
@@ -1208,7 +1298,7 @@ module Aws::Amplify
     #   resp.apps[0].enable_auto_branch_creation #=> Boolean
     #   resp.apps[0].auto_branch_creation_patterns #=> Array
     #   resp.apps[0].auto_branch_creation_patterns[0] #=> String
-    #   resp.apps[0].auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.apps[0].auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL", "PULL_REQUEST"
     #   resp.apps[0].auto_branch_creation_config.framework #=> String
     #   resp.apps[0].auto_branch_creation_config.enable_auto_build #=> Boolean
     #   resp.apps[0].auto_branch_creation_config.environment_variables #=> Hash
@@ -1216,6 +1306,7 @@ module Aws::Amplify
     #   resp.apps[0].auto_branch_creation_config.basic_auth_credentials #=> String
     #   resp.apps[0].auto_branch_creation_config.enable_basic_auth #=> Boolean
     #   resp.apps[0].auto_branch_creation_config.build_spec #=> String
+    #   resp.apps[0].auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListApps AWS API Documentation
@@ -1224,6 +1315,60 @@ module Aws::Amplify
     # @param [Hash] params ({})
     def list_apps(params = {}, options = {})
       req = build_request(:list_apps, params)
+      req.send_request(options)
+    end
+
+    # List artifacts with an app, a branch, a job and an artifact type.
+    #
+    # @option params [required, String] :app_id
+    #   Unique Id for an Amplify App.
+    #
+    # @option params [required, String] :branch_name
+    #   Name for a branch, part of an Amplify App.
+    #
+    # @option params [required, String] :job_id
+    #   Unique Id for an Job.
+    #
+    # @option params [String] :artifact_type
+    #   Type for an artifact.
+    #
+    # @option params [String] :next_token
+    #   Pagination token. Set to null to start listing artifacts from start.
+    #   If non-null pagination token is returned in a result, then pass its
+    #   value in here to list more artifacts.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of records to list in a single response.
+    #
+    # @return [Types::ListArtifactsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListArtifactsResult#artifacts #artifacts} => Array&lt;Types::Artifact&gt;
+    #   * {Types::ListArtifactsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_artifacts({
+    #     app_id: "AppId", # required
+    #     branch_name: "BranchName", # required
+    #     job_id: "JobId", # required
+    #     artifact_type: "TEST", # accepts TEST
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.artifacts #=> Array
+    #   resp.artifacts[0].artifact_file_name #=> String
+    #   resp.artifacts[0].artifact_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListArtifacts AWS API Documentation
+    #
+    # @overload list_artifacts(params = {})
+    # @param [Hash] params ({})
+    def list_artifacts(params = {}, options = {})
+      req = build_request(:list_artifacts, params)
       req.send_request(options)
     end
 
@@ -1261,7 +1406,7 @@ module Aws::Amplify
     #   resp.branches[0].description #=> String
     #   resp.branches[0].tags #=> Hash
     #   resp.branches[0].tags["TagKey"] #=> String
-    #   resp.branches[0].stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.branches[0].stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL", "PULL_REQUEST"
     #   resp.branches[0].display_name #=> String
     #   resp.branches[0].enable_notification #=> Boolean
     #   resp.branches[0].create_time #=> Time
@@ -1281,6 +1426,9 @@ module Aws::Amplify
     #   resp.branches[0].ttl #=> String
     #   resp.branches[0].associated_resources #=> Array
     #   resp.branches[0].associated_resources[0] #=> String
+    #   resp.branches[0].enable_pull_request_preview #=> Boolean
+    #   resp.branches[0].destination_branch #=> String
+    #   resp.branches[0].source_branch #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBranches AWS API Documentation
@@ -1732,7 +1880,20 @@ module Aws::Amplify
     #   Automated branch creation glob patterns for the Amplify App.
     #
     # @option params [Types::AutoBranchCreationConfig] :auto_branch_creation_config
-    #   Automated branch creation config for the Amplify App.
+    #   Automated branch creation branchConfig for the Amplify App.
+    #
+    # @option params [String] :repository
+    #   Repository for an Amplify App
+    #
+    # @option params [String] :oauth_token
+    #   OAuth token for 3rd party source control system for an Amplify App,
+    #   used to create webhook and read-only deploy key. OAuth token is not
+    #   stored.
+    #
+    # @option params [String] :access_token
+    #   Personal Access token for 3rd party source control system for an
+    #   Amplify App, used to create webhook and read-only deploy key. Token is
+    #   not stored.
     #
     # @return [Types::UpdateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1764,7 +1925,7 @@ module Aws::Amplify
     #     enable_auto_branch_creation: false,
     #     auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
     #     auto_branch_creation_config: {
-    #       stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #       stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #       framework: "Framework",
     #       enable_auto_build: false,
     #       environment_variables: {
@@ -1773,7 +1934,11 @@ module Aws::Amplify
     #       basic_auth_credentials: "BasicAuthCredentials",
     #       enable_basic_auth: false,
     #       build_spec: "BuildSpec",
+    #       enable_pull_request_preview: false,
     #     },
+    #     repository: "Repository",
+    #     oauth_token: "OauthToken",
+    #     access_token: "AccessToken",
     #   })
     #
     # @example Response structure
@@ -1808,7 +1973,7 @@ module Aws::Amplify
     #   resp.app.enable_auto_branch_creation #=> Boolean
     #   resp.app.auto_branch_creation_patterns #=> Array
     #   resp.app.auto_branch_creation_patterns[0] #=> String
-    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL", "PULL_REQUEST"
     #   resp.app.auto_branch_creation_config.framework #=> String
     #   resp.app.auto_branch_creation_config.enable_auto_build #=> Boolean
     #   resp.app.auto_branch_creation_config.environment_variables #=> Hash
@@ -1816,6 +1981,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
+    #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateApp AWS API Documentation
     #
@@ -1867,6 +2033,9 @@ module Aws::Amplify
     # @option params [String] :display_name
     #   Display name for a branch, will use as the default domain prefix.
     #
+    # @option params [Boolean] :enable_pull_request_preview
+    #   Enables Pull Request Preview for this branch.
+    #
     # @return [Types::UpdateBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBranchResult#branch #branch} => Types::Branch
@@ -1878,7 +2047,7 @@ module Aws::Amplify
     #     branch_name: "BranchName", # required
     #     description: "Description",
     #     framework: "Framework",
-    #     stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #     stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #     enable_notification: false,
     #     enable_auto_build: false,
     #     environment_variables: {
@@ -1889,6 +2058,7 @@ module Aws::Amplify
     #     build_spec: "BuildSpec",
     #     ttl: "TTL",
     #     display_name: "DisplayName",
+    #     enable_pull_request_preview: false,
     #   })
     #
     # @example Response structure
@@ -1898,7 +2068,7 @@ module Aws::Amplify
     #   resp.branch.description #=> String
     #   resp.branch.tags #=> Hash
     #   resp.branch.tags["TagKey"] #=> String
-    #   resp.branch.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.branch.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL", "PULL_REQUEST"
     #   resp.branch.display_name #=> String
     #   resp.branch.enable_notification #=> Boolean
     #   resp.branch.create_time #=> Time
@@ -1918,6 +2088,9 @@ module Aws::Amplify
     #   resp.branch.ttl #=> String
     #   resp.branch.associated_resources #=> Array
     #   resp.branch.associated_resources[0] #=> String
+    #   resp.branch.enable_pull_request_preview #=> Boolean
+    #   resp.branch.destination_branch #=> String
+    #   resp.branch.source_branch #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranch AWS API Documentation
     #
@@ -2038,7 +2211,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

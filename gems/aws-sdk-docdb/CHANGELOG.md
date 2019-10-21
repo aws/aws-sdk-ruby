@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2019-10-01)
+------------------
+
+* Feature - This release provides support for describe and modify CA certificates.
+
 1.10.0 (2019-07-25)
 ------------------
 

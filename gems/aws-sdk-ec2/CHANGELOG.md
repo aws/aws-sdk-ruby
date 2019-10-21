@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2019-10-10)
+------------------
+
+* Feature - New EC2 M5n, M5dn, R5n, R5dn instances with 100 Gbps network performance and Elastic Fabric Adapter (EFA) for ultra low latency; New A1.metal bare metal instance powered by AWS Graviton Processors
+
+1.111.0 (2019-10-03)
+------------------
+
+* Feature - This release allows customers to purchase regional EC2 RIs on a future date.
+
+1.110.0 (2019-09-20)
+------------------
+
+* Feature - G4 instances are Amazon EC2 instances based on NVIDIA T4 GPUs and are designed to provide cost-effective machine learning inference for applications, like image classification, object detection, recommender systems, automated speech recognition, and language translation. G4 instances are also a cost-effective platform for building and running graphics-intensive applications, such as remote graphics workstations, video transcoding, photo-realistic design, and game streaming in the cloud. To get started with G4 instances visit https://aws.amazon.com/ec2/instance-types/g4.
+
 1.109.0 (2019-09-12)
 ------------------
 

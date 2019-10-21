@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-10-10)
+------------------
+
+* Feature - Amazon Lex now supports Session API checkpoints
+
 1.19.0 (2019-08-09)
 ------------------
 

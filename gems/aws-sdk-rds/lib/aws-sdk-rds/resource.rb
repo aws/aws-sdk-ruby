@@ -835,9 +835,19 @@ module Aws::RDS
     #   the DB instance is a Multi-AZ deployment. The specified Availability
     #   Zone must be in the same AWS Region as the current endpoint.
     #
+    #   <note markdown="1"> If you're creating a DB instance in an RDS on VMware environment,
+    #   specify the identifier of the custom Availability Zone to create the
+    #   DB instance in.
+    #
+    #    For more information about RDS on VMware, see the [ *RDS on VMware
+    #   User Guide.* ][2]
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
     # @option options [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
     #
@@ -1128,17 +1138,27 @@ module Aws::RDS
     #   AWS account. Your AWS account has a different default encryption key
     #   for each AWS Region.
     # @option options [String] :domain
-    #   For an Amazon RDS DB instance that's running Microsoft SQL Server,
-    #   this parameter specifies the Active Directory directory ID to create
-    #   the instance in. Amazon RDS uses Windows Authentication to
+    #   The Active Directory directory ID to create the DB instance in.
+    #   Currently, only Microsoft SQL Server and Oracle DB instances can be
+    #   created in an Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #   For Oracle DB instance, Amazon RDS can use Kerberos Authentication to
     #   authenticate users that connect to the DB instance. For more
-    #   information, see [Using Windows Authentication with an Amazon RDS DB
-    #   Instance Running Microsoft SQL Server][1] in the *Amazon RDS User
-    #   Guide*.
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_SQLServerWinAuth.html
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy tags from the DB instance to
     #   snapshots of the DB instance. By default, tags are not copied.
@@ -1615,8 +1635,8 @@ module Aws::RDS
     # @option options [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -1690,8 +1710,8 @@ module Aws::RDS
     # @option options [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -1916,7 +1936,14 @@ module Aws::RDS
     #
     #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
     #     results list will only include information about the DB instances
-    #     identified by these resource identifiers.
+    #     identified by these DB instance resource identifiers.
+    #
+    #   * `domain` - Accepts Active Directory directory IDs. The results list
+    #     will only include information about the DB instances associated with
+    #     these domains.
+    #
+    #   * `engine` - Accepts engine names. The results list will only include
+    #     information about the DB instances for these engines.
     # @return [DBInstance::Collection]
     def db_instances(options = {})
       batches = Enumerator.new do |y|
@@ -2478,6 +2505,7 @@ module Aws::RDS
     #     product_description: "String",
     #     offering_type: "String",
     #     multi_az: false,
+    #     lease_id: "String",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -2513,6 +2541,14 @@ module Aws::RDS
     # @option options [Boolean] :multi_az
     #   A value that indicates whether to show only those reservations that
     #   support Multi-AZ.
+    # @option options [String] :lease_id
+    #   The lease identifier filter value. Specify this parameter to show only
+    #   the reservation that matches the specified lease ID.
+    #
+    #   <note markdown="1"> AWS Support might request the lease ID for an issue related to a
+    #   reserved DB instance.
+    #
+    #    </note>
     # @option options [Array<Types::Filter>] :filters
     #   This parameter is not currently supported.
     # @return [ReservedDBInstance::Collection]
@@ -2658,8 +2694,8 @@ module Aws::RDS
     # @option options [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #

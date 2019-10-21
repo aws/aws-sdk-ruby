@@ -17,6 +17,12 @@ module Aws::Amplify
     AppArn = Shapes::StringShape.new(name: 'AppArn')
     AppId = Shapes::StringShape.new(name: 'AppId')
     Apps = Shapes::ListShape.new(name: 'Apps')
+    Artifact = Shapes::StructureShape.new(name: 'Artifact')
+    ArtifactFileName = Shapes::StringShape.new(name: 'ArtifactFileName')
+    ArtifactId = Shapes::StringShape.new(name: 'ArtifactId')
+    ArtifactType = Shapes::StringShape.new(name: 'ArtifactType')
+    ArtifactUrl = Shapes::StringShape.new(name: 'ArtifactUrl')
+    Artifacts = Shapes::ListShape.new(name: 'Artifacts')
     ArtifactsUrl = Shapes::StringShape.new(name: 'ArtifactsUrl')
     AssociatedResource = Shapes::StringShape.new(name: 'AssociatedResource')
     AssociatedResources = Shapes::ListShape.new(name: 'AssociatedResources')
@@ -79,6 +85,7 @@ module Aws::Amplify
     EnableBasicAuth = Shapes::BooleanShape.new(name: 'EnableBasicAuth')
     EnableBranchAutoBuild = Shapes::BooleanShape.new(name: 'EnableBranchAutoBuild')
     EnableNotification = Shapes::BooleanShape.new(name: 'EnableNotification')
+    EnablePullRequestPreview = Shapes::BooleanShape.new(name: 'EnablePullRequestPreview')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     EnvKey = Shapes::StringShape.new(name: 'EnvKey')
     EnvValue = Shapes::StringShape.new(name: 'EnvValue')
@@ -88,8 +95,12 @@ module Aws::Amplify
     FileName = Shapes::StringShape.new(name: 'FileName')
     FileUploadUrls = Shapes::MapShape.new(name: 'FileUploadUrls')
     Framework = Shapes::StringShape.new(name: 'Framework')
+    GenerateAccessLogsRequest = Shapes::StructureShape.new(name: 'GenerateAccessLogsRequest')
+    GenerateAccessLogsResult = Shapes::StructureShape.new(name: 'GenerateAccessLogsResult')
     GetAppRequest = Shapes::StructureShape.new(name: 'GetAppRequest')
     GetAppResult = Shapes::StructureShape.new(name: 'GetAppResult')
+    GetArtifactUrlRequest = Shapes::StructureShape.new(name: 'GetArtifactUrlRequest')
+    GetArtifactUrlResult = Shapes::StructureShape.new(name: 'GetArtifactUrlResult')
     GetBranchRequest = Shapes::StructureShape.new(name: 'GetBranchRequest')
     GetBranchResult = Shapes::StructureShape.new(name: 'GetBranchResult')
     GetDomainAssociationRequest = Shapes::StructureShape.new(name: 'GetDomainAssociationRequest')
@@ -111,6 +122,8 @@ module Aws::Amplify
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAppsRequest = Shapes::StructureShape.new(name: 'ListAppsRequest')
     ListAppsResult = Shapes::StructureShape.new(name: 'ListAppsResult')
+    ListArtifactsRequest = Shapes::StructureShape.new(name: 'ListArtifactsRequest')
+    ListArtifactsResult = Shapes::StructureShape.new(name: 'ListArtifactsResult')
     ListBranchesRequest = Shapes::StructureShape.new(name: 'ListBranchesRequest')
     ListBranchesResult = Shapes::StructureShape.new(name: 'ListBranchesResult')
     ListDomainAssociationsRequest = Shapes::StructureShape.new(name: 'ListDomainAssociationsRequest')
@@ -162,6 +175,8 @@ module Aws::Amplify
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Target = Shapes::StringShape.new(name: 'Target')
+    TestArtifactsUrl = Shapes::StringShape.new(name: 'TestArtifactsUrl')
+    TestConfigUrl = Shapes::StringShape.new(name: 'TestConfigUrl')
     ThumbnailName = Shapes::StringShape.new(name: 'ThumbnailName')
     ThumbnailUrl = Shapes::StringShape.new(name: 'ThumbnailUrl')
     TotalNumberOfJobs = Shapes::StringShape.new(name: 'TotalNumberOfJobs')
@@ -210,6 +225,12 @@ module Aws::Amplify
 
     Apps.member = Shapes::ShapeRef.new(shape: App)
 
+    Artifact.add_member(:artifact_file_name, Shapes::ShapeRef.new(shape: ArtifactFileName, required: true, location_name: "artifactFileName"))
+    Artifact.add_member(:artifact_id, Shapes::ShapeRef.new(shape: ArtifactId, required: true, location_name: "artifactId"))
+    Artifact.struct_class = Types::Artifact
+
+    Artifacts.member = Shapes::ShapeRef.new(shape: Artifact)
+
     AssociatedResources.member = Shapes::ShapeRef.new(shape: AssociatedResource)
 
     AutoBranchCreationConfig.add_member(:stage, Shapes::ShapeRef.new(shape: Stage, location_name: "stage"))
@@ -219,6 +240,7 @@ module Aws::Amplify
     AutoBranchCreationConfig.add_member(:basic_auth_credentials, Shapes::ShapeRef.new(shape: BasicAuthCredentials, location_name: "basicAuthCredentials"))
     AutoBranchCreationConfig.add_member(:enable_basic_auth, Shapes::ShapeRef.new(shape: EnableBasicAuth, location_name: "enableBasicAuth"))
     AutoBranchCreationConfig.add_member(:build_spec, Shapes::ShapeRef.new(shape: BuildSpec, location_name: "buildSpec"))
+    AutoBranchCreationConfig.add_member(:enable_pull_request_preview, Shapes::ShapeRef.new(shape: EnablePullRequestPreview, location_name: "enablePullRequestPreview"))
     AutoBranchCreationConfig.struct_class = Types::AutoBranchCreationConfig
 
     AutoBranchCreationPatterns.member = Shapes::ShapeRef.new(shape: AutoBranchCreationPattern)
@@ -247,6 +269,9 @@ module Aws::Amplify
     Branch.add_member(:build_spec, Shapes::ShapeRef.new(shape: BuildSpec, location_name: "buildSpec"))
     Branch.add_member(:ttl, Shapes::ShapeRef.new(shape: TTL, required: true, location_name: "ttl"))
     Branch.add_member(:associated_resources, Shapes::ShapeRef.new(shape: AssociatedResources, location_name: "associatedResources"))
+    Branch.add_member(:enable_pull_request_preview, Shapes::ShapeRef.new(shape: EnablePullRequestPreview, required: true, location_name: "enablePullRequestPreview"))
+    Branch.add_member(:destination_branch, Shapes::ShapeRef.new(shape: BranchName, location_name: "destinationBranch"))
+    Branch.add_member(:source_branch, Shapes::ShapeRef.new(shape: BranchName, location_name: "sourceBranch"))
     Branch.struct_class = Types::Branch
 
     Branches.member = Shapes::ShapeRef.new(shape: Branch)
@@ -287,6 +312,7 @@ module Aws::Amplify
     CreateBranchRequest.add_member(:build_spec, Shapes::ShapeRef.new(shape: BuildSpec, location_name: "buildSpec"))
     CreateBranchRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: TTL, location_name: "ttl"))
     CreateBranchRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    CreateBranchRequest.add_member(:enable_pull_request_preview, Shapes::ShapeRef.new(shape: EnablePullRequestPreview, location_name: "enablePullRequestPreview"))
     CreateBranchRequest.struct_class = Types::CreateBranchRequest
 
     CreateBranchResult.add_member(:branch, Shapes::ShapeRef.new(shape: Branch, required: true, location_name: "branch"))
@@ -386,11 +412,27 @@ module Aws::Amplify
     FileUploadUrls.key = Shapes::ShapeRef.new(shape: FileName)
     FileUploadUrls.value = Shapes::ShapeRef.new(shape: UploadUrl)
 
+    GenerateAccessLogsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime"))
+    GenerateAccessLogsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, location_name: "endTime"))
+    GenerateAccessLogsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
+    GenerateAccessLogsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
+    GenerateAccessLogsRequest.struct_class = Types::GenerateAccessLogsRequest
+
+    GenerateAccessLogsResult.add_member(:log_url, Shapes::ShapeRef.new(shape: LogUrl, location_name: "logUrl"))
+    GenerateAccessLogsResult.struct_class = Types::GenerateAccessLogsResult
+
     GetAppRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     GetAppRequest.struct_class = Types::GetAppRequest
 
     GetAppResult.add_member(:app, Shapes::ShapeRef.new(shape: App, required: true, location_name: "app"))
     GetAppResult.struct_class = Types::GetAppResult
+
+    GetArtifactUrlRequest.add_member(:artifact_id, Shapes::ShapeRef.new(shape: ArtifactId, required: true, location: "uri", location_name: "artifactId"))
+    GetArtifactUrlRequest.struct_class = Types::GetArtifactUrlRequest
+
+    GetArtifactUrlResult.add_member(:artifact_id, Shapes::ShapeRef.new(shape: ArtifactId, required: true, location_name: "artifactId"))
+    GetArtifactUrlResult.add_member(:artifact_url, Shapes::ShapeRef.new(shape: ArtifactUrl, required: true, location_name: "artifactUrl"))
+    GetArtifactUrlResult.struct_class = Types::GetArtifactUrlResult
 
     GetBranchRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     GetBranchRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location: "uri", location_name: "branchName"))
@@ -450,6 +492,18 @@ module Aws::Amplify
     ListAppsResult.add_member(:apps, Shapes::ShapeRef.new(shape: Apps, required: true, location_name: "apps"))
     ListAppsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAppsResult.struct_class = Types::ListAppsResult
+
+    ListArtifactsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
+    ListArtifactsRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location: "uri", location_name: "branchName"))
+    ListArtifactsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    ListArtifactsRequest.add_member(:artifact_type, Shapes::ShapeRef.new(shape: ArtifactType, location_name: "artifactType"))
+    ListArtifactsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListArtifactsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListArtifactsRequest.struct_class = Types::ListArtifactsRequest
+
+    ListArtifactsResult.add_member(:artifacts, Shapes::ShapeRef.new(shape: Artifacts, required: true, location_name: "artifacts"))
+    ListArtifactsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListArtifactsResult.struct_class = Types::ListArtifactsResult
 
     ListBranchesRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     ListBranchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -538,6 +592,8 @@ module Aws::Amplify
     Step.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, required: true, location_name: "endTime"))
     Step.add_member(:log_url, Shapes::ShapeRef.new(shape: LogUrl, location_name: "logUrl"))
     Step.add_member(:artifacts_url, Shapes::ShapeRef.new(shape: ArtifactsUrl, location_name: "artifactsUrl"))
+    Step.add_member(:test_artifacts_url, Shapes::ShapeRef.new(shape: TestArtifactsUrl, location_name: "testArtifactsUrl"))
+    Step.add_member(:test_config_url, Shapes::ShapeRef.new(shape: TestConfigUrl, location_name: "testConfigUrl"))
     Step.add_member(:screenshots, Shapes::ShapeRef.new(shape: Screenshots, location_name: "screenshots"))
     Step.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
     Step.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "context"))
@@ -600,6 +656,9 @@ module Aws::Amplify
     UpdateAppRequest.add_member(:enable_auto_branch_creation, Shapes::ShapeRef.new(shape: EnableAutoBranchCreation, location_name: "enableAutoBranchCreation"))
     UpdateAppRequest.add_member(:auto_branch_creation_patterns, Shapes::ShapeRef.new(shape: AutoBranchCreationPatterns, location_name: "autoBranchCreationPatterns"))
     UpdateAppRequest.add_member(:auto_branch_creation_config, Shapes::ShapeRef.new(shape: AutoBranchCreationConfig, location_name: "autoBranchCreationConfig"))
+    UpdateAppRequest.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
+    UpdateAppRequest.add_member(:oauth_token, Shapes::ShapeRef.new(shape: OauthToken, location_name: "oauthToken"))
+    UpdateAppRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
     UpdateAppRequest.struct_class = Types::UpdateAppRequest
 
     UpdateAppResult.add_member(:app, Shapes::ShapeRef.new(shape: App, required: true, location_name: "app"))
@@ -618,6 +677,7 @@ module Aws::Amplify
     UpdateBranchRequest.add_member(:build_spec, Shapes::ShapeRef.new(shape: BuildSpec, location_name: "buildSpec"))
     UpdateBranchRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: TTL, location_name: "ttl"))
     UpdateBranchRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    UpdateBranchRequest.add_member(:enable_pull_request_preview, Shapes::ShapeRef.new(shape: EnablePullRequestPreview, location_name: "enablePullRequestPreview"))
     UpdateBranchRequest.struct_class = Types::UpdateBranchRequest
 
     UpdateBranchResult.add_member(:branch, Shapes::ShapeRef.new(shape: Branch, required: true, location_name: "branch"))
@@ -802,6 +862,18 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:generate_access_logs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateAccessLogs"
+        o.http_method = "POST"
+        o.http_request_uri = "/apps/{appId}/accesslogs"
+        o.input = Shapes::ShapeRef.new(shape: GenerateAccessLogsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GenerateAccessLogsResult)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:get_app, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetApp"
         o.http_method = "GET"
@@ -812,6 +884,19 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:get_artifact_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetArtifactUrl"
+        o.http_method = "GET"
+        o.http_request_uri = "/artifacts/{artifactId}"
+        o.input = Shapes::ShapeRef.new(shape: GetArtifactUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetArtifactUrlResult)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:get_branch, Seahorse::Model::Operation.new.tap do |o|
@@ -873,6 +958,18 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:list_artifacts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListArtifacts"
+        o.http_method = "GET"
+        o.http_request_uri = "/apps/{appId}/branches/{branchName}/jobs/{jobId}/artifacts"
+        o.input = Shapes::ShapeRef.new(shape: ListArtifactsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListArtifactsResult)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:list_branches, Seahorse::Model::Operation.new.tap do |o|

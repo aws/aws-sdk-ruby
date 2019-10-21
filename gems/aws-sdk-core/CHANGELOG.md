@@ -3,6 +3,23 @@ Unreleased Changes
 
 * Feature - Support enable STS regional endpoints by `sts_regional_endpoints: 'regional'`
 
+3.69.1 (2019-10-18)
+------------------
+
+* Issue - Fix method redefinition warnings
+
+3.69.0 (2019-10-17)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.68.1 (2019-10-02)
+------------------
+
+* Issue - Add final deprecation warnings to `access_key_id`, `secret_access_key`, and `session_token` in credential providers.
+
+* Issue - Remove misleading IO documentation from `BlobShape` error output.
+
 3.68.0 (2019-09-16)
 ------------------
 

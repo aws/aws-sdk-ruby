@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-10-03)
+------------------
+
+* Feature - Documentation updates for devicefarm
+
 1.27.0 (2019-07-25)
 ------------------
 

@@ -475,21 +475,21 @@ module Aws::DatabaseMigrationService
     #   The settings in JSON format for the DMS transfer type of source
     #   endpoint.
     #
-    #   Possible attributes include the following:
+    #   Possible settings include the following:
     #
-    #   * `serviceAccessRoleArn` - The IAM role that has permission to access
+    #   * `ServiceAccessRoleArn` - The IAM role that has permission to access
     #     the Amazon S3 bucket.
     #
-    #   * `bucketName` - The name of the S3 bucket to use.
+    #   * `BucketName` - The name of the S3 bucket to use.
     #
-    #   * `compressionType` - An optional parameter to use GZIP to compress
+    #   * `CompressionType` - An optional parameter to use GZIP to compress
     #     the target files. To use GZIP, set this value to `NONE` (the
     #     default). To keep the files uncompressed, don't use this value.
     #
-    #   Shorthand syntax for these attributes is as follows:
+    #   Shorthand syntax for these settings is as follows:
     #   `ServiceAccessRoleArn=string,BucketName=string,CompressionType=string`
     #
-    #   JSON syntax for these attributes is as follows: `\{
+    #   JSON syntax for these settings is as follows: `\{
     #   "ServiceAccessRoleArn": "string", "BucketName": "string",
     #   "CompressionType": "none"|"gzip" \} `
     #
@@ -617,6 +617,7 @@ module Aws::DatabaseMigrationService
     #       include_op_for_full_load: false,
     #       cdc_inserts_only: false,
     #       timestamp_column_name: "String",
+    #       parquet_timestamp_in_millisecond: false,
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -715,6 +716,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.include_op_for_full_load #=> Boolean
     #   resp.endpoint.s3_settings.cdc_inserts_only #=> Boolean
     #   resp.endpoint.s3_settings.timestamp_column_name #=> String
+    #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -1444,6 +1446,60 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Deletes the connection between a replication instance and an endpoint.
+    #
+    # @option params [required, String] :endpoint_arn
+    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   endpoint.
+    #
+    # @option params [required, String] :replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the replication instance.
+    #
+    # @return [Types::DeleteConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteConnectionResponse#connection #connection} => Types::Connection
+    #
+    #
+    # @example Example: Delete Connection
+    #
+    #   # Deletes the connection between the replication instance and the endpoint.
+    #
+    #   resp = client.delete_connection({
+    #     endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM", 
+    #     replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     connection: {
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connection({
+    #     endpoint_arn: "String", # required
+    #     replication_instance_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection.replication_instance_arn #=> String
+    #   resp.connection.endpoint_arn #=> String
+    #   resp.connection.status #=> String
+    #   resp.connection.last_failure_message #=> String
+    #   resp.connection.endpoint_identifier #=> String
+    #   resp.connection.replication_instance_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteConnection AWS API Documentation
+    #
+    # @overload delete_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_connection(params = {}, options = {})
+      req = build_request(:delete_connection, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified endpoint.
     #
     # <note markdown="1"> All tasks associated with the endpoint must be deleted before you can
@@ -1529,6 +1585,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.include_op_for_full_load #=> Boolean
     #   resp.endpoint.s3_settings.cdc_inserts_only #=> Boolean
     #   resp.endpoint.s3_settings.timestamp_column_name #=> String
+    #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -2306,6 +2363,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.include_op_for_full_load #=> Boolean
     #   resp.endpoints[0].s3_settings.cdc_inserts_only #=> Boolean
     #   resp.endpoints[0].s3_settings.timestamp_column_name #=> String
+    #   resp.endpoints[0].s3_settings.parquet_timestamp_in_millisecond #=> Boolean
     #   resp.endpoints[0].dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].dms_transfer_settings.bucket_name #=> String
     #   resp.endpoints[0].mongo_db_settings.username #=> String
@@ -3675,6 +3733,7 @@ module Aws::DatabaseMigrationService
     #       include_op_for_full_load: false,
     #       cdc_inserts_only: false,
     #       timestamp_column_name: "String",
+    #       parquet_timestamp_in_millisecond: false,
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -3773,6 +3832,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.include_op_for_full_load #=> Boolean
     #   resp.endpoint.s3_settings.cdc_inserts_only #=> Boolean
     #   resp.endpoint.s3_settings.timestamp_column_name #=> String
+    #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -4827,7 +4887,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

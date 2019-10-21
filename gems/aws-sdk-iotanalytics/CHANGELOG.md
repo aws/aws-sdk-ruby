@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-10-10)
+------------------
+
+* Feature - Add `completionTime` to API call ListDatasetContents.
+
 1.24.0 (2019-07-25)
 ------------------
 

@@ -353,6 +353,11 @@ module Aws::EC2
     DeleteNetworkInterfacePermissionResult = Shapes::StructureShape.new(name: 'DeleteNetworkInterfacePermissionResult')
     DeleteNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'DeleteNetworkInterfaceRequest')
     DeletePlacementGroupRequest = Shapes::StructureShape.new(name: 'DeletePlacementGroupRequest')
+    DeleteQueuedReservedInstancesError = Shapes::StructureShape.new(name: 'DeleteQueuedReservedInstancesError')
+    DeleteQueuedReservedInstancesErrorCode = Shapes::StringShape.new(name: 'DeleteQueuedReservedInstancesErrorCode')
+    DeleteQueuedReservedInstancesIdList = Shapes::ListShape.new(name: 'DeleteQueuedReservedInstancesIdList')
+    DeleteQueuedReservedInstancesRequest = Shapes::StructureShape.new(name: 'DeleteQueuedReservedInstancesRequest')
+    DeleteQueuedReservedInstancesResult = Shapes::StructureShape.new(name: 'DeleteQueuedReservedInstancesResult')
     DeleteRouteRequest = Shapes::StructureShape.new(name: 'DeleteRouteRequest')
     DeleteRouteTableRequest = Shapes::StructureShape.new(name: 'DeleteRouteTableRequest')
     DeleteSecurityGroupRequest = Shapes::StructureShape.new(name: 'DeleteSecurityGroupRequest')
@@ -738,6 +743,8 @@ module Aws::EC2
     ExportToS3TaskSpecification = Shapes::StructureShape.new(name: 'ExportToS3TaskSpecification')
     ExportTransitGatewayRoutesRequest = Shapes::StructureShape.new(name: 'ExportTransitGatewayRoutesRequest')
     ExportTransitGatewayRoutesResult = Shapes::StructureShape.new(name: 'ExportTransitGatewayRoutesResult')
+    FailedQueuedPurchaseDeletion = Shapes::StructureShape.new(name: 'FailedQueuedPurchaseDeletion')
+    FailedQueuedPurchaseDeletionSet = Shapes::ListShape.new(name: 'FailedQueuedPurchaseDeletionSet')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FleetActivityStatus = Shapes::StringShape.new(name: 'FleetActivityStatus')
@@ -1421,6 +1428,8 @@ module Aws::EC2
     SubnetState = Shapes::StringShape.new(name: 'SubnetState')
     SuccessfulInstanceCreditSpecificationItem = Shapes::StructureShape.new(name: 'SuccessfulInstanceCreditSpecificationItem')
     SuccessfulInstanceCreditSpecificationSet = Shapes::ListShape.new(name: 'SuccessfulInstanceCreditSpecificationSet')
+    SuccessfulQueuedPurchaseDeletion = Shapes::StructureShape.new(name: 'SuccessfulQueuedPurchaseDeletion')
+    SuccessfulQueuedPurchaseDeletionSet = Shapes::ListShape.new(name: 'SuccessfulQueuedPurchaseDeletionSet')
     SummaryStatus = Shapes::StringShape.new(name: 'SummaryStatus')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagDescription = Shapes::StructureShape.new(name: 'TagDescription')
@@ -3022,6 +3031,20 @@ module Aws::EC2
     DeletePlacementGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "groupName"))
     DeletePlacementGroupRequest.struct_class = Types::DeletePlacementGroupRequest
 
+    DeleteQueuedReservedInstancesError.add_member(:code, Shapes::ShapeRef.new(shape: DeleteQueuedReservedInstancesErrorCode, location_name: "code"))
+    DeleteQueuedReservedInstancesError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DeleteQueuedReservedInstancesError.struct_class = Types::DeleteQueuedReservedInstancesError
+
+    DeleteQueuedReservedInstancesIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+    DeleteQueuedReservedInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteQueuedReservedInstancesRequest.add_member(:reserved_instances_ids, Shapes::ShapeRef.new(shape: DeleteQueuedReservedInstancesIdList, required: true, location_name: "ReservedInstancesId"))
+    DeleteQueuedReservedInstancesRequest.struct_class = Types::DeleteQueuedReservedInstancesRequest
+
+    DeleteQueuedReservedInstancesResult.add_member(:successful_queued_purchase_deletions, Shapes::ShapeRef.new(shape: SuccessfulQueuedPurchaseDeletionSet, location_name: "successfulQueuedPurchaseDeletionSet"))
+    DeleteQueuedReservedInstancesResult.add_member(:failed_queued_purchase_deletions, Shapes::ShapeRef.new(shape: FailedQueuedPurchaseDeletionSet, location_name: "failedQueuedPurchaseDeletionSet"))
+    DeleteQueuedReservedInstancesResult.struct_class = Types::DeleteQueuedReservedInstancesResult
+
     DeleteRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
     DeleteRouteRequest.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpv6CidrBlock"))
     DeleteRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -4586,6 +4609,12 @@ module Aws::EC2
 
     ExportTransitGatewayRoutesResult.add_member(:s3_location, Shapes::ShapeRef.new(shape: String, location_name: "s3Location"))
     ExportTransitGatewayRoutesResult.struct_class = Types::ExportTransitGatewayRoutesResult
+
+    FailedQueuedPurchaseDeletion.add_member(:error, Shapes::ShapeRef.new(shape: DeleteQueuedReservedInstancesError, location_name: "error"))
+    FailedQueuedPurchaseDeletion.add_member(:reserved_instances_id, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesId"))
+    FailedQueuedPurchaseDeletion.struct_class = Types::FailedQueuedPurchaseDeletion
+
+    FailedQueuedPurchaseDeletionSet.member = Shapes::ShapeRef.new(shape: FailedQueuedPurchaseDeletion, location_name: "item")
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "Value"))
@@ -6527,6 +6556,7 @@ module Aws::EC2
     PurchaseReservedInstancesOfferingRequest.add_member(:reserved_instances_offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReservedInstancesOfferingId"))
     PurchaseReservedInstancesOfferingRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     PurchaseReservedInstancesOfferingRequest.add_member(:limit_price, Shapes::ShapeRef.new(shape: ReservedInstanceLimitPrice, location_name: "limitPrice"))
+    PurchaseReservedInstancesOfferingRequest.add_member(:purchase_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "PurchaseTime"))
     PurchaseReservedInstancesOfferingRequest.struct_class = Types::PurchaseReservedInstancesOfferingRequest
 
     PurchaseReservedInstancesOfferingResult.add_member(:reserved_instances_id, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesId"))
@@ -7584,6 +7614,11 @@ module Aws::EC2
     SuccessfulInstanceCreditSpecificationItem.struct_class = Types::SuccessfulInstanceCreditSpecificationItem
 
     SuccessfulInstanceCreditSpecificationSet.member = Shapes::ShapeRef.new(shape: SuccessfulInstanceCreditSpecificationItem, location_name: "item")
+
+    SuccessfulQueuedPurchaseDeletion.add_member(:reserved_instances_id, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesId"))
+    SuccessfulQueuedPurchaseDeletion.struct_class = Types::SuccessfulQueuedPurchaseDeletion
+
+    SuccessfulQueuedPurchaseDeletionSet.member = Shapes::ShapeRef.new(shape: SuccessfulQueuedPurchaseDeletion, location_name: "item")
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
@@ -9125,6 +9160,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeletePlacementGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_queued_reserved_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQueuedReservedInstances"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQueuedReservedInstancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteQueuedReservedInstancesResult)
       end)
 
       api.add_operation(:delete_route, Seahorse::Model::Operation.new.tap do |o|

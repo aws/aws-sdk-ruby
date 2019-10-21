@@ -266,9 +266,9 @@ module Aws::KinesisVideoArchivedMedia
     # providing data through MPEG-DASH:
     #
     # * The media must contain h.264 or h.265 encoded video and, optionally,
-    #   AAC or G.711 encoded audio. Specifically, the codec id of track 1
+    #   AAC or G.711 encoded audio. Specifically, the codec ID of track 1
     #   should be `V_MPEG/ISO/AVC` (for h.264) or V\_MPEGH/ISO/HEVC (for
-    #   H.265). Optionally, the codec id of track 2 should be `A_AAC` (for
+    #   H.265). Optionally, the codec ID of track 2 should be `A_AAC` (for
     #   AAC) or A\_MS/ACM (for G.711).
     #
     # * Data retention must be greater than 0.
@@ -311,7 +311,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     # 3.  Provide the URL (containing the encrypted session token) for the
     #     MPEG-DASH manifest to a media player that supports the MPEG-DASH
-    #     protocol. Kinesis Video Streams makes the initialization fragment,
+    #     protocol. Kinesis Video Streams makes the initialization fragment
     #     and media fragments available through the manifest URL. The
     #     initialization fragment contains the codec private data for the
     #     stream, and other data needed to set up the video or audio decoder
@@ -522,7 +522,7 @@ module Aws::KinesisVideoArchivedMedia
     #   The default value is `NEVER`.
     #
     # @option params [Types::DASHFragmentSelector] :dash_fragment_selector
-    #   The time range of the requested fragment, and the source of the
+    #   The time range of the requested fragment and the source of the
     #   timestamps.
     #
     #   This parameter is required if `PlaybackMode` is `ON_DEMAND` or
@@ -613,9 +613,9 @@ module Aws::KinesisVideoArchivedMedia
     # providing data through HLS:
     #
     # * The media must contain h.264 or h.265 encoded video and, optionally,
-    #   AAC encoded audio. Specifically, the codec id of track 1 should be
+    #   AAC encoded audio. Specifically, the codec ID of track 1 should be
     #   `V_MPEG/ISO/AVC` (for h.264) or `V_MPEG/ISO/HEVC` (for h.265).
-    #   Optionally, the codec id of track 2 should be `A_AAC`.
+    #   Optionally, the codec ID of track 2 should be `A_AAC`.
     #
     # * Data retention must be greater than 0.
     #
@@ -871,7 +871,7 @@ module Aws::KinesisVideoArchivedMedia
     #   The default is `LIVE`.
     #
     # @option params [Types::HLSFragmentSelector] :hls_fragment_selector
-    #   The time range of the requested fragment, and the source of the
+    #   The time range of the requested fragment and the source of the
     #   timestamps.
     #
     #   This parameter is required if `PlaybackMode` is `ON_DEMAND` or
@@ -896,23 +896,40 @@ module Aws::KinesisVideoArchivedMedia
     #   The default is `FRAGMENTED_MP4`.
     #
     # @option params [String] :discontinuity_mode
-    #   Specifies when flags marking discontinuities between fragments will be
-    #   added to the media playlists. The default is `ALWAYS` when
-    #   HLSFragmentSelector is `SERVER_TIMESTAMP`, and `NEVER` when it is
-    #   `PRODUCER_TIMESTAMP`.
+    #   Specifies when flags marking discontinuities between fragments are
+    #   added to the media playlists.
     #
     #   Media players typically build a timeline of media content to play,
     #   based on the timestamps of each fragment. This means that if there is
-    #   any overlap between fragments (as is typical if HLSFragmentSelector is
-    #   `SERVER_TIMESTAMP`), the media player timeline has small gaps between
-    #   fragments in some places, and overwrites frames in other places. When
-    #   there are discontinuity flags between fragments, the media player is
-    #   expected to reset the timeline, resulting in the fragment being played
-    #   immediately after the previous fragment. We recommend that you always
-    #   have discontinuity flags between fragments if the fragment timestamps
-    #   are not accurate or if fragments might be missing. You should not
-    #   place discontinuity flags between fragments for the player timeline to
-    #   accurately map to the producer timestamps.
+    #   any overlap or gap between fragments (as is typical if
+    #   HLSFragmentSelector is set to `SERVER_TIMESTAMP`), the media player
+    #   timeline will also have small gaps between fragments in some places,
+    #   and will overwrite frames in other places. Gaps in the media player
+    #   timeline can cause playback to stall and overlaps can cause playback
+    #   to be jittery. When there are discontinuity flags between fragments,
+    #   the media player is expected to reset the timeline, resulting in the
+    #   next fragment being played immediately after the previous fragment.
+    #
+    #   The following modes are supported:
+    #
+    #   * `ALWAYS`\: a discontinuity marker is placed between every fragment
+    #     in the HLS media playlist. It is recommended to use a value of
+    #     `ALWAYS` if the fragment timestamps are not accurate.
+    #
+    #   * `NEVER`\: no discontinuity markers are placed anywhere. It is
+    #     recommended to use a value of `NEVER` to ensure the media player
+    #     timeline most accurately maps to the producer timestamps.
+    #
+    #   * `ON_DISCONTIUNITY`\: a discontinuity marker is placed between
+    #     fragments that have a gap or overlap of more than 50 milliseconds.
+    #     For most playback scenarios, it is recommended to use a value of
+    #     `ON_DISCONTINUITY` so that the media player timeline is only reset
+    #     when there is a significant issue with the media timeline (e.g. a
+    #     missing fragment).
+    #
+    #   The default is `ALWAYS` when HLSFragmentSelector is set to
+    #   `SERVER_TIMESTAMP`, and `NEVER` when it is set to
+    #   `PRODUCER_TIMESTAMP`.
     #
     # @option params [String] :display_fragment_timestamp
     #   Specifies when the fragment start timestamps should be included in the
@@ -980,7 +997,7 @@ module Aws::KinesisVideoArchivedMedia
     #       },
     #     },
     #     container_format: "FRAGMENTED_MP4", # accepts FRAGMENTED_MP4, MPEG_TS
-    #     discontinuity_mode: "ALWAYS", # accepts ALWAYS, NEVER
+    #     discontinuity_mode: "ALWAYS", # accepts ALWAYS, NEVER, ON_DISCONTINUITY
     #     display_fragment_timestamp: "ALWAYS", # accepts ALWAYS, NEVER
     #     expires: 1,
     #     max_media_playlist_fragment_results: 1,
@@ -1187,7 +1204,7 @@ module Aws::KinesisVideoArchivedMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

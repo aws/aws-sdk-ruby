@@ -315,6 +315,7 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
     #   resp.accelerator.last_modified_time #=> Time
@@ -608,6 +609,7 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
     #   resp.accelerator.last_modified_time #=> Time
@@ -759,6 +761,7 @@ module Aws::GlobalAccelerator
     #   resp.accelerators[0].ip_sets[0].ip_family #=> String
     #   resp.accelerators[0].ip_sets[0].ip_addresses #=> Array
     #   resp.accelerators[0].ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerators[0].dns_name #=> String
     #   resp.accelerators[0].status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerators[0].created_time #=> Time
     #   resp.accelerators[0].last_modified_time #=> Time
@@ -921,6 +924,7 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
     #   resp.accelerator.last_modified_time #=> Time
@@ -1175,7 +1179,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

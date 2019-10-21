@@ -293,12 +293,16 @@ module Aws::ElasticsearchService
     #             enabled: false,
     #           },
     #         },
+    #         domain_endpoint_options: {
+    #           enforce_https: false,
+    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the Elasticsearch domain that you are creating. Domain
     #   names are unique across the domains owned by an account within an
-    #   AWS region. Domain names must start with a letter or number and can
+    #   AWS region. Domain names must start with a lowercase letter and can
     #   contain the following characters: a-z (lowercase), 0-9, and -
     #   (hyphen).
     #   @return [String]
@@ -377,6 +381,11 @@ module Aws::ElasticsearchService
     #   to publish a given type of Elasticsearch log.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   Options to specify configuration that will be applied to the domain
+    #   endpoint.
+    #   @return [Types::DomainEndpointOptions]
+    #
     class CreateElasticsearchDomainRequest < Struct.new(
       :domain_name,
       :elasticsearch_version,
@@ -389,7 +398,8 @@ module Aws::ElasticsearchService
       :encryption_at_rest_options,
       :node_to_node_encryption_options,
       :advanced_options,
-      :log_publishing_options)
+      :log_publishing_options,
+      :domain_endpoint_options)
       include Aws::Structure
     end
 
@@ -687,6 +697,55 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Options to configure endpoint for the Elasticsearch domain.
+    #
+    # @note When making an API call, you may pass DomainEndpointOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enforce_https: false,
+    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       }
+    #
+    # @!attribute [rw] enforce_https
+    #   Specify if only HTTPS endpoint should be enabled for the
+    #   Elasticsearch domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tls_security_policy
+    #   Specify the TLS security policy that needs to be applied to the
+    #   HTTPS endpoint of Elasticsearch domain.
+    #    It can be one of the following values: *
+    #   <b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which
+    #     supports TLSv1.0 and higher.
+    #   * <b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which
+    #     supports only TLSv1.2
+    #   @return [String]
+    #
+    class DomainEndpointOptions < Struct.new(
+      :enforce_https,
+      :tls_security_policy)
+      include Aws::Structure
+    end
+
+    # The configured endpoint options for the domain and their current
+    # status.
+    #
+    # @!attribute [rw] options
+    #   Options to configure endpoint for the Elasticsearch domain.
+    #   @return [Types::DomainEndpointOptions]
+    #
+    # @!attribute [rw] status
+    #   The status of the endpoint options for the Elasticsearch domain. See
+    #   `OptionStatus` for the status information that's included.
+    #   @return [Types::OptionStatus]
+    #
+    class DomainEndpointOptionsStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_name
     #   Specifies the `DomainName`.
     #   @return [String]
@@ -908,6 +967,10 @@ module Aws::ElasticsearchService
     #   Log publishing options for the given domain.
     #   @return [Types::LogPublishingOptionsStatus]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   Specifies the `DomainEndpointOptions` for the Elasticsearch domain.
+    #   @return [Types::DomainEndpointOptionsStatus]
+    #
     class ElasticsearchDomainConfig < Struct.new(
       :elasticsearch_version,
       :elasticsearch_cluster_config,
@@ -919,7 +982,8 @@ module Aws::ElasticsearchService
       :encryption_at_rest_options,
       :node_to_node_encryption_options,
       :advanced_options,
-      :log_publishing_options)
+      :log_publishing_options,
+      :domain_endpoint_options)
       include Aws::Structure
     end
 
@@ -1044,6 +1108,10 @@ module Aws::ElasticsearchService
     #   The current status of the Elasticsearch domain's service software.
     #   @return [Types::ServiceSoftwareOptions]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   The current status of the Elasticsearch domain's endpoint options.
+    #   @return [Types::DomainEndpointOptions]
+    #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
       :domain_name,
@@ -1065,7 +1133,8 @@ module Aws::ElasticsearchService
       :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options,
-      :service_software_options)
+      :service_software_options,
+      :domain_endpoint_options)
       include Aws::Structure
     end
 
@@ -2078,6 +2147,10 @@ module Aws::ElasticsearchService
     #             enabled: false,
     #           },
     #         },
+    #         domain_endpoint_options: {
+    #           enforce_https: false,
+    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -2138,6 +2211,11 @@ module Aws::ElasticsearchService
     #   to publish a given type of Elasticsearch log.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   Options to specify configuration that will be applied to the domain
+    #   endpoint.
+    #   @return [Types::DomainEndpointOptions]
+    #
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       :elasticsearch_cluster_config,
@@ -2147,7 +2225,8 @@ module Aws::ElasticsearchService
       :cognito_options,
       :advanced_options,
       :access_policies,
-      :log_publishing_options)
+      :log_publishing_options,
+      :domain_endpoint_options)
       include Aws::Structure
     end
 

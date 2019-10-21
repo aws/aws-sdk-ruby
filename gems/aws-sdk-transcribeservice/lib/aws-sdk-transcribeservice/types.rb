@@ -548,6 +548,7 @@ module Aws::TranscribeService
     #           media_file_uri: "Uri",
     #         },
     #         output_bucket_name: "OutputBucketName",
+    #         output_encryption_kms_key_id: "KMSKeyId",
     #         settings: {
     #           vocabulary_name: "VocabularyName",
     #           show_speaker_labels: false,
@@ -567,7 +568,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate of the audio track in the input media file in Hertz.
+    #   The sample rate, in Hertz, of the audio track in the input media
+    #   file.
     #
     #   If you do not specify the media sample rate, Amazon Transcribe
     #   determines the sample rate. If you specify the sample rate, it must
@@ -578,13 +580,6 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] media_format
     #   The format of the input media file.
-    #
-    #   If you do not specify the format of the media file, Amazon
-    #   Transcribe determines the format. If the format is not recognized,
-    #   Amazon Transcribe returns an `InternalFailureException` exception.
-    #   If you specify the format, it must match the format detected by
-    #   Amazon Transcribe, otherwise you get an `InternalFailureException`
-    #   exception.
     #   @return [String]
     #
     # @!attribute [rw] media
@@ -617,6 +612,9 @@ module Aws::TranscribeService
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
     #   @return [String]
     #
+    # @!attribute [rw] output_encryption_kms_key_id
+    #   @return [String]
+    #
     # @!attribute [rw] settings
     #   A `Settings` object that provides optional settings for a
     #   transcription job.
@@ -631,6 +629,7 @@ module Aws::TranscribeService
       :media_format,
       :media,
       :output_bucket_name,
+      :output_encryption_kms_key_id,
       :settings)
       include Aws::Structure
     end
@@ -771,7 +770,7 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Provides a summary of information about a transcription job. .
+    # Provides a summary of information about a transcription job.
     #
     # @!attribute [rw] transcription_job_name
     #   The name of the transcription job.

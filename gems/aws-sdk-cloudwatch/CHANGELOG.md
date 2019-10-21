@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2019-10-18)
+------------------
+
+* Feature - New Period parameter added to MetricDataQuery structure.
+
 1.28.0 (2019-08-12)
 ------------------
 

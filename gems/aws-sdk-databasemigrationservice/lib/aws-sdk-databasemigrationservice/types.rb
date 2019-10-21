@@ -299,6 +299,7 @@ module Aws::DatabaseMigrationService
     #           include_op_for_full_load: false,
     #           cdc_inserts_only: false,
     #           timestamp_column_name: "String",
+    #           parquet_timestamp_in_millisecond: false,
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -469,21 +470,21 @@ module Aws::DatabaseMigrationService
     #   The settings in JSON format for the DMS transfer type of source
     #   endpoint.
     #
-    #   Possible attributes include the following:
+    #   Possible settings include the following:
     #
-    #   * `serviceAccessRoleArn` - The IAM role that has permission to
+    #   * `ServiceAccessRoleArn` - The IAM role that has permission to
     #     access the Amazon S3 bucket.
     #
-    #   * `bucketName` - The name of the S3 bucket to use.
+    #   * `BucketName` - The name of the S3 bucket to use.
     #
-    #   * `compressionType` - An optional parameter to use GZIP to compress
+    #   * `CompressionType` - An optional parameter to use GZIP to compress
     #     the target files. To use GZIP, set this value to `NONE` (the
     #     default). To keep the files uncompressed, don't use this value.
     #
-    #   Shorthand syntax for these attributes is as follows:
+    #   Shorthand syntax for these settings is as follows:
     #   `ServiceAccessRoleArn=string,BucketName=string,CompressionType=string`
     #
-    #   JSON syntax for these attributes is as follows: `\{
+    #   JSON syntax for these settings is as follows: `\{
     #   "ServiceAccessRoleArn": "string", "BucketName": "string",
     #   "CompressionType": "none"|"gzip" \} `
     #   @return [Types::DmsTransferSettings]
@@ -1045,6 +1046,42 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteConnectionMessage
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_arn: "String", # required
+    #         replication_instance_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the replication instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteConnectionMessage AWS API Documentation
+    #
+    class DeleteConnectionMessage < Struct.new(
+      :endpoint_arn,
+      :replication_instance_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection
+    #   The connection that is being deleted.
+    #   @return [Types::Connection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteConnectionResponse AWS API Documentation
+    #
+    class DeleteConnectionResponse < Struct.new(
+      :connection)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteEndpointMessage
     #   data as a hash:
     #
@@ -1206,8 +1243,8 @@ module Aws::DatabaseMigrationService
     #   `dms-AccountNumber-UniqueAccountIdentifier.` Here is an example name
     #   for this default S3 bucket: `dms-111122223333-c44445555666`.
     #
-    #   <note markdown="1"> AWS DMS supports `UniqueAccountIdentifier` in versions 3.1.4 and
-    #   later.
+    #   <note markdown="1"> AWS DMS supports the `UniqueAccountIdentifier` parameter in versions
+    #   3.1.4 and later.
     #
     #    </note>
     #   @return [String]
@@ -2483,21 +2520,21 @@ module Aws::DatabaseMigrationService
     #   The settings in JSON format for the DMS transfer type of source
     #   endpoint.
     #
-    #   Possible attributes include the following:
+    #   Possible settings include the following:
     #
-    #   * `serviceAccessRoleArn` - The IAM role that has permission to
+    #   * `ServiceAccessRoleArn` - The IAM role that has permission to
     #     access the Amazon S3 bucket.
     #
-    #   * `bucketName` - The name of the S3 bucket to use.
+    #   * `BucketName` - The name of the S3 bucket to use.
     #
-    #   * `compressionType` - An optional parameter to use GZIP to compress
+    #   * `CompressionType` - An optional parameter to use GZIP to compress
     #     the target files. To use GZIP, set this value to `NONE` (the
     #     default). To keep the files uncompressed, don't use this value.
     #
-    #   Shorthand syntax for these attributes is as follows:
+    #   Shorthand syntax for these settings is as follows:
     #   `ServiceAccessRoleArn=string,BucketName=string,CompressionType=string`
     #
-    #   JSON syntax for these attributes is as follows: `\{
+    #   JSON syntax for these settings is as follows: `\{
     #   "ServiceAccessRoleArn": "string", "BucketName": "string",
     #   "CompressionType": "none"|"gzip" \} `
     #   @return [Types::DmsTransferSettings]
@@ -2974,6 +3011,7 @@ module Aws::DatabaseMigrationService
     #           include_op_for_full_load: false,
     #           cdc_inserts_only: false,
     #           timestamp_column_name: "String",
+    #           parquet_timestamp_in_millisecond: false,
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -3612,7 +3650,7 @@ module Aws::DatabaseMigrationService
     #   Valid values: DEFAULT, MONGODB\_CR, SCRAM\_SHA\_1
     #
     #   DEFAULT – For MongoDB version 2.x, use MONGODB\_CR. For MongoDB
-    #   version 3.x, use SCRAM\_SHA\_1. This attribute is not used when
+    #   version 3.x, use SCRAM\_SHA\_1. This setting is not used when
     #   authType=No.
     #   @return [String]
     #
@@ -3626,7 +3664,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] extract_doc_id
-    #   Specifies the document ID. Use this attribute when `NestingLevel` is
+    #   Specifies the document ID. Use this setting when `NestingLevel` is
     #   set to NONE.
     #
     #   Default value is false.
@@ -3634,14 +3672,14 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] docs_to_investigate
     #   Indicates the number of documents to preview to determine the
-    #   document organization. Use this attribute when `NestingLevel` is set
+    #   document organization. Use this setting when `NestingLevel` is set
     #   to ONE.
     #
     #   Must be a positive value greater than 0. Default value is 1000.
     #   @return [String]
     #
     # @!attribute [rw] auth_source
-    #   The MongoDB database name. This attribute is not used when
+    #   The MongoDB database name. This setting is not used when
     #   `authType=NO`.
     #
     #   The default is admin.
@@ -3719,7 +3757,8 @@ module Aws::DatabaseMigrationService
     #   replication instance is in Beta or test mode. This indicates some
     #   features might not work as expected.
     #
-    #   <note markdown="1"> AWS DMS supports `ReleaseStatus` in versions 3.1.4 and later.
+    #   <note markdown="1"> AWS DMS supports the `ReleaseStatus` parameter in versions 3.1.4 and
+    #   later.
     #
     #    </note>
     #   @return [String]
@@ -4742,6 +4781,7 @@ module Aws::DatabaseMigrationService
     #         include_op_for_full_load: false,
     #         cdc_inserts_only: false,
     #         timestamp_column_name: "String",
+    #         parquet_timestamp_in_millisecond: false,
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -4894,7 +4934,8 @@ module Aws::DatabaseMigrationService
     #   comma-separated value (.csv) output files only to indicate how the
     #   rows were added to the source database.
     #
-    #   <note markdown="1"> AWS DMS supports `IncludeOpForFullLoad` in versions 3.1.4 and later.
+    #   <note markdown="1"> AWS DMS supports the `IncludeOpForFullLoad` parameter in versions
+    #   3.1.4 and later.
     #
     #    </note>
     #
@@ -4906,10 +4947,11 @@ module Aws::DatabaseMigrationService
     #   file. This allows the format of your target records from a full load
     #   to be consistent with the target records from a CDC load.
     #
-    #   <note markdown="1"> This setting works together with `CdcInsertsOnly` for output to .csv
-    #   files only. For more information about how these settings work
-    #   together, see [Indicating Source DB Operations in Migrated S3
-    #   Data][1] in the *AWS Database Migration Service User Guide.*.
+    #   <note markdown="1"> This setting works together with the `CdcInsertsOnly` parameter for
+    #   output to .csv files only. For more information about how these
+    #   settings work together, see [Indicating Source DB Operations in
+    #   Migrated S3 Data][1] in the *AWS Database Migration Service User
+    #   Guide.*.
     #
     #    </note>
     #
@@ -4927,7 +4969,7 @@ module Aws::DatabaseMigrationService
     #   updated, or deleted at the source database for a CDC load to the
     #   target.
     #
-    #   If `cdcInsertsOnly` is set to `true` or `y`, only INSERTs from the
+    #   If `CdcInsertsOnly` is set to `true` or `y`, only INSERTs from the
     #   source database are migrated to the .csv or .parquet file. For .csv
     #   format only, how these INSERTs are recorded depends on the value of
     #   `IncludeOpForFullLoad`. If `IncludeOpForFullLoad` is set to `true`,
@@ -4939,8 +4981,8 @@ module Aws::DatabaseMigrationService
     #   Operations in Migrated S3 Data][1] in the *AWS Database Migration
     #   Service User Guide.*.
     #
-    #   <note markdown="1"> AWS DMS supports this interaction between `CdcInsertsOnly` and
-    #   `IncludeOpForFullLoad` in versions 3.1.4 and later.
+    #   <note markdown="1"> AWS DMS supports this interaction between the `CdcInsertsOnly` and
+    #   `IncludeOpForFullLoad` parameters in versions 3.1.4 and later.
     #
     #    </note>
     #
@@ -4950,25 +4992,65 @@ module Aws::DatabaseMigrationService
     #   @return [Boolean]
     #
     # @!attribute [rw] timestamp_column_name
-    #   A value that includes a timestamp column in the Amazon S3 target
-    #   endpoint data. AWS DMS includes an additional column in the migrated
-    #   data when you set `timestampColumnName` to a non-blank value.
+    #   A value that when nonblank causes AWS DMS to add a column with
+    #   timestamp information to the endpoint data for an Amazon S3 target.
     #
-    #   <note markdown="1"> AWS DMS supports `TimestampColumnName` in versions 3.1.4 and later.
+    #   <note markdown="1"> AWS DMS supports the `TimestampColumnName` parameter in versions
+    #   3.1.4 and later.
     #
     #    </note>
     #
-    #   For a full load, each row of the timestamp column contains a
+    #   DMS includes an additional `STRING` column in the .csv or .parquet
+    #   object files of your migrated data when you set
+    #   `TimestampColumnName` to a nonblank value.
+    #
+    #   For a full load, each row of this timestamp column contains a
     #   timestamp for when the data was transferred from the source to the
-    #   target by DMS. For a CDC load, each row of the timestamp column
-    #   contains the timestamp for the commit of that row in the source
-    #   database. The format for the timestamp column value is `yyyy-MM-dd
-    #   HH:mm:ss.SSSSSS`. For CDC, the microsecond precision depends on the
-    #   commit timestamp supported by DMS for the source database. When the
-    #   `AddColumnName` setting is set to `true`, DMS also includes the name
-    #   for the timestamp column that you set as the nonblank value of
-    #   `timestampColumnName`.
+    #   target by DMS.
+    #
+    #   For a change data capture (CDC) load, each row of the timestamp
+    #   column contains the timestamp for the commit of that row in the
+    #   source database.
+    #
+    #   The string format for this timestamp column value is `yyyy-MM-dd
+    #   HH:mm:ss.SSSSSS`. By default, the precision of this value is in
+    #   microseconds. For a CDC load, the rounding of the precision depends
+    #   on the commit timestamp supported by DMS for the source database.
+    #
+    #   When the `AddColumnName` parameter is set to `true`, DMS also
+    #   includes a name for the timestamp column that you set with
+    #   `TimestampColumnName`.
     #   @return [String]
+    #
+    # @!attribute [rw] parquet_timestamp_in_millisecond
+    #   A value that specifies the precision of any `TIMESTAMP` column
+    #   values that are written to an Amazon S3 object file in .parquet
+    #   format.
+    #
+    #   <note markdown="1"> AWS DMS supports the `ParquetTimestampInMillisecond` parameter in
+    #   versions 3.1.4 and later.
+    #
+    #    </note>
+    #
+    #   When `ParquetTimestampInMillisecond` is set to `true` or `y`, AWS
+    #   DMS writes all `TIMESTAMP` columns in a .parquet formatted file with
+    #   millisecond precision. Otherwise, DMS writes them with microsecond
+    #   precision.
+    #
+    #   Currently, Amazon Athena and AWS Glue can handle only millisecond
+    #   precision for `TIMESTAMP` values. Set this parameter to `true` for
+    #   S3 endpoint object files that are .parquet formatted only if you
+    #   plan to query or process the data with Athena or AWS Glue.
+    #
+    #   <note markdown="1"> AWS DMS writes any `TIMESTAMP` column values written to an S3 file
+    #   in .csv format with microsecond precision.
+    #
+    #    Setting `ParquetTimestampInMillisecond` has no effect on the string
+    #   format of the timestamp column value that is inserted by setting the
+    #   `TimestampColumnName` parameter.
+    #
+    #    </note>
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
@@ -4991,7 +5073,8 @@ module Aws::DatabaseMigrationService
       :enable_statistics,
       :include_op_for_full_load,
       :cdc_inserts_only,
-      :timestamp_column_name)
+      :timestamp_column_name,
+      :parquet_timestamp_in_millisecond)
       include Aws::Structure
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2019-09-24)
+------------------
+
+* Feature - With this update Amazon Transcribe enables you to provide an AWS KMS key to encrypt your transcription output.
+
 1.28.0 (2019-09-04)
 ------------------
 

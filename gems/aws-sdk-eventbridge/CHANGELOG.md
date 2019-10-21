@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2019-10-08)
+------------------
+
+* Feature - Documentation updates for Amazon EventBridge.
+
 1.1.0 (2019-07-25)
 ------------------
 

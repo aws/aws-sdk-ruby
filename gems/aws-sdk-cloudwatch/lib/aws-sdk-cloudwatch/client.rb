@@ -488,6 +488,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].expression #=> String
     #   resp.metric_alarms[0].metrics[0].label #=> String
     #   resp.metric_alarms[0].metrics[0].return_data #=> Boolean
+    #   resp.metric_alarms[0].metrics[0].period #=> Integer
     #   resp.metric_alarms[0].threshold_metric_id #=> String
     #   resp.next_token #=> String
     #
@@ -595,6 +596,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].expression #=> String
     #   resp.metric_alarms[0].metrics[0].label #=> String
     #   resp.metric_alarms[0].metrics[0].return_data #=> Boolean
+    #   resp.metric_alarms[0].metrics[0].period #=> Integer
     #   resp.metric_alarms[0].threshold_metric_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
@@ -913,6 +915,7 @@ module Aws::CloudWatch
     #         expression: "MetricExpression",
     #         label: "MetricLabel",
     #         return_data: false,
+    #         period: 1,
     #       },
     #     ],
     #     start_time: Time.now, # required
@@ -1878,6 +1881,7 @@ module Aws::CloudWatch
     #         expression: "MetricExpression",
     #         label: "MetricLabel",
     #         return_data: false,
+    #         period: 1,
     #       },
     #     ],
     #     tags: [
@@ -2042,34 +2046,30 @@ module Aws::CloudWatch
     end
 
     # Assigns one or more tags (key-value pairs) to the specified CloudWatch
-    # resource. Tags can help you organize and categorize your resources.
-    # You can also use them to scope user permissions, by granting a user
-    # permission to access or change only resources with certain tag values.
-    # In CloudWatch, alarms can be tagged.
+    # resource. Currently, the only CloudWatch resources that can be tagged
+    # are alarms.
+    #
+    # Tags can help you organize and categorize your resources. You can also
+    # use them to scope user permissions, by granting a user permission to
+    # access or change only resources with certain tag values.
     #
     # Tags don't have any semantic meaning to AWS and are interpreted
     # strictly as strings of characters.
     #
-    # You can use the `TagResource` action with a resource that already has
-    # tags. If you specify a new tag key for the resource, this tag is
-    # appended to the list of tags associated with the resource. If you
-    # specify a tag key that is already associated with the resource, the
-    # new tag value that you specify replaces the previous value for that
-    # tag.
+    # You can use the `TagResource` action with an alarm that already has
+    # tags. If you specify a new tag key for the alarm, this tag is appended
+    # to the list of tags associated with the alarm. If you specify a tag
+    # key that is already associated with the alarm, the new tag value that
+    # you specify replaces the previous value for that tag.
     #
     # You can associate as many as 50 tags with a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the CloudWatch resource that you're adding tags to. For
-    #   more information on ARN format, see [Example ARNs][1] in the *Amazon
-    #   Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch
+    #   The ARN of the CloudWatch alarm that you're adding tags to. The ARN
+    #   format is `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The list of key-value pairs to associate with the resource.
+    #   The list of key-value pairs to associate with the alarm.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2139,7 +2139,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

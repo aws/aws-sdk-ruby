@@ -111,6 +111,74 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # A certificate authority (CA) certificate for an AWS account.
+    #
+    # @!attribute [rw] certificate_identifier
+    #   The unique key that identifies a certificate.
+    #
+    #   Example: `rds-ca-2019`
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_type
+    #   The type of the certificate.
+    #
+    #   Example: `CA`
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbprint
+    #   The thumbprint of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_from
+    #   The starting date-time from which the certificate is valid.
+    #
+    #   Example: `2019-07-31T17:57:09Z`
+    #   @return [Time]
+    #
+    # @!attribute [rw] valid_till
+    #   The date-time after which the certificate is no longer valid.
+    #
+    #   Example: `2024-07-31T17:57:09Z`
+    #   @return [Time]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) for the certificate.
+    #
+    #   Example: `arn:aws:rds:us-east-1::cert:rds-ca-2019`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/Certificate AWS API Documentation
+    #
+    class Certificate < Struct.new(
+      :certificate_identifier,
+      :certificate_type,
+      :thumbprint,
+      :valid_from,
+      :valid_till,
+      :certificate_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificates
+    #   A list of certificates for this AWS account.
+    #   @return [Array<Types::Certificate>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided if the number of records
+    #   retrieved is greater than `MaxRecords`. If this parameter is
+    #   specified, the marker specifies the next record in the list.
+    #   Including the value of `Marker` in the next call to
+    #   `DescribeCertificates` results in the next page of certificates.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CertificateMessage AWS API Documentation
+    #
+    class CertificateMessage < Struct.new(
+      :certificates,
+      :marker)
+      include Aws::Structure
+    end
+
     # The configuration setting for the log types to be enabled for export
     # to Amazon CloudWatch Logs for a specific DB instance or DB cluster.
     #
@@ -468,7 +536,7 @@ module Aws::DocDB
     #
     #   Constraints:
     #
-    #   * Must be from 1 to 16 letters or numbers.
+    #   * Must be from 1 to 63 letters or numbers.
     #
     #   * The first character must be a letter.
     #
@@ -480,7 +548,7 @@ module Aws::DocDB
     #   any printable ASCII character except forward slash (/), double quote
     #   ("), or the "at" symbol (@).
     #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   Constraints: Must contain from 8 to 100 characters.
     #   @return [String]
     #
     # @!attribute [rw] preferred_backup_window
@@ -819,7 +887,8 @@ module Aws::DocDB
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the DB instance.
+    #   The tags to be assigned to the DB instance. You can assign up to 10
+    #   tags to an instance.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] db_cluster_identifier
@@ -1620,11 +1689,8 @@ module Aws::DocDB
     #   @return [Boolean]
     #
     # @!attribute [rw] publicly_accessible
-    #   Specifies the availability options for the DB instance. A value of
-    #   `true` specifies an internet-facing instance with a publicly
-    #   resolvable DNS name, which resolves to a public IP address. A value
-    #   of `false` specifies an internal instance with a DNS name that
-    #   resolves to a private IP address.
+    #   Not supported. Amazon DocumentDB does not currently support public
+    #   endpoints. The value of `PubliclyAccessible` is always `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] status_infos
@@ -1638,7 +1704,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] storage_encrypted
-    #   Specifies whether the DB instance is encrypted.
+    #   Specifies whether or not the DB instance is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
@@ -1650,6 +1716,10 @@ module Aws::DocDB
     #   The AWS Region-unique, immutable identifier for the DB instance.
     #   This identifier is found in AWS CloudTrail log entries whenever the
     #   AWS KMS key for the DB instance is accessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The identifier of the CA certificate for this DB instance.
     #   @return [String]
     #
     # @!attribute [rw] promotion_tier
@@ -1692,6 +1762,7 @@ module Aws::DocDB
       :storage_encrypted,
       :kms_key_id,
       :dbi_resource_id,
+      :ca_certificate_identifier,
       :promotion_tier,
       :db_instance_arn,
       :enabled_cloudwatch_logs_exports)
@@ -1773,7 +1844,7 @@ module Aws::DocDB
     #   @return [Array<Types::Subnet>]
     #
     # @!attribute [rw] db_subnet_group_arn
-    #   The Amazon Resource Identifier (ARN) for the DB subnet group.
+    #   The Amazon Resource Name (ARN) for the DB subnet group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSubnetGroup AWS API Documentation
@@ -2010,6 +2081,70 @@ module Aws::DocDB
     #
     class DeleteDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeCertificatesMessage
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_identifier: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] certificate_identifier
+    #   The user-supplied certificate identifier. If this parameter is
+    #   specified, information for only the specified certificate is
+    #   returned. If this parameter is omitted, a list of up to `MaxRecords`
+    #   certificates is returned. This parameter is not case sensitive.
+    #
+    #   Constraints
+    #
+    #   * Must match an existing `CertificateIdentifier`.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   This parameter is not currently supported.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints:
+    #
+    #   * Minimum: 20
+    #
+    #   * Maximum: 100
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeCertificates` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeCertificatesMessage AWS API Documentation
+    #
+    class DescribeCertificatesMessage < Struct.new(
+      :certificate_identifier,
+      :filters,
+      :max_records,
+      :marker)
       include Aws::Structure
     end
 
@@ -3297,7 +3432,7 @@ module Aws::DocDB
     #   any printable ASCII character except forward slash (/), double quote
     #   ("), or the "at" symbol (@).
     #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   Constraints: Must contain from 8 to 100 characters.
     #   @return [String]
     #
     # @!attribute [rw] preferred_backup_window
@@ -3508,6 +3643,7 @@ module Aws::DocDB
     #         preferred_maintenance_window: "String",
     #         auto_minor_version_upgrade: false,
     #         new_db_instance_identifier: "String",
+    #         ca_certificate_identifier: "String",
     #         promotion_tier: 1,
     #       }
     #
@@ -3597,6 +3733,11 @@ module Aws::DocDB
     #   Example: `mydbinstance`
     #   @return [String]
     #
+    # @!attribute [rw] ca_certificate_identifier
+    #   Indicates the certificate that needs to be associated with the
+    #   instance.
+    #   @return [String]
+    #
     # @!attribute [rw] promotion_tier
     #   A value that specifies the order in which an Amazon DocumentDB
     #   replica is promoted to the primary instance after a failure of the
@@ -3616,6 +3757,7 @@ module Aws::DocDB
       :preferred_maintenance_window,
       :auto_minor_version_upgrade,
       :new_db_instance_identifier,
+      :ca_certificate_identifier,
       :promotion_tier)
       include Aws::Structure
     end
