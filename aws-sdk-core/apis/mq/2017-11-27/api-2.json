@@ -1313,6 +1313,14 @@
           "shape" : "__string",
           "locationName" : "pendingEngineVersion"
         },
+        "PendingSecurityGroups" : {
+          "shape": "__listOf__string",
+          "locationName": "pendingSecurityGroups"
+        },
+        "PendingHostInstanceType" : {
+          "shape" : "__string",
+          "locationName" : "pendingHostInstanceType"
+        },
         "PubliclyAccessible" : {
           "shape" : "__boolean",
           "locationName" : "publiclyAccessible"
@@ -1412,6 +1420,14 @@
         "PendingEngineVersion" : {
           "shape" : "__string",
           "locationName" : "pendingEngineVersion"
+        },
+        "PendingSecurityGroups" : {
+          "shape" : "__listOf__string",
+          "locationName" : "pendingSecurityGroups"
+        },
+          "PendingHostInstanceType" : {
+          "shape" : "__string",
+          "locationName" : "pendingHostInstanceType"
         },
         "PubliclyAccessible" : {
           "shape" : "__boolean",
@@ -2071,9 +2087,17 @@
           "shape" : "__string",
           "locationName" : "engineVersion"
         },
+        "HostInstanceType" : {
+          "shape" : "__string",
+          "locationName" : "hostInstanceType"
+        },
         "Logs" : {
           "shape" : "Logs",
           "locationName" : "logs"
+        },
+        "SecurityGroups" : {
+          "shape" : "__listOf__string",
+          "locationName" : "securityGroups"
         }
       }
     },
@@ -2096,9 +2120,17 @@
           "shape" : "__string",
           "locationName" : "engineVersion"
         },
+        "HostInstanceType" : {
+          "shape" : "__string",
+          "locationName" : "hostInstanceType"
+        },
         "Logs" : {
           "shape" : "Logs",
           "locationName" : "logs"
+        },
+        "SecurityGroups" : {
+          "shape" : "__listOf__string",
+          "locationName" : "securityGroups"
         }
       }
     },
@@ -2122,9 +2154,17 @@
           "shape" : "__string",
           "locationName" : "engineVersion"
         },
+        "HostInstanceType" : {
+          "shape" : "__string",
+          "locationName" : "hostInstanceType"
+        },
         "Logs" : {
           "shape" : "Logs",
           "locationName" : "logs"
+        },
+        "SecurityGroups" : {
+          "shape" : "__listOf__string",
+          "locationName" : "securityGroups"
         }
       },
       "required" : [ "BrokerId" ]
@@ -2148,9 +2188,17 @@
           "shape" : "__string",
           "locationName" : "engineVersion"
         },
+        "HostInstanceType" : {
+          "shape" : "__string",
+          "locationName" : "hostInstanceType"
+        },
         "Logs" : {
           "shape" : "Logs",
           "locationName" : "logs"
+        },
+        "SecurityGroups" : {
+          "shape" : "__listOf__string",
+          "locationName" : "securityGroups"
         }
       }
     },

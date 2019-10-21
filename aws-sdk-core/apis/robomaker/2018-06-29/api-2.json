@@ -1208,7 +1208,8 @@
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
         "dataSources":{"shape":"DataSources"},
         "tags":{"shape":"TagMap"},
-        "vpcConfig":{"shape":"VPCConfigResponse"}
+        "vpcConfig":{"shape":"VPCConfigResponse"},
+        "networkInterface":{"shape":"NetworkInterface"}
       }
     },
     "EnvironmentVariableKey":{
@@ -1227,7 +1228,8 @@
     "EnvironmentVariableValue":{
       "type":"string",
       "max":1024,
-      "min":1
+      "min":1,
+      "pattern":".*"
     },
     "FailureBehavior":{
       "type":"string",
@@ -1283,7 +1285,8 @@
     "Id":{
       "type":"string",
       "max":1224,
-      "min":1
+      "min":1,
+      "pattern":".*"
     },
     "IdempotentParameterMismatchException":{
       "type":"structure",
@@ -1321,7 +1324,8 @@
       "members":{
         "packageName":{"shape":"Command"},
         "launchFile":{"shape":"Command"},
-        "environmentVariables":{"shape":"EnvironmentVariableMap"}
+        "environmentVariables":{"shape":"EnvironmentVariableMap"},
+        "portForwardingConfig":{"shape":"PortForwardingConfig"}
       }
     },
     "LimitExceededException":{
@@ -1456,9 +1460,22 @@
       "min":1,
       "pattern":"[a-zA-Z0-9_\\-]*"
     },
+    "NetworkInterface":{
+      "type":"structure",
+      "members":{
+        "networkInterfaceId":{"shape":"GenericString"},
+        "privateIpAddress":{"shape":"GenericString"},
+        "publicIpAddress":{"shape":"GenericString"}
+      }
+    },
     "NonEmptyString":{
       "type":"string",
       "min":1
+    },
+    "NonSystemPort":{
+      "type":"integer",
+      "max":65535,
+      "min":1024
     },
     "OutputLocation":{
       "type":"structure",
@@ -1476,7 +1493,8 @@
     "Path":{
       "type":"string",
       "max":1024,
-      "min":1
+      "min":1,
+      "pattern":".*"
     },
     "PercentDone":{
       "type":"float",
@@ -1487,6 +1505,35 @@
       "type":"integer",
       "max":100,
       "min":1
+    },
+    "Port":{
+      "type":"integer",
+      "max":65535,
+      "min":1
+    },
+    "PortForwardingConfig":{
+      "type":"structure",
+      "members":{
+        "portMappings":{"shape":"PortMappingList"}
+      }
+    },
+    "PortMapping":{
+      "type":"structure",
+      "required":[
+        "jobPort",
+        "applicationPort"
+      ],
+      "members":{
+        "jobPort":{"shape":"Port"},
+        "applicationPort":{"shape":"NonSystemPort"},
+        "enableOnPublicIp":{"shape":"Boolean"}
+      }
+    },
+    "PortMappingList":{
+      "type":"list",
+      "member":{"shape":"PortMapping"},
+      "max":10,
+      "min":0
     },
     "ProgressDetail":{
       "type":"structure",
@@ -1652,13 +1699,17 @@
     },
     "RobotSoftwareSuiteType":{
       "type":"string",
-      "enum":["ROS"]
+      "enum":[
+        "ROS",
+        "ROS2"
+      ]
     },
     "RobotSoftwareSuiteVersionType":{
       "type":"string",
       "enum":[
         "Kinetic",
-        "Melodic"
+        "Melodic",
+        "Dashing"
       ]
     },
     "RobotStatus":{
@@ -1783,7 +1834,8 @@
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
         "dataSources":{"shape":"DataSources"},
         "tags":{"shape":"TagMap"},
-        "vpcConfig":{"shape":"VPCConfigResponse"}
+        "vpcConfig":{"shape":"VPCConfigResponse"},
+        "networkInterface":{"shape":"NetworkInterface"}
       }
     },
     "SimulationJobErrorCode":{
@@ -1867,7 +1919,7 @@
     },
     "SimulationSoftwareSuiteVersionType":{
       "type":"string",
-      "pattern":"7|9|Kinetic|Melodic"
+      "pattern":"7|9|Kinetic|Melodic|Dashing"
     },
     "SimulationTimeMillis":{"type":"long"},
     "Source":{

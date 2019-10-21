@@ -165,6 +165,8 @@ module Aws
     PinpointSMSVoice
     Polly
     Pricing
+    QLDB
+    QLDBSession
     QuickSight
     RAM
     RDS
@@ -210,6 +212,7 @@ module Aws
     WorkDocs
     WorkLink
     WorkMail
+    WorkMailMessageFlow
     WorkSpaces
     XRay
   )

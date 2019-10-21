@@ -566,6 +566,14 @@
     "models": "pricing/2017-10-15",
     "endpoint": "api.pricing"
   },
+  "QLDB": {
+    "models": "qldb/2019-01-02",
+    "endpoint": "qldb"
+  },
+  "QLDBSession": {
+    "models": "qldb-session/2019-07-11",
+    "endpoint": "session.qldb"
+  },
   "QuickSight": {
     "models": "quicksight/2018-04-01",
     "endpoint": "quicksight"
@@ -745,6 +753,10 @@
   "WorkMail": {
     "models": "workmail/2017-10-01",
     "endpoint": "workmail"
+  },
+  "WorkMailMessageFlow": {
+    "models": "workmailmessageflow/2019-05-01",
+    "endpoint": "workmailmessageflow"
   },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08",

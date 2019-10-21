@@ -1,6 +1,325 @@
 Unreleased Changes
 ------------------
 
+2.11.378 (2019-10-18)
+------------------
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+2.11.377 (2019-10-17)
+------------------
+
+* Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+2.11.376 (2019-10-16)
+------------------
+
+* Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, and documentation for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::RoboMaker - Updated the API for AWS RoboMaker.
+
+2.11.375 (2019-10-15)
+------------------
+
+* Feature - Aws::KinesisVideoArchivedMedia - Updated the API, and documentation for Amazon Kinesis Video Streams Archived Media.
+
+2.11.374 (2019-10-14)
+------------------
+
+* Feature - Aws::Personalize - Updated the API, and documentation for Amazon Personalize.
+
+* Feature - Aws::WorkSpaces - Updated the documentation for Amazon WorkSpaces.
+
+2.11.373 (2019-10-11)
+------------------
+
+* Feature - Aws::Greengrass - Updated the API for AWS Greengrass.
+
+2.11.372 (2019-10-10)
+------------------
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
+
+* Feature - Aws::IoTAnalytics - Updated the API, and documentation for AWS IoT Analytics.
+
+* Feature - Aws::Lex - Updated the API, and documentation for Amazon Lex Runtime Service.
+
+2.11.371 (2019-10-09)
+------------------
+
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+* Feature - Aws::Kafka - Updated the documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+2.11.370 (2019-10-08)
+------------------
+
+* Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
+
+* Feature - Aws::EventBridge - Updated the documentation for Amazon EventBridge.
+
+* Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
+2.11.369 (2019-10-07)
+------------------
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+* Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::PinpointEmail - Updated the API, and documentation for Amazon Pinpoint Email Service.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::Snowball - Updated the API, and documentation for Amazon Import/Export Snowball.
+
+2.11.368 (2019-10-04)
+------------------
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
+
+* Feature - Aws::SSM - Updated the documentation for Amazon Simple Systems Manager (SSM).
+
+2.11.367 (2019-10-03)
+------------------
+
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::DeviceFarm - Updated the documentation for AWS Device Farm.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+2.11.366 (2019-10-02)
+------------------
+
+* Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
+
+2.11.365 (2019-10-01)
+------------------
+
+* Feature - Aws::DocDB - Updated the API, and documentation for Amazon DocumentDB with MongoDB compatibility.
+
+2.11.364 (2019-09-30)
+------------------
+
+* Feature - Aws::MQ - Updated the API, and documentation for AmazonMQ.
+
+* Feature - Aws::RDS - Updated the API, documentation, and waiters for Amazon Relational Database Service.
+
+* Feature - Aws::WAF - Updated the API, and documentation for AWS WAF.
+
+2.11.363 (2019-09-27)
+------------------
+
+* Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+2.11.362 (2019-09-26)
+------------------
+
+* Feature - Aws::CodePipeline - Updated the documentation for AWS CodePipeline.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+2.11.361 (2019-09-25)
+------------------
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::GlobalAccelerator - Updated the API, and documentation for AWS Global Accelerator.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+2.11.360 (2019-09-24)
+------------------
+
+* Feature - Aws::ComprehendMedical - Updated the API, and documentation for AWS Comprehend Medical.
+
+* Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
+2.11.359 (2019-09-23)
+------------------
+
+* Feature - Aws::RDSDataService - Updated the API, and documentation for AWS RDS DataService.
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
+2.11.358 (2019-09-20)
+------------------
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
+
+2.11.357 (2019-09-19)
+------------------
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::MediaConnect - Updated the API, and documentation for AWS MediaConnect.
+
+2.11.356 (2019-09-18)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::RAM - Updated the API, and documentation for AWS Resource Access Manager.
+
+* Feature - Aws::WAFRegional - Updated the API, and documentation for AWS WAF Regional.
+
+2.11.355 (2019-09-17)
+------------------
+
+* Feature - Aws::Athena - Updated the API, and documentation for Amazon Athena.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::Personalize - Updated the API, and documentation for Amazon Personalize.
+
+2.11.354 (2019-09-16)
+------------------
+
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+2.11.353 (2019-09-12)
+------------------
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::WorkMailMessageFlow - Added support for a new service, Amazon WorkMail Message Flow.
+
+2.11.352 (2019-09-11)
+------------------
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::SES - Updated the documentation for Amazon Simple Email Service.
+
+* Feature - Aws::MediaConnect - Updated the API, and documentation for AWS MediaConnect.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
+2.11.351 (2019-09-10)
+------------------
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+2.11.350 (2019-09-09)
+------------------
+
+* Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
+
+* Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, documentation, and integration test for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::RoboMaker - Updated the API, and documentation for AWS RoboMaker.
+
+* Feature - Aws::QLDBSession - Added support for a new service, Amazon QLDB Session.
+
+* Feature - Aws::QLDB - Added support for a new service, Amazon QLDB.
+
+2.11.349 (2019-09-06)
+------------------
+
+* Feature - Aws::KinesisAnalytics - Updated the documentation for Amazon Kinesis Analytics.
+
+2.11.348 (2019-09-05)
+------------------
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+2.11.347 (2019-09-04)
+------------------
+
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
+2.11.346 (2019-09-03)
+------------------
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Updated the documentation for AWS Resource Groups Tagging API.
+
+2.11.345 (2019-08-30)
+------------------
+
+* Feature - Aws::ApiGatewayManagementApi - Updated the API, and documentation for AmazonApiGatewayManagementApi.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::MQ - Updated the API, and documentation for AmazonMQ.
+
+2.11.344 (2019-08-29)
+------------------
+
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+2.11.343 (2019-08-28)
+------------------
+
+* Feature - Aws::GlobalAccelerator - Updated the API, and documentation for AWS Global Accelerator.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::SQS - Updated the API, and documentation for Amazon Simple Queue Service.
+
+2.11.342 (2019-08-27)
+------------------
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
 2.11.341 (2019-08-26)
 ------------------
 

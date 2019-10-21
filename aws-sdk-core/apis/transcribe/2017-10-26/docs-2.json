@@ -98,6 +98,12 @@
       "refs": {
       }
     },
+    "KMSKeyId": {
+      "base": null,
+      "refs": {
+        "StartTranscriptionJobRequest$OutputEncryptionKMSKeyId": null
+      }
+    },
     "LanguageCode": {
       "base": null,
       "refs": {
@@ -277,7 +283,7 @@
       }
     },
     "TranscriptionJobSummary": {
-      "base": "<p>Provides a summary of information about a transcription job. .</p>",
+      "base": "<p>Provides a summary of information about a transcription job.</p>",
       "refs": {
         "TranscriptionJobSummaries$member": null
       }

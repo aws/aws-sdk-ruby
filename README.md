@@ -312,8 +312,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
 | AWS Lake Formation                                    | LakeFormation                   | 2017-03-31  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
@@ -412,6 +412,8 @@ to be backwards compatible.
 | Amazon Pinpoint Email Service                         | PinpointEmail                   | 2018-07-26  |
 | Amazon Pinpoint SMS and Voice Service                 | PinpointSMSVoice                | 2018-09-05  |
 | Amazon Polly                                          | Polly                           | 2016-06-10  |
+| Amazon QLDB                                           | QLDB                            | 2019-01-02  |
+| Amazon QLDB Session                                   | QLDBSession                     | 2019-07-11  |
 | Amazon QuickSight                                     | QuickSight                      | 2018-04-01  |
 | Amazon Redshift                                       | Redshift                        | 2012-12-01  |
 | Amazon Rekognition                                    | Rekognition                     | 2016-06-27  |
@@ -434,14 +436,15 @@ to be backwards compatible.
 | Amazon WorkDocs                                       | WorkDocs                        | 2016-05-01  |
 | Amazon WorkLink                                       | WorkLink                        | 2018-09-25  |
 | Amazon WorkMail                                       | WorkMail                        | 2017-10-01  |
+| Amazon WorkMail Message Flow                          | WorkMailMessageFlow             | 2019-05-01  |
 | Amazon WorkSpaces                                     | WorkSpaces                      | 2015-04-08  |
 | AmazonApiGatewayManagementApi                         | ApiGatewayManagementApi         | 2018-11-29  |
 | AmazonApiGatewayV2                                    | ApiGatewayV2                    | 2018-11-29  |
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 | Service Quotas                                        | ServiceQuotas                   | 2019-06-24  |
