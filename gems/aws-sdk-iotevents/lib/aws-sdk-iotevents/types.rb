@@ -76,8 +76,8 @@ module Aws::IoTEvents
     #   @return [Types::ResetTimerAction]
     #
     # @!attribute [rw] lambda
-    #   Calls a Lambda function, passing in information about the detector
-    #   model instance and the event which triggered the action.
+    #   Calls an AWS Lambda function, passing in information about the
+    #   detector model instance and the event which triggered the action.
     #   @return [Types::LambdaAction]
     #
     # @!attribute [rw] iot_events
@@ -87,12 +87,13 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] sqs
     #   Sends information about the detector model instance and the event
-    #   which triggered the action to an AWS SQS queue.
+    #   which triggered the action to an Amazon SQS queue.
     #   @return [Types::SqsAction]
     #
     # @!attribute [rw] firehose
     #   Sends information about the detector model instance and the event
-    #   which triggered the action to a Kinesis Data Firehose stream.
+    #   which triggered the action to a Kinesis Data Firehose delivery
+    #   stream.
     #   @return [Types::FirehoseAction]
     #
     class Action < Struct.new(
@@ -363,6 +364,7 @@ module Aws::IoTEvents
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         evaluation_method: "BATCH", # accepts BATCH, SERIAL
     #       }
     #
     # @!attribute [rw] detector_model_name
@@ -378,8 +380,8 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The input attribute key used to identify a device or system in order
-    #   to create a detector (an instance of the detector model) and then to
+    #   The input attribute key used to identify a device or system to
+    #   create a detector (an instance of the detector model) and then to
     #   route each input received to the appropriate detector (instance).
     #   This parameter uses a JSON-path expression to specify the
     #   attribute-value pair in the message payload of each input that is
@@ -395,13 +397,21 @@ module Aws::IoTEvents
     #   Metadata that can be used to manage the detector model.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] evaluation_method
+    #   When set to `SERIAL`, variables are updated and event conditions
+    #   evaluated in the order that the events are defined. When set to
+    #   `BATCH`, variables are updated and events performed only after all
+    #   event conditions are evaluated.
+    #   @return [String]
+    #
     class CreateDetectorModelRequest < Struct.new(
       :detector_model_name,
       :detector_model_definition,
       :detector_model_description,
       :key,
       :role_arn,
-      :tags)
+      :tags,
+      :evaluation_method)
       include Aws::Structure
     end
 
@@ -651,12 +661,19 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The input attribute key used to identify a device or system in order
-    #   to create a detector (an instance of the detector model) and then to
+    #   The input attribute key used to identify a device or system to
+    #   create a detector (an instance of the detector model) and then to
     #   route each input received to the appropriate detector (instance).
     #   This parameter uses a JSON-path expression to specify the
     #   attribute-value pair in the message payload of each input that is
     #   used to identify the device associated with the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_method
+    #   When set to `SERIAL`, variables are updated and event conditions
+    #   evaluated in the order that the events are defined. When set to
+    #   `BATCH`, variables are updated and events performed only after all
+    #   event conditions are evaluated.
     #   @return [String]
     #
     class DetectorModelConfiguration < Struct.new(
@@ -668,7 +685,8 @@ module Aws::IoTEvents
       :creation_time,
       :last_update_time,
       :status,
-      :key)
+      :key,
+      :evaluation_method)
       include Aws::Structure
     end
 
@@ -936,6 +954,13 @@ module Aws::IoTEvents
     #   The status of the detector model version.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_method
+    #   When set to `SERIAL`, variables are updated and event conditions
+    #   evaluated in the order that the events are defined. When set to
+    #   `BATCH`, variables are updated and events performed only after all
+    #   event conditions are evaluated.
+    #   @return [String]
+    #
     class DetectorModelVersionSummary < Struct.new(
       :detector_model_name,
       :detector_model_version,
@@ -943,7 +968,8 @@ module Aws::IoTEvents
       :role_arn,
       :creation_time,
       :last_update_time,
-      :status)
+      :status,
+      :evaluation_method)
       include Aws::Structure
     end
 
@@ -1019,7 +1045,7 @@ module Aws::IoTEvents
     end
 
     # Sends information about the detector model instance and the event
-    # which triggered the action to a Kinesis Data Firehose stream.
+    # which triggered the action to a Kinesis Data Firehose delivery stream.
     #
     # @note When making an API call, you may pass FirehoseAction
     #   data as a hash:
@@ -1030,13 +1056,13 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] delivery_stream_name
-    #   The name of the Kinesis Data Firehose stream where the data is
-    #   written.
+    #   The name of the Kinesis Data Firehose delivery stream where the data
+    #   is written.
     #   @return [String]
     #
     # @!attribute [rw] separator
     #   A character separator that is used to separate records written to
-    #   the Kinesis Data Firehose stream. Valid values are: '\\n'
+    #   the Kinesis Data Firehose delivery stream. Valid values are: '\\n'
     #   (newline), '\\t' (tab), '\\r\\n' (Windows newline), ','
     #   (comma).
     #   @return [String]
@@ -1222,8 +1248,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Calls a Lambda function, passing in information about the detector
-    # model instance and the event which triggered the action.
+    # Calls an AWS Lambda function, passing in information about the
+    # detector model instance and the event which triggered the action.
     #
     # @note When making an API call, you may pass LambdaAction
     #   data as a hash:
@@ -1233,7 +1259,7 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] function_arn
-    #   The ARN of the Lambda function which is executed.
+    #   The ARN of the AWS Lambda function which is executed.
     #   @return [String]
     #
     class LambdaAction < Struct.new(
@@ -1843,7 +1869,7 @@ module Aws::IoTEvents
     end
 
     # Sends information about the detector model instance and the event
-    # which triggered the action to an AWS SQS queue.
+    # which triggered the action to an Amazon SQS queue.
     #
     # @note When making an API call, you may pass SqsAction
     #   data as a hash:
@@ -1854,7 +1880,7 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] queue_url
-    #   The URL of the SQS queue where the data is written.
+    #   The URL of the Amazon SQS queue where the data is written.
     #   @return [String]
     #
     # @!attribute [rw] use_base_64
@@ -2459,6 +2485,7 @@ module Aws::IoTEvents
     #         },
     #         detector_model_description: "DetectorModelDescription",
     #         role_arn: "AmazonResourceName", # required
+    #         evaluation_method: "BATCH", # accepts BATCH, SERIAL
     #       }
     #
     # @!attribute [rw] detector_model_name
@@ -2478,11 +2505,19 @@ module Aws::IoTEvents
     #   perform its operations.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_method
+    #   When set to `SERIAL`, variables are updated and event conditions
+    #   evaluated in the order that the events are defined. When set to
+    #   `BATCH`, variables are updated and events performed only after all
+    #   event conditions are evaluated.
+    #   @return [String]
+    #
     class UpdateDetectorModelRequest < Struct.new(
       :detector_model_name,
       :detector_model_definition,
       :detector_model_description,
-      :role_arn)
+      :role_arn,
+      :evaluation_method)
       include Aws::Structure
     end
 
