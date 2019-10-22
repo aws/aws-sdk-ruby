@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoTEvents - Updated the API, and documentation for AWS IoT Events.
+
+* Feature - Aws::OpsWorksCM - Updated the API, and documentation for AWS OpsWorks CM.
+
 2.11.378 (2019-10-18)
 ------------------
 
