@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update minimum `aws-partition` gem dependency version
+
 3.71.0 (2019-10-23)
 ------------------
 
