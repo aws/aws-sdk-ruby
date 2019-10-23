@@ -254,64 +254,49 @@ module Aws::Connect
 
     # @!group API Operations
 
-    # Creates a new user account in your Amazon Connect instance.
+    # Creates a user account for the specified Amazon Connect instance.
     #
     # @option params [required, String] :username
-    #   The user name in Amazon Connect for the account to create. If you are
-    #   using SAML for identity management in your Amazon Connect, the value
-    #   for `Username` can include up to 64 characters from
-    #   \[a-zA-Z0-9\_-.\\@\]+.
+    #   The user name for the account. For instances not using SAML for
+    #   identity management, the user name can include up to 20 characters. If
+    #   you are using SAML for identity management, the user name can include
+    #   up to 64 characters from \[a-zA-Z0-9\_-.\\@\]+.
     #
     # @option params [String] :password
-    #   The password for the user account to create. This is required if you
-    #   are using Amazon Connect for identity management. If you are using
-    #   SAML for identity management and include this parameter, an
-    #   `InvalidRequestException` is returned.
+    #   The password for the user account. A password is required if you are
+    #   using Amazon Connect for identity management. Otherwise, it is an
+    #   error to include a password.
     #
     # @option params [Types::UserIdentityInfo] :identity_info
-    #   Information about the user, including email address, first name, and
-    #   last name.
+    #   The information about the identity of the user.
     #
     # @option params [required, Types::UserPhoneConfig] :phone_config
-    #   Specifies the phone settings for the user, including
-    #   `AfterContactWorkTimeLimit`, `AutoAccept`, `DeskPhoneNumber`, and
-    #   `PhoneType`.
+    #   The phone settings for the user.
     #
     # @option params [String] :directory_user_id
-    #   The unique identifier for the user account in the directory service
-    #   directory used for identity management. If Amazon Connect is unable to
-    #   access the existing directory, you can use the `DirectoryUserId` to
-    #   authenticate users. If you include the parameter, it is assumed that
-    #   Amazon Connect cannot access the directory. If the parameter is not
-    #   included, the `UserIdentityInfo` is used to authenticate users from
-    #   your existing directory.
+    #   The identifier of the user account in the directory used for identity
+    #   management. If Amazon Connect cannot access the directory, you can
+    #   specify this identifier to authenticate users. If you include the
+    #   identifier, we assume that Amazon Connect cannot access the directory.
+    #   Otherwise, the identity information is used to authenticate users from
+    #   your directory.
     #
     #   This parameter is required if you are using an existing directory for
     #   identity management in Amazon Connect when Amazon Connect cannot
     #   access your directory to authenticate users. If you are using SAML for
-    #   identity management and include this parameter, an
-    #   `InvalidRequestException` is returned.
+    #   identity management and include this parameter, an error is returned.
     #
     # @option params [required, Array<String>] :security_profile_ids
-    #   The unique identifier of the security profile to assign to the user
-    #   created.
+    #   The identifier of the security profile for the user.
     #
     # @option params [required, String] :routing_profile_id
-    #   The unique identifier for the routing profile to assign to the user
-    #   created.
+    #   The identifier of the routing profile for the user.
     #
     # @option params [String] :hierarchy_group_id
-    #   The unique identifier for the hierarchy group to assign to the user
-    #   created.
+    #   The identifier of the hierarchy group for the user.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -355,19 +340,13 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Deletes a user account from Amazon Connect.
+    # Deletes a user account from the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, String] :user_id
-    #   The unique identifier of the user to delete.
+    #   The identifier of the user.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -387,20 +366,13 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Returns a `User` object that contains information about the user
-    # account specified by the `UserId`.
+    # Describes the specified user account.
     #
     # @option params [required, String] :user_id
-    #   Unique identifier for the user account to return.
+    #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Types::DescribeUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -440,20 +412,13 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Returns a `HierarchyGroup` object that includes information about a
-    # hierarchy group in your instance.
+    # Describes the specified hierarchy group.
     #
     # @option params [required, String] :hierarchy_group_id
-    #   The identifier for the hierarchy group to return.
+    #   The identifier of the hierarchy group.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Types::DescribeUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -497,17 +462,11 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Returns a `HiearchyGroupStructure` object, which contains data about
-    # the levels in the agent hierarchy.
+    # Describes the hierarchy structure of the specified Amazon Connect
+    # instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Types::DescribeUserHierarchyStructureResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -546,15 +505,13 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Retrieves the contact attributes associated with a contact.
+    # Retrieves the contact attributes for the specified contact.
     #
     # @option params [required, String] :instance_id
-    #   The instance ID for the instance from which to retrieve contact
-    #   attributes.
+    #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, String] :initial_contact_id
-    #   The ID for the initial contact in Amazon Connect associated with the
-    #   attributes to update.
+    #   The identifier of the initial contact.
     #
     # @return [Types::GetContactAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -581,76 +538,44 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # The `GetCurrentMetricData` operation retrieves current metric data
-    # from your Amazon Connect instance.
+    # Gets the real-time metric data from the specified Amazon Connect
+    # instance.
     #
-    # If you are using an IAM account, it must have permission to the
-    # `connect:GetCurrentMetricData` action.
+    # For more information, see [Real-time Metrics Reports][1] in the
+    # *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-reports.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, Types::Filters] :filters
-    #   A `Filters` object that contains a list of queue IDs or queue ARNs, up
-    #   to 100, or list of Channels to use to filter the metrics returned in
-    #   the response. Metric data is retrieved only for the resources
-    #   associated with the queue IDs, ARNs, or Channels included in the
-    #   filter. You can include both IDs and ARNs in the same request. To
-    #   retrieve metrics for all queues, add the queue ID or ARN for each
-    #   queue in your instance. Only VOICE is supported for Channels.
-    #
-    #   To find the ARN for a queue, open the queue you want to use in the
-    #   Amazon Connect Queue editor. The ARN for the queue is displayed in the
-    #   address bar as part of the URL. For example, the queue ARN is the set
-    #   of characters at the end of the URL, after 'id=' such as
-    #   `arn:aws:connect:us-east-1:270923740243:instance/78fb859d-1b7d-44b1-8aa3-12f0835c5855/queue/1d1a4575-9618-40ab-bbeb-81e45795fe61`.
-    #   The queue ID is also included in the URL, and is the string after
-    #   'queue/'.
+    #   The queues, up to 100, or channels, to use to filter the metrics
+    #   returned. Metric data is retrieved only for the resources associated
+    #   with the queues or channels included in the filter. You can include
+    #   both queue IDs and queue ARNs in the same request. The only supported
+    #   channel is `VOICE`.
     #
     # @option params [Array<String>] :groupings
     #   The grouping applied to the metrics returned. For example, when
-    #   grouped by QUEUE, the metrics returned apply to each queue rather than
-    #   aggregated for all queues. If you group by CHANNEL, you should include
-    #   a Channels filter. The only supported channel is VOICE.
+    #   grouped by `QUEUE`, the metrics returned apply to each queue rather
+    #   than aggregated for all queues. If you group by `CHANNEL`, you should
+    #   include a Channels filter. The only supported channel is `VOICE`.
     #
-    #   If no `Grouping` is included in the request, a summary of
-    #   `CurrentMetrics` is returned.
+    #   If no `Grouping` is included in the request, a summary of metrics is
+    #   returned.
     #
     # @option params [required, Array<Types::CurrentMetric>] :current_metrics
-    #   A list of `CurrentMetric` objects for the metrics to retrieve. Each
-    #   `CurrentMetric` includes a name of a metric to retrieve and the unit
-    #   to use for it. You must list each metric to retrieve data for in the
-    #   request.
-    #
+    #   The metrics to retrieve. Specify the name and unit for each metric.
     #   The following metrics are available:
-    #
-    #   AGENTS\_AVAILABLE
-    #
-    #   : Unit: COUNT
-    #
-    #   AGENTS\_ONLINE
-    #
-    #   : Unit: COUNT
-    #
-    #   AGENTS\_ON\_CALL
-    #
-    #   : Unit: COUNT
-    #
-    #   AGENTS\_STAFFED
-    #
-    #   : Unit: COUNT
     #
     #   AGENTS\_AFTER\_CONTACT\_WORK
     #
     #   : Unit: COUNT
     #
-    #   AGENTS\_NON\_PRODUCTIVE
+    #   AGENTS\_AVAILABLE
     #
     #   : Unit: COUNT
     #
@@ -658,7 +583,27 @@ module Aws::Connect
     #
     #   : Unit: COUNT
     #
+    #   AGENTS\_NON\_PRODUCTIVE
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_ON\_CALL
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_ONLINE
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_STAFFED
+    #
+    #   : Unit: COUNT
+    #
     #   CONTACTS\_IN\_QUEUE
+    #
+    #   : Unit: COUNT
+    #
+    #   CONTACTS\_SCHEDULED
     #
     #   : Unit: COUNT
     #
@@ -666,22 +611,17 @@ module Aws::Connect
     #
     #   : Unit: SECONDS
     #
-    #   CONTACTS\_SCHEDULED
-    #
-    #   : Unit: COUNT
-    #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
     #   The token expires after 5 minutes from the time it is created.
-    #   Subsequent requests that use the [NextToken]() must use the same
-    #   request parameters as the request that generated the token.
+    #   Subsequent requests that use the token must use the same request
+    #   parameters as the request that generated the token.
     #
     # @option params [Integer] :max_results
-    #   `MaxResults` indicates the maximum number of results to return per
-    #   page in the response, between 1 and 100.
+    #   The maximimum number of results to return per page.
     #
     # @return [Types::GetCurrentMetricDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -733,13 +673,7 @@ module Aws::Connect
     # Retrieves a token for federation.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Types::GetFederationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -767,20 +701,18 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # The `GetMetricData` operation retrieves historical metrics data from
-    # your Amazon Connect instance.
+    # Gets historical metric data from the specified Amazon Connect
+    # instance.
     #
-    # If you are using an IAM account, it must have permission to the
-    # `connect:GetMetricData` action.
+    # For more information, see [Historical Metrics Reports][1] in the
+    # *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The timestamp, in UNIX Epoch time format, at which to start the
@@ -788,60 +720,77 @@ module Aws::Connect
     #   time must be specified using a multiple of 5 minutes, such as 10:05,
     #   10:10, 10:15.
     #
-    #   `StartTime` cannot be earlier than 24 hours before the time of the
-    #   request. Historical metrics are available in Amazon Connect only for
-    #   24 hours.
+    #   The start time cannot be earlier than 24 hours before the time of the
+    #   request. Historical metrics are available only for 24 hours.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The timestamp, in UNIX Epoch time format, at which to end the
     #   reporting interval for the retrieval of historical metrics data. The
     #   time must be specified using an interval of 5 minutes, such as 11:00,
-    #   11:05, 11:10, and must be later than the `StartTime` timestamp.
+    #   11:05, 11:10, and must be later than the start time timestamp.
     #
-    #   The time range between `StartTime` and `EndTime` must be less than 24
+    #   The time range between the start and end time must be less than 24
     #   hours.
     #
     # @option params [required, Types::Filters] :filters
-    #   A `Filters` object that contains a list of queue IDs or queue ARNs, up
-    #   to 100, or a list of Channels to use to filter the metrics returned in
-    #   the response. Metric data is retrieved only for the resources
-    #   associated with the IDs, ARNs, or Channels included in the filter. You
-    #   can use both IDs and ARNs together in a request. Only VOICE is
-    #   supported for Channel.
-    #
-    #   To find the ARN for a queue, open the queue you want to use in the
-    #   Amazon Connect Queue editor. The ARN for the queue is displayed in the
-    #   address bar as part of the URL. For example, the queue ARN is the set
-    #   of characters at the end of the URL, after 'id=' such as
-    #   `arn:aws:connect:us-east-1:270923740243:instance/78fb859d-1b7d-44b1-8aa3-12f0835c5855/queue/1d1a4575-9618-40ab-bbeb-81e45795fe61`.
-    #   The queue ID is also included in the URL, and is the string after
-    #   'queue/'.
+    #   The queues, up to 100, or channels, to use to filter the metrics
+    #   returned. Metric data is retrieved only for the resources associated
+    #   with the queues or channels included in the filter. You can include
+    #   both queue IDs and queue ARNs in the same request. The only supported
+    #   channel is `VOICE`.
     #
     # @option params [Array<String>] :groupings
     #   The grouping applied to the metrics returned. For example, when
-    #   results are grouped by queueId, the metrics returned are grouped by
+    #   results are grouped by queue, the metrics returned are grouped by
     #   queue. The values returned apply to the metrics for each queue rather
     #   than aggregated for all queues.
     #
-    #   The current version supports grouping by Queue
+    #   The only supported grouping is `QUEUE`.
     #
-    #   If no `Grouping` is included in the request, a summary of
-    #   `HistoricalMetrics` for all queues is returned.
+    #   If no grouping is specified, a summary of metrics for all queues is
+    #   returned.
     #
     # @option params [required, Array<Types::HistoricalMetric>] :historical_metrics
-    #   A list of `HistoricalMetric` objects that contain the metrics to
-    #   retrieve with the request.
+    #   The metrics to retrieve. Specify the name, unit, and statistic for
+    #   each metric. The following historical metrics are available:
     #
-    #   A `HistoricalMetric` object contains: `HistoricalMetricName`,
-    #   `Statistic`, `Threshold`, and `Unit`.
+    #   ABANDON\_TIME
     #
-    #   You must list each metric to retrieve data for in the request. For
-    #   each historical metric you include in the request, you must include a
-    #   `Unit` and a `Statistic`.
+    #   : Unit: SECONDS
     #
-    #   The following historical metrics are available:
+    #     Statistic: AVG
     #
-    #   CONTACTS\_QUEUED
+    #   AFTER\_CONTACT\_WORK\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistic: AVG
+    #
+    #   API\_CONTACTS\_HANDLED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CALLBACK\_CONTACTS\_HANDLED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_ABANDONED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_AGENT\_HUNG\_UP\_FIRST
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_CONSULTED
     #
     #   : Unit: COUNT
     #
@@ -851,151 +800,109 @@ module Aws::Connect
     #
     #   : Unit: COUNT
     #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_ABANDONED
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_CONSULTED
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_AGENT\_HUNG\_UP\_FIRST
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
+    #     Statistic: SUM
     #
     #   CONTACTS\_HANDLED\_INCOMING
     #
     #   : Unit: COUNT
     #
-    #     Statistics: SUM
+    #     Statistic: SUM
     #
     #   CONTACTS\_HANDLED\_OUTBOUND
     #
     #   : Unit: COUNT
     #
-    #     Statistics: SUM
+    #     Statistic: SUM
     #
     #   CONTACTS\_HOLD\_ABANDONS
     #
     #   : Unit: COUNT
     #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_TRANSFERRED\_IN
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_TRANSFERRED\_OUT
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_TRANSFERRED\_IN\_FROM\_QUEUE
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CALLBACK\_CONTACTS\_HANDLED
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CALLBACK\_CONTACTS\_HANDLED
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   API\_CONTACTS\_HANDLED
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
+    #     Statistic: SUM
     #
     #   CONTACTS\_MISSED
     #
     #   : Unit: COUNT
     #
-    #     Statistics: SUM
+    #     Statistic: SUM
     #
-    #   OCCUPANCY
+    #   CONTACTS\_QUEUED
     #
-    #   : Unit: PERCENT
+    #   : Unit: COUNT
     #
-    #     Statistics: AVG
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_IN
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_IN\_FROM\_QUEUE
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
     #
     #   HANDLE\_TIME
     #
     #   : Unit: SECONDS
     #
-    #     Statistics: AVG
-    #
-    #   AFTER\_CONTACT\_WORK\_TIME
-    #
-    #   : Unit: SECONDS
-    #
-    #     Statistics: AVG
-    #
-    #   QUEUED\_TIME
-    #
-    #   : Unit: SECONDS
-    #
-    #     Statistics: MAX
-    #
-    #   ABANDON\_TIME
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   QUEUE\_ANSWER\_TIME
-    #
-    #   : Unit: SECONDS
-    #
-    #     Statistics: AVG
+    #     Statistic: AVG
     #
     #   HOLD\_TIME
     #
     #   : Unit: SECONDS
     #
-    #     Statistics: AVG
-    #
-    #   INTERACTION\_TIME
-    #
-    #   : Unit: SECONDS
-    #
-    #     Statistics: AVG
+    #     Statistic: AVG
     #
     #   INTERACTION\_AND\_HOLD\_TIME
     #
     #   : Unit: SECONDS
     #
-    #     Statistics: AVG
+    #     Statistic: AVG
+    #
+    #   INTERACTION\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistic: AVG
+    #
+    #   OCCUPANCY
+    #
+    #   : Unit: PERCENT
+    #
+    #     Statistic: AVG
+    #
+    #   QUEUE\_ANSWER\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistic: AVG
+    #
+    #   QUEUED\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistic: MAX
     #
     #   SERVICE\_LEVEL
     #
     #   : Unit: PERCENT
     #
-    #     Statistics: AVG
+    #     Statistic: AVG
     #
     #     Threshold: Only "Less than" comparisons are supported, with the
     #     following service level thresholds: 15, 20, 25, 30, 45, 60, 90, 120,
@@ -1007,8 +914,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   Indicates the maximum number of results to return per page in the
-    #   response, between 1-100.
+    #   The maximimum number of results to return per page.
     #
     # @return [Types::GetMetricDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1065,17 +971,14 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Returns an array of `RoutingProfileSummary` objects that includes
-    # information about the routing profiles in your instance.
+    # Provides information about the contact flows for the specified Amazon
+    # Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [Array<String>] :contact_flow_types
+    #   The type of contact flow.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -1083,7 +986,200 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of routing profiles to return in the response.
+    #   The maximimum number of results to return per page.
+    #
+    # @return [Types::ListContactFlowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContactFlowsResponse#contact_flow_summary_list #contact_flow_summary_list} => Array&lt;Types::ContactFlowSummary&gt;
+    #   * {Types::ListContactFlowsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contact_flows({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_types: ["CONTACT_FLOW"], # accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_flow_summary_list #=> Array
+    #   resp.contact_flow_summary_list[0].id #=> String
+    #   resp.contact_flow_summary_list[0].arn #=> String
+    #   resp.contact_flow_summary_list[0].name #=> String
+    #   resp.contact_flow_summary_list[0].contact_flow_type #=> String, one of "CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlows AWS API Documentation
+    #
+    # @overload list_contact_flows(params = {})
+    # @param [Hash] params ({})
+    def list_contact_flows(params = {}, options = {})
+      req = build_request(:list_contact_flows, params)
+      req.send_request(options)
+    end
+
+    # Provides information about the hours of operation for the specified
+    # Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximimum number of results to return per page.
+    #
+    # @return [Types::ListHoursOfOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHoursOfOperationsResponse#hours_of_operation_summary_list #hours_of_operation_summary_list} => Array&lt;Types::HoursOfOperationSummary&gt;
+    #   * {Types::ListHoursOfOperationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_hours_of_operations({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hours_of_operation_summary_list #=> Array
+    #   resp.hours_of_operation_summary_list[0].id #=> String
+    #   resp.hours_of_operation_summary_list[0].arn #=> String
+    #   resp.hours_of_operation_summary_list[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListHoursOfOperations AWS API Documentation
+    #
+    # @overload list_hours_of_operations(params = {})
+    # @param [Hash] params ({})
+    def list_hours_of_operations(params = {}, options = {})
+      req = build_request(:list_hours_of_operations, params)
+      req.send_request(options)
+    end
+
+    # Provides information about the phone numbers for the specified Amazon
+    # Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [Array<String>] :phone_number_types
+    #   The type of phone number.
+    #
+    # @option params [Array<String>] :phone_number_country_codes
+    #   The ISO country code.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximimum number of results to return per page.
+    #
+    # @return [Types::ListPhoneNumbersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPhoneNumbersResponse#phone_number_summary_list #phone_number_summary_list} => Array&lt;Types::PhoneNumberSummary&gt;
+    #   * {Types::ListPhoneNumbersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_phone_numbers({
+    #     instance_id: "InstanceId", # required
+    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID
+    #     phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_number_summary_list #=> Array
+    #   resp.phone_number_summary_list[0].id #=> String
+    #   resp.phone_number_summary_list[0].arn #=> String
+    #   resp.phone_number_summary_list[0].phone_number #=> String
+    #   resp.phone_number_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #   resp.phone_number_summary_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbers AWS API Documentation
+    #
+    # @overload list_phone_numbers(params = {})
+    # @param [Hash] params ({})
+    def list_phone_numbers(params = {}, options = {})
+      req = build_request(:list_phone_numbers, params)
+      req.send_request(options)
+    end
+
+    # Provides information about the queues for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [Array<String>] :queue_types
+    #   The type of queue.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximimum number of results to return per page.
+    #
+    # @return [Types::ListQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQueuesResponse#queue_summary_list #queue_summary_list} => Array&lt;Types::QueueSummary&gt;
+    #   * {Types::ListQueuesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_queues({
+    #     instance_id: "InstanceId", # required
+    #     queue_types: ["STANDARD"], # accepts STANDARD, AGENT
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queue_summary_list #=> Array
+    #   resp.queue_summary_list[0].id #=> String
+    #   resp.queue_summary_list[0].arn #=> String
+    #   resp.queue_summary_list[0].name #=> String
+    #   resp.queue_summary_list[0].queue_type #=> String, one of "STANDARD", "AGENT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueues AWS API Documentation
+    #
+    # @overload list_queues(params = {})
+    # @param [Hash] params ({})
+    def list_queues(params = {}, options = {})
+      req = build_request(:list_queues, params)
+      req.send_request(options)
+    end
+
+    # Provides summary information about the routing profiles for the
+    # specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximimum number of results to return per page.
     #
     # @return [Types::ListRoutingProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1115,18 +1211,11 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Returns an array of SecurityProfileSummary objects that contain
-    # information about the security profiles in your instance, including
-    # the ARN, Id, and Name of the security profile.
+    # Provides summary information about the security profiles for the
+    # specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -1134,7 +1223,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of security profiles to return.
+    #   The maximimum number of results to return per page.
     #
     # @return [Types::ListSecurityProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1166,18 +1255,11 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Returns a `UserHierarchyGroupSummaryList`, which is an array of
-    # `HierarchyGroupSummary` objects that contain information about the
-    # hierarchy groups in your instance.
+    # Provides summary information about the hierarchy groups for the
+    # specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -1185,7 +1267,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of hierarchy groups to return.
+    #   The maximimum number of results to return per page.
     #
     # @return [Types::ListUserHierarchyGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1217,17 +1299,11 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Returns a `UserSummaryList`, which is an array of `UserSummary`
-    # objects.
+    # Provides summary information about the users for the specified Amazon
+    # Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -1235,7 +1311,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in the response.
+    #   The maximimum number of results to return per page.
     #
     # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1267,35 +1343,19 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # The `StartOutboundVoiceContact` operation initiates a contact flow to
-    # place an outbound call to a customer.
-    #
-    # If you are using an IAM account, it must have permission to the
-    # `connect:StartOutboundVoiceContact` action.
+    # Initiates a contact flow to place an outbound call to a customer.
     #
     # There is a 60 second dialing timeout for this operation. If the call
-    # is not connected after 60 seconds, the call fails.
+    # is not connected after 60 seconds, it fails.
     #
     # @option params [required, String] :destination_phone_number
-    #   The phone number of the customer in E.164 format.
+    #   The phone number of the customer, in E.164 format.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier for the contact flow to connect the outbound call to.
-    #
-    #   To find the `ContactFlowId`, open the contact flow you want to use in
-    #   the Amazon Connect contact flow editor. The ID for the contact flow is
-    #   displayed in the address bar as part of the URL. For example, the
-    #   contact flow ID is the set of characters at the end of the URL, after
-    #   'contact-flow/' such as `78ea8fd5-2659-4f2b-b528-699760ccfc1b`.
+    #   The identifier of the contact flow for the outbound call.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1307,33 +1367,24 @@ module Aws::Connect
     #   not need to pass this option.**
     #
     # @option params [String] :source_phone_number
-    #   The phone number, in E.164 format, associated with your Amazon Connect
-    #   instance to use for the outbound call.
+    #   The phone number associated with the Amazon Connect instance, in E.164
+    #   format. If you do not specify a source phone number, you must specify
+    #   a queue.
     #
     # @option params [String] :queue_id
-    #   The queue to add the call to. If you specify a queue, the phone
-    #   displayed for caller ID is the phone number specified in the queue. If
-    #   you do not specify a queue, the queue used will be the queue defined
-    #   in the contact flow.
-    #
-    #   To find the `QueueId`, open the queue you want to use in the Amazon
-    #   Connect Queue editor. The ID for the queue is displayed in the address
-    #   bar as part of the URL. For example, the queue ID is the set of
-    #   characters at the end of the URL, after 'queue/' such as
-    #   `queue/aeg40574-2d01-51c3-73d6-bf8624d2168c`.
+    #   The queue for the call. If you specify a queue, the phone displayed
+    #   for caller ID is the phone number specified in the queue. If you do
+    #   not specify a queue, the queue defined in the contact flow is used. If
+    #   you do not specify a queue, you must specify a source phone number.
     #
     # @option params [Hash<String,String>] :attributes
-    #   Specify a custom key-value pair using an attribute map. The attributes
-    #   are standard Amazon Connect attributes, and can be accessed in contact
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in contact
     #   flows just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
     #   contact. Attribute keys can include only alphanumeric, dash, and
     #   underscore characters.
-    #
-    #   For example, if you want play a greeting when the customer answers the
-    #   call, you can pass the customer name in attributes similar to the
-    #   following:
     #
     # @return [Types::StartOutboundVoiceContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1366,23 +1417,13 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Ends the contact initiated by the `StartOutboundVoiceContact`
-    # operation.
-    #
-    # If you are using an IAM account, it must have permission to the
-    # `connect:StopContact` action.
+    # Ends the specified contact.
     #
     # @option params [required, String] :contact_id
-    #   The unique identifier of the contact to end.
+    #   The ID of the contact.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1402,15 +1443,15 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # The `UpdateContactAttributes` operation lets you programmatically
-    # create new, or update existing, contact attributes associated with a
-    # contact. You can use the operation to add or update attributes for
-    # both ongoing and completed contacts. For example, you can update the
-    # customer's name or the reason the customer called while the call is
-    # active, or add notes about steps that the agent took during the call
-    # that are displayed to the next agent that takes the call. You can also
-    # use the `UpdateContactAttributes` operation to update attributes for a
-    # contact using data from your CRM application and save the data with
+    # Creates or updates the contact attributes associated with the
+    # specified contact.
+    #
+    # You can add or update attributes for both ongoing and completed
+    # contacts. For example, you can update the customer's name or the
+    # reason the customer called while the call is active, or add notes
+    # about steps that the agent took during the call that are displayed to
+    # the next agent that takes the call. You can also update attributes for
+    # a contact using data from your CRM application and save the data with
     # the contact in Amazon Connect. You could also flag calls for
     # additional analysis, such as legal review or identifying abusive
     # callers.
@@ -1418,36 +1459,26 @@ module Aws::Connect
     # Contact attributes are available in Amazon Connect for 24 months, and
     # are then deleted.
     #
-    # *Important:*
-    #
-    # You cannot use the operation to update attributes for contacts that
-    # occurred prior to the release of the API, September 12, 2018. You can
-    # update attributes only for contacts that started after the release of
-    # the API. If you attempt to update attributes for a contact that
-    # occurred prior to the release of the API, a 400 error is returned.
-    # This applies also to queued callbacks that were initiated prior to the
-    # release of the API but are still active in your instance.
+    # **Important:** You cannot use the operation to update attributes for
+    # contacts that occurred prior to the release of the API, September 12,
+    # 2018. You can update attributes only for contacts that started after
+    # the release of the API. If you attempt to update attributes for a
+    # contact that occurred prior to the release of the API, a 400 error is
+    # returned. This applies also to queued callbacks that were initiated
+    # prior to the release of the API but are still active in your instance.
     #
     # @option params [required, String] :initial_contact_id
-    #   The unique identifier of the contact for which to update attributes.
-    #   This is the identifier for the contact associated with the first
-    #   interaction with the contact center.
+    #   The identifier of the contact. This is the identifier of the contact
+    #   associated with the first interaction with the contact center.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, Hash<String,String>] :attributes
-    #   Specify a custom key-value pair using an attribute map. The attributes
-    #   are standard Amazon Connect attributes, and can be accessed in contact
-    #   flows just like any other contact attributes.
+    #   The Amazon Connect attributes. These attributes can be accessed in
+    #   contact flows just like any other contact attributes.
     #
-    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   You can have up to 32,768 UTF-8 bytes across all attributes for a
     #   contact. Attribute keys can include only alphanumeric, dash, and
     #   underscore characters.
     #
@@ -1472,22 +1503,16 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Assigns the specified hierarchy group to the user.
+    # Assigns the specified hierarchy group to the specified user.
     #
     # @option params [String] :hierarchy_group_id
-    #   The identifier for the hierarchy group to assign to the user.
+    #   The identifier of the hierarchy group.
     #
     # @option params [required, String] :user_id
-    #   The identifier of the user account to assign the hierarchy group to.
+    #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1508,24 +1533,16 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Updates the identity information for the specified user in a
-    # `UserIdentityInfo` object, including email, first name, and last name.
+    # Updates the identity information for the specified user.
     #
     # @option params [required, Types::UserIdentityInfo] :identity_info
-    #   A `UserIdentityInfo` object.
+    #   The identity information for the user.
     #
     # @option params [required, String] :user_id
-    #   The identifier for the user account to update identity information
-    #   for.
+    #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1550,25 +1567,16 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Updates the phone configuration settings in the `UserPhoneConfig`
-    # object for the specified user.
+    # Updates the phone configuration settings for the specified user.
     #
     # @option params [required, Types::UserPhoneConfig] :phone_config
-    #   A `UserPhoneConfig` object that contains settings for
-    #   `AfterContactWorkTimeLimit`, `AutoAccept`, `DeskPhoneNumber`, and
-    #   `PhoneType` to assign to the user.
+    #   Information about phone configuration settings for the user.
     #
     # @option params [required, String] :user_id
-    #   The identifier for the user account to change phone settings for.
+    #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1594,22 +1602,16 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Assigns the specified routing profile to a user.
+    # Assigns the specified routing profile to the specified user.
     #
     # @option params [required, String] :routing_profile_id
-    #   The identifier of the routing profile to assign to the user.
+    #   The identifier of the routing profile for the user.
     #
     # @option params [required, String] :user_id
-    #   The identifier for the user account to assign the routing profile to.
+    #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1630,22 +1632,16 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Updates the security profiles assigned to the user.
+    # Assigns the specified security profiles to the specified user.
     #
     # @option params [required, Array<String>] :security_profile_ids
-    #   The identifiers for the security profiles to assign to the user.
+    #   The identifiers of the security profiles for the user.
     #
     # @option params [required, String] :user_id
-    #   The identifier of the user account to assign the security profiles.
+    #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect. Select
-    #   the alias of the instance in the Instance alias column. The instance
-    #   ID is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1679,7 +1675,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

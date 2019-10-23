@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.71.0 (2019-10-23)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Feature - Support enable STS regional endpoints by `sts_regional_endpoints: 'regional'`
 
 3.70.0 (2019-10-22)
