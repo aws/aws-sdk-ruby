@@ -121,15 +121,15 @@ module Aws
         end
 
         {
-          'delete_objects': { bucket: 'b', delete: { objects: [] } },
-          'put_bucket_cors': {
+          'delete_objects' => { bucket: 'b', delete: { objects: [] } },
+          'put_bucket_cors' => {
             bucket: 'b', cors_configuration: { cors_rules: [] }
           },
-          'put_bucket_lifecycle': {
+          'put_bucket_lifecycle' => {
             bucket: 'b', lifecycle_configuration: { rules: [] }
           },
-          'put_bucket_policy': { bucket: 'b', policy: '{foo:"bar"}' },
-          'put_bucket_tagging': { bucket: 'b', tagging: { tag_set: [] } }
+          'put_bucket_policy' => { bucket: 'b', policy: '{foo:"bar"}' },
+          'put_bucket_tagging' => { bucket: 'b', tagging: { tag_set: [] } }
         }.each_pair do |operation, params|
           it "computes md5 for #{operation} when :compute_checksums is false" do
             client = Client.new(stub_responses: true, compute_checksums: false)

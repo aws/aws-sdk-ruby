@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 def suites
-  JSON.parse(File.read(File.expand_path('suite.json', __dir__).strip))
+  JSON.parse(File.read(File.expand_path('suite.json', __FILE__).strip))
 end
 
 module Aws
