@@ -3,6 +3,13 @@ Unreleased Changes
 
 * Feature - Aws::Core - Support enable STS regional endpoints by `sts_regional_endpoints: 'regional'`
 
+2.11.379 (2019-10-22)
+------------------
+
+* Feature - Aws::IoTEvents - Updated the API, and documentation for AWS IoT Events.
+
+* Feature - Aws::OpsWorksCM - Updated the API, and documentation for AWS OpsWorks CM.
+
 2.11.378 (2019-10-18)
 ------------------
 
