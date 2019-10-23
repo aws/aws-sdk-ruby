@@ -227,8 +227,10 @@ module Aws
 
           expect do
             object.upload_stream do |write_stream|
-              write_stream << seventeen_mb
+              begin
+                write_stream << seventeen_mb
               rescue Errno::EPIPE
+              end
             end
           end.to raise_error('multipart upload failed: part 3 failed')
         end
@@ -396,8 +398,10 @@ module Aws
 
             expect do
               object.upload_stream(tempfile: true) do |write_stream|
-                write_stream << seventeen_mb
+                begin
+                  write_stream << seventeen_mb
                 rescue Errno::EPIPE
+                end
               end
             end.to raise_error('multipart upload failed: part 3 failed')
           end
