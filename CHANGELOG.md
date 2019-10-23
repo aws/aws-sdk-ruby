@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
+
+* Feature - Aws::Polly - Updated the API for Amazon Polly.
+
+* Feature - Aws::STS - Updated the documentation for AWS Security Token Service.
+
 * Feature - Aws::Core - Support enable STS regional endpoints by `sts_regional_endpoints: 'regional'`
 
 2.11.379 (2019-10-22)
