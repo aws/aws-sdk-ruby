@@ -7,30 +7,29 @@ module Aws
       let(:client) { S3::Client.new(stub_responses: true) }
 
       describe '#upload_stream' do
-
-        let(:object) {
+        let(:object) do
           S3::Object.new(
             bucket_name: 'bucket',
             key: 'key',
             client: client
           )
-        }
+        end
 
         let(:zero_mb) { '' }
 
         let(:one_mb) { '.' * 1024 * 1024 }
 
-        let(:ten_mb) {
+        let(:ten_mb) do
           one_mb * 10
-        }
+        end
 
-        let(:seventeen_mb) {
+        let(:seventeen_mb) do
           one_mb * 17
-        }
+        end
 
         it 'can upload empty stream' do
-          client.stub_responses(:create_multipart_upload, upload_id:'id')
-          client.stub_responses(:upload_part, etag:'etag')
+          client.stub_responses(:create_multipart_upload, upload_id: 'id')
+          client.stub_responses(:upload_part, etag: 'etag')
           expect(client).to receive(:complete_multipart_upload).with(
             bucket: 'bucket',
             key: 'key',
@@ -47,8 +46,8 @@ module Aws
         end
 
         it 'uses multipart APIs' do
-          client.stub_responses(:create_multipart_upload, upload_id:'id')
-          client.stub_responses(:upload_part, etag:'etag')
+          client.stub_responses(:create_multipart_upload, upload_id: 'id')
+          client.stub_responses(:upload_part, etag: 'etag')
           expect(client).to receive(:complete_multipart_upload).with(
             bucket: 'bucket',
             key: 'key',
@@ -58,7 +57,7 @@ module Aws
                 { etag: 'etag', part_number: 1 },
                 { etag: 'etag', part_number: 2 },
                 { etag: 'etag', part_number: 3 },
-                { etag: 'etag', part_number: 4 },
+                { etag: 'etag', part_number: 4 }
               ]
             }
           ).once
@@ -68,35 +67,35 @@ module Aws
         end
 
         it 'uploads the correct parts' do
-          client.stub_responses(:create_multipart_upload, upload_id:'id')
+          client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 1,
+            part_number: 1
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 2,
+            part_number: 2
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 3,
+            part_number: 3
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 4,
+            part_number: 4
           ).once.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream do |write_stream|
             write_stream << seventeen_mb
@@ -104,153 +103,166 @@ module Aws
         end
 
         it 'uploads the correct parts when input is chunked' do
-          client.stub_responses(:create_multipart_upload, upload_id:'id')
+          client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 1,
+            part_number: 1
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 2,
+            part_number: 2
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 3,
+            part_number: 3
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 4,
+            part_number: 4
           ).once.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream do |write_stream|
             17.times { write_stream << one_mb }
           end
         end
 
-        it 'uploads the correct parts when input is chunked with custom part_size' do
-          client.stub_responses(:create_multipart_upload, upload_id:'id')
+        it 'uploads correct parts when chunked with custom part_size' do
+          client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 1,
+            part_number: 1
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 2,
+            part_number: 2
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
-            part_number: 3,
+            part_number: 3
           ).once.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream(part_size: 7 * 1024 * 1024) do |write_stream|
             17.times { write_stream << one_mb }
           end
         end
 
-        it 'passes stringios with correct contents to upload_part with custom part_size' do
-          client.stub_responses(:create_multipart_upload, upload_id:'id')
+        it 'passes stringios with correct contents with custom part_size' do
+          client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
           result = []
           allow(client).to receive(:upload_part) do |part|
             result << [
               part[:part_number],
-              part[:body].read.size,
+              part[:body].read.size
             ]
           end.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream(part_size: 7 * 1024 * 1024) do |write_stream|
             17.times { write_stream << one_mb }
           end
-          expect(result.sort_by(&:first)).to eq([
-            [1, 7 * 1024 * 1024],
-            [2, 7 * 1024 * 1024],
-            [3, 3 * 1024 * 1024],
-          ])
+          expect(result.sort_by(&:first)).to eq(
+            [
+              [1, 7 * 1024 * 1024],
+              [2, 7 * 1024 * 1024],
+              [3, 3 * 1024 * 1024]
+            ]
+          )
         end
 
         it 'passes stringios with correct contents to upload_part' do
-          client.stub_responses(:create_multipart_upload, upload_id:'id')
+          client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
           result = []
           allow(client).to receive(:upload_part) do |part|
             result << [
               part[:part_number],
-              part[:body].read.size,
+              part[:body].read.size
             ]
           end.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream do |write_stream|
             17.times { write_stream << one_mb }
           end
-          expect(result.sort_by(&:first)).to eq([
-            [1, 5 * 1024 * 1024],
-            [2, 5 * 1024 * 1024],
-            [3, 5 * 1024 * 1024],
-            [4, 2 * 1024 * 1024],
-          ])
+          expect(result.sort_by(&:first)).to eq(
+            [
+              [1, 5 * 1024 * 1024],
+              [2, 5 * 1024 * 1024],
+              [3, 5 * 1024 * 1024],
+              [4, 2 * 1024 * 1024]
+            ]
+          )
         end
 
         it 'automatically deletes failed multipart upload on error' do
-          client.stub_responses(:upload_part, [
-            { etag: 'etag-1' },
-            { etag: 'etag-2' },
-            RuntimeError.new('part 3 failed'),
-            { etag: 'etag-4' },
-          ])
+          client.stub_responses(
+            :upload_part, [
+              { etag: 'etag-1' },
+              { etag: 'etag-2' },
+              RuntimeError.new('part 3 failed'),
+              { etag: 'etag-4' }
+            ]
+          )
 
-          expect(client).to receive(:abort_multipart_upload).
-            with(bucket: 'bucket', key: 'key', upload_id: 'MultipartUploadId')
+          expect(client).to receive(:abort_multipart_upload)
+            .with(bucket: 'bucket', key: 'key', upload_id: 'MultipartUploadId')
 
-          expect {
+          expect do
             object.upload_stream do |write_stream|
-              begin
-                write_stream << seventeen_mb
+              write_stream << seventeen_mb
               rescue Errno::EPIPE
-              end
             end
-          }.to raise_error('multipart upload failed: part 3 failed')
+          end.to raise_error('multipart upload failed: part 3 failed')
         end
 
         it 'reports when it is unable to abort a failed multipart upload' do
-          client.stub_responses(:upload_part, [
-            { etag: 'etag-1' },
-            { etag: 'etag-2' },
-            { etag: 'etag-3' },
-            RuntimeError.new('part failed'),
-          ])
-          client.stub_responses(:abort_multipart_upload, [
-            RuntimeError.new('network-error'),
-          ])
-          expect {
+          client.stub_responses(
+            :upload_part,
+            [
+              { etag: 'etag-1' },
+              { etag: 'etag-2' },
+              { etag: 'etag-3' },
+              RuntimeError.new('part failed')
+            ]
+          )
+          client.stub_responses(
+            :abort_multipart_upload,
+            [
+              RuntimeError.new('network-error')
+            ]
+          )
+          expect do
             object.upload_stream do |write_stream|
               write_stream << seventeen_mb
             end
-          }.to raise_error(S3::MultipartUploadError, 'failed to abort multipart upload: network-error')
+          end.to raise_error(
+            S3::MultipartUploadError,
+            'failed to abort multipart upload: network-error'
+          )
         end
 
         context 'with tempfile option' do
           it 'uses multipart APIs' do
-            client.stub_responses(:create_multipart_upload, upload_id:'id')
-            client.stub_responses(:upload_part, etag:'etag')
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
+            client.stub_responses(:upload_part, etag: 'etag')
             expect(client).to receive(:complete_multipart_upload).with(
               bucket: 'bucket',
               key: 'key',
@@ -260,45 +272,48 @@ module Aws
                   { etag: 'etag', part_number: 1 },
                   { etag: 'etag', part_number: 2 },
                   { etag: 'etag', part_number: 3 },
-                  { etag: 'etag', part_number: 4 },
+                  { etag: 'etag', part_number: 4 }
                 ]
               }
             ).once
-            object.upload_stream(content_type: 'text/plain', tempfile: true) do |write_stream|
+            object.upload_stream(
+              content_type: 'text/plain',
+              tempfile: true
+            ) do |write_stream|
               write_stream << seventeen_mb
             end
           end
 
           it 'uploads the correct parts' do
-            client.stub_responses(:create_multipart_upload, upload_id:'id')
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
             expect(client).to receive(:upload_part).with(
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
-              part_number: 1,
+              part_number: 1
             ).once.and_return(double(:upload_part, etag: 'etag'))
             expect(client).to receive(:upload_part).with(
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
-              part_number: 2,
+              part_number: 2
             ).once.and_return(double(:upload_part, etag: 'etag'))
             expect(client).to receive(:upload_part).with(
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
-              part_number: 3,
+              part_number: 3
             ).once.and_return(double(:upload_part, etag: 'etag'))
             expect(client).to receive(:upload_part).with(
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
-              part_number: 4,
+              part_number: 4
             ).once.and_return(double(:upload_part, etag: 'etag'))
             object.upload_stream(tempfile: true) do |write_stream|
               write_stream << seventeen_mb
@@ -306,35 +321,35 @@ module Aws
           end
 
           it 'uploads the correct parts when input is chunked' do
-            client.stub_responses(:create_multipart_upload, upload_id:'id')
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
             expect(client).to receive(:upload_part).with(
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
-              part_number: 1,
+              part_number: 1
             ).once.and_return(double(:upload_part, etag: 'etag'))
             expect(client).to receive(:upload_part).with(
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
-              part_number: 2,
+              part_number: 2
             ).once.and_return(double(:upload_part, etag: 'etag'))
             expect(client).to receive(:upload_part).with(
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
-              part_number: 3,
+              part_number: 3
             ).once.and_return(double(:upload_part, etag: 'etag'))
             expect(client).to receive(:upload_part).with(
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
-              part_number: 4,
+              part_number: 4
             ).once.and_return(double(:upload_part, etag: 'etag'))
             object.upload_stream(tempfile: true) do |write_stream|
               17.times { write_stream << one_mb }
@@ -342,62 +357,73 @@ module Aws
           end
 
           it 'passes tempfiles with correct contents to upload_part' do
-            client.stub_responses(:create_multipart_upload, upload_id:'id')
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
             result = []
             allow(client).to receive(:upload_part) do |part|
               result << [
                 part[:part_number],
-                part[:body].read.size,
+                part[:body].read.size
               ]
             end.and_return(double(:upload_part, etag: 'etag'))
             object.upload_stream(tempfile: true) do |write_stream|
               17.times { write_stream << one_mb }
             end
-            expect(result.sort_by(&:first)).to eq([
-              [1, 5 * 1024 * 1024],
-              [2, 5 * 1024 * 1024],
-              [3, 5 * 1024 * 1024],
-              [4, 2 * 1024 * 1024],
-            ])
+            expect(result.sort_by(&:first)).to eq(
+              [
+                [1, 5 * 1024 * 1024],
+                [2, 5 * 1024 * 1024],
+                [3, 5 * 1024 * 1024],
+                [4, 2 * 1024 * 1024]
+              ]
+            )
           end
 
           it 'automatically deletes failed multipart upload on error' do
-            client.stub_responses(:upload_part, [
-              { etag: 'etag-1' },
-              { etag: 'etag-2' },
-              RuntimeError.new('part 3 failed'),
-              { etag: 'etag-4' },
-            ])
+            client.stub_responses(
+              :upload_part,
+              [
+                { etag: 'etag-1' },
+                { etag: 'etag-2' },
+                RuntimeError.new('part 3 failed'),
+                { etag: 'etag-4' }
+              ]
+            )
 
-            expect(client).to receive(:abort_multipart_upload).
-              with(bucket: 'bucket', key: 'key', upload_id: 'MultipartUploadId')
+            expect(client).to receive(:abort_multipart_upload).with(
+              bucket: 'bucket', key: 'key', upload_id: 'MultipartUploadId'
+            )
 
-            expect {
+            expect do
               object.upload_stream(tempfile: true) do |write_stream|
-                begin
-                  write_stream << seventeen_mb
+                write_stream << seventeen_mb
                 rescue Errno::EPIPE
-                end
               end
-            }.to raise_error('multipart upload failed: part 3 failed')
+            end.to raise_error('multipart upload failed: part 3 failed')
           end
 
           it 'reports when it is unable to abort a failed multipart upload' do
-            client.stub_responses(:upload_part, [
-              { etag: 'etag-1' },
-              { etag: 'etag-2' },
-              { etag: 'etag-3' },
-              RuntimeError.new('part failed'),
-            ])
-            client.stub_responses(:abort_multipart_upload, [
-              RuntimeError.new('network-error'),
-            ])
-            expect {
+            client.stub_responses(
+              :upload_part,
+              [
+                { etag: 'etag-1' },
+                { etag: 'etag-2' },
+                { etag: 'etag-3' },
+                RuntimeError.new('part failed')
+              ]
+            )
+            client.stub_responses(
+              :abort_multipart_upload,
+              [RuntimeError.new('network-error')]
+            )
+            expect do
               object.upload_stream(tempfile: true) do |write_stream|
                 write_stream << seventeen_mb
               end
-            }.to raise_error(S3::MultipartUploadError, 'failed to abort multipart upload: network-error')
+            end.to raise_error(
+              S3::MultipartUploadError,
+              'failed to abort multipart upload: network-error'
+            )
           end
         end
       end

@@ -4,12 +4,13 @@ module Aws
   module S3
     describe Object do
       describe '#public_url' do
-
-        let(:opts) {{
-          region: 'us-east-1',
-          access_key_id: 'akid',
-          secret_access_key: 'secret'
-        }}
+        let(:opts) do
+          {
+            region: 'us-east-1',
+            access_key_id: 'akid',
+            secret_access_key: 'secret'
+          }
+        end
 
         let(:s3) { S3::Resource.new(opts) }
 
@@ -26,23 +27,29 @@ module Aws
         end
 
         it 'preserves the path portion of custom endpoints' do
-          s3 = S3::Resource.new(opts.merge(endpoint: 'http://localhost/prefix/'))
+          s3 = S3::Resource.new(
+            opts.merge(endpoint: 'http://localhost/prefix/')
+          )
           url = s3.bucket('bucket').object('key').public_url
           expect(url).to eq('http://bucket.localhost/prefix/key')
         end
 
         it 'allows the user to force path-style addressing' do
-          s3 = S3::Resource.new(opts.merge(
-            endpoint: 'http://localhost/prefix',
-            force_path_style: true
-          ))
+          s3 = S3::Resource.new(
+            opts.merge(
+              endpoint: 'http://localhost/prefix',
+              force_path_style: true
+            )
+          )
           url = s3.bucket('bucket').object('key').public_url
           expect(url).to eq('http://localhost/prefix/bucket/key')
         end
 
         it 'url-encodes the path portions of the object key, preserving /' do
           url = s3.bucket('bucket').object('/k&y/w&th/p&th').public_url
-          expect(url).to eq('https://bucket.s3.amazonaws.com//k%26y/w%26th/p%26th')
+          expect(url).to eq(
+            'https://bucket.s3.amazonaws.com//k%26y/w%26th/p%26th'
+          )
         end
 
         it 'url-encodes the bucket name' do
@@ -64,7 +71,6 @@ module Aws
           url = s3.bucket('bucket.name').object('key').public_url
           expect(url).to eq('https://s3.amazonaws.com/bucket.name/key')
         end
-
       end
     end
   end
