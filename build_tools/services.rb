@@ -8,7 +8,7 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.61.1"
+    MINIMUM_CORE_VERSION = "3.71.0"
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
     # @option options [String] :manifest_path (MANIFEST_PATH)
@@ -109,7 +109,9 @@ module BuildTools
       end
 
       gems_dir = File.expand_path('../../gems', __FILE__)
-      (["#{gems_dir}/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"] + parts).join('/') + '.rb'
+      prefix = gem == 'sts' ? ["#{gems_dir}/aws-sdk-core/lib/aws-sdk-#{gem}"] :
+        ["#{gems_dir}/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"]
+      (prefix + parts).join('/') + '.rb'
     end
 
     def gem_version(gem_name)

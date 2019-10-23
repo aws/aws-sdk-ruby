@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support enable STS regional endpoints by `sts_regional_endpoints: 'regional'`
+
 3.70.0 (2019-10-22)
 ------------------
 

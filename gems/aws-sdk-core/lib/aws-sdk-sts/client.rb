@@ -26,6 +26,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
+require 'aws-sdk-sts/plugins/sts_regional_endpoints.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:sts)
 
@@ -59,6 +60,7 @@ module Aws::STS
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
+    add_plugin(Aws::STS::Plugins::STSRegionalEndpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -191,6 +193,11 @@ module Aws::STS
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
+    #
+    #   @option options [String] :sts_regional_endpoints ("legacy")
+    #     Passing in 'regional' to enable regional endpoint for STS for all supported
+    #     regions (except 'aws-global'), defaults to 'legacy' mode, using global endpoint
+    #     for legacy regions.
     #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
