@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.380 (2019-10-23)
+------------------
+
 * Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
 
 * Feature - Aws::Polly - Updated the API for Amazon Polly.
