@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Core - Support enable STS regional endpoints by `sts_regional_endpoints: 'regional'`
+
 2.11.379 (2019-10-22)
 ------------------
 

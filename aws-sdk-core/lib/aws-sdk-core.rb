@@ -327,6 +327,7 @@ module Aws
     autoload :S3RequestSigner, 'aws-sdk-core/plugins/s3_request_signer'
     autoload :S3SseCpk, 'aws-sdk-core/plugins/s3_sse_cpk'
     autoload :S3UrlEncodedKeys, 'aws-sdk-core/plugins/s3_url_encoded_keys'
+    autoload :STSRegionalEndpoints, 'aws-sdk-core/plugins/sts_regional_endpoints'
     autoload :SQSQueueUrls, 'aws-sdk-core/plugins/sqs_queue_urls'
     autoload :SQSMd5s, 'aws-sdk-core/plugins/sqs_md5s'
     autoload :StubResponses, 'aws-sdk-core/plugins/stub_responses'

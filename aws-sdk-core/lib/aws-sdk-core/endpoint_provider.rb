@@ -2,12 +2,34 @@ module Aws
   # @api private
   class EndpointProvider
 
+    # when sts_regional_endpoint set to `legacy`
+    # endpoint pattern stays global for
+    # following regions
+    STS_LEGACY_REGIONS = %w(
+      ap-northeast-1
+      ap-south-1
+      ap-southeast-1
+      ap-southeast-2
+      aws-global
+      ca-central-1
+      eu-central-1
+      eu-north-1
+      eu-west-1
+      eu-west-2
+      eu-west-3
+      sa-east-1
+      us-east-1
+      us-east-2
+      us-west-1
+      us-west-2
+    )
+
     def initialize(rules)
       @rules = rules
     end
 
-    def resolve(region, service)
-      "https://" + endpoint_for(region, service)
+    def resolve(region, service, sts_regional_endpoints = nil)
+      "https://" + endpoint_for(region, service, sts_regional_endpoints)
     end
 
     def signing_region(region, service)
@@ -27,7 +49,7 @@ module Aws
 
     private
 
-    def endpoint_for(region, service)
+    def endpoint_for(region, service, sts_regional_endpoints)
       partition = get_partition(region)
       endpoint = default_endpoint(partition, service, region)
       service_cfg = partition.fetch("services", {}).fetch(service, {})
@@ -35,8 +57,13 @@ module Aws
       # Check for service-level default endpoint.
       endpoint = service_cfg.fetch("defaults", {}).fetch("hostname", endpoint)
 
+      # Check for sts legacy behavior
+      sts_legacy = service == 'sts' &&
+        sts_regional_endpoints == 'legacy' &&
+        STS_LEGACY_REGIONS.include?(region)
+
       # Check for global endpoint.
-      if service_cfg["isRegionalized"] == false
+      if sts_legacy || service_cfg["isRegionalized"] == false
         region = service_cfg.fetch("partitionEndpoint", region)
       end
 
@@ -81,8 +108,8 @@ module Aws
 
     class << self
 
-      def resolve(region, service)
-        default_provider.resolve(region, service)
+      def resolve(region, service, sts_regional_endpoints = nil)
+        default_provider.resolve(region, service, sts_regional_endpoints)
       end
 
       def signing_region(region, service)

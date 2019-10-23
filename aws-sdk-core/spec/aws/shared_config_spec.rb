@@ -110,6 +110,26 @@ module Aws
         expect(config.endpoint_discovery).to eq("false")
       end
 
+      context 'sts_regional_endpoints selection' do
+
+        it 'can resolve sts_regional_endpoints from config file' do
+          config = SharedConfig.new(
+            config_path: mock_config_file,
+            config_enabled: true,
+            profile_name: "sts_regional"
+          )
+          expect(config.sts_regional_endpoints).to eq('regional')
+
+          config = SharedConfig.new(
+            config_path: mock_config_file,
+            config_enabled: true,
+            profile_name: "sts_legacy"
+          )
+          expect(config.sts_regional_endpoints).to eq('legacy')
+        end
+
+      end
+
     end
   end
 end
