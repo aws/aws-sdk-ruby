@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.files         += Dir['lib/**/*.rb']
 
   spec.add_dependency('jmespath', '~> 1.0')
-  spec.add_dependency('aws-partitions', '~> 1.0')
+  spec.add_dependency('aws-partitions', '~> 1', '>= 1.228.0') # necessary for STS regional
   spec.add_dependency('aws-sigv4', '~> 1.1') # necessary for making Aws::STS API calls
   spec.add_dependency('aws-eventstream', '~> 1.0', '>= 1.0.2') # necessary for binary eventstream
 
