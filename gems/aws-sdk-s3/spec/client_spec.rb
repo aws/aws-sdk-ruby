@@ -322,7 +322,7 @@ module Aws
           resp = s3.create_bucket(bucket: 'aws-sdk')
           expect(
             resp.context.http_request.body_contents.strip
-          ).to eq(<<~XML.strip)
+          ).to eq(<<-XML.strip)
             <CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
               <LocationConstraint>us-west-2</LocationConstraint>
             </CreateBucketConfiguration>
@@ -343,7 +343,7 @@ module Aws
           )
           expect(
             resp.context.http_request.body_contents.strip
-          ).to eq(<<~XML.strip)
+          ).to eq(<<-XML.strip)
             <CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
               <LocationConstraint>EU</LocationConstraint>
             </CreateBucketConfiguration>
@@ -358,7 +358,7 @@ module Aws
             context.http_response.signal_done(
               status_code: 409,
               headers: {},
-              body: <<~XML.strip
+              body: <<-XML.strip
                 <?xml version="1.0" encoding="UTF-8"?>
                 <Error>
                   <Code>BucketNotEmpty</Code>
@@ -387,7 +387,7 @@ module Aws
             context.http_response.signal_done(
               status_code: 200,
               headers: {},
-              body: <<~XML.strip
+              body: <<-XML.strip
                 <?xml version="1.0" encoding="UTF-8"?>
                 <LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/">EU</LocationConstraint>
               XML
@@ -404,7 +404,7 @@ module Aws
             context.http_response.signal_done(
               status_code: 200,
               headers: {},
-              body: <<~XML.strip
+              body: <<-XML.strip
                 <?xml version="1.0" encoding="UTF-8"?>
                 <LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/"/>
               XML
@@ -585,7 +585,7 @@ module Aws
               ]
             }
           )
-          expect(resp.context.http_request.body_contents).to eq(<<~XML)
+          expect(resp.context.http_request.body_contents).to eq(<<-XML)
             <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
               <AccessControlList>
                 <Grant>
@@ -621,7 +621,7 @@ module Aws
             context.http_response.signal_done(
               status_code: 200,
               headers: {},
-              body: <<~XML)
+              body: <<-XML)
                 <?xml version="1.0" encoding="UTF-8"?>
                 <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
                   <Contents>
@@ -719,7 +719,7 @@ module Aws
             .remove(Seahorse::Client::Plugins::RaiseResponseErrors::Handler)
           client.handle(step: :send) do |context|
             context.http_response.signal_headers(200, {})
-            context.http_response.signal_data(<<~XML.strip)
+            context.http_response.signal_data(<<-XML.strip)
               <?xml version="1.0" encoding="UTF-8"?>
               <Error>
                 <Code>InternalError</Code>
