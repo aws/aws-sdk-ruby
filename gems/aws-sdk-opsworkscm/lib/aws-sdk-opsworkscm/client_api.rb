@@ -28,6 +28,9 @@ module Aws::OpsWorksCM
     CreateBackupResponse = Shapes::StructureShape.new(name: 'CreateBackupResponse')
     CreateServerRequest = Shapes::StructureShape.new(name: 'CreateServerRequest')
     CreateServerResponse = Shapes::StructureShape.new(name: 'CreateServerResponse')
+    CustomCertificate = Shapes::StringShape.new(name: 'CustomCertificate')
+    CustomDomain = Shapes::StringShape.new(name: 'CustomDomain')
+    CustomPrivateKey = Shapes::StringShape.new(name: 'CustomPrivateKey')
     DeleteBackupRequest = Shapes::StructureShape.new(name: 'DeleteBackupRequest')
     DeleteBackupResponse = Shapes::StructureShape.new(name: 'DeleteBackupResponse')
     DeleteServerRequest = Shapes::StructureShape.new(name: 'DeleteServerRequest')
@@ -136,6 +139,9 @@ module Aws::OpsWorksCM
     CreateBackupResponse.struct_class = Types::CreateBackupResponse
 
     CreateServerRequest.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "AssociatePublicIpAddress"))
+    CreateServerRequest.add_member(:custom_domain, Shapes::ShapeRef.new(shape: CustomDomain, location_name: "CustomDomain"))
+    CreateServerRequest.add_member(:custom_certificate, Shapes::ShapeRef.new(shape: CustomCertificate, location_name: "CustomCertificate"))
+    CreateServerRequest.add_member(:custom_private_key, Shapes::ShapeRef.new(shape: CustomPrivateKey, location_name: "CustomPrivateKey"))
     CreateServerRequest.add_member(:disable_automated_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableAutomatedBackup"))
     CreateServerRequest.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     CreateServerRequest.add_member(:engine_model, Shapes::ShapeRef.new(shape: String, location_name: "EngineModel"))
@@ -259,6 +265,7 @@ module Aws::OpsWorksCM
     Server.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     Server.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     Server.add_member(:cloud_formation_stack_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudFormationStackArn"))
+    Server.add_member(:custom_domain, Shapes::ShapeRef.new(shape: CustomDomain, location_name: "CustomDomain"))
     Server.add_member(:disable_automated_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableAutomatedBackup"))
     Server.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
     Server.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))

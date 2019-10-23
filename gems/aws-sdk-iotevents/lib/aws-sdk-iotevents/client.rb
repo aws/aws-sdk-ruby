@@ -266,12 +266,12 @@ module Aws::IoTEvents
     #   A brief description of the detector model.
     #
     # @option params [String] :key
-    #   The input attribute key used to identify a device or system in order
-    #   to create a detector (an instance of the detector model) and then to
-    #   route each input received to the appropriate detector (instance). This
-    #   parameter uses a JSON-path expression to specify the attribute-value
-    #   pair in the message payload of each input that is used to identify the
-    #   device associated with the input.
+    #   The input attribute key used to identify a device or system to create
+    #   a detector (an instance of the detector model) and then to route each
+    #   input received to the appropriate detector (instance). This parameter
+    #   uses a JSON-path expression to specify the attribute-value pair in the
+    #   message payload of each input that is used to identify the device
+    #   associated with the input.
     #
     # @option params [required, String] :role_arn
     #   The ARN of the role that grants permission to AWS IoT Events to
@@ -279,6 +279,12 @@ module Aws::IoTEvents
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata that can be used to manage the detector model.
+    #
+    # @option params [String] :evaluation_method
+    #   When set to `SERIAL`, variables are updated and event conditions
+    #   evaluated in the order that the events are defined. When set to
+    #   `BATCH`, variables are updated and events performed only after all
+    #   event conditions are evaluated.
     #
     # @return [Types::CreateDetectorModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -488,6 +494,7 @@ module Aws::IoTEvents
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     evaluation_method: "BATCH", # accepts BATCH, SERIAL
     #   })
     #
     # @example Response structure
@@ -501,6 +508,7 @@ module Aws::IoTEvents
     #   resp.detector_model_configuration.last_update_time #=> Time
     #   resp.detector_model_configuration.status #=> String, one of "ACTIVE", "ACTIVATING", "INACTIVE", "DEPRECATED", "DRAFT", "PAUSED", "FAILED"
     #   resp.detector_model_configuration.key #=> String
+    #   resp.detector_model_configuration.evaluation_method #=> String, one of "BATCH", "SERIAL"
     #
     # @overload create_detector_model(params = {})
     # @param [Hash] params ({})
@@ -711,6 +719,7 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_configuration.last_update_time #=> Time
     #   resp.detector_model.detector_model_configuration.status #=> String, one of "ACTIVE", "ACTIVATING", "INACTIVE", "DEPRECATED", "DRAFT", "PAUSED", "FAILED"
     #   resp.detector_model.detector_model_configuration.key #=> String
+    #   resp.detector_model.detector_model_configuration.evaluation_method #=> String, one of "BATCH", "SERIAL"
     #
     # @overload describe_detector_model(params = {})
     # @param [Hash] params ({})
@@ -809,6 +818,7 @@ module Aws::IoTEvents
     #   resp.detector_model_version_summaries[0].creation_time #=> Time
     #   resp.detector_model_version_summaries[0].last_update_time #=> Time
     #   resp.detector_model_version_summaries[0].status #=> String, one of "ACTIVE", "ACTIVATING", "INACTIVE", "DEPRECATED", "DRAFT", "PAUSED", "FAILED"
+    #   resp.detector_model_version_summaries[0].evaluation_method #=> String, one of "BATCH", "SERIAL"
     #   resp.next_token #=> String
     #
     # @overload list_detector_model_versions(params = {})
@@ -1026,6 +1036,12 @@ module Aws::IoTEvents
     #   The ARN of the role that grants permission to AWS IoT Events to
     #   perform its operations.
     #
+    # @option params [String] :evaluation_method
+    #   When set to `SERIAL`, variables are updated and event conditions
+    #   evaluated in the order that the events are defined. When set to
+    #   `BATCH`, variables are updated and events performed only after all
+    #   event conditions are evaluated.
+    #
     # @return [Types::UpdateDetectorModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDetectorModelResponse#detector_model_configuration #detector_model_configuration} => Types::DetectorModelConfiguration
@@ -1227,6 +1243,7 @@ module Aws::IoTEvents
     #     },
     #     detector_model_description: "DetectorModelDescription",
     #     role_arn: "AmazonResourceName", # required
+    #     evaluation_method: "BATCH", # accepts BATCH, SERIAL
     #   })
     #
     # @example Response structure
@@ -1240,6 +1257,7 @@ module Aws::IoTEvents
     #   resp.detector_model_configuration.last_update_time #=> Time
     #   resp.detector_model_configuration.status #=> String, one of "ACTIVE", "ACTIVATING", "INACTIVE", "DEPRECATED", "DRAFT", "PAUSED", "FAILED"
     #   resp.detector_model_configuration.key #=> String
+    #   resp.detector_model_configuration.evaluation_method #=> String, one of "BATCH", "SERIAL"
     #
     # @overload update_detector_model(params = {})
     # @param [Hash] params ({})
@@ -1306,7 +1324,7 @@ module Aws::IoTEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

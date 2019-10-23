@@ -289,6 +289,9 @@ module Aws::OpsWorksCM
     #
     #       {
     #         associate_public_ip_address: false,
+    #         custom_domain: "CustomDomain",
+    #         custom_certificate: "CustomCertificate",
+    #         custom_private_key: "CustomPrivateKey",
     #         disable_automated_backup: false,
     #         engine: "String",
     #         engine_model: "String",
@@ -316,6 +319,50 @@ module Aws::OpsWorksCM
     #   Associate a public IP address with a server that you are launching.
     #   Valid values are `true` or `false`. The default value is `true`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] custom_domain
+    #   An optional public endpoint of a server, such as
+    #   `https://aws.my-company.com`. To access the server, create a CNAME
+    #   DNS record in your preferred DNS service that points the custom
+    #   domain to the endpoint that is generated when the server is created
+    #   (the value of the CreateServer Endpoint attribute). You cannot
+    #   access the server by using the generated `Endpoint` value if the
+    #   server is using a custom domain. If you specify a custom domain, you
+    #   must also specify values for `CustomCertificate` and
+    #   `CustomPrivateKey`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_certificate
+    #   A PEM-formatted HTTPS certificate. The value can be be a single,
+    #   self-signed certificate, or a certificate chain. If you specify a
+    #   custom certificate, you must also specify values for `CustomDomain`
+    #   and `CustomPrivateKey`. The following are requirements for the
+    #   `CustomCertificate` value:
+    #
+    #   * You can provide either a self-signed, custom certificate, or the
+    #     full certificate chain.
+    #
+    #   * The certificate must be a valid X509 certificate, or a certificate
+    #     chain in PEM format.
+    #
+    #   * The certificate must be valid at the time of upload. A certificate
+    #     can't be used before its validity period begins (the
+    #     certificate's `NotBefore` date), or after it expires (the
+    #     certificate's `NotAfter` date).
+    #
+    #   * The certificate’s common name or subject alternative names (SANs),
+    #     if present, must match the value of `CustomDomain`.
+    #
+    #   * The certificate must match the value of `CustomPrivateKey`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_private_key
+    #   A private key in PEM format for connecting to the server by using
+    #   HTTPS. The private key must not be encrypted; it cannot be protected
+    #   by a password or passphrase. If you specify a custom private key,
+    #   you must also specify values for `CustomDomain` and
+    #   `CustomCertificate`.
+    #   @return [String]
     #
     # @!attribute [rw] disable_automated_backup
     #   Enable or disable scheduled backups. Valid values are `true` or
@@ -487,6 +534,9 @@ module Aws::OpsWorksCM
     #
     class CreateServerRequest < Struct.new(
       :associate_public_ip_address,
+      :custom_domain,
+      :custom_certificate,
+      :custom_private_key,
       :disable_automated_backup,
       :engine,
       :engine_model,
@@ -1098,6 +1148,12 @@ module Aws::OpsWorksCM
     #   server.
     #   @return [String]
     #
+    # @!attribute [rw] custom_domain
+    #   An optional public endpoint of a server, such as
+    #   `https://aws.my-company.com`. You cannot access the server by using
+    #   the `Endpoint` value if the server has a `CustomDomain` specified.
+    #   @return [String]
+    #
     # @!attribute [rw] disable_automated_backup
     #   Disables automated backups. The number of stored backups is
     #   dependent on the value of PreferredBackupCount.
@@ -1105,7 +1161,9 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] endpoint
     #   A DNS name that can be used to access the engine. Example:
-    #   `myserver-asdfghjkl.us-east-1.opsworks.io`
+    #   `myserver-asdfghjkl.us-east-1.opsworks.io`. You cannot access the
+    #   server by using the `Endpoint` value if the server has a
+    #   `CustomDomain` specified.
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -1220,6 +1278,7 @@ module Aws::OpsWorksCM
       :server_name,
       :created_at,
       :cloud_formation_stack_arn,
+      :custom_domain,
       :disable_automated_backup,
       :endpoint,
       :engine,

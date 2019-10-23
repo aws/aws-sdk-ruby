@@ -48,6 +48,7 @@ module Aws::IoTEvents
     DetectorModelVersionStatus = Shapes::StringShape.new(name: 'DetectorModelVersionStatus')
     DetectorModelVersionSummaries = Shapes::ListShape.new(name: 'DetectorModelVersionSummaries')
     DetectorModelVersionSummary = Shapes::StructureShape.new(name: 'DetectorModelVersionSummary')
+    EvaluationMethod = Shapes::StringShape.new(name: 'EvaluationMethod')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventName = Shapes::StringShape.new(name: 'EventName')
     Events = Shapes::ListShape.new(name: 'Events')
@@ -155,6 +156,7 @@ module Aws::IoTEvents
     CreateDetectorModelRequest.add_member(:key, Shapes::ShapeRef.new(shape: AttributeJsonPath, location_name: "key"))
     CreateDetectorModelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "roleArn"))
     CreateDetectorModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateDetectorModelRequest.add_member(:evaluation_method, Shapes::ShapeRef.new(shape: EvaluationMethod, location_name: "evaluationMethod"))
     CreateDetectorModelRequest.struct_class = Types::CreateDetectorModelRequest
 
     CreateDetectorModelResponse.add_member(:detector_model_configuration, Shapes::ShapeRef.new(shape: DetectorModelConfiguration, location_name: "detectorModelConfiguration"))
@@ -216,6 +218,7 @@ module Aws::IoTEvents
     DetectorModelConfiguration.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     DetectorModelConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: DetectorModelVersionStatus, location_name: "status"))
     DetectorModelConfiguration.add_member(:key, Shapes::ShapeRef.new(shape: AttributeJsonPath, location_name: "key"))
+    DetectorModelConfiguration.add_member(:evaluation_method, Shapes::ShapeRef.new(shape: EvaluationMethod, location_name: "evaluationMethod"))
     DetectorModelConfiguration.struct_class = Types::DetectorModelConfiguration
 
     DetectorModelDefinition.add_member(:states, Shapes::ShapeRef.new(shape: States, required: true, location_name: "states"))
@@ -238,6 +241,7 @@ module Aws::IoTEvents
     DetectorModelVersionSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     DetectorModelVersionSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     DetectorModelVersionSummary.add_member(:status, Shapes::ShapeRef.new(shape: DetectorModelVersionStatus, location_name: "status"))
+    DetectorModelVersionSummary.add_member(:evaluation_method, Shapes::ShapeRef.new(shape: EvaluationMethod, location_name: "evaluationMethod"))
     DetectorModelVersionSummary.struct_class = Types::DetectorModelVersionSummary
 
     Event.add_member(:event_name, Shapes::ShapeRef.new(shape: EventName, required: true, location_name: "eventName"))
@@ -422,6 +426,7 @@ module Aws::IoTEvents
     UpdateDetectorModelRequest.add_member(:detector_model_definition, Shapes::ShapeRef.new(shape: DetectorModelDefinition, required: true, location_name: "detectorModelDefinition"))
     UpdateDetectorModelRequest.add_member(:detector_model_description, Shapes::ShapeRef.new(shape: DetectorModelDescription, location_name: "detectorModelDescription"))
     UpdateDetectorModelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "roleArn"))
+    UpdateDetectorModelRequest.add_member(:evaluation_method, Shapes::ShapeRef.new(shape: EvaluationMethod, location_name: "evaluationMethod"))
     UpdateDetectorModelRequest.struct_class = Types::UpdateDetectorModelRequest
 
     UpdateDetectorModelResponse.add_member(:detector_model_configuration, Shapes::ShapeRef.new(shape: DetectorModelConfiguration, location_name: "detectorModelConfiguration"))

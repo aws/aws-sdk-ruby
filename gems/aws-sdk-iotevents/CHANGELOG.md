@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2019-10-22)
+------------------
+
+* Feature - Add support for new serial evaluation method for events in a detector model.
+
 1.4.0 (2019-07-25)
 ------------------
 

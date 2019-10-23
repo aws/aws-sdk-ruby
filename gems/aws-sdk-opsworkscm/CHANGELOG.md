@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-10-22)
+------------------
+
+* Feature - AWS OpsWorks for Chef Automate (OWCA) now allows customers to use a custom domain and respective certificate, for their AWS OpsWorks For Chef Automate servers. Customers can now provide a CustomDomain, CustomCertificate and CustomPrivateKey in CreateServer API to configure their Chef Automate servers with a custom domain and certificate.
+
 1.24.0 (2019-08-08)
 ------------------
 
