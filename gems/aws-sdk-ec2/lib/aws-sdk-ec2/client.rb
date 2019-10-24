@@ -4467,6 +4467,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the FPGA image during creation.
+    #
     # @return [Types::CreateFpgaImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFpgaImageResult#fpga_image_id #fpga_image_id} => String
@@ -4487,6 +4490,17 @@ module Aws::EC2
     #     description: "String",
     #     name: "String",
     #     client_token: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -28626,18 +28640,26 @@ module Aws::EC2
     # You can't register an image where a secondary (non-root) snapshot has
     # AWS Marketplace product codes.
     #
-    # Some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and
-    # SUSE Linux Enterprise Server (SLES), use the EC2 billing product code
-    # associated with an AMI to verify the subscription status for package
-    # updates. Creating an AMI from an EBS snapshot does not maintain this
-    # billing code, and instances launched from such an AMI are not able to
-    # connect to package update infrastructure. If you purchase a Reserved
-    # Instance offering for one of these Linux distributions and launch
-    # instances using an AMI that does not contain the required billing
-    # code, your Reserved Instance is not applied to these instances.
+    # Windows and some Linux distributions, such as Red Hat Enterprise Linux
+    # (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing
+    # product code associated with an AMI to verify the subscription status
+    # for package updates. To create a new AMI for operating systems that
+    # require a billing product code, do the following:
     #
-    # To create an AMI for operating systems that require a billing code,
-    # see CreateImage.
+    # 1.  Launch an instance from an existing AMI with that billing product
+    #     code.
+    #
+    # 2.  Customize the instance.
+    #
+    # 3.  Create a new AMI from the instance using CreateImage to preserve
+    #     the billing product code association.
+    #
+    # If you purchase a Reserved Instance to apply to an On-Demand Instance
+    # that was launched from an AMI with a billing product code, make sure
+    # that the Reserved Instance has the matching billing product code. If
+    # you purchase a Reserved Instance without the matching billing product
+    # code, the Reserved Instance will not be applied to the On-Demand
+    # Instance.
     #
     # If needed, you can deregister an AMI at any time. Any modifications
     # you make to an AMI backed by an instance store volume invalidates its
@@ -32692,7 +32714,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

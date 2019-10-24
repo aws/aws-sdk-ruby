@@ -5127,6 +5127,17 @@ module Aws::EC2
     #         description: "String",
     #         name: "String",
     #         client_token: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -5163,6 +5174,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the FPGA image during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFpgaImageRequest AWS API Documentation
     #
     class CreateFpgaImageRequest < Struct.new(
@@ -5171,7 +5186,8 @@ module Aws::EC2
       :logs_storage_location,
       :description,
       :name,
-      :client_token)
+      :client_token,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -38814,12 +38830,18 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
     #   support tagging on creation are: `capacity-reservation` \|
-    #   `client-vpn-endpoint` \| `dedicated-host` \| `fleet` \| `instance`
-    #   \| `launch-template` \| `snapshot` \| `transit-gateway` \|
+    #   `client-vpn-endpoint` \| `dedicated-host` \| `fleet` \| `fpga-image`
+    #   \| `instance` \| `launch-template` \| `snapshot` \|
+    #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
+    #   `traffic-mirror-target` \| `transit-gateway` \|
     #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
     #   `volume`.
     #
-    #   To tag a resource after it has been created, see CreateTags.
+    #   To tag a resource after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #   @return [String]
     #
     # @!attribute [rw] tags

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-10-24)
+------------------
+
+* Feature - This release adds support for the gRPC and HTTP/2 protocols.
+
 1.17.0 (2019-10-23)
 ------------------
 

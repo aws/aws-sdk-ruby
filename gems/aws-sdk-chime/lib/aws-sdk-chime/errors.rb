@@ -10,6 +10,27 @@ module Aws::Chime
 
     extend Aws::Errors::DynamicErrors
 
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Chime::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class BadRequestException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

@@ -63,6 +63,15 @@ module Aws::AppMesh
     FileAccessLog = Shapes::StructureShape.new(name: 'FileAccessLog')
     FilePath = Shapes::StringShape.new(name: 'FilePath')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    GrpcRetryPolicy = Shapes::StructureShape.new(name: 'GrpcRetryPolicy')
+    GrpcRetryPolicyEvent = Shapes::StringShape.new(name: 'GrpcRetryPolicyEvent')
+    GrpcRetryPolicyEvents = Shapes::ListShape.new(name: 'GrpcRetryPolicyEvents')
+    GrpcRoute = Shapes::StructureShape.new(name: 'GrpcRoute')
+    GrpcRouteAction = Shapes::StructureShape.new(name: 'GrpcRouteAction')
+    GrpcRouteMatch = Shapes::StructureShape.new(name: 'GrpcRouteMatch')
+    GrpcRouteMetadata = Shapes::StructureShape.new(name: 'GrpcRouteMetadata')
+    GrpcRouteMetadataList = Shapes::ListShape.new(name: 'GrpcRouteMetadataList')
+    GrpcRouteMetadataMatchMethod = Shapes::StructureShape.new(name: 'GrpcRouteMetadataMatchMethod')
     HeaderMatch = Shapes::StringShape.new(name: 'HeaderMatch')
     HeaderMatchMethod = Shapes::StructureShape.new(name: 'HeaderMatchMethod')
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
@@ -112,6 +121,7 @@ module Aws::AppMesh
     MeshSpec = Shapes::StructureShape.new(name: 'MeshSpec')
     MeshStatus = Shapes::StructureShape.new(name: 'MeshStatus')
     MeshStatusCode = Shapes::StringShape.new(name: 'MeshStatusCode')
+    MethodName = Shapes::StringShape.new(name: 'MethodName')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     PercentInt = Shapes::IntegerShape.new(name: 'PercentInt')
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
@@ -376,6 +386,42 @@ module Aws::AppMesh
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
+    GrpcRetryPolicy.add_member(:grpc_retry_events, Shapes::ShapeRef.new(shape: GrpcRetryPolicyEvents, location_name: "grpcRetryEvents"))
+    GrpcRetryPolicy.add_member(:http_retry_events, Shapes::ShapeRef.new(shape: HttpRetryPolicyEvents, location_name: "httpRetryEvents"))
+    GrpcRetryPolicy.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, required: true, location_name: "maxRetries"))
+    GrpcRetryPolicy.add_member(:per_retry_timeout, Shapes::ShapeRef.new(shape: Duration, required: true, location_name: "perRetryTimeout"))
+    GrpcRetryPolicy.add_member(:tcp_retry_events, Shapes::ShapeRef.new(shape: TcpRetryPolicyEvents, location_name: "tcpRetryEvents"))
+    GrpcRetryPolicy.struct_class = Types::GrpcRetryPolicy
+
+    GrpcRetryPolicyEvents.member = Shapes::ShapeRef.new(shape: GrpcRetryPolicyEvent)
+
+    GrpcRoute.add_member(:action, Shapes::ShapeRef.new(shape: GrpcRouteAction, required: true, location_name: "action"))
+    GrpcRoute.add_member(:match, Shapes::ShapeRef.new(shape: GrpcRouteMatch, required: true, location_name: "match"))
+    GrpcRoute.add_member(:retry_policy, Shapes::ShapeRef.new(shape: GrpcRetryPolicy, location_name: "retryPolicy"))
+    GrpcRoute.struct_class = Types::GrpcRoute
+
+    GrpcRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
+    GrpcRouteAction.struct_class = Types::GrpcRouteAction
+
+    GrpcRouteMatch.add_member(:metadata, Shapes::ShapeRef.new(shape: GrpcRouteMetadataList, location_name: "metadata"))
+    GrpcRouteMatch.add_member(:method_name, Shapes::ShapeRef.new(shape: MethodName, location_name: "methodName"))
+    GrpcRouteMatch.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "serviceName"))
+    GrpcRouteMatch.struct_class = Types::GrpcRouteMatch
+
+    GrpcRouteMetadata.add_member(:invert, Shapes::ShapeRef.new(shape: Boolean, location_name: "invert"))
+    GrpcRouteMetadata.add_member(:match, Shapes::ShapeRef.new(shape: GrpcRouteMetadataMatchMethod, location_name: "match"))
+    GrpcRouteMetadata.add_member(:name, Shapes::ShapeRef.new(shape: HeaderName, required: true, location_name: "name"))
+    GrpcRouteMetadata.struct_class = Types::GrpcRouteMetadata
+
+    GrpcRouteMetadataList.member = Shapes::ShapeRef.new(shape: GrpcRouteMetadata)
+
+    GrpcRouteMetadataMatchMethod.add_member(:exact, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "exact"))
+    GrpcRouteMetadataMatchMethod.add_member(:prefix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "prefix"))
+    GrpcRouteMetadataMatchMethod.add_member(:range, Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
+    GrpcRouteMetadataMatchMethod.add_member(:regex, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
+    GrpcRouteMetadataMatchMethod.add_member(:suffix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
+    GrpcRouteMetadataMatchMethod.struct_class = Types::GrpcRouteMetadataMatchMethod
+
     HeaderMatchMethod.add_member(:exact, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "exact"))
     HeaderMatchMethod.add_member(:prefix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "prefix"))
     HeaderMatchMethod.add_member(:range, Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
@@ -545,6 +591,8 @@ module Aws::AppMesh
     RouteRef.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualRouterName"))
     RouteRef.struct_class = Types::RouteRef
 
+    RouteSpec.add_member(:grpc_route, Shapes::ShapeRef.new(shape: GrpcRoute, location_name: "grpcRoute"))
+    RouteSpec.add_member(:http2_route, Shapes::ShapeRef.new(shape: HttpRoute, location_name: "http2Route"))
     RouteSpec.add_member(:http_route, Shapes::ShapeRef.new(shape: HttpRoute, location_name: "httpRoute"))
     RouteSpec.add_member(:priority, Shapes::ShapeRef.new(shape: RoutePriority, location_name: "priority"))
     RouteSpec.add_member(:tcp_route, Shapes::ShapeRef.new(shape: TcpRoute, location_name: "tcpRoute"))

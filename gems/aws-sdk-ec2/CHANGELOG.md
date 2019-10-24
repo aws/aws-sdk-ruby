@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2019-10-24)
+------------------
+
+* Feature - This release updates CreateFpgaImage to support tagging FPGA images on creation
+
 1.113.0 (2019-10-23)
 ------------------
 

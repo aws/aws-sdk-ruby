@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.72.0 (2019-10-24)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Issue - Update minimum `aws-partition` gem dependency version
 
 3.71.0 (2019-10-23)

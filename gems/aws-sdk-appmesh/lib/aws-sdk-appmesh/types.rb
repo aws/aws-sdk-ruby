@@ -8,7 +8,7 @@
 module Aws::AppMesh
   module Types
 
-    # An object representing a virtual router listener.
+    # An object that represents a virtual router listener.
     #
     # @note When making an API call, you may pass VirtualRouterListener
     #   data as a hash:
@@ -16,13 +16,12 @@ module Aws::AppMesh
     #       {
     #         port_mapping: { # required
     #           port: 1, # required
-    #           protocol: "http", # required, accepts http, tcp
+    #           protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #         },
     #       }
     #
     # @!attribute [rw] port_mapping
-    #   An object representing a virtual node or virtual router listener
-    #   port mapping.
+    #   An object that represents a port mapping.
     #   @return [Types::PortMapping]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterListener AWS API Documentation
@@ -53,13 +52,13 @@ module Aws::AppMesh
     #                 interval_millis: 1, # required
     #                 path: "String",
     #                 port: 1,
-    #                 protocol: "http", # required, accepts http, tcp
+    #                 protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #                 timeout_millis: 1, # required
     #                 unhealthy_threshold: 1, # required
     #               },
     #               port_mapping: { # required
     #                 port: 1, # required
-    #                 protocol: "http", # required, accepts http, tcp
+    #                 protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #               },
     #             },
     #           ],
@@ -215,7 +214,7 @@ module Aws::AppMesh
     #             {
     #               port_mapping: { # required
     #                 port: 1, # required
-    #                 protocol: "http", # required, accepts http, tcp
+    #                 protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #               },
     #             },
     #           ],
@@ -252,6 +251,64 @@ module Aws::AppMesh
       :mesh_name,
       :spec,
       :virtual_router_name)
+      include Aws::Structure
+    end
+
+    # An object that represents a retry policy. Specify at least one value
+    # for at least one of the types of `RetryEvents`, a value for
+    # `maxRetries`, and a value for `perRetryTimeout`.
+    #
+    # @note When making an API call, you may pass GrpcRetryPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         grpc_retry_events: ["cancelled"], # accepts cancelled, deadline-exceeded, internal, resource-exhausted, unavailable
+    #         http_retry_events: ["HttpRetryPolicyEvent"],
+    #         max_retries: 1, # required
+    #         per_retry_timeout: { # required
+    #           unit: "ms", # accepts ms, s
+    #           value: 1,
+    #         },
+    #         tcp_retry_events: ["connection-error"], # accepts connection-error
+    #       }
+    #
+    # @!attribute [rw] grpc_retry_events
+    #   Specify at least one of the valid values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] http_retry_events
+    #   Specify at least one of the following values.
+    #
+    #   * **server-error** – HTTP status codes 500, 501, 502, 503, 504, 505,
+    #     506, 507, 508, 510, and 511
+    #
+    #   * **gateway-error** – HTTP status codes 502, 503, and 504
+    #
+    #   * **client-error** – HTTP status code 409
+    #
+    #   * **stream-error** – Retry on refused stream
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_retries
+    #   The maximum number of retry attempts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] per_retry_timeout
+    #   An object that represents a duration of time.
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] tcp_retry_events
+    #   Specify a valid value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcRetryPolicy AWS API Documentation
+    #
+    class GrpcRetryPolicy < Struct.new(
+      :grpc_retry_events,
+      :http_retry_events,
+      :max_retries,
+      :per_retry_timeout,
+      :tcp_retry_events)
       include Aws::Structure
     end
 
@@ -308,7 +365,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the logging information for a virtual node.
+    # An object that represents the logging information for a virtual node.
     #
     # @note When making an API call, you may pass Logging
     #   data as a hash:
@@ -451,7 +508,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing metadata for a resource.
+    # An object that represents metadata for a resource.
     #
     # @!attribute [rw] arn
     #   The full Amazon Resource Name (ARN) for the resource.
@@ -531,7 +588,8 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a virtual service backend for a virtual node.
+    # An object that represents a virtual service backend for a virtual
+    # node.
     #
     # @note When making an API call, you may pass VirtualServiceBackend
     #   data as a hash:
@@ -627,8 +685,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the traffic distribution requirements for
-    # matched HTTP requests.
+    # An object that represents the action to take if a match is determined.
     #
     # @note When making an API call, you may pass HttpRouteAction
     #   data as a hash:
@@ -643,9 +700,8 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] weighted_targets
-    #   The targets that traffic is routed to when a request matches the
-    #   route. You can specify one or more targets and their relative
-    #   weights to distribute traffic with.
+    #   An object that represents the targets that traffic is routed to when
+    #   a request matches the route.
     #   @return [Array<Types::WeightedTarget>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteAction AWS API Documentation
@@ -701,8 +757,8 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the health check policy for a virtual node's
-    # listener.
+    # An object that represents the health check policy for a virtual
+    # node's listener.
     #
     # @note When making an API call, you may pass HealthCheckPolicy
     #   data as a hash:
@@ -712,7 +768,7 @@ module Aws::AppMesh
     #         interval_millis: 1, # required
     #         path: "String",
     #         port: 1,
-    #         protocol: "http", # required, accepts http, tcp
+    #         protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #         timeout_millis: 1, # required
     #         unhealthy_threshold: 1, # required
     #       }
@@ -764,7 +820,8 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a virtual service returned by a list operation.
+    # An object that represents a virtual service returned by a list
+    # operation.
     #
     # @!attribute [rw] arn
     #   The full Amazon Resource Name (ARN) for the virtual service.
@@ -787,7 +844,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the egress filter rules for a service mesh.
+    # An object that represents the egress filter rules for a service mesh.
     #
     # @note When making an API call, you may pass EgressFilter
     #   data as a hash:
@@ -811,7 +868,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the current status of the virtual node.
+    # An object that represents the current status of the virtual node.
     #
     # @!attribute [rw] status
     #   The current status of the virtual node.
@@ -824,7 +881,8 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a virtual router returned by a list operation.
+    # An object that represents a virtual router returned by a list
+    # operation.
     #
     # @!attribute [rw] arn
     #   The full Amazon Resource Name (ARN) for the virtual router.
@@ -847,7 +905,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a virtual service returned by a describe
+    # An object that represents a virtual service returned by a describe
     # operation.
     #
     # @!attribute [rw] mesh_name
@@ -855,7 +913,7 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] metadata
-    #   An object representing metadata for a resource.
+    #   An object that represents metadata for a resource.
     #   @return [Types::ResourceMetadata]
     #
     # @!attribute [rw] spec
@@ -881,7 +939,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the HTTP header in the request.
+    # An object that represents the HTTP header in the request.
     #
     # @note When making an API call, you may pass HttpRouteHeader
     #   data as a hash:
@@ -902,8 +960,8 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] invert
-    #   Specify `True` to match the opposite of the `HeaderMatchMethod`
-    #   method and value. The default value is `False`.
+    #   Specify `True` to match anything except the match criteria. The
+    #   default value is `False`.
     #   @return [Boolean]
     #
     # @!attribute [rw] match
@@ -935,7 +993,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a virtual node returned by a list operation.
+    # An object that represents a virtual node returned by a list operation.
     #
     # @!attribute [rw] arn
     #   The full Amazon Resource Name (ARN) for the virtual node.
@@ -1012,6 +1070,32 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents the action to take if a match is determined.
+    #
+    # @note When making an API call, you may pass GrpcRouteAction
+    #   data as a hash:
+    #
+    #       {
+    #         weighted_targets: [ # required
+    #           {
+    #             virtual_node: "ResourceName", # required
+    #             weight: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] weighted_targets
+    #   An object that represents the targets that traffic is routed to when
+    #   a request matches the route.
+    #   @return [Array<Types::WeightedTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcRouteAction AWS API Documentation
+    #
+    class GrpcRouteAction < Struct.new(
+      :weighted_targets)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_node
     #   The full description of your virtual node.
     #   @return [Types::VirtualNodeData]
@@ -1041,7 +1125,7 @@ module Aws::AppMesh
     end
 
     # @!attribute [rw] mesh
-    #   An object representing a service mesh returned by a describe
+    #   An object that represents a service mesh returned by a describe
     #   operation.
     #   @return [Types::MeshData]
     #
@@ -1063,8 +1147,57 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the DNS service discovery information for your
-    # virtual node.
+    # An object that represents the match method. Specify one of the match
+    # values.
+    #
+    # @note When making an API call, you may pass GrpcRouteMetadataMatchMethod
+    #   data as a hash:
+    #
+    #       {
+    #         exact: "HeaderMatch",
+    #         prefix: "HeaderMatch",
+    #         range: {
+    #           end: 1, # required
+    #           start: 1, # required
+    #         },
+    #         regex: "HeaderMatch",
+    #         suffix: "HeaderMatch",
+    #       }
+    #
+    # @!attribute [rw] exact
+    #   The value sent by the client must match the specified value exactly.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The value sent by the client must begin with the specified
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] range
+    #   An object that represents the range of values to match on.
+    #   @return [Types::MatchRange]
+    #
+    # @!attribute [rw] regex
+    #   The value sent by the client must include the specified characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] suffix
+    #   The value sent by the client must end with the specified characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcRouteMetadataMatchMethod AWS API Documentation
+    #
+    class GrpcRouteMetadataMatchMethod < Struct.new(
+      :exact,
+      :prefix,
+      :range,
+      :regex,
+      :suffix)
+      include Aws::Structure
+    end
+
+    # An object that represents the DNS service discovery information for
+    # your virtual node.
     #
     # @note When making an API call, you may pass DnsServiceDiscovery
     #   data as a hash:
@@ -1138,7 +1271,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a virtual node returned by a describe
+    # An object that represents a virtual node returned by a describe
     # operation.
     #
     # @!attribute [rw] mesh_name
@@ -1176,7 +1309,7 @@ module Aws::AppMesh
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # An object representing the AWS Cloud Map attribute information for
+    # An object that represents the AWS Cloud Map attribute information for
     # your virtual node.
     #
     # @note When making an API call, you may pass AwsCloudMapInstanceAttribute
@@ -1207,7 +1340,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the specification of a virtual service.
+    # An object that represents the specification of a virtual service.
     #
     # @note When making an API call, you may pass VirtualServiceSpec
     #   data as a hash:
@@ -1235,8 +1368,8 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the backends that a virtual node is expected to
-    # send outbound traffic to.
+    # An object that represents the backends that a virtual node is expected
+    # to send outbound traffic to.
     #
     # @note When making an API call, you may pass Backend
     #   data as a hash:
@@ -1258,9 +1391,10 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # The range of values to match on. The first character of the range is
-    # included in the range, though the last character is not. For example,
-    # if the range specified were 1-100, only values 1-99 would be matched.
+    # An object that represents the range of values to match on. The first
+    # character of the range is included in the range, though the last
+    # character is not. For example, if the range specified were 1-100, only
+    # values 1-99 would be matched.
     #
     # @note When making an API call, you may pass MatchRange
     #   data as a hash:
@@ -1326,7 +1460,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the TCP routing specification for a route.
+    # An object that represents a TCP route type.
     #
     # @note When making an API call, you may pass TcpRoute
     #   data as a hash:
@@ -1393,7 +1527,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a virtual router returned by a describe
+    # An object that represents a virtual router returned by a describe
     # operation.
     #
     # @!attribute [rw] mesh_name
@@ -1517,7 +1651,7 @@ module Aws::AppMesh
     #             {
     #               port_mapping: { # required
     #                 port: 1, # required
-    #                 protocol: "http", # required, accepts http, tcp
+    #                 protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #               },
     #             },
     #           ],
@@ -1571,7 +1705,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the access logging information for a virtual
+    # An object that represents the access logging information for a virtual
     # node.
     #
     # @note When making an API call, you may pass AccessLog
@@ -1668,7 +1802,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the status of a virtual service.
+    # An object that represents the status of a virtual service.
     #
     # @!attribute [rw] status
     #   The current status of the virtual service.
@@ -1681,7 +1815,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the specification of a virtual router.
+    # An object that represents the specification of a virtual router.
     #
     # @note When making an API call, you may pass VirtualRouterSpec
     #   data as a hash:
@@ -1691,7 +1825,7 @@ module Aws::AppMesh
     #           {
     #             port_mapping: { # required
     #               port: 1, # required
-    #               protocol: "http", # required, accepts http, tcp
+    #               protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #             },
     #           },
     #         ],
@@ -1699,8 +1833,7 @@ module Aws::AppMesh
     #
     # @!attribute [rw] listeners
     #   The listeners that the virtual router is expected to receive inbound
-    #   traffic from. Currently only one listener is supported per virtual
-    #   router.
+    #   traffic from. You can specify one listener.
     #   @return [Array<Types::VirtualRouterListener>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterSpec AWS API Documentation
@@ -1724,7 +1857,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the specification of a virtual node.
+    # An object that represents the specification of a virtual node.
     #
     # @note When making an API call, you may pass VirtualNodeSpec
     #   data as a hash:
@@ -1744,13 +1877,13 @@ module Aws::AppMesh
     #               interval_millis: 1, # required
     #               path: "String",
     #               port: 1,
-    #               protocol: "http", # required, accepts http, tcp
+    #               protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #               timeout_millis: 1, # required
     #               unhealthy_threshold: 1, # required
     #             },
     #             port_mapping: { # required
     #               port: 1, # required
-    #               protocol: "http", # required, accepts http, tcp
+    #               protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #             },
     #           },
     #         ],
@@ -1785,8 +1918,7 @@ module Aws::AppMesh
     #
     # @!attribute [rw] listeners
     #   The listeners that the virtual node is expected to receive inbound
-    #   traffic from. Currently only one listener is supported per virtual
-    #   node.
+    #   traffic from. You can specify one listener.
     #   @return [Array<Types::Listener>]
     #
     # @!attribute [rw] logging
@@ -1829,7 +1961,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the duration between retry attempts.
+    # An object that represents a duration of time.
     #
     # @note When making an API call, you may pass Duration
     #   data as a hash:
@@ -1840,11 +1972,11 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] unit
-    #   The unit of time between retry attempts.
+    #   A unit of time.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The duration of time between retry attempts.
+    #   A number of time units.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Duration AWS API Documentation
@@ -1880,7 +2012,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the requirements for a route to match HTTP
+    # An object that represents the requirements for a route to match HTTP
     # requests for a virtual router.
     #
     # @note When making an API call, you may pass HttpRouteMatch
@@ -1909,11 +2041,11 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] headers
-    #   The client request headers to match on.
+    #   An object that represents the client request headers to match on.
     #   @return [Array<Types::HttpRouteHeader>]
     #
     # @!attribute [rw] method
-    #   The client request header method to match on.
+    #   The client request method to match on. Specify only one.
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -1926,7 +2058,7 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] scheme
-    #   The client request header scheme to match on.
+    #   The client request scheme to match on. Specify only one.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteMatch AWS API Documentation
@@ -1972,7 +2104,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a service mesh returned by a list operation.
+    # An object that represents a service mesh returned by a list operation.
     #
     # @!attribute [rw] arn
     #   The full Amazon Resource Name (ARN) of the service mesh.
@@ -1990,15 +2122,14 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a virtual node or virtual router listener port
-    # mapping.
+    # An object that represents a port mapping.
     #
     # @note When making an API call, you may pass PortMapping
     #   data as a hash:
     #
     #       {
     #         port: 1, # required
-    #         protocol: "http", # required, accepts http, tcp
+    #         protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #       }
     #
     # @!attribute [rw] port
@@ -2006,7 +2137,7 @@ module Aws::AppMesh
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol used for the port mapping.
+    #   The protocol used for the port mapping. Specify one protocol.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/PortMapping AWS API Documentation
@@ -2017,7 +2148,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a service mesh returned by a describe
+    # An object that represents a service mesh returned by a describe
     # operation.
     #
     # @!attribute [rw] mesh_name
@@ -2046,7 +2177,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the status of a virtual router.
+    # An object that represents the status of a virtual router.
     #
     # @!attribute [rw] status
     #   The current status of the virtual router.
@@ -2080,10 +2211,11 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a target and its relative weight. Traffic is
+    # An object that represents a target and its relative weight. Traffic is
     # distributed across targets according to their relative weight. For
     # example, a weighted target with a relative weight of 50 receives five
-    # times as much traffic as one with a relative weight of 10.
+    # times as much traffic as one with a relative weight of 10. The total
+    # weight for all targets combined must be less than or equal to 100.
     #
     # @note When making an API call, you may pass WeightedTarget
     #   data as a hash:
@@ -2109,8 +2241,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the traffic distribution requirements for
-    # matched TCP requests.
+    # An object that represents the action to take if a match is determined.
     #
     # @note When making an API call, you may pass TcpRouteAction
     #   data as a hash:
@@ -2125,9 +2256,8 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] weighted_targets
-    #   The targets that traffic is routed to when a request matches the
-    #   route. You can specify one or more targets and their relative
-    #   weights to distribute traffic with.
+    #   An object that represents the targets that traffic is routed to when
+    #   a request matches the route.
     #   @return [Array<Types::WeightedTarget>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRouteAction AWS API Documentation
@@ -2161,7 +2291,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the current status of a route.
+    # An object that represents the current status of a route.
     #
     # @!attribute [rw] status
     #   The current status for the route.
@@ -2174,7 +2304,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a route returned by a list operation.
+    # An object that represents a route returned by a list operation.
     #
     # @!attribute [rw] arn
     #   The full Amazon Resource Name (ARN) for the route.
@@ -2202,7 +2332,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a listener for a virtual node.
+    # An object that represents a listener for a virtual node.
     #
     # @note When making an API call, you may pass Listener
     #   data as a hash:
@@ -2213,13 +2343,13 @@ module Aws::AppMesh
     #           interval_millis: 1, # required
     #           path: "String",
     #           port: 1,
-    #           protocol: "http", # required, accepts http, tcp
+    #           protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #           timeout_millis: 1, # required
     #           unhealthy_threshold: 1, # required
     #         },
     #         port_mapping: { # required
     #           port: 1, # required
-    #           protocol: "http", # required, accepts http, tcp
+    #           protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #         },
     #       }
     #
@@ -2236,6 +2366,75 @@ module Aws::AppMesh
     class Listener < Struct.new(
       :health_check,
       :port_mapping)
+      include Aws::Structure
+    end
+
+    # An object that represents a GRPC route type.
+    #
+    # @note When making an API call, you may pass GrpcRoute
+    #   data as a hash:
+    #
+    #       {
+    #         action: { # required
+    #           weighted_targets: [ # required
+    #             {
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         match: { # required
+    #           metadata: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method_name: "MethodName",
+    #           service_name: "ServiceName",
+    #         },
+    #         retry_policy: {
+    #           grpc_retry_events: ["cancelled"], # accepts cancelled, deadline-exceeded, internal, resource-exhausted, unavailable
+    #           http_retry_events: ["HttpRetryPolicyEvent"],
+    #           max_retries: 1, # required
+    #           per_retry_timeout: { # required
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   An object that represents the action to take if a match is
+    #   determined.
+    #   @return [Types::GrpcRouteAction]
+    #
+    # @!attribute [rw] match
+    #   An object that represents the criteria for determining a request
+    #   match.
+    #   @return [Types::GrpcRouteMatch]
+    #
+    # @!attribute [rw] retry_policy
+    #   An object that represents a retry policy.
+    #   @return [Types::GrpcRetryPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcRoute AWS API Documentation
+    #
+    class GrpcRoute < Struct.new(
+      :action,
+      :match,
+      :retry_policy)
       include Aws::Structure
     end
 
@@ -2263,7 +2462,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a route returned by a describe operation.
+    # An object that represents a route returned by a describe operation.
     #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh that the route resides in.
@@ -2312,7 +2511,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a virtual node service provider.
+    # An object that represents a virtual node service provider.
     #
     # @note When making an API call, you may pass VirtualNodeServiceProvider
     #   data as a hash:
@@ -2345,7 +2544,9 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object that represents a retry policy.
+    # An object that represents a retry policy. Specify at least one value
+    # for at least one of the types of `RetryEvents`, a value for
+    # `maxRetries`, and a value for `perRetryTimeout`.
     #
     # @note When making an API call, you may pass HttpRetryPolicy
     #   data as a hash:
@@ -2374,12 +2575,11 @@ module Aws::AppMesh
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_retries
-    #   The maximum number of retry attempts. If no value is specified, the
-    #   default is 1.
+    #   The maximum number of retry attempts.
     #   @return [Integer]
     #
     # @!attribute [rw] per_retry_timeout
-    #   An object that represents the retry duration.
+    #   An object that represents a duration of time.
     #   @return [Types::Duration]
     #
     # @!attribute [rw] tcp_retry_events
@@ -2451,8 +2651,8 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the method and value to match the header value
-    # sent with a request. Specify one match method.
+    # An object that represents the method and value to match with the
+    # header value sent in a request. Specify one match method.
     #
     # @note When making an API call, you may pass HeaderMatchMethod
     #   data as a hash:
@@ -2469,28 +2669,24 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] exact
-    #   The header value sent by the client must match the specified value
-    #   exactly.
+    #   The value sent by the client must match the specified value exactly.
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   The header value sent by the client must begin with the specified
+    #   The value sent by the client must begin with the specified
     #   characters.
     #   @return [String]
     #
     # @!attribute [rw] range
-    #   The object that specifies the range of numbers that the header value
-    #   sent by the client must be included in.
+    #   An object that represents the range of values to match on.
     #   @return [Types::MatchRange]
     #
     # @!attribute [rw] regex
-    #   The header value sent by the client must include the specified
-    #   characters.
+    #   The value sent by the client must include the specified characters.
     #   @return [String]
     #
     # @!attribute [rw] suffix
-    #   The header value sent by the client must end with the specified
-    #   characters.
+    #   The value sent by the client must end with the specified characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HeaderMatchMethod AWS API Documentation
@@ -2547,6 +2743,48 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents the match metadata for the route.
+    #
+    # @note When making an API call, you may pass GrpcRouteMetadata
+    #   data as a hash:
+    #
+    #       {
+    #         invert: false,
+    #         match: {
+    #           exact: "HeaderMatch",
+    #           prefix: "HeaderMatch",
+    #           range: {
+    #             end: 1, # required
+    #             start: 1, # required
+    #           },
+    #           regex: "HeaderMatch",
+    #           suffix: "HeaderMatch",
+    #         },
+    #         name: "HeaderName", # required
+    #       }
+    #
+    # @!attribute [rw] invert
+    #   Specify `True` to match anything except the match criteria. The
+    #   default value is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] match
+    #   An object that represents the data to match from the request.
+    #   @return [Types::GrpcRouteMetadataMatchMethod]
+    #
+    # @!attribute [rw] name
+    #   The name of the route.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcRouteMetadata AWS API Documentation
+    #
+    class GrpcRouteMetadata < Struct.new(
+      :invert,
+      :match,
+      :name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateRouteInput
     #   data as a hash:
     #
@@ -2555,6 +2793,86 @@ module Aws::AppMesh
     #         mesh_name: "ResourceName", # required
     #         route_name: "ResourceName", # required
     #         spec: { # required
+    #           grpc_route: {
+    #             action: { # required
+    #               weighted_targets: [ # required
+    #                 {
+    #                   virtual_node: "ResourceName", # required
+    #                   weight: 1, # required
+    #                 },
+    #               ],
+    #             },
+    #             match: { # required
+    #               metadata: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               method_name: "MethodName",
+    #               service_name: "ServiceName",
+    #             },
+    #             retry_policy: {
+    #               grpc_retry_events: ["cancelled"], # accepts cancelled, deadline-exceeded, internal, resource-exhausted, unavailable
+    #               http_retry_events: ["HttpRetryPolicyEvent"],
+    #               max_retries: 1, # required
+    #               per_retry_timeout: { # required
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               tcp_retry_events: ["connection-error"], # accepts connection-error
+    #             },
+    #           },
+    #           http2_route: {
+    #             action: { # required
+    #               weighted_targets: [ # required
+    #                 {
+    #                   virtual_node: "ResourceName", # required
+    #                   weight: 1, # required
+    #                 },
+    #               ],
+    #             },
+    #             match: { # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
+    #               prefix: "String", # required
+    #               scheme: "http", # accepts http, https
+    #             },
+    #             retry_policy: {
+    #               http_retry_events: ["HttpRetryPolicyEvent"],
+    #               max_retries: 1, # required
+    #               per_retry_timeout: { # required
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               tcp_retry_events: ["connection-error"], # accepts connection-error
+    #             },
+    #           },
     #           http_route: {
     #             action: { # required
     #               weighted_targets: [ # required
@@ -2661,7 +2979,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the provider for a virtual service.
+    # An object that represents the provider for a virtual service.
     #
     # @note When making an API call, you may pass VirtualServiceProvider
     #   data as a hash:
@@ -2691,8 +3009,58 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the AWS Cloud Map service discovery information
-    # for your virtual node.
+    # An object that represents the criteria for determining a request
+    # match.
+    #
+    # @note When making an API call, you may pass GrpcRouteMatch
+    #   data as a hash:
+    #
+    #       {
+    #         metadata: [
+    #           {
+    #             invert: false,
+    #             match: {
+    #               exact: "HeaderMatch",
+    #               prefix: "HeaderMatch",
+    #               range: {
+    #                 end: 1, # required
+    #                 start: 1, # required
+    #               },
+    #               regex: "HeaderMatch",
+    #               suffix: "HeaderMatch",
+    #             },
+    #             name: "HeaderName", # required
+    #           },
+    #         ],
+    #         method_name: "MethodName",
+    #         service_name: "ServiceName",
+    #       }
+    #
+    # @!attribute [rw] metadata
+    #   An object that represents the data to match from the request.
+    #   @return [Array<Types::GrpcRouteMetadata>]
+    #
+    # @!attribute [rw] method_name
+    #   The method name to match from the request. If you specify a name,
+    #   you must also specify a `serviceName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The fully qualified domain name for the service to match from the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcRouteMatch AWS API Documentation
+    #
+    class GrpcRouteMatch < Struct.new(
+      :metadata,
+      :method_name,
+      :service_name)
+      include Aws::Structure
+    end
+
+    # An object that represents the AWS Cloud Map service discovery
+    # information for your virtual node.
     #
     # @note When making an API call, you may pass AwsCloudMapServiceDiscovery
     #   data as a hash:
@@ -2751,6 +3119,86 @@ module Aws::AppMesh
     #         mesh_name: "ResourceName", # required
     #         route_name: "ResourceName", # required
     #         spec: { # required
+    #           grpc_route: {
+    #             action: { # required
+    #               weighted_targets: [ # required
+    #                 {
+    #                   virtual_node: "ResourceName", # required
+    #                   weight: 1, # required
+    #                 },
+    #               ],
+    #             },
+    #             match: { # required
+    #               metadata: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               method_name: "MethodName",
+    #               service_name: "ServiceName",
+    #             },
+    #             retry_policy: {
+    #               grpc_retry_events: ["cancelled"], # accepts cancelled, deadline-exceeded, internal, resource-exhausted, unavailable
+    #               http_retry_events: ["HttpRetryPolicyEvent"],
+    #               max_retries: 1, # required
+    #               per_retry_timeout: { # required
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               tcp_retry_events: ["connection-error"], # accepts connection-error
+    #             },
+    #           },
+    #           http2_route: {
+    #             action: { # required
+    #               weighted_targets: [ # required
+    #                 {
+    #                   virtual_node: "ResourceName", # required
+    #                   weight: 1, # required
+    #                 },
+    #               ],
+    #             },
+    #             match: { # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
+    #               prefix: "String", # required
+    #               scheme: "http", # accepts http, https
+    #             },
+    #             retry_policy: {
+    #               http_retry_events: ["HttpRetryPolicyEvent"],
+    #               max_retries: 1, # required
+    #               per_retry_timeout: { # required
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               tcp_retry_events: ["connection-error"], # accepts connection-error
+    #             },
+    #           },
     #           http_route: {
     #             action: { # required
     #               weighted_targets: [ # required
@@ -2843,7 +3291,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the status of a service mesh.
+    # An object that represents the status of a service mesh.
     #
     # @!attribute [rw] status
     #   The current mesh status.
@@ -2877,13 +3325,13 @@ module Aws::AppMesh
     #                 interval_millis: 1, # required
     #                 path: "String",
     #                 port: 1,
-    #                 protocol: "http", # required, accepts http, tcp
+    #                 protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #                 timeout_millis: 1, # required
     #                 unhealthy_threshold: 1, # required
     #               },
     #               port_mapping: { # required
     #                 port: 1, # required
-    #                 protocol: "http", # required, accepts http, tcp
+    #                 protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #               },
     #             },
     #           ],
@@ -2972,12 +3420,93 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the specification of a route.
+    # An object that represents a route specification. Specify one route
+    # type.
     #
     # @note When making an API call, you may pass RouteSpec
     #   data as a hash:
     #
     #       {
+    #         grpc_route: {
+    #           action: { # required
+    #             weighted_targets: [ # required
+    #               {
+    #                 virtual_node: "ResourceName", # required
+    #                 weight: 1, # required
+    #               },
+    #             ],
+    #           },
+    #           match: { # required
+    #             metadata: [
+    #               {
+    #                 invert: false,
+    #                 match: {
+    #                   exact: "HeaderMatch",
+    #                   prefix: "HeaderMatch",
+    #                   range: {
+    #                     end: 1, # required
+    #                     start: 1, # required
+    #                   },
+    #                   regex: "HeaderMatch",
+    #                   suffix: "HeaderMatch",
+    #                 },
+    #                 name: "HeaderName", # required
+    #               },
+    #             ],
+    #             method_name: "MethodName",
+    #             service_name: "ServiceName",
+    #           },
+    #           retry_policy: {
+    #             grpc_retry_events: ["cancelled"], # accepts cancelled, deadline-exceeded, internal, resource-exhausted, unavailable
+    #             http_retry_events: ["HttpRetryPolicyEvent"],
+    #             max_retries: 1, # required
+    #             per_retry_timeout: { # required
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #             tcp_retry_events: ["connection-error"], # accepts connection-error
+    #           },
+    #         },
+    #         http2_route: {
+    #           action: { # required
+    #             weighted_targets: [ # required
+    #               {
+    #                 virtual_node: "ResourceName", # required
+    #                 weight: 1, # required
+    #               },
+    #             ],
+    #           },
+    #           match: { # required
+    #             headers: [
+    #               {
+    #                 invert: false,
+    #                 match: {
+    #                   exact: "HeaderMatch",
+    #                   prefix: "HeaderMatch",
+    #                   range: {
+    #                     end: 1, # required
+    #                     start: 1, # required
+    #                   },
+    #                   regex: "HeaderMatch",
+    #                   suffix: "HeaderMatch",
+    #                 },
+    #                 name: "HeaderName", # required
+    #               },
+    #             ],
+    #             method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
+    #             prefix: "String", # required
+    #             scheme: "http", # accepts http, https
+    #           },
+    #           retry_policy: {
+    #             http_retry_events: ["HttpRetryPolicyEvent"],
+    #             max_retries: 1, # required
+    #             per_retry_timeout: { # required
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #             tcp_retry_events: ["connection-error"], # accepts connection-error
+    #           },
+    #         },
     #         http_route: {
     #           action: { # required
     #             weighted_targets: [ # required
@@ -3031,8 +3560,16 @@ module Aws::AppMesh
     #         },
     #       }
     #
+    # @!attribute [rw] grpc_route
+    #   An object that represents the specification of a GRPC route.
+    #   @return [Types::GrpcRoute]
+    #
+    # @!attribute [rw] http2_route
+    #   An object that represents the specification of an HTTP2 route.
+    #   @return [Types::HttpRoute]
+    #
     # @!attribute [rw] http_route
-    #   The HTTP routing information for the route.
+    #   An object that represents the specification of an HTTP route.
     #   @return [Types::HttpRoute]
     #
     # @!attribute [rw] priority
@@ -3041,19 +3578,21 @@ module Aws::AppMesh
     #   @return [Integer]
     #
     # @!attribute [rw] tcp_route
-    #   The TCP routing information for the route.
+    #   An object that represents the specification of a TCP route.
     #   @return [Types::TcpRoute]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteSpec AWS API Documentation
     #
     class RouteSpec < Struct.new(
+      :grpc_route,
+      :http2_route,
       :http_route,
       :priority,
       :tcp_route)
       include Aws::Structure
     end
 
-    # An object representing the HTTP routing specification for a route.
+    # An object that represents an HTTP or HTTP2 route type.
     #
     # @note When making an API call, you may pass HttpRoute
     #   data as a hash:
@@ -3100,11 +3639,13 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] action
-    #   The action to take if a match is determined.
+    #   An object that represents the action to take if a match is
+    #   determined.
     #   @return [Types::HttpRouteAction]
     #
     # @!attribute [rw] match
-    #   The criteria for determining an HTTP request match.
+    #   An object that represents the criteria for determining a request
+    #   match.
     #   @return [Types::HttpRouteMatch]
     #
     # @!attribute [rw] retry_policy
@@ -3138,7 +3679,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the specification of a service mesh.
+    # An object that represents the specification of a service mesh.
     #
     # @note When making an API call, you may pass MeshSpec
     #   data as a hash:
@@ -3172,7 +3713,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing an access log file.
+    # An object that represents an access log file.
     #
     # @note When making an API call, you may pass FileAccessLog
     #   data as a hash:
@@ -3202,7 +3743,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing a virtual node service provider.
+    # An object that represents a virtual node service provider.
     #
     # @note When making an API call, you may pass VirtualRouterServiceProvider
     #   data as a hash:
@@ -3266,8 +3807,8 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object representing the service discovery information for a virtual
-    # node.
+    # An object that represents the service discovery information for a
+    # virtual node.
     #
     # @note When making an API call, you may pass ServiceDiscovery
     #   data as a hash:
