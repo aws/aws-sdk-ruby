@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.381 (2019-10-24)
+------------------
+
 * Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
 
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
