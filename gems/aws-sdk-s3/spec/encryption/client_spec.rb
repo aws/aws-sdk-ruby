@@ -140,8 +140,9 @@ module Aws
                     'Content-Md5' => 'l0B7VfMeJ/9UqZlxWo2uEw==',
                     # key is encrypted here with the master encryption key,
                     # then base64 encoded
-                    'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOIt'\
-                                            'bXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
+                    'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e'\
+                                              '2l0DvOItbXByml/NPtKQcUls'\
+                                              'oGHoYR/T0TuYHcNj',
                     'X-Amz-Meta-X-Amz-Iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                     'X-Amz-Meta-X-Amz-Matdesc' => '{}',
                     'X-Amz-Meta-X-Amz-Unencrypted-Content-Length' => '6'
@@ -268,8 +269,9 @@ module Aws
                 .to_return(
                   body: encrypted_body,
                   headers: {
-                    'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOIt'\
-                                            'bXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
+                    'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e'\
+                                              '2l0DvOItbXByml/NPtKQcUls'\
+                                              'oGHoYR/T0TuYHcNj',
                     'X-Amz-Meta-X-Amz-Iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                     'X-Amz-Meta-X-Amz-Matdesc' => matdesc
                   }
@@ -289,8 +291,9 @@ module Aws
               ).to_return(
                 body: encrypted_body,
                 headers: {
-                  'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOIt'\
-                                          'bXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
+                  'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e'\
+                                            '2l0DvOItbXByml/NPtKQcUls'\
+                                            'oGHoYR/T0TuYHcNj',
                   'X-Amz-Meta-X-Amz-Iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                   'X-Amz-Meta-X-Amz-Matdesc' => '{}'
                 }
@@ -435,8 +438,9 @@ module Aws
               api_client.handle(step: :send) do |context|
                 http_resp = context.http_response
                 headers = {
-                  'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOIt'\
-                                          'bXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
+                  'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e'\
+                                            '2l0DvOItbXByml/NPtKQcUls'\
+                                            'oGHoYR/T0TuYHcNj',
                   'X-Amz-Meta-X-Amz-Iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                   'X-Amz-Meta-X-Amz-Matdesc' => '{}'
                 }

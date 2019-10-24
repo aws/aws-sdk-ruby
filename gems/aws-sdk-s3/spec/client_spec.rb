@@ -320,13 +320,12 @@ module Aws
             Seahorse::Client::Response.new(context: context)
           end
           resp = s3.create_bucket(bucket: 'aws-sdk')
-          expect(
-            resp.context.http_request.body_contents.strip
-          ).to eq(<<-XML.strip)
-<CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-  <LocationConstraint>us-west-2</LocationConstraint>
-</CreateBucketConfiguration>
-          XML
+          expect(resp.context.http_request.body_contents.strip)
+            .to eq(<<-XML.strip)
+              <CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+                <LocationConstraint>us-west-2</LocationConstraint>
+              </CreateBucketConfiguration>
+            XML
         end
 
         it 'does not overide bucket location constraint params' do
@@ -341,13 +340,12 @@ module Aws
               location_constraint: 'EU'
             }
           )
-          expect(
-            resp.context.http_request.body_contents.strip
-          ).to eq(<<-XML.strip)
-<CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-  <LocationConstraint>EU</LocationConstraint>
-</CreateBucketConfiguration>
-          XML
+          expect(resp.context.http_request.body_contents.strip)
+            .to eq(<<-XML.strip)
+              <CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+                <LocationConstraint>EU</LocationConstraint>
+              </CreateBucketConfiguration>
+            XML
         end
       end
 
@@ -440,19 +438,19 @@ module Aws
               status_code: 200,
               headers: {},
               body: <<-XML.strip)
-            <?xml version="1.0" encoding="UTF-8"?>
-            <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-              <Prefix>a%26</Prefix>
-              <Delimiter>b%26</Delimiter>
-              <Marker>c%26</Marker>
-              <NextMarker>d%26</NextMarker>
-              <Contents>
-                <Key>e%26</Key>
-              </Contents>
-              <CommonPrefixes>
-                <Prefix>f%26</Prefix>
-              </CommonPrefixes>
-            </ListBucketResult>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+                  <Prefix>a%26</Prefix>
+                  <Delimiter>b%26</Delimiter>
+                  <Marker>c%26</Marker>
+                  <NextMarker>d%26</NextMarker>
+                  <Contents>
+                    <Key>e%26</Key>
+                  </Contents>
+                  <CommonPrefixes>
+                    <Prefix>f%26</Prefix>
+                  </CommonPrefixes>
+                </ListBucketResult>
               XML
             Seahorse::Client::Response.new(context: context)
           end
@@ -477,12 +475,12 @@ module Aws
               status_code: 200,
               headers: {},
               body: <<-XML.strip)
-            <?xml version="1.0" encoding="UTF-8"?>
-            <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-              <Contents>
-                <Key>a%26</Key>
-              </Contents>
-            </ListBucketResult>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+                  <Contents>
+                    <Key>a%26</Key>
+                  </Contents>
+                </ListBucketResult>
               XML
             Seahorse::Client::Response.new(context: context)
           end
@@ -498,22 +496,22 @@ module Aws
               status_code: 200,
               headers: {},
               body: <<-XML.strip)
-            <?xml version="1.0" encoding="UTF-8"?>
-            <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
-              <Prefix>a%26</Prefix>
-              <Delimiter>b%26</Delimiter>
-              <KeyMarker>c%26</KeyMarker>
-              <NextKeyMarker>d%26</NextKeyMarker>
-              <Version>
-                <Key>e%26</Key>
-              </Version>
-              <DeleteMarker>
-                <Key>f%26</Key>
-              </DeleteMarker>
-              <CommonPrefixes>
-                <Prefix>g%26</Prefix>
-              </CommonPrefixes>
-            </ListVersionsResult>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
+                  <Prefix>a%26</Prefix>
+                  <Delimiter>b%26</Delimiter>
+                  <KeyMarker>c%26</KeyMarker>
+                  <NextKeyMarker>d%26</NextKeyMarker>
+                  <Version>
+                    <Key>e%26</Key>
+                  </Version>
+                  <DeleteMarker>
+                    <Key>f%26</Key>
+                  </DeleteMarker>
+                  <CommonPrefixes>
+                    <Prefix>g%26</Prefix>
+                  </CommonPrefixes>
+                </ListVersionsResult>
               XML
             Seahorse::Client::Response.new(context: context)
           end
@@ -538,19 +536,19 @@ module Aws
               status_code: 200,
               headers: {},
               body: <<-XML.strip)
-            <?xml version="1.0" encoding="UTF-8"?>
-            <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
-              <Prefix>a%26</Prefix>
-              <Delimiter>b%26</Delimiter>
-              <KeyMarker>c%26</KeyMarker>
-              <NextKeyMarker>d%26</NextKeyMarker>
-              <Upload>
-                <Key>e%26</Key>
-              </Upload>
-              <CommonPrefixes>
-                <Prefix>f%26</Prefix>
-              </CommonPrefixes>
-            </ListVersionsResult>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
+                  <Prefix>a%26</Prefix>
+                  <Delimiter>b%26</Delimiter>
+                  <KeyMarker>c%26</KeyMarker>
+                  <NextKeyMarker>d%26</NextKeyMarker>
+                  <Upload>
+                    <Key>e%26</Key>
+                  </Upload>
+                  <CommonPrefixes>
+                    <Prefix>f%26</Prefix>
+                  </CommonPrefixes>
+                </ListVersionsResult>
               XML
             Seahorse::Client::Response.new(context: context)
           end
@@ -586,16 +584,16 @@ module Aws
             }
           )
           expect(resp.context.http_request.body_contents).to eq(<<-XML)
-<AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-  <AccessControlList>
-    <Grant>
-      <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-        <DisplayName>name</DisplayName>
-      </Grantee>
-      <Permission>READ</Permission>
-    </Grant>
-  </AccessControlList>
-</AccessControlPolicy>
+            <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+              <AccessControlList>
+                <Grant>
+                  <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+                    <DisplayName>name</DisplayName>
+                  </Grantee>
+                  <Permission>READ</Permission>
+                </Grant>
+              </AccessControlList>
+            </AccessControlPolicy>
           XML
         end
       end
@@ -639,11 +637,7 @@ module Aws
           end
           resp = client.list_objects(bucket: 'aws-sdk')
           expect(resp.contents.map(&:key)).to eq(
-            [
-             'prefix suffix',
-             'prefix+suffix',
-             'prefix suffix'
-            ]
+            ['prefix suffix', 'prefix+suffix', 'prefix suffix']
           )
         end
       end
@@ -661,7 +655,7 @@ module Aws
           end.not_to raise_error
         end
 
-        it 'retries requests when fewer than content-length bytes are received' do
+        it 'retries requests when bytes are less than content-length' do
           stub_request(:get, 'https://bucket.s3.amazonaws.com/key')
             .to_return(
               status: 200, body: 'dat', headers: { 'content-length' => '4' }
