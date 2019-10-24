@@ -322,9 +322,9 @@ module Aws
           resp = s3.create_bucket(bucket: 'aws-sdk')
           expect(resp.context.http_request.body_contents.strip)
             .to eq(<<-XML.strip)
-              <CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-                <LocationConstraint>us-west-2</LocationConstraint>
-              </CreateBucketConfiguration>
+<CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <LocationConstraint>us-west-2</LocationConstraint>
+</CreateBucketConfiguration>
             XML
         end
 
@@ -342,9 +342,9 @@ module Aws
           )
           expect(resp.context.http_request.body_contents.strip)
             .to eq(<<-XML.strip)
-              <CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-                <LocationConstraint>EU</LocationConstraint>
-              </CreateBucketConfiguration>
+<CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <LocationConstraint>EU</LocationConstraint>
+</CreateBucketConfiguration>
             XML
         end
       end
@@ -584,16 +584,16 @@ module Aws
             }
           )
           expect(resp.context.http_request.body_contents).to eq(<<-XML)
-            <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-              <AccessControlList>
-                <Grant>
-                  <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-                    <DisplayName>name</DisplayName>
-                  </Grantee>
-                  <Permission>READ</Permission>
-                </Grant>
-              </AccessControlList>
-            </AccessControlPolicy>
+<AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <AccessControlList>
+    <Grant>
+      <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+        <DisplayName>name</DisplayName>
+      </Grantee>
+      <Permission>READ</Permission>
+    </Grant>
+  </AccessControlList>
+</AccessControlPolicy>
           XML
         end
       end
