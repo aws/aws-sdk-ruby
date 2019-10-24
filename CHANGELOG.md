@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
+
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::GameLift - Updated the API for Amazon GameLift.
+
+* Feature - Aws::SageMaker - Updated the API for Amazon SageMaker Service.
+
 2.11.380 (2019-10-23)
 ------------------
 
