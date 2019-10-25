@@ -190,7 +190,7 @@ module Aws::TranscribeStreamingService
     # * x-amzn-transcribe-session-id
     #
     # @option params [required, String] :language_code
-    #   Indicates the language used in the input audio stream.
+    #   Indicates the source language used in the input audio stream.
     #
     # @option params [required, Integer] :media_sample_rate_hertz
     #   The sample rate, in Hertz, of the input audio. We suggest that you use
@@ -308,7 +308,7 @@ module Aws::TranscribeStreamingService
     # @example Request syntax with placeholder values
     #
     #   async_resp = async_client.start_stream_transcription({
-    #     language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR
+    #     language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm", # required, accepts pcm
     #     vocabulary_name: "VocabularyName",
@@ -323,7 +323,7 @@ module Aws::TranscribeStreamingService
     # @example Response structure
     #
     #   resp.request_id #=> String
-    #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR"
+    #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU"
     #   resp.media_sample_rate_hertz #=> Integer
     #   resp.media_encoding #=> String, one of "pcm"
     #   resp.vocabulary_name #=> String
@@ -343,7 +343,7 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].items #=> Array
     #   event.transcript.results[0].alternatives[0].items[0].start_time #=> Float
     #   event.transcript.results[0].alternatives[0].items[0].end_time #=> Float
-    #   event.transcript.results[0].alternatives[0].items[0].type #=> String, one of "PRONUNCIATION", "PUNCTUATION"
+    #   event.transcript.results[0].alternatives[0].items[0].type #=> String, one of "pronunciation", "punctuation"
     #   event.transcript.results[0].alternatives[0].items[0].content #=> String
     #
     #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
@@ -401,7 +401,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
