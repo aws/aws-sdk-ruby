@@ -12,6 +12,10 @@ module Aws::ECR
     include Seahorse::Model
 
     Arn = Shapes::StringShape.new(name: 'Arn')
+    Attribute = Shapes::StructureShape.new(name: 'Attribute')
+    AttributeKey = Shapes::StringShape.new(name: 'AttributeKey')
+    AttributeList = Shapes::ListShape.new(name: 'AttributeList')
+    AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     AuthorizationData = Shapes::StructureShape.new(name: 'AuthorizationData')
     AuthorizationDataList = Shapes::ListShape.new(name: 'AuthorizationDataList')
     Base64 = Shapes::StringShape.new(name: 'Base64')
@@ -34,6 +38,8 @@ module Aws::ECR
     DeleteRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyResponse')
     DeleteRepositoryRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryRequest')
     DeleteRepositoryResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryResponse')
+    DescribeImageScanFindingsRequest = Shapes::StructureShape.new(name: 'DescribeImageScanFindingsRequest')
+    DescribeImageScanFindingsResponse = Shapes::StructureShape.new(name: 'DescribeImageScanFindingsResponse')
     DescribeImagesFilter = Shapes::StructureShape.new(name: 'DescribeImagesFilter')
     DescribeImagesRequest = Shapes::StructureShape.new(name: 'DescribeImagesRequest')
     DescribeImagesResponse = Shapes::StructureShape.new(name: 'DescribeImagesResponse')
@@ -43,6 +49,10 @@ module Aws::ECR
     EvaluationTimestamp = Shapes::TimestampShape.new(name: 'EvaluationTimestamp')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExpirationTimestamp = Shapes::TimestampShape.new(name: 'ExpirationTimestamp')
+    FindingDescription = Shapes::StringShape.new(name: 'FindingDescription')
+    FindingName = Shapes::StringShape.new(name: 'FindingName')
+    FindingSeverity = Shapes::StringShape.new(name: 'FindingSeverity')
+    FindingSeverityCounts = Shapes::MapShape.new(name: 'FindingSeverityCounts')
     ForceFlag = Shapes::BooleanShape.new(name: 'ForceFlag')
     GetAuthorizationTokenRegistryIdList = Shapes::ListShape.new(name: 'GetAuthorizationTokenRegistryIdList')
     GetAuthorizationTokenRequest = Shapes::StructureShape.new(name: 'GetAuthorizationTokenRequest')
@@ -71,6 +81,12 @@ module Aws::ECR
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImageManifest = Shapes::StringShape.new(name: 'ImageManifest')
     ImageNotFoundException = Shapes::StructureShape.new(name: 'ImageNotFoundException')
+    ImageScanFinding = Shapes::StructureShape.new(name: 'ImageScanFinding')
+    ImageScanFindingList = Shapes::ListShape.new(name: 'ImageScanFindingList')
+    ImageScanFindings = Shapes::StructureShape.new(name: 'ImageScanFindings')
+    ImageScanFindingsSummary = Shapes::StructureShape.new(name: 'ImageScanFindingsSummary')
+    ImageScanStatus = Shapes::StructureShape.new(name: 'ImageScanStatus')
+    ImageScanningConfiguration = Shapes::StructureShape.new(name: 'ImageScanningConfiguration')
     ImageSizeInBytes = Shapes::IntegerShape.new(name: 'ImageSizeInBytes')
     ImageTag = Shapes::StringShape.new(name: 'ImageTag')
     ImageTagAlreadyExistsException = Shapes::StructureShape.new(name: 'ImageTagAlreadyExistsException')
@@ -124,6 +140,8 @@ module Aws::ECR
     PushTimestamp = Shapes::TimestampShape.new(name: 'PushTimestamp')
     PutImageRequest = Shapes::StructureShape.new(name: 'PutImageRequest')
     PutImageResponse = Shapes::StructureShape.new(name: 'PutImageResponse')
+    PutImageScanningConfigurationRequest = Shapes::StructureShape.new(name: 'PutImageScanningConfigurationRequest')
+    PutImageScanningConfigurationResponse = Shapes::StructureShape.new(name: 'PutImageScanningConfigurationResponse')
     PutImageTagMutabilityRequest = Shapes::StructureShape.new(name: 'PutImageTagMutabilityRequest')
     PutImageTagMutabilityResponse = Shapes::StructureShape.new(name: 'PutImageTagMutabilityResponse')
     PutLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'PutLifecyclePolicyRequest')
@@ -138,9 +156,17 @@ module Aws::ECR
     RepositoryNotFoundException = Shapes::StructureShape.new(name: 'RepositoryNotFoundException')
     RepositoryPolicyNotFoundException = Shapes::StructureShape.new(name: 'RepositoryPolicyNotFoundException')
     RepositoryPolicyText = Shapes::StringShape.new(name: 'RepositoryPolicyText')
+    ScanNotFoundException = Shapes::StructureShape.new(name: 'ScanNotFoundException')
+    ScanOnPushFlag = Shapes::BooleanShape.new(name: 'ScanOnPushFlag')
+    ScanStatus = Shapes::StringShape.new(name: 'ScanStatus')
+    ScanStatusDescription = Shapes::StringShape.new(name: 'ScanStatusDescription')
+    ScanTimestamp = Shapes::TimestampShape.new(name: 'ScanTimestamp')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     SetRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'SetRepositoryPolicyRequest')
     SetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'SetRepositoryPolicyResponse')
+    SeverityCount = Shapes::IntegerShape.new(name: 'SeverityCount')
+    StartImageScanRequest = Shapes::StructureShape.new(name: 'StartImageScanRequest')
+    StartImageScanResponse = Shapes::StructureShape.new(name: 'StartImageScanResponse')
     StartLifecyclePolicyPreviewRequest = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewRequest')
     StartLifecyclePolicyPreviewResponse = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewResponse')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -159,6 +185,13 @@ module Aws::ECR
     UploadLayerPartResponse = Shapes::StructureShape.new(name: 'UploadLayerPartResponse')
     UploadNotFoundException = Shapes::StructureShape.new(name: 'UploadNotFoundException')
     Url = Shapes::StringShape.new(name: 'Url')
+    VulnerabilitySourceUpdateTimestamp = Shapes::TimestampShape.new(name: 'VulnerabilitySourceUpdateTimestamp')
+
+    Attribute.add_member(:key, Shapes::ShapeRef.new(shape: AttributeKey, required: true, location_name: "key"))
+    Attribute.add_member(:value, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "value"))
+    Attribute.struct_class = Types::Attribute
+
+    AttributeList.member = Shapes::ShapeRef.new(shape: Attribute)
 
     AuthorizationData.add_member(:authorization_token, Shapes::ShapeRef.new(shape: Base64, location_name: "authorizationToken"))
     AuthorizationData.add_member(:expires_at, Shapes::ShapeRef.new(shape: ExpirationTimestamp, location_name: "expiresAt"))
@@ -212,6 +245,7 @@ module Aws::ECR
     CreateRepositoryRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     CreateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRepositoryRequest.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
+    CreateRepositoryRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
     CreateRepositoryRequest.struct_class = Types::CreateRepositoryRequest
 
     CreateRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
@@ -244,6 +278,21 @@ module Aws::ECR
     DeleteRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
     DeleteRepositoryResponse.struct_class = Types::DeleteRepositoryResponse
 
+    DescribeImageScanFindingsRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DescribeImageScanFindingsRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    DescribeImageScanFindingsRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, required: true, location_name: "imageId"))
+    DescribeImageScanFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeImageScanFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribeImageScanFindingsRequest.struct_class = Types::DescribeImageScanFindingsRequest
+
+    DescribeImageScanFindingsResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DescribeImageScanFindingsResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    DescribeImageScanFindingsResponse.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
+    DescribeImageScanFindingsResponse.add_member(:image_scan_status, Shapes::ShapeRef.new(shape: ImageScanStatus, location_name: "imageScanStatus"))
+    DescribeImageScanFindingsResponse.add_member(:image_scan_findings, Shapes::ShapeRef.new(shape: ImageScanFindings, location_name: "imageScanFindings"))
+    DescribeImageScanFindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeImageScanFindingsResponse.struct_class = Types::DescribeImageScanFindingsResponse
+
     DescribeImagesFilter.add_member(:tag_status, Shapes::ShapeRef.new(shape: TagStatus, location_name: "tagStatus"))
     DescribeImagesFilter.struct_class = Types::DescribeImagesFilter
 
@@ -271,6 +320,9 @@ module Aws::ECR
 
     EmptyUploadException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     EmptyUploadException.struct_class = Types::EmptyUploadException
+
+    FindingSeverityCounts.key = Shapes::ShapeRef.new(shape: FindingSeverity)
+    FindingSeverityCounts.value = Shapes::ShapeRef.new(shape: SeverityCount)
 
     GetAuthorizationTokenRegistryIdList.member = Shapes::ShapeRef.new(shape: RegistryId)
 
@@ -340,6 +392,8 @@ module Aws::ECR
     ImageDetail.add_member(:image_tags, Shapes::ShapeRef.new(shape: ImageTagList, location_name: "imageTags"))
     ImageDetail.add_member(:image_size_in_bytes, Shapes::ShapeRef.new(shape: ImageSizeInBytes, location_name: "imageSizeInBytes"))
     ImageDetail.add_member(:image_pushed_at, Shapes::ShapeRef.new(shape: PushTimestamp, location_name: "imagePushedAt"))
+    ImageDetail.add_member(:image_scan_status, Shapes::ShapeRef.new(shape: ImageScanStatus, location_name: "imageScanStatus"))
+    ImageDetail.add_member(:image_scan_findings_summary, Shapes::ShapeRef.new(shape: ImageScanFindingsSummary, location_name: "imageScanFindingsSummary"))
     ImageDetail.struct_class = Types::ImageDetail
 
     ImageDetailList.member = Shapes::ShapeRef.new(shape: ImageDetail)
@@ -361,6 +415,33 @@ module Aws::ECR
 
     ImageNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ImageNotFoundException.struct_class = Types::ImageNotFoundException
+
+    ImageScanFinding.add_member(:name, Shapes::ShapeRef.new(shape: FindingName, location_name: "name"))
+    ImageScanFinding.add_member(:description, Shapes::ShapeRef.new(shape: FindingDescription, location_name: "description"))
+    ImageScanFinding.add_member(:uri, Shapes::ShapeRef.new(shape: Url, location_name: "uri"))
+    ImageScanFinding.add_member(:severity, Shapes::ShapeRef.new(shape: FindingSeverity, location_name: "severity"))
+    ImageScanFinding.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, location_name: "attributes"))
+    ImageScanFinding.struct_class = Types::ImageScanFinding
+
+    ImageScanFindingList.member = Shapes::ShapeRef.new(shape: ImageScanFinding)
+
+    ImageScanFindings.add_member(:image_scan_completed_at, Shapes::ShapeRef.new(shape: ScanTimestamp, location_name: "imageScanCompletedAt"))
+    ImageScanFindings.add_member(:vulnerability_source_updated_at, Shapes::ShapeRef.new(shape: VulnerabilitySourceUpdateTimestamp, location_name: "vulnerabilitySourceUpdatedAt"))
+    ImageScanFindings.add_member(:findings, Shapes::ShapeRef.new(shape: ImageScanFindingList, location_name: "findings"))
+    ImageScanFindings.add_member(:finding_severity_counts, Shapes::ShapeRef.new(shape: FindingSeverityCounts, location_name: "findingSeverityCounts"))
+    ImageScanFindings.struct_class = Types::ImageScanFindings
+
+    ImageScanFindingsSummary.add_member(:image_scan_completed_at, Shapes::ShapeRef.new(shape: ScanTimestamp, location_name: "imageScanCompletedAt"))
+    ImageScanFindingsSummary.add_member(:vulnerability_source_updated_at, Shapes::ShapeRef.new(shape: VulnerabilitySourceUpdateTimestamp, location_name: "vulnerabilitySourceUpdatedAt"))
+    ImageScanFindingsSummary.add_member(:finding_severity_counts, Shapes::ShapeRef.new(shape: FindingSeverityCounts, location_name: "findingSeverityCounts"))
+    ImageScanFindingsSummary.struct_class = Types::ImageScanFindingsSummary
+
+    ImageScanStatus.add_member(:status, Shapes::ShapeRef.new(shape: ScanStatus, location_name: "status"))
+    ImageScanStatus.add_member(:description, Shapes::ShapeRef.new(shape: ScanStatusDescription, location_name: "description"))
+    ImageScanStatus.struct_class = Types::ImageScanStatus
+
+    ImageScanningConfiguration.add_member(:scan_on_push, Shapes::ShapeRef.new(shape: ScanOnPushFlag, location_name: "scanOnPush"))
+    ImageScanningConfiguration.struct_class = Types::ImageScanningConfiguration
 
     ImageTagAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ImageTagAlreadyExistsException.struct_class = Types::ImageTagAlreadyExistsException
@@ -481,6 +562,16 @@ module Aws::ECR
     PutImageResponse.add_member(:image, Shapes::ShapeRef.new(shape: Image, location_name: "image"))
     PutImageResponse.struct_class = Types::PutImageResponse
 
+    PutImageScanningConfigurationRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    PutImageScanningConfigurationRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    PutImageScanningConfigurationRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, required: true, location_name: "imageScanningConfiguration"))
+    PutImageScanningConfigurationRequest.struct_class = Types::PutImageScanningConfigurationRequest
+
+    PutImageScanningConfigurationResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    PutImageScanningConfigurationResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    PutImageScanningConfigurationResponse.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
+    PutImageScanningConfigurationResponse.struct_class = Types::PutImageScanningConfigurationResponse
+
     PutImageTagMutabilityRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     PutImageTagMutabilityRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     PutImageTagMutabilityRequest.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, required: true, location_name: "imageTagMutability"))
@@ -507,6 +598,7 @@ module Aws::ECR
     Repository.add_member(:repository_uri, Shapes::ShapeRef.new(shape: Url, location_name: "repositoryUri"))
     Repository.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
     Repository.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
+    Repository.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
     Repository.struct_class = Types::Repository
 
     RepositoryAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -525,6 +617,9 @@ module Aws::ECR
     RepositoryPolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     RepositoryPolicyNotFoundException.struct_class = Types::RepositoryPolicyNotFoundException
 
+    ScanNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ScanNotFoundException.struct_class = Types::ScanNotFoundException
+
     ServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ServerException.struct_class = Types::ServerException
 
@@ -538,6 +633,17 @@ module Aws::ECR
     SetRepositoryPolicyResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     SetRepositoryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "policyText"))
     SetRepositoryPolicyResponse.struct_class = Types::SetRepositoryPolicyResponse
+
+    StartImageScanRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    StartImageScanRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    StartImageScanRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, required: true, location_name: "imageId"))
+    StartImageScanRequest.struct_class = Types::StartImageScanRequest
+
+    StartImageScanResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    StartImageScanResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    StartImageScanResponse.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
+    StartImageScanResponse.add_member(:image_scan_status, Shapes::ShapeRef.new(shape: ImageScanStatus, location_name: "imageScanStatus"))
+    StartImageScanResponse.struct_class = Types::StartImageScanResponse
 
     StartLifecyclePolicyPreviewRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     StartLifecyclePolicyPreviewRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -709,6 +815,25 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryPolicyNotFoundException)
       end)
 
+      api.add_operation(:describe_image_scan_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImageScanFindings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImageScanFindingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImageScanFindingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ScanNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_images, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeImages"
         o.http_method = "POST"
@@ -789,6 +914,12 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_repository_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -857,6 +988,17 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ImageTagAlreadyExistsException)
       end)
 
+      api.add_operation(:put_image_scanning_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutImageScanningConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutImageScanningConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutImageScanningConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+      end)
+
       api.add_operation(:put_image_tag_mutability, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutImageTagMutability"
         o.http_method = "POST"
@@ -888,6 +1030,18 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+      end)
+
+      api.add_operation(:start_image_scan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartImageScan"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartImageScanRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartImageScanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
       end)
 
       api.add_operation(:start_lifecycle_policy_preview, Seahorse::Model::Operation.new.tap do |o|

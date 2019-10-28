@@ -1049,6 +1049,45 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CompleteMigrationMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The ID of the replication group to which data is being migrated.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   Forces the migration to stop without ensuring that data is in sync.
+    #   It is recommended to use this option only to abort the migration and
+    #   not recommended when application wants to continue migration to
+    #   ElastiCache.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigrationMessage AWS API Documentation
+    #
+    class CompleteMigrationMessage < Struct.new(
+      :replication_group_id,
+      :force)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigrationResponse AWS API Documentation
+    #
+    class CompleteMigrationResponse < Struct.new(
+      :replication_group)
+      include Aws::Structure
+    end
+
     # Node group (shard) configuration options when adding or removing
     # replicas. Each node group (shard) configuration has the following
     # members: NodeGroupId, NewReplicaCount, and PreferredAvailabilityZones.
@@ -2318,6 +2357,32 @@ module Aws::ElastiCache
     #
     class CreateSnapshotResult < Struct.new(
       :snapshot)
+      include Aws::Structure
+    end
+
+    # The endpoint from which data should be migrated.
+    #
+    # @note When making an API call, you may pass CustomerNodeEndpoint
+    #   data as a hash:
+    #
+    #       {
+    #         address: "String",
+    #         port: 1,
+    #       }
+    #
+    # @!attribute [rw] address
+    #   The address of the node endpoint
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port of the node endpoint
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CustomerNodeEndpoint AWS API Documentation
+    #
+    class CustomerNodeEndpoint < Struct.new(
+      :address,
+      :port)
       include Aws::Structure
     end
 
@@ -6282,6 +6347,48 @@ module Aws::ElastiCache
       :automatic_failover,
       :node_snapshots,
       :kms_key_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartMigrationMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         customer_node_endpoint_list: [ # required
+    #           {
+    #             address: "String",
+    #             port: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The ID of the replication group to which data should be migrated.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_node_endpoint_list
+    #   List of endpoints from which data should be migrated. For Redis
+    #   (cluster mode disabled), list should have only one element.
+    #   @return [Array<Types::CustomerNodeEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigrationMessage AWS API Documentation
+    #
+    class StartMigrationMessage < Struct.new(
+      :replication_group_id,
+      :customer_node_endpoint_list)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigrationResponse AWS API Documentation
+    #
+    class StartMigrationResponse < Struct.new(
+      :replication_group)
       include Aws::Structure
     end
 

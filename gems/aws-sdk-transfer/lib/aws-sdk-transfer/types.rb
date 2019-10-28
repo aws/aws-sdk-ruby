@@ -52,7 +52,7 @@ module Aws::Transfer
     #   Accidentally changing a server's host key can be disruptive.
     #
     #   For more information, see
-    #   "https://docs.aws.amazon.com/transfer/latest/userguide/change-host-key"
+    #   "https://alpha-docs-aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key"
     #   in the *AWS SFTP User Guide.*
     #   @return [String]
     #
@@ -112,6 +112,13 @@ module Aws::Transfer
     #
     #       {
     #         home_directory: "HomeDirectory",
+    #         home_directory_type: "PATH", # accepts PATH, LOGICAL
+    #         home_directory_mappings: [
+    #           {
+    #             entry: "MapEntry", # required
+    #             target: "MapTarget", # required
+    #           },
+    #         ],
     #         policy: "Policy",
     #         role: "Role", # required
     #         server_id: "ServerId", # required
@@ -127,8 +134,39 @@ module Aws::Transfer
     #
     # @!attribute [rw] home_directory
     #   The landing directory (folder) for a user when they log in to the
-    #   server using their SFTP client. An example is `/home/username `.
+    #   server using their SFTP client.
+    #
+    #   An example is &lt;`your-Amazon-S3-bucket-name>/home/username`.
     #   @return [String]
+    #
+    # @!attribute [rw] home_directory_type
+    #   The type of landing directory (folder) you want your users' home
+    #   directory to be when they log into the SFTP server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is
+    #   in their SFTP clients. If you set it `LOGICAL`, you will need to
+    #   provide mappings in the `HomeDirectoryMappings` for how you want to
+    #   make S3 paths visible to your user.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_directory_mappings
+    #   Logical directory mappings that specify what S3 paths and keys
+    #   should be visible to your user and how you want to make them
+    #   visible. You will need to specify the "`Entry`" and "`Target`"
+    #   pair, where `Entry` shows how the path is made visible and `Target`
+    #   is the actual S3 path. If you only specify a target, it will be
+    #   displayed as is. You will need to also make sure that your AWS IAM
+    #   Role provides access to paths in `Target`. The following is an
+    #   example.
+    #
+    #   `'[ "/bucket2/documentation", \{ "Entry":
+    #   "your-personal-report.pdf", "Target":
+    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]'`
+    #
+    #   In most cases, you can use this value instead of the scope down
+    #   policy to lock your user down to the designated home directory
+    #   ("chroot"). To do this, you can set `Entry` to '/' and set
+    #   `Target` to the HomeDirectory parameter value.
+    #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
     #   A scope-down policy for your user so you can use the same IAM role
@@ -190,6 +228,8 @@ module Aws::Transfer
     #
     class CreateUserRequest < Struct.new(
       :home_directory,
+      :home_directory_type,
+      :home_directory_mappings,
       :policy,
       :role,
       :server_id,
@@ -471,8 +511,37 @@ module Aws::Transfer
     # @!attribute [rw] home_directory
     #   This property specifies the landing directory (or folder), which is
     #   the location that files are written to or read from in an Amazon S3
-    #   bucket for the described user. An example is
-    #   `/bucket_name/home/username `.
+    #   bucket for the described user. An example is `/your s3 bucket
+    #   name/home/username `.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_directory_mappings
+    #   Logical directory mappings that you specified for what S3 paths and
+    #   keys should be visible to your user and how you want to make them
+    #   visible. You will need to specify the "`Entry`" and "`Target`"
+    #   pair, where `Entry` shows how the path is made visible and `Target`
+    #   is the actual S3 path. If you only specify a target, it will be
+    #   displayed as is. You will need to also make sure that your AWS IAM
+    #   Role provides access to paths in `Target`.
+    #
+    #   In most cases, you can use this value instead of the scope down
+    #   policy to lock your user down to the designated home directory
+    #   ("chroot"). To do this, you can set `Entry` to '/' and set
+    #   `Target` to the HomeDirectory parameter value.
+    #
+    #   In most cases, you can use this value instead of the scope down
+    #   policy to lock your user down to the designated home directory
+    #   ("chroot"). To do this, you can set `Entry` to '/' and set
+    #   `Target` to the HomeDirectory parameter value.
+    #   @return [Array<Types::HomeDirectoryMapEntry>]
+    #
+    # @!attribute [rw] home_directory_type
+    #   The type of landing directory (folder) you mapped for your users'
+    #   to see when they log into the SFTP server. If you set it to `PATH`,
+    #   the user will see the absolute Amazon S3 bucket paths as is in their
+    #   SFTP clients. If you set it `LOGICAL`, you will need to provide
+    #   mappings in the `HomeDirectoryMappings` for how you want to make S3
+    #   paths visible to your user.
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -512,6 +581,8 @@ module Aws::Transfer
     class DescribedUser < Struct.new(
       :arn,
       :home_directory,
+      :home_directory_mappings,
+      :home_directory_type,
       :policy,
       :role,
       :ssh_public_keys,
@@ -538,6 +609,33 @@ module Aws::Transfer
     #
     class EndpointDetails < Struct.new(
       :vpc_endpoint_id)
+      include Aws::Structure
+    end
+
+    # Represents an object that contains entries and a targets for
+    # `HomeDirectoryMappings`.
+    #
+    # @note When making an API call, you may pass HomeDirectoryMapEntry
+    #   data as a hash:
+    #
+    #       {
+    #         entry: "MapEntry", # required
+    #         target: "MapTarget", # required
+    #       }
+    #
+    # @!attribute [rw] entry
+    #   Represents an entry and a target for `HomeDirectoryMappings`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   Represents the map target that is used in a `HomeDirectorymapEntry`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/HomeDirectoryMapEntry AWS API Documentation
+    #
+    class HomeDirectoryMapEntry < Struct.new(
+      :entry,
+      :target)
       include Aws::Structure
     end
 
@@ -908,6 +1006,15 @@ module Aws::Transfer
     #   from an Amazon S3 bucket for the user you specify by their ARN.
     #   @return [String]
     #
+    # @!attribute [rw] home_directory_type
+    #   The type of landing directory (folder) you mapped for your users'
+    #   home directory. If you set it to `PATH`, the user will see the
+    #   absolute Amazon S3 bucket paths as is in their SFTP clients. If you
+    #   set it `LOGICAL`, you will need to provide mappings in the
+    #   `HomeDirectoryMappings` for how you want to make S3 paths visible to
+    #   your user.
+    #   @return [String]
+    #
     # @!attribute [rw] role
     #   The role in use by this user. A *role* is an AWS Identity and Access
     #   Management (IAM) entity that, in this case, allows the SFTP server
@@ -931,6 +1038,7 @@ module Aws::Transfer
     class ListedUser < Struct.new(
       :arn,
       :home_directory,
+      :home_directory_type,
       :role,
       :ssh_public_key_count,
       :user_name)
@@ -1179,6 +1287,20 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # The request was denied due to request throttling.
+    #
+    # HTTP Status Code: 400
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :retry_after_seconds)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -1296,6 +1418,13 @@ module Aws::Transfer
     #
     #       {
     #         home_directory: "HomeDirectory",
+    #         home_directory_type: "PATH", # accepts PATH, LOGICAL
+    #         home_directory_mappings: [
+    #           {
+    #             entry: "MapEntry", # required
+    #             target: "MapTarget", # required
+    #           },
+    #         ],
     #         policy: "Policy",
     #         role: "Role",
     #         server_id: "ServerId", # required
@@ -1304,9 +1433,39 @@ module Aws::Transfer
     #
     # @!attribute [rw] home_directory
     #   A parameter that specifies the landing directory (folder) for a user
-    #   when they log in to the server using their client. An example is
-    #   `/home/username `.
+    #   when they log in to the server using their client.
+    #
+    #   An example is `<your-Amazon-S3-bucket-name>/home/username`.
     #   @return [String]
+    #
+    # @!attribute [rw] home_directory_type
+    #   The type of landing directory (folder) you want your users' home
+    #   directory to be when they log into the SFTP serve. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is
+    #   in their SFTP clients. If you set it `LOGICAL`, you will need to
+    #   provide mappings in the `HomeDirectoryMappings` for how you want to
+    #   make S3 paths visible to your user.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_directory_mappings
+    #   Logical directory mappings that specify what S3 paths and keys
+    #   should be visible to your user and how you want to make them
+    #   visible. You will need to specify the "`Entry`" and "`Target`"
+    #   pair, where `Entry` shows how the path is made visible and `Target`
+    #   is the actual S3 path. If you only specify a target, it will be
+    #   displayed as is. You will need to also make sure that your AWS IAM
+    #   Role provides access to paths in `Target`. The following is an
+    #   example.
+    #
+    #   `'[ "/bucket2/documentation", \{ "Entry":
+    #   "your-personal-report.pdf", "Target":
+    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]'`
+    #
+    #   In most cases, you can use this value instead of the scope down
+    #   policy to lock your user down to the designated home directory
+    #   ("chroot"). To do this, you can set `Entry` to '/' and set
+    #   `Target` to the HomeDirectory parameter value.
+    #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
     #   Allows you to supply a scope-down policy for your user so you can
@@ -1360,6 +1519,8 @@ module Aws::Transfer
     #
     class UpdateUserRequest < Struct.new(
       :home_directory,
+      :home_directory_type,
+      :home_directory_mappings,
       :policy,
       :role,
       :server_id,

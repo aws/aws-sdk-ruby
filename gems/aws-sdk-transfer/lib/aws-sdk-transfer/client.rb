@@ -288,7 +288,7 @@ module Aws::Transfer
     #   Accidentally changing a server's host key can be disruptive.
     #
     #   For more information, see
-    #   "https://docs.aws.amazon.com/transfer/latest/userguide/change-host-key"
+    #   "https://alpha-docs-aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key"
     #   in the *AWS SFTP User Guide.*
     #
     # @option params [Types::IdentityProviderDetails] :identity_provider_details
@@ -364,7 +364,35 @@ module Aws::Transfer
     #
     # @option params [String] :home_directory
     #   The landing directory (folder) for a user when they log in to the
-    #   server using their SFTP client. An example is `/home/username `.
+    #   server using their SFTP client.
+    #
+    #   An example is &lt;`your-Amazon-S3-bucket-name>/home/username`.
+    #
+    # @option params [String] :home_directory_type
+    #   The type of landing directory (folder) you want your users' home
+    #   directory to be when they log into the SFTP server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is in
+    #   their SFTP clients. If you set it `LOGICAL`, you will need to provide
+    #   mappings in the `HomeDirectoryMappings` for how you want to make S3
+    #   paths visible to your user.
+    #
+    # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
+    #   Logical directory mappings that specify what S3 paths and keys should
+    #   be visible to your user and how you want to make them visible. You
+    #   will need to specify the "`Entry`" and "`Target`" pair, where
+    #   `Entry` shows how the path is made visible and `Target` is the actual
+    #   S3 path. If you only specify a target, it will be displayed as is. You
+    #   will need to also make sure that your AWS IAM Role provides access to
+    #   paths in `Target`. The following is an example.
+    #
+    #   `'[ "/bucket2/documentation", \{ "Entry": "your-personal-report.pdf",
+    #   "Target": "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \}
+    #   ]'`
+    #
+    #   In most cases, you can use this value instead of the scope down policy
+    #   to lock your user down to the designated home directory ("chroot").
+    #   To do this, you can set `Entry` to '/' and set `Target` to the
+    #   HomeDirectory parameter value.
     #
     # @option params [String] :policy
     #   A scope-down policy for your user so you can use the same IAM role
@@ -424,6 +452,13 @@ module Aws::Transfer
     #
     #   resp = client.create_user({
     #     home_directory: "HomeDirectory",
+    #     home_directory_type: "PATH", # accepts PATH, LOGICAL
+    #     home_directory_mappings: [
+    #       {
+    #         entry: "MapEntry", # required
+    #         target: "MapTarget", # required
+    #       },
+    #     ],
     #     policy: "Policy",
     #     role: "Role", # required
     #     server_id: "ServerId", # required
@@ -620,6 +655,10 @@ module Aws::Transfer
     #   resp.server_id #=> String
     #   resp.user.arn #=> String
     #   resp.user.home_directory #=> String
+    #   resp.user.home_directory_mappings #=> Array
+    #   resp.user.home_directory_mappings[0].entry #=> String
+    #   resp.user.home_directory_mappings[0].target #=> String
+    #   resp.user.home_directory_type #=> String, one of "PATH", "LOGICAL"
     #   resp.user.policy #=> String
     #   resp.user.role #=> String
     #   resp.user.ssh_public_keys #=> Array
@@ -818,6 +857,7 @@ module Aws::Transfer
     #   resp.users #=> Array
     #   resp.users[0].arn #=> String
     #   resp.users[0].home_directory #=> String
+    #   resp.users[0].home_directory_type #=> String, one of "PATH", "LOGICAL"
     #   resp.users[0].role #=> String
     #   resp.users[0].ssh_public_key_count #=> Integer
     #   resp.users[0].user_name #=> String
@@ -1099,8 +1139,35 @@ module Aws::Transfer
     #
     # @option params [String] :home_directory
     #   A parameter that specifies the landing directory (folder) for a user
-    #   when they log in to the server using their client. An example is
-    #   `/home/username `.
+    #   when they log in to the server using their client.
+    #
+    #   An example is `<your-Amazon-S3-bucket-name>/home/username`.
+    #
+    # @option params [String] :home_directory_type
+    #   The type of landing directory (folder) you want your users' home
+    #   directory to be when they log into the SFTP serve. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is in
+    #   their SFTP clients. If you set it `LOGICAL`, you will need to provide
+    #   mappings in the `HomeDirectoryMappings` for how you want to make S3
+    #   paths visible to your user.
+    #
+    # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
+    #   Logical directory mappings that specify what S3 paths and keys should
+    #   be visible to your user and how you want to make them visible. You
+    #   will need to specify the "`Entry`" and "`Target`" pair, where
+    #   `Entry` shows how the path is made visible and `Target` is the actual
+    #   S3 path. If you only specify a target, it will be displayed as is. You
+    #   will need to also make sure that your AWS IAM Role provides access to
+    #   paths in `Target`. The following is an example.
+    #
+    #   `'[ "/bucket2/documentation", \{ "Entry": "your-personal-report.pdf",
+    #   "Target": "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \}
+    #   ]'`
+    #
+    #   In most cases, you can use this value instead of the scope down policy
+    #   to lock your user down to the designated home directory ("chroot").
+    #   To do this, you can set `Entry` to '/' and set `Target` to the
+    #   HomeDirectory parameter value.
     #
     # @option params [String] :policy
     #   Allows you to supply a scope-down policy for your user so you can use
@@ -1155,6 +1222,13 @@ module Aws::Transfer
     #
     #   resp = client.update_user({
     #     home_directory: "HomeDirectory",
+    #     home_directory_type: "PATH", # accepts PATH, LOGICAL
+    #     home_directory_mappings: [
+    #       {
+    #         entry: "MapEntry", # required
+    #         target: "MapTarget", # required
+    #       },
+    #     ],
     #     policy: "Policy",
     #     role: "Role",
     #     server_id: "ServerId", # required
@@ -1188,7 +1262,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
