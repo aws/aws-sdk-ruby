@@ -9245,6 +9245,33 @@ module Aws::S3
     #
     class SSES3 < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass ScanRange
+    #   data as a hash:
+    #
+    #       {
+    #         start: 1,
+    #         end: 1,
+    #       }
+    #
+    # @!attribute [rw] start
+    #   Specifies the start of the byte range. This parameter is optional.
+    #   Valid values: non-negative integers. The default value is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end
+    #   Specifies the end of the byte range. This parameter is optional.
+    #   Valid values: non-negative integers. The default value is one less
+    #   than the size of the object being queried.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ScanRange AWS API Documentation
+    #
+    class ScanRange < Struct.new(
+      :start,
+      :end)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] payload
     #   @return [Types::SelectObjectContentEventStream]
     #
@@ -9311,6 +9338,10 @@ module Aws::S3
     #             record_delimiter: "RecordDelimiter",
     #           },
     #         },
+    #         scan_range: {
+    #           start: 1,
+    #           end: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] bucket
@@ -9372,6 +9403,14 @@ module Aws::S3
     #   in response.
     #   @return [Types::OutputSerialization]
     #
+    # @!attribute [rw] scan_range
+    #   Specifies the byte range of the object to get the records from. A
+    #   record is processed when its first byte is contained by the range.
+    #   This parameter is optional, but when specified, it must not be
+    #   empty. See RFC 2616, Section 14.35.1 about how to specify the start
+    #   and end of the range.
+    #   @return [Types::ScanRange]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentRequest AWS API Documentation
     #
     class SelectObjectContentRequest < Struct.new(
@@ -9384,7 +9423,8 @@ module Aws::S3
       :expression_type,
       :request_progress,
       :input_serialization,
-      :output_serialization)
+      :output_serialization,
+      :scan_range)
       include Aws::Structure
     end
 
