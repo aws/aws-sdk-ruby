@@ -596,29 +596,34 @@ module Aws::S3
     #     delimiter: "Delimiter",
     #     encoding_type: "url", # accepts url
     #     prefix: "Prefix",
+    #     fetch_owner: false,
+    #     start_after: "StartAfter",
     #     request_payer: "requester", # accepts requester
     #   })
     # @param [Hash] options ({})
     # @option options [String] :delimiter
     #   A delimiter is a character you use to group keys.
     # @option options [String] :encoding_type
-    #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key may contain any
-    #   Unicode character; however, XML 1.0 parser cannot parse some
-    #   characters, such as characters with an ASCII value from 0 to 10. For
-    #   characters that are not supported in XML 1.0, you can add this
-    #   parameter to request that Amazon S3 encode the keys in the response.
+    #   Encoding type used by Amazon S3 to encode object keys in the response.
     # @option options [String] :prefix
     #   Limits the response to keys that begin with the specified prefix.
+    # @option options [Boolean] :fetch_owner
+    #   The owner field is not present in listV2 by default, if you want to
+    #   return owner field with each key in the result then set the fetch
+    #   owner field to true
+    # @option options [String] :start_after
+    #   StartAfter is where you want Amazon S3 to start listing from. Amazon
+    #   S3 starts listing after this specified key. StartAfter can be any key
+    #   in the bucket
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
-    #   the list objects request. Bucket owners need not specify this
-    #   parameter in their requests.
+    #   the list objects request in V2 style. Bucket owners need not specify
+    #   this parameter in their requests.
     # @return [ObjectSummary::Collection]
     def objects(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(bucket: @name)
-        resp = @client.list_objects(options)
+        resp = @client.list_objects_v2(options)
         resp.each_page do |page|
           batch = []
           page.data.contents.each do |c|

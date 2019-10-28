@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2019-10-28)
+------------------
+
+* Feature - Adding support in SelectObjectContent for scanning a portion of an object specified by a scan range.
+
 1.51.0 (2019-10-23)
 ------------------
 
