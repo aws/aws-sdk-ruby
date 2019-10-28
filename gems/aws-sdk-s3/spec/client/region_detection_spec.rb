@@ -75,9 +75,7 @@ module Aws
         end
 
         it 'detects the moved permanently and redirects' do
-          client = S3::Client.new(client_opts.merge(
-                                    region: 'us-west-2'
-                                  ))
+          client = S3::Client.new(client_opts.merge(region: 'us-west-2'))
           resp = client.put_object(bucket: 'bucket', key: 'key', body: 'body')
           host = resp.context.http_request.endpoint.host
           expect(host).to eq('bucket.s3.eu-central-1.amazonaws.com')
