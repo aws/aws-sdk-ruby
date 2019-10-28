@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.383 (2019-10-28)
+------------------
+
 * Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
 
 * Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
