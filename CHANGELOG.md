@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+* Feature - Aws::Transfer - Updated the API, and documentation for AWS Transfer for SFTP.
+
 2.11.382 (2019-10-25)
 ------------------
 
