@@ -3,13 +3,13 @@ require_relative 'spec_helper'
 module Aws
   module S3
     describe Presigner do
-
-      before (:each) do
+      before(:each) do
         Aws.config[:s3] = {
           region: 'us-east-1',
           credentials: Credentials.new(
-            "AKIAIOSFODNN7EXAMPLE",
-            "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+            'ACCESS_KEY_ID',
+            'SECRET_ACCESS_KEY'
+          ),
           retry_limit: 0
         }
 
@@ -28,7 +28,6 @@ module Aws
       let(:utc) { double('utc-time') }
       let(:datetime) { '20130524T000000Z' }
 
-
       describe '#initialize' do
         it 'accepts an injected S3 client' do
           pre = Presigner.new(client: client)
@@ -41,8 +40,7 @@ module Aws
         end
       end
 
-      describe "#presigned_url" do
-
+      describe '#presigned_url' do
         it 'will be tracked as an api request' do
           stub_client = Aws::S3::Client.new(stub_responses: true)
           presigner = Presigner.new(client: stub_client)
@@ -54,7 +52,9 @@ module Aws
           stub_client = Aws::S3::Client.new(stub_responses: true)
           presigner = Presigner.new(client: stub_client)
           presigner.presigned_url(:get_object, bucket: 'bkt', key: 'k')
-          expect(stub_client.api_requests(exclude_presign: true).size).to be_zero
+          expect(
+            stub_client.api_requests(exclude_presign: true).size
+          ).to be_zero
 
           stub_client.list_buckets
           stub_client.list_buckets
@@ -66,45 +66,43 @@ module Aws
 
         it 'raises an error if the key is blank' do
           presigner = Presigner.new(client: client)
-          expect {
-            presigner.presigned_url(:get_object, {
-              bucket: 'aws-sdk',
-              key: '',
-            })
-          }.to raise_error(ArgumentError, /key must not be blank/)
+          expect do
+            presigner.presigned_url(
+              :get_object, bucket: 'aws-sdk', key: ''
+            )
+          end.to raise_error(ArgumentError, /key must not be blank/)
         end
 
         it 'can presign #get_object to spec' do
-          bucket = "examplebucket"
-          key = "test.txt"
-          expected_url = "https://examplebucket.s3.amazonaws.com/test.txt"\
-            "?X-Amz-Algorithm=AWS4-HMAC-SHA256"\
-            "&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE%2F20130524%2F"\
-            "us-east-1%2Fs3%2Faws4_request"\
-            "&X-Amz-Date=20130524T000000Z&X-Amz-Expires=86400"\
-            "&X-Amz-SignedHeaders=host"\
-            "&X-Amz-Signature=aeeed9bbccd4d02ee5c0109b86d86835f995330da4c26595"\
-            "7d157751f604d404"
+          bucket = 'examplebucket'
+          key = 'test.txt'
+          expected_url = 'https://examplebucket.s3.amazonaws.com/test.txt?'\
+                         'X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential='\
+                         'ACCESS_KEY_ID%2F20130524%2Fus-east-1%2Fs3%2F'\
+                         'aws4_request&X-Amz-Date=20130524T000000Z'\
+                         '&X-Amz-Expires=86400&X-Amz-SignedHeaders=host'\
+                         '&X-Amz-Signature=5da845a038b194a3826362ecd698f78fb1e'\
+                         '26cb44b25af49263f0a0983870f57'
 
           pre = Presigner.new(client: client)
           params = {
             bucket: bucket,
             key: key,
-            expires_in: 86400
+            expires_in: 86_400
           }
           actual_url = pre.presigned_url(:get_object, params)
           expect(actual_url).to eq(expected_url)
         end
 
         it 'can sign with a given time' do
-          bucket = "examplebucket"
-          key = "test.txt"
+          bucket = 'examplebucket'
+          key = 'test.txt'
 
           pre = Presigner.new(client: client)
           params = {
             bucket: bucket,
             key: key,
-            expires_in: 86400,
+            expires_in: 86_400,
             time: Time.utc(1969, 4, 20)
           }
           actual_url = pre.presigned_url(:get_object, params)
@@ -112,54 +110,52 @@ module Aws
         end
 
         it 'can sign with additional whitelisted headers' do
-          bucket = "examplebucket"
-          key = "test.txt"
+          bucket = 'examplebucket'
+          key = 'test.txt'
 
           pre = Presigner.new(client: client)
           params = {
             bucket: bucket,
             key: key,
-            expires_in: 86400,
+            expires_in: 86_400,
             whitelist_headers: ['user-agent']
           }
           actual_url = pre.presigned_url(:get_object, params)
-          expect(actual_url).to include('&X-Amz-SignedHeaders=host%3Buser-agent')
+          expect(actual_url).to include(
+            '&X-Amz-SignedHeaders=host%3Buser-agent'
+          )
         end
 
         it 'raises when expires_in length is over 1 week' do
-          bucket = "examplebucket"
-          key = "test.txt"
+          bucket = 'examplebucket'
+          key = 'test.txt'
           pre = Presigner.new(client: client)
           params = {
             bucket: bucket,
             key: key,
-            expires_in: (7 * 86400) + 1
+            expires_in: (7 * 86_400) + 1
           }
-          expect {
+          expect do
             pre.presigned_url(:get_object, params)
-          }.to raise_error(ArgumentError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'can generate http (non-secure) urls' do
           signer = Presigner.new(client: client)
-          url = signer.presigned_url(:get_object,
-            bucket:'aws-sdk',
-            key:'foo',
-            secure: false
+          url = signer.presigned_url(
+            :get_object, bucket: 'aws-sdk', key: 'foo', secure: false
           )
           expect(url).to match(/^http:/)
         end
 
         it 'uses the correct :endpoint scheme' do
-          client.config.endpoint = URI("http://example.com")
+          client.config.endpoint = URI('http://example.com')
           signer = Presigner.new(client: client)
-          url = signer.presigned_url(:get_object,
-            bucket:'aws-sdk',
-            key:'foo',
+          url = signer.presigned_url(
+            :get_object, bucket: 'aws-sdk', key: 'foo'
           )
           expect(url).to match(/^http:/)
         end
-
       end
     end
   end
