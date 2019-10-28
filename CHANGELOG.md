@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Updated the API, documentation, and resource interfaces for Amazon Simple Storage Service.
+
 2.11.383 (2019-10-28)
 ------------------
 

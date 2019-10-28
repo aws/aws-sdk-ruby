@@ -235,7 +235,7 @@
         },
         "Objects": {
           "request": {
-            "operation": "ListObjects",
+            "operation": "ListObjectsV2",
             "params": [
               { "target": "Bucket", "source": "identifier", "name": "Name" }
             ]
