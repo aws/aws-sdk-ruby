@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.385 (2019-10-29)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::Cloud9 - Updated the API, and documentation for AWS Cloud9.
