@@ -611,7 +611,17 @@ module Aws::AppStream
     #   fleet. To assume a role, a fleet instance calls the AWS Security
     #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
     #   the role to use. The operation creates a new session with temporary
-    #   credentials.
+    #   credentials. AppStream 2.0 retrieves the temporary credentials and
+    #   creates the **AppStream\_Machine\_Role** credential profile on the
+    #   instance.
+    #
+    #   For more information, see [Using an IAM Role to Grant Permissions to
+    #   Applications and Scripts Running on AppStream 2.0 Streaming
+    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
@@ -692,7 +702,48 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type to use when launching the image builder.
+    #   The instance type to use when launching the image builder. The
+    #   following instance types are available:
+    #
+    #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.compute.large
+    #
+    #   * stream.compute.xlarge
+    #
+    #   * stream.compute.2xlarge
+    #
+    #   * stream.compute.4xlarge
+    #
+    #   * stream.compute.8xlarge
+    #
+    #   * stream.memory.large
+    #
+    #   * stream.memory.xlarge
+    #
+    #   * stream.memory.2xlarge
+    #
+    #   * stream.memory.4xlarge
+    #
+    #   * stream.memory.8xlarge
+    #
+    #   * stream.graphics-design.large
+    #
+    #   * stream.graphics-design.xlarge
+    #
+    #   * stream.graphics-design.2xlarge
+    #
+    #   * stream.graphics-design.4xlarge
+    #
+    #   * stream.graphics-desktop.2xlarge
+    #
+    #   * stream.graphics-pro.4xlarge
+    #
+    #   * stream.graphics-pro.8xlarge
+    #
+    #   * stream.graphics-pro.16xlarge
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -713,7 +764,17 @@ module Aws::AppStream
     #   builder. To assume a role, the image builder calls the AWS Security
     #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
     #   the role to use. The operation creates a new session with temporary
-    #   credentials.
+    #   credentials. AppStream 2.0 retrieves the temporary credentials and
+    #   creates the **AppStream\_Machine\_Role** credential profile on the
+    #   instance.
+    #
+    #   For more information, see [Using an IAM Role to Grant Permissions to
+    #   Applications and Scripts Running on AppStream 2.0 Streaming
+    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
@@ -864,6 +925,7 @@ module Aws::AppStream
     #             vpce_id: "String",
     #           },
     #         ],
+    #         embed_host_domains: ["EmbedHostDomain"],
     #       }
     #
     # @!attribute [rw] name
@@ -931,6 +993,12 @@ module Aws::AppStream
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
+    # @!attribute [rw] embed_host_domains
+    #   The domains where AppStream 2.0 streaming sessions can be embedded
+    #   in an iframe. You must approve the domains that you want to host
+    #   embedded AppStream 2.0 streaming sessions.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -943,7 +1011,8 @@ module Aws::AppStream
       :user_settings,
       :application_settings,
       :tags,
-      :access_endpoints)
+      :access_endpoints,
+      :embed_host_domains)
       include Aws::Structure
     end
 
@@ -2051,7 +2120,48 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type to use when launching fleet instances.
+    #   The instance type to use when launching fleet instances. The
+    #   following instance types are available:
+    #
+    #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.compute.large
+    #
+    #   * stream.compute.xlarge
+    #
+    #   * stream.compute.2xlarge
+    #
+    #   * stream.compute.4xlarge
+    #
+    #   * stream.compute.8xlarge
+    #
+    #   * stream.memory.large
+    #
+    #   * stream.memory.xlarge
+    #
+    #   * stream.memory.2xlarge
+    #
+    #   * stream.memory.4xlarge
+    #
+    #   * stream.memory.8xlarge
+    #
+    #   * stream.graphics-design.large
+    #
+    #   * stream.graphics-design.xlarge
+    #
+    #   * stream.graphics-design.2xlarge
+    #
+    #   * stream.graphics-design.4xlarge
+    #
+    #   * stream.graphics-desktop.2xlarge
+    #
+    #   * stream.graphics-pro.4xlarge
+    #
+    #   * stream.graphics-pro.8xlarge
+    #
+    #   * stream.graphics-pro.16xlarge
     #   @return [String]
     #
     # @!attribute [rw] fleet_type
@@ -2156,6 +2266,16 @@ module Aws::AppStream
     #   role, the fleet instance calls the AWS Security Token Service (STS)
     #   `AssumeRole` API operation and passes the ARN of the role to use.
     #   The operation creates a new session with temporary credentials.
+    #   AppStream 2.0 retrieves the temporary credentials and creates the
+    #   **AppStream\_Machine\_Role** credential profile on the instance.
+    #
+    #   For more information, see [Using an IAM Role to Grant Permissions to
+    #   Applications and Scripts Running on AppStream 2.0 Streaming
+    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
@@ -2323,7 +2443,48 @@ module Aws::AppStream
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] instance_type
-    #   The instance type for the image builder.
+    #   The instance type for the image builder. The following instance
+    #   types are available:
+    #
+    #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.compute.large
+    #
+    #   * stream.compute.xlarge
+    #
+    #   * stream.compute.2xlarge
+    #
+    #   * stream.compute.4xlarge
+    #
+    #   * stream.compute.8xlarge
+    #
+    #   * stream.memory.large
+    #
+    #   * stream.memory.xlarge
+    #
+    #   * stream.memory.2xlarge
+    #
+    #   * stream.memory.4xlarge
+    #
+    #   * stream.memory.8xlarge
+    #
+    #   * stream.graphics-design.large
+    #
+    #   * stream.graphics-design.xlarge
+    #
+    #   * stream.graphics-design.2xlarge
+    #
+    #   * stream.graphics-design.4xlarge
+    #
+    #   * stream.graphics-desktop.2xlarge
+    #
+    #   * stream.graphics-pro.4xlarge
+    #
+    #   * stream.graphics-pro.8xlarge
+    #
+    #   * stream.graphics-pro.16xlarge
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -2335,7 +2496,17 @@ module Aws::AppStream
     #   assume a role, the image builder calls the AWS Security Token
     #   Service (STS) `AssumeRole` API operation and passes the ARN of the
     #   role to use. The operation creates a new session with temporary
-    #   credentials.
+    #   credentials. AppStream 2.0 retrieves the temporary credentials and
+    #   creates the **AppStream\_Machine\_Role** credential profile on the
+    #   instance.
+    #
+    #   For more information, see [Using an IAM Role to Grant Permissions to
+    #   Applications and Scripts Running on AppStream 2.0 Streaming
+    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -2948,6 +3119,12 @@ module Aws::AppStream
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
+    # @!attribute [rw] embed_host_domains
+    #   The domains where AppStream 2.0 streaming sessions can be embedded
+    #   in an iframe. You must approve the domains that you want to host
+    #   embedded AppStream 2.0 streaming sessions.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -2962,7 +3139,8 @@ module Aws::AppStream
       :stack_errors,
       :user_settings,
       :application_settings,
-      :access_endpoints)
+      :access_endpoints,
+      :embed_host_domains)
       include Aws::Structure
     end
 
@@ -3415,7 +3593,17 @@ module Aws::AppStream
     #   fleet. To assume a role, a fleet instance calls the AWS Security
     #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
     #   the role to use. The operation creates a new session with temporary
-    #   credentials.
+    #   credentials. AppStream 2.0 retrieves the temporary credentials and
+    #   creates the **AppStream\_Machine\_Role** credential profile on the
+    #   instance.
+    #
+    #   For more information, see [Using an IAM Role to Grant Permissions to
+    #   Applications and Scripts Running on AppStream 2.0 Streaming
+    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
@@ -3506,7 +3694,7 @@ module Aws::AppStream
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
     #         user_settings: [
     #           {
     #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
@@ -3523,6 +3711,7 @@ module Aws::AppStream
     #             vpce_id: "String",
     #           },
     #         ],
+    #         embed_host_domains: ["EmbedHostDomain"],
     #       }
     #
     # @!attribute [rw] display_name
@@ -3578,6 +3767,12 @@ module Aws::AppStream
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
+    # @!attribute [rw] embed_host_domains
+    #   The domains where AppStream 2.0 streaming sessions can be embedded
+    #   in an iframe. You must approve the domains that you want to host
+    #   embedded AppStream 2.0 streaming sessions.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -3591,7 +3786,8 @@ module Aws::AppStream
       :attributes_to_delete,
       :user_settings,
       :application_settings,
-      :access_endpoints)
+      :access_endpoints,
+      :embed_host_domains)
       include Aws::Structure
     end
 

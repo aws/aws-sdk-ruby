@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2019-10-29)
+------------------
+
+* Feature - Adds support for providing domain names that can embed streaming sessions
+
 1.37.0 (2019-10-23)
 ------------------
 

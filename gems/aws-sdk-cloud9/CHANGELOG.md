@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-10-29)
+------------------
+
+* Feature - Added CREATING and CREATE_FAILED environment lifecycle statuses.
+
 1.18.0 (2019-10-23)
 ------------------
 
