@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Support setting `:disable_queue_url_override` to `true` for disabling endpoint and region override from `:queue_url` value (Github #2114)
+
 1.23.0 (2019-10-23)
 ------------------
 

@@ -4,10 +4,20 @@ module Aws
       # @api private
       class QueueUrls < Seahorse::Client::Plugin
 
+        option(:disable_queue_url_override,
+              default: false,
+              doc_type: 'Boolean',
+              docstring: <<-DOCS
+Set to `true` to disable region and endpoint override from
+`:queue_url` value, default to `false`
+              DOCS
+        )
+
         class Handler < Seahorse::Client::Handler
 
           def call(context)
-            if queue_url = context.params[:queue_url]
+            disable = !!context.config.disable_queue_url_override
+            if !disable && (queue_url = context.params[:queue_url])
               update_endpoint(context, queue_url)
               update_region(context, queue_url)
             end

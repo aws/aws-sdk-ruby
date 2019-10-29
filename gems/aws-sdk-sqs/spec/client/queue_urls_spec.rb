@@ -59,6 +59,16 @@ module Aws
               client.send(method, params.merge(queue_url: url))
             }.to_not raise_error
           end
+
+          it 'does not override endpoint and region when disabled' do
+            endpoint = 'https://vpc-123234.sqs.us-west-2.vpc.amazonaws.com'
+            url = 'https://sqs.us-east-1.amazonaws.com/1234567890/demo'
+            client = Client.new(stub_responses: true, endpoint: endpoint, disable_queue_url_override: true)
+            resp = client.send(method, params.merge(queue_url: url))
+            expect(resp.context.http_request.endpoint.to_s).to eq(endpoint)
+            expect(resp.context.http_request.headers['authorization']).not_to include('us-east-1')
+            expect(resp.context.http_request.headers['authorization']).to include('us-stubbed-1')
+          end
         end
       end
     end
