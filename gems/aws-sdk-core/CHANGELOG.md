@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix `EndpointCache#key?` to be thread safe.
+
 3.72.0 (2019-10-24)
 ------------------
 
