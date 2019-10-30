@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.386 (2019-10-30)
+------------------
+
 * Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
 
 2.11.385 (2019-10-29)
