@@ -60,10 +60,12 @@ module Aws
     # @param [String] key
     # @return [Boolean]
     def key?(key)
-      if @entries.key?(key) && (@entries[key].nil? || @entries[key].expired?)
-        self.delete(key)
+      @mutex.synchronize do
+        if @entries.key?(key) && (@entries[key].nil? || @entries[key].expired?)
+          @entries.delete(key)
+        end
+        @entries.key?(key)
       end
-      @entries.key?(key)
     end
 
     # checking whether an polling thread exist for the key
