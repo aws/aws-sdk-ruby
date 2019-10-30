@@ -630,7 +630,17 @@ module Aws::AppStream
     #   To assume a role, a fleet instance calls the AWS Security Token
     #   Service (STS) `AssumeRole` API operation and passes the ARN of the
     #   role to use. The operation creates a new session with temporary
-    #   credentials.
+    #   credentials. AppStream 2.0 retrieves the temporary credentials and
+    #   creates the **AppStream\_Machine\_Role** credential profile on the
+    #   instance.
+    #
+    #   For more information, see [Using an IAM Role to Grant Permissions to
+    #   Applications and Scripts Running on AppStream 2.0 Streaming
+    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -723,7 +733,48 @@ module Aws::AppStream
     #   The ARN of the public, private, or shared image to use.
     #
     # @option params [required, String] :instance_type
-    #   The instance type to use when launching the image builder.
+    #   The instance type to use when launching the image builder. The
+    #   following instance types are available:
+    #
+    #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.compute.large
+    #
+    #   * stream.compute.xlarge
+    #
+    #   * stream.compute.2xlarge
+    #
+    #   * stream.compute.4xlarge
+    #
+    #   * stream.compute.8xlarge
+    #
+    #   * stream.memory.large
+    #
+    #   * stream.memory.xlarge
+    #
+    #   * stream.memory.2xlarge
+    #
+    #   * stream.memory.4xlarge
+    #
+    #   * stream.memory.8xlarge
+    #
+    #   * stream.graphics-design.large
+    #
+    #   * stream.graphics-design.xlarge
+    #
+    #   * stream.graphics-design.2xlarge
+    #
+    #   * stream.graphics-design.4xlarge
+    #
+    #   * stream.graphics-desktop.2xlarge
+    #
+    #   * stream.graphics-pro.4xlarge
+    #
+    #   * stream.graphics-pro.8xlarge
+    #
+    #   * stream.graphics-pro.16xlarge
     #
     # @option params [String] :description
     #   The description to display.
@@ -740,7 +791,17 @@ module Aws::AppStream
     #   builder. To assume a role, the image builder calls the AWS Security
     #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
     #   the role to use. The operation creates a new session with temporary
-    #   credentials.
+    #   credentials. AppStream 2.0 retrieves the temporary credentials and
+    #   creates the **AppStream\_Machine\_Role** credential profile on the
+    #   instance.
+    #
+    #   For more information, see [Using an IAM Role to Grant Permissions to
+    #   Applications and Scripts Running on AppStream 2.0 Streaming
+    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
     #
     # @option params [Boolean] :enable_default_internet_access
     #   Enables or disables default internet access for the image builder.
@@ -948,6 +1009,11 @@ module Aws::AppStream
     #   of the stack can connect to AppStream 2.0 only through the specified
     #   endpoints.
     #
+    # @option params [Array<String>] :embed_host_domains
+    #   The domains where AppStream 2.0 streaming sessions can be embedded in
+    #   an iframe. You must approve the domains that you want to host embedded
+    #   AppStream 2.0 streaming sessions.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -986,6 +1052,7 @@ module Aws::AppStream
     #         vpce_id: "String",
     #       },
     #     ],
+    #     embed_host_domains: ["EmbedHostDomain"],
     #   })
     #
     # @example Response structure
@@ -1014,6 +1081,8 @@ module Aws::AppStream
     #   resp.stack.access_endpoints #=> Array
     #   resp.stack.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.stack.access_endpoints[0].vpce_id #=> String
+    #   resp.stack.embed_host_domains #=> Array
+    #   resp.stack.embed_host_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -1846,6 +1915,8 @@ module Aws::AppStream
     #   resp.stacks[0].access_endpoints #=> Array
     #   resp.stacks[0].access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.stacks[0].access_endpoints[0].vpce_id #=> String
+    #   resp.stacks[0].embed_host_domains #=> Array
+    #   resp.stacks[0].embed_host_domains[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -2672,7 +2743,17 @@ module Aws::AppStream
     #   To assume a role, a fleet instance calls the AWS Security Token
     #   Service (STS) `AssumeRole` API operation and passes the ARN of the
     #   role to use. The operation creates a new session with temporary
-    #   credentials.
+    #   credentials. AppStream 2.0 retrieves the temporary credentials and
+    #   creates the **AppStream\_Machine\_Role** credential profile on the
+    #   instance.
+    #
+    #   For more information, see [Using an IAM Role to Grant Permissions to
+    #   Applications and Scripts Running on AppStream 2.0 Streaming
+    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
     #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2825,6 +2906,11 @@ module Aws::AppStream
     #   of the stack can connect to AppStream 2.0 only through the specified
     #   endpoints.
     #
+    # @option params [Array<String>] :embed_host_domains
+    #   The domains where AppStream 2.0 streaming sessions can be embedded in
+    #   an iframe. You must approve the domains that you want to host embedded
+    #   AppStream 2.0 streaming sessions.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -2845,7 +2931,7 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
     #     user_settings: [
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
@@ -2862,6 +2948,7 @@ module Aws::AppStream
     #         vpce_id: "String",
     #       },
     #     ],
+    #     embed_host_domains: ["EmbedHostDomain"],
     #   })
     #
     # @example Response structure
@@ -2890,6 +2977,8 @@ module Aws::AppStream
     #   resp.stack.access_endpoints #=> Array
     #   resp.stack.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.stack.access_endpoints[0].vpce_id #=> String
+    #   resp.stack.embed_host_domains #=> Array
+    #   resp.stack.embed_host_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -2913,7 +3002,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
