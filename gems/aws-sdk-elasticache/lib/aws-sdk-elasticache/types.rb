@@ -424,6 +424,10 @@ module Aws::ElastiCache
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] auth_token_last_modified_date
+    #   The date the auth token was last modified
+    #   @return [Time]
+    #
     # @!attribute [rw] transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to `true`.
     #
@@ -478,6 +482,7 @@ module Aws::ElastiCache
       :snapshot_retention_limit,
       :snapshot_window,
       :auth_token_enabled,
+      :auth_token_last_modified_date,
       :transit_encryption_enabled,
       :at_rest_encryption_enabled)
       include Aws::Structure
@@ -1588,8 +1593,9 @@ module Aws::ElastiCache
     #   * Must be at least 16 characters and no more than 128 characters in
     #     length.
     #
-    #   * Cannot contain any of the following characters: '/', '"', or
-    #     '@'.
+    #   * The only permitted printable special characters are !, &amp;, #,
+    #     $, ^, &lt;, &gt;, and -. Other printable special characters cannot
+    #     be used in the AUTH token.
     #
     #   For more information, see [AUTH password][1] at
     #   http://redis.io/commands/AUTH.
@@ -2208,8 +2214,9 @@ module Aws::ElastiCache
     #   * Must be at least 16 characters and no more than 128 characters in
     #     length.
     #
-    #   * Cannot contain any of the following characters: '/', '"', or
-    #     '@'.
+    #   * The only permitted printable special characters are !, &amp;, #,
+    #     $, ^, &lt;, &gt;, and -. Other printable special characters cannot
+    #     be used in the AUTH token.
     #
     #   For more information, see [AUTH password][1] at
     #   http://redis.io/commands/AUTH.
@@ -3980,6 +3987,8 @@ module Aws::ElastiCache
     #         snapshot_retention_limit: 1,
     #         snapshot_window: "String",
     #         cache_node_type: "String",
+    #         auth_token: "String",
+    #         auth_token_update_strategy: "SET", # accepts SET, ROTATE
     #       }
     #
     # @!attribute [rw] cache_cluster_id
@@ -4056,16 +4065,9 @@ module Aws::ElastiCache
     #   Availability Zone.
     #
     #    Only newly created nodes are located in different Availability
-    #   Zones. For instructions on how to move existing Memcached nodes to
-    #   different Availability Zones, see the **Availability Zone
-    #   Considerations** section of [Cache Node Considerations for
-    #   Memcached][1].
+    #   Zones.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html
     #   @return [String]
     #
     # @!attribute [rw] new_availability_zones
@@ -4277,6 +4279,42 @@ module Aws::ElastiCache
     #   A valid cache node type that you want to scale this cluster up to.
     #   @return [String]
     #
+    # @!attribute [rw] auth_token
+    #   Reserved parameter. The password used to access a password protected
+    #   server. This parameter must be specified with the
+    #   `auth-token-update` parameter. Password constraints:
+    #
+    #   * Must be only printable ASCII characters
+    #
+    #   * Must be at least 16 characters and no more than 128 characters in
+    #     length
+    #
+    #   * Cannot contain any of the following characters: '/', '"', or
+    #     '@', '%'
+    #
+    #   For more information, see AUTH password at [AUTH][1].
+    #
+    #
+    #
+    #   [1]: http://redis.io/commands/AUTH
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token_update_strategy
+    #   Specifies the strategy to use to update the AUTH token. This
+    #   parameter must be specified with the `auth-token` parameter.
+    #   Possible values:
+    #
+    #   * Rotate
+    #
+    #   * Set
+    #
+    #   For more information, see [Authenticating Users with Redis AUTH][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterMessage AWS API Documentation
     #
     class ModifyCacheClusterMessage < Struct.new(
@@ -4296,7 +4334,9 @@ module Aws::ElastiCache
       :auto_minor_version_upgrade,
       :snapshot_retention_limit,
       :snapshot_window,
-      :cache_node_type)
+      :cache_node_type,
+      :auth_token,
+      :auth_token_update_strategy)
       include Aws::Structure
     end
 
@@ -4409,6 +4449,7 @@ module Aws::ElastiCache
     #         primary_cluster_id: "String",
     #         snapshotting_cluster_id: "String",
     #         automatic_failover_enabled: false,
+    #         node_group_id: "String",
     #         cache_security_group_names: ["String"],
     #         security_group_ids: ["String"],
     #         preferred_maintenance_window: "String",
@@ -4421,7 +4462,8 @@ module Aws::ElastiCache
     #         snapshot_retention_limit: 1,
     #         snapshot_window: "String",
     #         cache_node_type: "String",
-    #         node_group_id: "String",
+    #         auth_token: "String",
+    #         auth_token_update_strategy: "SET", # accepts SET, ROTATE
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -4461,6 +4503,10 @@ module Aws::ElastiCache
     #
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] node_group_id
+    #   Deprecated. This parameter is not used.
+    #   @return [String]
     #
     # @!attribute [rw] cache_security_group_names
     #   A list of cache security group names to authorize for the clusters
@@ -4593,8 +4639,40 @@ module Aws::ElastiCache
     #   group to.
     #   @return [String]
     #
-    # @!attribute [rw] node_group_id
-    #   Deprecated. This parameter is not used.
+    # @!attribute [rw] auth_token
+    #   Reserved parameter. The password used to access a password protected
+    #   server. This parameter must be specified with the
+    #   `auth-token-update-strategy ` parameter. Password constraints:
+    #
+    #   * Must be only printable ASCII characters
+    #
+    #   * Must be at least 16 characters and no more than 128 characters in
+    #     length
+    #
+    #   * Cannot contain any of the following characters: '/', '"', or
+    #     '@', '%'
+    #
+    #   For more information, see AUTH password at [AUTH][1].
+    #
+    #
+    #
+    #   [1]: http://redis.io/commands/AUTH
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token_update_strategy
+    #   Specifies the strategy to use to update the AUTH token. This
+    #   parameter must be specified with the `auth-token` parameter.
+    #   Possible values:
+    #
+    #   * Rotate
+    #
+    #   * Set
+    #
+    #   For more information, see [Authenticating Users with Redis AUTH][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupMessage AWS API Documentation
@@ -4605,6 +4683,7 @@ module Aws::ElastiCache
       :primary_cluster_id,
       :snapshotting_cluster_id,
       :automatic_failover_enabled,
+      :node_group_id,
       :cache_security_group_names,
       :security_group_ids,
       :preferred_maintenance_window,
@@ -4617,7 +4696,8 @@ module Aws::ElastiCache
       :snapshot_retention_limit,
       :snapshot_window,
       :cache_node_type,
-      :node_group_id)
+      :auth_token,
+      :auth_token_update_strategy)
       include Aws::Structure
     end
 
@@ -5116,13 +5196,18 @@ module Aws::ElastiCache
     #   to.
     #   @return [String]
     #
+    # @!attribute [rw] auth_token_status
+    #   The auth token status
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
       :num_cache_nodes,
       :cache_node_ids_to_remove,
       :engine_version,
-      :cache_node_type)
+      :cache_node_type,
+      :auth_token_status)
       include Aws::Structure
     end
 
@@ -5410,6 +5495,10 @@ module Aws::ElastiCache
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] auth_token_last_modified_date
+    #   The date the auth token was last modified
+    #   @return [Time]
+    #
     # @!attribute [rw] transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to `true`.
     #
@@ -5459,6 +5548,7 @@ module Aws::ElastiCache
       :cluster_enabled,
       :cache_node_type,
       :auth_token_enabled,
+      :auth_token_last_modified_date,
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :kms_key_id)
@@ -5511,12 +5601,17 @@ module Aws::ElastiCache
     #   The status of an online resharding operation.
     #   @return [Types::ReshardingStatus]
     #
+    # @!attribute [rw] auth_token_status
+    #   The auth token status
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues AWS API Documentation
     #
     class ReplicationGroupPendingModifiedValues < Struct.new(
       :primary_cluster_id,
       :automatic_failover_status,
-      :resharding)
+      :resharding,
+      :auth_token_status)
       include Aws::Structure
     end
 

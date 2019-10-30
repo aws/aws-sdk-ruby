@@ -551,6 +551,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -577,6 +578,7 @@ module Aws::ElastiCache
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
     #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
@@ -1117,8 +1119,9 @@ module Aws::ElastiCache
     #   * Must be at least 16 characters and no more than 128 characters in
     #     length.
     #
-    #   * Cannot contain any of the following characters: '/', '"', or
-    #     '@'.
+    #   * The only permitted printable special characters are !, &amp;, #, $,
+    #     ^, &lt;, &gt;, and -. Other printable special characters cannot be
+    #     used in the AUTH token.
     #
     #   For more information, see [AUTH password][1] at
     #   http://redis.io/commands/AUTH.
@@ -1272,6 +1275,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.cache_node_ids_to_remove[0] #=> String
     #   resp.cache_cluster.pending_modified_values.engine_version #=> String
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
+    #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -1299,6 +1303,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
     #   resp.cache_cluster.auth_token_enabled #=> Boolean
+    #   resp.cache_cluster.auth_token_last_modified_date #=> Time
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #
@@ -1922,8 +1927,9 @@ module Aws::ElastiCache
     #   * Must be at least 16 characters and no more than 128 characters in
     #     length.
     #
-    #   * Cannot contain any of the following characters: '/', '"', or
-    #     '@'.
+    #   * The only permitted printable special characters are !, &amp;, #, $,
+    #     ^, &lt;, &gt;, and -. Other printable special characters cannot be
+    #     used in the AUTH token.
     #
     #   For more information, see [AUTH password][1] at
     #   http://redis.io/commands/AUTH.
@@ -2121,6 +2127,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -2147,6 +2154,7 @@ module Aws::ElastiCache
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
     #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
@@ -2438,6 +2446,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -2464,6 +2473,7 @@ module Aws::ElastiCache
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
     #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
@@ -2575,6 +2585,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.cache_node_ids_to_remove[0] #=> String
     #   resp.cache_cluster.pending_modified_values.engine_version #=> String
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
+    #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -2602,6 +2613,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
     #   resp.cache_cluster.auth_token_enabled #=> Boolean
+    #   resp.cache_cluster.auth_token_last_modified_date #=> Time
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #
@@ -2801,6 +2813,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -2827,6 +2840,7 @@ module Aws::ElastiCache
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
     #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
@@ -3152,6 +3166,7 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].pending_modified_values.cache_node_ids_to_remove[0] #=> String
     #   resp.cache_clusters[0].pending_modified_values.engine_version #=> String
     #   resp.cache_clusters[0].pending_modified_values.cache_node_type #=> String
+    #   resp.cache_clusters[0].pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.cache_clusters[0].notification_configuration.topic_arn #=> String
     #   resp.cache_clusters[0].notification_configuration.topic_status #=> String
     #   resp.cache_clusters[0].cache_security_groups #=> Array
@@ -3179,6 +3194,7 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].snapshot_retention_limit #=> Integer
     #   resp.cache_clusters[0].snapshot_window #=> String
     #   resp.cache_clusters[0].auth_token_enabled #=> Boolean
+    #   resp.cache_clusters[0].auth_token_last_modified_date #=> Time
     #   resp.cache_clusters[0].transit_encryption_enabled #=> Boolean
     #   resp.cache_clusters[0].at_rest_encryption_enabled #=> Boolean
     #
@@ -5149,6 +5165,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_groups[0].pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_groups[0].pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_groups[0].pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.replication_groups[0].member_clusters #=> Array
     #   resp.replication_groups[0].member_clusters[0] #=> String
     #   resp.replication_groups[0].node_groups #=> Array
@@ -5175,6 +5192,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].cluster_enabled #=> Boolean
     #   resp.replication_groups[0].cache_node_type #=> String
     #   resp.replication_groups[0].auth_token_enabled #=> Boolean
+    #   resp.replication_groups[0].auth_token_last_modified_date #=> Time
     #   resp.replication_groups[0].transit_encryption_enabled #=> Boolean
     #   resp.replication_groups[0].at_rest_encryption_enabled #=> Boolean
     #   resp.replication_groups[0].kms_key_id #=> String
@@ -6219,6 +6237,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -6245,6 +6264,7 @@ module Aws::ElastiCache
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
     #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
@@ -6500,15 +6520,8 @@ module Aws::ElastiCache
     #   Availability Zone.
     #
     #    Only newly created nodes are located in different Availability Zones.
-    #   For instructions on how to move existing Memcached nodes to different
-    #   Availability Zones, see the **Availability Zone Considerations**
-    #   section of [Cache Node Considerations for Memcached][1].
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html
     #
     # @option params [Array<String>] :new_availability_zones
     #   The list of Availability Zones where the new Memcached cache nodes are
@@ -6703,6 +6716,39 @@ module Aws::ElastiCache
     # @option params [String] :cache_node_type
     #   A valid cache node type that you want to scale this cluster up to.
     #
+    # @option params [String] :auth_token
+    #   Reserved parameter. The password used to access a password protected
+    #   server. This parameter must be specified with the `auth-token-update`
+    #   parameter. Password constraints:
+    #
+    #   * Must be only printable ASCII characters
+    #
+    #   * Must be at least 16 characters and no more than 128 characters in
+    #     length
+    #
+    #   * Cannot contain any of the following characters: '/', '"', or
+    #     '@', '%'
+    #
+    #   For more information, see AUTH password at [AUTH][1].
+    #
+    #
+    #
+    #   [1]: http://redis.io/commands/AUTH
+    #
+    # @option params [String] :auth_token_update_strategy
+    #   Specifies the strategy to use to update the AUTH token. This parameter
+    #   must be specified with the `auth-token` parameter. Possible values:
+    #
+    #   * Rotate
+    #
+    #   * Set
+    #
+    #   For more information, see [Authenticating Users with Redis AUTH][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #
     # @return [Types::ModifyCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
@@ -6768,6 +6814,8 @@ module Aws::ElastiCache
     #     snapshot_retention_limit: 1,
     #     snapshot_window: "String",
     #     cache_node_type: "String",
+    #     auth_token: "String",
+    #     auth_token_update_strategy: "SET", # accepts SET, ROTATE
     #   })
     #
     # @example Response structure
@@ -6789,6 +6837,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.cache_node_ids_to_remove[0] #=> String
     #   resp.cache_cluster.pending_modified_values.engine_version #=> String
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
+    #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -6816,6 +6865,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
     #   resp.cache_cluster.auth_token_enabled #=> Boolean
+    #   resp.cache_cluster.auth_token_last_modified_date #=> Time
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #
@@ -7048,6 +7098,9 @@ module Aws::ElastiCache
     #
     #   * Redis (cluster mode enabled): T1 node types.
     #
+    # @option params [String] :node_group_id
+    #   Deprecated. This parameter is not used.
+    #
     # @option params [Array<String>] :cache_security_group_names
     #   A list of cache security group names to authorize for the clusters in
     #   this replication group. This change is asynchronously applied as soon
@@ -7166,8 +7219,38 @@ module Aws::ElastiCache
     #   A valid cache node type that you want to scale this replication group
     #   to.
     #
-    # @option params [String] :node_group_id
-    #   Deprecated. This parameter is not used.
+    # @option params [String] :auth_token
+    #   Reserved parameter. The password used to access a password protected
+    #   server. This parameter must be specified with the
+    #   `auth-token-update-strategy ` parameter. Password constraints:
+    #
+    #   * Must be only printable ASCII characters
+    #
+    #   * Must be at least 16 characters and no more than 128 characters in
+    #     length
+    #
+    #   * Cannot contain any of the following characters: '/', '"', or
+    #     '@', '%'
+    #
+    #   For more information, see AUTH password at [AUTH][1].
+    #
+    #
+    #
+    #   [1]: http://redis.io/commands/AUTH
+    #
+    # @option params [String] :auth_token_update_strategy
+    #   Specifies the strategy to use to update the AUTH token. This parameter
+    #   must be specified with the `auth-token` parameter. Possible values:
+    #
+    #   * Rotate
+    #
+    #   * Set
+    #
+    #   For more information, see [Authenticating Users with Redis AUTH][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #
     # @return [Types::ModifyReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7252,6 +7335,7 @@ module Aws::ElastiCache
     #     primary_cluster_id: "String",
     #     snapshotting_cluster_id: "String",
     #     automatic_failover_enabled: false,
+    #     node_group_id: "String",
     #     cache_security_group_names: ["String"],
     #     security_group_ids: ["String"],
     #     preferred_maintenance_window: "String",
@@ -7264,7 +7348,8 @@ module Aws::ElastiCache
     #     snapshot_retention_limit: 1,
     #     snapshot_window: "String",
     #     cache_node_type: "String",
-    #     node_group_id: "String",
+    #     auth_token: "String",
+    #     auth_token_update_strategy: "SET", # accepts SET, ROTATE
     #   })
     #
     # @example Response structure
@@ -7275,6 +7360,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -7301,6 +7387,7 @@ module Aws::ElastiCache
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
     #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
@@ -7388,6 +7475,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -7414,6 +7502,7 @@ module Aws::ElastiCache
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
     #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
@@ -7605,6 +7694,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.cache_node_ids_to_remove[0] #=> String
     #   resp.cache_cluster.pending_modified_values.engine_version #=> String
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
+    #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -7632,6 +7722,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
     #   resp.cache_cluster.auth_token_enabled #=> Boolean
+    #   resp.cache_cluster.auth_token_last_modified_date #=> Time
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #
@@ -7888,6 +7979,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -7914,6 +8006,7 @@ module Aws::ElastiCache
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
     #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
@@ -8010,6 +8103,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -8036,6 +8130,7 @@ module Aws::ElastiCache
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
     #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
@@ -8062,7 +8157,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
