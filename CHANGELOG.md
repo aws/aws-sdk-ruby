@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.387 (2019-10-31)
+------------------
+
 * Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
 
 * Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
