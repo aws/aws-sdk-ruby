@@ -4215,7 +4215,7 @@ module Aws::S3
     #         },
     #         id: "InventoryId", # required
     #         included_object_versions: "All", # required, accepts All, Current
-    #         optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus
+    #         optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus, IntelligentTieringAccessTier
     #         schedule: { # required
     #           frequency: "Daily", # required, accepts Daily, Weekly
     #         },
@@ -6855,7 +6855,7 @@ module Aws::S3
     #           },
     #           id: "InventoryId", # required
     #           included_object_versions: "All", # required, accepts All, Current
-    #           optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus
+    #           optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus, IntelligentTieringAccessTier
     #           schedule: { # required
     #             frequency: "Daily", # required, accepts Daily, Weekly
     #           },

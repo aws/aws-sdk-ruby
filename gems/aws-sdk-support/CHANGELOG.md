@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2019-10-31)
+------------------
+
+* Feature - The status descriptions for TrustedAdvisorCheckRefreshStatus have been updated
+
 1.16.0 (2019-10-23)
 ------------------
 

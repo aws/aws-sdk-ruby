@@ -20,7 +20,6 @@ module Aws::Amplify
     Artifact = Shapes::StructureShape.new(name: 'Artifact')
     ArtifactFileName = Shapes::StringShape.new(name: 'ArtifactFileName')
     ArtifactId = Shapes::StringShape.new(name: 'ArtifactId')
-    ArtifactType = Shapes::StringShape.new(name: 'ArtifactType')
     ArtifactUrl = Shapes::StringShape.new(name: 'ArtifactUrl')
     Artifacts = Shapes::ListShape.new(name: 'Artifacts')
     ArtifactsUrl = Shapes::StringShape.new(name: 'ArtifactsUrl')
@@ -29,6 +28,7 @@ module Aws::Amplify
     AutoBranchCreationConfig = Shapes::StructureShape.new(name: 'AutoBranchCreationConfig')
     AutoBranchCreationPattern = Shapes::StringShape.new(name: 'AutoBranchCreationPattern')
     AutoBranchCreationPatterns = Shapes::ListShape.new(name: 'AutoBranchCreationPatterns')
+    BackendEnvironmentArn = Shapes::StringShape.new(name: 'BackendEnvironmentArn')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BasicAuthCredentials = Shapes::StringShape.new(name: 'BasicAuthCredentials')
     Branch = Shapes::StructureShape.new(name: 'Branch')
@@ -143,6 +143,7 @@ module Aws::Amplify
     OauthToken = Shapes::StringShape.new(name: 'OauthToken')
     Platform = Shapes::StringShape.new(name: 'Platform')
     ProductionBranch = Shapes::StructureShape.new(name: 'ProductionBranch')
+    PullRequestEnvironmentName = Shapes::StringShape.new(name: 'PullRequestEnvironmentName')
     Repository = Shapes::StringShape.new(name: 'Repository')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -241,6 +242,7 @@ module Aws::Amplify
     AutoBranchCreationConfig.add_member(:enable_basic_auth, Shapes::ShapeRef.new(shape: EnableBasicAuth, location_name: "enableBasicAuth"))
     AutoBranchCreationConfig.add_member(:build_spec, Shapes::ShapeRef.new(shape: BuildSpec, location_name: "buildSpec"))
     AutoBranchCreationConfig.add_member(:enable_pull_request_preview, Shapes::ShapeRef.new(shape: EnablePullRequestPreview, location_name: "enablePullRequestPreview"))
+    AutoBranchCreationConfig.add_member(:pull_request_environment_name, Shapes::ShapeRef.new(shape: PullRequestEnvironmentName, location_name: "pullRequestEnvironmentName"))
     AutoBranchCreationConfig.struct_class = Types::AutoBranchCreationConfig
 
     AutoBranchCreationPatterns.member = Shapes::ShapeRef.new(shape: AutoBranchCreationPattern)
@@ -270,8 +272,10 @@ module Aws::Amplify
     Branch.add_member(:ttl, Shapes::ShapeRef.new(shape: TTL, required: true, location_name: "ttl"))
     Branch.add_member(:associated_resources, Shapes::ShapeRef.new(shape: AssociatedResources, location_name: "associatedResources"))
     Branch.add_member(:enable_pull_request_preview, Shapes::ShapeRef.new(shape: EnablePullRequestPreview, required: true, location_name: "enablePullRequestPreview"))
+    Branch.add_member(:pull_request_environment_name, Shapes::ShapeRef.new(shape: PullRequestEnvironmentName, location_name: "pullRequestEnvironmentName"))
     Branch.add_member(:destination_branch, Shapes::ShapeRef.new(shape: BranchName, location_name: "destinationBranch"))
     Branch.add_member(:source_branch, Shapes::ShapeRef.new(shape: BranchName, location_name: "sourceBranch"))
+    Branch.add_member(:backend_environment_arn, Shapes::ShapeRef.new(shape: BackendEnvironmentArn, location_name: "backendEnvironmentArn"))
     Branch.struct_class = Types::Branch
 
     Branches.member = Shapes::ShapeRef.new(shape: Branch)
@@ -313,6 +317,8 @@ module Aws::Amplify
     CreateBranchRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: TTL, location_name: "ttl"))
     CreateBranchRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
     CreateBranchRequest.add_member(:enable_pull_request_preview, Shapes::ShapeRef.new(shape: EnablePullRequestPreview, location_name: "enablePullRequestPreview"))
+    CreateBranchRequest.add_member(:pull_request_environment_name, Shapes::ShapeRef.new(shape: PullRequestEnvironmentName, location_name: "pullRequestEnvironmentName"))
+    CreateBranchRequest.add_member(:backend_environment_arn, Shapes::ShapeRef.new(shape: BackendEnvironmentArn, location_name: "backendEnvironmentArn"))
     CreateBranchRequest.struct_class = Types::CreateBranchRequest
 
     CreateBranchResult.add_member(:branch, Shapes::ShapeRef.new(shape: Branch, required: true, location_name: "branch"))
@@ -496,7 +502,6 @@ module Aws::Amplify
     ListArtifactsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     ListArtifactsRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location: "uri", location_name: "branchName"))
     ListArtifactsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
-    ListArtifactsRequest.add_member(:artifact_type, Shapes::ShapeRef.new(shape: ArtifactType, location_name: "artifactType"))
     ListArtifactsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListArtifactsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListArtifactsRequest.struct_class = Types::ListArtifactsRequest
@@ -678,6 +683,8 @@ module Aws::Amplify
     UpdateBranchRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: TTL, location_name: "ttl"))
     UpdateBranchRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
     UpdateBranchRequest.add_member(:enable_pull_request_preview, Shapes::ShapeRef.new(shape: EnablePullRequestPreview, location_name: "enablePullRequestPreview"))
+    UpdateBranchRequest.add_member(:pull_request_environment_name, Shapes::ShapeRef.new(shape: PullRequestEnvironmentName, location_name: "pullRequestEnvironmentName"))
+    UpdateBranchRequest.add_member(:backend_environment_arn, Shapes::ShapeRef.new(shape: BackendEnvironmentArn, location_name: "backendEnvironmentArn"))
     UpdateBranchRequest.struct_class = Types::UpdateBranchRequest
 
     UpdateBranchResult.add_member(:branch, Shapes::ShapeRef.new(shape: Branch, required: true, location_name: "branch"))

@@ -357,6 +357,7 @@ module Aws::Amplify
     #       enable_basic_auth: false,
     #       build_spec: "BuildSpec",
     #       enable_pull_request_preview: false,
+    #       pull_request_environment_name: "PullRequestEnvironmentName",
     #     },
     #   })
     #
@@ -401,6 +402,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
+    #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateApp AWS API Documentation
     #
@@ -458,6 +460,12 @@ module Aws::Amplify
     # @option params [Boolean] :enable_pull_request_preview
     #   Enables Pull Request Preview for this branch.
     #
+    # @option params [String] :pull_request_environment_name
+    #   The Amplify Environment name for the pull request.
+    #
+    # @option params [String] :backend_environment_arn
+    #   ARN for a Backend Environment, part of an Amplify App.
+    #
     # @return [Types::CreateBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBranchResult#branch #branch} => Types::Branch
@@ -484,6 +492,8 @@ module Aws::Amplify
     #     ttl: "TTL",
     #     display_name: "DisplayName",
     #     enable_pull_request_preview: false,
+    #     pull_request_environment_name: "PullRequestEnvironmentName",
+    #     backend_environment_arn: "BackendEnvironmentArn",
     #   })
     #
     # @example Response structure
@@ -514,8 +524,10 @@ module Aws::Amplify
     #   resp.branch.associated_resources #=> Array
     #   resp.branch.associated_resources[0] #=> String
     #   resp.branch.enable_pull_request_preview #=> Boolean
+    #   resp.branch.pull_request_environment_name #=> String
     #   resp.branch.destination_branch #=> String
     #   resp.branch.source_branch #=> String
+    #   resp.branch.backend_environment_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranch AWS API Documentation
     #
@@ -582,7 +594,8 @@ module Aws::Amplify
     #   Domain name for the Domain Association.
     #
     # @option params [Boolean] :enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches.
+    #   Enables automated creation of Subdomains for branches. (Currently not
+    #   supported)
     #
     # @option params [required, Array<Types::SubDomainSetting>] :sub_domain_settings
     #   Setting structure for the Subdomain.
@@ -726,6 +739,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
+    #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteApp AWS API Documentation
     #
@@ -783,8 +797,10 @@ module Aws::Amplify
     #   resp.branch.associated_resources #=> Array
     #   resp.branch.associated_resources[0] #=> String
     #   resp.branch.enable_pull_request_preview #=> Boolean
+    #   resp.branch.pull_request_environment_name #=> String
     #   resp.branch.destination_branch #=> String
     #   resp.branch.source_branch #=> String
+    #   resp.branch.backend_environment_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBranch AWS API Documentation
     #
@@ -916,7 +932,7 @@ module Aws::Amplify
     end
 
     # Retrieve website access logs for a specific time range via a
-    # pre-signed URL. Optionally, deliver the logs to a given S3 bucket.
+    # pre-signed URL.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The time at which the logs should start, inclusive.
@@ -1012,6 +1028,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
+    #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetApp AWS API Documentation
     #
@@ -1099,8 +1116,10 @@ module Aws::Amplify
     #   resp.branch.associated_resources #=> Array
     #   resp.branch.associated_resources[0] #=> String
     #   resp.branch.enable_pull_request_preview #=> Boolean
+    #   resp.branch.pull_request_environment_name #=> String
     #   resp.branch.destination_branch #=> String
     #   resp.branch.source_branch #=> String
+    #   resp.branch.backend_environment_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBranch AWS API Documentation
     #
@@ -1307,6 +1326,7 @@ module Aws::Amplify
     #   resp.apps[0].auto_branch_creation_config.enable_basic_auth #=> Boolean
     #   resp.apps[0].auto_branch_creation_config.build_spec #=> String
     #   resp.apps[0].auto_branch_creation_config.enable_pull_request_preview #=> Boolean
+    #   resp.apps[0].auto_branch_creation_config.pull_request_environment_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListApps AWS API Documentation
@@ -1329,9 +1349,6 @@ module Aws::Amplify
     # @option params [required, String] :job_id
     #   Unique Id for an Job.
     #
-    # @option params [String] :artifact_type
-    #   Type for an artifact.
-    #
     # @option params [String] :next_token
     #   Pagination token. Set to null to start listing artifacts from start.
     #   If non-null pagination token is returned in a result, then pass its
@@ -1351,7 +1368,6 @@ module Aws::Amplify
     #     app_id: "AppId", # required
     #     branch_name: "BranchName", # required
     #     job_id: "JobId", # required
-    #     artifact_type: "TEST", # accepts TEST
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -1427,8 +1443,10 @@ module Aws::Amplify
     #   resp.branches[0].associated_resources #=> Array
     #   resp.branches[0].associated_resources[0] #=> String
     #   resp.branches[0].enable_pull_request_preview #=> Boolean
+    #   resp.branches[0].pull_request_environment_name #=> String
     #   resp.branches[0].destination_branch #=> String
     #   resp.branches[0].source_branch #=> String
+    #   resp.branches[0].backend_environment_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBranches AWS API Documentation
@@ -1935,6 +1953,7 @@ module Aws::Amplify
     #       enable_basic_auth: false,
     #       build_spec: "BuildSpec",
     #       enable_pull_request_preview: false,
+    #       pull_request_environment_name: "PullRequestEnvironmentName",
     #     },
     #     repository: "Repository",
     #     oauth_token: "OauthToken",
@@ -1982,6 +2001,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
+    #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateApp AWS API Documentation
     #
@@ -2036,6 +2056,12 @@ module Aws::Amplify
     # @option params [Boolean] :enable_pull_request_preview
     #   Enables Pull Request Preview for this branch.
     #
+    # @option params [String] :pull_request_environment_name
+    #   The Amplify Environment name for the pull request.
+    #
+    # @option params [String] :backend_environment_arn
+    #   ARN for a Backend Environment, part of an Amplify App.
+    #
     # @return [Types::UpdateBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBranchResult#branch #branch} => Types::Branch
@@ -2059,6 +2085,8 @@ module Aws::Amplify
     #     ttl: "TTL",
     #     display_name: "DisplayName",
     #     enable_pull_request_preview: false,
+    #     pull_request_environment_name: "PullRequestEnvironmentName",
+    #     backend_environment_arn: "BackendEnvironmentArn",
     #   })
     #
     # @example Response structure
@@ -2089,8 +2117,10 @@ module Aws::Amplify
     #   resp.branch.associated_resources #=> Array
     #   resp.branch.associated_resources[0] #=> String
     #   resp.branch.enable_pull_request_preview #=> Boolean
+    #   resp.branch.pull_request_environment_name #=> String
     #   resp.branch.destination_branch #=> String
     #   resp.branch.source_branch #=> String
+    #   resp.branch.backend_environment_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranch AWS API Documentation
     #
@@ -2110,7 +2140,8 @@ module Aws::Amplify
     #   Name of the domain.
     #
     # @option params [Boolean] :enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches.
+    #   Enables automated creation of Subdomains for branches. (Currently not
+    #   supported)
     #
     # @option params [required, Array<Types::SubDomainSetting>] :sub_domain_settings
     #   Setting structure for the Subdomain.
@@ -2211,7 +2242,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

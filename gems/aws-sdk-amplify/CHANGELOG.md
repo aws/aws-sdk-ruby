@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2019-10-31)
+------------------
+
+* Feature - This release of AWS Amplify Console introduces support for Web Previews. This feature allows user to create ephemeral branch deployments from pull request submissions made to a connected repository.  A pull-request preview deploys every pull request made to your Git repository to a unique preview URL.
+
 1.12.0 (2019-10-23)
 ------------------
 

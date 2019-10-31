@@ -156,6 +156,7 @@ module Aws::Amplify
     #         enable_basic_auth: false,
     #         build_spec: "BuildSpec",
     #         enable_pull_request_preview: false,
+    #         pull_request_environment_name: "PullRequestEnvironmentName",
     #       }
     #
     # @!attribute [rw] stage
@@ -190,6 +191,10 @@ module Aws::Amplify
     #   Enables Pull Request Preview for auto created branch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] pull_request_environment_name
+    #   The Amplify Environment name for the pull request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/AutoBranchCreationConfig AWS API Documentation
     #
     class AutoBranchCreationConfig < Struct.new(
@@ -200,7 +205,8 @@ module Aws::Amplify
       :basic_auth_credentials,
       :enable_basic_auth,
       :build_spec,
-      :enable_pull_request_preview)
+      :enable_pull_request_preview,
+      :pull_request_environment_name)
       include Aws::Structure
     end
 
@@ -308,12 +314,20 @@ module Aws::Amplify
     #   Enables Pull Request Preview for this branch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] pull_request_environment_name
+    #   The Amplify Environment name for the pull request.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_branch
     #   The destination branch if the branch is a pull request branch.
     #   @return [String]
     #
     # @!attribute [rw] source_branch
     #   The source branch if the branch is a pull request branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_arn
+    #   ARN for a Backend Environment, part of an Amplify App.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Branch AWS API Documentation
@@ -341,8 +355,10 @@ module Aws::Amplify
       :ttl,
       :associated_resources,
       :enable_pull_request_preview,
+      :pull_request_environment_name,
       :destination_branch,
-      :source_branch)
+      :source_branch,
+      :backend_environment_arn)
       include Aws::Structure
     end
 
@@ -390,6 +406,7 @@ module Aws::Amplify
     #           enable_basic_auth: false,
     #           build_spec: "BuildSpec",
     #           enable_pull_request_preview: false,
+    #           pull_request_environment_name: "PullRequestEnvironmentName",
     #         },
     #       }
     #
@@ -526,6 +543,8 @@ module Aws::Amplify
     #         ttl: "TTL",
     #         display_name: "DisplayName",
     #         enable_pull_request_preview: false,
+    #         pull_request_environment_name: "PullRequestEnvironmentName",
+    #         backend_environment_arn: "BackendEnvironmentArn",
     #       }
     #
     # @!attribute [rw] app_id
@@ -588,6 +607,14 @@ module Aws::Amplify
     #   Enables Pull Request Preview for this branch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] pull_request_environment_name
+    #   The Amplify Environment name for the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_arn
+    #   ARN for a Backend Environment, part of an Amplify App.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranchRequest AWS API Documentation
     #
     class CreateBranchRequest < Struct.new(
@@ -605,7 +632,9 @@ module Aws::Amplify
       :build_spec,
       :ttl,
       :display_name,
-      :enable_pull_request_preview)
+      :enable_pull_request_preview,
+      :pull_request_environment_name,
+      :backend_environment_arn)
       include Aws::Structure
     end
 
@@ -710,7 +739,8 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches.
+    #   Enables automated creation of Subdomains for branches. (Currently
+    #   not supported)
     #   @return [Boolean]
     #
     # @!attribute [rw] sub_domain_settings
@@ -1037,7 +1067,8 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches.
+    #   Enables automated creation of Subdomains for branches. (Currently
+    #   not supported)
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_status
@@ -1190,7 +1221,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for get branch request.
+    # Request structure for get branch request.
     #
     # @note When making an API call, you may pass GetBranchRequest
     #   data as a hash:
@@ -1499,7 +1530,6 @@ module Aws::Amplify
     #         app_id: "AppId", # required
     #         branch_name: "BranchName", # required
     #         job_id: "JobId", # required
-    #         artifact_type: "TEST", # accepts TEST
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -1514,10 +1544,6 @@ module Aws::Amplify
     #
     # @!attribute [rw] job_id
     #   Unique Id for an Job.
-    #   @return [String]
-    #
-    # @!attribute [rw] artifact_type
-    #   Type for an artifact.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1536,7 +1562,6 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :job_id,
-      :artifact_type,
       :next_token,
       :max_results)
       include Aws::Structure
@@ -2282,6 +2307,7 @@ module Aws::Amplify
     #           enable_basic_auth: false,
     #           build_spec: "BuildSpec",
     #           enable_pull_request_preview: false,
+    #           pull_request_environment_name: "PullRequestEnvironmentName",
     #         },
     #         repository: "Repository",
     #         oauth_token: "OauthToken",
@@ -2418,6 +2444,8 @@ module Aws::Amplify
     #         ttl: "TTL",
     #         display_name: "DisplayName",
     #         enable_pull_request_preview: false,
+    #         pull_request_environment_name: "PullRequestEnvironmentName",
+    #         backend_environment_arn: "BackendEnvironmentArn",
     #       }
     #
     # @!attribute [rw] app_id
@@ -2476,6 +2504,14 @@ module Aws::Amplify
     #   Enables Pull Request Preview for this branch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] pull_request_environment_name
+    #   The Amplify Environment name for the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_arn
+    #   ARN for a Backend Environment, part of an Amplify App.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranchRequest AWS API Documentation
     #
     class UpdateBranchRequest < Struct.new(
@@ -2492,7 +2528,9 @@ module Aws::Amplify
       :build_spec,
       :ttl,
       :display_name,
-      :enable_pull_request_preview)
+      :enable_pull_request_preview,
+      :pull_request_environment_name,
+      :backend_environment_arn)
       include Aws::Structure
     end
 
@@ -2535,7 +2573,8 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches.
+    #   Enables automated creation of Subdomains for branches. (Currently
+    #   not supported)
     #   @return [Boolean]
     #
     # @!attribute [rw] sub_domain_settings

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2019-10-31)
+------------------
+
+* Feature - S3 Inventory now supports a new field 'IntelligentTieringAccessTier' that reports the access tier (frequent or infrequent) of objects stored in Intelligent-Tiering storage class.
+
 1.52.0 (2019-10-28)
 ------------------
 
