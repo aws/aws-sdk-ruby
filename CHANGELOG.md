@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.388 (2019-11-01)
+------------------
+
 * Feature - Aws::CloudTrail - Updated the API, and documentation for AWS CloudTrail.
 
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
