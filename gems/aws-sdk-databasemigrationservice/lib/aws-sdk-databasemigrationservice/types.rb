@@ -972,6 +972,19 @@ module Aws::DatabaseMigrationService
     #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
     #
     #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #
+    #   <note markdown="1"> When you use this task setting with a source PostgreSQL database, a
+    #   logical replication slot should already be created and associated
+    #   with the source endpoint. You can verify this by setting the
+    #   `slotName` extra connection attribute to the name of this logical
+    #   replication slot. For more information, see [Extra Connection
+    #   Attributes When Using PostgreSQL as a Source for AWS DMS][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
     #   @return [String]
     #
     # @!attribute [rw] cdc_stop_position
@@ -3556,6 +3569,19 @@ module Aws::DatabaseMigrationService
     #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
     #
     #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #
+    #   <note markdown="1"> When you use this task setting with a source PostgreSQL database, a
+    #   logical replication slot should already be created and associated
+    #   with the source endpoint. You can verify this by setting the
+    #   `slotName` extra connection attribute to the name of this logical
+    #   replication slot. For more information, see [Extra Connection
+    #   Attributes When Using PostgreSQL as a Source for AWS DMS][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
     #   @return [String]
     #
     # @!attribute [rw] cdc_stop_position
@@ -4681,6 +4707,33 @@ module Aws::DatabaseMigrationService
     #   The number of errors that have occurred during this task.
     #   @return [Integer]
     #
+    # @!attribute [rw] fresh_start_date
+    #   The date the replication task was started either with a fresh start
+    #   or a target reload.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_date
+    #   The date the replication task was started either with a fresh start
+    #   or a resume. For more information, see
+    #   [StartReplicationTaskType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html#DMS-StartReplicationTask-request-StartReplicationTaskType
+    #   @return [Time]
+    #
+    # @!attribute [rw] stop_date
+    #   The date the replication task was stopped.
+    #   @return [Time]
+    #
+    # @!attribute [rw] full_load_start_date
+    #   The date the the replication task full load was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] full_load_finish_date
+    #   The date the replication task full load was completed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskStats AWS API Documentation
     #
     class ReplicationTaskStats < Struct.new(
@@ -4689,7 +4742,12 @@ module Aws::DatabaseMigrationService
       :tables_loaded,
       :tables_loading,
       :tables_queued,
-      :tables_errored)
+      :tables_errored,
+      :fresh_start_date,
+      :start_date,
+      :stop_date,
+      :full_load_start_date,
+      :full_load_finish_date)
       include Aws::Structure
     end
 
@@ -5174,6 +5232,19 @@ module Aws::DatabaseMigrationService
     #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
     #
     #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #
+    #   <note markdown="1"> When you use this task setting with a source PostgreSQL database, a
+    #   logical replication slot should already be created and associated
+    #   with the source endpoint. You can verify this by setting the
+    #   `slotName` extra connection attribute to the name of this logical
+    #   replication slot. For more information, see [Extra Connection
+    #   Attributes When Using PostgreSQL as a Source for AWS DMS][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
     #   @return [String]
     #
     # @!attribute [rw] cdc_stop_position

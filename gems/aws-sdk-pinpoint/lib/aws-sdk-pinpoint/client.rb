@@ -892,7 +892,7 @@ module Aws::Pinpoint
     #   resp.export_job_response.failures #=> Array
     #   resp.export_job_response.failures[0] #=> String
     #   resp.export_job_response.id #=> String
-    #   resp.export_job_response.job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.export_job_response.job_status #=> String, one of "CREATED", "PREPARING_FOR_INITIALIZATION", "INITIALIZING", "PROCESSING", "PENDING_JOB", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
     #   resp.export_job_response.total_failures #=> Integer
     #   resp.export_job_response.total_pieces #=> Integer
     #   resp.export_job_response.total_processed #=> Integer
@@ -953,7 +953,7 @@ module Aws::Pinpoint
     #   resp.import_job_response.failures #=> Array
     #   resp.import_job_response.failures[0] #=> String
     #   resp.import_job_response.id #=> String
-    #   resp.import_job_response.job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.import_job_response.job_status #=> String, one of "CREATED", "PREPARING_FOR_INITIALIZATION", "INITIALIZING", "PROCESSING", "PENDING_JOB", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
     #   resp.import_job_response.total_failures #=> Integer
     #   resp.import_job_response.total_pieces #=> Integer
     #   resp.import_job_response.total_processed #=> Integer
@@ -965,6 +965,445 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def create_import_job(params = {}, options = {})
       req = build_request(:create_import_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a journey for an application.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, Types::WriteJourneyRequest] :write_journey_request
+    #   Specifies the configuration and other settings for a journey.
+    #
+    # @return [Types::CreateJourneyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateJourneyResponse#journey_response #journey_response} => Types::JourneyResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_journey({
+    #     application_id: "__string", # required
+    #     write_journey_request: { # required
+    #       activities: {
+    #         "__string" => {
+    #           conditional_split: {
+    #             condition: {
+    #               conditions: [
+    #                 {
+    #                   event_condition: {
+    #                     dimensions: { # required
+    #                       attributes: {
+    #                         "__string" => {
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                       },
+    #                       event_type: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       metrics: {
+    #                         "__string" => {
+    #                           comparison_operator: "__string", # required
+    #                           value: 1.0, # required
+    #                         },
+    #                       },
+    #                     },
+    #                     message_activity: "__string",
+    #                   },
+    #                   segment_condition: {
+    #                     segment_id: "__string", # required
+    #                   },
+    #                   segment_dimensions: {
+    #                     attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                     behavior: {
+    #                       recency: {
+    #                         duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                         recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                       },
+    #                     },
+    #                     demographic: {
+    #                       app_version: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       channel: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       device_type: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       make: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       model: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       platform: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                     location: {
+    #                       country: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       gps_point: {
+    #                         coordinates: { # required
+    #                           latitude: 1.0, # required
+    #                           longitude: 1.0, # required
+    #                         },
+    #                         range_in_kilometers: 1.0,
+    #                       },
+    #                     },
+    #                     metrics: {
+    #                       "__string" => {
+    #                         comparison_operator: "__string", # required
+    #                         value: 1.0, # required
+    #                       },
+    #                     },
+    #                     user_attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               operator: "ALL", # accepts ALL, ANY
+    #             },
+    #             evaluation_wait_time: {
+    #               wait_for: "__string",
+    #               wait_until: "__string",
+    #             },
+    #             false_activity: "__string",
+    #             true_activity: "__string",
+    #           },
+    #           description: "__string",
+    #           email: {
+    #             message_config: {
+    #               from_address: "__string",
+    #             },
+    #             next_activity: "__string",
+    #             template_name: "__string",
+    #           },
+    #           holdout: {
+    #             next_activity: "__string",
+    #             percentage: 1, # required
+    #           },
+    #           multi_condition: {
+    #             branches: [
+    #               {
+    #                 condition: {
+    #                   event_condition: {
+    #                     dimensions: { # required
+    #                       attributes: {
+    #                         "__string" => {
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                       },
+    #                       event_type: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       metrics: {
+    #                         "__string" => {
+    #                           comparison_operator: "__string", # required
+    #                           value: 1.0, # required
+    #                         },
+    #                       },
+    #                     },
+    #                     message_activity: "__string",
+    #                   },
+    #                   segment_condition: {
+    #                     segment_id: "__string", # required
+    #                   },
+    #                   segment_dimensions: {
+    #                     attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                     behavior: {
+    #                       recency: {
+    #                         duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                         recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                       },
+    #                     },
+    #                     demographic: {
+    #                       app_version: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       channel: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       device_type: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       make: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       model: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       platform: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                     location: {
+    #                       country: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       gps_point: {
+    #                         coordinates: { # required
+    #                           latitude: 1.0, # required
+    #                           longitude: 1.0, # required
+    #                         },
+    #                         range_in_kilometers: 1.0,
+    #                       },
+    #                     },
+    #                     metrics: {
+    #                       "__string" => {
+    #                         comparison_operator: "__string", # required
+    #                         value: 1.0, # required
+    #                       },
+    #                     },
+    #                     user_attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #                 next_activity: "__string",
+    #               },
+    #             ],
+    #             default_activity: "__string",
+    #             evaluation_wait_time: {
+    #               wait_for: "__string",
+    #               wait_until: "__string",
+    #             },
+    #           },
+    #           random_split: {
+    #             branches: [
+    #               {
+    #                 next_activity: "__string",
+    #                 percentage: 1,
+    #               },
+    #             ],
+    #           },
+    #           wait: {
+    #             next_activity: "__string",
+    #             wait_time: {
+    #               wait_for: "__string",
+    #               wait_until: "__string",
+    #             },
+    #           },
+    #         },
+    #       },
+    #       creation_date: "__string",
+    #       last_modified_date: "__string",
+    #       limits: {
+    #         daily_cap: 1,
+    #         endpoint_reentry_cap: 1,
+    #         messages_per_second: 1,
+    #       },
+    #       local_time: false,
+    #       name: "__string", # required
+    #       quiet_time: {
+    #         end: "__string",
+    #         start: "__string",
+    #       },
+    #       refresh_frequency: "__string",
+    #       schedule: {
+    #         end_time: Time.now,
+    #         start_time: Time.now,
+    #         timezone: "__string",
+    #       },
+    #       start_activity: "__string",
+    #       start_condition: {
+    #         description: "__string",
+    #         segment_start_condition: {
+    #           segment_id: "__string", # required
+    #         },
+    #       },
+    #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_response.activities #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
+    #   resp.journey_response.activities["__string"].conditional_split.evaluation_wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.false_activity #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.true_activity #=> String
+    #   resp.journey_response.activities["__string"].description #=> String
+    #   resp.journey_response.activities["__string"].email.message_config.from_address #=> String
+    #   resp.journey_response.activities["__string"].email.next_activity #=> String
+    #   resp.journey_response.activities["__string"].email.template_name #=> String
+    #   resp.journey_response.activities["__string"].holdout.next_activity #=> String
+    #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
+    #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].next_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.default_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].random_split.branches #=> Array
+    #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
+    #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journey_response.activities["__string"].wait.next_activity #=> String
+    #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journey_response.application_id #=> String
+    #   resp.journey_response.creation_date #=> String
+    #   resp.journey_response.id #=> String
+    #   resp.journey_response.last_modified_date #=> String
+    #   resp.journey_response.limits.daily_cap #=> Integer
+    #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
+    #   resp.journey_response.limits.messages_per_second #=> Integer
+    #   resp.journey_response.local_time #=> Boolean
+    #   resp.journey_response.name #=> String
+    #   resp.journey_response.quiet_time.end #=> String
+    #   resp.journey_response.quiet_time.start #=> String
+    #   resp.journey_response.refresh_frequency #=> String
+    #   resp.journey_response.schedule.end_time #=> Time
+    #   resp.journey_response.schedule.start_time #=> Time
+    #   resp.journey_response.schedule.timezone #=> String
+    #   resp.journey_response.start_activity #=> String
+    #   resp.journey_response.start_condition.description #=> String
+    #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
+    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journey_response.tags #=> Hash
+    #   resp.journey_response.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateJourney AWS API Documentation
+    #
+    # @overload create_journey(params = {})
+    # @param [Hash] params ({})
+    def create_journey(params = {}, options = {})
+      req = build_request(:create_journey, params)
       req.send_request(options)
     end
 
@@ -2078,6 +2517,178 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Deletes a journey from an application.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :journey_id
+    #
+    # @return [Types::DeleteJourneyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteJourneyResponse#journey_response #journey_response} => Types::JourneyResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_journey({
+    #     application_id: "__string", # required
+    #     journey_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_response.activities #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
+    #   resp.journey_response.activities["__string"].conditional_split.evaluation_wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.false_activity #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.true_activity #=> String
+    #   resp.journey_response.activities["__string"].description #=> String
+    #   resp.journey_response.activities["__string"].email.message_config.from_address #=> String
+    #   resp.journey_response.activities["__string"].email.next_activity #=> String
+    #   resp.journey_response.activities["__string"].email.template_name #=> String
+    #   resp.journey_response.activities["__string"].holdout.next_activity #=> String
+    #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
+    #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].next_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.default_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].random_split.branches #=> Array
+    #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
+    #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journey_response.activities["__string"].wait.next_activity #=> String
+    #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journey_response.application_id #=> String
+    #   resp.journey_response.creation_date #=> String
+    #   resp.journey_response.id #=> String
+    #   resp.journey_response.last_modified_date #=> String
+    #   resp.journey_response.limits.daily_cap #=> Integer
+    #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
+    #   resp.journey_response.limits.messages_per_second #=> Integer
+    #   resp.journey_response.local_time #=> Boolean
+    #   resp.journey_response.name #=> String
+    #   resp.journey_response.quiet_time.end #=> String
+    #   resp.journey_response.quiet_time.start #=> String
+    #   resp.journey_response.refresh_frequency #=> String
+    #   resp.journey_response.schedule.end_time #=> Time
+    #   resp.journey_response.schedule.start_time #=> Time
+    #   resp.journey_response.schedule.timezone #=> String
+    #   resp.journey_response.start_activity #=> String
+    #   resp.journey_response.start_condition.description #=> String
+    #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
+    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journey_response.tags #=> Hash
+    #   resp.journey_response.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteJourney AWS API Documentation
+    #
+    # @overload delete_journey(params = {})
+    # @param [Hash] params ({})
+    def delete_journey(params = {}, options = {})
+      req = build_request(:delete_journey, params)
+      req.send_request(options)
+    end
+
     # Deletes a message template that was designed for use in messages that
     # were sent through a push notification channel.
     #
@@ -2393,7 +3004,6 @@ module Aws::Pinpoint
     #   resp.voice_channel_response.is_archived #=> Boolean
     #   resp.voice_channel_response.last_modified_by #=> String
     #   resp.voice_channel_response.last_modified_date #=> String
-    #   resp.voice_channel_response.origination_number #=> String
     #   resp.voice_channel_response.platform #=> String
     #   resp.voice_channel_response.version #=> Integer
     #
@@ -3034,7 +3644,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Retrieves information about the activity performed by a campaign.
+    # Retrieves information about all the activities for a campaign.
     #
     # @option params [required, String] :application_id
     #
@@ -3385,7 +3995,7 @@ module Aws::Pinpoint
     end
 
     # Retrieves information about the status, configuration, and other
-    # settings for all versions of a specific campaign.
+    # settings for all versions of a campaign.
     #
     # @option params [required, String] :application_id
     #
@@ -3976,7 +4586,7 @@ module Aws::Pinpoint
     #   resp.email_template_response.tags #=> Hash
     #   resp.email_template_response.tags["__string"] #=> String
     #   resp.email_template_response.template_name #=> String
-    #   resp.email_template_response.template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #   resp.email_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
     #   resp.email_template_response.text_part #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailTemplate AWS API Documentation
@@ -4116,7 +4726,7 @@ module Aws::Pinpoint
     #   resp.export_job_response.failures #=> Array
     #   resp.export_job_response.failures[0] #=> String
     #   resp.export_job_response.id #=> String
-    #   resp.export_job_response.job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.export_job_response.job_status #=> String, one of "CREATED", "PREPARING_FOR_INITIALIZATION", "INITIALIZING", "PROCESSING", "PENDING_JOB", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
     #   resp.export_job_response.total_failures #=> Integer
     #   resp.export_job_response.total_pieces #=> Integer
     #   resp.export_job_response.total_processed #=> Integer
@@ -4167,7 +4777,7 @@ module Aws::Pinpoint
     #   resp.export_jobs_response.item[0].failures #=> Array
     #   resp.export_jobs_response.item[0].failures[0] #=> String
     #   resp.export_jobs_response.item[0].id #=> String
-    #   resp.export_jobs_response.item[0].job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.export_jobs_response.item[0].job_status #=> String, one of "CREATED", "PREPARING_FOR_INITIALIZATION", "INITIALIZING", "PROCESSING", "PENDING_JOB", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
     #   resp.export_jobs_response.item[0].total_failures #=> Integer
     #   resp.export_jobs_response.item[0].total_pieces #=> Integer
     #   resp.export_jobs_response.item[0].total_processed #=> Integer
@@ -4257,7 +4867,7 @@ module Aws::Pinpoint
     #   resp.import_job_response.failures #=> Array
     #   resp.import_job_response.failures[0] #=> String
     #   resp.import_job_response.id #=> String
-    #   resp.import_job_response.job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.import_job_response.job_status #=> String, one of "CREATED", "PREPARING_FOR_INITIALIZATION", "INITIALIZING", "PROCESSING", "PENDING_JOB", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
     #   resp.import_job_response.total_failures #=> Integer
     #   resp.import_job_response.total_pieces #=> Integer
     #   resp.import_job_response.total_processed #=> Integer
@@ -4312,7 +4922,7 @@ module Aws::Pinpoint
     #   resp.import_jobs_response.item[0].failures #=> Array
     #   resp.import_jobs_response.item[0].failures[0] #=> String
     #   resp.import_jobs_response.item[0].id #=> String
-    #   resp.import_jobs_response.item[0].job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.import_jobs_response.item[0].job_status #=> String, one of "CREATED", "PREPARING_FOR_INITIALIZATION", "INITIALIZING", "PROCESSING", "PENDING_JOB", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
     #   resp.import_jobs_response.item[0].total_failures #=> Integer
     #   resp.import_jobs_response.item[0].total_pieces #=> Integer
     #   resp.import_jobs_response.item[0].total_processed #=> Integer
@@ -4325,6 +4935,326 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_import_jobs(params = {}, options = {})
       req = build_request(:get_import_jobs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the status, configuration, and other
+    # settings for a journey.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :journey_id
+    #
+    # @return [Types::GetJourneyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJourneyResponse#journey_response #journey_response} => Types::JourneyResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_journey({
+    #     application_id: "__string", # required
+    #     journey_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_response.activities #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
+    #   resp.journey_response.activities["__string"].conditional_split.evaluation_wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.false_activity #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.true_activity #=> String
+    #   resp.journey_response.activities["__string"].description #=> String
+    #   resp.journey_response.activities["__string"].email.message_config.from_address #=> String
+    #   resp.journey_response.activities["__string"].email.next_activity #=> String
+    #   resp.journey_response.activities["__string"].email.template_name #=> String
+    #   resp.journey_response.activities["__string"].holdout.next_activity #=> String
+    #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
+    #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].next_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.default_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].random_split.branches #=> Array
+    #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
+    #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journey_response.activities["__string"].wait.next_activity #=> String
+    #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journey_response.application_id #=> String
+    #   resp.journey_response.creation_date #=> String
+    #   resp.journey_response.id #=> String
+    #   resp.journey_response.last_modified_date #=> String
+    #   resp.journey_response.limits.daily_cap #=> Integer
+    #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
+    #   resp.journey_response.limits.messages_per_second #=> Integer
+    #   resp.journey_response.local_time #=> Boolean
+    #   resp.journey_response.name #=> String
+    #   resp.journey_response.quiet_time.end #=> String
+    #   resp.journey_response.quiet_time.start #=> String
+    #   resp.journey_response.refresh_frequency #=> String
+    #   resp.journey_response.schedule.end_time #=> Time
+    #   resp.journey_response.schedule.start_time #=> Time
+    #   resp.journey_response.schedule.timezone #=> String
+    #   resp.journey_response.start_activity #=> String
+    #   resp.journey_response.start_condition.description #=> String
+    #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
+    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journey_response.tags #=> Hash
+    #   resp.journey_response.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourney AWS API Documentation
+    #
+    # @overload get_journey(params = {})
+    # @param [Hash] params ({})
+    def get_journey(params = {}, options = {})
+      req = build_request(:get_journey, params)
+      req.send_request(options)
+    end
+
+    # Retrieves (queries) pre-aggregated data for a standard engagement
+    # metric that applies to a journey.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #
+    # @option params [required, String] :journey_id
+    #
+    # @option params [required, String] :kpi_name
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #
+    # @return [Types::GetJourneyDateRangeKpiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJourneyDateRangeKpiResponse#journey_date_range_kpi_response #journey_date_range_kpi_response} => Types::JourneyDateRangeKpiResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_journey_date_range_kpi({
+    #     application_id: "__string", # required
+    #     end_time: Time.now,
+    #     journey_id: "__string", # required
+    #     kpi_name: "__string", # required
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #     start_time: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_date_range_kpi_response.application_id #=> String
+    #   resp.journey_date_range_kpi_response.end_time #=> Time
+    #   resp.journey_date_range_kpi_response.journey_id #=> String
+    #   resp.journey_date_range_kpi_response.kpi_name #=> String
+    #   resp.journey_date_range_kpi_response.kpi_result.rows #=> Array
+    #   resp.journey_date_range_kpi_response.kpi_result.rows[0].grouped_bys #=> Array
+    #   resp.journey_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].key #=> String
+    #   resp.journey_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].type #=> String
+    #   resp.journey_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].value #=> String
+    #   resp.journey_date_range_kpi_response.kpi_result.rows[0].values #=> Array
+    #   resp.journey_date_range_kpi_response.kpi_result.rows[0].values[0].key #=> String
+    #   resp.journey_date_range_kpi_response.kpi_result.rows[0].values[0].type #=> String
+    #   resp.journey_date_range_kpi_response.kpi_result.rows[0].values[0].value #=> String
+    #   resp.journey_date_range_kpi_response.next_token #=> String
+    #   resp.journey_date_range_kpi_response.start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyDateRangeKpi AWS API Documentation
+    #
+    # @overload get_journey_date_range_kpi(params = {})
+    # @param [Hash] params ({})
+    def get_journey_date_range_kpi(params = {}, options = {})
+      req = build_request(:get_journey_date_range_kpi, params)
+      req.send_request(options)
+    end
+
+    # Retrieves (queries) pre-aggregated data for a standard execution
+    # metric that applies to a journey activity.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :journey_activity_id
+    #
+    # @option params [required, String] :journey_id
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @return [Types::GetJourneyExecutionActivityMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJourneyExecutionActivityMetricsResponse#journey_execution_activity_metrics_response #journey_execution_activity_metrics_response} => Types::JourneyExecutionActivityMetricsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_journey_execution_activity_metrics({
+    #     application_id: "__string", # required
+    #     journey_activity_id: "__string", # required
+    #     journey_id: "__string", # required
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_execution_activity_metrics_response.activity_type #=> String
+    #   resp.journey_execution_activity_metrics_response.application_id #=> String
+    #   resp.journey_execution_activity_metrics_response.journey_activity_id #=> String
+    #   resp.journey_execution_activity_metrics_response.journey_id #=> String
+    #   resp.journey_execution_activity_metrics_response.last_evaluated_time #=> String
+    #   resp.journey_execution_activity_metrics_response.metrics #=> Hash
+    #   resp.journey_execution_activity_metrics_response.metrics["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyExecutionActivityMetrics AWS API Documentation
+    #
+    # @overload get_journey_execution_activity_metrics(params = {})
+    # @param [Hash] params ({})
+    def get_journey_execution_activity_metrics(params = {}, options = {})
+      req = build_request(:get_journey_execution_activity_metrics, params)
+      req.send_request(options)
+    end
+
+    # Retrieves (queries) pre-aggregated data for a standard execution
+    # metric that applies to a journey.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :journey_id
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @return [Types::GetJourneyExecutionMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJourneyExecutionMetricsResponse#journey_execution_metrics_response #journey_execution_metrics_response} => Types::JourneyExecutionMetricsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_journey_execution_metrics({
+    #     application_id: "__string", # required
+    #     journey_id: "__string", # required
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_execution_metrics_response.application_id #=> String
+    #   resp.journey_execution_metrics_response.journey_id #=> String
+    #   resp.journey_execution_metrics_response.last_evaluated_time #=> String
+    #   resp.journey_execution_metrics_response.metrics #=> Hash
+    #   resp.journey_execution_metrics_response.metrics["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyExecutionMetrics AWS API Documentation
+    #
+    # @overload get_journey_execution_metrics(params = {})
+    # @param [Hash] params ({})
+    def get_journey_execution_metrics(params = {}, options = {})
+      req = build_request(:get_journey_execution_metrics, params)
       req.send_request(options)
     end
 
@@ -4386,7 +5316,7 @@ module Aws::Pinpoint
     #   resp.push_notification_template_response.tags #=> Hash
     #   resp.push_notification_template_response.tags["__string"] #=> String
     #   resp.push_notification_template_response.template_name #=> String
-    #   resp.push_notification_template_response.template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #   resp.push_notification_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetPushTemplate AWS API Documentation
     #
@@ -4566,7 +5496,7 @@ module Aws::Pinpoint
     #   resp.export_jobs_response.item[0].failures #=> Array
     #   resp.export_jobs_response.item[0].failures[0] #=> String
     #   resp.export_jobs_response.item[0].id #=> String
-    #   resp.export_jobs_response.item[0].job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.export_jobs_response.item[0].job_status #=> String, one of "CREATED", "PREPARING_FOR_INITIALIZATION", "INITIALIZING", "PROCESSING", "PENDING_JOB", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
     #   resp.export_jobs_response.item[0].total_failures #=> Integer
     #   resp.export_jobs_response.item[0].total_pieces #=> Integer
     #   resp.export_jobs_response.item[0].total_processed #=> Integer
@@ -4625,7 +5555,7 @@ module Aws::Pinpoint
     #   resp.import_jobs_response.item[0].failures #=> Array
     #   resp.import_jobs_response.item[0].failures[0] #=> String
     #   resp.import_jobs_response.item[0].id #=> String
-    #   resp.import_jobs_response.item[0].job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.import_jobs_response.item[0].job_status #=> String, one of "CREATED", "PREPARING_FOR_INITIALIZATION", "INITIALIZING", "PROCESSING", "PENDING_JOB", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
     #   resp.import_jobs_response.item[0].total_failures #=> Integer
     #   resp.import_jobs_response.item[0].total_pieces #=> Integer
     #   resp.import_jobs_response.item[0].total_processed #=> Integer
@@ -5111,7 +6041,7 @@ module Aws::Pinpoint
     #   resp.sms_template_response.tags #=> Hash
     #   resp.sms_template_response.tags["__string"] #=> String
     #   resp.sms_template_response.template_name #=> String
-    #   resp.sms_template_response.template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #   resp.sms_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplate AWS API Documentation
     #
@@ -5211,7 +6141,6 @@ module Aws::Pinpoint
     #   resp.voice_channel_response.is_archived #=> Boolean
     #   resp.voice_channel_response.last_modified_by #=> String
     #   resp.voice_channel_response.last_modified_date #=> String
-    #   resp.voice_channel_response.origination_number #=> String
     #   resp.voice_channel_response.platform #=> String
     #   resp.voice_channel_response.version #=> Integer
     #
@@ -5224,8 +6153,186 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Retrieves information about the status, configuration, and other
+    # settings for all the journeys that are associated with an application.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [String] :token
+    #
+    # @return [Types::ListJourneysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJourneysResponse#journeys_response #journeys_response} => Types::JourneysResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_journeys({
+    #     application_id: "__string", # required
+    #     page_size: "__string",
+    #     token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journeys_response.item #=> Array
+    #   resp.journeys_response.item[0].activities #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.evaluation_wait_time.wait_for #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.evaluation_wait_time.wait_until #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.false_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.true_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].description #=> String
+    #   resp.journeys_response.item[0].activities["__string"].email.message_config.from_address #=> String
+    #   resp.journeys_response.item[0].activities["__string"].email.next_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].email.template_name #=> String
+    #   resp.journeys_response.item[0].activities["__string"].holdout.next_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].holdout.percentage #=> Integer
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].next_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.default_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journeys_response.item[0].activities["__string"].random_split.branches #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].random_split.branches[0].next_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journeys_response.item[0].activities["__string"].wait.next_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].wait.wait_time.wait_for #=> String
+    #   resp.journeys_response.item[0].activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journeys_response.item[0].application_id #=> String
+    #   resp.journeys_response.item[0].creation_date #=> String
+    #   resp.journeys_response.item[0].id #=> String
+    #   resp.journeys_response.item[0].last_modified_date #=> String
+    #   resp.journeys_response.item[0].limits.daily_cap #=> Integer
+    #   resp.journeys_response.item[0].limits.endpoint_reentry_cap #=> Integer
+    #   resp.journeys_response.item[0].limits.messages_per_second #=> Integer
+    #   resp.journeys_response.item[0].local_time #=> Boolean
+    #   resp.journeys_response.item[0].name #=> String
+    #   resp.journeys_response.item[0].quiet_time.end #=> String
+    #   resp.journeys_response.item[0].quiet_time.start #=> String
+    #   resp.journeys_response.item[0].refresh_frequency #=> String
+    #   resp.journeys_response.item[0].schedule.end_time #=> Time
+    #   resp.journeys_response.item[0].schedule.start_time #=> Time
+    #   resp.journeys_response.item[0].schedule.timezone #=> String
+    #   resp.journeys_response.item[0].start_activity #=> String
+    #   resp.journeys_response.item[0].start_condition.description #=> String
+    #   resp.journeys_response.item[0].start_condition.segment_start_condition.segment_id #=> String
+    #   resp.journeys_response.item[0].state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journeys_response.item[0].tags #=> Hash
+    #   resp.journeys_response.item[0].tags["__string"] #=> String
+    #   resp.journeys_response.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListJourneys AWS API Documentation
+    #
+    # @overload list_journeys(params = {})
+    # @param [Hash] params ({})
+    def list_journeys(params = {}, options = {})
+      req = build_request(:list_journeys, params)
+      req.send_request(options)
+    end
+
     # Retrieves all the tags (keys and values) that are associated with an
-    # application, campaign, message template, or segment.
+    # application, campaign, journey, message template, or segment.
     #
     # @option params [required, String] :resource_arn
     #
@@ -5286,7 +6393,7 @@ module Aws::Pinpoint
     #   resp.templates_response.item[0].tags #=> Hash
     #   resp.templates_response.item[0].tags["__string"] #=> String
     #   resp.templates_response.item[0].template_name #=> String
-    #   resp.templates_response.item[0].template_type #=> String, one of "EMAIL", "SMS", "PUSH"
+    #   resp.templates_response.item[0].template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
     #   resp.templates_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplates AWS API Documentation
@@ -5599,6 +6706,7 @@ module Aws::Pinpoint
     #           url: "__string",
     #         },
     #         apns_message: {
+    #           apns_push_type: "__string",
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           badge: 1,
     #           body: "__string",
@@ -5815,6 +6923,7 @@ module Aws::Pinpoint
     #           url: "__string",
     #         },
     #         apns_message: {
+    #           apns_push_type: "__string",
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           badge: 1,
     #           body: "__string",
@@ -5996,13 +7105,13 @@ module Aws::Pinpoint
     end
 
     # Adds one or more tags (keys and values) to an application, campaign,
-    # message template, or segment.
+    # journey, message template, or segment.
     #
     # @option params [required, String] :resource_arn
     #
     # @option params [required, Types::TagsModel] :tags_model
     #   Specifies the tags (keys and values) for an application, campaign,
-    #   message template, or segment.
+    #   journey, message template, or segment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6027,7 +7136,7 @@ module Aws::Pinpoint
     end
 
     # Removes one or more tags (keys and values) from an application,
-    # campaign, message template, or segment.
+    # campaign, journey, message template, or segment.
     #
     # @option params [required, String] :resource_arn
     #
@@ -6415,7 +7524,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates the settings for a campaign.
+    # Updates the configuration and other settings for a campaign.
     #
     # @option params [required, String] :application_id
     #
@@ -7233,6 +8342,626 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Updates the configuration and other settings for a journey.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :journey_id
+    #
+    # @option params [required, Types::WriteJourneyRequest] :write_journey_request
+    #   Specifies the configuration and other settings for a journey.
+    #
+    # @return [Types::UpdateJourneyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateJourneyResponse#journey_response #journey_response} => Types::JourneyResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_journey({
+    #     application_id: "__string", # required
+    #     journey_id: "__string", # required
+    #     write_journey_request: { # required
+    #       activities: {
+    #         "__string" => {
+    #           conditional_split: {
+    #             condition: {
+    #               conditions: [
+    #                 {
+    #                   event_condition: {
+    #                     dimensions: { # required
+    #                       attributes: {
+    #                         "__string" => {
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                       },
+    #                       event_type: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       metrics: {
+    #                         "__string" => {
+    #                           comparison_operator: "__string", # required
+    #                           value: 1.0, # required
+    #                         },
+    #                       },
+    #                     },
+    #                     message_activity: "__string",
+    #                   },
+    #                   segment_condition: {
+    #                     segment_id: "__string", # required
+    #                   },
+    #                   segment_dimensions: {
+    #                     attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                     behavior: {
+    #                       recency: {
+    #                         duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                         recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                       },
+    #                     },
+    #                     demographic: {
+    #                       app_version: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       channel: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       device_type: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       make: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       model: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       platform: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                     location: {
+    #                       country: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       gps_point: {
+    #                         coordinates: { # required
+    #                           latitude: 1.0, # required
+    #                           longitude: 1.0, # required
+    #                         },
+    #                         range_in_kilometers: 1.0,
+    #                       },
+    #                     },
+    #                     metrics: {
+    #                       "__string" => {
+    #                         comparison_operator: "__string", # required
+    #                         value: 1.0, # required
+    #                       },
+    #                     },
+    #                     user_attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               operator: "ALL", # accepts ALL, ANY
+    #             },
+    #             evaluation_wait_time: {
+    #               wait_for: "__string",
+    #               wait_until: "__string",
+    #             },
+    #             false_activity: "__string",
+    #             true_activity: "__string",
+    #           },
+    #           description: "__string",
+    #           email: {
+    #             message_config: {
+    #               from_address: "__string",
+    #             },
+    #             next_activity: "__string",
+    #             template_name: "__string",
+    #           },
+    #           holdout: {
+    #             next_activity: "__string",
+    #             percentage: 1, # required
+    #           },
+    #           multi_condition: {
+    #             branches: [
+    #               {
+    #                 condition: {
+    #                   event_condition: {
+    #                     dimensions: { # required
+    #                       attributes: {
+    #                         "__string" => {
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                       },
+    #                       event_type: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       metrics: {
+    #                         "__string" => {
+    #                           comparison_operator: "__string", # required
+    #                           value: 1.0, # required
+    #                         },
+    #                       },
+    #                     },
+    #                     message_activity: "__string",
+    #                   },
+    #                   segment_condition: {
+    #                     segment_id: "__string", # required
+    #                   },
+    #                   segment_dimensions: {
+    #                     attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                     behavior: {
+    #                       recency: {
+    #                         duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                         recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                       },
+    #                     },
+    #                     demographic: {
+    #                       app_version: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       channel: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       device_type: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       make: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       model: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       platform: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                     location: {
+    #                       country: {
+    #                         dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                       gps_point: {
+    #                         coordinates: { # required
+    #                           latitude: 1.0, # required
+    #                           longitude: 1.0, # required
+    #                         },
+    #                         range_in_kilometers: 1.0,
+    #                       },
+    #                     },
+    #                     metrics: {
+    #                       "__string" => {
+    #                         comparison_operator: "__string", # required
+    #                         value: 1.0, # required
+    #                       },
+    #                     },
+    #                     user_attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #                 next_activity: "__string",
+    #               },
+    #             ],
+    #             default_activity: "__string",
+    #             evaluation_wait_time: {
+    #               wait_for: "__string",
+    #               wait_until: "__string",
+    #             },
+    #           },
+    #           random_split: {
+    #             branches: [
+    #               {
+    #                 next_activity: "__string",
+    #                 percentage: 1,
+    #               },
+    #             ],
+    #           },
+    #           wait: {
+    #             next_activity: "__string",
+    #             wait_time: {
+    #               wait_for: "__string",
+    #               wait_until: "__string",
+    #             },
+    #           },
+    #         },
+    #       },
+    #       creation_date: "__string",
+    #       last_modified_date: "__string",
+    #       limits: {
+    #         daily_cap: 1,
+    #         endpoint_reentry_cap: 1,
+    #         messages_per_second: 1,
+    #       },
+    #       local_time: false,
+    #       name: "__string", # required
+    #       quiet_time: {
+    #         end: "__string",
+    #         start: "__string",
+    #       },
+    #       refresh_frequency: "__string",
+    #       schedule: {
+    #         end_time: Time.now,
+    #         start_time: Time.now,
+    #         timezone: "__string",
+    #       },
+    #       start_activity: "__string",
+    #       start_condition: {
+    #         description: "__string",
+    #         segment_start_condition: {
+    #           segment_id: "__string", # required
+    #         },
+    #       },
+    #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_response.activities #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
+    #   resp.journey_response.activities["__string"].conditional_split.evaluation_wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.false_activity #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.true_activity #=> String
+    #   resp.journey_response.activities["__string"].description #=> String
+    #   resp.journey_response.activities["__string"].email.message_config.from_address #=> String
+    #   resp.journey_response.activities["__string"].email.next_activity #=> String
+    #   resp.journey_response.activities["__string"].email.template_name #=> String
+    #   resp.journey_response.activities["__string"].holdout.next_activity #=> String
+    #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
+    #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].next_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.default_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].random_split.branches #=> Array
+    #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
+    #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journey_response.activities["__string"].wait.next_activity #=> String
+    #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journey_response.application_id #=> String
+    #   resp.journey_response.creation_date #=> String
+    #   resp.journey_response.id #=> String
+    #   resp.journey_response.last_modified_date #=> String
+    #   resp.journey_response.limits.daily_cap #=> Integer
+    #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
+    #   resp.journey_response.limits.messages_per_second #=> Integer
+    #   resp.journey_response.local_time #=> Boolean
+    #   resp.journey_response.name #=> String
+    #   resp.journey_response.quiet_time.end #=> String
+    #   resp.journey_response.quiet_time.start #=> String
+    #   resp.journey_response.refresh_frequency #=> String
+    #   resp.journey_response.schedule.end_time #=> Time
+    #   resp.journey_response.schedule.start_time #=> Time
+    #   resp.journey_response.schedule.timezone #=> String
+    #   resp.journey_response.start_activity #=> String
+    #   resp.journey_response.start_condition.description #=> String
+    #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
+    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journey_response.tags #=> Hash
+    #   resp.journey_response.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourney AWS API Documentation
+    #
+    # @overload update_journey(params = {})
+    # @param [Hash] params ({})
+    def update_journey(params = {}, options = {})
+      req = build_request(:update_journey, params)
+      req.send_request(options)
+    end
+
+    # Cancels an active journey.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :journey_id
+    #
+    # @option params [required, Types::JourneyStateRequest] :journey_state_request
+    #   Changes the status of a journey.
+    #
+    # @return [Types::UpdateJourneyStateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateJourneyStateResponse#journey_response #journey_response} => Types::JourneyResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_journey_state({
+    #     application_id: "__string", # required
+    #     journey_id: "__string", # required
+    #     journey_state_request: { # required
+    #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_response.activities #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.country.values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
+    #   resp.journey_response.activities["__string"].conditional_split.evaluation_wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.false_activity #=> String
+    #   resp.journey_response.activities["__string"].conditional_split.true_activity #=> String
+    #   resp.journey_response.activities["__string"].description #=> String
+    #   resp.journey_response.activities["__string"].email.message_config.from_address #=> String
+    #   resp.journey_response.activities["__string"].email.next_activity #=> String
+    #   resp.journey_response.activities["__string"].email.template_name #=> String
+    #   resp.journey_response.activities["__string"].holdout.next_activity #=> String
+    #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
+    #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.app_version.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.channel.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.device_type.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.make.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.model.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.demographic.platform.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.country.values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].next_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.default_activity #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].random_split.branches #=> Array
+    #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
+    #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journey_response.activities["__string"].wait.next_activity #=> String
+    #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
+    #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journey_response.application_id #=> String
+    #   resp.journey_response.creation_date #=> String
+    #   resp.journey_response.id #=> String
+    #   resp.journey_response.last_modified_date #=> String
+    #   resp.journey_response.limits.daily_cap #=> Integer
+    #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
+    #   resp.journey_response.limits.messages_per_second #=> Integer
+    #   resp.journey_response.local_time #=> Boolean
+    #   resp.journey_response.name #=> String
+    #   resp.journey_response.quiet_time.end #=> String
+    #   resp.journey_response.quiet_time.start #=> String
+    #   resp.journey_response.refresh_frequency #=> String
+    #   resp.journey_response.schedule.end_time #=> Time
+    #   resp.journey_response.schedule.start_time #=> Time
+    #   resp.journey_response.schedule.timezone #=> String
+    #   resp.journey_response.start_activity #=> String
+    #   resp.journey_response.start_condition.description #=> String
+    #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
+    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journey_response.tags #=> Hash
+    #   resp.journey_response.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourneyState AWS API Documentation
+    #
+    # @overload update_journey_state(params = {})
+    # @param [Hash] params ({})
+    def update_journey_state(params = {}, options = {})
+      req = build_request(:update_journey_state, params)
+      req.send_request(options)
+    end
+
     # Updates an existing message template that you can use in messages that
     # are sent through a push notification channel.
     #
@@ -7725,7 +9454,6 @@ module Aws::Pinpoint
     #   resp.voice_channel_response.is_archived #=> Boolean
     #   resp.voice_channel_response.last_modified_by #=> String
     #   resp.voice_channel_response.last_modified_date #=> String
-    #   resp.voice_channel_response.origination_number #=> String
     #   resp.voice_channel_response.platform #=> String
     #   resp.voice_channel_response.version #=> Integer
     #
@@ -7751,7 +9479,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

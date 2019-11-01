@@ -885,6 +885,17 @@ module Aws::DatabaseMigrationService
 
     # Creates the replication instance using the specified parameters.
     #
+    # AWS DMS requires that your account have certain roles with appropriate
+    # permissions before you can create a replication instance. For
+    # information on the required roles, see [Creating the IAM Roles to Use
+    # With the AWS CLI and AWS DMS API][1]. For information on the required
+    # permissions, see [IAM Permissions Needed to Use AWS DMS][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.APIRole.html
+    # [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.IAMPermissions.html
+    #
     # @option params [required, String] :replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
     #   lowercase string.
@@ -1284,6 +1295,19 @@ module Aws::DatabaseMigrationService
     #
     #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
     #
+    #   <note markdown="1"> When you use this task setting with a source PostgreSQL database, a
+    #   logical replication slot should already be created and associated with
+    #   the source endpoint. You can verify this by setting the `slotName`
+    #   extra connection attribute to the name of this logical replication
+    #   slot. For more information, see [Extra Connection Attributes When
+    #   Using PostgreSQL as a Source for AWS DMS][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
+    #
     # @option params [String] :cdc_stop_position
     #   Indicates when you want a change data capture (CDC) operation to stop.
     #   The value can be either server time or commit time.
@@ -1384,6 +1408,11 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTask AWS API Documentation
     #
@@ -1913,6 +1942,11 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTask AWS API Documentation
     #
@@ -3233,6 +3267,11 @@ module Aws::DatabaseMigrationService
     #   resp.replication_tasks[0].replication_task_stats.tables_loading #=> Integer
     #   resp.replication_tasks[0].replication_task_stats.tables_queued #=> Integer
     #   resp.replication_tasks[0].replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_tasks[0].replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_tasks[0].replication_task_stats.start_date #=> Time
+    #   resp.replication_tasks[0].replication_task_stats.stop_date #=> Time
+    #   resp.replication_tasks[0].replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_tasks[0].replication_task_stats.full_load_finish_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasks AWS API Documentation
     #
@@ -4294,6 +4333,19 @@ module Aws::DatabaseMigrationService
     #
     #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
     #
+    #   <note markdown="1"> When you use this task setting with a source PostgreSQL database, a
+    #   logical replication slot should already be created and associated with
+    #   the source endpoint. You can verify this by setting the `slotName`
+    #   extra connection attribute to the name of this logical replication
+    #   slot. For more information, see [Extra Connection Attributes When
+    #   Using PostgreSQL as a Source for AWS DMS][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
+    #
     # @option params [String] :cdc_stop_position
     #   Indicates when you want a change data capture (CDC) operation to stop.
     #   The value can be either server time or commit time.
@@ -4345,6 +4397,11 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTask AWS API Documentation
     #
@@ -4610,6 +4667,19 @@ module Aws::DatabaseMigrationService
     #
     #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
     #
+    #   <note markdown="1"> When you use this task setting with a source PostgreSQL database, a
+    #   logical replication slot should already be created and associated with
+    #   the source endpoint. You can verify this by setting the `slotName`
+    #   extra connection attribute to the name of this logical replication
+    #   slot. For more information, see [Extra Connection Attributes When
+    #   Using PostgreSQL as a Source for AWS DMS][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
+    #
     # @option params [String] :cdc_stop_position
     #   Indicates when you want a change data capture (CDC) operation to stop.
     #   The value can be either server time or commit time.
@@ -4685,6 +4755,11 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTask AWS API Documentation
     #
@@ -4735,6 +4810,11 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessment AWS API Documentation
     #
@@ -4809,6 +4889,11 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTask AWS API Documentation
     #
@@ -4887,7 +4972,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

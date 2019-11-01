@@ -66,6 +66,12 @@ module Aws::CloudTrail
     #         cloud_watch_logs_role_arn: "String",
     #         kms_key_id: "String",
     #         is_organization_trail: false,
+    #         tags_list: [
+    #           {
+    #             key: "String", # required
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -91,7 +97,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -102,7 +108,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
@@ -117,7 +123,9 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] is_multi_region_trail
     #   Specifies whether the trail is created in the current region or in
-    #   all regions. The default is false.
+    #   all regions. The default is false, which creates a trail only in the
+    #   region where you are signed in. As a best practice, consider
+    #   creating trails that log events in all regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_log_file_validation
@@ -174,6 +182,10 @@ module Aws::CloudTrail
     #   organization in AWS Organizations.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags_list
+    #   A list of tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrailRequest AWS API Documentation
     #
     class CreateTrailRequest < Struct.new(
@@ -187,7 +199,8 @@ module Aws::CloudTrail
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
       :kms_key_id,
-      :is_organization_trail)
+      :is_organization_trail,
+      :tags_list)
       include Aws::Structure
     end
 
@@ -210,11 +223,11 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
-    #   This field is deprecated. Use SnsTopicARN.
+    #   This field is no longer in use. Use SnsTopicARN.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
@@ -300,7 +313,7 @@ module Aws::CloudTrail
     #
     # The following example demonstrates how logging works when you
     # configure logging of all data events for an S3 bucket named
-    # `bucket-1`. In this example, the CloudTrail user spcified an empty
+    # `bucket-1`. In this example, the CloudTrail user specified an empty
     # prefix, and the option to log both `Read` and `Write` data events.
     #
     # 1.  A user uploads an image file to `bucket-1`.
@@ -364,11 +377,6 @@ module Aws::CloudTrail
     #
     #      </note>
     #
-    #   * To log data events for all objects in all S3 buckets that include
-    #     *my-bucket* in their names, specify the prefix as
-    #     `aws:s3:::my-bucket`. The trail logs data events for all objects
-    #     in all buckets whose name contains a match for *my-bucket*.
-    #
     #   * To log data events for all objects in an S3 bucket, specify the
     #     bucket and an empty object prefix such as
     #     `arn:aws:s3:::bucket-1/`. The trail logs data events for all
@@ -388,11 +396,11 @@ module Aws::CloudTrail
     #
     #      </note>
     #
-    #   * To log data eents for a specific Lambda function, specify the
+    #   * To log data events for a specific Lambda function, specify the
     #     function ARN.
     #
-    #     <note markdown="1"> Lambda function ARNs are exact. Unlike S3, you cannot use
-    #     matching. For example, if you specify a function ARN
+    #     <note markdown="1"> Lambda function ARNs are exact. For example, if you specify a
+    #     function ARN
     #     *arn:aws:lambda:us-west-2:111111111111:function:helloworld*, data
     #     events will only be logged for
     #     *arn:aws:lambda:us-west-2:111111111111:function:helloworld*. They
@@ -608,7 +616,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events
     #   @return [Boolean]
     #
     # @!attribute [rw] data_resources
@@ -624,7 +632,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events
     #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #   @return [Array<Types::DataResource>]
     #
@@ -688,6 +696,36 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTrailRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name or the Amazon Resource Name (ARN) of the trail for which
+    #   you want to retrieve settings information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailRequest AWS API Documentation
+    #
+    class GetTrailRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trail
+    #   The settings for a trail.
+    #   @return [Types::Trail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailResponse AWS API Documentation
+    #
+    class GetTrailResponse < Struct.new(
+      :trail)
+      include Aws::Structure
+    end
+
     # The name of a trail about which you want the current status.
     #
     # @note When making an API call, you may pass GetTrailStatusRequest
@@ -736,7 +774,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
     #   @return [String]
     #
     # @!attribute [rw] latest_notification_error
@@ -746,7 +784,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/welcome.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/welcome.html
     #   @return [String]
     #
     # @!attribute [rw] latest_delivery_time
@@ -801,31 +839,31 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
     #   @return [String]
     #
     # @!attribute [rw] latest_delivery_attempt_time
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @!attribute [rw] latest_notification_attempt_time
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @!attribute [rw] latest_notification_attempt_succeeded
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @!attribute [rw] latest_delivery_attempt_succeeded
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @!attribute [rw] time_logging_started
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @!attribute [rw] time_logging_stopped
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatusResponse AWS API Documentation
@@ -954,6 +992,39 @@ module Aws::CloudTrail
     #
     class ListTagsResponse < Struct.new(
       :resource_tag_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTrailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTrailsRequest AWS API Documentation
+    #
+    class ListTrailsRequest < Struct.new(
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trails
+    #   Returns the name, ARN, and home region of trails in the current
+    #   account.
+    #   @return [Array<Types::TrailInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTrailsResponse AWS API Documentation
+    #
+    class ListTrailsResponse < Struct.new(
+      :trails,
       :next_token)
       include Aws::Structure
     end
@@ -1216,13 +1287,13 @@ module Aws::CloudTrail
     #   The type of a resource referenced by the event returned. When the
     #   resource type cannot be determined, null is returned. Some examples
     #   of resource types are: **Instance** for EC2, **Trail** for
-    #   CloudTrail, **DBInstance** for RDS, and **AccessKey** for IAM. For a
-    #   list of resource types supported for event lookup, see [Resource
-    #   Types Supported for Event Lookup][1].
+    #   CloudTrail, **DBInstance** for RDS, and **AccessKey** for IAM. To
+    #   learn more about how to look up and filter events by the resource
+    #   types supported for a service, see [Filtering CloudTrail Events][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/lookup_supported_resourcetypes.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events-console.html#filtering-cloudtrail-events
     #   @return [String]
     #
     # @!attribute [rw] resource_name
@@ -1364,7 +1435,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -1375,11 +1446,11 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
-    #   This field is deprecated. Use SnsTopicARN.
+    #   This field is no longer in use. Use SnsTopicARN.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
@@ -1396,7 +1467,7 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] is_multi_region_trail
-    #   Specifies whether the trail belongs only to one region or exists in
+    #   Specifies whether the trail exists only in one region or exists in
     #   all regions.
     #   @return [Boolean]
     #
@@ -1461,6 +1532,30 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # Information about a CloudTrail trail, including the trail's name,
+    # home region, and Amazon Resource Name (ARN).
+    #
+    # @!attribute [rw] trail_arn
+    #   The ARN of a trail.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a trail.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_region
+    #   The AWS region in which a trail was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/TrailInfo AWS API Documentation
+    #
+    class TrailInfo < Struct.new(
+      :trail_arn,
+      :name,
+      :home_region)
+      include Aws::Structure
+    end
+
     # Specifies settings to update for the trail.
     #
     # @note When making an API call, you may pass UpdateTrailRequest
@@ -1507,7 +1602,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -1518,7 +1613,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
@@ -1538,7 +1633,8 @@ module Aws::CloudTrail
     #   (replications of the trail) will be created in the other regions. If
     #   the trail exists in all regions and this value is set to false, the
     #   trail will remain in the region where it was created, and its shadow
-    #   trails in other regions will be deleted.
+    #   trails in other regions will be deleted. As a best practice,
+    #   consider using trails that log events in all regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_log_file_validation
@@ -1636,11 +1732,11 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
-    #   This field is deprecated. Use SnsTopicARN.
+    #   This field is no longer in use. Use SnsTopicARN.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn

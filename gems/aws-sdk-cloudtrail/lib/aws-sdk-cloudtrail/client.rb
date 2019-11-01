@@ -264,12 +264,14 @@ module Aws::CloudTrail
 
     # @!group API Operations
 
-    # Adds one or more tags to a trail, up to a limit of 50. Tags must be
-    # unique per trail. Overwrites an existing tag's value when a new value
-    # is specified for an existing tag key. If you specify a key without a
-    # value, the tag will be created with the specified key and a value of
-    # null. You can tag a trail that applies to all regions only from the
-    # region in which the trail was created (that is, from its home region).
+    # Adds one or more tags to a trail, up to a limit of 50. Overwrites an
+    # existing tag's value when a new value is specified for an existing
+    # tag key. Tag key names must be unique for a trail; you cannot have two
+    # keys with the same name but different values. If you specify a key
+    # without a value, the tag will be created with the specified key and a
+    # value of null. You can tag a trail that applies to all AWS Regions
+    # only from the Region in which the trail was created (also known as its
+    # home region).
     #
     # @option params [required, String] :resource_id
     #   Specifies the ARN of the trail to which one or more tags will be
@@ -304,8 +306,7 @@ module Aws::CloudTrail
     end
 
     # Creates a trail that specifies the settings for delivery of log data
-    # to an Amazon S3 bucket. A maximum of five trails can exist in a
-    # region, irrespective of the region in which they were created.
+    # to an Amazon S3 bucket.
     #
     # @option params [required, String] :name
     #   Specifies the name of the trail. The name must meet the following
@@ -329,7 +330,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
     #
     # @option params [String] :s3_key_prefix
     #   Specifies the Amazon S3 key prefix that comes after the name of the
@@ -339,7 +340,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #
     # @option params [String] :sns_topic_name
     #   Specifies the name of the Amazon SNS topic defined for notification of
@@ -351,7 +352,9 @@ module Aws::CloudTrail
     #
     # @option params [Boolean] :is_multi_region_trail
     #   Specifies whether the trail is created in the current region or in all
-    #   regions. The default is false.
+    #   regions. The default is false, which creates a trail only in the
+    #   region where you are signed in. As a best practice, consider creating
+    #   trails that log events in all regions.
     #
     # @option params [Boolean] :enable_log_file_validation
     #   Specifies whether log file integrity validation is enabled. The
@@ -402,6 +405,9 @@ module Aws::CloudTrail
     #   made on behalf of an AWS account that is the master account for an
     #   organization in AWS Organizations.
     #
+    # @option params [Array<Types::Tag>] :tags_list
+    #   A list of tags.
+    #
     # @return [Types::CreateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTrailResponse#name #name} => String
@@ -432,6 +438,12 @@ module Aws::CloudTrail
     #     cloud_watch_logs_role_arn: "String",
     #     kms_key_id: "String",
     #     is_organization_trail: false,
+    #     tags_list: [
+    #       {
+    #         key: "String", # required
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -486,8 +498,8 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Retrieves settings for the trail associated with the current region
-    # for your account.
+    # Retrieves settings for one or more trails associated with the current
+    # region for your account.
     #
     # @option params [Array<String>] :trail_name_list
     #   Specifies a list of trail names, trail ARNs, or both, of the trails to
@@ -577,7 +589,7 @@ module Aws::CloudTrail
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
     #
     # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -627,6 +639,49 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def get_event_selectors(params = {}, options = {})
       req = build_request(:get_event_selectors, params)
+      req.send_request(options)
+    end
+
+    # Returns settings information for a specified trail.
+    #
+    # @option params [required, String] :name
+    #   The name or the Amazon Resource Name (ARN) of the trail for which you
+    #   want to retrieve settings information.
+    #
+    # @return [Types::GetTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTrailResponse#trail #trail} => Types::Trail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_trail({
+    #     name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trail.name #=> String
+    #   resp.trail.s3_bucket_name #=> String
+    #   resp.trail.s3_key_prefix #=> String
+    #   resp.trail.sns_topic_name #=> String
+    #   resp.trail.sns_topic_arn #=> String
+    #   resp.trail.include_global_service_events #=> Boolean
+    #   resp.trail.is_multi_region_trail #=> Boolean
+    #   resp.trail.home_region #=> String
+    #   resp.trail.trail_arn #=> String
+    #   resp.trail.log_file_validation_enabled #=> Boolean
+    #   resp.trail.cloud_watch_logs_log_group_arn #=> String
+    #   resp.trail.cloud_watch_logs_role_arn #=> String
+    #   resp.trail.kms_key_id #=> String
+    #   resp.trail.has_custom_event_selectors #=> Boolean
+    #   resp.trail.is_organization_trail #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrail AWS API Documentation
+    #
+    # @overload get_trail(params = {})
+    # @param [Hash] params ({})
+    def get_trail(params = {}, options = {})
+      req = build_request(:get_trail, params)
       req.send_request(options)
     end
 
@@ -797,8 +852,40 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Looks up [management events][1] captured by CloudTrail. Events for a
-    # region can be looked up in that region during the last 90 days. Lookup
+    # Lists trails that are in the current account.
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListTrailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTrailsResponse#trails #trails} => Array&lt;Types::TrailInfo&gt;
+    #   * {Types::ListTrailsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_trails({
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trails #=> Array
+    #   resp.trails[0].trail_arn #=> String
+    #   resp.trails[0].name #=> String
+    #   resp.trails[0].home_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTrails AWS API Documentation
+    #
+    # @overload list_trails(params = {})
+    # @param [Hash] params ({})
+    def list_trails(params = {}, options = {})
+      req = build_request(:list_trails, params)
+      req.send_request(options)
+    end
+
+    # Looks up [management events][1] captured by CloudTrail. You can look
+    # up events that occurred in a region within the last 90 days. Lookup
     # supports the following attributes:
     #
     # * AWS access key
@@ -824,7 +911,7 @@ module Aws::CloudTrail
     # The rate of lookup requests is limited to one per second per account.
     # If this limit is exceeded, a throttling error occurs.
     #
-    # Events that occurred during the selected time range will not be
+    #  Events that occurred during the selected time range will not be
     # available for lookup if CloudTrail logging was not enabled when the
     # events occurred.
     #
@@ -940,7 +1027,7 @@ module Aws::CloudTrail
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
     # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #
     # @option params [required, String] :trail_name
@@ -1140,7 +1227,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
     #
     # @option params [String] :s3_key_prefix
     #   Specifies the Amazon S3 key prefix that comes after the name of the
@@ -1150,7 +1237,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #
     # @option params [String] :sns_topic_name
     #   Specifies the name of the Amazon SNS topic defined for notification of
@@ -1167,7 +1254,8 @@ module Aws::CloudTrail
     #   (replications of the trail) will be created in the other regions. If
     #   the trail exists in all regions and this value is set to false, the
     #   trail will remain in the region where it was created, and its shadow
-    #   trails in other regions will be deleted.
+    #   trails in other regions will be deleted. As a best practice, consider
+    #   using trails that log events in all regions.
     #
     # @option params [Boolean] :enable_log_file_validation
     #   Specifies whether log file validation is enabled. The default is
@@ -1293,7 +1381,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

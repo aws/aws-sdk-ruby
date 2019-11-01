@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-11-01)
+------------------
+
+* Feature - This release of the Amazon Pinpoint API introduces support for using and managing journeys, and querying analytics data for journeys.
+
 1.29.0 (2019-10-23)
 ------------------
 
