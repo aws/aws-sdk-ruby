@@ -160,6 +160,7 @@ module Aws::RoboMaker
     S3KeyOutput = Shapes::StructureShape.new(name: 'S3KeyOutput')
     S3KeyOutputs = Shapes::ListShape.new(name: 'S3KeyOutputs')
     S3Keys = Shapes::ListShape.new(name: 'S3Keys')
+    S3Object = Shapes::StructureShape.new(name: 'S3Object')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SimulationApplicationConfig = Shapes::StructureShape.new(name: 'SimulationApplicationConfig')
@@ -411,6 +412,7 @@ module Aws::RoboMaker
     DeploymentConfig.add_member(:concurrent_deployment_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "concurrentDeploymentPercentage"))
     DeploymentConfig.add_member(:failure_threshold_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "failureThresholdPercentage"))
     DeploymentConfig.add_member(:robot_deployment_timeout_in_seconds, Shapes::ShapeRef.new(shape: DeploymentTimeout, location_name: "robotDeploymentTimeoutInSeconds"))
+    DeploymentConfig.add_member(:download_condition_file, Shapes::ShapeRef.new(shape: S3Object, location_name: "downloadConditionFile"))
     DeploymentConfig.struct_class = Types::DeploymentConfig
 
     DeploymentJob.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
@@ -743,6 +745,11 @@ module Aws::RoboMaker
     S3KeyOutputs.member = Shapes::ShapeRef.new(shape: S3KeyOutput)
 
     S3Keys.member = Shapes::ShapeRef.new(shape: S3Key)
+
+    S3Object.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "bucket"))
+    S3Object.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "key"))
+    S3Object.add_member(:etag, Shapes::ShapeRef.new(shape: S3Etag, location_name: "etag"))
+    S3Object.struct_class = Types::S3Object
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 

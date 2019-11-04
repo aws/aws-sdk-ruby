@@ -222,11 +222,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.associate({
-    #     allocation_id: "String",
-    #     instance_id: "String",
+    #     allocation_id: "AllocationId",
+    #     instance_id: "InstanceId",
     #     allow_reassociation: false,
     #     dry_run: false,
-    #     network_interface_id: "String",
+    #     network_interface_id: "NetworkInterfaceId",
     #     private_ip_address: "String",
     #   })
     # @param [Hash] options ({})
@@ -292,7 +292,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.release({
-    #     allocation_id: "String",
+    #     allocation_id: "AllocationId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

@@ -107,6 +107,11 @@ module Aws::RoboMaker
     #           concurrent_deployment_percentage: 1,
     #           failure_threshold_percentage: 1,
     #           robot_deployment_timeout_in_seconds: 1,
+    #           download_condition_file: {
+    #             bucket: "S3Bucket", # required
+    #             key: "S3Key", # required
+    #             etag: "S3Etag",
+    #           },
     #         },
     #         client_request_token: "ClientRequestToken", # required
     #         fleet: "Arn", # required
@@ -1299,6 +1304,11 @@ module Aws::RoboMaker
     #         concurrent_deployment_percentage: 1,
     #         failure_threshold_percentage: 1,
     #         robot_deployment_timeout_in_seconds: 1,
+    #         download_condition_file: {
+    #           bucket: "S3Bucket", # required
+    #           key: "S3Key", # required
+    #           etag: "S3Etag",
+    #         },
     #       }
     #
     # @!attribute [rw] concurrent_deployment_percentage
@@ -1316,12 +1326,17 @@ module Aws::RoboMaker
     #   default is 5 hours.
     #   @return [Integer]
     #
+    # @!attribute [rw] download_condition_file
+    #   The download condition file.
+    #   @return [Types::S3Object]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentConfig AWS API Documentation
     #
     class DeploymentConfig < Struct.new(
       :concurrent_deployment_percentage,
       :failure_threshold_percentage,
-      :robot_deployment_timeout_in_seconds)
+      :robot_deployment_timeout_in_seconds,
+      :download_condition_file)
       include Aws::Structure
     end
 
@@ -3223,6 +3238,38 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # Information about an S3 object.
+    #
+    # @note When making an API call, you may pass S3Object
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "S3Bucket", # required
+    #         key: "S3Key", # required
+    #         etag: "S3Etag",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The bucket containing the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The key of the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The etag of the object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/S3Object AWS API Documentation
+    #
+    class S3Object < Struct.new(
+      :bucket,
+      :key,
+      :etag)
+      include Aws::Structure
+    end
+
     # The request has failed due to a temporary failure of the server.
     #
     # @!attribute [rw] message
@@ -3414,6 +3461,7 @@ module Aws::RoboMaker
     #   @return [Types::VPCConfigResponse]
     #
     # @!attribute [rw] network_interface
+    #   Information about a network interface.
     #   @return [Types::NetworkInterface]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJob AWS API Documentation

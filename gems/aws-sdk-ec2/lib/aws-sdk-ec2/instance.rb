@@ -542,7 +542,7 @@ module Aws::EC2
     #   instance.attach_classic_link_vpc({
     #     dry_run: false,
     #     groups: ["String"], # required
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -566,7 +566,7 @@ module Aws::EC2
     #
     #   instance.attach_volume({
     #     device: "String", # required
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -732,7 +732,7 @@ module Aws::EC2
     #
     #   instance.detach_classic_link_vpc({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -754,7 +754,7 @@ module Aws::EC2
     #   instance.detach_volume({
     #     device: "String",
     #     force: false,
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

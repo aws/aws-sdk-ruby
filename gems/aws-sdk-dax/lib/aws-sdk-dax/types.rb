@@ -169,8 +169,11 @@ module Aws::DAX
     #   The number of nodes in the DAX cluster. A replication factor of 1
     #   will create a single-node cluster, without any read replicas. For
     #   additional fault tolerance, you can create a multiple node cluster
-    #   with one or more read replicas. To do this, set *ReplicationFactor*
-    #   to 2 or more.
+    #   with one or more read replicas. To do this, set `ReplicationFactor`
+    #   to a number between 3 (one primary and two read replicas) and 10
+    #   (one primary and nine read replicas). `If the AvailabilityZones`
+    #   parameter is provided, its length must equal the
+    #   `ReplicationFactor`.
     #
     #   <note markdown="1"> AWS recommends that you have at least two read replicas per cluster.
     #
@@ -178,10 +181,11 @@ module Aws::DAX
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zones
-    #   The Availability Zones (AZs) in which the cluster nodes will be
-    #   created. All nodes belonging to the cluster are placed in these
-    #   Availability Zones. Use this parameter if you want to distribute the
-    #   nodes across multiple AZs.
+    #   The Availability Zones (AZs) in which the cluster nodes will reside
+    #   after the cluster has been created or updated. If provided, the
+    #   length of this list must equal the `ReplicationFactor` parameter. If
+    #   you omit this parameter, DAX will spread the nodes across
+    #   Availability Zones for the highest availability.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_group_name
@@ -1344,7 +1348,7 @@ module Aws::DAX
     #   @return [String]
     #
     # @!attribute [rw] subnet_availability_zone
-    #   The Availability Zone (AZ) for subnet subnet.
+    #   The Availability Zone (AZ) for the subnet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Subnet AWS API Documentation

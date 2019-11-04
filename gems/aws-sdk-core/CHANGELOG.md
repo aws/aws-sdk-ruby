@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.73.0 (2019-11-04)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 3.72.1 (2019-10-31)
 ------------------
 

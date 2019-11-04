@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-11-04)
+------------------
+
+* Feature - Documentation updates for dax
+
 1.18.0 (2019-10-23)
 ------------------
 

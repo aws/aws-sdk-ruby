@@ -185,7 +185,7 @@ module Aws::EC2
     #
     #   internet_gateway.attach_to_vpc({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -261,7 +261,7 @@ module Aws::EC2
     #
     #   internet_gateway.detach_from_vpc({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run

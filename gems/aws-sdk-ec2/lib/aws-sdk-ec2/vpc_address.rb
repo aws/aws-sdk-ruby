@@ -221,11 +221,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc_address.associate({
-    #     instance_id: "String",
+    #     instance_id: "InstanceId",
     #     public_ip: "String",
     #     allow_reassociation: false,
     #     dry_run: false,
-    #     network_interface_id: "String",
+    #     network_interface_id: "NetworkInterfaceId",
     #     private_ip_address: "String",
     #   })
     # @param [Hash] options ({})

@@ -257,7 +257,7 @@ module Aws::EC2
     #
     #   volume.attach_to_instance({
     #     device: "String", # required
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -472,7 +472,7 @@ module Aws::EC2
     #   volume.detach_from_instance({
     #     device: "String",
     #     force: false,
-    #     instance_id: "String",
+    #     instance_id: "InstanceId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

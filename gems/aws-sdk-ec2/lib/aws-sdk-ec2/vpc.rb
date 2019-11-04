@@ -269,7 +269,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc.associate_dhcp_options({
-    #     dhcp_options_id: "String", # required
+    #     dhcp_options_id: "DhcpOptionsId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -293,7 +293,7 @@ module Aws::EC2
     #   vpc.attach_classic_link_instance({
     #     dry_run: false,
     #     groups: ["String"], # required
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -318,7 +318,7 @@ module Aws::EC2
     #
     #   vpc.attach_internet_gateway({
     #     dry_run: false,
-    #     internet_gateway_id: "String", # required
+    #     internet_gateway_id: "InternetGatewayId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -540,7 +540,7 @@ module Aws::EC2
     #
     #   vpc.detach_classic_link_instance({
     #     dry_run: false,
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -561,7 +561,7 @@ module Aws::EC2
     #
     #   vpc.detach_internet_gateway({
     #     dry_run: false,
-    #     internet_gateway_id: "String", # required
+    #     internet_gateway_id: "InternetGatewayId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run

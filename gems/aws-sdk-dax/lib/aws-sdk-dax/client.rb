@@ -289,18 +289,21 @@ module Aws::DAX
     #   The number of nodes in the DAX cluster. A replication factor of 1 will
     #   create a single-node cluster, without any read replicas. For
     #   additional fault tolerance, you can create a multiple node cluster
-    #   with one or more read replicas. To do this, set *ReplicationFactor* to
-    #   2 or more.
+    #   with one or more read replicas. To do this, set `ReplicationFactor` to
+    #   a number between 3 (one primary and two read replicas) and 10 (one
+    #   primary and nine read replicas). `If the AvailabilityZones` parameter
+    #   is provided, its length must equal the `ReplicationFactor`.
     #
     #   <note markdown="1"> AWS recommends that you have at least two read replicas per cluster.
     #
     #    </note>
     #
     # @option params [Array<String>] :availability_zones
-    #   The Availability Zones (AZs) in which the cluster nodes will be
-    #   created. All nodes belonging to the cluster are placed in these
-    #   Availability Zones. Use this parameter if you want to distribute the
-    #   nodes across multiple AZs.
+    #   The Availability Zones (AZs) in which the cluster nodes will reside
+    #   after the cluster has been created or updated. If provided, the length
+    #   of this list must equal the `ReplicationFactor` parameter. If you omit
+    #   this parameter, DAX will spread the nodes across Availability Zones
+    #   for the highest availability.
     #
     # @option params [String] :subnet_group_name
     #   The name of the subnet group to be used for the replication group.
@@ -870,7 +873,7 @@ module Aws::DAX
     # obtain events specific to a particular DAX cluster or parameter group
     # by providing the name as a parameter.
     #
-    # By default, only the events occurring within the last hour are
+    # By default, only the events occurring within the last 24 hours are
     # returned; however, you can retrieve up to 14 days' worth of events if
     # necessary.
     #
@@ -1221,6 +1224,11 @@ module Aws::DAX
     # as soon as possible. During the reboot, the node status is set to
     # REBOOTING.
     #
+    # <note markdown="1"> `RebootNode` restarts the DAX engine process and does not remove the
+    # contents of the cache.
+    #
+    #  </note>
+    #
     # @option params [required, String] :cluster_name
     #   The name of the DAX cluster containing the node to be rebooted.
     #
@@ -1543,7 +1551,7 @@ module Aws::DAX
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dax'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

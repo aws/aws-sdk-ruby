@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2019-11-04)
+------------------
+
+* Feature - Documentation updates for ec2
+
 1.114.0 (2019-10-24)
 ------------------
 

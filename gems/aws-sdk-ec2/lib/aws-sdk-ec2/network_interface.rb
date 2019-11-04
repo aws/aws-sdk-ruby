@@ -307,7 +307,7 @@ module Aws::EC2
     #   network_interface.attach({
     #     device_index: 1, # required
     #     dry_run: false,
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [required, Integer] :device_index
