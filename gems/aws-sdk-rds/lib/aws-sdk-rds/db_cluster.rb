@@ -34,7 +34,7 @@ module Aws::RDS
     # For all database engines except Amazon Aurora, `AllocatedStorage`
     # specifies the allocated storage size in gibibytes (GiB). For Aurora,
     # `AllocatedStorage` always returns 1, because Aurora DB cluster storage
-    # size is not fixed, but instead automatically adjusts as needed.
+    # size isn't fixed, but instead automatically adjusts as needed.
     # @return [Integer]
     def allocated_storage
       data[:allocated_storage]
@@ -626,7 +626,8 @@ module Aws::RDS
     #   the DB cluster you are creating.
     # @option options [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
-    #   cluster. If this argument is omitted, `default.aurora5.6` is used.
+    #   cluster. If you do not specify a value, then the default DB cluster
+    #   parameter group for the specified DB engine and version is used.
     #
     #   Constraints:
     #
@@ -763,14 +764,14 @@ module Aws::RDS
     #   cluster, then you can use the KMS key alias instead of the ARN for the
     #   KMS encryption key.
     #
-    #   If an encryption key is not specified in `KmsKeyId`\:
+    #   If an encryption key isn't specified in `KmsKeyId`\:
     #
     #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
     #     then Amazon RDS will use the encryption key used to encrypt the
     #     source. Otherwise, Amazon RDS will use your default encryption key.
     #
     #   * If the `StorageEncrypted` parameter is enabled and
-    #     `ReplicationSourceIdentifier` is not specified, then Amazon RDS will
+    #     `ReplicationSourceIdentifier` isn't specified, then Amazon RDS will
     #     use your default encryption key.
     #
     #   AWS KMS creates the default encryption key for your AWS account. Your
@@ -815,6 +816,14 @@ module Aws::RDS
     #   To learn how to generate a Signature Version 4 signed request, see [
     #   Authenticating Requests: Using Query Parameters (AWS Signature Version
     #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
     #
     #
     #
@@ -948,9 +957,9 @@ module Aws::RDS
     # @option options [Boolean] :skip_final_snapshot
     #   A value that indicates whether to skip the creation of a final DB
     #   cluster snapshot before the DB cluster is deleted. If skip is
-    #   specified, no DB cluster snapshot is created. If skip is not
+    #   specified, no DB cluster snapshot is created. If skip isn't
     #   specified, a DB cluster snapshot is created before the DB cluster is
-    #   deleted. By default, skip is not specified, and the DB cluster
+    #   deleted. By default, skip isn't specified, and the DB cluster
     #   snapshot is created. By default, this parameter is disabled.
     #
     #   <note markdown="1"> You must specify a `FinalDBSnapshotIdentifier` parameter if
@@ -1324,7 +1333,7 @@ module Aws::RDS
     #
     #   * Must be before the latest restorable time for the DB instance
     #
-    #   * Must be specified if `UseLatestRestorableTime` parameter is not
+    #   * Must be specified if `UseLatestRestorableTime` parameter isn't
     #     provided
     #
     #   * Can't be specified if the `UseLatestRestorableTime` parameter is
@@ -1336,7 +1345,7 @@ module Aws::RDS
     #   Example: `2015-03-07T23:45:00Z`
     # @option options [Boolean] :use_latest_restorable_time
     #   A value that indicates whether to restore the DB cluster to the latest
-    #   restorable backup time. By default, the DB cluster is not restored to
+    #   restorable backup time. By default, the DB cluster isn't restored to
     #   the latest restorable backup time.
     #
     #   Constraints: Can't be specified if `RestoreToTime` parameter is
@@ -1387,10 +1396,10 @@ module Aws::RDS
     #     encrypted using the KMS key that was used to encrypt the source DB
     #     cluster.
     #
-    #   * If the DB cluster is not encrypted, then the restored DB cluster is
-    #     not encrypted.
+    #   * If the DB cluster isn't encrypted, then the restored DB cluster
+    #     isn't encrypted.
     #
-    #   If `DBClusterIdentifier` refers to a DB cluster that is not encrypted,
+    #   If `DBClusterIdentifier` refers to a DB cluster that isn't encrypted,
     #   then the restore request is rejected.
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
@@ -1503,7 +1512,7 @@ module Aws::RDS
     #   A list of event categories that trigger notifications for a event
     #   notification subscription.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [Event::Collection]
     def events(options = {})
       batches = Enumerator.new do |y|
@@ -1638,8 +1647,8 @@ module Aws::RDS
     # @option options [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that you can
-    #   retrieve the remaining results.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #

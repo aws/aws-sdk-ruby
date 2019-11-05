@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2019-11-05)
+------------------
+
+* Feature - Documentation updates for Amazon RDS
+
 1.69.0 (2019-10-23)
 ------------------
 

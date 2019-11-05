@@ -171,7 +171,7 @@ module Aws::RDS
     #   If specified, filters the results to include only options for the
     #   specified major engine version.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [OptionGroupOption::Collection]
     def option_group_options(options = {})
       batches = Enumerator.new do |y|
@@ -209,7 +209,7 @@ module Aws::RDS
     #   The name of the option group to describe. Can't be supplied together
     #   with EngineName or MajorEngineVersion.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @option options [String] :major_engine_version
     #   Filters the list of option groups to only include groups associated
     #   with a specific database engine version. If specified, then EngineName
@@ -275,7 +275,7 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @option options [Boolean] :default_only
     #   A value that indicates whether only the default version of the
     #   specified engine or engine and major version combination is returned.

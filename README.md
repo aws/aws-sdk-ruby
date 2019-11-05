@@ -321,6 +321,7 @@ to be backwards compatible.
 | AWS CodeDeploy                                        | Aws::CodeDeploy                      | aws-sdk-codedeploy                      | 2014-10-06  |
 | AWS CodePipeline                                      | Aws::CodePipeline                    | aws-sdk-codepipeline                    | 2015-07-09  |
 | AWS CodeStar                                          | Aws::CodeStar                        | aws-sdk-codestar                        | 2017-04-19  |
+| AWS CodeStar Notifications                            | Aws::CodeStarNotifications           | aws-sdk-codestarnotifications           | 2019-10-15  |
 | AWS Comprehend Medical                                | Aws::ComprehendMedical               | aws-sdk-comprehendmedical               | 2018-10-30  |
 | AWS Config                                            | Aws::ConfigService                   | aws-sdk-configservice                   | 2014-11-12  |
 | AWS Cost Explorer Service                             | Aws::CostExplorer                    | aws-sdk-costexplorer                    | 2017-10-25  |
@@ -489,8 +490,8 @@ to be backwards compatible.
 | AmazonMQ                                              | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |

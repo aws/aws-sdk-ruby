@@ -336,7 +336,7 @@ module Aws::RDS
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_cluster_snapshot_identifier
     #   The identifier of the new DB cluster snapshot to create from the
-    #   source DB cluster snapshot. This parameter is not case-sensitive.
+    #   source DB cluster snapshot. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -375,7 +375,8 @@ module Aws::RDS
     #   `CopyDBClusterSnapshot` API action in the AWS Region that contains the
     #   source DB cluster snapshot to copy. The `PreSignedUrl` parameter must
     #   be used when copying an encrypted DB cluster snapshot from another AWS
-    #   Region.
+    #   Region. Don't specify `PreSignedUrl` when you are copying an
+    #   encrypted DB cluster snapshot in the same AWS Region.
     #
     #   The pre-signed URL must be a valid request for the
     #   `CopyDBSClusterSnapshot` API action that can be executed in the source
@@ -404,6 +405,14 @@ module Aws::RDS
     #   To learn how to generate a Signature Version 4 signed request, see [
     #   Authenticating Requests: Using Query Parameters (AWS Signature Version
     #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
     #
     #
     #
@@ -530,6 +539,11 @@ module Aws::RDS
     #   `aws rds describe-db-engine-versions --engine aurora-postgresql
     #   --query "DBEngineVersions[].EngineVersion"`
     #
+    #   <note markdown="1"> If you aren't using the default engine version, then you must specify
+    #   the engine version.
+    #
+    #    </note>
+    #
     #   **Aurora MySQL**
     #
     #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
@@ -576,8 +590,8 @@ module Aws::RDS
     #     encrypted, then the restored DB cluster is encrypted using the KMS
     #     key that was used to encrypt the DB snapshot or DB cluster snapshot.
     #
-    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
-    #     not encrypted, then the restored DB cluster is not encrypted.
+    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
+    #     isn't encrypted, then the restored DB cluster isn't encrypted.
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
@@ -703,7 +717,7 @@ module Aws::RDS
     #   A list of event categories that trigger notifications for a event
     #   notification subscription.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [Event::Collection]
     def events(options = {})
       batches = Enumerator.new do |y|

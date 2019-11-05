@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.55.0 (2019-11-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-codestarnotifications` gem.
+
 3.54.1 (2019-09-27)
 ------------------
 

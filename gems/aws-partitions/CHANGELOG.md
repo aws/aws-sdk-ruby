@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.233.0 (2019-11-05)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CodeStarNotifications`.
+
 1.232.0 (2019-10-31)
 ------------------
 
