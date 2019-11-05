@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.390 (2019-11-05)
+------------------
+
 * Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
 
 * Feature - Aws::CodeStarNotifications - Added support for a new service, AWS CodeStar Notifications.
