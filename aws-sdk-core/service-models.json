@@ -146,6 +146,10 @@
     "models": "codestar/2017-04-19",
     "endpoint": "codestar"
   },
+  "CodeStarNotifications": {
+    "models": "codestar-notifications/2019-10-15",
+    "endpoint": "codestar-notifications"
+  },
   "CognitoIdentity": {
     "models": "cognito-identity/2014-06-30",
     "endpoint": "cognito-identity"

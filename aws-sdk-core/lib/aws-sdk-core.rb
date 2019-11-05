@@ -60,6 +60,7 @@ module Aws
     CodeDeploy
     CodePipeline
     CodeStar
+    CodeStarNotifications
     CognitoIdentity
     CognitoIdentityProvider
     CognitoSync
