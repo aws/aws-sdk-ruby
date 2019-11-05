@@ -444,9 +444,9 @@ module Aws::RDS
     #   source DB snapshot to copy.
     #
     #   You must specify this parameter when you copy an encrypted DB snapshot
-    #   from another AWS Region by using the Amazon RDS API. You can specify
-    #   the `--source-region` option instead of this parameter when you copy
-    #   an encrypted DB snapshot from another AWS Region by using the AWS CLI.
+    #   from another AWS Region by using the Amazon RDS API. Don't specify
+    #   `PreSignedUrl` when you are copying an encrypted DB snapshot in the
+    #   same AWS Region.
     #
     #   The presigned URL must be a valid request for the `CopyDBSnapshot` API
     #   action that can be executed in the source AWS Region that contains the
@@ -481,6 +481,14 @@ module Aws::RDS
     #   To learn how to generate a Signature Version 4 signed request, see
     #   [Authenticating Requests: Using Query Parameters (AWS Signature
     #   Version 4)][1] and [Signature Version 4 Signing Process][2].
+    #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
     #
     #
     #
@@ -631,7 +639,7 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address. For more information, see CreateDBInstance.
     # @option options [Boolean] :auto_minor_version_upgrade
@@ -685,7 +693,7 @@ module Aws::RDS
     #   * `sqlserver-web`
     # @option options [Integer] :iops
     #   Specifies the amount of provisioned IOPS for the DB instance,
-    #   expressed in I/O operations per second. If this parameter is not
+    #   expressed in I/O operations per second. If this parameter isn't
     #   specified, the IOPS value is taken from the backup. If this parameter
     #   is set to 0, the new instance is converted to a non-PIOPS instance.
     #   The conversion takes additional time, though your DB instance is
@@ -934,7 +942,7 @@ module Aws::RDS
     #   A list of event categories that trigger notifications for a event
     #   notification subscription.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [Event::Collection]
     def events(options = {})
       batches = Enumerator.new do |y|

@@ -449,9 +449,52 @@ module Aws::OpsWorksCM
     # group rules, open Security Groups in the navigation pane of the EC2
     # management console.
     #
+    # To specify your own domain for a server, and provide your own
+    # self-signed or CA-signed certificate and private key, specify values
+    # for `CustomDomain`, `CustomCertificate`, and `CustomPrivateKey`.
+    #
     # @option params [Boolean] :associate_public_ip_address
     #   Associate a public IP address with a server that you are launching.
     #   Valid values are `true` or `false`. The default value is `true`.
+    #
+    # @option params [String] :custom_domain
+    #   An optional public endpoint of a server, such as
+    #   `https://aws.my-company.com`. To access the server, create a CNAME DNS
+    #   record in your preferred DNS service that points the custom domain to
+    #   the endpoint that is generated when the server is created (the value
+    #   of the CreateServer Endpoint attribute). You cannot access the server
+    #   by using the generated `Endpoint` value if the server is using a
+    #   custom domain. If you specify a custom domain, you must also specify
+    #   values for `CustomCertificate` and `CustomPrivateKey`.
+    #
+    # @option params [String] :custom_certificate
+    #   A PEM-formatted HTTPS certificate. The value can be be a single,
+    #   self-signed certificate, or a certificate chain. If you specify a
+    #   custom certificate, you must also specify values for `CustomDomain`
+    #   and `CustomPrivateKey`. The following are requirements for the
+    #   `CustomCertificate` value:
+    #
+    #   * You can provide either a self-signed, custom certificate, or the
+    #     full certificate chain.
+    #
+    #   * The certificate must be a valid X509 certificate, or a certificate
+    #     chain in PEM format.
+    #
+    #   * The certificate must be valid at the time of upload. A certificate
+    #     can't be used before its validity period begins (the certificate's
+    #     `NotBefore` date), or after it expires (the certificate's
+    #     `NotAfter` date).
+    #
+    #   * The certificate’s common name or subject alternative names (SANs),
+    #     if present, must match the value of `CustomDomain`.
+    #
+    #   * The certificate must match the value of `CustomPrivateKey`.
+    #
+    # @option params [String] :custom_private_key
+    #   A private key in PEM format for connecting to the server by using
+    #   HTTPS. The private key must not be encrypted; it cannot be protected
+    #   by a password or passphrase. If you specify a custom private key, you
+    #   must also specify values for `CustomDomain` and `CustomCertificate`.
     #
     # @option params [Boolean] :disable_automated_backup
     #   Enable or disable scheduled backups. Valid values are `true` or
@@ -610,6 +653,9 @@ module Aws::OpsWorksCM
     #
     #   resp = client.create_server({
     #     associate_public_ip_address: false,
+    #     custom_domain: "CustomDomain",
+    #     custom_certificate: "CustomCertificate",
+    #     custom_private_key: "CustomPrivateKey",
     #     disable_automated_backup: false,
     #     engine: "String",
     #     engine_model: "String",
@@ -640,6 +686,7 @@ module Aws::OpsWorksCM
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
     #   resp.server.cloud_formation_stack_arn #=> String
+    #   resp.server.custom_domain #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -978,6 +1025,7 @@ module Aws::OpsWorksCM
     #   resp.servers[0].server_name #=> String
     #   resp.servers[0].created_at #=> Time
     #   resp.servers[0].cloud_formation_stack_arn #=> String
+    #   resp.servers[0].custom_domain #=> String
     #   resp.servers[0].disable_automated_backup #=> Boolean
     #   resp.servers[0].endpoint #=> String
     #   resp.servers[0].engine #=> String
@@ -1238,6 +1286,7 @@ module Aws::OpsWorksCM
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
     #   resp.server.cloud_formation_stack_arn #=> String
+    #   resp.server.custom_domain #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -1319,6 +1368,7 @@ module Aws::OpsWorksCM
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
     #   resp.server.cloud_formation_stack_arn #=> String
+    #   resp.server.custom_domain #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -1393,6 +1443,7 @@ module Aws::OpsWorksCM
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
     #   resp.server.cloud_formation_stack_arn #=> String
+    #   resp.server.custom_domain #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -1438,7 +1489,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

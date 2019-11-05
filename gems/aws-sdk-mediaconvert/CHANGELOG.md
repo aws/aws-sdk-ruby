@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2019-10-09)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for Dolby Atmos encoding, up to 36 outputs, accelerated transcoding with frame capture and preferred acceleration feature.
+
 1.36.0 (2019-09-16)
 ------------------
 

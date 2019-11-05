@@ -477,6 +477,10 @@ module Aws::PinpointEmail
     #       raw: {
     #         data: "data", # required
     #       },
+    #       template: {
+    #         template_arn: "TemplateArn",
+    #         template_data: "TemplateData",
+    #       },
     #     },
     #     tags: [
     #       {
@@ -1544,9 +1548,11 @@ module Aws::PinpointEmail
     #   dedicated IP pool.
     #
     # @option params [String] :tls_policy
-    #   Whether Amazon Pinpoint should require that incoming email is
-    #   delivered over a connection encrypted with Transport Layer Security
-    #   (TLS).
+    #   Specifies whether messages that use the configuration set are required
+    #   to use Transport Layer Security (TLS). If the value is `Require`,
+    #   messages are only delivered if a TLS connection can be established. If
+    #   the value is `Optional`, messages can be delivered in plain text if a
+    #   TLS connection can't be established.
     #
     # @option params [String] :sending_pool_name
     #   The name of the dedicated IP pool that you want to associate with the
@@ -1985,6 +1991,10 @@ module Aws::PinpointEmail
     #       raw: {
     #         data: "data", # required
     #       },
+    #       template: {
+    #         template_arn: "TemplateArn",
+    #         template_data: "TemplateData",
+    #       },
     #     },
     #     email_tags: [
     #       {
@@ -2160,7 +2170,7 @@ module Aws::PinpointEmail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointemail'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

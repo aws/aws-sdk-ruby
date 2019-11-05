@@ -1205,7 +1205,7 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # The error returned if the message passed to
+    # This error is returned if the message passed to
     # `DecodeAuthorizationMessage` was invalid. This can happen if the token
     # contains invalid characters, such as linebreaks.
     #

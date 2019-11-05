@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2019-10-16)
+------------------
+
+* Feature - AWS MSK has added support for adding brokers to a cluster.
+
+1.13.0 (2019-10-09)
+------------------
+
+* Feature - Updated documentation for Amazon Managed Streaming for Kafka service.
+
 1.12.0 (2019-07-25)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2019-10-10)
+------------------
+
+* Feature - Amazon Lex now supports Session API checkpoints
+
 1.19.0 (2019-08-09)
 ------------------
 

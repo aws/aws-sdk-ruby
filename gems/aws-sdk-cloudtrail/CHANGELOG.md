@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-11-01)
+------------------
+
+* Feature - This release adds two new APIs, GetTrail and ListTrails, and support for adding tags when you create a trail by using a new TagsList parameter on CreateTrail operations.
+
+1.18.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.17.0 (2019-07-25)
 ------------------
 

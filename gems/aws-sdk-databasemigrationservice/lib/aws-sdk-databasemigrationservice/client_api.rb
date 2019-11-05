@@ -962,6 +962,11 @@ module Aws::DatabaseMigrationService
     ReplicationTaskStats.add_member(:tables_loading, Shapes::ShapeRef.new(shape: Integer, location_name: "TablesLoading"))
     ReplicationTaskStats.add_member(:tables_queued, Shapes::ShapeRef.new(shape: Integer, location_name: "TablesQueued"))
     ReplicationTaskStats.add_member(:tables_errored, Shapes::ShapeRef.new(shape: Integer, location_name: "TablesErrored"))
+    ReplicationTaskStats.add_member(:fresh_start_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "FreshStartDate"))
+    ReplicationTaskStats.add_member(:start_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartDate"))
+    ReplicationTaskStats.add_member(:stop_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "StopDate"))
+    ReplicationTaskStats.add_member(:full_load_start_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "FullLoadStartDate"))
+    ReplicationTaskStats.add_member(:full_load_finish_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "FullLoadFinishDate"))
     ReplicationTaskStats.struct_class = Types::ReplicationTaskStats
 
     ResourceAlreadyExistsFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))

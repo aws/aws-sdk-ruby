@@ -124,6 +124,9 @@
   "CodeStar": {
     "models": "codestar/2017-04-19"
   },
+  "CodeStarNotifications": {
+    "models": "codestar-notifications/2019-10-15"
+  },
   "CognitoIdentity": {
     "models": "cognito-identity/2014-06-30"
   },
@@ -573,6 +576,9 @@
   },
   "STS": {
     "models": "sts/2011-06-15",
+    "addPlugins": [
+      "Aws::STS::Plugins::STSRegionalEndpoints"
+    ],
     "gemName": "aws-sdk-core"
   },
   "SWF": {

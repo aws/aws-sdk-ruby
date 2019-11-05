@@ -109,7 +109,8 @@ module Aws::RDS
     #   Example: `my-cluster1`
     # @option options [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
-    #   cluster. If this argument is omitted, `default.aurora5.6` is used.
+    #   cluster. If you do not specify a value, then the default DB cluster
+    #   parameter group for the specified DB engine and version is used.
     #
     #   Constraints:
     #
@@ -246,14 +247,14 @@ module Aws::RDS
     #   cluster, then you can use the KMS key alias instead of the ARN for the
     #   KMS encryption key.
     #
-    #   If an encryption key is not specified in `KmsKeyId`\:
+    #   If an encryption key isn't specified in `KmsKeyId`\:
     #
     #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
     #     then Amazon RDS will use the encryption key used to encrypt the
     #     source. Otherwise, Amazon RDS will use your default encryption key.
     #
     #   * If the `StorageEncrypted` parameter is enabled and
-    #     `ReplicationSourceIdentifier` is not specified, then Amazon RDS will
+    #     `ReplicationSourceIdentifier` isn't specified, then Amazon RDS will
     #     use your default encryption key.
     #
     #   AWS KMS creates the default encryption key for your AWS account. Your
@@ -298,6 +299,14 @@ module Aws::RDS
     #   To learn how to generate a Signature Version 4 signed request, see [
     #   Authenticating Requests: Using Query Parameters (AWS Signature Version
     #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
     #
     #
     #
@@ -503,7 +512,7 @@ module Aws::RDS
     #   **MySQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter is not specified, no database is created in the DB
+    #   this parameter isn't specified, no database is created in the DB
     #   instance.
     #
     #   Constraints:
@@ -515,7 +524,7 @@ module Aws::RDS
     #   **MariaDB**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter is not specified, no database is created in the DB
+    #   this parameter isn't specified, no database is created in the DB
     #   instance.
     #
     #   Constraints:
@@ -527,7 +536,7 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter is not specified, the default "postgres" database is
+    #   this parameter isn't specified, the default "postgres" database is
     #   created in the DB instance.
     #
     #   Constraints:
@@ -560,7 +569,7 @@ module Aws::RDS
     #   **Amazon Aurora**
     #
     #   The name of the database to create when the primary instance of the DB
-    #   cluster is created. If this parameter is not specified, no database is
+    #   cluster is created. If this parameter isn't specified, no database is
     #   created in the DB instance.
     #
     #   Constraints:
@@ -835,9 +844,19 @@ module Aws::RDS
     #   the DB instance is a Multi-AZ deployment. The specified Availability
     #   Zone must be in the same AWS Region as the current endpoint.
     #
+    #   <note markdown="1"> If you're creating a DB instance in an RDS on VMware environment,
+    #   specify the identifier of the custom Availability Zone to create the
+    #   DB instance in.
+    #
+    #    For more information about RDS on VMware, see the [ *RDS on VMware
+    #   User Guide.* ][2]
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
     # @option options [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
     #
@@ -862,8 +881,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
-    #   If you do not specify a value for `DBParameterGroupName`, then the
-    #   default `DBParameterGroup` for the specified DB engine is used.
+    #   If you do not specify a value, then the default DB parameter group for
+    #   the specified DB engine and version is used.
     #
     #   Constraints:
     #
@@ -1057,15 +1076,15 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address.
     #
     #   Default: The default behavior varies depending on whether
     #   `DBSubnetGroupName` is specified.
     #
-    #   If `DBSubnetGroupName` is not specified, and `PubliclyAccessible` is
-    #   not specified, the following applies:
+    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
+    #   isn't specified, the following applies:
     #
     #   * If the default VPC in the target region doesn’t have an Internet
     #     gateway attached to it, the DB instance is private.
@@ -1073,7 +1092,7 @@ module Aws::RDS
     #   * If the default VPC in the target region has an Internet gateway
     #     attached to it, the DB instance is public.
     #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` is not
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
     #   specified, the following applies:
     #
     #   * If the subnets are part of a VPC that doesn’t have an Internet
@@ -1102,7 +1121,7 @@ module Aws::RDS
     #   the device.
     # @option options [Boolean] :storage_encrypted
     #   A value that indicates whether the DB instance is encrypted. By
-    #   default, it is not encrypted.
+    #   default, it isn't encrypted.
     #
     #   **Amazon Aurora**
     #
@@ -1460,7 +1479,7 @@ module Aws::RDS
     # @option options [String] :source_type
     #   The type of source that is generating the events. For example, if you
     #   want to be notified of events generated by a DB instance, you would
-    #   set this parameter to db-instance. if this value is not specified, all
+    #   set this parameter to db-instance. if this value isn't specified, all
     #   events are returned.
     #
     #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
@@ -1498,7 +1517,7 @@ module Aws::RDS
     #     be supplied.
     # @option options [Boolean] :enabled
     #   A value that indicates whether to activate the subscription. If the
-    #   event notification subscription is not activated, the subscription is
+    #   event notification subscription isn't activated, the subscription is
     #   created but not active.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -1621,12 +1640,12 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @option options [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -1696,12 +1715,12 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @option options [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -1837,7 +1856,7 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @option options [Boolean] :default_only
     #   A value that indicates whether only the default version of the
     #   specified engine or engine and major version combination is returned.
@@ -1993,7 +2012,7 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [DBParameterGroup::Collection]
     def db_parameter_groups(options = {})
       batches = Enumerator.new do |y|
@@ -2037,7 +2056,7 @@ module Aws::RDS
     # @option options [String] :db_security_group_name
     #   The name of the DB security group to return details for.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [DBSecurityGroup::Collection]
     def db_security_groups(options = {})
       batches = Enumerator.new do |y|
@@ -2077,7 +2096,7 @@ module Aws::RDS
     # @option options [String] :db_instance_identifier
     #   The ID of the DB instance to retrieve the list of DB snapshots for.
     #   This parameter can't be used in conjunction with
-    #   `DBSnapshotIdentifier`. This parameter is not case-sensitive.
+    #   `DBSnapshotIdentifier`. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -2211,7 +2230,7 @@ module Aws::RDS
     # @option options [String] :db_subnet_group_name
     #   The name of the DB subnet group to return details for.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [DBSubnetGroup::Collection]
     def db_subnet_groups(options = {})
       batches = Enumerator.new do |y|
@@ -2258,7 +2277,7 @@ module Aws::RDS
     #   Valid values: db-instance \| db-parameter-group \| db-security-group
     #   \| db-snapshot
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [EventCategoryMap::Collection]
     def event_category_maps(options = {})
       batches = Enumerator.new do |y|
@@ -2301,7 +2320,7 @@ module Aws::RDS
     #   The name of the RDS event notification subscription you want to
     #   describe.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [EventSubscription::Collection]
     def event_subscriptions(options = {})
       batches = Enumerator.new do |y|
@@ -2390,7 +2409,7 @@ module Aws::RDS
     #   A list of event categories that trigger notifications for a event
     #   notification subscription.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [Event::Collection]
     def events(options = {})
       batches = Enumerator.new do |y|
@@ -2438,7 +2457,7 @@ module Aws::RDS
     #   The name of the option group to describe. Can't be supplied together
     #   with EngineName or MajorEngineVersion.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @option options [String] :engine_name
     #   Filters the list of option groups to only include groups associated
     #   with a specific database engine.
@@ -2540,7 +2559,7 @@ module Aws::RDS
     #
     #    </note>
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [ReservedDBInstance::Collection]
     def reserved_db_instances(options = {})
       batches = Enumerator.new do |y|
@@ -2617,7 +2636,7 @@ module Aws::RDS
     #   A value that indicates whether to show only those reservations that
     #   support Multi-AZ.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [ReservedDBInstancesOffering::Collection]
     def reserved_db_instances_offerings(options = {})
       batches = Enumerator.new do |y|
@@ -2684,8 +2703,8 @@ module Aws::RDS
     # @option options [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #

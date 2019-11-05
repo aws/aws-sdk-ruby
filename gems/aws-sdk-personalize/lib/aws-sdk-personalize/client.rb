@@ -918,6 +918,19 @@ module Aws::Personalize
     #   The Amazon Resource Name (ARN) of the solution containing the training
     #   configuration information.
     #
+    # @option params [String] :training_mode
+    #   The scope of training to be performed when creating the solution
+    #   version. The `FULL` option trains the solution version based on the
+    #   entirety of the input solution's training data, while the `UPDATE`
+    #   option processes only the data that has changed in comparison to the
+    #   input solution. Choose `UPDATE` when you want to incrementally update
+    #   your solution version instead of creating an entirely new one.
+    #
+    #   The `UPDATE` option can only be used when you already have an active
+    #   solution version created from the input solution using the `FULL`
+    #   option and the input solution was trained with the
+    #   native-recipe-hrnn-coldstart recipe.
+    #
     # @return [Types::CreateSolutionVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSolutionVersionResponse#solution_version_arn #solution_version_arn} => String
@@ -926,6 +939,7 @@ module Aws::Personalize
     #
     #   resp = client.create_solution_version({
     #     solution_arn: "Arn", # required
+    #     training_mode: "FULL", # accepts FULL, UPDATE
     #   })
     #
     # @example Response structure
@@ -1596,6 +1610,7 @@ module Aws::Personalize
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list #=> Array
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list[0] #=> String
     #   resp.solution_version.training_hours #=> Float
+    #   resp.solution_version.training_mode #=> String, one of "FULL", "UPDATE"
     #   resp.solution_version.status #=> String
     #   resp.solution_version.failure_reason #=> String
     #   resp.solution_version.creation_date_time #=> Time
@@ -2127,7 +2142,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

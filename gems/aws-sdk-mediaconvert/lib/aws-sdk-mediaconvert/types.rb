@@ -192,11 +192,12 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         mode: "DISABLED", # required, accepts DISABLED, ENABLED
+    #         mode: "DISABLED", # required, accepts DISABLED, ENABLED, PREFERRED
     #       }
     #
     # @!attribute [rw] mode
-    #   Acceleration configuration for the job.
+    #   Specify the conditions when the service will run your job with
+    #   accelerated transcoding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AccelerationSettings AWS API Documentation
@@ -755,7 +756,7 @@ module Aws::MediaConvert
     #       {
     #         custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #         default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #         external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #         external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #         offset: 1,
     #         pids: [1],
@@ -884,7 +885,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #         avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
     #       }
     #
     # @!attribute [rw] avail_blanking_image
@@ -1482,7 +1483,7 @@ module Aws::MediaConvert
     #           },
     #           file_source_settings: {
     #             convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #             source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #             time_delta: 1,
     #           },
     #           source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -1557,7 +1558,7 @@ module Aws::MediaConvert
     #         },
     #         file_source_settings: {
     #           convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #           source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #           time_delta: 1,
     #         },
     #         source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -1764,6 +1765,7 @@ module Aws::MediaConvert
     #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #         min_buffer_time: 1,
     #         min_final_segment_length: 1.0,
+    #         mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -1843,6 +1845,16 @@ module Aws::MediaConvert
     #   seconds.
     #   @return [Float]
     #
+    # @!attribute [rw] mpd_profile
+    #   Specify whether your DASH profile is on-demand or main. When you
+    #   choose Main profile (MAIN\_PROFILE), the service signals
+    #   urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest.
+    #   When you choose On-demand (ON\_DEMAND\_PROFILE), the service signals
+    #   urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you
+    #   choose On-demand, you must also set the output group setting Segment
+    #   control (SegmentControl) to Single file (SINGLE\_FILE).
+    #   @return [String]
+    #
     # @!attribute [rw] segment_control
     #   When set to SINGLE\_FILE, a single output file is generated, which
     #   is internally segmented using the Fragment Length and Segment
@@ -1892,6 +1904,7 @@ module Aws::MediaConvert
       :manifest_duration_format,
       :min_buffer_time,
       :min_final_segment_length,
+      :mpd_profile,
       :segment_control,
       :segment_length,
       :stream_inf_resolution,
@@ -2142,9 +2155,9 @@ module Aws::MediaConvert
     #
     #       {
     #         acceleration_settings: {
-    #           mode: "DISABLED", # required, accepts DISABLED, ENABLED
+    #           mode: "DISABLED", # required, accepts DISABLED, ENABLED, PREFERRED
     #         },
-    #         billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE
+    #         billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE, JOB
     #         client_request_token: "__string",
     #         job_template: "__string",
     #         priority: 1,
@@ -2153,7 +2166,7 @@ module Aws::MediaConvert
     #         settings: { # required
     #           ad_avail_offset: 1,
     #           avail_blanking: {
-    #             avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #             avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
     #           },
     #           esam: {
     #             manifest_confirm_condition_notification: {
@@ -2175,7 +2188,7 @@ module Aws::MediaConvert
     #                 "__string" => {
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                   external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
@@ -2216,7 +2229,7 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                       source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -2253,7 +2266,7 @@ module Aws::MediaConvert
     #                     fade_in: 1,
     #                     fade_out: 1,
     #                     height: 1,
-    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                     image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                     image_x: 1,
     #                     image_y: 1,
     #                     layer: 1,
@@ -2308,7 +2321,7 @@ module Aws::MediaConvert
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #             },
-    #             input: "__stringMin14Max1285PatternS3Mov09Png",
+    #             input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
     #             insertion_mode: "MOV", # accepts MOV, PNG
     #             offset: {
     #               image_x: 1,
@@ -2363,6 +2376,7 @@ module Aws::MediaConvert
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
+    #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -2392,6 +2406,7 @@ module Aws::MediaConvert
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
+    #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -2968,7 +2983,7 @@ module Aws::MediaConvert
     #                             fade_in: 1,
     #                             fade_out: 1,
     #                             height: 1,
-    #                             image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                             image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                             image_x: 1,
     #                             image_y: 1,
     #                             layer: 1,
@@ -3023,6 +3038,9 @@ module Aws::MediaConvert
     #         },
     #         simulate_reserved_queue: "DISABLED", # accepts DISABLED, ENABLED
     #         status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #         user_metadata: {
     #           "__string" => "__string",
     #         },
@@ -3095,6 +3113,11 @@ module Aws::MediaConvert
     #   transcode or encounters an error.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags that you want to add to the resource. You can tag resources
+    #   with a key-value pair or with only a key.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] user_metadata
     #   User-defined metadata that you want to associate with an
     #   MediaConvert job. You specify metadata in key/value pairs.
@@ -3113,6 +3136,7 @@ module Aws::MediaConvert
       :settings,
       :simulate_reserved_queue,
       :status_update_interval,
+      :tags,
       :user_metadata)
       include Aws::Structure
     end
@@ -3142,7 +3166,7 @@ module Aws::MediaConvert
     #
     #       {
     #         acceleration_settings: {
-    #           mode: "DISABLED", # required, accepts DISABLED, ENABLED
+    #           mode: "DISABLED", # required, accepts DISABLED, ENABLED, PREFERRED
     #         },
     #         category: "__string",
     #         description: "__string",
@@ -3152,7 +3176,7 @@ module Aws::MediaConvert
     #         settings: { # required
     #           ad_avail_offset: 1,
     #           avail_blanking: {
-    #             avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #             avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
     #           },
     #           esam: {
     #             manifest_confirm_condition_notification: {
@@ -3174,7 +3198,7 @@ module Aws::MediaConvert
     #                 "__string" => {
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                   external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
@@ -3215,7 +3239,7 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                       source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -3245,7 +3269,7 @@ module Aws::MediaConvert
     #                     fade_in: 1,
     #                     fade_out: 1,
     #                     height: 1,
-    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                     image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                     image_x: 1,
     #                     image_y: 1,
     #                     layer: 1,
@@ -3299,7 +3323,7 @@ module Aws::MediaConvert
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #             },
-    #             input: "__stringMin14Max1285PatternS3Mov09Png",
+    #             input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
     #             insertion_mode: "MOV", # accepts MOV, PNG
     #             offset: {
     #               image_x: 1,
@@ -3354,6 +3378,7 @@ module Aws::MediaConvert
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
+    #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -3383,6 +3408,7 @@ module Aws::MediaConvert
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
+    #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -3959,7 +3985,7 @@ module Aws::MediaConvert
     #                             fade_in: 1,
     #                             fade_out: 1,
     #                             height: 1,
-    #                             image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                             image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                             image_x: 1,
     #                             image_y: 1,
     #                             layer: 1,
@@ -4572,7 +4598,7 @@ module Aws::MediaConvert
     #                     fade_in: 1,
     #                     fade_out: 1,
     #                     height: 1,
-    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                     image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                     image_x: 1,
     #                     image_y: 1,
     #                     layer: 1,
@@ -4815,6 +4841,7 @@ module Aws::MediaConvert
     #         fragment_length: 1,
     #         hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #         min_buffer_time: 1,
+    #         mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
     #         write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -4861,6 +4888,16 @@ module Aws::MediaConvert
     #   smooth playout.
     #   @return [Integer]
     #
+    # @!attribute [rw] mpd_profile
+    #   Specify whether your DASH profile is on-demand or main. When you
+    #   choose Main profile (MAIN\_PROFILE), the service signals
+    #   urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest.
+    #   When you choose On-demand (ON\_DEMAND\_PROFILE), the service signals
+    #   urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you
+    #   choose On-demand, you must also set the output group setting Segment
+    #   control (SegmentControl) to Single file (SINGLE\_FILE).
+    #   @return [String]
+    #
     # @!attribute [rw] segment_control
     #   When set to SINGLE\_FILE, a single output file is generated, which
     #   is internally segmented using the Fragment Length and Segment
@@ -4878,14 +4915,14 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] write_segment_timeline_in_representation
-    #   When you enable Precise segment duration in manifests
-    #   (writeSegmentTimelineInRepresentation), your DASH manifest shows
-    #   precise segment durations. The segment duration information appears
-    #   inside the SegmentTimeline element, inside SegmentTemplate at the
-    #   Representation level. When this feature isn't enabled, the segment
-    #   durations in your DASH manifest are approximate. The segment
-    #   duration information appears in the duration attribute of the
-    #   SegmentTemplate element.
+    #   If you get an HTTP error in the 400 range when you play back your
+    #   DASH output, enable this setting and run your transcoding job again.
+    #   When you enable this setting, the service writes precise segment
+    #   durations in the DASH manifest. The segment duration information
+    #   appears inside the SegmentTimeline element, inside SegmentTemplate
+    #   at the Representation level. When you don't enable this setting,
+    #   the service writes approximate segment durations in your DASH
+    #   manifest.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashIsoGroupSettings AWS API Documentation
@@ -4898,6 +4935,7 @@ module Aws::MediaConvert
       :fragment_length,
       :hbbtv_compliance,
       :min_buffer_time,
+      :mpd_profile,
       :segment_control,
       :segment_length,
       :write_segment_timeline_in_representation)
@@ -6069,7 +6107,7 @@ module Aws::MediaConvert
     #
     #       {
     #         convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #         source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #         time_delta: 1,
     #       }
     #
@@ -7031,19 +7069,17 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] write_mp_4_packaging_type
-    #   Use this setting only for outputs encoded with H.265 that are in
-    #   CMAF or DASH output groups. If you include writeMp4PackagingType in
-    #   your JSON job specification for other outputs, your video might not
-    #   work properly with downstream systems and video players. If the
-    #   location of parameter set NAL units don't matter in your workflow,
-    #   ignore this setting. The service defaults to marking your output as
-    #   HEV1. Choose HVC1 to mark your output as HVC1. This makes your
-    #   output compliant with this specification: ISO IECJTC1 SC29 N13798
-    #   Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the
-    #   service stores parameter set NAL units in the sample headers but not
-    #   in the samples directly. Keep the default HEV1 to mark your output
-    #   as HEV1. For these outputs, the service writes parameter set NAL
-    #   units directly into the samples.
+    #   If the location of parameter set NAL units doesn't matter in your
+    #   workflow, ignore this setting. Use this setting in your CMAF, DASH,
+    #   or file MP4 output. For file MP4 outputs, choosing HVC1 can create
+    #   video that doesn't work properly with some downstream systems and
+    #   video players. Choose HVC1 to mark your output as HVC1. This makes
+    #   your output compliant with the following specification: ISO IECJTC1
+    #   SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these
+    #   outputs, the service stores parameter set NAL units in the sample
+    #   headers but not in the samples directly. The service defaults to
+    #   marking your output as HEV1. For these outputs, the service writes
+    #   parameter set NAL units directly into the samples.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H265Settings AWS API Documentation
@@ -7687,7 +7723,7 @@ module Aws::MediaConvert
     #             fade_in: 1,
     #             fade_out: 1,
     #             height: 1,
-    #             image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #             image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #             image_x: 1,
     #             image_y: 1,
     #             layer: 1,
@@ -7749,7 +7785,7 @@ module Aws::MediaConvert
     #           "__string" => {
     #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #             default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #             external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #             external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             offset: 1,
     #             pids: [1],
@@ -7790,7 +7826,7 @@ module Aws::MediaConvert
     #               },
     #               file_source_settings: {
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                 source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                 time_delta: 1,
     #               },
     #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -7827,7 +7863,7 @@ module Aws::MediaConvert
     #               fade_in: 1,
     #               fade_out: 1,
     #               height: 1,
-    #               image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #               image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #               image_x: 1,
     #               image_y: 1,
     #               layer: 1,
@@ -8168,7 +8204,7 @@ module Aws::MediaConvert
     #           "__string" => {
     #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #             default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #             external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #             external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             offset: 1,
     #             pids: [1],
@@ -8209,7 +8245,7 @@ module Aws::MediaConvert
     #               },
     #               file_source_settings: {
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                 source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                 time_delta: 1,
     #               },
     #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -8239,7 +8275,7 @@ module Aws::MediaConvert
     #               fade_in: 1,
     #               fade_out: 1,
     #               height: 1,
-    #               image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #               image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #               image_x: 1,
     #               image_y: 1,
     #               layer: 1,
@@ -8445,7 +8481,7 @@ module Aws::MediaConvert
     #         fade_in: 1,
     #         fade_out: 1,
     #         height: 1,
-    #         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #         image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #         image_x: 1,
     #         image_y: 1,
     #         layer: 1,
@@ -8484,8 +8520,8 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] image_inserter_input
-    #   Specify the Amazon S3 location of the image that you want to overlay
-    #   on the video. Use a PNG or TGA file.
+    #   Specify the HTTP, HTTPS, or Amazon S3 location of the image that you
+    #   want to overlay on the video. Use a PNG or TGA file.
     #   @return [String]
     #
     # @!attribute [rw] image_x
@@ -8561,6 +8597,23 @@ module Aws::MediaConvert
     #   visually complex content.
     #   @return [Types::AccelerationSettings]
     #
+    # @!attribute [rw] acceleration_status
+    #   Describes whether the current job is running with accelerated
+    #   transcoding. For jobs that have Acceleration (AccelerationMode) set
+    #   to DISABLED, AccelerationStatus is always NOT\_APPLICABLE. For jobs
+    #   that have Acceleration (AccelerationMode) set to ENABLED or
+    #   PREFERRED, AccelerationStatus is one of the other states.
+    #   AccelerationStatus is IN\_PROGRESS initially, while the service
+    #   determines whether the input files and job settings are compatible
+    #   with accelerated transcoding. If they are, AcclerationStatus is
+    #   ACCELERATED. If your input files and job settings aren't compatible
+    #   with accelerated transcoding, the service either fails your job or
+    #   runs it without accelerated transcoding, depending on how you set
+    #   Acceleration (AccelerationMode). When the service runs your job
+    #   without accelerated transcoding, AccelerationStatus is
+    #   NOT\_ACCELERATED.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   An identifier for this resource that is unique within all of AWS.
     #   @return [String]
@@ -8612,6 +8665,11 @@ module Aws::MediaConvert
     #   The job template that the job is created from, if it is created from
     #   a job template.
     #   @return [String]
+    #
+    # @!attribute [rw] messages
+    #   Provides messages from the service about jobs that you have already
+    #   successfully submitted.
+    #   @return [Types::JobMessages]
     #
     # @!attribute [rw] output_group_details
     #   List of output group details
@@ -8678,6 +8736,7 @@ module Aws::MediaConvert
     #
     class Job < Struct.new(
       :acceleration_settings,
+      :acceleration_status,
       :arn,
       :billing_tags_source,
       :created_at,
@@ -8687,6 +8746,7 @@ module Aws::MediaConvert
       :id,
       :job_percent_complete,
       :job_template,
+      :messages,
       :output_group_details,
       :priority,
       :queue,
@@ -8701,6 +8761,27 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Provides messages from the service about jobs that you have already
+    # successfully submitted.
+    #
+    # @!attribute [rw] info
+    #   List of messages that are informational only and don't indicate a
+    #   problem with your job.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] warning
+    #   List of messages that warn about conditions that might cause your
+    #   job not to run or to fail.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobMessages AWS API Documentation
+    #
+    class JobMessages < Struct.new(
+      :info,
+      :warning)
+      include Aws::Structure
+    end
+
     # JobSettings contains all the transcode settings for a job.
     #
     # @note When making an API call, you may pass JobSettings
@@ -8709,7 +8790,7 @@ module Aws::MediaConvert
     #       {
     #         ad_avail_offset: 1,
     #         avail_blanking: {
-    #           avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #           avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
     #         },
     #         esam: {
     #           manifest_confirm_condition_notification: {
@@ -8731,7 +8812,7 @@ module Aws::MediaConvert
     #               "__string" => {
     #                 custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                 default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                 external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                 external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 offset: 1,
     #                 pids: [1],
@@ -8772,7 +8853,7 @@ module Aws::MediaConvert
     #                   },
     #                   file_source_settings: {
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                     source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                     time_delta: 1,
     #                   },
     #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -8809,7 +8890,7 @@ module Aws::MediaConvert
     #                   fade_in: 1,
     #                   fade_out: 1,
     #                   height: 1,
-    #                   image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                   image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                   image_x: 1,
     #                   image_y: 1,
     #                   layer: 1,
@@ -8864,7 +8945,7 @@ module Aws::MediaConvert
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #           },
-    #           input: "__stringMin14Max1285PatternS3Mov09Png",
+    #           input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
     #           insertion_mode: "MOV", # accepts MOV, PNG
     #           offset: {
     #             image_x: 1,
@@ -8919,6 +9000,7 @@ module Aws::MediaConvert
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
+    #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -8948,6 +9030,7 @@ module Aws::MediaConvert
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                 min_buffer_time: 1,
+    #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -9524,7 +9607,7 @@ module Aws::MediaConvert
     #                           fade_in: 1,
     #                           fade_out: 1,
     #                           height: 1,
-    #                           image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                           image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                           image_x: 1,
     #                           image_y: 1,
     #                           layer: 1,
@@ -9745,7 +9828,7 @@ module Aws::MediaConvert
     #       {
     #         ad_avail_offset: 1,
     #         avail_blanking: {
-    #           avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #           avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
     #         },
     #         esam: {
     #           manifest_confirm_condition_notification: {
@@ -9767,7 +9850,7 @@ module Aws::MediaConvert
     #               "__string" => {
     #                 custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                 default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                 external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                 external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 offset: 1,
     #                 pids: [1],
@@ -9808,7 +9891,7 @@ module Aws::MediaConvert
     #                   },
     #                   file_source_settings: {
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                     source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                     time_delta: 1,
     #                   },
     #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -9838,7 +9921,7 @@ module Aws::MediaConvert
     #                   fade_in: 1,
     #                   fade_out: 1,
     #                   height: 1,
-    #                   image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                   image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                   image_x: 1,
     #                   image_y: 1,
     #                   layer: 1,
@@ -9892,7 +9975,7 @@ module Aws::MediaConvert
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #           },
-    #           input: "__stringMin14Max1285PatternS3Mov09Png",
+    #           input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
     #           insertion_mode: "MOV", # accepts MOV, PNG
     #           offset: {
     #             image_x: 1,
@@ -9947,6 +10030,7 @@ module Aws::MediaConvert
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
+    #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -9976,6 +10060,7 @@ module Aws::MediaConvert
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                 min_buffer_time: 1,
+    #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -10552,7 +10637,7 @@ module Aws::MediaConvert
     #                           fade_in: 1,
     #                           fade_out: 1,
     #                           height: 1,
-    #                           image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                           image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                           image_x: 1,
     #                           image_y: 1,
     #                           layer: 1,
@@ -11521,7 +11606,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
     #         insertion_mode: "MOV", # accepts MOV, PNG
     #         offset: {
     #           image_x: 1,
@@ -12861,7 +12946,7 @@ module Aws::MediaConvert
     #                   fade_in: 1,
     #                   fade_out: 1,
     #                   height: 1,
-    #                   image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                   image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                   image_x: 1,
     #                   image_y: 1,
     #                   layer: 1,
@@ -13051,6 +13136,7 @@ module Aws::MediaConvert
     #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #             min_buffer_time: 1,
     #             min_final_segment_length: 1.0,
+    #             mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -13080,6 +13166,7 @@ module Aws::MediaConvert
     #             fragment_length: 1,
     #             hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #             min_buffer_time: 1,
+    #             mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
     #             write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -13656,7 +13743,7 @@ module Aws::MediaConvert
     #                       fade_in: 1,
     #                       fade_out: 1,
     #                       height: 1,
-    #                       image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                       image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                       image_x: 1,
     #                       image_y: 1,
     #                       layer: 1,
@@ -13782,6 +13869,7 @@ module Aws::MediaConvert
     #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #           min_buffer_time: 1,
     #           min_final_segment_length: 1.0,
+    #           mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -13811,6 +13899,7 @@ module Aws::MediaConvert
     #           fragment_length: 1,
     #           hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #           min_buffer_time: 1,
+    #           mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
     #           write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -14501,7 +14590,7 @@ module Aws::MediaConvert
     #                   fade_in: 1,
     #                   fade_out: 1,
     #                   height: 1,
-    #                   image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                   image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                   image_x: 1,
     #                   image_y: 1,
     #                   layer: 1,
@@ -15591,7 +15680,7 @@ module Aws::MediaConvert
     #
     #       {
     #         acceleration_settings: {
-    #           mode: "DISABLED", # required, accepts DISABLED, ENABLED
+    #           mode: "DISABLED", # required, accepts DISABLED, ENABLED, PREFERRED
     #         },
     #         category: "__string",
     #         description: "__string",
@@ -15601,7 +15690,7 @@ module Aws::MediaConvert
     #         settings: {
     #           ad_avail_offset: 1,
     #           avail_blanking: {
-    #             avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #             avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
     #           },
     #           esam: {
     #             manifest_confirm_condition_notification: {
@@ -15623,7 +15712,7 @@ module Aws::MediaConvert
     #                 "__string" => {
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                   external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
@@ -15664,7 +15753,7 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                       source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -15694,7 +15783,7 @@ module Aws::MediaConvert
     #                     fade_in: 1,
     #                     fade_out: 1,
     #                     height: 1,
-    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                     image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                     image_x: 1,
     #                     image_y: 1,
     #                     layer: 1,
@@ -15748,7 +15837,7 @@ module Aws::MediaConvert
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #             },
-    #             input: "__stringMin14Max1285PatternS3Mov09Png",
+    #             input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
     #             insertion_mode: "MOV", # accepts MOV, PNG
     #             offset: {
     #               image_x: 1,
@@ -15803,6 +15892,7 @@ module Aws::MediaConvert
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
+    #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -15832,6 +15922,7 @@ module Aws::MediaConvert
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
+    #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -16408,7 +16499,7 @@ module Aws::MediaConvert
     #                             fade_in: 1,
     #                             fade_out: 1,
     #                             height: 1,
-    #                             image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                             image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                             image_x: 1,
     #                             image_y: 1,
     #                             layer: 1,
@@ -17012,7 +17103,7 @@ module Aws::MediaConvert
     #                     fade_in: 1,
     #                     fade_out: 1,
     #                     height: 1,
-    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                     image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                     image_x: 1,
     #                     image_y: 1,
     #                     layer: 1,
@@ -17561,7 +17652,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -17801,7 +17892,7 @@ module Aws::MediaConvert
     #               fade_in: 1,
     #               fade_out: 1,
     #               height: 1,
-    #               image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #               image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #               image_x: 1,
     #               image_y: 1,
     #               layer: 1,

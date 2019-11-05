@@ -346,7 +346,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_acl.replace_association({
-    #     association_id: "String", # required
+    #     association_id: "NetworkAclAssociationId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

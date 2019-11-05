@@ -256,7 +256,7 @@ module Aws::RDS
       data[:publicly_accessible]
     end
 
-    # The status of a Read Replica. If the instance is not a Read Replica,
+    # The status of a Read Replica. If the instance isn't a Read Replica,
     # this is blank.
     # @return [Array<Types::DBInstanceStatusInfo>]
     def status_infos
@@ -679,7 +679,7 @@ module Aws::RDS
     #   **MySQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter is not specified, no database is created in the DB
+    #   this parameter isn't specified, no database is created in the DB
     #   instance.
     #
     #   Constraints:
@@ -691,7 +691,7 @@ module Aws::RDS
     #   **MariaDB**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter is not specified, no database is created in the DB
+    #   this parameter isn't specified, no database is created in the DB
     #   instance.
     #
     #   Constraints:
@@ -703,7 +703,7 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter is not specified, the default "postgres" database is
+    #   this parameter isn't specified, the default "postgres" database is
     #   created in the DB instance.
     #
     #   Constraints:
@@ -736,7 +736,7 @@ module Aws::RDS
     #   **Amazon Aurora**
     #
     #   The name of the database to create when the primary instance of the DB
-    #   cluster is created. If this parameter is not specified, no database is
+    #   cluster is created. If this parameter isn't specified, no database is
     #   created in the DB instance.
     #
     #   Constraints:
@@ -998,9 +998,19 @@ module Aws::RDS
     #   the DB instance is a Multi-AZ deployment. The specified Availability
     #   Zone must be in the same AWS Region as the current endpoint.
     #
+    #   <note markdown="1"> If you're creating a DB instance in an RDS on VMware environment,
+    #   specify the identifier of the custom Availability Zone to create the
+    #   DB instance in.
+    #
+    #    For more information about RDS on VMware, see the [ *RDS on VMware
+    #   User Guide.* ][2]
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
     # @option options [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
     #
@@ -1025,8 +1035,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
-    #   If you do not specify a value for `DBParameterGroupName`, then the
-    #   default `DBParameterGroup` for the specified DB engine is used.
+    #   If you do not specify a value, then the default DB parameter group for
+    #   the specified DB engine and version is used.
     #
     #   Constraints:
     #
@@ -1220,15 +1230,15 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address.
     #
     #   Default: The default behavior varies depending on whether
     #   `DBSubnetGroupName` is specified.
     #
-    #   If `DBSubnetGroupName` is not specified, and `PubliclyAccessible` is
-    #   not specified, the following applies:
+    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
+    #   isn't specified, the following applies:
     #
     #   * If the default VPC in the target region doesn’t have an Internet
     #     gateway attached to it, the DB instance is private.
@@ -1236,7 +1246,7 @@ module Aws::RDS
     #   * If the default VPC in the target region has an Internet gateway
     #     attached to it, the DB instance is public.
     #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` is not
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
     #   specified, the following applies:
     #
     #   * If the subnets are part of a VPC that doesn’t have an Internet
@@ -1265,7 +1275,7 @@ module Aws::RDS
     #   the device.
     # @option options [Boolean] :storage_encrypted
     #   A value that indicates whether the DB instance is encrypted. By
-    #   default, it is not encrypted.
+    #   default, it isn't encrypted.
     #
     #   **Amazon Aurora**
     #
@@ -1561,6 +1571,11 @@ module Aws::RDS
     #   region Read Replica, or the default `DBParameterGroup` for the
     #   specified DB engine for a cross region Read Replica.
     #
+    #   <note markdown="1"> Currently, specifying a parameter group for this operation is only
+    #   supported for Oracle DB instances.
+    #
+    #    </note>
+    #
     #   Constraints:
     #
     #   * Must be 1 to 255 letters, numbers, or hyphens.
@@ -1572,7 +1587,7 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address. For more information, see CreateDBInstance.
     # @option options [Array<Types::Tag>] :tags
@@ -1585,7 +1600,7 @@ module Aws::RDS
     # @option options [String] :db_subnet_group_name
     #   Specifies a DB subnet group for the DB instance. The new DB instance
     #   is created in the VPC associated with the DB subnet group. If no DB
-    #   subnet group is specified, then the new DB instance is not created in
+    #   subnet group is specified, then the new DB instance isn't created in
     #   a VPC.
     #
     #   Constraints:
@@ -1671,10 +1686,9 @@ module Aws::RDS
     #   contains the source DB instance.
     #
     #   You must specify this parameter when you create an encrypted Read
-    #   Replica from another AWS Region by using the Amazon RDS API. You can
-    #   specify the `--source-region` option instead of this parameter when
-    #   you create an encrypted Read Replica from another AWS Region by using
-    #   the AWS CLI.
+    #   Replica from another AWS Region by using the Amazon RDS API. Don't
+    #   specify `PreSignedUrl` when you are creating an encrypted Read Replica
+    #   in the same AWS Region.
     #
     #   The presigned URL must be a valid request for the
     #   `CreateDBInstanceReadReplica` API action that can be executed in the
@@ -1711,6 +1725,14 @@ module Aws::RDS
     #   To learn how to generate a Signature Version 4 signed request, see
     #   [Authenticating Requests: Using Query Parameters (AWS Signature
     #   Version 4)][1] and [Signature Version 4 Signing Process][2].
+    #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
     #
     #
     #
@@ -1860,8 +1882,8 @@ module Aws::RDS
     # @option options [Boolean] :skip_final_snapshot
     #   A value that indicates whether to skip the creation of a final DB
     #   snapshot before the DB instance is deleted. If skip is specified, no
-    #   DB snapshot is created. If skip is not specified, a DB snapshot is
-    #   created before the DB instance is deleted. By default, skip is not
+    #   DB snapshot is created. If skip isn't specified, a DB snapshot is
+    #   created before the DB instance is deleted. By default, skip isn't
     #   specified, and the DB snapshot is created.
     #
     #   Note that when a DB instance is in a failure state and has a status of
@@ -1870,8 +1892,8 @@ module Aws::RDS
     #
     #   Specify skip when deleting a Read Replica.
     #
-    #   <note markdown="1"> The FinalDBSnapshotIdentifier parameter must be specified if skip is
-    #   not specified.
+    #   <note markdown="1"> The FinalDBSnapshotIdentifier parameter must be specified if skip
+    #   isn't specified.
     #
     #    </note>
     # @option options [String] :final_db_snapshot_identifier
@@ -1991,7 +2013,7 @@ module Aws::RDS
     # @option options [String] :db_subnet_group_name
     #   The new DB subnet group for the DB instance. You can use this
     #   parameter to move your DB instance to a different VPC. If your DB
-    #   instance is not in a VPC, you can also use this parameter to move your
+    #   instance isn't in a VPC, you can also use this parameter to move your
     #   DB instance into a VPC. For more information, see [Updating the VPC
     #   for a DB Instance][1] in the *Amazon RDS User Guide.*
     #
@@ -2401,7 +2423,7 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address.
     #
@@ -2574,7 +2596,7 @@ module Aws::RDS
     #   A value that indicates whether the reboot is conducted through a
     #   Multi-AZ failover.
     #
-    #   Constraint: You can't enable force failover if the instance is not
+    #   Constraint: You can't enable force failover if the instance isn't
     #   configured for Multi-AZ.
     # @return [DBInstance]
     def reboot(options = {})
@@ -2658,7 +2680,7 @@ module Aws::RDS
     #   Example: `2009-09-07T23:45:00Z`
     # @option options [Boolean] :use_latest_restorable_time
     #   A value that indicates whether the DB instance is restored from the
-    #   latest backup time. By default, the DB instance is not restored from
+    #   latest backup time. By default, the DB instance isn't restored from
     #   the latest backup time.
     #
     #   Constraints: Can't be specified if the `RestoreTime` parameter is
@@ -2707,7 +2729,7 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address. For more information, see CreateDBInstance.
     # @option options [Boolean] :auto_minor_version_upgrade
@@ -2723,7 +2745,7 @@ module Aws::RDS
     # @option options [String] :db_name
     #   The database name for the restored DB instance.
     #
-    #   <note markdown="1"> This parameter is not used for the MySQL or MariaDB engines.
+    #   <note markdown="1"> This parameter isn't used for the MySQL or MariaDB engines.
     #
     #    </note>
     # @option options [String] :engine
@@ -2764,7 +2786,7 @@ module Aws::RDS
     #
     #   **SQL Server**
     #
-    #   Setting the IOPS value for the SQL Server database engine is not
+    #   Setting the IOPS value for the SQL Server database engine isn't
     #   supported.
     # @option options [String] :option_group_name
     #   The name of the option group to be used for the restored DB instance.
@@ -3002,7 +3024,7 @@ module Aws::RDS
     #   A list of event categories that trigger notifications for a event
     #   notification subscription.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [Event::Collection]
     def events(options = {})
       batches = Enumerator.new do |y|
@@ -3051,7 +3073,7 @@ module Aws::RDS
     #   Filters the available log files for files larger than the specified
     #   size.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [DBLogFile::Collection]
     def log_files(options = {})
       batches = Enumerator.new do |y|
@@ -3135,8 +3157,8 @@ module Aws::RDS
     # @option options [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #

@@ -319,7 +319,7 @@ module Aws::RDS
     # @option params [required, String] :feature_name
     #   The name of the feature for the DB instance that the IAM role is to be
     #   associated with. For the list of supported feature names, see
-    #   `DBEngineVersion`.
+    #   DBEngineVersion.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -599,7 +599,7 @@ module Aws::RDS
     #
     # @option params [String] :ec2_security_group_owner_id
     #   AWS account number of the owner of the EC2 security group specified in
-    #   the `EC2SecurityGroupName` parameter. The AWS Access Key ID is not an
+    #   the `EC2SecurityGroupName` parameter. The AWS access key ID isn't an
     #   acceptable value. For VPC DB security groups, `EC2SecurityGroupId`
     #   must be provided. Otherwise, `EC2SecurityGroupOwnerId` and either
     #   `EC2SecurityGroupName` or `EC2SecurityGroupId` must be provided.
@@ -692,7 +692,7 @@ module Aws::RDS
     #   ISO 8601 format. For more information about ISO 8601, see the [ISO8601
     #   Wikipedia page.][1]
     #
-    #   <note markdown="1"> If the specified time is not a consistent time for the DB cluster,
+    #   <note markdown="1"> If the specified time isn't a consistent time for the DB cluster,
     #   Aurora automatically chooses the nearest possible consistent time for
     #   the DB cluster.
     #
@@ -914,6 +914,14 @@ module Aws::RDS
     #   Authenticating Requests: Using Query Parameters (AWS Signature
     #   Version 4)][1] and [ Signature Version 4 Signing Process][2].
     #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
+    #
     # * `TargetDBClusterSnapshotIdentifier` - The identifier for the new
     #   copy of the DB cluster snapshot in the destination AWS Region.
     #
@@ -946,8 +954,8 @@ module Aws::RDS
     # [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
     #
     # @option params [required, String] :source_db_cluster_snapshot_identifier
-    #   The identifier of the DB cluster snapshot to copy. This parameter is
-    #   not case-sensitive.
+    #   The identifier of the DB cluster snapshot to copy. This parameter
+    #   isn't case-sensitive.
     #
     #   You can't copy an encrypted, shared DB cluster snapshot from one AWS
     #   Region to another.
@@ -972,7 +980,7 @@ module Aws::RDS
     #
     # @option params [required, String] :target_db_cluster_snapshot_identifier
     #   The identifier of the new DB cluster snapshot to create from the
-    #   source DB cluster snapshot. This parameter is not case-sensitive.
+    #   source DB cluster snapshot. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -1013,7 +1021,8 @@ module Aws::RDS
     #   `CopyDBClusterSnapshot` API action in the AWS Region that contains the
     #   source DB cluster snapshot to copy. The `PreSignedUrl` parameter must
     #   be used when copying an encrypted DB cluster snapshot from another AWS
-    #   Region.
+    #   Region. Don't specify `PreSignedUrl` when you are copying an
+    #   encrypted DB cluster snapshot in the same AWS Region.
     #
     #   The pre-signed URL must be a valid request for the
     #   `CopyDBSClusterSnapshot` API action that can be executed in the source
@@ -1042,6 +1051,14 @@ module Aws::RDS
     #   To learn how to generate a Signature Version 4 signed request, see [
     #   Authenticating Requests: Using Query Parameters (AWS Signature Version
     #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
     #
     #
     #
@@ -1328,9 +1345,9 @@ module Aws::RDS
     #   source DB snapshot to copy.
     #
     #   You must specify this parameter when you copy an encrypted DB snapshot
-    #   from another AWS Region by using the Amazon RDS API. You can specify
-    #   the `--source-region` option instead of this parameter when you copy
-    #   an encrypted DB snapshot from another AWS Region by using the AWS CLI.
+    #   from another AWS Region by using the Amazon RDS API. Don't specify
+    #   `PreSignedUrl` when you are copying an encrypted DB snapshot in the
+    #   same AWS Region.
     #
     #   The presigned URL must be a valid request for the `CopyDBSnapshot` API
     #   action that can be executed in the source AWS Region that contains the
@@ -1365,6 +1382,14 @@ module Aws::RDS
     #   To learn how to generate a Signature Version 4 signed request, see
     #   [Authenticating Requests: Using Query Parameters (AWS Signature
     #   Version 4)][1] and [Signature Version 4 Signing Process][2].
+    #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
     #
     #
     #
@@ -1596,6 +1621,71 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Creates a custom Availability Zone (AZ).
+    #
+    # A custom AZ is an on-premises AZ that is integrated with a VMware
+    # vSphere cluster.
+    #
+    # For more information about RDS on VMware, see the [ *RDS on VMware
+    # User Guide.* ][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
+    #
+    # @option params [required, String] :custom_availability_zone_name
+    #   The name of the custom Availability Zone (AZ).
+    #
+    # @option params [String] :existing_vpn_id
+    #   The ID of an existing virtual private network (VPN) between the Amazon
+    #   RDS website and the VMware vSphere cluster.
+    #
+    # @option params [String] :new_vpn_tunnel_name
+    #   The name of a new VPN tunnel between the Amazon RDS website and the
+    #   VMware vSphere cluster.
+    #
+    #   Specify this parameter only if `ExistingVpnId` isn't specified.
+    #
+    # @option params [String] :vpn_tunnel_originator_ip
+    #   The IP address of network traffic from your on-premises data center. A
+    #   custom AZ receives the network traffic.
+    #
+    #   Specify this parameter only if `ExistingVpnId` isn't specified.
+    #
+    # @return [Types::CreateCustomAvailabilityZoneResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomAvailabilityZoneResult#custom_availability_zone #custom_availability_zone} => Types::CustomAvailabilityZone
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_availability_zone({
+    #     custom_availability_zone_name: "String", # required
+    #     existing_vpn_id: "String",
+    #     new_vpn_tunnel_name: "String",
+    #     vpn_tunnel_originator_ip: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_availability_zone.custom_availability_zone_id #=> String
+    #   resp.custom_availability_zone.custom_availability_zone_name #=> String
+    #   resp.custom_availability_zone.custom_availability_zone_status #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_id #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_tunnel_originator_ip #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_gateway_ip #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_psk #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_name #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomAvailabilityZone AWS API Documentation
+    #
+    # @overload create_custom_availability_zone(params = {})
+    # @param [Hash] params ({})
+    def create_custom_availability_zone(params = {}, options = {})
+      req = build_request(:create_custom_availability_zone, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon Aurora DB cluster.
     #
     # You can use the `ReplicationSourceIdentifier` parameter to create the
@@ -1661,7 +1751,8 @@ module Aws::RDS
     #
     # @option params [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
-    #   cluster. If this argument is omitted, `default.aurora5.6` is used.
+    #   cluster. If you do not specify a value, then the default DB cluster
+    #   parameter group for the specified DB engine and version is used.
     #
     #   Constraints:
     #
@@ -1812,14 +1903,14 @@ module Aws::RDS
     #   cluster, then you can use the KMS key alias instead of the ARN for the
     #   KMS encryption key.
     #
-    #   If an encryption key is not specified in `KmsKeyId`\:
+    #   If an encryption key isn't specified in `KmsKeyId`\:
     #
     #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
     #     then Amazon RDS will use the encryption key used to encrypt the
     #     source. Otherwise, Amazon RDS will use your default encryption key.
     #
     #   * If the `StorageEncrypted` parameter is enabled and
-    #     `ReplicationSourceIdentifier` is not specified, then Amazon RDS will
+    #     `ReplicationSourceIdentifier` isn't specified, then Amazon RDS will
     #     use your default encryption key.
     #
     #   AWS KMS creates the default encryption key for your AWS account. Your
@@ -1865,6 +1956,14 @@ module Aws::RDS
     #   To learn how to generate a Signature Version 4 signed request, see [
     #   Authenticating Requests: Using Query Parameters (AWS Signature Version
     #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
     #
     #
     #
@@ -2335,7 +2434,7 @@ module Aws::RDS
     #
     # @option params [required, String] :db_cluster_identifier
     #   The identifier of the DB cluster to create a snapshot for. This
-    #   parameter is not case-sensitive.
+    #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -2423,7 +2522,7 @@ module Aws::RDS
     #   **MySQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter is not specified, no database is created in the DB
+    #   this parameter isn't specified, no database is created in the DB
     #   instance.
     #
     #   Constraints:
@@ -2435,7 +2534,7 @@ module Aws::RDS
     #   **MariaDB**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter is not specified, no database is created in the DB
+    #   this parameter isn't specified, no database is created in the DB
     #   instance.
     #
     #   Constraints:
@@ -2447,7 +2546,7 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter is not specified, the default "postgres" database is
+    #   this parameter isn't specified, the default "postgres" database is
     #   created in the DB instance.
     #
     #   Constraints:
@@ -2480,7 +2579,7 @@ module Aws::RDS
     #   **Amazon Aurora**
     #
     #   The name of the database to create when the primary instance of the DB
-    #   cluster is created. If this parameter is not specified, no database is
+    #   cluster is created. If this parameter isn't specified, no database is
     #   created in the DB instance.
     #
     #   Constraints:
@@ -2764,9 +2863,19 @@ module Aws::RDS
     #   the DB instance is a Multi-AZ deployment. The specified Availability
     #   Zone must be in the same AWS Region as the current endpoint.
     #
+    #   <note markdown="1"> If you're creating a DB instance in an RDS on VMware environment,
+    #   specify the identifier of the custom Availability Zone to create the
+    #   DB instance in.
+    #
+    #    For more information about RDS on VMware, see the [ *RDS on VMware
+    #   User Guide.* ][2]
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
     #
     # @option params [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
@@ -2794,8 +2903,8 @@ module Aws::RDS
     #
     # @option params [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
-    #   If you do not specify a value for `DBParameterGroupName`, then the
-    #   default `DBParameterGroup` for the specified DB engine is used.
+    #   If you do not specify a value, then the default DB parameter group for
+    #   the specified DB engine and version is used.
     #
     #   Constraints:
     #
@@ -3000,15 +3109,15 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address.
     #
     #   Default: The default behavior varies depending on whether
     #   `DBSubnetGroupName` is specified.
     #
-    #   If `DBSubnetGroupName` is not specified, and `PubliclyAccessible` is
-    #   not specified, the following applies:
+    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
+    #   isn't specified, the following applies:
     #
     #   * If the default VPC in the target region doesn’t have an Internet
     #     gateway attached to it, the DB instance is private.
@@ -3016,7 +3125,7 @@ module Aws::RDS
     #   * If the default VPC in the target region has an Internet gateway
     #     attached to it, the DB instance is public.
     #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` is not
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
     #   specified, the following applies:
     #
     #   * If the subnets are part of a VPC that doesn’t have an Internet
@@ -3051,7 +3160,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :storage_encrypted
     #   A value that indicates whether the DB instance is encrypted. By
-    #   default, it is not encrypted.
+    #   default, it isn't encrypted.
     #
     #   **Amazon Aurora**
     #
@@ -3581,6 +3690,11 @@ module Aws::RDS
     #   region Read Replica, or the default `DBParameterGroup` for the
     #   specified DB engine for a cross region Read Replica.
     #
+    #   <note markdown="1"> Currently, specifying a parameter group for this operation is only
+    #   supported for Oracle DB instances.
+    #
+    #    </note>
+    #
     #   Constraints:
     #
     #   * Must be 1 to 255 letters, numbers, or hyphens.
@@ -3593,7 +3707,7 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address. For more information, see CreateDBInstance.
     #
@@ -3608,7 +3722,7 @@ module Aws::RDS
     # @option params [String] :db_subnet_group_name
     #   Specifies a DB subnet group for the DB instance. The new DB instance
     #   is created in the VPC associated with the DB subnet group. If no DB
-    #   subnet group is specified, then the new DB instance is not created in
+    #   subnet group is specified, then the new DB instance isn't created in
     #   a VPC.
     #
     #   Constraints:
@@ -3701,10 +3815,9 @@ module Aws::RDS
     #   contains the source DB instance.
     #
     #   You must specify this parameter when you create an encrypted Read
-    #   Replica from another AWS Region by using the Amazon RDS API. You can
-    #   specify the `--source-region` option instead of this parameter when
-    #   you create an encrypted Read Replica from another AWS Region by using
-    #   the AWS CLI.
+    #   Replica from another AWS Region by using the Amazon RDS API. Don't
+    #   specify `PreSignedUrl` when you are creating an encrypted Read Replica
+    #   in the same AWS Region.
     #
     #   The presigned URL must be a valid request for the
     #   `CreateDBInstanceReadReplica` API action that can be executed in the
@@ -3741,6 +3854,14 @@ module Aws::RDS
     #   To learn how to generate a Signature Version 4 signed request, see
     #   [Authenticating Requests: Using Query Parameters (AWS Signature
     #   Version 4)][1] and [Signature Version 4 Signing Process][2].
+    #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
     #
     #
     #
@@ -4466,7 +4587,7 @@ module Aws::RDS
     # @option params [String] :source_type
     #   The type of source that is generating the events. For example, if you
     #   want to be notified of events generated by a DB instance, you would
-    #   set this parameter to db-instance. if this value is not specified, all
+    #   set this parameter to db-instance. if this value isn't specified, all
     #   events are returned.
     #
     #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
@@ -4507,7 +4628,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :enabled
     #   A value that indicates whether to activate the subscription. If the
-    #   event notification subscription is not activated, the subscription is
+    #   event notification subscription isn't activated, the subscription is
     #   created but not active.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -4778,6 +4899,52 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Deletes a custom Availability Zone (AZ).
+    #
+    # A custom AZ is an on-premises AZ that is integrated with a VMware
+    # vSphere cluster.
+    #
+    # For more information about RDS on VMware, see the [ *RDS on VMware
+    # User Guide.* ][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
+    #
+    # @option params [required, String] :custom_availability_zone_id
+    #   The custom AZ identifier.
+    #
+    # @return [Types::DeleteCustomAvailabilityZoneResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCustomAvailabilityZoneResult#custom_availability_zone #custom_availability_zone} => Types::CustomAvailabilityZone
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_availability_zone({
+    #     custom_availability_zone_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_availability_zone.custom_availability_zone_id #=> String
+    #   resp.custom_availability_zone.custom_availability_zone_name #=> String
+    #   resp.custom_availability_zone.custom_availability_zone_status #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_id #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_tunnel_originator_ip #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_gateway_ip #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_psk #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_name #=> String
+    #   resp.custom_availability_zone.vpn_details.vpn_state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomAvailabilityZone AWS API Documentation
+    #
+    # @overload delete_custom_availability_zone(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_availability_zone(params = {}, options = {})
+      req = build_request(:delete_custom_availability_zone, params)
+      req.send_request(options)
+    end
+
     # The DeleteDBCluster action deletes a previously provisioned DB
     # cluster. When you delete a DB cluster, all automated backups for that
     # DB cluster are deleted and can't be recovered. Manual DB cluster
@@ -4809,9 +4976,9 @@ module Aws::RDS
     # @option params [Boolean] :skip_final_snapshot
     #   A value that indicates whether to skip the creation of a final DB
     #   cluster snapshot before the DB cluster is deleted. If skip is
-    #   specified, no DB cluster snapshot is created. If skip is not
+    #   specified, no DB cluster snapshot is created. If skip isn't
     #   specified, a DB cluster snapshot is created before the DB cluster is
-    #   deleted. By default, skip is not specified, and the DB cluster
+    #   deleted. By default, skip isn't specified, and the DB cluster
     #   snapshot is created. By default, this parameter is disabled.
     #
     #   <note markdown="1"> You must specify a `FinalDBSnapshotIdentifier` parameter if
@@ -5180,8 +5347,8 @@ module Aws::RDS
     # @option params [Boolean] :skip_final_snapshot
     #   A value that indicates whether to skip the creation of a final DB
     #   snapshot before the DB instance is deleted. If skip is specified, no
-    #   DB snapshot is created. If skip is not specified, a DB snapshot is
-    #   created before the DB instance is deleted. By default, skip is not
+    #   DB snapshot is created. If skip isn't specified, a DB snapshot is
+    #   created before the DB instance is deleted. By default, skip isn't
     #   specified, and the DB snapshot is created.
     #
     #   Note that when a DB instance is in a failure state and has a status of
@@ -5190,8 +5357,8 @@ module Aws::RDS
     #
     #   Specify skip when deleting a Read Replica.
     #
-    #   <note markdown="1"> The FinalDBSnapshotIdentifier parameter must be specified if skip is
-    #   not specified.
+    #   <note markdown="1"> The FinalDBSnapshotIdentifier parameter must be specified if skip
+    #   isn't specified.
     #
     #    </note>
     #
@@ -5745,6 +5912,49 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Deletes the installation medium for a DB engine that requires an
+    # on-premises customer provided license, such as Microsoft SQL Server.
+    #
+    # @option params [required, String] :installation_media_id
+    #   The installation medium ID.
+    #
+    # @return [Types::InstallationMedia] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InstallationMedia#installation_media_id #installation_media_id} => String
+    #   * {Types::InstallationMedia#custom_availability_zone_id #custom_availability_zone_id} => String
+    #   * {Types::InstallationMedia#engine #engine} => String
+    #   * {Types::InstallationMedia#engine_version #engine_version} => String
+    #   * {Types::InstallationMedia#engine_installation_media_path #engine_installation_media_path} => String
+    #   * {Types::InstallationMedia#os_installation_media_path #os_installation_media_path} => String
+    #   * {Types::InstallationMedia#status #status} => String
+    #   * {Types::InstallationMedia#failure_cause #failure_cause} => Types::InstallationMediaFailureCause
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_installation_media({
+    #     installation_media_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.installation_media_id #=> String
+    #   resp.custom_availability_zone_id #=> String
+    #   resp.engine #=> String
+    #   resp.engine_version #=> String
+    #   resp.engine_installation_media_path #=> String
+    #   resp.os_installation_media_path #=> String
+    #   resp.status #=> String
+    #   resp.failure_cause.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteInstallationMedia AWS API Documentation
+    #
+    # @overload delete_installation_media(params = {})
+    # @param [Hash] params ({})
+    def delete_installation_media(params = {}, options = {})
+      req = build_request(:delete_installation_media, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing option group.
     #
     # @option params [required, String] :option_group_name
@@ -5834,13 +6044,13 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -5902,6 +6112,83 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_certificates(params = {}, options = {})
       req = build_request(:describe_certificates, params)
+      req.send_request(options)
+    end
+
+    # Returns information about custom Availability Zones (AZs).
+    #
+    # A custom AZ is an on-premises AZ that is integrated with a VMware
+    # vSphere cluster.
+    #
+    # For more information about RDS on VMware, see the [ *RDS on VMware
+    # User Guide.* ][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
+    #
+    # @option params [String] :custom_availability_zone_id
+    #   The custom AZ identifier. If this parameter is specified, information
+    #   from only the specific custom AZ is returned.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more custom AZs to describe.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeCustomAvailabilityZones` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by `MaxRecords`.
+    #
+    # @return [Types::CustomAvailabilityZoneMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CustomAvailabilityZoneMessage#marker #marker} => String
+    #   * {Types::CustomAvailabilityZoneMessage#custom_availability_zones #custom_availability_zones} => Array&lt;Types::CustomAvailabilityZone&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_custom_availability_zones({
+    #     custom_availability_zone_id: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.custom_availability_zones #=> Array
+    #   resp.custom_availability_zones[0].custom_availability_zone_id #=> String
+    #   resp.custom_availability_zones[0].custom_availability_zone_name #=> String
+    #   resp.custom_availability_zones[0].custom_availability_zone_status #=> String
+    #   resp.custom_availability_zones[0].vpn_details.vpn_id #=> String
+    #   resp.custom_availability_zones[0].vpn_details.vpn_tunnel_originator_ip #=> String
+    #   resp.custom_availability_zones[0].vpn_details.vpn_gateway_ip #=> String
+    #   resp.custom_availability_zones[0].vpn_details.vpn_psk #=> String
+    #   resp.custom_availability_zones[0].vpn_details.vpn_name #=> String
+    #   resp.custom_availability_zones[0].vpn_details.vpn_state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCustomAvailabilityZones AWS API Documentation
+    #
+    # @overload describe_custom_availability_zones(params = {})
+    # @param [Hash] params ({})
+    def describe_custom_availability_zones(params = {}, options = {})
+      req = build_request(:describe_custom_availability_zones, params)
       req.send_request(options)
     end
 
@@ -5975,8 +6262,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -6058,8 +6345,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -6145,13 +6432,13 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -6243,13 +6530,13 @@ module Aws::RDS
     #   source. Parameter sources can be `engine`, `service`, or `customer`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -6402,7 +6689,7 @@ module Aws::RDS
     # @option params [String] :db_cluster_identifier
     #   The ID of the DB cluster to retrieve the list of DB cluster snapshots
     #   for. This parameter can't be used in conjunction with the
-    #   `DBClusterSnapshotIdentifier` parameter. This parameter is not
+    #   `DBClusterSnapshotIdentifier` parameter. This parameter isn't
     #   case-sensitive.
     #
     #   Constraints:
@@ -6469,8 +6756,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -6611,8 +6898,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -6766,13 +7053,13 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more than
     #   the `MaxRecords` value is available, a pagination token called a
-    #   marker is included in the response so that the following results can
-    #   be retrieved.
+    #   marker is included in the response so you can retrieve the remaining
+    #   results.
     #
     #   Default: 100
     #
@@ -6940,8 +7227,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     # @option params [String] :marker
     #   The pagination token provided in the previous request. If this
@@ -7048,8 +7335,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7245,13 +7532,13 @@ module Aws::RDS
     #   size.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified MaxRecords value, a pagination token
-    #   called a marker is included in the response so that the remaining
-    #   results can be retrieved.
+    #   called a marker is included in the response so you can retrieve the
+    #   remaining results.
     #
     # @option params [String] :marker
     #   The pagination token provided in the previous request. If this
@@ -7329,13 +7616,13 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7417,13 +7704,13 @@ module Aws::RDS
     #   Valid Values: `user | system | engine-default`
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7504,13 +7791,13 @@ module Aws::RDS
     #   The name of the DB security group to return details for.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7646,7 +7933,7 @@ module Aws::RDS
     # @option params [String] :db_instance_identifier
     #   The ID of the DB instance to retrieve the list of DB snapshots for.
     #   This parameter can't be used in conjunction with
-    #   `DBSnapshotIdentifier`. This parameter is not case-sensitive.
+    #   `DBSnapshotIdentifier`. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -7725,8 +8012,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7857,13 +8144,13 @@ module Aws::RDS
     #   The name of the DB subnet group to return details for.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -7945,13 +8232,13 @@ module Aws::RDS
     #   parameter information for.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -8030,13 +8317,13 @@ module Aws::RDS
     #   The name of the DB parameter group family.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -8124,7 +8411,7 @@ module Aws::RDS
     #   \| db-snapshot
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @return [Types::EventCategoriesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8183,13 +8470,13 @@ module Aws::RDS
     #   describe.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8323,13 +8610,13 @@ module Aws::RDS
     #   notification subscription.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8443,8 +8730,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8503,6 +8790,80 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Describes the available installation media for a DB engine that
+    # requires an on-premises customer provided license, such as Microsoft
+    # SQL Server.
+    #
+    # @option params [String] :installation_media_id
+    #   The installation medium ID.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more installation media to describe.
+    #   Supported filters include the following:
+    #
+    #   * `custom-availability-zone-id` - Accepts custom Availability Zone
+    #     (AZ) identifiers. The results list includes information about only
+    #     the custom AZs identified by these identifiers.
+    #
+    #   * `engine` - Accepts database engines. The results list includes
+    #     information about only the database engines identified by these
+    #     identifiers.
+    #
+    #     For more information about the valid engines for installation media,
+    #     see ImportInstallationMedia.
+    #
+    # @option params [Integer] :max_records
+    #   An optional pagination token provided by a previous
+    #   DescribeInstallationMedia request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::InstallationMediaMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InstallationMediaMessage#marker #marker} => String
+    #   * {Types::InstallationMediaMessage#installation_media #installation_media} => Array&lt;Types::InstallationMedia&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_installation_media({
+    #     installation_media_id: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.installation_media #=> Array
+    #   resp.installation_media[0].installation_media_id #=> String
+    #   resp.installation_media[0].custom_availability_zone_id #=> String
+    #   resp.installation_media[0].engine #=> String
+    #   resp.installation_media[0].engine_version #=> String
+    #   resp.installation_media[0].engine_installation_media_path #=> String
+    #   resp.installation_media[0].os_installation_media_path #=> String
+    #   resp.installation_media[0].status #=> String
+    #   resp.installation_media[0].failure_cause.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeInstallationMedia AWS API Documentation
+    #
+    # @overload describe_installation_media(params = {})
+    # @param [Hash] params ({})
+    def describe_installation_media(params = {}, options = {})
+      req = build_request(:describe_installation_media, params)
+      req.send_request(options)
+    end
+
     # Describes all available options.
     #
     # @option params [required, String] :engine_name
@@ -8514,13 +8875,13 @@ module Aws::RDS
     #   specified major engine version.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8616,7 +8977,7 @@ module Aws::RDS
     #   with EngineName or MajorEngineVersion.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous
@@ -8627,8 +8988,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8744,13 +9105,13 @@ module Aws::RDS
     #   A value that indicates whether to show only VPC or non-VPC offerings.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8876,8 +9237,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
     #
     #   Default: 100
     #
@@ -8984,13 +9345,13 @@ module Aws::RDS
     #    </note>
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more than
     #   the `MaxRecords` value is available, a pagination token called a
-    #   marker is included in the response so that the following results can
-    #   be retrieved.
+    #   marker is included in the response so you can retrieve the remaining
+    #   results.
     #
     #   Default: 100
     #
@@ -9116,13 +9477,13 @@ module Aws::RDS
     #   support Multi-AZ.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more than
     #   the `MaxRecords` value is available, a pagination token called a
-    #   marker is included in the response so that the following results can
-    #   be retrieved.
+    #   marker is included in the response so you can retrieve the remaining
+    #   results.
     #
     #   Default: 100
     #
@@ -9217,8 +9578,8 @@ module Aws::RDS
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
     #
     #   Default: 100
     #
@@ -9231,7 +9592,7 @@ module Aws::RDS
     #   specified by `MaxRecords`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @return [Types::SourceRegionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9414,7 +9775,7 @@ module Aws::RDS
     #     file is returned up to a maximum of 10000 lines, starting with the
     #     most recent log entries first.
     #
-    #   * If NumberOfLines is specified and Marker is not specified, then the
+    #   * If NumberOfLines is specified and Marker isn't specified, then the
     #     most recent lines from the end of the log file are returned.
     #
     #   * If Marker is specified as "0", then the specified number of lines
@@ -9496,7 +9857,7 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
     #
     # @option params [required, String] :db_cluster_identifier
-    #   A DB cluster identifier to force a failover for. This parameter is not
+    #   A DB cluster identifier to force a failover for. This parameter isn't
     #   case-sensitive.
     #
     #   Constraints:
@@ -9620,6 +9981,100 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Imports the installation media for a DB engine that requires an
+    # on-premises customer provided license, such as SQL Server.
+    #
+    # @option params [required, String] :custom_availability_zone_id
+    #   The identifier of the custom Availability Zone (AZ) to import the
+    #   installation media to.
+    #
+    # @option params [required, String] :engine
+    #   The name of the database engine to be used for this instance.
+    #
+    #   The list only includes supported DB engines that require an
+    #   on-premises customer provided license.
+    #
+    #   Valid Values:
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
+    #
+    # @option params [required, String] :engine_version
+    #   The version number of the database engine to use.
+    #
+    #   For a list of valid engine versions, call DescribeDBEngineVersions.
+    #
+    #   The following are the database engines and links to information about
+    #   the major and minor versions. The list only includes DB engines that
+    #   require an on-premises customer provided license.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   See [Version and Feature Support on Amazon RDS][1] in the *Amazon RDS
+    #   User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport
+    #
+    # @option params [required, String] :engine_installation_media_path
+    #   The path to the installation medium for the specified DB engine.
+    #
+    #   Example:
+    #   `SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso`
+    #
+    # @option params [required, String] :os_installation_media_path
+    #   The path to the installation medium for the operating system
+    #   associated with the specified DB engine.
+    #
+    #   Example: `WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso`
+    #
+    # @return [Types::InstallationMedia] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InstallationMedia#installation_media_id #installation_media_id} => String
+    #   * {Types::InstallationMedia#custom_availability_zone_id #custom_availability_zone_id} => String
+    #   * {Types::InstallationMedia#engine #engine} => String
+    #   * {Types::InstallationMedia#engine_version #engine_version} => String
+    #   * {Types::InstallationMedia#engine_installation_media_path #engine_installation_media_path} => String
+    #   * {Types::InstallationMedia#os_installation_media_path #os_installation_media_path} => String
+    #   * {Types::InstallationMedia#status #status} => String
+    #   * {Types::InstallationMedia#failure_cause #failure_cause} => Types::InstallationMediaFailureCause
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_installation_media({
+    #     custom_availability_zone_id: "String", # required
+    #     engine: "String", # required
+    #     engine_version: "String", # required
+    #     engine_installation_media_path: "String", # required
+    #     os_installation_media_path: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.installation_media_id #=> String
+    #   resp.custom_availability_zone_id #=> String
+    #   resp.engine #=> String
+    #   resp.engine_version #=> String
+    #   resp.engine_installation_media_path #=> String
+    #   resp.os_installation_media_path #=> String
+    #   resp.status #=> String
+    #   resp.failure_cause.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ImportInstallationMedia AWS API Documentation
+    #
+    # @overload import_installation_media(params = {})
+    # @param [Hash] params ({})
+    def import_installation_media(params = {}, options = {})
+      req = build_request(:import_installation_media, params)
+      req.send_request(options)
+    end
+
     # Lists all tags on an Amazon RDS resource.
     #
     # For an overview on tagging an Amazon RDS resource, see [Tagging Amazon
@@ -9640,7 +10095,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     #
     # @return [Types::TagListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9719,7 +10174,7 @@ module Aws::RDS
     #
     # @option params [required, String] :db_cluster_identifier
     #   The DB cluster identifier for the cluster being modified. This
-    #   parameter is not case-sensitive.
+    #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -9756,7 +10211,7 @@ module Aws::RDS
     #   specified value as soon as possible.
     #
     #   `RollbackCapacityChange` ignores the capacity change if a scaling
-    #   point is not found in the timeout period.
+    #   point isn't found in the timeout period.
     #
     # @return [Types::DBClusterCapacityInfo] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9808,7 +10263,7 @@ module Aws::RDS
     #
     # @option params [required, String] :db_cluster_identifier
     #   The DB cluster identifier for the cluster being modified. This
-    #   parameter is not case-sensitive.
+    #   parameter isn't case-sensitive.
     #
     #   Constraints: This identifier must match the identifier of an existing
     #   DB cluster.
@@ -10510,7 +10965,7 @@ module Aws::RDS
     # @option params [String] :db_subnet_group_name
     #   The new DB subnet group for the DB instance. You can use this
     #   parameter to move your DB instance to a different VPC. If your DB
-    #   instance is not in a VPC, you can also use this parameter to move your
+    #   instance isn't in a VPC, you can also use this parameter to move your
     #   DB instance into a VPC. For more information, see [Updating the VPC
     #   for a DB Instance][1] in the *Amazon RDS User Guide.*
     #
@@ -10945,7 +11400,7 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address.
     #
@@ -11659,7 +12114,7 @@ module Aws::RDS
     # @option params [String] :source_type
     #   The type of source that is generating the events. For example, if you
     #   want to be notified of events generated by a DB instance, you would
-    #   set this parameter to db-instance. if this value is not specified, all
+    #   set this parameter to db-instance. If this value isn't specified, all
     #   events are returned.
     #
     #   Valid values: db-instance \| db-parameter-group \| db-security-group
@@ -11753,7 +12208,7 @@ module Aws::RDS
     #
     # @option params [String] :global_cluster_identifier
     #   The DB cluster identifier for the global cluster being modified. This
-    #   parameter is not case-sensitive.
+    #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -12168,7 +12623,7 @@ module Aws::RDS
     #
     # @option params [required, String] :db_cluster_identifier
     #   The identifier of the DB cluster Read Replica to promote. This
-    #   parameter is not case-sensitive.
+    #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -12389,7 +12844,7 @@ module Aws::RDS
     #   A value that indicates whether the reboot is conducted through a
     #   Multi-AZ failover.
     #
-    #   Constraint: You can't enable force failover if the instance is not
+    #   Constraint: You can't enable force failover if the instance isn't
     #   configured for Multi-AZ.
     #
     # @return [Types::RebootDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -13403,8 +13858,9 @@ module Aws::RDS
     #
     # If a DB cluster snapshot is specified, the target DB cluster is
     # created from the source DB cluster restore point with the same
-    # configuration as the original source DB cluster, except that the new
-    # DB cluster is created with the default security group.
+    # configuration as the original source DB cluster. If you don't specify
+    # a security group, the new DB cluster is associated with the default
+    # security group.
     #
     # For more information on Amazon Aurora, see [ What Is Amazon
     # Aurora?][1] in the *Amazon Aurora User Guide.*
@@ -13477,6 +13933,11 @@ module Aws::RDS
     #   `aws rds describe-db-engine-versions --engine aurora-postgresql
     #   --query "DBEngineVersions[].EngineVersion"`
     #
+    #   <note markdown="1"> If you aren't using the default engine version, then you must specify
+    #   the engine version.
+    #
+    #    </note>
+    #
     #   **Aurora MySQL**
     #
     #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
@@ -13530,8 +13991,8 @@ module Aws::RDS
     #     encrypted, then the restored DB cluster is encrypted using the KMS
     #     key that was used to encrypt the DB snapshot or DB cluster snapshot.
     #
-    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
-    #     not encrypted, then the restored DB cluster is not encrypted.
+    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
+    #     isn't encrypted, then the restored DB cluster isn't encrypted.
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
@@ -13814,7 +14275,7 @@ module Aws::RDS
     #
     #   * Must be before the latest restorable time for the DB instance
     #
-    #   * Must be specified if `UseLatestRestorableTime` parameter is not
+    #   * Must be specified if `UseLatestRestorableTime` parameter isn't
     #     provided
     #
     #   * Can't be specified if the `UseLatestRestorableTime` parameter is
@@ -13827,7 +14288,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :use_latest_restorable_time
     #   A value that indicates whether to restore the DB cluster to the latest
-    #   restorable backup time. By default, the DB cluster is not restored to
+    #   restorable backup time. By default, the DB cluster isn't restored to
     #   the latest restorable backup time.
     #
     #   Constraints: Can't be specified if `RestoreToTime` parameter is
@@ -13884,10 +14345,10 @@ module Aws::RDS
     #     encrypted using the KMS key that was used to encrypt the source DB
     #     cluster.
     #
-    #   * If the DB cluster is not encrypted, then the restored DB cluster is
-    #     not encrypted.
+    #   * If the DB cluster isn't encrypted, then the restored DB cluster
+    #     isn't encrypted.
     #
-    #   If `DBClusterIdentifier` refers to a DB cluster that is not encrypted,
+    #   If `DBClusterIdentifier` refers to a DB cluster that isn't encrypted,
     #   then the restore request is rejected.
     #
     # @option params [Boolean] :enable_iam_database_authentication
@@ -14181,7 +14642,7 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address. For more information, see CreateDBInstance.
     #
@@ -14240,7 +14701,7 @@ module Aws::RDS
     #
     # @option params [Integer] :iops
     #   Specifies the amount of provisioned IOPS for the DB instance,
-    #   expressed in I/O operations per second. If this parameter is not
+    #   expressed in I/O operations per second. If this parameter isn't
     #   specified, the IOPS value is taken from the backup. If this parameter
     #   is set to 0, the new instance is converted to a non-PIOPS instance.
     #   The conversion takes additional time, though your DB instance is
@@ -14699,7 +15160,7 @@ module Aws::RDS
     #   classes, and availability for your engine, see [DB Instance Class][1]
     #   in the *Amazon RDS User Guide.*
     #
-    #   Importing from Amazon S3 is not supported on the db.t2.micro DB
+    #   Importing from Amazon S3 isn't supported on the db.t2.micro DB
     #   instance class.
     #
     #
@@ -14854,7 +15315,7 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address. For more information, see CreateDBInstance.
     #
@@ -15257,7 +15718,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :use_latest_restorable_time
     #   A value that indicates whether the DB instance is restored from the
-    #   latest backup time. By default, the DB instance is not restored from
+    #   latest backup time. By default, the DB instance isn't restored from
     #   the latest backup time.
     #
     #   Constraints: Can't be specified if the `RestoreTime` parameter is
@@ -15312,7 +15773,7 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
     #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance is not publicly accessible, it
+    #   public IP address. When the DB instance isn't publicly accessible, it
     #   is an internal instance with a DNS name that resolves to a private IP
     #   address. For more information, see CreateDBInstance.
     #
@@ -15331,7 +15792,7 @@ module Aws::RDS
     # @option params [String] :db_name
     #   The database name for the restored DB instance.
     #
-    #   <note markdown="1"> This parameter is not used for the MySQL or MariaDB engines.
+    #   <note markdown="1"> This parameter isn't used for the MySQL or MariaDB engines.
     #
     #    </note>
     #
@@ -15374,7 +15835,7 @@ module Aws::RDS
     #
     #   **SQL Server**
     #
-    #   Setting the IOPS value for the SQL Server database engine is not
+    #   Setting the IOPS value for the SQL Server database engine isn't
     #   supported.
     #
     # @option params [String] :option_group_name
@@ -15807,9 +16268,9 @@ module Aws::RDS
     #   `EC2SecurityGroupId` must be provided.
     #
     # @option params [String] :ec2_security_group_owner_id
-    #   The AWS Account Number of the owner of the EC2 security group
-    #   specified in the `EC2SecurityGroupName` parameter. The AWS Access Key
-    #   ID is not an acceptable value. For VPC DB security groups,
+    #   The AWS account number of the owner of the EC2 security group
+    #   specified in the `EC2SecurityGroupName` parameter. The AWS access key
+    #   ID isn't an acceptable value. For VPC DB security groups,
     #   `EC2SecurityGroupId` must be provided. Otherwise,
     #   EC2SecurityGroupOwnerId and either `EC2SecurityGroupName` or
     #   `EC2SecurityGroupId` must be provided.
@@ -16531,7 +16992,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

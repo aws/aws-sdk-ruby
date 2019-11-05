@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.6.0 (2019-10-14)
+------------------
+
+* Feature - AWS Personalize: Adds ability to create a solution version using FULL or UPDATE training mode
+
 1.5.0 (2019-09-17)
 ------------------
 

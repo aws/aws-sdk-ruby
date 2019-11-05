@@ -59,7 +59,7 @@ module Aws::RDS
     end
 
     # The default character set for new instances of this engine version, if
-    # the `CharacterSetName` parameter of the CreateDBInstance API is not
+    # the `CharacterSetName` parameter of the CreateDBInstance API isn't
     # specified.
     # @return [Types::CharacterSet]
     def default_character_set
@@ -286,7 +286,7 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [OptionGroupOption::Collection]
     def option_group_options(options = {})
       batches = Enumerator.new do |y|
@@ -326,7 +326,7 @@ module Aws::RDS
     #   The name of the option group to describe. Can't be supplied together
     #   with EngineName or MajorEngineVersion.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [OptionGroup::Collection]
     def option_groups(options = {})
       batches = Enumerator.new do |y|

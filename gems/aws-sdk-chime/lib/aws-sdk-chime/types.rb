@@ -8,6 +8,22 @@
 module Aws::Chime
   module Types
 
+    # You don't have permissions to perform the requested operation.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # The Amazon Chime account details. An AWS account can have multiple
     # Amazon Chime accounts.
     #
@@ -133,12 +149,59 @@ module Aws::Chime
     #
     class AssociatePhoneNumberWithUserResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass AssociatePhoneNumbersWithVoiceConnectorGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_group_id: "NonEmptyString", # required
+    #         e164_phone_numbers: ["E164PhoneNumber"],
+    #         force_associate: false,
+    #       }
+    #
+    # @!attribute [rw] voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] e164_phone_numbers
+    #   List of phone numbers, in E.164 format.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] force_associate
+    #   If true, associates the provided phone numbers with the provided
+    #   Amazon Chime Voice Connector Group and removes any previously
+    #   existing associations. If false, does not associate any phone
+    #   numbers that have previously existing associations.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumbersWithVoiceConnectorGroupRequest AWS API Documentation
+    #
+    class AssociatePhoneNumbersWithVoiceConnectorGroupRequest < Struct.new(
+      :voice_connector_group_id,
+      :e164_phone_numbers,
+      :force_associate)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_number_errors
+    #   If the action fails for one or more of the phone numbers in the
+    #   request, a list of the phone numbers is returned, along with error
+    #   codes and error messages.
+    #   @return [Array<Types::PhoneNumberError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumbersWithVoiceConnectorGroupResponse AWS API Documentation
+    #
+    class AssociatePhoneNumbersWithVoiceConnectorGroupResponse < Struct.new(
+      :phone_number_errors)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociatePhoneNumbersWithVoiceConnectorRequest
     #   data as a hash:
     #
     #       {
     #         voice_connector_id: "NonEmptyString", # required
     #         e164_phone_numbers: ["E164PhoneNumber"],
+    #         force_associate: false,
     #       }
     #
     # @!attribute [rw] voice_connector_id
@@ -149,11 +212,19 @@ module Aws::Chime
     #   List of phone numbers, in E.164 format.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] force_associate
+    #   If true, associates the provided phone numbers with the provided
+    #   Amazon Chime Voice Connector and removes any previously existing
+    #   associations. If false, does not associate any phone numbers that
+    #   have previously existing associations.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumbersWithVoiceConnectorRequest AWS API Documentation
     #
     class AssociatePhoneNumbersWithVoiceConnectorRequest < Struct.new(
       :voice_connector_id,
-      :e164_phone_numbers)
+      :e164_phone_numbers,
+      :force_associate)
       include Aws::Structure
     end
 
@@ -299,13 +370,14 @@ module Aws::Chime
     #           {
     #             phone_number_id: "NonEmptyString", # required
     #             product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #             calling_name: "CallingName",
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] update_phone_number_request_items
-    #   The request containing the phone number IDs and product types to
-    #   update.
+    #   The request containing the phone number IDs and product types or
+    #   calling names to update.
     #   @return [Array<Types::UpdatePhoneNumberRequestItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchUpdatePhoneNumberRequest AWS API Documentation
@@ -569,16 +641,62 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateVoiceConnectorGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "VoiceConnectorGroupName", # required
+    #         voice_connector_items: [
+    #           {
+    #             voice_connector_id: "NonEmptyString", # required
+    #             priority: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon Chime Voice Connector group.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_connector_items
+    #   The Amazon Chime Voice Connectors to route inbound calls to.
+    #   @return [Array<Types::VoiceConnectorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateVoiceConnectorGroupRequest AWS API Documentation
+    #
+    class CreateVoiceConnectorGroupRequest < Struct.new(
+      :name,
+      :voice_connector_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_group
+    #   The Amazon Chime Voice Connector group details.
+    #   @return [Types::VoiceConnectorGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateVoiceConnectorGroupResponse AWS API Documentation
+    #
+    class CreateVoiceConnectorGroupResponse < Struct.new(
+      :voice_connector_group)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateVoiceConnectorRequest
     #   data as a hash:
     #
     #       {
     #         name: "VoiceConnectorName", # required
+    #         aws_region: "us-east-1", # accepts us-east-1, us-west-2
     #         require_encryption: false, # required
     #       }
     #
     # @!attribute [rw] name
     #   The name of the Amazon Chime Voice Connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The AWS Region in which the Amazon Chime Voice Connector is created.
+    #   Default value: `us-east-1`.
     #   @return [String]
     #
     # @!attribute [rw] require_encryption
@@ -590,6 +708,7 @@ module Aws::Chime
     #
     class CreateVoiceConnectorRequest < Struct.new(
       :name,
+      :aws_region,
       :require_encryption)
       include Aws::Structure
     end
@@ -698,6 +817,24 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteVoiceConnectorGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_group_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorGroupRequest AWS API Documentation
+    #
+    class DeleteVoiceConnectorGroupRequest < Struct.new(
+      :voice_connector_group_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteVoiceConnectorOriginationRequest
     #   data as a hash:
     #
@@ -730,6 +867,24 @@ module Aws::Chime
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorRequest AWS API Documentation
     #
     class DeleteVoiceConnectorRequest < Struct.new(
+      :voice_connector_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteVoiceConnectorStreamingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorStreamingConfigurationRequest AWS API Documentation
+    #
+    class DeleteVoiceConnectorStreamingConfigurationRequest < Struct.new(
       :voice_connector_id)
       include Aws::Structure
     end
@@ -804,6 +959,43 @@ module Aws::Chime
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumberFromUserResponse AWS API Documentation
     #
     class DisassociatePhoneNumberFromUserResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_group_id: "NonEmptyString", # required
+    #         e164_phone_numbers: ["E164PhoneNumber"],
+    #       }
+    #
+    # @!attribute [rw] voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] e164_phone_numbers
+    #   List of phone numbers, in E.164 format.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumbersFromVoiceConnectorGroupRequest AWS API Documentation
+    #
+    class DisassociatePhoneNumbersFromVoiceConnectorGroupRequest < Struct.new(
+      :voice_connector_group_id,
+      :e164_phone_numbers)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_number_errors
+    #   If the action fails for one or more of the phone numbers in the
+    #   request, a list of the phone numbers is returned, along with error
+    #   codes and error messages.
+    #   @return [Array<Types::PhoneNumberError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumbersFromVoiceConnectorGroupResponse AWS API Documentation
+    #
+    class DisassociatePhoneNumbersFromVoiceConnectorGroupResponse < Struct.new(
+      :phone_number_errors)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DisassociatePhoneNumbersFromVoiceConnectorRequest
     #   data as a hash:
@@ -1086,6 +1278,22 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @!attribute [rw] calling_name
+    #   The default outbound calling name for the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] calling_name_updated_timestamp
+    #   The updated outbound calling name timestamp, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetPhoneNumberSettingsResponse AWS API Documentation
+    #
+    class GetPhoneNumberSettingsResponse < Struct.new(
+      :calling_name,
+      :calling_name_updated_timestamp)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetUserRequest
     #   data as a hash:
     #
@@ -1156,6 +1364,64 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetVoiceConnectorGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_group_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorGroupRequest AWS API Documentation
+    #
+    class GetVoiceConnectorGroupRequest < Struct.new(
+      :voice_connector_group_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_group
+    #   The Amazon Chime Voice Connector group details.
+    #   @return [Types::VoiceConnectorGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorGroupResponse AWS API Documentation
+    #
+    class GetVoiceConnectorGroupResponse < Struct.new(
+      :voice_connector_group)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetVoiceConnectorLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorLoggingConfigurationRequest AWS API Documentation
+    #
+    class GetVoiceConnectorLoggingConfigurationRequest < Struct.new(
+      :voice_connector_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] logging_configuration
+    #   The logging configuration details.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorLoggingConfigurationResponse AWS API Documentation
+    #
+    class GetVoiceConnectorLoggingConfigurationResponse < Struct.new(
+      :logging_configuration)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetVoiceConnectorOriginationRequest
     #   data as a hash:
     #
@@ -1211,6 +1477,35 @@ module Aws::Chime
     #
     class GetVoiceConnectorResponse < Struct.new(
       :voice_connector)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetVoiceConnectorStreamingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorStreamingConfigurationRequest AWS API Documentation
+    #
+    class GetVoiceConnectorStreamingConfigurationRequest < Struct.new(
+      :voice_connector_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] streaming_configuration
+    #   The streaming configuration details.
+    #   @return [Types::StreamingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorStreamingConfigurationResponse AWS API Documentation
+    #
+    class GetVoiceConnectorStreamingConfigurationResponse < Struct.new(
+      :streaming_configuration)
       include Aws::Structure
     end
 
@@ -1482,7 +1777,7 @@ module Aws::Chime
     #       {
     #         status: "AcquireInProgress", # accepts AcquireInProgress, AcquireFailed, Unassigned, Assigned, ReleaseInProgress, DeleteInProgress, ReleaseFailed, DeleteFailed
     #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
-    #         filter_name: "AccountId", # accepts AccountId, UserId, VoiceConnectorId
+    #         filter_name: "AccountId", # accepts AccountId, UserId, VoiceConnectorId, VoiceConnectorGroupId
     #         filter_value: "String",
     #         max_results: 1,
     #         next_token: "String",
@@ -1593,6 +1888,46 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListVoiceConnectorGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectorGroupsRequest AWS API Documentation
+    #
+    class ListVoiceConnectorGroupsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_groups
+    #   The details of the Amazon Chime Voice Connector groups.
+    #   @return [Array<Types::VoiceConnectorGroup>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectorGroupsResponse AWS API Documentation
+    #
+    class ListVoiceConnectorGroupsResponse < Struct.new(
+      :voice_connector_groups,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListVoiceConnectorTerminationCredentialsRequest
     #   data as a hash:
     #
@@ -1659,6 +1994,29 @@ module Aws::Chime
     class ListVoiceConnectorsResponse < Struct.new(
       :voice_connectors,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The logging configuration associated with an Amazon Chime Voice
+    # Connector. Specifies whether SIP message logs are enabled for sending
+    # to Amazon CloudWatch Logs.
+    #
+    # @note When making an API call, you may pass LoggingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enable_sip_logs: false,
+    #       }
+    #
+    # @!attribute [rw] enable_sip_logs
+    #   When true, enables SIP message logs for sending to Amazon CloudWatch
+    #   Logs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/LoggingConfiguration AWS API Documentation
+    #
+    class LoggingConfiguration < Struct.new(
+      :enable_sip_logs)
       include Aws::Structure
     end
 
@@ -1764,7 +2122,7 @@ module Aws::Chime
 
     # Origination routes define call distribution properties for your SIP
     # hosts to receive inbound calls using your Amazon Chime Voice
-    # Connector. Limit: 10 origination routes per Amazon Chime Voice
+    # Connector. Limit: Ten origination routes for each Amazon Chime Voice
     # Connector.
     #
     # @note When making an API call, you may pass OriginationRoute
@@ -1779,7 +2137,7 @@ module Aws::Chime
     #       }
     #
     # @!attribute [rw] host
-    #   The FODN or IP address to contact for origination traffic.
+    #   The FQDN or IP address to contact for origination traffic.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -1843,6 +2201,14 @@ module Aws::Chime
     #   The phone number associations.
     #   @return [Array<Types::PhoneNumberAssociation>]
     #
+    # @!attribute [rw] calling_name
+    #   The outbound calling name associated with the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] calling_name_status
+    #   The outbound calling name status.
+    #   @return [String]
+    #
     # @!attribute [rw] created_timestamp
     #   The phone number creation timestamp, in ISO 8601 format.
     #   @return [Time]
@@ -1865,6 +2231,8 @@ module Aws::Chime
       :status,
       :capabilities,
       :associations,
+      :calling_name,
+      :calling_name_status,
       :created_timestamp,
       :updated_timestamp,
       :deletion_timestamp)
@@ -1872,15 +2240,17 @@ module Aws::Chime
     end
 
     # The phone number associations, such as Amazon Chime account ID, Amazon
-    # Chime user ID, or Amazon Chime Voice Connector ID.
+    # Chime user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice
+    # Connector group ID.
     #
     # @!attribute [rw] value
     #   Contains the ID for the entity specified in Name.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Defines the association with an Amazon Chime account ID, user ID, or
-    #   Amazon Chime Voice Connector ID.
+    #   Defines the association with an Amazon Chime account ID, user ID,
+    #   Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector
+    #   group ID.
     #   @return [String]
     #
     # @!attribute [rw] associated_timestamp
@@ -1896,8 +2266,9 @@ module Aws::Chime
       include Aws::Structure
     end
 
-    # The phone number capabilities, such as enabled inbound and outbound
-    # calling and text messaging.
+    # The phone number capabilities for Amazon Chime Business Calling phone
+    # numbers, such as enabled inbound and outbound calling and text
+    # messaging.
     #
     # @!attribute [rw] inbound_call
     #   Allows or denies inbound calling for the specified phone number.
@@ -2051,6 +2422,43 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutVoiceConnectorLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #         logging_configuration: { # required
+    #           enable_sip_logs: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_configuration
+    #   The logging configuration details to add.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorLoggingConfigurationRequest AWS API Documentation
+    #
+    class PutVoiceConnectorLoggingConfigurationRequest < Struct.new(
+      :voice_connector_id,
+      :logging_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] logging_configuration
+    #   The updated logging configuration details.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorLoggingConfigurationResponse AWS API Documentation
+    #
+    class PutVoiceConnectorLoggingConfigurationResponse < Struct.new(
+      :logging_configuration)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutVoiceConnectorOriginationRequest
     #   data as a hash:
     #
@@ -2094,6 +2502,44 @@ module Aws::Chime
     #
     class PutVoiceConnectorOriginationResponse < Struct.new(
       :origination)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutVoiceConnectorStreamingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #         streaming_configuration: { # required
+    #           data_retention_in_hours: 1, # required
+    #           disabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] streaming_configuration
+    #   The streaming configuration details to add.
+    #   @return [Types::StreamingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorStreamingConfigurationRequest AWS API Documentation
+    #
+    class PutVoiceConnectorStreamingConfigurationRequest < Struct.new(
+      :voice_connector_id,
+      :streaming_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] streaming_configuration
+    #   The updated streaming configuration details.
+    #   @return [Types::StreamingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorStreamingConfigurationResponse AWS API Documentation
+    #
+    class PutVoiceConnectorStreamingConfigurationResponse < Struct.new(
+      :streaming_configuration)
       include Aws::Structure
     end
 
@@ -2380,6 +2826,35 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The streaming configuration associated with an Amazon Chime Voice
+    # Connector. Specifies whether media streaming is enabled for sending to
+    # Amazon Kinesis, and shows the retention period for the Amazon Kinesis
+    # data, in hours.
+    #
+    # @note When making an API call, you may pass StreamingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         data_retention_in_hours: 1, # required
+    #         disabled: false,
+    #       }
+    #
+    # @!attribute [rw] data_retention_in_hours
+    #   The retention period for the Amazon Kinesis data, in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] disabled
+    #   When true, media streaming to Amazon Kinesis is turned off.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StreamingConfiguration AWS API Documentation
+    #
+    class StreamingConfiguration < Struct.new(
+      :data_retention_in_hours,
+      :disabled)
+      include Aws::Structure
+    end
+
     # Settings that allow management of telephony permissions for an Amazon
     # Chime user, such as inbound and outbound calling and text messaging.
     #
@@ -2437,11 +2912,12 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] calling_regions
-    #   The countries to which calls are allowed.
+    #   The countries to which calls are allowed, in ISO 3166-1 alpha-2
+    #   format. Required.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cidr_allowed_list
-    #   The IP addresses allowed to make calls, in CIDR format.
+    #   The IP addresses allowed to make calls, in CIDR format. Required.
     #   @return [Array<String>]
     #
     # @!attribute [rw] disabled
@@ -2670,6 +3146,7 @@ module Aws::Chime
     #       {
     #         phone_number_id: "String", # required
     #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #         calling_name: "CallingName",
     #       }
     #
     # @!attribute [rw] phone_number_id
@@ -2680,16 +3157,21 @@ module Aws::Chime
     #   The product type.
     #   @return [String]
     #
+    # @!attribute [rw] calling_name
+    #   The outbound calling name associated with the phone number.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdatePhoneNumberRequest AWS API Documentation
     #
     class UpdatePhoneNumberRequest < Struct.new(
       :phone_number_id,
-      :product_type)
+      :product_type,
+      :calling_name)
       include Aws::Structure
     end
 
-    # The phone number ID and product type fields to update, used with the
-    # BatchUpdatePhoneNumber and UpdatePhoneNumber actions.
+    # The phone number ID, product type, or calling name fields to update,
+    # used with the BatchUpdatePhoneNumber and UpdatePhoneNumber actions.
     #
     # @note When making an API call, you may pass UpdatePhoneNumberRequestItem
     #   data as a hash:
@@ -2697,6 +3179,7 @@ module Aws::Chime
     #       {
     #         phone_number_id: "NonEmptyString", # required
     #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #         calling_name: "CallingName",
     #       }
     #
     # @!attribute [rw] phone_number_id
@@ -2707,11 +3190,16 @@ module Aws::Chime
     #   The product type to update.
     #   @return [String]
     #
+    # @!attribute [rw] calling_name
+    #   The outbound calling name to update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdatePhoneNumberRequestItem AWS API Documentation
     #
     class UpdatePhoneNumberRequestItem < Struct.new(
       :phone_number_id,
-      :product_type)
+      :product_type,
+      :calling_name)
       include Aws::Structure
     end
 
@@ -2723,6 +3211,24 @@ module Aws::Chime
     #
     class UpdatePhoneNumberResponse < Struct.new(
       :phone_number)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePhoneNumberSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         calling_name: "CallingName", # required
+    #       }
+    #
+    # @!attribute [rw] calling_name
+    #   The default outbound calling name for the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdatePhoneNumberSettingsRequest AWS API Documentation
+    #
+    class UpdatePhoneNumberSettingsRequest < Struct.new(
+      :calling_name)
       include Aws::Structure
     end
 
@@ -2831,6 +3337,52 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateVoiceConnectorGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_group_id: "NonEmptyString", # required
+    #         name: "VoiceConnectorGroupName", # required
+    #         voice_connector_items: [ # required
+    #           {
+    #             voice_connector_id: "NonEmptyString", # required
+    #             priority: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon Chime Voice Connector group.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_connector_items
+    #   The `VoiceConnectorItems` to associate with the group.
+    #   @return [Array<Types::VoiceConnectorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateVoiceConnectorGroupRequest AWS API Documentation
+    #
+    class UpdateVoiceConnectorGroupRequest < Struct.new(
+      :voice_connector_group_id,
+      :name,
+      :voice_connector_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_group
+    #   The updated Amazon Chime Voice Connector group details.
+    #   @return [Types::VoiceConnectorGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateVoiceConnectorGroupResponse AWS API Documentation
+    #
+    class UpdateVoiceConnectorGroupResponse < Struct.new(
+      :voice_connector_group)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateVoiceConnectorRequest
     #   data as a hash:
     #
@@ -2863,7 +3415,7 @@ module Aws::Chime
     end
 
     # @!attribute [rw] voice_connector
-    #   The Amazon Chime Voice Connector details.
+    #   The updated Amazon Chime Voice Connector details.
     #   @return [Types::VoiceConnector]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateVoiceConnectorResponse AWS API Documentation
@@ -2994,6 +3546,11 @@ module Aws::Chime
     #   The Amazon Chime Voice Connector ID.
     #   @return [String]
     #
+    # @!attribute [rw] aws_region
+    #   The AWS Region in which the Amazon Chime Voice Connector is created.
+    #   Default: `us-east-1`.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the Amazon Chime Voice Connector.
     #   @return [String]
@@ -3021,11 +3578,82 @@ module Aws::Chime
     #
     class VoiceConnector < Struct.new(
       :voice_connector_id,
+      :aws_region,
       :name,
       :outbound_host_name,
       :require_encryption,
       :created_timestamp,
       :updated_timestamp)
+      include Aws::Structure
+    end
+
+    # The Amazon Chime Voice Connector group configuration, including
+    # associated Amazon Chime Voice Connectors. You can include Amazon Chime
+    # Voice Connectors from different AWS Regions in your group. This
+    # creates a fault tolerant mechanism for fallback in case of
+    # availability events.
+    #
+    # @!attribute [rw] voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon Chime Voice Connector group.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_connector_items
+    #   The Amazon Chime Voice Connectors to which to route inbound calls.
+    #   @return [Array<Types::VoiceConnectorItem>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The Amazon Chime Voice Connector group creation timestamp, in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The updated Amazon Chime Voice Connector group timestamp, in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/VoiceConnectorGroup AWS API Documentation
+    #
+    class VoiceConnectorGroup < Struct.new(
+      :voice_connector_group_id,
+      :name,
+      :voice_connector_items,
+      :created_timestamp,
+      :updated_timestamp)
+      include Aws::Structure
+    end
+
+    # For Amazon Chime Voice Connector groups, the Amazon Chime Voice
+    # Connectors to which to route inbound calls. Includes priority
+    # configuration settings. Limit: 3 `VoiceConnectorItems` per Amazon
+    # Chime Voice Connector group.
+    #
+    # @note When making an API call, you may pass VoiceConnectorItem
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #         priority: 1, # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority associated with the Amazon Chime Voice Connector, with
+    #   1 being the highest priority. Higher priority Amazon Chime Voice
+    #   Connectors are attempted first.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/VoiceConnectorItem AWS API Documentation
+    #
+    class VoiceConnectorItem < Struct.new(
+      :voice_connector_id,
+      :priority)
       include Aws::Structure
     end
 

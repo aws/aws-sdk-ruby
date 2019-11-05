@@ -184,7 +184,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   dhcp_options.associate_with_vpc({
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

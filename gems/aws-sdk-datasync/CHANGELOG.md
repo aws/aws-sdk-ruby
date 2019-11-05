@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2019-10-08)
+------------------
+
+* Feature - Add Sync options to enable/disable TaskQueueing
+
 1.13.0 (2019-09-24)
 ------------------
 

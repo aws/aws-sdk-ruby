@@ -143,6 +143,7 @@ module Aws::S3
     EncodingType = Shapes::StringShape.new(name: 'EncodingType')
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
+    End = Shapes::IntegerShape.new(name: 'End')
     EndEvent = Shapes::StructureShape.new(name: 'EndEvent')
     Error = Shapes::StructureShape.new(name: 'Error')
     ErrorDocument = Shapes::StructureShape.new(name: 'ErrorDocument')
@@ -463,6 +464,7 @@ module Aws::S3
     SSEKMSEncryptionContext = Shapes::StringShape.new(name: 'SSEKMSEncryptionContext')
     SSEKMSKeyId = Shapes::StringShape.new(name: 'SSEKMSKeyId')
     SSES3 = Shapes::StructureShape.new(name: 'SSES3')
+    ScanRange = Shapes::StructureShape.new(name: 'ScanRange')
     SelectObjectContentEventStream = Shapes::StructureShape.new(name: 'SelectObjectContentEventStream')
     SelectObjectContentOutput = Shapes::StructureShape.new(name: 'SelectObjectContentOutput')
     SelectObjectContentRequest = Shapes::StructureShape.new(name: 'SelectObjectContentRequest')
@@ -477,6 +479,7 @@ module Aws::S3
     SourceSelectionCriteria = Shapes::StructureShape.new(name: 'SourceSelectionCriteria')
     SseKmsEncryptedObjects = Shapes::StructureShape.new(name: 'SseKmsEncryptedObjects')
     SseKmsEncryptedObjectsStatus = Shapes::StringShape.new(name: 'SseKmsEncryptedObjectsStatus')
+    Start = Shapes::IntegerShape.new(name: 'Start')
     StartAfter = Shapes::StringShape.new(name: 'StartAfter')
     Stats = Shapes::StructureShape.new(name: 'Stats')
     StatsEvent = Shapes::StructureShape.new(name: 'StatsEvent')
@@ -1997,6 +2000,10 @@ module Aws::S3
 
     SSES3.struct_class = Types::SSES3
 
+    ScanRange.add_member(:start, Shapes::ShapeRef.new(shape: Start, location_name: "Start"))
+    ScanRange.add_member(:end, Shapes::ShapeRef.new(shape: End, location_name: "End"))
+    ScanRange.struct_class = Types::ScanRange
+
     SelectObjectContentEventStream.add_member(:records, Shapes::ShapeRef.new(shape: RecordsEvent, event: true, location_name: "Records"))
     SelectObjectContentEventStream.add_member(:stats, Shapes::ShapeRef.new(shape: StatsEvent, event: true, location_name: "Stats"))
     SelectObjectContentEventStream.add_member(:progress, Shapes::ShapeRef.new(shape: ProgressEvent, event: true, location_name: "Progress"))
@@ -2019,6 +2026,7 @@ module Aws::S3
     SelectObjectContentRequest.add_member(:request_progress, Shapes::ShapeRef.new(shape: RequestProgress, location_name: "RequestProgress"))
     SelectObjectContentRequest.add_member(:input_serialization, Shapes::ShapeRef.new(shape: InputSerialization, required: true, location_name: "InputSerialization"))
     SelectObjectContentRequest.add_member(:output_serialization, Shapes::ShapeRef.new(shape: OutputSerialization, required: true, location_name: "OutputSerialization"))
+    SelectObjectContentRequest.add_member(:scan_range, Shapes::ShapeRef.new(shape: ScanRange, location_name: "ScanRange"))
     SelectObjectContentRequest.struct_class = Types::SelectObjectContentRequest
 
     SelectParameters.add_member(:input_serialization, Shapes::ShapeRef.new(shape: InputSerialization, required: true, location_name: "InputSerialization"))

@@ -284,7 +284,7 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Associates a phone number with the specified Amazon Chime Voice
+    # Associates phone numbers with the specified Amazon Chime Voice
     # Connector.
     #
     # @option params [required, String] :voice_connector_id
@@ -292,6 +292,12 @@ module Aws::Chime
     #
     # @option params [Array<String>] :e164_phone_numbers
     #   List of phone numbers, in E.164 format.
+    #
+    # @option params [Boolean] :force_associate
+    #   If true, associates the provided phone numbers with the provided
+    #   Amazon Chime Voice Connector and removes any previously existing
+    #   associations. If false, does not associate any phone numbers that have
+    #   previously existing associations.
     #
     # @return [Types::AssociatePhoneNumbersWithVoiceConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -302,13 +308,14 @@ module Aws::Chime
     #   resp = client.associate_phone_numbers_with_voice_connector({
     #     voice_connector_id: "NonEmptyString", # required
     #     e164_phone_numbers: ["E164PhoneNumber"],
+    #     force_associate: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.phone_number_errors #=> Array
     #   resp.phone_number_errors[0].phone_number_id #=> String
-    #   resp.phone_number_errors[0].error_code #=> String, one of "Unauthorized", "Forbidden", "NotFound", "BadRequest", "Conflict", "ServiceFailure", "ServiceUnavailable", "Unprocessable", "Throttled", "PreconditionFailed"
+    #   resp.phone_number_errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
     #   resp.phone_number_errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumbersWithVoiceConnector AWS API Documentation
@@ -317,6 +324,49 @@ module Aws::Chime
     # @param [Hash] params ({})
     def associate_phone_numbers_with_voice_connector(params = {}, options = {})
       req = build_request(:associate_phone_numbers_with_voice_connector, params)
+      req.send_request(options)
+    end
+
+    # Associates phone numbers with the specified Amazon Chime Voice
+    # Connector group.
+    #
+    # @option params [required, String] :voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #
+    # @option params [Array<String>] :e164_phone_numbers
+    #   List of phone numbers, in E.164 format.
+    #
+    # @option params [Boolean] :force_associate
+    #   If true, associates the provided phone numbers with the provided
+    #   Amazon Chime Voice Connector Group and removes any previously existing
+    #   associations. If false, does not associate any phone numbers that have
+    #   previously existing associations.
+    #
+    # @return [Types::AssociatePhoneNumbersWithVoiceConnectorGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociatePhoneNumbersWithVoiceConnectorGroupResponse#phone_number_errors #phone_number_errors} => Array&lt;Types::PhoneNumberError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_phone_numbers_with_voice_connector_group({
+    #     voice_connector_group_id: "NonEmptyString", # required
+    #     e164_phone_numbers: ["E164PhoneNumber"],
+    #     force_associate: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_number_errors #=> Array
+    #   resp.phone_number_errors[0].phone_number_id #=> String
+    #   resp.phone_number_errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
+    #   resp.phone_number_errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumbersWithVoiceConnectorGroup AWS API Documentation
+    #
+    # @overload associate_phone_numbers_with_voice_connector_group(params = {})
+    # @param [Hash] params ({})
+    def associate_phone_numbers_with_voice_connector_group(params = {}, options = {})
+      req = build_request(:associate_phone_numbers_with_voice_connector_group, params)
       req.send_request(options)
     end
 
@@ -344,7 +394,7 @@ module Aws::Chime
     #
     #   resp.phone_number_errors #=> Array
     #   resp.phone_number_errors[0].phone_number_id #=> String
-    #   resp.phone_number_errors[0].error_code #=> String, one of "Unauthorized", "Forbidden", "NotFound", "BadRequest", "Conflict", "ServiceFailure", "ServiceUnavailable", "Unprocessable", "Throttled", "PreconditionFailed"
+    #   resp.phone_number_errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
     #   resp.phone_number_errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchDeletePhoneNumber AWS API Documentation
@@ -399,7 +449,7 @@ module Aws::Chime
     #
     #   resp.user_errors #=> Array
     #   resp.user_errors[0].user_id #=> String
-    #   resp.user_errors[0].error_code #=> String, one of "Unauthorized", "Forbidden", "NotFound", "BadRequest", "Conflict", "ServiceFailure", "ServiceUnavailable", "Unprocessable", "Throttled", "PreconditionFailed"
+    #   resp.user_errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
     #   resp.user_errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchSuspendUser AWS API Documentation
@@ -446,7 +496,7 @@ module Aws::Chime
     #
     #   resp.user_errors #=> Array
     #   resp.user_errors[0].user_id #=> String
-    #   resp.user_errors[0].error_code #=> String, one of "Unauthorized", "Forbidden", "NotFound", "BadRequest", "Conflict", "ServiceFailure", "ServiceUnavailable", "Unprocessable", "Throttled", "PreconditionFailed"
+    #   resp.user_errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
     #   resp.user_errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchUnsuspendUser AWS API Documentation
@@ -458,14 +508,21 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Updates phone number product types. Choose from Amazon Chime Business
-    # Calling and Amazon Chime Voice Connector product types. For toll-free
-    # numbers, you can use only the Amazon Chime Voice Connector product
-    # type.
+    # Updates phone number product types or calling names. You can update
+    # one attribute at a time for each `UpdatePhoneNumberRequestItem`. For
+    # example, you can update either the product type or the calling name.
+    #
+    # For product types, choose from Amazon Chime Business Calling and
+    # Amazon Chime Voice Connector. For toll-free numbers, you must use the
+    # Amazon Chime Voice Connector product type.
+    #
+    # Updates to outbound calling names can take up to 72 hours to complete.
+    # Pending updates to outbound calling names must be complete before you
+    # can request another update.
     #
     # @option params [required, Array<Types::UpdatePhoneNumberRequestItem>] :update_phone_number_request_items
-    #   The request containing the phone number IDs and product types to
-    #   update.
+    #   The request containing the phone number IDs and product types or
+    #   calling names to update.
     #
     # @return [Types::BatchUpdatePhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -478,6 +535,7 @@ module Aws::Chime
     #       {
     #         phone_number_id: "NonEmptyString", # required
     #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #         calling_name: "CallingName",
     #       },
     #     ],
     #   })
@@ -486,7 +544,7 @@ module Aws::Chime
     #
     #   resp.phone_number_errors #=> Array
     #   resp.phone_number_errors[0].phone_number_id #=> String
-    #   resp.phone_number_errors[0].error_code #=> String, one of "Unauthorized", "Forbidden", "NotFound", "BadRequest", "Conflict", "ServiceFailure", "ServiceUnavailable", "Unprocessable", "Throttled", "PreconditionFailed"
+    #   resp.phone_number_errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
     #   resp.phone_number_errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchUpdatePhoneNumber AWS API Documentation
@@ -528,7 +586,7 @@ module Aws::Chime
     #
     #   resp.user_errors #=> Array
     #   resp.user_errors[0].user_id #=> String
-    #   resp.user_errors[0].error_code #=> String, one of "Unauthorized", "Forbidden", "NotFound", "BadRequest", "Conflict", "ServiceFailure", "ServiceUnavailable", "Unprocessable", "Throttled", "PreconditionFailed"
+    #   resp.user_errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
     #   resp.user_errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchUpdateUser AWS API Documentation
@@ -629,7 +687,7 @@ module Aws::Chime
 
     # Creates an order for phone numbers to be provisioned. Choose from
     # Amazon Chime Business Calling and Amazon Chime Voice Connector product
-    # types. For toll-free numbers, you can use only the Amazon Chime Voice
+    # types. For toll-free numbers, you must use the Amazon Chime Voice
     # Connector product type.
     #
     # @option params [required, String] :product_type
@@ -670,13 +728,20 @@ module Aws::Chime
     end
 
     # Creates an Amazon Chime Voice Connector under the administrator's AWS
-    # account. Enabling CreateVoiceConnectorRequest$RequireEncryption
-    # configures your Amazon Chime Voice Connector to use TLS transport for
-    # SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS
-    # transport, and unencrypted outbound calls are blocked.
+    # account. You can choose to create an Amazon Chime Voice Connector in a
+    # specific AWS Region.
+    #
+    # Enabling CreateVoiceConnectorRequest$RequireEncryption configures your
+    # Amazon Chime Voice Connector to use TLS transport for SIP signaling
+    # and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and
+    # unencrypted outbound calls are blocked.
     #
     # @option params [required, String] :name
     #   The name of the Amazon Chime Voice Connector.
+    #
+    # @option params [String] :aws_region
+    #   The AWS Region in which the Amazon Chime Voice Connector is created.
+    #   Default value: `us-east-1`.
     #
     # @option params [required, Boolean] :require_encryption
     #   When enabled, requires encryption for the Amazon Chime Voice
@@ -690,12 +755,14 @@ module Aws::Chime
     #
     #   resp = client.create_voice_connector({
     #     name: "VoiceConnectorName", # required
+    #     aws_region: "us-east-1", # accepts us-east-1, us-west-2
     #     require_encryption: false, # required
     #   })
     #
     # @example Response structure
     #
     #   resp.voice_connector.voice_connector_id #=> String
+    #   resp.voice_connector.aws_region #=> String, one of "us-east-1", "us-west-2"
     #   resp.voice_connector.name #=> String
     #   resp.voice_connector.outbound_host_name #=> String
     #   resp.voice_connector.require_encryption #=> Boolean
@@ -708,6 +775,56 @@ module Aws::Chime
     # @param [Hash] params ({})
     def create_voice_connector(params = {}, options = {})
       req = build_request(:create_voice_connector, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon Chime Voice Connector group under the
+    # administrator's AWS account. You can associate up to three existing
+    # Amazon Chime Voice Connectors with the Amazon Chime Voice Connector
+    # group by including `VoiceConnectorItems` in the request.
+    #
+    # You can include Amazon Chime Voice Connectors from different AWS
+    # Regions in your group. This creates a fault tolerant mechanism for
+    # fallback in case of availability events.
+    #
+    # @option params [required, String] :name
+    #   The name of the Amazon Chime Voice Connector group.
+    #
+    # @option params [Array<Types::VoiceConnectorItem>] :voice_connector_items
+    #   The Amazon Chime Voice Connectors to route inbound calls to.
+    #
+    # @return [Types::CreateVoiceConnectorGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVoiceConnectorGroupResponse#voice_connector_group #voice_connector_group} => Types::VoiceConnectorGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_voice_connector_group({
+    #     name: "VoiceConnectorGroupName", # required
+    #     voice_connector_items: [
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #         priority: 1, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_connector_group.voice_connector_group_id #=> String
+    #   resp.voice_connector_group.name #=> String
+    #   resp.voice_connector_group.voice_connector_items #=> Array
+    #   resp.voice_connector_group.voice_connector_items[0].voice_connector_id #=> String
+    #   resp.voice_connector_group.voice_connector_items[0].priority #=> Integer
+    #   resp.voice_connector_group.created_timestamp #=> Time
+    #   resp.voice_connector_group.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateVoiceConnectorGroup AWS API Documentation
+    #
+    # @overload create_voice_connector_group(params = {})
+    # @param [Hash] params ({})
+    def create_voice_connector_group(params = {}, options = {})
+      req = build_request(:create_voice_connector_group, params)
       req.send_request(options)
     end
 
@@ -801,8 +918,8 @@ module Aws::Chime
     end
 
     # Deletes the specified Amazon Chime Voice Connector. Any phone numbers
-    # assigned to the Amazon Chime Voice Connector must be unassigned from
-    # it before it can be deleted.
+    # associated with the Amazon Chime Voice Connector must be disassociated
+    # from it before it can be deleted.
     #
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
@@ -821,6 +938,30 @@ module Aws::Chime
     # @param [Hash] params ({})
     def delete_voice_connector(params = {}, options = {})
       req = build_request(:delete_voice_connector, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Amazon Chime Voice Connector group. Any
+    # `VoiceConnectorItems` and phone numbers associated with the group must
+    # be removed before it can be deleted.
+    #
+    # @option params [required, String] :voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_voice_connector_group({
+    #     voice_connector_group_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorGroup AWS API Documentation
+    #
+    # @overload delete_voice_connector_group(params = {})
+    # @param [Hash] params ({})
+    def delete_voice_connector_group(params = {}, options = {})
+      req = build_request(:delete_voice_connector_group, params)
       req.send_request(options)
     end
 
@@ -844,6 +985,29 @@ module Aws::Chime
     # @param [Hash] params ({})
     def delete_voice_connector_origination(params = {}, options = {})
       req = build_request(:delete_voice_connector_origination, params)
+      req.send_request(options)
+    end
+
+    # Deletes the streaming configuration for the specified Amazon Chime
+    # Voice Connector.
+    #
+    # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_voice_connector_streaming_configuration({
+    #     voice_connector_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorStreamingConfiguration AWS API Documentation
+    #
+    # @overload delete_voice_connector_streaming_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_voice_connector_streaming_configuration(params = {}, options = {})
+      req = build_request(:delete_voice_connector_streaming_configuration, params)
       req.send_request(options)
     end
 
@@ -925,7 +1089,7 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Disassociates the specified phone number from the specified Amazon
+    # Disassociates the specified phone numbers from the specified Amazon
     # Chime Voice Connector.
     #
     # @option params [required, String] :voice_connector_id
@@ -949,7 +1113,7 @@ module Aws::Chime
     #
     #   resp.phone_number_errors #=> Array
     #   resp.phone_number_errors[0].phone_number_id #=> String
-    #   resp.phone_number_errors[0].error_code #=> String, one of "Unauthorized", "Forbidden", "NotFound", "BadRequest", "Conflict", "ServiceFailure", "ServiceUnavailable", "Unprocessable", "Throttled", "PreconditionFailed"
+    #   resp.phone_number_errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
     #   resp.phone_number_errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumbersFromVoiceConnector AWS API Documentation
@@ -958,6 +1122,42 @@ module Aws::Chime
     # @param [Hash] params ({})
     def disassociate_phone_numbers_from_voice_connector(params = {}, options = {})
       req = build_request(:disassociate_phone_numbers_from_voice_connector, params)
+      req.send_request(options)
+    end
+
+    # Disassociates the specified phone numbers from the specified Amazon
+    # Chime Voice Connector group.
+    #
+    # @option params [required, String] :voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #
+    # @option params [Array<String>] :e164_phone_numbers
+    #   List of phone numbers, in E.164 format.
+    #
+    # @return [Types::DisassociatePhoneNumbersFromVoiceConnectorGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociatePhoneNumbersFromVoiceConnectorGroupResponse#phone_number_errors #phone_number_errors} => Array&lt;Types::PhoneNumberError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_phone_numbers_from_voice_connector_group({
+    #     voice_connector_group_id: "NonEmptyString", # required
+    #     e164_phone_numbers: ["E164PhoneNumber"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_number_errors #=> Array
+    #   resp.phone_number_errors[0].phone_number_id #=> String
+    #   resp.phone_number_errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
+    #   resp.phone_number_errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumbersFromVoiceConnectorGroup AWS API Documentation
+    #
+    # @overload disassociate_phone_numbers_from_voice_connector_group(params = {})
+    # @param [Hash] params ({})
+    def disassociate_phone_numbers_from_voice_connector_group(params = {}, options = {})
+      req = build_request(:disassociate_phone_numbers_from_voice_connector_group, params)
       req.send_request(options)
     end
 
@@ -1163,8 +1363,10 @@ module Aws::Chime
     #   resp.phone_number.capabilities.outbound_mms #=> Boolean
     #   resp.phone_number.associations #=> Array
     #   resp.phone_number.associations[0].value #=> String
-    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId"
+    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId"
     #   resp.phone_number.associations[0].associated_timestamp #=> Time
+    #   resp.phone_number.calling_name #=> String
+    #   resp.phone_number.calling_name_status #=> String, one of "Unassigned", "UpdateInProgress", "UpdateSucceeded", "UpdateFailed"
     #   resp.phone_number.created_timestamp #=> Time
     #   resp.phone_number.updated_timestamp #=> Time
     #   resp.phone_number.deletion_timestamp #=> Time
@@ -1212,6 +1414,28 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_phone_number_order(params = {}, options = {})
       req = build_request(:get_phone_number_order, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the phone number settings for the administrator's AWS
+    # account, such as the default outbound calling name.
+    #
+    # @return [Types::GetPhoneNumberSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPhoneNumberSettingsResponse#calling_name #calling_name} => String
+    #   * {Types::GetPhoneNumberSettingsResponse#calling_name_updated_timestamp #calling_name_updated_timestamp} => Time
+    #
+    # @example Response structure
+    #
+    #   resp.calling_name #=> String
+    #   resp.calling_name_updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetPhoneNumberSettings AWS API Documentation
+    #
+    # @overload get_phone_number_settings(params = {})
+    # @param [Hash] params ({})
+    def get_phone_number_settings(params = {}, options = {})
+      req = build_request(:get_phone_number_settings, params)
       req.send_request(options)
     end
 
@@ -1315,6 +1539,7 @@ module Aws::Chime
     # @example Response structure
     #
     #   resp.voice_connector.voice_connector_id #=> String
+    #   resp.voice_connector.aws_region #=> String, one of "us-east-1", "us-west-2"
     #   resp.voice_connector.name #=> String
     #   resp.voice_connector.outbound_host_name #=> String
     #   resp.voice_connector.require_encryption #=> Boolean
@@ -1327,6 +1552,71 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_voice_connector(params = {}, options = {})
       req = build_request(:get_voice_connector, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details for the specified Amazon Chime Voice Connector
+    # group, such as timestamps, name, and associated `VoiceConnectorItems`.
+    #
+    # @option params [required, String] :voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #
+    # @return [Types::GetVoiceConnectorGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceConnectorGroupResponse#voice_connector_group #voice_connector_group} => Types::VoiceConnectorGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_connector_group({
+    #     voice_connector_group_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_connector_group.voice_connector_group_id #=> String
+    #   resp.voice_connector_group.name #=> String
+    #   resp.voice_connector_group.voice_connector_items #=> Array
+    #   resp.voice_connector_group.voice_connector_items[0].voice_connector_id #=> String
+    #   resp.voice_connector_group.voice_connector_items[0].priority #=> Integer
+    #   resp.voice_connector_group.created_timestamp #=> Time
+    #   resp.voice_connector_group.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorGroup AWS API Documentation
+    #
+    # @overload get_voice_connector_group(params = {})
+    # @param [Hash] params ({})
+    def get_voice_connector_group(params = {}, options = {})
+      req = build_request(:get_voice_connector_group, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the logging configuration details for the specified Amazon
+    # Chime Voice Connector. Shows whether SIP message logs are enabled for
+    # sending to Amazon CloudWatch Logs.
+    #
+    # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #
+    # @return [Types::GetVoiceConnectorLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceConnectorLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_connector_logging_configuration({
+    #     voice_connector_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.logging_configuration.enable_sip_logs #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorLoggingConfiguration AWS API Documentation
+    #
+    # @overload get_voice_connector_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_voice_connector_logging_configuration(params = {}, options = {})
+      req = build_request(:get_voice_connector_logging_configuration, params)
       req.send_request(options)
     end
 
@@ -1362,6 +1652,38 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_voice_connector_origination(params = {}, options = {})
       req = build_request(:get_voice_connector_origination, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the streaming configuration details for the specified Amazon
+    # Chime Voice Connector. Shows whether media streaming is enabled for
+    # sending to Amazon Kinesis, and shows the retention period for the
+    # Amazon Kinesis data, in hours.
+    #
+    # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #
+    # @return [Types::GetVoiceConnectorStreamingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceConnectorStreamingConfigurationResponse#streaming_configuration #streaming_configuration} => Types::StreamingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_connector_streaming_configuration({
+    #     voice_connector_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streaming_configuration.data_retention_in_hours #=> Integer
+    #   resp.streaming_configuration.disabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorStreamingConfiguration AWS API Documentation
+    #
+    # @overload get_voice_connector_streaming_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_voice_connector_streaming_configuration(params = {}, options = {})
+      req = build_request(:get_voice_connector_streaming_configuration, params)
       req.send_request(options)
     end
 
@@ -1616,7 +1938,8 @@ module Aws::Chime
     end
 
     # Lists the phone numbers for the specified Amazon Chime account, Amazon
-    # Chime user, or Amazon Chime Voice Connector.
+    # Chime user, Amazon Chime Voice Connector, or Amazon Chime Voice
+    # Connector group.
     #
     # @option params [String] :status
     #   The phone number status.
@@ -1646,7 +1969,7 @@ module Aws::Chime
     #   resp = client.list_phone_numbers({
     #     status: "AcquireInProgress", # accepts AcquireInProgress, AcquireFailed, Unassigned, Assigned, ReleaseInProgress, DeleteInProgress, ReleaseFailed, DeleteFailed
     #     product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
-    #     filter_name: "AccountId", # accepts AccountId, UserId, VoiceConnectorId
+    #     filter_name: "AccountId", # accepts AccountId, UserId, VoiceConnectorId, VoiceConnectorGroupId
     #     filter_value: "String",
     #     max_results: 1,
     #     next_token: "String",
@@ -1668,8 +1991,10 @@ module Aws::Chime
     #   resp.phone_numbers[0].capabilities.outbound_mms #=> Boolean
     #   resp.phone_numbers[0].associations #=> Array
     #   resp.phone_numbers[0].associations[0].value #=> String
-    #   resp.phone_numbers[0].associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId"
+    #   resp.phone_numbers[0].associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId"
     #   resp.phone_numbers[0].associations[0].associated_timestamp #=> Time
+    #   resp.phone_numbers[0].calling_name #=> String
+    #   resp.phone_numbers[0].calling_name_status #=> String, one of "Unassigned", "UpdateInProgress", "UpdateSucceeded", "UpdateFailed"
     #   resp.phone_numbers[0].created_timestamp #=> Time
     #   resp.phone_numbers[0].updated_timestamp #=> Time
     #   resp.phone_numbers[0].deletion_timestamp #=> Time
@@ -1740,6 +2065,48 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Lists the Amazon Chime Voice Connector groups for the administrator's
+    # AWS account.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListVoiceConnectorGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVoiceConnectorGroupsResponse#voice_connector_groups #voice_connector_groups} => Array&lt;Types::VoiceConnectorGroup&gt;
+    #   * {Types::ListVoiceConnectorGroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_voice_connector_groups({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_connector_groups #=> Array
+    #   resp.voice_connector_groups[0].voice_connector_group_id #=> String
+    #   resp.voice_connector_groups[0].name #=> String
+    #   resp.voice_connector_groups[0].voice_connector_items #=> Array
+    #   resp.voice_connector_groups[0].voice_connector_items[0].voice_connector_id #=> String
+    #   resp.voice_connector_groups[0].voice_connector_items[0].priority #=> Integer
+    #   resp.voice_connector_groups[0].created_timestamp #=> Time
+    #   resp.voice_connector_groups[0].updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectorGroups AWS API Documentation
+    #
+    # @overload list_voice_connector_groups(params = {})
+    # @param [Hash] params ({})
+    def list_voice_connector_groups(params = {}, options = {})
+      req = build_request(:list_voice_connector_groups, params)
+      req.send_request(options)
+    end
+
     # Lists the SIP credentials for the specified Amazon Chime Voice
     # Connector.
     #
@@ -1795,6 +2162,7 @@ module Aws::Chime
     #
     #   resp.voice_connectors #=> Array
     #   resp.voice_connectors[0].voice_connector_id #=> String
+    #   resp.voice_connectors[0].aws_region #=> String, one of "us-east-1", "us-west-2"
     #   resp.voice_connectors[0].name #=> String
     #   resp.voice_connectors[0].outbound_host_name #=> String
     #   resp.voice_connectors[0].require_encryption #=> Boolean
@@ -1882,6 +2250,42 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Adds a logging configuration for the specified Amazon Chime Voice
+    # Connector. The logging configuration specifies whether SIP message
+    # logs are enabled for sending to Amazon CloudWatch Logs.
+    #
+    # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #
+    # @option params [required, Types::LoggingConfiguration] :logging_configuration
+    #   The logging configuration details to add.
+    #
+    # @return [Types::PutVoiceConnectorLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutVoiceConnectorLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_voice_connector_logging_configuration({
+    #     voice_connector_id: "NonEmptyString", # required
+    #     logging_configuration: { # required
+    #       enable_sip_logs: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.logging_configuration.enable_sip_logs #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorLoggingConfiguration AWS API Documentation
+    #
+    # @overload put_voice_connector_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_voice_connector_logging_configuration(params = {}, options = {})
+      req = build_request(:put_voice_connector_logging_configuration, params)
+      req.send_request(options)
+    end
+
     # Adds origination settings for the specified Amazon Chime Voice
     # Connector.
     #
@@ -1929,6 +2333,45 @@ module Aws::Chime
     # @param [Hash] params ({})
     def put_voice_connector_origination(params = {}, options = {})
       req = build_request(:put_voice_connector_origination, params)
+      req.send_request(options)
+    end
+
+    # Adds a streaming configuration for the specified Amazon Chime Voice
+    # Connector. The streaming configuration specifies whether media
+    # streaming is enabled for sending to Amazon Kinesis, and sets the
+    # retention period for the Amazon Kinesis data, in hours.
+    #
+    # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #
+    # @option params [required, Types::StreamingConfiguration] :streaming_configuration
+    #   The streaming configuration details to add.
+    #
+    # @return [Types::PutVoiceConnectorStreamingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutVoiceConnectorStreamingConfigurationResponse#streaming_configuration #streaming_configuration} => Types::StreamingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_voice_connector_streaming_configuration({
+    #     voice_connector_id: "NonEmptyString", # required
+    #     streaming_configuration: { # required
+    #       data_retention_in_hours: 1, # required
+    #       disabled: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streaming_configuration.data_retention_in_hours #=> Integer
+    #   resp.streaming_configuration.disabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorStreamingConfiguration AWS API Documentation
+    #
+    # @overload put_voice_connector_streaming_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_voice_connector_streaming_configuration(params = {}, options = {})
+      req = build_request(:put_voice_connector_streaming_configuration, params)
       req.send_request(options)
     end
 
@@ -2124,8 +2567,10 @@ module Aws::Chime
     #   resp.phone_number.capabilities.outbound_mms #=> Boolean
     #   resp.phone_number.associations #=> Array
     #   resp.phone_number.associations[0].value #=> String
-    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId"
+    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId"
     #   resp.phone_number.associations[0].associated_timestamp #=> Time
+    #   resp.phone_number.calling_name #=> String
+    #   resp.phone_number.calling_name_status #=> String, one of "Unassigned", "UpdateInProgress", "UpdateSucceeded", "UpdateFailed"
     #   resp.phone_number.created_timestamp #=> Time
     #   resp.phone_number.updated_timestamp #=> Time
     #   resp.phone_number.deletion_timestamp #=> Time
@@ -2345,15 +2790,26 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Updates phone number details, such as product type, for the specified
-    # phone number ID. For toll-free numbers, you can use only the Amazon
-    # Chime Voice Connector product type.
+    # Updates phone number details, such as product type or calling name,
+    # for the specified phone number ID. You can update one phone number
+    # detail at a time. For example, you can update either the product type
+    # or the calling name in one action.
+    #
+    # For toll-free numbers, you must use the Amazon Chime Voice Connector
+    # product type.
+    #
+    # Updates to outbound calling names can take up to 72 hours to complete.
+    # Pending updates to outbound calling names must be complete before you
+    # can request another update.
     #
     # @option params [required, String] :phone_number_id
     #   The phone number ID.
     #
     # @option params [String] :product_type
     #   The product type.
+    #
+    # @option params [String] :calling_name
+    #   The outbound calling name associated with the phone number.
     #
     # @return [Types::UpdatePhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2364,6 +2820,7 @@ module Aws::Chime
     #   resp = client.update_phone_number({
     #     phone_number_id: "String", # required
     #     product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #     calling_name: "CallingName",
     #   })
     #
     # @example Response structure
@@ -2381,8 +2838,10 @@ module Aws::Chime
     #   resp.phone_number.capabilities.outbound_mms #=> Boolean
     #   resp.phone_number.associations #=> Array
     #   resp.phone_number.associations[0].value #=> String
-    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId"
+    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId"
     #   resp.phone_number.associations[0].associated_timestamp #=> Time
+    #   resp.phone_number.calling_name #=> String
+    #   resp.phone_number.calling_name_status #=> String, one of "Unassigned", "UpdateInProgress", "UpdateSucceeded", "UpdateFailed"
     #   resp.phone_number.created_timestamp #=> Time
     #   resp.phone_number.updated_timestamp #=> Time
     #   resp.phone_number.deletion_timestamp #=> Time
@@ -2393,6 +2852,31 @@ module Aws::Chime
     # @param [Hash] params ({})
     def update_phone_number(params = {}, options = {})
       req = build_request(:update_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Updates the phone number settings for the administrator's AWS
+    # account, such as the default outbound calling name. You can update the
+    # default outbound calling name once every seven days. Outbound calling
+    # names can take up to 72 hours to be updated.
+    #
+    # @option params [required, String] :calling_name
+    #   The default outbound calling name for the account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_phone_number_settings({
+    #     calling_name: "CallingName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdatePhoneNumberSettings AWS API Documentation
+    #
+    # @overload update_phone_number_settings(params = {})
+    # @param [Hash] params ({})
+    def update_phone_number_settings(params = {}, options = {})
+      req = build_request(:update_phone_number_settings, params)
       req.send_request(options)
     end
 
@@ -2508,6 +2992,7 @@ module Aws::Chime
     # @example Response structure
     #
     #   resp.voice_connector.voice_connector_id #=> String
+    #   resp.voice_connector.aws_region #=> String, one of "us-east-1", "us-west-2"
     #   resp.voice_connector.name #=> String
     #   resp.voice_connector.outbound_host_name #=> String
     #   resp.voice_connector.require_encryption #=> Boolean
@@ -2520,6 +3005,54 @@ module Aws::Chime
     # @param [Hash] params ({})
     def update_voice_connector(params = {}, options = {})
       req = build_request(:update_voice_connector, params)
+      req.send_request(options)
+    end
+
+    # Updates details for the specified Amazon Chime Voice Connector group,
+    # such as the name and Amazon Chime Voice Connector priority ranking.
+    #
+    # @option params [required, String] :voice_connector_group_id
+    #   The Amazon Chime Voice Connector group ID.
+    #
+    # @option params [required, String] :name
+    #   The name of the Amazon Chime Voice Connector group.
+    #
+    # @option params [required, Array<Types::VoiceConnectorItem>] :voice_connector_items
+    #   The `VoiceConnectorItems` to associate with the group.
+    #
+    # @return [Types::UpdateVoiceConnectorGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVoiceConnectorGroupResponse#voice_connector_group #voice_connector_group} => Types::VoiceConnectorGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_voice_connector_group({
+    #     voice_connector_group_id: "NonEmptyString", # required
+    #     name: "VoiceConnectorGroupName", # required
+    #     voice_connector_items: [ # required
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #         priority: 1, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_connector_group.voice_connector_group_id #=> String
+    #   resp.voice_connector_group.name #=> String
+    #   resp.voice_connector_group.voice_connector_items #=> Array
+    #   resp.voice_connector_group.voice_connector_items[0].voice_connector_id #=> String
+    #   resp.voice_connector_group.voice_connector_items[0].priority #=> Integer
+    #   resp.voice_connector_group.created_timestamp #=> Time
+    #   resp.voice_connector_group.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateVoiceConnectorGroup AWS API Documentation
+    #
+    # @overload update_voice_connector_group(params = {})
+    # @param [Hash] params ({})
+    def update_voice_connector_group(params = {}, options = {})
+      req = build_request(:update_voice_connector_group, params)
       req.send_request(options)
     end
 
@@ -2536,7 +3069,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2019-10-31)
+------------------
+
+* Feature - S3 Inventory now supports a new field 'IntelligentTieringAccessTier' that reports the access tier (frequent or infrequent) of objects stored in Intelligent-Tiering storage class.
+
+1.52.0 (2019-10-28)
+------------------
+
+* Feature - Adding support in SelectObjectContent for scanning a portion of an object specified by a scan range.
+
+1.51.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2019-10-17)
+------------------
+
+* Feature - Add support to yield the response in #upload_file if a block is given.
+
+1.49.0 (2019-10-10)
+------------------
+
+* Feature - Support `#delete_object` and `#head_object` for encryption client.
+
 1.48.0 (2019-08-30)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2019-10-04)
+------------------
+
+* Feature - Documentation updates for Systems Manager / StartSession.
+
 1.56.0 (2019-09-26)
 ------------------
 

@@ -25,6 +25,11 @@ module Aws::Connect
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Comparison = Shapes::StringShape.new(name: 'Comparison')
     ContactFlowId = Shapes::StringShape.new(name: 'ContactFlowId')
+    ContactFlowName = Shapes::StringShape.new(name: 'ContactFlowName')
+    ContactFlowSummary = Shapes::StructureShape.new(name: 'ContactFlowSummary')
+    ContactFlowSummaryList = Shapes::ListShape.new(name: 'ContactFlowSummaryList')
+    ContactFlowType = Shapes::StringShape.new(name: 'ContactFlowType')
+    ContactFlowTypes = Shapes::ListShape.new(name: 'ContactFlowTypes')
     ContactId = Shapes::StringShape.new(name: 'ContactId')
     ContactNotFoundException = Shapes::StructureShape.new(name: 'ContactNotFoundException')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
@@ -77,11 +82,23 @@ module Aws::Connect
     HistoricalMetricResult = Shapes::StructureShape.new(name: 'HistoricalMetricResult')
     HistoricalMetricResults = Shapes::ListShape.new(name: 'HistoricalMetricResults')
     HistoricalMetrics = Shapes::ListShape.new(name: 'HistoricalMetrics')
+    HoursOfOperationId = Shapes::StringShape.new(name: 'HoursOfOperationId')
+    HoursOfOperationName = Shapes::StringShape.new(name: 'HoursOfOperationName')
+    HoursOfOperationSummary = Shapes::StructureShape.new(name: 'HoursOfOperationSummary')
+    HoursOfOperationSummaryList = Shapes::ListShape.new(name: 'HoursOfOperationSummaryList')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListContactFlowsRequest = Shapes::StructureShape.new(name: 'ListContactFlowsRequest')
+    ListContactFlowsResponse = Shapes::StructureShape.new(name: 'ListContactFlowsResponse')
+    ListHoursOfOperationsRequest = Shapes::StructureShape.new(name: 'ListHoursOfOperationsRequest')
+    ListHoursOfOperationsResponse = Shapes::StructureShape.new(name: 'ListHoursOfOperationsResponse')
+    ListPhoneNumbersRequest = Shapes::StructureShape.new(name: 'ListPhoneNumbersRequest')
+    ListPhoneNumbersResponse = Shapes::StructureShape.new(name: 'ListPhoneNumbersResponse')
+    ListQueuesRequest = Shapes::StructureShape.new(name: 'ListQueuesRequest')
+    ListQueuesResponse = Shapes::StructureShape.new(name: 'ListQueuesResponse')
     ListRoutingProfilesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfilesRequest')
     ListRoutingProfilesResponse = Shapes::StructureShape.new(name: 'ListRoutingProfilesResponse')
     ListSecurityProfilesRequest = Shapes::StructureShape.new(name: 'ListSecurityProfilesRequest')
@@ -97,9 +114,21 @@ module Aws::Connect
     OutboundContactNotPermittedException = Shapes::StructureShape.new(name: 'OutboundContactNotPermittedException')
     Password = Shapes::StringShape.new(name: 'Password')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
+    PhoneNumberCountryCode = Shapes::StringShape.new(name: 'PhoneNumberCountryCode')
+    PhoneNumberCountryCodes = Shapes::ListShape.new(name: 'PhoneNumberCountryCodes')
+    PhoneNumberId = Shapes::StringShape.new(name: 'PhoneNumberId')
+    PhoneNumberSummary = Shapes::StructureShape.new(name: 'PhoneNumberSummary')
+    PhoneNumberSummaryList = Shapes::ListShape.new(name: 'PhoneNumberSummaryList')
+    PhoneNumberType = Shapes::StringShape.new(name: 'PhoneNumberType')
+    PhoneNumberTypes = Shapes::ListShape.new(name: 'PhoneNumberTypes')
     PhoneType = Shapes::StringShape.new(name: 'PhoneType')
     QueueId = Shapes::StringShape.new(name: 'QueueId')
+    QueueName = Shapes::StringShape.new(name: 'QueueName')
     QueueReference = Shapes::StructureShape.new(name: 'QueueReference')
+    QueueSummary = Shapes::StructureShape.new(name: 'QueueSummary')
+    QueueSummaryList = Shapes::ListShape.new(name: 'QueueSummaryList')
+    QueueType = Shapes::StringShape.new(name: 'QueueType')
+    QueueTypes = Shapes::ListShape.new(name: 'QueueTypes')
     Queues = Shapes::ListShape.new(name: 'Queues')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoutingProfileId = Shapes::StringShape.new(name: 'RoutingProfileId')
@@ -142,6 +171,16 @@ module Aws::Connect
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
+
+    ContactFlowSummary.add_member(:id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "Id"))
+    ContactFlowSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    ContactFlowSummary.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "Name"))
+    ContactFlowSummary.add_member(:contact_flow_type, Shapes::ShapeRef.new(shape: ContactFlowType, location_name: "ContactFlowType"))
+    ContactFlowSummary.struct_class = Types::ContactFlowSummary
+
+    ContactFlowSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowSummary)
+
+    ContactFlowTypes.member = Shapes::ShapeRef.new(shape: ContactFlowType)
 
     ContactNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ContactNotFoundException.struct_class = Types::ContactNotFoundException
@@ -318,6 +357,13 @@ module Aws::Connect
 
     HistoricalMetrics.member = Shapes::ShapeRef.new(shape: HistoricalMetric)
 
+    HoursOfOperationSummary.add_member(:id, Shapes::ShapeRef.new(shape: HoursOfOperationId, location_name: "Id"))
+    HoursOfOperationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    HoursOfOperationSummary.add_member(:name, Shapes::ShapeRef.new(shape: HoursOfOperationName, location_name: "Name"))
+    HoursOfOperationSummary.struct_class = Types::HoursOfOperationSummary
+
+    HoursOfOperationSummaryList.member = Shapes::ShapeRef.new(shape: HoursOfOperationSummary)
+
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalServiceException.struct_class = Types::InternalServiceException
 
@@ -329,6 +375,46 @@ module Aws::Connect
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListContactFlowsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListContactFlowsRequest.add_member(:contact_flow_types, Shapes::ShapeRef.new(shape: ContactFlowTypes, location: "querystring", location_name: "contactFlowTypes"))
+    ListContactFlowsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListContactFlowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults"))
+    ListContactFlowsRequest.struct_class = Types::ListContactFlowsRequest
+
+    ListContactFlowsResponse.add_member(:contact_flow_summary_list, Shapes::ShapeRef.new(shape: ContactFlowSummaryList, location_name: "ContactFlowSummaryList"))
+    ListContactFlowsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListContactFlowsResponse.struct_class = Types::ListContactFlowsResponse
+
+    ListHoursOfOperationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListHoursOfOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListHoursOfOperationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults"))
+    ListHoursOfOperationsRequest.struct_class = Types::ListHoursOfOperationsRequest
+
+    ListHoursOfOperationsResponse.add_member(:hours_of_operation_summary_list, Shapes::ShapeRef.new(shape: HoursOfOperationSummaryList, location_name: "HoursOfOperationSummaryList"))
+    ListHoursOfOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListHoursOfOperationsResponse.struct_class = Types::ListHoursOfOperationsResponse
+
+    ListPhoneNumbersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListPhoneNumbersRequest.add_member(:phone_number_types, Shapes::ShapeRef.new(shape: PhoneNumberTypes, location: "querystring", location_name: "phoneNumberTypes"))
+    ListPhoneNumbersRequest.add_member(:phone_number_country_codes, Shapes::ShapeRef.new(shape: PhoneNumberCountryCodes, location: "querystring", location_name: "phoneNumberCountryCodes"))
+    ListPhoneNumbersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPhoneNumbersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults"))
+    ListPhoneNumbersRequest.struct_class = Types::ListPhoneNumbersRequest
+
+    ListPhoneNumbersResponse.add_member(:phone_number_summary_list, Shapes::ShapeRef.new(shape: PhoneNumberSummaryList, location_name: "PhoneNumberSummaryList"))
+    ListPhoneNumbersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPhoneNumbersResponse.struct_class = Types::ListPhoneNumbersResponse
+
+    ListQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListQueuesRequest.add_member(:queue_types, Shapes::ShapeRef.new(shape: QueueTypes, location: "querystring", location_name: "queueTypes"))
+    ListQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults"))
+    ListQueuesRequest.struct_class = Types::ListQueuesRequest
+
+    ListQueuesResponse.add_member(:queue_summary_list, Shapes::ShapeRef.new(shape: QueueSummaryList, location_name: "QueueSummaryList"))
+    ListQueuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListQueuesResponse.struct_class = Types::ListQueuesResponse
 
     ListRoutingProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListRoutingProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -369,9 +455,32 @@ module Aws::Connect
     OutboundContactNotPermittedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     OutboundContactNotPermittedException.struct_class = Types::OutboundContactNotPermittedException
 
+    PhoneNumberCountryCodes.member = Shapes::ShapeRef.new(shape: PhoneNumberCountryCode)
+
+    PhoneNumberSummary.add_member(:id, Shapes::ShapeRef.new(shape: PhoneNumberId, location_name: "Id"))
+    PhoneNumberSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    PhoneNumberSummary.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
+    PhoneNumberSummary.add_member(:phone_number_type, Shapes::ShapeRef.new(shape: PhoneNumberType, location_name: "PhoneNumberType"))
+    PhoneNumberSummary.add_member(:phone_number_country_code, Shapes::ShapeRef.new(shape: PhoneNumberCountryCode, location_name: "PhoneNumberCountryCode"))
+    PhoneNumberSummary.struct_class = Types::PhoneNumberSummary
+
+    PhoneNumberSummaryList.member = Shapes::ShapeRef.new(shape: PhoneNumberSummary)
+
+    PhoneNumberTypes.member = Shapes::ShapeRef.new(shape: PhoneNumberType)
+
     QueueReference.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
     QueueReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     QueueReference.struct_class = Types::QueueReference
+
+    QueueSummary.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
+    QueueSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    QueueSummary.add_member(:name, Shapes::ShapeRef.new(shape: QueueName, location_name: "Name"))
+    QueueSummary.add_member(:queue_type, Shapes::ShapeRef.new(shape: QueueType, location_name: "QueueType"))
+    QueueSummary.struct_class = Types::QueueSummary
+
+    QueueSummaryList.member = Shapes::ShapeRef.new(shape: QueueSummary)
+
+    QueueTypes.member = Shapes::ShapeRef.new(shape: QueueType)
 
     Queues.member = Shapes::ShapeRef.new(shape: QueueId)
 
@@ -632,6 +741,82 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_contact_flows, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContactFlows"
+        o.http_method = "GET"
+        o.http_request_uri = "/contact-flows-summary/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListContactFlowsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContactFlowsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_hours_of_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHoursOfOperations"
+        o.http_method = "GET"
+        o.http_request_uri = "/hours-of-operations-summary/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListHoursOfOperationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListHoursOfOperationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_phone_numbers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPhoneNumbers"
+        o.http_method = "GET"
+        o.http_request_uri = "/phone-numbers-summary/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListPhoneNumbersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPhoneNumbersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_queues, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListQueues"
+        o.http_method = "GET"
+        o.http_request_uri = "/queues-summary/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListQueuesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListQueuesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_routing_profiles, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRoutingProfiles"
         o.http_method = "GET"
@@ -643,6 +828,12 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_security_profiles, Seahorse::Model::Operation.new.tap do |o|
@@ -656,6 +847,12 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_user_hierarchy_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -669,6 +866,12 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_users, Seahorse::Model::Operation.new.tap do |o|
@@ -682,6 +885,12 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:start_outbound_voice_contact, Seahorse::Model::Operation.new.tap do |o|

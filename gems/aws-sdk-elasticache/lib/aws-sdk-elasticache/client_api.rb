@@ -16,6 +16,8 @@ module Aws::ElastiCache
     AddTagsToResourceMessage = Shapes::StructureShape.new(name: 'AddTagsToResourceMessage')
     AllowedNodeGroupId = Shapes::StringShape.new(name: 'AllowedNodeGroupId')
     AllowedNodeTypeModificationsMessage = Shapes::StructureShape.new(name: 'AllowedNodeTypeModificationsMessage')
+    AuthTokenUpdateStatus = Shapes::StringShape.new(name: 'AuthTokenUpdateStatus')
+    AuthTokenUpdateStrategyType = Shapes::StringShape.new(name: 'AuthTokenUpdateStrategyType')
     AuthorizationAlreadyExistsFault = Shapes::StructureShape.new(name: 'AuthorizationAlreadyExistsFault')
     AuthorizationNotFoundFault = Shapes::StructureShape.new(name: 'AuthorizationNotFoundFault')
     AuthorizeCacheSecurityGroupIngressMessage = Shapes::StructureShape.new(name: 'AuthorizeCacheSecurityGroupIngressMessage')
@@ -30,6 +32,7 @@ module Aws::ElastiCache
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
     CacheCluster = Shapes::StructureShape.new(name: 'CacheCluster')
     CacheClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'CacheClusterAlreadyExistsFault')
+    CacheClusterIdList = Shapes::ListShape.new(name: 'CacheClusterIdList')
     CacheClusterList = Shapes::ListShape.new(name: 'CacheClusterList')
     CacheClusterMessage = Shapes::StructureShape.new(name: 'CacheClusterMessage')
     CacheClusterNotFoundFault = Shapes::StructureShape.new(name: 'CacheClusterNotFoundFault')
@@ -43,6 +46,8 @@ module Aws::ElastiCache
     CacheNodeTypeSpecificParametersList = Shapes::ListShape.new(name: 'CacheNodeTypeSpecificParametersList')
     CacheNodeTypeSpecificValue = Shapes::StructureShape.new(name: 'CacheNodeTypeSpecificValue')
     CacheNodeTypeSpecificValueList = Shapes::ListShape.new(name: 'CacheNodeTypeSpecificValueList')
+    CacheNodeUpdateStatus = Shapes::StructureShape.new(name: 'CacheNodeUpdateStatus')
+    CacheNodeUpdateStatusList = Shapes::ListShape.new(name: 'CacheNodeUpdateStatusList')
     CacheParameterGroup = Shapes::StructureShape.new(name: 'CacheParameterGroup')
     CacheParameterGroupAlreadyExistsFault = Shapes::StructureShape.new(name: 'CacheParameterGroupAlreadyExistsFault')
     CacheParameterGroupDetails = Shapes::StructureShape.new(name: 'CacheParameterGroupDetails')
@@ -72,6 +77,8 @@ module Aws::ElastiCache
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     ClusterIdList = Shapes::ListShape.new(name: 'ClusterIdList')
     ClusterQuotaForCustomerExceededFault = Shapes::StructureShape.new(name: 'ClusterQuotaForCustomerExceededFault')
+    CompleteMigrationMessage = Shapes::StructureShape.new(name: 'CompleteMigrationMessage')
+    CompleteMigrationResponse = Shapes::StructureShape.new(name: 'CompleteMigrationResponse')
     ConfigureShard = Shapes::StructureShape.new(name: 'ConfigureShard')
     CopySnapshotMessage = Shapes::StructureShape.new(name: 'CopySnapshotMessage')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
@@ -87,6 +94,8 @@ module Aws::ElastiCache
     CreateReplicationGroupResult = Shapes::StructureShape.new(name: 'CreateReplicationGroupResult')
     CreateSnapshotMessage = Shapes::StructureShape.new(name: 'CreateSnapshotMessage')
     CreateSnapshotResult = Shapes::StructureShape.new(name: 'CreateSnapshotResult')
+    CustomerNodeEndpoint = Shapes::StructureShape.new(name: 'CustomerNodeEndpoint')
+    CustomerNodeEndpointList = Shapes::ListShape.new(name: 'CustomerNodeEndpointList')
     DecreaseReplicaCountMessage = Shapes::StructureShape.new(name: 'DecreaseReplicaCountMessage')
     DecreaseReplicaCountResult = Shapes::StructureShape.new(name: 'DecreaseReplicaCountResult')
     DeleteCacheClusterMessage = Shapes::StructureShape.new(name: 'DeleteCacheClusterMessage')
@@ -193,10 +202,12 @@ module Aws::ElastiCache
     ReplicaConfigurationList = Shapes::ListShape.new(name: 'ReplicaConfigurationList')
     ReplicationGroup = Shapes::StructureShape.new(name: 'ReplicationGroup')
     ReplicationGroupAlreadyExistsFault = Shapes::StructureShape.new(name: 'ReplicationGroupAlreadyExistsFault')
+    ReplicationGroupAlreadyUnderMigrationFault = Shapes::StructureShape.new(name: 'ReplicationGroupAlreadyUnderMigrationFault')
     ReplicationGroupIdList = Shapes::ListShape.new(name: 'ReplicationGroupIdList')
     ReplicationGroupList = Shapes::ListShape.new(name: 'ReplicationGroupList')
     ReplicationGroupMessage = Shapes::StructureShape.new(name: 'ReplicationGroupMessage')
     ReplicationGroupNotFoundFault = Shapes::StructureShape.new(name: 'ReplicationGroupNotFoundFault')
+    ReplicationGroupNotUnderMigrationFault = Shapes::StructureShape.new(name: 'ReplicationGroupNotUnderMigrationFault')
     ReplicationGroupPendingModifiedValues = Shapes::StructureShape.new(name: 'ReplicationGroupPendingModifiedValues')
     ReservedCacheNode = Shapes::StructureShape.new(name: 'ReservedCacheNode')
     ReservedCacheNodeAlreadyExistsFault = Shapes::StructureShape.new(name: 'ReservedCacheNodeAlreadyExistsFault')
@@ -236,6 +247,8 @@ module Aws::ElastiCache
     SnapshotNotFoundFault = Shapes::StructureShape.new(name: 'SnapshotNotFoundFault')
     SnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SnapshotQuotaExceededFault')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    StartMigrationMessage = Shapes::StructureShape.new(name: 'StartMigrationMessage')
+    StartMigrationResponse = Shapes::StructureShape.new(name: 'StartMigrationResponse')
     String = Shapes::StringShape.new(name: 'String')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
     SubnetIdentifierList = Shapes::ListShape.new(name: 'SubnetIdentifierList')
@@ -281,11 +294,13 @@ module Aws::ElastiCache
 
     AvailabilityZonesList.member = Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone")
 
-    BatchApplyUpdateActionMessage.add_member(:replication_group_ids, Shapes::ShapeRef.new(shape: ReplicationGroupIdList, required: true, location_name: "ReplicationGroupIds"))
+    BatchApplyUpdateActionMessage.add_member(:replication_group_ids, Shapes::ShapeRef.new(shape: ReplicationGroupIdList, location_name: "ReplicationGroupIds"))
+    BatchApplyUpdateActionMessage.add_member(:cache_cluster_ids, Shapes::ShapeRef.new(shape: CacheClusterIdList, location_name: "CacheClusterIds"))
     BatchApplyUpdateActionMessage.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceUpdateName"))
     BatchApplyUpdateActionMessage.struct_class = Types::BatchApplyUpdateActionMessage
 
-    BatchStopUpdateActionMessage.add_member(:replication_group_ids, Shapes::ShapeRef.new(shape: ReplicationGroupIdList, required: true, location_name: "ReplicationGroupIds"))
+    BatchStopUpdateActionMessage.add_member(:replication_group_ids, Shapes::ShapeRef.new(shape: ReplicationGroupIdList, location_name: "ReplicationGroupIds"))
+    BatchStopUpdateActionMessage.add_member(:cache_cluster_ids, Shapes::ShapeRef.new(shape: CacheClusterIdList, location_name: "CacheClusterIds"))
     BatchStopUpdateActionMessage.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceUpdateName"))
     BatchStopUpdateActionMessage.struct_class = Types::BatchStopUpdateActionMessage
 
@@ -312,9 +327,12 @@ module Aws::ElastiCache
     CacheCluster.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     CacheCluster.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
     CacheCluster.add_member(:auth_token_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AuthTokenEnabled"))
+    CacheCluster.add_member(:auth_token_last_modified_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "AuthTokenLastModifiedDate"))
     CacheCluster.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     CacheCluster.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AtRestEncryptionEnabled"))
     CacheCluster.struct_class = Types::CacheCluster
+
+    CacheClusterIdList.member = Shapes::ShapeRef.new(shape: String)
 
     CacheClusterList.member = Shapes::ShapeRef.new(shape: CacheCluster, location_name: "CacheCluster")
 
@@ -366,6 +384,18 @@ module Aws::ElastiCache
     CacheNodeTypeSpecificValue.struct_class = Types::CacheNodeTypeSpecificValue
 
     CacheNodeTypeSpecificValueList.member = Shapes::ShapeRef.new(shape: CacheNodeTypeSpecificValue, location_name: "CacheNodeTypeSpecificValue")
+
+    CacheNodeUpdateStatus.add_member(:cache_node_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeId"))
+    CacheNodeUpdateStatus.add_member(:node_update_status, Shapes::ShapeRef.new(shape: NodeUpdateStatus, location_name: "NodeUpdateStatus"))
+    CacheNodeUpdateStatus.add_member(:node_deletion_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeDeletionDate"))
+    CacheNodeUpdateStatus.add_member(:node_update_start_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeUpdateStartDate"))
+    CacheNodeUpdateStatus.add_member(:node_update_end_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeUpdateEndDate"))
+    CacheNodeUpdateStatus.add_member(:node_update_initiated_by, Shapes::ShapeRef.new(shape: NodeUpdateInitiatedBy, location_name: "NodeUpdateInitiatedBy"))
+    CacheNodeUpdateStatus.add_member(:node_update_initiated_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeUpdateInitiatedDate"))
+    CacheNodeUpdateStatus.add_member(:node_update_status_modified_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeUpdateStatusModifiedDate"))
+    CacheNodeUpdateStatus.struct_class = Types::CacheNodeUpdateStatus
+
+    CacheNodeUpdateStatusList.member = Shapes::ShapeRef.new(shape: CacheNodeUpdateStatus, location_name: "CacheNodeUpdateStatus")
 
     CacheParameterGroup.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupName"))
     CacheParameterGroup.add_member(:cache_parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupFamily"))
@@ -424,6 +454,13 @@ module Aws::ElastiCache
     CacheSubnetGroups.member = Shapes::ShapeRef.new(shape: CacheSubnetGroup, location_name: "CacheSubnetGroup")
 
     ClusterIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "ClusterId")
+
+    CompleteMigrationMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
+    CompleteMigrationMessage.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
+    CompleteMigrationMessage.struct_class = Types::CompleteMigrationMessage
+
+    CompleteMigrationResponse.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
+    CompleteMigrationResponse.struct_class = Types::CompleteMigrationResponse
 
     ConfigureShard.add_member(:node_group_id, Shapes::ShapeRef.new(shape: AllowedNodeGroupId, required: true, location_name: "NodeGroupId"))
     ConfigureShard.add_member(:new_replica_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "NewReplicaCount"))
@@ -532,6 +569,12 @@ module Aws::ElastiCache
 
     CreateSnapshotResult.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
     CreateSnapshotResult.struct_class = Types::CreateSnapshotResult
+
+    CustomerNodeEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
+    CustomerNodeEndpoint.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    CustomerNodeEndpoint.struct_class = Types::CustomerNodeEndpoint
+
+    CustomerNodeEndpointList.member = Shapes::ShapeRef.new(shape: CustomerNodeEndpoint)
 
     DecreaseReplicaCountMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
     DecreaseReplicaCountMessage.add_member(:new_replica_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NewReplicaCount"))
@@ -671,6 +714,8 @@ module Aws::ElastiCache
 
     DescribeUpdateActionsMessage.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     DescribeUpdateActionsMessage.add_member(:replication_group_ids, Shapes::ShapeRef.new(shape: ReplicationGroupIdList, location_name: "ReplicationGroupIds"))
+    DescribeUpdateActionsMessage.add_member(:cache_cluster_ids, Shapes::ShapeRef.new(shape: CacheClusterIdList, location_name: "CacheClusterIds"))
+    DescribeUpdateActionsMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     DescribeUpdateActionsMessage.add_member(:service_update_status, Shapes::ShapeRef.new(shape: ServiceUpdateStatusList, location_name: "ServiceUpdateStatus"))
     DescribeUpdateActionsMessage.add_member(:service_update_time_range, Shapes::ShapeRef.new(shape: TimeRangeFilter, location_name: "ServiceUpdateTimeRange"))
     DescribeUpdateActionsMessage.add_member(:update_action_status, Shapes::ShapeRef.new(shape: UpdateActionStatusList, location_name: "UpdateActionStatus"))
@@ -749,6 +794,8 @@ module Aws::ElastiCache
     ModifyCacheClusterMessage.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     ModifyCacheClusterMessage.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
     ModifyCacheClusterMessage.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
+    ModifyCacheClusterMessage.add_member(:auth_token, Shapes::ShapeRef.new(shape: String, location_name: "AuthToken"))
+    ModifyCacheClusterMessage.add_member(:auth_token_update_strategy, Shapes::ShapeRef.new(shape: AuthTokenUpdateStrategyType, location_name: "AuthTokenUpdateStrategy"))
     ModifyCacheClusterMessage.struct_class = Types::ModifyCacheClusterMessage
 
     ModifyCacheClusterResult.add_member(:cache_cluster, Shapes::ShapeRef.new(shape: CacheCluster, location_name: "CacheCluster"))
@@ -771,6 +818,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupMessage.add_member(:primary_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryClusterId"))
     ModifyReplicationGroupMessage.add_member(:snapshotting_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "SnapshottingClusterId"))
     ModifyReplicationGroupMessage.add_member(:automatic_failover_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutomaticFailoverEnabled"))
+    ModifyReplicationGroupMessage.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "NodeGroupId"))
     ModifyReplicationGroupMessage.add_member(:cache_security_group_names, Shapes::ShapeRef.new(shape: CacheSecurityGroupNameList, location_name: "CacheSecurityGroupNames"))
     ModifyReplicationGroupMessage.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdsList, location_name: "SecurityGroupIds"))
     ModifyReplicationGroupMessage.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
@@ -783,7 +831,8 @@ module Aws::ElastiCache
     ModifyReplicationGroupMessage.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     ModifyReplicationGroupMessage.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
     ModifyReplicationGroupMessage.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
-    ModifyReplicationGroupMessage.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "NodeGroupId"))
+    ModifyReplicationGroupMessage.add_member(:auth_token, Shapes::ShapeRef.new(shape: String, location_name: "AuthToken"))
+    ModifyReplicationGroupMessage.add_member(:auth_token_update_strategy, Shapes::ShapeRef.new(shape: AuthTokenUpdateStrategyType, location_name: "AuthTokenUpdateStrategy"))
     ModifyReplicationGroupMessage.struct_class = Types::ModifyReplicationGroupMessage
 
     ModifyReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -891,11 +940,13 @@ module Aws::ElastiCache
     PendingModifiedValues.add_member(:cache_node_ids_to_remove, Shapes::ShapeRef.new(shape: CacheNodeIdsList, location_name: "CacheNodeIdsToRemove"))
     PendingModifiedValues.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     PendingModifiedValues.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
+    PendingModifiedValues.add_member(:auth_token_status, Shapes::ShapeRef.new(shape: AuthTokenUpdateStatus, location_name: "AuthTokenStatus"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PreferredAvailabilityZoneList.member = Shapes::ShapeRef.new(shape: String, location_name: "PreferredAvailabilityZone")
 
     ProcessedUpdateAction.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+    ProcessedUpdateAction.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     ProcessedUpdateAction.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     ProcessedUpdateAction.add_member(:update_action_status, Shapes::ShapeRef.new(shape: UpdateActionStatus, location_name: "UpdateActionStatus"))
     ProcessedUpdateAction.struct_class = Types::ProcessedUpdateAction
@@ -945,6 +996,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:cluster_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ClusterEnabled"))
     ReplicationGroup.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
     ReplicationGroup.add_member(:auth_token_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AuthTokenEnabled"))
+    ReplicationGroup.add_member(:auth_token_last_modified_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "AuthTokenLastModifiedDate"))
     ReplicationGroup.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     ReplicationGroup.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AtRestEncryptionEnabled"))
     ReplicationGroup.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
@@ -961,6 +1013,7 @@ module Aws::ElastiCache
     ReplicationGroupPendingModifiedValues.add_member(:primary_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryClusterId"))
     ReplicationGroupPendingModifiedValues.add_member(:automatic_failover_status, Shapes::ShapeRef.new(shape: PendingAutomaticFailoverStatus, location_name: "AutomaticFailoverStatus"))
     ReplicationGroupPendingModifiedValues.add_member(:resharding, Shapes::ShapeRef.new(shape: ReshardingStatus, location_name: "Resharding"))
+    ReplicationGroupPendingModifiedValues.add_member(:auth_token_status, Shapes::ShapeRef.new(shape: AuthTokenUpdateStatus, location_name: "AuthTokenStatus"))
     ReplicationGroupPendingModifiedValues.struct_class = Types::ReplicationGroupPendingModifiedValues
 
     ReservedCacheNode.add_member(:reserved_cache_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedCacheNodeId"))
@@ -1086,6 +1139,13 @@ module Aws::ElastiCache
 
     SnapshotList.member = Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot")
 
+    StartMigrationMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
+    StartMigrationMessage.add_member(:customer_node_endpoint_list, Shapes::ShapeRef.new(shape: CustomerNodeEndpointList, required: true, location_name: "CustomerNodeEndpointList"))
+    StartMigrationMessage.struct_class = Types::StartMigrationMessage
+
+    StartMigrationResponse.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
+    StartMigrationResponse.struct_class = Types::StartMigrationResponse
+
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "SubnetAvailabilityZone"))
     Subnet.struct_class = Types::Subnet
@@ -1115,6 +1175,7 @@ module Aws::ElastiCache
     TimeRangeFilter.struct_class = Types::TimeRangeFilter
 
     UnprocessedUpdateAction.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+    UnprocessedUpdateAction.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     UnprocessedUpdateAction.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     UnprocessedUpdateAction.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location_name: "ErrorType"))
     UnprocessedUpdateAction.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -1123,6 +1184,7 @@ module Aws::ElastiCache
     UnprocessedUpdateActionList.member = Shapes::ShapeRef.new(shape: UnprocessedUpdateAction, location_name: "UnprocessedUpdateAction")
 
     UpdateAction.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+    UpdateAction.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     UpdateAction.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     UpdateAction.add_member(:service_update_release_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ServiceUpdateReleaseDate"))
     UpdateAction.add_member(:service_update_severity, Shapes::ShapeRef.new(shape: ServiceUpdateSeverity, location_name: "ServiceUpdateSeverity"))
@@ -1135,7 +1197,9 @@ module Aws::ElastiCache
     UpdateAction.add_member(:update_action_status_modified_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "UpdateActionStatusModifiedDate"))
     UpdateAction.add_member(:sla_met, Shapes::ShapeRef.new(shape: SlaMet, location_name: "SlaMet"))
     UpdateAction.add_member(:node_group_update_status, Shapes::ShapeRef.new(shape: NodeGroupUpdateStatusList, location_name: "NodeGroupUpdateStatus"))
+    UpdateAction.add_member(:cache_node_update_status, Shapes::ShapeRef.new(shape: CacheNodeUpdateStatusList, location_name: "CacheNodeUpdateStatus"))
     UpdateAction.add_member(:estimated_update_time, Shapes::ShapeRef.new(shape: String, location_name: "EstimatedUpdateTime"))
+    UpdateAction.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     UpdateAction.struct_class = Types::UpdateAction
 
     UpdateActionList.member = Shapes::ShapeRef.new(shape: UpdateAction, location_name: "UpdateAction")
@@ -1210,6 +1274,17 @@ module Aws::ElastiCache
         o.output = Shapes::ShapeRef.new(shape: UpdateActionResultsMessage)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUpdateNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:complete_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CompleteMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CompleteMigrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: CompleteMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotUnderMigrationFault)
       end)
 
       api.add_operation(:copy_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -1836,6 +1911,18 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidCacheSecurityGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:start_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMigrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupAlreadyUnderMigrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:test_failover, Seahorse::Model::Operation.new.tap do |o|

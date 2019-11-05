@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-10-07)
+------------------
+
+* Feature - This release adds a service provider field for physical connection creation and provides a list of available partner providers for each Direct Connect location.
+
 1.24.0 (2019-07-25)
 ------------------
 

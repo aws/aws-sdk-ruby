@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2019-11-05)
+------------------
+
+* Feature - Documentation updates for Amazon RDS
+
+1.69.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.68.0 (2019-10-17)
+------------------
+
+* Feature - Amazon RDS now supports Amazon RDS on VMware with the introduction of APIs related to Custom Availability Zones and Media installation.
+
 1.67.0 (2019-09-30)
 ------------------
 

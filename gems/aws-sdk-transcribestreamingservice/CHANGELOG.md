@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2019-10-25)
+------------------
+
+* Feature - With this release, Amazon Transcribe Streaming now supports audio sources in Australian English (en-AU).
+
+1.9.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.8.0 (2019-07-25)
 ------------------
 

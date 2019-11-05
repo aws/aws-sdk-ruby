@@ -308,6 +308,7 @@ module Aws::Batch
     #
     #       {
     #         type: "EC2", # required, accepts EC2, SPOT
+    #         allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
     #         minv_cpus: 1, # required
     #         maxv_cpus: 1, # required
     #         desiredv_cpus: 1,
@@ -331,27 +332,50 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] type
-    #   The type of compute environment: EC2 or SPOT.
+    #   The type of compute environment: `EC2` or `SPOT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_strategy
+    #   The allocation strategy to use for the compute resource in case not
+    #   enough instances of the best fitting instance type can be allocated.
+    #   This could be due to availability of the instance type in the region
+    #   or [Amazon EC2 service limits][1]. If this is not specified, the
+    #   default is `BEST_FIT`, which will use only the best fitting instance
+    #   type, waiting for additional capacity if it's not available. This
+    #   allocation strategy keeps costs lower but can limit scaling.
+    #   `BEST_FIT_PROGRESSIVE` will select an additional instance type that
+    #   is large enough to meet the requirements of the jobs in the queue,
+    #   with a preference for an instance type with a lower cost.
+    #   `SPOT_CAPACITY_OPTIMIZED` is only available for Spot Instance
+    #   compute resources and will select an additional instance type that
+    #   is large enough to meet the requirements of the jobs in the queue,
+    #   with a preference for an instance type that is less likely to be
+    #   interrupted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html
     #   @return [String]
     #
     # @!attribute [rw] minv_cpus
-    #   The minimum number of EC2 vCPUs that an environment should maintain
-    #   (even if the compute environment is `DISABLED`).
+    #   The minimum number of Amazon EC2 vCPUs that an environment should
+    #   maintain (even if the compute environment is `DISABLED`).
     #   @return [Integer]
     #
     # @!attribute [rw] maxv_cpus
-    #   The maximum number of EC2 vCPUs that an environment can reach.
+    #   The maximum number of Amazon EC2 vCPUs that an environment can
+    #   reach.
     #   @return [Integer]
     #
     # @!attribute [rw] desiredv_cpus
-    #   The desired number of EC2 vCPUS in the compute environment.
+    #   The desired number of Amazon EC2 vCPUS in the compute environment.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_types
     #   The instances types that may be launched. You can specify instance
     #   families to launch any instance type within those families (for
-    #   example, `c4` or `p3`), or you can specify specific sizes within a
-    #   family (such as `c4.8xlarge`). You can also choose `optimal` to pick
+    #   example, `c5` or `p3`), or you can specify specific sizes within a
+    #   family (such as `c5.8xlarge`). You can also choose `optimal` to pick
     #   instance types (from the C, M, and R instance families) on the fly
     #   that match the demand of your job queues.
     #   @return [Array<String>]
@@ -372,13 +396,17 @@ module Aws::Batch
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   The EC2 security group that is associated with instances launched in
-    #   the compute environment.
+    #   The Amazon EC2 security groups associated with instances launched in
+    #   the compute environment. One or more security groups must be
+    #   specified, either in `securityGroupIds` or using a launch template
+    #   referenced in `launchTemplate`. If security groups are specified
+    #   using both `securityGroupIds` and `launchTemplate`, the values in
+    #   `securityGroupIds` will be used.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ec2_key_pair
-    #   The EC2 key pair that is used for instances launched in the compute
-    #   environment.
+    #   The Amazon EC2 key pair that is used for instances launched in the
+    #   compute environment.
     #   @return [String]
     #
     # @!attribute [rw] instance_role
@@ -423,9 +451,10 @@ module Aws::Batch
     #   compared with the On-Demand price for that instance type before
     #   instances are launched. For example, if your maximum percentage is
     #   20%, then the Spot price must be below 20% of the current On-Demand
-    #   price for that EC2 instance. You always pay the lowest (market)
-    #   price and never more than your maximum percentage. If you leave this
-    #   field empty, the default value is 100% of the On-Demand price.
+    #   price for that Amazon EC2 instance. You always pay the lowest
+    #   (market) price and never more than your maximum percentage. If you
+    #   leave this field empty, the default value is 100% of the On-Demand
+    #   price.
     #   @return [Integer]
     #
     # @!attribute [rw] spot_iam_fleet_role
@@ -456,6 +485,7 @@ module Aws::Batch
     #
     class ComputeResource < Struct.new(
       :type,
+      :allocation_strategy,
       :minv_cpus,
       :maxv_cpus,
       :desiredv_cpus,
@@ -486,15 +516,17 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] minv_cpus
-    #   The minimum number of EC2 vCPUs that an environment should maintain.
+    #   The minimum number of Amazon EC2 vCPUs that an environment should
+    #   maintain.
     #   @return [Integer]
     #
     # @!attribute [rw] maxv_cpus
-    #   The maximum number of EC2 vCPUs that an environment can reach.
+    #   The maximum number of Amazon EC2 vCPUs that an environment can
+    #   reach.
     #   @return [Integer]
     #
     # @!attribute [rw] desiredv_cpus
-    #   The desired number of EC2 vCPUS in the compute environment.
+    #   The desired number of Amazon EC2 vCPUS in the compute environment.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResourceUpdate AWS API Documentation
@@ -1015,6 +1047,7 @@ module Aws::Batch
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #         compute_resources: {
     #           type: "EC2", # required, accepts EC2, SPOT
+    #           allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
     #           minv_cpus: 1, # required
     #           maxv_cpus: 1, # required
     #           desiredv_cpus: 1,

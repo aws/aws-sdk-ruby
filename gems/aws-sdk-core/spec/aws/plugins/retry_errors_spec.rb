@@ -346,7 +346,7 @@ module Aws
         it 'raises KeyError with invalid jitter function' do
           config.retry_jitter = :unknown
           resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          expect(-> { handle { |context| resp } }).to raise_error(KeyError)
+          expect { handle { |context| resp } }.to raise_error(KeyError)
         end
 
         it 'adjusts delay with custom jitter'  do

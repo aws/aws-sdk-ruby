@@ -410,6 +410,7 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         apns_push_type: "__string",
     #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #         badge: 1,
     #         body: "__string",
@@ -432,6 +433,43 @@ module Aws::Pinpoint
     #         title: "__string",
     #         url: "__string",
     #       }
+    #
+    # @!attribute [rw] apns_push_type
+    #   The type of push notification to send. Valid values are:
+    #
+    #   * alert - For a standard notification that's displayed on
+    #     recipients' devices and prompts a recipient to interact with the
+    #     notification.
+    #
+    #   * background - For a silent notification that delivers content in
+    #     the background and isn't displayed on recipients' devices.
+    #
+    #   * complication - For a notification that contains update information
+    #     for an app’s complication timeline.
+    #
+    #   * fileprovider - For a notification that signals changes to a File
+    #     Provider extension.
+    #
+    #   * mdm - For a notification that tells managed devices to contact the
+    #     MDM server.
+    #
+    #   * voip - For a notification that provides information about an
+    #     incoming VoIP call.
+    #
+    #   Amazon Pinpoint specifies this value in the apns-push-type request
+    #   header when it sends the notification message to APNs. If you don't
+    #   specify a value for this property, Amazon Pinpoint sets the value to
+    #   alert or background automatically, based on the value that you
+    #   specify for the SilentPush or RawContent property of the message.
+    #
+    #   For more information about the apns-push-type request header, see
+    #   [Sending Notification Requests to APNs][1] on the Apple Developer
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns
+    #   @return [String]
     #
     # @!attribute [rw] action
     #   The action to occur if the recipient taps the push notification.
@@ -486,8 +524,7 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] preferred_authentication_method
     #   The authentication method that you want Amazon Pinpoint to use when
-    #   authenticating with Apple Push Notification service (APNs),
-    #   CERTIFICATE or TOKEN.
+    #   authenticating with APNs, CERTIFICATE or TOKEN.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -510,20 +547,65 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] raw_content
     #   The raw, JSON-formatted string to use as the payload for the
-    #   notification message. This value overrides the message.
+    #   notification message. This value overrides all other content for the
+    #   message.
+    #
+    #   <note markdown="1">If you specify the raw content of an APNs push notification, the
+    #   message payload has to include the content-available key. The value
+    #   of the content-available key has to be an integer, and can only be 0
+    #   or 1. If you're sending a standard notification, set the value of
+    #   content-available to 0. If you're sending a silent (background)
+    #   notification, set the value of content-available to 1. Additionally,
+    #   silent notification payloads can't include the alert, badge, or
+    #   sound keys. For more information, see [Generating a Remote
+    #   Notification][1] and [Pushing Background Updates to Your App][2] on
+    #   the Apple Developer website.
+    #
+    #   </note>
+    #
+    #
+    #
+    #   [1]: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification
+    #   [2]: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app
     #   @return [String]
     #
     # @!attribute [rw] silent_push
-    #   Specifies whether the notification is a silent push notification,
-    #   which is a push notification that doesn't display on a recipient's
-    #   device. Silent push notifications can be used for cases such as
-    #   updating an app's configuration, displaying messages in an in-app
-    #   message center, or supporting phone home functionality.
+    #   Specifies whether the notification is a silent push notification. A
+    #   silent (or background) push notification isn't displayed on
+    #   recipients' devices. You can use silent push notifications to make
+    #   small updates to your app, or to display messages in an in-app
+    #   message center.
+    #
+    #   Amazon Pinpoint uses this property to determine the correct value
+    #   for the apns-push-type request header when it sends the notification
+    #   message to APNs. If you specify a value of true for this property,
+    #   Amazon Pinpoint sets the value for the apns-push-type header field
+    #   to background.
+    #
+    #   <note markdown="1">If you specify the raw content of an APNs push notification, the
+    #   message payload has to include the content-available key. For silent
+    #   (background) notifications, set the value of content-available to 1.
+    #   Additionally, the message payload for a silent notification can't
+    #   include the alert, badge, or sound keys. For more information, see
+    #   [Generating a Remote Notification][1] and [Pushing Background
+    #   Updates to Your App][2] on the Apple Developer website.
+    #
+    #    Apple has indicated that they will throttle "excessive" background
+    #   notifications based on current traffic volumes. To prevent your
+    #   notifications being throttled, Apple recommends that you send no
+    #   more than 3 silent push notifications to each recipient per hour.
+    #
+    #   </note>
+    #
+    #
+    #
+    #   [1]: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification
+    #   [2]: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app
     #   @return [Boolean]
     #
     # @!attribute [rw] sound
     #   The key for the sound to play when the recipient receives the push
-    #   notification. The value of this key is the name of a sound file in
+    #   notification. The value for this key is the name of a sound file in
     #   your app's main bundle or the Library/Sounds folder in your app's
     #   data container. If the sound file can't be found or you specify
     #   default for the value, the system plays the default alert sound.
@@ -566,6 +648,7 @@ module Aws::Pinpoint
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSMessage AWS API Documentation
     #
     class APNSMessage < Struct.new(
+      :apns_push_type,
       :action,
       :badge,
       :body,
@@ -581,6 +664,80 @@ module Aws::Pinpoint
       :substitutions,
       :thread_id,
       :time_to_live,
+      :title,
+      :url)
+      include Aws::Structure
+    end
+
+    # Specifies channel-specific content and settings for a message template
+    # that can be used in push notifications that are sent through the APNs
+    # (Apple Push Notification service) channel.
+    #
+    # @note When making an API call, you may pass APNSPushNotificationTemplate
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         media_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to occur if a recipient taps a push notification that's
+    #   based on the message template. Valid values are:
+    #
+    #   * OPEN\_APP - Your app opens or it becomes the foreground app if it
+    #     was sent to the background. This is the default action.
+    #
+    #   * DEEP\_LINK - Your app opens and displays a designated user
+    #     interface in the app. This setting uses the deep-linking features
+    #     of the iOS platform.
+    #
+    #   * URL - The default mobile browser on the recipient's device opens
+    #     and loads the web page at a URL that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body to use in push notifications that are based on the
+    #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_url
+    #   The URL of an image or video to display in push notifications that
+    #   are based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   The key for the sound to play when the recipient receives a push
+    #   notification that's based on the message template. The value for
+    #   this key is the name of a sound file in your app's main bundle or
+    #   the Library/Sounds folder in your app's data container. If the
+    #   sound file can't be found or you specify default for the value, the
+    #   system plays the default alert sound.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title to use in push notifications that are based on the message
+    #   template. This title appears above the notification message on a
+    #   recipient's device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in the recipient's default mobile browser, if a
+    #   recipient taps a push notification that's based on the message
+    #   template and the value of the Action property is URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSPushNotificationTemplate AWS API Documentation
+    #
+    class APNSPushNotificationTemplate < Struct.new(
+      :action,
+      :body,
+      :media_url,
+      :sound,
       :title,
       :url)
       include Aws::Structure
@@ -1061,6 +1218,301 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies the configuration and other settings for an activity in a
+    # journey.
+    #
+    # @note When making an API call, you may pass Activity
+    #   data as a hash:
+    #
+    #       {
+    #         conditional_split: {
+    #           condition: {
+    #             conditions: [
+    #               {
+    #                 event_condition: {
+    #                   dimensions: { # required
+    #                     attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                     event_type: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     metrics: {
+    #                       "__string" => {
+    #                         comparison_operator: "__string", # required
+    #                         value: 1.0, # required
+    #                       },
+    #                     },
+    #                   },
+    #                   message_activity: "__string",
+    #                 },
+    #                 segment_condition: {
+    #                   segment_id: "__string", # required
+    #                 },
+    #                 segment_dimensions: {
+    #                   attributes: {
+    #                     "__string" => {
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                   },
+    #                   behavior: {
+    #                     recency: {
+    #                       duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                       recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                     },
+    #                   },
+    #                   demographic: {
+    #                     app_version: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     channel: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     device_type: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     make: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     model: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     platform: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                   },
+    #                   location: {
+    #                     country: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     gps_point: {
+    #                       coordinates: { # required
+    #                         latitude: 1.0, # required
+    #                         longitude: 1.0, # required
+    #                       },
+    #                       range_in_kilometers: 1.0,
+    #                     },
+    #                   },
+    #                   metrics: {
+    #                     "__string" => {
+    #                       comparison_operator: "__string", # required
+    #                       value: 1.0, # required
+    #                     },
+    #                   },
+    #                   user_attributes: {
+    #                     "__string" => {
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             operator: "ALL", # accepts ALL, ANY
+    #           },
+    #           evaluation_wait_time: {
+    #             wait_for: "__string",
+    #             wait_until: "__string",
+    #           },
+    #           false_activity: "__string",
+    #           true_activity: "__string",
+    #         },
+    #         description: "__string",
+    #         email: {
+    #           message_config: {
+    #             from_address: "__string",
+    #           },
+    #           next_activity: "__string",
+    #           template_name: "__string",
+    #         },
+    #         holdout: {
+    #           next_activity: "__string",
+    #           percentage: 1, # required
+    #         },
+    #         multi_condition: {
+    #           branches: [
+    #             {
+    #               condition: {
+    #                 event_condition: {
+    #                   dimensions: { # required
+    #                     attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"], # required
+    #                       },
+    #                     },
+    #                     event_type: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     metrics: {
+    #                       "__string" => {
+    #                         comparison_operator: "__string", # required
+    #                         value: 1.0, # required
+    #                       },
+    #                     },
+    #                   },
+    #                   message_activity: "__string",
+    #                 },
+    #                 segment_condition: {
+    #                   segment_id: "__string", # required
+    #                 },
+    #                 segment_dimensions: {
+    #                   attributes: {
+    #                     "__string" => {
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                   },
+    #                   behavior: {
+    #                     recency: {
+    #                       duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                       recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                     },
+    #                   },
+    #                   demographic: {
+    #                     app_version: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     channel: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     device_type: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     make: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     model: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     platform: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                   },
+    #                   location: {
+    #                     country: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                     gps_point: {
+    #                       coordinates: { # required
+    #                         latitude: 1.0, # required
+    #                         longitude: 1.0, # required
+    #                       },
+    #                       range_in_kilometers: 1.0,
+    #                     },
+    #                   },
+    #                   metrics: {
+    #                     "__string" => {
+    #                       comparison_operator: "__string", # required
+    #                       value: 1.0, # required
+    #                     },
+    #                   },
+    #                   user_attributes: {
+    #                     "__string" => {
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #               next_activity: "__string",
+    #             },
+    #           ],
+    #           default_activity: "__string",
+    #           evaluation_wait_time: {
+    #             wait_for: "__string",
+    #             wait_until: "__string",
+    #           },
+    #         },
+    #         random_split: {
+    #           branches: [
+    #             {
+    #               next_activity: "__string",
+    #               percentage: 1,
+    #             },
+    #           ],
+    #         },
+    #         wait: {
+    #           next_activity: "__string",
+    #           wait_time: {
+    #             wait_for: "__string",
+    #             wait_until: "__string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] conditional_split
+    #   The settings for a yes/no split activity. This type of activity
+    #   sends participants down one of two paths in a journey, based on
+    #   conditions that you specify.
+    #   @return [Types::ConditionalSplitActivity]
+    #
+    # @!attribute [rw] description
+    #   The custom description of the activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The settings for an email activity. This type of activity sends an
+    #   email message to participants.
+    #   @return [Types::EmailMessageActivity]
+    #
+    # @!attribute [rw] holdout
+    #   The settings for a holdout activity. This type of activity stops a
+    #   journey for a specified percentage of participants.
+    #   @return [Types::HoldoutActivity]
+    #
+    # @!attribute [rw] multi_condition
+    #   The settings for a multivariate split activity. This type of
+    #   activity sends participants down one of as many as five paths in a
+    #   journey, based on conditions that you specify.
+    #   @return [Types::MultiConditionalSplitActivity]
+    #
+    # @!attribute [rw] random_split
+    #   The settings for a random split activity. This type of activity
+    #   randomly sends specified percentages of participants down one of as
+    #   many as five paths in a journey, based on conditions that you
+    #   specify.
+    #   @return [Types::RandomSplitActivity]
+    #
+    # @!attribute [rw] wait
+    #   The settings for a wait activity. This type of activity waits for a
+    #   certain amount of time or until a specific date and time before
+    #   moving participants to the next activity in a journey.
+    #   @return [Types::WaitActivity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Activity AWS API Documentation
+    #
+    class Activity < Struct.new(
+      :conditional_split,
+      :description,
+      :email,
+      :holdout,
+      :multi_condition,
+      :random_split,
+      :wait)
+      include Aws::Structure
+    end
+
     # Provides information about an activity that was performed by a
     # campaign.
     #
@@ -1096,7 +1548,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the activity. Possible values are: PENDING,
+    #   The current status of the activity. Possible values are: PENDING,
     #   INITIALIZING, RUNNING, PAUSED, CANCELLED, and COMPLETED.
     #   @return [String]
     #
@@ -1209,6 +1661,95 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies channel-specific content and settings for a message template
+    # that can be used in push notifications that are sent through the ADM
+    # (Amazon Device Messaging), Baidu (Baidu Cloud Push), or GCM (Firebase
+    # Cloud Messaging, formerly Google Cloud Messaging) channel.
+    #
+    # @note When making an API call, you may pass AndroidPushNotificationTemplate
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to occur if a recipient taps a push notification that's
+    #   based on the message template. Valid values are:
+    #
+    #   * OPEN\_APP - Your app opens or it becomes the foreground app if it
+    #     was sent to the background. This is the default action.
+    #
+    #   * DEEP\_LINK - Your app opens and displays a designated user
+    #     interface in the app. This action uses the deep-linking features
+    #     of the Android platform.
+    #
+    #   * URL - The default mobile browser on the recipient's device opens
+    #     and loads the web page at a URL that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body to use in a push notification that's based on the
+    #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_icon_url
+    #   The URL of the large icon image to display in the content view of a
+    #   push notification that's based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_url
+    #   The URL of an image to display in a push notification that's based
+    #   on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] small_image_icon_url
+    #   The URL of the small icon image to display in the status bar and the
+    #   content view of a push notification that's based on the message
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   The sound to play when a recipient receives a push notification
+    #   that's based on the message template. You can use the default
+    #   stream or specify the file name of a sound resource that's bundled
+    #   in your app. On an Android platform, the sound file must reside in
+    #   /res/raw/.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title to use in a push notification that's based on the message
+    #   template. This title appears above the notification message on a
+    #   recipient's device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in a recipient's default mobile browser, if a
+    #   recipient taps a a push notification that's based on the message
+    #   template and the value of the Action property is URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/AndroidPushNotificationTemplate AWS API Documentation
+    #
+    class AndroidPushNotificationTemplate < Struct.new(
+      :action,
+      :body,
+      :image_icon_url,
+      :image_url,
+      :small_image_icon_url,
+      :sound,
+      :title,
+      :url)
+      include Aws::Structure
+    end
+
     # Provides the results of a query that retrieved the data for a standard
     # metric that applies to an application, and provides information about
     # that query.
@@ -1219,8 +1760,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   The last date or date and time of the date range that was used to
-    #   filter the query results, in ISO 8601 format. The date range is
+    #   The last date and time of the date range that was used to filter the
+    #   query results, in extended ISO 8601 format. The date range is
     #   inclusive.
     #   @return [Time]
     #
@@ -1229,8 +1770,12 @@ module Aws::Pinpoint
     #   indicator (KPI)*, that the data was retrieved for. This value
     #   describes the associated metric and consists of two or more terms,
     #   which are comprised of lowercase alphanumeric characters, separated
-    #   by a hyphen. For a list of valid values, see the [Amazon Pinpoint
-    #   Developer Guide](developerguide.html).
+    #   by a hyphen. For a list of possible values, see the [Amazon Pinpoint
+    #   Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
     #   @return [String]
     #
     # @!attribute [rw] kpi_result
@@ -1241,14 +1786,14 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] next_token
     #   The string to use in a subsequent request to get the next page of
-    #   results in a paginated response. This value is null for the App
-    #   Metrics resource. The App Metrics resource returns all results in a
-    #   single page.
+    #   results in a paginated response. This value is null for the
+    #   Application Metrics resource because the resource returns all
+    #   results in a single page.
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The first date or date and time of the date range that was used to
-    #   filter the query results, in ISO 8601 format. The date range is
+    #   The first date and time of the date range that was used to filter
+    #   the query results, in extended ISO 8601 format. The date range is
     #   inclusive.
     #   @return [Time]
     #
@@ -1319,24 +1864,26 @@ module Aws::Pinpoint
     #   @return [Types::CampaignLimits]
     #
     # @!attribute [rw] quiet_time
-    #   The default quiet time for campaigns in the application. Quiet time
-    #   is a specific time range when campaigns don't send messages to
-    #   endpoints, if all the following conditions are met:
+    #   The default quiet time for campaigns and journeys in the
+    #   application. Quiet time is a specific time range when messages
+    #   aren't sent to endpoints, if all the following conditions are met:
     #
     #   * The EndpointDemographic.Timezone property of the endpoint is set
     #     to a valid value.
     #
     #   * The current time in the endpoint's time zone is later than or
     #     equal to the time specified by the QuietTime.Start property for
-    #     the application (or a campaign that has custom quiet time
-    #     settings).
+    #     the application (or a campaign or journey that has custom quiet
+    #     time settings).
     #
     #   * The current time in the endpoint's time zone is earlier than or
     #     equal to the time specified by the QuietTime.End property for the
-    #     application (or a campaign that has custom quiet time settings).
+    #     application (or a campaign or journey that has custom quiet time
+    #     settings).
     #
     #   If any of the preceding conditions isn't met, the endpoint will
-    #   receive messages from a campaign, even if quiet time is enabled.
+    #   receive messages from a campaign or journey, even if quiet time is
+    #   enabled.
     #   @return [Types::QuietTime]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationSettingsResource AWS API Documentation
@@ -1416,12 +1963,12 @@ module Aws::Pinpoint
     #   endpoints. Valid values are:
     #
     #   * endpoint-custom-attributes - Custom attributes that describe
-    #     endpoints
+    #     endpoints.
     #
-    #   * endpoint-custom-metrics - Custom metrics that your app reports to
-    #     Amazon Pinpoint for endpoints
+    #   * endpoint-metric-attributes - Custom metrics that your app reports
+    #     to Amazon Pinpoint for endpoints.
     #
-    #   * endpoint-user-attributes - Custom attributes that describe users
+    #   * endpoint-user-attributes - Custom attributes that describe users.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -1693,12 +2240,12 @@ module Aws::Pinpoint
     end
 
     # Provides the results of a query that retrieved the data for a standard
-    # metric that applies to an application or campaign.
+    # metric that applies to an application, campaign, or journey.
     #
     # @!attribute [rw] rows
     #   An array of objects that provides the results of a query that
     #   retrieved the data for a standard metric that applies to an
-    #   application or campaign.
+    #   application, campaign, or journey.
     #   @return [Array<Types::ResultRow>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BaseKpiResult AWS API Documentation
@@ -1722,8 +2269,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   The last date or date and time of the date range that was used to
-    #   filter the query results, in ISO 8601 format. The date range is
+    #   The last date and time of the date range that was used to filter the
+    #   query results, in extended ISO 8601 format. The date range is
     #   inclusive.
     #   @return [Time]
     #
@@ -1732,8 +2279,12 @@ module Aws::Pinpoint
     #   indicator (KPI)*, that the data was retrieved for. This value
     #   describes the associated metric and consists of two or more terms,
     #   which are comprised of lowercase alphanumeric characters, separated
-    #   by a hyphen. For a list of valid values, see the [Amazon Pinpoint
-    #   Developer Guide](developerguide.html).
+    #   by a hyphen. For a list of possible values, see the [Amazon Pinpoint
+    #   Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
     #   @return [String]
     #
     # @!attribute [rw] kpi_result
@@ -1745,13 +2296,13 @@ module Aws::Pinpoint
     # @!attribute [rw] next_token
     #   The string to use in a subsequent request to get the next page of
     #   results in a paginated response. This value is null for the Campaign
-    #   Metrics resource. The Campaign Metrics resource returns all results
-    #   in a single page.
+    #   Metrics resource because the resource returns all results in a
+    #   single page.
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The first date or date and time of the date range that was used to
-    #   filter the query results, in ISO 8601 format. The date range is
+    #   The first date and time of the date range that was used to filter
+    #   the query results, in extended ISO 8601 format. The date range is
     #   inclusive.
     #   @return [Time]
     #
@@ -1848,7 +2399,7 @@ module Aws::Pinpoint
     #   ENDPOINT, sends the campaign when an endpoint event (<link
     #   linkend="apps-application-id-events" />
     #
-    #   Events</link> resource) occurs.
+    #   Events resource</link>) occurs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignEventFilter AWS API Documentation
@@ -2029,6 +2580,10 @@ module Aws::Pinpoint
     #   required tag key and an associated tag value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template that’s used for the campaign.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] treatment_description
     #   The custom description of a variation of the campaign that's used
     #   for A/B testing.
@@ -2065,6 +2620,7 @@ module Aws::Pinpoint
       :segment_version,
       :state,
       :tags,
+      :template_configuration,
       :treatment_description,
       :treatment_name,
       :version)
@@ -2111,10 +2667,10 @@ module Aws::Pinpoint
     # Provides information about the status of a campaign.
     #
     # @!attribute [rw] campaign_status
-    #   The status of the campaign, or the status of a treatment that
-    #   belongs to an A/B test campaign. If a campaign uses A/B testing, the
-    #   campaign has a status of COMPLETED only when all campaign treatments
-    #   have a status of COMPLETED.
+    #   The current status of the campaign, or the current status of a
+    #   treatment that belongs to an A/B test campaign. If a campaign uses
+    #   A/B testing, the campaign has a status of COMPLETED only if all
+    #   campaign treatments have a status of COMPLETED.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignState AWS API Documentation
@@ -2217,6 +2773,271 @@ module Aws::Pinpoint
     #
     class ChannelsResponse < Struct.new(
       :channels)
+      include Aws::Structure
+    end
+
+    # Specifies the conditions to evaluate for an activity in a journey, and
+    # how to evaluate those conditions.
+    #
+    # @note When making an API call, you may pass Condition
+    #   data as a hash:
+    #
+    #       {
+    #         conditions: [
+    #           {
+    #             event_condition: {
+    #               dimensions: { # required
+    #                 attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                 },
+    #                 event_type: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #                 metrics: {
+    #                   "__string" => {
+    #                     comparison_operator: "__string", # required
+    #                     value: 1.0, # required
+    #                   },
+    #                 },
+    #               },
+    #               message_activity: "__string",
+    #             },
+    #             segment_condition: {
+    #               segment_id: "__string", # required
+    #             },
+    #             segment_dimensions: {
+    #               attributes: {
+    #                 "__string" => {
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #               },
+    #               behavior: {
+    #                 recency: {
+    #                   duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                   recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                 },
+    #               },
+    #               demographic: {
+    #                 app_version: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #                 channel: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #                 device_type: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #                 make: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #                 model: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #                 platform: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #               },
+    #               location: {
+    #                 country: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #                 gps_point: {
+    #                   coordinates: { # required
+    #                     latitude: 1.0, # required
+    #                     longitude: 1.0, # required
+    #                   },
+    #                   range_in_kilometers: 1.0,
+    #                 },
+    #               },
+    #               metrics: {
+    #                 "__string" => {
+    #                   comparison_operator: "__string", # required
+    #                   value: 1.0, # required
+    #                 },
+    #               },
+    #               user_attributes: {
+    #                 "__string" => {
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         operator: "ALL", # accepts ALL, ANY
+    #       }
+    #
+    # @!attribute [rw] conditions
+    #   The conditions to evaluate for the activity.
+    #   @return [Array<Types::SimpleCondition>]
+    #
+    # @!attribute [rw] operator
+    #   Specifies how to handle multiple conditions for the activity. For
+    #   example, if you specify two conditions for an activity, whether both
+    #   or only one of the conditions must be met for the activity to be
+    #   performed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Condition AWS API Documentation
+    #
+    class Condition < Struct.new(
+      :conditions,
+      :operator)
+      include Aws::Structure
+    end
+
+    # Specifies the settings for a yes/no split activity in a journey. This
+    # type of activity sends participants down one of two paths in a
+    # journey, based on conditions that you specify.
+    #
+    # @note When making an API call, you may pass ConditionalSplitActivity
+    #   data as a hash:
+    #
+    #       {
+    #         condition: {
+    #           conditions: [
+    #             {
+    #               event_condition: {
+    #                 dimensions: { # required
+    #                   attributes: {
+    #                     "__string" => {
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                   },
+    #                   event_type: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   metrics: {
+    #                     "__string" => {
+    #                       comparison_operator: "__string", # required
+    #                       value: 1.0, # required
+    #                     },
+    #                   },
+    #                 },
+    #                 message_activity: "__string",
+    #               },
+    #               segment_condition: {
+    #                 segment_id: "__string", # required
+    #               },
+    #               segment_dimensions: {
+    #                 attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                 },
+    #                 behavior: {
+    #                   recency: {
+    #                     duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                     recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                   },
+    #                 },
+    #                 demographic: {
+    #                   app_version: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   channel: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   device_type: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   make: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   model: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   platform: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                 },
+    #                 location: {
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   gps_point: {
+    #                     coordinates: { # required
+    #                       latitude: 1.0, # required
+    #                       longitude: 1.0, # required
+    #                     },
+    #                     range_in_kilometers: 1.0,
+    #                   },
+    #                 },
+    #                 metrics: {
+    #                   "__string" => {
+    #                     comparison_operator: "__string", # required
+    #                     value: 1.0, # required
+    #                   },
+    #                 },
+    #                 user_attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           operator: "ALL", # accepts ALL, ANY
+    #         },
+    #         evaluation_wait_time: {
+    #           wait_for: "__string",
+    #           wait_until: "__string",
+    #         },
+    #         false_activity: "__string",
+    #         true_activity: "__string",
+    #       }
+    #
+    # @!attribute [rw] condition
+    #   The conditions that define the paths for the activity, and the
+    #   relationship between the conditions.
+    #   @return [Types::Condition]
+    #
+    # @!attribute [rw] evaluation_wait_time
+    #   The amount of time to wait before determining whether the conditions
+    #   are met, or the date and time when Amazon Pinpoint determines
+    #   whether the conditions are met.
+    #   @return [Types::WaitTime]
+    #
+    # @!attribute [rw] false_activity
+    #   The unique identifier for the activity to perform if the condition
+    #   isn't met.
+    #   @return [String]
+    #
+    # @!attribute [rw] true_activity
+    #   The unique identifier for the activity to perform if the condition
+    #   is met.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ConditionalSplitActivity AWS API Documentation
+    #
+    class ConditionalSplitActivity < Struct.new(
+      :condition,
+      :evaluation_wait_time,
+      :false_activity,
+      :true_activity)
       include Aws::Structure
     end
 
@@ -2411,6 +3232,17 @@ module Aws::Pinpoint
     #                 timezone: "__string",
     #               },
     #               size_percent: 1, # required
+    #               template_configuration: {
+    #                 email_template: {
+    #                   name: "__string",
+    #                 },
+    #                 push_template: {
+    #                   name: "__string",
+    #                 },
+    #                 sms_template: {
+    #                   name: "__string",
+    #                 },
+    #               },
     #               treatment_description: "__string",
     #               treatment_name: "__string",
     #             },
@@ -2550,6 +3382,17 @@ module Aws::Pinpoint
     #           tags: {
     #             "__string" => "__string",
     #           },
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -2579,6 +3422,48 @@ module Aws::Pinpoint
     #
     class CreateCampaignResponse < Struct.new(
       :campaign_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_template_request: { # required
+    #           html_part: "__string",
+    #           subject: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #           text_part: "__string",
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] email_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in messages that are sent through the email channel.
+    #   @return [Types::EmailTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateEmailTemplateRequest AWS API Documentation
+    #
+    class CreateEmailTemplateRequest < Struct.new(
+      :email_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_template_message_body
+    #   Provides information about a request to create a message template.
+    #   @return [Types::CreateTemplateMessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateEmailTemplateResponse AWS API Documentation
+    #
+    class CreateEmailTemplateResponse < Struct.new(
+      :create_template_message_body)
       include Aws::Structure
     end
 
@@ -2671,6 +3556,392 @@ module Aws::Pinpoint
     #
     class CreateImportJobResponse < Struct.new(
       :import_job_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateJourneyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         write_journey_request: { # required
+    #           activities: {
+    #             "__string" => {
+    #               conditional_split: {
+    #                 condition: {
+    #                   conditions: [
+    #                     {
+    #                       event_condition: {
+    #                         dimensions: { # required
+    #                           attributes: {
+    #                             "__string" => {
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               values: ["__string"], # required
+    #                             },
+    #                           },
+    #                           event_type: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           metrics: {
+    #                             "__string" => {
+    #                               comparison_operator: "__string", # required
+    #                               value: 1.0, # required
+    #                             },
+    #                           },
+    #                         },
+    #                         message_activity: "__string",
+    #                       },
+    #                       segment_condition: {
+    #                         segment_id: "__string", # required
+    #                       },
+    #                       segment_dimensions: {
+    #                         attributes: {
+    #                           "__string" => {
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                         behavior: {
+    #                           recency: {
+    #                             duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                             recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                           },
+    #                         },
+    #                         demographic: {
+    #                           app_version: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           channel: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           device_type: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           make: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           model: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           platform: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                         location: {
+    #                           country: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           gps_point: {
+    #                             coordinates: { # required
+    #                               latitude: 1.0, # required
+    #                               longitude: 1.0, # required
+    #                             },
+    #                             range_in_kilometers: 1.0,
+    #                           },
+    #                         },
+    #                         metrics: {
+    #                           "__string" => {
+    #                             comparison_operator: "__string", # required
+    #                             value: 1.0, # required
+    #                           },
+    #                         },
+    #                         user_attributes: {
+    #                           "__string" => {
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                       },
+    #                     },
+    #                   ],
+    #                   operator: "ALL", # accepts ALL, ANY
+    #                 },
+    #                 evaluation_wait_time: {
+    #                   wait_for: "__string",
+    #                   wait_until: "__string",
+    #                 },
+    #                 false_activity: "__string",
+    #                 true_activity: "__string",
+    #               },
+    #               description: "__string",
+    #               email: {
+    #                 message_config: {
+    #                   from_address: "__string",
+    #                 },
+    #                 next_activity: "__string",
+    #                 template_name: "__string",
+    #               },
+    #               holdout: {
+    #                 next_activity: "__string",
+    #                 percentage: 1, # required
+    #               },
+    #               multi_condition: {
+    #                 branches: [
+    #                   {
+    #                     condition: {
+    #                       event_condition: {
+    #                         dimensions: { # required
+    #                           attributes: {
+    #                             "__string" => {
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               values: ["__string"], # required
+    #                             },
+    #                           },
+    #                           event_type: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           metrics: {
+    #                             "__string" => {
+    #                               comparison_operator: "__string", # required
+    #                               value: 1.0, # required
+    #                             },
+    #                           },
+    #                         },
+    #                         message_activity: "__string",
+    #                       },
+    #                       segment_condition: {
+    #                         segment_id: "__string", # required
+    #                       },
+    #                       segment_dimensions: {
+    #                         attributes: {
+    #                           "__string" => {
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                         behavior: {
+    #                           recency: {
+    #                             duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                             recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                           },
+    #                         },
+    #                         demographic: {
+    #                           app_version: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           channel: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           device_type: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           make: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           model: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           platform: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                         location: {
+    #                           country: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           gps_point: {
+    #                             coordinates: { # required
+    #                               latitude: 1.0, # required
+    #                               longitude: 1.0, # required
+    #                             },
+    #                             range_in_kilometers: 1.0,
+    #                           },
+    #                         },
+    #                         metrics: {
+    #                           "__string" => {
+    #                             comparison_operator: "__string", # required
+    #                             value: 1.0, # required
+    #                           },
+    #                         },
+    #                         user_attributes: {
+    #                           "__string" => {
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                       },
+    #                     },
+    #                     next_activity: "__string",
+    #                   },
+    #                 ],
+    #                 default_activity: "__string",
+    #                 evaluation_wait_time: {
+    #                   wait_for: "__string",
+    #                   wait_until: "__string",
+    #                 },
+    #               },
+    #               random_split: {
+    #                 branches: [
+    #                   {
+    #                     next_activity: "__string",
+    #                     percentage: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               wait: {
+    #                 next_activity: "__string",
+    #                 wait_time: {
+    #                   wait_for: "__string",
+    #                   wait_until: "__string",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           creation_date: "__string",
+    #           last_modified_date: "__string",
+    #           limits: {
+    #             daily_cap: 1,
+    #             endpoint_reentry_cap: 1,
+    #             messages_per_second: 1,
+    #           },
+    #           local_time: false,
+    #           name: "__string", # required
+    #           quiet_time: {
+    #             end: "__string",
+    #             start: "__string",
+    #           },
+    #           refresh_frequency: "__string",
+    #           schedule: {
+    #             end_time: Time.now,
+    #             start_time: Time.now,
+    #             timezone: "__string",
+    #           },
+    #           start_activity: "__string",
+    #           start_condition: {
+    #             description: "__string",
+    #             segment_start_condition: {
+    #               segment_id: "__string", # required
+    #             },
+    #           },
+    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] write_journey_request
+    #   Specifies the configuration and other settings for a journey.
+    #   @return [Types::WriteJourneyRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateJourneyRequest AWS API Documentation
+    #
+    class CreateJourneyRequest < Struct.new(
+      :application_id,
+      :write_journey_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_response
+    #   Provides information about the status, configuration, and other
+    #   settings for a journey.
+    #   @return [Types::JourneyResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateJourneyResponse AWS API Documentation
+    #
+    class CreateJourneyResponse < Struct.new(
+      :journey_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreatePushTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         push_notification_template_request: { # required
+    #           adm: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           apns: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             media_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           baidu: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           default: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           gcm: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] push_notification_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in messages that are sent through a push notification
+    #   channel.
+    #   @return [Types::PushNotificationTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreatePushTemplateRequest AWS API Documentation
+    #
+    class CreatePushTemplateRequest < Struct.new(
+      :push_notification_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_template_message_body
+    #   Provides information about a request to create a message template.
+    #   @return [Types::CreateTemplateMessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreatePushTemplateResponse AWS API Documentation
+    #
+    class CreatePushTemplateResponse < Struct.new(
+      :create_template_message_body)
       include Aws::Structure
     end
 
@@ -2863,6 +4134,72 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSmsTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sms_template_request: { # required
+    #           body: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] sms_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in text messages that are sent through the SMS channel.
+    #   @return [Types::SMSTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSmsTemplateRequest AWS API Documentation
+    #
+    class CreateSmsTemplateRequest < Struct.new(
+      :sms_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_template_message_body
+    #   Provides information about a request to create a message template.
+    #   @return [Types::CreateTemplateMessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSmsTemplateResponse AWS API Documentation
+    #
+    class CreateSmsTemplateResponse < Struct.new(
+      :create_template_message_body)
+      include Aws::Structure
+    end
+
+    # Provides information about a request to create a message template.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the message template that was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message that's returned from the API for the request to create
+    #   the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The unique identifier for the request to create the message
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateTemplateMessageBody AWS API Documentation
+    #
+    class CreateTemplateMessageBody < Struct.new(
+      :arn,
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Specifies the default message to use for all channels.
     #
     # @note When making an API call, you may pass DefaultMessage
@@ -2972,6 +4309,78 @@ module Aws::Pinpoint
       :data,
       :silent_push,
       :substitutions,
+      :title,
+      :url)
+      include Aws::Structure
+    end
+
+    # Specifies the default settings and content for a message template that
+    # can be used in messages that are sent through a push notification
+    # channel.
+    #
+    # @note When making an API call, you may pass DefaultPushNotificationTemplate
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to occur if a recipient taps a push notification that's
+    #   based on the message template. Valid values are:
+    #
+    #   * OPEN\_APP - Your app opens or it becomes the foreground app if it
+    #     was sent to the background. This is the default action.
+    #
+    #   * DEEP\_LINK - Your app opens and displays a designated user
+    #     interface in the app. This setting uses the deep-linking features
+    #     of the iOS and Android platforms.
+    #
+    #   * URL - The default mobile browser on the recipient's device opens
+    #     and loads the web page at a URL that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body to use in push notifications that are based on the
+    #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   The sound to play when a recipient receives a push notification
+    #   that's based on the message template. You can use the default
+    #   stream or specify the file name of a sound resource that's bundled
+    #   in your app. On an Android platform, the sound file must reside in
+    #   /res/raw/.
+    #
+    #   For an iOS platform, this value is the key for the name of a sound
+    #   file in your app's main bundle or the Library/Sounds folder in your
+    #   app's data container. If the sound file can't be found or you
+    #   specify default for the value, the system plays the default alert
+    #   sound.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title to use in push notifications that are based on the message
+    #   template. This title appears above the notification message on a
+    #   recipient's device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in a recipient's default mobile browser, if a
+    #   recipient taps a push notification that's based on the message
+    #   template and the value of the Action property is URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DefaultPushNotificationTemplate AWS API Documentation
+    #
+    class DefaultPushNotificationTemplate < Struct.new(
+      :action,
+      :body,
+      :sound,
       :title,
       :url)
       include Aws::Structure
@@ -3244,6 +4653,34 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailTemplateRequest AWS API Documentation
+    #
+    class DeleteEmailTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailTemplateResponse AWS API Documentation
+    #
+    class DeleteEmailTemplateResponse < Struct.new(
+      :message_body)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteEndpointRequest
     #   data as a hash:
     #
@@ -3338,6 +4775,68 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteJourneyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         journey_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteJourneyRequest AWS API Documentation
+    #
+    class DeleteJourneyRequest < Struct.new(
+      :application_id,
+      :journey_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_response
+    #   Provides information about the status, configuration, and other
+    #   settings for a journey.
+    #   @return [Types::JourneyResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteJourneyResponse AWS API Documentation
+    #
+    class DeleteJourneyResponse < Struct.new(
+      :journey_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeletePushTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeletePushTemplateRequest AWS API Documentation
+    #
+    class DeletePushTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeletePushTemplateResponse AWS API Documentation
+    #
+    class DeletePushTemplateResponse < Struct.new(
+      :message_body)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteSegmentRequest
     #   data as a hash:
     #
@@ -3398,6 +4897,34 @@ module Aws::Pinpoint
     #
     class DeleteSmsChannelResponse < Struct.new(
       :sms_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteSmsTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsTemplateRequest AWS API Documentation
+    #
+    class DeleteSmsTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsTemplateResponse AWS API Documentation
+    #
+    class DeleteSmsTemplateResponse < Struct.new(
+      :message_body)
       include Aws::Structure
     end
 
@@ -3494,6 +5021,7 @@ module Aws::Pinpoint
     #           url: "__string",
     #         },
     #         apns_message: {
+    #           apns_push_type: "__string",
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           badge: 1,
     #           body: "__string",
@@ -3648,7 +5176,8 @@ module Aws::Pinpoint
     #   @return [Types::DefaultMessage]
     #
     # @!attribute [rw] default_push_notification_message
-    #   The default push notification message for all push channels.
+    #   The default push notification message for all push notification
+    #   channels.
     #   @return [Types::DefaultPushNotificationMessage]
     #
     # @!attribute [rw] email_message
@@ -3918,6 +5447,153 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies the settings for an email activity in a journey. This type
+    # of activity sends an email message to participants.
+    #
+    # @note When making an API call, you may pass EmailMessageActivity
+    #   data as a hash:
+    #
+    #       {
+    #         message_config: {
+    #           from_address: "__string",
+    #         },
+    #         next_activity: "__string",
+    #         template_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] message_config
+    #   The "From" address to use for the message.
+    #   @return [Types::JourneyEmailMessage]
+    #
+    # @!attribute [rw] next_activity
+    #   The unique identifier for the next activity to perform, after the
+    #   message is sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the email template to use for the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailMessageActivity AWS API Documentation
+    #
+    class EmailMessageActivity < Struct.new(
+      :message_config,
+      :next_activity,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # Specifies the content and settings for a message template that can be
+    # used in messages that are sent through the email channel.
+    #
+    # @note When making an API call, you may pass EmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         html_part: "__string",
+    #         subject: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #         text_part: "__string",
+    #       }
+    #
+    # @!attribute [rw] html_part
+    #   The message body, in HTML format, to use in email messages that are
+    #   based on the message template. We recommend using HTML format for
+    #   email clients that support HTML. You can include links, formatted
+    #   text, and more in an HTML message.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject line, or title, to use in email messages that are based
+    #   on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that defines the tags to
+    #   associate with the message template. Each tag consists of a required
+    #   tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] text_part
+    #   The message body, in text format, to use in email messages that are
+    #   based on the message template. We recommend using text format for
+    #   email clients that don't support HTML and clients that are
+    #   connected to high-latency networks, such as mobile devices.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailTemplateRequest AWS API Documentation
+    #
+    class EmailTemplateRequest < Struct.new(
+      :html_part,
+      :subject,
+      :tags,
+      :text_part)
+      include Aws::Structure
+    end
+
+    # Provides information about the content and settings for a message
+    # template that can be used in messages that are sent through the email
+    # channel.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the message template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] html_part
+    #   The message body, in HTML format, that's used in email messages
+    #   that are based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the message template was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject line, or title, that's used in email messages that are
+    #   based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that identifies the tags
+    #   that are associated with the message template. Each tag consists of
+    #   a required tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of channel that the message template is designed for. For
+    #   an email template, this value is EMAIL.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_part
+    #   The message body, in text format, that's used in email messages
+    #   that are based on the message template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailTemplateResponse AWS API Documentation
+    #
+    class EmailTemplateResponse < Struct.new(
+      :arn,
+      :creation_date,
+      :html_part,
+      :last_modified_date,
+      :subject,
+      :tags,
+      :template_name,
+      :template_type,
+      :text_part)
+      include Aws::Structure
+    end
+
     # Specifies an endpoint to create or update and the settings and
     # attributes to set or change for the endpoint.
     #
@@ -4004,7 +5680,15 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
-    #   Not used.
+    #   Specifies whether to send messages or push notifications to the
+    #   endpoint. Valid values are: ACTIVE, messages are sent to the
+    #   endpoint; and, INACTIVE, messages aren’t sent to the endpoint.
+    #
+    #   Amazon Pinpoint automatically sets this value to ACTIVE when you
+    #   create an endpoint or update an existing endpoint. Amazon Pinpoint
+    #   automatically sets this value to INACTIVE if you update another
+    #   endpoint that has the same address specified by the Address
+    #   property.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4312,8 +5996,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] updated_token
     #   For push notifications that are sent through the GCM channel,
-    #   specifies whether the token was updated as part of delivering the
-    #   message.
+    #   specifies whether the endpoint's device registration token was
+    #   updated as part of delivering the message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointMessageResult AWS API Documentation
@@ -4411,7 +6095,15 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
-    #   Not used.
+    #   Specifies whether to send messages or push notifications to the
+    #   endpoint. Valid values are: ACTIVE, messages are sent to the
+    #   endpoint; and, INACTIVE, messages aren’t sent to the endpoint.
+    #
+    #   Amazon Pinpoint automatically sets this value to ACTIVE when you
+    #   create an endpoint or update an existing endpoint. Amazon Pinpoint
+    #   automatically sets this value to INACTIVE if you update another
+    #   endpoint that has the same address specified by the Address
+    #   property.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -4515,7 +6207,15 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
-    #   Not used.
+    #   Specifies whether messages or push notifications are sent to the
+    #   endpoint. Possible values are: ACTIVE, messages are sent to the
+    #   endpoint; and, INACTIVE, messages aren’t sent to the endpoint.
+    #
+    #   Amazon Pinpoint automatically sets this value to ACTIVE when you
+    #   create an endpoint or update an existing endpoint. Amazon Pinpoint
+    #   automatically sets this value to INACTIVE if you update another
+    #   endpoint that has the same address specified by the Address
+    #   property.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4770,8 +6470,53 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies the conditions to evaluate for an event that applies to an
+    # activity in a journey.
+    #
+    # @note When making an API call, you may pass EventCondition
+    #   data as a hash:
+    #
+    #       {
+    #         dimensions: { # required
+    #           attributes: {
+    #             "__string" => {
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #           },
+    #           event_type: {
+    #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             values: ["__string"], # required
+    #           },
+    #           metrics: {
+    #             "__string" => {
+    #               comparison_operator: "__string", # required
+    #               value: 1.0, # required
+    #             },
+    #           },
+    #         },
+    #         message_activity: "__string",
+    #       }
+    #
+    # @!attribute [rw] dimensions
+    #   The dimensions for the event filter to use for the activity.
+    #   @return [Types::EventDimensions]
+    #
+    # @!attribute [rw] message_activity
+    #   The message identifier (message\_id) for the message to use when
+    #   determining whether message events meet the condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventCondition AWS API Documentation
+    #
+    class EventCondition < Struct.new(
+      :dimensions,
+      :message_activity)
+      include Aws::Structure
+    end
+
     # Specifies the dimensions for an event filter that determines when a
-    # campaign is sent.
+    # campaign is sent or a journey activity is performed.
     #
     # @note When making an API call, you may pass EventDimensions
     #   data as a hash:
@@ -4796,21 +6541,22 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] attributes
-    #   One or more custom attributes that your app reports to Amazon
-    #   Pinpoint. You can use these attributes as selection criteria when
-    #   you create an event filter.
+    #   One or more custom attributes that your application reports to
+    #   Amazon Pinpoint. You can use these attributes as selection criteria
+    #   when you create an event filter.
     #   @return [Hash<String,Types::AttributeDimension>]
     #
     # @!attribute [rw] event_type
-    #   The name of the event that causes the campaign to be sent. This can
-    #   be a standard type of event that Amazon Pinpoint generates, such as
-    #   \_session.start, or a custom event that's specific to your app.
+    #   The name of the event that causes the campaign to be sent or the
+    #   journey activity to be performed. This can be a standard type of
+    #   event that Amazon Pinpoint generates, such as \_email.delivered, or
+    #   a custom event that's specific to your application.
     #   @return [Types::SetDimension]
     #
     # @!attribute [rw] metrics
-    #   One or more custom metrics that your app reports to Amazon Pinpoint.
-    #   You can use these metrics as selection criteria when you create an
-    #   event filter.
+    #   One or more custom metrics that your application reports to Amazon
+    #   Pinpoint. You can use these metrics as selection criteria when you
+    #   create an event filter.
     #   @return [Hash<String,Types::MetricDimension>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventDimensions AWS API Documentation
@@ -5337,8 +7083,8 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] api_key
-    #   The API key, also referred to as a *server key*, that you received
-    #   from Google to communicate with Google services.
+    #   The Web API Key, also referred to as an *API\_KEY* or *server key*,
+    #   that you received from Google to communicate with Google services.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -5368,8 +7114,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] credential
-    #   The API key, also referred to as a *server key*, that you received
-    #   from Google to communicate with Google services.
+    #   The Web API Key, also referred to as an *API\_KEY* or *server key*,
+    #   that you received from Google to communicate with Google services.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -6300,6 +8046,36 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailTemplateRequest AWS API Documentation
+    #
+    class GetEmailTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] email_template_response
+    #   Provides information about the content and settings for a message
+    #   template that can be used in messages that are sent through the
+    #   email channel.
+    #   @return [Types::EmailTemplateResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailTemplateResponse AWS API Documentation
+    #
+    class GetEmailTemplateResponse < Struct.new(
+      :email_template_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetEndpointRequest
     #   data as a hash:
     #
@@ -6546,6 +8322,224 @@ module Aws::Pinpoint
     #
     class GetImportJobsResponse < Struct.new(
       :import_jobs_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetJourneyDateRangeKpiRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         end_time: Time.now,
+    #         journey_id: "__string", # required
+    #         kpi_name: "__string", # required
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #         start_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] journey_id
+    #   @return [String]
+    #
+    # @!attribute [rw] kpi_name
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyDateRangeKpiRequest AWS API Documentation
+    #
+    class GetJourneyDateRangeKpiRequest < Struct.new(
+      :application_id,
+      :end_time,
+      :journey_id,
+      :kpi_name,
+      :next_token,
+      :page_size,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_date_range_kpi_response
+    #   Provides the results of a query that retrieved the data for a
+    #   standard engagement metric that applies to a journey, and provides
+    #   information about that query.
+    #   @return [Types::JourneyDateRangeKpiResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyDateRangeKpiResponse AWS API Documentation
+    #
+    class GetJourneyDateRangeKpiResponse < Struct.new(
+      :journey_date_range_kpi_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetJourneyExecutionActivityMetricsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         journey_activity_id: "__string", # required
+    #         journey_id: "__string", # required
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_activity_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyExecutionActivityMetricsRequest AWS API Documentation
+    #
+    class GetJourneyExecutionActivityMetricsRequest < Struct.new(
+      :application_id,
+      :journey_activity_id,
+      :journey_id,
+      :next_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_execution_activity_metrics_response
+    #   Provides the results of a query that retrieved the data for a
+    #   standard execution metric that applies to a journey activity, and
+    #   provides information about that query.
+    #   @return [Types::JourneyExecutionActivityMetricsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyExecutionActivityMetricsResponse AWS API Documentation
+    #
+    class GetJourneyExecutionActivityMetricsResponse < Struct.new(
+      :journey_execution_activity_metrics_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetJourneyExecutionMetricsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         journey_id: "__string", # required
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyExecutionMetricsRequest AWS API Documentation
+    #
+    class GetJourneyExecutionMetricsRequest < Struct.new(
+      :application_id,
+      :journey_id,
+      :next_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_execution_metrics_response
+    #   Provides the results of a query that retrieved the data for a
+    #   standard execution metric that applies to a journey.
+    #   @return [Types::JourneyExecutionMetricsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyExecutionMetricsResponse AWS API Documentation
+    #
+    class GetJourneyExecutionMetricsResponse < Struct.new(
+      :journey_execution_metrics_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetJourneyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         journey_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyRequest AWS API Documentation
+    #
+    class GetJourneyRequest < Struct.new(
+      :application_id,
+      :journey_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_response
+    #   Provides information about the status, configuration, and other
+    #   settings for a journey.
+    #   @return [Types::JourneyResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyResponse AWS API Documentation
+    #
+    class GetJourneyResponse < Struct.new(
+      :journey_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPushTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetPushTemplateRequest AWS API Documentation
+    #
+    class GetPushTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] push_notification_template_response
+    #   Provides information about the content and settings for a message
+    #   template that can be used in messages that are sent through a push
+    #   notification channel.
+    #   @return [Types::PushNotificationTemplateResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetPushTemplateResponse AWS API Documentation
+    #
+    class GetPushTemplateResponse < Struct.new(
+      :push_notification_template_response)
       include Aws::Structure
     end
 
@@ -6825,6 +8819,36 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetSmsTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplateRequest AWS API Documentation
+    #
+    class GetSmsTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sms_template_response
+    #   Provides information about the content and settings for a message
+    #   template that can be used in text messages that are sent through the
+    #   SMS channel.
+    #   @return [Types::SMSTemplateResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplateResponse AWS API Documentation
+    #
+    class GetSmsTemplateResponse < Struct.new(
+      :sms_template_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetUserEndpointsRequest
     #   data as a hash:
     #
@@ -6885,6 +8909,35 @@ module Aws::Pinpoint
     #
     class GetVoiceChannelResponse < Struct.new(
       :voice_channel_response)
+      include Aws::Structure
+    end
+
+    # Specifies the settings for a holdout activity in a journey. This type
+    # of activity stops a journey for a specified percentage of
+    # participants.
+    #
+    # @note When making an API call, you may pass HoldoutActivity
+    #   data as a hash:
+    #
+    #       {
+    #         next_activity: "__string",
+    #         percentage: 1, # required
+    #       }
+    #
+    # @!attribute [rw] next_activity
+    #   The unique identifier for the next activity to perform, after
+    #   performing the holdout activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] percentage
+    #   The percentage of participants who shouldn't continue the journey.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/HoldoutActivity AWS API Documentation
+    #
+    class HoldoutActivity < Struct.new(
+      :next_activity,
+      :percentage)
       include Aws::Structure
     end
 
@@ -7212,6 +9265,510 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Provides the results of a query that retrieved the data for a standard
+    # engagement metric that applies to a journey, and provides information
+    # about that query.
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier for the application that the metric applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The last date and time of the date range that was used to filter the
+    #   query results, in extended ISO 8601 format. The date range is
+    #   inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] journey_id
+    #   The unique identifier for the journey that the metric applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] kpi_name
+    #   The name of the metric, also referred to as a *key performance
+    #   indicator (KPI)*, that the data was retrieved for. This value
+    #   describes the associated metric and consists of two or more terms,
+    #   which are comprised of lowercase alphanumeric characters, separated
+    #   by a hyphen. For a list of possible values, see the [Amazon Pinpoint
+    #   Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
+    #   @return [String]
+    #
+    # @!attribute [rw] kpi_result
+    #   An array of objects that contains the results of the query. Each
+    #   object contains the value for the metric and metadata about that
+    #   value.
+    #   @return [Types::BaseKpiResult]
+    #
+    # @!attribute [rw] next_token
+    #   The string to use in a subsequent request to get the next page of
+    #   results in a paginated response. This value is null for the Journey
+    #   Engagement Metrics resource because the resource returns all results
+    #   in a single page.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The first date and time of the date range that was used to filter
+    #   the query results, in extended ISO 8601 format. The date range is
+    #   inclusive.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyDateRangeKpiResponse AWS API Documentation
+    #
+    class JourneyDateRangeKpiResponse < Struct.new(
+      :application_id,
+      :end_time,
+      :journey_id,
+      :kpi_name,
+      :kpi_result,
+      :next_token,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # Specifies the "From" address for an email message that's sent to
+    # participants in a journey.
+    #
+    # @note When making an API call, you may pass JourneyEmailMessage
+    #   data as a hash:
+    #
+    #       {
+    #         from_address: "__string",
+    #       }
+    #
+    # @!attribute [rw] from_address
+    #   The verified email address to send the email message from. The
+    #   default address is the FromAddress specified for the email channel
+    #   for the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyEmailMessage AWS API Documentation
+    #
+    class JourneyEmailMessage < Struct.new(
+      :from_address)
+      include Aws::Structure
+    end
+
+    # Provides the results of a query that retrieved the data for a standard
+    # execution metric that applies to a journey activity, and provides
+    # information about that query.
+    #
+    # @!attribute [rw] activity_type
+    #   The type of activity that the metric applies to. Possible values
+    #   are:
+    #
+    #   * CONDITIONAL\_SPLIT - For a yes/no split activity, which is an
+    #     activity that sends participants down one of two paths in a
+    #     journey.
+    #
+    #   * HOLDOUT - For a holdout activity, which is an activity that stops
+    #     a journey for a specified percentage of participants.
+    #
+    #   * MESSAGE - For an email activity, which is an activity that sends
+    #     an email message to participants.
+    #
+    #   * MULTI\_CONDITIONAL\_SPLIT - For a multivariate split activity,
+    #     which is an activity that sends participants down one of as many
+    #     as five paths in a journey.
+    #
+    #   * RANDOM\_SPLIT - For a random split activity, which is an activity
+    #     that sends specified percentages of participants down one of as
+    #     many as five paths in a journey.
+    #
+    #   * WAIT - For a wait activity, which is an activity that waits for a
+    #     certain amount of time or until a specific date and time before
+    #     moving participants to the next activity in a journey.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier for the application that the metric applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_activity_id
+    #   The unique identifier for the activity that the metric applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   The unique identifier for the journey that the metric applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_evaluated_time
+    #   The date and time, in ISO 8601 format, when Amazon Pinpoint last
+    #   evaluated the execution status of the activity and updated the data
+    #   for the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   A JSON object that contains the results of the query. The results
+    #   vary depending on the type of activity (ActivityType). For
+    #   information about the structure and contents of the results, see the
+    #   [Amazon Pinpoint Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyExecutionActivityMetricsResponse AWS API Documentation
+    #
+    class JourneyExecutionActivityMetricsResponse < Struct.new(
+      :activity_type,
+      :application_id,
+      :journey_activity_id,
+      :journey_id,
+      :last_evaluated_time,
+      :metrics)
+      include Aws::Structure
+    end
+
+    # Provides the results of a query that retrieved the data for a standard
+    # execution metric that applies to a journey.
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier for the application that the metric applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   The unique identifier for the journey that the metric applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_evaluated_time
+    #   The date and time, in ISO 8601 format, when Amazon Pinpoint last
+    #   evaluated the journey and updated the data for the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   A JSON object that contains the results of the query. For
+    #   information about the structure and contents of the results, see the
+    #   [Amazon Pinpoint Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyExecutionMetricsResponse AWS API Documentation
+    #
+    class JourneyExecutionMetricsResponse < Struct.new(
+      :application_id,
+      :journey_id,
+      :last_evaluated_time,
+      :metrics)
+      include Aws::Structure
+    end
+
+    # Specifies limits on the messages that a journey can send and the
+    # number of times participants can enter a journey.
+    #
+    # @note When making an API call, you may pass JourneyLimits
+    #   data as a hash:
+    #
+    #       {
+    #         daily_cap: 1,
+    #         endpoint_reentry_cap: 1,
+    #         messages_per_second: 1,
+    #       }
+    #
+    # @!attribute [rw] daily_cap
+    #   The maximum number of messages that the journey can send to a single
+    #   participant during a 24-hour period. The maximum value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] endpoint_reentry_cap
+    #   The maximum number of times that a participant can enter the
+    #   journey. The maximum value is 100. To allow participants to enter
+    #   the journey an unlimited number of times, set this value to 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] messages_per_second
+    #   The maximum number of messages that the journey can send each
+    #   second.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyLimits AWS API Documentation
+    #
+    class JourneyLimits < Struct.new(
+      :daily_cap,
+      :endpoint_reentry_cap,
+      :messages_per_second)
+      include Aws::Structure
+    end
+
+    # Provides information about the status, configuration, and other
+    # settings for a journey.
+    #
+    # @!attribute [rw] activities
+    #   The configuration and other settings for the activities that
+    #   comprise the journey.
+    #   @return [Hash<String,Types::Activity>]
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier for the application that the journey applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date, in ISO 8601 format, when the journey was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the journey.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date, in ISO 8601 format, when the journey was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] limits
+    #   The messaging and entry limits for the journey.
+    #   @return [Types::JourneyLimits]
+    #
+    # @!attribute [rw] local_time
+    #   Specifies whether the journey's scheduled start and end times use
+    #   each participant's local time. If this value is true, the schedule
+    #   uses each participant's local time.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the journey.
+    #   @return [String]
+    #
+    # @!attribute [rw] quiet_time
+    #   The quiet time settings for the journey. Quiet time is a specific
+    #   time range when a journey doesn't send messages to participants, if
+    #   all the following conditions are met:
+    #
+    #   * The EndpointDemographic.Timezone property of the endpoint for the
+    #     participant is set to a valid value.
+    #
+    #   * The current time in the participant's time zone is later than or
+    #     equal to the time specified by the QuietTime.Start property for
+    #     the journey.
+    #
+    #   * The current time in the participant's time zone is earlier than
+    #     or equal to the time specified by the QuietTime.End property for
+    #     the journey.
+    #
+    #   If any of the preceding conditions isn't met, the participant will
+    #   receive messages from the journey, even if quiet time is enabled.
+    #   @return [Types::QuietTime]
+    #
+    # @!attribute [rw] refresh_frequency
+    #   The frequency with which Amazon Pinpoint evaluates segment and event
+    #   data for the journey, as a duration in ISO 8601 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule settings for the journey.
+    #   @return [Types::JourneySchedule]
+    #
+    # @!attribute [rw] start_activity
+    #   The unique identifier for the first activity in the journey.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_condition
+    #   The segment that defines which users are participants in the
+    #   journey.
+    #   @return [Types::StartCondition]
+    #
+    # @!attribute [rw] state
+    #   The current status of the journey. Possible values are:
+    #
+    #   * DRAFT - The journey is being developed and hasn't been published
+    #     yet.
+    #
+    #   * ACTIVE - The journey has been developed and published. Depending
+    #     on the journey's schedule, the journey may currently be running
+    #     or scheduled to start running at a later time. If a journey's
+    #     status is ACTIVE, you can't add, change, or remove activities
+    #     from it.
+    #
+    #   * COMPLETED - The journey has been published and has finished
+    #     running. All participants have entered the journey and no
+    #     participants are waiting to complete the journey or any activities
+    #     in the journey.
+    #
+    #   * CANCELLED - The journey has been stopped. If a journey's status
+    #     is CANCELLED, you can't add, change, or remove activities or
+    #     segment settings from the journey.
+    #
+    #   * CLOSED - The journey has been published and has started running.
+    #     It may have also passed its scheduled end time, or passed its
+    #     scheduled start time and a refresh frequency hasn't been
+    #     specified for it. If a journey's status is CLOSED, you can't add
+    #     participants to it, and no existing participants can enter the
+    #     journey for the first time. However, any existing participants who
+    #     are currently waiting to start an activity may resume the journey.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that identifies the tags
+    #   that are associated with the journey. Each tag consists of a
+    #   required tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyResponse AWS API Documentation
+    #
+    class JourneyResponse < Struct.new(
+      :activities,
+      :application_id,
+      :creation_date,
+      :id,
+      :last_modified_date,
+      :limits,
+      :local_time,
+      :name,
+      :quiet_time,
+      :refresh_frequency,
+      :schedule,
+      :start_activity,
+      :start_condition,
+      :state,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Specifies the schedule settings for a journey.
+    #
+    # @note When making an API call, you may pass JourneySchedule
+    #   data as a hash:
+    #
+    #       {
+    #         end_time: Time.now,
+    #         start_time: Time.now,
+    #         timezone: "__string",
+    #       }
+    #
+    # @!attribute [rw] end_time
+    #   The scheduled time, in ISO 8601 format, when the journey ended or
+    #   will end.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The scheduled time, in ISO 8601 format, when the journey began or
+    #   will begin.
+    #   @return [Time]
+    #
+    # @!attribute [rw] timezone
+    #   The starting UTC offset for the journey schedule, if the value of
+    #   the journey's LocalTime property is true. Valid values are: UTC,
+    #   UTC+01, UTC+02, UTC+03, UTC+03:30, UTC+04, UTC+04:30, UTC+05,
+    #   UTC+05:30, UTC+05:45, UTC+06, UTC+06:30, UTC+07, UTC+08, UTC+08:45,
+    #   UTC+09, UTC+09:30, UTC+10, UTC+10:30, UTC+11, UTC+12, UTC+12:45,
+    #   UTC+13, UTC+13:45, UTC-02, UTC-02:30, UTC-03, UTC-03:30, UTC-04,
+    #   UTC-05, UTC-06, UTC-07, UTC-08, UTC-09, UTC-09:30, UTC-10, and
+    #   UTC-11.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneySchedule AWS API Documentation
+    #
+    class JourneySchedule < Struct.new(
+      :end_time,
+      :start_time,
+      :timezone)
+      include Aws::Structure
+    end
+
+    # Changes the status of a journey.
+    #
+    # @note When making an API call, you may pass JourneyStateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #       }
+    #
+    # @!attribute [rw] state
+    #   The status of the journey. Currently, the only supported value is
+    #   CANCELLED.
+    #
+    #   If you cancel a journey, Amazon Pinpoint continues to perform
+    #   activities that are currently in progress, until those activities
+    #   are complete. Amazon Pinpoint also continues to collect and
+    #   aggregate analytics data for those activities, until they are
+    #   complete, and any activities that were complete when you cancelled
+    #   the journey.
+    #
+    #   After you cancel a journey, you can't add, change, or remove any
+    #   activities from the journey. In addition, Amazon Pinpoint stops
+    #   evaluating the journey and doesn't perform any activities that
+    #   haven't started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyStateRequest AWS API Documentation
+    #
+    class JourneyStateRequest < Struct.new(
+      :state)
+      include Aws::Structure
+    end
+
+    # Provides information about the status, configuration, and other
+    # settings for all the journeys that are associated with an application.
+    #
+    # @!attribute [rw] item
+    #   An array of responses, one for each journey that's associated with
+    #   the application.
+    #   @return [Array<Types::JourneyResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   The string to use in a subsequent request to get the next page of
+    #   results in a paginated response. This value is null if there are no
+    #   additional pages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneysResponse AWS API Documentation
+    #
+    class JourneysResponse < Struct.new(
+      :item,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListJourneysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         page_size: "__string",
+    #         token: "__string",
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListJourneysRequest AWS API Documentation
+    #
+    class ListJourneysRequest < Struct.new(
+      :application_id,
+      :page_size,
+      :token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journeys_response
+    #   Provides information about the status, configuration, and other
+    #   settings for all the journeys that are associated with an
+    #   application.
+    #   @return [Types::JourneysResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListJourneysResponse AWS API Documentation
+    #
+    class ListJourneysResponse < Struct.new(
+      :journeys_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -7231,13 +9788,57 @@ module Aws::Pinpoint
 
     # @!attribute [rw] tags_model
     #   Specifies the tags (keys and values) for an application, campaign,
-    #   or segment.
+    #   journey, message template, or segment.
     #   @return [Types::TagsModel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags_model)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #         prefix: "__string",
+    #         template_type: "__string",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplatesRequest AWS API Documentation
+    #
+    class ListTemplatesRequest < Struct.new(
+      :next_token,
+      :page_size,
+      :prefix,
+      :template_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] templates_response
+    #   Provides information about all the message templates that are
+    #   associated with your Amazon Pinpoint account.
+    #   @return [Types::TemplatesResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplatesResponse AWS API Documentation
+    #
+    class ListTemplatesResponse < Struct.new(
+      :templates_response)
       include Aws::Structure
     end
 
@@ -7576,6 +10177,7 @@ module Aws::Pinpoint
     #             url: "__string",
     #           },
     #           apns_message: {
+    #             apns_push_type: "__string",
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             badge: 1,
     #             body: "__string",
@@ -7706,6 +10308,17 @@ module Aws::Pinpoint
     #             voice_id: "__string",
     #           },
     #         },
+    #         template_configuration: {
+    #           email_template: {
+    #             name: "__string",
+    #           },
+    #           push_template: {
+    #             name: "__string",
+    #           },
+    #           sms_template: {
+    #             name: "__string",
+    #           },
+    #         },
     #         trace_id: "__string",
     #       }
     #
@@ -7738,6 +10351,10 @@ module Aws::Pinpoint
     #   the message.
     #   @return [Types::DirectMessageConfiguration]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template to use for the message.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] trace_id
     #   The unique identifier for tracing the message. This identifier is
     #   visible to message recipients.
@@ -7750,6 +10367,7 @@ module Aws::Pinpoint
       :context,
       :endpoints,
       :message_configuration,
+      :template_configuration,
       :trace_id)
       include Aws::Structure
     end
@@ -7836,8 +10454,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] updated_token
     #   For push notifications that are sent through the GCM channel,
-    #   specifies whether the token was updated as part of delivering the
-    #   message.
+    #   specifies whether the endpoint's device registration token was
+    #   updated as part of delivering the message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageResult AWS API Documentation
@@ -7894,6 +10512,257 @@ module Aws::Pinpoint
     class MetricDimension < Struct.new(
       :comparison_operator,
       :value)
+      include Aws::Structure
+    end
+
+    # Specifies a condition to evaluate for an activity path in a journey.
+    #
+    # @note When making an API call, you may pass MultiConditionalBranch
+    #   data as a hash:
+    #
+    #       {
+    #         condition: {
+    #           event_condition: {
+    #             dimensions: { # required
+    #               attributes: {
+    #                 "__string" => {
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #               },
+    #               event_type: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #               metrics: {
+    #                 "__string" => {
+    #                   comparison_operator: "__string", # required
+    #                   value: 1.0, # required
+    #                 },
+    #               },
+    #             },
+    #             message_activity: "__string",
+    #           },
+    #           segment_condition: {
+    #             segment_id: "__string", # required
+    #           },
+    #           segment_dimensions: {
+    #             attributes: {
+    #               "__string" => {
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #             },
+    #             behavior: {
+    #               recency: {
+    #                 duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                 recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #               },
+    #             },
+    #             demographic: {
+    #               app_version: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #               channel: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #               device_type: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #               make: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #               model: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #               platform: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #             },
+    #             location: {
+    #               country: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #               gps_point: {
+    #                 coordinates: { # required
+    #                   latitude: 1.0, # required
+    #                   longitude: 1.0, # required
+    #                 },
+    #                 range_in_kilometers: 1.0,
+    #               },
+    #             },
+    #             metrics: {
+    #               "__string" => {
+    #                 comparison_operator: "__string", # required
+    #                 value: 1.0, # required
+    #               },
+    #             },
+    #             user_attributes: {
+    #               "__string" => {
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #             },
+    #           },
+    #         },
+    #         next_activity: "__string",
+    #       }
+    #
+    # @!attribute [rw] condition
+    #   The condition to evaluate for the activity path.
+    #   @return [Types::SimpleCondition]
+    #
+    # @!attribute [rw] next_activity
+    #   The unique identifier for the next activity to perform, after
+    #   completing the activity for the path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MultiConditionalBranch AWS API Documentation
+    #
+    class MultiConditionalBranch < Struct.new(
+      :condition,
+      :next_activity)
+      include Aws::Structure
+    end
+
+    # Specifies the settings for a multivariate split activity in a journey.
+    # This type of activity sends participants down one of as many as five
+    # paths in a journey, based on conditions that you specify.
+    #
+    # @note When making an API call, you may pass MultiConditionalSplitActivity
+    #   data as a hash:
+    #
+    #       {
+    #         branches: [
+    #           {
+    #             condition: {
+    #               event_condition: {
+    #                 dimensions: { # required
+    #                   attributes: {
+    #                     "__string" => {
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                   },
+    #                   event_type: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   metrics: {
+    #                     "__string" => {
+    #                       comparison_operator: "__string", # required
+    #                       value: 1.0, # required
+    #                     },
+    #                   },
+    #                 },
+    #                 message_activity: "__string",
+    #               },
+    #               segment_condition: {
+    #                 segment_id: "__string", # required
+    #               },
+    #               segment_dimensions: {
+    #                 attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                 },
+    #                 behavior: {
+    #                   recency: {
+    #                     duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                     recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                   },
+    #                 },
+    #                 demographic: {
+    #                   app_version: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   channel: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   device_type: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   make: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   model: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   platform: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                 },
+    #                 location: {
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   gps_point: {
+    #                     coordinates: { # required
+    #                       latitude: 1.0, # required
+    #                       longitude: 1.0, # required
+    #                     },
+    #                     range_in_kilometers: 1.0,
+    #                   },
+    #                 },
+    #                 metrics: {
+    #                   "__string" => {
+    #                     comparison_operator: "__string", # required
+    #                     value: 1.0, # required
+    #                   },
+    #                 },
+    #                 user_attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #             next_activity: "__string",
+    #           },
+    #         ],
+    #         default_activity: "__string",
+    #         evaluation_wait_time: {
+    #           wait_for: "__string",
+    #           wait_until: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] branches
+    #   The paths for the activity, including the conditions for entering
+    #   each path and the activity to perform for each path.
+    #   @return [Array<Types::MultiConditionalBranch>]
+    #
+    # @!attribute [rw] default_activity
+    #   The activity to perform by default for any path in the activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_wait_time
+    #   The amount of time to wait or the date and time when Amazon Pinpoint
+    #   determines whether the conditions are met.
+    #   @return [Types::WaitTime]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MultiConditionalSplitActivity AWS API Documentation
+    #
+    class MultiConditionalSplitActivity < Struct.new(
+      :branches,
+      :default_activity,
+      :evaluation_wait_time)
       include Aws::Structure
     end
 
@@ -8140,9 +11009,15 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
-    #   The status of the update request for the endpoint. Possible values
-    #   are: INACTIVE, the update failed; and, ACTIVE, the endpoint was
-    #   updated successfully.
+    #   Specifies whether to send messages or push notifications to the
+    #   endpoint. Valid values are: ACTIVE, messages are sent to the
+    #   endpoint; and, INACTIVE, messages aren’t sent to the endpoint.
+    #
+    #   Amazon Pinpoint automatically sets this value to ACTIVE when you
+    #   create an endpoint or update an existing endpoint. Amazon Pinpoint
+    #   automatically sets this value to INACTIVE if you update another
+    #   endpoint that has the same address specified by the Address
+    #   property.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -8187,6 +11062,193 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user)
+      include Aws::Structure
+    end
+
+    # Specifies the content and settings for a message template that can be
+    # used in messages that are sent through a push notification channel.
+    #
+    # @note When making an API call, you may pass PushNotificationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         adm: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_url: "__string",
+    #           small_image_icon_url: "__string",
+    #           sound: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         apns: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           media_url: "__string",
+    #           sound: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         baidu: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_url: "__string",
+    #           small_image_icon_url: "__string",
+    #           sound: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         default: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           sound: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         gcm: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_url: "__string",
+    #           small_image_icon_url: "__string",
+    #           sound: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] adm
+    #   The message template to use for the ADM (Amazon Device Messaging)
+    #   channel. This message template overrides the default template for
+    #   push notification channels (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] apns
+    #   The message template to use for the APNs (Apple Push Notification
+    #   service) channel. This message template overrides the default
+    #   template for push notification channels
+    #   (DefaultPushNotificationTemplate).
+    #   @return [Types::APNSPushNotificationTemplate]
+    #
+    # @!attribute [rw] baidu
+    #   The message template to use for the Baidu (Baidu Cloud Push)
+    #   channel. This message template overrides the default template for
+    #   push notification channels (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] default
+    #   The default message template to use for push notification channels.
+    #   @return [Types::DefaultPushNotificationTemplate]
+    #
+    # @!attribute [rw] gcm
+    #   The message template to use for the GCM channel, which is used to
+    #   send notifications through the Firebase Cloud Messaging (FCM),
+    #   formerly Google Cloud Messaging (GCM), service. This message
+    #   template overrides the default template for push notification
+    #   channels (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that defines the tags to
+    #   associate with the message template. Each tag consists of a required
+    #   tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PushNotificationTemplateRequest AWS API Documentation
+    #
+    class PushNotificationTemplateRequest < Struct.new(
+      :adm,
+      :apns,
+      :baidu,
+      :default,
+      :gcm,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Provides information about the content and settings for a message
+    # template that can be used in messages that are sent through a push
+    # notification channel.
+    #
+    # @!attribute [rw] adm
+    #   The message template that's used for the ADM (Amazon Device
+    #   Messaging) channel. This message template overrides the default
+    #   template for push notification channels
+    #   (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] apns
+    #   The message template that's used for the APNs (Apple Push
+    #   Notification service) channel. This message template overrides the
+    #   default template for push notification channels
+    #   (DefaultPushNotificationTemplate).
+    #   @return [Types::APNSPushNotificationTemplate]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] baidu
+    #   The message template that's used for the Baidu (Baidu Cloud Push)
+    #   channel. This message template overrides the default template for
+    #   push notification channels (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the message template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] default
+    #   The default message template that's used for push notification
+    #   channels.
+    #   @return [Types::DefaultPushNotificationTemplate]
+    #
+    # @!attribute [rw] gcm
+    #   The message template that's used for the GCM channel, which is used
+    #   to send notifications through the Firebase Cloud Messaging (FCM),
+    #   formerly Google Cloud Messaging (GCM), service. This message
+    #   template overrides the default template for push notification
+    #   channels (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the message template was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that identifies the tags
+    #   that are associated with the message template. Each tag consists of
+    #   a required tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of channel that the message template is designed for. For a
+    #   push notification template, this value is PUSH.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PushNotificationTemplateResponse AWS API Documentation
+    #
+    class PushNotificationTemplateResponse < Struct.new(
+      :adm,
+      :apns,
+      :arn,
+      :baidu,
+      :creation_date,
+      :default,
+      :gcm,
+      :last_modified_date,
+      :tags,
+      :template_name,
+      :template_type)
       include Aws::Structure
     end
 
@@ -8364,6 +11426,63 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies the settings for a random split activity in a journey. This
+    # type of activity randomly sends specified percentages of participants
+    # down one of as many as five paths in a journey, based on conditions
+    # that you specify.
+    #
+    # @note When making an API call, you may pass RandomSplitActivity
+    #   data as a hash:
+    #
+    #       {
+    #         branches: [
+    #           {
+    #             next_activity: "__string",
+    #             percentage: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] branches
+    #   The paths for the activity, including the percentage of participants
+    #   to enter each path and the activity to perform for each path.
+    #   @return [Array<Types::RandomSplitEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RandomSplitActivity AWS API Documentation
+    #
+    class RandomSplitActivity < Struct.new(
+      :branches)
+      include Aws::Structure
+    end
+
+    # Specifies the settings for a path in a random split activity in a
+    # journey.
+    #
+    # @note When making an API call, you may pass RandomSplitEntry
+    #   data as a hash:
+    #
+    #       {
+    #         next_activity: "__string",
+    #         percentage: 1,
+    #       }
+    #
+    # @!attribute [rw] next_activity
+    #   The unique identifier for the next activity to perform, after
+    #   completing the activity for the path.
+    #   @return [String]
+    #
+    # @!attribute [rw] percentage
+    #   The percentage of participants to send down the activity path.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RandomSplitEntry AWS API Documentation
+    #
+    class RandomSplitEntry < Struct.new(
+      :next_activity,
+      :percentage)
+      include Aws::Structure
+    end
+
     # Specifies the contents of an email message, represented as a raw MIME
     # message.
     #
@@ -8463,7 +11582,7 @@ module Aws::Pinpoint
     end
 
     # Provides the results of a query that retrieved the data for a standard
-    # metric that applies to an application or campaign.
+    # metric that applies to an application, campaign, or journey.
     #
     # @!attribute [rw] grouped_bys
     #   An array of objects that defines the field and field values that
@@ -8474,7 +11593,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] values
     #   An array of objects that provides pre-aggregated values for a
-    #   standard metric that applies to an application or campaign.
+    #   standard metric that applies to an application, campaign, or
+    #   journey.
     #   @return [Array<Types::ResultRowValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ResultRow AWS API Documentation
@@ -8487,11 +11607,11 @@ module Aws::Pinpoint
 
     # Provides a single value and metadata about that value as part of an
     # array of query results for a standard metric that applies to an
-    # application or campaign.
+    # application, campaign, or journey.
     #
     # @!attribute [rw] key
-    #   The name of the field that Amazon Pinpoint uses to store the value
-    #   specified by the Value property.
+    #   The friendly name of the metric whose value is specified by the
+    #   Value property.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -8672,11 +11792,11 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] origination_number
-    #   The number that the SMS message originates from. This should be one
-    #   of the dedicated long codes or short codes that you requested from
-    #   AWS Support and is assigned to your AWS account. If you don't
-    #   specify a long or short code, Amazon Pinpoint assigns a random long
-    #   code to the SMS message.
+    #   The number to send the SMS message from. This value should be one of
+    #   the dedicated long or short codes that's assigned to your AWS
+    #   account. If you don't specify a long or short code, Amazon Pinpoint
+    #   assigns a random long code to the SMS message and sends the message
+    #   from that code.
     #   @return [String]
     #
     # @!attribute [rw] sender_id
@@ -8699,6 +11819,87 @@ module Aws::Pinpoint
       :origination_number,
       :sender_id,
       :substitutions)
+      include Aws::Structure
+    end
+
+    # Specifies the content and settings for a message template that can be
+    # used in text messages that are sent through the SMS channel.
+    #
+    # @note When making an API call, you may pass SMSTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         body: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] body
+    #   The message body to use in text messages that are based on the
+    #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that defines the tags to
+    #   associate with the message template. Each tag consists of a required
+    #   tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSTemplateRequest AWS API Documentation
+    #
+    class SMSTemplateRequest < Struct.new(
+      :body,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Provides information about the content and settings for a message
+    # template that can be used in text messages that are sent through the
+    # SMS channel.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body that's used in text messages that are based on the
+    #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the message template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the message template was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that identifies the tags
+    #   that are associated with the message template. Each tag consists of
+    #   a required tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of channel that the message template is designed for. For
+    #   an SMS template, this value is SMS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSTemplateResponse AWS API Documentation
+    #
+    class SMSTemplateResponse < Struct.new(
+      :arn,
+      :body,
+      :creation_date,
+      :last_modified_date,
+      :tags,
+      :template_name,
+      :template_type)
       include Aws::Structure
     end
 
@@ -8741,7 +11942,8 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] end_time
-    #   The scheduled time, in ISO 8601 format, for the campaign to end.
+    #   The scheduled time, in ISO 8601 format, when the campaign ended or
+    #   will end.
     #   @return [String]
     #
     # @!attribute [rw] event_filter
@@ -8781,7 +11983,8 @@ module Aws::Pinpoint
     #   @return [Types::QuietTime]
     #
     # @!attribute [rw] start_time
-    #   The scheduled time, in ISO 8601 format, for the campaign to begin.
+    #   The scheduled time, in ISO 8601 format, when the campaign began or
+    #   will begin.
     #   @return [String]
     #
     # @!attribute [rw] timezone
@@ -8828,6 +12031,27 @@ module Aws::Pinpoint
     #
     class SegmentBehaviors < Struct.new(
       :recency)
+      include Aws::Structure
+    end
+
+    # Specifies a segment to associate with an activity in a journey.
+    #
+    # @note When making an API call, you may pass SegmentCondition
+    #   data as a hash:
+    #
+    #       {
+    #         segment_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] segment_id
+    #   The unique identifier for the segment to associate with the
+    #   activity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentCondition AWS API Documentation
+    #
+    class SegmentCondition < Struct.new(
+      :segment_id)
       include Aws::Structure
     end
 
@@ -9527,6 +12751,7 @@ module Aws::Pinpoint
     #               url: "__string",
     #             },
     #             apns_message: {
+    #               apns_push_type: "__string",
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               badge: 1,
     #               body: "__string",
@@ -9657,6 +12882,17 @@ module Aws::Pinpoint
     #               voice_id: "__string",
     #             },
     #           },
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           trace_id: "__string",
     #         },
     #       }
@@ -9723,6 +12959,7 @@ module Aws::Pinpoint
     #             url: "__string",
     #           },
     #           apns_message: {
+    #             apns_push_type: "__string",
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             badge: 1,
     #             body: "__string",
@@ -9853,6 +13090,17 @@ module Aws::Pinpoint
     #             voice_id: "__string",
     #           },
     #         },
+    #         template_configuration: {
+    #           email_template: {
+    #             name: "__string",
+    #           },
+    #           push_template: {
+    #             name: "__string",
+    #           },
+    #           sms_template: {
+    #             name: "__string",
+    #           },
+    #         },
     #         trace_id: "__string",
     #         users: { # required
     #           "__string" => {
@@ -9882,6 +13130,10 @@ module Aws::Pinpoint
     #   messages that you defined for specific channels.
     #   @return [Types::DirectMessageConfiguration]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template to use for the message.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] trace_id
     #   The unique identifier for tracing the message. This identifier is
     #   visible to message recipients.
@@ -9899,6 +13151,7 @@ module Aws::Pinpoint
     class SendUsersMessageRequest < Struct.new(
       :context,
       :message_configuration,
+      :template_configuration,
       :trace_id,
       :users)
       include Aws::Structure
@@ -9965,6 +13218,7 @@ module Aws::Pinpoint
     #               url: "__string",
     #             },
     #             apns_message: {
+    #               apns_push_type: "__string",
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               badge: 1,
     #               body: "__string",
@@ -10095,6 +13349,17 @@ module Aws::Pinpoint
     #               voice_id: "__string",
     #             },
     #           },
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           trace_id: "__string",
     #           users: { # required
     #             "__string" => {
@@ -10209,7 +13474,127 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the content of an email message, composed of a subject, a
+    # Specifies a condition to evaluate for an activity in a journey.
+    #
+    # @note When making an API call, you may pass SimpleCondition
+    #   data as a hash:
+    #
+    #       {
+    #         event_condition: {
+    #           dimensions: { # required
+    #             attributes: {
+    #               "__string" => {
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #             },
+    #             event_type: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #             metrics: {
+    #               "__string" => {
+    #                 comparison_operator: "__string", # required
+    #                 value: 1.0, # required
+    #               },
+    #             },
+    #           },
+    #           message_activity: "__string",
+    #         },
+    #         segment_condition: {
+    #           segment_id: "__string", # required
+    #         },
+    #         segment_dimensions: {
+    #           attributes: {
+    #             "__string" => {
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #           },
+    #           behavior: {
+    #             recency: {
+    #               duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #               recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #             },
+    #           },
+    #           demographic: {
+    #             app_version: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #             channel: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #             device_type: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #             make: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #             model: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #             platform: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #           },
+    #           location: {
+    #             country: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #             gps_point: {
+    #               coordinates: { # required
+    #                 latitude: 1.0, # required
+    #                 longitude: 1.0, # required
+    #               },
+    #               range_in_kilometers: 1.0,
+    #             },
+    #           },
+    #           metrics: {
+    #             "__string" => {
+    #               comparison_operator: "__string", # required
+    #               value: 1.0, # required
+    #             },
+    #           },
+    #           user_attributes: {
+    #             "__string" => {
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] event_condition
+    #   The dimension settings for the event that's associated with the
+    #   activity.
+    #   @return [Types::EventCondition]
+    #
+    # @!attribute [rw] segment_condition
+    #   The segment that's associated with the activity.
+    #   @return [Types::SegmentCondition]
+    #
+    # @!attribute [rw] segment_dimensions
+    #   The dimension settings for the segment that's associated with the
+    #   activity.
+    #   @return [Types::SegmentDimensions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SimpleCondition AWS API Documentation
+    #
+    class SimpleCondition < Struct.new(
+      :event_condition,
+      :segment_condition,
+      :segment_dimensions)
+      include Aws::Structure
+    end
+
+    # Specifies the contents of an email message, composed of a subject, a
     # text part, and an HTML part.
     #
     # @note When making an API call, you may pass SimpleEmail
@@ -10282,6 +13667,38 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies the conditions for the first activity in a journey. This
+    # activity and its conditions determine which users are participants in
+    # a journey.
+    #
+    # @note When making an API call, you may pass StartCondition
+    #   data as a hash:
+    #
+    #       {
+    #         description: "__string",
+    #         segment_start_condition: {
+    #           segment_id: "__string", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The custom description of the condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_start_condition
+    #   The segment that's associated with the first activity in the
+    #   journey. This segment determines which users are participants in the
+    #   journey.
+    #   @return [Types::SegmentCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/StartCondition AWS API Documentation
+    #
+    class StartCondition < Struct.new(
+      :description,
+      :segment_start_condition)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
@@ -10299,7 +13716,7 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] tags_model
     #   Specifies the tags (keys and values) for an application, campaign,
-    #   or segment.
+    #   journey, message template, or segment.
     #   @return [Types::TagsModel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagResourceRequest AWS API Documentation
@@ -10310,8 +13727,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the tags (keys and values) for an application, campaign, or
-    # segment.
+    # Specifies the tags (keys and values) for an application, campaign,
+    # journey, message template, or segment.
     #
     # @note When making an API call, you may pass TagsModel
     #   data as a hash:
@@ -10324,8 +13741,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that defines the tags for
-    #   an application, campaign, or segment. A project, campaign, or
-    #   segment can have a maximum of 50 tags.
+    #   an application, campaign, journey, message template, or segment.
+    #   Each of these resources can have a maximum of 50 tags.
     #
     #   Each tag consists of a required tag key and an associated tag value.
     #   The maximum length of a tag key is 128 characters. The maximum
@@ -10336,6 +13753,130 @@ module Aws::Pinpoint
     #
     class TagsModel < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # Specifies the name of the message template to use for the message.
+    #
+    # @note When making an API call, you may pass Template
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the message template to use for the message. If
+    #   specified, this value must match the name of an existing message
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Template AWS API Documentation
+    #
+    class Template < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # Specifies the message template for each type of channel.
+    #
+    # @note When making an API call, you may pass TemplateConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         email_template: {
+    #           name: "__string",
+    #         },
+    #         push_template: {
+    #           name: "__string",
+    #         },
+    #         sms_template: {
+    #           name: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] email_template
+    #   The email template to use for the message.
+    #   @return [Types::Template]
+    #
+    # @!attribute [rw] push_template
+    #   The push notification template to use for the message.
+    #   @return [Types::Template]
+    #
+    # @!attribute [rw] sms_template
+    #   The SMS template to use for the message.
+    #   @return [Types::Template]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateConfiguration AWS API Documentation
+    #
+    class TemplateConfiguration < Struct.new(
+      :email_template,
+      :push_template,
+      :sms_template)
+      include Aws::Structure
+    end
+
+    # Provides information about a message template that's associated with
+    # your Amazon Pinpoint account.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the message template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the message template was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that identifies the tags
+    #   that are associated with the message template. Each tag consists of
+    #   a required tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of channel that the message template is designed for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateResponse AWS API Documentation
+    #
+    class TemplateResponse < Struct.new(
+      :arn,
+      :creation_date,
+      :last_modified_date,
+      :tags,
+      :template_name,
+      :template_type)
+      include Aws::Structure
+    end
+
+    # Provides information about all the message templates that are
+    # associated with your Amazon Pinpoint account.
+    #
+    # @!attribute [rw] item
+    #   An array of responses, one for each message template that's
+    #   associated with your Amazon Pinpoint account and meets any filter
+    #   criteria that you specified in the request.
+    #   @return [Array<Types::TemplateResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   The string to use in a subsequent request to get the next page of
+    #   results in a paginated response. This value is null if there are no
+    #   additional pages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplatesResponse AWS API Documentation
+    #
+    class TemplatesResponse < Struct.new(
+      :item,
+      :next_token)
       include Aws::Structure
     end
 
@@ -10376,8 +13917,12 @@ module Aws::Pinpoint
     #   @return [Integer]
     #
     # @!attribute [rw] state
-    #   The status of the treatment.
+    #   The current status of the treatment.
     #   @return [Types::CampaignState]
+    #
+    # @!attribute [rw] template_configuration
+    #   The message template to use for the treatment.
+    #   @return [Types::TemplateConfiguration]
     #
     # @!attribute [rw] treatment_description
     #   The custom description of the treatment.
@@ -10396,6 +13941,7 @@ module Aws::Pinpoint
       :schedule,
       :size_percent,
       :state,
+      :template_configuration,
       :treatment_description,
       :treatment_name)
       include Aws::Structure
@@ -10887,6 +14433,17 @@ module Aws::Pinpoint
     #                 timezone: "__string",
     #               },
     #               size_percent: 1, # required
+    #               template_configuration: {
+    #                 email_template: {
+    #                   name: "__string",
+    #                 },
+    #                 push_template: {
+    #                   name: "__string",
+    #                 },
+    #                 sms_template: {
+    #                   name: "__string",
+    #                 },
+    #               },
     #               treatment_description: "__string",
     #               treatment_name: "__string",
     #             },
@@ -11026,6 +14583,17 @@ module Aws::Pinpoint
     #           tags: {
     #             "__string" => "__string",
     #           },
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -11101,6 +14669,48 @@ module Aws::Pinpoint
     #
     class UpdateEmailChannelResponse < Struct.new(
       :email_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_template_request: { # required
+    #           html_part: "__string",
+    #           subject: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #           text_part: "__string",
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] email_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in messages that are sent through the email channel.
+    #   @return [Types::EmailTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailTemplateRequest AWS API Documentation
+    #
+    class UpdateEmailTemplateRequest < Struct.new(
+      :email_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailTemplateResponse AWS API Documentation
+    #
+    class UpdateEmailTemplateResponse < Struct.new(
+      :message_body)
       include Aws::Structure
     end
 
@@ -11297,6 +14907,439 @@ module Aws::Pinpoint
     #
     class UpdateGcmChannelResponse < Struct.new(
       :gcm_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateJourneyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         journey_id: "__string", # required
+    #         write_journey_request: { # required
+    #           activities: {
+    #             "__string" => {
+    #               conditional_split: {
+    #                 condition: {
+    #                   conditions: [
+    #                     {
+    #                       event_condition: {
+    #                         dimensions: { # required
+    #                           attributes: {
+    #                             "__string" => {
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               values: ["__string"], # required
+    #                             },
+    #                           },
+    #                           event_type: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           metrics: {
+    #                             "__string" => {
+    #                               comparison_operator: "__string", # required
+    #                               value: 1.0, # required
+    #                             },
+    #                           },
+    #                         },
+    #                         message_activity: "__string",
+    #                       },
+    #                       segment_condition: {
+    #                         segment_id: "__string", # required
+    #                       },
+    #                       segment_dimensions: {
+    #                         attributes: {
+    #                           "__string" => {
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                         behavior: {
+    #                           recency: {
+    #                             duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                             recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                           },
+    #                         },
+    #                         demographic: {
+    #                           app_version: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           channel: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           device_type: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           make: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           model: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           platform: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                         location: {
+    #                           country: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           gps_point: {
+    #                             coordinates: { # required
+    #                               latitude: 1.0, # required
+    #                               longitude: 1.0, # required
+    #                             },
+    #                             range_in_kilometers: 1.0,
+    #                           },
+    #                         },
+    #                         metrics: {
+    #                           "__string" => {
+    #                             comparison_operator: "__string", # required
+    #                             value: 1.0, # required
+    #                           },
+    #                         },
+    #                         user_attributes: {
+    #                           "__string" => {
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                       },
+    #                     },
+    #                   ],
+    #                   operator: "ALL", # accepts ALL, ANY
+    #                 },
+    #                 evaluation_wait_time: {
+    #                   wait_for: "__string",
+    #                   wait_until: "__string",
+    #                 },
+    #                 false_activity: "__string",
+    #                 true_activity: "__string",
+    #               },
+    #               description: "__string",
+    #               email: {
+    #                 message_config: {
+    #                   from_address: "__string",
+    #                 },
+    #                 next_activity: "__string",
+    #                 template_name: "__string",
+    #               },
+    #               holdout: {
+    #                 next_activity: "__string",
+    #                 percentage: 1, # required
+    #               },
+    #               multi_condition: {
+    #                 branches: [
+    #                   {
+    #                     condition: {
+    #                       event_condition: {
+    #                         dimensions: { # required
+    #                           attributes: {
+    #                             "__string" => {
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               values: ["__string"], # required
+    #                             },
+    #                           },
+    #                           event_type: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           metrics: {
+    #                             "__string" => {
+    #                               comparison_operator: "__string", # required
+    #                               value: 1.0, # required
+    #                             },
+    #                           },
+    #                         },
+    #                         message_activity: "__string",
+    #                       },
+    #                       segment_condition: {
+    #                         segment_id: "__string", # required
+    #                       },
+    #                       segment_dimensions: {
+    #                         attributes: {
+    #                           "__string" => {
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                         behavior: {
+    #                           recency: {
+    #                             duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                             recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                           },
+    #                         },
+    #                         demographic: {
+    #                           app_version: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           channel: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           device_type: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           make: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           model: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           platform: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                         location: {
+    #                           country: {
+    #                             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                           gps_point: {
+    #                             coordinates: { # required
+    #                               latitude: 1.0, # required
+    #                               longitude: 1.0, # required
+    #                             },
+    #                             range_in_kilometers: 1.0,
+    #                           },
+    #                         },
+    #                         metrics: {
+    #                           "__string" => {
+    #                             comparison_operator: "__string", # required
+    #                             value: 1.0, # required
+    #                           },
+    #                         },
+    #                         user_attributes: {
+    #                           "__string" => {
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                       },
+    #                     },
+    #                     next_activity: "__string",
+    #                   },
+    #                 ],
+    #                 default_activity: "__string",
+    #                 evaluation_wait_time: {
+    #                   wait_for: "__string",
+    #                   wait_until: "__string",
+    #                 },
+    #               },
+    #               random_split: {
+    #                 branches: [
+    #                   {
+    #                     next_activity: "__string",
+    #                     percentage: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               wait: {
+    #                 next_activity: "__string",
+    #                 wait_time: {
+    #                   wait_for: "__string",
+    #                   wait_until: "__string",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           creation_date: "__string",
+    #           last_modified_date: "__string",
+    #           limits: {
+    #             daily_cap: 1,
+    #             endpoint_reentry_cap: 1,
+    #             messages_per_second: 1,
+    #           },
+    #           local_time: false,
+    #           name: "__string", # required
+    #           quiet_time: {
+    #             end: "__string",
+    #             start: "__string",
+    #           },
+    #           refresh_frequency: "__string",
+    #           schedule: {
+    #             end_time: Time.now,
+    #             start_time: Time.now,
+    #             timezone: "__string",
+    #           },
+    #           start_activity: "__string",
+    #           start_condition: {
+    #             description: "__string",
+    #             segment_start_condition: {
+    #               segment_id: "__string", # required
+    #             },
+    #           },
+    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   @return [String]
+    #
+    # @!attribute [rw] write_journey_request
+    #   Specifies the configuration and other settings for a journey.
+    #   @return [Types::WriteJourneyRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourneyRequest AWS API Documentation
+    #
+    class UpdateJourneyRequest < Struct.new(
+      :application_id,
+      :journey_id,
+      :write_journey_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_response
+    #   Provides information about the status, configuration, and other
+    #   settings for a journey.
+    #   @return [Types::JourneyResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourneyResponse AWS API Documentation
+    #
+    class UpdateJourneyResponse < Struct.new(
+      :journey_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateJourneyStateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         journey_id: "__string", # required
+    #         journey_state_request: { # required
+    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_state_request
+    #   Changes the status of a journey.
+    #   @return [Types::JourneyStateRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourneyStateRequest AWS API Documentation
+    #
+    class UpdateJourneyStateRequest < Struct.new(
+      :application_id,
+      :journey_id,
+      :journey_state_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_response
+    #   Provides information about the status, configuration, and other
+    #   settings for a journey.
+    #   @return [Types::JourneyResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourneyStateResponse AWS API Documentation
+    #
+    class UpdateJourneyStateResponse < Struct.new(
+      :journey_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePushTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         push_notification_template_request: { # required
+    #           adm: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           apns: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             media_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           baidu: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           default: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           gcm: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] push_notification_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in messages that are sent through a push notification
+    #   channel.
+    #   @return [Types::PushNotificationTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdatePushTemplateRequest AWS API Documentation
+    #
+    class UpdatePushTemplateRequest < Struct.new(
+      :push_notification_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdatePushTemplateResponse AWS API Documentation
+    #
+    class UpdatePushTemplateResponse < Struct.new(
+      :message_body)
       include Aws::Structure
     end
 
@@ -11534,6 +15577,46 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateSmsTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sms_template_request: { # required
+    #           body: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] sms_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in text messages that are sent through the SMS channel.
+    #   @return [Types::SMSTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsTemplateRequest AWS API Documentation
+    #
+    class UpdateSmsTemplateRequest < Struct.new(
+      :sms_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsTemplateResponse AWS API Documentation
+    #
+    class UpdateSmsTemplateResponse < Struct.new(
+      :message_body)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateVoiceChannelRequest
     #   data as a hash:
     #
@@ -11633,9 +15716,6 @@ module Aws::Pinpoint
     #   last modified.
     #   @return [String]
     #
-    # @!attribute [rw] origination_number
-    #   @return [String]
-    #
     # @!attribute [rw] platform
     #   The type of messaging or notification platform for the channel. For
     #   the voice channel, this value is VOICE.
@@ -11656,7 +15736,6 @@ module Aws::Pinpoint
       :is_archived,
       :last_modified_by,
       :last_modified_date,
-      :origination_number,
       :platform,
       :version)
       include Aws::Structure
@@ -11689,10 +15768,11 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] origination_number
-    #   The phone number from the pool or messaging service to send the
-    #   message from. Although it isn't required, we recommend that you
-    #   specify the phone number in E.164 format to ensure prompt and
-    #   accurate delivery.
+    #   The long code to send the voice message from. This value should be
+    #   one of the dedicated long codes that's assigned to your AWS
+    #   account. Although it isn't required, we recommend that you specify
+    #   the long code in E.164 format, for example +12065550100, to ensure
+    #   prompt and accurate delivery of the message.
     #   @return [String]
     #
     # @!attribute [rw] substitutions
@@ -11714,6 +15794,71 @@ module Aws::Pinpoint
       :origination_number,
       :substitutions,
       :voice_id)
+      include Aws::Structure
+    end
+
+    # Specifies the settings for a wait activity in a journey. This type of
+    # activity waits for a certain amount of time or until a specific date
+    # and time before moving participants to the next activity in a journey.
+    #
+    # @note When making an API call, you may pass WaitActivity
+    #   data as a hash:
+    #
+    #       {
+    #         next_activity: "__string",
+    #         wait_time: {
+    #           wait_for: "__string",
+    #           wait_until: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] next_activity
+    #   The unique identifier for the next activity to perform, after
+    #   performing the wait activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] wait_time
+    #   The amount of time to wait or the date and time when the activity
+    #   moves participants to the next activity in the journey.
+    #   @return [Types::WaitTime]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WaitActivity AWS API Documentation
+    #
+    class WaitActivity < Struct.new(
+      :next_activity,
+      :wait_time)
+      include Aws::Structure
+    end
+
+    # Specifies a duration or a date and time that indicates when Amazon
+    # Pinpoint determines whether an activity's conditions have been met or
+    # an activity moves participants to the next activity in a journey.
+    #
+    # @note When making an API call, you may pass WaitTime
+    #   data as a hash:
+    #
+    #       {
+    #         wait_for: "__string",
+    #         wait_until: "__string",
+    #       }
+    #
+    # @!attribute [rw] wait_for
+    #   The amount of time, as a duration in ISO 8601 format, to wait before
+    #   determining whether the activity's conditions have been met or
+    #   moving participants to the next activity in the journey.
+    #   @return [String]
+    #
+    # @!attribute [rw] wait_until
+    #   The date and time, in ISO 8601 format, when Amazon Pinpoint
+    #   determines whether the activity's conditions have been met or the
+    #   activity moves participants to the next activity in the journey.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WaitTime AWS API Documentation
+    #
+    class WaitTime < Struct.new(
+      :wait_for,
+      :wait_until)
       include Aws::Structure
     end
 
@@ -11765,30 +15910,36 @@ module Aws::Pinpoint
     #   @return [Types::CampaignLimits]
     #
     # @!attribute [rw] quiet_time
-    #   The default quiet time for campaigns in the application. Quiet time
-    #   is a specific time range when campaigns don't send messages to
-    #   endpoints, if all the following conditions are met:
+    #   The default quiet time for campaigns and journeys in the
+    #   application. Quiet time is a specific time range when messages
+    #   aren't sent to endpoints, if all the following conditions are met:
     #
     #   * The EndpointDemographic.Timezone property of the endpoint is set
     #     to a valid value.
     #
     #   * The current time in the endpoint's time zone is later than or
     #     equal to the time specified by the QuietTime.Start property for
-    #     the application (or a campaign that has custom quiet time
-    #     settings).
+    #     the application (or a campaign or journey that has custom quiet
+    #     time settings).
     #
     #   * The current time in the endpoint's time zone is earlier than or
     #     equal to the time specified by the QuietTime.End property for the
-    #     application (or a campaign that has custom quiet time settings).
+    #     application (or a campaign or journey that has custom quiet time
+    #     settings).
     #
     #   If any of the preceding conditions isn't met, the endpoint will
-    #   receive messages from a campaign, even if quiet time is enabled.
+    #   receive messages from a campaign or journey, even if quiet time is
+    #   enabled.
     #
-    #   To override the default quiet time settings for a specific campaign,
-    #   use the <link linkend="apps-application-id-campaigns-campaign-id" />
+    #   To override the default quiet time settings for a specific campaign
+    #   or journey, use the <link
+    #   linkend="apps-application-id-campaigns-campaign-id" />
     #
-    #   Campaign</link> resource to define a custom quiet time for the
-    #   campaign.
+    #   Campaign</link> resource or the <link
+    #   linkend="apps-application-id-journeys-journey-id" />
+    #
+    #   Journey</link> resource to define a custom quiet time for the
+    #   campaign or journey.
     #   @return [Types::QuietTime]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteApplicationSettingsRequest AWS API Documentation
@@ -11925,6 +16076,17 @@ module Aws::Pinpoint
     #               timezone: "__string",
     #             },
     #             size_percent: 1, # required
+    #             template_configuration: {
+    #               email_template: {
+    #                 name: "__string",
+    #               },
+    #               push_template: {
+    #                 name: "__string",
+    #               },
+    #               sms_template: {
+    #                 name: "__string",
+    #               },
+    #             },
     #             treatment_description: "__string",
     #             treatment_name: "__string",
     #           },
@@ -12064,6 +16226,17 @@ module Aws::Pinpoint
     #         tags: {
     #           "__string" => "__string",
     #         },
+    #         template_configuration: {
+    #           email_template: {
+    #             name: "__string",
+    #           },
+    #           push_template: {
+    #             name: "__string",
+    #           },
+    #           sms_template: {
+    #             name: "__string",
+    #           },
+    #         },
     #         treatment_description: "__string",
     #         treatment_name: "__string",
     #       }
@@ -12123,6 +16296,10 @@ module Aws::Pinpoint
     #   and an associated tag value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template to use for the campaign.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] treatment_description
     #   The custom description of a variation of the campaign to use for A/B
     #   testing.
@@ -12148,6 +16325,7 @@ module Aws::Pinpoint
       :segment_id,
       :segment_version,
       :tags,
+      :template_configuration,
       :treatment_description,
       :treatment_name)
       include Aws::Structure
@@ -12196,6 +16374,382 @@ module Aws::Pinpoint
     class WriteEventStream < Struct.new(
       :destination_stream_arn,
       :role_arn)
+      include Aws::Structure
+    end
+
+    # Specifies the configuration and other settings for a journey.
+    #
+    # @note When making an API call, you may pass WriteJourneyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         activities: {
+    #           "__string" => {
+    #             conditional_split: {
+    #               condition: {
+    #                 conditions: [
+    #                   {
+    #                     event_condition: {
+    #                       dimensions: { # required
+    #                         attributes: {
+    #                           "__string" => {
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                         event_type: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         metrics: {
+    #                           "__string" => {
+    #                             comparison_operator: "__string", # required
+    #                             value: 1.0, # required
+    #                           },
+    #                         },
+    #                       },
+    #                       message_activity: "__string",
+    #                     },
+    #                     segment_condition: {
+    #                       segment_id: "__string", # required
+    #                     },
+    #                     segment_dimensions: {
+    #                       attributes: {
+    #                         "__string" => {
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                       },
+    #                       behavior: {
+    #                         recency: {
+    #                           duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                           recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                         },
+    #                       },
+    #                       demographic: {
+    #                         app_version: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         channel: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         device_type: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         make: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         model: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         platform: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                       },
+    #                       location: {
+    #                         country: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         gps_point: {
+    #                           coordinates: { # required
+    #                             latitude: 1.0, # required
+    #                             longitude: 1.0, # required
+    #                           },
+    #                           range_in_kilometers: 1.0,
+    #                         },
+    #                       },
+    #                       metrics: {
+    #                         "__string" => {
+    #                           comparison_operator: "__string", # required
+    #                           value: 1.0, # required
+    #                         },
+    #                       },
+    #                       user_attributes: {
+    #                         "__string" => {
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #                 operator: "ALL", # accepts ALL, ANY
+    #               },
+    #               evaluation_wait_time: {
+    #                 wait_for: "__string",
+    #                 wait_until: "__string",
+    #               },
+    #               false_activity: "__string",
+    #               true_activity: "__string",
+    #             },
+    #             description: "__string",
+    #             email: {
+    #               message_config: {
+    #                 from_address: "__string",
+    #               },
+    #               next_activity: "__string",
+    #               template_name: "__string",
+    #             },
+    #             holdout: {
+    #               next_activity: "__string",
+    #               percentage: 1, # required
+    #             },
+    #             multi_condition: {
+    #               branches: [
+    #                 {
+    #                   condition: {
+    #                     event_condition: {
+    #                       dimensions: { # required
+    #                         attributes: {
+    #                           "__string" => {
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             values: ["__string"], # required
+    #                           },
+    #                         },
+    #                         event_type: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         metrics: {
+    #                           "__string" => {
+    #                             comparison_operator: "__string", # required
+    #                             value: 1.0, # required
+    #                           },
+    #                         },
+    #                       },
+    #                       message_activity: "__string",
+    #                     },
+    #                     segment_condition: {
+    #                       segment_id: "__string", # required
+    #                     },
+    #                     segment_dimensions: {
+    #                       attributes: {
+    #                         "__string" => {
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                       },
+    #                       behavior: {
+    #                         recency: {
+    #                           duration: "HR_24", # required, accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                           recency_type: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #                         },
+    #                       },
+    #                       demographic: {
+    #                         app_version: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         channel: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         device_type: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         make: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         model: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         platform: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                       },
+    #                       location: {
+    #                         country: {
+    #                           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                         gps_point: {
+    #                           coordinates: { # required
+    #                             latitude: 1.0, # required
+    #                             longitude: 1.0, # required
+    #                           },
+    #                           range_in_kilometers: 1.0,
+    #                         },
+    #                       },
+    #                       metrics: {
+    #                         "__string" => {
+    #                           comparison_operator: "__string", # required
+    #                           value: 1.0, # required
+    #                         },
+    #                       },
+    #                       user_attributes: {
+    #                         "__string" => {
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           values: ["__string"], # required
+    #                         },
+    #                       },
+    #                     },
+    #                   },
+    #                   next_activity: "__string",
+    #                 },
+    #               ],
+    #               default_activity: "__string",
+    #               evaluation_wait_time: {
+    #                 wait_for: "__string",
+    #                 wait_until: "__string",
+    #               },
+    #             },
+    #             random_split: {
+    #               branches: [
+    #                 {
+    #                   next_activity: "__string",
+    #                   percentage: 1,
+    #                 },
+    #               ],
+    #             },
+    #             wait: {
+    #               next_activity: "__string",
+    #               wait_time: {
+    #                 wait_for: "__string",
+    #                 wait_until: "__string",
+    #               },
+    #             },
+    #           },
+    #         },
+    #         creation_date: "__string",
+    #         last_modified_date: "__string",
+    #         limits: {
+    #           daily_cap: 1,
+    #           endpoint_reentry_cap: 1,
+    #           messages_per_second: 1,
+    #         },
+    #         local_time: false,
+    #         name: "__string", # required
+    #         quiet_time: {
+    #           end: "__string",
+    #           start: "__string",
+    #         },
+    #         refresh_frequency: "__string",
+    #         schedule: {
+    #           end_time: Time.now,
+    #           start_time: Time.now,
+    #           timezone: "__string",
+    #         },
+    #         start_activity: "__string",
+    #         start_condition: {
+    #           description: "__string",
+    #           segment_start_condition: {
+    #             segment_id: "__string", # required
+    #           },
+    #         },
+    #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #       }
+    #
+    # @!attribute [rw] activities
+    #   The configuration and other settings for the activities that
+    #   comprise the journey.
+    #   @return [Hash<String,Types::Activity>]
+    #
+    # @!attribute [rw] creation_date
+    #   The date, in ISO 8601 format, when the journey was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date, in ISO 8601 format, when the journey was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] limits
+    #   The messaging and entry limits for the journey.
+    #   @return [Types::JourneyLimits]
+    #
+    # @!attribute [rw] local_time
+    #   Specifies whether the journey's scheduled start and end times use
+    #   each participant's local time. To base the schedule on each
+    #   participant's local time, set this value to true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the journey. A journey name can contain a maximum of 150
+    #   characters. The characters can be alphanumeric characters or
+    #   symbols, such as underscores (\_) or hyphens (-). A journey name
+    #   can't contain any spaces.
+    #   @return [String]
+    #
+    # @!attribute [rw] quiet_time
+    #   The quiet time settings for the journey. Quiet time is a specific
+    #   time range when a journey doesn't send messages to participants, if
+    #   all the following conditions are met:
+    #
+    #   * The EndpointDemographic.Timezone property of the endpoint for the
+    #     participant is set to a valid value.
+    #
+    #   * The current time in the participant's time zone is later than or
+    #     equal to the time specified by the QuietTime.Start property for
+    #     the journey.
+    #
+    #   * The current time in the participant's time zone is earlier than
+    #     or equal to the time specified by the QuietTime.End property for
+    #     the journey.
+    #
+    #   If any of the preceding conditions isn't met, the participant will
+    #   receive messages from the journey, even if quiet time is enabled.
+    #   @return [Types::QuietTime]
+    #
+    # @!attribute [rw] refresh_frequency
+    #   The frequency with which Amazon Pinpoint evaluates segment and event
+    #   data for the journey, as a duration in ISO 8601 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule settings for the journey.
+    #   @return [Types::JourneySchedule]
+    #
+    # @!attribute [rw] start_activity
+    #   The unique identifier for the first activity in the journey.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_condition
+    #   The segment that defines which users are participants in the
+    #   journey.
+    #   @return [Types::StartCondition]
+    #
+    # @!attribute [rw] state
+    #   The status of the journey. Valid values are:
+    #
+    #   * DRAFT - Saves the journey and doesn't publish it.
+    #
+    #   * ACTIVE - Saves and publishes the journey. Depending on the
+    #     journey's schedule, the journey starts running immediately or at
+    #     the scheduled start time. If a journey's status is ACTIVE, you
+    #     can't add, change, or remove activities from it.
+    #
+    #   The CANCELLED, COMPLETED, and CLOSED values are not supported in
+    #   requests to create or update a journey. To cancel a journey, use the
+    #   <link linkend="apps-application-id-journeys-journey-id-state" />
+    #
+    #   Journey State</link> resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteJourneyRequest AWS API Documentation
+    #
+    class WriteJourneyRequest < Struct.new(
+      :activities,
+      :creation_date,
+      :last_modified_date,
+      :limits,
+      :local_time,
+      :name,
+      :quiet_time,
+      :refresh_frequency,
+      :schedule,
+      :start_activity,
+      :start_condition,
+      :state)
       include Aws::Structure
     end
 
@@ -12514,6 +17068,17 @@ module Aws::Pinpoint
     #           timezone: "__string",
     #         },
     #         size_percent: 1, # required
+    #         template_configuration: {
+    #           email_template: {
+    #             name: "__string",
+    #           },
+    #           push_template: {
+    #             name: "__string",
+    #           },
+    #           sms_template: {
+    #             name: "__string",
+    #           },
+    #         },
     #         treatment_description: "__string",
     #         treatment_name: "__string",
     #       }
@@ -12531,6 +17096,10 @@ module Aws::Pinpoint
     #   treatment to.
     #   @return [Integer]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template to use for the treatment.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] treatment_description
     #   The custom description of the treatment.
     #   @return [String]
@@ -12546,6 +17115,7 @@ module Aws::Pinpoint
       :message_configuration,
       :schedule,
       :size_percent,
+      :template_configuration,
       :treatment_description,
       :treatment_name)
       include Aws::Structure

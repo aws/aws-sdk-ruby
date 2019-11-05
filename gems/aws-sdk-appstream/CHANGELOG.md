@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2019-10-29)
+------------------
+
+* Feature - Adds support for providing domain names that can embed streaming sessions
+
+1.37.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.36.0 (2019-09-09)
 ------------------
 

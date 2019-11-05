@@ -330,7 +330,7 @@ module Aws::Firehose
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream. This name must be unique per AWS
@@ -608,9 +608,10 @@ module Aws::Firehose
     #     },
     #     elasticsearch_destination_configuration: {
     #       role_arn: "RoleARN", # required
-    #       domain_arn: "ElasticsearchDomainARN", # required
+    #       domain_arn: "ElasticsearchDomainARN",
+    #       cluster_endpoint: "ElasticsearchClusterEndpoint",
     #       index_name: "ElasticsearchIndexName", # required
-    #       type_name: "ElasticsearchTypeName", # required
+    #       type_name: "ElasticsearchTypeName",
     #       index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
     #       buffering_hints: {
     #         interval_in_seconds: 1,
@@ -928,6 +929,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.domain_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cluster_endpoint #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.index_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.type_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.index_rotation_period #=> String, one of "NoRotation", "OneHour", "OneDay", "OneWeek", "OneMonth"
@@ -1145,7 +1147,7 @@ module Aws::Firehose
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/limits.html
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
@@ -1254,7 +1256,7 @@ module Aws::Firehose
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/limits.html
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
@@ -1754,6 +1756,7 @@ module Aws::Firehose
     #     elasticsearch_destination_update: {
     #       role_arn: "RoleARN",
     #       domain_arn: "ElasticsearchDomainARN",
+    #       cluster_endpoint: "ElasticsearchClusterEndpoint",
     #       index_name: "ElasticsearchIndexName",
     #       type_name: "ElasticsearchTypeName",
     #       index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
@@ -1881,7 +1884,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

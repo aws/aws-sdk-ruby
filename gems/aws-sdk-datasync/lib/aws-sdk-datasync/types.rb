@@ -567,6 +567,7 @@ module Aws::DataSync
     #           preserve_devices: "NONE", # accepts NONE, PRESERVE
     #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #           bytes_per_second: 1,
+    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         excludes: [
     #           {
@@ -1763,6 +1764,7 @@ module Aws::DataSync
     #         preserve_devices: "NONE", # accepts NONE, PRESERVE
     #         posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #         bytes_per_second: 1,
+    #         task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #       }
     #
     # @!attribute [rw] verify_mode
@@ -1914,6 +1916,15 @@ module Aws::DataSync
     #   `1048576` (`=1024*1024`).
     #   @return [Integer]
     #
+    # @!attribute [rw] task_queueing
+    #   A value that determines whether tasks should be queued before
+    #   executing the tasks. If set to `Enabled`, the tasks will queued. The
+    #   default is `Enabled`.
+    #
+    #   If you use the same agent to run multiple tasks you can enable the
+    #   tasks to run in series. For more information see task-queue.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options AWS API Documentation
     #
     class Options < Struct.new(
@@ -1926,7 +1937,8 @@ module Aws::DataSync
       :preserve_deleted_files,
       :preserve_devices,
       :posix_permissions,
-      :bytes_per_second)
+      :bytes_per_second,
+      :task_queueing)
       include Aws::Structure
     end
 
@@ -2038,6 +2050,7 @@ module Aws::DataSync
     #           preserve_devices: "NONE", # accepts NONE, PRESERVE
     #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #           bytes_per_second: 1,
+    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         includes: [
     #           {
@@ -2339,6 +2352,7 @@ module Aws::DataSync
     #           preserve_devices: "NONE", # accepts NONE, PRESERVE
     #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #           bytes_per_second: 1,
+    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         excludes: [
     #           {

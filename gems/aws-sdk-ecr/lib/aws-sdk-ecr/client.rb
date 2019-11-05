@@ -563,7 +563,14 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Creates an image repository.
+    # Creates an Amazon Elastic Container Registry (Amazon ECR) repository,
+    # where users can push and pull Docker images. For more information, see
+    # [Amazon ECR Repositories][1] in the *Amazon Elastic Container Registry
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html
     #
     # @option params [required, String] :repository_name
     #   The name to use for the repository. The repository name may be
@@ -584,6 +591,11 @@ module Aws::ECR
     #   allow image tags to be overwritten. If `IMMUTABLE` is specified, all
     #   image tags within the repository will be immutable which will prevent
     #   them from being overwritten.
+    #
+    # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
+    #   The image scanning configuration for the repository. This setting
+    #   determines whether images are scanned for known vulnerabilities after
+    #   being pushed to the repository.
     #
     # @return [Types::CreateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -619,6 +631,9 @@ module Aws::ECR
     #       },
     #     ],
     #     image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
+    #     image_scanning_configuration: {
+    #       scan_on_push: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -629,6 +644,7 @@ module Aws::ECR
     #   resp.repository.repository_uri #=> String
     #   resp.repository.created_at #=> Time
     #   resp.repository.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #   resp.repository.image_scanning_configuration.scan_on_push #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepository AWS API Documentation
     #
@@ -733,6 +749,7 @@ module Aws::ECR
     #   resp.repository.repository_uri #=> String
     #   resp.repository.created_at #=> Time
     #   resp.repository.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #   resp.repository.image_scanning_configuration.scan_on_push #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepository AWS API Documentation
     #
@@ -795,6 +812,90 @@ module Aws::ECR
     # @param [Hash] params ({})
     def delete_repository_policy(params = {}, options = {})
       req = build_request(:delete_repository_policy, params)
+      req.send_request(options)
+    end
+
+    # Describes the image scan findings for the specified image.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to describe the image scan findings for. If you do
+    #   not specify a registry, the default registry is assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The repository for the image for which to describe the scan findings.
+    #
+    # @option params [required, Types::ImageIdentifier] :image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeImageScanFindings` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is null when there are no more results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of image scan results returned by
+    #   `DescribeImageScanFindings` in paginated output. When this parameter
+    #   is used, `DescribeImageScanFindings` only returns `maxResults` results
+    #   in a single page along with a `nextToken` response element. The
+    #   remaining results of the initial request can be seen by sending
+    #   another `DescribeImageScanFindings` request with the returned
+    #   `nextToken` value. This value can be between 1 and 1000. If this
+    #   parameter is not used, then `DescribeImageScanFindings` returns up to
+    #   100 results and a `nextToken` value, if applicable.
+    #
+    # @return [Types::DescribeImageScanFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImageScanFindingsResponse#registry_id #registry_id} => String
+    #   * {Types::DescribeImageScanFindingsResponse#repository_name #repository_name} => String
+    #   * {Types::DescribeImageScanFindingsResponse#image_id #image_id} => Types::ImageIdentifier
+    #   * {Types::DescribeImageScanFindingsResponse#image_scan_status #image_scan_status} => Types::ImageScanStatus
+    #   * {Types::DescribeImageScanFindingsResponse#image_scan_findings #image_scan_findings} => Types::ImageScanFindings
+    #   * {Types::DescribeImageScanFindingsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image_scan_findings({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     image_id: { # required
+    #       image_digest: "ImageDigest",
+    #       image_tag: "ImageTag",
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.image_id.image_digest #=> String
+    #   resp.image_id.image_tag #=> String
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.image_scan_status.description #=> String
+    #   resp.image_scan_findings.image_scan_completed_at #=> Time
+    #   resp.image_scan_findings.vulnerability_source_updated_at #=> Time
+    #   resp.image_scan_findings.findings #=> Array
+    #   resp.image_scan_findings.findings[0].name #=> String
+    #   resp.image_scan_findings.findings[0].description #=> String
+    #   resp.image_scan_findings.findings[0].uri #=> String
+    #   resp.image_scan_findings.findings[0].severity #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL", "UNDEFINED"
+    #   resp.image_scan_findings.findings[0].attributes #=> Array
+    #   resp.image_scan_findings.findings[0].attributes[0].key #=> String
+    #   resp.image_scan_findings.findings[0].attributes[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.image_scan_findings.finding_severity_counts #=> Hash
+    #   resp.image_scan_findings.finding_severity_counts["FindingSeverity"] #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageScanFindings AWS API Documentation
+    #
+    # @overload describe_image_scan_findings(params = {})
+    # @param [Hash] params ({})
+    def describe_image_scan_findings(params = {}, options = {})
+      req = build_request(:describe_image_scan_findings, params)
       req.send_request(options)
     end
 
@@ -876,6 +977,12 @@ module Aws::ECR
     #   resp.image_details[0].image_tags[0] #=> String
     #   resp.image_details[0].image_size_in_bytes #=> Integer
     #   resp.image_details[0].image_pushed_at #=> Time
+    #   resp.image_details[0].image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.image_details[0].image_scan_status.description #=> String
+    #   resp.image_details[0].image_scan_findings_summary.image_scan_completed_at #=> Time
+    #   resp.image_details[0].image_scan_findings_summary.vulnerability_source_updated_at #=> Time
+    #   resp.image_details[0].image_scan_findings_summary.finding_severity_counts #=> Hash
+    #   resp.image_details[0].image_scan_findings_summary.finding_severity_counts["FindingSeverity"] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImages AWS API Documentation
@@ -973,6 +1080,7 @@ module Aws::ECR
     #   resp.repositories[0].repository_uri #=> String
     #   resp.repositories[0].created_at #=> Time
     #   resp.repositories[0].image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #   resp.repositories[0].image_scanning_configuration.scan_on_push #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositories AWS API Documentation
@@ -1504,6 +1612,54 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Updates the image scanning configuration for a repository.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to update the image scanning configuration
+    #   setting. If you do not specify a registry, the default registry is
+    #   assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository in which to update the image scanning
+    #   configuration setting.
+    #
+    # @option params [required, Types::ImageScanningConfiguration] :image_scanning_configuration
+    #   The image scanning configuration for the repository. This setting
+    #   determines whether images are scanned for known vulnerabilities after
+    #   being pushed to the repository.
+    #
+    # @return [Types::PutImageScanningConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutImageScanningConfigurationResponse#registry_id #registry_id} => String
+    #   * {Types::PutImageScanningConfigurationResponse#repository_name #repository_name} => String
+    #   * {Types::PutImageScanningConfigurationResponse#image_scanning_configuration #image_scanning_configuration} => Types::ImageScanningConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_image_scanning_configuration({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     image_scanning_configuration: { # required
+    #       scan_on_push: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.image_scanning_configuration.scan_on_push #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageScanningConfiguration AWS API Documentation
+    #
+    # @overload put_image_scanning_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_image_scanning_configuration(params = {}, options = {})
+      req = build_request(:put_image_scanning_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the image tag mutability settings for a repository.
     #
     # @option params [String] :registry_id
@@ -1655,6 +1811,55 @@ module Aws::ECR
     # @param [Hash] params ({})
     def set_repository_policy(params = {}, options = {})
       req = build_request(:set_repository_policy, params)
+      req.send_request(options)
+    end
+
+    # Starts an image vulnerability scan.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to start an image scan request. If you do not
+    #   specify a registry, the default registry is assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the images to scan.
+    #
+    # @option params [required, Types::ImageIdentifier] :image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #
+    # @return [Types::StartImageScanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImageScanResponse#registry_id #registry_id} => String
+    #   * {Types::StartImageScanResponse#repository_name #repository_name} => String
+    #   * {Types::StartImageScanResponse#image_id #image_id} => Types::ImageIdentifier
+    #   * {Types::StartImageScanResponse#image_scan_status #image_scan_status} => Types::ImageScanStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_image_scan({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     image_id: { # required
+    #       image_digest: "ImageDigest",
+    #       image_tag: "ImageTag",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.image_id.image_digest #=> String
+    #   resp.image_id.image_tag #=> String
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.image_scan_status.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScan AWS API Documentation
+    #
+    # @overload start_image_scan(params = {})
+    # @param [Hash] params ({})
+    def start_image_scan(params = {}, options = {})
+      req = build_request(:start_image_scan, params)
       req.send_request(options)
     end
 
@@ -1845,7 +2050,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

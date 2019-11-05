@@ -282,7 +282,7 @@ module Aws::EC2
     #     description: "String",
     #     destination_region: "String",
     #     encrypted: false,
-    #     kms_key_id: "String",
+    #     kms_key_id: "KmsKeyId",
     #     presigned_url: "String",
     #     source_region: "String", # required
     #     dry_run: false,

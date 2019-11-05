@@ -222,7 +222,7 @@ module Aws::RDS
     #   `EC2SecurityGroupId` must be provided.
     # @option options [String] :ec2_security_group_owner_id
     #   AWS account number of the owner of the EC2 security group specified in
-    #   the `EC2SecurityGroupName` parameter. The AWS Access Key ID is not an
+    #   the `EC2SecurityGroupName` parameter. The AWS access key ID isn't an
     #   acceptable value. For VPC DB security groups, `EC2SecurityGroupId`
     #   must be provided. Otherwise, `EC2SecurityGroupOwnerId` and either
     #   `EC2SecurityGroupName` or `EC2SecurityGroupId` must be provided.
@@ -299,9 +299,9 @@ module Aws::RDS
     #   EC2SecurityGroupOwnerId and either `EC2SecurityGroupName` or
     #   `EC2SecurityGroupId` must be provided.
     # @option options [String] :ec2_security_group_owner_id
-    #   The AWS Account Number of the owner of the EC2 security group
-    #   specified in the `EC2SecurityGroupName` parameter. The AWS Access Key
-    #   ID is not an acceptable value. For VPC DB security groups,
+    #   The AWS account number of the owner of the EC2 security group
+    #   specified in the `EC2SecurityGroupName` parameter. The AWS access key
+    #   ID isn't an acceptable value. For VPC DB security groups,
     #   `EC2SecurityGroupId` must be provided. Otherwise,
     #   EC2SecurityGroupOwnerId and either `EC2SecurityGroupName` or
     #   `EC2SecurityGroupId` must be provided.
@@ -401,7 +401,7 @@ module Aws::RDS
     #   A list of event categories that trigger notifications for a event
     #   notification subscription.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [Event::Collection]
     def events(options = {})
       batches = Enumerator.new do |y|

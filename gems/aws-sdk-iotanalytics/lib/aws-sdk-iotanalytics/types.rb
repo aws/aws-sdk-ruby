@@ -162,7 +162,10 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] storage
-    #   Where channel data is stored.
+    #   Where channel data is stored. You may choose one of
+    #   "serviceManagedS3" or "customerManagedS3" storage. If not
+    #   specified, the default is "serviceManagedS3". This cannot be
+    #   changed after creation of the channel.
     #   @return [Types::ChannelStorage]
     #
     # @!attribute [rw] arn
@@ -238,7 +241,10 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
-    # Where channel data is stored.
+    # Where channel data is stored. You may choose one of
+    # "serviceManagedS3" or "customerManagedS3" storage. If not
+    # specified, the default is "serviceManagedS3". This cannot be changed
+    # after creation of the channel.
     #
     # @note When making an API call, you may pass ChannelStorage
     #   data as a hash:
@@ -255,11 +261,17 @@ module Aws::IoTAnalytics
     #
     # @!attribute [rw] service_managed_s3
     #   Use this to store channel data in an S3 bucket managed by the AWS
-    #   IoT Analytics service.
+    #   IoT Analytics service. The choice of service-managed or
+    #   customer-managed S3 storage cannot be changed after creation of the
+    #   channel.
     #   @return [Types::ServiceManagedChannelS3Storage]
     #
     # @!attribute [rw] customer_managed_s3
-    #   Use this to store channel data in an S3 bucket that you manage.
+    #   Use this to store channel data in an S3 bucket that you manage. If
+    #   customer managed storage is selected, the "retentionPeriod"
+    #   parameter is ignored. The choice of service-managed or
+    #   customer-managed S3 storage cannot be changed after creation of the
+    #   channel.
     #   @return [Types::CustomerManagedChannelS3Storage]
     #
     class ChannelStorage < Struct.new(
@@ -409,11 +421,16 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] channel_storage
-    #   Where channel data is stored.
+    #   Where channel data is stored. You may choose one of
+    #   "serviceManagedS3" or "customerManagedS3" storage. If not
+    #   specified, the default is "serviceManagedS3". This cannot be
+    #   changed after creation of the channel.
     #   @return [Types::ChannelStorage]
     #
     # @!attribute [rw] retention_period
-    #   How long, in days, message data is kept for the channel.
+    #   How long, in days, message data is kept for the channel. When
+    #   "customerManagedS3" storage is selected, this parameter is
+    #   ignored.
     #   @return [Types::RetentionPeriod]
     #
     # @!attribute [rw] tags
@@ -663,11 +680,16 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] datastore_storage
-    #   Where data store data is stored.
+    #   Where data store data is stored. You may choose one of
+    #   "serviceManagedS3" or "customerManagedS3" storage. If not
+    #   specified, the default is "serviceManagedS3". This cannot be
+    #   changed after the data store is created.
     #   @return [Types::DatastoreStorage]
     #
     # @!attribute [rw] retention_period
-    #   How long, in days, message data is kept for the data store.
+    #   How long, in days, message data is kept for the data store. When
+    #   "customerManagedS3" storage is selected, this parameter is
+    #   ignored.
     #   @return [Types::RetentionPeriod]
     #
     # @!attribute [rw] tags
@@ -820,7 +842,11 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
-    # Use this to store channel data in an S3 bucket that you manage.
+    # Use this to store channel data in an S3 bucket that you manage. If
+    # customer managed storage is selected, the "retentionPeriod"
+    # parameter is ignored. The choice of service-managed or
+    # customer-managed S3 storage cannot be changed after creation of the
+    # channel.
     #
     # @note When making an API call, you may pass CustomerManagedChannelS3Storage
     #   data as a hash:
@@ -836,10 +862,10 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] key_prefix
-    #   The prefix used to create the keys of the channel data objects. Each
-    #   object in an Amazon S3 bucket has a key that is its unique
-    #   identifier within the bucket (each object in a bucket has exactly
-    #   one key).
+    #   \[Optional\] The prefix used to create the keys of the channel data
+    #   objects. Each object in an Amazon S3 bucket has a key that is its
+    #   unique identifier within the bucket (each object in a bucket has
+    #   exactly one key). The prefix must end with a '/'.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -861,10 +887,10 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] key_prefix
-    #   The prefix used to create the keys of the channel data objects. Each
-    #   object in an Amazon S3 bucket has a key that is its unique
-    #   identifier within the bucket (each object in a bucket has exactly
-    #   one key).
+    #   \[Optional\] The prefix used to create the keys of the channel data
+    #   objects. Each object in an Amazon S3 bucket has a key that is its
+    #   unique identifier within the bucket (each object in a bucket has
+    #   exactly one key). The prefix must end with a '/'.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -880,6 +906,10 @@ module Aws::IoTAnalytics
     end
 
     # Use this to store data store data in an S3 bucket that you manage.
+    # When customer managed storage is selected, the "retentionPeriod"
+    # parameter is ignored. The choice of service-managed or
+    # customer-managed S3 storage cannot be changed after creation of the
+    # data store.
     #
     # @note When making an API call, you may pass CustomerManagedDatastoreS3Storage
     #   data as a hash:
@@ -895,10 +925,10 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] key_prefix
-    #   The prefix used to create the keys of the data store data objects.
-    #   Each object in an Amazon S3 bucket has a key that is its unique
-    #   identifier within the bucket (each object in a bucket has exactly
-    #   one key).
+    #   \[Optional\] The prefix used to create the keys of the data store
+    #   data objects. Each object in an Amazon S3 bucket has a key that is
+    #   its unique identifier within the bucket (each object in a bucket has
+    #   exactly one key). The prefix must end with a '/'.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -920,10 +950,10 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] key_prefix
-    #   The prefix used to create the keys of the data store data objects.
-    #   Each object in an Amazon S3 bucket has a key that is its unique
-    #   identifier within the bucket (each object in a bucket has exactly
-    #   one key).
+    #   \[Optional\] The prefix used to create the keys of the data store
+    #   data objects. Each object in an Amazon S3 bucket has a key that is
+    #   its unique identifier within the bucket (each object in a bucket has
+    #   exactly one key). The prefix must end with a '/'.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1201,11 +1231,17 @@ module Aws::IoTAnalytics
     #   start.
     #   @return [Time]
     #
+    # @!attribute [rw] completion_time
+    #   The time the dataset content status was updated to SUCCEEDED or
+    #   FAILED.
+    #   @return [Time]
+    #
     class DatasetContentSummary < Struct.new(
       :version,
       :status,
       :creation_time,
-      :schedule_time)
+      :schedule_time,
+      :completion_time)
       include Aws::Structure
     end
 
@@ -1321,7 +1357,10 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] storage
-    #   Where data store data is stored.
+    #   Where data store data is stored. You may choose one of
+    #   "serviceManagedS3" or "customerManagedS3" storage. If not
+    #   specified, the default is "serviceManagedS3". This cannot be
+    #   changed after the data store is created.
     #   @return [Types::DatastoreStorage]
     #
     # @!attribute [rw] arn
@@ -1345,7 +1384,9 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] retention_period
-    #   How long, in days, message data is kept for the data store.
+    #   How long, in days, message data is kept for the data store. When
+    #   "customerManagedS3" storage is selected, this parameter is
+    #   ignored.
     #   @return [Types::RetentionPeriod]
     #
     # @!attribute [rw] creation_time
@@ -1403,7 +1444,10 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
-    # Where data store data is stored.
+    # Where data store data is stored. You may choose one of
+    # "serviceManagedS3" or "customerManagedS3" storage. If not
+    # specified, the default is "serviceManagedS3". This cannot be changed
+    # after the data store is created.
     #
     # @note When making an API call, you may pass DatastoreStorage
     #   data as a hash:
@@ -1420,11 +1464,17 @@ module Aws::IoTAnalytics
     #
     # @!attribute [rw] service_managed_s3
     #   Use this to store data store data in an S3 bucket managed by the AWS
-    #   IoT Analytics service.
+    #   IoT Analytics service. The choice of service-managed or
+    #   customer-managed S3 storage cannot be changed after creation of the
+    #   data store.
     #   @return [Types::ServiceManagedDatastoreS3Storage]
     #
     # @!attribute [rw] customer_managed_s3
     #   Use this to store data store data in an S3 bucket that you manage.
+    #   When customer managed storage is selected, the "retentionPeriod"
+    #   parameter is ignored. The choice of service-managed or
+    #   customer-managed S3 storage cannot be changed after creation of the
+    #   data store.
     #   @return [Types::CustomerManagedDatastoreS3Storage]
     #
     class DatastoreStorage < Struct.new(
@@ -1621,7 +1671,8 @@ module Aws::IoTAnalytics
     #
     # @!attribute [rw] include_statistics
     #   If true, additional statistical information about the channel is
-    #   included in the response.
+    #   included in the response. This feature cannot be used with a channel
+    #   whose S3 storage is customer-managed.
     #   @return [Boolean]
     #
     class DescribeChannelRequest < Struct.new(
@@ -1683,8 +1734,9 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] include_statistics
-    #   If true, additional statistical information about the datastore is
-    #   included in the response.
+    #   If true, additional statistical information about the data store is
+    #   included in the response. This feature cannot be used with a data
+    #   store whose S3 storage is customer-managed.
     #   @return [Boolean]
     #
     class DescribeDatastoreRequest < Struct.new(
@@ -2898,7 +2950,12 @@ module Aws::IoTAnalytics
     # @!attribute [rw] key
     #   The key of the data set contents object. Each object in an Amazon S3
     #   bucket has a key that is its unique identifier within the bucket
-    #   (each object in a bucket has exactly one key).
+    #   (each object in a bucket has exactly one key). To produce a unique
+    #   key, you can use "!\\\{iotanalytics:scheduledTime\\}" to insert
+    #   the time of the scheduled SQL query run, or
+    #   "!\\\{iotanalytics:versioned\\} to insert a unique hash identifying
+    #   the data set, for example:
+    #   "/DataSet/!\\\{iotanalytics:scheduledTime\\}/!\\\{iotanalytics:versioned\\}.csv".
     #   @return [String]
     #
     # @!attribute [rw] glue_configuration
@@ -3021,7 +3078,8 @@ module Aws::IoTAnalytics
     end
 
     # Use this to store channel data in an S3 bucket managed by the AWS IoT
-    # Analytics service.
+    # Analytics service. The choice of service-managed or customer-managed
+    # S3 storage cannot be changed after creation of the channel.
     #
     # @api private
     #
@@ -3033,7 +3091,9 @@ module Aws::IoTAnalytics
     class ServiceManagedChannelS3StorageSummary < Aws::EmptyStructure; end
 
     # Use this to store data store data in an S3 bucket managed by the AWS
-    # IoT Analytics service.
+    # IoT Analytics service. The choice of service-managed or
+    # customer-managed S3 storage cannot be changed after creation of the
+    # data store.
     #
     # @api private
     #
@@ -3254,11 +3314,16 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] channel_storage
-    #   Where channel data is stored.
+    #   Where channel data is stored. You may choose one of
+    #   "serviceManagedS3" or "customerManagedS3" storage. If not
+    #   specified, the default is "serviceManagedS3". This cannot be
+    #   changed after creation of the channel.
     #   @return [Types::ChannelStorage]
     #
     # @!attribute [rw] retention_period
-    #   How long, in days, message data is kept for the channel.
+    #   How long, in days, message data is kept for the channel. The
+    #   retention period cannot be updated if the channel's S3 storage is
+    #   customer-managed.
     #   @return [Types::RetentionPeriod]
     #
     class UpdateChannelRequest < Struct.new(
@@ -3416,11 +3481,16 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] retention_period
-    #   How long, in days, message data is kept for the data store.
+    #   How long, in days, message data is kept for the data store. The
+    #   retention period cannot be updated if the data store's S3 storage
+    #   is customer-managed.
     #   @return [Types::RetentionPeriod]
     #
     # @!attribute [rw] datastore_storage
-    #   Where data store data is stored.
+    #   Where data store data is stored. You may choose one of
+    #   "serviceManagedS3" or "customerManagedS3" storage. If not
+    #   specified, the default is "serviceManagedS3". This cannot be
+    #   changed after the data store is created.
     #   @return [Types::DatastoreStorage]
     #
     class UpdateDatastoreRequest < Struct.new(

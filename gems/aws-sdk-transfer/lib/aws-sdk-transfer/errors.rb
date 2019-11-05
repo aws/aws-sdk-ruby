@@ -126,5 +126,21 @@ module Aws::Transfer
 
     end
 
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Transfer::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def retry_after_seconds
+        @data[:retry_after_seconds]
+      end
+
+    end
+
   end
 end

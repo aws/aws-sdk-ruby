@@ -362,6 +362,10 @@ module Aws::MediaConvert
     #   the service begins processing your job to the time it completes the
     #   transcode or encounters an error.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you want to add to the resource. You can tag resources
+    #   with a key-value pair or with only a key.
+    #
     # @option params [Hash<String,String>] :user_metadata
     #   User-defined metadata that you want to associate with an MediaConvert
     #   job. You specify metadata in key/value pairs.
@@ -374,9 +378,9 @@ module Aws::MediaConvert
     #
     #   resp = client.create_job({
     #     acceleration_settings: {
-    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED
+    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED, PREFERRED
     #     },
-    #     billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE
+    #     billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE, JOB
     #     client_request_token: "__string",
     #     job_template: "__string",
     #     priority: 1,
@@ -385,7 +389,7 @@ module Aws::MediaConvert
     #     settings: { # required
     #       ad_avail_offset: 1,
     #       avail_blanking: {
-    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #         avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
     #       },
     #       esam: {
     #         manifest_confirm_condition_notification: {
@@ -407,7 +411,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -448,7 +452,7 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                   source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
     #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -485,7 +489,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -540,7 +544,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
     #         insertion_mode: "MOV", # accepts MOV, PNG
     #         offset: {
     #           image_x: 1,
@@ -595,6 +599,7 @@ module Aws::MediaConvert
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -624,6 +629,7 @@ module Aws::MediaConvert
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #               min_buffer_time: 1,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -1200,7 +1206,7 @@ module Aws::MediaConvert
     #                         fade_in: 1,
     #                         fade_out: 1,
     #                         height: 1,
-    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                         image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                         image_x: 1,
     #                         image_y: 1,
     #                         layer: 1,
@@ -1255,6 +1261,9 @@ module Aws::MediaConvert
     #     },
     #     simulate_reserved_queue: "DISABLED", # accepts DISABLED, ENABLED
     #     status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #     user_metadata: {
     #       "__string" => "__string",
     #     },
@@ -1262,9 +1271,10 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
-    #   resp.job.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
+    #   resp.job.acceleration_status #=> String, one of "NOT_APPLICABLE", "IN_PROGRESS", "ACCELERATED", "NOT_ACCELERATED"
     #   resp.job.arn #=> String
-    #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
+    #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE", "JOB"
     #   resp.job.created_at #=> Time
     #   resp.job.current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.job.error_code #=> Integer
@@ -1272,6 +1282,10 @@ module Aws::MediaConvert
     #   resp.job.id #=> String
     #   resp.job.job_percent_complete #=> Integer
     #   resp.job.job_template #=> String
+    #   resp.job.messages.info #=> Array
+    #   resp.job.messages.info[0] #=> String
+    #   resp.job.messages.warning #=> Array
+    #   resp.job.messages.warning[0] #=> String
     #   resp.job.output_group_details #=> Array
     #   resp.job.output_group_details[0].output_details #=> Array
     #   resp.job.output_group_details[0].output_details[0].duration_in_ms #=> Integer
@@ -1418,6 +1432,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -1436,6 +1451,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -1976,7 +1992,7 @@ module Aws::MediaConvert
     #
     #   resp = client.create_job_template({
     #     acceleration_settings: {
-    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED
+    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED, PREFERRED
     #     },
     #     category: "__string",
     #     description: "__string",
@@ -1986,7 +2002,7 @@ module Aws::MediaConvert
     #     settings: { # required
     #       ad_avail_offset: 1,
     #       avail_blanking: {
-    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #         avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
     #       },
     #       esam: {
     #         manifest_confirm_condition_notification: {
@@ -2008,7 +2024,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -2049,7 +2065,7 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                   source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
     #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -2079,7 +2095,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -2133,7 +2149,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
     #         insertion_mode: "MOV", # accepts MOV, PNG
     #         offset: {
     #           image_x: 1,
@@ -2188,6 +2204,7 @@ module Aws::MediaConvert
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -2217,6 +2234,7 @@ module Aws::MediaConvert
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #               min_buffer_time: 1,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -2793,7 +2811,7 @@ module Aws::MediaConvert
     #                         fade_in: 1,
     #                         fade_out: 1,
     #                         height: 1,
-    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                         image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                         image_x: 1,
     #                         image_y: 1,
     #                         layer: 1,
@@ -2854,7 +2872,7 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
-    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
     #   resp.job_template.arn #=> String
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
@@ -2993,6 +3011,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -3011,6 +3030,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -3986,7 +4006,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -4668,9 +4688,10 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
-    #   resp.job.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
+    #   resp.job.acceleration_status #=> String, one of "NOT_APPLICABLE", "IN_PROGRESS", "ACCELERATED", "NOT_ACCELERATED"
     #   resp.job.arn #=> String
-    #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
+    #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE", "JOB"
     #   resp.job.created_at #=> Time
     #   resp.job.current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.job.error_code #=> Integer
@@ -4678,6 +4699,10 @@ module Aws::MediaConvert
     #   resp.job.id #=> String
     #   resp.job.job_percent_complete #=> Integer
     #   resp.job.job_template #=> String
+    #   resp.job.messages.info #=> Array
+    #   resp.job.messages.info[0] #=> String
+    #   resp.job.messages.warning #=> Array
+    #   resp.job.messages.warning[0] #=> String
     #   resp.job.output_group_details #=> Array
     #   resp.job.output_group_details[0].output_details #=> Array
     #   resp.job.output_group_details[0].output_details[0].duration_in_ms #=> Integer
@@ -4824,6 +4849,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -4842,6 +4868,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -5346,7 +5373,7 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
-    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
     #   resp.job_template.arn #=> String
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
@@ -5485,6 +5512,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -5503,6 +5531,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -6496,7 +6525,7 @@ module Aws::MediaConvert
     # @example Response structure
     #
     #   resp.job_templates #=> Array
-    #   resp.job_templates[0].acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_templates[0].acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
     #   resp.job_templates[0].arn #=> String
     #   resp.job_templates[0].category #=> String
     #   resp.job_templates[0].created_at #=> Time
@@ -6635,6 +6664,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -6653,6 +6683,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -7179,9 +7210,10 @@ module Aws::MediaConvert
     # @example Response structure
     #
     #   resp.jobs #=> Array
-    #   resp.jobs[0].acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.jobs[0].acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
+    #   resp.jobs[0].acceleration_status #=> String, one of "NOT_APPLICABLE", "IN_PROGRESS", "ACCELERATED", "NOT_ACCELERATED"
     #   resp.jobs[0].arn #=> String
-    #   resp.jobs[0].billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
+    #   resp.jobs[0].billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE", "JOB"
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.jobs[0].error_code #=> Integer
@@ -7189,6 +7221,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].id #=> String
     #   resp.jobs[0].job_percent_complete #=> Integer
     #   resp.jobs[0].job_template #=> String
+    #   resp.jobs[0].messages.info #=> Array
+    #   resp.jobs[0].messages.info[0] #=> String
+    #   resp.jobs[0].messages.warning #=> Array
+    #   resp.jobs[0].messages.warning[0] #=> String
     #   resp.jobs[0].output_group_details #=> Array
     #   resp.jobs[0].output_group_details[0].output_details #=> Array
     #   resp.jobs[0].output_group_details[0].output_details[0].duration_in_ms #=> Integer
@@ -7335,6 +7371,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -7353,6 +7390,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -8498,7 +8536,7 @@ module Aws::MediaConvert
     #
     #   resp = client.update_job_template({
     #     acceleration_settings: {
-    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED
+    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED, PREFERRED
     #     },
     #     category: "__string",
     #     description: "__string",
@@ -8508,7 +8546,7 @@ module Aws::MediaConvert
     #     settings: {
     #       ad_avail_offset: 1,
     #       avail_blanking: {
-    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #         avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
     #       },
     #       esam: {
     #         manifest_confirm_condition_notification: {
@@ -8530,7 +8568,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -8571,7 +8609,7 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                   source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
     #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -8601,7 +8639,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -8655,7 +8693,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
     #         insertion_mode: "MOV", # accepts MOV, PNG
     #         offset: {
     #           image_x: 1,
@@ -8710,6 +8748,7 @@ module Aws::MediaConvert
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -8739,6 +8778,7 @@ module Aws::MediaConvert
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #               min_buffer_time: 1,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -9315,7 +9355,7 @@ module Aws::MediaConvert
     #                         fade_in: 1,
     #                         fade_out: 1,
     #                         height: 1,
-    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                         image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                         image_x: 1,
     #                         image_y: 1,
     #                         layer: 1,
@@ -9373,7 +9413,7 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
-    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
     #   resp.job_template.arn #=> String
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
@@ -9512,6 +9552,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -9530,6 +9571,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -10499,7 +10541,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -11025,7 +11067,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

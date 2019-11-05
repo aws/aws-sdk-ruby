@@ -439,6 +439,11 @@ module Aws::RoboMaker
     #       concurrent_deployment_percentage: 1,
     #       failure_threshold_percentage: 1,
     #       robot_deployment_timeout_in_seconds: 1,
+    #       download_condition_file: {
+    #         bucket: "S3Bucket", # required
+    #         key: "S3Key", # required
+    #         etag: "S3Etag",
+    #       },
     #     },
     #     client_request_token: "ClientRequestToken", # required
     #     fleet: "Arn", # required
@@ -477,11 +482,14 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
     #   resp.created_at #=> Time
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
     #   resp.deployment_config.robot_deployment_timeout_in_seconds #=> Integer
+    #   resp.deployment_config.download_condition_file.bucket #=> String
+    #   resp.deployment_config.download_condition_file.key #=> String
+    #   resp.deployment_config.download_condition_file.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -629,8 +637,8 @@ module Aws::RoboMaker
     #       },
     #     ],
     #     robot_software_suite: { # required
-    #       name: "ROS", # accepts ROS
-    #       version: "Kinetic", # accepts Kinetic, Melodic
+    #       name: "ROS", # accepts ROS, ROS2
+    #       version: "Kinetic", # accepts Kinetic, Melodic, Dashing
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -647,8 +655,8 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
     #   resp.tags #=> Hash
@@ -700,8 +708,8 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
     #
@@ -764,8 +772,8 @@ module Aws::RoboMaker
     #       version: "SimulationSoftwareSuiteVersionType",
     #     },
     #     robot_software_suite: { # required
-    #       name: "ROS", # accepts ROS
-    #       version: "Kinetic", # accepts Kinetic, Melodic
+    #       name: "ROS", # accepts ROS, ROS2
+    #       version: "Kinetic", # accepts Kinetic, Melodic, Dashing
     #     },
     #     rendering_engine: {
     #       name: "OGRE", # accepts OGRE
@@ -788,8 +796,8 @@ module Aws::RoboMaker
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
     #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
     #   resp.simulation_software_suite.version #=> String
-    #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
     #   resp.last_updated_at #=> Time
@@ -847,8 +855,8 @@ module Aws::RoboMaker
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
     #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
     #   resp.simulation_software_suite.version #=> String
-    #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
     #   resp.last_updated_at #=> Time
@@ -1246,6 +1254,9 @@ module Aws::RoboMaker
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
     #   resp.deployment_config.robot_deployment_timeout_in_seconds #=> Integer
+    #   resp.deployment_config.download_condition_file.bucket #=> String
+    #   resp.deployment_config.download_condition_file.key #=> String
+    #   resp.deployment_config.download_condition_file.etag #=> String
     #   resp.deployment_application_configs #=> Array
     #   resp.deployment_application_configs[0].application #=> String
     #   resp.deployment_application_configs[0].application_version #=> String
@@ -1256,19 +1267,19 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
     #   resp.created_at #=> Time
     #   resp.robot_deployment_summary #=> Array
     #   resp.robot_deployment_summary[0].arn #=> String
     #   resp.robot_deployment_summary[0].deployment_start_time #=> Time
     #   resp.robot_deployment_summary[0].deployment_finish_time #=> Time
     #   resp.robot_deployment_summary[0].status #=> String, one of "Available", "Registered", "PendingNewDeployment", "Deploying", "Failed", "InSync", "NoResponse"
-    #   resp.robot_deployment_summary[0].progress_detail.current_progress #=> String, one of "Validating", "DownloadingExtracting", "ExecutingPreLaunch", "Launching", "ExecutingPostLaunch", "Finished"
+    #   resp.robot_deployment_summary[0].progress_detail.current_progress #=> String, one of "Validating", "DownloadingExtracting", "ExecutingDownloadCondition", "ExecutingPreLaunch", "Launching", "ExecutingPostLaunch", "Finished"
     #   resp.robot_deployment_summary[0].progress_detail.percent_done #=> Float
     #   resp.robot_deployment_summary[0].progress_detail.estimated_time_remaining_seconds #=> Integer
     #   resp.robot_deployment_summary[0].progress_detail.target_resource #=> String
     #   resp.robot_deployment_summary[0].failure_reason #=> String
-    #   resp.robot_deployment_summary[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.robot_deployment_summary[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1416,8 +1427,8 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing"
     #   resp.revision_id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -1472,8 +1483,8 @@ module Aws::RoboMaker
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
     #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
     #   resp.simulation_software_suite.version #=> String
-    #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
     #   resp.revision_id #=> String
@@ -1666,8 +1677,11 @@ module Aws::RoboMaker
     #   resp.deployment_jobs[0].deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_jobs[0].deployment_config.failure_threshold_percentage #=> Integer
     #   resp.deployment_jobs[0].deployment_config.robot_deployment_timeout_in_seconds #=> Integer
+    #   resp.deployment_jobs[0].deployment_config.download_condition_file.bucket #=> String
+    #   resp.deployment_jobs[0].deployment_config.download_condition_file.key #=> String
+    #   resp.deployment_jobs[0].deployment_config.download_condition_file.etag #=> String
     #   resp.deployment_jobs[0].failure_reason #=> String
-    #   resp.deployment_jobs[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.deployment_jobs[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
     #   resp.deployment_jobs[0].created_at #=> Time
     #   resp.next_token #=> String
     #
@@ -1811,8 +1825,8 @@ module Aws::RoboMaker
     #   resp.robot_application_summaries[0].arn #=> String
     #   resp.robot_application_summaries[0].version #=> String
     #   resp.robot_application_summaries[0].last_updated_at #=> Time
-    #   resp.robot_application_summaries[0].robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
+    #   resp.robot_application_summaries[0].robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotApplications AWS API Documentation
@@ -1961,8 +1975,8 @@ module Aws::RoboMaker
     #   resp.simulation_application_summaries[0].arn #=> String
     #   resp.simulation_application_summaries[0].version #=> String
     #   resp.simulation_application_summaries[0].last_updated_at #=> Time
-    #   resp.simulation_application_summaries[0].robot_software_suite.name #=> String, one of "ROS"
-    #   resp.simulation_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
+    #   resp.simulation_application_summaries[0].robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.simulation_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing"
     #   resp.simulation_application_summaries[0].simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
     #   resp.simulation_application_summaries[0].simulation_software_suite.version #=> String
     #   resp.next_token #=> String
@@ -2178,6 +2192,9 @@ module Aws::RoboMaker
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
     #   resp.deployment_config.robot_deployment_timeout_in_seconds #=> Integer
+    #   resp.deployment_config.download_condition_file.bucket #=> String
+    #   resp.deployment_config.download_condition_file.key #=> String
+    #   resp.deployment_config.download_condition_file.etag #=> String
     #   resp.deployment_application_configs #=> Array
     #   resp.deployment_application_configs[0].application #=> String
     #   resp.deployment_application_configs[0].application_version #=> String
@@ -2188,7 +2205,7 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
     #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SyncDeploymentJob AWS API Documentation
@@ -2312,8 +2329,8 @@ module Aws::RoboMaker
     #       },
     #     ],
     #     robot_software_suite: { # required
-    #       name: "ROS", # accepts ROS
-    #       version: "Kinetic", # accepts Kinetic, Melodic
+    #       name: "ROS", # accepts ROS, ROS2
+    #       version: "Kinetic", # accepts Kinetic, Melodic, Dashing
     #     },
     #     current_revision_id: "RevisionId",
     #   })
@@ -2328,8 +2345,8 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
     #
@@ -2390,8 +2407,8 @@ module Aws::RoboMaker
     #       version: "SimulationSoftwareSuiteVersionType",
     #     },
     #     robot_software_suite: { # required
-    #       name: "ROS", # accepts ROS
-    #       version: "Kinetic", # accepts Kinetic, Melodic
+    #       name: "ROS", # accepts ROS, ROS2
+    #       version: "Kinetic", # accepts Kinetic, Melodic, Dashing
     #     },
     #     rendering_engine: {
     #       name: "OGRE", # accepts OGRE
@@ -2412,8 +2429,8 @@ module Aws::RoboMaker
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
     #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
     #   resp.simulation_software_suite.version #=> String
-    #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
     #   resp.last_updated_at #=> Time
@@ -2441,7 +2458,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

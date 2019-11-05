@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-10-04)
+------------------
+
+* Feature - This release adds ClientMetadata input parameter to multiple Cognito User Pools operations, making this parameter available to the customer configured lambda triggers as applicable.
+
 1.25.0 (2019-07-25)
 ------------------
 

@@ -378,18 +378,29 @@ module Aws::Support
     #   either "customer-service" or "technical." If you do not indicate
     #   a value, the default is "technical."
     #
-    # * **serviceCode.** The code for an AWS service. You obtain the
-    #   `serviceCode` by calling DescribeServices.
+    #   <note markdown="1"> Service limit increases are not supported by the Support API; you
+    #   must submit service limit increase requests in [Support Center][2].
+    #
+    #    The `caseId` is not the `displayId` that appears in [Support
+    #   Center][2]. You can use the DescribeCases API to get the
+    #   `displayId`.
+    #
+    #    </note>
+    #
+    # * **serviceCode.** The code for an AWS service. You can get the
+    #   possible `serviceCode` values by calling DescribeServices.
     #
     # * **categoryCode.** The category for the service defined for the
-    #   `serviceCode` value. You also obtain the category code for a service
-    #   by calling DescribeServices. Each AWS service defines its own set of
+    #   `serviceCode` value. You also get the category code for a service by
+    #   calling DescribeServices. Each AWS service defines its own set of
     #   category codes.
     #
     # * **severityCode.** A value that indicates the urgency of the case,
     #   which in turn determines the response time according to your service
-    #   level agreement with AWS Support. You obtain the SeverityCode by
-    #   calling DescribeSeverityLevels.
+    #   level agreement with AWS Support. You can get the possible
+    #   `severityCode` values by calling DescribeSeverityLevels. For more
+    #   information about the meaning of the codes, see SeverityLevel and
+    #   [Choosing a Severity][3].
     #
     # * **subject.** The **Subject** field on the AWS Support Center [Create
     #   Case][1] page.
@@ -408,7 +419,7 @@ module Aws::Support
     #   any correspondence about the case. The account that opens the case
     #   is already identified by passing the AWS Credentials in the HTTP
     #   POST method or in a method or function call from one of the
-    #   programming languages supported by an [AWS SDK][2].
+    #   programming languages supported by an [AWS SDK][4].
     #
     # <note markdown="1"> To add additional communication or attachments to an existing case,
     # use AddCommunicationToCase.
@@ -422,7 +433,9 @@ module Aws::Support
     #
     #
     # [1]: https://console.aws.amazon.com/support/home#/case/create
-    # [2]: http://aws.amazon.com/tools/
+    # [2]: https://console.aws.amazon.com/support
+    # [3]: https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity
+    # [4]: http://aws.amazon.com/tools/
     #
     # @option params [required, String] :subject
     #   The title of the AWS Support case.
@@ -434,9 +447,8 @@ module Aws::Support
     #   The code for the severity level returned by the call to
     #   DescribeSeverityLevels.
     #
-    #   <note markdown="1"> The availability of severity levels depends on each customer's
-    #   support subscription. In other words, your subscription may not
-    #   necessarily require the urgent level of response time.
+    #   <note markdown="1"> The availability of severity levels depends on the support plan for
+    #   the account.
     #
     #    </note>
     #
@@ -461,6 +473,15 @@ module Aws::Support
     #   The type of issue for the case. You can specify either
     #   "customer-service" or "technical." If you do not indicate a value,
     #   the default is "technical."
+    #
+    #   <note markdown="1"> Service limit increases are not supported by the Support API; you must
+    #   submit service limit increase requests in [Support Center][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support
     #
     # @option params [String] :attachment_set_id
     #   The ID of a set of one or more attachments for the case. Create the
@@ -959,7 +980,8 @@ module Aws::Support
     # including name, ID, category, description, and metadata. You must
     # specify a language code; English ("en") and Japanese ("ja") are
     # currently supported. The response contains a
-    # TrustedAdvisorCheckDescription for each check.
+    # TrustedAdvisorCheckDescription for each check. The region must be set
+    # to us-east-1.
     #
     # @option params [required, String] :language
     #   The ISO 639-1 code for the language in which AWS provides support. AWS
@@ -1009,8 +1031,20 @@ module Aws::Support
     # The response contains a TrustedAdvisorCheckRefreshStatus object, which
     # contains these fields:
     #
-    # * **status.** The refresh status of the check: "none", "enqueued",
-    #   "processing", "success", or "abandoned".
+    # * **status.** The refresh status of the check:
+    #
+    #   * `none:` The check is not refreshed or the non-success status
+    #     exceeds the timeout
+    #
+    #   * `enqueued:` The check refresh requests has entered the refresh
+    #     queue
+    #
+    #   * `processing:` The check refresh request is picked up by the rule
+    #     processing engine
+    #
+    #   * `success:` The check is successfully refreshed
+    #
+    #   * `abandoned:` The check refresh has failed
     #
     # * **millisUntilNextRefreshable.** The amount of time, in milliseconds,
     #   until the check is eligible for refresh.
@@ -1093,7 +1127,7 @@ module Aws::Support
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-support'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

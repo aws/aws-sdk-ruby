@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-11-04)
+------------------
+
+* Feature - Documentation updates for dax
+
+1.18.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.17.0 (2019-07-25)
 ------------------
 

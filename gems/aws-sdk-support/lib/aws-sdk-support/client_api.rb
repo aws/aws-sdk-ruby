@@ -392,6 +392,7 @@ module Aws::Support
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Support",
+        "serviceId" => "Support",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSSupport_20130415",
         "uid" => "support-2013-04-15",

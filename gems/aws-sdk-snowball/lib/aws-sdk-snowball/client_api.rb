@@ -54,6 +54,8 @@ module Aws::Snowball
     GetJobUnlockCodeResult = Shapes::StructureShape.new(name: 'GetJobUnlockCodeResult')
     GetSnowballUsageRequest = Shapes::StructureShape.new(name: 'GetSnowballUsageRequest')
     GetSnowballUsageResult = Shapes::StructureShape.new(name: 'GetSnowballUsageResult')
+    GetSoftwareUpdatesRequest = Shapes::StructureShape.new(name: 'GetSoftwareUpdatesRequest')
+    GetSoftwareUpdatesResult = Shapes::StructureShape.new(name: 'GetSoftwareUpdatesResult')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidAddressException = Shapes::StructureShape.new(name: 'InvalidAddressException')
     InvalidInputCombinationException = Shapes::StructureShape.new(name: 'InvalidInputCombinationException')
@@ -266,6 +268,12 @@ module Aws::Snowball
     GetSnowballUsageResult.add_member(:snowball_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "SnowballLimit"))
     GetSnowballUsageResult.add_member(:snowballs_in_use, Shapes::ShapeRef.new(shape: Integer, location_name: "SnowballsInUse"))
     GetSnowballUsageResult.struct_class = Types::GetSnowballUsageResult
+
+    GetSoftwareUpdatesRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    GetSoftwareUpdatesRequest.struct_class = Types::GetSoftwareUpdatesRequest
+
+    GetSoftwareUpdatesResult.add_member(:updates_uri, Shapes::ShapeRef.new(shape: String, location_name: "UpdatesURI"))
+    GetSoftwareUpdatesResult.struct_class = Types::GetSoftwareUpdatesResult
 
     InvalidAddressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidAddressException.struct_class = Types::InvalidAddressException
@@ -566,6 +574,16 @@ module Aws::Snowball
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetSnowballUsageRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSnowballUsageResult)
+      end)
+
+      api.add_operation(:get_software_updates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSoftwareUpdates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSoftwareUpdatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSoftwareUpdatesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
       end)
 
       api.add_operation(:list_cluster_jobs, Seahorse::Model::Operation.new.tap do |o|

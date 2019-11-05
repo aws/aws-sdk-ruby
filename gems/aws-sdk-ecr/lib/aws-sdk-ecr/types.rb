@@ -8,6 +8,24 @@
 module Aws::ECR
   module Types
 
+    # This data type is used in the ImageScanFinding data type.
+    #
+    # @!attribute [rw] key
+    #   The attribute key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value assigned to the attribute key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Attribute AWS API Documentation
+    #
+    class Attribute < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
     # An object representing authorization data for an Amazon ECR registry.
     #
     # @!attribute [rw] authorization_token
@@ -289,6 +307,9 @@ module Aws::ECR
     #           },
     #         ],
     #         image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
+    #         image_scanning_configuration: {
+    #           scan_on_push: false,
+    #         },
     #       }
     #
     # @!attribute [rw] repository_name
@@ -314,12 +335,19 @@ module Aws::ECR
     #   prevent them from being overwritten.
     #   @return [String]
     #
+    # @!attribute [rw] image_scanning_configuration
+    #   The image scanning configuration for the repository. This setting
+    #   determines whether images are scanned for known vulnerabilities
+    #   after being pushed to the repository.
+    #   @return [Types::ImageScanningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryRequest AWS API Documentation
     #
     class CreateRepositoryRequest < Struct.new(
       :repository_name,
       :tags,
-      :image_tag_mutability)
+      :image_tag_mutability,
+      :image_scanning_configuration)
       include Aws::Structure
     end
 
@@ -474,6 +502,107 @@ module Aws::ECR
     #
     class DeleteRepositoryResponse < Struct.new(
       :repository)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeImageScanFindingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         image_id: { # required
+    #           image_digest: "ImageDigest",
+    #           image_tag: "ImageTag",
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to describe the image scan findings for. If you
+    #   do not specify a registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository for the image for which to describe the scan
+    #   findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeImageScanFindings` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value. This value is null when there are no more results
+    #   to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of image scan results returned by
+    #   `DescribeImageScanFindings` in paginated output. When this parameter
+    #   is used, `DescribeImageScanFindings` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `DescribeImageScanFindings` request with the returned
+    #   `nextToken` value. This value can be between 1 and 1000. If this
+    #   parameter is not used, then `DescribeImageScanFindings` returns up
+    #   to 100 results and a `nextToken` value, if applicable.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageScanFindingsRequest AWS API Documentation
+    #
+    class DescribeImageScanFindingsRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @!attribute [rw] image_scan_status
+    #   The current state of the scan.
+    #   @return [Types::ImageScanStatus]
+    #
+    # @!attribute [rw] image_scan_findings
+    #   The information contained in the image scan findings.
+    #   @return [Types::ImageScanFindings]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `DescribeImageScanFindings` request. When the results of a
+    #   `DescribeImageScanFindings` request exceed `maxResults`, this value
+    #   can be used to retrieve the next page of results. This value is null
+    #   when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageScanFindingsResponse AWS API Documentation
+    #
+    class DescribeImageScanFindingsResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_id,
+      :image_scan_status,
+      :image_scan_findings,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1063,6 +1192,14 @@ module Aws::ECR
     #   which the current image was pushed to the repository.
     #   @return [Time]
     #
+    # @!attribute [rw] image_scan_status
+    #   The current state of the scan.
+    #   @return [Types::ImageScanStatus]
+    #
+    # @!attribute [rw] image_scan_findings_summary
+    #   A summary of the last completed image scan.
+    #   @return [Types::ImageScanFindingsSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageDetail AWS API Documentation
     #
     class ImageDetail < Struct.new(
@@ -1071,7 +1208,9 @@ module Aws::ECR
       :image_digest,
       :image_tags,
       :image_size_in_bytes,
-      :image_pushed_at)
+      :image_pushed_at,
+      :image_scan_status,
+      :image_scan_findings_summary)
       include Aws::Structure
     end
 
@@ -1133,6 +1272,134 @@ module Aws::ECR
     #
     class ImageNotFoundException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # Contains information about an image scan finding.
+    #
+    # @!attribute [rw] name
+    #   The name associated with the finding, usually a CVE number.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   A link containing additional details about the security
+    #   vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The finding severity.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   A collection of attributes of the host from which the finding is
+    #   generated.
+    #   @return [Array<Types::Attribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanFinding AWS API Documentation
+    #
+    class ImageScanFinding < Struct.new(
+      :name,
+      :description,
+      :uri,
+      :severity,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # The details of an image scan.
+    #
+    # @!attribute [rw] image_scan_completed_at
+    #   The time of the last completed image scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vulnerability_source_updated_at
+    #   The time when the vulnerability data was last scanned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] findings
+    #   The findings from the image scan.
+    #   @return [Array<Types::ImageScanFinding>]
+    #
+    # @!attribute [rw] finding_severity_counts
+    #   The image vulnerability counts, sorted by severity.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanFindings AWS API Documentation
+    #
+    class ImageScanFindings < Struct.new(
+      :image_scan_completed_at,
+      :vulnerability_source_updated_at,
+      :findings,
+      :finding_severity_counts)
+      include Aws::Structure
+    end
+
+    # A summary of the last completed image scan.
+    #
+    # @!attribute [rw] image_scan_completed_at
+    #   The time of the last completed image scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vulnerability_source_updated_at
+    #   The time when the vulnerability data was last scanned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finding_severity_counts
+    #   The image vulnerability counts, sorted by severity.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanFindingsSummary AWS API Documentation
+    #
+    class ImageScanFindingsSummary < Struct.new(
+      :image_scan_completed_at,
+      :vulnerability_source_updated_at,
+      :finding_severity_counts)
+      include Aws::Structure
+    end
+
+    # The current status of an image scan.
+    #
+    # @!attribute [rw] status
+    #   The current state of an image scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the image scan status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanStatus AWS API Documentation
+    #
+    class ImageScanStatus < Struct.new(
+      :status,
+      :description)
+      include Aws::Structure
+    end
+
+    # The image scanning configuration for a repository.
+    #
+    # @note When making an API call, you may pass ImageScanningConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         scan_on_push: false,
+    #       }
+    #
+    # @!attribute [rw] scan_on_push
+    #   The setting that determines whether images are scanned after being
+    #   pushed to a repository. If set to `true`, images will be scanned
+    #   after being pushed. If this parameter is not specified, it will
+    #   default to `false` and images will not be scanned unless a scan is
+    #   manually started with the StartImageScan API.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanningConfiguration AWS API Documentation
+    #
+    class ImageScanningConfiguration < Struct.new(
+      :scan_on_push)
       include Aws::Structure
     end
 
@@ -1701,6 +1968,65 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutImageScanningConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         image_scanning_configuration: { # required
+    #           scan_on_push: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to update the image scanning configuration
+    #   setting. If you do not specify a registry, the default registry is
+    #   assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository in which to update the image scanning
+    #   configuration setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_scanning_configuration
+    #   The image scanning configuration for the repository. This setting
+    #   determines whether images are scanned for known vulnerabilities
+    #   after being pushed to the repository.
+    #   @return [Types::ImageScanningConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageScanningConfigurationRequest AWS API Documentation
+    #
+    class PutImageScanningConfigurationRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_scanning_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_scanning_configuration
+    #   The image scanning configuration setting for the repository.
+    #   @return [Types::ImageScanningConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageScanningConfigurationResponse AWS API Documentation
+    #
+    class PutImageScanningConfigurationResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_scanning_configuration)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutImageTagMutabilityRequest
     #   data as a hash:
     #
@@ -1844,6 +2170,10 @@ module Aws::ECR
     #   The tag mutability setting for the repository.
     #   @return [String]
     #
+    # @!attribute [rw] image_scanning_configuration
+    #   The image scanning configuration for a repository.
+    #   @return [Types::ImageScanningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Repository AWS API Documentation
     #
     class Repository < Struct.new(
@@ -1852,7 +2182,8 @@ module Aws::ECR
       :repository_name,
       :repository_uri,
       :created_at,
-      :image_tag_mutability)
+      :image_tag_mutability,
+      :image_scanning_configuration)
       include Aws::Structure
     end
 
@@ -1909,6 +2240,19 @@ module Aws::ECR
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryPolicyNotFoundException AWS API Documentation
     #
     class RepositoryPolicyNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified image scan could not be found. Ensure that image
+    # scanning is enabled on the repository and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ScanNotFoundException AWS API Documentation
+    #
+    class ScanNotFoundException < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -1991,6 +2335,67 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :policy_text)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartImageScanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         image_id: { # required
+    #           image_digest: "ImageDigest",
+    #           image_tag: "ImageTag",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to start an image scan request. If you do not
+    #   specify a registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the images to scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScanRequest AWS API Documentation
+    #
+    class StartImageScanRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @!attribute [rw] image_scan_status
+    #   The current state of the scan.
+    #   @return [Types::ImageScanStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScanResponse AWS API Documentation
+    #
+    class StartImageScanResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_id,
+      :image_scan_status)
       include Aws::Structure
     end
 

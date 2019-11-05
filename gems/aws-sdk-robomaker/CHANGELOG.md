@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-11-04)
+------------------
+
+* Feature - RoboMaker Fleet Management launch a feature to verify your robot is ready to download and install the new robot application using a download condition file, which is a script run on the robot prior to downloading the new deployment.
+
+1.17.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2019-10-16)
+------------------
+
+* Feature - This release adds support for ROS2 Dashing as a beta feature
+
 1.15.0 (2019-09-09)
 ------------------
 

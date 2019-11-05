@@ -150,12 +150,17 @@ module Aws::ElastiCache
     #   data as a hash:
     #
     #       {
-    #         replication_group_ids: ["String"], # required
+    #         replication_group_ids: ["String"],
+    #         cache_cluster_ids: ["String"],
     #         service_update_name: "String", # required
     #       }
     #
     # @!attribute [rw] replication_group_ids
     #   The replication group IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cache_cluster_ids
+    #   The cache cluster IDs
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_update_name
@@ -166,6 +171,7 @@ module Aws::ElastiCache
     #
     class BatchApplyUpdateActionMessage < Struct.new(
       :replication_group_ids,
+      :cache_cluster_ids,
       :service_update_name)
       include Aws::Structure
     end
@@ -174,12 +180,17 @@ module Aws::ElastiCache
     #   data as a hash:
     #
     #       {
-    #         replication_group_ids: ["String"], # required
+    #         replication_group_ids: ["String"],
+    #         cache_cluster_ids: ["String"],
     #         service_update_name: "String", # required
     #       }
     #
     # @!attribute [rw] replication_group_ids
     #   The replication group IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cache_cluster_ids
+    #   The cache cluster IDs
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_update_name
@@ -190,6 +201,7 @@ module Aws::ElastiCache
     #
     class BatchStopUpdateActionMessage < Struct.new(
       :replication_group_ids,
+      :cache_cluster_ids,
       :service_update_name)
       include Aws::Structure
     end
@@ -412,6 +424,10 @@ module Aws::ElastiCache
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] auth_token_last_modified_date
+    #   The date the auth token was last modified
+    #   @return [Time]
+    #
     # @!attribute [rw] transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to `true`.
     #
@@ -466,6 +482,7 @@ module Aws::ElastiCache
       :snapshot_retention_limit,
       :snapshot_window,
       :auth_token_enabled,
+      :auth_token_last_modified_date,
       :transit_encryption_enabled,
       :at_rest_encryption_enabled)
       include Aws::Structure
@@ -748,6 +765,55 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The status of the service update on the cache node
+    #
+    # @!attribute [rw] cache_node_id
+    #   The node ID of the cache cluster
+    #   @return [String]
+    #
+    # @!attribute [rw] node_update_status
+    #   The update status of the node
+    #   @return [String]
+    #
+    # @!attribute [rw] node_deletion_date
+    #   The deletion date of the node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_start_date
+    #   The start date of the update for a node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_end_date
+    #   The end date of the update for a node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_initiated_by
+    #   Reflects whether the update was initiated by the customer or
+    #   automatically applied
+    #   @return [String]
+    #
+    # @!attribute [rw] node_update_initiated_date
+    #   The date when the update is triggered
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_status_modified_date
+    #   The date when the NodeUpdateStatus was last modified&gt;
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNodeUpdateStatus AWS API Documentation
+    #
+    class CacheNodeUpdateStatus < Struct.new(
+      :cache_node_id,
+      :node_update_status,
+      :node_deletion_date,
+      :node_update_start_date,
+      :node_update_end_date,
+      :node_update_initiated_by,
+      :node_update_initiated_date,
+      :node_update_status_modified_date)
+      include Aws::Structure
+    end
+
     # Represents the output of a `CreateCacheParameterGroup` operation.
     #
     # @!attribute [rw] cache_parameter_group_name
@@ -985,6 +1051,45 @@ module Aws::ElastiCache
     class CacheSubnetGroupMessage < Struct.new(
       :marker,
       :cache_subnet_groups)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CompleteMigrationMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The ID of the replication group to which data is being migrated.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   Forces the migration to stop without ensuring that data is in sync.
+    #   It is recommended to use this option only to abort the migration and
+    #   not recommended when application wants to continue migration to
+    #   ElastiCache.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigrationMessage AWS API Documentation
+    #
+    class CompleteMigrationMessage < Struct.new(
+      :replication_group_id,
+      :force)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigrationResponse AWS API Documentation
+    #
+    class CompleteMigrationResponse < Struct.new(
+      :replication_group)
       include Aws::Structure
     end
 
@@ -1488,8 +1593,9 @@ module Aws::ElastiCache
     #   * Must be at least 16 characters and no more than 128 characters in
     #     length.
     #
-    #   * Cannot contain any of the following characters: '/', '"', or
-    #     '@'.
+    #   * The only permitted printable special characters are !, &amp;, #,
+    #     $, ^, &lt;, &gt;, and -. Other printable special characters cannot
+    #     be used in the AUTH token.
     #
     #   For more information, see [AUTH password][1] at
     #   http://redis.io/commands/AUTH.
@@ -2108,8 +2214,9 @@ module Aws::ElastiCache
     #   * Must be at least 16 characters and no more than 128 characters in
     #     length.
     #
-    #   * Cannot contain any of the following characters: '/', '"', or
-    #     '@'.
+    #   * The only permitted printable special characters are !, &amp;, #,
+    #     $, ^, &lt;, &gt;, and -. Other printable special characters cannot
+    #     be used in the AUTH token.
     #
     #   For more information, see [AUTH password][1] at
     #   http://redis.io/commands/AUTH.
@@ -2257,6 +2364,32 @@ module Aws::ElastiCache
     #
     class CreateSnapshotResult < Struct.new(
       :snapshot)
+      include Aws::Structure
+    end
+
+    # The endpoint from which data should be migrated.
+    #
+    # @note When making an API call, you may pass CustomerNodeEndpoint
+    #   data as a hash:
+    #
+    #       {
+    #         address: "String",
+    #         port: 1,
+    #       }
+    #
+    # @!attribute [rw] address
+    #   The address of the node endpoint
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port of the node endpoint
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CustomerNodeEndpoint AWS API Documentation
+    #
+    class CustomerNodeEndpoint < Struct.new(
+      :address,
+      :port)
       include Aws::Structure
     end
 
@@ -3468,6 +3601,8 @@ module Aws::ElastiCache
     #       {
     #         service_update_name: "String",
     #         replication_group_ids: ["String"],
+    #         cache_cluster_ids: ["String"],
+    #         engine: "String",
     #         service_update_status: ["available"], # accepts available, cancelled, expired
     #         service_update_time_range: {
     #           start_time: Time.now,
@@ -3486,6 +3621,15 @@ module Aws::ElastiCache
     # @!attribute [rw] replication_group_ids
     #   The replication group IDs
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] cache_cluster_ids
+    #   The cache cluster IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] engine
+    #   The Elasticache engine to which the update applies. Either Redis or
+    #   Memcached
+    #   @return [String]
     #
     # @!attribute [rw] service_update_status
     #   The status of the service update
@@ -3520,6 +3664,8 @@ module Aws::ElastiCache
     class DescribeUpdateActionsMessage < Struct.new(
       :service_update_name,
       :replication_group_ids,
+      :cache_cluster_ids,
+      :engine,
       :service_update_status,
       :service_update_time_range,
       :update_action_status,
@@ -3841,6 +3987,8 @@ module Aws::ElastiCache
     #         snapshot_retention_limit: 1,
     #         snapshot_window: "String",
     #         cache_node_type: "String",
+    #         auth_token: "String",
+    #         auth_token_update_strategy: "SET", # accepts SET, ROTATE
     #       }
     #
     # @!attribute [rw] cache_cluster_id
@@ -3917,16 +4065,9 @@ module Aws::ElastiCache
     #   Availability Zone.
     #
     #    Only newly created nodes are located in different Availability
-    #   Zones. For instructions on how to move existing Memcached nodes to
-    #   different Availability Zones, see the **Availability Zone
-    #   Considerations** section of [Cache Node Considerations for
-    #   Memcached][1].
+    #   Zones.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html
     #   @return [String]
     #
     # @!attribute [rw] new_availability_zones
@@ -4138,6 +4279,42 @@ module Aws::ElastiCache
     #   A valid cache node type that you want to scale this cluster up to.
     #   @return [String]
     #
+    # @!attribute [rw] auth_token
+    #   Reserved parameter. The password used to access a password protected
+    #   server. This parameter must be specified with the
+    #   `auth-token-update` parameter. Password constraints:
+    #
+    #   * Must be only printable ASCII characters
+    #
+    #   * Must be at least 16 characters and no more than 128 characters in
+    #     length
+    #
+    #   * Cannot contain any of the following characters: '/', '"', or
+    #     '@', '%'
+    #
+    #   For more information, see AUTH password at [AUTH][1].
+    #
+    #
+    #
+    #   [1]: http://redis.io/commands/AUTH
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token_update_strategy
+    #   Specifies the strategy to use to update the AUTH token. This
+    #   parameter must be specified with the `auth-token` parameter.
+    #   Possible values:
+    #
+    #   * Rotate
+    #
+    #   * Set
+    #
+    #   For more information, see [Authenticating Users with Redis AUTH][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterMessage AWS API Documentation
     #
     class ModifyCacheClusterMessage < Struct.new(
@@ -4157,7 +4334,9 @@ module Aws::ElastiCache
       :auto_minor_version_upgrade,
       :snapshot_retention_limit,
       :snapshot_window,
-      :cache_node_type)
+      :cache_node_type,
+      :auth_token,
+      :auth_token_update_strategy)
       include Aws::Structure
     end
 
@@ -4270,6 +4449,7 @@ module Aws::ElastiCache
     #         primary_cluster_id: "String",
     #         snapshotting_cluster_id: "String",
     #         automatic_failover_enabled: false,
+    #         node_group_id: "String",
     #         cache_security_group_names: ["String"],
     #         security_group_ids: ["String"],
     #         preferred_maintenance_window: "String",
@@ -4282,7 +4462,8 @@ module Aws::ElastiCache
     #         snapshot_retention_limit: 1,
     #         snapshot_window: "String",
     #         cache_node_type: "String",
-    #         node_group_id: "String",
+    #         auth_token: "String",
+    #         auth_token_update_strategy: "SET", # accepts SET, ROTATE
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -4322,6 +4503,10 @@ module Aws::ElastiCache
     #
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] node_group_id
+    #   Deprecated. This parameter is not used.
+    #   @return [String]
     #
     # @!attribute [rw] cache_security_group_names
     #   A list of cache security group names to authorize for the clusters
@@ -4454,8 +4639,40 @@ module Aws::ElastiCache
     #   group to.
     #   @return [String]
     #
-    # @!attribute [rw] node_group_id
-    #   Deprecated. This parameter is not used.
+    # @!attribute [rw] auth_token
+    #   Reserved parameter. The password used to access a password protected
+    #   server. This parameter must be specified with the
+    #   `auth-token-update-strategy ` parameter. Password constraints:
+    #
+    #   * Must be only printable ASCII characters
+    #
+    #   * Must be at least 16 characters and no more than 128 characters in
+    #     length
+    #
+    #   * Cannot contain any of the following characters: '/', '"', or
+    #     '@', '%'
+    #
+    #   For more information, see AUTH password at [AUTH][1].
+    #
+    #
+    #
+    #   [1]: http://redis.io/commands/AUTH
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token_update_strategy
+    #   Specifies the strategy to use to update the AUTH token. This
+    #   parameter must be specified with the `auth-token` parameter.
+    #   Possible values:
+    #
+    #   * Rotate
+    #
+    #   * Set
+    #
+    #   For more information, see [Authenticating Users with Redis AUTH][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupMessage AWS API Documentation
@@ -4466,6 +4683,7 @@ module Aws::ElastiCache
       :primary_cluster_id,
       :snapshotting_cluster_id,
       :automatic_failover_enabled,
+      :node_group_id,
       :cache_security_group_names,
       :security_group_ids,
       :preferred_maintenance_window,
@@ -4478,7 +4696,8 @@ module Aws::ElastiCache
       :snapshot_retention_limit,
       :snapshot_window,
       :cache_node_type,
-      :node_group_id)
+      :auth_token,
+      :auth_token_update_strategy)
       include Aws::Structure
     end
 
@@ -4977,13 +5196,18 @@ module Aws::ElastiCache
     #   to.
     #   @return [String]
     #
+    # @!attribute [rw] auth_token_status
+    #   The auth token status
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
       :num_cache_nodes,
       :cache_node_ids_to_remove,
       :engine_version,
-      :cache_node_type)
+      :cache_node_type,
+      :auth_token_status)
       include Aws::Structure
     end
 
@@ -4992,6 +5216,10 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] replication_group_id
     #   The ID of the replication group
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_cluster_id
+    #   The ID of the cache cluster
     #   @return [String]
     #
     # @!attribute [rw] service_update_name
@@ -5006,6 +5234,7 @@ module Aws::ElastiCache
     #
     class ProcessedUpdateAction < Struct.new(
       :replication_group_id,
+      :cache_cluster_id,
       :service_update_name,
       :update_action_status)
       include Aws::Structure
@@ -5266,6 +5495,10 @@ module Aws::ElastiCache
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] auth_token_last_modified_date
+    #   The date the auth token was last modified
+    #   @return [Time]
+    #
     # @!attribute [rw] transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to `true`.
     #
@@ -5315,6 +5548,7 @@ module Aws::ElastiCache
       :cluster_enabled,
       :cache_node_type,
       :auth_token_enabled,
+      :auth_token_last_modified_date,
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :kms_key_id)
@@ -5367,12 +5601,17 @@ module Aws::ElastiCache
     #   The status of an online resharding operation.
     #   @return [Types::ReshardingStatus]
     #
+    # @!attribute [rw] auth_token_status
+    #   The auth token status
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues AWS API Documentation
     #
     class ReplicationGroupPendingModifiedValues < Struct.new(
       :primary_cluster_id,
       :automatic_failover_status,
-      :resharding)
+      :resharding,
+      :auth_token_status)
       include Aws::Structure
     end
 
@@ -5876,11 +6115,13 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The Redis engine to which the service update applies
+    #   The Elasticache engine to which the update applies. Either Redis or
+    #   Memcached
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The Redis engine version to which the service update applies
+    #   The Elasticache engine version to which the update applies. Either
+    #   Redis or Memcached engine version
     #   @return [String]
     #
     # @!attribute [rw] auto_update_after_recommended_apply_by_date
@@ -6204,6 +6445,48 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartMigrationMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         customer_node_endpoint_list: [ # required
+    #           {
+    #             address: "String",
+    #             port: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The ID of the replication group to which data should be migrated.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_node_endpoint_list
+    #   List of endpoints from which data should be migrated. For Redis
+    #   (cluster mode disabled), list should have only one element.
+    #   @return [Array<Types::CustomerNodeEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigrationMessage AWS API Documentation
+    #
+    class StartMigrationMessage < Struct.new(
+      :replication_group_id,
+      :customer_node_endpoint_list)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigrationResponse AWS API Documentation
+    #
+    class StartMigrationResponse < Struct.new(
+      :replication_group)
+      include Aws::Structure
+    end
+
     # Represents the subnet associated with a cluster. This parameter refers
     # to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and
     # used with ElastiCache.
@@ -6340,6 +6623,10 @@ module Aws::ElastiCache
     #   The replication group ID
     #   @return [String]
     #
+    # @!attribute [rw] cache_cluster_id
+    #   The ID of the cache cluster
+    #   @return [String]
+    #
     # @!attribute [rw] service_update_name
     #   The unique ID of the service update
     #   @return [String]
@@ -6357,6 +6644,7 @@ module Aws::ElastiCache
     #
     class UnprocessedUpdateAction < Struct.new(
       :replication_group_id,
+      :cache_cluster_id,
       :service_update_name,
       :error_type,
       :error_message)
@@ -6367,6 +6655,10 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] replication_group_id
     #   The ID of the replication group
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_cluster_id
+    #   The ID of the cache cluster
     #   @return [String]
     #
     # @!attribute [rw] service_update_name
@@ -6427,14 +6719,24 @@ module Aws::ElastiCache
     #   The status of the service update on the node group
     #   @return [Array<Types::NodeGroupUpdateStatus>]
     #
+    # @!attribute [rw] cache_node_update_status
+    #   The status of the service update on the cache node
+    #   @return [Array<Types::CacheNodeUpdateStatus>]
+    #
     # @!attribute [rw] estimated_update_time
     #   The estimated length of time for the update to complete
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The Elasticache engine to which the update applies. Either Redis or
+    #   Memcached
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UpdateAction AWS API Documentation
     #
     class UpdateAction < Struct.new(
       :replication_group_id,
+      :cache_cluster_id,
       :service_update_name,
       :service_update_release_date,
       :service_update_severity,
@@ -6447,7 +6749,9 @@ module Aws::ElastiCache
       :update_action_status_modified_date,
       :sla_met,
       :node_group_update_status,
-      :estimated_update_time)
+      :cache_node_update_status,
+      :estimated_update_time,
+      :engine)
       include Aws::Structure
     end
 

@@ -381,6 +381,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -412,6 +413,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect AWS API Documentation
     #
@@ -455,7 +457,7 @@ module Aws::DirectConnect
     #   The dedicated VLAN provisioned to the hosted connection.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to assign to the hosted connection.
+    #   The tags associated with the connection.
     #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -475,6 +477,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -512,6 +515,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection AWS API Documentation
     #
@@ -907,6 +911,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -935,6 +940,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag AWS API Documentation
     #
@@ -979,6 +985,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1007,6 +1014,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection AWS API Documentation
     #
@@ -1382,7 +1390,11 @@ module Aws::DirectConnect
     #   The ID of the LAG.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to assign to the connection.
+    #   The tags to associate with the lag.
+    #
+    # @option params [String] :provider_name
+    #   The name of the service provider associated with the requested
+    #   connection.
     #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1402,6 +1414,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1416,6 +1429,7 @@ module Aws::DirectConnect
     #         value: "TagValue",
     #       },
     #     ],
+    #     provider_name: "ProviderName",
     #   })
     #
     # @example Response structure
@@ -1438,6 +1452,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection AWS API Documentation
     #
@@ -1507,6 +1522,9 @@ module Aws::DirectConnect
     #
     # @option params [Array<Types::RouteFilterPrefix>] :add_allowed_prefixes_to_direct_connect_gateway
     #   The Amazon VPC prefixes to advertise to the Direct Connect gateway
+    #
+    #   This parameter is required when you create an association to a transit
+    #   gateway.
     #
     #   For information about how to set the prefixes, see [Allowed
     #   Prefixes][1] in the *AWS Direct Connect User Guide*.
@@ -1672,7 +1690,10 @@ module Aws::DirectConnect
     #   The ID of the LAG.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to assign to the interconnect,
+    #   The tags to associate with the interconnect.
+    #
+    # @option params [String] :provider_name
+    #   The name of the service provider associated with the interconnect.
     #
     # @return [Types::Interconnect] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1689,6 +1710,7 @@ module Aws::DirectConnect
     #   * {Types::Interconnect#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Interconnect#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Interconnect#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Interconnect#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1703,6 +1725,7 @@ module Aws::DirectConnect
     #         value: "TagValue",
     #       },
     #     ],
+    #     provider_name: "ProviderName",
     #   })
     #
     # @example Response structure
@@ -1722,6 +1745,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect AWS API Documentation
     #
@@ -1778,14 +1802,13 @@ module Aws::DirectConnect
     #   The ID of an existing connection to migrate to the LAG.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to assign to the link aggregation group (LAG).
+    #   The tags to associate with the LAG.
     #
     # @option params [Array<Types::Tag>] :child_connection_tags
-    #   The tags to assign to the child connections of the LAG. Only newly
-    #   created child connections as the result of creating a LAG connection
-    #   are assigned the provided tags. The tags are not assigned to an
-    #   existing connection that is provided via the “connectionId” parameter
-    #   that will be migrated to the LAG.
+    #   The tags to associate with the automtically created LAGs.
+    #
+    # @option params [String] :provider_name
+    #   The name of the service provider associated with the LAG.
     #
     # @return [Types::Lag] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1805,6 +1828,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Lag#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1826,6 +1850,7 @@ module Aws::DirectConnect
     #         value: "TagValue",
     #       },
     #     ],
+    #     provider_name: "ProviderName",
     #   })
     #
     # @example Response structure
@@ -1860,12 +1885,14 @@ module Aws::DirectConnect
     #   resp.connections[0].tags #=> Array
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag AWS API Documentation
     #
@@ -2305,6 +2332,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2332,6 +2360,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection AWS API Documentation
     #
@@ -2344,8 +2373,8 @@ module Aws::DirectConnect
 
     # Deletes the specified Direct Connect gateway. You must first delete
     # all virtual interfaces that are attached to the Direct Connect gateway
-    # and disassociate all virtual private gateways that are associated with
-    # the Direct Connect gateway.
+    # and disassociate all virtual private gateways associated with the
+    # Direct Connect gateway.
     #
     # @option params [required, String] :direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
@@ -2380,6 +2409,11 @@ module Aws::DirectConnect
 
     # Deletes the association between the specified Direct Connect gateway
     # and virtual private gateway.
+    #
+    # We recommend that you specify the `associationID` to delete the
+    # association. Alternatively, if you own virtual gateway and a Direct
+    # Connect gateway association, you can specify the `virtualGatewayId`
+    # and `directConnectGatewayId` to delete an association.
     #
     # @option params [String] :association_id
     #   The ID of the Direct Connect gateway association.
@@ -2524,6 +2558,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Lag#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2563,12 +2598,14 @@ module Aws::DirectConnect
     #   resp.connections[0].tags #=> Array
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag AWS API Documentation
     #
@@ -2696,6 +2733,7 @@ module Aws::DirectConnect
     #   resp.connections[0].tags #=> Array
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
     #
@@ -2749,6 +2787,7 @@ module Aws::DirectConnect
     #   resp.connections[0].tags #=> Array
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
     #
@@ -3053,6 +3092,7 @@ module Aws::DirectConnect
     #   resp.connections[0].tags #=> Array
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections AWS API Documentation
     #
@@ -3150,6 +3190,7 @@ module Aws::DirectConnect
     #   resp.interconnects[0].tags #=> Array
     #   resp.interconnects[0].tags[0].key #=> String
     #   resp.interconnects[0].tags[0].value #=> String
+    #   resp.interconnects[0].provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects AWS API Documentation
     #
@@ -3208,12 +3249,14 @@ module Aws::DirectConnect
     #   resp.lags[0].connections[0].tags #=> Array
     #   resp.lags[0].connections[0].tags[0].key #=> String
     #   resp.lags[0].connections[0].tags[0].value #=> String
+    #   resp.lags[0].connections[0].provider_name #=> String
     #   resp.lags[0].allows_hosted_connections #=> Boolean
     #   resp.lags[0].jumbo_frame_capable #=> Boolean
     #   resp.lags[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #   resp.lags[0].tags #=> Array
     #   resp.lags[0].tags[0].key #=> String
     #   resp.lags[0].tags[0].value #=> String
+    #   resp.lags[0].provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags AWS API Documentation
     #
@@ -3293,6 +3336,8 @@ module Aws::DirectConnect
     #   resp.locations[0].region #=> String
     #   resp.locations[0].available_port_speeds #=> Array
     #   resp.locations[0].available_port_speeds[0] #=> String
+    #   resp.locations[0].available_providers #=> Array
+    #   resp.locations[0].available_providers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations AWS API Documentation
     #
@@ -3473,6 +3518,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3501,6 +3547,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag AWS API Documentation
     #
@@ -3522,7 +3569,7 @@ module Aws::DirectConnect
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags to assign.
+    #   The tags to add.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3680,6 +3727,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Lag#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3721,12 +3769,14 @@ module Aws::DirectConnect
     #   resp.connections[0].tags #=> Array
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag AWS API Documentation
     #
@@ -3851,7 +3901,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

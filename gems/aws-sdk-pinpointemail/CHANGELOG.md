@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2019-10-07)
+------------------
+
+* Feature - This release of the Amazon Pinpoint Email API introduces support for using and managing message templates.
+
 1.14.0 (2019-07-25)
 ------------------
 

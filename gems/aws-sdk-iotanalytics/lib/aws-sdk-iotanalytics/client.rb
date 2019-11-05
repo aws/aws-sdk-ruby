@@ -348,10 +348,14 @@ module Aws::IoTAnalytics
     #   The name of the channel.
     #
     # @option params [Types::ChannelStorage] :channel_storage
-    #   Where channel data is stored.
+    #   Where channel data is stored. You may choose one of
+    #   "serviceManagedS3" or "customerManagedS3" storage. If not
+    #   specified, the default is "serviceManagedS3". This cannot be changed
+    #   after creation of the channel.
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   How long, in days, message data is kept for the channel.
+    #   How long, in days, message data is kept for the channel. When
+    #   "customerManagedS3" storage is selected, this parameter is ignored.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the channel.
@@ -584,10 +588,14 @@ module Aws::IoTAnalytics
     #   The name of the data store.
     #
     # @option params [Types::DatastoreStorage] :datastore_storage
-    #   Where data store data is stored.
+    #   Where data store data is stored. You may choose one of
+    #   "serviceManagedS3" or "customerManagedS3" storage. If not
+    #   specified, the default is "serviceManagedS3". This cannot be changed
+    #   after the data store is created.
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   How long, in days, message data is kept for the data store.
+    #   How long, in days, message data is kept for the data store. When
+    #   "customerManagedS3" storage is selected, this parameter is ignored.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the data store.
@@ -637,10 +645,10 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates a pipeline. A pipeline consumes messages from one or more
-    # channels and allows you to process the messages before storing them in
-    # a data store. You must specify both a `channel` and a `datastore`
-    # activity and, optionally, as many as 23 additional activities in the
+    # Creates a pipeline. A pipeline consumes messages from a channel and
+    # allows you to process the messages before storing them in a data
+    # store. You must specify both a `channel` and a `datastore` activity
+    # and, optionally, as many as 23 additional activities in the
     # `pipelineActivities` array.
     #
     # @option params [required, String] :pipeline_name
@@ -870,7 +878,8 @@ module Aws::IoTAnalytics
     #
     # @option params [Boolean] :include_statistics
     #   If true, additional statistical information about the channel is
-    #   included in the response.
+    #   included in the response. This feature cannot be used with a channel
+    #   whose S3 storage is customer-managed.
     #
     # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -974,8 +983,9 @@ module Aws::IoTAnalytics
     #   The name of the data store
     #
     # @option params [Boolean] :include_statistics
-    #   If true, additional statistical information about the datastore is
-    #   included in the response.
+    #   If true, additional statistical information about the data store is
+    #   included in the response. This feature cannot be used with a data
+    #   store whose S3 storage is customer-managed.
     #
     # @return [Types::DescribeDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1228,6 +1238,7 @@ module Aws::IoTAnalytics
     #   resp.dataset_content_summaries[0].status.reason #=> String
     #   resp.dataset_content_summaries[0].creation_time #=> Time
     #   resp.dataset_content_summaries[0].schedule_time #=> Time
+    #   resp.dataset_content_summaries[0].completion_time #=> Time
     #   resp.next_token #=> String
     #
     # @overload list_dataset_contents(params = {})
@@ -1653,10 +1664,15 @@ module Aws::IoTAnalytics
     #   The name of the channel to be updated.
     #
     # @option params [Types::ChannelStorage] :channel_storage
-    #   Where channel data is stored.
+    #   Where channel data is stored. You may choose one of
+    #   "serviceManagedS3" or "customerManagedS3" storage. If not
+    #   specified, the default is "serviceManagedS3". This cannot be changed
+    #   after creation of the channel.
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   How long, in days, message data is kept for the channel.
+    #   How long, in days, message data is kept for the channel. The retention
+    #   period cannot be updated if the channel's S3 storage is
+    #   customer-managed.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1809,10 +1825,15 @@ module Aws::IoTAnalytics
     #   The name of the data store to be updated.
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   How long, in days, message data is kept for the data store.
+    #   How long, in days, message data is kept for the data store. The
+    #   retention period cannot be updated if the data store's S3 storage is
+    #   customer-managed.
     #
     # @option params [Types::DatastoreStorage] :datastore_storage
-    #   Where data store data is stored.
+    #   Where data store data is stored. You may choose one of
+    #   "serviceManagedS3" or "customerManagedS3" storage. If not
+    #   specified, the default is "serviceManagedS3". This cannot be changed
+    #   after the data store is created.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1952,7 +1973,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

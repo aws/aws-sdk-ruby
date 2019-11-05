@@ -475,7 +475,7 @@ module Aws::RDS
     #   A list of event categories that trigger notifications for a event
     #   notification subscription.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [Event::Collection]
     def events(options = {})
       batches = Enumerator.new do |y|
@@ -519,7 +519,7 @@ module Aws::RDS
     #
     #   Valid Values: `user | system | engine-default`
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [Parameter::Collection]
     def parameters(options = {})
       batches = Enumerator.new do |y|

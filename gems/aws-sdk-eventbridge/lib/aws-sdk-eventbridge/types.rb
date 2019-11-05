@@ -1472,12 +1472,14 @@ module Aws::EventBridge
     #
     # @!attribute [rw] detail_type
     #   Free-form string used to decide which fields to expect in the event
-    #   detail.
+    #   detail. This field is required.
     #   @return [String]
     #
     # @!attribute [rw] detail
-    #   A valid JSON string. There is no other schema imposed. The JSON
-    #   string can contain fields and nested subobjects.
+    #   A valid JSON object. There is no other schema imposed. The JSON
+    #   object can contain fields and nested subobjects.
+    #
+    #   This field is required.
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
@@ -1583,7 +1585,8 @@ module Aws::EventBridge
     #   @return [Time]
     #
     # @!attribute [rw] source
-    #   The event source that is generating the evntry.
+    #   The event source that is generating the evntry. This field is
+    #   required.
     #   @return [String]
     #
     # @!attribute [rw] resources
@@ -1594,12 +1597,13 @@ module Aws::EventBridge
     #
     # @!attribute [rw] detail_type
     #   A free-form string used to decide which fields to expect in the
-    #   event detail.
+    #   event detail. This field is required.
     #   @return [String]
     #
     # @!attribute [rw] detail
-    #   A valid JSON string. There is no other schema imposed. The JSON
-    #   string can contain fields and nested subobjects.
+    #   A valid JSON object. There is no other schema imposed. The JSON
+    #   object can contain fields and nested subobjects. This field is
+    #   required.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPartnerEventsRequestEntry AWS API Documentation
@@ -1688,8 +1692,8 @@ module Aws::EventBridge
     #   rules that might match undesirable events. To create more secure
     #   rules, make sure that the event pattern for each rule contains an
     #   `account` field with a specific account ID to receive events from.
-    #   Rules with an account field don't match any events sent from other
-    #   accounts.
+    #   Rules that have an account field match events sent only from
+    #   accounts that are listed in the rule's `account` field.
     #   @return [String]
     #
     # @!attribute [rw] statement_id
@@ -1750,6 +1754,9 @@ module Aws::EventBridge
     #
     # @!attribute [rw] name
     #   The name of the rule that you're creating or updating.
+    #
+    #   A rule can't have the same name as another rule in the same Region
+    #   or on the same event bus.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
@@ -2316,7 +2323,9 @@ module Aws::EventBridge
     #       }
     #
     # @!attribute [rw] id
-    #   The ID of the target.
+    #   A name for the target. Use a string that will help you identify the
+    #   target. Each target associated with a rule must have an `Id` unique
+    #   for that rule.
     #   @return [String]
     #
     # @!attribute [rw] arn

@@ -353,6 +353,12 @@ module Aws::MarketplaceCommerceAnalytics
     #   * **disbursed\_amount\_by\_age\_of\_disbursed\_funds**
     #     From 2015-01-26 to present: Available every 30 days by 24:00 UTC.
     #
+    #   * **disbursed\_amount\_by\_age\_of\_past\_due\_funds**
+    #     From 2018-04-07 to present: Available every 30 days by 24:00 UTC.
+    #
+    #   * **disbursed\_amount\_by\_uncollected\_funds\_breakdown**
+    #     From 2019-10-04 to present: Available every 30 days by 24:00 UTC.
+    #
     #   * **customer\_profile\_by\_industry**
     #     From 2015-10-01 to 2017-06-29: Available daily by 24:00 UTC.
     #
@@ -424,7 +430,7 @@ module Aws::MarketplaceCommerceAnalytics
     # @example Request syntax with placeholder values
     #
     #   resp = client.generate_data_set({
-    #     data_set_type: "customer_subscriber_hourly_monthly_subscriptions", # required, accepts customer_subscriber_hourly_monthly_subscriptions, customer_subscriber_annual_subscriptions, daily_business_usage_by_instance_type, daily_business_fees, daily_business_free_trial_conversions, daily_business_new_instances, daily_business_new_product_subscribers, daily_business_canceled_product_subscribers, monthly_revenue_billing_and_revenue_data, monthly_revenue_annual_subscriptions, monthly_revenue_field_demonstration_usage, monthly_revenue_flexible_payment_schedule, disbursed_amount_by_product, disbursed_amount_by_product_with_uncollected_funds, disbursed_amount_by_instance_hours, disbursed_amount_by_customer_geo, disbursed_amount_by_age_of_uncollected_funds, disbursed_amount_by_age_of_disbursed_funds, customer_profile_by_industry, customer_profile_by_revenue, customer_profile_by_geography, sales_compensation_billed_revenue, us_sales_and_use_tax_records
+    #     data_set_type: "customer_subscriber_hourly_monthly_subscriptions", # required, accepts customer_subscriber_hourly_monthly_subscriptions, customer_subscriber_annual_subscriptions, daily_business_usage_by_instance_type, daily_business_fees, daily_business_free_trial_conversions, daily_business_new_instances, daily_business_new_product_subscribers, daily_business_canceled_product_subscribers, monthly_revenue_billing_and_revenue_data, monthly_revenue_annual_subscriptions, monthly_revenue_field_demonstration_usage, monthly_revenue_flexible_payment_schedule, disbursed_amount_by_product, disbursed_amount_by_product_with_uncollected_funds, disbursed_amount_by_instance_hours, disbursed_amount_by_customer_geo, disbursed_amount_by_age_of_uncollected_funds, disbursed_amount_by_age_of_disbursed_funds, disbursed_amount_by_age_of_past_due_funds, disbursed_amount_by_uncollected_funds_breakdown, customer_profile_by_industry, customer_profile_by_revenue, customer_profile_by_geography, sales_compensation_billed_revenue, us_sales_and_use_tax_records
     #     data_set_publication_date: Time.now, # required
     #     role_name_arn: "RoleNameArn", # required
     #     destination_s3_bucket_name: "DestinationS3BucketName", # required
@@ -552,7 +558,7 @@ module Aws::MarketplaceCommerceAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecommerceanalytics'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -191,7 +191,7 @@ module Aws::EC2
     #
     #   routetableassociation = route_table.associate_with_subnet({
     #     dry_run: false,
-    #     subnet_id: "String", # required
+    #     subnet_id: "SubnetId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -217,13 +217,13 @@ module Aws::EC2
     #     destination_cidr_block: "String",
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
-    #     egress_only_internet_gateway_id: "String",
-    #     gateway_id: "String",
-    #     instance_id: "String",
-    #     nat_gateway_id: "String",
-    #     transit_gateway_id: "String",
-    #     network_interface_id: "String",
-    #     vpc_peering_connection_id: "String",
+    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
+    #     gateway_id: "RouteTableGatewayId",
+    #     instance_id: "InstanceId",
+    #     nat_gateway_id: "NatGatewayId",
+    #     transit_gateway_id: "TransitGatewayId",
+    #     network_interface_id: "NetworkInterfaceId",
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :destination_cidr_block

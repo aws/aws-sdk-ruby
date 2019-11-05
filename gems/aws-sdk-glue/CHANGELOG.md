@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2019-10-07)
+------------------
+
+* Feature - AWS Glue now provides ability to use custom certificates for JDBC Connections.
+
 1.44.0 (2019-09-19)
 ------------------
 

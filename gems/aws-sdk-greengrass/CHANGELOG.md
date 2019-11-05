@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-10-11)
+------------------
+
+* Feature - Greengrass OTA service supports Raspbian/Armv6l platforms.
+
 1.25.0 (2019-09-20)
 ------------------
 

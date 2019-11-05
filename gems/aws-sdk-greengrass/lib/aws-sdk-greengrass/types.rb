@@ -1574,7 +1574,7 @@ module Aws::Greengrass
     #         software_to_update: "core", # required, accepts core, ota_agent
     #         update_agent_log_level: "NONE", # accepts NONE, TRACE, DEBUG, VERBOSE, INFO, WARN, ERROR, FATAL
     #         update_targets: ["__string"], # required
-    #         update_targets_architecture: "armv7l", # required, accepts armv7l, x86_64, aarch64, openwrt
+    #         update_targets_architecture: "armv6l", # required, accepts armv6l, armv7l, x86_64, aarch64, openwrt
     #         update_targets_operating_system: "ubuntu", # required, accepts ubuntu, raspbian, amazon_linux
     #       }
     #

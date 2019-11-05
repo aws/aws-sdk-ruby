@@ -949,6 +949,16 @@ module Aws::SSM
 
     # Creates a new maintenance window.
     #
+    # <note markdown="1"> The value you specify for `Duration` determines the specific end time
+    # for the maintenance window based on the time it begins. No maintenance
+    # window tasks are permitted to start after the resulting endtime minus
+    # the number of hours you specify for `Cutoff`. For example, if the
+    # maintenance window starts at 3 PM, the duration is three hours, and
+    # the value you specify for `Cutoff` is one hour, no maintenance window
+    # tasks can start after 5 PM.
+    #
+    #  </note>
+    #
     # @option params [required, String] :name
     #   The name of the maintenance window.
     #
@@ -7578,6 +7588,9 @@ module Aws::SSM
     # making the call. For information, see [ Install the Session Manager
     # Plugin for the AWS CLI][1] in the *AWS Systems Manager User Guide*.
     #
+    #  AWS Tools for PowerShell usage: Start-SSMSession is not currently
+    # supported by AWS Tools for PowerShell on Windows local machines.
+    #
     #  </note>
     #
     #
@@ -8071,6 +8084,16 @@ module Aws::SSM
 
     # Updates an existing maintenance window. Only specified parameters are
     # modified.
+    #
+    # <note markdown="1"> The value you specify for `Duration` determines the specific end time
+    # for the maintenance window based on the time it begins. No maintenance
+    # window tasks are permitted to start after the resulting endtime minus
+    # the number of hours you specify for `Cutoff`. For example, if the
+    # maintenance window starts at 3 PM, the duration is three hours, and
+    # the value you specify for `Cutoff` is one hour, no maintenance window
+    # tasks can start after 5 PM.
+    #
+    #  </note>
     #
     # @option params [required, String] :window_id
     #   The ID of the maintenance window to update.
@@ -8920,7 +8943,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

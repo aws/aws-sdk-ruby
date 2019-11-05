@@ -42,6 +42,6 @@ require_relative 'aws-sdk-lex/customizations'
 # @service
 module Aws::Lex
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.21.0'
 
 end

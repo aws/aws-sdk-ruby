@@ -372,6 +372,86 @@ module Aws::AppMesh
     #     mesh_name: "ResourceName", # required
     #     route_name: "ResourceName", # required
     #     spec: { # required
+    #       grpc_route: {
+    #         action: { # required
+    #           weighted_targets: [ # required
+    #             {
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         match: { # required
+    #           metadata: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method_name: "MethodName",
+    #           service_name: "ServiceName",
+    #         },
+    #         retry_policy: {
+    #           grpc_retry_events: ["cancelled"], # accepts cancelled, deadline-exceeded, internal, resource-exhausted, unavailable
+    #           http_retry_events: ["HttpRetryPolicyEvent"],
+    #           max_retries: 1, # required
+    #           per_retry_timeout: { # required
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
+    #       },
+    #       http2_route: {
+    #         action: { # required
+    #           weighted_targets: [ # required
+    #             {
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         match: { # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
+    #           prefix: "String", # required
+    #           scheme: "http", # accepts http, https
+    #         },
+    #         retry_policy: {
+    #           http_retry_events: ["HttpRetryPolicyEvent"],
+    #           max_retries: 1, # required
+    #           per_retry_timeout: { # required
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
+    #       },
     #       http_route: {
     #         action: { # required
     #           weighted_targets: [ # required
@@ -442,6 +522,51 @@ module Aws::AppMesh
     #   resp.route.metadata.uid #=> String
     #   resp.route.metadata.version #=> Integer
     #   resp.route.route_name #=> String
+    #   resp.route.spec.grpc_route.action.weighted_targets #=> Array
+    #   resp.route.spec.grpc_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.grpc_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata #=> Array
+    #   resp.route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].name #=> String
+    #   resp.route.spec.grpc_route.match.method_name #=> String
+    #   resp.route.spec.grpc_route.match.service_name #=> String
+    #   resp.route.spec.grpc_route.retry_policy.grpc_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.grpc_retry_events[0] #=> String, one of "cancelled", "deadline-exceeded", "internal", "resource-exhausted", "unavailable"
+    #   resp.route.spec.grpc_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.grpc_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http2_route.action.weighted_targets #=> Array
+    #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.http2_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http2_route.match.headers #=> Array
+    #   resp.route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.route.spec.http2_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.http2_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
@@ -555,13 +680,13 @@ module Aws::AppMesh
     #             interval_millis: 1, # required
     #             path: "String",
     #             port: 1,
-    #             protocol: "http", # required, accepts http, tcp
+    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #             timeout_millis: 1, # required
     #             unhealthy_threshold: 1, # required
     #           },
     #           port_mapping: { # required
     #             port: 1, # required
-    #             protocol: "http", # required, accepts http, tcp
+    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #           },
     #         },
     #       ],
@@ -612,11 +737,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_node.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_node.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -684,7 +809,7 @@ module Aws::AppMesh
     #         {
     #           port_mapping: { # required
     #             port: 1, # required
-    #             protocol: "http", # required, accepts http, tcp
+    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #           },
     #         },
     #       ],
@@ -708,7 +833,7 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
     #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_router.virtual_router_name #=> String
     #
@@ -875,6 +1000,51 @@ module Aws::AppMesh
     #   resp.route.metadata.uid #=> String
     #   resp.route.metadata.version #=> Integer
     #   resp.route.route_name #=> String
+    #   resp.route.spec.grpc_route.action.weighted_targets #=> Array
+    #   resp.route.spec.grpc_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.grpc_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata #=> Array
+    #   resp.route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].name #=> String
+    #   resp.route.spec.grpc_route.match.method_name #=> String
+    #   resp.route.spec.grpc_route.match.service_name #=> String
+    #   resp.route.spec.grpc_route.retry_policy.grpc_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.grpc_retry_events[0] #=> String, one of "cancelled", "deadline-exceeded", "internal", "resource-exhausted", "unavailable"
+    #   resp.route.spec.grpc_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.grpc_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http2_route.action.weighted_targets #=> Array
+    #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.http2_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http2_route.match.headers #=> Array
+    #   resp.route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.route.spec.http2_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.http2_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
@@ -950,11 +1120,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_node.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_node.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -1006,7 +1176,7 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
     #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_router.virtual_router_name #=> String
     #
@@ -1127,6 +1297,51 @@ module Aws::AppMesh
     #   resp.route.metadata.uid #=> String
     #   resp.route.metadata.version #=> Integer
     #   resp.route.route_name #=> String
+    #   resp.route.spec.grpc_route.action.weighted_targets #=> Array
+    #   resp.route.spec.grpc_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.grpc_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata #=> Array
+    #   resp.route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].name #=> String
+    #   resp.route.spec.grpc_route.match.method_name #=> String
+    #   resp.route.spec.grpc_route.match.service_name #=> String
+    #   resp.route.spec.grpc_route.retry_policy.grpc_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.grpc_retry_events[0] #=> String, one of "cancelled", "deadline-exceeded", "internal", "resource-exhausted", "unavailable"
+    #   resp.route.spec.grpc_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.grpc_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http2_route.action.weighted_targets #=> Array
+    #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.http2_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http2_route.match.headers #=> Array
+    #   resp.route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.route.spec.http2_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.http2_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
@@ -1199,11 +1414,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_node.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_node.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -1252,7 +1467,7 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
     #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_router.virtual_router_name #=> String
     #
@@ -1767,6 +1982,86 @@ module Aws::AppMesh
     #     mesh_name: "ResourceName", # required
     #     route_name: "ResourceName", # required
     #     spec: { # required
+    #       grpc_route: {
+    #         action: { # required
+    #           weighted_targets: [ # required
+    #             {
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         match: { # required
+    #           metadata: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method_name: "MethodName",
+    #           service_name: "ServiceName",
+    #         },
+    #         retry_policy: {
+    #           grpc_retry_events: ["cancelled"], # accepts cancelled, deadline-exceeded, internal, resource-exhausted, unavailable
+    #           http_retry_events: ["HttpRetryPolicyEvent"],
+    #           max_retries: 1, # required
+    #           per_retry_timeout: { # required
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
+    #       },
+    #       http2_route: {
+    #         action: { # required
+    #           weighted_targets: [ # required
+    #             {
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         match: { # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
+    #           prefix: "String", # required
+    #           scheme: "http", # accepts http, https
+    #         },
+    #         retry_policy: {
+    #           http_retry_events: ["HttpRetryPolicyEvent"],
+    #           max_retries: 1, # required
+    #           per_retry_timeout: { # required
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
+    #       },
     #       http_route: {
     #         action: { # required
     #           weighted_targets: [ # required
@@ -1831,6 +2126,51 @@ module Aws::AppMesh
     #   resp.route.metadata.uid #=> String
     #   resp.route.metadata.version #=> Integer
     #   resp.route.route_name #=> String
+    #   resp.route.spec.grpc_route.action.weighted_targets #=> Array
+    #   resp.route.spec.grpc_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.grpc_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata #=> Array
+    #   resp.route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.route.spec.grpc_route.match.metadata[0].name #=> String
+    #   resp.route.spec.grpc_route.match.method_name #=> String
+    #   resp.route.spec.grpc_route.match.service_name #=> String
+    #   resp.route.spec.grpc_route.retry_policy.grpc_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.grpc_retry_events[0] #=> String, one of "cancelled", "deadline-exceeded", "internal", "resource-exhausted", "unavailable"
+    #   resp.route.spec.grpc_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.grpc_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http2_route.action.weighted_targets #=> Array
+    #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.http2_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http2_route.match.headers #=> Array
+    #   resp.route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.route.spec.http2_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.http2_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
@@ -1913,13 +2253,13 @@ module Aws::AppMesh
     #             interval_millis: 1, # required
     #             path: "String",
     #             port: 1,
-    #             protocol: "http", # required, accepts http, tcp
+    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #             timeout_millis: 1, # required
     #             unhealthy_threshold: 1, # required
     #           },
     #           port_mapping: { # required
     #             port: 1, # required
-    #             protocol: "http", # required, accepts http, tcp
+    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #           },
     #         },
     #       ],
@@ -1964,11 +2304,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_node.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_node.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -2022,7 +2362,7 @@ module Aws::AppMesh
     #         {
     #           port_mapping: { # required
     #             port: 1, # required
-    #             protocol: "http", # required, accepts http, tcp
+    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #           },
     #         },
     #       ],
@@ -2040,7 +2380,7 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
     #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
     #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_router.virtual_router_name #=> String
     #
@@ -2130,7 +2470,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

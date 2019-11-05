@@ -38,6 +38,7 @@ module Aws::Lex
     HttpContentType = Shapes::StringShape.new(name: 'HttpContentType')
     IntentName = Shapes::StringShape.new(name: 'IntentName')
     IntentSummary = Shapes::StructureShape.new(name: 'IntentSummary')
+    IntentSummaryCheckpointLabel = Shapes::StringShape.new(name: 'IntentSummaryCheckpointLabel')
     IntentSummaryList = Shapes::ListShape.new(name: 'IntentSummaryList')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -109,6 +110,7 @@ module Aws::Lex
     GetSessionRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))
     GetSessionRequest.add_member(:bot_alias, Shapes::ShapeRef.new(shape: BotAlias, required: true, location: "uri", location_name: "botAlias"))
     GetSessionRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
+    GetSessionRequest.add_member(:checkpoint_label_filter, Shapes::ShapeRef.new(shape: IntentSummaryCheckpointLabel, location: "querystring", location_name: "checkpointLabelFilter"))
     GetSessionRequest.struct_class = Types::GetSessionRequest
 
     GetSessionResponse.add_member(:recent_intent_summary_view, Shapes::ShapeRef.new(shape: IntentSummaryList, location_name: "recentIntentSummaryView"))
@@ -118,6 +120,7 @@ module Aws::Lex
     GetSessionResponse.struct_class = Types::GetSessionResponse
 
     IntentSummary.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, location_name: "intentName"))
+    IntentSummary.add_member(:checkpoint_label, Shapes::ShapeRef.new(shape: IntentSummaryCheckpointLabel, location_name: "checkpointLabel"))
     IntentSummary.add_member(:slots, Shapes::ShapeRef.new(shape: StringMap, location_name: "slots"))
     IntentSummary.add_member(:confirmation_status, Shapes::ShapeRef.new(shape: ConfirmationStatus, location_name: "confirmationStatus"))
     IntentSummary.add_member(:dialog_action_type, Shapes::ShapeRef.new(shape: DialogActionType, required: true, location_name: "dialogActionType"))
@@ -192,6 +195,7 @@ module Aws::Lex
     PutSessionRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
     PutSessionRequest.add_member(:session_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "sessionAttributes"))
     PutSessionRequest.add_member(:dialog_action, Shapes::ShapeRef.new(shape: DialogAction, location_name: "dialogAction"))
+    PutSessionRequest.add_member(:recent_intent_summary_view, Shapes::ShapeRef.new(shape: IntentSummaryList, location_name: "recentIntentSummaryView"))
     PutSessionRequest.add_member(:accept, Shapes::ShapeRef.new(shape: Accept, location: "header", location_name: "Accept"))
     PutSessionRequest.struct_class = Types::PutSessionRequest
 
@@ -261,7 +265,7 @@ module Aws::Lex
       api.add_operation(:get_session, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSession"
         o.http_method = "GET"
-        o.http_request_uri = "/bot/{botName}/alias/{botAlias}/user/{userId}/session"
+        o.http_request_uri = "/bot/{botName}/alias/{botAlias}/user/{userId}/session/"
         o.input = Shapes::ShapeRef.new(shape: GetSessionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2019-10-10)
+------------------
+
+* Feature - Firewall Manager now supports Amazon VPC security groups, making it easier to configure and manage security groups across multiple accounts from a single place.
+
 1.18.0 (2019-07-25)
 ------------------
 

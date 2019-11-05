@@ -23,6 +23,8 @@ module Aws::MediaPackage
     CmafPackageCreateOrUpdateParameters = Shapes::StructureShape.new(name: 'CmafPackageCreateOrUpdateParameters')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
+    CreateHarvestJobRequest = Shapes::StructureShape.new(name: 'CreateHarvestJobRequest')
+    CreateHarvestJobResponse = Shapes::StructureShape.new(name: 'CreateHarvestJobResponse')
     CreateOriginEndpointRequest = Shapes::StructureShape.new(name: 'CreateOriginEndpointRequest')
     CreateOriginEndpointResponse = Shapes::StructureShape.new(name: 'CreateOriginEndpointResponse')
     DashEncryption = Shapes::StructureShape.new(name: 'DashEncryption')
@@ -33,10 +35,15 @@ module Aws::MediaPackage
     DeleteOriginEndpointResponse = Shapes::StructureShape.new(name: 'DeleteOriginEndpointResponse')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
+    DescribeHarvestJobRequest = Shapes::StructureShape.new(name: 'DescribeHarvestJobRequest')
+    DescribeHarvestJobResponse = Shapes::StructureShape.new(name: 'DescribeHarvestJobResponse')
     DescribeOriginEndpointRequest = Shapes::StructureShape.new(name: 'DescribeOriginEndpointRequest')
     DescribeOriginEndpointResponse = Shapes::StructureShape.new(name: 'DescribeOriginEndpointResponse')
     EncryptionMethod = Shapes::StringShape.new(name: 'EncryptionMethod')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    HarvestJob = Shapes::StructureShape.new(name: 'HarvestJob')
+    HarvestJobCreateParameters = Shapes::StructureShape.new(name: 'HarvestJobCreateParameters')
+    HarvestJobList = Shapes::StructureShape.new(name: 'HarvestJobList')
     HlsEncryption = Shapes::StructureShape.new(name: 'HlsEncryption')
     HlsIngest = Shapes::StructureShape.new(name: 'HlsIngest')
     HlsManifest = Shapes::StructureShape.new(name: 'HlsManifest')
@@ -46,6 +53,8 @@ module Aws::MediaPackage
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
+    ListHarvestJobsRequest = Shapes::StructureShape.new(name: 'ListHarvestJobsRequest')
+    ListHarvestJobsResponse = Shapes::StructureShape.new(name: 'ListHarvestJobsResponse')
     ListOriginEndpointsRequest = Shapes::StructureShape.new(name: 'ListOriginEndpointsRequest')
     ListOriginEndpointsResponse = Shapes::StructureShape.new(name: 'ListOriginEndpointsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -59,15 +68,18 @@ module Aws::MediaPackage
     OriginEndpointCreateParameters = Shapes::StructureShape.new(name: 'OriginEndpointCreateParameters')
     OriginEndpointList = Shapes::StructureShape.new(name: 'OriginEndpointList')
     OriginEndpointUpdateParameters = Shapes::StructureShape.new(name: 'OriginEndpointUpdateParameters')
+    Origination = Shapes::StringShape.new(name: 'Origination')
     PlaylistType = Shapes::StringShape.new(name: 'PlaylistType')
     Profile = Shapes::StringShape.new(name: 'Profile')
     RotateChannelCredentialsRequest = Shapes::StructureShape.new(name: 'RotateChannelCredentialsRequest')
     RotateChannelCredentialsResponse = Shapes::StructureShape.new(name: 'RotateChannelCredentialsResponse')
     RotateIngestEndpointCredentialsRequest = Shapes::StructureShape.new(name: 'RotateIngestEndpointCredentialsRequest')
     RotateIngestEndpointCredentialsResponse = Shapes::StructureShape.new(name: 'RotateIngestEndpointCredentialsResponse')
+    S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
     SegmentTemplateFormat = Shapes::StringShape.new(name: 'SegmentTemplateFormat')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
+    Status = Shapes::StringShape.new(name: 'Status')
     StreamOrder = Shapes::StringShape.new(name: 'StreamOrder')
     StreamSelection = Shapes::StructureShape.new(name: 'StreamSelection')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -86,6 +98,7 @@ module Aws::MediaPackage
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __listOfChannel = Shapes::ListShape.new(name: '__listOfChannel')
+    __listOfHarvestJob = Shapes::ListShape.new(name: '__listOfHarvestJob')
     __listOfHlsManifest = Shapes::ListShape.new(name: '__listOfHlsManifest')
     __listOfHlsManifestCreateOrUpdateParameters = Shapes::ListShape.new(name: '__listOfHlsManifestCreateOrUpdateParameters')
     __listOfIngestEndpoint = Shapes::ListShape.new(name: '__listOfIngestEndpoint')
@@ -147,6 +160,24 @@ module Aws::MediaPackage
     CreateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
 
+    CreateHarvestJobRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "endTime"))
+    CreateHarvestJobRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
+    CreateHarvestJobRequest.add_member(:origin_endpoint_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "originEndpointId"))
+    CreateHarvestJobRequest.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, required: true, location_name: "s3Destination"))
+    CreateHarvestJobRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "startTime"))
+    CreateHarvestJobRequest.struct_class = Types::CreateHarvestJobRequest
+
+    CreateHarvestJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreateHarvestJobResponse.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    CreateHarvestJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
+    CreateHarvestJobResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: __string, location_name: "endTime"))
+    CreateHarvestJobResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    CreateHarvestJobResponse.add_member(:origin_endpoint_id, Shapes::ShapeRef.new(shape: __string, location_name: "originEndpointId"))
+    CreateHarvestJobResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    CreateHarvestJobResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: __string, location_name: "startTime"))
+    CreateHarvestJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    CreateHarvestJobResponse.struct_class = Types::CreateHarvestJobResponse
+
     CreateOriginEndpointRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "channelId"))
     CreateOriginEndpointRequest.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackageCreateOrUpdateParameters, location_name: "cmafPackage"))
     CreateOriginEndpointRequest.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
@@ -155,6 +186,7 @@ module Aws::MediaPackage
     CreateOriginEndpointRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     CreateOriginEndpointRequest.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     CreateOriginEndpointRequest.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
+    CreateOriginEndpointRequest.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, location_name: "origination"))
     CreateOriginEndpointRequest.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     CreateOriginEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateOriginEndpointRequest.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
@@ -170,6 +202,7 @@ module Aws::MediaPackage
     CreateOriginEndpointResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     CreateOriginEndpointResponse.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     CreateOriginEndpointResponse.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
+    CreateOriginEndpointResponse.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, location_name: "origination"))
     CreateOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     CreateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateOriginEndpointResponse.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
@@ -216,6 +249,20 @@ module Aws::MediaPackage
     DescribeChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
+    DescribeHarvestJobRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
+    DescribeHarvestJobRequest.struct_class = Types::DescribeHarvestJobRequest
+
+    DescribeHarvestJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeHarvestJobResponse.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    DescribeHarvestJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
+    DescribeHarvestJobResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: __string, location_name: "endTime"))
+    DescribeHarvestJobResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeHarvestJobResponse.add_member(:origin_endpoint_id, Shapes::ShapeRef.new(shape: __string, location_name: "originEndpointId"))
+    DescribeHarvestJobResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    DescribeHarvestJobResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: __string, location_name: "startTime"))
+    DescribeHarvestJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    DescribeHarvestJobResponse.struct_class = Types::DescribeHarvestJobResponse
+
     DescribeOriginEndpointRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
     DescribeOriginEndpointRequest.struct_class = Types::DescribeOriginEndpointRequest
 
@@ -228,6 +275,7 @@ module Aws::MediaPackage
     DescribeOriginEndpointResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribeOriginEndpointResponse.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     DescribeOriginEndpointResponse.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
+    DescribeOriginEndpointResponse.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, location_name: "origination"))
     DescribeOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     DescribeOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeOriginEndpointResponse.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
@@ -237,6 +285,28 @@ module Aws::MediaPackage
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
+
+    HarvestJob.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    HarvestJob.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    HarvestJob.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
+    HarvestJob.add_member(:end_time, Shapes::ShapeRef.new(shape: __string, location_name: "endTime"))
+    HarvestJob.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    HarvestJob.add_member(:origin_endpoint_id, Shapes::ShapeRef.new(shape: __string, location_name: "originEndpointId"))
+    HarvestJob.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    HarvestJob.add_member(:start_time, Shapes::ShapeRef.new(shape: __string, location_name: "startTime"))
+    HarvestJob.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    HarvestJob.struct_class = Types::HarvestJob
+
+    HarvestJobCreateParameters.add_member(:end_time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "endTime"))
+    HarvestJobCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
+    HarvestJobCreateParameters.add_member(:origin_endpoint_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "originEndpointId"))
+    HarvestJobCreateParameters.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, required: true, location_name: "s3Destination"))
+    HarvestJobCreateParameters.add_member(:start_time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "startTime"))
+    HarvestJobCreateParameters.struct_class = Types::HarvestJobCreateParameters
+
+    HarvestJobList.add_member(:harvest_jobs, Shapes::ShapeRef.new(shape: __listOfHarvestJob, location_name: "harvestJobs"))
+    HarvestJobList.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    HarvestJobList.struct_class = Types::HarvestJobList
 
     HlsEncryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
     HlsEncryption.add_member(:encryption_method, Shapes::ShapeRef.new(shape: EncryptionMethod, location_name: "encryptionMethod"))
@@ -299,6 +369,16 @@ module Aws::MediaPackage
     ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListChannelsResponse.struct_class = Types::ListChannelsResponse
 
+    ListHarvestJobsRequest.add_member(:include_channel_id, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "includeChannelId"))
+    ListHarvestJobsRequest.add_member(:include_status, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "includeStatus"))
+    ListHarvestJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListHarvestJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListHarvestJobsRequest.struct_class = Types::ListHarvestJobsRequest
+
+    ListHarvestJobsResponse.add_member(:harvest_jobs, Shapes::ShapeRef.new(shape: __listOfHarvestJob, location_name: "harvestJobs"))
+    ListHarvestJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListHarvestJobsResponse.struct_class = Types::ListHarvestJobsResponse
+
     ListOriginEndpointsRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelId"))
     ListOriginEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListOriginEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -335,6 +415,7 @@ module Aws::MediaPackage
     OriginEndpoint.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     OriginEndpoint.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     OriginEndpoint.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
+    OriginEndpoint.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, location_name: "origination"))
     OriginEndpoint.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     OriginEndpoint.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     OriginEndpoint.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
@@ -350,6 +431,7 @@ module Aws::MediaPackage
     OriginEndpointCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     OriginEndpointCreateParameters.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     OriginEndpointCreateParameters.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
+    OriginEndpointCreateParameters.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, location_name: "origination"))
     OriginEndpointCreateParameters.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     OriginEndpointCreateParameters.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     OriginEndpointCreateParameters.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
@@ -366,6 +448,7 @@ module Aws::MediaPackage
     OriginEndpointUpdateParameters.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
     OriginEndpointUpdateParameters.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     OriginEndpointUpdateParameters.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
+    OriginEndpointUpdateParameters.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, location_name: "origination"))
     OriginEndpointUpdateParameters.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     OriginEndpointUpdateParameters.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     OriginEndpointUpdateParameters.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
@@ -391,6 +474,11 @@ module Aws::MediaPackage
     RotateIngestEndpointCredentialsResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     RotateIngestEndpointCredentialsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RotateIngestEndpointCredentialsResponse.struct_class = Types::RotateIngestEndpointCredentialsResponse
+
+    S3Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "bucketName"))
+    S3Destination.add_member(:manifest_key, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "manifestKey"))
+    S3Destination.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
+    S3Destination.struct_class = Types::S3Destination
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -445,6 +533,7 @@ module Aws::MediaPackage
     UpdateOriginEndpointRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
     UpdateOriginEndpointRequest.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     UpdateOriginEndpointRequest.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
+    UpdateOriginEndpointRequest.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, location_name: "origination"))
     UpdateOriginEndpointRequest.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     UpdateOriginEndpointRequest.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     UpdateOriginEndpointRequest.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
@@ -459,6 +548,7 @@ module Aws::MediaPackage
     UpdateOriginEndpointResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     UpdateOriginEndpointResponse.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     UpdateOriginEndpointResponse.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
+    UpdateOriginEndpointResponse.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, location_name: "origination"))
     UpdateOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     UpdateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateOriginEndpointResponse.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
@@ -467,6 +557,8 @@ module Aws::MediaPackage
     UpdateOriginEndpointResponse.struct_class = Types::UpdateOriginEndpointResponse
 
     __listOfChannel.member = Shapes::ShapeRef.new(shape: Channel)
+
+    __listOfHarvestJob.member = Shapes::ShapeRef.new(shape: HarvestJob)
 
     __listOfHlsManifest.member = Shapes::ShapeRef.new(shape: HlsManifest)
 
@@ -508,6 +600,20 @@ module Aws::MediaPackage
         o.http_request_uri = "/channels"
         o.input = Shapes::ShapeRef.new(shape: CreateChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:create_harvest_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateHarvestJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/harvest_jobs"
+        o.input = Shapes::ShapeRef.new(shape: CreateHarvestJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateHarvestJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -572,6 +678,20 @@ module Aws::MediaPackage
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:describe_harvest_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeHarvestJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/harvest_jobs/{id}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeHarvestJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeHarvestJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:describe_origin_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeOriginEndpoint"
         o.http_method = "GET"
@@ -592,6 +712,26 @@ module Aws::MediaPackage
         o.http_request_uri = "/channels"
         o.input = Shapes::ShapeRef.new(shape: ListChannelsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListChannelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_harvest_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHarvestJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/harvest_jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListHarvestJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListHarvestJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

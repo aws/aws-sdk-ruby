@@ -106,6 +106,8 @@ module Aws::AppStream
     Domain = Shapes::StringShape.new(name: 'Domain')
     DomainJoinInfo = Shapes::StructureShape.new(name: 'DomainJoinInfo')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
+    EmbedHostDomain = Shapes::StringShape.new(name: 'EmbedHostDomain')
+    EmbedHostDomains = Shapes::ListShape.new(name: 'EmbedHostDomains')
     EnableUserRequest = Shapes::StructureShape.new(name: 'EnableUserRequest')
     EnableUserResult = Shapes::StructureShape.new(name: 'EnableUserResult')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -367,6 +369,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettings, location_name: "ApplicationSettings"))
     CreateStackRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateStackRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    CreateStackRequest.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -565,6 +568,8 @@ module Aws::AppStream
     DomainJoinInfo.struct_class = Types::DomainJoinInfo
 
     DomainList.member = Shapes::ShapeRef.new(shape: Domain)
+
+    EmbedHostDomains.member = Shapes::ShapeRef.new(shape: EmbedHostDomain)
 
     EnableUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "UserName"))
     EnableUserRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "AuthenticationType"))
@@ -774,6 +779,7 @@ module Aws::AppStream
     Stack.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
     Stack.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettingsResponse, location_name: "ApplicationSettings"))
     Stack.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    Stack.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     Stack.struct_class = Types::Stack
 
     StackAttributes.member = Shapes::ShapeRef.new(shape: StackAttribute)
@@ -884,6 +890,7 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
     UpdateStackRequest.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettings, location_name: "ApplicationSettings"))
     UpdateStackRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    UpdateStackRequest.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))

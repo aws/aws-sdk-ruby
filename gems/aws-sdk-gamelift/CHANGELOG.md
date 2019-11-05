@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-10-24)
+------------------
+
+* Feature - Amazon GameLift offers expanded hardware options for game hosting: Custom game builds can use the Amazon Linux 2 operating system, and fleets for both custom builds and Realtime servers can now use C5, M5, and R5 instance types.
+
+1.25.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.24.0 (2019-09-03)
 ------------------
 

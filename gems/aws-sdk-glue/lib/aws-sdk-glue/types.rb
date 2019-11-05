@@ -1248,6 +1248,28 @@ module Aws::Glue
     #     whether Secure Sockets Layer (SSL) with hostname matching is
     #     enforced for the JDBC connection on the client. The default is
     #     false.
+    #
+    #   * `CUSTOM_JDBC_CERT` - An Amazon S3 location specifying the
+    #     customer's root certificate. AWS Glue uses this root certificate
+    #     to validate the customer’s certificate when connecting to the
+    #     customer database. AWS Glue only handles X.509 certificates. The
+    #     certificate provided must be DER-encoded and supplied in Base64
+    #     encoding PEM format.
+    #
+    #   * `SKIP_CUSTOM_JDBC_CERT_VALIDATION` - By default, this is `false`.
+    #     AWS Glue validates the Signature algorithm and Subject Public Key
+    #     Algorithm for the customer certificate. The only permitted
+    #     algorithms for the Signature algorithm are SHA256withRSA,
+    #     SHA384withRSA or SHA512withRSA. For the Subject Public Key
+    #     Algorithm, the key length must be at least 2048. You can set the
+    #     value of this property to `true` to skip AWS Glue’s validation of
+    #     the customer certificate.
+    #
+    #   * `CUSTOM_JDBC_CERT_STRING` - A custom JDBC certificate string which
+    #     is used for domain match or distinguished name match to prevent a
+    #     man-in-the-middle attack. In Oracle database, this is used as the
+    #     `SSL_SERVER_CERT_DN`; in Microsoft SQL Server, this is used as the
+    #     `hostNameInCertificate`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -8658,6 +8680,11 @@ module Aws::Glue
     # @!attribute [rw] values
     #   The values of the partition. Although this parameter is not required
     #   by the SDK, you must specify this parameter for a valid input.
+    #
+    #   The values for the keys for the new partition must be passed as an
+    #   array of String objects that must be ordered in the same order as
+    #   the partition keys appearing in the Amazon S3 prefix. Otherwise AWS
+    #   Glue will add the values to the wrong keys.
     #   @return [Array<String>]
     #
     # @!attribute [rw] last_access_time
@@ -9440,6 +9467,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a field to sort by and a sort order.
+    #
     # @note When making an API call, you may pass SortCriterion
     #   data as a hash:
     #
@@ -9449,9 +9478,11 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] field_name
+    #   The name of the field on which to sort.
     #   @return [String]
     #
     # @!attribute [rw] sort
+    #   An ascending or descending sort.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SortCriterion AWS API Documentation

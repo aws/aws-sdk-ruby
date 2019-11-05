@@ -266,8 +266,7 @@ module Aws::Kafka
     #   The name of the cluster.
     #
     # @option params [Types::ConfigurationInfo] :configuration_info
-    #   Represents the configuration that you want MSK to use for the brokers
-    #   in a cluster.
+    #   Represents the configuration that you want MSK to use for the cluster.
     #
     # @option params [Types::EncryptionInfo] :encryption_info
     #   Includes all encryption-related information.
@@ -357,7 +356,8 @@ module Aws::Kafka
     #   configuration.
     #
     # @option params [required, String] :name
-    #   The name of the configuration.
+    #   The name of the configuration. Configuration names are strings that
+    #   match the regex "^\[0-9A-Za-z-\]+$".
     #
     # @option params [required, String, IO] :server_properties
     #
@@ -753,7 +753,7 @@ module Aws::Kafka
       req.send_request(options)
     end
 
-    # Returns a list of all the MSK configurations in this Region.
+    # Returns a list of all the revisions of an MSK configuration.
     #
     # @option params [required, String] :arn
     #
@@ -966,6 +966,46 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Updates the number of broker nodes in the cluster. You can use this
+    # operation to increase the number of brokers in an existing cluster.
+    # You can't decrease the number of brokers.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :current_version
+    #   The current version of the cluster.
+    #
+    # @option params [required, Integer] :target_number_of_broker_nodes
+    #   The number of broker nodes that you want the cluster to have after
+    #   this operation completes successfully.
+    #
+    # @return [Types::UpdateBrokerCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBrokerCountResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::UpdateBrokerCountResponse#cluster_operation_arn #cluster_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_broker_count({
+    #     cluster_arn: "__string", # required
+    #     current_version: "__string", # required
+    #     target_number_of_broker_nodes: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.cluster_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerCount AWS API Documentation
+    #
+    # @overload update_broker_count(params = {})
+    # @param [Hash] params ({})
+    def update_broker_count(params = {}, options = {})
+      req = build_request(:update_broker_count, params)
+      req.send_request(options)
+    end
+
     # Updates the EBS storage associated with MSK brokers.
     #
     # @option params [required, String] :cluster_arn
@@ -977,6 +1017,12 @@ module Aws::Kafka
     # @option params [required, Array<Types::BrokerEBSVolumeInfo>] :target_broker_ebs_volume_info
     #   Describes the target volume size and the ID of the broker to apply the
     #   update to.
+    #
+    #   The value you specify for Target-Volume-in-GiB must be a whole number
+    #   that is greater than 100 GiB.
+    #
+    #   The storage per broker after the update operation can't exceed 16384
+    #   GiB.
     #
     # @return [Types::UpdateBrokerStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1016,11 +1062,10 @@ module Aws::Kafka
     # @option params [required, String] :cluster_arn
     #
     # @option params [required, Types::ConfigurationInfo] :configuration_info
-    #   Represents the configuration that you want MSK to use for the brokers
-    #   in a cluster.
+    #   Represents the configuration that you want MSK to use for the cluster.
     #
     # @option params [required, String] :current_version
-    #   The version of the cluster that needs to be updated.
+    #   The version of the cluster that you want to update.
     #
     # @return [Types::UpdateClusterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1065,7 +1110,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

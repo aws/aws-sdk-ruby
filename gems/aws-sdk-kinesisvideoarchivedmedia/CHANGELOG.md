@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2019-10-15)
+------------------
+
+* Feature - Add ON_DISCONTINUITY mode to the GetHLSStreamingSessionURL API
+
 1.18.0 (2019-07-25)
 ------------------
 

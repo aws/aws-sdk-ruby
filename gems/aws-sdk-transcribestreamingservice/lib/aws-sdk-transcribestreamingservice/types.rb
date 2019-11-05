@@ -148,19 +148,23 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The offset in milliseconds from the beginning of the audio stream to
-    #   the beginning of the result.
+    #   The offset in seconds from the beginning of the audio stream to the
+    #   beginning of the result.
     #   @return [Float]
     #
     # @!attribute [rw] end_time
-    #   The offset in milliseconds from the beginning of the audio stream to
-    #   the end of the result.
+    #   The offset in seconds from the beginning of the audio stream to the
+    #   end of the result.
     #   @return [Float]
     #
     # @!attribute [rw] is_partial
-    #   `true` to indicate that Amazon Transcribe has additional
-    #   transcription data to send, `false` to indicate that this is the
-    #   last transcription result for the audio stream.
+    #   Amazon Transcribe divides the incoming audio stream into segments at
+    #   natural points in the audio. Transcription results are returned
+    #   based on these segments.
+    #
+    #   The `IsPartial` field is `true` to indicate that Amazon Transcribe
+    #   has additional transcription data to send, `false` to indicate that
+    #   this is the last transcription result for the segment.
     #   @return [Boolean]
     #
     # @!attribute [rw] alternatives
@@ -184,7 +188,7 @@ module Aws::TranscribeStreamingService
     #   data as a hash:
     #
     #       {
-    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR
+    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU
     #         media_sample_rate_hertz: 1, # required
     #         media_encoding: "pcm", # required, accepts pcm
     #         vocabulary_name: "VocabularyName",
@@ -193,7 +197,7 @@ module Aws::TranscribeStreamingService
     #       }
     #
     # @!attribute [rw] language_code
-    #   Indicates the language used in the input audio stream.
+    #   Indicates the source language used in the input audio stream.
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz

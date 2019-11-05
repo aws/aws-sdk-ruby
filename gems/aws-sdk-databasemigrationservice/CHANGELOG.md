@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-11-01)
+------------------
+
+* Feature - This release contains task timeline attributes in replication task statistics. This release also adds a note to the documentation for the CdcStartPosition task request parameter. This note describes how to enable the use of native CDC start points for a PostgreSQL source by setting the new slotName extra connection attribute on the source endpoint to the name of an existing logical replication slot.
+
+1.29.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.28.0 (2019-09-25)
 ------------------
 

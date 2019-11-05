@@ -3,6 +3,50 @@ Unreleased Changes
 
 * Feature - Remove deprecated `access_key_id`, `secret_access_key`, and `session_token` methods in credential providers.
 
+3.74.0 (2019-11-05)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.73.0 (2019-11-04)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.72.1 (2019-10-31)
+------------------
+
+* Issue - Fix `EndpointCache#key?` to be thread safe.
+
+3.72.0 (2019-10-24)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Issue - Update minimum `aws-partition` gem dependency version
+
+3.71.0 (2019-10-23)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Support enable STS regional endpoints by `sts_regional_endpoints: 'regional'`
+
+3.70.0 (2019-10-22)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.69.1 (2019-10-18)
+------------------
+
+* Issue - Fix method redefinition warnings
+
+3.69.0 (2019-10-17)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 3.68.1 (2019-10-02)
 ------------------
 

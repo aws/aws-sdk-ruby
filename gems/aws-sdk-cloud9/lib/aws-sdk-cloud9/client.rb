@@ -711,13 +711,20 @@ module Aws::Cloud9
     #         arn: "arn:aws:cloud9:us-east-2:123456789012:environment:8d9967e2f0624182b74e7690ad69ebEX", 
     #         description: "This is my demonstration environment.", 
     #         id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #         lifecycle: {
+    #           status: "CREATED", 
+    #         }, 
     #         owner_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
     #       }, 
     #       {
     #         name: "another-demo-environment", 
     #         type: "ssh", 
     #         arn: "arn:aws:cloud9:us-east-2:123456789012:environment:349c86d4579e4e7298d500ff57a6b2EX", 
+    #         description: "", 
     #         id: "349c86d4579e4e7298d500ff57a6b2EX", 
+    #         lifecycle: {
+    #           status: "CREATED", 
+    #         }, 
     #         owner_arn: "arn:aws:sts::123456789012:assumed-role/AnotherDemoUser/AnotherDemoUser", 
     #       }, 
     #     ], 
@@ -738,7 +745,7 @@ module Aws::Cloud9
     #   resp.environments[0].type #=> String, one of "ssh", "ec2"
     #   resp.environments[0].arn #=> String
     #   resp.environments[0].owner_arn #=> String
-    #   resp.environments[0].lifecycle.status #=> String, one of "CREATED", "DELETING", "DELETE_FAILED"
+    #   resp.environments[0].lifecycle.status #=> String, one of "CREATING", "CREATED", "CREATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.environments[0].lifecycle.reason #=> String
     #   resp.environments[0].lifecycle.failure_resource #=> String
     #
@@ -930,7 +937,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
