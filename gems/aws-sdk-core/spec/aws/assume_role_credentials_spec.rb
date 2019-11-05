@@ -100,22 +100,5 @@ module Aws
       c.credentials
     end
 
-    it 'generates deprecation warnings for credential accessors' do
-      c = AssumeRoleCredentials.new(
-        role_arn: 'arn',
-        role_session_name: 'session')
-
-      expect(c).to receive(:warn).exactly(3).times
-
-      c.access_key_id
-      c.secret_access_key
-      c.session_token
-
-      # warnings are not duplicated
-      c.access_key_id
-      c.secret_access_key
-      c.session_token
-    end
-
   end
 end
