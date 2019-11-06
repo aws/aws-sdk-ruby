@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.391 (2019-11-06)
+------------------
+
 * Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
 
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
