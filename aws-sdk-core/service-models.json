@@ -670,6 +670,10 @@
     "models": "runtime.sagemaker/2017-05-13",
     "endpoint": "runtime.sagemaker"
   },
+  "SavingsPlans": {
+    "models": "savingsplans/2019-06-28",
+    "endpoint": "savingsplans"
+  },
   "SecretsManager": {
     "models": "secretsmanager/2017-10-17",
     "endpoint": "secretsmanager"

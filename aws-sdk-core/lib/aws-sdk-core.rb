@@ -191,6 +191,7 @@ module Aws
     SWF
     SageMaker
     SageMakerRuntime
+    SavingsPlans
     SecretsManager
     SecurityHub
     ServerlessApplicationRepository

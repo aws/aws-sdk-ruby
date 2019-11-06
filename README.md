@@ -333,6 +333,7 @@ to be backwards compatible.
 | AWS Resource Groups Tagging API                       | ResourceGroupsTaggingAPI        | 2017-01-26  |
 | AWS RoboMaker                                         | RoboMaker                       | 2018-06-29  |
 | AWS S3 Control                                        | S3Control                       | 2018-08-20  |
+| AWS Savings Plans                                     | SavingsPlans                    | 2019-06-28  |
 | AWS Secrets Manager                                   | SecretsManager                  | 2017-10-17  |
 | AWS Security Token Service                            | STS                             | 2011-06-15  |
 | AWS SecurityHub                                       | SecurityHub                     | 2018-10-26  |

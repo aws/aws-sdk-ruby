@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
+
+* Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::EFS - Updated the API for Amazon Elastic File System.
+
+* Feature - Aws::Signer - Updated the API, and documentation for AWS Signer.
+
+* Feature - Aws::SavingsPlans - Added support for a new service, AWS Savings Plans.
+
 2.11.390 (2019-11-05)
 ------------------
 
