@@ -571,6 +571,7 @@ module Aws::CodeBuild
     #   resp.builds #=> Array
     #   resp.builds[0].id #=> String
     #   resp.builds[0].arn #=> String
+    #   resp.builds[0].build_number #=> Integer
     #   resp.builds[0].start_time #=> Time
     #   resp.builds[0].end_time #=> Time
     #   resp.builds[0].current_phase #=> String
@@ -634,7 +635,7 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.environment_variables #=> Array
     #   resp.builds[0].environment.environment_variables[0].name #=> String
     #   resp.builds[0].environment.environment_variables[0].value #=> String
-    #   resp.builds[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
+    #   resp.builds[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
     #   resp.builds[0].environment.privileged_mode #=> Boolean
     #   resp.builds[0].environment.certificate #=> String
     #   resp.builds[0].environment.registry_credential.credential #=> String
@@ -663,6 +664,9 @@ module Aws::CodeBuild
     #   resp.builds[0].network_interface.subnet_id #=> String
     #   resp.builds[0].network_interface.network_interface_id #=> String
     #   resp.builds[0].encryption_key #=> String
+    #   resp.builds[0].exported_environment_variables #=> Array
+    #   resp.builds[0].exported_environment_variables[0].name #=> String
+    #   resp.builds[0].exported_environment_variables[0].value #=> String
     #   resp.builds_not_found #=> Array
     #   resp.builds_not_found[0] #=> String
     #
@@ -751,7 +755,7 @@ module Aws::CodeBuild
     #   resp.projects[0].environment.environment_variables #=> Array
     #   resp.projects[0].environment.environment_variables[0].name #=> String
     #   resp.projects[0].environment.environment_variables[0].value #=> String
-    #   resp.projects[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
+    #   resp.projects[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
     #   resp.projects[0].environment.privileged_mode #=> Boolean
     #   resp.projects[0].environment.certificate #=> String
     #   resp.projects[0].environment.registry_credential.credential #=> String
@@ -997,7 +1001,7 @@ module Aws::CodeBuild
     #         {
     #           name: "NonEmptyString", # required
     #           value: "String", # required
-    #           type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
+    #           type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
     #         },
     #       ],
     #       privileged_mode: false,
@@ -1097,7 +1101,7 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables #=> Array
     #   resp.project.environment.environment_variables[0].name #=> String
     #   resp.project.environment.environment_variables[0].value #=> String
-    #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
+    #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
     #   resp.project.environment.privileged_mode #=> Boolean
     #   resp.project.environment.certificate #=> String
     #   resp.project.environment.registry_credential.credential #=> String
@@ -1685,6 +1689,11 @@ module Aws::CodeBuild
     #   other than GitHub, GitHub Enterprise, or Bitbucket, an
     #   invalidInputException is thrown.
     #
+    #   <note markdown="1"> The status of a build triggered by a webhook is always reported to
+    #   your source provider.
+    #
+    #    </note>
+    #
     # @option params [String] :environment_type_override
     #   A container type for this build that overrides the one specified in
     #   the build project.
@@ -1811,7 +1820,7 @@ module Aws::CodeBuild
     #       {
     #         name: "NonEmptyString", # required
     #         value: "String", # required
-    #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
+    #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
     #       },
     #     ],
     #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
@@ -1864,6 +1873,7 @@ module Aws::CodeBuild
     #
     #   resp.build.id #=> String
     #   resp.build.arn #=> String
+    #   resp.build.build_number #=> Integer
     #   resp.build.start_time #=> Time
     #   resp.build.end_time #=> Time
     #   resp.build.current_phase #=> String
@@ -1927,7 +1937,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables #=> Array
     #   resp.build.environment.environment_variables[0].name #=> String
     #   resp.build.environment.environment_variables[0].value #=> String
-    #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
+    #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.environment.certificate #=> String
     #   resp.build.environment.registry_credential.credential #=> String
@@ -1956,6 +1966,9 @@ module Aws::CodeBuild
     #   resp.build.network_interface.subnet_id #=> String
     #   resp.build.network_interface.network_interface_id #=> String
     #   resp.build.encryption_key #=> String
+    #   resp.build.exported_environment_variables #=> Array
+    #   resp.build.exported_environment_variables[0].name #=> String
+    #   resp.build.exported_environment_variables[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild AWS API Documentation
     #
@@ -1985,6 +1998,7 @@ module Aws::CodeBuild
     #
     #   resp.build.id #=> String
     #   resp.build.arn #=> String
+    #   resp.build.build_number #=> Integer
     #   resp.build.start_time #=> Time
     #   resp.build.end_time #=> Time
     #   resp.build.current_phase #=> String
@@ -2048,7 +2062,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables #=> Array
     #   resp.build.environment.environment_variables[0].name #=> String
     #   resp.build.environment.environment_variables[0].value #=> String
-    #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
+    #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.environment.certificate #=> String
     #   resp.build.environment.registry_credential.credential #=> String
@@ -2077,6 +2091,9 @@ module Aws::CodeBuild
     #   resp.build.network_interface.subnet_id #=> String
     #   resp.build.network_interface.network_interface_id #=> String
     #   resp.build.encryption_key #=> String
+    #   resp.build.exported_environment_variables #=> Array
+    #   resp.build.exported_environment_variables[0].name #=> String
+    #   resp.build.exported_environment_variables[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild AWS API Documentation
     #
@@ -2288,7 +2305,7 @@ module Aws::CodeBuild
     #         {
     #           name: "NonEmptyString", # required
     #           value: "String", # required
-    #           type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
+    #           type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
     #         },
     #       ],
     #       privileged_mode: false,
@@ -2388,7 +2405,7 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables #=> Array
     #   resp.project.environment.environment_variables[0].name #=> String
     #   resp.project.environment.environment_variables[0].value #=> String
-    #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
+    #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
     #   resp.project.environment.privileged_mode #=> Boolean
     #   resp.project.environment.certificate #=> String
     #   resp.project.environment.registry_credential.credential #=> String
@@ -2522,7 +2539,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

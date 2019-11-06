@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-11-06)
+------------------
+
+* Feature - Documentation updates for budgets to track Savings Plans utilization and coverage
+
 1.26.0 (2019-10-23)
 ------------------
 

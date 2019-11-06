@@ -121,6 +121,13 @@ module Aws::CodeBuild
     #   The Amazon Resource Name (ARN) of the build.
     #   @return [String]
     #
+    # @!attribute [rw] build_number
+    #   The number of the build. For each project, the `buildNumber` of its
+    #   first build is `1`. The `buildNumber` of each subsequent build is
+    #   incremented by `1`. If a build is deleted, the `buildNumber` of
+    #   other builds does not change.
+    #   @return [Integer]
+    #
     # @!attribute [rw] start_time
     #   When the build process started, expressed in Unix time format.
     #   @return [Time]
@@ -292,11 +299,16 @@ module Aws::CodeBuild
     #   `).
     #   @return [String]
     #
+    # @!attribute [rw] exported_environment_variables
+    #   A list of exported environment variables for this build.
+    #   @return [Array<Types::ExportedEnvironmentVariable>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
       :id,
       :arn,
+      :build_number,
       :start_time,
       :end_time,
       :current_phase,
@@ -320,7 +332,8 @@ module Aws::CodeBuild
       :initiator,
       :vpc_config,
       :network_interface,
-      :encryption_key)
+      :encryption_key,
+      :exported_environment_variables)
       include Aws::Structure
     end
 
@@ -620,7 +633,7 @@ module Aws::CodeBuild
     #             {
     #               name: "NonEmptyString", # required
     #               value: "String", # required
-    #               type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
+    #               type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
     #             },
     #           ],
     #           privileged_mode: false,
@@ -1034,7 +1047,7 @@ module Aws::CodeBuild
     #       {
     #         name: "NonEmptyString", # required
     #         value: "String", # required
-    #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
+    #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
     #       }
     #
     # @!attribute [rw] name
@@ -1057,6 +1070,9 @@ module Aws::CodeBuild
     #     Systems Manager Parameter Store.
     #
     #   * `PLAINTEXT`\: An environment variable in plaintext format.
+    #
+    #   * `SECRETS_MANAGER`\: An environment variable stored in AWS Secrets
+    #     Manager.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentVariable AWS API Documentation
@@ -1065,6 +1081,32 @@ module Aws::CodeBuild
       :name,
       :value,
       :type)
+      include Aws::Structure
+    end
+
+    # Information about an exported environment variable.
+    #
+    # @!attribute [rw] name
+    #   The name of this exported environment variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value assigned to this exported environment variable.
+    #
+    #   <note markdown="1"> During a build, the value of a variable is available starting with
+    #   the `install` phase. It can be updated between the start of the
+    #   `install` phase and the end of the `post_build` phase. After the
+    #   `post_build` phase ends, the value of exported variables cannot
+    #   change.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ExportedEnvironmentVariable AWS API Documentation
+    #
+    class ExportedEnvironmentVariable < Struct.new(
+      :name,
+      :value)
       include Aws::Structure
     end
 
@@ -1708,6 +1750,10 @@ module Aws::CodeBuild
     #   * `CODEPIPELINE`\: The build project has build output generated
     #     through AWS CodePipeline.
     #
+    #     <note markdown="1"> The `CODEPIPELINE` type is not supported for `secondaryArtifacts`.
+    #
+    #      </note>
+    #
     #   * `NO_ARTIFACTS`\: The build project does not produce any build
     #     output.
     #
@@ -1975,7 +2021,7 @@ module Aws::CodeBuild
     #           {
     #             name: "NonEmptyString", # required
     #             value: "String", # required
-    #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
+    #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
     #           },
     #         ],
     #         privileged_mode: false,
@@ -2018,6 +2064,13 @@ module Aws::CodeBuild
     #
     #   * `BUILD_GENERAL1_LARGE`\: Use up to 15 GB memory and 8 vCPUs for
     #     builds.
+    #
+    #   For more information, see [Build Environment Compute Types][1] in
+    #   the *AWS CodeBuild User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
@@ -2029,7 +2082,7 @@ module Aws::CodeBuild
     #   Enables running the Docker daemon inside a Docker container. Set to
     #   true only if the build project is used to build Docker images.
     #   Otherwise, a build that attempts to interact with the Docker daemon
-    #   fails.
+    #   fails. The default setting is `false`.
     #
     #   You can initialize the Docker daemon during the install phase of
     #   your build by adding one of the following sets of commands to the
@@ -2125,6 +2178,9 @@ module Aws::CodeBuild
     #
     #   * `GITHUB`\: The source code is in a GitHub repository.
     #
+    #   * `GITHUB_ENTERPRISE`\: The source code is in a GitHub Enterprise
+    #     repository.
+    #
     #   * `NO_SOURCE`\: The project does not have input source code.
     #
     #   * `S3`\: The source code is in an Amazon Simple Storage Service
@@ -2214,6 +2270,11 @@ module Aws::CodeBuild
     #   provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set
     #   and you use a different source provider, an invalidInputException is
     #   thrown.
+    #
+    #   <note markdown="1"> The status of a build triggered by a webhook is always reported to
+    #   your source provider.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] insecure_ssl
@@ -2497,7 +2558,7 @@ module Aws::CodeBuild
     #           {
     #             name: "NonEmptyString", # required
     #             value: "String", # required
-    #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
+    #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
     #           },
     #         ],
     #         source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
@@ -2654,6 +2715,11 @@ module Aws::CodeBuild
     #   build's start and completion. If you use this option with a source
     #   provider other than GitHub, GitHub Enterprise, or Bitbucket, an
     #   invalidInputException is thrown.
+    #
+    #   <note markdown="1"> The status of a build triggered by a webhook is always reported to
+    #   your source provider.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] environment_type_override
@@ -2921,7 +2987,7 @@ module Aws::CodeBuild
     #             {
     #               name: "NonEmptyString", # required
     #               value: "String", # required
-    #               type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
+    #               type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
     #             },
     #           ],
     #           privileged_mode: false,

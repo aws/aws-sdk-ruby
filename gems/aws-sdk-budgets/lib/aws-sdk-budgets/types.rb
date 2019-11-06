@@ -8,6 +8,18 @@
 module Aws::Budgets
   module Types
 
+    # You are not authorized to use this operation with the given
+    # parameters.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the output of the `CreateBudget` operation. The content
     # consists of the detailed metadata and data file information, and the
     # current status of the `budget` object.
@@ -62,7 +74,7 @@ module Aws::Budgets
     #             unit: "UnitValue", # required
     #           },
     #         },
-    #         budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
+    #         budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
     #         last_updated_time: Time.now,
     #       }
     #
@@ -72,13 +84,15 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_limit
-    #   The total amount of cost, usage, RI utilization, or RI coverage that
-    #   you want to track with your budget.
+    #   The total amount of cost, usage, RI utilization, RI coverage,
+    #   Savings Plans utilization, or Savings Plans coverage that you want
+    #   to track with your budget.
     #
     #   `BudgetLimit` is required for cost or usage budgets, but optional
-    #   for RI utilization or coverage budgets. RI utilization or coverage
-    #   budgets default to `100`, which is the only valid value for RI
-    #   utilization or coverage budgets. You can't use `BudgetLimit` with
+    #   for RI or Savings Plans utilization or coverage budgets. RI and
+    #   Savings Plans utilization or coverage budgets default to `100`,
+    #   which is the only valid value for RI or Savings Plans utilization or
+    #   coverage budgets. You can't use `BudgetLimit` with
     #   `PlannedBudgetLimits` for `CreateBudget` and `UpdateBudget` actions.
     #   @return [Types::Spend]
     #
@@ -140,14 +154,16 @@ module Aws::Budgets
     # @!attribute [rw] cost_types
     #   The types of costs that are included in this `COST` budget.
     #
-    #   `USAGE`, `RI_UTILIZATION`, and `RI_COVERAGE` budgets do not have
-    #   `CostTypes`.
+    #   `USAGE`, `RI_UTILIZATION`, `RI_COVERAGE`,
+    #   `Savings_Plans_Utilization`, and `Savings_Plans_Coverage` budgets do
+    #   not have `CostTypes`.
     #   @return [Types::CostTypes]
     #
     # @!attribute [rw] time_unit
     #   The length of time until a budget resets the actual and forecasted
-    #   spend. `DAILY` is available only for `RI_UTILIZATION` and
-    #   `RI_COVERAGE` budgets.
+    #   spend. `DAILY` is available only for `RI_UTILIZATION`,
+    #   `RI_COVERAGE`, `Savings_Plans_Utilization`, and
+    #   `Savings_Plans_Coverage` budgets.
     #   @return [String]
     #
     # @!attribute [rw] time_period
@@ -176,8 +192,8 @@ module Aws::Budgets
     #   @return [Types::CalculatedSpend]
     #
     # @!attribute [rw] budget_type
-    #   Whether this budget tracks costs, usage, RI utilization, or RI
-    #   coverage.
+    #   Whether this budget tracks costs, usage, RI utilization, RI
+    #   coverage, Savings Plans utilization, or Savings Plans coverage.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_time
@@ -456,7 +472,7 @@ module Aws::Budgets
     #               unit: "UnitValue", # required
     #             },
     #           },
-    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
+    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
     #           last_updated_time: Time.now,
     #         },
     #         notifications_with_subscribers: [
@@ -1252,8 +1268,8 @@ module Aws::Budgets
     #   The address that AWS sends budget notifications to, either an SNS
     #   topic or an email.
     #
-    #   AWS validates the address for a `CreateSubscriber` request with the
-    #   `.*` regex.
+    #   When you create a subscriber, the value of `Address` can't contain
+    #   line breaks.
     #   @return [String]
     #
     class Subscriber < Struct.new(
@@ -1353,7 +1369,7 @@ module Aws::Budgets
     #               unit: "UnitValue", # required
     #             },
     #           },
-    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
+    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
     #           last_updated_time: Time.now,
     #         },
     #       }

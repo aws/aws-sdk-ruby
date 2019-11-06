@@ -63,6 +63,14 @@ module Aws::CostExplorer
     GetReservationUtilizationResponse = Shapes::StructureShape.new(name: 'GetReservationUtilizationResponse')
     GetRightsizingRecommendationRequest = Shapes::StructureShape.new(name: 'GetRightsizingRecommendationRequest')
     GetRightsizingRecommendationResponse = Shapes::StructureShape.new(name: 'GetRightsizingRecommendationResponse')
+    GetSavingsPlansCoverageRequest = Shapes::StructureShape.new(name: 'GetSavingsPlansCoverageRequest')
+    GetSavingsPlansCoverageResponse = Shapes::StructureShape.new(name: 'GetSavingsPlansCoverageResponse')
+    GetSavingsPlansPurchaseRecommendationRequest = Shapes::StructureShape.new(name: 'GetSavingsPlansPurchaseRecommendationRequest')
+    GetSavingsPlansPurchaseRecommendationResponse = Shapes::StructureShape.new(name: 'GetSavingsPlansPurchaseRecommendationResponse')
+    GetSavingsPlansUtilizationDetailsRequest = Shapes::StructureShape.new(name: 'GetSavingsPlansUtilizationDetailsRequest')
+    GetSavingsPlansUtilizationDetailsResponse = Shapes::StructureShape.new(name: 'GetSavingsPlansUtilizationDetailsResponse')
+    GetSavingsPlansUtilizationRequest = Shapes::StructureShape.new(name: 'GetSavingsPlansUtilizationRequest')
+    GetSavingsPlansUtilizationResponse = Shapes::StructureShape.new(name: 'GetSavingsPlansUtilizationResponse')
     GetTagsRequest = Shapes::StructureShape.new(name: 'GetTagsRequest')
     GetTagsResponse = Shapes::StructureShape.new(name: 'GetTagsResponse')
     GetUsageForecastRequest = Shapes::StructureShape.new(name: 'GetUsageForecastRequest')
@@ -80,6 +88,7 @@ module Aws::CostExplorer
     Keys = Shapes::ListShape.new(name: 'Keys')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LookbackPeriodInDays = Shapes::StringShape.new(name: 'LookbackPeriodInDays')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Metric = Shapes::StringShape.new(name: 'Metric')
     MetricAmount = Shapes::StringShape.new(name: 'MetricAmount')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
@@ -128,8 +137,27 @@ module Aws::CostExplorer
     RightsizingRecommendationMetadata = Shapes::StructureShape.new(name: 'RightsizingRecommendationMetadata')
     RightsizingRecommendationSummary = Shapes::StructureShape.new(name: 'RightsizingRecommendationSummary')
     RightsizingType = Shapes::StringShape.new(name: 'RightsizingType')
+    SavingsPlanArn = Shapes::StringShape.new(name: 'SavingsPlanArn')
+    SavingsPlansAmortizedCommitment = Shapes::StructureShape.new(name: 'SavingsPlansAmortizedCommitment')
+    SavingsPlansCoverage = Shapes::StructureShape.new(name: 'SavingsPlansCoverage')
+    SavingsPlansCoverageData = Shapes::StructureShape.new(name: 'SavingsPlansCoverageData')
+    SavingsPlansCoverages = Shapes::ListShape.new(name: 'SavingsPlansCoverages')
+    SavingsPlansDetails = Shapes::StructureShape.new(name: 'SavingsPlansDetails')
+    SavingsPlansPurchaseRecommendation = Shapes::StructureShape.new(name: 'SavingsPlansPurchaseRecommendation')
+    SavingsPlansPurchaseRecommendationDetail = Shapes::StructureShape.new(name: 'SavingsPlansPurchaseRecommendationDetail')
+    SavingsPlansPurchaseRecommendationDetailList = Shapes::ListShape.new(name: 'SavingsPlansPurchaseRecommendationDetailList')
+    SavingsPlansPurchaseRecommendationMetadata = Shapes::StructureShape.new(name: 'SavingsPlansPurchaseRecommendationMetadata')
+    SavingsPlansPurchaseRecommendationSummary = Shapes::StructureShape.new(name: 'SavingsPlansPurchaseRecommendationSummary')
+    SavingsPlansSavings = Shapes::StructureShape.new(name: 'SavingsPlansSavings')
+    SavingsPlansUtilization = Shapes::StructureShape.new(name: 'SavingsPlansUtilization')
+    SavingsPlansUtilizationAggregates = Shapes::StructureShape.new(name: 'SavingsPlansUtilizationAggregates')
+    SavingsPlansUtilizationByTime = Shapes::StructureShape.new(name: 'SavingsPlansUtilizationByTime')
+    SavingsPlansUtilizationDetail = Shapes::StructureShape.new(name: 'SavingsPlansUtilizationDetail')
+    SavingsPlansUtilizationDetails = Shapes::ListShape.new(name: 'SavingsPlansUtilizationDetails')
+    SavingsPlansUtilizationsByTime = Shapes::ListShape.new(name: 'SavingsPlansUtilizationsByTime')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
     ServiceSpecification = Shapes::StructureShape.new(name: 'ServiceSpecification')
+    SupportedSavingsPlansType = Shapes::StringShape.new(name: 'SupportedSavingsPlansType')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValues = Shapes::StructureShape.new(name: 'TagValues')
@@ -193,6 +221,7 @@ module Aws::CostExplorer
     CurrentInstance.add_member(:resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "ResourceDetails"))
     CurrentInstance.add_member(:resource_utilization, Shapes::ShapeRef.new(shape: ResourceUtilization, location_name: "ResourceUtilization"))
     CurrentInstance.add_member(:reservation_covered_hours_in_lookback_period, Shapes::ShapeRef.new(shape: GenericString, location_name: "ReservationCoveredHoursInLookbackPeriod"))
+    CurrentInstance.add_member(:savings_plans_covered_hours_in_lookback_period, Shapes::ShapeRef.new(shape: GenericString, location_name: "SavingsPlansCoveredHoursInLookbackPeriod"))
     CurrentInstance.add_member(:on_demand_hours_in_lookback_period, Shapes::ShapeRef.new(shape: GenericString, location_name: "OnDemandHoursInLookbackPeriod"))
     CurrentInstance.add_member(:total_running_hours_in_lookback_period, Shapes::ShapeRef.new(shape: GenericString, location_name: "TotalRunningHoursInLookbackPeriod"))
     CurrentInstance.add_member(:monthly_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "MonthlyCost"))
@@ -366,6 +395,53 @@ module Aws::CostExplorer
     GetRightsizingRecommendationResponse.add_member(:rightsizing_recommendations, Shapes::ShapeRef.new(shape: RightsizingRecommendationList, location_name: "RightsizingRecommendations"))
     GetRightsizingRecommendationResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetRightsizingRecommendationResponse.struct_class = Types::GetRightsizingRecommendationResponse
+
+    GetSavingsPlansCoverageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetSavingsPlansCoverageRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
+    GetSavingsPlansCoverageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
+    GetSavingsPlansCoverageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetSavingsPlansCoverageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
+    GetSavingsPlansCoverageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    GetSavingsPlansCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetSavingsPlansCoverageRequest.struct_class = Types::GetSavingsPlansCoverageRequest
+
+    GetSavingsPlansCoverageResponse.add_member(:savings_plans_coverages, Shapes::ShapeRef.new(shape: SavingsPlansCoverages, required: true, location_name: "SavingsPlansCoverages"))
+    GetSavingsPlansCoverageResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    GetSavingsPlansCoverageResponse.struct_class = Types::GetSavingsPlansCoverageResponse
+
+    GetSavingsPlansPurchaseRecommendationRequest.add_member(:savings_plans_type, Shapes::ShapeRef.new(shape: SupportedSavingsPlansType, required: true, location_name: "SavingsPlansType"))
+    GetSavingsPlansPurchaseRecommendationRequest.add_member(:term_in_years, Shapes::ShapeRef.new(shape: TermInYears, required: true, location_name: "TermInYears"))
+    GetSavingsPlansPurchaseRecommendationRequest.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, required: true, location_name: "PaymentOption"))
+    GetSavingsPlansPurchaseRecommendationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetSavingsPlansPurchaseRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
+    GetSavingsPlansPurchaseRecommendationRequest.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookbackPeriodInDays, required: true, location_name: "LookbackPeriodInDays"))
+    GetSavingsPlansPurchaseRecommendationRequest.struct_class = Types::GetSavingsPlansPurchaseRecommendationRequest
+
+    GetSavingsPlansPurchaseRecommendationResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: SavingsPlansPurchaseRecommendationMetadata, location_name: "Metadata"))
+    GetSavingsPlansPurchaseRecommendationResponse.add_member(:savings_plans_purchase_recommendation, Shapes::ShapeRef.new(shape: SavingsPlansPurchaseRecommendation, location_name: "SavingsPlansPurchaseRecommendation"))
+    GetSavingsPlansPurchaseRecommendationResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetSavingsPlansPurchaseRecommendationResponse.struct_class = Types::GetSavingsPlansPurchaseRecommendationResponse
+
+    GetSavingsPlansUtilizationDetailsRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetSavingsPlansUtilizationDetailsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetSavingsPlansUtilizationDetailsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    GetSavingsPlansUtilizationDetailsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetSavingsPlansUtilizationDetailsRequest.struct_class = Types::GetSavingsPlansUtilizationDetailsRequest
+
+    GetSavingsPlansUtilizationDetailsResponse.add_member(:savings_plans_utilization_details, Shapes::ShapeRef.new(shape: SavingsPlansUtilizationDetails, required: true, location_name: "SavingsPlansUtilizationDetails"))
+    GetSavingsPlansUtilizationDetailsResponse.add_member(:total, Shapes::ShapeRef.new(shape: SavingsPlansUtilizationAggregates, location_name: "Total"))
+    GetSavingsPlansUtilizationDetailsResponse.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetSavingsPlansUtilizationDetailsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    GetSavingsPlansUtilizationDetailsResponse.struct_class = Types::GetSavingsPlansUtilizationDetailsResponse
+
+    GetSavingsPlansUtilizationRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetSavingsPlansUtilizationRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
+    GetSavingsPlansUtilizationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetSavingsPlansUtilizationRequest.struct_class = Types::GetSavingsPlansUtilizationRequest
+
+    GetSavingsPlansUtilizationResponse.add_member(:savings_plans_utilizations_by_time, Shapes::ShapeRef.new(shape: SavingsPlansUtilizationsByTime, location_name: "SavingsPlansUtilizationsByTime"))
+    GetSavingsPlansUtilizationResponse.add_member(:total, Shapes::ShapeRef.new(shape: SavingsPlansUtilizationAggregates, required: true, location_name: "Total"))
+    GetSavingsPlansUtilizationResponse.struct_class = Types::GetSavingsPlansUtilizationResponse
 
     GetTagsRequest.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, location_name: "SearchString"))
     GetTagsRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
@@ -557,6 +633,104 @@ module Aws::CostExplorer
     RightsizingRecommendationSummary.add_member(:savings_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "SavingsPercentage"))
     RightsizingRecommendationSummary.struct_class = Types::RightsizingRecommendationSummary
 
+    SavingsPlansAmortizedCommitment.add_member(:amortized_recurring_commitment, Shapes::ShapeRef.new(shape: GenericString, location_name: "AmortizedRecurringCommitment"))
+    SavingsPlansAmortizedCommitment.add_member(:amortized_upfront_commitment, Shapes::ShapeRef.new(shape: GenericString, location_name: "AmortizedUpfrontCommitment"))
+    SavingsPlansAmortizedCommitment.add_member(:total_amortized_commitment, Shapes::ShapeRef.new(shape: GenericString, location_name: "TotalAmortizedCommitment"))
+    SavingsPlansAmortizedCommitment.struct_class = Types::SavingsPlansAmortizedCommitment
+
+    SavingsPlansCoverage.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    SavingsPlansCoverage.add_member(:coverage, Shapes::ShapeRef.new(shape: SavingsPlansCoverageData, location_name: "Coverage"))
+    SavingsPlansCoverage.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
+    SavingsPlansCoverage.struct_class = Types::SavingsPlansCoverage
+
+    SavingsPlansCoverageData.add_member(:spend_covered_by_savings_plans, Shapes::ShapeRef.new(shape: GenericString, location_name: "SpendCoveredBySavingsPlans"))
+    SavingsPlansCoverageData.add_member(:on_demand_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "OnDemandCost"))
+    SavingsPlansCoverageData.add_member(:total_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "TotalCost"))
+    SavingsPlansCoverageData.add_member(:coverage_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "CoveragePercentage"))
+    SavingsPlansCoverageData.struct_class = Types::SavingsPlansCoverageData
+
+    SavingsPlansCoverages.member = Shapes::ShapeRef.new(shape: SavingsPlansCoverage)
+
+    SavingsPlansDetails.add_member(:region, Shapes::ShapeRef.new(shape: GenericString, location_name: "Region"))
+    SavingsPlansDetails.add_member(:instance_family, Shapes::ShapeRef.new(shape: GenericString, location_name: "InstanceFamily"))
+    SavingsPlansDetails.add_member(:offering_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "OfferingId"))
+    SavingsPlansDetails.struct_class = Types::SavingsPlansDetails
+
+    SavingsPlansPurchaseRecommendation.add_member(:savings_plans_type, Shapes::ShapeRef.new(shape: SupportedSavingsPlansType, location_name: "SavingsPlansType"))
+    SavingsPlansPurchaseRecommendation.add_member(:term_in_years, Shapes::ShapeRef.new(shape: TermInYears, location_name: "TermInYears"))
+    SavingsPlansPurchaseRecommendation.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "PaymentOption"))
+    SavingsPlansPurchaseRecommendation.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookbackPeriodInDays, location_name: "LookbackPeriodInDays"))
+    SavingsPlansPurchaseRecommendation.add_member(:savings_plans_purchase_recommendation_details, Shapes::ShapeRef.new(shape: SavingsPlansPurchaseRecommendationDetailList, location_name: "SavingsPlansPurchaseRecommendationDetails"))
+    SavingsPlansPurchaseRecommendation.add_member(:savings_plans_purchase_recommendation_summary, Shapes::ShapeRef.new(shape: SavingsPlansPurchaseRecommendationSummary, location_name: "SavingsPlansPurchaseRecommendationSummary"))
+    SavingsPlansPurchaseRecommendation.struct_class = Types::SavingsPlansPurchaseRecommendation
+
+    SavingsPlansPurchaseRecommendationDetail.add_member(:savings_plans_details, Shapes::ShapeRef.new(shape: SavingsPlansDetails, location_name: "SavingsPlansDetails"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "AccountId"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:upfront_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "UpfrontCost"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:estimated_roi, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedROI"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:currency_code, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrencyCode"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:estimated_sp_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedSPCost"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:estimated_on_demand_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedOnDemandCost"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:estimated_savings_amount, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedSavingsAmount"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:estimated_savings_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedSavingsPercentage"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:hourly_commitment_to_purchase, Shapes::ShapeRef.new(shape: GenericString, location_name: "HourlyCommitmentToPurchase"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:estimated_average_utilization, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedAverageUtilization"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:estimated_monthly_savings_amount, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedMonthlySavingsAmount"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:current_minimum_hourly_on_demand_spend, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrentMinimumHourlyOnDemandSpend"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:current_maximum_hourly_on_demand_spend, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrentMaximumHourlyOnDemandSpend"))
+    SavingsPlansPurchaseRecommendationDetail.add_member(:current_average_hourly_on_demand_spend, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrentAverageHourlyOnDemandSpend"))
+    SavingsPlansPurchaseRecommendationDetail.struct_class = Types::SavingsPlansPurchaseRecommendationDetail
+
+    SavingsPlansPurchaseRecommendationDetailList.member = Shapes::ShapeRef.new(shape: SavingsPlansPurchaseRecommendationDetail)
+
+    SavingsPlansPurchaseRecommendationMetadata.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "RecommendationId"))
+    SavingsPlansPurchaseRecommendationMetadata.add_member(:generation_timestamp, Shapes::ShapeRef.new(shape: GenericString, location_name: "GenerationTimestamp"))
+    SavingsPlansPurchaseRecommendationMetadata.struct_class = Types::SavingsPlansPurchaseRecommendationMetadata
+
+    SavingsPlansPurchaseRecommendationSummary.add_member(:estimated_roi, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedROI"))
+    SavingsPlansPurchaseRecommendationSummary.add_member(:currency_code, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrencyCode"))
+    SavingsPlansPurchaseRecommendationSummary.add_member(:estimated_total_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedTotalCost"))
+    SavingsPlansPurchaseRecommendationSummary.add_member(:current_on_demand_spend, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrentOnDemandSpend"))
+    SavingsPlansPurchaseRecommendationSummary.add_member(:estimated_savings_amount, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedSavingsAmount"))
+    SavingsPlansPurchaseRecommendationSummary.add_member(:total_recommendation_count, Shapes::ShapeRef.new(shape: GenericString, location_name: "TotalRecommendationCount"))
+    SavingsPlansPurchaseRecommendationSummary.add_member(:daily_commitment_to_purchase, Shapes::ShapeRef.new(shape: GenericString, location_name: "DailyCommitmentToPurchase"))
+    SavingsPlansPurchaseRecommendationSummary.add_member(:hourly_commitment_to_purchase, Shapes::ShapeRef.new(shape: GenericString, location_name: "HourlyCommitmentToPurchase"))
+    SavingsPlansPurchaseRecommendationSummary.add_member(:estimated_savings_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedSavingsPercentage"))
+    SavingsPlansPurchaseRecommendationSummary.add_member(:estimated_monthly_savings_amount, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedMonthlySavingsAmount"))
+    SavingsPlansPurchaseRecommendationSummary.struct_class = Types::SavingsPlansPurchaseRecommendationSummary
+
+    SavingsPlansSavings.add_member(:net_savings, Shapes::ShapeRef.new(shape: GenericString, location_name: "NetSavings"))
+    SavingsPlansSavings.add_member(:on_demand_cost_equivalent, Shapes::ShapeRef.new(shape: GenericString, location_name: "OnDemandCostEquivalent"))
+    SavingsPlansSavings.struct_class = Types::SavingsPlansSavings
+
+    SavingsPlansUtilization.add_member(:total_commitment, Shapes::ShapeRef.new(shape: GenericString, location_name: "TotalCommitment"))
+    SavingsPlansUtilization.add_member(:used_commitment, Shapes::ShapeRef.new(shape: GenericString, location_name: "UsedCommitment"))
+    SavingsPlansUtilization.add_member(:unused_commitment, Shapes::ShapeRef.new(shape: GenericString, location_name: "UnusedCommitment"))
+    SavingsPlansUtilization.add_member(:utilization_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "UtilizationPercentage"))
+    SavingsPlansUtilization.struct_class = Types::SavingsPlansUtilization
+
+    SavingsPlansUtilizationAggregates.add_member(:utilization, Shapes::ShapeRef.new(shape: SavingsPlansUtilization, required: true, location_name: "Utilization"))
+    SavingsPlansUtilizationAggregates.add_member(:savings, Shapes::ShapeRef.new(shape: SavingsPlansSavings, location_name: "Savings"))
+    SavingsPlansUtilizationAggregates.add_member(:amortized_commitment, Shapes::ShapeRef.new(shape: SavingsPlansAmortizedCommitment, location_name: "AmortizedCommitment"))
+    SavingsPlansUtilizationAggregates.struct_class = Types::SavingsPlansUtilizationAggregates
+
+    SavingsPlansUtilizationByTime.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    SavingsPlansUtilizationByTime.add_member(:utilization, Shapes::ShapeRef.new(shape: SavingsPlansUtilization, required: true, location_name: "Utilization"))
+    SavingsPlansUtilizationByTime.add_member(:savings, Shapes::ShapeRef.new(shape: SavingsPlansSavings, location_name: "Savings"))
+    SavingsPlansUtilizationByTime.add_member(:amortized_commitment, Shapes::ShapeRef.new(shape: SavingsPlansAmortizedCommitment, location_name: "AmortizedCommitment"))
+    SavingsPlansUtilizationByTime.struct_class = Types::SavingsPlansUtilizationByTime
+
+    SavingsPlansUtilizationDetail.add_member(:savings_plan_arn, Shapes::ShapeRef.new(shape: SavingsPlanArn, location_name: "SavingsPlanArn"))
+    SavingsPlansUtilizationDetail.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    SavingsPlansUtilizationDetail.add_member(:utilization, Shapes::ShapeRef.new(shape: SavingsPlansUtilization, location_name: "Utilization"))
+    SavingsPlansUtilizationDetail.add_member(:savings, Shapes::ShapeRef.new(shape: SavingsPlansSavings, location_name: "Savings"))
+    SavingsPlansUtilizationDetail.add_member(:amortized_commitment, Shapes::ShapeRef.new(shape: SavingsPlansAmortizedCommitment, location_name: "AmortizedCommitment"))
+    SavingsPlansUtilizationDetail.struct_class = Types::SavingsPlansUtilizationDetail
+
+    SavingsPlansUtilizationDetails.member = Shapes::ShapeRef.new(shape: SavingsPlansUtilizationDetail)
+
+    SavingsPlansUtilizationsByTime.member = Shapes::ShapeRef.new(shape: SavingsPlansUtilizationByTime)
+
     ServiceSpecification.add_member(:ec2_specification, Shapes::ShapeRef.new(shape: EC2Specification, location_name: "EC2Specification"))
     ServiceSpecification.struct_class = Types::ServiceSpecification
 
@@ -691,6 +865,60 @@ module Aws::CostExplorer
         o.output = Shapes::ShapeRef.new(shape: GetRightsizingRecommendationResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:get_savings_plans_coverage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSavingsPlansCoverage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSavingsPlansCoverageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSavingsPlansCoverageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_savings_plans_purchase_recommendation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSavingsPlansPurchaseRecommendation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSavingsPlansPurchaseRecommendationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSavingsPlansPurchaseRecommendationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:get_savings_plans_utilization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSavingsPlansUtilization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSavingsPlansUtilizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSavingsPlansUtilizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+      end)
+
+      api.add_operation(:get_savings_plans_utilization_details, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSavingsPlansUtilizationDetails"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSavingsPlansUtilizationDetailsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSavingsPlansUtilizationDetailsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_tags, Seahorse::Model::Operation.new.tap do |o|

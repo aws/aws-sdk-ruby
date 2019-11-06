@@ -58,6 +58,8 @@ module Aws::CodeBuild
     EnvironmentVariable = Shapes::StructureShape.new(name: 'EnvironmentVariable')
     EnvironmentVariableType = Shapes::StringShape.new(name: 'EnvironmentVariableType')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
+    ExportedEnvironmentVariable = Shapes::StructureShape.new(name: 'ExportedEnvironmentVariable')
+    ExportedEnvironmentVariables = Shapes::ListShape.new(name: 'ExportedEnvironmentVariables')
     FilterGroup = Shapes::ListShape.new(name: 'FilterGroup')
     FilterGroups = Shapes::ListShape.new(name: 'FilterGroups')
     GitCloneDepth = Shapes::IntegerShape.new(name: 'GitCloneDepth')
@@ -166,6 +168,7 @@ module Aws::CodeBuild
 
     Build.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "id"))
     Build.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    Build.add_member(:build_number, Shapes::ShapeRef.new(shape: WrapperLong, location_name: "buildNumber"))
     Build.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     Build.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     Build.add_member(:current_phase, Shapes::ShapeRef.new(shape: String, location_name: "currentPhase"))
@@ -190,6 +193,7 @@ module Aws::CodeBuild
     Build.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     Build.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
     Build.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKey"))
+    Build.add_member(:exported_environment_variables, Shapes::ShapeRef.new(shape: ExportedEnvironmentVariables, location_name: "exportedEnvironmentVariables"))
     Build.struct_class = Types::Build
 
     BuildArtifacts.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
@@ -299,6 +303,12 @@ module Aws::CodeBuild
     EnvironmentVariable.struct_class = Types::EnvironmentVariable
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: EnvironmentVariable)
+
+    ExportedEnvironmentVariable.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
+    ExportedEnvironmentVariable.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    ExportedEnvironmentVariable.struct_class = Types::ExportedEnvironmentVariable
+
+    ExportedEnvironmentVariables.member = Shapes::ShapeRef.new(shape: ExportedEnvironmentVariable)
 
     FilterGroup.member = Shapes::ShapeRef.new(shape: WebhookFilter)
 

@@ -171,6 +171,7 @@ module Aws
   autoload :SWF, 'aws-sdk-swf'
   autoload :SageMaker, 'aws-sdk-sagemaker'
   autoload :SageMakerRuntime, 'aws-sdk-sagemakerruntime'
+  autoload :SavingsPlans, 'aws-sdk-savingsplans'
   autoload :SecretsManager, 'aws-sdk-secretsmanager'
   autoload :SecurityHub, 'aws-sdk-securityhub'
   autoload :ServerlessApplicationRepository, 'aws-sdk-serverlessapplicationrepository'

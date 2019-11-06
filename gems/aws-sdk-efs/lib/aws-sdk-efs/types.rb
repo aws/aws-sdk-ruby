@@ -863,7 +863,7 @@ module Aws::EFS
     #   data as a hash:
     #
     #       {
-    #         transition_to_ia: "AFTER_14_DAYS", # accepts AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
+    #         transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
     #       }
     #
     # @!attribute [rw] transition_to_ia
@@ -1032,7 +1032,7 @@ module Aws::EFS
     #         file_system_id: "FileSystemId", # required
     #         lifecycle_policies: [ # required
     #           {
-    #             transition_to_ia: "AFTER_14_DAYS", # accepts AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
+    #             transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
     #           },
     #         ],
     #       }

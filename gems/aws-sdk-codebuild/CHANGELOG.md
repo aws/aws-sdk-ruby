@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2019-11-06)
+------------------
+
+* Feature - Add support for Build Number, Secrets Manager and Exported Environment Variables.
+
 1.41.0 (2019-10-23)
 ------------------
 

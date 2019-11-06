@@ -20,6 +20,20 @@ module Aws::Signer
       include Aws::Structure
     end
 
+    # The request contains invalid parameters for the ARN or tags. This
+    # exception also occurs when you call a tagging API on a cancelled
+    # signing profile.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelSigningProfileRequest
     #   data as a hash:
     #
@@ -109,8 +123,8 @@ module Aws::Signer
     #   @return [String]
     #
     # @!attribute [rw] signed_object
-    #   Name of the S3 bucket where the signed code image is saved by AWS
-    #   Signer.
+    #   Name of the S3 bucket where the signed code image is saved by code
+    #   signing.
     #   @return [Types::SignedObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/DescribeSigningJobResponse AWS API Documentation
@@ -156,16 +170,16 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The encryption algorithm options that are available to an AWS Signer
+    # The encryption algorithm options that are available to a code signing
     # job.
     #
     # @!attribute [rw] allowed_values
-    #   The set of accepted encryption algorithms that are allowed in an AWS
-    #   Signer job.
+    #   The set of accepted encryption algorithms that are allowed in a code
+    #   signing job.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_value
-    #   The default encryption algorithm that is used by an AWS Signer job.
+    #   The default encryption algorithm that is used by a code signing job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/EncryptionAlgorithmOptions AWS API Documentation
@@ -286,6 +300,14 @@ module Aws::Signer
     #   The status of the target signing profile.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the signing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the signing profile.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetSigningProfileResponse AWS API Documentation
     #
     class GetSigningProfileResponse < Struct.new(
@@ -294,18 +316,20 @@ module Aws::Signer
       :platform_id,
       :overrides,
       :signing_parameters,
-      :status)
+      :status,
+      :arn,
+      :tags)
       include Aws::Structure
     end
 
-    # The hash algorithms that are available to an AWS Signer job.
+    # The hash algorithms that are available to a code signing job.
     #
     # @!attribute [rw] allowed_values
-    #   The set of accepted hash algorithms allowed in an AWS Signer job.
+    #   The set of accepted hash algorithms allowed in a code signing job.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_value
-    #   The default hash algorithm that is used in an AWS Signer job.
+    #   The default hash algorithm that is used in a code signing job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/HashAlgorithmOptions AWS API Documentation
@@ -507,6 +531,47 @@ module Aws::Signer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the signing profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tags associated with the signing profile.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # The signing profile was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutSigningProfileRequest
     #   data as a hash:
     #
@@ -524,6 +589,9 @@ module Aws::Signer
     #         },
     #         signing_parameters: {
     #           "SigningParameterKey" => "SigningParameterValue",
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
     #         },
     #       }
     #
@@ -551,6 +619,10 @@ module Aws::Signer
     #   information that you want to use during signing.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the signing profile being created.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/PutSigningProfileRequest AWS API Documentation
     #
     class PutSigningProfileRequest < Struct.new(
@@ -558,7 +630,8 @@ module Aws::Signer
       :signing_material,
       :platform_id,
       :overrides,
-      :signing_parameters)
+      :signing_parameters,
+      :tags)
       include Aws::Structure
     end
 
@@ -585,7 +658,7 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The name and prefix of the S3 bucket where AWS Signer saves your
+    # The name and prefix of the S3 bucket where code signing saves your
     # signed objects.
     #
     # @note When making an API call, you may pass S3Destination
@@ -613,7 +686,7 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The S3 bucket name and key where AWS Signer saved your signed code
+    # The S3 bucket name and key where code signing saved your signed code
     # image.
     #
     # @!attribute [rw] bucket_name
@@ -679,15 +752,16 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The configuration of an AWS Signer operation.
+    # The configuration of a code signing operation.
     #
     # @!attribute [rw] encryption_algorithm_options
-    #   The encryption algorithm options that are available for an AWS
-    #   Signer job.
+    #   The encryption algorithm options that are available for a code
+    #   signing job.
     #   @return [Types::EncryptionAlgorithmOptions]
     #
     # @!attribute [rw] hash_algorithm_options
-    #   The hash algorithm options that are available for an AWS Signer job.
+    #   The hash algorithm options that are available for a a code signing
+    #   job.
     #   @return [Types::HashAlgorithmOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningConfiguration AWS API Documentation
@@ -711,12 +785,12 @@ module Aws::Signer
     #
     # @!attribute [rw] encryption_algorithm
     #   A specified override of the default encryption algorithm that is
-    #   used in an AWS Signer job.
+    #   used in a code signing job.
     #   @return [String]
     #
     # @!attribute [rw] hash_algorithm
-    #   A specified override of the default hash algorithm that is used in
-    #   an AWS Signer job.
+    #   A specified override of the default hash algorithm that is used in a
+    #   code signing job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningConfigurationOverrides AWS API Documentation
@@ -727,14 +801,14 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The image format of an AWS Signer platform or profile.
+    # The image format of a code signing platform or profile.
     #
     # @!attribute [rw] supported_formats
-    #   The supported formats of an AWS Signer signing image.
+    #   The supported formats of a code signing signing image.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_format
-    #   The default format of an AWS Signer signing image.
+    #   The default format of a code signing signing image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningImageFormat AWS API Documentation
@@ -808,41 +882,41 @@ module Aws::Signer
     end
 
     # Contains information about the signing configurations and parameters
-    # that is used to perform an AWS Signer job.
+    # that is used to perform a code signing job.
     #
     # @!attribute [rw] platform_id
-    #   The ID of an AWS Signer platform.
+    #   The ID of a code signing; platform.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The display name of an AWS Signer platform.
+    #   The display name of a code signing platform.
     #   @return [String]
     #
     # @!attribute [rw] partner
-    #   Any partner entities linked to an AWS Signer platform.
+    #   Any partner entities linked to a code signing platform.
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   The types of targets that can be signed by an AWS Signer platform.
+    #   The types of targets that can be signed by a code signing platform.
     #   @return [String]
     #
     # @!attribute [rw] category
-    #   The category of an AWS Signer platform.
+    #   The category of a code signing platform.
     #   @return [String]
     #
     # @!attribute [rw] signing_configuration
-    #   The configuration of an AWS Signer platform. This includes the
+    #   The configuration of a code signing platform. This includes the
     #   designated hash algorithm and encryption algorithm of a signing
     #   platform.
     #   @return [Types::SigningConfiguration]
     #
     # @!attribute [rw] signing_image_format
-    #   The signing image format that is used by an AWS Signer platform.
+    #   The image format of a code signing platform or profile.
     #   @return [Types::SigningImageFormat]
     #
     # @!attribute [rw] max_size_in_mb
-    #   The maximum size (in MB) of code that can be signed by a AWS Signer
-    #   platform.
+    #   The maximum size (in MB) of code that can be signed by a code
+    #   signing platform.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningPlatform AWS API Documentation
@@ -859,8 +933,8 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # Any overrides that are applied to the signing configuration of an AWS
-    # Signer platform.
+    # Any overrides that are applied to the signing configuration of a code
+    # signing platform.
     #
     # @note When making an API call, you may pass SigningPlatformOverrides
     #   data as a hash:
@@ -884,11 +958,12 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # Contains information about the ACM certificates and AWS Signer
-    # configuration parameters that can be used by a given AWS Signer user.
+    # Contains information about the ACM certificates and code signing
+    # configuration parameters that can be used by a given code signing
+    # user.
     #
     # @!attribute [rw] profile_name
-    #   The name of the AWS Signer profile.
+    #   The name of the signing profile.
     #   @return [String]
     #
     # @!attribute [rw] signing_material
@@ -900,12 +975,20 @@ module Aws::Signer
     #   @return [String]
     #
     # @!attribute [rw] signing_parameters
-    #   The parameters that are available for use by an AWS Signer user.
+    #   The parameters that are available for use by a code signing user.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
-    #   The status of an AWS Signer profile.
+    #   The status of a code signing profile.
     #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   Amazon Resource Name (ARN) for the signing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the signing profile.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningProfile AWS API Documentation
     #
@@ -914,7 +997,9 @@ module Aws::Signer
       :signing_material,
       :platform_id,
       :signing_parameters,
-      :status)
+      :status,
+      :arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -1008,6 +1093,36 @@ module Aws::Signer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) for the signing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags to be associated with the signing profile.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The signing job has been throttled.
     #
     # @!attribute [rw] message
@@ -1019,6 +1134,34 @@ module Aws::Signer
       :message)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) for the signing profile .
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of tag keys to be removed from the signing profile .
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # You signing certificate could not be validated.
     #

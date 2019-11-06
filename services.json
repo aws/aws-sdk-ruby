@@ -593,6 +593,9 @@
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13"
   },
+  "SavingsPlans": {
+    "models": "savingsplans/2019-06-28"
+  },
   "SecretsManager": {
     "models": "secretsmanager/2017-10-17"
   },

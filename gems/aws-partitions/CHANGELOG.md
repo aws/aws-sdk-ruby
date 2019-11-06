@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.234.0 (2019-11-06)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SavingsPlans`.
+
 1.233.0 (2019-11-05)
 ------------------
 

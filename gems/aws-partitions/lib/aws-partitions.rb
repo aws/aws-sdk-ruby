@@ -387,6 +387,7 @@ module Aws
             'SWF' => 'swf',
             'SageMaker' => 'api.sagemaker',
             'SageMakerRuntime' => 'runtime.sagemaker',
+            'SavingsPlans' => 'savingsplans',
             'SecretsManager' => 'secretsmanager',
             'SecurityHub' => 'securityhub',
             'ServerlessApplicationRepository' => 'serverlessrepo',

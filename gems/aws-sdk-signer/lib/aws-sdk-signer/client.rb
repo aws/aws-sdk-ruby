@@ -400,6 +400,8 @@ module Aws::Signer
     #   * {Types::GetSigningProfileResponse#overrides #overrides} => Types::SigningPlatformOverrides
     #   * {Types::GetSigningProfileResponse#signing_parameters #signing_parameters} => Hash&lt;String,String&gt;
     #   * {Types::GetSigningProfileResponse#status #status} => String
+    #   * {Types::GetSigningProfileResponse#arn #arn} => String
+    #   * {Types::GetSigningProfileResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -417,6 +419,9 @@ module Aws::Signer
     #   resp.signing_parameters #=> Hash
     #   resp.signing_parameters["SigningParameterKey"] #=> String
     #   resp.status #=> String, one of "Active", "Canceled"
+    #   resp.arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetSigningProfile AWS API Documentation
     #
@@ -429,12 +434,12 @@ module Aws::Signer
 
     # Lists all your signing jobs. You can use the `maxResults` parameter to
     # limit the number of signing jobs that are returned in the response. If
-    # additional jobs remain to be listed, AWS Signer returns a `nextToken`
-    # value. Use this value in subsequent calls to `ListSigningJobs` to
-    # fetch the remaining values. You can continue calling `ListSigningJobs`
-    # with your `maxResults` parameter and with new values that AWS Signer
-    # returns in the `nextToken` parameter until all of your signing jobs
-    # have been returned.
+    # additional jobs remain to be listed, code signing returns a
+    # `nextToken` value. Use this value in subsequent calls to
+    # `ListSigningJobs` to fetch the remaining values. You can continue
+    # calling `ListSigningJobs` with your `maxResults` parameter and with
+    # new values that code signing returns in the `nextToken` parameter
+    # until all of your signing jobs have been returned.
     #
     # @option params [String] :status
     #   A status value with which to filter your results.
@@ -497,13 +502,13 @@ module Aws::Signer
       req.send_request(options)
     end
 
-    # Lists all signing platforms available in AWS Signer that match the
-    # request parameters. If additional jobs remain to be listed, AWS Signer
-    # returns a `nextToken` value. Use this value in subsequent calls to
-    # `ListSigningJobs` to fetch the remaining values. You can continue
-    # calling `ListSigningJobs` with your `maxResults` parameter and with
-    # new values that AWS Signer returns in the `nextToken` parameter until
-    # all of your signing jobs have been returned.
+    # Lists all signing platforms available in code signing that match the
+    # request parameters. If additional jobs remain to be listed, code
+    # signing returns a `nextToken` value. Use this value in subsequent
+    # calls to `ListSigningJobs` to fetch the remaining values. You can
+    # continue calling `ListSigningJobs` with your `maxResults` parameter
+    # and with new values that code signing returns in the `nextToken`
+    # parameter until all of your signing jobs have been returned.
     #
     # @option params [String] :category
     #   The category type of a signing platform.
@@ -569,12 +574,12 @@ module Aws::Signer
 
     # Lists all available signing profiles in your AWS account. Returns only
     # profiles with an `ACTIVE` status unless the `includeCanceled` request
-    # field is set to `true`. If additional jobs remain to be listed, AWS
-    # Signer returns a `nextToken` value. Use this value in subsequent calls
-    # to `ListSigningJobs` to fetch the remaining values. You can continue
-    # calling `ListSigningJobs` with your `maxResults` parameter and with
-    # new values that AWS Signer returns in the `nextToken` parameter until
-    # all of your signing jobs have been returned.
+    # field is set to `true`. If additional jobs remain to be listed, code
+    # signing returns a `nextToken` value. Use this value in subsequent
+    # calls to `ListSigningJobs` to fetch the remaining values. You can
+    # continue calling `ListSigningJobs` with your `maxResults` parameter
+    # and with new values that code signing returns in the `nextToken`
+    # parameter until all of your signing jobs have been returned.
     #
     # @option params [Boolean] :include_canceled
     #   Designates whether to include profiles with the status of `CANCELED`.
@@ -610,6 +615,9 @@ module Aws::Signer
     #   resp.profiles[0].signing_parameters #=> Hash
     #   resp.profiles[0].signing_parameters["SigningParameterKey"] #=> String
     #   resp.profiles[0].status #=> String, one of "Active", "Canceled"
+    #   resp.profiles[0].arn #=> String
+    #   resp.profiles[0].tags #=> Hash
+    #   resp.profiles[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningProfiles AWS API Documentation
@@ -621,9 +629,38 @@ module Aws::Signer
       req.send_request(options)
     end
 
-    # Creates a signing profile. A signing profile is an AWS Signer template
-    # that can be used to carry out a pre-defined signing job. For more
-    # information, see
+    # Returns a list of the tags associated with a signing profile resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the signing profile.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates a signing profile. A signing profile is a code signing
+    # template that can be used to carry out a pre-defined signing job. For
+    # more information, see
     # [http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html][1]
     #
     #
@@ -649,6 +686,9 @@ module Aws::Signer
     #   Map of key-value pairs for signing. These can include any information
     #   that you want to use during signing.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to be associated with the signing profile being created.
+    #
     # @return [Types::PutSigningProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutSigningProfileResponse#arn #arn} => String
@@ -669,6 +709,9 @@ module Aws::Signer
     #     },
     #     signing_parameters: {
     #       "SigningParameterKey" => "SigningParameterValue",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -694,14 +737,14 @@ module Aws::Signer
     #
     # * Your S3 source bucket must be version enabled.
     #
-    # * You must create an S3 destination bucket. AWS Signer uses your S3
+    # * You must create an S3 destination bucket. Code signing uses your S3
     #   destination bucket to write your signed code.
     #
     # * You specify the name of the source and destination buckets when
     #   calling the `StartSigningJob` operation.
     #
     # * You must also specify a request token that identifies your request
-    #   to AWS Signer.
+    #   to code signing.
     #
     # You can call the DescribeSigningJob and the ListSigningJobs actions
     # after you call `StartSigningJob`.
@@ -769,6 +812,65 @@ module Aws::Signer
       req.send_request(options)
     end
 
+    # Adds one or more tags to a signing profile. Tags are labels that you
+    # can use to identify and organize your AWS resources. Each tag consists
+    # of a key and an optional value. You specify the signing profile using
+    # its Amazon Resource Name (ARN). You specify the tag by using a
+    # key-value pair.
+    #
+    # @option params [required, String] :resource_arn
+    #   Amazon Resource Name (ARN) for the signing profile.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   One or more tags to be associated with the signing profile.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove one or more tags from a signing profile. Specify a list of tag
+    # keys to remove the tags.
+    #
+    # @option params [required, String] :resource_arn
+    #   Amazon Resource Name (ARN) for the signing profile .
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag keys to be removed from the signing profile .
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -782,7 +884,7 @@ module Aws::Signer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-signer'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

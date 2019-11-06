@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2019-11-06)
+------------------
+
+* Feature - This release adds support for tagging code-signing profiles in AWS Signer.
+
 1.16.0 (2019-10-23)
 ------------------
 

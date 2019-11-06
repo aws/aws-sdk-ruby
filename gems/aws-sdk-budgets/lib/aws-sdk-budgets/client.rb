@@ -337,7 +337,7 @@ module Aws::Budgets
     #           unit: "UnitValue", # required
     #         },
     #       },
-    #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
+    #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
     #       last_updated_time: Time.now,
     #     },
     #     notifications_with_subscribers: [
@@ -625,7 +625,7 @@ module Aws::Budgets
     #   resp.budget.calculated_spend.actual_spend.unit #=> String
     #   resp.budget.calculated_spend.forecasted_spend.amount #=> String
     #   resp.budget.calculated_spend.forecasted_spend.unit #=> String
-    #   resp.budget.budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE"
+    #   resp.budget.budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE", "SAVINGS_PLANS_UTILIZATION", "SAVINGS_PLANS_COVERAGE"
     #   resp.budget.last_updated_time #=> Time
     #
     # @overload describe_budget(params = {})
@@ -677,7 +677,7 @@ module Aws::Budgets
     # @example Response structure
     #
     #   resp.budget_performance_history.budget_name #=> String
-    #   resp.budget_performance_history.budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE"
+    #   resp.budget_performance_history.budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE", "SAVINGS_PLANS_UTILIZATION", "SAVINGS_PLANS_COVERAGE"
     #   resp.budget_performance_history.cost_filters #=> Hash
     #   resp.budget_performance_history.cost_filters["GenericString"] #=> Array
     #   resp.budget_performance_history.cost_filters["GenericString"][0] #=> String
@@ -773,7 +773,7 @@ module Aws::Budgets
     #   resp.budgets[0].calculated_spend.actual_spend.unit #=> String
     #   resp.budgets[0].calculated_spend.forecasted_spend.amount #=> String
     #   resp.budgets[0].calculated_spend.forecasted_spend.unit #=> String
-    #   resp.budgets[0].budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE"
+    #   resp.budgets[0].budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE", "SAVINGS_PLANS_UTILIZATION", "SAVINGS_PLANS_COVERAGE"
     #   resp.budgets[0].last_updated_time #=> Time
     #   resp.next_token #=> String
     #
@@ -957,7 +957,7 @@ module Aws::Budgets
     #           unit: "UnitValue", # required
     #         },
     #       },
-    #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
+    #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
     #       last_updated_time: Time.now,
     #     },
     #   })
@@ -1076,7 +1076,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

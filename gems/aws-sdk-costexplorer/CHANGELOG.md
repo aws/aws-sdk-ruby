@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-11-06)
+------------------
+
+* Feature - This launch provides customers with access to Savings Plans management APIs.
+
 1.30.0 (2019-10-23)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.56.0 (2019-11-06)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-savingsplans` gem.
+
 3.55.0 (2019-11-05)
 ------------------
 

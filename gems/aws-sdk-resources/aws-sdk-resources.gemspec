@@ -180,6 +180,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-swf', '~> 1')
   spec.add_dependency('aws-sdk-sagemaker', '~> 1')
   spec.add_dependency('aws-sdk-sagemakerruntime', '~> 1')
+  spec.add_dependency('aws-sdk-savingsplans', '~> 1')
   spec.add_dependency('aws-sdk-secretsmanager', '~> 1')
   spec.add_dependency('aws-sdk-securityhub', '~> 1')
   spec.add_dependency('aws-sdk-serverlessapplicationrepository', '~> 1')

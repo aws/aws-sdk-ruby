@@ -178,6 +178,10 @@ module Aws::CostExplorer
     #   Number of hours during the lookback period covered by reservations.
     #   @return [String]
     #
+    # @!attribute [rw] savings_plans_covered_hours_in_lookback_period
+    #   Number of hours during the lookback period covered by Savings Plans.
+    #   @return [String]
+    #
     # @!attribute [rw] on_demand_hours_in_lookback_period
     #   Number of hours during the lookback period billed at On Demand
     #   rates.
@@ -206,6 +210,7 @@ module Aws::CostExplorer
       :resource_details,
       :resource_utilization,
       :reservation_covered_hours_in_lookback_period,
+      :savings_plans_covered_hours_in_lookback_period,
       :on_demand_hours_in_lookback_period,
       :total_running_hours_in_lookback_period,
       :monthly_cost,
@@ -264,7 +269,7 @@ module Aws::CostExplorer
     #   data as a hash:
     #
     #       {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
     #       }
     #
@@ -578,7 +583,7 @@ module Aws::CostExplorer
     #
     # <note markdown="1"> For `GetRightsizingRecommendation` action, a combination of OR and NOT
     # is not supported. OR is not supported between different dimensions, or
-    # dimensions and tags. NOT operators aren't supported. Dimentions are
+    # dimensions and tags. NOT operators aren't supported. Dimensions are
     # also limited to `LINKED_ACCOUNT`, `REGION`, or `RIGHTSIZING_TYPE`.
     #
     #  </note>
@@ -599,7 +604,7 @@ module Aws::CostExplorer
     #               # recursive Expression
     #             },
     #             dimensions: {
-    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #               values: ["Value"],
     #             },
     #             tags: {
@@ -620,7 +625,7 @@ module Aws::CostExplorer
     #               # recursive Expression
     #             },
     #             dimensions: {
-    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #               values: ["Value"],
     #             },
     #             tags: {
@@ -644,7 +649,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -653,7 +658,7 @@ module Aws::CostExplorer
     #           },
     #         },
     #         dimensions: {
-    #           key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #           key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #           values: ["Value"],
     #         },
     #         tags: {
@@ -745,7 +750,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -897,7 +902,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -995,8 +1000,8 @@ module Aws::CostExplorer
     #           start: "YearMonthDay", # required
     #           end: "YearMonthDay", # required
     #         },
-    #         dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
-    #         context: "COST_AND_USAGE", # accepts COST_AND_USAGE, RESERVATIONS
+    #         dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         context: "COST_AND_USAGE", # accepts COST_AND_USAGE, RESERVATIONS, SAVINGS_PLANS
     #         next_page_token: "NextPageToken",
     #       }
     #
@@ -1101,6 +1106,26 @@ module Aws::CostExplorer
     #
     #   * TENANCY - The tenancy of a resource. Examples are shared or
     #     dedicated.
+    #
+    #   If you set the context to `SAVINGS_PLANS`, you can use the following
+    #   dimensions for searching:
+    #
+    #   * SAVINGS\_PLANS\_TYPE - Type of Savings Plans (EC2 Instance or
+    #     Compute)
+    #
+    #   * PAYMENT\_OPTION - Payment option for the given Savings Plans (for
+    #     example, All Upfront)
+    #
+    #   * REGION - The AWS Region.
+    #
+    #   * INSTANCE\_TYPE\_FAMILY - The family of instances (For example,
+    #     `m5`)
+    #
+    #   * LINKED\_ACCOUNT - The description in the attribute map that
+    #     includes the full name of the member account. The value field
+    #     contains the AWS ID of the member account.
+    #
+    #   * SAVINGS\_PLAN\_ARN - The unique identifier for your Savings Plan
     #   @return [String]
     #
     # @!attribute [rw] next_page_token
@@ -1199,6 +1224,26 @@ module Aws::CostExplorer
     #
     #   * TENANCY - The tenancy of a resource. Examples are shared or
     #     dedicated.
+    #
+    #   If you set the context to `SAVINGS_PLANS`, you can use the following
+    #   dimensions for searching:
+    #
+    #   * SAVINGS\_PLANS\_TYPE - Type of Savings Plans (EC2 Instance or
+    #     Compute)
+    #
+    #   * PAYMENT\_OPTION - Payment option for the given Savings Plans (for
+    #     example, All Upfront)
+    #
+    #   * REGION - The AWS Region.
+    #
+    #   * INSTANCE\_TYPE\_FAMILY - The family of instances (For example,
+    #     `m5`)
+    #
+    #   * LINKED\_ACCOUNT - The description in the attribute map that
+    #     includes the full name of the member account. The value field
+    #     contains the AWS ID of the member account.
+    #
+    #   * SAVINGS\_PLAN\_ARN - The unique identifier for your Savings Plan
     #   @return [Array<Types::DimensionValuesWithAttributes>]
     #
     # @!attribute [rw] return_size
@@ -1258,7 +1303,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -1537,7 +1582,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -1667,7 +1712,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -1723,14 +1768,15 @@ module Aws::CostExplorer
     #   <note markdown="1"> For `GetRightsizingRecommendation` action, a combination of OR and
     #   NOT is not supported. OR is not supported between different
     #   dimensions, or dimensions and tags. NOT operators aren't supported.
-    #   Dimentions are also limited to `LINKED_ACCOUNT`, `REGION`, or
+    #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
     #   `RIGHTSIZING_TYPE`.
     #
     #    </note>
     #   @return [Types::Expression]
     #
     # @!attribute [rw] service
-    #   The specific service that you want recommendations for.
+    #   The specific service that you want recommendations for. The only
+    #   valid value for `GetRightsizingRecommendation` is "`AmazonEC2`".
     #   @return [String]
     #
     # @!attribute [rw] page_size
@@ -1776,6 +1822,426 @@ module Aws::CostExplorer
       :summary,
       :rightsizing_recommendations,
       :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSavingsPlansCoverageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         time_period: { # required
+    #           start: "YearMonthDay", # required
+    #           end: "YearMonthDay", # required
+    #         },
+    #         group_by: [
+    #           {
+    #             type: "DIMENSION", # accepts DIMENSION, TAG
+    #             key: "GroupDefinitionKey",
+    #           },
+    #         ],
+    #         granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
+    #         filter: {
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #             values: ["Value"],
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #         },
+    #         metrics: ["MetricName"],
+    #         next_token: "NextPageToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] time_period
+    #   The time period that you want the usage and costs for. The `Start`
+    #   date must be within 13 months. The `End` date must be after the
+    #   `Start` date, and before the current date. Future dates can't be
+    #   used as an `End` date.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] group_by
+    #   You can group the data using the attributes `INSTANCE_FAMILY`,
+    #   `REGION`, or `SERVICE`.
+    #   @return [Array<Types::GroupDefinition>]
+    #
+    # @!attribute [rw] granularity
+    #   The granularity of the Amazon Web Services cost data for your
+    #   Savings Plans. `Granularity` can't be set if `GroupBy` is set.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Filters Savings Plans coverage data by dimensions. You can filter
+    #   data for Savings Plans usage with the following dimensions:
+    #
+    #   * `LINKED_ACCOUNT`
+    #
+    #   * `REGION`
+    #
+    #   * `SERVICE`
+    #
+    #   * `INSTANCE_FAMILY`
+    #
+    #   `GetSavingsPlansCoverage` uses the same [Expression][1] object as
+    #   the other operations, but only `AND` is supported among each
+    #   dimension. If there are multiple values for a dimension, they are
+    #   OR'd together.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] metrics
+    #   The measurement that you want your Savings Plans coverage reported
+    #   in. The only valid value is `spendCoveredBySavingsPlans`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of items to be returned in a response. The default is
+    #   `20`, with a minimum value of `1`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansCoverageRequest AWS API Documentation
+    #
+    class GetSavingsPlansCoverageRequest < Struct.new(
+      :time_period,
+      :group_by,
+      :granularity,
+      :filter,
+      :metrics,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] savings_plans_coverages
+    #   The amount of spend that your Savings Plans covered.
+    #   @return [Array<Types::SavingsPlansCoverage>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansCoverageResponse AWS API Documentation
+    #
+    class GetSavingsPlansCoverageResponse < Struct.new(
+      :savings_plans_coverages,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSavingsPlansPurchaseRecommendationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         savings_plans_type: "COMPUTE_SP", # required, accepts COMPUTE_SP, EC2_INSTANCE_SP
+    #         term_in_years: "ONE_YEAR", # required, accepts ONE_YEAR, THREE_YEARS
+    #         payment_option: "NO_UPFRONT", # required, accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
+    #         next_page_token: "NextPageToken",
+    #         page_size: 1,
+    #         lookback_period_in_days: "SEVEN_DAYS", # required, accepts SEVEN_DAYS, THIRTY_DAYS, SIXTY_DAYS
+    #       }
+    #
+    # @!attribute [rw] savings_plans_type
+    #   The Savings Plans recommendation type requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] term_in_years
+    #   The savings plan recommendation term used to generated these
+    #   recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_option
+    #   The payment option used to generate these recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of recommendations that you want returned in a single
+    #   response object.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lookback_period_in_days
+    #   The lookback period used to generate the recommendation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansPurchaseRecommendationRequest AWS API Documentation
+    #
+    class GetSavingsPlansPurchaseRecommendationRequest < Struct.new(
+      :savings_plans_type,
+      :term_in_years,
+      :payment_option,
+      :next_page_token,
+      :page_size,
+      :lookback_period_in_days)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata
+    #   The accountIDs these recommendations are generated for.
+    #   @return [Types::SavingsPlansPurchaseRecommendationMetadata]
+    #
+    # @!attribute [rw] savings_plans_purchase_recommendation
+    #   Contains your request parameters, Savings Plan Recommendations
+    #   Summary, and Details.
+    #   @return [Types::SavingsPlansPurchaseRecommendation]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token for the next set of retrievable results. AWS provides the
+    #   token when the response from a previous call has more results than
+    #   the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansPurchaseRecommendationResponse AWS API Documentation
+    #
+    class GetSavingsPlansPurchaseRecommendationResponse < Struct.new(
+      :metadata,
+      :savings_plans_purchase_recommendation,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSavingsPlansUtilizationDetailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         time_period: { # required
+    #           start: "YearMonthDay", # required
+    #           end: "YearMonthDay", # required
+    #         },
+    #         filter: {
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #             values: ["Value"],
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #         },
+    #         next_token: "NextPageToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] time_period
+    #   The time period that you want the usage and costs for. The `Start`
+    #   date must be within 13 months. The `End` date must be after the
+    #   `Start` date, and before the current date. Future dates can't be
+    #   used as an `End` date.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] filter
+    #   Filters Savings Plans utilization coverage data for active Savings
+    #   Plans dimensions. You can filter data with the following dimensions:
+    #
+    #   * `LINKED_ACCOUNT`
+    #
+    #   * `SAVINGS_PLAN_ARN`
+    #
+    #   * `REGION`
+    #
+    #   * `PAYMENT_OPTIONS`
+    #
+    #   * `INSTANCE_TYPE_FAMILY`
+    #
+    #   `GetSavingsPlansUtilizationDetails` uses the same [Expression][1]
+    #   object as the other operations, but only `AND` is supported among
+    #   each dimension. If there are multiple values for a dimension, they
+    #   are OR'd together.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of items to be returned in a response. The default is
+    #   `20`, with a minimum value of `1`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansUtilizationDetailsRequest AWS API Documentation
+    #
+    class GetSavingsPlansUtilizationDetailsRequest < Struct.new(
+      :time_period,
+      :filter,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] savings_plans_utilization_details
+    #   Retrieves a single daily or monthly Savings Plans utilization rate
+    #   and details for your account.
+    #   @return [Array<Types::SavingsPlansUtilizationDetail>]
+    #
+    # @!attribute [rw] total
+    #   The total Savings Plans utilization, regardless of time period.
+    #   @return [Types::SavingsPlansUtilizationAggregates]
+    #
+    # @!attribute [rw] time_period
+    #   The time period that you want the usage and costs for.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansUtilizationDetailsResponse AWS API Documentation
+    #
+    class GetSavingsPlansUtilizationDetailsResponse < Struct.new(
+      :savings_plans_utilization_details,
+      :total,
+      :time_period,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSavingsPlansUtilizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         time_period: { # required
+    #           start: "YearMonthDay", # required
+    #           end: "YearMonthDay", # required
+    #         },
+    #         granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
+    #         filter: {
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #             values: ["Value"],
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] time_period
+    #   The time period that you want the usage and costs for. The `Start`
+    #   date must be within 13 months. The `End` date must be after the
+    #   `Start` date, and before the current date. Future dates can't be
+    #   used as an `End` date.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] granularity
+    #   The granularity of the Amazon Web Services utillization data for
+    #   your Savings Plans.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Filters Savings Plans utilization coverage data for active Savings
+    #   Plans dimensions. You can filter data with the following dimensions:
+    #
+    #   * `LINKED_ACCOUNT`
+    #
+    #   * `SAVINGS_PLAN_ARN`
+    #
+    #   * `SAVINGS_PLANS_TYPE`
+    #
+    #   * `REGION`
+    #
+    #   * `PAYMENT_OPTIONS`
+    #
+    #   * `INSTANCE_TYPE_FAMILY`
+    #
+    #   `GetSavingsPlansUtilization` uses the same [Expression][1] object as
+    #   the other operations, but only `AND` is supported among each
+    #   dimension. If there are multiple values for a dimension, they are
+    #   OR'd together.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   @return [Types::Expression]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansUtilizationRequest AWS API Documentation
+    #
+    class GetSavingsPlansUtilizationRequest < Struct.new(
+      :time_period,
+      :granularity,
+      :filter)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] savings_plans_utilizations_by_time
+    #   The amount of time (in hours) ou used your Savings Plans. This
+    #   allows you to specify date ranges.
+    #   @return [Array<Types::SavingsPlansUtilizationByTime>]
+    #
+    # @!attribute [rw] total
+    #   The total amount of time that you used your Savings Plans,
+    #   regardless of date ranges.
+    #   @return [Types::SavingsPlansUtilizationAggregates]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansUtilizationResponse AWS API Documentation
+    #
+    class GetSavingsPlansUtilizationResponse < Struct.new(
+      :savings_plans_utilizations_by_time,
+      :total)
       include Aws::Structure
     end
 
@@ -1877,7 +2343,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #             values: ["Value"],
     #           },
     #           tags: {
@@ -2440,7 +2906,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] estimated_reservation_cost_for_lookback_period
     #   How much AWS estimates that you would have spent for all usage
-    #   during the specified historical period if you had had a reservation.
+    #   during the specified historical period if you had a reservation.
     #   @return [String]
     #
     # @!attribute [rw] upfront_cost
@@ -2690,6 +3156,496 @@ module Aws::CostExplorer
       :estimated_total_monthly_savings_amount,
       :savings_currency_code,
       :savings_percentage)
+      include Aws::Structure
+    end
+
+    # The amortized amount of Savings Plans purchased in a specific account
+    # during a specific time interval.
+    #
+    # @!attribute [rw] amortized_recurring_commitment
+    #   The amortized amount of your Savings Plans commitment that was
+    #   purchased with either a `Partial` or a `NoUpfront`.
+    #   @return [String]
+    #
+    # @!attribute [rw] amortized_upfront_commitment
+    #   The amortized amount of your Savings Plans commitment that was
+    #   purchased with an `Upfront` or `PartialUpfront` Savings Plans.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_amortized_commitment
+    #   The total amortized amount of your Savings Plans commitment,
+    #   regardless of your Savings Plans purchase method.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansAmortizedCommitment AWS API Documentation
+    #
+    class SavingsPlansAmortizedCommitment < Struct.new(
+      :amortized_recurring_commitment,
+      :amortized_upfront_commitment,
+      :total_amortized_commitment)
+      include Aws::Structure
+    end
+
+    # The amount of Savings Plans eligible usage that is covered by Savings
+    # Plans. All calculations consider the On-Demand equivalent of your
+    # Savings Plans usage.
+    #
+    # @!attribute [rw] attributes
+    #   The attribute that applies to a specific `Dimension`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] coverage
+    #   The amount of Savings Plans eligible usage that the Savings Plans
+    #   covered.
+    #   @return [Types::SavingsPlansCoverageData]
+    #
+    # @!attribute [rw] time_period
+    #   The time period that you want the usage and costs for.
+    #   @return [Types::DateInterval]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansCoverage AWS API Documentation
+    #
+    class SavingsPlansCoverage < Struct.new(
+      :attributes,
+      :coverage,
+      :time_period)
+      include Aws::Structure
+    end
+
+    # Specific coverage percentage, On-Demand costs, and spend covered by
+    # Savings Plans, and total Savings Plans costs for an account.
+    #
+    # @!attribute [rw] spend_covered_by_savings_plans
+    #   The amount of your Amazon Web Services usage that is covered by a
+    #   Savings Plans.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_demand_cost
+    #   The cost of your Amazon Web Services usage at the public On-Demand
+    #   rate.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_cost
+    #   The total cost of your Amazon Web Services usage, regardless of your
+    #   purchase option.
+    #   @return [String]
+    #
+    # @!attribute [rw] coverage_percentage
+    #   The percentage of your existing Savings Planscovered usage, divided
+    #   by all of your eligible Savings Plans usage in an account(or set of
+    #   accounts).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansCoverageData AWS API Documentation
+    #
+    class SavingsPlansCoverageData < Struct.new(
+      :spend_covered_by_savings_plans,
+      :on_demand_cost,
+      :total_cost,
+      :coverage_percentage)
+      include Aws::Structure
+    end
+
+    # Attribute details on a specific Savings Plan.
+    #
+    # @!attribute [rw] region
+    #   A geographic location where the Savings Plans is hosted.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_family
+    #   A group of instance types that Savings Plans applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   The unique ID used to distinguish Savings Plans from one another.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansDetails AWS API Documentation
+    #
+    class SavingsPlansDetails < Struct.new(
+      :region,
+      :instance_family,
+      :offering_id)
+      include Aws::Structure
+    end
+
+    # Contains your request parameters, Savings Plan Recommendations
+    # Summary, and Details.
+    #
+    # @!attribute [rw] savings_plans_type
+    #   The requested Savings Plans recommendation type.
+    #   @return [String]
+    #
+    # @!attribute [rw] term_in_years
+    #   The Savings Plans recommendation term in years, used to generate the
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_option
+    #   The payment option used to generate the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] lookback_period_in_days
+    #   The lookback period in days, used to generate the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] savings_plans_purchase_recommendation_details
+    #   Details for the Savings Plans we recommend you to purchase to cover
+    #   existing, Savings Plans eligible workloads.
+    #   @return [Array<Types::SavingsPlansPurchaseRecommendationDetail>]
+    #
+    # @!attribute [rw] savings_plans_purchase_recommendation_summary
+    #   Summary metrics for your Savings Plans Recommendations.
+    #   @return [Types::SavingsPlansPurchaseRecommendationSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansPurchaseRecommendation AWS API Documentation
+    #
+    class SavingsPlansPurchaseRecommendation < Struct.new(
+      :savings_plans_type,
+      :term_in_years,
+      :payment_option,
+      :lookback_period_in_days,
+      :savings_plans_purchase_recommendation_details,
+      :savings_plans_purchase_recommendation_summary)
+      include Aws::Structure
+    end
+
+    # Details for your recommended Savings Plans.
+    #
+    # @!attribute [rw] savings_plans_details
+    #   Details for your recommended Savings Plans.
+    #   @return [Types::SavingsPlansDetails]
+    #
+    # @!attribute [rw] account_id
+    #   The `AccountID` the recommendation is generated for.
+    #   @return [String]
+    #
+    # @!attribute [rw] upfront_cost
+    #   The upfront cost of the recommended Savings Plans, based on the
+    #   selected payment option.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_roi
+    #   The estimated return on investment based on the recommended Savings
+    #   Plans purchased. This is calculated as `estimatedSavingsAmount`/
+    #   `estimatedSPCost`*100.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code Amazon Web Services used to generate the
+    #   recommendations and present potential savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_sp_cost
+    #   The cost of the recommended Savings Plans over the length of the
+    #   lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_on_demand_cost
+    #   The remaining On-Demand cost estimated to not be covered by the
+    #   recommended Savings Plans, over the length of the lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_savings_amount
+    #   The estimated savings amount based on the recommended Savings Plans
+    #   over the length of the lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_savings_percentage
+    #   The estimated savings percentage relative to the total cost of
+    #   applicable On-Demand usage over the lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] hourly_commitment_to_purchase
+    #   The recommended hourly commitment level for the Savings Plans type,
+    #   and configuration based on the usage during the lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_average_utilization
+    #   The estimated utilization of the recommended Savings Plans.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_monthly_savings_amount
+    #   The estimated monthly savings amount, based on the recommended
+    #   Savings Plans.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_minimum_hourly_on_demand_spend
+    #   The lowest value of hourly On-Demand spend over the lookback period
+    #   of the applicable usage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_maximum_hourly_on_demand_spend
+    #   The highest value of hourly On-Demand spend over the lookback period
+    #   of the applicable usage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_average_hourly_on_demand_spend
+    #   The average value of hourly On-Demand spend over the lookback period
+    #   of the applicable usage type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansPurchaseRecommendationDetail AWS API Documentation
+    #
+    class SavingsPlansPurchaseRecommendationDetail < Struct.new(
+      :savings_plans_details,
+      :account_id,
+      :upfront_cost,
+      :estimated_roi,
+      :currency_code,
+      :estimated_sp_cost,
+      :estimated_on_demand_cost,
+      :estimated_savings_amount,
+      :estimated_savings_percentage,
+      :hourly_commitment_to_purchase,
+      :estimated_average_utilization,
+      :estimated_monthly_savings_amount,
+      :current_minimum_hourly_on_demand_spend,
+      :current_maximum_hourly_on_demand_spend,
+      :current_average_hourly_on_demand_spend)
+      include Aws::Structure
+    end
+
+    # Metadata about your Savings Plans Purchase Recommendations.
+    #
+    # @!attribute [rw] recommendation_id
+    #   The unique identifier for the recommendation set.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_timestamp
+    #   The timestamp showing when the recommendations were generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansPurchaseRecommendationMetadata AWS API Documentation
+    #
+    class SavingsPlansPurchaseRecommendationMetadata < Struct.new(
+      :recommendation_id,
+      :generation_timestamp)
+      include Aws::Structure
+    end
+
+    # Summary metrics for your Savings Plans Purchase Recommendations.
+    #
+    # @!attribute [rw] estimated_roi
+    #   The estimated return on investment based on the recommended Savings
+    #   Plans and estimated savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code Amazon Web Services used to generate the
+    #   recommendations and present potential savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_total_cost
+    #   The estimated total cost of the usage after purchasing the
+    #   recommended Savings Plans. This is a sum of the cost of Savings
+    #   Plans during this term, and the remaining On-Demand usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_on_demand_spend
+    #   The current total on demand spend of the applicable usage types over
+    #   the lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_savings_amount
+    #   The estimated total savings over the lookback period, based on the
+    #   purchase of the recommended Savings Plans.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_recommendation_count
+    #   The aggregate number of Savings Plans recommendations that exist for
+    #   your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] daily_commitment_to_purchase
+    #   The recommended Savings Plans cost on a daily (24 hourly) basis.
+    #   @return [String]
+    #
+    # @!attribute [rw] hourly_commitment_to_purchase
+    #   The recommended hourly commitment based on the recommendation
+    #   parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_savings_percentage
+    #   The estimated savings relative to the total cost of On-Demand usage,
+    #   over the lookback period. This is calculated as
+    #   `estimatedSavingsAmount`/ `CurrentOnDemandSpend`*100.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_monthly_savings_amount
+    #   The estimated monthly savings amount, based on the recommended
+    #   Savings Plans purchase.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansPurchaseRecommendationSummary AWS API Documentation
+    #
+    class SavingsPlansPurchaseRecommendationSummary < Struct.new(
+      :estimated_roi,
+      :currency_code,
+      :estimated_total_cost,
+      :current_on_demand_spend,
+      :estimated_savings_amount,
+      :total_recommendation_count,
+      :daily_commitment_to_purchase,
+      :hourly_commitment_to_purchase,
+      :estimated_savings_percentage,
+      :estimated_monthly_savings_amount)
+      include Aws::Structure
+    end
+
+    # The amount of savings you're accumulating, against the public
+    # On-Demand rate of the usage accrued in an account.
+    #
+    # @!attribute [rw] net_savings
+    #   The savings amount that you are accumulating for the usage that is
+    #   covered by a Savings Plans, when compared to the On-Demand
+    #   equivalent of the same usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_demand_cost_equivalent
+    #   How much the amount that the usage would have cost if it was accrued
+    #   at the On-Demand rate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansSavings AWS API Documentation
+    #
+    class SavingsPlansSavings < Struct.new(
+      :net_savings,
+      :on_demand_cost_equivalent)
+      include Aws::Structure
+    end
+
+    # The measurement of how well you are using your existing Savings Plans.
+    #
+    # @!attribute [rw] total_commitment
+    #   The total amount of Savings Plans commitment that's been purchased
+    #   in an account (or set of accounts).
+    #   @return [String]
+    #
+    # @!attribute [rw] used_commitment
+    #   The amount of your Savings Plans commitment that was not consumed
+    #   from Savings Plans eligible usage in a specific period.
+    #   @return [String]
+    #
+    # @!attribute [rw] unused_commitment
+    #   The amount of your Savings Plans commitment that was not consumed
+    #   from Savings Plans eligible usage in a specific period.
+    #   @return [String]
+    #
+    # @!attribute [rw] utilization_percentage
+    #   The amount of `UsedCommitment` divided by the `TotalCommitment` for
+    #   your Savings Plans.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansUtilization AWS API Documentation
+    #
+    class SavingsPlansUtilization < Struct.new(
+      :total_commitment,
+      :used_commitment,
+      :unused_commitment,
+      :utilization_percentage)
+      include Aws::Structure
+    end
+
+    # The aggregated utilization metrics for your Savings Plans usage.
+    #
+    # @!attribute [rw] utilization
+    #   A ratio of your effectiveness of using existing Savings Plans to
+    #   apply to workloads that are Savings Plans eligible.
+    #   @return [Types::SavingsPlansUtilization]
+    #
+    # @!attribute [rw] savings
+    #   The amount saved by using existing Savings Plans. Savings returns
+    #   both net savings from Savings Plans, as well as the
+    #   `onDemandCostEquivalent` of the Savings Plans when considering the
+    #   utilization rate.
+    #   @return [Types::SavingsPlansSavings]
+    #
+    # @!attribute [rw] amortized_commitment
+    #   The total amortized commitment for a Savings Plans. This includes
+    #   the sum of the upfront and recurring Savings Plans fees.
+    #   @return [Types::SavingsPlansAmortizedCommitment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansUtilizationAggregates AWS API Documentation
+    #
+    class SavingsPlansUtilizationAggregates < Struct.new(
+      :utilization,
+      :savings,
+      :amortized_commitment)
+      include Aws::Structure
+    end
+
+    # The amount of Savings Plans utilization, in hours.
+    #
+    # @!attribute [rw] time_period
+    #   The time period that you want the usage and costs for.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] utilization
+    #   A ratio of your effectiveness of using existing Savings Plans to
+    #   apply to workloads that are Savings Plans eligible.
+    #   @return [Types::SavingsPlansUtilization]
+    #
+    # @!attribute [rw] savings
+    #   The amount saved by using existing Savings Plans. Savings returns
+    #   both net savings from Savings Plans as well as the
+    #   `onDemandCostEquivalent` of the Savings Plans when considering the
+    #   utilization rate.
+    #   @return [Types::SavingsPlansSavings]
+    #
+    # @!attribute [rw] amortized_commitment
+    #   The total amortized commitment for a Savings Plans. This includes
+    #   the sum of the upfront and recurring Savings Plans fees.
+    #   @return [Types::SavingsPlansAmortizedCommitment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansUtilizationByTime AWS API Documentation
+    #
+    class SavingsPlansUtilizationByTime < Struct.new(
+      :time_period,
+      :utilization,
+      :savings,
+      :amortized_commitment)
+      include Aws::Structure
+    end
+
+    # A single daily or monthly Savings Plans utilization rate, and details
+    # for your account. Master accounts in an organization have access to
+    # member accounts. You can use `GetDimensionValues` to determine the
+    # possible dimension values.
+    #
+    # @!attribute [rw] savings_plan_arn
+    #   The unique Amazon Resource Name (ARN) for a particular Savings Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The attribute that applies to a specific `Dimension`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] utilization
+    #   A ratio of your effectiveness of using existing Savings Plans to
+    #   apply to workloads that are Savings Plans eligible.
+    #   @return [Types::SavingsPlansUtilization]
+    #
+    # @!attribute [rw] savings
+    #   The amount saved by using existing Savings Plans. Savings returns
+    #   both net savings from savings plans as well as the
+    #   `onDemandCostEquivalent` of the Savings Plans when considering the
+    #   utilization rate.
+    #   @return [Types::SavingsPlansSavings]
+    #
+    # @!attribute [rw] amortized_commitment
+    #   The total amortized commitment for a Savings Plans. Includes the sum
+    #   of the upfront and recurring Savings Plans fees.
+    #   @return [Types::SavingsPlansAmortizedCommitment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansUtilizationDetail AWS API Documentation
+    #
+    class SavingsPlansUtilizationDetail < Struct.new(
+      :savings_plan_arn,
+      :attributes,
+      :utilization,
+      :savings,
+      :amortized_commitment)
       include Aws::Structure
     end
 
