@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SavingsPlans - Updated the documentation for AWS Savings Plans.
+
 2.11.391 (2019-11-06)
 ------------------
 
