@@ -123,8 +123,8 @@ module Seahorse
         attr_accessor :docstring
 
         def doc_default
-          if @doc_default.nil?
-            Proc === default ? nil : default
+          if @doc_default.nil? && !default.is_a?(Proc)
+            default
           else
             @doc_default
           end
