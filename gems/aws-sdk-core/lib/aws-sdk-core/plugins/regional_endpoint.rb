@@ -35,9 +35,18 @@ to test endpoints. This should be avalid HTTP(S) URI.
         DOCS
         endpoint_prefix = cfg.api.metadata['endpointPrefix']
         if cfg.region && endpoint_prefix
-          sts_regional = cfg.respond_to?(:sts_regional_endpoints) ? cfg.sts_regional_endpoints : nil
+          if cfg.respond_to?(:sts_regional_endpoints)
+            sts_regional = cfg.sts_regional_endpoints
+          end
+          if cfg.respond_to?(:s3_us_east_1_regional_endpoint)
+            s3_iad_regional = cfg.s3_us_east_1_regional_endpoint
+          end
           Aws::Partitions::EndpointProvider.resolve(
-            cfg.region, endpoint_prefix, sts_regional)
+            cfg.region,
+            endpoint_prefix,
+            sts_regional,
+            s3_iad_regional
+          )
         end
       end
 

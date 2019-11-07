@@ -38,9 +38,22 @@ module Aws
       # @param [String] sts_regional_endpoints [STS only] Whether to use `legacy` (global endpoint for
       #   legacy regions) or `regional` mode for using regional endpoint for supported regions
       #   except 'aws-global'
+      # @param [String] s3_us_east_1_regional_endpoint [S3 only] Whether to use
+      #   `legacy` (global endpoint) or `regional` mode for using regional
+      #   endpoint for S3 'us-east-1' region
       # @api private Use the static class methods instead.
-      def resolve(region, service, sts_regional_endpoints = nil)
-        "https://" + endpoint_for(region, service, sts_regional_endpoints)
+      def resolve(
+        region,
+        service,
+        sts_regional_endpoints = 'legacy',
+        s3_us_east_1_regional_endpoint = 'legacy'
+      )
+        "https://" + endpoint_for(
+          region,
+          service,
+          sts_regional_endpoints,
+          s3_us_east_1_regional_endpoint
+        )
       end
 
       # @api private Use the static class methods instead.
@@ -62,7 +75,12 @@ module Aws
 
       private
 
-      def endpoint_for(region, service, sts_regional_endpoints)
+      def endpoint_for(
+        region,
+        service,
+        sts_regional_endpoints = 'legacy',
+        s3_us_east_1_regional_endpoint = 'legacy'
+      )
         partition = get_partition(region)
         endpoint = default_endpoint(partition, service, region)
         service_cfg = partition.fetch("services", {}).fetch(service, {})
@@ -80,9 +98,16 @@ module Aws
           region = service_cfg.fetch("partitionEndpoint", region)
         end
 
+        # Check for s3 IAD regional behavior
+        s3_iad_regional = service == 's3' &&
+          region == 'us-east-1' &&
+          s3_us_east_1_regional_endpoint == 'regional'
+
         # Check for service/region level endpoint.
-        endpoint = service_cfg.fetch("endpoints", {}).
-          fetch(region, {}).fetch("hostname", endpoint)
+        unless s3_iad_regional
+          endpoint = service_cfg.fetch("endpoints", {}).
+            fetch(region, {}).fetch("hostname", endpoint)
+        end
 
         endpoint
       end
@@ -121,8 +146,18 @@ module Aws
 
       class << self
 
-        def resolve(region, service, sts_regional_endpoints = nil)
-          default_provider.resolve(region, service, sts_regional_endpoints)
+        def resolve(
+          region,
+          service,
+          sts_regional_endpoints = 'legacy',
+          s3_us_east_1_regional_endpoint = 'legacy'
+        )
+          default_provider.resolve(
+            region,
+            service,
+            sts_regional_endpoints,
+            s3_us_east_1_regional_endpoint
+          )
         end
 
         def signing_region(region, service)
