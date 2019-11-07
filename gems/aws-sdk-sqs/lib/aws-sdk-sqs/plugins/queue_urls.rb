@@ -35,7 +35,7 @@ module Aws
 
           private
 
-          # take the first conponemnt after service delimiter
+          # take the first component after service delimiter
           # https://sqs.us-east-1.amazonaws.com/1234567890/demo
           # https://vpce-x-y.sqs.us-east-1.vpce.amazonaws.com/1234567890/demo
           def parse_region(url)
