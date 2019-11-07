@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.393 (2019-11-07)
+------------------
+
 * Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
 
 * Feature - Aws::SSM - Updated the API for Amazon Simple Systems Manager (SSM).
