@@ -187,6 +187,8 @@ module Aws
     SNS
     SQS
     SSM
+    SSO
+    SSOOIDC
     STS
     SWF
     SageMaker

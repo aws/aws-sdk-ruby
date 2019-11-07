@@ -333,6 +333,7 @@ to be backwards compatible.
 | AWS Resource Groups Tagging API                       | ResourceGroupsTaggingAPI        | 2017-01-26  |
 | AWS RoboMaker                                         | RoboMaker                       | 2018-06-29  |
 | AWS S3 Control                                        | S3Control                       | 2018-08-20  |
+| AWS SSO OIDC                                          | SSOOIDC                         | 2019-06-10  |
 | AWS Savings Plans                                     | SavingsPlans                    | 2019-06-28  |
 | AWS Secrets Manager                                   | SecretsManager                  | 2017-10-17  |
 | AWS Security Token Service                            | STS                             | 2011-06-15  |
@@ -341,6 +342,7 @@ to be backwards compatible.
 | AWS Service Catalog                                   | ServiceCatalog                  | 2015-12-10  |
 | AWS Shield                                            | Shield                          | 2016-06-02  |
 | AWS Signer                                            | Signer                          | 2017-08-25  |
+| AWS Single Sign-On                                    | SSO                             | 2019-06-10  |
 | AWS Step Functions                                    | States                          | 2016-11-23  |
 | AWS Storage Gateway                                   | StorageGateway                  | 2013-06-30  |
 | AWS Support                                           | Support                         | 2013-04-15  |
@@ -445,8 +447,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 | Service Quotas                                        | ServiceQuotas                   | 2019-06-24  |

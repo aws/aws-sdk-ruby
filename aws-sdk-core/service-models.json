@@ -654,6 +654,14 @@
     "models": "ssm/2014-11-06",
     "endpoint": "ssm"
   },
+  "SSO": {
+    "models": "sso/2019-06-10",
+    "endpoint": "portal.sso"
+  },
+  "SSOOIDC": {
+    "models": "sso-oidc/2019-06-10",
+    "endpoint": "oidc"
+  },
   "STS": {
     "models": "sts/2011-06-15",
     "endpoint": "sts"

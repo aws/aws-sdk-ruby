@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
+
+* Feature - Aws::SSM - Updated the API for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::SSOOIDC - Added support for a new service, AWS SSO OIDC.
+
+* Feature - Aws::SSO - Added support for a new service, AWS Single Sign-On.
+
 2.11.392 (2019-11-06)
 ------------------
 
