@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.236.0 (2019-11-07)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SSOOIDC`.
+
+* Feature - Added support for enumerating regions for `Aws::SSO`.
+
 1.235.0 (2019-11-06)
 ------------------
 

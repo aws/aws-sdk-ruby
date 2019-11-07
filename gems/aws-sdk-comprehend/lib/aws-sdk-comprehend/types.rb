@@ -96,7 +96,7 @@ module Aws::Comprehend
     #
     #       {
     #         text_list: ["String"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text_list
@@ -168,7 +168,7 @@ module Aws::Comprehend
     #
     #       {
     #         text_list: ["String"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text_list
@@ -245,7 +245,7 @@ module Aws::Comprehend
     #
     #       {
     #         text_list: ["String"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text_list
@@ -507,7 +507,7 @@ module Aws::Comprehend
     #           kms_key_id: "KmsKeyId",
     #         },
     #         client_request_token: "ClientRequestTokenString",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #         volume_kms_key_id: "KmsKeyId",
     #         vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -636,7 +636,7 @@ module Aws::Comprehend
     #           },
     #         },
     #         client_request_token: "ClientRequestTokenString",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #         volume_kms_key_id: "KmsKeyId",
     #         vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -1067,7 +1067,7 @@ module Aws::Comprehend
     #
     #       {
     #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text
@@ -1111,7 +1111,7 @@ module Aws::Comprehend
     #
     #       {
     #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text
@@ -1155,7 +1155,7 @@ module Aws::Comprehend
     #
     #       {
     #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text
@@ -2173,7 +2173,7 @@ module Aws::Comprehend
     #   @return [Types::EntityTypesEvaluationMetrics]
     #
     # @!attribute [rw] number_of_train_mentions
-    #   indicates the number of times the given entity name was seen in the
+    #   Indicates the number of times the given entity type was seen in the
     #   training data.
     #   @return [Integer]
     #
@@ -3616,7 +3616,7 @@ module Aws::Comprehend
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
     #         entity_recognizer_arn: "EntityRecognizerArn",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #         client_request_token: "ClientRequestTokenString",
     #         volume_kms_key_id: "KmsKeyId",
     #         vpc_config: {
@@ -3755,7 +3755,7 @@ module Aws::Comprehend
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #         client_request_token: "ClientRequestTokenString",
     #         volume_kms_key_id: "KmsKeyId",
     #         vpc_config: {
@@ -3881,7 +3881,7 @@ module Aws::Comprehend
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #         client_request_token: "ClientRequestTokenString",
     #         volume_kms_key_id: "KmsKeyId",
     #         vpc_config: {

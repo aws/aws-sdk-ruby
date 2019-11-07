@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-11-07)
+------------------
+
+* Feature - This release adds new languages (ar, hi, ko, ja, zh, zh-TW) for Amazon Comprehend's DetectSentiment, DetectEntities, DetectKeyPhrases, BatchDetectSentiment, BatchDetectEntities and BatchDetectKeyPhrases APIs
+
 1.26.0 (2019-10-23)
 ------------------
 

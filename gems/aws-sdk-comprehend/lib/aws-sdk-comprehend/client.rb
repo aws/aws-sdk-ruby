@@ -334,7 +334,7 @@ module Aws::Comprehend
     #
     #   resp = client.batch_detect_entities({
     #     text_list: ["String"], # required
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
     # @example Response structure
@@ -383,7 +383,7 @@ module Aws::Comprehend
     #
     #   resp = client.batch_detect_key_phrases({
     #     text_list: ["String"], # required
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
     # @example Response structure
@@ -433,7 +433,7 @@ module Aws::Comprehend
     #
     #   resp = client.batch_detect_sentiment({
     #     text_list: ["String"], # required
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
     # @example Response structure
@@ -595,7 +595,7 @@ module Aws::Comprehend
     #       kms_key_id: "KmsKeyId",
     #     },
     #     client_request_token: "ClientRequestTokenString",
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #     volume_kms_key_id: "KmsKeyId",
     #     vpc_config: {
     #       security_group_ids: ["SecurityGroupId"], # required
@@ -705,7 +705,7 @@ module Aws::Comprehend
     #       },
     #     },
     #     client_request_token: "ClientRequestTokenString",
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #     volume_kms_key_id: "KmsKeyId",
     #     vpc_config: {
     #       security_group_ids: ["SecurityGroupId"], # required
@@ -854,7 +854,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.document_classifier_properties.document_classifier_arn #=> String
-    #   resp.document_classifier_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.document_classifier_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
     #   resp.document_classifier_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.document_classifier_properties.message #=> String
     #   resp.document_classifier_properties.submit_time #=> Time
@@ -962,7 +962,7 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties.output_data_config.kms_key_id #=> String
-    #   resp.entities_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.entities_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
     #   resp.entities_detection_job_properties.data_access_role_arn #=> String
     #   resp.entities_detection_job_properties.volume_kms_key_id #=> String
     #   resp.entities_detection_job_properties.vpc_config.security_group_ids #=> Array
@@ -999,7 +999,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.entity_recognizer_properties.entity_recognizer_arn #=> String
-    #   resp.entity_recognizer_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.entity_recognizer_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
     #   resp.entity_recognizer_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.entity_recognizer_properties.message #=> String
     #   resp.entity_recognizer_properties.submit_time #=> Time
@@ -1067,7 +1067,7 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.key_phrases_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties.output_data_config.kms_key_id #=> String
-    #   resp.key_phrases_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.key_phrases_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
     #   resp.key_phrases_detection_job_properties.data_access_role_arn #=> String
     #   resp.key_phrases_detection_job_properties.volume_kms_key_id #=> String
     #   resp.key_phrases_detection_job_properties.vpc_config.security_group_ids #=> Array
@@ -1113,7 +1113,7 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.sentiment_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties.output_data_config.kms_key_id #=> String
-    #   resp.sentiment_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.sentiment_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
     #   resp.sentiment_detection_job_properties.data_access_role_arn #=> String
     #   resp.sentiment_detection_job_properties.volume_kms_key_id #=> String
     #   resp.sentiment_detection_job_properties.vpc_config.security_group_ids #=> Array
@@ -1233,7 +1233,7 @@ module Aws::Comprehend
     #
     #   resp = client.detect_entities({
     #     text: "String", # required
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
     # @example Response structure
@@ -1274,7 +1274,7 @@ module Aws::Comprehend
     #
     #   resp = client.detect_key_phrases({
     #     text: "String", # required
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
     # @example Response structure
@@ -1316,7 +1316,7 @@ module Aws::Comprehend
     #
     #   resp = client.detect_sentiment({
     #     text: "String", # required
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
     # @example Response structure
@@ -1478,7 +1478,7 @@ module Aws::Comprehend
     #
     #   resp.document_classifier_properties_list #=> Array
     #   resp.document_classifier_properties_list[0].document_classifier_arn #=> String
-    #   resp.document_classifier_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.document_classifier_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
     #   resp.document_classifier_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.document_classifier_properties_list[0].message #=> String
     #   resp.document_classifier_properties_list[0].submit_time #=> Time
@@ -1621,7 +1621,7 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
-    #   resp.entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
     #   resp.entities_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.entities_detection_job_properties_list[0].volume_kms_key_id #=> String
     #   resp.entities_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
@@ -1681,7 +1681,7 @@ module Aws::Comprehend
     #
     #   resp.entity_recognizer_properties_list #=> Array
     #   resp.entity_recognizer_properties_list[0].entity_recognizer_arn #=> String
-    #   resp.entity_recognizer_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.entity_recognizer_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
     #   resp.entity_recognizer_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.entity_recognizer_properties_list[0].message #=> String
     #   resp.entity_recognizer_properties_list[0].submit_time #=> Time
@@ -1766,7 +1766,7 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.key_phrases_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
-    #   resp.key_phrases_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.key_phrases_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
     #   resp.key_phrases_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.key_phrases_detection_job_properties_list[0].volume_kms_key_id #=> String
     #   resp.key_phrases_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
@@ -1829,7 +1829,7 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.sentiment_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
-    #   resp.sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
     #   resp.sentiment_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.sentiment_detection_job_properties_list[0].volume_kms_key_id #=> String
     #   resp.sentiment_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
@@ -2208,7 +2208,7 @@ module Aws::Comprehend
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     entity_recognizer_arn: "EntityRecognizerArn",
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #     client_request_token: "ClientRequestTokenString",
     #     volume_kms_key_id: "KmsKeyId",
     #     vpc_config: {
@@ -2304,7 +2304,7 @@ module Aws::Comprehend
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #     client_request_token: "ClientRequestTokenString",
     #     volume_kms_key_id: "KmsKeyId",
     #     vpc_config: {
@@ -2400,7 +2400,7 @@ module Aws::Comprehend
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #     client_request_token: "ClientRequestTokenString",
     #     volume_kms_key_id: "KmsKeyId",
     #     vpc_config: {
@@ -2828,7 +2828,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

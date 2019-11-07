@@ -383,6 +383,8 @@ module Aws
             'SNS' => 'sns',
             'SQS' => 'sqs',
             'SSM' => 'ssm',
+            'SSO' => 'portal.sso',
+            'SSOOIDC' => 'oidc',
             'STS' => 'sts',
             'SWF' => 'swf',
             'SageMaker' => 'api.sagemaker',

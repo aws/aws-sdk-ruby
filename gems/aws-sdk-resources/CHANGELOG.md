@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.57.0 (2019-11-07)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ssooidc` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-sso` gem.
+
 3.56.0 (2019-11-06)
 ------------------
 

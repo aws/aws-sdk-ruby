@@ -378,6 +378,7 @@ to be backwards compatible.
 | AWS Resource Groups Tagging API                       | Aws::ResourceGroupsTaggingAPI        | aws-sdk-resourcegroupstaggingapi        | 2017-01-26  |
 | AWS RoboMaker                                         | Aws::RoboMaker                       | aws-sdk-robomaker                       | 2018-06-29  |
 | AWS S3 Control                                        | Aws::S3Control                       | aws-sdk-s3control                       | 2018-08-20  |
+| AWS SSO OIDC                                          | Aws::SSOOIDC                         | aws-sdk-ssooidc                         | 2019-06-10  |
 | AWS Savings Plans                                     | Aws::SavingsPlans                    | aws-sdk-savingsplans                    | 2019-06-28  |
 | AWS Secrets Manager                                   | Aws::SecretsManager                  | aws-sdk-secretsmanager                  | 2017-10-17  |
 | AWS Security Token Service                            | Aws::STS                             | aws-sdk-core                            | 2011-06-15  |
@@ -386,6 +387,7 @@ to be backwards compatible.
 | AWS Service Catalog                                   | Aws::ServiceCatalog                  | aws-sdk-servicecatalog                  | 2015-12-10  |
 | AWS Shield                                            | Aws::Shield                          | aws-sdk-shield                          | 2016-06-02  |
 | AWS Signer                                            | Aws::Signer                          | aws-sdk-signer                          | 2017-08-25  |
+| AWS Single Sign-On                                    | Aws::SSO                             | aws-sdk-sso                             | 2019-06-10  |
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |
@@ -491,8 +493,8 @@ to be backwards compatible.
 | AmazonMQ                                              | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |
