@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.394 (2019-11-08)
+------------------
+
 * Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
 
 * Feature - Aws::ECR - Updated the documentation for Amazon EC2 Container Registry.
