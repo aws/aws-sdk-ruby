@@ -91,7 +91,7 @@ module Aws
           )
           resp = client.put_object(bucket: 'bucket-name', key: 'foo')
           expect(resp.context.http_request.endpoint.to_s).to eq(
-            'https://bucket-name.s3.us-east-1.dualstack.amazonaws.com/foo')
+            'https://bucket-name.s3.dualstack.us-east-1.amazonaws.com/foo')
         end
 
       end
