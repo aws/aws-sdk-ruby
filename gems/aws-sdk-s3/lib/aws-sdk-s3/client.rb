@@ -25,6 +25,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
+require 'aws-sdk-s3/plugins/iad_regional_endpoint.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
 require 'aws-sdk-s3/plugins/dualstack.rb'
 require 'aws-sdk-s3/plugins/bucket_dns.rb'
@@ -72,6 +73,7 @@ module Aws::S3
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::Protocols::RestXml)
+    add_plugin(Aws::S3::Plugins::IADRegionalEndpoint)
     add_plugin(Aws::S3::Plugins::Accelerate)
     add_plugin(Aws::S3::Plugins::Dualstack)
     add_plugin(Aws::S3::Plugins::BucketDns)
@@ -243,6 +245,10 @@ module Aws::S3
     #
     #   @option options [Integer] :retry_max_delay (0)
     #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :s3_us_east_1_regional_endpoint ("legacy")
+    #     Passing in `regional` to enable regional endpoint for S3 `us-east-1`
+    #     region, defaults to `legacy` mode, using global endpoint for `us-east-1`.
     #
     #   @option options [String] :secret_access_key
     #
