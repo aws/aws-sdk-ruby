@@ -1660,7 +1660,15 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Updates the image tag mutability settings for a repository.
+    # Updates the image tag mutability settings for a repository. When a
+    # repository is configured with tag immutability, all image tags within
+    # the repository will be prevented them from being overwritten. For more
+    # information, see [Image Tag Mutability][1] in the *Amazon Elastic
+    # Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1814,7 +1822,14 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Starts an image vulnerability scan.
+    # Starts an image vulnerability scan. An image scan can only be started
+    # once per day on an individual image. This limit includes if an image
+    # was scanned on initial push. For more information, see [Image
+    # Scanning][1] in the *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -2050,7 +2065,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

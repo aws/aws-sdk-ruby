@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.23.1 (2019-11-08)
+------------------
+
 * Issue - Support VPC Endpoint pattern in Aws::SQS::Plugins::QueueUrl (Github #2114)
 
 1.23.0 (2019-10-23)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-11-08)
+------------------
+
+* Feature - This release adds support for disabling classic flow.
+
 1.17.0 (2019-10-23)
 ------------------
 

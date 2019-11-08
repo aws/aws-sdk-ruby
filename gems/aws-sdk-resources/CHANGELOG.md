@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.57.1 (2019-11-08)
+------------------
+
 * Issue - Yanked 3.57.0 as typo protection broke the release (rubygems/rubygems.org#2161).
 
 3.57.0 (2019-11-07)

@@ -17,6 +17,7 @@ module Aws::CognitoIdentity
     AmbiguousRoleResolutionType = Shapes::StringShape.new(name: 'AmbiguousRoleResolutionType')
     ClaimName = Shapes::StringShape.new(name: 'ClaimName')
     ClaimValue = Shapes::StringShape.new(name: 'ClaimValue')
+    ClassicFlow = Shapes::BooleanShape.new(name: 'ClassicFlow')
     CognitoIdentityProvider = Shapes::StructureShape.new(name: 'CognitoIdentityProvider')
     CognitoIdentityProviderClientId = Shapes::StringShape.new(name: 'CognitoIdentityProviderClientId')
     CognitoIdentityProviderList = Shapes::ListShape.new(name: 'CognitoIdentityProviderList')
@@ -126,6 +127,7 @@ module Aws::CognitoIdentity
 
     CreateIdentityPoolInput.add_member(:identity_pool_name, Shapes::ShapeRef.new(shape: IdentityPoolName, required: true, location_name: "IdentityPoolName"))
     CreateIdentityPoolInput.add_member(:allow_unauthenticated_identities, Shapes::ShapeRef.new(shape: IdentityPoolUnauthenticated, required: true, location_name: "AllowUnauthenticatedIdentities"))
+    CreateIdentityPoolInput.add_member(:allow_classic_flow, Shapes::ShapeRef.new(shape: ClassicFlow, location_name: "AllowClassicFlow"))
     CreateIdentityPoolInput.add_member(:supported_login_providers, Shapes::ShapeRef.new(shape: IdentityProviders, location_name: "SupportedLoginProviders"))
     CreateIdentityPoolInput.add_member(:developer_provider_name, Shapes::ShapeRef.new(shape: DeveloperProviderName, location_name: "DeveloperProviderName"))
     CreateIdentityPoolInput.add_member(:open_id_connect_provider_arns, Shapes::ShapeRef.new(shape: OIDCProviderList, location_name: "OpenIdConnectProviderARNs"))
@@ -219,6 +221,7 @@ module Aws::CognitoIdentity
     IdentityPool.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
     IdentityPool.add_member(:identity_pool_name, Shapes::ShapeRef.new(shape: IdentityPoolName, required: true, location_name: "IdentityPoolName"))
     IdentityPool.add_member(:allow_unauthenticated_identities, Shapes::ShapeRef.new(shape: IdentityPoolUnauthenticated, required: true, location_name: "AllowUnauthenticatedIdentities"))
+    IdentityPool.add_member(:allow_classic_flow, Shapes::ShapeRef.new(shape: ClassicFlow, location_name: "AllowClassicFlow"))
     IdentityPool.add_member(:supported_login_providers, Shapes::ShapeRef.new(shape: IdentityProviders, location_name: "SupportedLoginProviders"))
     IdentityPool.add_member(:developer_provider_name, Shapes::ShapeRef.new(shape: DeveloperProviderName, location_name: "DeveloperProviderName"))
     IdentityPool.add_member(:open_id_connect_provider_arns, Shapes::ShapeRef.new(shape: OIDCProviderList, location_name: "OpenIdConnectProviderARNs"))
@@ -345,7 +348,7 @@ module Aws::CognitoIdentity
     SetIdentityPoolRolesInput.struct_class = Types::SetIdentityPoolRolesInput
 
     TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARNString, required: true, location_name: "ResourceArn"))
-    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: IdentityPoolTagsType, location_name: "Tags"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: IdentityPoolTagsType, required: true, location_name: "Tags"))
     TagResourceInput.struct_class = Types::TagResourceInput
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
@@ -371,7 +374,7 @@ module Aws::CognitoIdentity
     UnprocessedIdentityIdList.member = Shapes::ShapeRef.new(shape: UnprocessedIdentityId)
 
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARNString, required: true, location_name: "ResourceArn"))
-    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: IdentityPoolTagsListType, location_name: "TagKeys"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: IdentityPoolTagsListType, required: true, location_name: "TagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
