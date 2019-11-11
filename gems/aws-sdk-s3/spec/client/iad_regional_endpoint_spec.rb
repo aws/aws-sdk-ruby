@@ -71,29 +71,6 @@ module Aws
             'https://s3.us-west-2.amazonaws.com/')
         end
 
-        it 'has no effect on dualstack configuration' do
-          client = Client.new(
-            stub_responses: true,
-            region: 'us-east-1',
-            use_dualstack_endpoint: true
-          )
-          resp = client.put_object(bucket: 'bucket-name', key: 'foo')
-          expect(resp.context.http_request.endpoint.to_s).to eq(
-            'https://bucket-name.s3.dualstack.amazonaws.com/foo')
-        end
-
-        it 'works with dualstack when regional enabled' do
-          client = Client.new(
-            stub_responses: true,
-            region: 'us-east-1',
-            s3_us_east_1_regional_endpoint: 'regional',
-            use_dualstack_endpoint: true
-          )
-          resp = client.put_object(bucket: 'bucket-name', key: 'foo')
-          expect(resp.context.http_request.endpoint.to_s).to eq(
-            'https://bucket-name.s3.dualstack.us-east-1.amazonaws.com/foo')
-        end
-
       end
 
     end
