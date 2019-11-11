@@ -422,9 +422,11 @@ module Aws::CloudFormation
     # To create a change set for a stack that doesn't exist, for the
     # `ChangeSetType` parameter, specify `CREATE`. To create a change set
     # for an existing stack, specify `UPDATE` for the `ChangeSetType`
-    # parameter. After the `CreateChangeSet` call successfully completes,
-    # AWS CloudFormation starts creating the change set. To check the status
-    # of the change set or to review it, use the DescribeChangeSet action.
+    # parameter. To create a change set for an import operation, specify
+    # `IMPORT` for the `ChangeSetType` parameter. After the
+    # `CreateChangeSet` call successfully completes, AWS CloudFormation
+    # starts creating the change set. To check the status of the change set
+    # or to review it, use the DescribeChangeSet action.
     #
     # When you are satisfied with the changes the change set will make,
     # execute the change set by using the ExecuteChangeSet action. AWS
@@ -461,9 +463,9 @@ module Aws::CloudFormation
     #   change set. For more information, see the Parameter data type.
     #
     # @option params [Array<String>] :capabilities
-    #   In some cases, you must explicity acknowledge that your stack template
-    #   contains certain capabilities in order for AWS CloudFormation to
-    #   create the stack.
+    #   In some cases, you must explicitly acknowledge that your stack
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to create the stack.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
@@ -616,7 +618,8 @@ module Aws::CloudFormation
     # @option params [String] :change_set_type
     #   The type of change set operation. To create a change set for a new
     #   stack, specify `CREATE`. To create a change set for an existing stack,
-    #   specify `UPDATE`.
+    #   specify `UPDATE`. To create a change set for an import operation,
+    #   specify `IMPORT`.
     #
     #   If you create a change set for a new stack, AWS Cloudformation creates
     #   a stack with a unique stack ID, but no template or resources. The
@@ -630,6 +633,9 @@ module Aws::CloudFormation
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995
+    #
+    # @option params [Array<Types::ResourceToImport>] :resources_to_import
+    #   The resources to import into your stack.
     #
     # @return [Types::CreateChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -673,7 +679,16 @@ module Aws::CloudFormation
     #     change_set_name: "ChangeSetName", # required
     #     client_token: "ClientToken",
     #     description: "Description",
-    #     change_set_type: "CREATE", # accepts CREATE, UPDATE
+    #     change_set_type: "CREATE", # accepts CREATE, UPDATE, IMPORT
+    #     resources_to_import: [
+    #       {
+    #         resource_type: "ResourceType", # required
+    #         logical_resource_id: "LogicalResourceId", # required
+    #         resource_identifier: { # required
+    #           "ResourceIdentifierPropertyKey" => "ResourceIdentifierPropertyValue",
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -760,9 +775,9 @@ module Aws::CloudFormation
     #   or your Command Line Interface (CLI).
     #
     # @option params [Array<String>] :capabilities
-    #   In some cases, you must explicity acknowledge that your stack template
-    #   contains certain capabilities in order for AWS CloudFormation to
-    #   create the stack.
+    #   In some cases, you must explicitly acknowledge that your stack
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to create the stack.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
@@ -1173,7 +1188,7 @@ module Aws::CloudFormation
     #   The input parameters for the stack set template.
     #
     # @option params [Array<String>] :capabilities
-    #   In some cases, you must explicity acknowledge that your stack set
+    #   In some cases, you must explicitly acknowledge that your stack set
     #   template contains certain capabilities in order for AWS CloudFormation
     #   to create the stack set and related stack instances.
     #
@@ -1663,7 +1678,7 @@ module Aws::CloudFormation
     #   resp.tags[0].value #=> String
     #   resp.changes #=> Array
     #   resp.changes[0].type #=> String, one of "Resource"
-    #   resp.changes[0].resource_change.action #=> String, one of "Add", "Modify", "Remove"
+    #   resp.changes[0].resource_change.action #=> String, one of "Add", "Modify", "Remove", "Import"
     #   resp.changes[0].resource_change.logical_resource_id #=> String
     #   resp.changes[0].resource_change.physical_resource_id #=> String
     #   resp.changes[0].resource_change.resource_type #=> String
@@ -1801,7 +1816,7 @@ module Aws::CloudFormation
     #   resp.stack_events[0].physical_resource_id #=> String
     #   resp.stack_events[0].resource_type #=> String
     #   resp.stack_events[0].timestamp #=> Time
-    #   resp.stack_events[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
+    #   resp.stack_events[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
     #   resp.stack_events[0].resource_status_reason #=> String
     #   resp.stack_events[0].resource_properties #=> String
     #   resp.stack_events[0].client_request_token #=> String
@@ -1908,7 +1923,7 @@ module Aws::CloudFormation
     #   resp.stack_resource_detail.physical_resource_id #=> String
     #   resp.stack_resource_detail.resource_type #=> String
     #   resp.stack_resource_detail.last_updated_timestamp #=> Time
-    #   resp.stack_resource_detail.resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
+    #   resp.stack_resource_detail.resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
     #   resp.stack_resource_detail.resource_status_reason #=> String
     #   resp.stack_resource_detail.description #=> String
     #   resp.stack_resource_detail.metadata #=> String
@@ -2100,7 +2115,7 @@ module Aws::CloudFormation
     #   resp.stack_resources[0].physical_resource_id #=> String
     #   resp.stack_resources[0].resource_type #=> String
     #   resp.stack_resources[0].timestamp #=> Time
-    #   resp.stack_resources[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
+    #   resp.stack_resources[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
     #   resp.stack_resources[0].resource_status_reason #=> String
     #   resp.stack_resources[0].description #=> String
     #   resp.stack_resources[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
@@ -2261,7 +2276,7 @@ module Aws::CloudFormation
     #   resp.stacks[0].rollback_configuration.rollback_triggers[0].arn #=> String
     #   resp.stacks[0].rollback_configuration.rollback_triggers[0].type #=> String
     #   resp.stacks[0].rollback_configuration.monitoring_time_in_minutes #=> Integer
-    #   resp.stacks[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS"
+    #   resp.stacks[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS", "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
     #   resp.stacks[0].stack_status_reason #=> String
     #   resp.stacks[0].disable_rollback #=> Boolean
     #   resp.stacks[0].notification_arns #=> Array
@@ -2697,6 +2712,7 @@ module Aws::CloudFormation
     #   * {Types::GetTemplateSummaryOutput#version #version} => String
     #   * {Types::GetTemplateSummaryOutput#metadata #metadata} => String
     #   * {Types::GetTemplateSummaryOutput#declared_transforms #declared_transforms} => Array&lt;String&gt;
+    #   * {Types::GetTemplateSummaryOutput#resource_identifier_summaries #resource_identifier_summaries} => Array&lt;Types::ResourceIdentifierSummary&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2727,6 +2743,12 @@ module Aws::CloudFormation
     #   resp.metadata #=> String
     #   resp.declared_transforms #=> Array
     #   resp.declared_transforms[0] #=> String
+    #   resp.resource_identifier_summaries #=> Array
+    #   resp.resource_identifier_summaries[0].resource_type #=> String
+    #   resp.resource_identifier_summaries[0].logical_resource_ids #=> Array
+    #   resp.resource_identifier_summaries[0].logical_resource_ids[0] #=> String
+    #   resp.resource_identifier_summaries[0].resource_identifiers #=> Array
+    #   resp.resource_identifier_summaries[0].resource_identifiers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummary AWS API Documentation
     #
@@ -2979,7 +3001,7 @@ module Aws::CloudFormation
     #   resp.stack_resource_summaries[0].physical_resource_id #=> String
     #   resp.stack_resource_summaries[0].resource_type #=> String
     #   resp.stack_resource_summaries[0].last_updated_timestamp #=> Time
-    #   resp.stack_resource_summaries[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
+    #   resp.stack_resource_summaries[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
     #   resp.stack_resource_summaries[0].resource_status_reason #=> String
     #   resp.stack_resource_summaries[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
     #   resp.stack_resource_summaries[0].drift_information.last_check_timestamp #=> Time
@@ -3184,7 +3206,7 @@ module Aws::CloudFormation
     #
     #   resp = client.list_stacks({
     #     next_token: "NextToken",
-    #     stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS
+    #     stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS, IMPORT_IN_PROGRESS, IMPORT_COMPLETE, IMPORT_ROLLBACK_IN_PROGRESS, IMPORT_ROLLBACK_FAILED, IMPORT_ROLLBACK_COMPLETE
     #   })
     #
     # @example Response structure
@@ -3196,7 +3218,7 @@ module Aws::CloudFormation
     #   resp.stack_summaries[0].creation_time #=> Time
     #   resp.stack_summaries[0].last_updated_time #=> Time
     #   resp.stack_summaries[0].deletion_time #=> Time
-    #   resp.stack_summaries[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS"
+    #   resp.stack_summaries[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS", "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
     #   resp.stack_summaries[0].stack_status_reason #=> String
     #   resp.stack_summaries[0].parent_id #=> String
     #   resp.stack_summaries[0].root_id #=> String
@@ -3412,9 +3434,9 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
     #
     # @option params [Array<String>] :capabilities
-    #   In some cases, you must explicity acknowledge that your stack template
-    #   contains certain capabilities in order for AWS CloudFormation to
-    #   update the stack.
+    #   In some cases, you must explicitly acknowledge that your stack
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to update the stack.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
@@ -3847,9 +3869,9 @@ module Aws::CloudFormation
     #   A list of input parameters for the stack set template.
     #
     # @option params [Array<String>] :capabilities
-    #   In some cases, you must explicity acknowledge that your stack template
-    #   contains certain capabilities in order for AWS CloudFormation to
-    #   update the stack set and its associated stack instances.
+    #   In some cases, you must explicitly acknowledge that your stack
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to update the stack set and its associated stack instances.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
@@ -4101,14 +4123,16 @@ module Aws::CloudFormation
     # Updates termination protection for the specified stack. If a user
     # attempts to delete a stack with termination protection enabled, the
     # operation fails and the stack remains unchanged. For more information,
-    # see [Protecting a Stack From Being
-    # Deleted](AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
-    # in the *AWS CloudFormation User Guide*.
+    # see [Protecting a Stack From Being Deleted][1] in the *AWS
+    # CloudFormation User Guide*.
     #
-    # For [nested
-    # stacks](AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
-    # termination protection is set on the root stack and cannot be changed
-    # directly on the nested stack.
+    # For [nested stacks][2], termination protection is set on the root
+    # stack and cannot be changed directly on the nested stack.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #
     # @option params [required, Boolean] :enable_termination_protection
     #   Whether to enable termination protection on the specified stack.
@@ -4222,7 +4246,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4294,6 +4318,7 @@ module Aws::CloudFormation
     # | stack_create_complete      | {#describe_stacks}     | 30       | 120           |
     # | stack_delete_complete      | {#describe_stacks}     | 30       | 120           |
     # | stack_exists               | {#describe_stacks}     | 5        | 20            |
+    # | stack_import_complete      | {#describe_stacks}     | 30       | 120           |
     # | stack_update_complete      | {#describe_stacks}     | 30       | 120           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
@@ -4349,6 +4374,7 @@ module Aws::CloudFormation
         stack_create_complete: Waiters::StackCreateComplete,
         stack_delete_complete: Waiters::StackDeleteComplete,
         stack_exists: Waiters::StackExists,
+        stack_import_complete: Waiters::StackImportComplete,
         stack_update_complete: Waiters::StackUpdateComplete
       }
     end

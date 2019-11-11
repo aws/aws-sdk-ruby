@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-11-11)
+------------------
+
+* Feature - The Resource Import feature enables customers to import existing AWS resources into new or existing CloudFormation Stacks.
+
 1.26.0 (2019-10-23)
 ------------------
 

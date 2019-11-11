@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-11-11)
+------------------
+
+* Feature - This launch provides customers with access to GetCostAndUsageWithResources API.
+
 1.31.0 (2019-11-06)
 ------------------
 

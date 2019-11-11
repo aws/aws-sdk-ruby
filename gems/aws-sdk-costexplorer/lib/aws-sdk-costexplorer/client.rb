@@ -285,9 +285,9 @@ module Aws::CostExplorer
     #   but not including `2017-05-01`.
     #
     # @option params [String] :granularity
-    #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`. If
+    #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`, or `HOURLY`. If
     #   `Granularity` isn't set, the response object doesn't include the
-    #   `Granularity`, either `MONTHLY` or `DAILY`.
+    #   `Granularity`, either `MONTHLY` or `DAILY`, or `HOURLY`.
     #
     #   The `GetCostAndUsageRequest` operation supports only `DAILY` and
     #   `MONTHLY` granularities.
@@ -373,7 +373,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -417,6 +417,166 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def get_cost_and_usage(params = {}, options = {})
       req = build_request(:get_cost_and_usage, params)
+      req.send_request(options)
+    end
+
+    # Retrieves cost and usage metrics with resources for your account. You
+    # can specify which cost and usage-related metric, such as
+    # `BlendedCosts` or `UsageQuantity`, that you want the request to
+    # return. You can also filter and group your data by various dimensions,
+    # such as `SERVICE` or `AZ`, in a specific time range. For a complete
+    # list of valid dimensions, see the [GetDimensionValues][1] operation.
+    # Master accounts in an organization in AWS Organizations have access to
+    # all member accounts. This API is currently available for the Amazon
+    # Elastic Compute Cloud – Compute service only.
+    #
+    # <note markdown="1"> This is an opt-in only feature. You can enable this feature from the
+    # Cost Explorer Settings page. For information on how to access the
+    # Settings page, see [Controlling Access for Cost Explorer][2] in the
+    # *AWS Billing and Cost Management User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
+    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html
+    #
+    # @option params [required, Types::DateInterval] :time_period
+    #   Sets the start and end dates for retrieving Amazon Web Services costs.
+    #   The range must be within the last 14 days (the start date cannot be
+    #   earlier than 14 days ago). The start date is inclusive, but the end
+    #   date is exclusive. For example, if `start` is `2017-01-01` and `end`
+    #   is `2017-05-01`, then the cost and usage data is retrieved from
+    #   `2017-01-01` up to and including `2017-04-30` but not including
+    #   `2017-05-01`.
+    #
+    # @option params [String] :granularity
+    #   Sets the AWS cost granularity to `MONTHLY`, `DAILY`, or `HOURLY`. If
+    #   `Granularity` isn't set, the response object doesn't include the
+    #   `Granularity`, `MONTHLY`, `DAILY`, or `HOURLY`.
+    #
+    # @option params [Types::Expression] :filter
+    #   Filters Amazon Web Services costs by different dimensions. For
+    #   example, you can specify `SERVICE` and `LINKED_ACCOUNT` and get the
+    #   costs that are associated with that account's usage of that service.
+    #   You can nest `Expression` objects to define any combination of
+    #   dimension filters. For more information, see [Expression][1].
+    #
+    #   The `GetCostAndUsageWithResources` operation requires that you either
+    #   group by or filter by a `ResourceId`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #
+    # @option params [Array<String>] :metrics
+    #   Which metrics are returned in the query. For more information about
+    #   blended and unblended rates, see [Why does the "blended" annotation
+    #   appear on some line items in my bill?][1].
+    #
+    #   Valid values are `AmortizedCost`, `BlendedCost`, `NetAmortizedCost`,
+    #   `NetUnblendedCost`, `NormalizedUsageAmount`, `UnblendedCost`, and
+    #   `UsageQuantity`.
+    #
+    #   <note markdown="1"> If you return the `UsageQuantity` metric, the service aggregates all
+    #   usage numbers without taking the units into account. For example, if
+    #   you aggregate `usageQuantity` across all of Amazon EC2, the results
+    #   aren't meaningful because Amazon EC2 compute hours and data transfer
+    #   are measured in different units (for example, hours vs. GB). To get
+    #   more meaningful `UsageQuantity` metrics, filter by `UsageType` or
+    #   `UsageTypeGroups`.
+    #
+    #    </note>
+    #
+    #   `Metrics` is required for `GetCostAndUsageWithResources` requests.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
+    #
+    # @option params [Array<Types::GroupDefinition>] :group_by
+    #   You can group Amazon Web Services costs using up to two different
+    #   groups: either dimensions, tag keys, or both.
+    #
+    # @option params [String] :next_page_token
+    #   The token to retrieve the next set of results. AWS provides the token
+    #   when the response from a previous call has more results than the
+    #   maximum page size.
+    #
+    # @return [Types::GetCostAndUsageWithResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCostAndUsageWithResourcesResponse#next_page_token #next_page_token} => String
+    #   * {Types::GetCostAndUsageWithResourcesResponse#group_definitions #group_definitions} => Array&lt;Types::GroupDefinition&gt;
+    #   * {Types::GetCostAndUsageWithResourcesResponse#results_by_time #results_by_time} => Array&lt;Types::ResultByTime&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cost_and_usage_with_resources({
+    #     time_period: { # required
+    #       start: "YearMonthDay", # required
+    #       end: "YearMonthDay", # required
+    #     },
+    #     granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
+    #     filter: {
+    #       or: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       and: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive Expression
+    #       },
+    #       dimensions: {
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         values: ["Value"],
+    #       },
+    #       tags: {
+    #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #     },
+    #     metrics: ["MetricName"],
+    #     group_by: [
+    #       {
+    #         type: "DIMENSION", # accepts DIMENSION, TAG
+    #         key: "GroupDefinitionKey",
+    #       },
+    #     ],
+    #     next_page_token: "NextPageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_page_token #=> String
+    #   resp.group_definitions #=> Array
+    #   resp.group_definitions[0].type #=> String, one of "DIMENSION", "TAG"
+    #   resp.group_definitions[0].key #=> String
+    #   resp.results_by_time #=> Array
+    #   resp.results_by_time[0].time_period.start #=> String
+    #   resp.results_by_time[0].time_period.end #=> String
+    #   resp.results_by_time[0].total #=> Hash
+    #   resp.results_by_time[0].total["MetricName"].amount #=> String
+    #   resp.results_by_time[0].total["MetricName"].unit #=> String
+    #   resp.results_by_time[0].groups #=> Array
+    #   resp.results_by_time[0].groups[0].keys #=> Array
+    #   resp.results_by_time[0].groups[0].keys[0] #=> String
+    #   resp.results_by_time[0].groups[0].metrics #=> Hash
+    #   resp.results_by_time[0].groups[0].metrics["MetricName"].amount #=> String
+    #   resp.results_by_time[0].groups[0].metrics["MetricName"].unit #=> String
+    #   resp.results_by_time[0].estimated #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostAndUsageWithResources AWS API Documentation
+    #
+    # @overload get_cost_and_usage_with_resources(params = {})
+    # @param [Hash] params ({})
+    def get_cost_and_usage_with_resources(params = {}, options = {})
+      req = build_request(:get_cost_and_usage_with_resources, params)
       req.send_request(options)
     end
 
@@ -496,7 +656,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -598,6 +758,10 @@ module Aws::CostExplorer
     #   * RECORD\_TYPE - The different types of charges such as RI fees, usage
     #     costs, tax refunds, and credits.
     #
+    #   * RESOURCE\_ID - The unique identifier of the resource. ResourceId is
+    #     an opt-in feature only available for last 14 days for EC2-Compute
+    #     Service.
+    #
     #   If you set the context to `RESERVATIONS`, you can use the following
     #   dimensions for searching:
     #
@@ -669,7 +833,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #     context: "COST_AND_USAGE", # accepts COST_AND_USAGE, RESERVATIONS, SAVINGS_PLANS
     #     next_page_token: "NextPageToken",
     #   })
@@ -857,7 +1021,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -1175,7 +1339,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -1344,7 +1508,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -1453,6 +1617,9 @@ module Aws::CostExplorer
     #   The granularity of the Amazon Web Services cost data for your Savings
     #   Plans. `Granularity` can't be set if `GroupBy` is set.
     #
+    #   The `GetSavingsPlansCoverage` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
+    #
     # @option params [Types::Expression] :filter
     #   Filters Savings Plans coverage data by dimensions. You can filter data
     #   for Savings Plans usage with the following dimensions:
@@ -1475,7 +1642,7 @@ module Aws::CostExplorer
     #
     # @option params [Array<String>] :metrics
     #   The measurement that you want your Savings Plans coverage reported in.
-    #   The only valid value is `spendCoveredBySavingsPlans`.
+    #   The only valid value is `SpendCoveredBySavingsPlans`.
     #
     # @option params [String] :next_token
     #   The token to retrieve the next set of results. Amazon Web Services
@@ -1520,7 +1687,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -1647,7 +1814,8 @@ module Aws::CostExplorer
     # Retrieves the Savings Plans utilization for your account across date
     # ranges with daily or monthly granularity. Master accounts in an
     # organization have access to member accounts. You can use
-    # `GetDimensionValues` to determine the possible dimension values.
+    # `GetDimensionValues` in `SAVINGS_PLANS` to determine the possible
+    # dimension values.
     #
     # <note markdown="1"> You cannot group by any dimension values for
     # `GetSavingsPlansUtilization`.
@@ -1664,6 +1832,9 @@ module Aws::CostExplorer
     #   The granularity of the Amazon Web Services utillization data for your
     #   Savings Plans.
     #
+    #   The `GetSavingsPlansUtilization` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
+    #
     # @option params [Types::Expression] :filter
     #   Filters Savings Plans utilization coverage data for active Savings
     #   Plans dimensions. You can filter data with the following dimensions:
@@ -1676,14 +1847,13 @@ module Aws::CostExplorer
     #
     #   * `REGION`
     #
-    #   * `PAYMENT_OPTIONS`
+    #   * `PAYMENT_OPTION`
     #
     #   * `INSTANCE_TYPE_FAMILY`
     #
     #   `GetSavingsPlansUtilization` uses the same [Expression][1] object as
     #   the other operations, but only `AND` is supported among each
-    #   dimension. If there are multiple values for a dimension, they are
-    #   OR'd together.
+    #   dimension.
     #
     #
     #
@@ -1717,7 +1887,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -1760,13 +1930,17 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves a single daily or monthly Savings Plans utilization rate and
-    # details for your account. Master accounts in an organization have
-    # access to member accounts. You can use `GetDimensionValues` to
-    # determine the possible dimension values.
+    # Retrieves attribute data along with aggregate utilization and savings
+    # data for a given time period. This doesn't support granular or
+    # grouped data (daily/monthly) in response. You can't retrieve data by
+    # dates in a single response similar to `GetSavingsPlanUtilization`, but
+    # you have the option to make multiple calls to
+    # `GetSavingsPlanUtilizationDetails` by providing individual dates. You
+    # can use `GetDimensionValues` in `SAVINGS_PLANS` to determine the
+    # possible dimension values.
     #
-    # <note markdown="1"> You can't group by any dimension values for
-    # `GetSavingsPlansUtilizationDetails`.
+    # <note markdown="1"> `GetSavingsPlanUtilizationDetails` internally groups data by
+    # `SavingsPlansArn`.
     #
     #  </note>
     #
@@ -1786,14 +1960,13 @@ module Aws::CostExplorer
     #
     #   * `REGION`
     #
-    #   * `PAYMENT_OPTIONS`
+    #   * `PAYMENT_OPTION`
     #
     #   * `INSTANCE_TYPE_FAMILY`
     #
     #   `GetSavingsPlansUtilizationDetails` uses the same [Expression][1]
     #   object as the other operations, but only `AND` is supported among each
-    #   dimension. If there are multiple values for a dimension, they are
-    #   OR'd together.
+    #   dimension.
     #
     #
     #
@@ -1837,7 +2010,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -2012,7 +2185,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -2056,7 +2229,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
