@@ -26,6 +26,16 @@ module Aws
             'https://s3.us-east-1.amazonaws.com/')
         end
 
+        it 'raise an error when invalid option provided' do
+          ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT'] = 'foo'
+          expect{
+            Client.new(
+              stub_responses: true,
+              region: 'us-east-1'
+            )
+          }.to raise_error(ArgumentError)
+        end
+
         it 'can be set from ENV' do
           ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT'] = 'regional'
           client = Client.new(

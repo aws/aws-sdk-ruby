@@ -17,11 +17,15 @@ region, defaults to `legacy` mode, using global endpoint.
         private
 
         def self.resolve_iad_regional_endpoint(cfg)
-          env_mode = ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT']
-          env_mode = nil if env_mode == ''
-          cfg_mode = Aws.shared_config.s3_us_east_1_regional_endpoint(
-            profile: cfg.profile)
-          env_mode || cfg_mode || 'legacy'
+          mode = ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT'] ||
+            Aws.shared_config.s3_us_east_1_regional_endpoint(profile: cfg.profile) ||
+            'legacy'
+          unless %w(legacy regional).include?(mode)
+            raise ArgumentError, "expected :s3_us_east_1_regional_endpoint or"\
+              " ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT'] to be `legacy` or"\
+              " `regional`."
+          end
+          mode
         end
 
       end

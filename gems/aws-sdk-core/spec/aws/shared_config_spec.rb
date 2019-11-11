@@ -162,6 +162,13 @@ module Aws
           profile_name: "s3_iad_legacy"
         )
         expect(config.s3_us_east_1_regional_endpoint).to eq('legacy')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: "s3_iad_malformed"
+        )
+        expect(config.s3_us_east_1_regional_endpoint).to eq('foo')
       end
 
     end

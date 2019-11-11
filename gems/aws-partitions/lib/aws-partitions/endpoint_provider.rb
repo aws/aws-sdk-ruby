@@ -45,8 +45,8 @@ module Aws
       def resolve(
         region,
         service,
-        sts_regional_endpoints = 'legacy',
-        s3_us_east_1_regional_endpoint = 'legacy'
+        sts_regional_endpoints,
+        s3_us_east_1_regional_endpoint
       )
         "https://" + endpoint_for(
           region,
@@ -78,8 +78,8 @@ module Aws
       def endpoint_for(
         region,
         service,
-        sts_regional_endpoints = 'legacy',
-        s3_us_east_1_regional_endpoint = 'legacy'
+        sts_regional_endpoints,
+        s3_us_east_1_regional_endpoint
       )
         partition = get_partition(region)
         endpoint = default_endpoint(partition, service, region)
@@ -98,13 +98,11 @@ module Aws
           region = service_cfg.fetch("partitionEndpoint", region)
         end
 
-        # Check for s3 IAD regional behavior
-        s3_iad_regional = service == 's3' &&
-          region == 'us-east-1' &&
-          s3_us_east_1_regional_endpoint == 'regional'
-
         # Check for service/region level endpoint.
-        unless s3_iad_regional
+        # skip if s3 IAD regional behavior is enabled
+        unless (service == 's3') &&
+          (region == 'us-east-1') &&
+          (s3_us_east_1_regional_endpoint == 'regional')
           endpoint = service_cfg.fetch("endpoints", {}).
             fetch(region, {}).fetch("hostname", endpoint)
         end
