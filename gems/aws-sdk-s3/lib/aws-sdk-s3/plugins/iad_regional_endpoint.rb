@@ -8,8 +8,8 @@ module Aws
           default: 'legacy',
           doc_type: String,
           docstring: <<-DOCS) do |cfg|
-Passing in `regional` to enable regional endpoint for S3 `us-east-1`
-region, defaults to `legacy` mode, using global endpoint.
+Passing in `regional` to enable regional endpoint for S3's `us-east-1`
+region. Defaults to `legacy` mode using global endpoint.
           DOCS
           resolve_iad_regional_endpoint(cfg)
         end
