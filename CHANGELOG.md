@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.395 (2019-11-11)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::CloudFormation - Updated the API, documentation, waiters, and integration test for AWS CloudFormation.
