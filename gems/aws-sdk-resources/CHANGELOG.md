@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.58.0 (2019-11-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-marketplacecatalog` gem.
+
 3.57.1 (2019-11-08)
 ------------------
 

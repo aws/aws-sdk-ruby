@@ -336,6 +336,7 @@ module Aws
             'MachineLearning' => 'machinelearning',
             'Macie' => 'macie',
             'ManagedBlockchain' => 'managedblockchain',
+            'MarketplaceCatalog' => 'catalog.marketplace',
             'MarketplaceCommerceAnalytics' => 'marketplacecommerceanalytics',
             'MarketplaceEntitlementService' => 'entitlement.marketplace',
             'MarketplaceMetering' => 'metering.marketplace',

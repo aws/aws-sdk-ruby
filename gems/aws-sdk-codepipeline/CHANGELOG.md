@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-11-12)
+------------------
+
+* Feature - AWS CodePipeline now supports the use of variables in action configuration.
+
 1.26.0 (2019-10-23)
 ------------------
 

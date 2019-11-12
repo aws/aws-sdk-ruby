@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.238.0 (2019-11-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MarketplaceCatalog`.
+
 1.237.0 (2019-11-08)
 ------------------
 

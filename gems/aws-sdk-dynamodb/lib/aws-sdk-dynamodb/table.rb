@@ -169,7 +169,7 @@ module Aws::DynamoDB
     #       the index.
     #
     #     * `INCLUDE` - Only the specified table attributes are projected
-    #       into the index. The list of projected attributes are in
+    #       into the index. The list of projected attributes is in
     #       `NonKeyAttributes`.
     #
     #     * `ALL` - All of the table attributes are projected into the
@@ -202,10 +202,17 @@ module Aws::DynamoDB
     #
     # * `Backfilling` - If true, then the index is currently in the
     #   backfilling phase. Backfilling occurs only when a new global
-    #   secondary index is added to the table; it is the process by which
+    #   secondary index is added to the table. It is the process by which
     #   DynamoDB populates the new index with data from the table. (This
     #   attribute does not appear for indexes that were created during a
     #   `CreateTable` operation.)
+    #
+    #   You can delete an index that is being created during the
+    #   `Backfilling` phase when `IndexStatus` is set to CREATING and
+    #   `Backfilling` is true. You can't delete the index that is being
+    #   created when `IndexStatus` is set to CREATING and `Backfilling` is
+    #   false. (This attribute does not appear for indexes that were created
+    #   during a `CreateTable` operation.)
     #
     # * `IndexName` - The name of the global secondary index.
     #
@@ -243,7 +250,7 @@ module Aws::DynamoDB
     #       the index.
     #
     #     * `INCLUDE` - Only the specified table attributes are projected
-    #       into the index. The list of projected attributes are in
+    #       into the index. The list of projected attributes is in
     #       `NonKeyAttributes`.
     #
     #     * `ALL` - All of the table attributes are projected into the
@@ -280,11 +287,11 @@ module Aws::DynamoDB
     # have the same timestamp. However, the combination of the following
     # three elements is guaranteed to be unique:
     #
-    # * the AWS customer ID.
+    # * AWS customer ID
     #
-    # * the table name.
+    # * Table name
     #
-    # * the `StreamLabel`.
+    # * `StreamLabel`
     # @return [String]
     def latest_stream_label
       data[:latest_stream_label]
@@ -1742,11 +1749,18 @@ module Aws::DynamoDB
     #   and write capacity of your table and global secondary indexes over the
     #   past 30 minutes.
     #
-    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We recommend
-    #     using `PROVISIONED` for predictable workloads.
+    #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
+    #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
+    #     Mode][1].
     #
-    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
-    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
+    #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
+    #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
+    #     [On-Demand Mode][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
     # @option options [Types::ProvisionedThroughput] :provisioned_throughput
     #   The new provisioned throughput settings for the specified table or
     #   index.
@@ -1760,6 +1774,9 @@ module Aws::DynamoDB
     #     global secondary index.
     #
     #   * `Delete` - remove a global secondary index from the table.
+    #
+    #   You can create or delete only one global secondary index per
+    #   `UpdateTable` operation.
     #
     #   For more information, see [Managing Global Secondary Indexes][1] in
     #   the *Amazon DynamoDB Developer Guide*.

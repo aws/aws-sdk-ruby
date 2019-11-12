@@ -722,7 +722,7 @@ module Aws::ElasticLoadBalancingV2
     #   The nodes of an internal load balancer have only private IP addresses.
     #   The DNS name of an internal load balancer is publicly resolvable to
     #   the private IP addresses of the nodes. Therefore, internal load
-    #   balancers can only route requests from clients with access to the VPC
+    #   balancers can route requests only from clients with access to the VPC
     #   for the load balancer.
     #
     #   The default is an Internet-facing load balancer.
@@ -922,7 +922,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [required, Array<Types::Action>] :actions
     #   The actions. Each rule must include exactly one of the following types
-    #   of actions: `forward`, `fixed-response`, or `redirect`.
+    #   of actions: `forward`, `fixed-response`, or `redirect`, and it must be
+    #   the last action to be performed.
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an Application
@@ -3051,7 +3052,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Array<Types::Action>] :actions
     #   The actions. Each rule must include exactly one of the following types
-    #   of actions: `forward`, `fixed-response`, or `redirect`.
+    #   of actions: `forward`, `fixed-response`, or `redirect`, and it must be
+    #   the last action to be performed.
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an Application
@@ -3284,8 +3286,7 @@ module Aws::ElasticLoadBalancingV2
     #   protocol of the target group is TCP, TLS, UDP, or TCP\_UDP. The TLS,
     #   UDP, and TCP\_UDP protocols are not supported for health checks.
     #
-    #   If the protocol of the target group is TCP, you can't modify this
-    #   setting.
+    #   With Network Load Balancers, you can't modify this setting.
     #
     # @option params [String] :health_check_port
     #   The port the load balancer uses when performing health checks on
@@ -3304,15 +3305,13 @@ module Aws::ElasticLoadBalancingV2
     #   to 300 seconds. For Network Load Balancers, the supported values are
     #   10 or 30 seconds.
     #
-    #   If the protocol of the target group is TCP, you can't modify this
-    #   setting.
+    #   With Network Load Balancers, you can't modify this setting.
     #
     # @option params [Integer] :health_check_timeout_seconds
     #   \[HTTP/HTTPS health checks\] The amount of time, in seconds, during
     #   which no response means a failed health check.
     #
-    #   If the protocol of the target group is TCP, you can't modify this
-    #   setting.
+    #   With Network Load Balancers, you can't modify this setting.
     #
     # @option params [Integer] :healthy_threshold_count
     #   The number of consecutive health checks successes required before
@@ -3327,8 +3326,7 @@ module Aws::ElasticLoadBalancingV2
     #   \[HTTP/HTTPS health checks\] The HTTP codes to use when checking for a
     #   successful response from a target.
     #
-    #   If the protocol of the target group is TCP, you can't modify this
-    #   setting.
+    #   With Network Load Balancers, you can't modify this setting.
     #
     # @return [Types::ModifyTargetGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3986,7 +3984,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

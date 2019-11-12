@@ -120,6 +120,7 @@ module Aws
   autoload :MachineLearning, 'aws-sdk-machinelearning'
   autoload :Macie, 'aws-sdk-macie'
   autoload :ManagedBlockchain, 'aws-sdk-managedblockchain'
+  autoload :MarketplaceCatalog, 'aws-sdk-marketplacecatalog'
   autoload :MarketplaceCommerceAnalytics, 'aws-sdk-marketplacecommerceanalytics'
   autoload :MarketplaceEntitlementService, 'aws-sdk-marketplaceentitlementservice'
   autoload :MarketplaceMetering, 'aws-sdk-marketplacemetering'

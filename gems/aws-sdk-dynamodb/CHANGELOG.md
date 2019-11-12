@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2019-11-12)
+------------------
+
+* Feature - Amazon DynamoDB enables you to restore your data to a new DynamoDB table using a point-in-time or on-demand backup. You now can modify the settings on the new restored table. Specifically, you can exclude some or all of the local and global secondary indexes from being created with the restored table. In addition, you can change the billing mode and provisioned capacity settings.
+
 1.37.0 (2019-10-23)
 ------------------
 

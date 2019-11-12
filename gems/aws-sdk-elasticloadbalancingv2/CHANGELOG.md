@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2019-11-12)
+------------------
+
+* Feature - You can configure your Application Load Balancer to either drop invalid header fields or forward them to targets.
+
 1.35.0 (2019-10-23)
 ------------------
 

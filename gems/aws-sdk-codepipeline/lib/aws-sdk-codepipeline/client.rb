@@ -548,6 +548,7 @@ module Aws::CodePipeline
     #               ],
     #               role_arn: "RoleArn",
     #               region: "AWSRegionName",
+    #               namespace: "ActionNamespace",
     #             },
     #           ],
     #         },
@@ -595,6 +596,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
+    #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
@@ -924,6 +926,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
+    #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
     #   resp.metadata.pipeline_arn #=> String
     #   resp.metadata.created #=> Time
@@ -1181,12 +1184,15 @@ module Aws::CodePipeline
     #   resp.action_execution_details[0].input.action_type_id.version #=> String
     #   resp.action_execution_details[0].input.configuration #=> Hash
     #   resp.action_execution_details[0].input.configuration["ActionConfigurationKey"] #=> String
+    #   resp.action_execution_details[0].input.resolved_configuration #=> Hash
+    #   resp.action_execution_details[0].input.resolved_configuration["String"] #=> String
     #   resp.action_execution_details[0].input.role_arn #=> String
     #   resp.action_execution_details[0].input.region #=> String
     #   resp.action_execution_details[0].input.input_artifacts #=> Array
     #   resp.action_execution_details[0].input.input_artifacts[0].name #=> String
     #   resp.action_execution_details[0].input.input_artifacts[0].s3location.bucket #=> String
     #   resp.action_execution_details[0].input.input_artifacts[0].s3location.key #=> String
+    #   resp.action_execution_details[0].input.namespace #=> String
     #   resp.action_execution_details[0].output.output_artifacts #=> Array
     #   resp.action_execution_details[0].output.output_artifacts[0].name #=> String
     #   resp.action_execution_details[0].output.output_artifacts[0].s3location.bucket #=> String
@@ -1194,6 +1200,8 @@ module Aws::CodePipeline
     #   resp.action_execution_details[0].output.execution_result.external_execution_id #=> String
     #   resp.action_execution_details[0].output.execution_result.external_execution_summary #=> String
     #   resp.action_execution_details[0].output.execution_result.external_execution_url #=> String
+    #   resp.action_execution_details[0].output.output_variables #=> Hash
+    #   resp.action_execution_details[0].output.output_variables["OutputVariablesKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutions AWS API Documentation
@@ -1741,6 +1749,11 @@ module Aws::CodePipeline
     #   The execution details of the successful job, such as the actions taken
     #   by the job worker.
     #
+    # @option params [Hash<String,String>] :output_variables
+    #   Key-value pairs produced as output by a job worker that can be made
+    #   available to a downstream action configuration. `outputVariables` can
+    #   be included only when there is no continuation token on the request.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1758,6 +1771,9 @@ module Aws::CodePipeline
     #       summary: "ExecutionSummary",
     #       external_execution_id: "ExecutionId",
     #       percent_complete: 1,
+    #     },
+    #     output_variables: {
+    #       "OutputVariablesKey" => "OutputVariablesValue",
     #     },
     #   })
     #
@@ -2182,6 +2198,7 @@ module Aws::CodePipeline
     #               ],
     #               role_arn: "RoleArn",
     #               region: "AWSRegionName",
+    #               namespace: "ActionNamespace",
     #             },
     #           ],
     #         },
@@ -2223,6 +2240,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
+    #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipeline AWS API Documentation
@@ -2247,7 +2265,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
