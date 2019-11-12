@@ -9,6 +9,9 @@ module BuildTools
 
     # Minimum `aws-sdk-core` version for new gem builds
     MINIMUM_CORE_VERSION = "3.71.0"
+    # Minimum `aws-sdk-core` version for new S3 gem builds
+    MINIMUM_CORE_VERSION_S3 = "3.77.0"
+
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
     # @option options [String] :manifest_path (MANIFEST_PATH)
@@ -125,8 +128,11 @@ module BuildTools
 
     def gem_dependencies(api, dependencies)
       version_file = File.read("#{$GEMS_DIR}/aws-sdk-core/VERSION").rstrip
-      csm_version_string = "', '>= #{MINIMUM_CORE_VERSION}"
-      dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}#{csm_version_string}"
+      min_core = api['metadata']['serviceId'] == 'S3' ?
+        MINIMUM_CORE_VERSION_S3 :
+        MINIMUM_CORE_VERSION
+      core_version_string = "', '>= #{min_core}"
+      dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}#{core_version_string}"
 
       case api['metadata']['signatureVersion']
       when 'v4' then dependencies['aws-sigv4'] = '~> 1.1'

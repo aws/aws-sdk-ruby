@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Added support for S3 IAD regional endpoint.
+
 1.238.0 (2019-11-12)
 ------------------
 

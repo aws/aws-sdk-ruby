@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support `s3_us_east_1_regional_endpoint` from `SharedConfig`
+
 3.76.0 (2019-11-07)
 ------------------
 
