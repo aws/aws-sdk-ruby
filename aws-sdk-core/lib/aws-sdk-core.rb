@@ -140,6 +140,7 @@ module Aws
     MachineLearning
     Macie
     ManagedBlockchain
+    MarketplaceCatalog
     MarketplaceCommerceAnalytics
     MarketplaceEntitlementService
     MarketplaceMetering

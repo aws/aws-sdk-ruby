@@ -316,6 +316,7 @@ to be backwards compatible.
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
+| AWS Marketplace Catalog Service                       | MarketplaceCatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS MediaConnect                                      | MediaConnect                    | 2018-11-14  |

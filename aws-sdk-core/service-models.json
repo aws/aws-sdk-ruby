@@ -466,6 +466,10 @@
     "models": "managedblockchain/2018-09-24",
     "endpoint": "managedblockchain"
   },
+  "MarketplaceCatalog": {
+    "models": "marketplace-catalog/2018-09-17",
+    "endpoint": "catalog.marketplace"
+  },
   "MarketplaceCommerceAnalytics": {
     "models": "marketplacecommerceanalytics/2015-07-01",
     "endpoint": "marketplacecommerceanalytics"
