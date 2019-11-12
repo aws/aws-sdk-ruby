@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.396 (2019-11-12)
+------------------
+
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
 
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
