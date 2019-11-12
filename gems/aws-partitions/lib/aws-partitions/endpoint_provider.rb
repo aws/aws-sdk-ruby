@@ -25,6 +25,12 @@ module Aws
         us-west-2
       )
 
+      # Can be removed once S3 endpoint is updated
+      S3_IAD_REGIONAL = {
+        "hostname" => "s3.us-east-1.amazonaws.com",
+        "signatureVersions" => [ "s3", "s3v4" ]
+      }
+
       # Intentionally marked private. The format of the endpoint rules
       # is an implementation detail.
       # @api private
@@ -45,14 +51,12 @@ module Aws
       def resolve(
         region,
         service,
-        sts_regional_endpoints,
-        s3_us_east_1_regional_endpoint
+        sts_regional_endpoints
       )
         "https://" + endpoint_for(
           region,
           service,
-          sts_regional_endpoints,
-          s3_us_east_1_regional_endpoint
+          sts_regional_endpoints
         )
       end
 
@@ -78,8 +82,7 @@ module Aws
       def endpoint_for(
         region,
         service,
-        sts_regional_endpoints,
-        s3_us_east_1_regional_endpoint
+        sts_regional_endpoints
       )
         partition = get_partition(region)
         endpoint = default_endpoint(partition, service, region)
@@ -98,14 +101,14 @@ module Aws
           region = service_cfg.fetch("partitionEndpoint", region)
         end
 
-        # Check for service/region level endpoint.
-        # skip if s3 IAD regional behavior is enabled
-        unless (service == 's3') &&
-          (region == 'us-east-1') &&
-          (s3_us_east_1_regional_endpoint == 'regional')
-          endpoint = service_cfg.fetch("endpoints", {}).
-            fetch(region, {}).fetch("hostname", endpoint)
+        # Can be removed once S3 endpoint is updated
+        if (service == 's3') && (region == "us-east-1")
+          service_cfg["endpoints"][region] = S3_IAD_REGIONAL
         end
+
+        # Check for service/region level endpoint.
+        endpoint = service_cfg.fetch("endpoints", {}).
+          fetch(region, {}).fetch("hostname", endpoint)
 
         endpoint
       end
@@ -147,14 +150,12 @@ module Aws
         def resolve(
           region,
           service,
-          sts_regional_endpoints = 'legacy',
-          s3_us_east_1_regional_endpoint = 'legacy'
+          sts_regional_endpoints = 'legacy'
         )
           default_provider.resolve(
             region,
             service,
-            sts_regional_endpoints,
-            s3_us_east_1_regional_endpoint
+            sts_regional_endpoints
           )
         end
 

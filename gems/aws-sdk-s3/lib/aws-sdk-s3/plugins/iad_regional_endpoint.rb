@@ -14,6 +14,30 @@ region. Defaults to `legacy` mode using global endpoint.
           resolve_iad_regional_endpoint(cfg)
         end
 
+        def add_handlers(handlers, config)
+          if config.region == 'us-east-1'
+            handlers.add(Handler)
+          end
+        end
+
+        # @api private
+        class Handler < Seahorse::Client::Handler
+
+          def call(context)
+            # keep legacy global endpoint pattern by default
+            if context.config.s3_us_east_1_regional_endpoint == 'legacy'
+              context.http_request.endpoint.host = IADRegionalEndpoint.legacy_host(
+                context.http_request.endpoint.host)
+            end
+            @handler.call(context)
+          end
+
+        end
+
+        def self.legacy_host(host)
+          host.sub(".us-east-1", '')
+        end
+
         private
 
         def self.resolve_iad_regional_endpoint(cfg)

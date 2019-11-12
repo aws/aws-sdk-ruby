@@ -247,8 +247,8 @@ module Aws::S3
     #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     #   @option options [String] :s3_us_east_1_regional_endpoint ("legacy")
-    #     Passing in `regional` to enable regional endpoint for S3 `us-east-1`
-    #     region, defaults to `legacy` mode, using global endpoint for `us-east-1`.
+    #     Passing in `regional` to enable regional endpoint for S3's `us-east-1`
+    #     region. Defaults to `legacy` mode using global endpoint.
     #
     #   @option options [String] :secret_access_key
     #

@@ -16,7 +16,9 @@ def whitelist
     "s3" => {
       "location_constraint.rb" => 12,
       "s3_signer.rb" => 200,
-      "iad_regional_endpoint.rb" => 10
+      "bucket.rb" => 116,
+      "presigned_post.rb" => 587,
+      "iad_regional_endpoint.rb" => "SKIP_FILE"
     },
     "s3control" => {
       "s3_signer.rb" => 70
@@ -40,7 +42,10 @@ describe "ensure no hard-coded region" do
           # skip comment code
           next if val.strip[0] == "#"
           # skip known whitelists
-          next if whitelist[key] && whitelist[key][File.basename(path)] == idx
+          next if whitelist[key] &&
+            (whitelist[key][File.basename(path)] == idx ||
+            whitelist[key][File.basename(path)] == "SKIP_FILE")
+
           # If we use \w+ we will get false positives for uid fields
           expect(val).not_to match(/(us|eu|ap|sa|ca)-[a-zA-Z]+-\d+/)
         end
