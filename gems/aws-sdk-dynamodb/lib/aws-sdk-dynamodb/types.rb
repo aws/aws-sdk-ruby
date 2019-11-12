@@ -297,7 +297,7 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Represents the autoscaling policy to be modified.
+    # Represents the auto scaling policy to be modified.
     #
     # @note When making an API call, you may pass AutoScalingPolicyUpdate
     #   data as a hash:
@@ -328,7 +328,7 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Represents the autoscaling settings for a global table or global
+    # Represents the auto scaling settings for a global table or global
     # secondary index.
     #
     # @!attribute [rw] minimum_units
@@ -342,12 +342,12 @@ module Aws::DynamoDB
     #   @return [Integer]
     #
     # @!attribute [rw] auto_scaling_disabled
-    #   Disabled autoscaling for this global table or global secondary
+    #   Disabled auto scaling for this global table or global secondary
     #   index.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_scaling_role_arn
-    #   Role ARN used for configuring autoScaling policy.
+    #   Role ARN used for configuring the auto scaling policy.
     #   @return [String]
     #
     # @!attribute [rw] scaling_policies
@@ -365,7 +365,7 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Represents the autoscaling settings to be modified for a global table
+    # Represents the auto scaling settings to be modified for a global table
     # or global secondary index.
     #
     # @note When making an API call, you may pass AutoScalingSettingsUpdate
@@ -398,12 +398,12 @@ module Aws::DynamoDB
     #   @return [Integer]
     #
     # @!attribute [rw] auto_scaling_disabled
-    #   Disabled autoscaling for this global table or global secondary
+    #   Disabled auto scaling for this global table or global secondary
     #   index.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_scaling_role_arn
-    #   Role ARN used for configuring autoscaling policy.
+    #   Role ARN used for configuring auto scaling policy.
     #   @return [String]
     #
     # @!attribute [rw] scaling_policy_update
@@ -439,8 +439,8 @@ module Aws::DynamoDB
     #   used to block subsequent scale in requests until it has expired. You
     #   should scale in conservatively to protect your application's
     #   availability. However, if another alarm triggers a scale out policy
-    #   during the cooldown period after a scale-in, application autoscaling
-    #   scales out your scalable target immediately.
+    #   during the cooldown period after a scale-in, application auto
+    #   scaling scales out your scalable target immediately.
     #   @return [Integer]
     #
     # @!attribute [rw] scale_out_cooldown
@@ -495,8 +495,8 @@ module Aws::DynamoDB
     #   used to block subsequent scale in requests until it has expired. You
     #   should scale in conservatively to protect your application's
     #   availability. However, if another alarm triggers a scale out policy
-    #   during the cooldown period after a scale-in, application autoscaling
-    #   scales out your scalable target immediately.
+    #   during the cooldown period after a scale-in, application auto
+    #   scaling scales out your scalable target immediately.
     #   @return [Integer]
     #
     # @!attribute [rw] scale_out_cooldown
@@ -1389,7 +1389,7 @@ module Aws::DynamoDB
     end
 
     # Represents a request to perform a check that an item exists or to
-    # check the condition of specific attributes of the item..
+    # check the condition of specific attributes of the item.
     #
     # @note When making an API call, you may pass ConditionCheck
     #   data as a hash:
@@ -1696,7 +1696,7 @@ module Aws::DynamoDB
     #       }
     #
     # @!attribute [rw] region_name
-    #   The region of the replica to be added.
+    #   The Region of the replica to be added.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateReplicaAction AWS API Documentation
@@ -1925,11 +1925,18 @@ module Aws::DynamoDB
     #   Controls how you are charged for read and write throughput and how
     #   you manage capacity. This setting can be changed later.
     #
-    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We
-    #     recommend using `PROVISIONED` for predictable workloads.
+    #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
+    #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
+    #     Mode][1].
     #
-    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
-    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
+    #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
+    #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode
+    #     to [On-Demand Mode][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput
@@ -2425,7 +2432,7 @@ module Aws::DynamoDB
     #       }
     #
     # @!attribute [rw] region_name
-    #   The region of the replica to be removed.
+    #   The Region of the replica to be removed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteReplicaAction AWS API Documentation
@@ -2757,7 +2764,7 @@ module Aws::DynamoDB
     end
 
     # Represents a condition to be compared with an attribute value. This
-    # condition can be used with `DeleteItem`, `PutItem` or `UpdateItem`
+    # condition can be used with `DeleteItem`, `PutItem`, or `UpdateItem`
     # operations; if the comparison evaluates to true, the operation
     # succeeds; if not, the operation fails. You can use
     # `ExpectedAttributeValue` in one of two different ways:
@@ -3302,7 +3309,7 @@ module Aws::DynamoDB
     #   * `RANGE` - sort key
     #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   The term "hash attribute" derives from DynamoDB's usage of an
     #   internal hash function to evenly distribute data items across
     #   partitions, based on their partition key values.
     #
@@ -3358,7 +3365,7 @@ module Aws::DynamoDB
     #   * `RANGE` - sort key
     #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   The term "hash attribute" derives from DynamoDB's usage of an
     #   internal hash function to evenly distribute data items across
     #   partitions, based on their partition key values.
     #
@@ -3397,6 +3404,12 @@ module Aws::DynamoDB
     #   an item can be added to the index, DynamoDB will do so. After all
     #   items have been processed, the backfilling operation is complete and
     #   `Backfilling` is false.
+    #
+    #   You can delete an index that is being created during the
+    #   `Backfilling` phase when `IndexStatus` is set to CREATING and
+    #   `Backfilling` is true. You can't delete the index that is being
+    #   created when `IndexStatus` is set to CREATING and `Backfilling` is
+    #   false.
     #
     #   <note markdown="1"> For indexes that were created during a `CreateTable` operation, the
     #   `Backfilling` attribute does not appear in the `DescribeTable`
@@ -3464,7 +3477,7 @@ module Aws::DynamoDB
     #   * `RANGE` - sort key
     #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   The term "hash attribute" derives from DynamoDB's usage of an
     #   internal hash function to evenly distribute data items across
     #   partitions, based on their partition key values.
     #
@@ -3581,7 +3594,7 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] replication_group
-    #   The regions where the global table has replicas.
+    #   The Regions where the global table has replicas.
     #   @return [Array<Types::Replica>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTable AWS API Documentation
@@ -3607,7 +3620,7 @@ module Aws::DynamoDB
     # Contains details about the global table.
     #
     # @!attribute [rw] replication_group
-    #   The regions where the global table has replicas.
+    #   The Regions where the global table has replicas.
     #   @return [Array<Types::ReplicaDescription>]
     #
     # @!attribute [rw] global_table_arn
@@ -3682,7 +3695,7 @@ module Aws::DynamoDB
     #   @return [Integer]
     #
     # @!attribute [rw] provisioned_write_capacity_auto_scaling_settings_update
-    #   AutoScaling settings for managing a global secondary index's write
+    #   Auto scaling settings for managing a global secondary index's write
     #   capacity units.
     #   @return [Types::AutoScalingSettingsUpdate]
     #
@@ -3852,7 +3865,7 @@ module Aws::DynamoDB
     #   * `RANGE` - sort key
     #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   The term "hash attribute" derives from DynamoDB's usage of an
     #   internal hash function to evenly distribute data items across
     #   partitions, based on their partition key values.
     #
@@ -4297,7 +4310,7 @@ module Aws::DynamoDB
     #   * `RANGE` - sort key
     #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   The term "hash attribute" derives from DynamoDB's usage of an
     #   internal hash function to evenly distribute data items across
     #   partitions, based on their partition key values.
     #
@@ -4340,7 +4353,7 @@ module Aws::DynamoDB
     #   * `RANGE` - sort key
     #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   The term "hash attribute" derives from DynamoDB's usage of an
     #   internal hash function to evenly distribute data items across
     #   partitions, based on their partition key values.
     #
@@ -4403,7 +4416,7 @@ module Aws::DynamoDB
     #   * `RANGE` - sort key
     #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   The term "hash attribute" derives from DynamoDB's usage of an
     #   internal hash function to evenly distribute data items across
     #   partitions, based on their partition key values.
     #
@@ -4445,8 +4458,8 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] earliest_restorable_date_time
     #   Specifies the earliest point in time you can restore your table to.
-    #   It You can restore your table to any point in time during the last
-    #   35 days.
+    #   You can restore your table to any point in time during the last 35
+    #   days.
     #   @return [Time]
     #
     # @!attribute [rw] latest_restorable_date_time
@@ -4515,7 +4528,7 @@ module Aws::DynamoDB
     #     the index.
     #
     #   * `INCLUDE` - Only the specified table attributes are projected into
-    #     the index. The list of projected attributes are in
+    #     the index. The list of projected attributes is in
     #     `NonKeyAttributes`.
     #
     #   * `ALL` - All of the table attributes are projected into the index.
@@ -5050,8 +5063,8 @@ module Aws::DynamoDB
     #   primary key of an item to be processed by `PutItem`. All of the
     #   table's primary key attributes must be specified, and their data
     #   types must match those of the table's key schema. If any attributes
-    #   are present in the item which are part of an index key schema for
-    #   the table, their types must match the index key schema.
+    #   are present in the item that are part of an index key schema for the
+    #   table, their types must match the index key schema.
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutRequest AWS API Documentation
@@ -5594,7 +5607,7 @@ module Aws::DynamoDB
     #       }
     #
     # @!attribute [rw] region_name
-    #   The region where the replica needs to be created.
+    #   The Region where the replica needs to be created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Replica AWS API Documentation
@@ -5619,7 +5632,7 @@ module Aws::DynamoDB
     # Contains the details of the replica.
     #
     # @!attribute [rw] region_name
-    #   The name of the region.
+    #   The name of the Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaDescription AWS API Documentation
@@ -5654,7 +5667,7 @@ module Aws::DynamoDB
     #   @return [Integer]
     #
     # @!attribute [rw] provisioned_read_capacity_auto_scaling_settings
-    #   Autoscaling settings for a global secondary index replica's read
+    #   Auto scaling settings for a global secondary index replica's read
     #   capacity units.
     #   @return [Types::AutoScalingSettingsDescription]
     #
@@ -5664,7 +5677,7 @@ module Aws::DynamoDB
     #   @return [Integer]
     #
     # @!attribute [rw] provisioned_write_capacity_auto_scaling_settings
-    #   AutoScaling settings for a global secondary index replica's write
+    #   Auto scaling settings for a global secondary index replica's write
     #   capacity units.
     #   @return [Types::AutoScalingSettingsDescription]
     #
@@ -5717,7 +5730,7 @@ module Aws::DynamoDB
     #   @return [Integer]
     #
     # @!attribute [rw] provisioned_read_capacity_auto_scaling_settings_update
-    #   Autoscaling settings for managing a global secondary index
+    #   Auto scaling settings for managing a global secondary index
     #   replica's read capacity units.
     #   @return [Types::AutoScalingSettingsUpdate]
     #
@@ -5745,19 +5758,19 @@ module Aws::DynamoDB
     # Represents the properties of a replica.
     #
     # @!attribute [rw] region_name
-    #   The region name of the replica.
+    #   The Region name of the replica.
     #   @return [String]
     #
     # @!attribute [rw] replica_status
-    #   The current state of the region:
+    #   The current state of the Region:
     #
-    #   * `CREATING` - The region is being created.
+    #   * `CREATING` - The Region is being created.
     #
-    #   * `UPDATING` - The region is being updated.
+    #   * `UPDATING` - The Region is being updated.
     #
-    #   * `DELETING` - The region is being deleted.
+    #   * `DELETING` - The Region is being deleted.
     #
-    #   * `ACTIVE` - The region is ready for use.
+    #   * `ACTIVE` - The Region is ready for use.
     #   @return [String]
     #
     # @!attribute [rw] replica_billing_mode_summary
@@ -5776,7 +5789,7 @@ module Aws::DynamoDB
     #   @return [Integer]
     #
     # @!attribute [rw] replica_provisioned_read_capacity_auto_scaling_settings
-    #   Autoscaling settings for a global table replica's read capacity
+    #   Auto scaling settings for a global table replica's read capacity
     #   units.
     #   @return [Types::AutoScalingSettingsDescription]
     #
@@ -5792,7 +5805,7 @@ module Aws::DynamoDB
     #   @return [Integer]
     #
     # @!attribute [rw] replica_provisioned_write_capacity_auto_scaling_settings
-    #   AutoScaling settings for a global table replica's write capacity
+    #   Auto scaling settings for a global table replica's write capacity
     #   units.
     #   @return [Types::AutoScalingSettingsDescription]
     #
@@ -5814,7 +5827,7 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Represents the settings for a global table in a region that will be
+    # Represents the settings for a global table in a Region that will be
     # modified.
     #
     # @note When making an API call, you may pass ReplicaSettingsUpdate
@@ -5862,7 +5875,7 @@ module Aws::DynamoDB
     #       }
     #
     # @!attribute [rw] region_name
-    #   The region of the replica to be added.
+    #   The Region of the replica to be added.
     #   @return [String]
     #
     # @!attribute [rw] replica_provisioned_read_capacity_units
@@ -5877,7 +5890,7 @@ module Aws::DynamoDB
     #   @return [Integer]
     #
     # @!attribute [rw] replica_provisioned_read_capacity_auto_scaling_settings_update
-    #   Autoscaling settings for managing a global table replica's read
+    #   Auto scaling settings for managing a global table replica's read
     #   capacity units.
     #   @return [Types::AutoScalingSettingsUpdate]
     #
@@ -5984,11 +5997,12 @@ module Aws::DynamoDB
     # Contains details for the restore.
     #
     # @!attribute [rw] source_backup_arn
-    #   ARN of the backup from which the table was restored.
+    #   The Amazon Resource Name (ARN) of the backup from which the table
+    #   was restored.
     #   @return [String]
     #
     # @!attribute [rw] source_table_arn
-    #   ARN of the source table of the backup that is being restored.
+    #   The ARN of the source table of the backup that is being restored.
     #   @return [String]
     #
     # @!attribute [rw] restore_date_time
@@ -6015,6 +6029,45 @@ module Aws::DynamoDB
     #       {
     #         target_table_name: "TableName", # required
     #         backup_arn: "BackupArn", # required
+    #         billing_mode_override: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #         global_secondary_index_override: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             key_schema: [ # required
+    #               {
+    #                 attribute_name: "KeySchemaAttributeName", # required
+    #                 key_type: "HASH", # required, accepts HASH, RANGE
+    #               },
+    #             ],
+    #             projection: { # required
+    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #               non_key_attributes: ["NonKeyAttributeName"],
+    #             },
+    #             provisioned_throughput: {
+    #               read_capacity_units: 1, # required
+    #               write_capacity_units: 1, # required
+    #             },
+    #           },
+    #         ],
+    #         local_secondary_index_override: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             key_schema: [ # required
+    #               {
+    #                 attribute_name: "KeySchemaAttributeName", # required
+    #                 key_type: "HASH", # required, accepts HASH, RANGE
+    #               },
+    #             ],
+    #             projection: { # required
+    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #               non_key_attributes: ["NonKeyAttributeName"],
+    #             },
+    #           },
+    #         ],
+    #         provisioned_throughput_override: {
+    #           read_capacity_units: 1, # required
+    #           write_capacity_units: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] target_table_name
@@ -6025,11 +6078,35 @@ module Aws::DynamoDB
     #   The Amazon Resource Name (ARN) associated with the backup.
     #   @return [String]
     #
+    # @!attribute [rw] billing_mode_override
+    #   The billing mode of the restored table.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_secondary_index_override
+    #   List of global secondary indexes for the restored table. The indexes
+    #   provided should match existing secondary indexes. You can choose to
+    #   exclude some or all of the indexes at the time of restore.
+    #   @return [Array<Types::GlobalSecondaryIndex>]
+    #
+    # @!attribute [rw] local_secondary_index_override
+    #   List of local secondary indexes for the restored table. The indexes
+    #   provided should match existing secondary indexes. You can choose to
+    #   exclude some or all of the indexes at the time of restore.
+    #   @return [Array<Types::LocalSecondaryIndex>]
+    #
+    # @!attribute [rw] provisioned_throughput_override
+    #   Provisioned throughput settings for the restored table.
+    #   @return [Types::ProvisionedThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackupInput AWS API Documentation
     #
     class RestoreTableFromBackupInput < Struct.new(
       :target_table_name,
-      :backup_arn)
+      :backup_arn,
+      :billing_mode_override,
+      :global_secondary_index_override,
+      :local_secondary_index_override,
+      :provisioned_throughput_override)
       include Aws::Structure
     end
 
@@ -6052,6 +6129,45 @@ module Aws::DynamoDB
     #         target_table_name: "TableName", # required
     #         use_latest_restorable_time: false,
     #         restore_date_time: Time.now,
+    #         billing_mode_override: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #         global_secondary_index_override: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             key_schema: [ # required
+    #               {
+    #                 attribute_name: "KeySchemaAttributeName", # required
+    #                 key_type: "HASH", # required, accepts HASH, RANGE
+    #               },
+    #             ],
+    #             projection: { # required
+    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #               non_key_attributes: ["NonKeyAttributeName"],
+    #             },
+    #             provisioned_throughput: {
+    #               read_capacity_units: 1, # required
+    #               write_capacity_units: 1, # required
+    #             },
+    #           },
+    #         ],
+    #         local_secondary_index_override: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             key_schema: [ # required
+    #               {
+    #                 attribute_name: "KeySchemaAttributeName", # required
+    #                 key_type: "HASH", # required, accepts HASH, RANGE
+    #               },
+    #             ],
+    #             projection: { # required
+    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #               non_key_attributes: ["NonKeyAttributeName"],
+    #             },
+    #           },
+    #         ],
+    #         provisioned_throughput_override: {
+    #           read_capacity_units: 1, # required
+    #           write_capacity_units: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] source_table_name
@@ -6072,13 +6188,37 @@ module Aws::DynamoDB
     #   Time in the past to restore the table to.
     #   @return [Time]
     #
+    # @!attribute [rw] billing_mode_override
+    #   The billing mode of the restored table.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_secondary_index_override
+    #   List of global secondary indexes for the restored table. The indexes
+    #   provided should match existing secondary indexes. You can choose to
+    #   exclude some or all of the indexes at the time of restore.
+    #   @return [Array<Types::GlobalSecondaryIndex>]
+    #
+    # @!attribute [rw] local_secondary_index_override
+    #   List of local secondary indexes for the restored table. The indexes
+    #   provided should match existing secondary indexes. You can choose to
+    #   exclude some or all of the indexes at the time of restore.
+    #   @return [Array<Types::LocalSecondaryIndex>]
+    #
+    # @!attribute [rw] provisioned_throughput_override
+    #   Provisioned throughput settings for the restored table.
+    #   @return [Types::ProvisionedThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTimeInput AWS API Documentation
     #
     class RestoreTableToPointInTimeInput < Struct.new(
       :source_table_name,
       :target_table_name,
       :use_latest_restorable_time,
-      :restore_date_time)
+      :restore_date_time,
+      :billing_mode_override,
+      :global_secondary_index_override,
+      :local_secondary_index_override,
+      :provisioned_throughput_override)
       include Aws::Structure
     end
 
@@ -6108,15 +6248,16 @@ module Aws::DynamoDB
     # @!attribute [rw] sse_type
     #   Server-side encryption type. The only supported value is:
     #
-    #   * `KMS` - Server-side encryption which uses AWS Key Management
-    #     Service. Key is stored in your account and is managed by AWS KMS
-    #     (KMS charges apply).
+    #   * `KMS` - Server-side encryption that uses AWS Key Management
+    #     Service. The key is stored in your account and is managed by AWS
+    #     KMS (AWS KMS charges apply).
     #
     #   ^
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_arn
-    #   The KMS customer master key (CMK) ARN used for the KMS encryption.
+    #   The KMS customer master key (CMK) ARN used for the AWS KMS
+    #   encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSEDescription AWS API Documentation
@@ -6150,19 +6291,19 @@ module Aws::DynamoDB
     # @!attribute [rw] sse_type
     #   Server-side encryption type. The only supported value is:
     #
-    #   * `KMS` - Server-side encryption which uses AWS Key Management
-    #     Service. Key is stored in your account and is managed by AWS KMS
-    #     (KMS charges apply).
+    #   * `KMS` - Server-side encryption that uses AWS Key Management
+    #     Service. The key is stored in your account and is managed by AWS
+    #     KMS (AWS KMS charges apply).
     #
     #   ^
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The KMS Customer Master Key (CMK) which should be used for the KMS
-    #   encryption. To specify a CMK, use its key ID, Amazon Resource Name
-    #   (ARN), alias name, or alias ARN. Note that you should only provide
-    #   this parameter if the key is different from the default DynamoDB
-    #   Customer Master Key alias/aws/dynamodb.
+    #   The KMS customer master key (CMK) that should be used for the AWS
+    #   KMS encryption. To specify a CMK, use its key ID, Amazon Resource
+    #   Name (ARN), alias name, or alias ARN. Note that you should only
+    #   provide this parameter if the key is different from the default
+    #   DynamoDB customer master key alias/aws/dynamodb.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSESpecification AWS API Documentation
@@ -6635,8 +6776,7 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] table_size_bytes
-    #   Size of the table in bytes. Please note this is an approximate
-    #   value.
+    #   Size of the table in bytes. Note that this is an approximate value.
     #   @return [Integer]
     #
     # @!attribute [rw] key_schema
@@ -6652,7 +6792,7 @@ module Aws::DynamoDB
     #   @return [Types::ProvisionedThroughput]
     #
     # @!attribute [rw] item_count
-    #   Number of items in the table. Please note this is an approximate
+    #   Number of items in the table. Note that this is an approximate
     #   value.
     #   @return [Integer]
     #
@@ -6695,7 +6835,7 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] global_secondary_indexes
     #   Represents the GSI properties for the table when the backup was
-    #   created. It includes the IndexName, KeySchema, Projection and
+    #   created. It includes the IndexName, KeySchema, Projection, and
     #   ProvisionedThroughput for the GSIs on the table at the time of
     #   backup.
     #   @return [Array<Types::GlobalSecondaryIndexInfo>]
@@ -6903,7 +7043,7 @@ module Aws::DynamoDB
     #         into the index.
     #
     #       * `INCLUDE` - Only the specified table attributes are projected
-    #         into the index. The list of projected attributes are in
+    #         into the index. The list of projected attributes is in
     #         `NonKeyAttributes`.
     #
     #       * `ALL` - All of the table attributes are projected into the
@@ -6934,10 +7074,17 @@ module Aws::DynamoDB
     #
     #   * `Backfilling` - If true, then the index is currently in the
     #     backfilling phase. Backfilling occurs only when a new global
-    #     secondary index is added to the table; it is the process by which
+    #     secondary index is added to the table. It is the process by which
     #     DynamoDB populates the new index with data from the table. (This
     #     attribute does not appear for indexes that were created during a
     #     `CreateTable` operation.)
+    #
+    #     You can delete an index that is being created during the
+    #     `Backfilling` phase when `IndexStatus` is set to CREATING and
+    #     `Backfilling` is true. You can't delete the index that is being
+    #     created when `IndexStatus` is set to CREATING and `Backfilling` is
+    #     false. (This attribute does not appear for indexes that were
+    #     created during a `CreateTable` operation.)
     #
     #   * `IndexName` - The name of the global secondary index.
     #
@@ -6976,7 +7123,7 @@ module Aws::DynamoDB
     #         into the index.
     #
     #       * `INCLUDE` - Only the specified table attributes are projected
-    #         into the index. The list of projected attributes are in
+    #         into the index. The list of projected attributes is in
     #         `NonKeyAttributes`.
     #
     #       * `ALL` - All of the table attributes are projected into the
@@ -7009,11 +7156,11 @@ module Aws::DynamoDB
     #   might have the same timestamp. However, the combination of the
     #   following three elements is guaranteed to be unique:
     #
-    #   * the AWS customer ID.
+    #   * AWS customer ID
     #
-    #   * the table name.
+    #   * Table name
     #
-    #   * the `StreamLabel`.
+    #   * `StreamLabel`
     #   @return [String]
     #
     # @!attribute [rw] latest_stream_arn
@@ -7578,8 +7725,6 @@ module Aws::DynamoDB
     #   secondary index (LSI) becomes too large, or a similar validation
     #   error occurs because of changes made by the transaction.
     #
-    # * The aggregate size of the items in the transaction exceeds 4 MBs.
-    #
     # * There is a user error, such as an invalid data format.
     #
     # DynamoDB cancels a `TransactGetItems` request under the following
@@ -7595,8 +7740,6 @@ module Aws::DynamoDB
     #
     # * There is insufficient provisioned capacity for the transaction to be
     #   completed.
-    #
-    # * The aggregate size of the items in the transaction exceeds 4 MBs.
     #
     # * There is a user error, such as an invalid data format.
     #
@@ -8067,6 +8210,19 @@ module Aws::DynamoDB
     #   The billing mode of the global table. If `GlobalTableBillingMode` is
     #   not specified, the global table defaults to `PROVISIONED` capacity
     #   billing mode.
+    #
+    #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
+    #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
+    #     Mode][1].
+    #
+    #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
+    #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode
+    #     to [On-Demand Mode][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
     #   @return [String]
     #
     # @!attribute [rw] global_table_provisioned_write_capacity_units
@@ -8611,11 +8767,18 @@ module Aws::DynamoDB
     #   the consumed read and write capacity of your table and global
     #   secondary indexes over the past 30 minutes.
     #
-    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We
-    #     recommend using `PROVISIONED` for predictable workloads.
+    #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
+    #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
+    #     Mode][1].
     #
-    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
-    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
+    #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
+    #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode
+    #     to [On-Demand Mode][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput
@@ -8633,6 +8796,9 @@ module Aws::DynamoDB
     #     existing global secondary index.
     #
     #   * `Delete` - remove a global secondary index from the table.
+    #
+    #   You can create or delete only one global secondary index per
+    #   `UpdateTable` operation.
     #
     #   For more information, see [Managing Global Secondary Indexes][1] in
     #   the *Amazon DynamoDB Developer Guide*.
@@ -8726,7 +8892,7 @@ module Aws::DynamoDB
     # Represents an operation to perform - either `DeleteItem` or `PutItem`.
     # You can only request one of these operations, not both, in a single
     # `WriteRequest`. If you do need to perform both of these operations,
-    # you will need to provide two separate `WriteRequest` objects.
+    # you need to provide two separate `WriteRequest` objects.
     #
     # @note When making an API call, you may pass WriteRequest
     #   data as a hash:

@@ -41,6 +41,7 @@ module Aws::CodePipeline
     ActionExecutionStatus = Shapes::StringShape.new(name: 'ActionExecutionStatus')
     ActionExecutionToken = Shapes::StringShape.new(name: 'ActionExecutionToken')
     ActionName = Shapes::StringShape.new(name: 'ActionName')
+    ActionNamespace = Shapes::StringShape.new(name: 'ActionNamespace')
     ActionNotFoundException = Shapes::StructureShape.new(name: 'ActionNotFoundException')
     ActionOwner = Shapes::StringShape.new(name: 'ActionOwner')
     ActionProvider = Shapes::StringShape.new(name: 'ActionProvider')
@@ -172,6 +173,10 @@ module Aws::CodePipeline
     NotLatestPipelineExecutionException = Shapes::StructureShape.new(name: 'NotLatestPipelineExecutionException')
     OutputArtifact = Shapes::StructureShape.new(name: 'OutputArtifact')
     OutputArtifactList = Shapes::ListShape.new(name: 'OutputArtifactList')
+    OutputVariablesKey = Shapes::StringShape.new(name: 'OutputVariablesKey')
+    OutputVariablesMap = Shapes::MapShape.new(name: 'OutputVariablesMap')
+    OutputVariablesSizeExceededException = Shapes::StructureShape.new(name: 'OutputVariablesSizeExceededException')
+    OutputVariablesValue = Shapes::StringShape.new(name: 'OutputVariablesValue')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     PipelineArn = Shapes::StringShape.new(name: 'PipelineArn')
     PipelineContext = Shapes::StructureShape.new(name: 'PipelineContext')
@@ -208,6 +213,7 @@ module Aws::CodePipeline
     QueryParamMap = Shapes::MapShape.new(name: 'QueryParamMap')
     RegisterWebhookWithThirdPartyInput = Shapes::StructureShape.new(name: 'RegisterWebhookWithThirdPartyInput')
     RegisterWebhookWithThirdPartyOutput = Shapes::StructureShape.new(name: 'RegisterWebhookWithThirdPartyOutput')
+    ResolvedActionConfigurationMap = Shapes::MapShape.new(name: 'ResolvedActionConfigurationMap')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryStageExecutionInput = Shapes::StructureShape.new(name: 'RetryStageExecutionInput')
@@ -241,6 +247,7 @@ module Aws::CodePipeline
     StageTransitionType = Shapes::StringShape.new(name: 'StageTransitionType')
     StartPipelineExecutionInput = Shapes::StructureShape.new(name: 'StartPipelineExecutionInput')
     StartPipelineExecutionOutput = Shapes::StructureShape.new(name: 'StartPipelineExecutionOutput')
+    String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -332,6 +339,7 @@ module Aws::CodePipeline
     ActionDeclaration.add_member(:input_artifacts, Shapes::ShapeRef.new(shape: InputArtifactList, location_name: "inputArtifacts"))
     ActionDeclaration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     ActionDeclaration.add_member(:region, Shapes::ShapeRef.new(shape: AWSRegionName, location_name: "region"))
+    ActionDeclaration.add_member(:namespace, Shapes::ShapeRef.new(shape: ActionNamespace, location_name: "namespace"))
     ActionDeclaration.struct_class = Types::ActionDeclaration
 
     ActionExecution.add_member(:status, Shapes::ShapeRef.new(shape: ActionExecutionStatus, location_name: "status"))
@@ -364,13 +372,16 @@ module Aws::CodePipeline
 
     ActionExecutionInput.add_member(:action_type_id, Shapes::ShapeRef.new(shape: ActionTypeId, location_name: "actionTypeId"))
     ActionExecutionInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ActionConfigurationMap, location_name: "configuration"))
+    ActionExecutionInput.add_member(:resolved_configuration, Shapes::ShapeRef.new(shape: ResolvedActionConfigurationMap, location_name: "resolvedConfiguration"))
     ActionExecutionInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     ActionExecutionInput.add_member(:region, Shapes::ShapeRef.new(shape: AWSRegionName, location_name: "region"))
     ActionExecutionInput.add_member(:input_artifacts, Shapes::ShapeRef.new(shape: ArtifactDetailList, location_name: "inputArtifacts"))
+    ActionExecutionInput.add_member(:namespace, Shapes::ShapeRef.new(shape: ActionNamespace, location_name: "namespace"))
     ActionExecutionInput.struct_class = Types::ActionExecutionInput
 
     ActionExecutionOutput.add_member(:output_artifacts, Shapes::ShapeRef.new(shape: ArtifactDetailList, location_name: "outputArtifacts"))
     ActionExecutionOutput.add_member(:execution_result, Shapes::ShapeRef.new(shape: ActionExecutionResult, location_name: "executionResult"))
+    ActionExecutionOutput.add_member(:output_variables, Shapes::ShapeRef.new(shape: OutputVariablesMap, location_name: "outputVariables"))
     ActionExecutionOutput.struct_class = Types::ActionExecutionOutput
 
     ActionExecutionResult.add_member(:external_execution_id, Shapes::ShapeRef.new(shape: ExternalExecutionId, location_name: "externalExecutionId"))
@@ -679,6 +690,12 @@ module Aws::CodePipeline
 
     OutputArtifactList.member = Shapes::ShapeRef.new(shape: OutputArtifact)
 
+    OutputVariablesMap.key = Shapes::ShapeRef.new(shape: OutputVariablesKey)
+    OutputVariablesMap.value = Shapes::ShapeRef.new(shape: OutputVariablesValue)
+
+    OutputVariablesSizeExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    OutputVariablesSizeExceededException.struct_class = Types::OutputVariablesSizeExceededException
+
     PipelineContext.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "pipelineName"))
     PipelineContext.add_member(:stage, Shapes::ShapeRef.new(shape: StageContext, location_name: "stage"))
     PipelineContext.add_member(:action, Shapes::ShapeRef.new(shape: ActionContext, location_name: "action"))
@@ -769,6 +786,7 @@ module Aws::CodePipeline
     PutJobSuccessResultInput.add_member(:current_revision, Shapes::ShapeRef.new(shape: CurrentRevision, location_name: "currentRevision"))
     PutJobSuccessResultInput.add_member(:continuation_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "continuationToken"))
     PutJobSuccessResultInput.add_member(:execution_details, Shapes::ShapeRef.new(shape: ExecutionDetails, location_name: "executionDetails"))
+    PutJobSuccessResultInput.add_member(:output_variables, Shapes::ShapeRef.new(shape: OutputVariablesMap, location_name: "outputVariables"))
     PutJobSuccessResultInput.struct_class = Types::PutJobSuccessResultInput
 
     PutThirdPartyJobFailureResultInput.add_member(:job_id, Shapes::ShapeRef.new(shape: ThirdPartyJobId, required: true, location_name: "jobId"))
@@ -797,6 +815,9 @@ module Aws::CodePipeline
     RegisterWebhookWithThirdPartyInput.struct_class = Types::RegisterWebhookWithThirdPartyInput
 
     RegisterWebhookWithThirdPartyOutput.struct_class = Types::RegisterWebhookWithThirdPartyOutput
+
+    ResolvedActionConfigurationMap.key = Shapes::ShapeRef.new(shape: String)
+    ResolvedActionConfigurationMap.value = Shapes::ShapeRef.new(shape: String)
 
     RetryStageExecutionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
     RetryStageExecutionInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
@@ -1284,6 +1305,7 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
+        o.errors << Shapes::ShapeRef.new(shape: OutputVariablesSizeExceededException)
       end)
 
       api.add_operation(:put_third_party_job_failure_result, Seahorse::Model::Operation.new.tap do |o|

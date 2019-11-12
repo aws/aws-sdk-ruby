@@ -72,9 +72,19 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # The AccountLimit data type. For more information about account limits,
-    # see [AWS CloudFormation Limits][1] in the *AWS CloudFormation User
-    # Guide*.
+    # The AccountLimit data type.
+    #
+    # CloudFormation has the following limits per account:
+    #
+    # * Number of concurrent resources
+    #
+    # * Number of stacks
+    #
+    # * Number of stack outputs
+    #
+    # For more information about these account limits, and other
+    # CloudFormation limits, see [AWS CloudFormation Limits][1] in the *AWS
+    # CloudFormation User Guide*.
     #
     #
     #
@@ -82,6 +92,9 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] name
     #   The name of the account limit.
+    #
+    #   Values: `ConcurrentResourcesLimit` \| `StackLimit` \|
+    #   `StackOutputsLimit`
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -359,7 +372,16 @@ module Aws::CloudFormation
     #         change_set_name: "ChangeSetName", # required
     #         client_token: "ClientToken",
     #         description: "Description",
-    #         change_set_type: "CREATE", # accepts CREATE, UPDATE
+    #         change_set_type: "CREATE", # accepts CREATE, UPDATE, IMPORT
+    #         resources_to_import: [
+    #           {
+    #             resource_type: "ResourceType", # required
+    #             logical_resource_id: "LogicalResourceId", # required
+    #             resource_identifier: { # required
+    #               "ResourceIdentifierPropertyKey" => "ResourceIdentifierPropertyValue",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] stack_name
@@ -398,7 +420,7 @@ module Aws::CloudFormation
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] capabilities
-    #   In some cases, you must explicity acknowledge that your stack
+    #   In some cases, you must explicitly acknowledge that your stack
     #   template contains certain capabilities in order for AWS
     #   CloudFormation to create the stack.
     #
@@ -563,7 +585,8 @@ module Aws::CloudFormation
     # @!attribute [rw] change_set_type
     #   The type of change set operation. To create a change set for a new
     #   stack, specify `CREATE`. To create a change set for an existing
-    #   stack, specify `UPDATE`.
+    #   stack, specify `UPDATE`. To create a change set for an import
+    #   operation, specify `IMPORT`.
     #
     #   If you create a change set for a new stack, AWS Cloudformation
     #   creates a stack with a unique stack ID, but no template or
@@ -578,6 +601,10 @@ module Aws::CloudFormation
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995
     #   @return [String]
+    #
+    # @!attribute [rw] resources_to_import
+    #   The resources to import into your stack.
+    #   @return [Array<Types::ResourceToImport>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
     #
@@ -596,7 +623,8 @@ module Aws::CloudFormation
       :change_set_name,
       :client_token,
       :description,
-      :change_set_type)
+      :change_set_type,
+      :resources_to_import)
       include Aws::Structure
     end
 
@@ -737,7 +765,7 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     #
     # @!attribute [rw] capabilities
-    #   In some cases, you must explicity acknowledge that your stack
+    #   In some cases, you must explicitly acknowledge that your stack
     #   template contains certain capabilities in order for AWS
     #   CloudFormation to create the stack.
     #
@@ -1178,7 +1206,7 @@ module Aws::CloudFormation
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] capabilities
-    #   In some cases, you must explicity acknowledge that your stack set
+    #   In some cases, you must explicitly acknowledge that your stack set
     #   template contains certain capabilities in order for AWS
     #   CloudFormation to create the stack set and related stack instances.
     #
@@ -2729,6 +2757,14 @@ module Aws::CloudFormation
     #   A list of the transforms that are declared in the template.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] resource_identifier_summaries
+    #   A list of resource identifier summaries that describe the target
+    #   resources of an import operation and the properties you can provide
+    #   during the import to identify the target resources. For example,
+    #   `BucketName` is a possible identifier property for an
+    #   `AWS::S3::Bucket` resource.
+    #   @return [Array<Types::ResourceIdentifierSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryOutput AWS API Documentation
     #
     class GetTemplateSummaryOutput < Struct.new(
@@ -2739,7 +2775,8 @@ module Aws::CloudFormation
       :resource_types,
       :version,
       :metadata,
-      :declared_transforms)
+      :declared_transforms,
+      :resource_identifier_summaries)
       include Aws::Structure
     end
 
@@ -3198,7 +3235,7 @@ module Aws::CloudFormation
     #
     #       {
     #         next_token: "NextToken",
-    #         stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS
+    #         stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS, IMPORT_IN_PROGRESS, IMPORT_COMPLETE, IMPORT_ROLLBACK_IN_PROGRESS, IMPORT_ROLLBACK_FAILED, IMPORT_ROLLBACK_COMPLETE
     #       }
     #
     # @!attribute [rw] next_token
@@ -3589,6 +3626,36 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # Describes the target resources of a specific type in your import
+    # template (for example, all `AWS::S3::Bucket` resources) and the
+    # properties you can provide during the import to identify resources of
+    # that type.
+    #
+    # @!attribute [rw] resource_type
+    #   The template resource type of the target resources, such as
+    #   `AWS::S3::Bucket`.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_ids
+    #   The logical IDs of the target resources of the specified
+    #   `ResourceType`, as defined in the import template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_identifiers
+    #   The resource properties you can provide during the import to
+    #   identify your target resources. For example, `BucketName` is a
+    #   possible identifier property for `AWS::S3::Bucket` resources.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceIdentifierSummary AWS API Documentation
+    #
+    class ResourceIdentifierSummary < Struct.new(
+      :resource_type,
+      :logical_resource_ids,
+      :resource_identifiers)
+      include Aws::Structure
+    end
+
     # The field that AWS CloudFormation will change, such as the name of a
     # resource's property, and whether the resource will be recreated.
     #
@@ -3621,6 +3688,44 @@ module Aws::CloudFormation
       :attribute,
       :name,
       :requires_recreation)
+      include Aws::Structure
+    end
+
+    # Describes the target resource of an import operation.
+    #
+    # @note When making an API call, you may pass ResourceToImport
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "ResourceType", # required
+    #         logical_resource_id: "LogicalResourceId", # required
+    #         resource_identifier: { # required
+    #           "ResourceIdentifierPropertyKey" => "ResourceIdentifierPropertyValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to import into your stack, such as
+    #   `AWS::S3::Bucket`.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical ID of the target resource as specified in the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A key-value pair that identifies the target resource. The key is an
+    #   identifier property (for example, `BucketName` for `AWS::S3::Bucket`
+    #   resources) and the value is the actual property value (for example,
+    #   `MyS3Bucket`).
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceToImport AWS API Documentation
+    #
+    class ResourceToImport < Struct.new(
+      :resource_type,
+      :logical_resource_id,
+      :resource_identifier)
       include Aws::Structure
     end
 
@@ -3950,8 +4055,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] root_id
     #   For nested stacks--stacks created as resources for another
-    #   stack--the stack ID of the the top-level stack to which the nested
-    #   stack ultimately belongs.
+    #   stack--the stack ID of the top-level stack to which the nested stack
+    #   ultimately belongs.
     #
     #   For more information, see [Working with Nested Stacks][1] in the
     #   *AWS CloudFormation User Guide*.
@@ -5204,8 +5309,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] root_id
     #   For nested stacks--stacks created as resources for another
-    #   stack--the stack ID of the the top-level stack to which the nested
-    #   stack ultimately belongs.
+    #   stack--the stack ID of the top-level stack to which the nested stack
+    #   ultimately belongs.
     #
     #   For more information, see [Working with Nested Stacks][1] in the
     #   *AWS CloudFormation User Guide*.
@@ -5452,7 +5557,7 @@ module Aws::CloudFormation
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] capabilities
-    #   In some cases, you must explicity acknowledge that your stack
+    #   In some cases, you must explicitly acknowledge that your stack
     #   template contains certain capabilities in order for AWS
     #   CloudFormation to update the stack.
     #
@@ -5902,7 +6007,7 @@ module Aws::CloudFormation
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] capabilities
-    #   In some cases, you must explicity acknowledge that your stack
+    #   In some cases, you must explicitly acknowledge that your stack
     #   template contains certain capabilities in order for AWS
     #   CloudFormation to update the stack set and its associated stack
     #   instances.

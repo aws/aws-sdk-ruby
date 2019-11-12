@@ -1,6 +1,23 @@
 Unreleased Changes
 ------------------
 
+3.58.0 (2019-11-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-marketplacecatalog` gem.
+
+3.57.1 (2019-11-08)
+------------------
+
+* Issue - Yanked 3.57.0 as typo protection broke the release (rubygems/rubygems.org#2161).
+
+3.57.0 (2019-11-07)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ssooidc` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-sso` gem.
+
 3.56.0 (2019-11-06)
 ------------------
 

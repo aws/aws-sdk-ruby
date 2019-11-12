@@ -72,6 +72,7 @@ module Aws::CognitoIdentity
     #       {
     #         identity_pool_name: "IdentityPoolName", # required
     #         allow_unauthenticated_identities: false, # required
+    #         allow_classic_flow: false,
     #         supported_login_providers: {
     #           "IdentityProviderName" => "IdentityProviderId",
     #         },
@@ -96,6 +97,16 @@ module Aws::CognitoIdentity
     #
     # @!attribute [rw] allow_unauthenticated_identities
     #   TRUE if the identity pool supports unauthenticated logins.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_classic_flow
+    #   Enables or disables the Basic (Classic) authentication flow. For
+    #   more information, see [Identity Pools (Federated Identities)
+    #   Authentication Flow][1] in the *Amazon Cognito Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html
     #   @return [Boolean]
     #
     # @!attribute [rw] supported_login_providers
@@ -137,6 +148,7 @@ module Aws::CognitoIdentity
     class CreateIdentityPoolInput < Struct.new(
       :identity_pool_name,
       :allow_unauthenticated_identities,
+      :allow_classic_flow,
       :supported_login_providers,
       :developer_provider_name,
       :open_id_connect_provider_arns,
@@ -523,6 +535,11 @@ module Aws::CognitoIdentity
     #   in setting the expiration time for a token, as there are significant
     #   security implications: an attacker could use a leaked token to
     #   access your AWS resources for the token's duration.
+    #
+    #   <note markdown="1"> Please provide for a small grace period, usually no more than 5
+    #   minutes, to account for clock skew.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdTokenForDeveloperIdentityInput AWS API Documentation
@@ -642,6 +659,7 @@ module Aws::CognitoIdentity
     #         identity_pool_id: "IdentityPoolId", # required
     #         identity_pool_name: "IdentityPoolName", # required
     #         allow_unauthenticated_identities: false, # required
+    #         allow_classic_flow: false,
     #         supported_login_providers: {
     #           "IdentityProviderName" => "IdentityProviderId",
     #         },
@@ -670,6 +688,16 @@ module Aws::CognitoIdentity
     #
     # @!attribute [rw] allow_unauthenticated_identities
     #   TRUE if the identity pool supports unauthenticated logins.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_classic_flow
+    #   Enables or disables the Basic (Classic) authentication flow. For
+    #   more information, see [Identity Pools (Federated Identities)
+    #   Authentication Flow][1] in the *Amazon Cognito Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html
     #   @return [Boolean]
     #
     # @!attribute [rw] supported_login_providers
@@ -706,6 +734,7 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :identity_pool_name,
       :allow_unauthenticated_identities,
+      :allow_classic_flow,
       :supported_login_providers,
       :developer_provider_name,
       :open_id_connect_provider_arns,
@@ -1296,7 +1325,7 @@ module Aws::CognitoIdentity
     #
     #       {
     #         resource_arn: "ARNString", # required
-    #         tags: {
+    #         tags: { # required
     #           "TagKeysType" => "TagValueType",
     #         },
     #       }
@@ -1433,7 +1462,7 @@ module Aws::CognitoIdentity
     #
     #       {
     #         resource_arn: "ARNString", # required
-    #         tag_keys: ["TagKeysType"],
+    #         tag_keys: ["TagKeysType"], # required
     #       }
     #
     # @!attribute [rw] resource_arn

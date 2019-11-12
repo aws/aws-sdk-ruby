@@ -385,6 +385,9 @@
   "ManagedBlockchain": {
     "models": "managedblockchain/2018-09-24"
   },
+  "MarketplaceCatalog": {
+    "models": "marketplace-catalog/2018-09-17"
+  },
   "MarketplaceCommerceAnalytics": {
     "models": "marketplacecommerceanalytics/2015-07-01"
   },
@@ -574,6 +577,12 @@
   },
   "SSM": {
     "models": "ssm/2014-11-06"
+  },
+  "SSO": {
+    "models": "sso/2019-06-10"
+  },
+  "SSOOIDC": {
+    "models": "sso-oidc/2019-06-10"
   },
   "STS": {
     "models": "sts/2011-06-15",

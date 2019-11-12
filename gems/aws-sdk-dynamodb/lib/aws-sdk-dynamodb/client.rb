@@ -1115,11 +1115,18 @@ module Aws::DynamoDB
     #   Controls how you are charged for read and write throughput and how you
     #   manage capacity. This setting can be changed later.
     #
-    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We recommend
-    #     using `PROVISIONED` for predictable workloads.
+    #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
+    #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
+    #     Mode][1].
     #
-    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
-    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
+    #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
+    #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
+    #     [On-Demand Mode][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
     #
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput
     #   Represents the provisioned throughput settings for a specified table
@@ -3723,6 +3730,22 @@ module Aws::DynamoDB
     # @option params [required, String] :backup_arn
     #   The Amazon Resource Name (ARN) associated with the backup.
     #
+    # @option params [String] :billing_mode_override
+    #   The billing mode of the restored table.
+    #
+    # @option params [Array<Types::GlobalSecondaryIndex>] :global_secondary_index_override
+    #   List of global secondary indexes for the restored table. The indexes
+    #   provided should match existing secondary indexes. You can choose to
+    #   exclude some or all of the indexes at the time of restore.
+    #
+    # @option params [Array<Types::LocalSecondaryIndex>] :local_secondary_index_override
+    #   List of local secondary indexes for the restored table. The indexes
+    #   provided should match existing secondary indexes. You can choose to
+    #   exclude some or all of the indexes at the time of restore.
+    #
+    # @option params [Types::ProvisionedThroughput] :provisioned_throughput_override
+    #   Provisioned throughput settings for the restored table.
+    #
     # @return [Types::RestoreTableFromBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreTableFromBackupOutput#table_description #table_description} => Types::TableDescription
@@ -3732,6 +3755,45 @@ module Aws::DynamoDB
     #   resp = client.restore_table_from_backup({
     #     target_table_name: "TableName", # required
     #     backup_arn: "BackupArn", # required
+    #     billing_mode_override: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #     global_secondary_index_override: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         key_schema: [ # required
+    #           {
+    #             attribute_name: "KeySchemaAttributeName", # required
+    #             key_type: "HASH", # required, accepts HASH, RANGE
+    #           },
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #           non_key_attributes: ["NonKeyAttributeName"],
+    #         },
+    #         provisioned_throughput: {
+    #           read_capacity_units: 1, # required
+    #           write_capacity_units: 1, # required
+    #         },
+    #       },
+    #     ],
+    #     local_secondary_index_override: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         key_schema: [ # required
+    #           {
+    #             attribute_name: "KeySchemaAttributeName", # required
+    #             key_type: "HASH", # required, accepts HASH, RANGE
+    #           },
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #           non_key_attributes: ["NonKeyAttributeName"],
+    #         },
+    #       },
+    #     ],
+    #     provisioned_throughput_override: {
+    #       read_capacity_units: 1, # required
+    #       write_capacity_units: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -3860,6 +3922,22 @@ module Aws::DynamoDB
     # @option params [Time,DateTime,Date,Integer,String] :restore_date_time
     #   Time in the past to restore the table to.
     #
+    # @option params [String] :billing_mode_override
+    #   The billing mode of the restored table.
+    #
+    # @option params [Array<Types::GlobalSecondaryIndex>] :global_secondary_index_override
+    #   List of global secondary indexes for the restored table. The indexes
+    #   provided should match existing secondary indexes. You can choose to
+    #   exclude some or all of the indexes at the time of restore.
+    #
+    # @option params [Array<Types::LocalSecondaryIndex>] :local_secondary_index_override
+    #   List of local secondary indexes for the restored table. The indexes
+    #   provided should match existing secondary indexes. You can choose to
+    #   exclude some or all of the indexes at the time of restore.
+    #
+    # @option params [Types::ProvisionedThroughput] :provisioned_throughput_override
+    #   Provisioned throughput settings for the restored table.
+    #
     # @return [Types::RestoreTableToPointInTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreTableToPointInTimeOutput#table_description #table_description} => Types::TableDescription
@@ -3871,6 +3949,45 @@ module Aws::DynamoDB
     #     target_table_name: "TableName", # required
     #     use_latest_restorable_time: false,
     #     restore_date_time: Time.now,
+    #     billing_mode_override: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #     global_secondary_index_override: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         key_schema: [ # required
+    #           {
+    #             attribute_name: "KeySchemaAttributeName", # required
+    #             key_type: "HASH", # required, accepts HASH, RANGE
+    #           },
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #           non_key_attributes: ["NonKeyAttributeName"],
+    #         },
+    #         provisioned_throughput: {
+    #           read_capacity_units: 1, # required
+    #           write_capacity_units: 1, # required
+    #         },
+    #       },
+    #     ],
+    #     local_secondary_index_override: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         key_schema: [ # required
+    #           {
+    #             attribute_name: "KeySchemaAttributeName", # required
+    #             key_type: "HASH", # required, accepts HASH, RANGE
+    #           },
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #           non_key_attributes: ["NonKeyAttributeName"],
+    #         },
+    #       },
+    #     ],
+    #     provisioned_throughput_override: {
+    #       read_capacity_units: 1, # required
+    #       write_capacity_units: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -4436,18 +4553,6 @@ module Aws::DynamoDB
     # from tables in more than one AWS account or Region. The aggregate size
     # of the items in the transaction cannot exceed 4 MB.
     #
-    # <note markdown="1"> All AWS Regions and AWS GovCloud (US) support up to 25 items per
-    # transaction with up to 4 MB of data, except the following AWS Regions:
-    #
-    #  * China (Beijing)
-    #
-    # * China (Ningxia)
-    #
-    #  The China (Beijing) and China (Ningxia) Regions support up to 10 items
-    # per transaction with up to 4 MB of data.
-    #
-    #  </note>
-    #
     # DynamoDB rejects the entire `TransactGetItems` request if any of the
     # following is true:
     #
@@ -4533,18 +4638,6 @@ module Aws::DynamoDB
     # actions can target the same item. For example, you cannot both
     # `ConditionCheck` and `Update` the same item. The aggregate size of the
     # items in the transaction cannot exceed 4 MB.
-    #
-    # <note markdown="1"> All AWS Regions and AWS GovCloud (US) support up to 25 items per
-    # transaction with up to 4 MB of data, except the following AWS Regions:
-    #
-    #  * China (Beijing)
-    #
-    # * China (Ningxia)
-    #
-    #  The China (Beijing) and China (Ningxia) Regions support up to 10 items
-    # per transaction with up to 4 MB of data.
-    #
-    #  </note>
     #
     # The actions are completed atomically so that either all of them
     # succeed, or all of them fail. They are defined by the following
@@ -4924,6 +5017,19 @@ module Aws::DynamoDB
     #   The billing mode of the global table. If `GlobalTableBillingMode` is
     #   not specified, the global table defaults to `PROVISIONED` capacity
     #   billing mode.
+    #
+    #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
+    #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
+    #     Mode][1].
+    #
+    #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
+    #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
+    #     [On-Demand Mode][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
     #
     # @option params [Integer] :global_table_provisioned_write_capacity_units
     #   The maximum number of writes consumed per second before DynamoDB
@@ -5529,11 +5635,18 @@ module Aws::DynamoDB
     #   and write capacity of your table and global secondary indexes over the
     #   past 30 minutes.
     #
-    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We recommend
-    #     using `PROVISIONED` for predictable workloads.
+    #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
+    #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
+    #     Mode][1].
     #
-    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
-    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
+    #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
+    #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
+    #     [On-Demand Mode][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
     #
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput
     #   The new provisioned throughput settings for the specified table or
@@ -5549,6 +5662,9 @@ module Aws::DynamoDB
     #     global secondary index.
     #
     #   * `Delete` - remove a global secondary index from the table.
+    #
+    #   You can create or delete only one global secondary index per
+    #   `UpdateTable` operation.
     #
     #   For more information, see [Managing Global Secondary Indexes][1] in
     #   the *Amazon DynamoDB Developer Guide*.
@@ -5837,7 +5953,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -265,9 +265,8 @@ module Aws::CognitoIdentity
     # @!group API Operations
 
     # Creates a new identity pool. The identity pool is a store of user
-    # identity information that is specific to your AWS account. The limit
-    # on identity pools is 60 per account. The keys for
-    # `SupportedLoginProviders` are as follows:
+    # identity information that is specific to your AWS account. The keys
+    # for `SupportedLoginProviders` are as follows:
     #
     # * Facebook: `graph.facebook.com`
     #
@@ -286,6 +285,15 @@ module Aws::CognitoIdentity
     #
     # @option params [required, Boolean] :allow_unauthenticated_identities
     #   TRUE if the identity pool supports unauthenticated logins.
+    #
+    # @option params [Boolean] :allow_classic_flow
+    #   Enables or disables the Basic (Classic) authentication flow. For more
+    #   information, see [Identity Pools (Federated Identities) Authentication
+    #   Flow][1] in the *Amazon Cognito Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html
     #
     # @option params [Hash<String,String>] :supported_login_providers
     #   Optional key:value pairs mapping provider names to provider app IDs.
@@ -320,6 +328,7 @@ module Aws::CognitoIdentity
     #   * {Types::IdentityPool#identity_pool_id #identity_pool_id} => String
     #   * {Types::IdentityPool#identity_pool_name #identity_pool_name} => String
     #   * {Types::IdentityPool#allow_unauthenticated_identities #allow_unauthenticated_identities} => Boolean
+    #   * {Types::IdentityPool#allow_classic_flow #allow_classic_flow} => Boolean
     #   * {Types::IdentityPool#supported_login_providers #supported_login_providers} => Hash&lt;String,String&gt;
     #   * {Types::IdentityPool#developer_provider_name #developer_provider_name} => String
     #   * {Types::IdentityPool#open_id_connect_provider_arns #open_id_connect_provider_arns} => Array&lt;String&gt;
@@ -332,6 +341,7 @@ module Aws::CognitoIdentity
     #   resp = client.create_identity_pool({
     #     identity_pool_name: "IdentityPoolName", # required
     #     allow_unauthenticated_identities: false, # required
+    #     allow_classic_flow: false,
     #     supported_login_providers: {
     #       "IdentityProviderName" => "IdentityProviderId",
     #     },
@@ -355,6 +365,7 @@ module Aws::CognitoIdentity
     #   resp.identity_pool_id #=> String
     #   resp.identity_pool_name #=> String
     #   resp.allow_unauthenticated_identities #=> Boolean
+    #   resp.allow_classic_flow #=> Boolean
     #   resp.supported_login_providers #=> Hash
     #   resp.supported_login_providers["IdentityProviderName"] #=> String
     #   resp.developer_provider_name #=> String
@@ -487,6 +498,7 @@ module Aws::CognitoIdentity
     #   * {Types::IdentityPool#identity_pool_id #identity_pool_id} => String
     #   * {Types::IdentityPool#identity_pool_name #identity_pool_name} => String
     #   * {Types::IdentityPool#allow_unauthenticated_identities #allow_unauthenticated_identities} => Boolean
+    #   * {Types::IdentityPool#allow_classic_flow #allow_classic_flow} => Boolean
     #   * {Types::IdentityPool#supported_login_providers #supported_login_providers} => Hash&lt;String,String&gt;
     #   * {Types::IdentityPool#developer_provider_name #developer_provider_name} => String
     #   * {Types::IdentityPool#open_id_connect_provider_arns #open_id_connect_provider_arns} => Array&lt;String&gt;
@@ -505,6 +517,7 @@ module Aws::CognitoIdentity
     #   resp.identity_pool_id #=> String
     #   resp.identity_pool_name #=> String
     #   resp.allow_unauthenticated_identities #=> Boolean
+    #   resp.allow_classic_flow #=> Boolean
     #   resp.supported_login_providers #=> Hash
     #   resp.supported_login_providers["IdentityProviderName"] #=> String
     #   resp.developer_provider_name #=> String
@@ -786,6 +799,11 @@ module Aws::CognitoIdentity
     #   expiration time for a token, as there are significant security
     #   implications: an attacker could use a leaked token to access your AWS
     #   resources for the token's duration.
+    #
+    #   <note markdown="1"> Please provide for a small grace period, usually no more than 5
+    #   minutes, to account for clock skew.
+    #
+    #    </note>
     #
     # @return [Types::GetOpenIdTokenForDeveloperIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1163,7 +1181,7 @@ module Aws::CognitoIdentity
     #   The Amazon Resource Name (ARN) of the identity pool to assign the tags
     #   to.
     #
-    # @option params [Hash<String,String>] :tags
+    # @option params [required, Hash<String,String>] :tags
     #   The tags to assign to the identity pool.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1172,7 +1190,7 @@ module Aws::CognitoIdentity
     #
     #   resp = client.tag_resource({
     #     resource_arn: "ARNString", # required
-    #     tags: {
+    #     tags: { # required
     #       "TagKeysType" => "TagValueType",
     #     },
     #   })
@@ -1272,7 +1290,7 @@ module Aws::CognitoIdentity
     #   The Amazon Resource Name (ARN) of the identity pool that the tags are
     #   assigned to.
     #
-    # @option params [Array<String>] :tag_keys
+    # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to remove from the user pool.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1281,7 +1299,7 @@ module Aws::CognitoIdentity
     #
     #   resp = client.untag_resource({
     #     resource_arn: "ARNString", # required
-    #     tag_keys: ["TagKeysType"],
+    #     tag_keys: ["TagKeysType"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UntagResource AWS API Documentation
@@ -1305,6 +1323,15 @@ module Aws::CognitoIdentity
     #
     # @option params [required, Boolean] :allow_unauthenticated_identities
     #   TRUE if the identity pool supports unauthenticated logins.
+    #
+    # @option params [Boolean] :allow_classic_flow
+    #   Enables or disables the Basic (Classic) authentication flow. For more
+    #   information, see [Identity Pools (Federated Identities) Authentication
+    #   Flow][1] in the *Amazon Cognito Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html
     #
     # @option params [Hash<String,String>] :supported_login_providers
     #   Optional key:value pairs mapping provider names to provider app IDs.
@@ -1333,6 +1360,7 @@ module Aws::CognitoIdentity
     #   * {Types::IdentityPool#identity_pool_id #identity_pool_id} => String
     #   * {Types::IdentityPool#identity_pool_name #identity_pool_name} => String
     #   * {Types::IdentityPool#allow_unauthenticated_identities #allow_unauthenticated_identities} => Boolean
+    #   * {Types::IdentityPool#allow_classic_flow #allow_classic_flow} => Boolean
     #   * {Types::IdentityPool#supported_login_providers #supported_login_providers} => Hash&lt;String,String&gt;
     #   * {Types::IdentityPool#developer_provider_name #developer_provider_name} => String
     #   * {Types::IdentityPool#open_id_connect_provider_arns #open_id_connect_provider_arns} => Array&lt;String&gt;
@@ -1346,6 +1374,7 @@ module Aws::CognitoIdentity
     #     identity_pool_id: "IdentityPoolId", # required
     #     identity_pool_name: "IdentityPoolName", # required
     #     allow_unauthenticated_identities: false, # required
+    #     allow_classic_flow: false,
     #     supported_login_providers: {
     #       "IdentityProviderName" => "IdentityProviderId",
     #     },
@@ -1369,6 +1398,7 @@ module Aws::CognitoIdentity
     #   resp.identity_pool_id #=> String
     #   resp.identity_pool_name #=> String
     #   resp.allow_unauthenticated_identities #=> Boolean
+    #   resp.allow_classic_flow #=> Boolean
     #   resp.supported_login_providers #=> Hash
     #   resp.supported_login_providers["IdentityProviderName"] #=> String
     #   resp.developer_provider_name #=> String
@@ -1405,7 +1435,7 @@ module Aws::CognitoIdentity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentity'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1035,6 +1035,10 @@ module Aws::DynamoDB
 
     RestoreTableFromBackupInput.add_member(:target_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TargetTableName"))
     RestoreTableFromBackupInput.add_member(:backup_arn, Shapes::ShapeRef.new(shape: BackupArn, required: true, location_name: "BackupArn"))
+    RestoreTableFromBackupInput.add_member(:billing_mode_override, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingModeOverride"))
+    RestoreTableFromBackupInput.add_member(:global_secondary_index_override, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexOverride"))
+    RestoreTableFromBackupInput.add_member(:local_secondary_index_override, Shapes::ShapeRef.new(shape: LocalSecondaryIndexList, location_name: "LocalSecondaryIndexOverride"))
+    RestoreTableFromBackupInput.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughputOverride"))
     RestoreTableFromBackupInput.struct_class = Types::RestoreTableFromBackupInput
 
     RestoreTableFromBackupOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1044,6 +1048,10 @@ module Aws::DynamoDB
     RestoreTableToPointInTimeInput.add_member(:target_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TargetTableName"))
     RestoreTableToPointInTimeInput.add_member(:use_latest_restorable_time, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UseLatestRestorableTime"))
     RestoreTableToPointInTimeInput.add_member(:restore_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "RestoreDateTime"))
+    RestoreTableToPointInTimeInput.add_member(:billing_mode_override, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingModeOverride"))
+    RestoreTableToPointInTimeInput.add_member(:global_secondary_index_override, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexOverride"))
+    RestoreTableToPointInTimeInput.add_member(:local_secondary_index_override, Shapes::ShapeRef.new(shape: LocalSecondaryIndexList, location_name: "LocalSecondaryIndexOverride"))
+    RestoreTableToPointInTimeInput.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughputOverride"))
     RestoreTableToPointInTimeInput.struct_class = Types::RestoreTableToPointInTimeInput
 
     RestoreTableToPointInTimeOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1704,6 +1712,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TransactionCanceledException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -1720,6 +1729,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

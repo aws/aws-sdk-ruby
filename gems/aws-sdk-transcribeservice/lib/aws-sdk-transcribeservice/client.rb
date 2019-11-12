@@ -283,12 +283,12 @@ module Aws::TranscribeService
     #   endpoint that you are calling. The general form is
     #
     #   `
-    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
     #   `
     #
     #   For example:
     #
-    #   `https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -313,7 +313,7 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #   })
@@ -321,7 +321,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -402,7 +402,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
+    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -448,7 +448,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -507,7 +507,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].transcription_job_name #=> String
     #   resp.transcription_job_summaries[0].creation_time #=> Time
     #   resp.transcription_job_summaries[0].completion_time #=> Time
-    #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
+    #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT"
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
     #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -564,7 +564,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
+    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -612,9 +612,11 @@ module Aws::TranscribeService
     #   that allow Amazon Transcribe to put files in the bucket. For more
     #   information, see [Permissions Required for IAM User Roles][1].
     #
-    #   Amazon Transcribe uses the default Amazon S3 key for server-side
-    #   encryption of transcripts that are placed in your S3 bucket. You
-    #   can't specify your own encryption key.
+    #   You can specify an AWS Key Management Service (KMS) key to encrypt the
+    #   output of your transcription using the `OutputEncryptionKMSKeyId`
+    #   parameter. If you don't specify a KMS key, Amazon Transcribe uses the
+    #   default Amazon S3 key for server-side encryption of transcripts that
+    #   are placed in your S3 bucket.
     #
     #   If you don't set the `OutputBucketName`, Amazon Transcribe generates
     #   a pre-signed URL, a shareable URL that provides secure access to your
@@ -626,6 +628,34 @@ module Aws::TranscribeService
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
     #
     # @option params [String] :output_encryption_kms_key_id
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS)
+    #   key used to encrypt the output of the transcription job. The user
+    #   calling the `StartTranscriptionJob` operation must have permission to
+    #   use the specified KMS key.
+    #
+    #   You can use either of the following to identify a KMS key in the
+    #   current account:
+    #
+    #   * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+    #
+    #   * KMS Key Alias: "alias/ExampleAlias"
+    #
+    #   You can use either of the following to identify a KMS key in the
+    #   current account or another account:
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     "arn:aws:kms:region:account
+    #     ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+    #
+    #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
+    #     ID:alias/ExampleAlias"
+    #
+    #   If you don't specify an encryption key, the output of the
+    #   transcription job is encrypted with the default Amazon S3 key
+    #   (SSE-S3).
+    #
+    #   If you specify a KMS key to encrypt your output, you must also specify
+    #   an output location in the `OutputBucketName` parameter.
     #
     # @option params [Types::Settings] :settings
     #   A `Settings` object that provides optional settings for a
@@ -639,7 +669,7 @@ module Aws::TranscribeService
     #
     #   resp = client.start_transcription_job({
     #     transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3", # accepts mp3, mp4, wav, flac
     #     media: { # required
@@ -659,7 +689,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
+    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -700,12 +730,12 @@ module Aws::TranscribeService
     #   endpoint that you are calling. The general form is
     #
     #   `
-    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
     #   `
     #
     #   For example:
     #
-    #   `https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -729,7 +759,7 @@ module Aws::TranscribeService
     #
     #   resp = client.update_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #   })
@@ -737,7 +767,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -763,7 +793,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

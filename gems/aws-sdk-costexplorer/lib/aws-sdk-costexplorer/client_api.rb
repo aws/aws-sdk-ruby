@@ -51,6 +51,8 @@ module Aws::CostExplorer
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GetCostAndUsageRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageRequest')
     GetCostAndUsageResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageResponse')
+    GetCostAndUsageWithResourcesRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageWithResourcesRequest')
+    GetCostAndUsageWithResourcesResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageWithResourcesResponse')
     GetCostForecastRequest = Shapes::StructureShape.new(name: 'GetCostForecastRequest')
     GetCostForecastResponse = Shapes::StructureShape.new(name: 'GetCostForecastResponse')
     GetDimensionValuesRequest = Shapes::StructureShape.new(name: 'GetDimensionValuesRequest')
@@ -318,6 +320,19 @@ module Aws::CostExplorer
     GetCostAndUsageResponse.add_member(:group_definitions, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupDefinitions"))
     GetCostAndUsageResponse.add_member(:results_by_time, Shapes::ShapeRef.new(shape: ResultsByTime, location_name: "ResultsByTime"))
     GetCostAndUsageResponse.struct_class = Types::GetCostAndUsageResponse
+
+    GetCostAndUsageWithResourcesRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetCostAndUsageWithResourcesRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
+    GetCostAndUsageWithResourcesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetCostAndUsageWithResourcesRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
+    GetCostAndUsageWithResourcesRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
+    GetCostAndUsageWithResourcesRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostAndUsageWithResourcesRequest.struct_class = Types::GetCostAndUsageWithResourcesRequest
+
+    GetCostAndUsageWithResourcesResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostAndUsageWithResourcesResponse.add_member(:group_definitions, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupDefinitions"))
+    GetCostAndUsageWithResourcesResponse.add_member(:results_by_time, Shapes::ShapeRef.new(shape: ResultsByTime, location_name: "ResultsByTime"))
+    GetCostAndUsageWithResourcesResponse.struct_class = Types::GetCostAndUsageWithResourcesResponse
 
     GetCostForecastRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetCostForecastRequest.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
@@ -797,6 +812,19 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BillExpirationException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
+      end)
+
+      api.add_operation(:get_cost_and_usage_with_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCostAndUsageWithResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCostAndUsageWithResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCostAndUsageWithResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BillExpirationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
       end)

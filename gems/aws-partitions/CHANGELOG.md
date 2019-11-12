@@ -1,6 +1,28 @@
 Unreleased Changes
 ------------------
 
+1.238.0 (2019-11-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MarketplaceCatalog`.
+
+1.237.0 (2019-11-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.236.0 (2019-11-07)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SSOOIDC`.
+
+* Feature - Added support for enumerating regions for `Aws::SSO`.
+
+1.235.0 (2019-11-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.234.0 (2019-11-06)
 ------------------
 

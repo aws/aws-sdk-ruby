@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2019-11-07)
+------------------
+
+* Feature - AWS Systems Manager Session Manager target length increased to 400.
+
 1.58.0 (2019-10-23)
 ------------------
 

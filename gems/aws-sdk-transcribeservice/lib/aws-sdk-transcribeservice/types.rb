@@ -23,9 +23,9 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # When you are using the `StartTranscriptionJob` operation, the
-    # `JobName` field is a duplicate of a previously entered job name.
-    # Resend your request with a different name.
+    # When you are using the `CreateVocabulary` operation, the `JobName`
+    # field is a duplicate of a previously entered job name. Resend your
+    # request with a different name.
     #
     # When you are using the `UpdateVocabulary` operation, there are two
     # jobs running at the same time. Resend the second request later.
@@ -45,7 +45,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #       }
@@ -69,12 +69,12 @@ module Aws::TranscribeService
     #   endpoint that you are calling. The general form is
     #
     #   `
-    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
     #   `
     #
     #   For example:
     #
-    #   `https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -437,14 +437,14 @@ module Aws::TranscribeService
     #   is:
     #
     #   `
-    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
     #   `
     #
     #   For example:
     #
-    #   `https://s3-us-east-1.amazonaws.com/examplebucket/example.mp4`
+    #   `https://s3.us-east-1.amazonaws.com/examplebucket/example.mp4`
     #
-    #   `https://s3-us-east-1.amazonaws.com/examplebucket/mediadocs/example.mp4`
+    #   `https://s3.us-east-1.amazonaws.com/examplebucket/mediadocs/example.mp4`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -541,7 +541,7 @@ module Aws::TranscribeService
     #
     #       {
     #         transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # accepts mp3, mp4, wav, flac
     #         media: { # required
@@ -597,9 +597,12 @@ module Aws::TranscribeService
     #   For more information, see [Permissions Required for IAM User
     #   Roles][1].
     #
-    #   Amazon Transcribe uses the default Amazon S3 key for server-side
-    #   encryption of transcripts that are placed in your S3 bucket. You
-    #   can't specify your own encryption key.
+    #   You can specify an AWS Key Management Service (KMS) key to encrypt
+    #   the output of your transcription using the
+    #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS
+    #   key, Amazon Transcribe uses the default Amazon S3 key for
+    #   server-side encryption of transcripts that are placed in your S3
+    #   bucket.
     #
     #   If you don't set the `OutputBucketName`, Amazon Transcribe
     #   generates a pre-signed URL, a shareable URL that provides secure
@@ -613,6 +616,34 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] output_encryption_kms_key_id
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (KMS) key used to encrypt the output of the transcription job. The
+    #   user calling the `StartTranscriptionJob` operation must have
+    #   permission to use the specified KMS key.
+    #
+    #   You can use either of the following to identify a KMS key in the
+    #   current account:
+    #
+    #   * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+    #
+    #   * KMS Key Alias: "alias/ExampleAlias"
+    #
+    #   You can use either of the following to identify a KMS key in the
+    #   current account or another account:
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     "arn:aws:kms:region:account
+    #     ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+    #
+    #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
+    #     ID:alias/ExampleAlias"
+    #
+    #   If you don't specify an encryption key, the output of the
+    #   transcription job is encrypted with the default Amazon S3 key
+    #   (SSE-S3).
+    #
+    #   If you specify a KMS key to encrypt your output, you must also
+    #   specify an output location in the `OutputBucketName` parameter.
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -829,7 +860,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #       }
@@ -852,12 +883,12 @@ module Aws::TranscribeService
     #   endpoint that you are calling. The general form is
     #
     #   `
-    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
     #   `
     #
     #   For example:
     #
-    #   `https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.

@@ -262,6 +262,7 @@ module Aws::CodePipeline
     #         ],
     #         role_arn: "RoleArn",
     #         region: "AWSRegionName",
+    #         namespace: "ActionNamespace",
     #       }
     #
     # @!attribute [rw] name
@@ -319,6 +320,11 @@ module Aws::CodePipeline
     #   The action declaration's AWS Region, such as us-east-1.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The variable namespace associated with the action. All variables
+    #   produced as output by this action fall under this namespace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionDeclaration AWS API Documentation
     #
     class ActionDeclaration < Struct.new(
@@ -329,7 +335,8 @@ module Aws::CodePipeline
       :output_artifacts,
       :input_artifacts,
       :role_arn,
-      :region)
+      :region,
+      :namespace)
       include Aws::Structure
     end
 
@@ -483,6 +490,11 @@ module Aws::CodePipeline
     #   Configuration data for an action execution.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] resolved_configuration
+    #   Configuration data for an action execution with all variable
+    #   references replaced with their real values for the execution.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM service role that performs the declared action.
     #   This is assumed through the roleArn for the pipeline.
@@ -497,14 +509,21 @@ module Aws::CodePipeline
     #   action execution.
     #   @return [Array<Types::ArtifactDetail>]
     #
+    # @!attribute [rw] namespace
+    #   The variable namespace associated with the action. All variables
+    #   produced as output by this action fall under this namespace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionInput AWS API Documentation
     #
     class ActionExecutionInput < Struct.new(
       :action_type_id,
       :configuration,
+      :resolved_configuration,
       :role_arn,
       :region,
-      :input_artifacts)
+      :input_artifacts,
+      :namespace)
       include Aws::Structure
     end
 
@@ -521,11 +540,17 @@ module Aws::CodePipeline
     #   action execution.
     #   @return [Types::ActionExecutionResult]
     #
+    # @!attribute [rw] output_variables
+    #   The outputVariables field shows the key-value pairs that were output
+    #   as part of that execution.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionOutput AWS API Documentation
     #
     class ActionExecutionOutput < Struct.new(
       :output_artifacts,
-      :execution_result)
+      :execution_result,
+      :output_variables)
       include Aws::Structure
     end
 
@@ -1194,6 +1219,7 @@ module Aws::CodePipeline
     #                   ],
     #                   role_arn: "RoleArn",
     #                   region: "AWSRegionName",
+    #                   namespace: "ActionNamespace",
     #                 },
     #               ],
     #             },
@@ -2399,6 +2425,18 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Exceeded the total size limit for all variables in the pipeline.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/OutputVariablesSizeExceededException AWS API Documentation
+    #
+    class OutputVariablesSizeExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents information about a pipeline to a job worker.
     #
     # <note markdown="1"> PipelineContext contains `pipelineArn` and `pipelineExecutionId` for
@@ -2501,6 +2539,7 @@ module Aws::CodePipeline
     #                 ],
     #                 role_arn: "RoleArn",
     #                 region: "AWSRegionName",
+    #                 namespace: "ActionNamespace",
     #               },
     #             ],
     #           },
@@ -2988,6 +3027,9 @@ module Aws::CodePipeline
     #           external_execution_id: "ExecutionId",
     #           percent_complete: 1,
     #         },
+    #         output_variables: {
+    #           "OutputVariablesKey" => "OutputVariablesValue",
+    #         },
     #       }
     #
     # @!attribute [rw] job_id
@@ -3014,13 +3056,21 @@ module Aws::CodePipeline
     #   taken by the job worker.
     #   @return [Types::ExecutionDetails]
     #
+    # @!attribute [rw] output_variables
+    #   Key-value pairs produced as output by a job worker that can be made
+    #   available to a downstream action configuration. `outputVariables`
+    #   can be included only when there is no continuation token on the
+    #   request.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobSuccessResultInput AWS API Documentation
     #
     class PutJobSuccessResultInput < Struct.new(
       :job_id,
       :current_revision,
       :continuation_token,
-      :execution_details)
+      :execution_details,
+      :output_variables)
       include Aws::Structure
     end
 
@@ -3387,6 +3437,7 @@ module Aws::CodePipeline
     #             ],
     #             role_arn: "RoleArn",
     #             region: "AWSRegionName",
+    #             namespace: "ActionNamespace",
     #           },
     #         ],
     #       }
@@ -3810,6 +3861,7 @@ module Aws::CodePipeline
     #                   ],
     #                   role_arn: "RoleArn",
     #                   region: "AWSRegionName",
+    #                   namespace: "ActionNamespace",
     #                 },
     #               ],
     #             },

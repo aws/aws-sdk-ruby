@@ -121,9 +121,9 @@ module Aws::CloudFormation
     #   related events. You can find your SNS topic ARNs using the SNS console
     #   or your Command Line Interface (CLI).
     # @option options [Array<String>] :capabilities
-    #   In some cases, you must explicity acknowledge that your stack template
-    #   contains certain capabilities in order for AWS CloudFormation to
-    #   create the stack.
+    #   In some cases, you must explicitly acknowledge that your stack
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to create the stack.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2019-11-08)
+------------------
+
+* Feature - This release contains ticket fixes for Amazon ECR.
+
 1.22.0 (2019-10-28)
 ------------------
 

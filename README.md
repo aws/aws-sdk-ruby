@@ -361,6 +361,7 @@ to be backwards compatible.
 | AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS License Manager                                   | Aws::LicenseManager                  | aws-sdk-licensemanager                  | 2018-08-01  |
+| AWS Marketplace Catalog Service                       | Aws::MarketplaceCatalog              | aws-sdk-marketplacecatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
 | AWS MediaConnect                                      | Aws::MediaConnect                    | aws-sdk-mediaconnect                    | 2018-11-14  |
@@ -378,6 +379,7 @@ to be backwards compatible.
 | AWS Resource Groups Tagging API                       | Aws::ResourceGroupsTaggingAPI        | aws-sdk-resourcegroupstaggingapi        | 2017-01-26  |
 | AWS RoboMaker                                         | Aws::RoboMaker                       | aws-sdk-robomaker                       | 2018-06-29  |
 | AWS S3 Control                                        | Aws::S3Control                       | aws-sdk-s3control                       | 2018-08-20  |
+| AWS SSO OIDC                                          | Aws::SSOOIDC                         | aws-sdk-ssooidc                         | 2019-06-10  |
 | AWS Savings Plans                                     | Aws::SavingsPlans                    | aws-sdk-savingsplans                    | 2019-06-28  |
 | AWS Secrets Manager                                   | Aws::SecretsManager                  | aws-sdk-secretsmanager                  | 2017-10-17  |
 | AWS Security Token Service                            | Aws::STS                             | aws-sdk-core                            | 2011-06-15  |
@@ -386,6 +388,7 @@ to be backwards compatible.
 | AWS Service Catalog                                   | Aws::ServiceCatalog                  | aws-sdk-servicecatalog                  | 2015-12-10  |
 | AWS Shield                                            | Aws::Shield                          | aws-sdk-shield                          | 2016-06-02  |
 | AWS Signer                                            | Aws::Signer                          | aws-sdk-signer                          | 2017-08-25  |
+| AWS Single Sign-On                                    | Aws::SSO                             | aws-sdk-sso                             | 2019-06-10  |
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |

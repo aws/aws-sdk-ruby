@@ -61,9 +61,7 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] type
-    #   The type of action. Each rule must include exactly one of the
-    #   following types of actions: `forward`, `fixed-response`, or
-    #   `redirect`.
+    #   The type of action.
     #   @return [String]
     #
     # @!attribute [rw] target_group_arn
@@ -86,8 +84,9 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] order
     #   The order for the action. This value is required for rules with
     #   multiple actions. The action with the lowest value for order is
-    #   performed first. The final action to be performed must be a
-    #   `forward` or a `fixed-response` action.
+    #   performed first. The last action to be performed must be one of the
+    #   following types of actions: a `forward`, `fixed-response`, or
+    #   `redirect`.
     #   @return [Integer]
     #
     # @!attribute [rw] redirect_config
@@ -671,7 +670,7 @@ module Aws::ElasticLoadBalancingV2
     #   The nodes of an internal load balancer have only private IP
     #   addresses. The DNS name of an internal load balancer is publicly
     #   resolvable to the private IP addresses of the nodes. Therefore,
-    #   internal load balancers can only route requests from clients with
+    #   internal load balancers can route requests only from clients with
     #   access to the VPC for the load balancer.
     #
     #   The default is an Internet-facing load balancer.
@@ -821,7 +820,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] actions
     #   The actions. Each rule must include exactly one of the following
-    #   types of actions: `forward`, `fixed-response`, or `redirect`.
+    #   types of actions: `forward`, `fixed-response`, or `redirect`, and it
+    #   must be the last action to be performed.
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an
@@ -1901,7 +1901,7 @@ module Aws::ElasticLoadBalancingV2
     #   The nodes of an internal load balancer have only private IP
     #   addresses. The DNS name of an internal load balancer is publicly
     #   resolvable to the private IP addresses of the nodes. Therefore,
-    #   internal load balancers can only route requests from clients with
+    #   internal load balancers can route requests only from clients with
     #   access to the VPC for the load balancer.
     #   @return [String]
     #
@@ -2006,6 +2006,11 @@ module Aws::ElasticLoadBalancingV2
     #   * `idle_timeout.timeout_seconds` - The idle timeout value, in
     #     seconds. The valid range is 1-4000 seconds. The default is 60
     #     seconds.
+    #
+    #   * `routing.http.drop_invalid_header_fields.enabled` - Indicates
+    #     whether HTTP headers with invalid header fields are removed by the
+    #     load balancer (`true`) or routed to targets (`false`). The default
+    #     is `true`.
     #
     #   * `routing.http2.enabled` - Indicates whether HTTP/2 is enabled. The
     #     value is `true` or `false`. The default is `true`.
@@ -2364,7 +2369,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] actions
     #   The actions. Each rule must include exactly one of the following
-    #   types of actions: `forward`, `fixed-response`, or `redirect`.
+    #   types of actions: `forward`, `fixed-response`, or `redirect`, and it
+    #   must be the last action to be performed.
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an
@@ -2475,8 +2481,7 @@ module Aws::ElasticLoadBalancingV2
     #   protocol of the target group is TCP, TLS, UDP, or TCP\_UDP. The TLS,
     #   UDP, and TCP\_UDP protocols are not supported for health checks.
     #
-    #   If the protocol of the target group is TCP, you can't modify this
-    #   setting.
+    #   With Network Load Balancers, you can't modify this setting.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
@@ -2499,16 +2504,14 @@ module Aws::ElasticLoadBalancingV2
     #   to 300 seconds. For Network Load Balancers, the supported values are
     #   10 or 30 seconds.
     #
-    #   If the protocol of the target group is TCP, you can't modify this
-    #   setting.
+    #   With Network Load Balancers, you can't modify this setting.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
     #   \[HTTP/HTTPS health checks\] The amount of time, in seconds, during
     #   which no response means a failed health check.
     #
-    #   If the protocol of the target group is TCP, you can't modify this
-    #   setting.
+    #   With Network Load Balancers, you can't modify this setting.
     #   @return [Integer]
     #
     # @!attribute [rw] healthy_threshold_count
@@ -2526,8 +2529,7 @@ module Aws::ElasticLoadBalancingV2
     #   \[HTTP/HTTPS health checks\] The HTTP codes to use when checking for
     #   a successful response from a target.
     #
-    #   If the protocol of the target group is TCP, you can't modify this
-    #   setting.
+    #   With Network Load Balancers, you can't modify this setting.
     #   @return [Types::Matcher]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupInput AWS API Documentation
@@ -3332,7 +3334,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port on which the target is listening.
+    #   The port on which the target is listening. Not used if the target is
+    #   a Lambda function.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
@@ -3381,7 +3384,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port on which the targets are listening.
+    #   The port on which the targets are listening. Not used if the target
+    #   is a Lambda function.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_id
@@ -3569,16 +3573,17 @@ module Aws::ElasticLoadBalancingV2
     #   the following values:
     #
     #   * `Target.ResponseCodeMismatch` - The health checks did not return
-    #     an expected HTTP code.
+    #     an expected HTTP code. Applies only to Application Load Balancers.
     #
-    #   * `Target.Timeout` - The health check requests timed out.
+    #   * `Target.Timeout` - The health check requests timed out. Applies
+    #     only to Application Load Balancers.
     #
     #   * `Target.FailedHealthChecks` - The load balancer received an error
     #     while establishing a connection to the target or the target
     #     response was malformed.
     #
     #   * `Elb.InternalError` - The health checks failed due to an internal
-    #     error.
+    #     error. Applies only to Application Load Balancers.
     #
     #   If the target state is `unused`, the reason code can be one of the
     #   following values:
@@ -3590,11 +3595,11 @@ module Aws::ElasticLoadBalancingV2
     #     balancer or the target is in an Availability Zone that is not
     #     enabled for its load balancer.
     #
-    #   * `Target.IpUnusable` - The target IP address is reserved for use by
-    #     a load balancer.
-    #
     #   * `Target.InvalidState` - The target is in the stopped or terminated
     #     state.
+    #
+    #   * `Target.IpUnusable` - The target IP address is reserved for use by
+    #     a load balancer.
     #
     #   If the target state is `draining`, the reason code can be the
     #   following value:
@@ -3609,9 +3614,10 @@ module Aws::ElasticLoadBalancingV2
     #   following value:
     #
     #   * `Target.HealthCheckDisabled` - Health checks are disabled for the
-    #     target group.
+    #     target group. Applies only to Application Load Balancers.
     #
-    #   ^
+    #   * `Elb.InternalError` - Target health is unavailable due to an
+    #     internal error. Applies only to Network Load Balancers.
     #   @return [String]
     #
     # @!attribute [rw] description

@@ -188,15 +188,23 @@ module Aws::CloudFormation
     ResourceChange = Shapes::StructureShape.new(name: 'ResourceChange')
     ResourceChangeDetail = Shapes::StructureShape.new(name: 'ResourceChangeDetail')
     ResourceChangeDetails = Shapes::ListShape.new(name: 'ResourceChangeDetails')
+    ResourceIdentifierProperties = Shapes::MapShape.new(name: 'ResourceIdentifierProperties')
+    ResourceIdentifierPropertyKey = Shapes::StringShape.new(name: 'ResourceIdentifierPropertyKey')
+    ResourceIdentifierPropertyValue = Shapes::StringShape.new(name: 'ResourceIdentifierPropertyValue')
+    ResourceIdentifierSummaries = Shapes::ListShape.new(name: 'ResourceIdentifierSummaries')
+    ResourceIdentifierSummary = Shapes::StructureShape.new(name: 'ResourceIdentifierSummary')
+    ResourceIdentifiers = Shapes::ListShape.new(name: 'ResourceIdentifiers')
     ResourceProperties = Shapes::StringShape.new(name: 'ResourceProperties')
     ResourceSignalStatus = Shapes::StringShape.new(name: 'ResourceSignalStatus')
     ResourceSignalUniqueId = Shapes::StringShape.new(name: 'ResourceSignalUniqueId')
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
     ResourceStatusReason = Shapes::StringShape.new(name: 'ResourceStatusReason')
     ResourceTargetDefinition = Shapes::StructureShape.new(name: 'ResourceTargetDefinition')
+    ResourceToImport = Shapes::StructureShape.new(name: 'ResourceToImport')
     ResourceToSkip = Shapes::StringShape.new(name: 'ResourceToSkip')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
+    ResourcesToImport = Shapes::ListShape.new(name: 'ResourcesToImport')
     ResourcesToSkip = Shapes::ListShape.new(name: 'ResourcesToSkip')
     RetainResources = Shapes::ListShape.new(name: 'RetainResources')
     RetainStacks = Shapes::BooleanShape.new(name: 'RetainStacks')
@@ -363,6 +371,7 @@ module Aws::CloudFormation
     CreateChangeSetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
     CreateChangeSetInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateChangeSetInput.add_member(:change_set_type, Shapes::ShapeRef.new(shape: ChangeSetType, location_name: "ChangeSetType"))
+    CreateChangeSetInput.add_member(:resources_to_import, Shapes::ShapeRef.new(shape: ResourcesToImport, location_name: "ResourcesToImport"))
     CreateChangeSetInput.struct_class = Types::CreateChangeSetInput
 
     CreateChangeSetOutput.add_member(:id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "Id"))
@@ -614,6 +623,7 @@ module Aws::CloudFormation
     GetTemplateSummaryOutput.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "Version"))
     GetTemplateSummaryOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     GetTemplateSummaryOutput.add_member(:declared_transforms, Shapes::ShapeRef.new(shape: TransformsList, location_name: "DeclaredTransforms"))
+    GetTemplateSummaryOutput.add_member(:resource_identifier_summaries, Shapes::ShapeRef.new(shape: ResourceIdentifierSummaries, location_name: "ResourceIdentifierSummaries"))
     GetTemplateSummaryOutput.struct_class = Types::GetTemplateSummaryOutput
 
     Imports.member = Shapes::ShapeRef.new(shape: StackName)
@@ -762,12 +772,31 @@ module Aws::CloudFormation
 
     ResourceChangeDetails.member = Shapes::ShapeRef.new(shape: ResourceChangeDetail)
 
+    ResourceIdentifierProperties.key = Shapes::ShapeRef.new(shape: ResourceIdentifierPropertyKey)
+    ResourceIdentifierProperties.value = Shapes::ShapeRef.new(shape: ResourceIdentifierPropertyValue)
+
+    ResourceIdentifierSummaries.member = Shapes::ShapeRef.new(shape: ResourceIdentifierSummary)
+
+    ResourceIdentifierSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ResourceIdentifierSummary.add_member(:logical_resource_ids, Shapes::ShapeRef.new(shape: LogicalResourceIds, location_name: "LogicalResourceIds"))
+    ResourceIdentifierSummary.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifiers, location_name: "ResourceIdentifiers"))
+    ResourceIdentifierSummary.struct_class = Types::ResourceIdentifierSummary
+
+    ResourceIdentifiers.member = Shapes::ShapeRef.new(shape: ResourceIdentifierPropertyKey)
+
     ResourceTargetDefinition.add_member(:attribute, Shapes::ShapeRef.new(shape: ResourceAttribute, location_name: "Attribute"))
     ResourceTargetDefinition.add_member(:name, Shapes::ShapeRef.new(shape: PropertyName, location_name: "Name"))
     ResourceTargetDefinition.add_member(:requires_recreation, Shapes::ShapeRef.new(shape: RequiresRecreation, location_name: "RequiresRecreation"))
     ResourceTargetDefinition.struct_class = Types::ResourceTargetDefinition
 
+    ResourceToImport.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    ResourceToImport.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "LogicalResourceId"))
+    ResourceToImport.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifierProperties, required: true, location_name: "ResourceIdentifier"))
+    ResourceToImport.struct_class = Types::ResourceToImport
+
     ResourceTypes.member = Shapes::ShapeRef.new(shape: ResourceType)
+
+    ResourcesToImport.member = Shapes::ShapeRef.new(shape: ResourceToImport)
 
     ResourcesToSkip.member = Shapes::ShapeRef.new(shape: ResourceToSkip)
 
