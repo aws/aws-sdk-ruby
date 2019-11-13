@@ -194,6 +194,10 @@
     "models": "dlm/2018-01-12",
     "endpoint": "dlm"
   },
+  "DataExchange": {
+    "models": "dataexchange/2017-07-25",
+    "endpoint": "dataexchange"
+  },
   "DataPipeline": {
     "models": "datapipeline/2012-10-29",
     "endpoint": "datapipeline"
@@ -640,6 +644,10 @@
   },
   "SES": {
     "models": "email/2010-12-01",
+    "endpoint": "email"
+  },
+  "SESV2": {
+    "models": "sesv2/2019-09-27",
     "endpoint": "email"
   },
   "SMS": {

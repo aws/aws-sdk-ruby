@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudSearch - Updated the API, documentation, and integration test for Amazon CloudSearch.
+
+* Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::DataExchange - Added support for a new service, AWS Data Exchange.
+
+* Feature - Aws::SESV2 - Added support for a new service, Amazon Simple Email Service.
+
 2.11.396 (2019-11-12)
 ------------------
 

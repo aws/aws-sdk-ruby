@@ -72,6 +72,7 @@ module Aws
     CostandUsageReportService
     DAX
     DLM
+    DataExchange
     DataPipeline
     DataSync
     DatabaseMigrationService
@@ -184,6 +185,7 @@ module Aws
     S3
     S3Control
     SES
+    SESV2
     SMS
     SNS
     SQS
