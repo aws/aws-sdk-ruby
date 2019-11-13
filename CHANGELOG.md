@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.397 (2019-11-13)
+------------------
+
 * Feature - Aws::CloudSearch - Updated the API, documentation, and integration test for Amazon CloudSearch.
 
 * Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
