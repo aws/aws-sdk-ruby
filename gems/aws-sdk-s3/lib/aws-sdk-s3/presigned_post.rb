@@ -585,6 +585,10 @@ module Aws
         else
           url.path = '/' + @bucket_name
         end
+        if @bucket_region == 'us-east-1'
+          # keep legacy behavior by default
+          url.host = Plugins::IADRegionalEndpoint.legacy_host(url.host)
+        end
         url.to_s
       end
 

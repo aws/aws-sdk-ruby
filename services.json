@@ -527,6 +527,7 @@
       "Aws::Plugins::SignatureV4"
     ],
     "addPlugins": [
+      "Aws::S3::Plugins::IADRegionalEndpoint",
       "Aws::S3::Plugins::Accelerate",
       "Aws::S3::Plugins::Dualstack",
       "Aws::S3::Plugins::BucketDns",

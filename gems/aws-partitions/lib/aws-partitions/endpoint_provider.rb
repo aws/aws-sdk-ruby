@@ -25,6 +25,12 @@ module Aws
         us-west-2
       )
 
+      # Can be removed once S3 endpoint is updated
+      S3_IAD_REGIONAL = {
+        "hostname" => "s3.us-east-1.amazonaws.com",
+        "signatureVersions" => [ "s3", "s3v4" ]
+      }
+
       # Intentionally marked private. The format of the endpoint rules
       # is an implementation detail.
       # @api private
@@ -39,7 +45,7 @@ module Aws
       #   legacy regions) or `regional` mode for using regional endpoint for supported regions
       #   except 'aws-global'
       # @api private Use the static class methods instead.
-      def resolve(region, service, sts_regional_endpoints = nil)
+      def resolve(region, service, sts_regional_endpoints)
         "https://" + endpoint_for(region, service, sts_regional_endpoints)
       end
 
@@ -78,6 +84,11 @@ module Aws
         # Check for global endpoint.
         if sts_legacy || service_cfg["isRegionalized"] == false
           region = service_cfg.fetch("partitionEndpoint", region)
+        end
+
+        # Can be removed once S3 endpoint is updated
+        if (service == 's3') && (region == "us-east-1")
+          service_cfg["endpoints"][region] = S3_IAD_REGIONAL
         end
 
         # Check for service/region level endpoint.
@@ -121,7 +132,11 @@ module Aws
 
       class << self
 
-        def resolve(region, service, sts_regional_endpoints = nil)
+        def resolve(
+          region,
+          service,
+          sts_regional_endpoints = 'legacy'
+        )
           default_provider.resolve(region, service, sts_regional_endpoints)
         end
 

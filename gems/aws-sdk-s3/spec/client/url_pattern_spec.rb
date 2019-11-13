@@ -17,7 +17,8 @@ module Aws
             region: suite['Region'],
             force_path_style: path_style,
             use_dualstack_endpoint: suite['UseDualstack'],
-            use_accelerate_endpoint: suite['UseS3Accelerate']
+            use_accelerate_endpoint: suite['UseS3Accelerate'],
+            s3_us_east_1_regional_endpoint: suite['S3RegionalEndpoint']
           )
           resp = client.list_objects(bucket: suite['Bucket'])
           expect(resp.context.http_request.endpoint.to_s)
