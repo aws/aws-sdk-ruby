@@ -160,6 +160,9 @@
   "DLM": {
     "models": "dlm/2018-01-12"
   },
+  "DataExchange": {
+    "models": "dataexchange/2017-07-25"
+  },
   "DataPipeline": {
     "models": "datapipeline/2012-10-29"
   },
@@ -561,6 +564,9 @@
   },
   "SES": {
     "models": "email/2010-12-01"
+  },
+  "SESV2": {
+    "models": "sesv2/2019-09-27"
   },
   "SMS": {
     "models": "sms/2016-10-24"

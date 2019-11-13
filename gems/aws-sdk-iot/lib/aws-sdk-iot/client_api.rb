@@ -95,6 +95,7 @@ module Aws::IoT
     AuthorizerSummary = Shapes::StructureShape.new(name: 'AuthorizerSummary')
     Authorizers = Shapes::ListShape.new(name: 'Authorizers')
     AutoRegistrationStatus = Shapes::StringShape.new(name: 'AutoRegistrationStatus')
+    Average = Shapes::FloatShape.new(name: 'Average')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsArn = Shapes::StringShape.new(name: 'AwsArn')
     AwsIotJobArn = Shapes::StringShape.new(name: 'AwsIotJobArn')
@@ -355,6 +356,10 @@ module Aws::IoT
     FailedChecksCount = Shapes::IntegerShape.new(name: 'FailedChecksCount')
     FailedFindingsCount = Shapes::IntegerShape.new(name: 'FailedFindingsCount')
     FailedThings = Shapes::IntegerShape.new(name: 'FailedThings')
+    Field = Shapes::StructureShape.new(name: 'Field')
+    FieldName = Shapes::StringShape.new(name: 'FieldName')
+    FieldType = Shapes::StringShape.new(name: 'FieldType')
+    Fields = Shapes::ListShape.new(name: 'Fields')
     FileId = Shapes::IntegerShape.new(name: 'FileId')
     FileLocation = Shapes::StructureShape.new(name: 'FileLocation')
     FileName = Shapes::StringShape.new(name: 'FileName')
@@ -370,6 +375,8 @@ module Aws::IoT
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GEMaxResults = Shapes::IntegerShape.new(name: 'GEMaxResults')
     GenerationId = Shapes::StringShape.new(name: 'GenerationId')
+    GetCardinalityRequest = Shapes::StructureShape.new(name: 'GetCardinalityRequest')
+    GetCardinalityResponse = Shapes::StructureShape.new(name: 'GetCardinalityResponse')
     GetEffectivePoliciesRequest = Shapes::StructureShape.new(name: 'GetEffectivePoliciesRequest')
     GetEffectivePoliciesResponse = Shapes::StructureShape.new(name: 'GetEffectivePoliciesResponse')
     GetIndexingConfigurationRequest = Shapes::StructureShape.new(name: 'GetIndexingConfigurationRequest')
@@ -380,6 +387,8 @@ module Aws::IoT
     GetLoggingOptionsResponse = Shapes::StructureShape.new(name: 'GetLoggingOptionsResponse')
     GetOTAUpdateRequest = Shapes::StructureShape.new(name: 'GetOTAUpdateRequest')
     GetOTAUpdateResponse = Shapes::StructureShape.new(name: 'GetOTAUpdateResponse')
+    GetPercentilesRequest = Shapes::StructureShape.new(name: 'GetPercentilesRequest')
+    GetPercentilesResponse = Shapes::StructureShape.new(name: 'GetPercentilesResponse')
     GetPolicyRequest = Shapes::StructureShape.new(name: 'GetPolicyRequest')
     GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
     GetPolicyVersionRequest = Shapes::StructureShape.new(name: 'GetPolicyVersionRequest')
@@ -548,11 +557,13 @@ module Aws::IoT
     Marker = Shapes::StringShape.new(name: 'Marker')
     MaxJobExecutionsPerMin = Shapes::IntegerShape.new(name: 'MaxJobExecutionsPerMin')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    Maximum = Shapes::FloatShape.new(name: 'Maximum')
     MaximumPerMinute = Shapes::IntegerShape.new(name: 'MaximumPerMinute')
     Message = Shapes::StringShape.new(name: 'Message')
     MessageFormat = Shapes::StringShape.new(name: 'MessageFormat')
     MessageId = Shapes::StringShape.new(name: 'MessageId')
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
+    Minimum = Shapes::FloatShape.new(name: 'Minimum')
     MinimumNumberOfExecutedThings = Shapes::IntegerShape.new(name: 'MinimumNumberOfExecutedThings')
     MissingContextValue = Shapes::StringShape.new(name: 'MissingContextValue')
     MissingContextValues = Shapes::ListShape.new(name: 'MissingContextValues')
@@ -592,7 +603,12 @@ module Aws::IoT
     Parameters = Shapes::MapShape.new(name: 'Parameters')
     PartitionKey = Shapes::StringShape.new(name: 'PartitionKey')
     PayloadField = Shapes::StringShape.new(name: 'PayloadField')
+    Percent = Shapes::FloatShape.new(name: 'Percent')
+    PercentList = Shapes::ListShape.new(name: 'PercentList')
+    PercentPair = Shapes::StructureShape.new(name: 'PercentPair')
+    PercentValue = Shapes::FloatShape.new(name: 'PercentValue')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
+    Percentiles = Shapes::ListShape.new(name: 'Percentiles')
     Platform = Shapes::StringShape.new(name: 'Platform')
     Policies = Shapes::ListShape.new(name: 'Policies')
     Policy = Shapes::StructureShape.new(name: 'Policy')
@@ -747,6 +763,7 @@ module Aws::IoT
     StatisticalThreshold = Shapes::StructureShape.new(name: 'StatisticalThreshold')
     Statistics = Shapes::StructureShape.new(name: 'Statistics')
     Status = Shapes::StringShape.new(name: 'Status')
+    StdDeviation = Shapes::FloatShape.new(name: 'StdDeviation')
     StepFunctionsAction = Shapes::StructureShape.new(name: 'StepFunctionsAction')
     StopThingRegistrationTaskRequest = Shapes::StructureShape.new(name: 'StopThingRegistrationTaskRequest')
     StopThingRegistrationTaskResponse = Shapes::StructureShape.new(name: 'StopThingRegistrationTaskResponse')
@@ -765,6 +782,8 @@ module Aws::IoT
     StringMap = Shapes::MapShape.new(name: 'StringMap')
     SucceededFindingsCount = Shapes::IntegerShape.new(name: 'SucceededFindingsCount')
     SucceededThings = Shapes::IntegerShape.new(name: 'SucceededThings')
+    Sum = Shapes::FloatShape.new(name: 'Sum')
+    SumOfSquares = Shapes::FloatShape.new(name: 'SumOfSquares')
     TableName = Shapes::StringShape.new(name: 'TableName')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -888,6 +907,7 @@ module Aws::IoT
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     ValidationErrors = Shapes::ListShape.new(name: 'ValidationErrors')
     Value = Shapes::StringShape.new(name: 'Value')
+    Variance = Shapes::FloatShape.new(name: 'Variance')
     Version = Shapes::IntegerShape.new(name: 'Version')
     VersionConflictException = Shapes::StructureShape.new(name: 'VersionConflictException')
     VersionNumber = Shapes::IntegerShape.new(name: 'VersionNumber')
@@ -1913,6 +1933,12 @@ module Aws::IoT
     ExponentialRolloutRate.add_member(:rate_increase_criteria, Shapes::ShapeRef.new(shape: RateIncreaseCriteria, required: true, location_name: "rateIncreaseCriteria"))
     ExponentialRolloutRate.struct_class = Types::ExponentialRolloutRate
 
+    Field.add_member(:name, Shapes::ShapeRef.new(shape: FieldName, location_name: "name"))
+    Field.add_member(:type, Shapes::ShapeRef.new(shape: FieldType, location_name: "type"))
+    Field.struct_class = Types::Field
+
+    Fields.member = Shapes::ShapeRef.new(shape: Field)
+
     FileLocation.add_member(:stream, Shapes::ShapeRef.new(shape: Stream, location_name: "stream"))
     FileLocation.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
     FileLocation.struct_class = Types::FileLocation
@@ -1923,6 +1949,15 @@ module Aws::IoT
     FirehoseAction.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "deliveryStreamName"))
     FirehoseAction.add_member(:separator, Shapes::ShapeRef.new(shape: FirehoseSeparator, location_name: "separator"))
     FirehoseAction.struct_class = Types::FirehoseAction
+
+    GetCardinalityRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
+    GetCardinalityRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
+    GetCardinalityRequest.add_member(:aggregation_field, Shapes::ShapeRef.new(shape: AggregationField, location_name: "aggregationField"))
+    GetCardinalityRequest.add_member(:query_version, Shapes::ShapeRef.new(shape: QueryVersion, location_name: "queryVersion"))
+    GetCardinalityRequest.struct_class = Types::GetCardinalityRequest
+
+    GetCardinalityResponse.add_member(:cardinality, Shapes::ShapeRef.new(shape: Count, location_name: "cardinality"))
+    GetCardinalityResponse.struct_class = Types::GetCardinalityResponse
 
     GetEffectivePoliciesRequest.add_member(:principal, Shapes::ShapeRef.new(shape: Principal, location_name: "principal"))
     GetEffectivePoliciesRequest.add_member(:cognito_identity_pool_id, Shapes::ShapeRef.new(shape: CognitoIdentityPoolId, location_name: "cognitoIdentityPoolId"))
@@ -1955,6 +1990,16 @@ module Aws::IoT
 
     GetOTAUpdateResponse.add_member(:ota_update_info, Shapes::ShapeRef.new(shape: OTAUpdateInfo, location_name: "otaUpdateInfo"))
     GetOTAUpdateResponse.struct_class = Types::GetOTAUpdateResponse
+
+    GetPercentilesRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
+    GetPercentilesRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
+    GetPercentilesRequest.add_member(:aggregation_field, Shapes::ShapeRef.new(shape: AggregationField, location_name: "aggregationField"))
+    GetPercentilesRequest.add_member(:query_version, Shapes::ShapeRef.new(shape: QueryVersion, location_name: "queryVersion"))
+    GetPercentilesRequest.add_member(:percents, Shapes::ShapeRef.new(shape: PercentList, location_name: "percents"))
+    GetPercentilesRequest.struct_class = Types::GetPercentilesRequest
+
+    GetPercentilesResponse.add_member(:percentiles, Shapes::ShapeRef.new(shape: Percentiles, location_name: "percentiles"))
+    GetPercentilesResponse.struct_class = Types::GetPercentilesResponse
 
     GetPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location: "uri", location_name: "policyName"))
     GetPolicyRequest.struct_class = Types::GetPolicyRequest
@@ -2666,6 +2711,14 @@ module Aws::IoT
     Parameters.key = Shapes::ShapeRef.new(shape: Parameter)
     Parameters.value = Shapes::ShapeRef.new(shape: Value)
 
+    PercentList.member = Shapes::ShapeRef.new(shape: Percent)
+
+    PercentPair.add_member(:percent, Shapes::ShapeRef.new(shape: Percent, location_name: "percent"))
+    PercentPair.add_member(:value, Shapes::ShapeRef.new(shape: PercentValue, location_name: "value"))
+    PercentPair.struct_class = Types::PercentPair
+
+    Percentiles.member = Shapes::ShapeRef.new(shape: PercentPair)
+
     Policies.member = Shapes::ShapeRef.new(shape: Policy)
 
     Policy.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
@@ -2966,6 +3019,13 @@ module Aws::IoT
     StatisticalThreshold.struct_class = Types::StatisticalThreshold
 
     Statistics.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "count"))
+    Statistics.add_member(:average, Shapes::ShapeRef.new(shape: Average, location_name: "average", metadata: {"box"=>true}))
+    Statistics.add_member(:sum, Shapes::ShapeRef.new(shape: Sum, location_name: "sum", metadata: {"box"=>true}))
+    Statistics.add_member(:minimum, Shapes::ShapeRef.new(shape: Minimum, location_name: "minimum", metadata: {"box"=>true}))
+    Statistics.add_member(:maximum, Shapes::ShapeRef.new(shape: Maximum, location_name: "maximum", metadata: {"box"=>true}))
+    Statistics.add_member(:sum_of_squares, Shapes::ShapeRef.new(shape: SumOfSquares, location_name: "sumOfSquares", metadata: {"box"=>true}))
+    Statistics.add_member(:variance, Shapes::ShapeRef.new(shape: Variance, location_name: "variance", metadata: {"box"=>true}))
+    Statistics.add_member(:std_deviation, Shapes::ShapeRef.new(shape: StdDeviation, location_name: "stdDeviation", metadata: {"box"=>true}))
     Statistics.struct_class = Types::Statistics
 
     StepFunctionsAction.add_member(:execution_name_prefix, Shapes::ShapeRef.new(shape: ExecutionNamePrefix, location_name: "executionNamePrefix"))
@@ -3105,6 +3165,8 @@ module Aws::IoT
     ThingGroupDocumentList.member = Shapes::ShapeRef.new(shape: ThingGroupDocument)
 
     ThingGroupIndexingConfiguration.add_member(:thing_group_indexing_mode, Shapes::ShapeRef.new(shape: ThingGroupIndexingMode, required: true, location_name: "thingGroupIndexingMode"))
+    ThingGroupIndexingConfiguration.add_member(:managed_fields, Shapes::ShapeRef.new(shape: Fields, location_name: "managedFields"))
+    ThingGroupIndexingConfiguration.add_member(:custom_fields, Shapes::ShapeRef.new(shape: Fields, location_name: "customFields"))
     ThingGroupIndexingConfiguration.struct_class = Types::ThingGroupIndexingConfiguration
 
     ThingGroupList.member = Shapes::ShapeRef.new(shape: ThingGroupName)
@@ -3126,6 +3188,8 @@ module Aws::IoT
 
     ThingIndexingConfiguration.add_member(:thing_indexing_mode, Shapes::ShapeRef.new(shape: ThingIndexingMode, required: true, location_name: "thingIndexingMode"))
     ThingIndexingConfiguration.add_member(:thing_connectivity_indexing_mode, Shapes::ShapeRef.new(shape: ThingConnectivityIndexingMode, location_name: "thingConnectivityIndexingMode"))
+    ThingIndexingConfiguration.add_member(:managed_fields, Shapes::ShapeRef.new(shape: Fields, location_name: "managedFields"))
+    ThingIndexingConfiguration.add_member(:custom_fields, Shapes::ShapeRef.new(shape: Fields, location_name: "customFields"))
     ThingIndexingConfiguration.struct_class = Types::ThingIndexingConfiguration
 
     ThingNameList.member = Shapes::ShapeRef.new(shape: ThingName)
@@ -4542,6 +4606,23 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ConflictingResourceUpdateException)
       end)
 
+      api.add_operation(:get_cardinality, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCardinality"
+        o.http_method = "POST"
+        o.http_request_uri = "/indices/cardinality"
+        o.input = Shapes::ShapeRef.new(shape: GetCardinalityRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCardinalityResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAggregationException)
+        o.errors << Shapes::ShapeRef.new(shape: IndexNotReadyException)
+      end)
+
       api.add_operation(:get_effective_policies, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEffectivePolicies"
         o.http_method = "POST"
@@ -4605,6 +4686,23 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_percentiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPercentiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/indices/percentiles"
+        o.input = Shapes::ShapeRef.new(shape: GetPercentilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPercentilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAggregationException)
+        o.errors << Shapes::ShapeRef.new(shape: IndexNotReadyException)
       end)
 
       api.add_operation(:get_policy, Seahorse::Model::Operation.new.tap do |o|

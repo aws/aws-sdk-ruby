@@ -493,7 +493,8 @@ module Aws::IoT
     #   The name of the thing.
     #
     # @option params [required, String] :principal
-    #   The principal, such as a certificate or other credential.
+    #   The principal, which can be a certificate ARN (as returned from the
+    #   CreateCertificate operation) or an Amazon Cognito ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1595,11 +1596,7 @@ module Aws::IoT
     # Creates a stream for delivering one or more large files in chunks over
     # MQTT. A stream transports data bytes in chunks or blocks packaged as
     # MQTT messages from a source like S3. You can have one or more files
-    # associated with a stream. The total size of a file associated with the
-    # stream cannot exceed more than 2 MB. The stream will be created with
-    # version 0. If a stream is created with the same streamID as a stream
-    # that existed and was deleted within last 90 days, we will resurrect
-    # that old stream by incrementing the version by 1.
+    # associated with a stream.
     #
     # @option params [required, String] :stream_id
     #   The stream ID.
@@ -3794,6 +3791,45 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Returns the number of things with distinct values for the aggregation
+    # field.
+    #
+    # @option params [String] :index_name
+    #   The name of the index to search.
+    #
+    # @option params [required, String] :query_string
+    #   The search query.
+    #
+    # @option params [String] :aggregation_field
+    #   The field to aggregate.
+    #
+    # @option params [String] :query_version
+    #   The query version.
+    #
+    # @return [Types::GetCardinalityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCardinalityResponse#cardinality #cardinality} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cardinality({
+    #     index_name: "IndexName",
+    #     query_string: "QueryString", # required
+    #     aggregation_field: "AggregationField",
+    #     query_version: "QueryVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cardinality #=> Integer
+    #
+    # @overload get_cardinality(params = {})
+    # @param [Hash] params ({})
+    def get_cardinality(params = {}, options = {})
+      req = build_request(:get_cardinality, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the policies that have an effect on the authorization
     # behavior of the specified device when it connects to the AWS IoT
     # device gateway.
@@ -3844,7 +3880,19 @@ module Aws::IoT
     #
     #   resp.thing_indexing_configuration.thing_indexing_mode #=> String, one of "OFF", "REGISTRY", "REGISTRY_AND_SHADOW"
     #   resp.thing_indexing_configuration.thing_connectivity_indexing_mode #=> String, one of "OFF", "STATUS"
+    #   resp.thing_indexing_configuration.managed_fields #=> Array
+    #   resp.thing_indexing_configuration.managed_fields[0].name #=> String
+    #   resp.thing_indexing_configuration.managed_fields[0].type #=> String, one of "Number", "String", "Boolean"
+    #   resp.thing_indexing_configuration.custom_fields #=> Array
+    #   resp.thing_indexing_configuration.custom_fields[0].name #=> String
+    #   resp.thing_indexing_configuration.custom_fields[0].type #=> String, one of "Number", "String", "Boolean"
     #   resp.thing_group_indexing_configuration.thing_group_indexing_mode #=> String, one of "OFF", "ON"
+    #   resp.thing_group_indexing_configuration.managed_fields #=> Array
+    #   resp.thing_group_indexing_configuration.managed_fields[0].name #=> String
+    #   resp.thing_group_indexing_configuration.managed_fields[0].type #=> String, one of "Number", "String", "Boolean"
+    #   resp.thing_group_indexing_configuration.custom_fields #=> Array
+    #   resp.thing_group_indexing_configuration.custom_fields[0].name #=> String
+    #   resp.thing_group_indexing_configuration.custom_fields[0].type #=> String, one of "Number", "String", "Boolean"
     #
     # @overload get_indexing_configuration(params = {})
     # @param [Hash] params ({})
@@ -3964,6 +4012,53 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Returns the percentile values for the aggregation field. The results
+    # from GetPercentiles is an approximation. The default percentile
+    # groupings are: 1,5,25,50,75,95,99. You can specify custom percentile
+    # grouping using the percents argument to the GetPercentiles API.
+    #
+    # @option params [String] :index_name
+    #   The name of the index to search.
+    #
+    # @option params [required, String] :query_string
+    #   The query string.
+    #
+    # @option params [String] :aggregation_field
+    #   The field to aggregate.
+    #
+    # @option params [String] :query_version
+    #   The query version.
+    #
+    # @option params [Array<Float>] :percents
+    #   The percentile groups returned.
+    #
+    # @return [Types::GetPercentilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPercentilesResponse#percentiles #percentiles} => Array&lt;Types::PercentPair&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_percentiles({
+    #     index_name: "IndexName",
+    #     query_string: "QueryString", # required
+    #     aggregation_field: "AggregationField",
+    #     query_version: "QueryVersion",
+    #     percents: [1.0],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.percentiles #=> Array
+    #   resp.percentiles[0].percent #=> Float
+    #   resp.percentiles[0].value #=> Float
+    #
+    # @overload get_percentiles(params = {})
+    # @param [Hash] params ({})
+    def get_percentiles(params = {}, options = {})
+      req = build_request(:get_percentiles, params)
+      req.send_request(options)
+    end
+
     # Gets information about the specified policy with the policy document
     # of the default version.
     #
@@ -4065,7 +4160,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Gets statistics about things that match the specified query.
+    # Gets statistics returns the count, average, sum, minimum, maximum,
+    # sumOfSquares, variance, and standard deviation for the specified
+    # aggregated field. If the aggregation field is of type String, only the
+    # count statistic is returned.
     #
     # @option params [String] :index_name
     #   The name of the index to search. The default value is `AWS_Things`.
@@ -4075,7 +4173,7 @@ module Aws::IoT
     #   to get the count of all indexed things in your AWS account.
     #
     # @option params [String] :aggregation_field
-    #   The aggregation field name. Currently not supported.
+    #   The aggregation field name.
     #
     # @option params [String] :query_version
     #   The version of the query used to search.
@@ -4096,6 +4194,13 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.statistics.count #=> Integer
+    #   resp.statistics.average #=> Float
+    #   resp.statistics.sum #=> Float
+    #   resp.statistics.minimum #=> Float
+    #   resp.statistics.maximum #=> Float
+    #   resp.statistics.sum_of_squares #=> Float
+    #   resp.statistics.variance #=> Float
+    #   resp.statistics.std_deviation #=> Float
     #
     # @overload get_statistics(params = {})
     # @param [Hash] params ({})
@@ -6327,7 +6432,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Provisions a thing.
+    # Provisions a thing in the device registry. RegisterThing calls other
+    # AWS IoT control plane APIs. These calls might exceed your account
+    # level [ AWS IoT Throttling Limits][1] and cause throttle errors.
+    # Please contact [AWS Customer Support][2] to raise your throttling
+    # limits if necessary.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot
+    # [2]: https://console.aws.amazon.com/support/home
     #
     # @option params [required, String] :template_body
     #   The provisioning template. See [Programmatic Provisioning][1] for more
@@ -7584,9 +7698,33 @@ module Aws::IoT
     #     thing_indexing_configuration: {
     #       thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #       thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
+    #       managed_fields: [
+    #         {
+    #           name: "FieldName",
+    #           type: "Number", # accepts Number, String, Boolean
+    #         },
+    #       ],
+    #       custom_fields: [
+    #         {
+    #           name: "FieldName",
+    #           type: "Number", # accepts Number, String, Boolean
+    #         },
+    #       ],
     #     },
     #     thing_group_indexing_configuration: {
     #       thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
+    #       managed_fields: [
+    #         {
+    #           name: "FieldName",
+    #           type: "Number", # accepts Number, String, Boolean
+    #         },
+    #       ],
+    #       custom_fields: [
+    #         {
+    #           name: "FieldName",
+    #           type: "Number", # accepts Number, String, Boolean
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -8185,7 +8323,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

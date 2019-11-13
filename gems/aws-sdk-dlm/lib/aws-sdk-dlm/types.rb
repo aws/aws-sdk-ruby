@@ -54,6 +54,9 @@ module Aws::DLM
     #             exclude_boot_volume: false,
     #           },
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] execution_role_arn
@@ -72,9 +75,11 @@ module Aws::DLM
     #
     # @!attribute [rw] policy_details
     #   The configuration details of the lifecycle policy.
-    #
-    #   Target tags cannot be re-used across lifecycle policies.
     #   @return [Types::PolicyDetails]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the lifecycle policy during creation.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CreateLifecyclePolicyRequest AWS API Documentation
     #
@@ -82,7 +87,8 @@ module Aws::DLM
       :execution_role_arn,
       :description,
       :state,
-      :policy_details)
+      :policy_details,
+      :tags)
       include Aws::Structure
     end
 
@@ -302,6 +308,10 @@ module Aws::DLM
     #   The activation state of the lifecycle policy.
     #   @return [String]
     #
+    # @!attribute [rw] status_message
+    #   The description of the status.
+    #   @return [String]
+    #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role used to run the
     #   operations specified by the lifecycle policy.
@@ -319,16 +329,27 @@ module Aws::DLM
     #   The configuration of the lifecycle policy
     #   @return [Types::PolicyDetails]
     #
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN) of the policy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LifecyclePolicy AWS API Documentation
     #
     class LifecyclePolicy < Struct.new(
       :policy_id,
       :description,
       :state,
+      :status_message,
       :execution_role_arn,
       :date_created,
       :date_modified,
-      :policy_details)
+      :policy_details,
+      :tags,
+      :policy_arn)
       include Aws::Structure
     end
 
@@ -346,12 +367,17 @@ module Aws::DLM
     #   The activation state of the lifecycle policy.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LifecyclePolicySummary AWS API Documentation
     #
     class LifecyclePolicySummary < Struct.new(
       :policy_id,
       :description,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -373,6 +399,35 @@ module Aws::DLM
       :message,
       :code,
       :resource_type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "PolicyArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Information about the tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -624,6 +679,64 @@ module Aws::DLM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "PolicyArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "PolicyArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateLifecyclePolicyRequest
     #   data as a hash:
     #
@@ -691,9 +804,8 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] policy_details
-    #   The configuration of the lifecycle policy.
-    #
-    #   Target tags cannot be re-used across policies.
+    #   The configuration of the lifecycle policy. You cannot update the
+    #   policy type or the resource type.
     #   @return [Types::PolicyDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/UpdateLifecyclePolicyRequest AWS API Documentation

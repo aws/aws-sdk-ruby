@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.59.0 (2019-11-13)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sesv2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-dataexchange` gem.
+
 3.58.0 (2019-11-12)
 ------------------
 

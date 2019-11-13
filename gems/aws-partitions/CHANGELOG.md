@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.239.0 (2019-11-13)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SESV2`.
+
+* Feature - Added support for enumerating regions for `Aws::DataExchange`.
+
 * Feature - Added support for S3 IAD regional endpoint.
 
 1.238.0 (2019-11-12)

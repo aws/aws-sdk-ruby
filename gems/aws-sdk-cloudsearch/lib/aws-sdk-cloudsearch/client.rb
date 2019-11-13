@@ -1106,6 +1106,51 @@ module Aws::CloudSearch
       req.send_request(options)
     end
 
+    # Returns the domain's endpoint options, specifically whether all
+    # requests to the domain must arrive over HTTPS. For more information,
+    # see [Configuring Domain Endpoint Options][1] in the *Amazon
+    # CloudSearch Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html
+    #
+    # @option params [required, String] :domain_name
+    #   A string that represents the name of a domain.
+    #
+    # @option params [Boolean] :deployed
+    #   Whether to retrieve the latest configuration (which might be in a
+    #   Processing state) or the current, active configuration. Defaults to
+    #   `false`.
+    #
+    # @return [Types::DescribeDomainEndpointOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDomainEndpointOptionsResponse#domain_endpoint_options #domain_endpoint_options} => Types::DomainEndpointOptionsStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_domain_endpoint_options({
+    #     domain_name: "DomainName", # required
+    #     deployed: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_endpoint_options.options.enforce_https #=> Boolean
+    #   resp.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_endpoint_options.status.creation_date #=> Time
+    #   resp.domain_endpoint_options.status.update_date #=> Time
+    #   resp.domain_endpoint_options.status.update_version #=> Integer
+    #   resp.domain_endpoint_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
+    #   resp.domain_endpoint_options.status.pending_deletion #=> Boolean
+    #
+    # @overload describe_domain_endpoint_options(params = {})
+    # @param [Hash] params ({})
+    def describe_domain_endpoint_options(params = {}, options = {})
+      req = build_request(:describe_domain_endpoint_options, params)
+      req.send_request(options)
+    end
+
     # Gets information about the search domains owned by this account. Can
     # be limited to specific domains. Shows all domains by default. To get
     # the number of searchable documents in a domain, use the console or
@@ -1564,6 +1609,55 @@ module Aws::CloudSearch
       req.send_request(options)
     end
 
+    # Updates the domain's endpoint options, specifically whether all
+    # requests to the domain must arrive over HTTPS. For more information,
+    # see [Configuring Domain Endpoint Options][1] in the *Amazon
+    # CloudSearch Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html
+    #
+    # @option params [required, String] :domain_name
+    #   A string that represents the name of a domain.
+    #
+    # @option params [required, Types::DomainEndpointOptions] :domain_endpoint_options
+    #   Whether to require that all requests to the domain arrive over HTTPS.
+    #   We recommend Policy-Min-TLS-1-2-2019-07 for TLSSecurityPolicy. For
+    #   compatibility with older clients, the default is
+    #   Policy-Min-TLS-1-0-2019-07.
+    #
+    # @return [Types::UpdateDomainEndpointOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDomainEndpointOptionsResponse#domain_endpoint_options #domain_endpoint_options} => Types::DomainEndpointOptionsStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_domain_endpoint_options({
+    #     domain_name: "DomainName", # required
+    #     domain_endpoint_options: { # required
+    #       enforce_https: false,
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_endpoint_options.options.enforce_https #=> Boolean
+    #   resp.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_endpoint_options.status.creation_date #=> Time
+    #   resp.domain_endpoint_options.status.update_date #=> Time
+    #   resp.domain_endpoint_options.status.update_version #=> Integer
+    #   resp.domain_endpoint_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
+    #   resp.domain_endpoint_options.status.pending_deletion #=> Boolean
+    #
+    # @overload update_domain_endpoint_options(params = {})
+    # @param [Hash] params ({})
+    def update_domain_endpoint_options(params = {}, options = {})
+      req = build_request(:update_domain_endpoint_options, params)
+      req.send_request(options)
+    end
+
     # Configures scaling parameters for a domain. A domain's scaling
     # parameters specify the desired search instance type and replication
     # count. Amazon CloudSearch will still automatically scale your domain
@@ -1678,7 +1772,7 @@ module Aws::CloudSearch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudsearch'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

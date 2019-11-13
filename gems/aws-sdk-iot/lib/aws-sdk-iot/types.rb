@@ -614,7 +614,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The principal, such as a certificate or other credential.
+    #   The principal, which can be a certificate ARN (as returned from the
+    #   CreateCertificate operation) or an Amazon Cognito ID.
     #   @return [String]
     #
     class AttachThingPrincipalRequest < Struct.new(
@@ -5503,6 +5504,30 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Describes the name and data type at a field.
+    #
+    # @note When making an API call, you may pass Field
+    #   data as a hash:
+    #
+    #       {
+    #         name: "FieldName",
+    #         type: "Number", # accepts Number, String, Boolean
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The datatype of the field.
+    #   @return [String]
+    #
+    class Field < Struct.new(
+      :name,
+      :type)
+      include Aws::Structure
+    end
+
     # The location of the OTA update.
     #
     # @note When making an API call, you may pass FileLocation
@@ -5565,6 +5590,49 @@ module Aws::IoT
       :role_arn,
       :delivery_stream_name,
       :separator)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCardinalityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "IndexName",
+    #         query_string: "QueryString", # required
+    #         aggregation_field: "AggregationField",
+    #         query_version: "QueryVersion",
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The search query.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_field
+    #   The field to aggregate.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The query version.
+    #   @return [String]
+    #
+    class GetCardinalityRequest < Struct.new(
+      :index_name,
+      :query_string,
+      :aggregation_field,
+      :query_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cardinality
+    #   The number of things that match the query.
+    #   @return [Integer]
+    #
+    class GetCardinalityResponse < Struct.new(
+      :cardinality)
       include Aws::Structure
     end
 
@@ -5695,6 +5763,55 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetPercentilesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "IndexName",
+    #         query_string: "QueryString", # required
+    #         aggregation_field: "AggregationField",
+    #         query_version: "QueryVersion",
+    #         percents: [1.0],
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The query string.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_field
+    #   The field to aggregate.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The query version.
+    #   @return [String]
+    #
+    # @!attribute [rw] percents
+    #   The percentile groups returned.
+    #   @return [Array<Float>]
+    #
+    class GetPercentilesRequest < Struct.new(
+      :index_name,
+      :query_string,
+      :aggregation_field,
+      :query_version,
+      :percents)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] percentiles
+    #   The percentile values of the aggregated fields.
+    #   @return [Array<Types::PercentPair>]
+    #
+    class GetPercentilesResponse < Struct.new(
+      :percentiles)
+      include Aws::Structure
+    end
+
     # The input for the GetPolicy operation.
     #
     # @note When making an API call, you may pass GetPolicyRequest
@@ -5801,11 +5918,11 @@ module Aws::IoT
     #   @return [Boolean]
     #
     # @!attribute [rw] creation_date
-    #   The date the policy version was created.
+    #   The date the policy was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_date
-    #   The date the policy version was last modified.
+    #   The date the policy was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] generation_id
@@ -5861,7 +5978,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] aggregation_field
-    #   The aggregation field name. Currently not supported.
+    #   The aggregation field name.
     #   @return [String]
     #
     # @!attribute [rw] query_version
@@ -9205,6 +9322,22 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Describes the percentile and percentile value.
+    #
+    # @!attribute [rw] percent
+    #   The percentile.
+    #   @return [Float]
+    #
+    # @!attribute [rw] value
+    #   The value.
+    #   @return [Float]
+    #
+    class PercentPair < Struct.new(
+      :percent,
+      :value)
+      include Aws::Structure
+    end
+
     # Describes an AWS IoT policy.
     #
     # @!attribute [rw] policy_name
@@ -9938,7 +10071,7 @@ module Aws::IoT
     #
     # @!attribute [rw] qos
     #   The Quality of Service (QoS) level to use when republishing
-    #   messages.
+    #   messages. The default value is 0.
     #   @return [Integer]
     #
     class RepublishAction < Struct.new(
@@ -10811,8 +10944,43 @@ module Aws::IoT
     #   The count of things that match the query.
     #   @return [Integer]
     #
+    # @!attribute [rw] average
+    #   The average of the aggregated field values.
+    #   @return [Float]
+    #
+    # @!attribute [rw] sum
+    #   The sum of the aggregated field values.
+    #   @return [Float]
+    #
+    # @!attribute [rw] minimum
+    #   The minimum aggregated field value.
+    #   @return [Float]
+    #
+    # @!attribute [rw] maximum
+    #   The maximum aggregated field value.
+    #   @return [Float]
+    #
+    # @!attribute [rw] sum_of_squares
+    #   The sum of the squares of the aggregated field values.
+    #   @return [Float]
+    #
+    # @!attribute [rw] variance
+    #   The variance of the aggregated field values.
+    #   @return [Float]
+    #
+    # @!attribute [rw] std_deviation
+    #   The standard deviation of the aggregated field valuesl
+    #   @return [Float]
+    #
     class Statistics < Struct.new(
-      :count)
+      :count,
+      :average,
+      :sum,
+      :minimum,
+      :maximum,
+      :sum_of_squares,
+      :variance,
+      :std_deviation)
       include Aws::Structure
     end
 
@@ -11390,14 +11558,37 @@ module Aws::IoT
     #
     #       {
     #         thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
+    #         managed_fields: [
+    #           {
+    #             name: "FieldName",
+    #             type: "Number", # accepts Number, String, Boolean
+    #           },
+    #         ],
+    #         custom_fields: [
+    #           {
+    #             name: "FieldName",
+    #             type: "Number", # accepts Number, String, Boolean
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] thing_group_indexing_mode
     #   Thing group indexing mode.
     #   @return [String]
     #
+    # @!attribute [rw] managed_fields
+    #   Contains fields that are indexed and whose types are already known
+    #   by the Fleet Indexing service.
+    #   @return [Array<Types::Field>]
+    #
+    # @!attribute [rw] custom_fields
+    #   Contains custom field names and their data type.
+    #   @return [Array<Types::Field>]
+    #
     class ThingGroupIndexingConfiguration < Struct.new(
-      :thing_group_indexing_mode)
+      :thing_group_indexing_mode,
+      :managed_fields,
+      :custom_fields)
       include Aws::Structure
     end
 
@@ -11464,6 +11655,18 @@ module Aws::IoT
     #       {
     #         thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #         thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
+    #         managed_fields: [
+    #           {
+    #             name: "FieldName",
+    #             type: "Number", # accepts Number, String, Boolean
+    #           },
+    #         ],
+    #         custom_fields: [
+    #           {
+    #             name: "FieldName",
+    #             type: "Number", # accepts Number, String, Boolean
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] thing_indexing_mode
@@ -11487,9 +11690,20 @@ module Aws::IoT
     #   * OFF - Thing connectivity status indexing is disabled.
     #   @return [String]
     #
+    # @!attribute [rw] managed_fields
+    #   Contains fields that are indexed and whose types are already known
+    #   by the Fleet Indexing service.
+    #   @return [Array<Types::Field>]
+    #
+    # @!attribute [rw] custom_fields
+    #   Contains custom field names and their data type.
+    #   @return [Array<Types::Field>]
+    #
     class ThingIndexingConfiguration < Struct.new(
       :thing_indexing_mode,
-      :thing_connectivity_indexing_mode)
+      :thing_connectivity_indexing_mode,
+      :managed_fields,
+      :custom_fields)
       include Aws::Structure
     end
 
@@ -12439,9 +12653,33 @@ module Aws::IoT
     #         thing_indexing_configuration: {
     #           thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #           thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
+    #           managed_fields: [
+    #             {
+    #               name: "FieldName",
+    #               type: "Number", # accepts Number, String, Boolean
+    #             },
+    #           ],
+    #           custom_fields: [
+    #             {
+    #               name: "FieldName",
+    #               type: "Number", # accepts Number, String, Boolean
+    #             },
+    #           ],
     #         },
     #         thing_group_indexing_configuration: {
     #           thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
+    #           managed_fields: [
+    #             {
+    #               name: "FieldName",
+    #               type: "Number", # accepts Number, String, Boolean
+    #             },
+    #           ],
+    #           custom_fields: [
+    #             {
+    #               name: "FieldName",
+    #               type: "Number", # accepts Number, String, Boolean
+    #             },
+    #           ],
     #         },
     #       }
     #

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2019-11-13)
+------------------
+
 * Feature - Support `:s3_us_east_1_regional_endpoint` with `regional` to enable IAD regional endpoint for S3.
 
 1.53.0 (2019-10-31)
