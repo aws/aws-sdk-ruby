@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.398 (2019-11-14)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
