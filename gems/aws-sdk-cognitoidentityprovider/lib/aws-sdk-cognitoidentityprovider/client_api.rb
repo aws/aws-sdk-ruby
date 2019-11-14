@@ -308,6 +308,7 @@ module Aws::CognitoIdentityProvider
     PreSignedUrlType = Shapes::StringShape.new(name: 'PreSignedUrlType')
     PrecedenceType = Shapes::IntegerShape.new(name: 'PrecedenceType')
     PreconditionNotMetException = Shapes::StructureShape.new(name: 'PreconditionNotMetException')
+    PreventUserExistenceErrorTypes = Shapes::StringShape.new(name: 'PreventUserExistenceErrorTypes')
     ProviderDescription = Shapes::StructureShape.new(name: 'ProviderDescription')
     ProviderDetailsType = Shapes::MapShape.new(name: 'ProviderDetailsType')
     ProviderNameType = Shapes::StringShape.new(name: 'ProviderNameType')
@@ -890,6 +891,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolClientRequest.add_member(:allowed_o_auth_scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedOAuthScopes"))
     CreateUserPoolClientRequest.add_member(:allowed_o_auth_flows_user_pool_client, Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient"))
     CreateUserPoolClientRequest.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
+    CreateUserPoolClientRequest.add_member(:prevent_user_existence_errors, Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
     CreateUserPoolClientRequest.struct_class = Types::CreateUserPoolClientRequest
 
     CreateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
@@ -1694,6 +1696,7 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolClientRequest.add_member(:allowed_o_auth_scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedOAuthScopes"))
     UpdateUserPoolClientRequest.add_member(:allowed_o_auth_flows_user_pool_client, Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient"))
     UpdateUserPoolClientRequest.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
+    UpdateUserPoolClientRequest.add_member(:prevent_user_existence_errors, Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
     UpdateUserPoolClientRequest.struct_class = Types::UpdateUserPoolClientRequest
 
     UpdateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
@@ -1792,6 +1795,7 @@ module Aws::CognitoIdentityProvider
     UserPoolClientType.add_member(:allowed_o_auth_scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedOAuthScopes"))
     UserPoolClientType.add_member(:allowed_o_auth_flows_user_pool_client, Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient", metadata: {"box"=>true}))
     UserPoolClientType.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
+    UserPoolClientType.add_member(:prevent_user_existence_errors, Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
     UserPoolClientType.struct_class = Types::UserPoolClientType
 
     UserPoolDescriptionType.add_member(:id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "Id"))

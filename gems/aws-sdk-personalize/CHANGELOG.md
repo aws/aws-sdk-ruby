@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2019-11-14)
+------------------
+
+* Feature - Amazon Personalize: Adds ability to get batch recommendations by creating a batch inference job.
+
 1.7.0 (2019-10-23)
 ------------------
 

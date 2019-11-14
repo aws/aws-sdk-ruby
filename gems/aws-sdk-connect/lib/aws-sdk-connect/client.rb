@@ -298,6 +298,9 @@ module Aws::Connect
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserResponse#user_id #user_id} => String
@@ -324,6 +327,9 @@ module Aws::Connect
     #     routing_profile_id: "RoutingProfileId", # required
     #     hierarchy_group_id: "HierarchyGroupId",
     #     instance_id: "InstanceId", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -366,7 +372,10 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Describes the specified user account.
+    # Describes the specified user account. You can find the instance ID in
+    # the console (it’s the final part of the ARN). The console does not
+    # display the user IDs. Instead, list the users and note the IDs
+    # provided in the output.
     #
     # @option params [required, String] :user_id
     #   The identifier of the user account.
@@ -402,6 +411,8 @@ module Aws::Connect
     #   resp.user.security_profile_ids[0] #=> String
     #   resp.user.routing_profile_id #=> String
     #   resp.user.hierarchy_group_id #=> String
+    #   resp.user.tags #=> Hash
+    #   resp.user.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUser AWS API Documentation
     #
@@ -1255,6 +1266,35 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists the tags for the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Provides summary information about the hierarchy groups for the
     # specified Amazon Connect instance.
     #
@@ -1440,6 +1480,63 @@ module Aws::Connect
     # @param [Hash] params ({})
     def stop_contact(params = {}, options = {})
       req = build_request(:stop_contact, params)
+      req.send_request(options)
+    end
+
+    # Adds the specified tags to the specified resource.
+    #
+    # The supported resource type is users.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   One or more tags. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ARN", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ARN", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1675,7 +1772,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

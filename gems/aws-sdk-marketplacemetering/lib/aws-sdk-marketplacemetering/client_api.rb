@@ -192,6 +192,7 @@ module Aws::MarketplaceMetering
         o.errors << Shapes::ShapeRef.new(shape: TimestampOutOfBoundsException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomerNotEntitledException)
       end)
 
       api.add_operation(:register_usage, Seahorse::Model::Operation.new.tap do |o|

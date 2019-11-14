@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2019-11-14)
+------------------
+
+* Feature - Updates support for adding attachments to Systems Manager Automation documents
+
 1.59.0 (2019-11-07)
 ------------------
 

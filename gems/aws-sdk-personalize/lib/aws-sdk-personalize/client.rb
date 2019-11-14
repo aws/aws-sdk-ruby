@@ -264,6 +264,71 @@ module Aws::Personalize
 
     # @!group API Operations
 
+    # Creates a batch inference job. The operation can handle up to 50
+    # million records and the input file must be in JSON format. For more
+    # information, see recommendations-batch.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the batch inference job to create.
+    #
+    # @option params [required, String] :solution_version_arn
+    #   The Amazon Resource Name (ARN) of the solution version that will be
+    #   used to generate the batch inference recommendations.
+    #
+    # @option params [Integer] :num_results
+    #   The number of recommendations to retreive.
+    #
+    # @option params [required, Types::BatchInferenceJobInput] :job_input
+    #   The Amazon S3 path that leads to the input file to base your
+    #   recommendations on. The input material must be in JSON format.
+    #
+    # @option params [required, Types::BatchInferenceJobOutput] :job_output
+    #   The path to the Amazon S3 bucket where the job's output will be
+    #   stored.
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of the Amazon Identity and Access Management role that has
+    #   permissions to read and write to your input and out Amazon S3 buckets
+    #   respectively.
+    #
+    # @return [Types::CreateBatchInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBatchInferenceJobResponse#batch_inference_job_arn #batch_inference_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_batch_inference_job({
+    #     job_name: "Name", # required
+    #     solution_version_arn: "Arn", # required
+    #     num_results: 1,
+    #     job_input: { # required
+    #       s3_data_source: { # required
+    #         path: "S3Location", # required
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #     },
+    #     job_output: { # required
+    #       s3_data_destination: { # required
+    #         path: "S3Location", # required
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_inference_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateBatchInferenceJob AWS API Documentation
+    #
+    # @overload create_batch_inference_job(params = {})
+    # @param [Hash] params ({})
+    def create_batch_inference_job(params = {}, options = {})
+      req = build_request(:create_batch_inference_job, params)
+      req.send_request(options)
+    end
+
     # Creates a campaign by deploying a solution version. When a client
     # calls the [GetRecommendations][1] and [GetPersonalizedRanking][2]
     # APIs, a campaign is specified in the request.
@@ -1168,6 +1233,48 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Gets the properties of a batch inference job including name, Amazon
+    # Resource Name (ARN), status, input and output configurations, and the
+    # ARN of the solution version used to generate the recommendations.
+    #
+    # @option params [required, String] :batch_inference_job_arn
+    #   The ARN of the batch inference job to describe.
+    #
+    # @return [Types::DescribeBatchInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBatchInferenceJobResponse#batch_inference_job #batch_inference_job} => Types::BatchInferenceJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_batch_inference_job({
+    #     batch_inference_job_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_inference_job.job_name #=> String
+    #   resp.batch_inference_job.batch_inference_job_arn #=> String
+    #   resp.batch_inference_job.failure_reason #=> String
+    #   resp.batch_inference_job.solution_version_arn #=> String
+    #   resp.batch_inference_job.num_results #=> Integer
+    #   resp.batch_inference_job.job_input.s3_data_source.path #=> String
+    #   resp.batch_inference_job.job_input.s3_data_source.kms_key_arn #=> String
+    #   resp.batch_inference_job.job_output.s3_data_destination.path #=> String
+    #   resp.batch_inference_job.job_output.s3_data_destination.kms_key_arn #=> String
+    #   resp.batch_inference_job.role_arn #=> String
+    #   resp.batch_inference_job.status #=> String
+    #   resp.batch_inference_job.creation_date_time #=> Time
+    #   resp.batch_inference_job.last_updated_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeBatchInferenceJob AWS API Documentation
+    #
+    # @overload describe_batch_inference_job(params = {})
+    # @param [Hash] params ({})
+    def describe_batch_inference_job(params = {}, options = {})
+      req = build_request(:describe_batch_inference_job, params)
+      req.send_request(options)
+    end
+
     # Describes the given campaign, including its status.
     #
     # A campaign can be in one of the following states:
@@ -1657,6 +1764,53 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Gets a list of the batch inference jobs that have been performed off
+    # of a solution version.
+    #
+    # @option params [String] :solution_version_arn
+    #   The Amazon Resource Name (ARN) of the solution version from which the
+    #   batch inference jobs were created.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of batch inference job results to return in each
+    #   page. The default value is 100.
+    #
+    # @return [Types::ListBatchInferenceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBatchInferenceJobsResponse#batch_inference_jobs #batch_inference_jobs} => Array&lt;Types::BatchInferenceJobSummary&gt;
+    #   * {Types::ListBatchInferenceJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_batch_inference_jobs({
+    #     solution_version_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_inference_jobs #=> Array
+    #   resp.batch_inference_jobs[0].batch_inference_job_arn #=> String
+    #   resp.batch_inference_jobs[0].job_name #=> String
+    #   resp.batch_inference_jobs[0].status #=> String
+    #   resp.batch_inference_jobs[0].creation_date_time #=> Time
+    #   resp.batch_inference_jobs[0].last_updated_date_time #=> Time
+    #   resp.batch_inference_jobs[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListBatchInferenceJobs AWS API Documentation
+    #
+    # @overload list_batch_inference_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_batch_inference_jobs(params = {}, options = {})
+      req = build_request(:list_batch_inference_jobs, params)
+      req.send_request(options)
+    end
+
     # Returns a list of campaigns that use the given solution. When a
     # solution is not specified, all the campaigns associated with the
     # account are listed. The response provides the properties for each
@@ -2142,7 +2296,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -789,32 +789,40 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # A key and value pair that identifies the location of an attachment to
-    # a document.
+    # Identifying information about a document attachment, including the
+    # file name and a key-value pair that identifies the location of an
+    # attachment to a document.
     #
     # @note When making an API call, you may pass AttachmentsSource
     #   data as a hash:
     #
     #       {
-    #         key: "SourceUrl", # accepts SourceUrl
+    #         key: "SourceUrl", # accepts SourceUrl, S3FileUrl
     #         values: ["AttachmentsSourceValue"],
+    #         name: "AttachmentIdentifier",
     #       }
     #
     # @!attribute [rw] key
-    #   The key of a key and value pair that identifies the location of an
+    #   The key of a key-value pair that identifies the location of an
     #   attachment to a document.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The URL of the location of a document attachment, such as the URL of
-    #   an Amazon S3 bucket.
+    #   The value of a key-value pair that identifies the location of an
+    #   attachment to a document. The format is the URL of the location of a
+    #   document attachment, such as the URL of an Amazon S3 bucket.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the document attachment file.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentsSource AWS API Documentation
     #
     class AttachmentsSource < Struct.new(
       :key,
-      :values)
+      :values,
+      :name)
       include Aws::Structure
     end
 
@@ -2591,8 +2599,9 @@ module Aws::SSM
     #         content: "DocumentContent", # required
     #         attachments: [
     #           {
-    #             key: "SourceUrl", # accepts SourceUrl
+    #             key: "SourceUrl", # accepts SourceUrl, S3FileUrl
     #             values: ["AttachmentsSourceValue"],
+    #             name: "AttachmentIdentifier",
     #           },
     #         ],
     #         name: "DocumentName", # required
@@ -9713,7 +9722,8 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   (Optional) One or more filters. Use a filter to return a more
-    #   specific list of results.
+    #   specific list of results. Note that the `DocumentName` filter is not
+    #   supported for ListCommandInvocations.
     #   @return [Array<Types::CommandFilter>]
     #
     # @!attribute [rw] details
@@ -12724,8 +12734,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] instance_id
-    #   One or more instance IDs where you want to add or update inventory
-    #   items.
+    #   An instance ID where you want to add or update inventory items.
     #   @return [String]
     #
     # @!attribute [rw] items
@@ -14948,9 +14957,21 @@ module Aws::SSM
     # * (Maintenance window targets only)
     #   `Key=resource-groups:Name,Values=ProductionResourceGroup`
     #
+    #   This example demonstrates how to target all resources in the
+    #   resource group **ProductionResourceGroup** in your maintenance
+    #   window.
+    #
     # * (Maintenance window targets only)
     #   `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
     #   `
+    #
+    #   This example demonstrates how to target only Amazon EC2 instances
+    #   and VPCs in your maintenance window.
+    #
+    # * (State Manager association targets only) `Key=InstanceIds,Values=* `
+    #
+    #   This example demonstrates how to target all managed instances in the
+    #   AWS Region where the association was created.
     #
     # For information about how to send commands that target instances using
     # `Key,Value` parameters, see [Using Targets and Rate Controls to Send
@@ -15473,8 +15494,9 @@ module Aws::SSM
     #         content: "DocumentContent", # required
     #         attachments: [
     #           {
-    #             key: "SourceUrl", # accepts SourceUrl
+    #             key: "SourceUrl", # accepts SourceUrl, S3FileUrl
     #             values: ["AttachmentsSourceValue"],
+    #             name: "AttachmentIdentifier",
     #           },
     #         ],
     #         name: "DocumentName", # required

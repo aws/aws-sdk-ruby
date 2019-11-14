@@ -72,6 +72,7 @@ module Aws::SSM
     AttachmentContentList = Shapes::ListShape.new(name: 'AttachmentContentList')
     AttachmentHash = Shapes::StringShape.new(name: 'AttachmentHash')
     AttachmentHashType = Shapes::StringShape.new(name: 'AttachmentHashType')
+    AttachmentIdentifier = Shapes::StringShape.new(name: 'AttachmentIdentifier')
     AttachmentInformation = Shapes::StructureShape.new(name: 'AttachmentInformation')
     AttachmentInformationList = Shapes::ListShape.new(name: 'AttachmentInformationList')
     AttachmentName = Shapes::StringShape.new(name: 'AttachmentName')
@@ -1163,6 +1164,7 @@ module Aws::SSM
 
     AttachmentsSource.add_member(:key, Shapes::ShapeRef.new(shape: AttachmentsSourceKey, location_name: "Key"))
     AttachmentsSource.add_member(:values, Shapes::ShapeRef.new(shape: AttachmentsSourceValues, location_name: "Values"))
+    AttachmentsSource.add_member(:name, Shapes::ShapeRef.new(shape: AttachmentIdentifier, location_name: "Name"))
     AttachmentsSource.struct_class = Types::AttachmentsSource
 
     AttachmentsSourceList.member = Shapes::ShapeRef.new(shape: AttachmentsSource)

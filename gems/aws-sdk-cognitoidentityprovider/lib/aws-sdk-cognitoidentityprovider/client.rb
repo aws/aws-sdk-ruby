@@ -975,6 +975,11 @@ module Aws::CognitoIdentityProvider
     #     set, this flow will invoke the user migration Lambda if the USERNAME
     #     is not found in the user pool.
     #
+    #   * `ADMIN_USER_PASSWORD_AUTH`\: Admin-based user password
+    #     authentication. This replaces the `ADMIN_NO_SRP_AUTH` authentication
+    #     flow. In this flow, Cognito receives the password in the request
+    #     instead of using the SRP process to verify passwords.
+    #
     # @option params [Hash<String,String>] :auth_parameters
     #   The authentication parameters. These are inputs corresponding to the
     #   `AuthFlow` that you are invoking. The required values depend on the
@@ -1079,7 +1084,7 @@ module Aws::CognitoIdentityProvider
     #   resp = client.admin_initiate_auth({
     #     user_pool_id: "UserPoolIdType", # required
     #     client_id: "ClientIdType", # required
-    #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH
+    #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH, ADMIN_USER_PASSWORD_AUTH
     #     auth_parameters: {
     #       "StringType" => "StringType",
     #     },
@@ -2126,14 +2131,14 @@ module Aws::CognitoIdentityProvider
     #
     #   You create custom workflows by assigning AWS Lambda functions to user
     #   pool triggers. When you use the ConfirmForgotPassword API action,
-    #   Amazon Cognito invokes the functions that are assigned to the *post
-    #   confirmation* and *pre mutation* triggers. When Amazon Cognito invokes
-    #   either of these functions, it passes a JSON payload, which the
-    #   function receives as input. This payload contains a `clientMetadata`
-    #   attribute, which provides the data that you assigned to the
-    #   ClientMetadata parameter in your ConfirmForgotPassword request. In
-    #   your function code in AWS Lambda, you can process the `clientMetadata`
-    #   value to enhance your workflow for your specific needs.
+    #   Amazon Cognito invokes the function that is assigned to the *post
+    #   confirmation* trigger. When Amazon Cognito invokes this function, it
+    #   passes a JSON payload, which the function receives as input. This
+    #   payload contains a `clientMetadata` attribute, which provides the data
+    #   that you assigned to the ClientMetadata parameter in your
+    #   ConfirmForgotPassword request. In your function code in AWS Lambda,
+    #   you can process the `clientMetadata` value to enhance your workflow
+    #   for your specific needs.
     #
     #   For more information, see [Customizing User Pool Workflows with Lambda
     #   Triggers][1] in the *Amazon Cognito Developer Guide*.
@@ -2826,7 +2831,29 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #
     # @option params [Array<String>] :explicit_auth_flows
-    #   The explicit authentication flows.
+    #   The authentication flows that are supported by the user pool clients.
+    #   Flow names without the `ALLOW_` prefix are deprecated in favor of new
+    #   names with the `ALLOW_` prefix. Note that values with `ALLOW_` prefix
+    #   cannot be used along with values without `ALLOW_` prefix.
+    #
+    #   Valid values include:
+    #
+    #   * `ALLOW_ADMIN_USER_PASSWORD_AUTH`\: Enable admin based user password
+    #     authentication flow `ADMIN_USER_PASSWORD_AUTH`. This setting
+    #     replaces the `ADMIN_NO_SRP_AUTH` setting. With this authentication
+    #     flow, Cognito receives the password in the request instead of using
+    #     the SRP (Secure Remote Password protocol) protocol to verify
+    #     passwords.
+    #
+    #   * `ALLOW_CUSTOM_AUTH`\: Enable Lambda trigger based authentication.
+    #
+    #   * `ALLOW_USER_PASSWORD_AUTH`\: Enable user password-based
+    #     authentication. In this flow, Cognito receives the password in the
+    #     request instead of using the SRP protocol to verify passwords.
+    #
+    #   * `ALLOW_USER_SRP_AUTH`\: Enable SRP based authentication.
+    #
+    #   * `ALLOW_REFRESH_TOKEN_AUTH`\: Enable authflow to refresh tokens.
     #
     # @option params [Array<String>] :supported_identity_providers
     #   A list of provider names for the identity providers that are supported
@@ -2902,6 +2929,48 @@ module Aws::CognitoIdentityProvider
     #   The Amazon Pinpoint analytics configuration for collecting metrics for
     #   this user pool.
     #
+    # @option params [String] :prevent_user_existence_errors
+    #   Use this setting to choose which errors and responses are returned by
+    #   Cognito APIs during authentication, account confirmation, and password
+    #   recovery when the user does not exist in the user pool. When set to
+    #   `ENABLED` and the user does not exist, authentication returns an error
+    #   indicating either the username or password was incorrect, and account
+    #   confirmation and password recovery return a response indicating a code
+    #   was sent to a simulated destination. When set to `LEGACY`, those APIs
+    #   will return a `UserNotFoundException` exception if the user does not
+    #   exist in the user pool.
+    #
+    #   Valid values include:
+    #
+    #   * `ENABLED` - This prevents user existence-related errors.
+    #
+    #   * `LEGACY` - This represents the old behavior of Cognito where user
+    #     existence related errors are not prevented.
+    #
+    #   This setting affects the behavior of following APIs:
+    #
+    #   * AdminInitiateAuth
+    #
+    #   * AdminRespondToAuthChallenge
+    #
+    #   * InitiateAuth
+    #
+    #   * RespondToAuthChallenge
+    #
+    #   * ForgotPassword
+    #
+    #   * ConfirmForgotPassword
+    #
+    #   * ConfirmSignUp
+    #
+    #   * ResendConfirmationCode
+    #
+    #   <note markdown="1"> After January 1st 2020, the value of `PreventUserExistenceErrors` will
+    #   default to `ENABLED` for newly created user pool clients if no value
+    #   is provided.
+    #
+    #    </note>
+    #
     # @return [Types::CreateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -2915,7 +2984,7 @@ module Aws::CognitoIdentityProvider
     #     refresh_token_validity: 1,
     #     read_attributes: ["ClientPermissionType"],
     #     write_attributes: ["ClientPermissionType"],
-    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH
+    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH
     #     supported_identity_providers: ["ProviderNameType"],
     #     callback_urls: ["RedirectUrlType"],
     #     logout_urls: ["RedirectUrlType"],
@@ -2929,6 +2998,7 @@ module Aws::CognitoIdentityProvider
     #       external_id: "StringType", # required
     #       user_data_shared: false,
     #     },
+    #     prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
     #   })
     #
     # @example Response structure
@@ -2945,7 +3015,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -2962,6 +3032,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.analytics_configuration.role_arn #=> String
     #   resp.user_pool_client.analytics_configuration.external_id #=> String
     #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
+    #   resp.user_pool_client.prevent_user_existence_errors #=> String, one of "LEGACY", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClient AWS API Documentation
     #
@@ -3543,7 +3614,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -3560,6 +3631,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.analytics_configuration.role_arn #=> String
     #   resp.user_pool_client.analytics_configuration.external_id #=> String
     #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
+    #   resp.user_pool_client.prevent_user_existence_errors #=> String, one of "LEGACY", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClient AWS API Documentation
     #
@@ -4166,6 +4238,11 @@ module Aws::CognitoIdentityProvider
     #     set, this flow will invoke the user migration Lambda if the USERNAME
     #     is not found in the user pool.
     #
+    #   * `ADMIN_USER_PASSWORD_AUTH`\: Admin-based user password
+    #     authentication. This replaces the `ADMIN_NO_SRP_AUTH` authentication
+    #     flow. In this flow, Cognito receives the password in the request
+    #     instead of using the SRP process to verify passwords.
+    #
     #   `ADMIN_NO_SRP_AUTH` is not a valid value.
     #
     # @option params [Hash<String,String>] :auth_parameters
@@ -4269,7 +4346,7 @@ module Aws::CognitoIdentityProvider
     # @example Request syntax with placeholder values
     #
     #   resp = client.initiate_auth({
-    #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH
+    #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH, ADMIN_USER_PASSWORD_AUTH
     #     auth_parameters: {
     #       "StringType" => "StringType",
     #     },
@@ -5774,6 +5851,9 @@ module Aws::CognitoIdentityProvider
     #
     # Calling this action requires developer credentials.
     #
+    # If you don't provide a value for an attribute, it will be set to the
+    # default value.
+    #
     # @option params [required, String] :group_name
     #   The name of the group.
     #
@@ -5886,6 +5966,9 @@ module Aws::CognitoIdentityProvider
     # Updates the name and scopes of resource server. All other fields are
     # read-only.
     #
+    # If you don't provide a value for an attribute, it will be set to the
+    # default value.
+    #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool.
     #
@@ -5951,14 +6034,14 @@ module Aws::CognitoIdentityProvider
     #
     #   You create custom workflows by assigning AWS Lambda functions to user
     #   pool triggers. When you use the UpdateUserAttributes API action,
-    #   Amazon Cognito invokes the functions that are assigned to the *custom
-    #   message* and *pre mutation* triggers. When Amazon Cognito invokes
-    #   either of these functions, it passes a JSON payload, which the
-    #   function receives as input. This payload contains a `clientMetadata`
-    #   attribute, which provides the data that you assigned to the
-    #   ClientMetadata parameter in your UpdateUserAttributes request. In your
-    #   function code in AWS Lambda, you can process the `clientMetadata`
-    #   value to enhance your workflow for your specific needs.
+    #   Amazon Cognito invokes the function that is assigned to the *custom
+    #   message* trigger. When Amazon Cognito invokes this function, it passes
+    #   a JSON payload, which the function receives as input. This payload
+    #   contains a `clientMetadata` attribute, which provides the data that
+    #   you assigned to the ClientMetadata parameter in your
+    #   UpdateUserAttributes request. In your function code in AWS Lambda, you
+    #   can process the `clientMetadata` value to enhance your workflow for
+    #   your specific needs.
     #
     #   For more information, see [Customizing User Pool Workflows with Lambda
     #   Triggers][1] in the *Amazon Cognito Developer Guide*.
@@ -6018,9 +6101,11 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Updates the specified user pool with the specified attributes. If you
-    # don't provide a value for an attribute, it will be set to the default
-    # value. You can get a list of the current user pool settings with .
+    # Updates the specified user pool with the specified attributes. You can
+    # get a list of the current user pool settings with .
+    #
+    # If you don't provide a value for an attribute, it will be set to the
+    # default value.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool you want to update.
@@ -6166,9 +6251,11 @@ module Aws::CognitoIdentityProvider
     end
 
     # Updates the specified user pool app client with the specified
-    # attributes. If you don't provide a value for an attribute, it will be
-    # set to the default value. You can get a list of the current user pool
-    # app client settings with .
+    # attributes. You can get a list of the current user pool app client
+    # settings with .
+    #
+    # If you don't provide a value for an attribute, it will be set to the
+    # default value.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to update the user
@@ -6191,7 +6278,29 @@ module Aws::CognitoIdentityProvider
     #   The writeable attributes of the user pool.
     #
     # @option params [Array<String>] :explicit_auth_flows
-    #   Explicit authentication flows.
+    #   The authentication flows that are supported by the user pool clients.
+    #   Flow names without the `ALLOW_` prefix are deprecated in favor of new
+    #   names with the `ALLOW_` prefix. Note that values with `ALLOW_` prefix
+    #   cannot be used along with values without `ALLOW_` prefix.
+    #
+    #   Valid values include:
+    #
+    #   * `ALLOW_ADMIN_USER_PASSWORD_AUTH`\: Enable admin based user password
+    #     authentication flow `ADMIN_USER_PASSWORD_AUTH`. This setting
+    #     replaces the `ADMIN_NO_SRP_AUTH` setting. With this authentication
+    #     flow, Cognito receives the password in the request instead of using
+    #     the SRP (Secure Remote Password protocol) protocol to verify
+    #     passwords.
+    #
+    #   * `ALLOW_CUSTOM_AUTH`\: Enable Lambda trigger based authentication.
+    #
+    #   * `ALLOW_USER_PASSWORD_AUTH`\: Enable user password-based
+    #     authentication. In this flow, Cognito receives the password in the
+    #     request instead of using the SRP protocol to verify passwords.
+    #
+    #   * `ALLOW_USER_SRP_AUTH`\: Enable SRP based authentication.
+    #
+    #   * `ALLOW_REFRESH_TOKEN_AUTH`\: Enable authflow to refresh tokens.
     #
     # @option params [Array<String>] :supported_identity_providers
     #   A list of provider names for the identity providers that are supported
@@ -6263,6 +6372,48 @@ module Aws::CognitoIdentityProvider
     #   The Amazon Pinpoint analytics configuration for collecting metrics for
     #   this user pool.
     #
+    # @option params [String] :prevent_user_existence_errors
+    #   Use this setting to choose which errors and responses are returned by
+    #   Cognito APIs during authentication, account confirmation, and password
+    #   recovery when the user does not exist in the user pool. When set to
+    #   `ENABLED` and the user does not exist, authentication returns an error
+    #   indicating either the username or password was incorrect, and account
+    #   confirmation and password recovery return a response indicating a code
+    #   was sent to a simulated destination. When set to `LEGACY`, those APIs
+    #   will return a `UserNotFoundException` exception if the user does not
+    #   exist in the user pool.
+    #
+    #   Valid values include:
+    #
+    #   * `ENABLED` - This prevents user existence-related errors.
+    #
+    #   * `LEGACY` - This represents the old behavior of Cognito where user
+    #     existence related errors are not prevented.
+    #
+    #   This setting affects the behavior of following APIs:
+    #
+    #   * AdminInitiateAuth
+    #
+    #   * AdminRespondToAuthChallenge
+    #
+    #   * InitiateAuth
+    #
+    #   * RespondToAuthChallenge
+    #
+    #   * ForgotPassword
+    #
+    #   * ConfirmForgotPassword
+    #
+    #   * ConfirmSignUp
+    #
+    #   * ResendConfirmationCode
+    #
+    #   <note markdown="1"> After January 1st 2020, the value of `PreventUserExistenceErrors` will
+    #   default to `ENABLED` for newly created user pool clients if no value
+    #   is provided.
+    #
+    #    </note>
+    #
     # @return [Types::UpdateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -6276,7 +6427,7 @@ module Aws::CognitoIdentityProvider
     #     refresh_token_validity: 1,
     #     read_attributes: ["ClientPermissionType"],
     #     write_attributes: ["ClientPermissionType"],
-    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH
+    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH
     #     supported_identity_providers: ["ProviderNameType"],
     #     callback_urls: ["RedirectUrlType"],
     #     logout_urls: ["RedirectUrlType"],
@@ -6290,6 +6441,7 @@ module Aws::CognitoIdentityProvider
     #       external_id: "StringType", # required
     #       user_data_shared: false,
     #     },
+    #     prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
     #   })
     #
     # @example Response structure
@@ -6306,7 +6458,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -6323,6 +6475,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.analytics_configuration.role_arn #=> String
     #   resp.user_pool_client.analytics_configuration.external_id #=> String
     #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
+    #   resp.user_pool_client.prevent_user_existence_errors #=> String, one of "LEGACY", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClient AWS API Documentation
     #
@@ -6500,7 +6653,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

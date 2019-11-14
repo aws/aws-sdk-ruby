@@ -386,10 +386,9 @@ module Aws::MarketplaceMetering
 
     # Paid container software products sold through AWS Marketplace must
     # integrate with the AWS Marketplace Metering Service and call the
-    # RegisterUsage operation for software entitlement and metering. Calling
-    # RegisterUsage from containers running outside of ECS is not currently
-    # supported. Free and BYOL products for ECS aren't required to call
-    # RegisterUsage, but you may choose to do so if you would like to
+    # RegisterUsage operation for software entitlement and metering. Free
+    # and BYOL products for Amazon ECS or Amazon EKS aren't required to
+    # call RegisterUsage, but you may choose to do so if you would like to
     # receive usage data in your seller reports. The sections below explain
     # the behavior of RegisterUsage. RegisterUsage performs two primary
     # functions: metering and entitlement.
@@ -401,22 +400,24 @@ module Aws::MarketplaceMetering
     #   to guard against unauthorized use at container startup, as such a
     #   CustomerNotSubscribedException/PlatformNotSupportedException will
     #   only be thrown on the initial call to RegisterUsage. Subsequent
-    #   calls from the same Amazon ECS task instance (e.g. task-id) will not
-    #   throw a CustomerNotSubscribedException, even if the customer
-    #   unsubscribes while the Amazon ECS task is still running.
+    #   calls from the same Amazon ECS task instance (e.g. task-id) or
+    #   Amazon EKS pod will not throw a CustomerNotSubscribedException, even
+    #   if the customer unsubscribes while the Amazon ECS task or Amazon EKS
+    #   pod is still running.
     #
     # * *Metering*\: RegisterUsage meters software use per ECS task, per
-    #   hour, with usage prorated to the second. A minimum of 1 minute of
-    #   usage applies to tasks that are short lived. For example, if a
-    #   customer has a 10 node ECS cluster and creates an ECS service
-    #   configured as a Daemon Set, then ECS will launch a task on all 10
-    #   cluster nodes and the customer will be charged: (10 *
-    #   hourly\_rate). Metering for software use is automatically handled by
-    #   the AWS Marketplace Metering Control Plane -- your software is not
-    #   required to perform any metering specific actions, other than call
-    #   RegisterUsage once for metering of software use to commence. The AWS
-    #   Marketplace Metering Control Plane will also continue to bill
-    #   customers for running ECS tasks, regardless of the customers
+    #   hour, or per pod for Amazon EKS with usage prorated to the second. A
+    #   minimum of 1 minute of usage applies to tasks that are short lived.
+    #   For example, if a customer has a 10 node Amazon ECS or Amazon EKS
+    #   cluster and a service configured as a Daemon Set, then Amazon ECS or
+    #   Amazon EKS will launch a task on all 10 cluster nodes and the
+    #   customer will be charged: (10 * hourly\_rate). Metering for
+    #   software use is automatically handled by the AWS Marketplace
+    #   Metering Control Plane -- your software is not required to perform
+    #   any metering specific actions, other than call RegisterUsage once
+    #   for metering of software use to commence. The AWS Marketplace
+    #   Metering Control Plane will also continue to bill customers for
+    #   running ECS tasks and Amazon EKS pods, regardless of the customers
     #   subscription state, removing the need for your software to perform
     #   entitlement checks at runtime.
     #
@@ -509,7 +510,7 @@ module Aws::MarketplaceMetering
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

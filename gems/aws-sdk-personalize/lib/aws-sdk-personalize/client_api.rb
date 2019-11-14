@@ -19,6 +19,11 @@ module Aws::Personalize
     AutoMLConfig = Shapes::StructureShape.new(name: 'AutoMLConfig')
     AutoMLResult = Shapes::StructureShape.new(name: 'AutoMLResult')
     AvroSchema = Shapes::StringShape.new(name: 'AvroSchema')
+    BatchInferenceJob = Shapes::StructureShape.new(name: 'BatchInferenceJob')
+    BatchInferenceJobInput = Shapes::StructureShape.new(name: 'BatchInferenceJobInput')
+    BatchInferenceJobOutput = Shapes::StructureShape.new(name: 'BatchInferenceJobOutput')
+    BatchInferenceJobSummary = Shapes::StructureShape.new(name: 'BatchInferenceJobSummary')
+    BatchInferenceJobs = Shapes::ListShape.new(name: 'BatchInferenceJobs')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Campaign = Shapes::StructureShape.new(name: 'Campaign')
     CampaignSummary = Shapes::StructureShape.new(name: 'CampaignSummary')
@@ -32,6 +37,8 @@ module Aws::Personalize
     ContinuousHyperParameterRanges = Shapes::ListShape.new(name: 'ContinuousHyperParameterRanges')
     ContinuousMaxValue = Shapes::FloatShape.new(name: 'ContinuousMaxValue')
     ContinuousMinValue = Shapes::FloatShape.new(name: 'ContinuousMinValue')
+    CreateBatchInferenceJobRequest = Shapes::StructureShape.new(name: 'CreateBatchInferenceJobRequest')
+    CreateBatchInferenceJobResponse = Shapes::StructureShape.new(name: 'CreateBatchInferenceJobResponse')
     CreateCampaignRequest = Shapes::StructureShape.new(name: 'CreateCampaignRequest')
     CreateCampaignResponse = Shapes::StructureShape.new(name: 'CreateCampaignResponse')
     CreateDatasetGroupRequest = Shapes::StructureShape.new(name: 'CreateDatasetGroupRequest')
@@ -77,6 +84,8 @@ module Aws::Personalize
     DeleteSolutionRequest = Shapes::StructureShape.new(name: 'DeleteSolutionRequest')
     DescribeAlgorithmRequest = Shapes::StructureShape.new(name: 'DescribeAlgorithmRequest')
     DescribeAlgorithmResponse = Shapes::StructureShape.new(name: 'DescribeAlgorithmResponse')
+    DescribeBatchInferenceJobRequest = Shapes::StructureShape.new(name: 'DescribeBatchInferenceJobRequest')
+    DescribeBatchInferenceJobResponse = Shapes::StructureShape.new(name: 'DescribeBatchInferenceJobResponse')
     DescribeCampaignRequest = Shapes::StructureShape.new(name: 'DescribeCampaignRequest')
     DescribeCampaignResponse = Shapes::StructureShape.new(name: 'DescribeCampaignResponse')
     DescribeDatasetGroupRequest = Shapes::StructureShape.new(name: 'DescribeDatasetGroupRequest')
@@ -126,6 +135,8 @@ module Aws::Personalize
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListBatchInferenceJobsRequest = Shapes::StructureShape.new(name: 'ListBatchInferenceJobsRequest')
+    ListBatchInferenceJobsResponse = Shapes::StructureShape.new(name: 'ListBatchInferenceJobsResponse')
     ListCampaignsRequest = Shapes::StructureShape.new(name: 'ListCampaignsRequest')
     ListCampaignsResponse = Shapes::StructureShape.new(name: 'ListCampaignsResponse')
     ListDatasetGroupsRequest = Shapes::StructureShape.new(name: 'ListDatasetGroupsRequest')
@@ -151,6 +162,7 @@ module Aws::Personalize
     Metrics = Shapes::MapShape.new(name: 'Metrics')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NumBatchResults = Shapes::IntegerShape.new(name: 'NumBatchResults')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PerformAutoML = Shapes::BooleanShape.new(name: 'PerformAutoML')
@@ -165,6 +177,7 @@ module Aws::Personalize
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3DataConfig = Shapes::StructureShape.new(name: 'S3DataConfig')
     S3Location = Shapes::StringShape.new(name: 'S3Location')
     Schemas = Shapes::ListShape.new(name: 'Schemas')
     Solution = Shapes::StructureShape.new(name: 'Solution')
@@ -209,6 +222,35 @@ module Aws::Personalize
     AutoMLResult.add_member(:best_recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "bestRecipeArn"))
     AutoMLResult.struct_class = Types::AutoMLResult
 
+    BatchInferenceJob.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    BatchInferenceJob.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchInferenceJobArn"))
+    BatchInferenceJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    BatchInferenceJob.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
+    BatchInferenceJob.add_member(:num_results, Shapes::ShapeRef.new(shape: NumBatchResults, location_name: "numResults"))
+    BatchInferenceJob.add_member(:job_input, Shapes::ShapeRef.new(shape: BatchInferenceJobInput, location_name: "jobInput"))
+    BatchInferenceJob.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchInferenceJobOutput, location_name: "jobOutput"))
+    BatchInferenceJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    BatchInferenceJob.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    BatchInferenceJob.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    BatchInferenceJob.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    BatchInferenceJob.struct_class = Types::BatchInferenceJob
+
+    BatchInferenceJobInput.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataConfig, required: true, location_name: "s3DataSource"))
+    BatchInferenceJobInput.struct_class = Types::BatchInferenceJobInput
+
+    BatchInferenceJobOutput.add_member(:s3_data_destination, Shapes::ShapeRef.new(shape: S3DataConfig, required: true, location_name: "s3DataDestination"))
+    BatchInferenceJobOutput.struct_class = Types::BatchInferenceJobOutput
+
+    BatchInferenceJobSummary.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchInferenceJobArn"))
+    BatchInferenceJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    BatchInferenceJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    BatchInferenceJobSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    BatchInferenceJobSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    BatchInferenceJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    BatchInferenceJobSummary.struct_class = Types::BatchInferenceJobSummary
+
+    BatchInferenceJobs.member = Shapes::ShapeRef.new(shape: BatchInferenceJobSummary)
+
     Campaign.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Campaign.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
     Campaign.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
@@ -252,6 +294,17 @@ module Aws::Personalize
     ContinuousHyperParameterRange.struct_class = Types::ContinuousHyperParameterRange
 
     ContinuousHyperParameterRanges.member = Shapes::ShapeRef.new(shape: ContinuousHyperParameterRange)
+
+    CreateBatchInferenceJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    CreateBatchInferenceJobRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
+    CreateBatchInferenceJobRequest.add_member(:num_results, Shapes::ShapeRef.new(shape: NumBatchResults, location_name: "numResults"))
+    CreateBatchInferenceJobRequest.add_member(:job_input, Shapes::ShapeRef.new(shape: BatchInferenceJobInput, required: true, location_name: "jobInput"))
+    CreateBatchInferenceJobRequest.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchInferenceJobOutput, required: true, location_name: "jobOutput"))
+    CreateBatchInferenceJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateBatchInferenceJobRequest.struct_class = Types::CreateBatchInferenceJobRequest
+
+    CreateBatchInferenceJobResponse.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchInferenceJobArn"))
+    CreateBatchInferenceJobResponse.struct_class = Types::CreateBatchInferenceJobResponse
 
     CreateCampaignRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateCampaignRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
@@ -450,6 +503,12 @@ module Aws::Personalize
     DescribeAlgorithmResponse.add_member(:algorithm, Shapes::ShapeRef.new(shape: Algorithm, location_name: "algorithm"))
     DescribeAlgorithmResponse.struct_class = Types::DescribeAlgorithmResponse
 
+    DescribeBatchInferenceJobRequest.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "batchInferenceJobArn"))
+    DescribeBatchInferenceJobRequest.struct_class = Types::DescribeBatchInferenceJobRequest
+
+    DescribeBatchInferenceJobResponse.add_member(:batch_inference_job, Shapes::ShapeRef.new(shape: BatchInferenceJob, location_name: "batchInferenceJob"))
+    DescribeBatchInferenceJobResponse.struct_class = Types::DescribeBatchInferenceJobResponse
+
     DescribeCampaignRequest.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "campaignArn"))
     DescribeCampaignRequest.struct_class = Types::DescribeCampaignRequest
 
@@ -588,6 +647,15 @@ module Aws::Personalize
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListBatchInferenceJobsRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
+    ListBatchInferenceJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBatchInferenceJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBatchInferenceJobsRequest.struct_class = Types::ListBatchInferenceJobsRequest
+
+    ListBatchInferenceJobsResponse.add_member(:batch_inference_jobs, Shapes::ShapeRef.new(shape: BatchInferenceJobs, location_name: "batchInferenceJobs"))
+    ListBatchInferenceJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBatchInferenceJobsResponse.struct_class = Types::ListBatchInferenceJobsResponse
+
     ListCampaignsRequest.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionArn"))
     ListCampaignsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListCampaignsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -702,6 +770,10 @@ module Aws::Personalize
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    S3DataConfig.add_member(:path, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "path"))
+    S3DataConfig.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    S3DataConfig.struct_class = Types::S3DataConfig
+
     Schemas.member = Shapes::ShapeRef.new(shape: DatasetSchemaSummary)
 
     Solution.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -786,6 +858,19 @@ module Aws::Personalize
         "targetPrefix" => "AmazonPersonalize",
         "uid" => "personalize-2018-05-22",
       }
+
+      api.add_operation(:create_batch_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBatchInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBatchInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBatchInferenceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
 
       api.add_operation(:create_campaign, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCampaign"
@@ -961,6 +1046,16 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_batch_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBatchInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBatchInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBatchInferenceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_campaign, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeCampaign"
         o.http_method = "POST"
@@ -1070,6 +1165,22 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:list_batch_inference_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBatchInferenceJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBatchInferenceJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBatchInferenceJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_campaigns, Seahorse::Model::Operation.new.tap do |o|

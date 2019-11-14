@@ -71,6 +71,9 @@ module Aws::Connect
     #         routing_profile_id: "RoutingProfileId", # required
     #         hierarchy_group_id: "HierarchyGroupId",
     #         instance_id: "InstanceId", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] username
@@ -125,6 +128,10 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserRequest AWS API Documentation
     #
     class CreateUserRequest < Struct.new(
@@ -136,7 +143,8 @@ module Aws::Connect
       :security_profile_ids,
       :routing_profile_id,
       :hierarchy_group_id,
-      :instance_id)
+      :instance_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1541,6 +1549,35 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Information about the tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListUserHierarchyGroupsRequest
     #   data as a hash:
     #
@@ -1905,6 +1942,33 @@ module Aws::Connect
     #
     class StopContactResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ARN", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags. For example, \\\{ "tags":
+    #   \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
     # Contains information about the threshold for service level metrics.
     #
     # @note When making an API call, you may pass Threshold
@@ -1941,6 +2005,30 @@ module Aws::Connect
     #
     class ThrottlingException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ARN", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 
@@ -2185,6 +2273,10 @@ module Aws::Connect
     #   The identifier of the hierarchy group for the user.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/User AWS API Documentation
     #
     class User < Struct.new(
@@ -2196,7 +2288,8 @@ module Aws::Connect
       :directory_user_id,
       :security_profile_ids,
       :routing_profile_id,
-      :hierarchy_group_id)
+      :hierarchy_group_id,
+      :tags)
       include Aws::Structure
     end
 

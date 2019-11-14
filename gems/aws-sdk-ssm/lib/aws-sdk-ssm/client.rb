@@ -889,8 +889,9 @@ module Aws::SSM
     #     content: "DocumentContent", # required
     #     attachments: [
     #       {
-    #         key: "SourceUrl", # accepts SourceUrl
+    #         key: "SourceUrl", # accepts SourceUrl, S3FileUrl
     #         values: ["AttachmentsSourceValue"],
+    #         name: "AttachmentIdentifier",
     #       },
     #     ],
     #     name: "DocumentName", # required
@@ -5588,7 +5589,8 @@ module Aws::SSM
     #
     # @option params [Array<Types::CommandFilter>] :filters
     #   (Optional) One or more filters. Use a filter to return a more specific
-    #   list of results.
+    #   list of results. Note that the `DocumentName` filter is not supported
+    #   for ListCommandInvocations.
     #
     # @option params [Boolean] :details
     #   (Optional) If set this returns the response of the command executions
@@ -6397,8 +6399,7 @@ module Aws::SSM
     # inventory item, if it does exist.
     #
     # @option params [required, String] :instance_id
-    #   One or more instance IDs where you want to add or update inventory
-    #   items.
+    #   An instance ID where you want to add or update inventory items.
     #
     # @option params [required, Array<Types::InventoryItem>] :items
     #   The inventory items that you want to add or update on instances.
@@ -7994,8 +7995,9 @@ module Aws::SSM
     #     content: "DocumentContent", # required
     #     attachments: [
     #       {
-    #         key: "SourceUrl", # accepts SourceUrl
+    #         key: "SourceUrl", # accepts SourceUrl, S3FileUrl
     #         values: ["AttachmentsSourceValue"],
+    #         name: "AttachmentIdentifier",
     #       },
     #     ],
     #     name: "DocumentName", # required
@@ -8943,7 +8945,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

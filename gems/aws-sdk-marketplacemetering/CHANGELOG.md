@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-11-14)
+------------------
+
+* Feature - Added CustomerNotEntitledException in MeterUsage API for Container use case.
+
 1.19.0 (2019-10-23)
 ------------------
 
