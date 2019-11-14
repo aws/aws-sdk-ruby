@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
+
+* Feature - Aws::MarketplaceMetering - Updated the API, and documentation for AWSMarketplace Metering.
+
+* Feature - Aws::Personalize - Updated the API, and documentation for Amazon Personalize.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.397 (2019-11-13)
 ------------------
 
