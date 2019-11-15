@@ -247,33 +247,33 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] eq
-    #   Deprecated. Represents the equal condition to be applied to a single
-    #   field when querying for findings.
+    #   Represents the equal condition to be applied to a single field when
+    #   querying for findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] neq
-    #   Deprecated. Represents the not equal condition to be applied to a
-    #   single field when querying for findings.
+    #   Represents the not equal condition to be applied to a single field
+    #   when querying for findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] gt
-    #   Deprecated. Represents a greater than condition to be applied to a
-    #   single field when querying for findings.
+    #   Represents a greater than condition to be applied to a single field
+    #   when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] gte
-    #   Deprecated. Represents a greater than equal condition to be applied
-    #   to a single field when querying for findings.
+    #   Represents a greater than equal condition to be applied to a single
+    #   field when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] lt
-    #   Deprecated. Represents a less than condition to be applied to a
-    #   single field when querying for findings.
+    #   Represents a less than condition to be applied to a single field
+    #   when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] lte
-    #   Deprecated. Represents a less than equal condition to be applied to
-    #   a single field when querying for findings.
+    #   Represents a less than equal condition to be applied to a single
+    #   field when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] equals
@@ -324,7 +324,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the country.
+    # Contains information about the country in which the remote IP address
+    # is located.
     #
     # @!attribute [rw] country_code
     #   Country code of the remote IP address.
@@ -612,6 +613,62 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreatePublishingDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         destination_type: "S3", # required, accepts S3
+    #         destination_properties: { # required
+    #           destination_arn: "String",
+    #           kms_key_arn: "String",
+    #         },
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The ID of the GuardDuty detector associated with the publishing
+    #   destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_type
+    #   The type of resource for the publishing destination. Currently only
+    #   S3 is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_properties
+    #   Properties of the publishing destination, including the ARNs for the
+    #   destination and the KMS key used for encryption.
+    #   @return [Types::DestinationProperties]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreatePublishingDestinationRequest AWS API Documentation
+    #
+    class CreatePublishingDestinationRequest < Struct.new(
+      :detector_id,
+      :destination_type,
+      :destination_properties,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_id
+    #   The ID of the publishing destination created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreatePublishingDestinationResponse AWS API Documentation
+    #
+    class CreatePublishingDestinationResponse < Struct.new(
+      :destination_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateSampleFindingsRequest
     #   data as a hash:
     #
@@ -625,7 +682,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] finding_types
-    #   Types of sample findings that you want to generate.
+    #   Types of sample findings to generate.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindingsRequest AWS API Documentation
@@ -806,11 +863,11 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector the ipSet is associated with.
+    #   The unique ID of the detector associated with the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] ip_set_id
-    #   The unique ID of the ipSet you want to delete.
+    #   The unique ID of the IPSet to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSetRequest AWS API Documentation
@@ -893,6 +950,35 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeletePublishingDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         destination_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector associated with the publishing
+    #   destination to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_id
+    #   The ID of the publishing destination to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeletePublishingDestinationRequest AWS API Documentation
+    #
+    class DeletePublishingDestinationRequest < Struct.new(
+      :detector_id,
+      :destination_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeletePublishingDestinationResponse AWS API Documentation
+    #
+    class DeletePublishingDestinationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteThreatIntelSetRequest
     #   data as a hash:
     #
@@ -920,6 +1006,117 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetResponse AWS API Documentation
     #
     class DeleteThreatIntelSetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribePublishingDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         destination_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector associated with the publishing
+    #   destination to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_id
+    #   The ID of the publishing destination to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribePublishingDestinationRequest AWS API Documentation
+    #
+    class DescribePublishingDestinationRequest < Struct.new(
+      :detector_id,
+      :destination_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_id
+    #   The ID of the publishing destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_type
+    #   The type of the publishing destination. Currently, only S3 is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the publishing destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] publishing_failure_start_timestamp
+    #   The time, in epoch millisecond format, at which GuardDuty was first
+    #   unable to publish findings to the destination.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_properties
+    #   A `DestinationProperties` object that includes the `DestinationArn`
+    #   and `KmsKeyArn` of the publishing destination.
+    #   @return [Types::DestinationProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribePublishingDestinationResponse AWS API Documentation
+    #
+    class DescribePublishingDestinationResponse < Struct.new(
+      :destination_id,
+      :destination_type,
+      :status,
+      :publishing_failure_start_timestamp,
+      :destination_properties)
+      include Aws::Structure
+    end
+
+    # Contains information about a publishing destination, including the ID,
+    # type, and status.
+    #
+    # @!attribute [rw] destination_id
+    #   The unique ID of the publishing destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_type
+    #   The type of resource used for the publishing destination. Currently,
+    #   only S3 is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the publishing destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Destination AWS API Documentation
+    #
+    class Destination < Struct.new(
+      :destination_id,
+      :destination_type,
+      :status)
+      include Aws::Structure
+    end
+
+    # Contains the ARN of the resource to publish to, such as an S3 bucket,
+    # and the ARN of the KMS key to use to encrypt published findings.
+    #
+    # @note When making an API call, you may pass DestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         destination_arn: "String",
+    #         kms_key_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] destination_arn
+    #   The ARN of the resource to publish to.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the KMS key to use for encryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DestinationProperties AWS API Documentation
+    #
+    class DestinationProperties < Struct.new(
+      :destination_arn,
+      :kms_key_arn)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DisassociateFromMasterAccountRequest
     #   data as a hash:
@@ -981,10 +1178,11 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the DNS request.
+    # Contains information about the DNS\_REQUEST action described in this
+    # finding.
     #
     # @!attribute [rw] domain
-    #   Domain information for the DNS request.
+    #   Domain information for the API request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction AWS API Documentation
@@ -1020,7 +1218,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the finding.
+    # Contains information about the finding, which is generated when
+    # abnormal or suspicious activity is detected.
     #
     # @!attribute [rw] account_id
     #   The ID of the account in which the finding was generated.
@@ -1055,7 +1254,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   Contains information about the resource.
+    #   Contains information about the AWS resource associated with the
+    #   activity that prompted GuardDuty to generate a finding.
     #   @return [Types::Resource]
     #
     # @!attribute [rw] schema_version
@@ -1063,7 +1263,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] service
-    #   Contains information about the service.
+    #   Contains additional information about the generated finding.
     #   @return [Types::Service]
     #
     # @!attribute [rw] severity
@@ -1103,7 +1303,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains finding criteria information.
+    # Contains information about the criteria used for querying findings.
     #
     # @note When making an API call, you may pass FindingCriteria
     #   data as a hash:
@@ -1153,7 +1353,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the
+    # Contains information about the location of the remote IP address.
     #
     # @!attribute [rw] lat
     #   Latitude information of remote IP address.
@@ -1406,7 +1606,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] ip_set_id
-    #   The unique ID of the ipSet you want to get.
+    #   The unique ID of the IPSet to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetRequest AWS API Documentation
@@ -1418,9 +1618,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] name
-    #   The user friendly name to identify the IPSet. This name is displayed
-    #   in all findings that are triggered by activity that involves IP
-    #   addresses included in this IPSet.
+    #   The user friendly name for the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -1598,7 +1796,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the instance profile.
+    # Contains information about the EC2 instance profile.
     #
     # @!attribute [rw] arn
     #   AWS EC2 instance profile ARN.
@@ -1702,15 +1900,15 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the invitation.
+    # Contains information about the invitation to become a member account.
     #
     # @!attribute [rw] account_id
-    #   Inviter account ID
+    #   The ID of the account from which the invitations was sent.
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
-    #   This value is used to validate the inviter account to the member
-    #   account.
+    #   The ID of the invitation. This value is used to validate the inviter
+    #   account to the member account.
     #   @return [String]
     #
     # @!attribute [rw] relationship_status
@@ -1719,7 +1917,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] invited_at
-    #   Timestamp at which the invitation was sent
+    #   Timestamp at which the invitation was sent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Invitation AWS API Documentation
@@ -1922,7 +2120,113 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] finding_criteria
-    #   Represents the criteria used for querying findings.
+    #   Represents the criteria used for querying findings. Valid values
+    #   include:
+    #
+    #   * JSON field name
+    #
+    #   * accountId
+    #
+    #   * region
+    #
+    #   * confidence
+    #
+    #   * id
+    #
+    #   * resource.accessKeyDetails.accessKeyId
+    #
+    #   * resource.accessKeyDetails.principalId
+    #
+    #   * resource.accessKeyDetails.userName
+    #
+    #   * resource.accessKeyDetails.userType
+    #
+    #   * resource.instanceDetails.iamInstanceProfile.id
+    #
+    #   * resource.instanceDetails.imageId
+    #
+    #   * resource.instanceDetails.instanceId
+    #
+    #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
+    #
+    #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
+    #
+    #   * resource.instanceDetails.networkInterfaces.publicDnsName
+    #
+    #   * resource.instanceDetails.networkInterfaces.publicIp
+    #
+    #   * resource.instanceDetails.networkInterfaces.securityGroups.groupId
+    #
+    #   * resource.instanceDetails.networkInterfaces.securityGroups.groupName
+    #
+    #   * resource.instanceDetails.networkInterfaces.subnetId
+    #
+    #   * resource.instanceDetails.networkInterfaces.vpcId
+    #
+    #   * resource.instanceDetails.tags.key
+    #
+    #   * resource.instanceDetails.tags.value
+    #
+    #   * resource.resourceType
+    #
+    #   * service.action.actionType
+    #
+    #   * service.action.awsApiCallAction.api
+    #
+    #   * service.action.awsApiCallAction.callerType
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.city.cityName
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.country.countryName
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.organization.asn
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
+    #
+    #   * service.action.awsApiCallAction.serviceName
+    #
+    #   * service.action.dnsRequestAction.domain
+    #
+    #   * service.action.networkConnectionAction.blocked
+    #
+    #   * service.action.networkConnectionAction.connectionDirection
+    #
+    #   * service.action.networkConnectionAction.localPortDetails.port
+    #
+    #   * service.action.networkConnectionAction.protocol
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.country.countryName
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.organization.asn
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
+    #
+    #   * service.action.networkConnectionAction.remotePortDetails.port
+    #
+    #   * service.additionalInfo.threatListName
+    #
+    #   * service.archived
+    #
+    #     When this attribute is set to 'true', only archived findings are
+    #     listed. When it's set to 'false', only unarchived findings are
+    #     listed. When this attribute is not set, all existing findings are
+    #     listed.
+    #
+    #   * service.resourceRole
+    #
+    #   * severity
+    #
+    #   * type
+    #
+    #   * updatedAt
+    #
+    #     Type: Timestamp in Unix Epoch millisecond format: 1486685375000
     #   @return [Types::FindingCriteria]
     #
     # @!attribute [rw] sort_criteria
@@ -2132,6 +2436,61 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPublishingDestinationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The ID of the detector to retrieve publishing destinations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results returned in the repsonse. Set
+    #   the value of this parameter to null for the first request to a list
+    #   action. For subsequent calls, use the `NextToken` value returned
+    #   from the previous request to continue listing results after the
+    #   first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListPublishingDestinationsRequest AWS API Documentation
+    #
+    class ListPublishingDestinationsRequest < Struct.new(
+      :detector_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destinations
+    #   A `Destinations` obect that includes information about each
+    #   publishing destination returned.
+    #   @return [Array<Types::Destination>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results returned in the repsonse. Set
+    #   the value of this parameter to null for the first request to a list
+    #   action. For subsequent calls, use the `NextToken` value returned
+    #   from the previous request to continue listing results after the
+    #   first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListPublishingDestinationsResponse AWS API Documentation
+    #
+    class ListPublishingDestinationsResponse < Struct.new(
+      :destinations,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -2181,11 +2540,11 @@ module Aws::GuardDuty
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
-    #   the value of NextToken from the previous response to continue
-    #   listing data.
+    #   You can use this parameter to paginate results in the response. Set
+    #   the value of this parameter to null on your first call to the list
+    #   action. For subsequent calls to the action fill nextToken in the
+    #   request with the value of NextToken from the previous response to
+    #   continue listing data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsRequest AWS API Documentation
@@ -2305,7 +2664,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the network connection.
+    # Contains information about the NETWORK\_CONNECTION action described in
+    # the finding.
     #
     # @!attribute [rw] blocked
     #   Network connection blocked information.
@@ -2343,7 +2703,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the network interface.
+    # Contains information about the network interface of the Ec2 instance.
     #
     # @!attribute [rw] ipv_6_addresses
     #   A list of EC2 instance IPv6 address information.
@@ -2401,7 +2761,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Continas information about the organization.
+    # Continas information about the ISP organization of the remote IP
+    # address.
     #
     # @!attribute [rw] asn
     #   Autonomous system number of the internet provider of the remote IP
@@ -2430,7 +2791,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the port probe.
+    # Contains information about the PORT\_PROBE action described in the
+    # finding.
     #
     # @!attribute [rw] blocked
     #   Port probe blocked information.
@@ -2466,7 +2828,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the private IP address.
+    # Contains other private IP address information of the EC2 instance.
     #
     # @!attribute [rw] private_dns_name
     #   Private DNS name of the EC2 instance.
@@ -2484,7 +2846,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the product code.
+    # Contains information about the product code for the Ec2 instance.
     #
     # @!attribute [rw] code
     #   Product code information.
@@ -2502,7 +2864,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Continas information about the remote IP address.
+    # Continas information about the remote IP address of the connection.
     #
     # @!attribute [rw] city
     #   City information of the remote IP address.
@@ -2553,7 +2915,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the resource.
+    # Contains information about the AWS resource associated with the
+    # activity that prompted GuardDuty to generate a finding.
     #
     # @!attribute [rw] access_key_details
     #   The IAM access key details (IAM user information) of a user that
@@ -2579,7 +2942,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the security group.
+    # Contains information about the security groups associated with the EC2
+    # instance.
     #
     # @!attribute [rw] group_id
     #   EC2 instance's security group ID.
@@ -2597,7 +2961,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the service.
+    # Contains additional information about the generated finding.
     #
     # @!attribute [rw] action
     #   Information about the activity described in a finding.
@@ -2657,7 +3021,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the criteria for sorting.
+    # Contains information about the criteria used for sorting findings.
     #
     # @note When making an API call, you may pass SortCriteria
     #   data as a hash:
@@ -2693,13 +3057,13 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account whom you want
-    #   to re-enable to monitor members' findings.
+    #   The unique ID of the detector of the GuardDuty master account
+    #   associated with the member accounts to monitor.
     #   @return [String]
     #
     # @!attribute [rw] account_ids
-    #   A list of account IDs of the GuardDuty member accounts whose
-    #   findings you want the master account to monitor.
+    #   A list of account IDs of the GuardDuty member accounts to start
+    #   monitoring.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersRequest AWS API Documentation
@@ -2760,7 +3124,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the tag associated with the resource.
+    # Contains information about a tag associated with the Ec2 instance.
     #
     # @!attribute [rw] key
     #   EC2 instance tag key.
@@ -2789,7 +3153,8 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #   The Amazon Resource Name (ARN) for the GuardDuty resource to apply a
+    #   tag to.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2837,12 +3202,11 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The ID of the detector that specifies the GuardDuty service whose
-    #   findings you want to unarchive.
+    #   The ID of the detector associated with the findings to unarchive.
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
-    #   IDs of the findings that you want to unarchive.
+    #   IDs of the findings to unarchive.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindingsRequest AWS API Documentation
@@ -2884,11 +3248,11 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #   The Amazon Resource Name (ARN) for the resource to remove tags from.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The tag keys to remove from a resource.
+    #   The tag keys to remove from the resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UntagResourceRequest AWS API Documentation
@@ -2913,17 +3277,16 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector that you want to update.
+    #   The unique ID of the detector to update.
     #   @return [String]
     #
     # @!attribute [rw] enable
-    #   Updated boolean value for the detector that specifies whether the
-    #   detector is enabled.
+    #   Specifies whether the detector is enabled or not enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] finding_publishing_frequency
-    #   A enum value that specifies how frequently customer got Finding
-    #   updates published.
+    #   A enum value that specifies how frequently findings are exported,
+    #   such as to CloudWatch Events.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest AWS API Documentation
@@ -3031,8 +3394,8 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The ID of the detector that specifies the GuardDuty service whose
-    #   findings you want to mark as useful or not useful.
+    #   The ID of the detector associated with the findings to update
+    #   feedback for.
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
@@ -3040,7 +3403,7 @@ module Aws::GuardDuty
     #   @return [Array<String>]
     #
     # @!attribute [rw] feedback
-    #   Valid values: USEFUL \| NOT\_USEFUL
+    #   The feedback for the finding.
     #   @return [String]
     #
     # @!attribute [rw] comments
@@ -3109,6 +3472,45 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSetResponse AWS API Documentation
     #
     class UpdateIPSetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdatePublishingDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         destination_id: "String", # required
+    #         destination_properties: {
+    #           destination_arn: "String",
+    #           kms_key_arn: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The ID of the
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_id
+    #   The ID of the detector associated with the publishing destinations
+    #   to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_properties
+    #   A `DestinationProperties` object that includes the `DestinationArn`
+    #   and `KmsKeyArn` of the publishing destination.
+    #   @return [Types::DestinationProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdatePublishingDestinationRequest AWS API Documentation
+    #
+    class UpdatePublishingDestinationRequest < Struct.new(
+      :detector_id,
+      :destination_id,
+      :destination_properties)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdatePublishingDestinationResponse AWS API Documentation
+    #
+    class UpdatePublishingDestinationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateThreatIntelSetRequest
     #   data as a hash:

@@ -282,9 +282,20 @@ module Aws::EC2
     #     description: "String",
     #     destination_region: "String",
     #     encrypted: false,
-    #     kms_key_id: "KmsKeyId",
+    #     kms_key_id: "String",
     #     presigned_url: "String",
     #     source_region: "String", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -354,6 +365,7 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     # @option options [required, String] :source_region
     #   The ID of the Region that contains the snapshot to be copied.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

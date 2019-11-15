@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-11-15)
+------------------
+
+* Feature - Added APIs to register your directories with Amazon WorkSpaces and to modify directory details.
+
 1.30.0 (2019-10-23)
 ------------------
 

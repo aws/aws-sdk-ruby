@@ -8,6 +8,21 @@
 module Aws::EKS
   module Types
 
+    # An AutoScaling group that is associated with an Amazon EKS managed
+    # node group.
+    #
+    # @!attribute [rw] name
+    #   The name of the AutoScaling group associated with an Amazon EKS
+    #   managed node group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AutoScalingGroup AWS API Documentation
+    #
+    class AutoScalingGroup < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # This exception is thrown if the request contains a semantic error. The
     # precise meaning will depend on the API, and will be documented in the
     # error message.
@@ -47,6 +62,9 @@ module Aws::EKS
     #   The Amazon EKS cluster associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] nodegroup_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -54,6 +72,7 @@ module Aws::EKS
     #
     class ClientException < Struct.new(
       :cluster_name,
+      :nodegroup_name,
       :message)
       include Aws::Structure
     end
@@ -134,7 +153,8 @@ module Aws::EKS
     # @!attribute [rw] tags
     #   The metadata that you apply to the cluster to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define.
+    #   optional value, both of which you define. Cluster tags do not
+    #   propagate to any other resources associated with the cluster.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
@@ -277,6 +297,166 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateNodegroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         nodegroup_name: "String", # required
+    #         scaling_config: {
+    #           min_size: 1,
+    #           max_size: 1,
+    #           desired_size: 1,
+    #         },
+    #         disk_size: 1,
+    #         subnets: ["String"], # required
+    #         instance_types: ["String"],
+    #         ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU
+    #         remote_access: {
+    #           ec2_ssh_key: "String",
+    #           source_security_groups: ["String"],
+    #         },
+    #         node_role: "String", # required
+    #         labels: {
+    #           "labelKey" => "labelValue",
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         client_request_token: "String",
+    #         version: "String",
+    #         release_version: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster to create the node group in.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodegroup_name
+    #   The unique name to give your node group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_config
+    #   The scaling configuration details for the AutoScaling group that is
+    #   created for your node group.
+    #   @return [Types::NodegroupScalingConfig]
+    #
+    # @!attribute [rw] disk_size
+    #   The root device disk size (in GiB) for your node group instances.
+    #   The default disk size is 20 GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] subnets
+    #   The subnets to use for the AutoScaling group that is created for
+    #   your node group. These subnets must have the tag key
+    #   `kubernetes.io/cluster/CLUSTER_NAME` with a value of `shared`, where
+    #   `CLUSTER_NAME` is replaced with the name of your cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_types
+    #   The instance type to use for your node group. Currently, you can
+    #   specify a single instance type for a node group. The default value
+    #   for this parameter is `t3.medium`. If you choose a GPU instance
+    #   type, be sure to specify the `AL2_x86_64_GPU` with the `amiType`
+    #   parameter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ami_type
+    #   The AMI type for your node group. GPU instance types should use the
+    #   `AL2_x86_64_GPU` AMI type, which uses the Amazon EKS-optimized Linux
+    #   AMI with GPU support; non-GPU instances should use the `AL2_x86_64`
+    #   AMI type, which uses the Amazon EKS-optimized Linux AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_access
+    #   The remote access (SSH) configuration to use with your node group.
+    #   @return [Types::RemoteAccessConfig]
+    #
+    # @!attribute [rw] node_role
+    #   The IAM role associated with your node group. The Amazon EKS worker
+    #   node `kubelet` daemon makes calls to AWS APIs on your behalf. Worker
+    #   nodes receive permissions for these API calls through an IAM
+    #   instance profile and associated policies. Before you can launch
+    #   worker nodes and register them into a cluster, you must create an
+    #   IAM role for those worker nodes to use when they are launched. For
+    #   more information, see [Amazon EKS Worker Node IAM Role][1] in the
+    #   <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] labels
+    #   The Kubernetes labels to be applied to the nodes in the node group
+    #   when they are created.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The metadata to apply to the node group to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define. Node group tags do not
+    #   propagate to any other resources associated with the node group,
+    #   such as the Amazon EC2 instances or subnets.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The Kubernetes version to use for your managed nodes. By default,
+    #   the Kubernetes version of the cluster is used, and this is the only
+    #   accepted specified value.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_version
+    #   The AMI version of the Amazon EKS-optimized AMI to use with your
+    #   node group. By default, the latest available AMI version for the
+    #   node group's current Kubernetes version is used. For more
+    #   information, see [Amazon EKS-Optimized Linux AMI Versions][1] in the
+    #   *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateNodegroupRequest AWS API Documentation
+    #
+    class CreateNodegroupRequest < Struct.new(
+      :cluster_name,
+      :nodegroup_name,
+      :scaling_config,
+      :disk_size,
+      :subnets,
+      :instance_types,
+      :ami_type,
+      :remote_access,
+      :node_role,
+      :labels,
+      :tags,
+      :client_request_token,
+      :version,
+      :release_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nodegroup
+    #   The full description of your new node group.
+    #   @return [Types::Nodegroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateNodegroupResponse AWS API Documentation
+    #
+    class CreateNodegroupResponse < Struct.new(
+      :nodegroup)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteClusterRequest
     #   data as a hash:
     #
@@ -303,6 +483,42 @@ module Aws::EKS
     #
     class DeleteClusterResponse < Struct.new(
       :cluster)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteNodegroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         nodegroup_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster that is associated with your node
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodegroup_name
+    #   The name of the node group to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteNodegroupRequest AWS API Documentation
+    #
+    class DeleteNodegroupRequest < Struct.new(
+      :cluster_name,
+      :nodegroup_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nodegroup
+    #   The full description of your deleted node group.
+    #   @return [Types::Nodegroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteNodegroupResponse AWS API Documentation
+    #
+    class DeleteNodegroupResponse < Struct.new(
+      :nodegroup)
       include Aws::Structure
     end
 
@@ -335,27 +551,68 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeNodegroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         nodegroup_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster associated with the node group.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodegroup_name
+    #   The name of the node group to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeNodegroupRequest AWS API Documentation
+    #
+    class DescribeNodegroupRequest < Struct.new(
+      :cluster_name,
+      :nodegroup_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nodegroup
+    #   The full description of your node group.
+    #   @return [Types::Nodegroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeNodegroupResponse AWS API Documentation
+    #
+    class DescribeNodegroupResponse < Struct.new(
+      :nodegroup)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeUpdateRequest
     #   data as a hash:
     #
     #       {
     #         name: "String", # required
     #         update_id: "String", # required
+    #         nodegroup_name: "String",
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Amazon EKS cluster to update.
+    #   The name of the Amazon EKS cluster associated with the update.
     #   @return [String]
     #
     # @!attribute [rw] update_id
     #   The ID of the update to describe.
     #   @return [String]
     #
+    # @!attribute [rw] nodegroup_name
+    #   The name of the Amazon EKS node group associated with the update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdateRequest AWS API Documentation
     #
     class DescribeUpdateRequest < Struct.new(
       :name,
-      :update_id)
+      :update_id,
+      :nodegroup_name)
       include Aws::Structure
     end
 
@@ -442,6 +699,9 @@ module Aws::EKS
     #   The Amazon EKS cluster associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] nodegroup_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -449,6 +709,7 @@ module Aws::EKS
     #
     class InvalidParameterException < Struct.new(
       :cluster_name,
+      :nodegroup_name,
       :message)
       include Aws::Structure
     end
@@ -460,6 +721,9 @@ module Aws::EKS
     #   The Amazon EKS cluster associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] nodegroup_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -467,7 +731,76 @@ module Aws::EKS
     #
     class InvalidRequestException < Struct.new(
       :cluster_name,
+      :nodegroup_name,
       :message)
+      include Aws::Structure
+    end
+
+    # An object representing an issue with an Amazon EKS resource.
+    #
+    # @!attribute [rw] code
+    #   A brief description of the error.
+    #
+    #   * **AutoScalingGroupNotFound**\: We couldn't find the Auto Scaling
+    #     group associated with the managed node group. You may be able to
+    #     recreate an Auto Scaling group with the same settings to recover.
+    #
+    #   * **Ec2SecurityGroupNotFound**\: We couldn't find the cluster
+    #     security group for the cluster. You must recreate your cluster.
+    #
+    #   * **Ec2SecurityGroupDeletionFailure**\: We could not delete the
+    #     remote access security group for your managed node group. Remove
+    #     any dependencies from the security group.
+    #
+    #   * **Ec2LaunchTemplateNotFound**\: We couldn't find the Amazon EC2
+    #     launch template for your managed node group. You may be able to
+    #     recreate a launch template with the same settings to recover.
+    #
+    #   * **Ec2LaunchTemplateVersionMismatch**\: The Amazon EC2 launch
+    #     template version for your managed node group does not match the
+    #     version that Amazon EKS created. You may be able to revert to the
+    #     Amazon EKS-created version to recover.
+    #
+    #   * **IamInstanceProfileNotFound**\: We couldn't find the IAM
+    #     instance profile for your managed node group. You may be able to
+    #     recreate an instance profile with the same settings to recover.
+    #
+    #   * **IamNodeRoleNotFound**\: We couldn't find the IAM role for your
+    #     managed node group. You may be able to recreate an IAM role with
+    #     the same settings to recover.
+    #
+    #   * **AsgInstanceLaunchFailures**\: Your Auto Scaling group is
+    #     experiencing failures while attempting to launch instances.
+    #
+    #   * **InstanceLimitExceeded**\: Your AWS account is unable to launch
+    #     any more instances of the specified instance type. You may be able
+    #     to request an Amazon EC2 instance limit increase to recover.
+    #
+    #   * **InsufficientFreeAddresses**\: One or more of the subnets
+    #     associated with your managed node group does not have enough
+    #     available IP addresses for new nodes.
+    #
+    #   * **AccessDenied**\: Amazon EKS and or one or more of your managed
+    #     nodes is unable to communicate with your cluster API server.
+    #
+    #   * **InternalFailure**\: These errors are usually caused by an Amazon
+    #     EKS server-side issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   The AWS resources that are afflicted by this issue.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Issue AWS API Documentation
+    #
+    class Issue < Struct.new(
+      :code,
+      :message,
+      :resource_ids)
       include Aws::Structure
     end
 
@@ -531,6 +864,69 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListNodegroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster that you would like to list node
+    #   groups in.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of node group results returned by
+    #   `ListNodegroups` in paginated output. When you use this parameter,
+    #   `ListNodegroups` returns only `maxResults` results in a single page
+    #   along with a `nextToken` response element. You can see the remaining
+    #   results of the initial request by sending another `ListNodegroups`
+    #   request with the returned `nextToken` value. This value can be
+    #   between 1 and 100. If you don't use this parameter,
+    #   `ListNodegroups` returns up to 100 results and a `nextToken` value
+    #   if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListNodegroups` request where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListNodegroupsRequest AWS API Documentation
+    #
+    class ListNodegroupsRequest < Struct.new(
+      :cluster_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nodegroups
+    #   A list of all of the node groups associated with the specified
+    #   cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListNodegroups`
+    #   request. When the results of a `ListNodegroups` request exceed
+    #   `maxResults`, you can use this value to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListNodegroupsResponse AWS API Documentation
+    #
+    class ListNodegroupsResponse < Struct.new(
+      :nodegroups,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -541,7 +937,7 @@ module Aws::EKS
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags. Currently, the supported resources are
-    #   Amazon EKS clusters.
+    #   Amazon EKS clusters and managed node groups.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListTagsForResourceRequest AWS API Documentation
@@ -567,12 +963,17 @@ module Aws::EKS
     #
     #       {
     #         name: "String", # required
+    #         nodegroup_name: "String",
     #         next_token: "String",
     #         max_results: 1,
     #       }
     #
     # @!attribute [rw] name
     #   The name of the Amazon EKS cluster to list updates for.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodegroup_name
+    #   The name of the Amazon EKS managed node group to list updates for.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -597,6 +998,7 @@ module Aws::EKS
     #
     class ListUpdatesRequest < Struct.new(
       :name,
+      :nodegroup_name,
       :next_token,
       :max_results)
       include Aws::Structure
@@ -677,6 +1079,221 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An object representing an Amazon EKS managed node group.
+    #
+    # @!attribute [rw] nodegroup_name
+    #   The name associated with an Amazon EKS managed node group.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodegroup_arn
+    #   The Amazon Resource Name (ARN) associated with the managed node
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster that the managed node group resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The Kubernetes version of the managed node group.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_version
+    #   The AMI version of the managed node group. For more information, see
+    #   [Amazon EKS-Optimized Linux AMI Versions ][1] in the *Amazon EKS
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the managed node group
+    #   was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The Unix epoch timestamp in seconds for when the managed node group
+    #   was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the managed node group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_config
+    #   The scaling configuration details for the AutoScaling group that is
+    #   associated with your node group.
+    #   @return [Types::NodegroupScalingConfig]
+    #
+    # @!attribute [rw] instance_types
+    #   The instance types associated with your node group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The subnets allowed for the AutoScaling group that is associated
+    #   with your node group. These subnets must have the following tag:
+    #   `kubernetes.io/cluster/CLUSTER_NAME`, where `CLUSTER_NAME` is
+    #   replaced with the name of your cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remote_access
+    #   The remote access (SSH) configuration that is associated with the
+    #   node group.
+    #   @return [Types::RemoteAccessConfig]
+    #
+    # @!attribute [rw] ami_type
+    #   The AMI type associated with your node group. GPU instance types
+    #   should use the `AL2_x86_64_GPU` AMI type, which uses the Amazon
+    #   EKS-optimized Linux AMI with GPU support; non-GPU instances should
+    #   use the `AL2_x86_64` AMI type, which uses the Amazon EKS-optimized
+    #   Linux AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_role
+    #   The IAM role associated with your node group. The Amazon EKS worker
+    #   node `kubelet` daemon makes calls to AWS APIs on your behalf. Worker
+    #   nodes receive permissions for these API calls through an IAM
+    #   instance profile and associated policies. Before you can launch
+    #   worker nodes and register them into a cluster, you must create an
+    #   IAM role for those worker nodes to use when they are launched. For
+    #   more information, see [Amazon EKS Worker Node IAM Role][1] in the
+    #   <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] labels
+    #   The Kubernetes labels applied to the nodes in the node group.
+    #
+    #   <note markdown="1"> Only labels that are applied with the Amazon EKS API are shown here.
+    #   There may be other Kubernetes labels applied to the nodes in this
+    #   group.
+    #
+    #    </note>
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] resources
+    #   The resources associated with the nodegroup, such as AutoScaling
+    #   groups and security groups for remote access.
+    #   @return [Types::NodegroupResources]
+    #
+    # @!attribute [rw] disk_size
+    #   The root device disk size (in GiB) for your node group instances.
+    #   The default disk size is 20 GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] health
+    #   The health status of the node group. If there are issues with your
+    #   node group's health, they are listed here.
+    #   @return [Types::NodegroupHealth]
+    #
+    # @!attribute [rw] tags
+    #   The metadata applied the node group to assist with categorization
+    #   and organization. Each tag consists of a key and an optional value,
+    #   both of which you define. Node group tags do not propagate to any
+    #   other resources associated with the node group, such as the Amazon
+    #   EC2 instances or subnets.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Nodegroup AWS API Documentation
+    #
+    class Nodegroup < Struct.new(
+      :nodegroup_name,
+      :nodegroup_arn,
+      :cluster_name,
+      :version,
+      :release_version,
+      :created_at,
+      :modified_at,
+      :status,
+      :scaling_config,
+      :instance_types,
+      :subnets,
+      :remote_access,
+      :ami_type,
+      :node_role,
+      :labels,
+      :resources,
+      :disk_size,
+      :health,
+      :tags)
+      include Aws::Structure
+    end
+
+    # An object representing the health status of the node group.
+    #
+    # @!attribute [rw] issues
+    #   Any issues that are associated with the node group.
+    #   @return [Array<Types::Issue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupHealth AWS API Documentation
+    #
+    class NodegroupHealth < Struct.new(
+      :issues)
+      include Aws::Structure
+    end
+
+    # An object representing the resources associated with the nodegroup,
+    # such as AutoScaling groups and security groups for remote access.
+    #
+    # @!attribute [rw] auto_scaling_groups
+    #   The autoscaling groups associated with the node group.
+    #   @return [Array<Types::AutoScalingGroup>]
+    #
+    # @!attribute [rw] remote_access_security_group
+    #   The remote access security group associated with the node group.
+    #   This security group controls SSH access to the worker nodes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupResources AWS API Documentation
+    #
+    class NodegroupResources < Struct.new(
+      :auto_scaling_groups,
+      :remote_access_security_group)
+      include Aws::Structure
+    end
+
+    # An object representing the scaling configuration details for the
+    # AutoScaling group that is associated with your node group.
+    #
+    # @note When making an API call, you may pass NodegroupScalingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         min_size: 1,
+    #         max_size: 1,
+    #         desired_size: 1,
+    #       }
+    #
+    # @!attribute [rw] min_size
+    #   The minimum number of worker nodes that the managed node group can
+    #   scale in to. This number must be greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_size
+    #   The maximum number of worker nodes that the managed node group can
+    #   scale out to. Managed node groups can support up to 100 nodes by
+    #   default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] desired_size
+    #   The current number of worker nodes that the managed node group
+    #   should maintain.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupScalingConfig AWS API Documentation
+    #
+    class NodegroupScalingConfig < Struct.new(
+      :min_size,
+      :max_size,
+      :desired_size)
+      include Aws::Structure
+    end
+
     # A service resource associated with the request could not be found.
     # Clients should not retry such requests.
     #
@@ -708,10 +1325,56 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An object representing the remote access configuration for the managed
+    # node group.
+    #
+    # @note When making an API call, you may pass RemoteAccessConfig
+    #   data as a hash:
+    #
+    #       {
+    #         ec2_ssh_key: "String",
+    #         source_security_groups: ["String"],
+    #       }
+    #
+    # @!attribute [rw] ec2_ssh_key
+    #   The Amazon EC2 SSH key that provides access for SSH communication
+    #   with the worker nodes in the managed node group. For more
+    #   information, see [Amazon EC2 Key Pairs][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide for Linux Instances*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    #   @return [String]
+    #
+    # @!attribute [rw] source_security_groups
+    #   The security groups to allow SSH access (port 22) from on the worker
+    #   nodes. If you specify an Amazon EC2 SSH key, but you do not specify
+    #   a source security group when you create a managed node group, port
+    #   22 on the worker nodes is opened to the internet (0.0.0.0/0). For
+    #   more information, see [Security Groups for Your VPC][1] in the
+    #   *Amazon Virtual Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RemoteAccessConfig AWS API Documentation
+    #
+    class RemoteAccessConfig < Struct.new(
+      :ec2_ssh_key,
+      :source_security_groups)
+      include Aws::Structure
+    end
+
     # The specified resource is in use.
     #
     # @!attribute [rw] cluster_name
     #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodegroup_name
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -721,6 +1384,7 @@ module Aws::EKS
     #
     class ResourceInUseException < Struct.new(
       :cluster_name,
+      :nodegroup_name,
       :message)
       include Aws::Structure
     end
@@ -731,6 +1395,9 @@ module Aws::EKS
     #   The Amazon EKS cluster associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] nodegroup_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -738,15 +1405,21 @@ module Aws::EKS
     #
     class ResourceLimitExceededException < Struct.new(
       :cluster_name,
+      :nodegroup_name,
       :message)
       include Aws::Structure
     end
 
     # The specified resource could not be found. You can view your available
-    # clusters with ListClusters. Amazon EKS clusters are Region-specific.
+    # clusters with ListClusters. You can view your available managed node
+    # groups with ListNodegroups. Amazon EKS clusters and node groups are
+    # Region-specific.
     #
     # @!attribute [rw] cluster_name
     #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodegroup_name
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -756,6 +1429,7 @@ module Aws::EKS
     #
     class ResourceNotFoundException < Struct.new(
       :cluster_name,
+      :nodegroup_name,
       :message)
       include Aws::Structure
     end
@@ -766,6 +1440,9 @@ module Aws::EKS
     #   The Amazon EKS cluster associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] nodegroup_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -773,6 +1450,7 @@ module Aws::EKS
     #
     class ServerException < Struct.new(
       :cluster_name,
+      :nodegroup_name,
       :message)
       include Aws::Structure
     end
@@ -801,7 +1479,8 @@ module Aws::EKS
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to add tags.
-    #   Currently, the supported resources are Amazon EKS clusters.
+    #   Currently, the supported resources are Amazon EKS clusters and
+    #   managed node groups.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -833,6 +1512,9 @@ module Aws::EKS
     #   The Amazon EKS cluster associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] nodegroup_name
+    #   @return [String]
+    #
     # @!attribute [rw] valid_zones
     #   The supported Availability Zones for your account. Choose subnets in
     #   these Availability Zones for your cluster.
@@ -843,6 +1525,7 @@ module Aws::EKS
     class UnsupportedAvailabilityZoneException < Struct.new(
       :message,
       :cluster_name,
+      :nodegroup_name,
       :valid_zones)
       include Aws::Structure
     end
@@ -857,7 +1540,8 @@ module Aws::EKS
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to delete
-    #   tags. Currently, the supported resources are Amazon EKS clusters.
+    #   tags. Currently, the supported resources are Amazon EKS clusters and
+    #   managed node groups.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -1039,6 +1723,184 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An object representing a Kubernetes label change for a managed node
+    # group.
+    #
+    # @note When making an API call, you may pass UpdateLabelsPayload
+    #   data as a hash:
+    #
+    #       {
+    #         add_or_update_labels: {
+    #           "labelKey" => "labelValue",
+    #         },
+    #         remove_labels: ["String"],
+    #       }
+    #
+    # @!attribute [rw] add_or_update_labels
+    #   Kubernetes labels to be added or updated.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] remove_labels
+    #   Kubernetes labels to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateLabelsPayload AWS API Documentation
+    #
+    class UpdateLabelsPayload < Struct.new(
+      :add_or_update_labels,
+      :remove_labels)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateNodegroupConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         nodegroup_name: "String", # required
+    #         labels: {
+    #           add_or_update_labels: {
+    #             "labelKey" => "labelValue",
+    #           },
+    #           remove_labels: ["String"],
+    #         },
+    #         scaling_config: {
+    #           min_size: 1,
+    #           max_size: 1,
+    #           desired_size: 1,
+    #         },
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster that the managed node group
+    #   resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodegroup_name
+    #   The name of the managed node group to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] labels
+    #   The Kubernetes labels to be applied to the nodes in the node group
+    #   after the update.
+    #   @return [Types::UpdateLabelsPayload]
+    #
+    # @!attribute [rw] scaling_config
+    #   The scaling configuration details for the AutoScaling group after
+    #   the update.
+    #   @return [Types::NodegroupScalingConfig]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateNodegroupConfigRequest AWS API Documentation
+    #
+    class UpdateNodegroupConfigRequest < Struct.new(
+      :cluster_name,
+      :nodegroup_name,
+      :labels,
+      :scaling_config,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateNodegroupConfigResponse AWS API Documentation
+    #
+    class UpdateNodegroupConfigResponse < Struct.new(
+      :update)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateNodegroupVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         nodegroup_name: "String", # required
+    #         version: "String",
+    #         release_version: "String",
+    #         force: false,
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster that is associated with the
+    #   managed node group to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodegroup_name
+    #   The name of the managed node group to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The Kubernetes version to update to. If no version is specified,
+    #   then the Kubernetes version of the node group does not change. You
+    #   can specify the Kubernetes version of the cluster to update the node
+    #   group to the latest AMI version of the cluster's Kubernetes
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_version
+    #   The AMI version of the Amazon EKS-optimized AMI to use for the
+    #   update. By default, the latest available AMI version for the node
+    #   group's Kubernetes version is used. For more information, see
+    #   [Amazon EKS-Optimized Linux AMI Versions ][1] in the *Amazon EKS
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   Force the update if the existing node group's pods are unable to be
+    #   drained due to a pod disruption budget issue. If a previous update
+    #   fails because pods could not be drained, you can force the update
+    #   after it fails to terminate the old node regardless of whether or
+    #   not any pods are running on the node.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateNodegroupVersionRequest AWS API Documentation
+    #
+    class UpdateNodegroupVersionRequest < Struct.new(
+      :cluster_name,
+      :nodegroup_name,
+      :version,
+      :release_version,
+      :force,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateNodegroupVersionResponse AWS API Documentation
+    #
+    class UpdateNodegroupVersionResponse < Struct.new(
+      :update)
+      include Aws::Structure
+    end
+
     # An object representing the details of an update request.
     #
     # @!attribute [rw] type
@@ -1136,6 +1998,12 @@ module Aws::EKS
     #   worker nodes and the Kubernetes control plane.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cluster_security_group_id
+    #   The cluster security group that was created by Amazon EKS for the
+    #   cluster. Managed node groups use this security group for control
+    #   plane to data plane communication.
+    #   @return [String]
+    #
     # @!attribute [rw] vpc_id
     #   The VPC associated with your cluster.
     #   @return [String]
@@ -1160,6 +2028,7 @@ module Aws::EKS
     class VpcConfigResponse < Struct.new(
       :subnet_ids,
       :security_group_ids,
+      :cluster_security_group_id,
       :vpc_id,
       :endpoint_public_access,
       :endpoint_private_access)

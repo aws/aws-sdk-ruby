@@ -436,6 +436,7 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.subnet_ids[0] #=> String
     #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
     #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
+    #   resp.cluster.resources_vpc_config.cluster_security_group_id #=> String
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
     #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
     #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
@@ -444,7 +445,7 @@ module Aws::EKS
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
     #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
     #   resp.cluster.identity.oidc.issuer #=> String
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
@@ -460,16 +461,195 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Creates a managed worker node group for an Amazon EKS cluster. You can
+    # only create a node group for your cluster that is equal to the current
+    # Kubernetes version for the cluster. All node groups are created with
+    # the latest AMI release version for the respective minor Kubernetes
+    # version of the cluster.
+    #
+    # An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group
+    # and associated Amazon EC2 instances that are managed by AWS for an
+    # Amazon EKS cluster. Each node group uses a version of the Amazon
+    # EKS-optimized Amazon Linux 2 AMI. For more information, see [Managed
+    # Node Groups][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster to create the node group in.
+    #
+    # @option params [required, String] :nodegroup_name
+    #   The unique name to give your node group.
+    #
+    # @option params [Types::NodegroupScalingConfig] :scaling_config
+    #   The scaling configuration details for the AutoScaling group that is
+    #   created for your node group.
+    #
+    # @option params [Integer] :disk_size
+    #   The root device disk size (in GiB) for your node group instances. The
+    #   default disk size is 20 GiB.
+    #
+    # @option params [required, Array<String>] :subnets
+    #   The subnets to use for the AutoScaling group that is created for your
+    #   node group. These subnets must have the tag key
+    #   `kubernetes.io/cluster/CLUSTER_NAME` with a value of `shared`, where
+    #   `CLUSTER_NAME` is replaced with the name of your cluster.
+    #
+    # @option params [Array<String>] :instance_types
+    #   The instance type to use for your node group. Currently, you can
+    #   specify a single instance type for a node group. The default value for
+    #   this parameter is `t3.medium`. If you choose a GPU instance type, be
+    #   sure to specify the `AL2_x86_64_GPU` with the `amiType` parameter.
+    #
+    # @option params [String] :ami_type
+    #   The AMI type for your node group. GPU instance types should use the
+    #   `AL2_x86_64_GPU` AMI type, which uses the Amazon EKS-optimized Linux
+    #   AMI with GPU support; non-GPU instances should use the `AL2_x86_64`
+    #   AMI type, which uses the Amazon EKS-optimized Linux AMI.
+    #
+    # @option params [Types::RemoteAccessConfig] :remote_access
+    #   The remote access (SSH) configuration to use with your node group.
+    #
+    # @option params [required, String] :node_role
+    #   The IAM role associated with your node group. The Amazon EKS worker
+    #   node `kubelet` daemon makes calls to AWS APIs on your behalf. Worker
+    #   nodes receive permissions for these API calls through an IAM instance
+    #   profile and associated policies. Before you can launch worker nodes
+    #   and register them into a cluster, you must create an IAM role for
+    #   those worker nodes to use when they are launched. For more
+    #   information, see [Amazon EKS Worker Node IAM Role][1] in the <i>
+    #   <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
+    #
+    # @option params [Hash<String,String>] :labels
+    #   The Kubernetes labels to be applied to the nodes in the node group
+    #   when they are created.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata to apply to the node group to assist with categorization
+    #   and organization. Each tag consists of a key and an optional value,
+    #   both of which you define. Node group tags do not propagate to any
+    #   other resources associated with the node group, such as the Amazon EC2
+    #   instances or subnets.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :version
+    #   The Kubernetes version to use for your managed nodes. By default, the
+    #   Kubernetes version of the cluster is used, and this is the only
+    #   accepted specified value.
+    #
+    # @option params [String] :release_version
+    #   The AMI version of the Amazon EKS-optimized AMI to use with your node
+    #   group. By default, the latest available AMI version for the node
+    #   group's current Kubernetes version is used. For more information, see
+    #   [Amazon EKS-Optimized Linux AMI Versions][1] in the *Amazon EKS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+    #
+    # @return [Types::CreateNodegroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNodegroupResponse#nodegroup #nodegroup} => Types::Nodegroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_nodegroup({
+    #     cluster_name: "String", # required
+    #     nodegroup_name: "String", # required
+    #     scaling_config: {
+    #       min_size: 1,
+    #       max_size: 1,
+    #       desired_size: 1,
+    #     },
+    #     disk_size: 1,
+    #     subnets: ["String"], # required
+    #     instance_types: ["String"],
+    #     ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU
+    #     remote_access: {
+    #       ec2_ssh_key: "String",
+    #       source_security_groups: ["String"],
+    #     },
+    #     node_role: "String", # required
+    #     labels: {
+    #       "labelKey" => "labelValue",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_request_token: "String",
+    #     version: "String",
+    #     release_version: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nodegroup.nodegroup_name #=> String
+    #   resp.nodegroup.nodegroup_arn #=> String
+    #   resp.nodegroup.cluster_name #=> String
+    #   resp.nodegroup.version #=> String
+    #   resp.nodegroup.release_version #=> String
+    #   resp.nodegroup.created_at #=> Time
+    #   resp.nodegroup.modified_at #=> Time
+    #   resp.nodegroup.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "DEGRADED"
+    #   resp.nodegroup.scaling_config.min_size #=> Integer
+    #   resp.nodegroup.scaling_config.max_size #=> Integer
+    #   resp.nodegroup.scaling_config.desired_size #=> Integer
+    #   resp.nodegroup.instance_types #=> Array
+    #   resp.nodegroup.instance_types[0] #=> String
+    #   resp.nodegroup.subnets #=> Array
+    #   resp.nodegroup.subnets[0] #=> String
+    #   resp.nodegroup.remote_access.ec2_ssh_key #=> String
+    #   resp.nodegroup.remote_access.source_security_groups #=> Array
+    #   resp.nodegroup.remote_access.source_security_groups[0] #=> String
+    #   resp.nodegroup.ami_type #=> String, one of "AL2_x86_64", "AL2_x86_64_GPU"
+    #   resp.nodegroup.node_role #=> String
+    #   resp.nodegroup.labels #=> Hash
+    #   resp.nodegroup.labels["labelKey"] #=> String
+    #   resp.nodegroup.resources.auto_scaling_groups #=> Array
+    #   resp.nodegroup.resources.auto_scaling_groups[0].name #=> String
+    #   resp.nodegroup.resources.remote_access_security_group #=> String
+    #   resp.nodegroup.disk_size #=> Integer
+    #   resp.nodegroup.health.issues #=> Array
+    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "IamInstanceProfileNotFound", "IamNodeRoleNotFound", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
+    #   resp.nodegroup.health.issues[0].message #=> String
+    #   resp.nodegroup.health.issues[0].resource_ids #=> Array
+    #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
+    #   resp.nodegroup.tags #=> Hash
+    #   resp.nodegroup.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateNodegroup AWS API Documentation
+    #
+    # @overload create_nodegroup(params = {})
+    # @param [Hash] params ({})
+    def create_nodegroup(params = {}, options = {})
+      req = build_request(:create_nodegroup, params)
+      req.send_request(options)
+    end
+
     # Deletes the Amazon EKS cluster control plane.
     #
-    # <note markdown="1"> If you have active services in your cluster that are associated with a
+    # If you have active services in your cluster that are associated with a
     # load balancer, you must delete those services before deleting the
     # cluster so that the load balancers are deleted properly. Otherwise,
     # you can have orphaned resources in your VPC that prevent you from
     # being able to delete the VPC. For more information, see [Deleting a
     # Cluster][1] in the *Amazon EKS User Guide*.
     #
-    #  </note>
+    # If you have managed node groups attached to the cluster, you must
+    # delete them first. For more information, see DeleteNodegroup.
     #
     #
     #
@@ -513,6 +693,7 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.subnet_ids[0] #=> String
     #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
     #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
+    #   resp.cluster.resources_vpc_config.cluster_security_group_id #=> String
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
     #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
     #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
@@ -521,7 +702,7 @@ module Aws::EKS
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
     #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
     #   resp.cluster.identity.oidc.issuer #=> String
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
@@ -534,6 +715,71 @@ module Aws::EKS
     # @param [Hash] params ({})
     def delete_cluster(params = {}, options = {})
       req = build_request(:delete_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon EKS node group for a cluster.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster that is associated with your node
+    #   group.
+    #
+    # @option params [required, String] :nodegroup_name
+    #   The name of the node group to delete.
+    #
+    # @return [Types::DeleteNodegroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteNodegroupResponse#nodegroup #nodegroup} => Types::Nodegroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_nodegroup({
+    #     cluster_name: "String", # required
+    #     nodegroup_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nodegroup.nodegroup_name #=> String
+    #   resp.nodegroup.nodegroup_arn #=> String
+    #   resp.nodegroup.cluster_name #=> String
+    #   resp.nodegroup.version #=> String
+    #   resp.nodegroup.release_version #=> String
+    #   resp.nodegroup.created_at #=> Time
+    #   resp.nodegroup.modified_at #=> Time
+    #   resp.nodegroup.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "DEGRADED"
+    #   resp.nodegroup.scaling_config.min_size #=> Integer
+    #   resp.nodegroup.scaling_config.max_size #=> Integer
+    #   resp.nodegroup.scaling_config.desired_size #=> Integer
+    #   resp.nodegroup.instance_types #=> Array
+    #   resp.nodegroup.instance_types[0] #=> String
+    #   resp.nodegroup.subnets #=> Array
+    #   resp.nodegroup.subnets[0] #=> String
+    #   resp.nodegroup.remote_access.ec2_ssh_key #=> String
+    #   resp.nodegroup.remote_access.source_security_groups #=> Array
+    #   resp.nodegroup.remote_access.source_security_groups[0] #=> String
+    #   resp.nodegroup.ami_type #=> String, one of "AL2_x86_64", "AL2_x86_64_GPU"
+    #   resp.nodegroup.node_role #=> String
+    #   resp.nodegroup.labels #=> Hash
+    #   resp.nodegroup.labels["labelKey"] #=> String
+    #   resp.nodegroup.resources.auto_scaling_groups #=> Array
+    #   resp.nodegroup.resources.auto_scaling_groups[0].name #=> String
+    #   resp.nodegroup.resources.remote_access_security_group #=> String
+    #   resp.nodegroup.disk_size #=> Integer
+    #   resp.nodegroup.health.issues #=> Array
+    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "IamInstanceProfileNotFound", "IamNodeRoleNotFound", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
+    #   resp.nodegroup.health.issues[0].message #=> String
+    #   resp.nodegroup.health.issues[0].resource_ids #=> Array
+    #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
+    #   resp.nodegroup.tags #=> Hash
+    #   resp.nodegroup.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteNodegroup AWS API Documentation
+    #
+    # @overload delete_nodegroup(params = {})
+    # @param [Hash] params ({})
+    def delete_nodegroup(params = {}, options = {})
+      req = build_request(:delete_nodegroup, params)
       req.send_request(options)
     end
 
@@ -613,6 +859,7 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.subnet_ids[0] #=> String
     #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
     #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
+    #   resp.cluster.resources_vpc_config.cluster_security_group_id #=> String
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
     #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
     #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
@@ -621,7 +868,7 @@ module Aws::EKS
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
     #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
     #   resp.cluster.identity.oidc.issuer #=> String
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
@@ -637,18 +884,85 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Returns descriptive information about an Amazon EKS node group.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster associated with the node group.
+    #
+    # @option params [required, String] :nodegroup_name
+    #   The name of the node group to describe.
+    #
+    # @return [Types::DescribeNodegroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNodegroupResponse#nodegroup #nodegroup} => Types::Nodegroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_nodegroup({
+    #     cluster_name: "String", # required
+    #     nodegroup_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nodegroup.nodegroup_name #=> String
+    #   resp.nodegroup.nodegroup_arn #=> String
+    #   resp.nodegroup.cluster_name #=> String
+    #   resp.nodegroup.version #=> String
+    #   resp.nodegroup.release_version #=> String
+    #   resp.nodegroup.created_at #=> Time
+    #   resp.nodegroup.modified_at #=> Time
+    #   resp.nodegroup.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "DEGRADED"
+    #   resp.nodegroup.scaling_config.min_size #=> Integer
+    #   resp.nodegroup.scaling_config.max_size #=> Integer
+    #   resp.nodegroup.scaling_config.desired_size #=> Integer
+    #   resp.nodegroup.instance_types #=> Array
+    #   resp.nodegroup.instance_types[0] #=> String
+    #   resp.nodegroup.subnets #=> Array
+    #   resp.nodegroup.subnets[0] #=> String
+    #   resp.nodegroup.remote_access.ec2_ssh_key #=> String
+    #   resp.nodegroup.remote_access.source_security_groups #=> Array
+    #   resp.nodegroup.remote_access.source_security_groups[0] #=> String
+    #   resp.nodegroup.ami_type #=> String, one of "AL2_x86_64", "AL2_x86_64_GPU"
+    #   resp.nodegroup.node_role #=> String
+    #   resp.nodegroup.labels #=> Hash
+    #   resp.nodegroup.labels["labelKey"] #=> String
+    #   resp.nodegroup.resources.auto_scaling_groups #=> Array
+    #   resp.nodegroup.resources.auto_scaling_groups[0].name #=> String
+    #   resp.nodegroup.resources.remote_access_security_group #=> String
+    #   resp.nodegroup.disk_size #=> Integer
+    #   resp.nodegroup.health.issues #=> Array
+    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "IamInstanceProfileNotFound", "IamNodeRoleNotFound", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
+    #   resp.nodegroup.health.issues[0].message #=> String
+    #   resp.nodegroup.health.issues[0].resource_ids #=> Array
+    #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
+    #   resp.nodegroup.tags #=> Hash
+    #   resp.nodegroup.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeNodegroup AWS API Documentation
+    #
+    # @overload describe_nodegroup(params = {})
+    # @param [Hash] params ({})
+    def describe_nodegroup(params = {}, options = {})
+      req = build_request(:describe_nodegroup, params)
+      req.send_request(options)
+    end
+
     # Returns descriptive information about an update against your Amazon
-    # EKS cluster.
+    # EKS cluster or associated managed node group.
     #
     # When the status of the update is `Succeeded`, the update is complete.
     # If an update fails, the status is `Failed`, and an error detail
     # explains the reason for the failure.
     #
     # @option params [required, String] :name
-    #   The name of the Amazon EKS cluster to update.
+    #   The name of the Amazon EKS cluster associated with the update.
     #
     # @option params [required, String] :update_id
     #   The ID of the update to describe.
+    #
+    # @option params [String] :nodegroup_name
+    #   The name of the Amazon EKS node group associated with the update.
     #
     # @return [Types::DescribeUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -659,19 +973,20 @@ module Aws::EKS
     #   resp = client.describe_update({
     #     name: "String", # required
     #     update_id: "String", # required
+    #     nodegroup_name: "String",
     #   })
     #
     # @example Response structure
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -753,16 +1068,83 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Lists the Amazon EKS node groups associated with the specified cluster
+    # in your AWS account in the specified Region.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster that you would like to list node
+    #   groups in.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of node group results returned by `ListNodegroups`
+    #   in paginated output. When you use this parameter, `ListNodegroups`
+    #   returns only `maxResults` results in a single page along with a
+    #   `nextToken` response element. You can see the remaining results of the
+    #   initial request by sending another `ListNodegroups` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   you don't use this parameter, `ListNodegroups` returns up to 100
+    #   results and a `nextToken` value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListNodegroups` request where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #
+    # @return [Types::ListNodegroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNodegroupsResponse#nodegroups #nodegroups} => Array&lt;String&gt;
+    #   * {Types::ListNodegroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_nodegroups({
+    #     cluster_name: "String", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nodegroups #=> Array
+    #   resp.nodegroups[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListNodegroups AWS API Documentation
+    #
+    # @overload list_nodegroups(params = {})
+    # @param [Hash] params ({})
+    def list_nodegroups(params = {}, options = {})
+      req = build_request(:list_nodegroups, params)
+      req.send_request(options)
+    end
+
     # List the tags for an Amazon EKS resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for which
     #   to list the tags. Currently, the supported resources are Amazon EKS
-    #   clusters.
+    #   clusters and managed node groups.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: To list tags for a cluster
+    #
+    #   # This example lists all of the tags for the `beta` cluster.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:eks:us-west-2:012345678910:cluster/beta", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "aws:tag:domain" => "beta", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -784,11 +1166,14 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Lists the updates associated with an Amazon EKS cluster in your AWS
-    # account, in the specified Region.
+    # Lists the updates associated with an Amazon EKS cluster or managed
+    # node group in your AWS account, in the specified Region.
     #
     # @option params [required, String] :name
     #   The name of the Amazon EKS cluster to list updates for.
+    #
+    # @option params [String] :nodegroup_name
+    #   The name of the Amazon EKS managed node group to list updates for.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated `ListUpdates`
@@ -815,6 +1200,7 @@ module Aws::EKS
     #
     #   resp = client.list_updates({
     #     name: "String", # required
+    #     nodegroup_name: "String",
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -837,11 +1223,16 @@ module Aws::EKS
     # Associates the specified tags to a resource with the specified
     # `resourceArn`. If existing tags on a resource are not specified in the
     # request parameters, they are not changed. When a resource is deleted,
-    # the tags associated with that resource are deleted as well.
+    # the tags associated with that resource are deleted as well. Tags that
+    # you create for Amazon EKS resources do not propagate to any other
+    # resources associated with the cluster. For example, if you tag a
+    # cluster with this operation, that tag does not automatically propagate
+    # to the subnets and worker nodes associated with the cluster.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to add tags.
-    #   Currently, the supported resources are Amazon EKS clusters.
+    #   Currently, the supported resources are Amazon EKS clusters and managed
+    #   node groups.
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags to add to the resource. A tag is an array of key-value pairs.
@@ -870,7 +1261,8 @@ module Aws::EKS
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to delete
-    #   tags. Currently, the supported resources are Amazon EKS clusters.
+    #   tags. Currently, the supported resources are Amazon EKS clusters and
+    #   managed node groups.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to be removed.
@@ -992,13 +1384,13 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -1022,6 +1414,10 @@ module Aws::EKS
     # (this status transition is eventually consistent). When the update is
     # complete (either `Failed` or `Successful`), the cluster status moves
     # to `Active`.
+    #
+    # If your cluster has managed node groups attached to it, all of your
+    # node groups’ Kubernetes versions must match the cluster’s Kubernetes
+    # version in order to update the cluster to a new Kubernetes version.
     #
     # @option params [required, String] :name
     #   The name of the Amazon EKS cluster to update.
@@ -1052,13 +1448,13 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -1069,6 +1465,181 @@ module Aws::EKS
     # @param [Hash] params ({})
     def update_cluster_version(params = {}, options = {})
       req = build_request(:update_cluster_version, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon EKS managed node group configuration. Your node
+    # group continues to function during the update. The response output
+    # includes an update ID that you can use to track the status of your
+    # node group update with the DescribeUpdate API operation. Currently you
+    # can update the Kubernetes labels for a node group or the scaling
+    # configuration.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster that the managed node group resides
+    #   in.
+    #
+    # @option params [required, String] :nodegroup_name
+    #   The name of the managed node group to update.
+    #
+    # @option params [Types::UpdateLabelsPayload] :labels
+    #   The Kubernetes labels to be applied to the nodes in the node group
+    #   after the update.
+    #
+    # @option params [Types::NodegroupScalingConfig] :scaling_config
+    #   The scaling configuration details for the AutoScaling group after the
+    #   update.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateNodegroupConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateNodegroupConfigResponse#update #update} => Types::Update
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_nodegroup_config({
+    #     cluster_name: "String", # required
+    #     nodegroup_name: "String", # required
+    #     labels: {
+    #       add_or_update_labels: {
+    #         "labelKey" => "labelValue",
+    #       },
+    #       remove_labels: ["String"],
+    #     },
+    #     scaling_config: {
+    #       min_size: 1,
+    #       max_size: 1,
+    #       desired_size: 1,
+    #     },
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateNodegroupConfig AWS API Documentation
+    #
+    # @overload update_nodegroup_config(params = {})
+    # @param [Hash] params ({})
+    def update_nodegroup_config(params = {}, options = {})
+      req = build_request(:update_nodegroup_config, params)
+      req.send_request(options)
+    end
+
+    # Updates the Kubernetes version or AMI version of an Amazon EKS managed
+    # node group.
+    #
+    # You can update to the latest available AMI version of a node group's
+    # current Kubernetes version by not specifying a Kubernetes version in
+    # the request. You can update to the latest AMI version of your
+    # cluster's current Kubernetes version by specifying your cluster's
+    # Kubernetes version in the request. For more information, see [Amazon
+    # EKS-Optimized Linux AMI Versions][1] in the *Amazon EKS User Guide*.
+    #
+    # You cannot roll back a node group to an earlier Kubernetes version or
+    # AMI version.
+    #
+    # When a node in a managed node group is terminated due to a scaling
+    # action or update, the pods in that node are drained first. Amazon EKS
+    # attempts to drain the nodes gracefully and will fail if it is unable
+    # to do so. You can `force` the update if Amazon EKS is unable to drain
+    # the nodes as a result of a pod disruption budget issue.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster that is associated with the managed
+    #   node group to update.
+    #
+    # @option params [required, String] :nodegroup_name
+    #   The name of the managed node group to update.
+    #
+    # @option params [String] :version
+    #   The Kubernetes version to update to. If no version is specified, then
+    #   the Kubernetes version of the node group does not change. You can
+    #   specify the Kubernetes version of the cluster to update the node group
+    #   to the latest AMI version of the cluster's Kubernetes version.
+    #
+    # @option params [String] :release_version
+    #   The AMI version of the Amazon EKS-optimized AMI to use for the update.
+    #   By default, the latest available AMI version for the node group's
+    #   Kubernetes version is used. For more information, see [Amazon
+    #   EKS-Optimized Linux AMI Versions ][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+    #
+    # @option params [Boolean] :force
+    #   Force the update if the existing node group's pods are unable to be
+    #   drained due to a pod disruption budget issue. If a previous update
+    #   fails because pods could not be drained, you can force the update
+    #   after it fails to terminate the old node regardless of whether or not
+    #   any pods are running on the node.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateNodegroupVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateNodegroupVersionResponse#update #update} => Types::Update
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_nodegroup_version({
+    #     cluster_name: "String", # required
+    #     nodegroup_name: "String", # required
+    #     version: "String",
+    #     release_version: "String",
+    #     force: false,
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateNodegroupVersion AWS API Documentation
+    #
+    # @overload update_nodegroup_version(params = {})
+    # @param [Hash] params ({})
+    def update_nodegroup_version(params = {}, options = {})
+      req = build_request(:update_nodegroup_version, params)
       req.send_request(options)
     end
 
@@ -1085,7 +1656,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1151,10 +1722,12 @@ module Aws::EKS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name     | params              | :delay   | :max_attempts |
-    # | --------------- | ------------------- | -------- | ------------- |
-    # | cluster_active  | {#describe_cluster} | 30       | 40            |
-    # | cluster_deleted | {#describe_cluster} | 30       | 40            |
+    # | waiter_name       | params                | :delay   | :max_attempts |
+    # | ----------------- | --------------------- | -------- | ------------- |
+    # | cluster_active    | {#describe_cluster}   | 30       | 40            |
+    # | cluster_deleted   | {#describe_cluster}   | 30       | 40            |
+    # | nodegroup_active  | {#describe_nodegroup} | 30       | 80            |
+    # | nodegroup_deleted | {#describe_nodegroup} | 30       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -1206,7 +1779,9 @@ module Aws::EKS
     def waiters
       {
         cluster_active: Waiters::ClusterActive,
-        cluster_deleted: Waiters::ClusterDeleted
+        cluster_deleted: Waiters::ClusterDeleted,
+        nodegroup_active: Waiters::NodegroupActive,
+        nodegroup_deleted: Waiters::NodegroupDeleted
       }
     end
 

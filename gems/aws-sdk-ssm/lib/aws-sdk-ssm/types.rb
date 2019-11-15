@@ -5362,8 +5362,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters. Use a filter to return a more specific list of
-    #   results.
+    #   This data type is deprecated. Instead, use `ParameterFilters`.
     #   @return [Array<Types::ParametersFilter>]
     #
     # @!attribute [rw] parameter_filters
@@ -7687,10 +7686,6 @@ module Aws::SSM
     #
     # @!attribute [rw] parameter_filters
     #   Filters to limit the request results.
-    #
-    #   <note markdown="1"> You can't filter using the parameter name.
-    #
-    #    </note>
     #   @return [Array<Types::ParameterStringFilter>]
     #
     # @!attribute [rw] with_decryption
@@ -12054,11 +12049,24 @@ module Aws::SSM
     # One or more filters. Use a filter to return a more specific list of
     # results.
     #
-    # <note markdown="1"> The `Name` and `Tier` filter keys can't be used with the
-    # GetParametersByPath API action. Also, the `Label` filter key can't be
-    # used with the DescribeParameters API action.
+    # The `ParameterStringFilter` object is used by the DescribeParameters
+    # and GetParametersByPath API actions. However, not all of the pattern
+    # values listed for `Key` can be used with both actions.
     #
-    #  </note>
+    #  For `DescribeActions`, all of the listed patterns are valid, with the
+    # exception of `Label`.
+    #
+    #  For `GetParametersByPath`, the following patterns listed for `Key`
+    # are
+    # not valid: `Name`, `Path`, and `Tier`.
+    #
+    #  For examples of CLI commands demonstrating valid parameter filter
+    # constructions, see [Searching for Systems Manager Parameters][1] in
+    # the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html
     #
     # @note When making an API call, you may pass ParameterStringFilter
     #   data as a hash:
@@ -12074,8 +12082,14 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] option
-    #   Valid options are Equals and BeginsWith. For Path filter, valid
-    #   options are Recursive and OneLevel.
+    #   For all filters used with DescribeParameters, valid options include
+    #   `Equals` and `BeginsWith`. The `Name` filter additionally supports
+    #   the `Contains` option. (Exception: For filters using the key `Path`,
+    #   valid options include `Recursive` and `OneLevel`.)
+    #
+    #   For filters used with GetParametersByPath, valid options include
+    #   `Equals` and `BeginsWith`. (Exception: For filters using the key
+    #   `Label`, the only valid option is `Equals`.)
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -14957,21 +14971,9 @@ module Aws::SSM
     # * (Maintenance window targets only)
     #   `Key=resource-groups:Name,Values=ProductionResourceGroup`
     #
-    #   This example demonstrates how to target all resources in the
-    #   resource group **ProductionResourceGroup** in your maintenance
-    #   window.
-    #
     # * (Maintenance window targets only)
     #   `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
     #   `
-    #
-    #   This example demonstrates how to target only Amazon EC2 instances
-    #   and VPCs in your maintenance window.
-    #
-    # * (State Manager association targets only) `Key=InstanceIds,Values=* `
-    #
-    #   This example demonstrates how to target all managed instances in the
-    #   AWS Region where the association was created.
     #
     # For information about how to send commands that target instances using
     # `Key,Value` parameters, see [Using Targets and Rate Controls to Send

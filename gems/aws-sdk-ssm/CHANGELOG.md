@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2019-11-15)
+------------------
+
+* Feature - This release updates AWS Systems Manager Parameter Store documentation for the enhanced search capability.
+
 1.60.0 (2019-11-14)
 ------------------
 

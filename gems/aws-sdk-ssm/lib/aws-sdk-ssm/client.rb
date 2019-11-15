@@ -3628,7 +3628,7 @@ module Aws::SSM
 
     # Get information about a parameter.
     #
-    # Request results are returned on a best-effort basis. If you specify
+    # <note markdown="1"> Request results are returned on a best-effort basis. If you specify
     # `MaxResults` in the request, the response includes information up to
     # the limit specified. The number of items returned, however, can be
     # between zero and the value of `MaxResults`. If the service reaches an
@@ -3637,9 +3637,10 @@ module Aws::SSM
     # You can specify the `NextToken` in a subsequent call to get the next
     # set of results.
     #
+    #  </note>
+    #
     # @option params [Array<Types::ParametersFilter>] :filters
-    #   One or more filters. Use a filter to return a more specific list of
-    #   results.
+    #   This data type is deprecated. Instead, use `ParameterFilters`.
     #
     # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
     #   Filters to limit the request results.
@@ -5107,11 +5108,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieve parameters in a specific hierarchy. For more information, see
-    # [Working with Systems Manager Parameters][1] in the *AWS Systems
-    # Manager User Guide*.
+    # Retrieve information about one or more parameters in a specific
+    # hierarchy.
     #
-    # Request results are returned on a best-effort basis. If you specify
+    # <note markdown="1"> Request results are returned on a best-effort basis. If you specify
     # `MaxResults` in the request, the response includes information up to
     # the limit specified. The number of items returned, however, can be
     # between zero and the value of `MaxResults`. If the service reaches an
@@ -5120,13 +5120,7 @@ module Aws::SSM
     # You can specify the `NextToken` in a subsequent call to get the next
     # set of results.
     #
-    # <note markdown="1"> This API action doesn't support filtering by tags.
-    #
     #  </note>
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html
     #
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
@@ -5146,10 +5140,6 @@ module Aws::SSM
     #
     # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
     #   Filters to limit the request results.
-    #
-    #   <note markdown="1"> You can't filter using the parameter name.
-    #
-    #    </note>
     #
     # @option params [Boolean] :with_decryption
     #   Retrieve all parameters in a hierarchy with their value decrypted.
@@ -8945,7 +8935,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

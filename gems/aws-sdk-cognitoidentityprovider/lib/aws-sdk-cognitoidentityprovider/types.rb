@@ -3420,6 +3420,8 @@ module Aws::CognitoIdentityProvider
     #           source_arn: "ArnType",
     #           reply_to_email_address: "EmailAddressType",
     #           email_sending_account: "COGNITO_DEFAULT", # accepts COGNITO_DEFAULT, DEVELOPER
+    #           from: "StringType",
+    #           configuration_set: "SESConfigurationSet",
     #         },
     #         sms_configuration: {
     #           sns_caller_arn: "ArnType", # required
@@ -4234,6 +4236,8 @@ module Aws::CognitoIdentityProvider
     #         source_arn: "ArnType",
     #         reply_to_email_address: "EmailAddressType",
     #         email_sending_account: "COGNITO_DEFAULT", # accepts COGNITO_DEFAULT, DEVELOPER
+    #         from: "StringType",
+    #         configuration_set: "SESConfigurationSet",
     #       }
     #
     # @!attribute [rw] source_arn
@@ -4304,12 +4308,40 @@ module Aws::CognitoIdentityProvider
     #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/using-service-linked-roles.html
     #   @return [String]
     #
+    # @!attribute [rw] from
+    #   Identifies either the sender’s email address or the sender’s name
+    #   with their email address. For example, `testuser@example.com` or
+    #   `Test User <testuser@example.com>`. This address will appear before
+    #   the body of the email.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set
+    #   The set of configuration rules that can be applied to emails sent
+    #   using Amazon SES. A configuration set is applied to an email by
+    #   including a reference to the configuration set in the headers of the
+    #   email. Once applied, all of the rules in that configuration set are
+    #   applied to the email. Configuration sets can be used to apply the
+    #   following types of rules to emails:
+    #
+    #   * Event publishing – Amazon SES can track the number of send,
+    #     delivery, open, click, bounce, and complaint events for each email
+    #     sent. Use event publishing to send information about these events
+    #     to other AWS services such as SNS and CloudWatch.
+    #
+    #   * IP pool management – When leasing dedicated IP addresses with
+    #     Amazon SES, you can create groups of IP addresses, called
+    #     dedicated IP pools. You can then associate the dedicated IP pools
+    #     with configuration sets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EmailConfigurationType AWS API Documentation
     #
     class EmailConfigurationType < Struct.new(
       :source_arn,
       :reply_to_email_address,
-      :email_sending_account)
+      :email_sending_account,
+      :from,
+      :configuration_set)
       include Aws::Structure
     end
 
@@ -8655,6 +8687,8 @@ module Aws::CognitoIdentityProvider
     #           source_arn: "ArnType",
     #           reply_to_email_address: "EmailAddressType",
     #           email_sending_account: "COGNITO_DEFAULT", # accepts COGNITO_DEFAULT, DEVELOPER
+    #           from: "StringType",
+    #           configuration_set: "SESConfigurationSet",
     #         },
     #         sms_configuration: {
     #           sns_caller_arn: "ArnType", # required

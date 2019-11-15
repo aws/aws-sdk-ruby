@@ -70,6 +70,7 @@ module Aws::MediaConvert
     CaptionSourceSettings = Shapes::StructureShape.new(name: 'CaptionSourceSettings')
     CaptionSourceType = Shapes::StringShape.new(name: 'CaptionSourceType')
     ChannelMapping = Shapes::StructureShape.new(name: 'ChannelMapping')
+    CmafAdditionalManifest = Shapes::StructureShape.new(name: 'CmafAdditionalManifest')
     CmafClientCache = Shapes::StringShape.new(name: 'CmafClientCache')
     CmafCodecSpecification = Shapes::StringShape.new(name: 'CmafCodecSpecification')
     CmafEncryptionSettings = Shapes::StructureShape.new(name: 'CmafEncryptionSettings')
@@ -101,6 +102,7 @@ module Aws::MediaConvert
     CreatePresetResponse = Shapes::StructureShape.new(name: 'CreatePresetResponse')
     CreateQueueRequest = Shapes::StructureShape.new(name: 'CreateQueueRequest')
     CreateQueueResponse = Shapes::StructureShape.new(name: 'CreateQueueResponse')
+    DashAdditionalManifest = Shapes::StructureShape.new(name: 'DashAdditionalManifest')
     DashIsoEncryptionSettings = Shapes::StructureShape.new(name: 'DashIsoEncryptionSettings')
     DashIsoGroupSettings = Shapes::StructureShape.new(name: 'DashIsoGroupSettings')
     DashIsoHbbtvCompliance = Shapes::StringShape.new(name: 'DashIsoHbbtvCompliance')
@@ -125,6 +127,10 @@ module Aws::MediaConvert
     DestinationSettings = Shapes::StructureShape.new(name: 'DestinationSettings')
     DisassociateCertificateRequest = Shapes::StructureShape.new(name: 'DisassociateCertificateRequest')
     DisassociateCertificateResponse = Shapes::StructureShape.new(name: 'DisassociateCertificateResponse')
+    DolbyVision = Shapes::StructureShape.new(name: 'DolbyVision')
+    DolbyVisionLevel6Metadata = Shapes::StructureShape.new(name: 'DolbyVisionLevel6Metadata')
+    DolbyVisionLevel6Mode = Shapes::StringShape.new(name: 'DolbyVisionLevel6Mode')
+    DolbyVisionProfile = Shapes::StringShape.new(name: 'DolbyVisionProfile')
     DropFrameTimecode = Shapes::StringShape.new(name: 'DropFrameTimecode')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
     DvbSdtSettings = Shapes::StructureShape.new(name: 'DvbSdtSettings')
@@ -239,6 +245,7 @@ module Aws::MediaConvert
     H265WriteMp4PackagingType = Shapes::StringShape.new(name: 'H265WriteMp4PackagingType')
     Hdr10Metadata = Shapes::StructureShape.new(name: 'Hdr10Metadata')
     HlsAdMarkers = Shapes::StringShape.new(name: 'HlsAdMarkers')
+    HlsAdditionalManifest = Shapes::StructureShape.new(name: 'HlsAdditionalManifest')
     HlsAudioOnlyContainer = Shapes::StringShape.new(name: 'HlsAudioOnlyContainer')
     HlsAudioTrackType = Shapes::StringShape.new(name: 'HlsAudioTrackType')
     HlsCaptionLanguageMapping = Shapes::StructureShape.new(name: 'HlsCaptionLanguageMapping')
@@ -330,6 +337,10 @@ module Aws::MediaConvert
     Mp4FreeSpaceBox = Shapes::StringShape.new(name: 'Mp4FreeSpaceBox')
     Mp4MoovPlacement = Shapes::StringShape.new(name: 'Mp4MoovPlacement')
     Mp4Settings = Shapes::StructureShape.new(name: 'Mp4Settings')
+    MpdCaptionContainerType = Shapes::StringShape.new(name: 'MpdCaptionContainerType')
+    MpdScte35Esam = Shapes::StringShape.new(name: 'MpdScte35Esam')
+    MpdScte35Source = Shapes::StringShape.new(name: 'MpdScte35Source')
+    MpdSettings = Shapes::StructureShape.new(name: 'MpdSettings')
     Mpeg2AdaptiveQuantization = Shapes::StringShape.new(name: 'Mpeg2AdaptiveQuantization')
     Mpeg2CodecLevel = Shapes::StringShape.new(name: 'Mpeg2CodecLevel')
     Mpeg2CodecProfile = Shapes::StringShape.new(name: 'Mpeg2CodecProfile')
@@ -349,6 +360,7 @@ module Aws::MediaConvert
     Mpeg2Syntax = Shapes::StringShape.new(name: 'Mpeg2Syntax')
     Mpeg2Telecine = Shapes::StringShape.new(name: 'Mpeg2Telecine')
     Mpeg2TemporalAdaptiveQuantization = Shapes::StringShape.new(name: 'Mpeg2TemporalAdaptiveQuantization')
+    MsSmoothAdditionalManifest = Shapes::StructureShape.new(name: 'MsSmoothAdditionalManifest')
     MsSmoothAudioDeduplication = Shapes::StringShape.new(name: 'MsSmoothAudioDeduplication')
     MsSmoothEncryptionSettings = Shapes::StructureShape.new(name: 'MsSmoothEncryptionSettings')
     MsSmoothGroupSettings = Shapes::StructureShape.new(name: 'MsSmoothGroupSettings')
@@ -393,8 +405,10 @@ module Aws::MediaConvert
     ReservationPlanStatus = Shapes::StringShape.new(name: 'ReservationPlanStatus')
     ResourceTags = Shapes::StructureShape.new(name: 'ResourceTags')
     RespondToAfd = Shapes::StringShape.new(name: 'RespondToAfd')
+    S3DestinationAccessControl = Shapes::StructureShape.new(name: 'S3DestinationAccessControl')
     S3DestinationSettings = Shapes::StructureShape.new(name: 'S3DestinationSettings')
     S3EncryptionSettings = Shapes::StructureShape.new(name: 'S3EncryptionSettings')
+    S3ObjectCannedAcl = Shapes::StringShape.new(name: 'S3ObjectCannedAcl')
     S3ServerSideEncryptionType = Shapes::StringShape.new(name: 'S3ServerSideEncryptionType')
     ScalingBehavior = Shapes::StringShape.new(name: 'ScalingBehavior')
     SccDestinationFramerate = Shapes::StringShape.new(name: 'SccDestinationFramerate')
@@ -521,8 +535,11 @@ module Aws::MediaConvert
     __listOfAudioDescription = Shapes::ListShape.new(name: '__listOfAudioDescription')
     __listOfCaptionDescription = Shapes::ListShape.new(name: '__listOfCaptionDescription')
     __listOfCaptionDescriptionPreset = Shapes::ListShape.new(name: '__listOfCaptionDescriptionPreset')
+    __listOfCmafAdditionalManifest = Shapes::ListShape.new(name: '__listOfCmafAdditionalManifest')
+    __listOfDashAdditionalManifest = Shapes::ListShape.new(name: '__listOfDashAdditionalManifest')
     __listOfEndpoint = Shapes::ListShape.new(name: '__listOfEndpoint')
     __listOfHlsAdMarkers = Shapes::ListShape.new(name: '__listOfHlsAdMarkers')
+    __listOfHlsAdditionalManifest = Shapes::ListShape.new(name: '__listOfHlsAdditionalManifest')
     __listOfHlsCaptionLanguageMapping = Shapes::ListShape.new(name: '__listOfHlsCaptionLanguageMapping')
     __listOfId3Insertion = Shapes::ListShape.new(name: '__listOfId3Insertion')
     __listOfInput = Shapes::ListShape.new(name: '__listOfInput')
@@ -531,6 +548,7 @@ module Aws::MediaConvert
     __listOfInsertableImage = Shapes::ListShape.new(name: '__listOfInsertableImage')
     __listOfJob = Shapes::ListShape.new(name: '__listOfJob')
     __listOfJobTemplate = Shapes::ListShape.new(name: '__listOfJobTemplate')
+    __listOfMsSmoothAdditionalManifest = Shapes::ListShape.new(name: '__listOfMsSmoothAdditionalManifest')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfOutputChannelMapping = Shapes::ListShape.new(name: '__listOfOutputChannelMapping')
     __listOfOutputDetail = Shapes::ListShape.new(name: '__listOfOutputDetail')
@@ -574,6 +592,7 @@ module Aws::MediaConvert
     __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = Shapes::StringShape.new(name: '__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12')
     __stringPatternAZaZ0902 = Shapes::StringShape.new(name: '__stringPatternAZaZ0902')
     __stringPatternAZaZ0932 = Shapes::StringShape.new(name: '__stringPatternAZaZ0932')
+    __stringPatternAZaZ23AZaZ = Shapes::StringShape.new(name: '__stringPatternAZaZ23AZaZ')
     __stringPatternArnAwsUsGovAcm = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovAcm')
     __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912 = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912')
     __stringPatternDD = Shapes::StringShape.new(name: '__stringPatternDD')
@@ -644,7 +663,7 @@ module Aws::MediaConvert
     AudioDescription.add_member(:audio_type, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "audioType"))
     AudioDescription.add_member(:audio_type_control, Shapes::ShapeRef.new(shape: AudioTypeControl, location_name: "audioTypeControl"))
     AudioDescription.add_member(:codec_settings, Shapes::ShapeRef.new(shape: AudioCodecSettings, location_name: "codecSettings"))
-    AudioDescription.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
+    AudioDescription.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringPatternAZaZ23AZaZ, location_name: "customLanguageCode"))
     AudioDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     AudioDescription.add_member(:language_code_control, Shapes::ShapeRef.new(shape: AudioLanguageCodeControl, location_name: "languageCodeControl"))
     AudioDescription.add_member(:remix_settings, Shapes::ShapeRef.new(shape: RemixSettings, location_name: "remixSettings"))
@@ -705,13 +724,13 @@ module Aws::MediaConvert
     CancelJobResponse.struct_class = Types::CancelJobResponse
 
     CaptionDescription.add_member(:caption_selector_name, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "captionSelectorName"))
-    CaptionDescription.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
+    CaptionDescription.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringPatternAZaZ23AZaZ, location_name: "customLanguageCode"))
     CaptionDescription.add_member(:destination_settings, Shapes::ShapeRef.new(shape: CaptionDestinationSettings, location_name: "destinationSettings"))
     CaptionDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     CaptionDescription.add_member(:language_description, Shapes::ShapeRef.new(shape: __string, location_name: "languageDescription"))
     CaptionDescription.struct_class = Types::CaptionDescription
 
-    CaptionDescriptionPreset.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
+    CaptionDescriptionPreset.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringPatternAZaZ23AZaZ, location_name: "customLanguageCode"))
     CaptionDescriptionPreset.add_member(:destination_settings, Shapes::ShapeRef.new(shape: CaptionDestinationSettings, location_name: "destinationSettings"))
     CaptionDescriptionPreset.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     CaptionDescriptionPreset.add_member(:language_description, Shapes::ShapeRef.new(shape: __string, location_name: "languageDescription"))
@@ -744,6 +763,10 @@ module Aws::MediaConvert
     ChannelMapping.add_member(:output_channels, Shapes::ShapeRef.new(shape: __listOfOutputChannelMapping, location_name: "outputChannels"))
     ChannelMapping.struct_class = Types::ChannelMapping
 
+    CmafAdditionalManifest.add_member(:manifest_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "manifestNameModifier"))
+    CmafAdditionalManifest.add_member(:selected_outputs, Shapes::ShapeRef.new(shape: __listOf__stringMin1, location_name: "selectedOutputs"))
+    CmafAdditionalManifest.struct_class = Types::CmafAdditionalManifest
+
     CmafEncryptionSettings.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __stringMin32Max32Pattern09aFAF32, location_name: "constantInitializationVector"))
     CmafEncryptionSettings.add_member(:encryption_method, Shapes::ShapeRef.new(shape: CmafEncryptionType, location_name: "encryptionMethod"))
     CmafEncryptionSettings.add_member(:initialization_vector_in_manifest, Shapes::ShapeRef.new(shape: CmafInitializationVectorInManifest, location_name: "initializationVectorInManifest"))
@@ -752,6 +775,7 @@ module Aws::MediaConvert
     CmafEncryptionSettings.add_member(:type, Shapes::ShapeRef.new(shape: CmafKeyProviderType, location_name: "type"))
     CmafEncryptionSettings.struct_class = Types::CmafEncryptionSettings
 
+    CmafGroupSettings.add_member(:additional_manifests, Shapes::ShapeRef.new(shape: __listOfCmafAdditionalManifest, location_name: "additionalManifests"))
     CmafGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
     CmafGroupSettings.add_member(:client_cache, Shapes::ShapeRef.new(shape: CmafClientCache, location_name: "clientCache"))
     CmafGroupSettings.add_member(:codec_specification, Shapes::ShapeRef.new(shape: CmafCodecSpecification, location_name: "codecSpecification"))
@@ -788,6 +812,7 @@ module Aws::MediaConvert
     ContainerSettings.add_member(:m3u_8_settings, Shapes::ShapeRef.new(shape: M3u8Settings, location_name: "m3u8Settings"))
     ContainerSettings.add_member(:mov_settings, Shapes::ShapeRef.new(shape: MovSettings, location_name: "movSettings"))
     ContainerSettings.add_member(:mp_4_settings, Shapes::ShapeRef.new(shape: Mp4Settings, location_name: "mp4Settings"))
+    ContainerSettings.add_member(:mpd_settings, Shapes::ShapeRef.new(shape: MpdSettings, location_name: "mpdSettings"))
     ContainerSettings.struct_class = Types::ContainerSettings
 
     CreateJobRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
@@ -842,10 +867,15 @@ module Aws::MediaConvert
     CreateQueueResponse.add_member(:queue, Shapes::ShapeRef.new(shape: Queue, location_name: "queue"))
     CreateQueueResponse.struct_class = Types::CreateQueueResponse
 
+    DashAdditionalManifest.add_member(:manifest_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "manifestNameModifier"))
+    DashAdditionalManifest.add_member(:selected_outputs, Shapes::ShapeRef.new(shape: __listOf__stringMin1, location_name: "selectedOutputs"))
+    DashAdditionalManifest.struct_class = Types::DashAdditionalManifest
+
     DashIsoEncryptionSettings.add_member(:playback_device_compatibility, Shapes::ShapeRef.new(shape: DashIsoPlaybackDeviceCompatibility, location_name: "playbackDeviceCompatibility"))
     DashIsoEncryptionSettings.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, location_name: "spekeKeyProvider"))
     DashIsoEncryptionSettings.struct_class = Types::DashIsoEncryptionSettings
 
+    DashIsoGroupSettings.add_member(:additional_manifests, Shapes::ShapeRef.new(shape: __listOfDashAdditionalManifest, location_name: "additionalManifests"))
     DashIsoGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
     DashIsoGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "destination"))
     DashIsoGroupSettings.add_member(:destination_settings, Shapes::ShapeRef.new(shape: DestinationSettings, location_name: "destinationSettings"))
@@ -895,6 +925,15 @@ module Aws::MediaConvert
     DisassociateCertificateRequest.struct_class = Types::DisassociateCertificateRequest
 
     DisassociateCertificateResponse.struct_class = Types::DisassociateCertificateResponse
+
+    DolbyVision.add_member(:l6_metadata, Shapes::ShapeRef.new(shape: DolbyVisionLevel6Metadata, location_name: "l6Metadata"))
+    DolbyVision.add_member(:l6_mode, Shapes::ShapeRef.new(shape: DolbyVisionLevel6Mode, location_name: "l6Mode"))
+    DolbyVision.add_member(:profile, Shapes::ShapeRef.new(shape: DolbyVisionProfile, location_name: "profile"))
+    DolbyVision.struct_class = Types::DolbyVision
+
+    DolbyVisionLevel6Metadata.add_member(:max_cll, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "maxCll"))
+    DolbyVisionLevel6Metadata.add_member(:max_fall, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "maxFall"))
+    DolbyVisionLevel6Metadata.struct_class = Types::DolbyVisionLevel6Metadata
 
     DvbNitSettings.add_member(:network_id, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "networkId"))
     DvbNitSettings.add_member(:network_name, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "networkName"))
@@ -1148,6 +1187,10 @@ module Aws::MediaConvert
     Hdr10Metadata.add_member(:white_point_y, Shapes::ShapeRef.new(shape: __integerMin0Max50000, location_name: "whitePointY"))
     Hdr10Metadata.struct_class = Types::Hdr10Metadata
 
+    HlsAdditionalManifest.add_member(:manifest_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "manifestNameModifier"))
+    HlsAdditionalManifest.add_member(:selected_outputs, Shapes::ShapeRef.new(shape: __listOf__stringMin1, location_name: "selectedOutputs"))
+    HlsAdditionalManifest.struct_class = Types::HlsAdditionalManifest
+
     HlsCaptionLanguageMapping.add_member(:caption_channel, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "captionChannel"))
     HlsCaptionLanguageMapping.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
     HlsCaptionLanguageMapping.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
@@ -1164,6 +1207,7 @@ module Aws::MediaConvert
     HlsEncryptionSettings.struct_class = Types::HlsEncryptionSettings
 
     HlsGroupSettings.add_member(:ad_markers, Shapes::ShapeRef.new(shape: __listOfHlsAdMarkers, location_name: "adMarkers"))
+    HlsGroupSettings.add_member(:additional_manifests, Shapes::ShapeRef.new(shape: __listOfHlsAdditionalManifest, location_name: "additionalManifests"))
     HlsGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
     HlsGroupSettings.add_member(:caption_language_mappings, Shapes::ShapeRef.new(shape: __listOfHlsCaptionLanguageMapping, location_name: "captionLanguageMappings"))
     HlsGroupSettings.add_member(:caption_language_setting, Shapes::ShapeRef.new(shape: HlsCaptionLanguageSetting, location_name: "captionLanguageSetting"))
@@ -1479,6 +1523,11 @@ module Aws::MediaConvert
     Mp4Settings.add_member(:mp_4_major_brand, Shapes::ShapeRef.new(shape: __string, location_name: "mp4MajorBrand"))
     Mp4Settings.struct_class = Types::Mp4Settings
 
+    MpdSettings.add_member(:caption_container_type, Shapes::ShapeRef.new(shape: MpdCaptionContainerType, location_name: "captionContainerType"))
+    MpdSettings.add_member(:scte_35_esam, Shapes::ShapeRef.new(shape: MpdScte35Esam, location_name: "scte35Esam"))
+    MpdSettings.add_member(:scte_35_source, Shapes::ShapeRef.new(shape: MpdScte35Source, location_name: "scte35Source"))
+    MpdSettings.struct_class = Types::MpdSettings
+
     Mpeg2Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: Mpeg2AdaptiveQuantization, location_name: "adaptiveQuantization"))
     Mpeg2Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max288000000, location_name: "bitrate"))
     Mpeg2Settings.add_member(:codec_level, Shapes::ShapeRef.new(shape: Mpeg2CodecLevel, location_name: "codecLevel"))
@@ -1512,9 +1561,14 @@ module Aws::MediaConvert
     Mpeg2Settings.add_member(:temporal_adaptive_quantization, Shapes::ShapeRef.new(shape: Mpeg2TemporalAdaptiveQuantization, location_name: "temporalAdaptiveQuantization"))
     Mpeg2Settings.struct_class = Types::Mpeg2Settings
 
+    MsSmoothAdditionalManifest.add_member(:manifest_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "manifestNameModifier"))
+    MsSmoothAdditionalManifest.add_member(:selected_outputs, Shapes::ShapeRef.new(shape: __listOf__stringMin1, location_name: "selectedOutputs"))
+    MsSmoothAdditionalManifest.struct_class = Types::MsSmoothAdditionalManifest
+
     MsSmoothEncryptionSettings.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, location_name: "spekeKeyProvider"))
     MsSmoothEncryptionSettings.struct_class = Types::MsSmoothEncryptionSettings
 
+    MsSmoothGroupSettings.add_member(:additional_manifests, Shapes::ShapeRef.new(shape: __listOfMsSmoothAdditionalManifest, location_name: "additionalManifests"))
     MsSmoothGroupSettings.add_member(:audio_deduplication, Shapes::ShapeRef.new(shape: MsSmoothAudioDeduplication, location_name: "audioDeduplication"))
     MsSmoothGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "destination"))
     MsSmoothGroupSettings.add_member(:destination_settings, Shapes::ShapeRef.new(shape: DestinationSettings, location_name: "destinationSettings"))
@@ -1656,6 +1710,10 @@ module Aws::MediaConvert
     ResourceTags.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     ResourceTags.struct_class = Types::ResourceTags
 
+    S3DestinationAccessControl.add_member(:canned_acl, Shapes::ShapeRef.new(shape: S3ObjectCannedAcl, location_name: "cannedAcl"))
+    S3DestinationAccessControl.struct_class = Types::S3DestinationAccessControl
+
+    S3DestinationSettings.add_member(:access_control, Shapes::ShapeRef.new(shape: S3DestinationAccessControl, location_name: "accessControl"))
     S3DestinationSettings.add_member(:encryption, Shapes::ShapeRef.new(shape: S3EncryptionSettings, location_name: "encryption"))
     S3DestinationSettings.struct_class = Types::S3DestinationSettings
 
@@ -1794,6 +1852,7 @@ module Aws::MediaConvert
 
     VideoPreprocessor.add_member(:color_corrector, Shapes::ShapeRef.new(shape: ColorCorrector, location_name: "colorCorrector"))
     VideoPreprocessor.add_member(:deinterlacer, Shapes::ShapeRef.new(shape: Deinterlacer, location_name: "deinterlacer"))
+    VideoPreprocessor.add_member(:dolby_vision, Shapes::ShapeRef.new(shape: DolbyVision, location_name: "dolbyVision"))
     VideoPreprocessor.add_member(:image_inserter, Shapes::ShapeRef.new(shape: ImageInserter, location_name: "imageInserter"))
     VideoPreprocessor.add_member(:noise_reducer, Shapes::ShapeRef.new(shape: NoiseReducer, location_name: "noiseReducer"))
     VideoPreprocessor.add_member(:timecode_burnin, Shapes::ShapeRef.new(shape: TimecodeBurnin, location_name: "timecodeBurnin"))
@@ -1819,9 +1878,15 @@ module Aws::MediaConvert
 
     __listOfCaptionDescriptionPreset.member = Shapes::ShapeRef.new(shape: CaptionDescriptionPreset)
 
+    __listOfCmafAdditionalManifest.member = Shapes::ShapeRef.new(shape: CmafAdditionalManifest)
+
+    __listOfDashAdditionalManifest.member = Shapes::ShapeRef.new(shape: DashAdditionalManifest)
+
     __listOfEndpoint.member = Shapes::ShapeRef.new(shape: Endpoint)
 
     __listOfHlsAdMarkers.member = Shapes::ShapeRef.new(shape: HlsAdMarkers)
+
+    __listOfHlsAdditionalManifest.member = Shapes::ShapeRef.new(shape: HlsAdditionalManifest)
 
     __listOfHlsCaptionLanguageMapping.member = Shapes::ShapeRef.new(shape: HlsCaptionLanguageMapping)
 
@@ -1838,6 +1903,8 @@ module Aws::MediaConvert
     __listOfJob.member = Shapes::ShapeRef.new(shape: Job)
 
     __listOfJobTemplate.member = Shapes::ShapeRef.new(shape: JobTemplate)
+
+    __listOfMsSmoothAdditionalManifest.member = Shapes::ShapeRef.new(shape: MsSmoothAdditionalManifest)
 
     __listOfOutput.member = Shapes::ShapeRef.new(shape: Output)
 

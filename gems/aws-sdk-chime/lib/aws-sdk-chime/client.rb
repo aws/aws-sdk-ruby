@@ -370,6 +370,52 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Adds up to 50 members to a chat room. Members can be either users or
+    # bots. The member role designates whether the member is a chat room
+    # administrator or a general chat room member.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :room_id
+    #   The room ID.
+    #
+    # @option params [required, Array<Types::MembershipItem>] :membership_item_list
+    #   The list of membership items.
+    #
+    # @return [Types::BatchCreateRoomMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateRoomMembershipResponse#errors #errors} => Array&lt;Types::MemberError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_room_membership({
+    #     account_id: "NonEmptyString", # required
+    #     room_id: "NonEmptyString", # required
+    #     membership_item_list: [ # required
+    #       {
+    #         member_id: "NonEmptyString",
+    #         role: "Administrator", # accepts Administrator, Member
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].member_id #=> String
+    #   resp.errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchCreateRoomMembership AWS API Documentation
+    #
+    # @overload batch_create_room_membership(params = {})
+    # @param [Hash] params ({})
+    def batch_create_room_membership(params = {}, options = {})
+      req = build_request(:batch_create_room_membership, params)
+      req.send_request(options)
+    end
+
     # Moves phone numbers into the **Deletion queue**. Phone numbers must be
     # disassociated from any users or Amazon Chime Voice Connectors before
     # they can be deleted.
@@ -727,6 +773,100 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Creates a chat room for the specified Amazon Chime account.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :name
+    #   The room name.
+    #
+    # @option params [String] :client_request_token
+    #   The idempotency token for the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateRoomResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRoomResponse#room #room} => Types::Room
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_room({
+    #     account_id: "NonEmptyString", # required
+    #     name: "SensitiveString", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.room.room_id #=> String
+    #   resp.room.name #=> String
+    #   resp.room.account_id #=> String
+    #   resp.room.created_by #=> String
+    #   resp.room.created_timestamp #=> Time
+    #   resp.room.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateRoom AWS API Documentation
+    #
+    # @overload create_room(params = {})
+    # @param [Hash] params ({})
+    def create_room(params = {}, options = {})
+      req = build_request(:create_room, params)
+      req.send_request(options)
+    end
+
+    # Adds a member to a chat room. A member can be either a user or a bot.
+    # The member role designates whether the member is a chat room
+    # administrator or a general chat room member.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :room_id
+    #   The room ID.
+    #
+    # @option params [required, String] :member_id
+    #   The Amazon Chime member ID (user ID or bot ID).
+    #
+    # @option params [String] :role
+    #   The role of the member.
+    #
+    # @return [Types::CreateRoomMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRoomMembershipResponse#room_membership #room_membership} => Types::RoomMembership
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_room_membership({
+    #     account_id: "NonEmptyString", # required
+    #     room_id: "NonEmptyString", # required
+    #     member_id: "NonEmptyString", # required
+    #     role: "Administrator", # accepts Administrator, Member
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.room_membership.room_id #=> String
+    #   resp.room_membership.member.member_id #=> String
+    #   resp.room_membership.member.member_type #=> String, one of "User", "Bot", "Webhook"
+    #   resp.room_membership.member.email #=> String
+    #   resp.room_membership.member.full_name #=> String
+    #   resp.room_membership.member.account_id #=> String
+    #   resp.room_membership.role #=> String, one of "Administrator", "Member"
+    #   resp.room_membership.invited_by #=> String
+    #   resp.room_membership.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateRoomMembership AWS API Documentation
+    #
+    # @overload create_room_membership(params = {})
+    # @param [Hash] params ({})
+    def create_room_membership(params = {}, options = {})
+      req = build_request(:create_room_membership, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Chime Voice Connector under the administrator's AWS
     # account. You can choose to create an Amazon Chime Voice Connector in a
     # specific AWS Region.
@@ -914,6 +1054,62 @@ module Aws::Chime
     # @param [Hash] params ({})
     def delete_phone_number(params = {}, options = {})
       req = build_request(:delete_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Deletes a chat room.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :room_id
+    #   The chat room ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_room({
+    #     account_id: "NonEmptyString", # required
+    #     room_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteRoom AWS API Documentation
+    #
+    # @overload delete_room(params = {})
+    # @param [Hash] params ({})
+    def delete_room(params = {}, options = {})
+      req = build_request(:delete_room, params)
+      req.send_request(options)
+    end
+
+    # Removes a member from a chat room.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :room_id
+    #   The room ID.
+    #
+    # @option params [required, String] :member_id
+    #   The member ID (user ID or bot ID).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_room_membership({
+    #     account_id: "NonEmptyString", # required
+    #     room_id: "NonEmptyString", # required
+    #     member_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteRoomMembership AWS API Documentation
+    #
+    # @overload delete_room_membership(params = {})
+    # @param [Hash] params ({})
+    def delete_room_membership(params = {}, options = {})
+      req = build_request(:delete_room_membership, params)
       req.send_request(options)
     end
 
@@ -1439,6 +1635,43 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Retrieves room details, such as name.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :room_id
+    #   The room ID.
+    #
+    # @return [Types::GetRoomResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRoomResponse#room #room} => Types::Room
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_room({
+    #     account_id: "NonEmptyString", # required
+    #     room_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.room.room_id #=> String
+    #   resp.room.name #=> String
+    #   resp.room.account_id #=> String
+    #   resp.room.created_by #=> String
+    #   resp.room.created_timestamp #=> Time
+    #   resp.room.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetRoom AWS API Documentation
+    #
+    # @overload get_room(params = {})
+    # @param [Hash] params ({})
+    def get_room(params = {}, options = {})
+      req = build_request(:get_room, params)
+      req.send_request(options)
+    end
+
     # Retrieves details for the specified user ID, such as primary email
     # address, license type, and personal meeting PIN.
     #
@@ -1657,8 +1890,8 @@ module Aws::Chime
 
     # Retrieves the streaming configuration details for the specified Amazon
     # Chime Voice Connector. Shows whether media streaming is enabled for
-    # sending to Amazon Kinesis, and shows the retention period for the
-    # Amazon Kinesis data, in hours.
+    # sending to Amazon Kinesis. It also shows the retention period, in
+    # hours, for the Amazon Kinesis data.
     #
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
@@ -1753,15 +1986,15 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Sends email invites to as many as 50 users, inviting them to the
-    # specified Amazon Chime `Team` account. Only `Team` account types are
-    # currently supported for this action.
+    # Sends email to a maximum of 50 users, inviting them to the specified
+    # Amazon Chime `Team` account. Only `Team` account types are currently
+    # supported for this action.
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
     #
     # @option params [required, Array<String>] :user_email_list
-    #   The user email addresses to which to send the invite.
+    #   The user email addresses to which to send the email invitation.
     #
     # @return [Types::InviteUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1852,8 +2085,8 @@ module Aws::Chime
     #   The Amazon Chime account ID.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Default is
-    #   10.
+    #   The maximum number of results to return in a single call. The default
+    #   is 10.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next page of results.
@@ -2006,6 +2239,108 @@ module Aws::Chime
     # @param [Hash] params ({})
     def list_phone_numbers(params = {}, options = {})
       req = build_request(:list_phone_numbers, params)
+      req.send_request(options)
+    end
+
+    # Lists the membership details for the specified room, such as member
+    # IDs, member email addresses, and member names.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :room_id
+    #   The room ID.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @return [Types::ListRoomMembershipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRoomMembershipsResponse#room_memberships #room_memberships} => Array&lt;Types::RoomMembership&gt;
+    #   * {Types::ListRoomMembershipsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_room_memberships({
+    #     account_id: "NonEmptyString", # required
+    #     room_id: "NonEmptyString", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.room_memberships #=> Array
+    #   resp.room_memberships[0].room_id #=> String
+    #   resp.room_memberships[0].member.member_id #=> String
+    #   resp.room_memberships[0].member.member_type #=> String, one of "User", "Bot", "Webhook"
+    #   resp.room_memberships[0].member.email #=> String
+    #   resp.room_memberships[0].member.full_name #=> String
+    #   resp.room_memberships[0].member.account_id #=> String
+    #   resp.room_memberships[0].role #=> String, one of "Administrator", "Member"
+    #   resp.room_memberships[0].invited_by #=> String
+    #   resp.room_memberships[0].updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListRoomMemberships AWS API Documentation
+    #
+    # @overload list_room_memberships(params = {})
+    # @param [Hash] params ({})
+    def list_room_memberships(params = {}, options = {})
+      req = build_request(:list_room_memberships, params)
+      req.send_request(options)
+    end
+
+    # Lists the room details for the specified Amazon Chime account.
+    # Optionally, filter the results by a member ID (user ID or bot ID) to
+    # see a list of rooms that the member belongs to.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [String] :member_id
+    #   The member ID (user ID or bot ID).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @return [Types::ListRoomsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRoomsResponse#rooms #rooms} => Array&lt;Types::Room&gt;
+    #   * {Types::ListRoomsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rooms({
+    #     account_id: "NonEmptyString", # required
+    #     member_id: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rooms #=> Array
+    #   resp.rooms[0].room_id #=> String
+    #   resp.rooms[0].name #=> String
+    #   resp.rooms[0].account_id #=> String
+    #   resp.rooms[0].created_by #=> String
+    #   resp.rooms[0].created_timestamp #=> Time
+    #   resp.rooms[0].updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListRooms AWS API Documentation
+    #
+    # @overload list_rooms(params = {})
+    # @param [Hash] params ({})
+    def list_rooms(params = {}, options = {})
+      req = build_request(:list_rooms, params)
       req.send_request(options)
     end
 
@@ -2338,8 +2673,8 @@ module Aws::Chime
 
     # Adds a streaming configuration for the specified Amazon Chime Voice
     # Connector. The streaming configuration specifies whether media
-    # streaming is enabled for sending to Amazon Kinesis, and sets the
-    # retention period for the Amazon Kinesis data, in hours.
+    # streaming is enabled for sending to Amazon Kinesis. It also sets the
+    # retention period, in hours, for the Amazon Kinesis data.
     #
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
@@ -2858,7 +3193,7 @@ module Aws::Chime
     # Updates the phone number settings for the administrator's AWS
     # account, such as the default outbound calling name. You can update the
     # default outbound calling name once every seven days. Outbound calling
-    # names can take up to 72 hours to be updated.
+    # names can take up to 72 hours to update.
     #
     # @option params [required, String] :calling_name
     #   The default outbound calling name for the account.
@@ -2877,6 +3212,98 @@ module Aws::Chime
     # @param [Hash] params ({})
     def update_phone_number_settings(params = {}, options = {})
       req = build_request(:update_phone_number_settings, params)
+      req.send_request(options)
+    end
+
+    # Updates room details, such as the room name.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :room_id
+    #   The room ID.
+    #
+    # @option params [String] :name
+    #   The room name.
+    #
+    # @return [Types::UpdateRoomResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRoomResponse#room #room} => Types::Room
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_room({
+    #     account_id: "NonEmptyString", # required
+    #     room_id: "NonEmptyString", # required
+    #     name: "SensitiveString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.room.room_id #=> String
+    #   resp.room.name #=> String
+    #   resp.room.account_id #=> String
+    #   resp.room.created_by #=> String
+    #   resp.room.created_timestamp #=> Time
+    #   resp.room.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateRoom AWS API Documentation
+    #
+    # @overload update_room(params = {})
+    # @param [Hash] params ({})
+    def update_room(params = {}, options = {})
+      req = build_request(:update_room, params)
+      req.send_request(options)
+    end
+
+    # Updates room membership details, such as member role. The member role
+    # designates whether the member is a chat room administrator or a
+    # general chat room member. Member role can only be updated for user
+    # IDs.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :room_id
+    #   The room ID.
+    #
+    # @option params [required, String] :member_id
+    #   The member ID.
+    #
+    # @option params [String] :role
+    #   The role of the member.
+    #
+    # @return [Types::UpdateRoomMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRoomMembershipResponse#room_membership #room_membership} => Types::RoomMembership
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_room_membership({
+    #     account_id: "NonEmptyString", # required
+    #     room_id: "NonEmptyString", # required
+    #     member_id: "NonEmptyString", # required
+    #     role: "Administrator", # accepts Administrator, Member
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.room_membership.room_id #=> String
+    #   resp.room_membership.member.member_id #=> String
+    #   resp.room_membership.member.member_type #=> String, one of "User", "Bot", "Webhook"
+    #   resp.room_membership.member.email #=> String
+    #   resp.room_membership.member.full_name #=> String
+    #   resp.room_membership.member.account_id #=> String
+    #   resp.room_membership.role #=> String, one of "Administrator", "Member"
+    #   resp.room_membership.invited_by #=> String
+    #   resp.room_membership.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateRoomMembership AWS API Documentation
+    #
+    # @overload update_room_membership(params = {})
+    # @param [Hash] params ({})
+    def update_room_membership(params = {}, options = {})
+      req = build_request(:update_room_membership, params)
       req.send_request(options)
     end
 
@@ -3069,7 +3496,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

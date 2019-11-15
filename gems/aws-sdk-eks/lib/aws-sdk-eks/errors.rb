@@ -41,6 +41,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def nodegroup_name
+        @data[:nodegroup_name]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -62,6 +67,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def nodegroup_name
+        @data[:nodegroup_name]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -80,6 +90,11 @@ module Aws::EKS
       # @return [String]
       def cluster_name
         @data[:cluster_name]
+      end
+
+      # @return [String]
+      def nodegroup_name
+        @data[:nodegroup_name]
       end
 
       # @return [String]
@@ -120,6 +135,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def nodegroup_name
+        @data[:nodegroup_name]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -138,6 +158,11 @@ module Aws::EKS
       # @return [String]
       def cluster_name
         @data[:cluster_name]
+      end
+
+      # @return [String]
+      def nodegroup_name
+        @data[:nodegroup_name]
       end
 
       # @return [String]
@@ -162,6 +187,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def nodegroup_name
+        @data[:nodegroup_name]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -180,6 +210,11 @@ module Aws::EKS
       # @return [String]
       def cluster_name
         @data[:cluster_name]
+      end
+
+      # @return [String]
+      def nodegroup_name
+        @data[:nodegroup_name]
       end
 
       # @return [String]
@@ -222,6 +257,11 @@ module Aws::EKS
       # @return [String]
       def cluster_name
         @data[:cluster_name]
+      end
+
+      # @return [String]
+      def nodegroup_name
+        @data[:nodegroup_name]
       end
 
       # @return [String]

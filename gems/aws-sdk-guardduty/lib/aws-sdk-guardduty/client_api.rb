@@ -37,6 +37,8 @@ module Aws::GuardDuty
     CreateIPSetResponse = Shapes::StructureShape.new(name: 'CreateIPSetResponse')
     CreateMembersRequest = Shapes::StructureShape.new(name: 'CreateMembersRequest')
     CreateMembersResponse = Shapes::StructureShape.new(name: 'CreateMembersResponse')
+    CreatePublishingDestinationRequest = Shapes::StructureShape.new(name: 'CreatePublishingDestinationRequest')
+    CreatePublishingDestinationResponse = Shapes::StructureShape.new(name: 'CreatePublishingDestinationResponse')
     CreateSampleFindingsRequest = Shapes::StructureShape.new(name: 'CreateSampleFindingsRequest')
     CreateSampleFindingsResponse = Shapes::StructureShape.new(name: 'CreateSampleFindingsResponse')
     CreateThreatIntelSetRequest = Shapes::StructureShape.new(name: 'CreateThreatIntelSetRequest')
@@ -54,8 +56,16 @@ module Aws::GuardDuty
     DeleteInvitationsResponse = Shapes::StructureShape.new(name: 'DeleteInvitationsResponse')
     DeleteMembersRequest = Shapes::StructureShape.new(name: 'DeleteMembersRequest')
     DeleteMembersResponse = Shapes::StructureShape.new(name: 'DeleteMembersResponse')
+    DeletePublishingDestinationRequest = Shapes::StructureShape.new(name: 'DeletePublishingDestinationRequest')
+    DeletePublishingDestinationResponse = Shapes::StructureShape.new(name: 'DeletePublishingDestinationResponse')
     DeleteThreatIntelSetRequest = Shapes::StructureShape.new(name: 'DeleteThreatIntelSetRequest')
     DeleteThreatIntelSetResponse = Shapes::StructureShape.new(name: 'DeleteThreatIntelSetResponse')
+    DescribePublishingDestinationRequest = Shapes::StructureShape.new(name: 'DescribePublishingDestinationRequest')
+    DescribePublishingDestinationResponse = Shapes::StructureShape.new(name: 'DescribePublishingDestinationResponse')
+    Destination = Shapes::StructureShape.new(name: 'Destination')
+    DestinationProperties = Shapes::StructureShape.new(name: 'DestinationProperties')
+    DestinationType = Shapes::StringShape.new(name: 'DestinationType')
+    Destinations = Shapes::ListShape.new(name: 'Destinations')
     DetectorId = Shapes::StringShape.new(name: 'DetectorId')
     DetectorIds = Shapes::ListShape.new(name: 'DetectorIds')
     DetectorStatus = Shapes::StringShape.new(name: 'DetectorStatus')
@@ -131,6 +141,8 @@ module Aws::GuardDuty
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
+    ListPublishingDestinationsRequest = Shapes::StructureShape.new(name: 'ListPublishingDestinationsRequest')
+    ListPublishingDestinationsResponse = Shapes::StructureShape.new(name: 'ListPublishingDestinationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListThreatIntelSetsRequest = Shapes::StructureShape.new(name: 'ListThreatIntelSetsRequest')
@@ -157,6 +169,7 @@ module Aws::GuardDuty
     PrivateIpAddresses = Shapes::ListShape.new(name: 'PrivateIpAddresses')
     ProductCode = Shapes::StructureShape.new(name: 'ProductCode')
     ProductCodes = Shapes::ListShape.new(name: 'ProductCodes')
+    PublishingStatus = Shapes::StringShape.new(name: 'PublishingStatus')
     RemoteIpDetails = Shapes::StructureShape.new(name: 'RemoteIpDetails')
     RemotePortDetails = Shapes::StructureShape.new(name: 'RemotePortDetails')
     Resource = Shapes::StructureShape.new(name: 'Resource')
@@ -197,6 +210,8 @@ module Aws::GuardDuty
     UpdateFindingsFeedbackResponse = Shapes::StructureShape.new(name: 'UpdateFindingsFeedbackResponse')
     UpdateIPSetRequest = Shapes::StructureShape.new(name: 'UpdateIPSetRequest')
     UpdateIPSetResponse = Shapes::StructureShape.new(name: 'UpdateIPSetResponse')
+    UpdatePublishingDestinationRequest = Shapes::StructureShape.new(name: 'UpdatePublishingDestinationRequest')
+    UpdatePublishingDestinationResponse = Shapes::StructureShape.new(name: 'UpdatePublishingDestinationResponse')
     UpdateThreatIntelSetRequest = Shapes::StructureShape.new(name: 'UpdateThreatIntelSetRequest')
     UpdateThreatIntelSetResponse = Shapes::StructureShape.new(name: 'UpdateThreatIntelSetResponse')
 
@@ -310,6 +325,15 @@ module Aws::GuardDuty
     CreateMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, required: true, location_name: "unprocessedAccounts"))
     CreateMembersResponse.struct_class = Types::CreateMembersResponse
 
+    CreatePublishingDestinationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    CreatePublishingDestinationRequest.add_member(:destination_type, Shapes::ShapeRef.new(shape: DestinationType, required: true, location_name: "destinationType"))
+    CreatePublishingDestinationRequest.add_member(:destination_properties, Shapes::ShapeRef.new(shape: DestinationProperties, required: true, location_name: "destinationProperties"))
+    CreatePublishingDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePublishingDestinationRequest.struct_class = Types::CreatePublishingDestinationRequest
+
+    CreatePublishingDestinationResponse.add_member(:destination_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationId"))
+    CreatePublishingDestinationResponse.struct_class = Types::CreatePublishingDestinationResponse
+
     CreateSampleFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     CreateSampleFindingsRequest.add_member(:finding_types, Shapes::ShapeRef.new(shape: FindingTypes, location_name: "findingTypes"))
     CreateSampleFindingsRequest.struct_class = Types::CreateSampleFindingsRequest
@@ -367,11 +391,39 @@ module Aws::GuardDuty
     DeleteMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, required: true, location_name: "unprocessedAccounts"))
     DeleteMembersResponse.struct_class = Types::DeleteMembersResponse
 
+    DeletePublishingDestinationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    DeletePublishingDestinationRequest.add_member(:destination_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "destinationId"))
+    DeletePublishingDestinationRequest.struct_class = Types::DeletePublishingDestinationRequest
+
+    DeletePublishingDestinationResponse.struct_class = Types::DeletePublishingDestinationResponse
+
     DeleteThreatIntelSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     DeleteThreatIntelSetRequest.add_member(:threat_intel_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "threatIntelSetId"))
     DeleteThreatIntelSetRequest.struct_class = Types::DeleteThreatIntelSetRequest
 
     DeleteThreatIntelSetResponse.struct_class = Types::DeleteThreatIntelSetResponse
+
+    DescribePublishingDestinationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    DescribePublishingDestinationRequest.add_member(:destination_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "destinationId"))
+    DescribePublishingDestinationRequest.struct_class = Types::DescribePublishingDestinationRequest
+
+    DescribePublishingDestinationResponse.add_member(:destination_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationId"))
+    DescribePublishingDestinationResponse.add_member(:destination_type, Shapes::ShapeRef.new(shape: DestinationType, required: true, location_name: "destinationType"))
+    DescribePublishingDestinationResponse.add_member(:status, Shapes::ShapeRef.new(shape: PublishingStatus, required: true, location_name: "status"))
+    DescribePublishingDestinationResponse.add_member(:publishing_failure_start_timestamp, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "publishingFailureStartTimestamp"))
+    DescribePublishingDestinationResponse.add_member(:destination_properties, Shapes::ShapeRef.new(shape: DestinationProperties, required: true, location_name: "destinationProperties"))
+    DescribePublishingDestinationResponse.struct_class = Types::DescribePublishingDestinationResponse
+
+    Destination.add_member(:destination_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationId"))
+    Destination.add_member(:destination_type, Shapes::ShapeRef.new(shape: DestinationType, required: true, location_name: "destinationType"))
+    Destination.add_member(:status, Shapes::ShapeRef.new(shape: PublishingStatus, required: true, location_name: "status"))
+    Destination.struct_class = Types::Destination
+
+    DestinationProperties.add_member(:destination_arn, Shapes::ShapeRef.new(shape: String, location_name: "destinationArn"))
+    DestinationProperties.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
+    DestinationProperties.struct_class = Types::DestinationProperties
+
+    Destinations.member = Shapes::ShapeRef.new(shape: Destination)
 
     DetectorIds.member = Shapes::ShapeRef.new(shape: DetectorId)
 
@@ -615,6 +667,15 @@ module Aws::GuardDuty
     ListMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListMembersResponse.struct_class = Types::ListMembersResponse
 
+    ListPublishingDestinationsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    ListPublishingDestinationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPublishingDestinationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListPublishingDestinationsRequest.struct_class = Types::ListPublishingDestinationsRequest
+
+    ListPublishingDestinationsResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: Destinations, required: true, location_name: "destinations"))
+    ListPublishingDestinationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListPublishingDestinationsResponse.struct_class = Types::ListPublishingDestinationsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GuardDutyArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -837,6 +898,13 @@ module Aws::GuardDuty
 
     UpdateIPSetResponse.struct_class = Types::UpdateIPSetResponse
 
+    UpdatePublishingDestinationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    UpdatePublishingDestinationRequest.add_member(:destination_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "destinationId"))
+    UpdatePublishingDestinationRequest.add_member(:destination_properties, Shapes::ShapeRef.new(shape: DestinationProperties, location_name: "destinationProperties"))
+    UpdatePublishingDestinationRequest.struct_class = Types::UpdatePublishingDestinationRequest
+
+    UpdatePublishingDestinationResponse.struct_class = Types::UpdatePublishingDestinationResponse
+
     UpdateThreatIntelSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UpdateThreatIntelSetRequest.add_member(:threat_intel_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "threatIntelSetId"))
     UpdateThreatIntelSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -924,6 +992,16 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:create_publishing_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePublishingDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/publishingDestination"
+        o.input = Shapes::ShapeRef.new(shape: CreatePublishingDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePublishingDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:create_sample_findings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSampleFindings"
         o.http_method = "POST"
@@ -1004,12 +1082,32 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:delete_publishing_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePublishingDestination"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/detector/{detectorId}/publishingDestination/{destinationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePublishingDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePublishingDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:delete_threat_intel_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteThreatIntelSet"
         o.http_method = "DELETE"
         o.http_request_uri = "/detector/{detectorId}/threatintelset/{threatIntelSetId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteThreatIntelSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteThreatIntelSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:describe_publishing_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePublishingDestination"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/publishingDestination/{destinationId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribePublishingDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePublishingDestinationResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -1230,6 +1328,22 @@ module Aws::GuardDuty
         )
       end)
 
+      api.add_operation(:list_publishing_destinations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPublishingDestinations"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/publishingDestination"
+        o.input = Shapes::ShapeRef.new(shape: ListPublishingDestinationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPublishingDestinationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -1342,6 +1456,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector/{detectorId}/ipset/{ipSetId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateIPSetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateIPSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:update_publishing_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePublishingDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/publishingDestination/{destinationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePublishingDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePublishingDestinationResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)

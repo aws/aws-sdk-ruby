@@ -11,9 +11,14 @@ module Aws::EKS
 
     include Seahorse::Model
 
+    AMITypes = Shapes::StringShape.new(name: 'AMITypes')
+    AutoScalingGroup = Shapes::StructureShape.new(name: 'AutoScalingGroup')
+    AutoScalingGroupList = Shapes::ListShape.new(name: 'AutoScalingGroupList')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
+    BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
+    Capacity = Shapes::IntegerShape.new(name: 'Capacity')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
@@ -21,10 +26,16 @@ module Aws::EKS
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
+    CreateNodegroupRequest = Shapes::StructureShape.new(name: 'CreateNodegroupRequest')
+    CreateNodegroupResponse = Shapes::StructureShape.new(name: 'CreateNodegroupResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
+    DeleteNodegroupRequest = Shapes::StructureShape.new(name: 'DeleteNodegroupRequest')
+    DeleteNodegroupResponse = Shapes::StructureShape.new(name: 'DeleteNodegroupResponse')
     DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
     DescribeClusterResponse = Shapes::StructureShape.new(name: 'DescribeClusterResponse')
+    DescribeNodegroupRequest = Shapes::StructureShape.new(name: 'DescribeNodegroupRequest')
+    DescribeNodegroupResponse = Shapes::StructureShape.new(name: 'DescribeNodegroupResponse')
     DescribeUpdateRequest = Shapes::StructureShape.new(name: 'DescribeUpdateRequest')
     DescribeUpdateResponse = Shapes::StructureShape.new(name: 'DescribeUpdateResponse')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
@@ -33,9 +44,14 @@ module Aws::EKS
     Identity = Shapes::StructureShape.new(name: 'Identity')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    Issue = Shapes::StructureShape.new(name: 'Issue')
+    IssueList = Shapes::ListShape.new(name: 'IssueList')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersRequestMaxResults = Shapes::IntegerShape.new(name: 'ListClustersRequestMaxResults')
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
+    ListNodegroupsRequest = Shapes::StructureShape.new(name: 'ListNodegroupsRequest')
+    ListNodegroupsRequestMaxResults = Shapes::IntegerShape.new(name: 'ListNodegroupsRequestMaxResults')
+    ListNodegroupsResponse = Shapes::StructureShape.new(name: 'ListNodegroupsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUpdatesRequest = Shapes::StructureShape.new(name: 'ListUpdatesRequest')
@@ -46,8 +62,15 @@ module Aws::EKS
     LogType = Shapes::StringShape.new(name: 'LogType')
     LogTypes = Shapes::ListShape.new(name: 'LogTypes')
     Logging = Shapes::StructureShape.new(name: 'Logging')
+    Nodegroup = Shapes::StructureShape.new(name: 'Nodegroup')
+    NodegroupHealth = Shapes::StructureShape.new(name: 'NodegroupHealth')
+    NodegroupIssueCode = Shapes::StringShape.new(name: 'NodegroupIssueCode')
+    NodegroupResources = Shapes::StructureShape.new(name: 'NodegroupResources')
+    NodegroupScalingConfig = Shapes::StructureShape.new(name: 'NodegroupScalingConfig')
+    NodegroupStatus = Shapes::StringShape.new(name: 'NodegroupStatus')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OIDC = Shapes::StructureShape.new(name: 'OIDC')
+    RemoteAccessConfig = Shapes::StructureShape.new(name: 'RemoteAccessConfig')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -70,6 +93,11 @@ module Aws::EKS
     UpdateClusterConfigResponse = Shapes::StructureShape.new(name: 'UpdateClusterConfigResponse')
     UpdateClusterVersionRequest = Shapes::StructureShape.new(name: 'UpdateClusterVersionRequest')
     UpdateClusterVersionResponse = Shapes::StructureShape.new(name: 'UpdateClusterVersionResponse')
+    UpdateLabelsPayload = Shapes::StructureShape.new(name: 'UpdateLabelsPayload')
+    UpdateNodegroupConfigRequest = Shapes::StructureShape.new(name: 'UpdateNodegroupConfigRequest')
+    UpdateNodegroupConfigResponse = Shapes::StructureShape.new(name: 'UpdateNodegroupConfigResponse')
+    UpdateNodegroupVersionRequest = Shapes::StructureShape.new(name: 'UpdateNodegroupVersionRequest')
+    UpdateNodegroupVersionResponse = Shapes::StructureShape.new(name: 'UpdateNodegroupVersionResponse')
     UpdateParam = Shapes::StructureShape.new(name: 'UpdateParam')
     UpdateParamType = Shapes::StringShape.new(name: 'UpdateParamType')
     UpdateParams = Shapes::ListShape.new(name: 'UpdateParams')
@@ -77,6 +105,15 @@ module Aws::EKS
     UpdateType = Shapes::StringShape.new(name: 'UpdateType')
     VpcConfigRequest = Shapes::StructureShape.new(name: 'VpcConfigRequest')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
+    labelKey = Shapes::StringShape.new(name: 'labelKey')
+    labelValue = Shapes::StringShape.new(name: 'labelValue')
+    labelsKeyList = Shapes::ListShape.new(name: 'labelsKeyList')
+    labelsMap = Shapes::MapShape.new(name: 'labelsMap')
+
+    AutoScalingGroup.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    AutoScalingGroup.struct_class = Types::AutoScalingGroup
+
+    AutoScalingGroupList.member = Shapes::ShapeRef.new(shape: AutoScalingGroup)
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
@@ -85,6 +122,7 @@ module Aws::EKS
     Certificate.struct_class = Types::Certificate
 
     ClientException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ClientException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ClientException.struct_class = Types::ClientException
 
@@ -116,11 +154,37 @@ module Aws::EKS
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     CreateClusterResponse.struct_class = Types::CreateClusterResponse
 
+    CreateNodegroupRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    CreateNodegroupRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "nodegroupName"))
+    CreateNodegroupRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: NodegroupScalingConfig, location_name: "scalingConfig"))
+    CreateNodegroupRequest.add_member(:disk_size, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "diskSize"))
+    CreateNodegroupRequest.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
+    CreateNodegroupRequest.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "instanceTypes"))
+    CreateNodegroupRequest.add_member(:ami_type, Shapes::ShapeRef.new(shape: AMITypes, location_name: "amiType"))
+    CreateNodegroupRequest.add_member(:remote_access, Shapes::ShapeRef.new(shape: RemoteAccessConfig, location_name: "remoteAccess"))
+    CreateNodegroupRequest.add_member(:node_role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "nodeRole"))
+    CreateNodegroupRequest.add_member(:labels, Shapes::ShapeRef.new(shape: labelsMap, location_name: "labels"))
+    CreateNodegroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateNodegroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateNodegroupRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    CreateNodegroupRequest.add_member(:release_version, Shapes::ShapeRef.new(shape: String, location_name: "releaseVersion"))
+    CreateNodegroupRequest.struct_class = Types::CreateNodegroupRequest
+
+    CreateNodegroupResponse.add_member(:nodegroup, Shapes::ShapeRef.new(shape: Nodegroup, location_name: "nodegroup"))
+    CreateNodegroupResponse.struct_class = Types::CreateNodegroupResponse
+
     DeleteClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DeleteClusterRequest.struct_class = Types::DeleteClusterRequest
 
     DeleteClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     DeleteClusterResponse.struct_class = Types::DeleteClusterResponse
+
+    DeleteNodegroupRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DeleteNodegroupRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "nodegroupName"))
+    DeleteNodegroupRequest.struct_class = Types::DeleteNodegroupRequest
+
+    DeleteNodegroupResponse.add_member(:nodegroup, Shapes::ShapeRef.new(shape: Nodegroup, location_name: "nodegroup"))
+    DeleteNodegroupResponse.struct_class = Types::DeleteNodegroupResponse
 
     DescribeClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DescribeClusterRequest.struct_class = Types::DescribeClusterRequest
@@ -128,8 +192,16 @@ module Aws::EKS
     DescribeClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     DescribeClusterResponse.struct_class = Types::DescribeClusterResponse
 
+    DescribeNodegroupRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DescribeNodegroupRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "nodegroupName"))
+    DescribeNodegroupRequest.struct_class = Types::DescribeNodegroupRequest
+
+    DescribeNodegroupResponse.add_member(:nodegroup, Shapes::ShapeRef.new(shape: Nodegroup, location_name: "nodegroup"))
+    DescribeNodegroupResponse.struct_class = Types::DescribeNodegroupResponse
+
     DescribeUpdateRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DescribeUpdateRequest.add_member(:update_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "updateId"))
+    DescribeUpdateRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nodegroupName"))
     DescribeUpdateRequest.struct_class = Types::DescribeUpdateRequest
 
     DescribeUpdateResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -146,12 +218,21 @@ module Aws::EKS
     Identity.struct_class = Types::Identity
 
     InvalidParameterException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    InvalidParameterException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
     InvalidRequestException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    InvalidRequestException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    Issue.add_member(:code, Shapes::ShapeRef.new(shape: NodegroupIssueCode, location_name: "code"))
+    Issue.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    Issue.add_member(:resource_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "resourceIds"))
+    Issue.struct_class = Types::Issue
+
+    IssueList.member = Shapes::ShapeRef.new(shape: Issue)
 
     ListClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListClustersRequestMaxResults, location: "querystring", location_name: "maxResults"))
     ListClustersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -161,6 +242,15 @@ module Aws::EKS
     ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListClustersResponse.struct_class = Types::ListClustersResponse
 
+    ListNodegroupsRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    ListNodegroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNodegroupsRequestMaxResults, location: "querystring", location_name: "maxResults"))
+    ListNodegroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListNodegroupsRequest.struct_class = Types::ListNodegroupsRequest
+
+    ListNodegroupsResponse.add_member(:nodegroups, Shapes::ShapeRef.new(shape: StringList, location_name: "nodegroups"))
+    ListNodegroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListNodegroupsResponse.struct_class = Types::ListNodegroupsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -168,6 +258,7 @@ module Aws::EKS
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ListUpdatesRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    ListUpdatesRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nodegroupName"))
     ListUpdatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListUpdatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListUpdatesRequestMaxResults, location: "querystring", location_name: "maxResults"))
     ListUpdatesRequest.struct_class = Types::ListUpdatesRequest
@@ -187,25 +278,66 @@ module Aws::EKS
     Logging.add_member(:cluster_logging, Shapes::ShapeRef.new(shape: LogSetups, location_name: "clusterLogging"))
     Logging.struct_class = Types::Logging
 
+    Nodegroup.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
+    Nodegroup.add_member(:nodegroup_arn, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupArn"))
+    Nodegroup.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    Nodegroup.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    Nodegroup.add_member(:release_version, Shapes::ShapeRef.new(shape: String, location_name: "releaseVersion"))
+    Nodegroup.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    Nodegroup.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
+    Nodegroup.add_member(:status, Shapes::ShapeRef.new(shape: NodegroupStatus, location_name: "status"))
+    Nodegroup.add_member(:scaling_config, Shapes::ShapeRef.new(shape: NodegroupScalingConfig, location_name: "scalingConfig"))
+    Nodegroup.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "instanceTypes"))
+    Nodegroup.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, location_name: "subnets"))
+    Nodegroup.add_member(:remote_access, Shapes::ShapeRef.new(shape: RemoteAccessConfig, location_name: "remoteAccess"))
+    Nodegroup.add_member(:ami_type, Shapes::ShapeRef.new(shape: AMITypes, location_name: "amiType"))
+    Nodegroup.add_member(:node_role, Shapes::ShapeRef.new(shape: String, location_name: "nodeRole"))
+    Nodegroup.add_member(:labels, Shapes::ShapeRef.new(shape: labelsMap, location_name: "labels"))
+    Nodegroup.add_member(:resources, Shapes::ShapeRef.new(shape: NodegroupResources, location_name: "resources"))
+    Nodegroup.add_member(:disk_size, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "diskSize"))
+    Nodegroup.add_member(:health, Shapes::ShapeRef.new(shape: NodegroupHealth, location_name: "health"))
+    Nodegroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Nodegroup.struct_class = Types::Nodegroup
+
+    NodegroupHealth.add_member(:issues, Shapes::ShapeRef.new(shape: IssueList, location_name: "issues"))
+    NodegroupHealth.struct_class = Types::NodegroupHealth
+
+    NodegroupResources.add_member(:auto_scaling_groups, Shapes::ShapeRef.new(shape: AutoScalingGroupList, location_name: "autoScalingGroups"))
+    NodegroupResources.add_member(:remote_access_security_group, Shapes::ShapeRef.new(shape: String, location_name: "remoteAccessSecurityGroup"))
+    NodegroupResources.struct_class = Types::NodegroupResources
+
+    NodegroupScalingConfig.add_member(:min_size, Shapes::ShapeRef.new(shape: Capacity, location_name: "minSize"))
+    NodegroupScalingConfig.add_member(:max_size, Shapes::ShapeRef.new(shape: Capacity, location_name: "maxSize"))
+    NodegroupScalingConfig.add_member(:desired_size, Shapes::ShapeRef.new(shape: Capacity, location_name: "desiredSize"))
+    NodegroupScalingConfig.struct_class = Types::NodegroupScalingConfig
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
 
     OIDC.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "issuer"))
     OIDC.struct_class = Types::OIDC
 
+    RemoteAccessConfig.add_member(:ec2_ssh_key, Shapes::ShapeRef.new(shape: String, location_name: "ec2SshKey"))
+    RemoteAccessConfig.add_member(:source_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "sourceSecurityGroups"))
+    RemoteAccessConfig.struct_class = Types::RemoteAccessConfig
+
     ResourceInUseException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ResourceInUseException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceInUseException.struct_class = Types::ResourceInUseException
 
     ResourceLimitExceededException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ResourceLimitExceededException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
 
     ResourceNotFoundException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ResourceNotFoundException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ServerException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ServerException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     ServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServerException.struct_class = Types::ServerException
 
@@ -227,6 +359,7 @@ module Aws::EKS
 
     UnsupportedAvailabilityZoneException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     UnsupportedAvailabilityZoneException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    UnsupportedAvailabilityZoneException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     UnsupportedAvailabilityZoneException.add_member(:valid_zones, Shapes::ShapeRef.new(shape: StringList, location_name: "validZones"))
     UnsupportedAvailabilityZoneException.struct_class = Types::UnsupportedAvailabilityZoneException
 
@@ -261,6 +394,31 @@ module Aws::EKS
     UpdateClusterVersionResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
     UpdateClusterVersionResponse.struct_class = Types::UpdateClusterVersionResponse
 
+    UpdateLabelsPayload.add_member(:add_or_update_labels, Shapes::ShapeRef.new(shape: labelsMap, location_name: "addOrUpdateLabels"))
+    UpdateLabelsPayload.add_member(:remove_labels, Shapes::ShapeRef.new(shape: labelsKeyList, location_name: "removeLabels"))
+    UpdateLabelsPayload.struct_class = Types::UpdateLabelsPayload
+
+    UpdateNodegroupConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    UpdateNodegroupConfigRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "nodegroupName"))
+    UpdateNodegroupConfigRequest.add_member(:labels, Shapes::ShapeRef.new(shape: UpdateLabelsPayload, location_name: "labels"))
+    UpdateNodegroupConfigRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: NodegroupScalingConfig, location_name: "scalingConfig"))
+    UpdateNodegroupConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateNodegroupConfigRequest.struct_class = Types::UpdateNodegroupConfigRequest
+
+    UpdateNodegroupConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
+    UpdateNodegroupConfigResponse.struct_class = Types::UpdateNodegroupConfigResponse
+
+    UpdateNodegroupVersionRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    UpdateNodegroupVersionRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "nodegroupName"))
+    UpdateNodegroupVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    UpdateNodegroupVersionRequest.add_member(:release_version, Shapes::ShapeRef.new(shape: String, location_name: "releaseVersion"))
+    UpdateNodegroupVersionRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
+    UpdateNodegroupVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateNodegroupVersionRequest.struct_class = Types::UpdateNodegroupVersionRequest
+
+    UpdateNodegroupVersionResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
+    UpdateNodegroupVersionResponse.struct_class = Types::UpdateNodegroupVersionResponse
+
     UpdateParam.add_member(:type, Shapes::ShapeRef.new(shape: UpdateParamType, location_name: "type"))
     UpdateParam.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     UpdateParam.struct_class = Types::UpdateParam
@@ -275,10 +433,16 @@ module Aws::EKS
 
     VpcConfigResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "subnetIds"))
     VpcConfigResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
+    VpcConfigResponse.add_member(:cluster_security_group_id, Shapes::ShapeRef.new(shape: String, location_name: "clusterSecurityGroupId"))
     VpcConfigResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     VpcConfigResponse.add_member(:endpoint_public_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "endpointPublicAccess"))
     VpcConfigResponse.add_member(:endpoint_private_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "endpointPrivateAccess"))
     VpcConfigResponse.struct_class = Types::VpcConfigResponse
+
+    labelsKeyList.member = Shapes::ShapeRef.new(shape: String)
+
+    labelsMap.key = Shapes::ShapeRef.new(shape: labelKey)
+    labelsMap.value = Shapes::ShapeRef.new(shape: labelValue)
 
 
     # @api private
@@ -314,6 +478,21 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedAvailabilityZoneException)
       end)
 
+      api.add_operation(:create_nodegroup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNodegroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/node-groups"
+        o.input = Shapes::ShapeRef.new(shape: CreateNodegroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateNodegroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:delete_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCluster"
         o.http_method = "DELETE"
@@ -327,12 +506,39 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:delete_nodegroup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNodegroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/clusters/{name}/node-groups/{nodegroupName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNodegroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNodegroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:describe_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeCluster"
         o.http_method = "GET"
         o.http_request_uri = "/clusters/{name}"
         o.input = Shapes::ShapeRef.new(shape: DescribeClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_nodegroup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNodegroup"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/node-groups/{nodegroupName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNodegroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeNodegroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
@@ -361,6 +567,25 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_nodegroups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNodegroups"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/node-groups"
+        o.input = Shapes::ShapeRef.new(shape: ListNodegroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListNodegroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -437,6 +662,34 @@ module Aws::EKS
         o.http_request_uri = "/clusters/{name}/updates"
         o.input = Shapes::ShapeRef.new(shape: UpdateClusterVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateClusterVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:update_nodegroup_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNodegroupConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/node-groups/{nodegroupName}/update-config"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNodegroupConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNodegroupConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:update_nodegroup_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNodegroupVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/node-groups/{nodegroupName}/update-version"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNodegroupVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNodegroupVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)

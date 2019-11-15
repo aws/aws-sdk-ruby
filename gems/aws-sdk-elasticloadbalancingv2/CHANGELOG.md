@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2019-11-15)
+------------------
+
+* Feature - Documentation-only change to the default value of the routing.http.drop_invalid_header_fields.enabled attribute.
+
 1.36.0 (2019-11-12)
 ------------------
 

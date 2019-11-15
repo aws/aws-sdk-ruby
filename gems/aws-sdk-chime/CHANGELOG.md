@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2019-11-15)
+------------------
+
+* Feature - This release adds support for Chime Room Management APIs
+
 1.15.0 (2019-10-24)
 ------------------
 

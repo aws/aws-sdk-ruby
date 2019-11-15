@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2019-11-15)
+------------------
+
+* Feature - This release adds a new option in the User Pool to allow specifying sender's name in the emails sent by Amazon Cognito. This release also adds support to add SES Configuration Set to the emails sent by Amazon Cognito.
+
 1.28.0 (2019-11-14)
 ------------------
 
