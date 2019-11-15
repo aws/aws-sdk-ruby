@@ -15,13 +15,13 @@ def whitelist
     },
     "s3" => {
       "location_constraint.rb" => 12,
-      "s3_signer.rb" => 200,
+      "s3_signer.rb" => 202,
       "bucket.rb" => 116,
       "presigned_post.rb" => 587,
       "iad_regional_endpoint.rb" => "SKIP_FILE"
     },
     "s3control" => {
-      "s3_signer.rb" => 70
+      "s3_signer.rb" => 72
     },
   }
 end
@@ -34,7 +34,7 @@ describe "ensure no hard-coded region" do
     Dir.glob("#{dir}**/*").sort.each do |path|
       next if File.directory? path
 
-      file = File.open(path, 'r', encoding: 'UTF-8') { |f| f.read } 
+      file = File.open(path, 'r', encoding: 'UTF-8') { |f| f.read }
       lines = file.lines.to_a
 
       it "#{path} has no hard-coded region" do

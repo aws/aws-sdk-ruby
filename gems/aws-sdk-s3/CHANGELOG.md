@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix issue where `Aws::Errors::MissingRegionError` was not thrown for S3 or S3Control clients.
+
 1.55.0 (2019-11-15)
 ------------------
 

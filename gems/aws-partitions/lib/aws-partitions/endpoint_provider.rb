@@ -2,11 +2,9 @@ module Aws
   module Partitions
     # @api private
     class EndpointProvider
-
-      # when sts_regional_endpoint set to `legacy`
-      # endpoint pattern stays global for
-      # following regions
-      STS_LEGACY_REGIONS = %w(
+      # When sts_regional_endpoint is set to `legacy`, the endpoint
+      # pattern stays global for the following regions:
+      STS_LEGACY_REGIONS = %w[
         ap-northeast-1
         ap-south-1
         ap-southeast-1
@@ -23,13 +21,13 @@ module Aws
         us-east-2
         us-west-1
         us-west-2
-      )
+      ].freeze
 
       # Can be removed once S3 endpoint is updated
       S3_IAD_REGIONAL = {
-        "hostname" => "s3.us-east-1.amazonaws.com",
-        "signatureVersions" => [ "s3", "s3v4" ]
-      }
+        'hostname' => 's3.us-east-1.amazonaws.com',
+        'signatureVersions' => %w[s3 s3v4]
+      }.freeze
 
       # Intentionally marked private. The format of the endpoint rules
       # is an implementation detail.
@@ -38,26 +36,26 @@ module Aws
         @rules = rules
       end
 
-      # @param [String] region
-      # @param [String] service The endpoint prefix for the service, e.g. "monitoring" for
-      #   cloudwatch.
-      # @param [String] sts_regional_endpoints [STS only] Whether to use `legacy` (global endpoint for
-      #   legacy regions) or `regional` mode for using regional endpoint for supported regions
-      #   except 'aws-global'
+      # @param [String] region The region for the client.
+      # @param [String] service The endpoint prefix for the service, e.g.
+      #   "monitoring" for cloudwatch.
+      # @param [String] sts_regional_endpoints [STS only] Whether to use
+      #   `legacy` (global endpoint for legacy regions) or `regional` mode for
+      #    using regional endpoint for supported regions except 'aws-global'
       # @api private Use the static class methods instead.
       def resolve(region, service, sts_regional_endpoints)
-        "https://" + endpoint_for(region, service, sts_regional_endpoints)
+        'https://' + endpoint_for(region, service, sts_regional_endpoints)
       end
 
       # @api private Use the static class methods instead.
       def signing_region(region, service)
-        get_partition(region).
-          fetch("services", {}).
-          fetch(service, {}).
-          fetch("endpoints", {}).
-          fetch(region, {}).
-          fetch("credentialScope", {}).
-          fetch("region", region)
+        get_partition(region)
+          .fetch('services', {})
+          .fetch(service, {})
+          .fetch('endpoints', {})
+          .fetch(region, {})
+          .fetch('credentialScope', {})
+          .fetch('region', region)
       end
 
       # @api private Use the static class methods instead.
@@ -71,45 +69,45 @@ module Aws
       def endpoint_for(region, service, sts_regional_endpoints)
         partition = get_partition(region)
         endpoint = default_endpoint(partition, service, region)
-        service_cfg = partition.fetch("services", {}).fetch(service, {})
+        service_cfg = partition.fetch('services', {}).fetch(service, {})
 
         # Check for service-level default endpoint.
-        endpoint = service_cfg.fetch("defaults", {}).fetch("hostname", endpoint)
+        endpoint = service_cfg.fetch('defaults', {}).fetch('hostname', endpoint)
 
         # Check for sts legacy behavior
         sts_legacy = service == 'sts' &&
-          sts_regional_endpoints == 'legacy' &&
-          STS_LEGACY_REGIONS.include?(region)
+                     sts_regional_endpoints == 'legacy' &&
+                     STS_LEGACY_REGIONS.include?(region)
 
         # Check for global endpoint.
-        if sts_legacy || service_cfg["isRegionalized"] == false
-          region = service_cfg.fetch("partitionEndpoint", region)
+        if sts_legacy || service_cfg['isRegionalized'] == false
+          region = service_cfg.fetch('partitionEndpoint', region)
         end
 
         # Can be removed once S3 endpoint is updated
-        if (service == 's3') && (region == "us-east-1")
-          service_cfg["endpoints"][region] = S3_IAD_REGIONAL
+        if (service == 's3') && (region == 'us-east-1')
+          service_cfg['endpoints'][region] = S3_IAD_REGIONAL
         end
 
         # Check for service/region level endpoint.
-        endpoint = service_cfg.fetch("endpoints", {}).
-          fetch(region, {}).fetch("hostname", endpoint)
+        endpoint = service_cfg.fetch('endpoints', {})
+                              .fetch(region, {}).fetch('hostname', endpoint)
 
         endpoint
       end
 
       def default_endpoint(partition, service, region)
-        hostname_template = partition["defaults"]["hostname"]
-        hostname_template.
-          sub('{region}', region).
-          sub('{service}', service).
-          sub('{dnsSuffix}', partition["dnsSuffix"])
+        hostname_template = partition['defaults']['hostname']
+        hostname_template
+          .sub('{region}', region)
+          .sub('{service}', service)
+          .sub('{dnsSuffix}', partition['dnsSuffix'])
       end
 
       def get_partition(region)
         partition_containing_region(region) ||
-        partition_matching_region(region) ||
-        default_partition
+          partition_matching_region(region) ||
+          default_partition
       end
 
       def partition_containing_region(region)
@@ -120,23 +118,20 @@ module Aws
 
       def partition_matching_region(region)
         @rules['partitions'].find do |p|
-          region.match(p["regionRegex"]) ||
-          p['services'].values.find { |svc| svc['endpoints'].key?(region) if svc.key? 'endpoints' }
+          region.match(p['regionRegex']) ||
+            p['services'].values.find do |svc|
+              svc['endpoints'].key?(region) if svc.key? 'endpoints'
+            end
         end
       end
 
       def default_partition
-        @rules['partitions'].find { |p| p["partition"] == "aws" } ||
-        @rules['partitions'].first
+        @rules['partitions'].find { |p| p['partition'] == 'aws' } ||
+          @rules['partitions'].first
       end
 
       class << self
-
-        def resolve(
-          region,
-          service,
-          sts_regional_endpoints = 'legacy'
-        )
+        def resolve(region, service, sts_regional_endpoints = 'legacy')
           default_provider.resolve(region, service, sts_regional_endpoints)
         end
 
@@ -153,7 +148,6 @@ module Aws
         def default_provider
           @default_provider ||= EndpointProvider.new(Partitions.defaults)
         end
-
       end
     end
   end
