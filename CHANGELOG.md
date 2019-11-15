@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.399 (2019-11-15)
+------------------
+
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
 
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
