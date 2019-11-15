@@ -337,6 +337,7 @@ module Aws::CognitoIdentityProvider
     RiskExceptionConfigurationType = Shapes::StructureShape.new(name: 'RiskExceptionConfigurationType')
     RiskLevelType = Shapes::StringShape.new(name: 'RiskLevelType')
     S3BucketType = Shapes::StringShape.new(name: 'S3BucketType')
+    SESConfigurationSet = Shapes::StringShape.new(name: 'SESConfigurationSet')
     SMSMfaSettingsType = Shapes::StructureShape.new(name: 'SMSMfaSettingsType')
     SchemaAttributeType = Shapes::StructureShape.new(name: 'SchemaAttributeType')
     SchemaAttributesListType = Shapes::ListShape.new(name: 'SchemaAttributesListType')
@@ -1050,6 +1051,8 @@ module Aws::CognitoIdentityProvider
     EmailConfigurationType.add_member(:source_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "SourceArn"))
     EmailConfigurationType.add_member(:reply_to_email_address, Shapes::ShapeRef.new(shape: EmailAddressType, location_name: "ReplyToEmailAddress"))
     EmailConfigurationType.add_member(:email_sending_account, Shapes::ShapeRef.new(shape: EmailSendingAccountType, location_name: "EmailSendingAccount"))
+    EmailConfigurationType.add_member(:from, Shapes::ShapeRef.new(shape: StringType, location_name: "From"))
+    EmailConfigurationType.add_member(:configuration_set, Shapes::ShapeRef.new(shape: SESConfigurationSet, location_name: "ConfigurationSet"))
     EmailConfigurationType.struct_class = Types::EmailConfigurationType
 
     EnableSoftwareTokenMFAException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))

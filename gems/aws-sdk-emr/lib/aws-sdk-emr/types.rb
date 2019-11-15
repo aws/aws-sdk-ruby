@@ -84,11 +84,16 @@ module Aws::EMR
     #   The unique identifier of the instance fleet.
     #   @return [String]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleetOutput AWS API Documentation
     #
     class AddInstanceFleetOutput < Struct.new(
       :cluster_id,
-      :instance_fleet_id)
+      :instance_fleet_id,
+      :cluster_arn)
       include Aws::Structure
     end
 
@@ -199,11 +204,16 @@ module Aws::EMR
     #   Instance group IDs of the newly created instance groups.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroupsOutput AWS API Documentation
     #
     class AddInstanceGroupsOutput < Struct.new(
       :job_flow_id,
-      :instance_group_ids)
+      :instance_group_ids,
+      :cluster_arn)
       include Aws::Structure
     end
 
@@ -710,9 +720,9 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] evaluation_periods
-    #   The number of periods, expressed in seconds using `Period`, during
-    #   which the alarm condition must exist before the alarm triggers
-    #   automatic scaling activity. The default value is `1`.
+    #   The number of periods, in five-minute increments, during which the
+    #   alarm condition must exist before the alarm triggers automatic
+    #   scaling activity. The default value is `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] metric_name
@@ -838,15 +848,15 @@ module Aws::EMR
     #   @return [Boolean]
     #
     # @!attribute [rw] visible_to_all_users
-    #   *This member will be deprecated.*
-    #
     #   Indicates whether the cluster is visible to all IAM users of the AWS
-    #   account associated with the cluster. If this value is set to `true`,
-    #   all IAM users of that AWS account can view and manage the cluster if
-    #   they have the proper policy permissions set. If this value is
-    #   `false`, only the IAM user that created the cluster can view and
-    #   manage it. This value can be changed using the SetVisibleToAllUsers
-    #   action.
+    #   account associated with the cluster. The default value, `true`,
+    #   indicates that all IAM users in the AWS account can perform cluster
+    #   actions if they have the proper IAM policy permissions. If this
+    #   value is `false`, only the IAM user that created the cluster can
+    #   perform actions. This value can be changed on a running cluster by
+    #   using the SetVisibleToAllUsers action. You can override the default
+    #   value of `true` when you create a cluster by using the
+    #   `VisibleToAllUsers` parameter of the `RunJobFlow` action.
     #   @return [Boolean]
     #
     # @!attribute [rw] applications
@@ -938,6 +948,10 @@ module Aws::EMR
     #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #   @return [Types::KerberosAttributes]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -965,7 +979,8 @@ module Aws::EMR
       :custom_ami_id,
       :ebs_root_volume_size,
       :repo_upgrade_on_boot,
-      :kerberos_attributes)
+      :kerberos_attributes,
+      :cluster_arn)
       include Aws::Structure
     end
 
@@ -1035,13 +1050,18 @@ module Aws::EMR
     #   billing rate.
     #   @return [Integer]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterSummary AWS API Documentation
     #
     class ClusterSummary < Struct.new(
       :id,
       :name,
       :status,
-      :normalized_instance_hours)
+      :normalized_instance_hours,
+      :cluster_arn)
       include Aws::Structure
     end
 
@@ -2253,12 +2273,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The maximum Spot price your are willing to pay for EC2 instances.
-    #
-    #   An optional, nullable field that applies if the `MarketType` for the
-    #   instance group is specified as `SPOT`. Specify the maximum spot
-    #   price in USD. If the value is NULL and `SPOT` is specified, the
-    #   maximum Spot price is set equal to the On-Demand price.
+    #   The bid price for each EC2 Spot instance type as defined by
+    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
+    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
+    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -2436,12 +2454,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The maximum Spot price your are willing to pay for EC2 instances.
-    #
-    #   An optional, nullable field that applies if the `MarketType` for the
-    #   instance group is specified as `SPOT`. Specify the maximum spot
-    #   price in USD. If the value is NULL and `SPOT` is specified, the
-    #   maximum Spot price is set equal to the On-Demand price.
+    #   The bid price for each EC2 Spot instance type as defined by
+    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
+    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
+    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -2509,12 +2525,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The maximum Spot price your are willing to pay for EC2 instances.
-    #
-    #   An optional, nullable field that applies if the `MarketType` for the
-    #   instance group is specified as `SPOT`. Specified in USD. If the
-    #   value is NULL and `SPOT` is specified, the maximum Spot price is set
-    #   equal to the On-Demand price.
+    #   The bid price for each EC2 Spot instance type as defined by
+    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
+    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
+    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -3031,15 +3045,15 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   *This member will be deprecated.*
-    #
-    #   Specifies whether the cluster is visible to all IAM users of the AWS
-    #   account associated with the cluster. If this value is set to `true`,
-    #   all IAM users of that AWS account can view and (if they have the
-    #   proper policy permissions set) manage the cluster. If it is set to
-    #   `false`, only the IAM user that created the cluster can view and
-    #   manage it. This value can be changed using the SetVisibleToAllUsers
-    #   action.
+    #   Indicates whether the cluster is visible to all IAM users of the AWS
+    #   account associated with the cluster. The default value, `true`,
+    #   indicates that all IAM users in the AWS account can perform cluster
+    #   actions if they have the proper IAM policy permissions. If this
+    #   value is `false`, only the IAM user that created the cluster can
+    #   perform actions. This value can be changed on a running cluster by
+    #   using the SetVisibleToAllUsers action. You can override the default
+    #   value of `true` when you create a cluster by using the
+    #   `VisibleToAllUsers` parameter of the `RunJobFlow` action.
     #   @return [Boolean]
     #
     # @!attribute [rw] job_flow_role
@@ -3914,7 +3928,8 @@ module Aws::EMR
     #
     # @!attribute [rw] step_ids
     #   The filter to limit the step list based on the identifier of the
-    #   steps.
+    #   steps. You can specify a maximum of ten Step IDs. The character
+    #   constraint applies to the overall length of the array.
     #   @return [Array<String>]
     #
     # @!attribute [rw] marker
@@ -4209,12 +4224,17 @@ module Aws::EMR
     #   The automatic scaling policy definition.
     #   @return [Types::AutoScalingPolicyDescription]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicyOutput AWS API Documentation
     #
     class PutAutoScalingPolicyOutput < Struct.new(
       :cluster_id,
       :instance_group_id,
-      :auto_scaling_policy)
+      :auto_scaling_policy,
+      :cluster_arn)
       include Aws::Structure
     end
 
@@ -4672,13 +4692,10 @@ module Aws::EMR
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   *This member will be deprecated.*
-    #
-    #   Whether the cluster is visible to all IAM users of the AWS account
-    #   associated with the cluster. If this value is set to `true`, all IAM
-    #   users of that AWS account can view and (if they have the proper
-    #   policy permissions set) manage the cluster. If it is set to `false`,
-    #   only the IAM user that created the cluster can view and manage it.
+    #   A value of `true` indicates that all IAM users in the AWS account
+    #   can perform cluster actions if they have the proper IAM policy
+    #   permissions. This is the default. A value of `false` indicates that
+    #   only the IAM user who created the cluster can perform actions.
     #   @return [Boolean]
     #
     # @!attribute [rw] job_flow_role
@@ -4808,10 +4825,15 @@ module Aws::EMR
     #   An unique identifier for the job flow.
     #   @return [String]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowOutput AWS API Documentation
     #
     class RunJobFlowOutput < Struct.new(
-      :job_flow_id)
+      :job_flow_id,
+      :cluster_arn)
       include Aws::Structure
     end
 
@@ -5062,8 +5084,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # *This member will be deprecated.*
-    #
     # The input to the SetVisibleToAllUsers action.
     #
     # @note When making an API call, you may pass SetVisibleToAllUsersInput
@@ -5075,18 +5095,14 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] job_flow_ids
-    #   Identifiers of the job flows to receive the new visibility setting.
+    #   The unique identifier of the job flow (cluster).
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   *This member will be deprecated.*
-    #
-    #   Whether the specified clusters are visible to all IAM users of the
-    #   AWS account associated with the cluster. If this value is set to
-    #   True, all IAM users of that AWS account can view and, if they have
-    #   the proper IAM policy permissions set, manage the clusters. If it is
-    #   set to False, only the IAM user that created a cluster can view and
-    #   manage it.
+    #   A value of `true` indicates that all IAM users in the AWS account
+    #   can perform cluster actions if they have the proper IAM policy
+    #   permissions. This is the default. A value of `false` indicates that
+    #   only the IAM user who created the cluster can perform actions.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsersInput AWS API Documentation

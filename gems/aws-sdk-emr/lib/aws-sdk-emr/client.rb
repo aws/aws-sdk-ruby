@@ -281,6 +281,7 @@ module Aws::EMR
     #
     #   * {Types::AddInstanceFleetOutput#cluster_id #cluster_id} => String
     #   * {Types::AddInstanceFleetOutput#instance_fleet_id #instance_fleet_id} => String
+    #   * {Types::AddInstanceFleetOutput#cluster_arn #cluster_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -337,6 +338,7 @@ module Aws::EMR
     #
     #   resp.cluster_id #=> String
     #   resp.instance_fleet_id #=> String
+    #   resp.cluster_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleet AWS API Documentation
     #
@@ -359,6 +361,7 @@ module Aws::EMR
     #
     #   * {Types::AddInstanceGroupsOutput#job_flow_id #job_flow_id} => String
     #   * {Types::AddInstanceGroupsOutput#instance_group_ids #instance_group_ids} => Array&lt;String&gt;
+    #   * {Types::AddInstanceGroupsOutput#cluster_arn #cluster_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -443,6 +446,7 @@ module Aws::EMR
     #   resp.job_flow_id #=> String
     #   resp.instance_group_ids #=> Array
     #   resp.instance_group_ids[0] #=> String
+    #   resp.cluster_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroups AWS API Documentation
     #
@@ -755,6 +759,7 @@ module Aws::EMR
     #   resp.cluster.kerberos_attributes.cross_realm_trust_principal_password #=> String
     #   resp.cluster.kerberos_attributes.ad_domain_join_user #=> String
     #   resp.cluster.kerberos_attributes.ad_domain_join_password #=> String
+    #   resp.cluster.cluster_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeCluster AWS API Documentation
     #
@@ -1092,6 +1097,7 @@ module Aws::EMR
     #   resp.clusters[0].status.timeline.ready_date_time #=> Time
     #   resp.clusters[0].status.timeline.end_date_time #=> Time
     #   resp.clusters[0].normalized_instance_hours #=> Integer
+    #   resp.clusters[0].cluster_arn #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClusters AWS API Documentation
@@ -1387,7 +1393,8 @@ module Aws::EMR
     end
 
     # Provides a list of steps for the cluster in reverse order unless you
-    # specify stepIds with the request.
+    # specify `stepIds` with the request of filter by `StepStates`. You can
+    # specify a maximum of ten `stepIDs`.
     #
     # @option params [required, String] :cluster_id
     #   The identifier of the cluster for which to list the steps.
@@ -1397,7 +1404,8 @@ module Aws::EMR
     #
     # @option params [Array<String>] :step_ids
     #   The filter to limit the step list based on the identifier of the
-    #   steps.
+    #   steps. You can specify a maximum of ten Step IDs. The character
+    #   constraint applies to the overall length of the array.
     #
     # @option params [String] :marker
     #   The pagination token that indicates the next set of results to
@@ -1563,6 +1571,7 @@ module Aws::EMR
     #   * {Types::PutAutoScalingPolicyOutput#cluster_id #cluster_id} => String
     #   * {Types::PutAutoScalingPolicyOutput#instance_group_id #instance_group_id} => String
     #   * {Types::PutAutoScalingPolicyOutput#auto_scaling_policy #auto_scaling_policy} => Types::AutoScalingPolicyDescription
+    #   * {Types::PutAutoScalingPolicyOutput#cluster_arn #cluster_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1636,6 +1645,7 @@ module Aws::EMR
     #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions #=> Array
     #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].key #=> String
     #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].value #=> String
+    #   resp.cluster_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicy AWS API Documentation
     #
@@ -1906,13 +1916,10 @@ module Aws::EMR
     #   supplied for the EMR cluster you are creating.
     #
     # @option params [Boolean] :visible_to_all_users
-    #   *This member will be deprecated.*
-    #
-    #   Whether the cluster is visible to all IAM users of the AWS account
-    #   associated with the cluster. If this value is set to `true`, all IAM
-    #   users of that AWS account can view and (if they have the proper policy
-    #   permissions set) manage the cluster. If it is set to `false`, only the
-    #   IAM user that created the cluster can view and manage it.
+    #   A value of `true` indicates that all IAM users in the AWS account can
+    #   perform cluster actions if they have the proper IAM policy
+    #   permissions. This is the default. A value of `false` indicates that
+    #   only the IAM user who created the cluster can perform actions.
     #
     # @option params [String] :job_flow_role
     #   Also called instance profile and EC2 role. An IAM role for an EMR
@@ -1998,6 +2005,7 @@ module Aws::EMR
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
+    #   * {Types::RunJobFlowOutput#cluster_arn #cluster_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2227,6 +2235,7 @@ module Aws::EMR
     # @example Response structure
     #
     #   resp.job_flow_id #=> String
+    #   resp.cluster_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlow AWS API Documentation
     #
@@ -2290,28 +2299,25 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # *This member will be deprecated.*
-    #
-    # Sets whether all AWS Identity and Access Management (IAM) users under
-    # your account can access the specified clusters (job flows). This
-    # action works on running clusters. You can also set the visibility of a
-    # cluster when you launch it using the `VisibleToAllUsers` parameter of
-    # RunJobFlow. The SetVisibleToAllUsers action can be called only by an
-    # IAM user who created the cluster or the AWS account that owns the
-    # cluster.
+    # Sets the Cluster$VisibleToAllUsers value, which determines whether the
+    # cluster is visible to all IAM users of the AWS account associated with
+    # the cluster. Only the IAM user who created the cluster or the AWS
+    # account root user can call this action. The default value, `true`,
+    # indicates that all IAM users in the AWS account can perform cluster
+    # actions if they have the proper IAM policy permissions. If set to
+    # `false`, only the IAM user that created the cluster can perform
+    # actions. This action works on running clusters. You can override the
+    # default `true` setting when you create a cluster by using the
+    # `VisibleToAllUsers` parameter with `RunJobFlow`.
     #
     # @option params [required, Array<String>] :job_flow_ids
-    #   Identifiers of the job flows to receive the new visibility setting.
+    #   The unique identifier of the job flow (cluster).
     #
     # @option params [required, Boolean] :visible_to_all_users
-    #   *This member will be deprecated.*
-    #
-    #   Whether the specified clusters are visible to all IAM users of the AWS
-    #   account associated with the cluster. If this value is set to True, all
-    #   IAM users of that AWS account can view and, if they have the proper
-    #   IAM policy permissions set, manage the clusters. If it is set to
-    #   False, only the IAM user that created a cluster can view and manage
-    #   it.
+    #   A value of `true` indicates that all IAM users in the AWS account can
+    #   perform cluster actions if they have the proper IAM policy
+    #   permissions. This is the default. A value of `false` indicates that
+    #   only the IAM user who created the cluster can perform actions.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2376,7 +2382,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

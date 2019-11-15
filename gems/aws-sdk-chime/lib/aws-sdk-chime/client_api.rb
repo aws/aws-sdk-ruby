@@ -24,6 +24,8 @@ module Aws::Chime
     AssociatePhoneNumbersWithVoiceConnectorRequest = Shapes::StructureShape.new(name: 'AssociatePhoneNumbersWithVoiceConnectorRequest')
     AssociatePhoneNumbersWithVoiceConnectorResponse = Shapes::StructureShape.new(name: 'AssociatePhoneNumbersWithVoiceConnectorResponse')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BatchCreateRoomMembershipRequest = Shapes::StructureShape.new(name: 'BatchCreateRoomMembershipRequest')
+    BatchCreateRoomMembershipResponse = Shapes::StructureShape.new(name: 'BatchCreateRoomMembershipResponse')
     BatchDeletePhoneNumberRequest = Shapes::StructureShape.new(name: 'BatchDeletePhoneNumberRequest')
     BatchDeletePhoneNumberResponse = Shapes::StructureShape.new(name: 'BatchDeletePhoneNumberResponse')
     BatchSuspendUserRequest = Shapes::StructureShape.new(name: 'BatchSuspendUserRequest')
@@ -43,6 +45,7 @@ module Aws::Chime
     CallingNameStatus = Shapes::StringShape.new(name: 'CallingNameStatus')
     CallingRegion = Shapes::StringShape.new(name: 'CallingRegion')
     CallingRegionList = Shapes::ListShape.new(name: 'CallingRegionList')
+    ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CpsLimit = Shapes::IntegerShape.new(name: 'CpsLimit')
     CreateAccountRequest = Shapes::StructureShape.new(name: 'CreateAccountRequest')
@@ -51,6 +54,10 @@ module Aws::Chime
     CreateBotResponse = Shapes::StructureShape.new(name: 'CreateBotResponse')
     CreatePhoneNumberOrderRequest = Shapes::StructureShape.new(name: 'CreatePhoneNumberOrderRequest')
     CreatePhoneNumberOrderResponse = Shapes::StructureShape.new(name: 'CreatePhoneNumberOrderResponse')
+    CreateRoomMembershipRequest = Shapes::StructureShape.new(name: 'CreateRoomMembershipRequest')
+    CreateRoomMembershipResponse = Shapes::StructureShape.new(name: 'CreateRoomMembershipResponse')
+    CreateRoomRequest = Shapes::StructureShape.new(name: 'CreateRoomRequest')
+    CreateRoomResponse = Shapes::StructureShape.new(name: 'CreateRoomResponse')
     CreateVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'CreateVoiceConnectorGroupRequest')
     CreateVoiceConnectorGroupResponse = Shapes::StructureShape.new(name: 'CreateVoiceConnectorGroupResponse')
     CreateVoiceConnectorRequest = Shapes::StructureShape.new(name: 'CreateVoiceConnectorRequest')
@@ -62,6 +69,8 @@ module Aws::Chime
     DeleteAccountResponse = Shapes::StructureShape.new(name: 'DeleteAccountResponse')
     DeleteEventsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteEventsConfigurationRequest')
     DeletePhoneNumberRequest = Shapes::StructureShape.new(name: 'DeletePhoneNumberRequest')
+    DeleteRoomMembershipRequest = Shapes::StructureShape.new(name: 'DeleteRoomMembershipRequest')
+    DeleteRoomRequest = Shapes::StructureShape.new(name: 'DeleteRoomRequest')
     DeleteVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorGroupRequest')
     DeleteVoiceConnectorOriginationRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorOriginationRequest')
     DeleteVoiceConnectorRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorRequest')
@@ -95,6 +104,8 @@ module Aws::Chime
     GetPhoneNumberRequest = Shapes::StructureShape.new(name: 'GetPhoneNumberRequest')
     GetPhoneNumberResponse = Shapes::StructureShape.new(name: 'GetPhoneNumberResponse')
     GetPhoneNumberSettingsResponse = Shapes::StructureShape.new(name: 'GetPhoneNumberSettingsResponse')
+    GetRoomRequest = Shapes::StructureShape.new(name: 'GetRoomRequest')
+    GetRoomResponse = Shapes::StructureShape.new(name: 'GetRoomResponse')
     GetUserRequest = Shapes::StructureShape.new(name: 'GetUserRequest')
     GetUserResponse = Shapes::StructureShape.new(name: 'GetUserResponse')
     GetUserSettingsRequest = Shapes::StructureShape.new(name: 'GetUserSettingsRequest')
@@ -130,6 +141,10 @@ module Aws::Chime
     ListPhoneNumberOrdersResponse = Shapes::StructureShape.new(name: 'ListPhoneNumberOrdersResponse')
     ListPhoneNumbersRequest = Shapes::StructureShape.new(name: 'ListPhoneNumbersRequest')
     ListPhoneNumbersResponse = Shapes::StructureShape.new(name: 'ListPhoneNumbersResponse')
+    ListRoomMembershipsRequest = Shapes::StructureShape.new(name: 'ListRoomMembershipsRequest')
+    ListRoomMembershipsResponse = Shapes::StructureShape.new(name: 'ListRoomMembershipsResponse')
+    ListRoomsRequest = Shapes::StructureShape.new(name: 'ListRoomsRequest')
+    ListRoomsResponse = Shapes::StructureShape.new(name: 'ListRoomsResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
     ListVoiceConnectorGroupsRequest = Shapes::StructureShape.new(name: 'ListVoiceConnectorGroupsRequest')
@@ -141,6 +156,12 @@ module Aws::Chime
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     LogoutUserRequest = Shapes::StructureShape.new(name: 'LogoutUserRequest')
     LogoutUserResponse = Shapes::StructureShape.new(name: 'LogoutUserResponse')
+    Member = Shapes::StructureShape.new(name: 'Member')
+    MemberError = Shapes::StructureShape.new(name: 'MemberError')
+    MemberErrorList = Shapes::ListShape.new(name: 'MemberErrorList')
+    MemberType = Shapes::StringShape.new(name: 'MemberType')
+    MembershipItem = Shapes::StructureShape.new(name: 'MembershipItem')
+    MembershipItemList = Shapes::ListShape.new(name: 'MembershipItemList')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonEmptyStringList = Shapes::ListShape.new(name: 'NonEmptyStringList')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
@@ -191,6 +212,11 @@ module Aws::Chime
     RestorePhoneNumberRequest = Shapes::StructureShape.new(name: 'RestorePhoneNumberRequest')
     RestorePhoneNumberResponse = Shapes::StructureShape.new(name: 'RestorePhoneNumberResponse')
     ResultMax = Shapes::IntegerShape.new(name: 'ResultMax')
+    Room = Shapes::StructureShape.new(name: 'Room')
+    RoomList = Shapes::ListShape.new(name: 'RoomList')
+    RoomMembership = Shapes::StructureShape.new(name: 'RoomMembership')
+    RoomMembershipList = Shapes::ListShape.new(name: 'RoomMembershipList')
+    RoomMembershipRole = Shapes::StringShape.new(name: 'RoomMembershipRole')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
@@ -219,6 +245,10 @@ module Aws::Chime
     UpdatePhoneNumberRequestItemList = Shapes::ListShape.new(name: 'UpdatePhoneNumberRequestItemList')
     UpdatePhoneNumberResponse = Shapes::StructureShape.new(name: 'UpdatePhoneNumberResponse')
     UpdatePhoneNumberSettingsRequest = Shapes::StructureShape.new(name: 'UpdatePhoneNumberSettingsRequest')
+    UpdateRoomMembershipRequest = Shapes::StructureShape.new(name: 'UpdateRoomMembershipRequest')
+    UpdateRoomMembershipResponse = Shapes::StructureShape.new(name: 'UpdateRoomMembershipResponse')
+    UpdateRoomRequest = Shapes::StructureShape.new(name: 'UpdateRoomRequest')
+    UpdateRoomResponse = Shapes::StructureShape.new(name: 'UpdateRoomResponse')
     UpdateUserRequest = Shapes::StructureShape.new(name: 'UpdateUserRequest')
     UpdateUserRequestItem = Shapes::StructureShape.new(name: 'UpdateUserRequestItem')
     UpdateUserRequestItemList = Shapes::ListShape.new(name: 'UpdateUserRequestItemList')
@@ -292,6 +322,14 @@ module Aws::Chime
     BadRequestException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    BatchCreateRoomMembershipRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    BatchCreateRoomMembershipRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
+    BatchCreateRoomMembershipRequest.add_member(:membership_item_list, Shapes::ShapeRef.new(shape: MembershipItemList, required: true, location_name: "MembershipItemList"))
+    BatchCreateRoomMembershipRequest.struct_class = Types::BatchCreateRoomMembershipRequest
+
+    BatchCreateRoomMembershipResponse.add_member(:errors, Shapes::ShapeRef.new(shape: MemberErrorList, location_name: "Errors"))
+    BatchCreateRoomMembershipResponse.struct_class = Types::BatchCreateRoomMembershipResponse
 
     BatchDeletePhoneNumberRequest.add_member(:phone_number_ids, Shapes::ShapeRef.new(shape: NonEmptyStringList, required: true, location_name: "PhoneNumberIds"))
     BatchDeletePhoneNumberRequest.struct_class = Types::BatchDeletePhoneNumberRequest
@@ -369,6 +407,23 @@ module Aws::Chime
     CreatePhoneNumberOrderResponse.add_member(:phone_number_order, Shapes::ShapeRef.new(shape: PhoneNumberOrder, location_name: "PhoneNumberOrder"))
     CreatePhoneNumberOrderResponse.struct_class = Types::CreatePhoneNumberOrderResponse
 
+    CreateRoomMembershipRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    CreateRoomMembershipRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
+    CreateRoomMembershipRequest.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "MemberId"))
+    CreateRoomMembershipRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoomMembershipRole, location_name: "Role"))
+    CreateRoomMembershipRequest.struct_class = Types::CreateRoomMembershipRequest
+
+    CreateRoomMembershipResponse.add_member(:room_membership, Shapes::ShapeRef.new(shape: RoomMembership, location_name: "RoomMembership"))
+    CreateRoomMembershipResponse.struct_class = Types::CreateRoomMembershipResponse
+
+    CreateRoomRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    CreateRoomRequest.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "Name"))
+    CreateRoomRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateRoomRequest.struct_class = Types::CreateRoomRequest
+
+    CreateRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
+    CreateRoomResponse.struct_class = Types::CreateRoomResponse
+
     CreateVoiceConnectorGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: VoiceConnectorGroupName, required: true, location_name: "Name"))
     CreateVoiceConnectorGroupRequest.add_member(:voice_connector_items, Shapes::ShapeRef.new(shape: VoiceConnectorItemList, location_name: "VoiceConnectorItems"))
     CreateVoiceConnectorGroupRequest.struct_class = Types::CreateVoiceConnectorGroupRequest
@@ -401,6 +456,15 @@ module Aws::Chime
 
     DeletePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "phoneNumberId"))
     DeletePhoneNumberRequest.struct_class = Types::DeletePhoneNumberRequest
+
+    DeleteRoomMembershipRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    DeleteRoomMembershipRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
+    DeleteRoomMembershipRequest.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "memberId"))
+    DeleteRoomMembershipRequest.struct_class = Types::DeleteRoomMembershipRequest
+
+    DeleteRoomRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    DeleteRoomRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
+    DeleteRoomRequest.struct_class = Types::DeleteRoomRequest
 
     DeleteVoiceConnectorGroupRequest.add_member(:voice_connector_group_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorGroupId"))
     DeleteVoiceConnectorGroupRequest.struct_class = Types::DeleteVoiceConnectorGroupRequest
@@ -497,6 +561,13 @@ module Aws::Chime
     GetPhoneNumberSettingsResponse.add_member(:calling_name, Shapes::ShapeRef.new(shape: CallingName, location_name: "CallingName"))
     GetPhoneNumberSettingsResponse.add_member(:calling_name_updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CallingNameUpdatedTimestamp"))
     GetPhoneNumberSettingsResponse.struct_class = Types::GetPhoneNumberSettingsResponse
+
+    GetRoomRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    GetRoomRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
+    GetRoomRequest.struct_class = Types::GetRoomRequest
+
+    GetRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
+    GetRoomResponse.struct_class = Types::GetRoomResponse
 
     GetUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     GetUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "userId"))
@@ -610,6 +681,26 @@ module Aws::Chime
     ListPhoneNumbersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListPhoneNumbersResponse.struct_class = Types::ListPhoneNumbersResponse
 
+    ListRoomMembershipsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    ListRoomMembershipsRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
+    ListRoomMembershipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListRoomMembershipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListRoomMembershipsRequest.struct_class = Types::ListRoomMembershipsRequest
+
+    ListRoomMembershipsResponse.add_member(:room_memberships, Shapes::ShapeRef.new(shape: RoomMembershipList, location_name: "RoomMemberships"))
+    ListRoomMembershipsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListRoomMembershipsResponse.struct_class = Types::ListRoomMembershipsResponse
+
+    ListRoomsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    ListRoomsRequest.add_member(:member_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "member-id"))
+    ListRoomsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListRoomsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListRoomsRequest.struct_class = Types::ListRoomsRequest
+
+    ListRoomsResponse.add_member(:rooms, Shapes::ShapeRef.new(shape: RoomList, location_name: "Rooms"))
+    ListRoomsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListRoomsResponse.struct_class = Types::ListRoomsResponse
+
     ListUsersRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     ListUsersRequest.add_member(:user_email, Shapes::ShapeRef.new(shape: EmailAddress, location: "querystring", location_name: "user-email"))
     ListUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ProfileServiceMaxResults, location: "querystring", location_name: "max-results"))
@@ -650,6 +741,26 @@ module Aws::Chime
     LogoutUserRequest.struct_class = Types::LogoutUserRequest
 
     LogoutUserResponse.struct_class = Types::LogoutUserResponse
+
+    Member.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MemberId"))
+    Member.add_member(:member_type, Shapes::ShapeRef.new(shape: MemberType, location_name: "MemberType"))
+    Member.add_member(:email, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Email"))
+    Member.add_member(:full_name, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "FullName"))
+    Member.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccountId"))
+    Member.struct_class = Types::Member
+
+    MemberError.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MemberId"))
+    MemberError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    MemberError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    MemberError.struct_class = Types::MemberError
+
+    MemberErrorList.member = Shapes::ShapeRef.new(shape: MemberError)
+
+    MembershipItem.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MemberId"))
+    MembershipItem.add_member(:role, Shapes::ShapeRef.new(shape: RoomMembershipRole, location_name: "Role"))
+    MembershipItem.struct_class = Types::MembershipItem
+
+    MembershipItemList.member = Shapes::ShapeRef.new(shape: MembershipItem)
 
     NonEmptyStringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -789,6 +900,25 @@ module Aws::Chime
     RestorePhoneNumberResponse.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
     RestorePhoneNumberResponse.struct_class = Types::RestorePhoneNumberResponse
 
+    Room.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoomId"))
+    Room.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Name"))
+    Room.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccountId"))
+    Room.add_member(:created_by, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedBy"))
+    Room.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    Room.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    Room.struct_class = Types::Room
+
+    RoomList.member = Shapes::ShapeRef.new(shape: Room)
+
+    RoomMembership.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoomId"))
+    RoomMembership.add_member(:member, Shapes::ShapeRef.new(shape: Member, location_name: "Member"))
+    RoomMembership.add_member(:role, Shapes::ShapeRef.new(shape: RoomMembershipRole, location_name: "Role"))
+    RoomMembership.add_member(:invited_by, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InvitedBy"))
+    RoomMembership.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    RoomMembership.struct_class = Types::RoomMembership
+
+    RoomMembershipList.member = Shapes::ShapeRef.new(shape: RoomMembership)
+
     SearchAvailablePhoneNumbersRequest.add_member(:area_code, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "area-code"))
     SearchAvailablePhoneNumbersRequest.add_member(:city, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "city"))
     SearchAvailablePhoneNumbersRequest.add_member(:country, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "country"))
@@ -887,6 +1017,23 @@ module Aws::Chime
 
     UpdatePhoneNumberSettingsRequest.add_member(:calling_name, Shapes::ShapeRef.new(shape: CallingName, required: true, location_name: "CallingName"))
     UpdatePhoneNumberSettingsRequest.struct_class = Types::UpdatePhoneNumberSettingsRequest
+
+    UpdateRoomMembershipRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    UpdateRoomMembershipRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
+    UpdateRoomMembershipRequest.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "memberId"))
+    UpdateRoomMembershipRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoomMembershipRole, location_name: "Role"))
+    UpdateRoomMembershipRequest.struct_class = Types::UpdateRoomMembershipRequest
+
+    UpdateRoomMembershipResponse.add_member(:room_membership, Shapes::ShapeRef.new(shape: RoomMembership, location_name: "RoomMembership"))
+    UpdateRoomMembershipResponse.struct_class = Types::UpdateRoomMembershipResponse
+
+    UpdateRoomRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    UpdateRoomRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
+    UpdateRoomRequest.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Name"))
+    UpdateRoomRequest.struct_class = Types::UpdateRoomRequest
+
+    UpdateRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
+    UpdateRoomResponse.struct_class = Types::UpdateRoomResponse
 
     UpdateUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     UpdateUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "userId"))
@@ -1045,6 +1192,20 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:batch_create_room_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchCreateRoomMembership"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/rooms/{roomId}/memberships?operation=batch-create"
+        o.input = Shapes::ShapeRef.new(shape: BatchCreateRoomMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchCreateRoomMembershipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:batch_delete_phone_number, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchDeletePhoneNumber"
         o.http_method = "POST"
@@ -1166,6 +1327,37 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:create_room, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRoom"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/rooms"
+        o.input = Shapes::ShapeRef.new(shape: CreateRoomRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRoomResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_room_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRoomMembership"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/rooms/{roomId}/memberships"
+        o.input = Shapes::ShapeRef.new(shape: CreateRoomMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRoomMembershipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:create_voice_connector, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateVoiceConnector"
         o.http_method = "POST"
@@ -1239,6 +1431,34 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_room, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRoom"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{accountId}/rooms/{roomId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRoomRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_room_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRoomMembership"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{accountId}/rooms/{roomId}/memberships/{memberId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRoomMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -1497,6 +1717,20 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:get_room, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRoom"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{accountId}/rooms/{roomId}"
+        o.input = Shapes::ShapeRef.new(shape: GetRoomRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRoomResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:get_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetUser"
         o.http_method = "GET"
@@ -1718,6 +1952,46 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_room_memberships, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRoomMemberships"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{accountId}/rooms/{roomId}/memberships"
+        o.input = Shapes::ShapeRef.new(shape: ListRoomMembershipsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRoomMembershipsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_rooms, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRooms"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{accountId}/rooms"
+        o.input = Shapes::ShapeRef.new(shape: ListRoomsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRoomsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o[:pager] = Aws::Pager.new(
@@ -2054,6 +2328,34 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_room, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRoom"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/rooms/{roomId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRoomRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRoomResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_room_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRoomMembership"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/rooms/{roomId}/memberships/{memberId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRoomMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRoomMembershipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

@@ -3817,10 +3817,21 @@ module Aws::EC2
     #         description: "String",
     #         destination_region: "String",
     #         encrypted: false,
-    #         kms_key_id: "KmsKeyId",
+    #         kms_key_id: "String",
     #         presigned_url: "String",
     #         source_region: "String", # required
     #         source_snapshot_id: "String", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #         dry_run: false,
     #       }
     #
@@ -3909,6 +3920,9 @@ module Aws::EC2
     #   The ID of the EBS snapshot to copy.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -3926,6 +3940,7 @@ module Aws::EC2
       :presigned_url,
       :source_region,
       :source_snapshot_id,
+      :tag_specifications,
       :dry_run)
       include Aws::Structure
     end
@@ -3936,10 +3951,14 @@ module Aws::EC2
     #   The ID of the new snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshotResult AWS API Documentation
     #
     class CopySnapshotResult < Struct.new(
-      :snapshot_id)
+      :snapshot_id,
+      :tags)
       include Aws::Structure
     end
 

@@ -257,6 +257,54 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchCreateRoomMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         room_id: "NonEmptyString", # required
+    #         membership_item_list: [ # required
+    #           {
+    #             member_id: "NonEmptyString",
+    #             role: "Administrator", # accepts Administrator, Member
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_item_list
+    #   The list of membership items.
+    #   @return [Array<Types::MembershipItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchCreateRoomMembershipRequest AWS API Documentation
+    #
+    class BatchCreateRoomMembershipRequest < Struct.new(
+      :account_id,
+      :room_id,
+      :membership_item_list)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   If the action fails for one or more of the member IDs in the
+    #   request, a list of the member IDs is returned, along with error
+    #   codes and error messages.
+    #   @return [Array<Types::MemberError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchCreateRoomMembershipResponse AWS API Documentation
+    #
+    class BatchCreateRoomMembershipResponse < Struct.new(
+      :errors)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchDeletePhoneNumberRequest
     #   data as a hash:
     #
@@ -641,6 +689,97 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateRoomMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         room_id: "NonEmptyString", # required
+    #         member_id: "NonEmptyString", # required
+    #         role: "Administrator", # accepts Administrator, Member
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   The Amazon Chime member ID (user ID or bot ID).
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The role of the member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateRoomMembershipRequest AWS API Documentation
+    #
+    class CreateRoomMembershipRequest < Struct.new(
+      :account_id,
+      :room_id,
+      :member_id,
+      :role)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] room_membership
+    #   The room membership details.
+    #   @return [Types::RoomMembership]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateRoomMembershipResponse AWS API Documentation
+    #
+    class CreateRoomMembershipResponse < Struct.new(
+      :room_membership)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateRoomRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         name: "SensitiveString", # required
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The room name.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   The idempotency token for the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateRoomRequest AWS API Documentation
+    #
+    class CreateRoomRequest < Struct.new(
+      :account_id,
+      :name,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] room
+    #   The room details.
+    #   @return [Types::Room]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateRoomResponse AWS API Documentation
+    #
+    class CreateRoomResponse < Struct.new(
+      :room)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateVoiceConnectorGroupRequest
     #   data as a hash:
     #
@@ -814,6 +953,60 @@ module Aws::Chime
     #
     class DeletePhoneNumberRequest < Struct.new(
       :phone_number_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteRoomMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         room_id: "NonEmptyString", # required
+    #         member_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   The member ID (user ID or bot ID).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteRoomMembershipRequest AWS API Documentation
+    #
+    class DeleteRoomMembershipRequest < Struct.new(
+      :account_id,
+      :room_id,
+      :member_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteRoomRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         room_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_id
+    #   The chat room ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteRoomRequest AWS API Documentation
+    #
+    class DeleteRoomRequest < Struct.new(
+      :account_id,
+      :room_id)
       include Aws::Structure
     end
 
@@ -1294,6 +1487,41 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetRoomRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         room_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetRoomRequest AWS API Documentation
+    #
+    class GetRoomRequest < Struct.new(
+      :account_id,
+      :room_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] room
+    #   The room details.
+    #   @return [Types::Room]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetRoomResponse AWS API Documentation
+    #
+    class GetRoomResponse < Struct.new(
+      :room)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetUserRequest
     #   data as a hash:
     #
@@ -1609,7 +1837,7 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] user_email_list
-    #   The user email addresses to which to send the invite.
+    #   The user email addresses to which to send the email invitation.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/InviteUsersRequest AWS API Documentation
@@ -1621,7 +1849,7 @@ module Aws::Chime
     end
 
     # @!attribute [rw] invites
-    #   The invite details.
+    #   The email invitation details.
     #   @return [Array<Types::Invite>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/InviteUsersResponse AWS API Documentation
@@ -1698,8 +1926,8 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Default is
-    #   10.
+    #   The maximum number of results to return in a single call. The
+    #   default is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1831,6 +2059,110 @@ module Aws::Chime
     #
     class ListPhoneNumbersResponse < Struct.new(
       :phone_numbers,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRoomMembershipsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         room_id: "NonEmptyString", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListRoomMembershipsRequest AWS API Documentation
+    #
+    class ListRoomMembershipsRequest < Struct.new(
+      :account_id,
+      :room_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] room_memberships
+    #   The room membership details.
+    #   @return [Array<Types::RoomMembership>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListRoomMembershipsResponse AWS API Documentation
+    #
+    class ListRoomMembershipsResponse < Struct.new(
+      :room_memberships,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRoomsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         member_id: "String",
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   The member ID (user ID or bot ID).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListRoomsRequest AWS API Documentation
+    #
+    class ListRoomsRequest < Struct.new(
+      :account_id,
+      :member_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rooms
+    #   The room details.
+    #   @return [Array<Types::Room>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListRoomsResponse AWS API Documentation
+    #
+    class ListRoomsResponse < Struct.new(
+      :rooms,
       :next_token)
       include Aws::Structure
     end
@@ -2047,6 +2379,89 @@ module Aws::Chime
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/LogoutUserResponse AWS API Documentation
     #
     class LogoutUserResponse < Aws::EmptyStructure; end
+
+    # The member details, such as email address, name, member ID, and member
+    # type.
+    #
+    # @!attribute [rw] member_id
+    #   The member ID (user ID or bot ID).
+    #   @return [String]
+    #
+    # @!attribute [rw] member_type
+    #   The member type.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The member email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] full_name
+    #   The member name.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Member AWS API Documentation
+    #
+    class Member < Struct.new(
+      :member_id,
+      :member_type,
+      :email,
+      :full_name,
+      :account_id)
+      include Aws::Structure
+    end
+
+    # The list of errors returned when a member action results in an error.
+    #
+    # @!attribute [rw] member_id
+    #   The member ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MemberError AWS API Documentation
+    #
+    class MemberError < Struct.new(
+      :member_id,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # Membership details, such as member ID and member role.
+    #
+    # @note When making an API call, you may pass MembershipItem
+    #   data as a hash:
+    #
+    #       {
+    #         member_id: "NonEmptyString",
+    #         role: "Administrator", # accepts Administrator, Member
+    #       }
+    #
+    # @!attribute [rw] member_id
+    #   The member ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The member role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MembershipItem AWS API Documentation
+    #
+    class MembershipItem < Struct.new(
+      :member_id,
+      :role)
+      include Aws::Structure
+    end
 
     # One or more of the resources in the request does not exist in the
     # system.
@@ -2729,6 +3144,78 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The Amazon Chime chat room details.
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The room name.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the room creator.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The room creation timestamp, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The room update timestamp, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Room AWS API Documentation
+    #
+    class Room < Struct.new(
+      :room_id,
+      :name,
+      :account_id,
+      :created_by,
+      :created_timestamp,
+      :updated_timestamp)
+      include Aws::Structure
+    end
+
+    # The room membership details.
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] member
+    #   The member details, such as email address, name, member ID, and
+    #   member type.
+    #   @return [Types::Member]
+    #
+    # @!attribute [rw] role
+    #   The membership role.
+    #   @return [String]
+    #
+    # @!attribute [rw] invited_by
+    #   The identifier of the user that invited the room member.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The room membership update timestamp, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RoomMembership AWS API Documentation
+    #
+    class RoomMembership < Struct.new(
+      :room_id,
+      :member,
+      :role,
+      :invited_by,
+      :updated_timestamp)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SearchAvailablePhoneNumbersRequest
     #   data as a hash:
     #
@@ -2840,7 +3327,7 @@ module Aws::Chime
     #       }
     #
     # @!attribute [rw] data_retention_in_hours
-    #   The retention period for the Amazon Kinesis data, in hours.
+    #   The retention period, in hours, for the Amazon Kinesis data.
     #   @return [Integer]
     #
     # @!attribute [rw] disabled
@@ -3229,6 +3716,94 @@ module Aws::Chime
     #
     class UpdatePhoneNumberSettingsRequest < Struct.new(
       :calling_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoomMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         room_id: "NonEmptyString", # required
+    #         member_id: "NonEmptyString", # required
+    #         role: "Administrator", # accepts Administrator, Member
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   The member ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The role of the member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateRoomMembershipRequest AWS API Documentation
+    #
+    class UpdateRoomMembershipRequest < Struct.new(
+      :account_id,
+      :room_id,
+      :member_id,
+      :role)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] room_membership
+    #   The room membership details.
+    #   @return [Types::RoomMembership]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateRoomMembershipResponse AWS API Documentation
+    #
+    class UpdateRoomMembershipResponse < Struct.new(
+      :room_membership)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoomRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         room_id: "NonEmptyString", # required
+    #         name: "SensitiveString",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The room name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateRoomRequest AWS API Documentation
+    #
+    class UpdateRoomRequest < Struct.new(
+      :account_id,
+      :room_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] room
+    #   The room details.
+    #   @return [Types::Room]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateRoomResponse AWS API Documentation
+    #
+    class UpdateRoomResponse < Struct.new(
+      :room)
       include Aws::Structure
     end
 

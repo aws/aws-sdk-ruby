@@ -563,12 +563,21 @@ module Aws::MediaConvert
     #           name: "__string",
     #           output_group_settings: {
     #             cmaf_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -607,10 +616,19 @@ module Aws::MediaConvert
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             },
     #             dash_iso_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -638,6 +656,9 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -647,6 +668,12 @@ module Aws::MediaConvert
     #             },
     #             hls_group_settings: {
     #               ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               caption_language_mappings: [
     #                 {
@@ -662,6 +689,9 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -704,10 +734,19 @@ module Aws::MediaConvert
     #               timestamp_delta_milliseconds: 1,
     #             },
     #             ms_smooth_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -822,7 +861,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1,
     #                     },
     #                   },
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   remix_settings: {
@@ -842,7 +881,7 @@ module Aws::MediaConvert
     #               caption_descriptions: [
     #                 {
     #                   caption_selector_name: "__stringMin1",
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   destination_settings: {
     #                     burnin_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -891,7 +930,7 @@ module Aws::MediaConvert
     #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                     },
     #                     scc_destination_settings: {
-    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                     },
     #                     teletext_destination_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -991,6 +1030,11 @@ module Aws::MediaConvert
     #                   free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   mp_4_major_brand: "__string",
+    #                 },
+    #                 mpd_settings: {
+    #                   caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 },
     #               },
     #               extension: "__string",
@@ -1199,6 +1243,14 @@ module Aws::MediaConvert
     #                     control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                     mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                   },
+    #                   dolby_vision: {
+    #                     l6_metadata: {
+    #                       max_cll: 1,
+    #                       max_fall: 1,
+    #                     },
+    #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                   },
     #                   image_inserter: {
     #                     insertable_images: [
     #                       {
@@ -1406,10 +1458,15 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups #=> Array
     #   resp.job.settings.output_groups[0].custom_name #=> String
     #   resp.job.settings.output_groups[0].name #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
@@ -1438,8 +1495,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
@@ -1456,10 +1518,15 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -1470,6 +1537,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
@@ -1501,8 +1569,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -1638,7 +1711,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -1716,6 +1789,9 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -1890,6 +1966,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -2168,12 +2248,21 @@ module Aws::MediaConvert
     #           name: "__string",
     #           output_group_settings: {
     #             cmaf_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -2212,10 +2301,19 @@ module Aws::MediaConvert
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             },
     #             dash_iso_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -2243,6 +2341,9 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -2252,6 +2353,12 @@ module Aws::MediaConvert
     #             },
     #             hls_group_settings: {
     #               ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               caption_language_mappings: [
     #                 {
@@ -2267,6 +2374,9 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -2309,10 +2419,19 @@ module Aws::MediaConvert
     #               timestamp_delta_milliseconds: 1,
     #             },
     #             ms_smooth_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -2427,7 +2546,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1,
     #                     },
     #                   },
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   remix_settings: {
@@ -2447,7 +2566,7 @@ module Aws::MediaConvert
     #               caption_descriptions: [
     #                 {
     #                   caption_selector_name: "__stringMin1",
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   destination_settings: {
     #                     burnin_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -2496,7 +2615,7 @@ module Aws::MediaConvert
     #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                     },
     #                     scc_destination_settings: {
-    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                     },
     #                     teletext_destination_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -2596,6 +2715,11 @@ module Aws::MediaConvert
     #                   free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   mp_4_major_brand: "__string",
+    #                 },
+    #                 mpd_settings: {
+    #                   caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 },
     #               },
     #               extension: "__string",
@@ -2804,6 +2928,14 @@ module Aws::MediaConvert
     #                     control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                     mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                   },
+    #                   dolby_vision: {
+    #                     l6_metadata: {
+    #                       max_cll: 1,
+    #                       max_fall: 1,
+    #                     },
+    #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                   },
     #                   image_inserter: {
     #                     insertable_images: [
     #                       {
@@ -2985,10 +3117,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups #=> Array
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
@@ -3017,8 +3154,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
@@ -3035,10 +3177,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -3049,6 +3196,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
@@ -3080,8 +3228,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -3217,7 +3370,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -3295,6 +3448,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -3469,6 +3625,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -3636,7 +3796,7 @@ module Aws::MediaConvert
     #               sample_rate: 1,
     #             },
     #           },
-    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #           custom_language_code: "__stringPatternAZaZ23AZaZ",
     #           language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           remix_settings: {
@@ -3655,7 +3815,7 @@ module Aws::MediaConvert
     #       ],
     #       caption_descriptions: [
     #         {
-    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #           custom_language_code: "__stringPatternAZaZ23AZaZ",
     #           destination_settings: {
     #             burnin_destination_settings: {
     #               alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -3704,7 +3864,7 @@ module Aws::MediaConvert
     #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             scc_destination_settings: {
-    #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #             },
     #             teletext_destination_settings: {
     #               page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -3804,6 +3964,11 @@ module Aws::MediaConvert
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           mp_4_major_brand: "__string",
+    #         },
+    #         mpd_settings: {
+    #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #           scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
     #       },
     #       video_description: {
@@ -3999,6 +4164,14 @@ module Aws::MediaConvert
     #             control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #             mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #           },
+    #           dolby_vision: {
+    #             l6_metadata: {
+    #               max_cll: 1,
+    #               max_fall: 1,
+    #             },
+    #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #           },
     #           image_inserter: {
     #             insertable_images: [
     #               {
@@ -4177,7 +4350,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -4255,6 +4428,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
@@ -4420,6 +4596,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -4823,10 +5003,15 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups #=> Array
     #   resp.job.settings.output_groups[0].custom_name #=> String
     #   resp.job.settings.output_groups[0].name #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
@@ -4855,8 +5040,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
@@ -4873,10 +5063,15 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -4887,6 +5082,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
@@ -4918,8 +5114,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -5055,7 +5256,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -5133,6 +5334,9 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -5307,6 +5511,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -5486,10 +5694,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups #=> Array
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
@@ -5518,8 +5731,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
@@ -5536,10 +5754,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -5550,6 +5773,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
@@ -5581,8 +5805,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -5718,7 +5947,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -5796,6 +6025,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -5970,6 +6202,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -6159,7 +6395,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -6237,6 +6473,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
@@ -6402,6 +6641,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -6638,10 +6881,15 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups #=> Array
     #   resp.job_templates[0].settings.output_groups[0].custom_name #=> String
     #   resp.job_templates[0].settings.output_groups[0].name #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
@@ -6670,8 +6918,13 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
@@ -6688,10 +6941,15 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -6702,6 +6960,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
@@ -6733,8 +6992,13 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -6870,7 +7134,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -6948,6 +7212,9 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -7122,6 +7389,10 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -7345,10 +7616,15 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups #=> Array
     #   resp.jobs[0].settings.output_groups[0].custom_name #=> String
     #   resp.jobs[0].settings.output_groups[0].name #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
@@ -7377,8 +7653,13 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
@@ -7395,10 +7676,15 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -7409,6 +7695,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
@@ -7440,8 +7727,13 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -7577,7 +7869,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -7655,6 +7947,9 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].extension #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -7829,6 +8124,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -8054,7 +8353,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -8132,6 +8431,9 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.presets[0].settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.presets[0].settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.presets[0].settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
@@ -8297,6 +8599,10 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.presets[0].settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.presets[0].settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -8712,12 +9018,21 @@ module Aws::MediaConvert
     #           name: "__string",
     #           output_group_settings: {
     #             cmaf_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -8756,10 +9071,19 @@ module Aws::MediaConvert
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             },
     #             dash_iso_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -8787,6 +9111,9 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -8796,6 +9123,12 @@ module Aws::MediaConvert
     #             },
     #             hls_group_settings: {
     #               ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               caption_language_mappings: [
     #                 {
@@ -8811,6 +9144,9 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -8853,10 +9189,19 @@ module Aws::MediaConvert
     #               timestamp_delta_milliseconds: 1,
     #             },
     #             ms_smooth_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -8971,7 +9316,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1,
     #                     },
     #                   },
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   remix_settings: {
@@ -8991,7 +9336,7 @@ module Aws::MediaConvert
     #               caption_descriptions: [
     #                 {
     #                   caption_selector_name: "__stringMin1",
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   destination_settings: {
     #                     burnin_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -9040,7 +9385,7 @@ module Aws::MediaConvert
     #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                     },
     #                     scc_destination_settings: {
-    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                     },
     #                     teletext_destination_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -9140,6 +9485,11 @@ module Aws::MediaConvert
     #                   free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   mp_4_major_brand: "__string",
+    #                 },
+    #                 mpd_settings: {
+    #                   caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 },
     #               },
     #               extension: "__string",
@@ -9348,6 +9698,14 @@ module Aws::MediaConvert
     #                     control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                     mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                   },
+    #                   dolby_vision: {
+    #                     l6_metadata: {
+    #                       max_cll: 1,
+    #                       max_fall: 1,
+    #                     },
+    #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                   },
     #                   image_inserter: {
     #                     insertable_images: [
     #                       {
@@ -9526,10 +9884,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups #=> Array
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
@@ -9558,8 +9921,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
@@ -9576,10 +9944,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -9590,6 +9963,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
@@ -9621,8 +9995,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -9758,7 +10137,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -9836,6 +10215,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -10010,6 +10392,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -10171,7 +10557,7 @@ module Aws::MediaConvert
     #               sample_rate: 1,
     #             },
     #           },
-    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #           custom_language_code: "__stringPatternAZaZ23AZaZ",
     #           language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           remix_settings: {
@@ -10190,7 +10576,7 @@ module Aws::MediaConvert
     #       ],
     #       caption_descriptions: [
     #         {
-    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #           custom_language_code: "__stringPatternAZaZ23AZaZ",
     #           destination_settings: {
     #             burnin_destination_settings: {
     #               alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -10239,7 +10625,7 @@ module Aws::MediaConvert
     #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             scc_destination_settings: {
-    #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #             },
     #             teletext_destination_settings: {
     #               page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -10339,6 +10725,11 @@ module Aws::MediaConvert
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           mp_4_major_brand: "__string",
+    #         },
+    #         mpd_settings: {
+    #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #           scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
     #       },
     #       video_description: {
@@ -10534,6 +10925,14 @@ module Aws::MediaConvert
     #             control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #             mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #           },
+    #           dolby_vision: {
+    #             l6_metadata: {
+    #               max_cll: 1,
+    #               max_fall: 1,
+    #             },
+    #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #           },
     #           image_inserter: {
     #             insertable_images: [
     #               {
@@ -10709,7 +11108,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -10787,6 +11186,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
@@ -10952,6 +11354,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -11067,7 +11473,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

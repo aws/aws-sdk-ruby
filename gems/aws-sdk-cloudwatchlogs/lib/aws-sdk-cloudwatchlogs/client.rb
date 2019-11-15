@@ -413,7 +413,7 @@ module Aws::CloudWatchLogs
 
     # Creates a log group with the specified name.
     #
-    # You can create up to 5000 log groups per account.
+    # You can create up to 20,000 log groups per account.
     #
     # You must use the following guidelines when naming a log group:
     #
@@ -422,8 +422,8 @@ module Aws::CloudWatchLogs
     # * Log group names can be between 1 and 512 characters long.
     #
     # * Log group names consist of the following characters: a-z, A-Z, 0-9,
-    #   '\_' (underscore), '-' (hyphen), '/' (forward slash), and
-    #   '.' (period).
+    #   '\_' (underscore), '-' (hyphen), '/' (forward slash), '.'
+    #   (period), and '#' (number sign)
     #
     # If you associate a AWS Key Management Service (AWS KMS) customer
     # master key (CMK) with the log group, ingested data is encrypted using
@@ -1301,6 +1301,9 @@ module Aws::CloudWatchLogs
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
     #
+    #   Using this token works only when you specify `true` for
+    #   `startFromHead`.
+    #
     # @option params [Integer] :limit
     #   The maximum number of log events returned. If you don't specify a
     #   value, the maximum is as many log events as can fit in a response size
@@ -1516,12 +1519,12 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Creates or updates a destination. A destination encapsulates a
-    # physical resource (such as an Amazon Kinesis stream) and enables you
-    # to subscribe to a real-time stream of log events for a different
-    # account, ingested using PutLogEvents. A destination can be an Amazon
-    # Kinesis stream, Amazon Kinesis Data Firehose strea, or an AWS Lambda
-    # function.
+    # Creates or updates a destination. This operation is used only to
+    # create destinations for cross-account subscriptions.
+    #
+    # A destination encapsulates a physical resource (such as an Amazon
+    # Kinesis stream) and enables you to subscribe to a real-time stream of
+    # log events for a different account, ingested using PutLogEvents.
     #
     # Through an access policy, a destination controls what is written to
     # it. By default, `PutDestination` does not set any access policy with
@@ -1952,7 +1955,7 @@ module Aws::CloudWatchLogs
     # @option params [Integer] :limit
     #   The maximum number of log events to return in the query. If the query
     #   string uses the `fields` command, only the specified fields and their
-    #   values are returned.
+    #   values are returned. The default is 1000.
     #
     # @return [Types::StartQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2134,7 +2137,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

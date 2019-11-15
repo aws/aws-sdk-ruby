@@ -245,6 +245,7 @@ module Aws::EMR
 
     AddInstanceFleetOutput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ClusterId"))
     AddInstanceFleetOutput.add_member(:instance_fleet_id, Shapes::ShapeRef.new(shape: InstanceFleetId, location_name: "InstanceFleetId"))
+    AddInstanceFleetOutput.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
     AddInstanceFleetOutput.struct_class = Types::AddInstanceFleetOutput
 
     AddInstanceGroupsInput.add_member(:instance_groups, Shapes::ShapeRef.new(shape: InstanceGroupConfigList, required: true, location_name: "InstanceGroups"))
@@ -253,6 +254,7 @@ module Aws::EMR
 
     AddInstanceGroupsOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
     AddInstanceGroupsOutput.add_member(:instance_group_ids, Shapes::ShapeRef.new(shape: InstanceGroupIdsList, location_name: "InstanceGroupIds"))
+    AddInstanceGroupsOutput.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
     AddInstanceGroupsOutput.struct_class = Types::AddInstanceGroupsOutput
 
     AddJobFlowStepsInput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "JobFlowId"))
@@ -362,6 +364,7 @@ module Aws::EMR
     Cluster.add_member(:ebs_root_volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeSize"))
     Cluster.add_member(:repo_upgrade_on_boot, Shapes::ShapeRef.new(shape: RepoUpgradeOnBoot, location_name: "RepoUpgradeOnBoot"))
     Cluster.add_member(:kerberos_attributes, Shapes::ShapeRef.new(shape: KerberosAttributes, location_name: "KerberosAttributes"))
+    Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -379,6 +382,7 @@ module Aws::EMR
     ClusterSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     ClusterSummary.add_member(:status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "Status"))
     ClusterSummary.add_member(:normalized_instance_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "NormalizedInstanceHours"))
+    ClusterSummary.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
     ClusterSummary.struct_class = Types::ClusterSummary
 
     ClusterSummaryList.member = Shapes::ShapeRef.new(shape: ClusterSummary)
@@ -870,6 +874,7 @@ module Aws::EMR
     PutAutoScalingPolicyOutput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     PutAutoScalingPolicyOutput.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: InstanceGroupId, location_name: "InstanceGroupId"))
     PutAutoScalingPolicyOutput.add_member(:auto_scaling_policy, Shapes::ShapeRef.new(shape: AutoScalingPolicyDescription, location_name: "AutoScalingPolicy"))
+    PutAutoScalingPolicyOutput.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
     PutAutoScalingPolicyOutput.struct_class = Types::PutAutoScalingPolicyOutput
 
     PutBlockPublicAccessConfigurationInput.add_member(:block_public_access_configuration, Shapes::ShapeRef.new(shape: BlockPublicAccessConfiguration, required: true, location_name: "BlockPublicAccessConfiguration"))
@@ -915,6 +920,7 @@ module Aws::EMR
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
+    RunJobFlowOutput.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
     RunJobFlowOutput.struct_class = Types::RunJobFlowOutput
 
     ScalingAction.add_member(:market, Shapes::ShapeRef.new(shape: MarketType, location_name: "Market"))

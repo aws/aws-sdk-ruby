@@ -641,8 +641,36 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Retrieves a list that describes the configuration of bring your own
-    # license (BYOL) for the specified account.
+    # Deregisters the specified directory. This operation is asynchronous
+    # and returns before the WorkSpace directory is deregistered. If any
+    # WorkSpaces are registered to this directory, you must remove them
+    # before you can deregister the directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory. If any WorkSpaces are registered to
+    #   this directory, you must remove them before you deregister the
+    #   directory, or you will receive an OperationNotSupportedException
+    #   error.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_workspace_directory({
+    #     directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeregisterWorkspaceDirectory AWS API Documentation
+    #
+    # @overload deregister_workspace_directory(params = {})
+    # @param [Hash] params ({})
+    def deregister_workspace_directory(params = {}, options = {})
+      req = build_request(:deregister_workspace_directory, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes the configuration of Bring Your Own
+    # License (BYOL) for the specified account.
     #
     # @return [Types::DescribeAccountResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -664,7 +692,7 @@ module Aws::WorkSpaces
     end
 
     # Retrieves a list that describes modifications to the configuration of
-    # bring your own license (BYOL) for the specified account.
+    # Bring Your Own License (BYOL) for the specified account.
     #
     # @option params [String] :next_token
     #   If you received a `NextToken` from a previous call that was paginated,
@@ -863,12 +891,15 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes the available AWS Directory Service directories that are
-    # registered with Amazon WorkSpaces.
+    # Describes the available directories that are registered with Amazon
+    # WorkSpaces.
     #
     # @option params [Array<String>] :directory_ids
     #   The identifiers of the directories. If the value is null, all
     #   directories are retrieved.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of directories to return.
     #
     # @option params [String] :next_token
     #   If you received a `NextToken` from a previous call that was paginated,
@@ -883,6 +914,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.describe_workspace_directories({
     #     directory_ids: ["DirectoryId"],
+    #     limit: 1,
     #     next_token: "PaginationToken",
     #   })
     #
@@ -907,8 +939,22 @@ module Aws::WorkSpaces
     #   resp.directories[0].workspace_creation_properties.default_ou #=> String
     #   resp.directories[0].workspace_creation_properties.custom_security_group_id #=> String
     #   resp.directories[0].workspace_creation_properties.user_enabled_as_local_administrator #=> Boolean
+    #   resp.directories[0].workspace_creation_properties.enable_maintenance_mode #=> Boolean
     #   resp.directories[0].ip_group_ids #=> Array
     #   resp.directories[0].ip_group_ids[0] #=> String
+    #   resp.directories[0].workspace_access_properties.device_type_windows #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_osx #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_web #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_ios #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_android #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_chrome_os #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_zero_client #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].tenancy #=> String, one of "DEDICATED", "SHARED"
+    #   resp.directories[0].selfservice_permissions.restart_workspace #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.increase_volume_size #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.change_compute_type #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.switch_running_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.rebuild_workspace #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories AWS API Documentation
@@ -1153,7 +1199,7 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Imports the specified Windows 7 or Windows 10 bring your own license
+    # Imports the specified Windows 7 or Windows 10 Bring Your Own License
     # (BYOL) image into Amazon WorkSpaces. The image must be an already
     # licensed EC2 image that is in your AWS account, and you must own the
     # image.
@@ -1207,7 +1253,7 @@ module Aws::WorkSpaces
 
     # Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks,
     # that you can use for the network management interface when you enable
-    # bring your own license (BYOL).
+    # Bring Your Own License (BYOL).
     #
     # The management network interface is connected to a secure Amazon
     # WorkSpaces management network. It is used for interactive streaming of
@@ -1254,7 +1300,7 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Modifies the configuration of bring your own license (BYOL) for the
+    # Modifies the configuration of Bring Your Own License (BYOL) for the
     # specified account.
     #
     # @option params [String] :dedicated_tenancy_support
@@ -1311,6 +1357,117 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def modify_client_properties(params = {}, options = {})
       req = build_request(:modify_client_properties, params)
+      req.send_request(options)
+    end
+
+    # Modifies the self-service WorkSpace management capabilities for your
+    # users. For more information, see [Enable Self-Service WorkSpace
+    # Management Capabilities for Your Users][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the directory.
+    #
+    # @option params [required, Types::SelfservicePermissions] :selfservice_permissions
+    #   The permissions to enable or disable self-service capabilities.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_selfservice_permissions({
+    #     resource_id: "DirectoryId", # required
+    #     selfservice_permissions: { # required
+    #       restart_workspace: "ENABLED", # accepts ENABLED, DISABLED
+    #       increase_volume_size: "ENABLED", # accepts ENABLED, DISABLED
+    #       change_compute_type: "ENABLED", # accepts ENABLED, DISABLED
+    #       switch_running_mode: "ENABLED", # accepts ENABLED, DISABLED
+    #       rebuild_workspace: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifySelfservicePermissions AWS API Documentation
+    #
+    # @overload modify_selfservice_permissions(params = {})
+    # @param [Hash] params ({})
+    def modify_selfservice_permissions(params = {}, options = {})
+      req = build_request(:modify_selfservice_permissions, params)
+      req.send_request(options)
+    end
+
+    # Specifies which devices and operating systems users can use to access
+    # their Workspaces. For more information, see [ Control Device
+    # Access][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the directory.
+    #
+    # @option params [required, Types::WorkspaceAccessProperties] :workspace_access_properties
+    #   The device types and operating systems to enable or disable for
+    #   access.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_workspace_access_properties({
+    #     resource_id: "DirectoryId", # required
+    #     workspace_access_properties: { # required
+    #       device_type_windows: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_osx: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_web: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_ios: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_android: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_chrome_os: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceAccessProperties AWS API Documentation
+    #
+    # @overload modify_workspace_access_properties(params = {})
+    # @param [Hash] params ({})
+    def modify_workspace_access_properties(params = {}, options = {})
+      req = build_request(:modify_workspace_access_properties, params)
+      req.send_request(options)
+    end
+
+    # Modify the default properties used to create WorkSpaces.
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the directory.
+    #
+    # @option params [required, Types::WorkspaceCreationProperties] :workspace_creation_properties
+    #   The default properties for creating WorkSpaces.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_workspace_creation_properties({
+    #     resource_id: "DirectoryId", # required
+    #     workspace_creation_properties: { # required
+    #       enable_internet_access: false,
+    #       default_ou: "DefaultOu",
+    #       custom_security_group_id: "SecurityGroupId",
+    #       user_enabled_as_local_administrator: false,
+    #       enable_maintenance_mode: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceCreationProperties AWS API Documentation
+    #
+    # @overload modify_workspace_creation_properties(params = {})
+    # @param [Hash] params ({})
+    def modify_workspace_creation_properties(params = {}, options = {})
+      req = build_request(:modify_workspace_creation_properties, params)
       req.send_request(options)
     end
 
@@ -1465,6 +1622,84 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def rebuild_workspaces(params = {}, options = {})
       req = build_request(:rebuild_workspaces, params)
+      req.send_request(options)
+    end
+
+    # Registers the specified directory. This operation is asynchronous and
+    # returns before the WorkSpace directory is registered. If this is the
+    # first time you are registering a directory, you will need to create
+    # the workspaces\_DefaultRole role before you can register a directory.
+    # For more information, see [ Creating the workspaces\_DefaultRole
+    # Role][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory. You cannot register a directory if it
+    #   does not have a status of Active. If the directory does not have a
+    #   status of Active, you will receive an InvalidResourceStateException
+    #   error. If you have already registered the maximum number of
+    #   directories that you can register with Amazon WorkSpaces, you will
+    #   receive a ResourceLimitExceededException error. Deregister directories
+    #   that you are not using for WorkSpaces, and try again.
+    #
+    # @option params [Array<String>] :subnet_ids
+    #   The identifiers of the subnets for your virtual private cloud (VPC).
+    #   Make sure that the subnets are in supported Availability Zones. The
+    #   subnets must also be in separate Availability Zones. If these
+    #   conditions are not met, you will receive an
+    #   OperationNotSupportedException error.
+    #
+    # @option params [required, Boolean] :enable_work_docs
+    #   Indicates whether Amazon WorkDocs is enabled or disabled. If you have
+    #   enabled this parameter and WorkDocs is not available in the Region,
+    #   you will receive an OperationNotSupportedException error. Set
+    #   `EnableWorkDocs` to disabled, and try again.
+    #
+    # @option params [Boolean] :enable_self_service
+    #   Indicates whether self-service capabilities are enabled or disabled.
+    #
+    # @option params [String] :tenancy
+    #   Indicates whether your WorkSpace directory is dedicated or shared. To
+    #   use Bring Your Own License (BYOL) images, this value must be set to
+    #   `DEDICATED` and your AWS account must be enabled for BYOL. If your
+    #   account has not been enabled for BYOL, you will receive an
+    #   InvalidParameterValuesException error. For more information about BYOL
+    #   images, see [Bring Your Own Windows Desktop Images][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the directory.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_workspace_directory({
+    #     directory_id: "DirectoryId", # required
+    #     subnet_ids: ["SubnetId"],
+    #     enable_work_docs: false, # required
+    #     enable_self_service: false,
+    #     tenancy: "DEDICATED", # accepts DEDICATED, SHARED
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RegisterWorkspaceDirectory AWS API Documentation
+    #
+    # @overload register_workspace_directory(params = {})
+    # @param [Hash] params ({})
+    def register_workspace_directory(params = {}, options = {})
+      req = build_request(:register_workspace_directory, params)
       req.send_request(options)
     end
 
@@ -1695,7 +1930,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

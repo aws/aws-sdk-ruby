@@ -1163,6 +1163,9 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
+    #
+    #   Using this token works only when you specify `true` for
+    #   `startFromHead`.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1524,10 +1527,10 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] stored_bytes
     #   The number of bytes stored.
     #
-    #   **IMPORTANT:** Starting on June 17, 2019, this parameter will be
-    #   deprecated for log streams, and will be reported as zero. This
-    #   change applies only to log streams. The `storedBytes` parameter for
-    #   log groups is not affected.
+    #   **IMPORTANT:**On June 17, 2019, this parameter was deprecated for
+    #   log streams, and is always reported as zero. This change applies
+    #   only to log streams. The `storedBytes` parameter for log groups is
+    #   not affected.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogStream AWS API Documentation
@@ -2247,7 +2250,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] limit
     #   The maximum number of log events to return in the query. If the
     #   query string uses the `fields` command, only the specified fields
-    #   and their values are returned.
+    #   and their values are returned. The default is 1000.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQueryRequest AWS API Documentation

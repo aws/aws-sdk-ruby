@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2019-11-15)
+------------------
+
+* Feature - You can now add tags while copying snapshots. Previously, a user had to first copy the snapshot and then add tags to the copied snapshot manually. Moving forward, you can specify the list of tags you wish to be applied to the copied snapshot as a parameter on the Copy Snapshot API.
+
 1.115.0 (2019-11-04)
 ------------------
 

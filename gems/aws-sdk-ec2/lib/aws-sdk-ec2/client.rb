@@ -3116,6 +3116,8 @@ module Aws::EC2
     # @option params [required, String] :source_snapshot_id
     #   The ID of the EBS snapshot to copy.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -3125,6 +3127,7 @@ module Aws::EC2
     # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopySnapshotResult#snapshot_id #snapshot_id} => String
+    #   * {Types::CopySnapshotResult#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To copy a snapshot
@@ -3175,16 +3178,30 @@ module Aws::EC2
     #     description: "String",
     #     destination_region: "String",
     #     encrypted: false,
-    #     kms_key_id: "KmsKeyId",
+    #     kms_key_id: "String",
     #     presigned_url: "String",
     #     source_region: "String", # required
     #     source_snapshot_id: "String", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.snapshot_id #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshot AWS API Documentation
     #
@@ -32728,7 +32745,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

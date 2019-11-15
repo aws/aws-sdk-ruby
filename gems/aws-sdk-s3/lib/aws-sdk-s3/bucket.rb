@@ -7,8 +7,7 @@
 
 module Aws::S3
   class Bucket
-    attr_reader :name, :client
-    
+
     extend Aws::Deprecations
 
     # @overload def initialize(name, options = {})
@@ -26,6 +25,11 @@ module Aws::S3
 
     # @!group Read-Only Attributes
 
+    # @return [String]
+    def name
+      @name
+    end
+
     # Date the bucket was created.
     # @return [Time]
     def creation_date
@@ -33,6 +37,11 @@ module Aws::S3
     end
 
     # @!endgroup
+
+    # @return [Client]
+    def client
+      @client
+    end
 
     # @raise [NotImplementedError]
     # @api private

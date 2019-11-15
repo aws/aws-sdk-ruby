@@ -2010,7 +2010,7 @@ module Aws::ElasticLoadBalancingV2
     #   * `routing.http.drop_invalid_header_fields.enabled` - Indicates
     #     whether HTTP headers with invalid header fields are removed by the
     #     load balancer (`true`) or routed to targets (`false`). The default
-    #     is `true`.
+    #     is `false`.
     #
     #   * `routing.http2.enabled` - Indicates whether HTTP/2 is enabled. The
     #     value is `true` or `false`. The default is `true`.

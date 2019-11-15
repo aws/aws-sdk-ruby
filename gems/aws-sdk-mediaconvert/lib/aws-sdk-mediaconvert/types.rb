@@ -560,7 +560,7 @@ module Aws::MediaConvert
     #             sample_rate: 1,
     #           },
     #         },
-    #         custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #         custom_language_code: "__stringPatternAZaZ23AZaZ",
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #         language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #         remix_settings: {
@@ -626,11 +626,17 @@ module Aws::MediaConvert
     #   @return [Types::AudioCodecSettings]
     #
     # @!attribute [rw] custom_language_code
-    #   Specify the language for this audio output track, using the ISO
-    #   639-2 or ISO 639-3 three-letter language code. The language
-    #   specified will be used when 'Follow Input Language Code' is not
-    #   selected or when 'Follow Input Language Code' is selected but
-    #   there is no ISO 639 language code specified by the input.
+    #   Specify the language for this audio output track. The service puts
+    #   this language code into your output audio track when you set
+    #   Language code control (AudioLanguageCodeControl) to Use configured
+    #   (USE\_CONFIGURED). The service also uses your specified custom
+    #   language code when you set Language code control
+    #   (AudioLanguageCodeControl) to Follow input (FOLLOW\_INPUT), but your
+    #   input file doesn't specify a language code. For all outputs, you
+    #   can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you
+    #   can also use any other code in the full RFC-5646 specification.
+    #   Streaming outputs are those that are in one of the following output
+    #   groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -642,11 +648,14 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] language_code_control
-    #   Choosing FOLLOW\_INPUT will cause the ISO 639 language code of the
-    #   output to follow the ISO 639 language code of the input. The
-    #   language specified for languageCode' will be used when
-    #   USE\_CONFIGURED is selected or when FOLLOW\_INPUT is selected but
-    #   there is no ISO 639 language code specified by the input.
+    #   Specify which source for language code takes precedence for this
+    #   audio track. When you choose Follow input (FOLLOW\_INPUT), the
+    #   service uses the language code from the input track if it's
+    #   present. If there's no languge code on the input track, the service
+    #   uses the code that you specify in the setting Language code
+    #   (languageCode or customLanguageCode). When you choose Use configured
+    #   (USE\_CONFIGURED), the service uses the language code that you
+    #   specify.
     #   @return [String]
     #
     # @!attribute [rw] remix_settings
@@ -1117,7 +1126,7 @@ module Aws::MediaConvert
     #
     #       {
     #         caption_selector_name: "__stringMin1",
-    #         custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #         custom_language_code: "__stringPatternAZaZ23AZaZ",
     #         destination_settings: {
     #           burnin_destination_settings: {
     #             alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -1166,7 +1175,7 @@ module Aws::MediaConvert
     #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #           scc_destination_settings: {
-    #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #           },
     #           teletext_destination_settings: {
     #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -1185,12 +1194,16 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] custom_language_code
-    #   Indicates the language of the caption output track, using the ISO
-    #   639-2 or ISO 639-3 three-letter language code. For most captions
-    #   output formats, the encoder puts this language information in the
-    #   output captions metadata. If your output captions format is DVB-Sub
-    #   or Burn in, the encoder uses this language information to choose the
-    #   font language for rendering the captions text.
+    #   Specify the language for this captions output track. For most
+    #   captions output formats, the encoder puts this language information
+    #   in the output captions metadata. If your output captions format is
+    #   DVB-Sub or Burn in, the encoder uses this language information when
+    #   automatically selecting the font script for rendering the captions
+    #   text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code.
+    #   For streaming outputs, you can also use any other code in the full
+    #   RFC-5646 specification. Streaming outputs are those that are in one
+    #   of the following output groups: CMAF, DASH ISO, Apple HLS, or
+    #   Microsoft Smooth Streaming.
     #   @return [String]
     #
     # @!attribute [rw] destination_settings
@@ -1232,7 +1245,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #         custom_language_code: "__stringPatternAZaZ23AZaZ",
     #         destination_settings: {
     #           burnin_destination_settings: {
     #             alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -1281,7 +1294,7 @@ module Aws::MediaConvert
     #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #           scc_destination_settings: {
-    #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #           },
     #           teletext_destination_settings: {
     #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -1296,12 +1309,16 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] custom_language_code
-    #   Indicates the language of the caption output track, using the ISO
-    #   639-2 or ISO 639-3 three-letter language code. For most captions
-    #   output formats, the encoder puts this language information in the
-    #   output captions metadata. If your output captions format is DVB-Sub
-    #   or Burn in, the encoder uses this language information to choose the
-    #   font language for rendering the captions text.
+    #   Specify the language for this captions output track. For most
+    #   captions output formats, the encoder puts this language information
+    #   in the output captions metadata. If your output captions format is
+    #   DVB-Sub or Burn in, the encoder uses this language information when
+    #   automatically selecting the font script for rendering the captions
+    #   text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code.
+    #   For streaming outputs, you can also use any other code in the full
+    #   RFC-5646 specification. Streaming outputs are those that are in one
+    #   of the following output groups: CMAF, DASH ISO, Apple HLS, or
+    #   Microsoft Smooth Streaming.
     #   @return [String]
     #
     # @!attribute [rw] destination_settings
@@ -1391,7 +1408,7 @@ module Aws::MediaConvert
     #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         scc_destination_settings: {
-    #           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #         },
     #         teletext_destination_settings: {
     #           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -1647,6 +1664,45 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Specify the details for each pair of HLS and DASH additional manifests
+    # that you want the service to generate for this CMAF output group. Each
+    # pair of manifests can reference a different subset of outputs in the
+    # group.
+    #
+    # @note When making an API call, you may pass CmafAdditionalManifest
+    #   data as a hash:
+    #
+    #       {
+    #         manifest_name_modifier: "__stringMin1",
+    #         selected_outputs: ["__stringMin1"],
+    #       }
+    #
+    # @!attribute [rw] manifest_name_modifier
+    #   Specify a name modifier that the service adds to the name of this
+    #   manifest to make it different from the file names of the other main
+    #   manifests in the output group. For example, say that the default
+    #   main manifest for your HLS group is film-name.m3u8. If you enter
+    #   "-no-premium" for this setting, then the file name the service
+    #   generates for this top-level manifest is film-name-no-premium.m3u8.
+    #   For HLS output groups, specify a manifestNameModifier that is
+    #   different from the nameModifier of the output. The service uses the
+    #   output name modifier to create unique names for the individual
+    #   variant manifests.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_outputs
+    #   Specify the outputs that you want this additional top-level manifest
+    #   to reference.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmafAdditionalManifest AWS API Documentation
+    #
+    class CmafAdditionalManifest < Struct.new(
+      :manifest_name_modifier,
+      :selected_outputs)
+      include Aws::Structure
+    end
+
     # Settings for CMAF encryption
     #
     # @note When making an API call, you may pass CmafEncryptionSettings
@@ -1729,12 +1785,21 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         additional_manifests: [
+    #           {
+    #             manifest_name_modifier: "__stringMin1",
+    #             selected_outputs: ["__stringMin1"],
+    #           },
+    #         ],
     #         base_url: "__string",
     #         client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #         destination: "__stringPatternS3",
     #         destination_settings: {
     #           s3_settings: {
+    #             access_control: {
+    #               canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #             },
     #             encryption: {
     #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #               kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -1772,6 +1837,16 @@ module Aws::MediaConvert
     #         write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #         write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #       }
+    #
+    # @!attribute [rw] additional_manifests
+    #   By default, the service creates one top-level .m3u8 HLS manifest and
+    #   one top -level .mpd DASH manifest for each CMAF output group in your
+    #   job. These default manifests reference every output in the output
+    #   group. To create additional top-level manifests that reference a
+    #   subset of the outputs in the output group, specify a list of them
+    #   here. For each additional manifest that you specify, the service
+    #   creates one HLS manifest and one DASH manifest.
+    #   @return [Array<Types::CmafAdditionalManifest>]
     #
     # @!attribute [rw] base_url
     #   A partial URI prefix that will be put in the manifest file at the
@@ -1893,6 +1968,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmafGroupSettings AWS API Documentation
     #
     class CmafGroupSettings < Struct.new(
+      :additional_manifests,
       :base_url,
       :client_cache,
       :codec_specification,
@@ -2096,6 +2172,11 @@ module Aws::MediaConvert
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           mp_4_major_brand: "__string",
     #         },
+    #         mpd_settings: {
+    #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #           scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #         },
     #       }
     #
     # @!attribute [rw] container
@@ -2135,6 +2216,10 @@ module Aws::MediaConvert
     #   with this container.
     #   @return [Types::Mp4Settings]
     #
+    # @!attribute [rw] mpd_settings
+    #   Settings for MP4 segments in DASH
+    #   @return [Types::MpdSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ContainerSettings AWS API Documentation
     #
     class ContainerSettings < Struct.new(
@@ -2143,7 +2228,8 @@ module Aws::MediaConvert
       :m2ts_settings,
       :m3u_8_settings,
       :mov_settings,
-      :mp_4_settings)
+      :mp_4_settings,
+      :mpd_settings)
       include Aws::Structure
     end
 
@@ -2340,12 +2426,21 @@ module Aws::MediaConvert
     #               name: "__string",
     #               output_group_settings: {
     #                 cmaf_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   base_url: "__string",
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -2384,10 +2479,19 @@ module Aws::MediaConvert
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 },
     #                 dash_iso_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   base_url: "__string",
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -2415,6 +2519,9 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -2424,6 +2531,12 @@ module Aws::MediaConvert
     #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   base_url: "__string",
     #                   caption_language_mappings: [
     #                     {
@@ -2439,6 +2552,9 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -2481,10 +2597,19 @@ module Aws::MediaConvert
     #                   timestamp_delta_milliseconds: 1,
     #                 },
     #                 ms_smooth_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -2599,7 +2724,7 @@ module Aws::MediaConvert
     #                           sample_rate: 1,
     #                         },
     #                       },
-    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                       language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                       remix_settings: {
@@ -2619,7 +2744,7 @@ module Aws::MediaConvert
     #                   caption_descriptions: [
     #                     {
     #                       caption_selector_name: "__stringMin1",
-    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                       destination_settings: {
     #                         burnin_destination_settings: {
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -2668,7 +2793,7 @@ module Aws::MediaConvert
     #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         scc_destination_settings: {
-    #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                         },
     #                         teletext_destination_settings: {
     #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -2768,6 +2893,11 @@ module Aws::MediaConvert
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                       mp_4_major_brand: "__string",
+    #                     },
+    #                     mpd_settings: {
+    #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
     #                   },
     #                   extension: "__string",
@@ -2975,6 +3105,14 @@ module Aws::MediaConvert
     #                         algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
     #                         control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                         mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
+    #                       },
+    #                       dolby_vision: {
+    #                         l6_metadata: {
+    #                           max_cll: 1,
+    #                           max_fall: 1,
+    #                         },
+    #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                         profile: "PROFILE_5", # accepts PROFILE_5
     #                       },
     #                       image_inserter: {
     #                         insertable_images: [
@@ -3342,12 +3480,21 @@ module Aws::MediaConvert
     #               name: "__string",
     #               output_group_settings: {
     #                 cmaf_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   base_url: "__string",
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -3386,10 +3533,19 @@ module Aws::MediaConvert
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 },
     #                 dash_iso_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   base_url: "__string",
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -3417,6 +3573,9 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -3426,6 +3585,12 @@ module Aws::MediaConvert
     #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   base_url: "__string",
     #                   caption_language_mappings: [
     #                     {
@@ -3441,6 +3606,9 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -3483,10 +3651,19 @@ module Aws::MediaConvert
     #                   timestamp_delta_milliseconds: 1,
     #                 },
     #                 ms_smooth_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -3601,7 +3778,7 @@ module Aws::MediaConvert
     #                           sample_rate: 1,
     #                         },
     #                       },
-    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                       language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                       remix_settings: {
@@ -3621,7 +3798,7 @@ module Aws::MediaConvert
     #                   caption_descriptions: [
     #                     {
     #                       caption_selector_name: "__stringMin1",
-    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                       destination_settings: {
     #                         burnin_destination_settings: {
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -3670,7 +3847,7 @@ module Aws::MediaConvert
     #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         scc_destination_settings: {
-    #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                         },
     #                         teletext_destination_settings: {
     #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -3770,6 +3947,11 @@ module Aws::MediaConvert
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                       mp_4_major_brand: "__string",
+    #                     },
+    #                     mpd_settings: {
+    #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
     #                   },
     #                   extension: "__string",
@@ -3977,6 +4159,14 @@ module Aws::MediaConvert
     #                         algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
     #                         control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                         mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
+    #                       },
+    #                       dolby_vision: {
+    #                         l6_metadata: {
+    #                           max_cll: 1,
+    #                           max_fall: 1,
+    #                         },
+    #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                         profile: "PROFILE_5", # accepts PROFILE_5
     #                       },
     #                       image_inserter: {
     #                         insertable_images: [
@@ -4228,7 +4418,7 @@ module Aws::MediaConvert
     #                   sample_rate: 1,
     #                 },
     #               },
-    #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #               custom_language_code: "__stringPatternAZaZ23AZaZ",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #               remix_settings: {
@@ -4247,7 +4437,7 @@ module Aws::MediaConvert
     #           ],
     #           caption_descriptions: [
     #             {
-    #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #               custom_language_code: "__stringPatternAZaZ23AZaZ",
     #               destination_settings: {
     #                 burnin_destination_settings: {
     #                   alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -4296,7 +4486,7 @@ module Aws::MediaConvert
     #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 scc_destination_settings: {
-    #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                 },
     #                 teletext_destination_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -4396,6 +4586,11 @@ module Aws::MediaConvert
     #               free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #               mp_4_major_brand: "__string",
+    #             },
+    #             mpd_settings: {
+    #               caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #               scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
     #           },
     #           video_description: {
@@ -4591,6 +4786,14 @@ module Aws::MediaConvert
     #                 control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                 mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #               },
+    #               dolby_vision: {
+    #                 l6_metadata: {
+    #                   max_cll: 1,
+    #                   max_fall: 1,
+    #                 },
+    #                 l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                 profile: "PROFILE_5", # accepts PROFILE_5
+    #               },
     #               image_inserter: {
     #                 insertable_images: [
     #                   {
@@ -4772,6 +4975,40 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Specify the details for each additional DASH manifest that you want
+    # the service to generate for this output group. Each manifest can
+    # reference a different subset of outputs in the group.
+    #
+    # @note When making an API call, you may pass DashAdditionalManifest
+    #   data as a hash:
+    #
+    #       {
+    #         manifest_name_modifier: "__stringMin1",
+    #         selected_outputs: ["__stringMin1"],
+    #       }
+    #
+    # @!attribute [rw] manifest_name_modifier
+    #   Specify a name modifier that the service adds to the name of this
+    #   manifest to make it different from the file names of the other main
+    #   manifests in the output group. For example, say that the default
+    #   main manifest for your DASH group is film-name.mpd. If you enter
+    #   "-no-premium" for this setting, then the file name the service
+    #   generates for this top-level manifest is film-name-no-premium.mpd.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_outputs
+    #   Specify the outputs that you want this additional top-level manifest
+    #   to reference.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashAdditionalManifest AWS API Documentation
+    #
+    class DashAdditionalManifest < Struct.new(
+      :manifest_name_modifier,
+      :selected_outputs)
+      include Aws::Structure
+    end
+
     # Specifies DRM settings for DASH outputs.
     #
     # @note When making an API call, you may pass DashIsoEncryptionSettings
@@ -4819,10 +5056,19 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         additional_manifests: [
+    #           {
+    #             manifest_name_modifier: "__stringMin1",
+    #             selected_outputs: ["__stringMin1"],
+    #           },
+    #         ],
     #         base_url: "__string",
     #         destination: "__stringPatternS3",
     #         destination_settings: {
     #           s3_settings: {
+    #             access_control: {
+    #               canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #             },
     #             encryption: {
     #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #               kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -4846,6 +5092,14 @@ module Aws::MediaConvert
     #         segment_length: 1,
     #         write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #       }
+    #
+    # @!attribute [rw] additional_manifests
+    #   By default, the service creates one .mpd DASH manifest for each DASH
+    #   ISO output group in your job. This default manifest references every
+    #   output in the output group. To create additional DASH manifests that
+    #   reference a subset of the outputs in the output group, specify a
+    #   list of them here.
+    #   @return [Array<Types::DashAdditionalManifest>]
     #
     # @!attribute [rw] base_url
     #   A partial URI prefix that will be put in the manifest (.mpd) file at
@@ -4928,6 +5182,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashIsoGroupSettings AWS API Documentation
     #
     class DashIsoGroupSettings < Struct.new(
+      :additional_manifests,
       :base_url,
       :destination,
       :destination_settings,
@@ -5141,6 +5396,9 @@ module Aws::MediaConvert
     #
     #       {
     #         s3_settings: {
+    #           access_control: {
+    #             canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #           },
     #           encryption: {
     #             encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #             kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -5188,6 +5446,76 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DisassociateCertificateResponse AWS API Documentation
     #
     class DisassociateCertificateResponse < Aws::EmptyStructure; end
+
+    # Settings for Dolby Vision
+    #
+    # @note When making an API call, you may pass DolbyVision
+    #   data as a hash:
+    #
+    #       {
+    #         l6_metadata: {
+    #           max_cll: 1,
+    #           max_fall: 1,
+    #         },
+    #         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #         profile: "PROFILE_5", # accepts PROFILE_5
+    #       }
+    #
+    # @!attribute [rw] l6_metadata
+    #   Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to
+    #   override the MaxCLL and MaxFALL values in your input with new
+    #   values.
+    #   @return [Types::DolbyVisionLevel6Metadata]
+    #
+    # @!attribute [rw] l6_mode
+    #   Use Dolby Vision Mode to choose how the service will handle Dolby
+    #   Vision MaxCLL and MaxFALL properies.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile
+    #   In the current MediaConvert implementation, the Dolby Vision profile
+    #   is always 5 (PROFILE\_5). Therefore, all of your inputs must contain
+    #   Dolby Vision frame interleaved data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DolbyVision AWS API Documentation
+    #
+    class DolbyVision < Struct.new(
+      :l6_metadata,
+      :l6_mode,
+      :profile)
+      include Aws::Structure
+    end
+
+    # Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to
+    # override the MaxCLL and MaxFALL values in your input with new values.
+    #
+    # @note When making an API call, you may pass DolbyVisionLevel6Metadata
+    #   data as a hash:
+    #
+    #       {
+    #         max_cll: 1,
+    #         max_fall: 1,
+    #       }
+    #
+    # @!attribute [rw] max_cll
+    #   Maximum Content Light Level. Static HDR metadata that corresponds to
+    #   the brightest pixel in the entire stream. Measured in nits.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_fall
+    #   Maximum Frame-Average Light Level. Static HDR metadata that
+    #   corresponds to the highest frame-average brightness in the entire
+    #   stream. Measured in nits.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DolbyVisionLevel6Metadata AWS API Documentation
+    #
+    class DolbyVisionLevel6Metadata < Struct.new(
+      :max_cll,
+      :max_fall)
+      include Aws::Structure
+    end
 
     # Inserts DVB Network Information Table (NIT) at the specified table
     # repetition interval.
@@ -6068,6 +6396,9 @@ module Aws::MediaConvert
     #         destination: "__stringPatternS3",
     #         destination_settings: {
     #           s3_settings: {
+    #             access_control: {
+    #               canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #             },
     #             encryption: {
     #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #               kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -7070,14 +7401,15 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] write_mp_4_packaging_type
     #   If the location of parameter set NAL units doesn't matter in your
-    #   workflow, ignore this setting. Use this setting in your CMAF, DASH,
-    #   or file MP4 output. For file MP4 outputs, choosing HVC1 can create
-    #   video that doesn't work properly with some downstream systems and
-    #   video players. Choose HVC1 to mark your output as HVC1. This makes
+    #   workflow, ignore this setting. Use this setting only with CMAF or
+    #   DASH outputs, or with standalone file outputs in an MPEG-4 container
+    #   (MP4 outputs). Choose HVC1 to mark your output as HVC1. This makes
     #   your output compliant with the following specification: ISO IECJTC1
     #   SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these
     #   outputs, the service stores parameter set NAL units in the sample
-    #   headers but not in the samples directly. The service defaults to
+    #   headers but not in the samples directly. For MP4 outputs, when you
+    #   choose HVC1, your output video might not work properly with some
+    #   downstream systems and video players. The service defaults to
     #   marking your output as HEV1. For these outputs, the service writes
     #   parameter set NAL units directly into the samples.
     #   @return [String]
@@ -7249,6 +7581,44 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Specify the details for each additional HLS manifest that you want the
+    # service to generate for this output group. Each manifest can reference
+    # a different subset of outputs in the group.
+    #
+    # @note When making an API call, you may pass HlsAdditionalManifest
+    #   data as a hash:
+    #
+    #       {
+    #         manifest_name_modifier: "__stringMin1",
+    #         selected_outputs: ["__stringMin1"],
+    #       }
+    #
+    # @!attribute [rw] manifest_name_modifier
+    #   Specify a name modifier that the service adds to the name of this
+    #   manifest to make it different from the file names of the other main
+    #   manifests in the output group. For example, say that the default
+    #   main manifest for your HLS group is film-name.m3u8. If you enter
+    #   "-no-premium" for this setting, then the file name the service
+    #   generates for this top-level manifest is film-name-no-premium.m3u8.
+    #   For HLS output groups, specify a manifestNameModifier that is
+    #   different from the nameModifier of the output. The service uses the
+    #   output name modifier to create unique names for the individual
+    #   variant manifests.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_outputs
+    #   Specify the outputs that you want this additional top-level manifest
+    #   to reference.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HlsAdditionalManifest AWS API Documentation
+    #
+    class HlsAdditionalManifest < Struct.new(
+      :manifest_name_modifier,
+      :selected_outputs)
+      include Aws::Structure
+    end
+
     # Caption Language Mapping
     #
     # @note When making an API call, you may pass HlsCaptionLanguageMapping
@@ -7266,7 +7636,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] custom_language_code
-    #   Specify the language for this caption channel, using the ISO 639-2
+    #   Specify the language for this captions channel, using the ISO 639-2
     #   or ISO 639-3 three-letter language code
     #   @return [String]
     #
@@ -7378,6 +7748,12 @@ module Aws::MediaConvert
     #
     #       {
     #         ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #         additional_manifests: [
+    #           {
+    #             manifest_name_modifier: "__stringMin1",
+    #             selected_outputs: ["__stringMin1"],
+    #           },
+    #         ],
     #         base_url: "__string",
     #         caption_language_mappings: [
     #           {
@@ -7393,6 +7769,9 @@ module Aws::MediaConvert
     #         destination: "__stringPatternS3",
     #         destination_settings: {
     #           s3_settings: {
+    #             access_control: {
+    #               canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #             },
     #             encryption: {
     #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #               kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -7440,6 +7819,14 @@ module Aws::MediaConvert
     #   manifest. This setting does not determine whether SCTE-35 markers
     #   appear in the outputs themselves.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_manifests
+    #   By default, the service creates one top-level .m3u8 HLS manifest for
+    #   each HLS output group in your job. This default manifest references
+    #   every output in the output group. To create additional top-level
+    #   manifests that reference a subset of the outputs in the output
+    #   group, specify a list of them here.
+    #   @return [Array<Types::HlsAdditionalManifest>]
     #
     # @!attribute [rw] base_url
     #   A partial URI prefix that will be prepended to each output in the
@@ -7583,6 +7970,7 @@ module Aws::MediaConvert
     #
     class HlsGroupSettings < Struct.new(
       :ad_markers,
+      :additional_manifests,
       :base_url,
       :caption_language_mappings,
       :caption_language_setting,
@@ -8964,12 +9352,21 @@ module Aws::MediaConvert
     #             name: "__string",
     #             output_group_settings: {
     #               cmaf_group_settings: {
+    #                 additional_manifests: [
+    #                   {
+    #                     manifest_name_modifier: "__stringMin1",
+    #                     selected_outputs: ["__stringMin1"],
+    #                   },
+    #                 ],
     #                 base_url: "__string",
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
+    #                     access_control: {
+    #                       canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -9008,10 +9405,19 @@ module Aws::MediaConvert
     #                 write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               },
     #               dash_iso_group_settings: {
+    #                 additional_manifests: [
+    #                   {
+    #                     manifest_name_modifier: "__stringMin1",
+    #                     selected_outputs: ["__stringMin1"],
+    #                   },
+    #                 ],
     #                 base_url: "__string",
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
+    #                     access_control: {
+    #                       canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -9039,6 +9445,9 @@ module Aws::MediaConvert
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
+    #                     access_control: {
+    #                       canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -9048,6 +9457,12 @@ module Aws::MediaConvert
     #               },
     #               hls_group_settings: {
     #                 ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #                 additional_manifests: [
+    #                   {
+    #                     manifest_name_modifier: "__stringMin1",
+    #                     selected_outputs: ["__stringMin1"],
+    #                   },
+    #                 ],
     #                 base_url: "__string",
     #                 caption_language_mappings: [
     #                   {
@@ -9063,6 +9478,9 @@ module Aws::MediaConvert
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
+    #                     access_control: {
+    #                       canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -9105,10 +9523,19 @@ module Aws::MediaConvert
     #                 timestamp_delta_milliseconds: 1,
     #               },
     #               ms_smooth_group_settings: {
+    #                 additional_manifests: [
+    #                   {
+    #                     manifest_name_modifier: "__stringMin1",
+    #                     selected_outputs: ["__stringMin1"],
+    #                   },
+    #                 ],
     #                 audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
+    #                     access_control: {
+    #                       canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -9223,7 +9650,7 @@ module Aws::MediaConvert
     #                         sample_rate: 1,
     #                       },
     #                     },
-    #                     custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                     custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                     language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                     language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                     remix_settings: {
@@ -9243,7 +9670,7 @@ module Aws::MediaConvert
     #                 caption_descriptions: [
     #                   {
     #                     caption_selector_name: "__stringMin1",
-    #                     custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                     custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                     destination_settings: {
     #                       burnin_destination_settings: {
     #                         alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -9292,7 +9719,7 @@ module Aws::MediaConvert
     #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       },
     #                       scc_destination_settings: {
-    #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                       },
     #                       teletext_destination_settings: {
     #                         page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -9392,6 +9819,11 @@ module Aws::MediaConvert
     #                     free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                     mp_4_major_brand: "__string",
+    #                   },
+    #                   mpd_settings: {
+    #                     caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
     #                 },
     #                 extension: "__string",
@@ -9599,6 +10031,14 @@ module Aws::MediaConvert
     #                       algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
     #                       control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                       mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
+    #                     },
+    #                     dolby_vision: {
+    #                       l6_metadata: {
+    #                         max_cll: 1,
+    #                         max_fall: 1,
+    #                       },
+    #                       l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                       profile: "PROFILE_5", # accepts PROFILE_5
     #                     },
     #                     image_inserter: {
     #                       insertable_images: [
@@ -9994,12 +10434,21 @@ module Aws::MediaConvert
     #             name: "__string",
     #             output_group_settings: {
     #               cmaf_group_settings: {
+    #                 additional_manifests: [
+    #                   {
+    #                     manifest_name_modifier: "__stringMin1",
+    #                     selected_outputs: ["__stringMin1"],
+    #                   },
+    #                 ],
     #                 base_url: "__string",
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
+    #                     access_control: {
+    #                       canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -10038,10 +10487,19 @@ module Aws::MediaConvert
     #                 write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               },
     #               dash_iso_group_settings: {
+    #                 additional_manifests: [
+    #                   {
+    #                     manifest_name_modifier: "__stringMin1",
+    #                     selected_outputs: ["__stringMin1"],
+    #                   },
+    #                 ],
     #                 base_url: "__string",
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
+    #                     access_control: {
+    #                       canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -10069,6 +10527,9 @@ module Aws::MediaConvert
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
+    #                     access_control: {
+    #                       canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -10078,6 +10539,12 @@ module Aws::MediaConvert
     #               },
     #               hls_group_settings: {
     #                 ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #                 additional_manifests: [
+    #                   {
+    #                     manifest_name_modifier: "__stringMin1",
+    #                     selected_outputs: ["__stringMin1"],
+    #                   },
+    #                 ],
     #                 base_url: "__string",
     #                 caption_language_mappings: [
     #                   {
@@ -10093,6 +10560,9 @@ module Aws::MediaConvert
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
+    #                     access_control: {
+    #                       canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -10135,10 +10605,19 @@ module Aws::MediaConvert
     #                 timestamp_delta_milliseconds: 1,
     #               },
     #               ms_smooth_group_settings: {
+    #                 additional_manifests: [
+    #                   {
+    #                     manifest_name_modifier: "__stringMin1",
+    #                     selected_outputs: ["__stringMin1"],
+    #                   },
+    #                 ],
     #                 audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
+    #                     access_control: {
+    #                       canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -10253,7 +10732,7 @@ module Aws::MediaConvert
     #                         sample_rate: 1,
     #                       },
     #                     },
-    #                     custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                     custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                     language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                     language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                     remix_settings: {
@@ -10273,7 +10752,7 @@ module Aws::MediaConvert
     #                 caption_descriptions: [
     #                   {
     #                     caption_selector_name: "__stringMin1",
-    #                     custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                     custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                     destination_settings: {
     #                       burnin_destination_settings: {
     #                         alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -10322,7 +10801,7 @@ module Aws::MediaConvert
     #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       },
     #                       scc_destination_settings: {
-    #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                       },
     #                       teletext_destination_settings: {
     #                         page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -10422,6 +10901,11 @@ module Aws::MediaConvert
     #                     free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                     mp_4_major_brand: "__string",
+    #                   },
+    #                   mpd_settings: {
+    #                     caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
     #                 },
     #                 extension: "__string",
@@ -10629,6 +11113,14 @@ module Aws::MediaConvert
     #                       algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
     #                       control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                       mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
+    #                     },
+    #                     dolby_vision: {
+    #                       l6_metadata: {
+    #                         max_cll: 1,
+    #                         max_fall: 1,
+    #                       },
+    #                       l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                       profile: "PROFILE_5", # accepts PROFILE_5
     #                     },
     #                     image_inserter: {
     #                       insertable_images: [
@@ -11884,6 +12376,51 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Settings for MP4 segments in DASH
+    #
+    # @note When making an API call, you may pass MpdSettings
+    #   data as a hash:
+    #
+    #       {
+    #         caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #         scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #       }
+    #
+    # @!attribute [rw] caption_container_type
+    #   Use this setting only in DASH output groups that include sidecar
+    #   TTML or IMSC captions. You specify sidecar captions in a separate
+    #   output from your audio and video. Choose Raw (RAW) for captions in a
+    #   single XML file in a raw container. Choose Fragmented MPEG-4
+    #   (FRAGMENTED\_MP4) for captions in XML format contained within
+    #   fragmented MP4 files. This set of fragmented MP4 files is separate
+    #   from your video and audio fragmented MP4 files.
+    #   @return [String]
+    #
+    # @!attribute [rw] scte_35_esam
+    #   Use this setting only when you specify SCTE-35 markers from ESAM.
+    #   Choose INSERT to put SCTE-35 markers in this output at the insertion
+    #   points that you specify in an ESAM XML document. Provide the
+    #   document in the setting SCC XML (sccXml).
+    #   @return [String]
+    #
+    # @!attribute [rw] scte_35_source
+    #   Ignore this setting unless you have SCTE-35 markers in your input
+    #   video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35
+    #   markers that appear in your input to also appear in this output.
+    #   Choose None (NONE) if you don't want those SCTE-35 markers in this
+    #   output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MpdSettings AWS API Documentation
+    #
+    class MpdSettings < Struct.new(
+      :caption_container_type,
+      :scte_35_esam,
+      :scte_35_source)
+      include Aws::Structure
+    end
+
     # Required when you set (Codec) under (VideoDescription)>(CodecSettings)
     # to the value MPEG2.
     #
@@ -12154,6 +12691,42 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Specify the details for each additional Microsoft Smooth Streaming
+    # manifest that you want the service to generate for this output group.
+    # Each manifest can reference a different subset of outputs in the
+    # group.
+    #
+    # @note When making an API call, you may pass MsSmoothAdditionalManifest
+    #   data as a hash:
+    #
+    #       {
+    #         manifest_name_modifier: "__stringMin1",
+    #         selected_outputs: ["__stringMin1"],
+    #       }
+    #
+    # @!attribute [rw] manifest_name_modifier
+    #   Specify a name modifier that the service adds to the name of this
+    #   manifest to make it different from the file names of the other main
+    #   manifests in the output group. For example, say that the default
+    #   main manifest for your Microsoft Smooth group is film-name.ismv. If
+    #   you enter "-no-premium" for this setting, then the file name the
+    #   service generates for this top-level manifest is
+    #   film-name-no-premium.ismv.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_outputs
+    #   Specify the outputs that you want this additional top-level manifest
+    #   to reference.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MsSmoothAdditionalManifest AWS API Documentation
+    #
+    class MsSmoothAdditionalManifest < Struct.new(
+      :manifest_name_modifier,
+      :selected_outputs)
+      include Aws::Structure
+    end
+
     # If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to
     # specify the value SpekeKeyProvider.
     #
@@ -12190,10 +12763,19 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         additional_manifests: [
+    #           {
+    #             manifest_name_modifier: "__stringMin1",
+    #             selected_outputs: ["__stringMin1"],
+    #           },
+    #         ],
     #         audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #         destination: "__stringPatternS3",
     #         destination_settings: {
     #           s3_settings: {
+    #             access_control: {
+    #               canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #             },
     #             encryption: {
     #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #               kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -12211,6 +12793,14 @@ module Aws::MediaConvert
     #         fragment_length: 1,
     #         manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #       }
+    #
+    # @!attribute [rw] additional_manifests
+    #   By default, the service creates one .ism Microsoft Smooth Streaming
+    #   manifest for each Microsoft Smooth Streaming output group in your
+    #   job. This default manifest references every output in the output
+    #   group. To create additional manifests that reference a subset of the
+    #   outputs in the output group, specify a list of them here.
+    #   @return [Array<Types::MsSmoothAdditionalManifest>]
     #
     # @!attribute [rw] audio_deduplication
     #   COMBINE\_DUPLICATE\_STREAMS combines identical audio encoding
@@ -12251,6 +12841,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MsSmoothGroupSettings AWS API Documentation
     #
     class MsSmoothGroupSettings < Struct.new(
+      :additional_manifests,
       :audio_deduplication,
       :destination,
       :destination_settings,
@@ -12562,7 +13153,7 @@ module Aws::MediaConvert
     #                 sample_rate: 1,
     #               },
     #             },
-    #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #             custom_language_code: "__stringPatternAZaZ23AZaZ",
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #             remix_settings: {
@@ -12582,7 +13173,7 @@ module Aws::MediaConvert
     #         caption_descriptions: [
     #           {
     #             caption_selector_name: "__stringMin1",
-    #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #             custom_language_code: "__stringPatternAZaZ23AZaZ",
     #             destination_settings: {
     #               burnin_destination_settings: {
     #                 alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -12631,7 +13222,7 @@ module Aws::MediaConvert
     #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               scc_destination_settings: {
-    #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #               },
     #               teletext_destination_settings: {
     #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -12731,6 +13322,11 @@ module Aws::MediaConvert
     #             free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #             mp_4_major_brand: "__string",
+    #           },
+    #           mpd_settings: {
+    #             caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #             scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
     #         },
     #         extension: "__string",
@@ -12939,6 +13535,14 @@ module Aws::MediaConvert
     #               control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #               mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #             },
+    #             dolby_vision: {
+    #               l6_metadata: {
+    #                 max_cll: 1,
+    #                 max_fall: 1,
+    #               },
+    #               l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #               profile: "PROFILE_5", # accepts PROFILE_5
+    #             },
     #             image_inserter: {
     #               insertable_images: [
     #                 {
@@ -13100,12 +13704,21 @@ module Aws::MediaConvert
     #         name: "__string",
     #         output_group_settings: {
     #           cmaf_group_settings: {
+    #             additional_manifests: [
+    #               {
+    #                 manifest_name_modifier: "__stringMin1",
+    #                 selected_outputs: ["__stringMin1"],
+    #               },
+    #             ],
     #             base_url: "__string",
     #             client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #             codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #             destination: "__stringPatternS3",
     #             destination_settings: {
     #               s3_settings: {
+    #                 access_control: {
+    #                   canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                 },
     #                 encryption: {
     #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                   kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -13144,10 +13757,19 @@ module Aws::MediaConvert
     #             write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #           },
     #           dash_iso_group_settings: {
+    #             additional_manifests: [
+    #               {
+    #                 manifest_name_modifier: "__stringMin1",
+    #                 selected_outputs: ["__stringMin1"],
+    #               },
+    #             ],
     #             base_url: "__string",
     #             destination: "__stringPatternS3",
     #             destination_settings: {
     #               s3_settings: {
+    #                 access_control: {
+    #                   canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                 },
     #                 encryption: {
     #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                   kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -13175,6 +13797,9 @@ module Aws::MediaConvert
     #             destination: "__stringPatternS3",
     #             destination_settings: {
     #               s3_settings: {
+    #                 access_control: {
+    #                   canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                 },
     #                 encryption: {
     #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                   kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -13184,6 +13809,12 @@ module Aws::MediaConvert
     #           },
     #           hls_group_settings: {
     #             ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #             additional_manifests: [
+    #               {
+    #                 manifest_name_modifier: "__stringMin1",
+    #                 selected_outputs: ["__stringMin1"],
+    #               },
+    #             ],
     #             base_url: "__string",
     #             caption_language_mappings: [
     #               {
@@ -13199,6 +13830,9 @@ module Aws::MediaConvert
     #             destination: "__stringPatternS3",
     #             destination_settings: {
     #               s3_settings: {
+    #                 access_control: {
+    #                   canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                 },
     #                 encryption: {
     #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                   kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -13241,10 +13875,19 @@ module Aws::MediaConvert
     #             timestamp_delta_milliseconds: 1,
     #           },
     #           ms_smooth_group_settings: {
+    #             additional_manifests: [
+    #               {
+    #                 manifest_name_modifier: "__stringMin1",
+    #                 selected_outputs: ["__stringMin1"],
+    #               },
+    #             ],
     #             audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #             destination: "__stringPatternS3",
     #             destination_settings: {
     #               s3_settings: {
+    #                 access_control: {
+    #                   canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                 },
     #                 encryption: {
     #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                   kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -13359,7 +14002,7 @@ module Aws::MediaConvert
     #                     sample_rate: 1,
     #                   },
     #                 },
-    #                 custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                 custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                 remix_settings: {
@@ -13379,7 +14022,7 @@ module Aws::MediaConvert
     #             caption_descriptions: [
     #               {
     #                 caption_selector_name: "__stringMin1",
-    #                 custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                 custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                 destination_settings: {
     #                   burnin_destination_settings: {
     #                     alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -13428,7 +14071,7 @@ module Aws::MediaConvert
     #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                   },
     #                   scc_destination_settings: {
-    #                     framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                     framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                   },
     #                   teletext_destination_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -13528,6 +14171,11 @@ module Aws::MediaConvert
     #                 free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                 mp_4_major_brand: "__string",
+    #               },
+    #               mpd_settings: {
+    #                 caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               },
     #             },
     #             extension: "__string",
@@ -13736,6 +14384,14 @@ module Aws::MediaConvert
     #                   control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                   mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                 },
+    #                 dolby_vision: {
+    #                   l6_metadata: {
+    #                     max_cll: 1,
+    #                     max_fall: 1,
+    #                   },
+    #                   l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                   profile: "PROFILE_5", # accepts PROFILE_5
+    #                 },
     #                 image_inserter: {
     #                   insertable_images: [
     #                     {
@@ -13833,12 +14489,21 @@ module Aws::MediaConvert
     #
     #       {
     #         cmaf_group_settings: {
+    #           additional_manifests: [
+    #             {
+    #               manifest_name_modifier: "__stringMin1",
+    #               selected_outputs: ["__stringMin1"],
+    #             },
+    #           ],
     #           base_url: "__string",
     #           client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #           codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #           destination: "__stringPatternS3",
     #           destination_settings: {
     #             s3_settings: {
+    #               access_control: {
+    #                 canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #               },
     #               encryption: {
     #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                 kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -13877,10 +14542,19 @@ module Aws::MediaConvert
     #           write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #         },
     #         dash_iso_group_settings: {
+    #           additional_manifests: [
+    #             {
+    #               manifest_name_modifier: "__stringMin1",
+    #               selected_outputs: ["__stringMin1"],
+    #             },
+    #           ],
     #           base_url: "__string",
     #           destination: "__stringPatternS3",
     #           destination_settings: {
     #             s3_settings: {
+    #               access_control: {
+    #                 canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #               },
     #               encryption: {
     #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                 kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -13908,6 +14582,9 @@ module Aws::MediaConvert
     #           destination: "__stringPatternS3",
     #           destination_settings: {
     #             s3_settings: {
+    #               access_control: {
+    #                 canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #               },
     #               encryption: {
     #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                 kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -13917,6 +14594,12 @@ module Aws::MediaConvert
     #         },
     #         hls_group_settings: {
     #           ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #           additional_manifests: [
+    #             {
+    #               manifest_name_modifier: "__stringMin1",
+    #               selected_outputs: ["__stringMin1"],
+    #             },
+    #           ],
     #           base_url: "__string",
     #           caption_language_mappings: [
     #             {
@@ -13932,6 +14615,9 @@ module Aws::MediaConvert
     #           destination: "__stringPatternS3",
     #           destination_settings: {
     #             s3_settings: {
+    #               access_control: {
+    #                 canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #               },
     #               encryption: {
     #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                 kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -13974,10 +14660,19 @@ module Aws::MediaConvert
     #           timestamp_delta_milliseconds: 1,
     #         },
     #         ms_smooth_group_settings: {
+    #           additional_manifests: [
+    #             {
+    #               manifest_name_modifier: "__stringMin1",
+    #               selected_outputs: ["__stringMin1"],
+    #             },
+    #           ],
     #           audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #           destination: "__stringPatternS3",
     #           destination_settings: {
     #             s3_settings: {
+    #               access_control: {
+    #                 canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #               },
     #               encryption: {
     #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                 kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -14220,7 +14915,7 @@ module Aws::MediaConvert
     #                 sample_rate: 1,
     #               },
     #             },
-    #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #             custom_language_code: "__stringPatternAZaZ23AZaZ",
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #             remix_settings: {
@@ -14239,7 +14934,7 @@ module Aws::MediaConvert
     #         ],
     #         caption_descriptions: [
     #           {
-    #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #             custom_language_code: "__stringPatternAZaZ23AZaZ",
     #             destination_settings: {
     #               burnin_destination_settings: {
     #                 alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -14288,7 +14983,7 @@ module Aws::MediaConvert
     #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               scc_destination_settings: {
-    #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #               },
     #               teletext_destination_settings: {
     #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -14388,6 +15083,11 @@ module Aws::MediaConvert
     #             free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #             mp_4_major_brand: "__string",
+    #           },
+    #           mpd_settings: {
+    #             caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #             scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
     #         },
     #         video_description: {
@@ -14582,6 +15282,14 @@ module Aws::MediaConvert
     #               algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
     #               control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #               mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
+    #             },
+    #             dolby_vision: {
+    #               l6_metadata: {
+    #                 max_cll: 1,
+    #                 max_fall: 1,
+    #               },
+    #               l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #               profile: "PROFILE_5", # accepts PROFILE_5
     #             },
     #             image_inserter: {
     #               insertable_images: [
@@ -15063,17 +15771,51 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Optional. Have MediaConvert automatically apply Amazon S3 access
+    # control for the outputs in this output group. When you don't use this
+    # setting, S3 automatically applies the default access control list
+    # PRIVATE.
+    #
+    # @note When making an API call, you may pass S3DestinationAccessControl
+    #   data as a hash:
+    #
+    #       {
+    #         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #       }
+    #
+    # @!attribute [rw] canned_acl
+    #   Choose an Amazon S3 canned ACL for MediaConvert to apply to this
+    #   output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/S3DestinationAccessControl AWS API Documentation
+    #
+    class S3DestinationAccessControl < Struct.new(
+      :canned_acl)
+      include Aws::Structure
+    end
+
     # Settings associated with S3 destination
     #
     # @note When making an API call, you may pass S3DestinationSettings
     #   data as a hash:
     #
     #       {
+    #         access_control: {
+    #           canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #         },
     #         encryption: {
     #           encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #           kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #         },
     #       }
+    #
+    # @!attribute [rw] access_control
+    #   Optional. Have MediaConvert automatically apply Amazon S3 access
+    #   control for the outputs in this output group. When you don't use
+    #   this setting, S3 automatically applies the default access control
+    #   list PRIVATE.
+    #   @return [Types::S3DestinationAccessControl]
     #
     # @!attribute [rw] encryption
     #   Settings for how your job outputs are encrypted as they are uploaded
@@ -15083,6 +15825,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/S3DestinationSettings AWS API Documentation
     #
     class S3DestinationSettings < Struct.new(
+      :access_control,
       :encryption)
       include Aws::Structure
     end
@@ -15139,7 +15882,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #       }
     #
     # @!attribute [rw] framerate
@@ -15856,12 +16599,21 @@ module Aws::MediaConvert
     #               name: "__string",
     #               output_group_settings: {
     #                 cmaf_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   base_url: "__string",
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -15900,10 +16652,19 @@ module Aws::MediaConvert
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 },
     #                 dash_iso_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   base_url: "__string",
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -15931,6 +16692,9 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -15940,6 +16704,12 @@ module Aws::MediaConvert
     #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   base_url: "__string",
     #                   caption_language_mappings: [
     #                     {
@@ -15955,6 +16725,9 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -15997,10 +16770,19 @@ module Aws::MediaConvert
     #                   timestamp_delta_milliseconds: 1,
     #                 },
     #                 ms_smooth_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"],
+    #                     },
+    #                   ],
     #                   audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
@@ -16115,7 +16897,7 @@ module Aws::MediaConvert
     #                           sample_rate: 1,
     #                         },
     #                       },
-    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                       language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                       remix_settings: {
@@ -16135,7 +16917,7 @@ module Aws::MediaConvert
     #                   caption_descriptions: [
     #                     {
     #                       caption_selector_name: "__stringMin1",
-    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                       destination_settings: {
     #                         burnin_destination_settings: {
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -16184,7 +16966,7 @@ module Aws::MediaConvert
     #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         scc_destination_settings: {
-    #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                         },
     #                         teletext_destination_settings: {
     #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -16284,6 +17066,11 @@ module Aws::MediaConvert
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                       mp_4_major_brand: "__string",
+    #                     },
+    #                     mpd_settings: {
+    #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
     #                   },
     #                   extension: "__string",
@@ -16491,6 +17278,14 @@ module Aws::MediaConvert
     #                         algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
     #                         control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                         mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
+    #                       },
+    #                       dolby_vision: {
+    #                         l6_metadata: {
+    #                           max_cll: 1,
+    #                           max_fall: 1,
+    #                         },
+    #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                         profile: "PROFILE_5", # accepts PROFILE_5
     #                       },
     #                       image_inserter: {
     #                         insertable_images: [
@@ -16733,7 +17528,7 @@ module Aws::MediaConvert
     #                   sample_rate: 1,
     #                 },
     #               },
-    #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #               custom_language_code: "__stringPatternAZaZ23AZaZ",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #               remix_settings: {
@@ -16752,7 +17547,7 @@ module Aws::MediaConvert
     #           ],
     #           caption_descriptions: [
     #             {
-    #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #               custom_language_code: "__stringPatternAZaZ23AZaZ",
     #               destination_settings: {
     #                 burnin_destination_settings: {
     #                   alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -16801,7 +17596,7 @@ module Aws::MediaConvert
     #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 scc_destination_settings: {
-    #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                 },
     #                 teletext_destination_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -16901,6 +17696,11 @@ module Aws::MediaConvert
     #               free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #               mp_4_major_brand: "__string",
+    #             },
+    #             mpd_settings: {
+    #               caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #               scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
     #           },
     #           video_description: {
@@ -17095,6 +17895,14 @@ module Aws::MediaConvert
     #                 algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
     #                 control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                 mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
+    #               },
+    #               dolby_vision: {
+    #                 l6_metadata: {
+    #                   max_cll: 1,
+    #                   max_fall: 1,
+    #                 },
+    #                 l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                 profile: "PROFILE_5", # accepts PROFILE_5
     #               },
     #               image_inserter: {
     #                 insertable_images: [
@@ -17645,6 +18453,14 @@ module Aws::MediaConvert
     #             control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #             mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #           },
+    #           dolby_vision: {
+    #             l6_metadata: {
+    #               max_cll: 1,
+    #               max_fall: 1,
+    #             },
+    #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #           },
     #           image_inserter: {
     #             insertable_images: [
     #               {
@@ -17885,6 +18701,14 @@ module Aws::MediaConvert
     #           control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #           mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #         },
+    #         dolby_vision: {
+    #           l6_metadata: {
+    #             max_cll: 1,
+    #             max_fall: 1,
+    #           },
+    #           l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #           profile: "PROFILE_5", # accepts PROFILE_5
+    #         },
     #         image_inserter: {
     #           insertable_images: [
     #             {
@@ -17936,6 +18760,11 @@ module Aws::MediaConvert
     #   clearer picture.
     #   @return [Types::Deinterlacer]
     #
+    # @!attribute [rw] dolby_vision
+    #   Enable Dolby Vision feature to produce Dolby Vision compatible video
+    #   output.
+    #   @return [Types::DolbyVision]
+    #
     # @!attribute [rw] image_inserter
     #   Enable the Image inserter (ImageInserter) feature to include a
     #   graphic overlay on your video. Enable or disable this feature for
@@ -17958,6 +18787,7 @@ module Aws::MediaConvert
     class VideoPreprocessor < Struct.new(
       :color_corrector,
       :deinterlacer,
+      :dolby_vision,
       :image_inserter,
       :noise_reducer,
       :timecode_burnin)

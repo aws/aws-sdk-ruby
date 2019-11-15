@@ -450,9 +450,11 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Creates a new IPSet - a list of trusted IP addresses that have been
-    # whitelisted for secure communication with AWS infrastructure and
-    # applications.
+    # Creates a new IPSet, called Trusted IP list in the consoler user
+    # interface. An IPSet is a list IP addresses trusted for secure
+    # communication with AWS infrastructure and applications. GuardDuty does
+    # not generate findings for IP addresses included in IPSets. Only users
+    # from the master account can use this operation.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account for which you
@@ -557,15 +559,65 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Creates a publishing destination to send findings to. The resource to
+    # send findings to must exist before you use this operation.
+    #
+    # @option params [required, String] :detector_id
+    #   The ID of the GuardDuty detector associated with the publishing
+    #   destination.
+    #
+    # @option params [required, String] :destination_type
+    #   The type of resource for the publishing destination. Currently only S3
+    #   is supported.
+    #
+    # @option params [required, Types::DestinationProperties] :destination_properties
+    #   Properties of the publishing destination, including the ARNs for the
+    #   destination and the KMS key used for encryption.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token for the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreatePublishingDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePublishingDestinationResponse#destination_id #destination_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_publishing_destination({
+    #     detector_id: "DetectorId", # required
+    #     destination_type: "S3", # required, accepts S3
+    #     destination_properties: { # required
+    #       destination_arn: "String",
+    #       kms_key_arn: "String",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreatePublishingDestination AWS API Documentation
+    #
+    # @overload create_publishing_destination(params = {})
+    # @param [Hash] params ({})
+    def create_publishing_destination(params = {}, options = {})
+      req = build_request(:create_publishing_destination, params)
+      req.send_request(options)
+    end
+
     # Generates example findings of types specified by the list of finding
-    # types. If 'NULL' is specified for findingTypes, the API generates
+    # types. If 'NULL' is specified for `findingTypes`, the API generates
     # example findings of all supported finding types.
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector to create sample findings for.
     #
     # @option params [Array<String>] :finding_types
-    #   Types of sample findings that you want to generate.
+    #   Types of sample findings to generate.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -587,7 +639,8 @@ module Aws::GuardDuty
 
     # Create a new ThreatIntelSet. ThreatIntelSets consist of known
     # malicious IP addresses. GuardDuty generates findings based on
-    # ThreatIntelSets.
+    # ThreatIntelSets. Only users of the master account can use this
+    # operation.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account for which you
@@ -729,13 +782,14 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Deletes the IPSet specified by the IPSet ID.
+    # Deletes the IPSet specified by the `ipSetId`. IPSets are called
+    # Trusted IP lists in the console user interface.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector the ipSet is associated with.
+    #   The unique ID of the detector associated with the IPSet.
     #
     # @option params [required, String] :ip_set_id
-    #   The unique ID of the ipSet you want to delete.
+    #   The unique ID of the IPSet to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -824,6 +878,33 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Deletes the publishing definition with the specified `destinationId`.
+    #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector associated with the publishing
+    #   destination to delete.
+    #
+    # @option params [required, String] :destination_id
+    #   The ID of the publishing destination to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_publishing_destination({
+    #     detector_id: "DetectorId", # required
+    #     destination_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeletePublishingDestination AWS API Documentation
+    #
+    # @overload delete_publishing_destination(params = {})
+    # @param [Hash] params ({})
+    def delete_publishing_destination(params = {}, options = {})
+      req = build_request(:delete_publishing_destination, params)
+      req.send_request(options)
+    end
+
     # Deletes ThreatIntelSet specified by the ThreatIntelSet ID.
     #
     # @option params [required, String] :detector_id
@@ -847,6 +928,49 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def delete_threat_intel_set(params = {}, options = {})
       req = build_request(:delete_threat_intel_set, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the publishing destination specified by the
+    # provided `destinationId`.
+    #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector associated with the publishing
+    #   destination to retrieve.
+    #
+    # @option params [required, String] :destination_id
+    #   The ID of the publishing destination to retrieve.
+    #
+    # @return [Types::DescribePublishingDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePublishingDestinationResponse#destination_id #destination_id} => String
+    #   * {Types::DescribePublishingDestinationResponse#destination_type #destination_type} => String
+    #   * {Types::DescribePublishingDestinationResponse#status #status} => String
+    #   * {Types::DescribePublishingDestinationResponse#publishing_failure_start_timestamp #publishing_failure_start_timestamp} => Integer
+    #   * {Types::DescribePublishingDestinationResponse#destination_properties #destination_properties} => Types::DestinationProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_publishing_destination({
+    #     detector_id: "DetectorId", # required
+    #     destination_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_id #=> String
+    #   resp.destination_type #=> String, one of "S3"
+    #   resp.status #=> String, one of "PENDING_VERIFICATION", "PUBLISHING", "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY", "STOPPED"
+    #   resp.publishing_failure_start_timestamp #=> Integer
+    #   resp.destination_properties.destination_arn #=> String
+    #   resp.destination_properties.kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribePublishingDestination AWS API Documentation
+    #
+    # @overload describe_publishing_destination(params = {})
+    # @param [Hash] params ({})
+    def describe_publishing_destination(params = {}, options = {})
+      req = build_request(:describe_publishing_destination, params)
       req.send_request(options)
     end
 
@@ -1213,13 +1337,13 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Retrieves the IPSet specified by the IPSet ID.
+    # Retrieves the IPSet specified by the `ipSetId`.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector the ipSet is associated with.
     #
     # @option params [required, String] :ip_set_id
-    #   The unique ID of the ipSet you want to get.
+    #   The unique ID of the IPSet to retrieve.
     #
     # @return [Types::GetIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1539,7 +1663,113 @@ module Aws::GuardDuty
     #   findings you want to list.
     #
     # @option params [Types::FindingCriteria] :finding_criteria
-    #   Represents the criteria used for querying findings.
+    #   Represents the criteria used for querying findings. Valid values
+    #   include:
+    #
+    #   * JSON field name
+    #
+    #   * accountId
+    #
+    #   * region
+    #
+    #   * confidence
+    #
+    #   * id
+    #
+    #   * resource.accessKeyDetails.accessKeyId
+    #
+    #   * resource.accessKeyDetails.principalId
+    #
+    #   * resource.accessKeyDetails.userName
+    #
+    #   * resource.accessKeyDetails.userType
+    #
+    #   * resource.instanceDetails.iamInstanceProfile.id
+    #
+    #   * resource.instanceDetails.imageId
+    #
+    #   * resource.instanceDetails.instanceId
+    #
+    #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
+    #
+    #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
+    #
+    #   * resource.instanceDetails.networkInterfaces.publicDnsName
+    #
+    #   * resource.instanceDetails.networkInterfaces.publicIp
+    #
+    #   * resource.instanceDetails.networkInterfaces.securityGroups.groupId
+    #
+    #   * resource.instanceDetails.networkInterfaces.securityGroups.groupName
+    #
+    #   * resource.instanceDetails.networkInterfaces.subnetId
+    #
+    #   * resource.instanceDetails.networkInterfaces.vpcId
+    #
+    #   * resource.instanceDetails.tags.key
+    #
+    #   * resource.instanceDetails.tags.value
+    #
+    #   * resource.resourceType
+    #
+    #   * service.action.actionType
+    #
+    #   * service.action.awsApiCallAction.api
+    #
+    #   * service.action.awsApiCallAction.callerType
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.city.cityName
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.country.countryName
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.organization.asn
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
+    #
+    #   * service.action.awsApiCallAction.serviceName
+    #
+    #   * service.action.dnsRequestAction.domain
+    #
+    #   * service.action.networkConnectionAction.blocked
+    #
+    #   * service.action.networkConnectionAction.connectionDirection
+    #
+    #   * service.action.networkConnectionAction.localPortDetails.port
+    #
+    #   * service.action.networkConnectionAction.protocol
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.country.countryName
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.organization.asn
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
+    #
+    #   * service.action.networkConnectionAction.remotePortDetails.port
+    #
+    #   * service.additionalInfo.threatListName
+    #
+    #   * service.archived
+    #
+    #     When this attribute is set to 'true', only archived findings are
+    #     listed. When it's set to 'false', only unarchived findings are
+    #     listed. When this attribute is not set, all existing findings are
+    #     listed.
+    #
+    #   * service.resourceRole
+    #
+    #   * severity
+    #
+    #   * type
+    #
+    #   * updatedAt
+    #
+    #     Type: Timestamp in Unix Epoch millisecond format: 1486685375000
     #
     # @option params [Types::SortCriteria] :sort_criteria
     #   Represents the criteria used for sorting findings.
@@ -1607,7 +1837,8 @@ module Aws::GuardDuty
     end
 
     # Lists the IPSets of the GuardDuty service specified by the detector
-    # ID.
+    # ID. If you use this operation from a member account, the IPSets
+    # returned are the IPSets from the associated master account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector the ipSet is associated with.
@@ -1755,6 +1986,51 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Returns a list of publishing destinations associated with the
+    # specified `dectectorId`.
+    #
+    # @option params [required, String] :detector_id
+    #   The ID of the detector to retrieve publishing destinations for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results returned in the repsonse. Set
+    #   the value of this parameter to null for the first request to a list
+    #   action. For subsequent calls, use the `NextToken` value returned from
+    #   the previous request to continue listing results after the first page.
+    #
+    # @return [Types::ListPublishingDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPublishingDestinationsResponse#destinations #destinations} => Array&lt;Types::Destination&gt;
+    #   * {Types::ListPublishingDestinationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_publishing_destinations({
+    #     detector_id: "DetectorId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destinations #=> Array
+    #   resp.destinations[0].destination_id #=> String
+    #   resp.destinations[0].destination_type #=> String, one of "S3"
+    #   resp.destinations[0].status #=> String, one of "PENDING_VERIFICATION", "PUBLISHING", "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY", "STOPPED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListPublishingDestinations AWS API Documentation
+    #
+    # @overload list_publishing_destinations(params = {})
+    # @param [Hash] params ({})
+    def list_publishing_destinations(params = {}, options = {})
+      req = build_request(:list_publishing_destinations, params)
+      req.send_request(options)
+    end
+
     # Lists tags for a resource. Tagging is currently supported for
     # detectors, finding filters, IP sets, and Threat Intel sets, with a
     # limit of 50 tags per resource. When invoked, this operation returns
@@ -1788,7 +2064,8 @@ module Aws::GuardDuty
     end
 
     # Lists the ThreatIntelSets of the GuardDuty service specified by the
-    # detector ID.
+    # detector ID. If you use this operation from a member account, the
+    # ThreatIntelSets associated with the master account are returned.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector the threatIntelSet is associated with.
@@ -1799,11 +2076,11 @@ module Aws::GuardDuty
     #   50.
     #
     # @option params [String] :next_token
-    #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with the
-    #   value of NextToken from the previous response to continue listing
-    #   data.
+    #   You can use this parameter to paginate results in the response. Set
+    #   the value of this parameter to null on your first call to the list
+    #   action. For subsequent calls to the action fill nextToken in the
+    #   request with the value of NextToken from the previous response to
+    #   continue listing data.
     #
     # @return [Types::ListThreatIntelSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1833,18 +2110,17 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Re-enables GuardDuty to monitor findings of the member accounts
-    # specified by the account IDs. A master GuardDuty account can run this
-    # command after disabling GuardDuty from monitoring these members'
-    # findings by running StopMonitoringMembers.
+    # Turns on GuardDuty monitoring of the specified member accounts. Use
+    # this operation to restart monitoring of accounts that you stopped
+    # monitoring with the `StopMonitoringMembers` operation.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector of the GuardDuty account whom you want
-    #   to re-enable to monitor members' findings.
+    #   The unique ID of the detector of the GuardDuty master account
+    #   associated with the member accounts to monitor.
     #
     # @option params [required, Array<String>] :account_ids
-    #   A list of account IDs of the GuardDuty member accounts whose findings
-    #   you want the master account to monitor.
+    #   A list of account IDs of the GuardDuty member accounts to start
+    #   monitoring.
     #
     # @return [Types::StartMonitoringMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1872,10 +2148,8 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Disables GuardDuty from monitoring findings of the member accounts
-    # specified by the account IDs. After running this command, a master
-    # GuardDuty account can run StartMonitoringMembers to re-enable
-    # GuardDuty to monitor these members’ findings.
+    # Stops GuardDuty monitoring for the specified member accounnts. Use the
+    # `StartMonitoringMembers` to restart monitoring for those accounts.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -1914,7 +2188,8 @@ module Aws::GuardDuty
     # Adds tags to a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #   The Amazon Resource Name (ARN) for the GuardDuty resource to apply a
+    #   tag to.
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags to be added to a resource.
@@ -1939,15 +2214,13 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Unarchives Amazon GuardDuty findings specified by the list of finding
-    # IDs.
+    # Unarchives GuardDuty findings specified by the `findingIds`.
     #
     # @option params [required, String] :detector_id
-    #   The ID of the detector that specifies the GuardDuty service whose
-    #   findings you want to unarchive.
+    #   The ID of the detector associated with the findings to unarchive.
     #
     # @option params [required, Array<String>] :finding_ids
-    #   IDs of the findings that you want to unarchive.
+    #   IDs of the findings to unarchive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1970,10 +2243,10 @@ module Aws::GuardDuty
     # Removes tags from a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #   The Amazon Resource Name (ARN) for the resource to remove tags from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The tag keys to remove from a resource.
+    #   The tag keys to remove from the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1993,18 +2266,17 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Updates an Amazon GuardDuty detector specified by the detectorId.
+    # Updates the Amazon GuardDuty detector specified by the detectorId.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector that you want to update.
+    #   The unique ID of the detector to update.
     #
     # @option params [Boolean] :enable
-    #   Updated boolean value for the detector that specifies whether the
-    #   detector is enabled.
+    #   Specifies whether the detector is enabled or not enabled.
     #
     # @option params [String] :finding_publishing_frequency
-    #   A enum value that specifies how frequently customer got Finding
-    #   updates published.
+    #   A enum value that specifies how frequently findings are exported, such
+    #   as to CloudWatch Events.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2095,17 +2367,17 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Marks specified Amazon GuardDuty findings as useful or not useful.
+    # Marks the specified GuardDuty findings as useful or not useful.
     #
     # @option params [required, String] :detector_id
-    #   The ID of the detector that specifies the GuardDuty service whose
-    #   findings you want to mark as useful or not useful.
+    #   The ID of the detector associated with the findings to update feedback
+    #   for.
     #
     # @option params [required, Array<String>] :finding_ids
     #   IDs of the findings that you want to mark as useful or not useful.
     #
     # @option params [required, String] :feedback
-    #   Valid values: USEFUL \| NOT\_USEFUL
+    #   The feedback for the finding.
     #
     # @option params [String] :comments
     #   Additional feedback about the GuardDuty findings.
@@ -2171,6 +2443,42 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Updates information about the publishing destination specified by the
+    # `destinationId`.
+    #
+    # @option params [required, String] :detector_id
+    #   The ID of the
+    #
+    # @option params [required, String] :destination_id
+    #   The ID of the detector associated with the publishing destinations to
+    #   update.
+    #
+    # @option params [Types::DestinationProperties] :destination_properties
+    #   A `DestinationProperties` object that includes the `DestinationArn`
+    #   and `KmsKeyArn` of the publishing destination.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_publishing_destination({
+    #     detector_id: "DetectorId", # required
+    #     destination_id: "String", # required
+    #     destination_properties: {
+    #       destination_arn: "String",
+    #       kms_key_arn: "String",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdatePublishingDestination AWS API Documentation
+    #
+    # @overload update_publishing_destination(params = {})
+    # @param [Hash] params ({})
+    def update_publishing_destination(params = {}, options = {})
+      req = build_request(:update_publishing_destination, params)
+      req.send_request(options)
+    end
+
     # Updates the ThreatIntelSet specified by ThreatIntelSet ID.
     #
     # @option params [required, String] :detector_id
@@ -2227,7 +2535,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
