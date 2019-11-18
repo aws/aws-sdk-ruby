@@ -40,7 +40,9 @@ module Aws::S3
     # @option options [String] :acl
     #   The canned ACL to apply to the bucket.
     # @option options [required, String] :bucket
+    #   The name of the bucket to create.
     # @option options [Types::CreateBucketConfiguration] :create_bucket_configuration
+    #   The configuration information for the bucket.
     # @option options [String] :grant_full_control
     #   Allows grantee the read, write, read ACP, and write ACP permissions on
     #   the bucket.
@@ -54,8 +56,8 @@ module Aws::S3
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
     # @option options [Boolean] :object_lock_enabled_for_bucket
-    #   Specifies whether you want Amazon S3 object lock to be enabled for the
-    #   new bucket.
+    #   Specifies whether you want S3 Object Lock to be enabled for the new
+    #   bucket.
     # @return [Bucket]
     def create_bucket(options = {})
       resp = @client.create_bucket(options)

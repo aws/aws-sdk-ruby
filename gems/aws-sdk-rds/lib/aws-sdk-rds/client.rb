@@ -3352,6 +3352,13 @@ module Aws::RDS
     #   enabled. By default, deletion protection is disabled. For more
     #   information, see [ Deleting a DB Instance][1].
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. You can enable or disable deletion protection for the
+    #   DB cluster. For more information, see `CreateDBCluster`. DB instances
+    #   in a DB cluster can be deleted even when deletion protection is
+    #   enabled for the DB cluster.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
@@ -4573,6 +4580,12 @@ module Aws::RDS
     # not specify either the SourceType nor the SourceIdentifier, you are
     # notified of events generated from all RDS sources belonging to your
     # customer account.
+    #
+    # <note markdown="1"> RDS event notification is only available for unencrypted SNS topics.
+    # If you specify an encrypted SNS topic, event notifications aren't
+    # sent for the topic.
+    #
+    #  </note>
     #
     # @option params [required, String] :subscription_name
     #   The name of the subscription.
@@ -10190,9 +10203,11 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Value must be `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, or `256`.
+    #   * For Aurora MySQL, valid capacity values are `1`, `2`, `4`, `8`,
+    #     `16`, `32`, `64`, `128`, and `256`.
     #
-    #   ^
+    #   * For Aurora PostgreSQL, valid capacity values are `2`, `4`, `8`,
+    #     `16`, `32`, `64`, `192`, and `384`.
     #
     # @option params [Integer] :seconds_before_timeout
     #   The amount of time, in seconds, that Aurora Serverless tries to find a
@@ -11830,7 +11845,8 @@ module Aws::RDS
     # Updates a manual DB snapshot, which can be encrypted or not encrypted,
     # with a new engine version.
     #
-    # Amazon RDS supports upgrading DB snapshots for MySQL and Oracle.
+    # Amazon RDS supports upgrading DB snapshots for MySQL, Oracle, and
+    # PostgreSQL.
     #
     # @option params [required, String] :db_snapshot_identifier
     #   The identifier of the DB snapshot to modify.
@@ -11854,6 +11870,15 @@ module Aws::RDS
     #   * `11.2.0.4.v12` (supported for 11.2.0.2 DB snapshots)
     #
     #   * `11.2.0.4.v11` (supported for 11.2.0.3 DB snapshots)
+    #
+    #   **PostgreSQL**
+    #
+    #   For the list of engine versions that are available for upgrading a DB
+    #   snapshot, see [ Upgrading the PostgreSQL DB Engine for Amazon RDS][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion
     #
     # @option params [String] :option_group_name
     #   The option group to identify with the upgraded DB snapshot.
@@ -16992,7 +17017,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -70,7 +70,8 @@ module Aws::S3
       data[:storage_class]
     end
 
-    
+    # Specifies the owner of the object that is part of the multipart
+    # upload.
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -247,6 +248,7 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [Types::CompletedMultipartUpload] :multipart_upload
+    #   The container for the multipart upload request information.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their

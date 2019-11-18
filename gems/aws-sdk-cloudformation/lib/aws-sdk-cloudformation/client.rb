@@ -1561,6 +1561,59 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
+    # Removes a type or type version from active use in the CloudFormation
+    # registry. If a type or type version is deregistered, it cannot be used
+    # in CloudFormation operations.
+    #
+    # To deregister a type, you must individually deregister all registered
+    # versions of that type. If a type has only a single registered version,
+    # deregistering that version results in the type itself being
+    # deregistered.
+    #
+    # You cannot deregister the default version of a type, unless it is the
+    # only registered version of that type, in which case the type itself is
+    # deregistered as well.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #
+    # @option params [String] :type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #
+    # @option params [String] :type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #
+    # @option params [String] :version_id
+    #   The ID of a specific version of the type. The version ID is the value
+    #   at the end of the Amazon Resource Name (ARN) assigned to the type
+    #   version when it is registered.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_type({
+    #     arn: "PrivateTypeArn",
+    #     type: "RESOURCE", # accepts RESOURCE
+    #     type_name: "TypeName",
+    #     version_id: "TypeVersionId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeregisterType AWS API Documentation
+    #
+    # @overload deregister_type(params = {})
+    # @param [Hash] params ({})
+    def deregister_type(params = {}, options = {})
+      req = build_request(:deregister_type, params)
+      req.send_request(options)
+    end
+
     # Retrieves your account's AWS CloudFormation limits, such as the
     # maximum number of stacks that you can create in your account. For more
     # information about account limits, see [AWS CloudFormation Limits][1]
@@ -2306,6 +2359,136 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def describe_stacks(params = {}, options = {})
       req = build_request(:describe_stacks, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed information about a type that has been registered.
+    #
+    # If you specify a `VersionId`, `DescribeType` returns information about
+    # that specific type version. Otherwise, it returns information about
+    # the default type version.
+    #
+    # @option params [String] :type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #
+    # @option params [String] :type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #
+    # @option params [String] :version_id
+    #   The ID of a specific version of the type. The version ID is the value
+    #   at the end of the Amazon Resource Name (ARN) assigned to the type
+    #   version when it is registered.
+    #
+    #   If you specify a `VersionId`, `DescribeType` returns information about
+    #   that specific type version. Otherwise, it returns information about
+    #   the default type version.
+    #
+    # @return [Types::DescribeTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTypeOutput#arn #arn} => String
+    #   * {Types::DescribeTypeOutput#type #type} => String
+    #   * {Types::DescribeTypeOutput#type_name #type_name} => String
+    #   * {Types::DescribeTypeOutput#default_version_id #default_version_id} => String
+    #   * {Types::DescribeTypeOutput#description #description} => String
+    #   * {Types::DescribeTypeOutput#schema #schema} => String
+    #   * {Types::DescribeTypeOutput#provisioning_type #provisioning_type} => String
+    #   * {Types::DescribeTypeOutput#deprecated_status #deprecated_status} => String
+    #   * {Types::DescribeTypeOutput#logging_config #logging_config} => Types::LoggingConfig
+    #   * {Types::DescribeTypeOutput#execution_role_arn #execution_role_arn} => String
+    #   * {Types::DescribeTypeOutput#visibility #visibility} => String
+    #   * {Types::DescribeTypeOutput#source_url #source_url} => String
+    #   * {Types::DescribeTypeOutput#documentation_url #documentation_url} => String
+    #   * {Types::DescribeTypeOutput#last_updated #last_updated} => Time
+    #   * {Types::DescribeTypeOutput#time_created #time_created} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_type({
+    #     type: "RESOURCE", # accepts RESOURCE
+    #     type_name: "TypeName",
+    #     arn: "TypeArn",
+    #     version_id: "TypeVersionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.type #=> String, one of "RESOURCE"
+    #   resp.type_name #=> String
+    #   resp.default_version_id #=> String
+    #   resp.description #=> String
+    #   resp.schema #=> String
+    #   resp.provisioning_type #=> String, one of "NON_PROVISIONABLE", "IMMUTABLE", "FULLY_MUTABLE"
+    #   resp.deprecated_status #=> String, one of "LIVE", "DEPRECATED"
+    #   resp.logging_config.log_role_arn #=> String
+    #   resp.logging_config.log_group_name #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.visibility #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.source_url #=> String
+    #   resp.documentation_url #=> String
+    #   resp.last_updated #=> Time
+    #   resp.time_created #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeType AWS API Documentation
+    #
+    # @overload describe_type(params = {})
+    # @param [Hash] params ({})
+    def describe_type(params = {}, options = {})
+      req = build_request(:describe_type, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a type's registration, including its
+    # current status and type and version identifiers.
+    #
+    # When you initiate a registration request using ` RegisterType `, you
+    # can then use ` DescribeTypeRegistration ` to monitor the progress of
+    # that registration request.
+    #
+    # Once the registration request has completed, use ` DescribeType ` to
+    # return detailed informaiton about a type.
+    #
+    # @option params [required, String] :registration_token
+    #   The identifier for this registration request.
+    #
+    #   This registration token is generated by CloudFormation when you
+    #   initiate a registration request using ` RegisterType `.
+    #
+    # @return [Types::DescribeTypeRegistrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTypeRegistrationOutput#progress_status #progress_status} => String
+    #   * {Types::DescribeTypeRegistrationOutput#description #description} => String
+    #   * {Types::DescribeTypeRegistrationOutput#type_arn #type_arn} => String
+    #   * {Types::DescribeTypeRegistrationOutput#type_version_arn #type_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_type_registration({
+    #     registration_token: "RegistrationToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.progress_status #=> String, one of "COMPLETE", "IN_PROGRESS", "FAILED"
+    #   resp.description #=> String
+    #   resp.type_arn #=> String
+    #   resp.type_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeRegistration AWS API Documentation
+    #
+    # @overload describe_type_registration(params = {})
+    # @param [Hash] params ({})
+    def describe_type_registration(params = {}, options = {})
+      req = build_request(:describe_type_registration, params)
       req.send_request(options)
     end
 
@@ -3235,6 +3418,438 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
+    # Returns a list of registration tokens for the specified type.
+    #
+    # @option params [String] :type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #
+    # @option params [String] :type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #
+    # @option params [String] :type_arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #
+    # @option params [String] :registration_status_filter
+    #   The current status of the type registration request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #
+    # @option params [String] :next_token
+    #   If the previous paginated request didn't return all of the remaining
+    #   results, the response object's `NextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call this action again
+    #   and assign that token to the request object's `NextToken` parameter.
+    #   If there are no remaining results, the previous response object's
+    #   `NextToken` parameter is set to `null`.
+    #
+    # @return [Types::ListTypeRegistrationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTypeRegistrationsOutput#registration_token_list #registration_token_list} => Array&lt;String&gt;
+    #   * {Types::ListTypeRegistrationsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_type_registrations({
+    #     type: "RESOURCE", # accepts RESOURCE
+    #     type_name: "TypeName",
+    #     type_arn: "TypeArn",
+    #     registration_status_filter: "COMPLETE", # accepts COMPLETE, IN_PROGRESS, FAILED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_token_list #=> Array
+    #   resp.registration_token_list[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeRegistrations AWS API Documentation
+    #
+    # @overload list_type_registrations(params = {})
+    # @param [Hash] params ({})
+    def list_type_registrations(params = {}, options = {})
+      req = build_request(:list_type_registrations, params)
+      req.send_request(options)
+    end
+
+    # Returns summary information about the versions of a type.
+    #
+    # @option params [String] :type
+    #   The kind of the type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #
+    # @option params [String] :type_name
+    #   The name of the type for which you want version summary information.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) of the type for which you want version
+    #   summary information.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #
+    # @option params [String] :next_token
+    #   If the previous paginated request didn't return all of the remaining
+    #   results, the response object's `NextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call this action again
+    #   and assign that token to the request object's `NextToken` parameter.
+    #   If there are no remaining results, the previous response object's
+    #   `NextToken` parameter is set to `null`.
+    #
+    # @option params [String] :deprecated_status
+    #   The deprecation status of the type versions that you want to get
+    #   summary information about.
+    #
+    #   Valid values include:
+    #
+    #   * `LIVE`\: The type version is registered and can be used in
+    #     CloudFormation operations, dependent on its provisioning behavior
+    #     and visibility scope.
+    #
+    #   * `DEPRECATED`\: The type version has been deregistered and can no
+    #     longer be used in CloudFormation operations.
+    #
+    # @return [Types::ListTypeVersionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTypeVersionsOutput#type_version_summaries #type_version_summaries} => Array&lt;Types::TypeVersionSummary&gt;
+    #   * {Types::ListTypeVersionsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_type_versions({
+    #     type: "RESOURCE", # accepts RESOURCE
+    #     type_name: "TypeName",
+    #     arn: "PrivateTypeArn",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.type_version_summaries #=> Array
+    #   resp.type_version_summaries[0].type #=> String, one of "RESOURCE"
+    #   resp.type_version_summaries[0].type_name #=> String
+    #   resp.type_version_summaries[0].version_id #=> String
+    #   resp.type_version_summaries[0].arn #=> String
+    #   resp.type_version_summaries[0].time_created #=> Time
+    #   resp.type_version_summaries[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeVersions AWS API Documentation
+    #
+    # @overload list_type_versions(params = {})
+    # @param [Hash] params ({})
+    def list_type_versions(params = {}, options = {})
+      req = build_request(:list_type_versions, params)
+      req.send_request(options)
+    end
+
+    # Returns summary information about types that have been registered with
+    # CloudFormation.
+    #
+    # @option params [String] :visibility
+    #   The scope at which the type is visible and usable in CloudFormation
+    #   operations.
+    #
+    #   Valid values include:
+    #
+    #   * `PRIVATE`\: The type is only visible and usable within the account
+    #     in which it is registered. Currently, AWS CloudFormation marks any
+    #     types you create as `PRIVATE`.
+    #
+    #   * `PUBLIC`\: The type is publically visible and usable within any
+    #     Amazon account.
+    #
+    # @option params [String] :provisioning_type
+    #   The provisioning behavior of the type. AWS CloudFormation determines
+    #   the provisioning type during registration, based on the types of
+    #   handlers in the schema handler package submitted.
+    #
+    #   Valid values include:
+    #
+    #   * `FULLY_MUTABLE`\: The type includes an update handler to process
+    #     updates to the type during stack update operations.
+    #
+    #   * `IMMUTABLE`\: The type does not include an update handler, so the
+    #     type cannot be updated and must instead be replaced during stack
+    #     update operations.
+    #
+    #   * `NON_PROVISIONABLE`\: The type does not include create, read, and
+    #     delete handlers, and therefore cannot actually be provisioned.
+    #
+    # @option params [String] :deprecated_status
+    #   The deprecation status of the types that you want to get summary
+    #   information about.
+    #
+    #   Valid values include:
+    #
+    #   * `LIVE`\: The type is registered for use in CloudFormation
+    #     operations.
+    #
+    #   * `DEPRECATED`\: The type has been deregistered and can no longer be
+    #     used in CloudFormation operations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #
+    # @option params [String] :next_token
+    #   If the previous paginated request didn't return all of the remaining
+    #   results, the response object's `NextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call this action again
+    #   and assign that token to the request object's `NextToken` parameter.
+    #   If there are no remaining results, the previous response object's
+    #   `NextToken` parameter is set to `null`.
+    #
+    # @return [Types::ListTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTypesOutput#type_summaries #type_summaries} => Array&lt;Types::TypeSummary&gt;
+    #   * {Types::ListTypesOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_types({
+    #     visibility: "PUBLIC", # accepts PUBLIC, PRIVATE
+    #     provisioning_type: "NON_PROVISIONABLE", # accepts NON_PROVISIONABLE, IMMUTABLE, FULLY_MUTABLE
+    #     deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.type_summaries #=> Array
+    #   resp.type_summaries[0].type #=> String, one of "RESOURCE"
+    #   resp.type_summaries[0].type_name #=> String
+    #   resp.type_summaries[0].default_version_id #=> String
+    #   resp.type_summaries[0].type_arn #=> String
+    #   resp.type_summaries[0].last_updated #=> Time
+    #   resp.type_summaries[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypes AWS API Documentation
+    #
+    # @overload list_types(params = {})
+    # @param [Hash] params ({})
+    def list_types(params = {}, options = {})
+      req = build_request(:list_types, params)
+      req.send_request(options)
+    end
+
+    # Reports progress of a resource handler to CloudFormation.
+    #
+    # Reserved for use by the [CloudFormation CLI][1]. Do not use this API
+    # in your code.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @option params [required, String] :bearer_token
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @option params [required, String] :operation_status
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @option params [String] :current_operation_status
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @option params [String] :status_message
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @option params [String] :error_code
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @option params [String] :resource_model
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @option params [String] :client_request_token
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.record_handler_progress({
+    #     bearer_token: "ClientToken", # required
+    #     operation_status: "PENDING", # required, accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
+    #     current_operation_status: "PENDING", # accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
+    #     status_message: "StatusMessage",
+    #     error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure
+    #     resource_model: "ResourceModel",
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RecordHandlerProgress AWS API Documentation
+    #
+    # @overload record_handler_progress(params = {})
+    # @param [Hash] params ({})
+    def record_handler_progress(params = {}, options = {})
+      req = build_request(:record_handler_progress, params)
+      req.send_request(options)
+    end
+
+    # Registers a type with the CloudFormation service. Registering a type
+    # makes it available for use in CloudFormation templates in your AWS
+    # account, and includes:
+    #
+    # * Validating the resource schema
+    #
+    # * Determining which handlers have been specified for the resource
+    #
+    # * Making the resource type available for use in your account
+    #
+    # For more information on how to develop types and ready them for
+    # registeration, see [Creating Resource
+    # Providers](cloudformation-cli/latest/userguide/resource-types.html) in
+    # the *CloudFormation CLI User Guide*.
+    #
+    # Once you have initiated a registration request using ` RegisterType `,
+    # you can use ` DescribeTypeRegistration ` to monitor the progress of
+    # the registration request.
+    #
+    # @option params [String] :type
+    #   The kind of type.
+    #
+    #   Currently, the only valid value is `RESOURCE`.
+    #
+    # @option params [required, String] :type_name
+    #   The name of the type being registered.
+    #
+    #   We recommend that type names adhere to the following pattern:
+    #   *company\_or\_organization*\::*service*\::*type*.
+    #
+    #   <note markdown="1"> The following organization namespaces are reserved and cannot be used
+    #   in your resource type names:
+    #
+    #    * `Alexa`
+    #
+    #   * `AMZN`
+    #
+    #   * `Amazon`
+    #
+    #   * `AWS`
+    #
+    #   * `Custom`
+    #
+    #   * `Dev`
+    #
+    #    </note>
+    #
+    # @option params [required, String] :schema_handler_package
+    #   A url to the S3 bucket containing the schema handler package that
+    #   contains the schema, event handlers, and associated files for the type
+    #   you want to register.
+    #
+    #   For information on generating a schema handler package for the type
+    #   you want to register, see [submit][1] in the *CloudFormation CLI User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html
+    #
+    # @option params [Types::LoggingConfig] :logging_config
+    #   Specifies logging configuration information for a type.
+    #
+    # @option params [String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM execution role to use to
+    #   register the type. If your resource type calls AWS APIs in any of its
+    #   handlers, you must create an <i> <a
+    #   href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM
+    #   execution role</a> </i> that includes the necessary permissions to
+    #   call those AWS APIs, and provision that execution role in your
+    #   account. CloudFormation then assumes that execution role to provide
+    #   your resource type with the appropriate credentials.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier that acts as an idempotency key for this
+    #   registration request. Specifying a client request token prevents
+    #   CloudFormation from generating more than one version of a type from
+    #   the same registeration request, even if the request is submitted
+    #   multiple times.
+    #
+    # @return [Types::RegisterTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterTypeOutput#registration_token #registration_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_type({
+    #     type: "RESOURCE", # accepts RESOURCE
+    #     type_name: "TypeName", # required
+    #     schema_handler_package: "S3Url", # required
+    #     logging_config: {
+    #       log_role_arn: "RoleArn", # required
+    #       log_group_name: "LogGroupName", # required
+    #     },
+    #     execution_role_arn: "RoleArn",
+    #     client_request_token: "RequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RegisterType AWS API Documentation
+    #
+    # @overload register_type(params = {})
+    # @param [Hash] params ({})
+    def register_type(params = {}, options = {})
+      req = build_request(:register_type, params)
+      req.send_request(options)
+    end
+
     # Sets a stack policy for a specified stack.
     #
     # @option params [required, String] :stack_name
@@ -3272,6 +3887,48 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def set_stack_policy(params = {}, options = {})
       req = build_request(:set_stack_policy, params)
+      req.send_request(options)
+    end
+
+    # Specify the default version of a type. The default version of a type
+    # will be used in CloudFormation operations.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) of the type for which you want version
+    #   summary information.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #
+    # @option params [String] :type
+    #   The kind of type.
+    #
+    # @option params [String] :type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #
+    # @option params [String] :version_id
+    #   The ID of a specific version of the type. The version ID is the value
+    #   at the end of the Amazon Resource Name (ARN) assigned to the type
+    #   version when it is registered.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_type_default_version({
+    #     arn: "PrivateTypeArn",
+    #     type: "RESOURCE", # accepts RESOURCE
+    #     type_name: "TypeName",
+    #     version_id: "TypeVersionId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetTypeDefaultVersion AWS API Documentation
+    #
+    # @overload set_type_default_version(params = {})
+    # @param [Hash] params ({})
+    def set_type_default_version(params = {}, options = {})
+      req = build_request(:set_type_default_version, params)
       req.send_request(options)
     end
 
@@ -4246,7 +4903,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4312,14 +4969,15 @@ module Aws::CloudFormation
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                | params                 | :delay   | :max_attempts |
-    # | -------------------------- | ---------------------- | -------- | ------------- |
-    # | change_set_create_complete | {#describe_change_set} | 30       | 120           |
-    # | stack_create_complete      | {#describe_stacks}     | 30       | 120           |
-    # | stack_delete_complete      | {#describe_stacks}     | 30       | 120           |
-    # | stack_exists               | {#describe_stacks}     | 5        | 20            |
-    # | stack_import_complete      | {#describe_stacks}     | 30       | 120           |
-    # | stack_update_complete      | {#describe_stacks}     | 30       | 120           |
+    # | waiter_name                | params                        | :delay   | :max_attempts |
+    # | -------------------------- | ----------------------------- | -------- | ------------- |
+    # | change_set_create_complete | {#describe_change_set}        | 30       | 120           |
+    # | stack_create_complete      | {#describe_stacks}            | 30       | 120           |
+    # | stack_delete_complete      | {#describe_stacks}            | 30       | 120           |
+    # | stack_exists               | {#describe_stacks}            | 5        | 20            |
+    # | stack_import_complete      | {#describe_stacks}            | 30       | 120           |
+    # | stack_update_complete      | {#describe_stacks}            | 30       | 120           |
+    # | type_registration_complete | {#describe_type_registration} | 30       | 120           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -4375,7 +5033,8 @@ module Aws::CloudFormation
         stack_delete_complete: Waiters::StackDeleteComplete,
         stack_exists: Waiters::StackExists,
         stack_import_complete: Waiters::StackImportComplete,
-        stack_update_complete: Waiters::StackUpdateComplete
+        stack_update_complete: Waiters::StackUpdateComplete,
+        type_registration_complete: Waiters::TypeRegistrationComplete
       }
     end
 

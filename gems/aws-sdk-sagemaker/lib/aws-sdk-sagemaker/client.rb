@@ -868,24 +868,28 @@ module Aws::SageMaker
     #   that Amazon SageMaker uses to encrypt data on the storage volume
     #   attached to the ML compute instance that hosts the endpoint.
     #
-    #   <note markdown="1"> Nitro-based instances do not support encryption with AWS KMS. If any
-    #   of the models that you specify in the `ProductionVariants` parameter
-    #   use nitro-based instances, do not specify a value for the `KmsKeyId`
-    #   parameter. If you specify a value for `KmsKeyId` when using any
-    #   nitro-based instances, the call to `CreateEndpointConfig` fails.
+    #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on the
+    #   instance type. Local storage volumes are encrypted using a hardware
+    #   module on the instance. You can't request a `KmsKeyId` when using an
+    #   instance type with local storage. If any of the models that you
+    #   specify in the `ProductionVariants` parameter use nitro-based
+    #   instances with local storage, do not specify a value for the
+    #   `KmsKeyId` parameter. If you specify a value for `KmsKeyId` when using
+    #   any nitro-based instances with local storage, the call to
+    #   `CreateEndpointConfig` fails.
     #
-    #    For a list of nitro-based instances, see [Nitro-based Instances][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide for Linux Instances*.
+    #    For a list of instance types that support local instance storage, see
+    #   [Instance Store Volumes][1].
     #
-    #    For more information about storage volumes on nitro-based instances,
-    #   see [Amazon EBS and NVMe on Linux Instances][2].
+    #    For more information about local instance storage encryption, see [SSD
+    #   Instance Store Volumes][2].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nvme-ebs-volumes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #
     # @return [Types::CreateEndpointConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1429,6 +1433,7 @@ module Aws::SageMaker
     #     primary_container: {
     #       container_hostname: "ContainerHostname",
     #       image: "Image",
+    #       mode: "SingleModel", # accepts SingleModel, MultiModel
     #       model_data_url: "Url",
     #       environment: {
     #         "EnvironmentKey" => "EnvironmentValue",
@@ -1439,6 +1444,7 @@ module Aws::SageMaker
     #       {
     #         container_hostname: "ContainerHostname",
     #         image: "Image",
+    #         mode: "SingleModel", # accepts SingleModel, MultiModel
     #         model_data_url: "Url",
     #         environment: {
     #           "EnvironmentKey" => "EnvironmentValue",
@@ -2268,8 +2274,8 @@ module Aws::SageMaker
     # * `TransformResources` - Identifies the ML compute instances for the
     #   transform job.
     #
-    # For more information about how batch transformation works Amazon
-    # SageMaker, see [How It Works][1].
+    # For more information about how batch transformation works, see [Batch
+    # Transform][1].
     #
     #
     #
@@ -2318,8 +2324,8 @@ module Aws::SageMaker
     #   inference can be made on. For example, a single line in a CSV file is
     #   a record.
     #
-    #   To enable the batch strategy, you must set `SplitType` to `Line`,
-    #   `RecordIO`, or `TFRecord`.
+    #   To enable the batch strategy, you must set the `SplitType` property of
+    #   the DataProcessing object to `Line`, `RecordIO`, or `TFRecord`.
     #
     #   To use only one record when making an HTTP invocation request to a
     #   container, set `BatchStrategy` to `SingleRecord` and `SplitType` to
@@ -3382,6 +3388,7 @@ module Aws::SageMaker
     #   resp.model_name #=> String
     #   resp.primary_container.container_hostname #=> String
     #   resp.primary_container.image #=> String
+    #   resp.primary_container.mode #=> String, one of "SingleModel", "MultiModel"
     #   resp.primary_container.model_data_url #=> String
     #   resp.primary_container.environment #=> Hash
     #   resp.primary_container.environment["EnvironmentKey"] #=> String
@@ -3389,6 +3396,7 @@ module Aws::SageMaker
     #   resp.containers #=> Array
     #   resp.containers[0].container_hostname #=> String
     #   resp.containers[0].image #=> String
+    #   resp.containers[0].mode #=> String, one of "SingleModel", "MultiModel"
     #   resp.containers[0].model_data_url #=> String
     #   resp.containers[0].environment #=> Hash
     #   resp.containers[0].environment["EnvironmentKey"] #=> String
@@ -6058,7 +6066,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

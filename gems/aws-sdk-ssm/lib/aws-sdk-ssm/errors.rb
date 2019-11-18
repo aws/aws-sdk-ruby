@@ -1360,6 +1360,16 @@ module Aws::SSM
         @data[:sync_name]
       end
 
+      # @return [String]
+      def sync_type
+        @data[:sync_type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
     end
 
     class ResourceInUseException < ServiceError

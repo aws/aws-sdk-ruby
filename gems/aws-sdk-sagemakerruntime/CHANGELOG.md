@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-11-18)
+------------------
+
+* Feature - Amazon SageMaker Runtime now supports a new TargetModel header to invoke a specific model hosted on multi model endpoints.
+
 1.17.0 (2019-10-23)
 ------------------
 

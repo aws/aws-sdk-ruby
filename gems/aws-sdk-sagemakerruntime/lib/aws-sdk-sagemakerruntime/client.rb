@@ -265,9 +265,15 @@ module Aws::SageMakerRuntime
     # rely on the behavior of headers outside those enumerated in the
     # request syntax.
     #
-    # Cals to `InvokeEndpoint` are authenticated by using AWS Signature
+    # Calls to `InvokeEndpoint` are authenticated by using AWS Signature
     # Version 4. For information, see [Authenticating Requests (AWS
     # Signature Version 4)][2] in the *Amazon S3 API Reference*.
+    #
+    # A customer's model containers must respond to requests within 60
+    # seconds. The model itself can have a maximum processing time of 60
+    # seconds before responding to the /invocations. If your model is going
+    # to take 50-60 seconds of processing time, the SDK socket timeout
+    # should be set to be 70 seconds.
     #
     # <note markdown="1"> Endpoints are scoped to an individual account, and are not public. The
     # URL does not contain the account ID, but Amazon SageMaker determines
@@ -278,7 +284,7 @@ module Aws::SageMakerRuntime
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
     # [2]: http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
     #
     # @option params [required, String] :endpoint_name
@@ -287,7 +293,7 @@ module Aws::SageMakerRuntime
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
     #
     # @option params [required, String, IO] :body
     #   Provides input data, in the format specified in the `ContentType`
@@ -299,7 +305,7 @@ module Aws::SageMakerRuntime
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
     #
     # @option params [String] :content_type
     #   The MIME type of the input data in the request body.
@@ -308,6 +314,24 @@ module Aws::SageMakerRuntime
     #   The desired MIME type of the inference in the response.
     #
     # @option params [String] :custom_attributes
+    #   Provides additional information about a request for an inference
+    #   submitted to a model hosted at an Amazon SageMaker endpoint. The
+    #   information is an opaque value that is forwarded verbatim. You could
+    #   use this value, for example, to provide an ID that you can use to
+    #   track a request or to provide other metadata that a service endpoint
+    #   was programmed to process. The value must consist of no more than 1024
+    #   visible US-ASCII characters as specified in [Section 3.3.6. Field
+    #   Value Components][1] of the Hypertext Transfer Protocol (HTTP/1.1).
+    #   This feature is currently supported in the AWS SDKs but not in the
+    #   Amazon SageMaker Python SDK.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7230#section-3.2.6
+    #
+    # @option params [String] :target_model
+    #   Specifies the model to be requested for an inference when invoking a
+    #   multi-model endpoint.
     #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -324,6 +348,7 @@ module Aws::SageMakerRuntime
     #     content_type: "Header",
     #     accept: "Header",
     #     custom_attributes: "CustomAttributesHeader",
+    #     target_model: "TargetModelHeader",
     #   })
     #
     # @example Response structure
@@ -355,7 +380,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -194,7 +194,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] raw_content
     #   The raw, JSON-formatted string to use as the payload for the
-    #   notification message. This value overrides the message.
+    #   notification message. If specified, this value overrides all other
+    #   content for the message.
     #   @return [String]
     #
     # @!attribute [rw] silent_push
@@ -547,8 +548,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] raw_content
     #   The raw, JSON-formatted string to use as the payload for the
-    #   notification message. This value overrides all other content for the
-    #   message.
+    #   notification message. If specified, this value overrides all other
+    #   content for the message.
     #
     #   <note markdown="1">If you specify the raw content of an APNs push notification, the
     #   message payload has to include the content-available key. The value
@@ -680,6 +681,7 @@ module Aws::Pinpoint
     #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #         body: "__string",
     #         media_url: "__string",
+    #         raw_content: "__string",
     #         sound: "__string",
     #         title: "__string",
     #         url: "__string",
@@ -710,6 +712,12 @@ module Aws::Pinpoint
     #   are based on the message template.
     #   @return [String]
     #
+    # @!attribute [rw] raw_content
+    #   The raw, JSON-formatted string to use as the payload for push
+    #   notifications that are based on the message template. If specified,
+    #   this value overrides all other content for the message template.
+    #   @return [String]
+    #
     # @!attribute [rw] sound
     #   The key for the sound to play when the recipient receives a push
     #   notification that's based on the message template. The value for
@@ -737,6 +745,7 @@ module Aws::Pinpoint
       :action,
       :body,
       :media_url,
+      :raw_content,
       :sound,
       :title,
       :url)
@@ -1634,14 +1643,14 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] raw_content
     #   The raw, JSON-formatted string to use as the payload for the
-    #   notification message. This value overrides the message.
+    #   message. If specified, this value overrides all other values for the
+    #   message.
     #   @return [String]
     #
     # @!attribute [rw] substitutions
-    #   An object that maps variable values for the message. Amazon Pinpoint
-    #   merges these values with the variable values specified by properties
-    #   of the DefaultMessage object. The substitutions in this map take
-    #   precedence over all other substitutions.
+    #   A map of the message variables to merge with the variables specified
+    #   by properties of the DefaultMessage object. The variables specified
+    #   in this map take precedence over all other variables.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] title_override
@@ -1674,6 +1683,7 @@ module Aws::Pinpoint
     #         body: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
+    #         raw_content: "__string",
     #         small_image_icon_url: "__string",
     #         sound: "__string",
     #         title: "__string",
@@ -1710,6 +1720,12 @@ module Aws::Pinpoint
     #   on the message template.
     #   @return [String]
     #
+    # @!attribute [rw] raw_content
+    #   The raw, JSON-formatted string to use as the payload for a push
+    #   notification that's based on the message template. If specified,
+    #   this value overrides all other content for the message template.
+    #   @return [String]
+    #
     # @!attribute [rw] small_image_icon_url
     #   The URL of the small icon image to display in the status bar and the
     #   content view of a push notification that's based on the message
@@ -1743,6 +1759,7 @@ module Aws::Pinpoint
       :body,
       :image_icon_url,
       :image_url,
+      :raw_content,
       :small_image_icon_url,
       :sound,
       :title,
@@ -2172,7 +2189,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] raw_content
     #   The raw, JSON-formatted string to use as the payload for the
-    #   notification message. This value overrides the message.
+    #   notification message. If specified, this value overrides all other
+    #   content for the message.
     #   @return [String]
     #
     # @!attribute [rw] silent_push
@@ -2334,7 +2352,7 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] body
     #   The body of the email for recipients whose email clients don't
-    #   support HTML content.
+    #   render HTML content.
     #   @return [String]
     #
     # @!attribute [rw] from_address
@@ -2345,7 +2363,7 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] html_body
     #   The body of the email, in HTML format, for recipients whose email
-    #   clients support HTML content.
+    #   clients render HTML content.
     #   @return [String]
     #
     # @!attribute [rw] title
@@ -3242,6 +3260,9 @@ module Aws::Pinpoint
     #                 sms_template: {
     #                   name: "__string",
     #                 },
+    #                 voice_template: {
+    #                   name: "__string",
+    #                 },
     #               },
     #               treatment_description: "__string",
     #               treatment_name: "__string",
@@ -3392,6 +3413,9 @@ module Aws::Pinpoint
     #             sms_template: {
     #               name: "__string",
     #             },
+    #             voice_template: {
+    #               name: "__string",
+    #             },
     #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
@@ -3430,11 +3454,13 @@ module Aws::Pinpoint
     #
     #       {
     #         email_template_request: { # required
+    #           default_substitutions: "__string",
     #           html_part: "__string",
     #           subject: "__string",
     #           tags: {
     #             "__string" => "__string",
     #           },
+    #           template_description: "__string",
     #           text_part: "__string",
     #         },
     #         template_name: "__string", # required
@@ -3870,6 +3896,7 @@ module Aws::Pinpoint
     #             body: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
+    #             raw_content: "__string",
     #             small_image_icon_url: "__string",
     #             sound: "__string",
     #             title: "__string",
@@ -3879,6 +3906,7 @@ module Aws::Pinpoint
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             media_url: "__string",
+    #             raw_content: "__string",
     #             sound: "__string",
     #             title: "__string",
     #             url: "__string",
@@ -3888,6 +3916,7 @@ module Aws::Pinpoint
     #             body: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
+    #             raw_content: "__string",
     #             small_image_icon_url: "__string",
     #             sound: "__string",
     #             title: "__string",
@@ -3900,11 +3929,13 @@ module Aws::Pinpoint
     #             title: "__string",
     #             url: "__string",
     #           },
+    #           default_substitutions: "__string",
     #           gcm: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
+    #             raw_content: "__string",
     #             small_image_icon_url: "__string",
     #             sound: "__string",
     #             title: "__string",
@@ -3913,6 +3944,7 @@ module Aws::Pinpoint
     #           tags: {
     #             "__string" => "__string",
     #           },
+    #           template_description: "__string",
     #         },
     #         template_name: "__string", # required
     #       }
@@ -4140,9 +4172,11 @@ module Aws::Pinpoint
     #       {
     #         sms_template_request: { # required
     #           body: "__string",
+    #           default_substitutions: "__string",
     #           tags: {
     #             "__string" => "__string",
     #           },
+    #           template_description: "__string",
     #         },
     #         template_name: "__string", # required
     #       }
@@ -4200,7 +4234,51 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the default message to use for all channels.
+    # @note When making an API call, you may pass CreateVoiceTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #         voice_template_request: { # required
+    #           body: "__string",
+    #           default_substitutions: "__string",
+    #           language_code: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #           template_description: "__string",
+    #           voice_id: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in messages that are sent through the voice channel.
+    #   @return [Types::VoiceTemplateRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateVoiceTemplateRequest AWS API Documentation
+    #
+    class CreateVoiceTemplateRequest < Struct.new(
+      :template_name,
+      :voice_template_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_template_message_body
+    #   Provides information about a request to create a message template.
+    #   @return [Types::CreateTemplateMessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateVoiceTemplateResponse AWS API Documentation
+    #
+    class CreateVoiceTemplateResponse < Struct.new(
+      :create_template_message_body)
+      include Aws::Structure
+    end
+
+    # Specifies the default message for all channels.
     #
     # @note When making an API call, you may pass DefaultMessage
     #   data as a hash:
@@ -4213,14 +4291,12 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] body
-    #   The default message body of the push notification, email, or SMS
-    #   message.
+    #   The default body of the message.
     #   @return [String]
     #
     # @!attribute [rw] substitutions
-    #   The default message variables to use in the push notification,
-    #   email, or SMS message. You can override these default variables with
-    #   individual address variables.
+    #   The default message variables to use in the message. You can
+    #   override these default variables with individual address variables.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DefaultMessage AWS API Documentation
@@ -4991,6 +5067,34 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteVoiceTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteVoiceTemplateRequest AWS API Documentation
+    #
+    class DeleteVoiceTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteVoiceTemplateResponse AWS API Documentation
+    #
+    class DeleteVoiceTemplateResponse < Struct.new(
+      :message_body)
+      include Aws::Structure
+    end
+
     # Specifies the settings and content for the default message and any
     # default messages that you tailored for specific channels.
     #
@@ -5172,7 +5276,7 @@ module Aws::Pinpoint
     #   @return [Types::BaiduMessage]
     #
     # @!attribute [rw] default_message
-    #   The default message body for all channels.
+    #   The default message for all channels.
     #   @return [Types::DefaultMessage]
     #
     # @!attribute [rw] default_push_notification_message
@@ -5490,19 +5594,31 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         default_substitutions: "__string",
     #         html_part: "__string",
     #         subject: "__string",
     #         tags: {
     #           "__string" => "__string",
     #         },
+    #         template_description: "__string",
     #         text_part: "__string",
     #       }
+    #
+    # @!attribute [rw] default_substitutions
+    #   A JSON object that specifies the default values to use for message
+    #   variables in the message template. This object is a set of key-value
+    #   pairs. Each key defines a message variable in the template. The
+    #   corresponding value defines the default value for that variable.
+    #   When you create a message that's based on the template, you can
+    #   override these defaults with message-specific and address-specific
+    #   variables and values.
+    #   @return [String]
     #
     # @!attribute [rw] html_part
     #   The message body, in HTML format, to use in email messages that are
     #   based on the message template. We recommend using HTML format for
-    #   email clients that support HTML. You can include links, formatted
-    #   text, and more in an HTML message.
+    #   email clients that render HTML content. You can include links,
+    #   formatted text, and more in an HTML message.
     #   @return [String]
     #
     # @!attribute [rw] subject
@@ -5516,19 +5632,26 @@ module Aws::Pinpoint
     #   tag key and an associated tag value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] template_description
+    #   A custom description of the message template.
+    #   @return [String]
+    #
     # @!attribute [rw] text_part
-    #   The message body, in text format, to use in email messages that are
-    #   based on the message template. We recommend using text format for
-    #   email clients that don't support HTML and clients that are
-    #   connected to high-latency networks, such as mobile devices.
+    #   The message body, in plain text format, to use in email messages
+    #   that are based on the message template. We recommend using plain
+    #   text format for email clients that don't render HTML content and
+    #   clients that are connected to high-latency networks, such as mobile
+    #   devices.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailTemplateRequest AWS API Documentation
     #
     class EmailTemplateRequest < Struct.new(
+      :default_substitutions,
       :html_part,
       :subject,
       :tags,
+      :template_description,
       :text_part)
       include Aws::Structure
     end
@@ -5543,6 +5666,14 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] creation_date
     #   The date when the message template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_substitutions
+    #   The JSON object that specifies the default values that are used for
+    #   message variables in the message template. This object is a set of
+    #   key-value pairs. Each key defines a message variable in the
+    #   template. The corresponding value defines the default value for that
+    #   variable.
     #   @return [String]
     #
     # @!attribute [rw] html_part
@@ -5565,6 +5696,10 @@ module Aws::Pinpoint
     #   a required tag key and an associated tag value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] template_description
+    #   The custom description of the message template.
+    #   @return [String]
+    #
     # @!attribute [rw] template_name
     #   The name of the message template.
     #   @return [String]
@@ -5575,8 +5710,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] text_part
-    #   The message body, in text format, that's used in email messages
-    #   that are based on the message template.
+    #   The message body, in plain text format, that's used in email
+    #   messages that are based on the message template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailTemplateResponse AWS API Documentation
@@ -5584,10 +5719,12 @@ module Aws::Pinpoint
     class EmailTemplateResponse < Struct.new(
       :arn,
       :creation_date,
+      :default_substitutions,
       :html_part,
       :last_modified_date,
       :subject,
       :tags,
+      :template_description,
       :template_name,
       :template_type,
       :text_part)
@@ -6306,7 +6443,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] raw_content
     #   The raw, JSON-formatted string to use as the payload for the
-    #   message. If specified, this value overrides the message.
+    #   message. If specified, this value overrides all other values for the
+    #   message.
     #   @return [String]
     #
     # @!attribute [rw] substitutions
@@ -7271,7 +7409,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] raw_content
     #   The raw, JSON-formatted string to use as the payload for the
-    #   notification message. This value overrides the message.
+    #   notification message. If specified, this value overrides all other
+    #   content for the message.
     #   @return [String]
     #
     # @!attribute [rw] restricted_package_name
@@ -8912,6 +9051,36 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetVoiceTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceTemplateRequest AWS API Documentation
+    #
+    class GetVoiceTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_template_response
+    #   Provides information about the content and settings for a message
+    #   template that can be used in messages that are sent through the
+    #   voice channel.
+    #   @return [Types::VoiceTemplateResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceTemplateResponse AWS API Documentation
+    #
+    class GetVoiceTemplateResponse < Struct.new(
+      :voice_template_response)
+      include Aws::Structure
+    end
+
     # Specifies the settings for a holdout activity in a journey. This type
     # of activity stops a journey for a specified percentage of
     # participants.
@@ -9907,8 +10076,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] raw_content
     #   The raw, JSON-formatted string to use as the payload for the
-    #   notification message. This value overrides other values for the
-    #   message.
+    #   notification message. If specified, this value overrides all other
+    #   content for the message.
     #   @return [String]
     #
     # @!attribute [rw] silent_push
@@ -10116,8 +10285,7 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the objects that define configuration and other settings for
-    # a message.
+    # Specifies the configuration and other settings for a message.
     #
     # @note When making an API call, you may pass MessageRequest
     #   data as a hash:
@@ -10318,6 +10486,9 @@ module Aws::Pinpoint
     #           sms_template: {
     #             name: "__string",
     #           },
+    #           voice_template: {
+    #             name: "__string",
+    #           },
     #         },
     #         trace_id: "__string",
     #       }
@@ -10347,8 +10518,8 @@ module Aws::Pinpoint
     #   @return [Hash<String,Types::EndpointSendConfiguration>]
     #
     # @!attribute [rw] message_configuration
-    #   The set of properties that defines the configuration settings for
-    #   the message.
+    #   The settings and content for the default message and any default
+    #   messages that you defined for specific channels.
     #   @return [Types::DirectMessageConfiguration]
     #
     # @!attribute [rw] template_configuration
@@ -11077,6 +11248,7 @@ module Aws::Pinpoint
     #           body: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
+    #           raw_content: "__string",
     #           small_image_icon_url: "__string",
     #           sound: "__string",
     #           title: "__string",
@@ -11086,6 +11258,7 @@ module Aws::Pinpoint
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
     #           media_url: "__string",
+    #           raw_content: "__string",
     #           sound: "__string",
     #           title: "__string",
     #           url: "__string",
@@ -11095,6 +11268,7 @@ module Aws::Pinpoint
     #           body: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
+    #           raw_content: "__string",
     #           small_image_icon_url: "__string",
     #           sound: "__string",
     #           title: "__string",
@@ -11107,11 +11281,13 @@ module Aws::Pinpoint
     #           title: "__string",
     #           url: "__string",
     #         },
+    #         default_substitutions: "__string",
     #         gcm: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
+    #           raw_content: "__string",
     #           small_image_icon_url: "__string",
     #           sound: "__string",
     #           title: "__string",
@@ -11120,6 +11296,7 @@ module Aws::Pinpoint
     #         tags: {
     #           "__string" => "__string",
     #         },
+    #         template_description: "__string",
     #       }
     #
     # @!attribute [rw] adm
@@ -11145,6 +11322,16 @@ module Aws::Pinpoint
     #   The default message template to use for push notification channels.
     #   @return [Types::DefaultPushNotificationTemplate]
     #
+    # @!attribute [rw] default_substitutions
+    #   A JSON object that specifies the default values to use for message
+    #   variables in the message template. This object is a set of key-value
+    #   pairs. Each key defines a message variable in the template. The
+    #   corresponding value defines the default value for that variable.
+    #   When you create a message that's based on the template, you can
+    #   override these defaults with message-specific and address-specific
+    #   variables and values.
+    #   @return [String]
+    #
     # @!attribute [rw] gcm
     #   The message template to use for the GCM channel, which is used to
     #   send notifications through the Firebase Cloud Messaging (FCM),
@@ -11159,6 +11346,10 @@ module Aws::Pinpoint
     #   tag key and an associated tag value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] template_description
+    #   A custom description of the message template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PushNotificationTemplateRequest AWS API Documentation
     #
     class PushNotificationTemplateRequest < Struct.new(
@@ -11166,8 +11357,10 @@ module Aws::Pinpoint
       :apns,
       :baidu,
       :default,
+      :default_substitutions,
       :gcm,
-      :tags)
+      :tags,
+      :template_description)
       include Aws::Structure
     end
 
@@ -11208,6 +11401,14 @@ module Aws::Pinpoint
     #   channels.
     #   @return [Types::DefaultPushNotificationTemplate]
     #
+    # @!attribute [rw] default_substitutions
+    #   The JSON object that specifies the default values that are used for
+    #   message variables in the message template. This object is a set of
+    #   key-value pairs. Each key defines a message variable in the
+    #   template. The corresponding value defines the default value for that
+    #   variable.
+    #   @return [String]
+    #
     # @!attribute [rw] gcm
     #   The message template that's used for the GCM channel, which is used
     #   to send notifications through the Firebase Cloud Messaging (FCM),
@@ -11225,6 +11426,10 @@ module Aws::Pinpoint
     #   that are associated with the message template. Each tag consists of
     #   a required tag key and an associated tag value.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_description
+    #   The custom description of the message template.
+    #   @return [String]
     #
     # @!attribute [rw] template_name
     #   The name of the message template.
@@ -11244,9 +11449,11 @@ module Aws::Pinpoint
       :baidu,
       :creation_date,
       :default,
+      :default_substitutions,
       :gcm,
       :last_modified_date,
       :tags,
+      :template_description,
       :template_name,
       :template_type)
       include Aws::Structure
@@ -11830,14 +12037,26 @@ module Aws::Pinpoint
     #
     #       {
     #         body: "__string",
+    #         default_substitutions: "__string",
     #         tags: {
     #           "__string" => "__string",
     #         },
+    #         template_description: "__string",
     #       }
     #
     # @!attribute [rw] body
     #   The message body to use in text messages that are based on the
     #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_substitutions
+    #   A JSON object that specifies the default values to use for message
+    #   variables in the message template. This object is a set of key-value
+    #   pairs. Each key defines a message variable in the template. The
+    #   corresponding value defines the default value for that variable.
+    #   When you create a message that's based on the template, you can
+    #   override these defaults with message-specific and address-specific
+    #   variables and values.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -11846,11 +12065,17 @@ module Aws::Pinpoint
     #   tag key and an associated tag value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] template_description
+    #   A custom description of the message template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSTemplateRequest AWS API Documentation
     #
     class SMSTemplateRequest < Struct.new(
       :body,
-      :tags)
+      :default_substitutions,
+      :tags,
+      :template_description)
       include Aws::Structure
     end
 
@@ -11871,6 +12096,14 @@ module Aws::Pinpoint
     #   The date when the message template was created.
     #   @return [String]
     #
+    # @!attribute [rw] default_substitutions
+    #   The JSON object that specifies the default values that are used for
+    #   message variables in the message template. This object is a set of
+    #   key-value pairs. Each key defines a message variable in the
+    #   template. The corresponding value defines the default value for that
+    #   variable.
+    #   @return [String]
+    #
     # @!attribute [rw] last_modified_date
     #   The date when the message template was last modified.
     #   @return [String]
@@ -11880,6 +12113,10 @@ module Aws::Pinpoint
     #   that are associated with the message template. Each tag consists of
     #   a required tag key and an associated tag value.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_description
+    #   The custom description of the message template.
+    #   @return [String]
     #
     # @!attribute [rw] template_name
     #   The name of the message template.
@@ -11896,8 +12133,10 @@ module Aws::Pinpoint
       :arn,
       :body,
       :creation_date,
+      :default_substitutions,
       :last_modified_date,
       :tags,
+      :template_description,
       :template_name,
       :template_type)
       include Aws::Structure
@@ -12892,6 +13131,9 @@ module Aws::Pinpoint
     #             sms_template: {
     #               name: "__string",
     #             },
+    #             voice_template: {
+    #               name: "__string",
+    #             },
     #           },
     #           trace_id: "__string",
     #         },
@@ -12901,8 +13143,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] message_request
-    #   Specifies the objects that define configuration and other settings
-    #   for a message.
+    #   Specifies the configuration and other settings for a message.
     #   @return [Types::MessageRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendMessagesRequest AWS API Documentation
@@ -13100,6 +13341,9 @@ module Aws::Pinpoint
     #           sms_template: {
     #             name: "__string",
     #           },
+    #           voice_template: {
+    #             name: "__string",
+    #           },
     #         },
     #         trace_id: "__string",
     #         users: { # required
@@ -13126,7 +13370,7 @@ module Aws::Pinpoint
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] message_configuration
-    #   The message definitions for the default message and any default
+    #   The settings and content for the default message and any default
     #   messages that you defined for specific channels.
     #   @return [Types::DirectMessageConfiguration]
     #
@@ -13357,6 +13601,9 @@ module Aws::Pinpoint
     #               name: "__string",
     #             },
     #             sms_template: {
+    #               name: "__string",
+    #             },
+    #             voice_template: {
     #               name: "__string",
     #             },
     #           },
@@ -13616,9 +13863,9 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] html_part
-    #   The body of the email message, in HTML format. We recommend using an
-    #   HTML part for email clients that support HTML. You can include
-    #   links, formatted text, and more in an HTML message.
+    #   The body of the email message, in HTML format. We recommend using
+    #   HTML format for email clients that render HTML content. You can
+    #   include links, formatted text, and more in an HTML message.
     #   @return [Types::SimpleEmailPart]
     #
     # @!attribute [rw] subject
@@ -13626,9 +13873,10 @@ module Aws::Pinpoint
     #   @return [Types::SimpleEmailPart]
     #
     # @!attribute [rw] text_part
-    #   The body of the email message, in text format. We recommend using a
-    #   text part for email clients that don't support HTML and clients
-    #   that are connected to high-latency networks, such as mobile devices.
+    #   The body of the email message, in plain text format. We recommend
+    #   using plain text format for email clients that don't render HTML
+    #   content and clients that are connected to high-latency networks,
+    #   such as mobile devices.
     #   @return [Types::SimpleEmailPart]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SimpleEmail AWS API Documentation
@@ -13778,7 +14026,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the message template for each type of channel.
+    # Specifies the message template to use for the message, for each type
+    # of channel.
     #
     # @note When making an API call, you may pass TemplateConfiguration
     #   data as a hash:
@@ -13791,6 +14040,9 @@ module Aws::Pinpoint
     #           name: "__string",
     #         },
     #         sms_template: {
+    #           name: "__string",
+    #         },
+    #         voice_template: {
     #           name: "__string",
     #         },
     #       }
@@ -13807,12 +14059,17 @@ module Aws::Pinpoint
     #   The SMS template to use for the message.
     #   @return [Types::Template]
     #
+    # @!attribute [rw] voice_template
+    #   The voice template to use for the message.
+    #   @return [Types::Template]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateConfiguration AWS API Documentation
     #
     class TemplateConfiguration < Struct.new(
       :email_template,
       :push_template,
-      :sms_template)
+      :sms_template,
+      :voice_template)
       include Aws::Structure
     end
 
@@ -13827,6 +14084,14 @@ module Aws::Pinpoint
     #   The date when the message template was created.
     #   @return [String]
     #
+    # @!attribute [rw] default_substitutions
+    #   The JSON object that specifies the default values that are used for
+    #   message variables in the message template. This object is a set of
+    #   key-value pairs. Each key defines a message variable in the
+    #   template. The corresponding value defines the default value for that
+    #   variable.
+    #   @return [String]
+    #
     # @!attribute [rw] last_modified_date
     #   The date when the message template was last modified.
     #   @return [String]
@@ -13836,6 +14101,10 @@ module Aws::Pinpoint
     #   that are associated with the message template. Each tag consists of
     #   a required tag key and an associated tag value.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_description
+    #   The custom description of the message template.
+    #   @return [String]
     #
     # @!attribute [rw] template_name
     #   The name of the message template.
@@ -13850,8 +14119,10 @@ module Aws::Pinpoint
     class TemplateResponse < Struct.new(
       :arn,
       :creation_date,
+      :default_substitutions,
       :last_modified_date,
       :tags,
+      :template_description,
       :template_name,
       :template_type)
       include Aws::Structure
@@ -14443,6 +14714,9 @@ module Aws::Pinpoint
     #                 sms_template: {
     #                   name: "__string",
     #                 },
+    #                 voice_template: {
+    #                   name: "__string",
+    #                 },
     #               },
     #               treatment_description: "__string",
     #               treatment_name: "__string",
@@ -14593,6 +14867,9 @@ module Aws::Pinpoint
     #             sms_template: {
     #               name: "__string",
     #             },
+    #             voice_template: {
+    #               name: "__string",
+    #             },
     #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
@@ -14677,11 +14954,13 @@ module Aws::Pinpoint
     #
     #       {
     #         email_template_request: { # required
+    #           default_substitutions: "__string",
     #           html_part: "__string",
     #           subject: "__string",
     #           tags: {
     #             "__string" => "__string",
     #           },
+    #           template_description: "__string",
     #           text_part: "__string",
     #         },
     #         template_name: "__string", # required
@@ -15268,6 +15547,7 @@ module Aws::Pinpoint
     #             body: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
+    #             raw_content: "__string",
     #             small_image_icon_url: "__string",
     #             sound: "__string",
     #             title: "__string",
@@ -15277,6 +15557,7 @@ module Aws::Pinpoint
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             media_url: "__string",
+    #             raw_content: "__string",
     #             sound: "__string",
     #             title: "__string",
     #             url: "__string",
@@ -15286,6 +15567,7 @@ module Aws::Pinpoint
     #             body: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
+    #             raw_content: "__string",
     #             small_image_icon_url: "__string",
     #             sound: "__string",
     #             title: "__string",
@@ -15298,11 +15580,13 @@ module Aws::Pinpoint
     #             title: "__string",
     #             url: "__string",
     #           },
+    #           default_substitutions: "__string",
     #           gcm: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
+    #             raw_content: "__string",
     #             small_image_icon_url: "__string",
     #             sound: "__string",
     #             title: "__string",
@@ -15311,6 +15595,7 @@ module Aws::Pinpoint
     #           tags: {
     #             "__string" => "__string",
     #           },
+    #           template_description: "__string",
     #         },
     #         template_name: "__string", # required
     #       }
@@ -15583,9 +15868,11 @@ module Aws::Pinpoint
     #       {
     #         sms_template_request: { # required
     #           body: "__string",
+    #           default_substitutions: "__string",
     #           tags: {
     #             "__string" => "__string",
     #           },
+    #           template_description: "__string",
     #         },
     #         template_name: "__string", # required
     #       }
@@ -15652,6 +15939,50 @@ module Aws::Pinpoint
     #
     class UpdateVoiceChannelResponse < Struct.new(
       :voice_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateVoiceTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #         voice_template_request: { # required
+    #           body: "__string",
+    #           default_substitutions: "__string",
+    #           language_code: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #           template_description: "__string",
+    #           voice_id: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in messages that are sent through the voice channel.
+    #   @return [Types::VoiceTemplateRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceTemplateRequest AWS API Documentation
+    #
+    class UpdateVoiceTemplateRequest < Struct.new(
+      :template_name,
+      :voice_template_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceTemplateResponse AWS API Documentation
+    #
+    class UpdateVoiceTemplateResponse < Struct.new(
+      :message_body)
       include Aws::Structure
     end
 
@@ -15758,13 +16089,17 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] body
-    #   The text script for the voice message.
+    #   The text of the script to use for the voice message.
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language to use when delivering the message. For a list of
-    #   supported languages, see the [Amazon Polly Developer
-    #   Guide](AmazonPollyDG.html).
+    #   The code for the language to use when synthesizing the text of the
+    #   message script. For a list of supported languages and the code for
+    #   each one, see the [Amazon Polly Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/what-is.html
     #   @return [String]
     #
     # @!attribute [rw] origination_number
@@ -15782,8 +16117,11 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] voice_id
     #   The name of the voice to use when delivering the message. For a list
-    #   of supported voices, see the [Amazon Polly Developer
-    #   Guide](AmazonPollyDG.html).
+    #   of supported voices, see the [Amazon Polly Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/what-is.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceMessage AWS API Documentation
@@ -15793,6 +16131,167 @@ module Aws::Pinpoint
       :language_code,
       :origination_number,
       :substitutions,
+      :voice_id)
+      include Aws::Structure
+    end
+
+    # Specifies the content and settings for a message template that can be
+    # used in messages that are sent through the voice channel.
+    #
+    # @note When making an API call, you may pass VoiceTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         body: "__string",
+    #         default_substitutions: "__string",
+    #         language_code: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #         template_description: "__string",
+    #         voice_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] body
+    #   The text of the script to use in messages that are based on the
+    #   message template, in plain text format.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_substitutions
+    #   A JSON object that specifies the default values to use for message
+    #   variables in the message template. This object is a set of key-value
+    #   pairs. Each key defines a message variable in the template. The
+    #   corresponding value defines the default value for that variable.
+    #   When you create a message that's based on the template, you can
+    #   override these defaults with message-specific and address-specific
+    #   variables and values.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The code for the language to use when synthesizing the text of the
+    #   script in messages that are based on the message template. For a
+    #   list of supported languages and the code for each one, see the
+    #   [Amazon Polly Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/what-is.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that defines the tags to
+    #   associate with the message template. Each tag consists of a required
+    #   tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_description
+    #   A custom description of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_id
+    #   The name of the voice to use when delivering messages that are based
+    #   on the message template. For a list of supported voices, see the
+    #   [Amazon Polly Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/what-is.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceTemplateRequest AWS API Documentation
+    #
+    class VoiceTemplateRequest < Struct.new(
+      :body,
+      :default_substitutions,
+      :language_code,
+      :tags,
+      :template_description,
+      :voice_id)
+      include Aws::Structure
+    end
+
+    # Provides information about the content and settings for a message
+    # template that can be used in messages that are sent through the voice
+    # channel.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The text of the script that's used in messages that are based on
+    #   the message template, in plain text format.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the message template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_substitutions
+    #   The JSON object that specifies the default values that are used for
+    #   message variables in the message template. This object is a set of
+    #   key-value pairs. Each key defines a message variable in the
+    #   template. The corresponding value defines the default value for that
+    #   variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The code for the language that's used when synthesizing the text of
+    #   the script in messages that are based on the message template. For a
+    #   list of supported languages and the code for each one, see the
+    #   [Amazon Polly Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/what-is.html
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the message template was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that identifies the tags
+    #   that are associated with the message template. Each tag consists of
+    #   a required tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_description
+    #   The custom description of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of channel that the message template is designed for. For a
+    #   voice template, this value is VOICE.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_id
+    #   The name of the voice that's used when delivering messages that are
+    #   based on the message template. For a list of supported voices, see
+    #   the [Amazon Polly Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/what-is.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceTemplateResponse AWS API Documentation
+    #
+    class VoiceTemplateResponse < Struct.new(
+      :arn,
+      :body,
+      :creation_date,
+      :default_substitutions,
+      :language_code,
+      :last_modified_date,
+      :tags,
+      :template_description,
+      :template_name,
+      :template_type,
       :voice_id)
       include Aws::Structure
     end
@@ -15843,7 +16342,7 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] wait_for
-    #   The amount of time, as a duration in ISO 8601 format, to wait before
+    #   The amount of time to wait, as a duration in ISO 8601 format, before
     #   determining whether the activity's conditions have been met or
     #   moving participants to the next activity in the journey.
     #   @return [String]
@@ -16086,6 +16585,9 @@ module Aws::Pinpoint
     #               sms_template: {
     #                 name: "__string",
     #               },
+    #               voice_template: {
+    #                 name: "__string",
+    #               },
     #             },
     #             treatment_description: "__string",
     #             treatment_name: "__string",
@@ -16236,6 +16738,9 @@ module Aws::Pinpoint
     #           sms_template: {
     #             name: "__string",
     #           },
+    #           voice_template: {
+    #             name: "__string",
+    #           },
     #         },
     #         treatment_description: "__string",
     #         treatment_name: "__string",
@@ -16247,7 +16752,7 @@ module Aws::Pinpoint
     #   @return [Array<Types::WriteTreatmentResource>]
     #
     # @!attribute [rw] description
-    #   The custom description of the campaign.
+    #   A custom description of the campaign.
     #   @return [String]
     #
     # @!attribute [rw] holdout_percent
@@ -16301,7 +16806,7 @@ module Aws::Pinpoint
     #   @return [Types::TemplateConfiguration]
     #
     # @!attribute [rw] treatment_description
-    #   The custom description of a variation of the campaign to use for A/B
+    #   A custom description of a variation of the campaign to use for A/B
     #   testing.
     #   @return [String]
     #
@@ -17078,6 +17583,9 @@ module Aws::Pinpoint
     #           sms_template: {
     #             name: "__string",
     #           },
+    #           voice_template: {
+    #             name: "__string",
+    #           },
     #         },
     #         treatment_description: "__string",
     #         treatment_name: "__string",
@@ -17101,7 +17609,7 @@ module Aws::Pinpoint
     #   @return [Types::TemplateConfiguration]
     #
     # @!attribute [rw] treatment_description
-    #   The custom description of the treatment.
+    #   A custom description of the treatment.
     #   @return [String]
     #
     # @!attribute [rw] treatment_name

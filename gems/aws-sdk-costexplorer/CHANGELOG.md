@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2019-11-18)
+------------------
+
+* Feature - add EstimatedOnDemandCostWithCurrentCommitment to GetSavingsPlansPurchaseRecommendationRequest API
+
 1.32.0 (2019-11-11)
 ------------------
 

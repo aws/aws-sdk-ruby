@@ -1452,6 +1452,13 @@ module Aws::RDS
     #   enabled. By default, deletion protection is disabled. For more
     #   information, see [ Deleting a DB Instance][1].
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. You can enable or disable deletion protection for the
+    #   DB cluster. For more information, see `CreateDBCluster`. DB instances
+    #   in a DB cluster can be deleted even when deletion protection is
+    #   enabled for the DB cluster.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html

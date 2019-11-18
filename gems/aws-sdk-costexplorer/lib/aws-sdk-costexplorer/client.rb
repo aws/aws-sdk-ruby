@@ -289,9 +289,6 @@ module Aws::CostExplorer
     #   `Granularity` isn't set, the response object doesn't include the
     #   `Granularity`, either `MONTHLY` or `DAILY`, or `HOURLY`.
     #
-    #   The `GetCostAndUsageRequest` operation supports only `DAILY` and
-    #   `MONTHLY` granularities.
-    #
     # @option params [Types::Expression] :filter
     #   Filters AWS costs by different dimensions. For example, you can
     #   specify `SERVICE` and `LINKED_ACCOUNT` and get the costs that are
@@ -337,7 +334,7 @@ module Aws::CostExplorer
     #
     #   Valid values are `AZ`, `INSTANCE_TYPE`, `LEGAL_ENTITY_NAME`,
     #   `LINKED_ACCOUNT`, `OPERATION`, `PLATFORM`, `PURCHASE_TYPE`, `SERVICE`,
-    #   `TAGS`, `TENANCY`, and `USAGE_TYPE`.
+    #   `TAGS`, `TENANCY`, `RECORD_TYPE`, and `USAGE_TYPE`.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -1782,6 +1779,7 @@ module Aws::CostExplorer
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].currency_code #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].estimated_sp_cost #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].estimated_on_demand_cost #=> String
+    #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].estimated_on_demand_cost_with_current_commitment #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].estimated_savings_amount #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].estimated_savings_percentage #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].hourly_commitment_to_purchase #=> String
@@ -1800,6 +1798,7 @@ module Aws::CostExplorer
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_summary.hourly_commitment_to_purchase #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_summary.estimated_savings_percentage #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_summary.estimated_monthly_savings_amount #=> String
+    #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_summary.estimated_on_demand_cost_with_current_commitment #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansPurchaseRecommendation AWS API Documentation
@@ -2229,7 +2228,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -982,6 +982,7 @@ module Aws::SageMaker
     #       {
     #         container_hostname: "ContainerHostname",
     #         image: "Image",
+    #         mode: "SingleModel", # accepts SingleModel, MultiModel
     #         model_data_url: "Url",
     #         environment: {
     #           "EnvironmentKey" => "EnvironmentValue",
@@ -1022,6 +1023,11 @@ module Aws::SageMaker
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   Specifies whether the container hosts a single model or multiple
+    #   models.
     #   @return [String]
     #
     # @!attribute [rw] model_data_url
@@ -1066,6 +1072,7 @@ module Aws::SageMaker
     class ContainerDefinition < Struct.new(
       :container_hostname,
       :image,
+      :mode,
       :model_data_url,
       :environment,
       :model_package_name)
@@ -1125,7 +1132,7 @@ module Aws::SageMaker
     #
     #   ReverseLogarithmic
     #
-    #   : Hyperparemeter tuning searches the values in the hyperparameter
+    #   : Hyperparameter tuning searches the values in the hyperparameter
     #     range by using a reverse logarithmic scale.
     #
     #     Reverse logarithmic scaling works only for ranges that are
@@ -1602,25 +1609,28 @@ module Aws::SageMaker
     #   that Amazon SageMaker uses to encrypt data on the storage volume
     #   attached to the ML compute instance that hosts the endpoint.
     #
-    #   <note markdown="1"> Nitro-based instances do not support encryption with AWS KMS. If any
-    #   of the models that you specify in the `ProductionVariants` parameter
-    #   use nitro-based instances, do not specify a value for the `KmsKeyId`
-    #   parameter. If you specify a value for `KmsKeyId` when using any
-    #   nitro-based instances, the call to `CreateEndpointConfig` fails.
+    #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on
+    #   the instance type. Local storage volumes are encrypted using a
+    #   hardware module on the instance. You can't request a `KmsKeyId`
+    #   when using an instance type with local storage. If any of the models
+    #   that you specify in the `ProductionVariants` parameter use
+    #   nitro-based instances with local storage, do not specify a value for
+    #   the `KmsKeyId` parameter. If you specify a value for `KmsKeyId` when
+    #   using any nitro-based instances with local storage, the call to
+    #   `CreateEndpointConfig` fails.
     #
-    #    For a list of nitro-based instances, see [Nitro-based Instances][1]
-    #   in the *Amazon Elastic Compute Cloud User Guide for Linux
-    #   Instances*.
+    #    For a list of instance types that support local instance storage,
+    #   see [Instance Store Volumes][1].
     #
-    #    For more information about storage volumes on nitro-based instances,
-    #   see [Amazon EBS and NVMe on Linux Instances][2].
+    #    For more information about local instance storage encryption, see
+    #   [SSD Instance Store Volumes][2].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nvme-ebs-volumes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput AWS API Documentation
@@ -2106,6 +2116,7 @@ module Aws::SageMaker
     #         primary_container: {
     #           container_hostname: "ContainerHostname",
     #           image: "Image",
+    #           mode: "SingleModel", # accepts SingleModel, MultiModel
     #           model_data_url: "Url",
     #           environment: {
     #             "EnvironmentKey" => "EnvironmentValue",
@@ -2116,6 +2127,7 @@ module Aws::SageMaker
     #           {
     #             container_hostname: "ContainerHostname",
     #             image: "Image",
+    #             mode: "SingleModel", # accepts SingleModel, MultiModel
     #             model_data_url: "Url",
     #             environment: {
     #               "EnvironmentKey" => "EnvironmentValue",
@@ -3016,8 +3028,8 @@ module Aws::SageMaker
     #   that inference can be made on. For example, a single line in a CSV
     #   file is a record.
     #
-    #   To enable the batch strategy, you must set `SplitType` to `Line`,
-    #   `RecordIO`, or `TFRecord`.
+    #   To enable the batch strategy, you must set the `SplitType` property
+    #   of the DataProcessing object to `Line`, `RecordIO`, or `TFRecord`.
     #
     #   To use only one record when making an HTTP invocation request to a
     #   container, set `BatchStrategy` to `SingleRecord` and `SplitType` to
@@ -3241,10 +3253,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] join_source
     #   Specifies the source of the data to join with the transformed data.
-    #   The valid values are `None` and `Input` The default value is `None`
-    #   which specifies not to join the input with the transformed data. If
-    #   you want the batch transform job to join the original input data
-    #   with the transformed data, set `JoinSource` to `Input`.
+    #   The valid values are `None` and `Input`. The default value is
+    #   `None`, which specifies not to join the input with the transformed
+    #   data. If you want the batch transform job to join the original input
+    #   data with the transformed data, set `JoinSource` to `Input`.
     #
     #   For JSON or JSONLines objects, such as a JSON array, Amazon
     #   SageMaker adds the transformed data to the input JSON object in an
@@ -5269,7 +5281,7 @@ module Aws::SageMaker
     end
 
     # A conditional statement for a search expression that includes a
-    # Boolean operator, a resource property, and a value.
+    # resource property, a Boolean operator, and a value.
     #
     # If you don't specify an `Operator` and a `Value`, the filter searches
     # for only the specified property. For example, defining a `Filter` for
@@ -5374,7 +5386,8 @@ module Aws::SageMaker
     #   Contains
     #
     #   : Only supported for text-based properties. The word-list of the
-    #     property contains the specified `Value`.
+    #     property contains the specified `Value`. A `SearchExpression` can
+    #     include only one `Contains` operator.
     #
     #   If you have specified a filter `Value`, the default is `Equals`.
     #   @return [String]
@@ -6690,7 +6703,7 @@ module Aws::SageMaker
     #
     #   Logarithmic
     #
-    #   : Hyperparemeter tuning searches the values in the hyperparameter
+    #   : Hyperparameter tuning searches the values in the hyperparameter
     #     range by using a logarithmic scale.
     #
     #     Logarithmic scaling works only for ranges that have only values
@@ -7090,6 +7103,11 @@ module Aws::SageMaker
     # A set of conditions for stopping a labeling job. If any of the
     # conditions are met, the job is automatically stopped. You can use
     # these conditions to control the cost of data labeling.
+    #
+    # <note markdown="1"> Labeling jobs fail after 30 days with an appropriate client error
+    # message.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass LabelingJobStoppingConditions
     #   data as a hash:
@@ -10024,13 +10042,44 @@ module Aws::SageMaker
     #   storage volume type.
     #
     #    </note>
+    #
+    #   <note markdown="1"> Certain Nitro-based instances include local storage with a fixed
+    #   total size, dependent on the instance type. When using these
+    #   instances for training, Amazon SageMaker mounts the local instance
+    #   storage instead of Amazon EBS gp2 storage. You can't request a
+    #   `VolumeSizeInGB` greater than the total size of the local instance
+    #   storage.
+    #
+    #    For a list of instance types that support local instance storage,
+    #   including the total size per instance type, see [Instance Store
+    #   Volumes][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt data on the storage volume attached to the ML
-    #   compute instance(s) that run the training job. The `VolumeKmsKeyId`
-    #   can be any of the following formats:
+    #   The AWS KMS key that Amazon SageMaker uses to encrypt data on the
+    #   storage volume attached to the ML compute instance(s) that run the
+    #   training job.
+    #
+    #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on
+    #   the instance type. Local storage volumes are encrypted using a
+    #   hardware module on the instance. You can't request a
+    #   `VolumeKmsKeyId` when using an instance type with local storage.
+    #
+    #    For a list of instance types that support local instance storage,
+    #   see [Instance Store Volumes][1].
+    #
+    #    For more information about local instance storage encryption, see
+    #   [SSD Instance Store Volumes][2].
+    #
+    #    </note>
+    #
+    #   The `VolumeKmsKeyId` can be in any of the following formats:
     #
     #   * // KMS Key ID
     #
@@ -10039,6 +10088,11 @@ module Aws::SageMaker
     #   * // Amazon Resource Name (ARN) of a KMS Key
     #
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig AWS API Documentation
@@ -10158,17 +10212,19 @@ module Aws::SageMaker
     #     The manifest is an S3 object which is a JSON file with the
     #     following format:
     #
-    #     `[`
+    #     The preceding JSON matches the following `s3Uris`\:
     #
-    #     ` \{"prefix": "s3://customer_bucket/some/prefix/"\},`
+    #     `[ \{"prefix": "s3://customer_bucket/some/prefix/"\},`
     #
-    #     ` "relative/path/to/custdata-1",`
+    #     `"relative/path/to/custdata-1",`
     #
-    #     ` "relative/path/custdata-2",`
+    #     `"relative/path/custdata-2",`
     #
-    #     ` ...`
+    #     `...`
     #
-    #     ` ]`
+    #     `"relative/path/custdata-N"`
+    #
+    #     `]`
     #
     #     The preceding JSON matches the following `s3Uris`\:
     #
@@ -10177,6 +10233,8 @@ module Aws::SageMaker
     #     `s3://customer_bucket/some/prefix/relative/path/custdata-2`
     #
     #     `...`
+    #
+    #     `s3://customer_bucket/some/prefix/relative/path/custdata-N`
     #
     #     The complete set of `s3uris` in this manifest is the input data
     #     for the channel for this datasource. The object that each `s3uris`
@@ -10234,7 +10292,8 @@ module Aws::SageMaker
     #
     # * A list of `Filter` objects. Each filter defines a simple Boolean
     #   expression comprised of a resource property name, Boolean operator,
-    #   and value.
+    #   and value. A `SearchExpression` can include only one `Contains`
+    #   operator.
     #
     # * A list of `NestedFilter` objects. Each nested filter defines a list
     #   of Boolean expressions using a list of resource properties. A nested
@@ -11562,15 +11621,16 @@ module Aws::SageMaker
     #   `SingleRecord`. Padding is not removed if the value of
     #   `BatchStrategy` is set to `MultiRecord`.
     #
-    #    For more information about the RecordIO, see [Data Format][1] in the
-    #   MXNet documentation. For more information about the TFRecord, see
-    #   [Consuming TFRecord data][2] in the TensorFlow documentation.
+    #    For more information about `RecordIO`, see [Create a Dataset Using
+    #   RecordIO][1] in the MXNet documentation. For more information about
+    #   `TFRecord`, see [Consuming TFRecord data][2] in the TensorFlow
+    #   documentation.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://mxnet.io/architecture/note_data_loading.html#data-format
+    #   [1]: https://mxnet.apache.org/api/faq/recordio
     #   [2]: https://www.tensorflow.org/guide/datasets#consuming_tfrecord_data
     #   @return [String]
     #
@@ -11795,8 +11855,8 @@ module Aws::SageMaker
     #   Simple Storage Service Developer Guide.*
     #
     #   The KMS key policy must grant permission to the IAM role that you
-    #   specify in your `CreateTramsformJob` request. For more information,
-    #   see [Using Key Policies in AWS KMS][2] in the *AWS Key Management
+    #   specify in your CreateModel request. For more information, see
+    #   [Using Key Policies in AWS KMS][2] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -11900,25 +11960,27 @@ module Aws::SageMaker
     #     The manifest is an S3 object which is a JSON file with the
     #     following format:
     #
-    #     `[`
+    #     `[ \{"prefix": "s3://customer_bucket/some/prefix/"\},`
     #
-    #     ` \{"prefix": "s3://customer_bucket/some/prefix/"\},`
+    #     `"relative/path/to/custdata-1",`
     #
-    #     ` "relative/path/to/custdata-1",`
+    #     `"relative/path/custdata-2",`
     #
-    #     ` "relative/path/custdata-2",`
+    #     `...`
     #
-    #     ` ...`
+    #     `"relative/path/custdata-N"`
     #
-    #     ` ]`
+    #     `]`
     #
-    #     The preceding JSON matches the following `S3Uris`\:
+    #     The preceding JSON matches the following `s3Uris`\:
     #
     #     `s3://customer_bucket/some/prefix/relative/path/to/custdata-1`
     #
-    #     `s3://customer_bucket/some/prefix/relative/path/custdata-1`
+    #     `s3://customer_bucket/some/prefix/relative/path/custdata-2`
     #
     #     `...`
+    #
+    #     `s3://customer_bucket/some/prefix/relative/path/custdata-N`
     #
     #     The complete set of `S3Uris` in this manifest constitutes the
     #     input data for the channel for this datasource. The object that

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2019-11-18)
+------------------
+
+* Feature - Added support for S3 Replication for existing objects. This release allows customers who have requested and been granted access to replicate existing S3 objects across buckets.
+
 * Issue - Fix issue where `Aws::Errors::MissingRegionError` was not thrown for S3 or S3Control clients.
 
 1.55.0 (2019-11-15)

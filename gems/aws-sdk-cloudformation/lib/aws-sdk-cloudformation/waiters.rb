@@ -391,5 +391,50 @@ module Aws::CloudFormation
       attr_reader :waiter
 
     end
+
+    # Wait until type registration is COMPLETE.
+    class TypeRegistrationComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (120)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 120,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_type_registration,
+            acceptors: [
+              {
+                "argument" => "progress_status",
+                "expected" => "COMPLETE",
+                "matcher" => "path",
+                "state" => "success"
+              },
+              {
+                "argument" => "progress_status",
+                "expected" => "FAILED",
+                "matcher" => "path",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_type_registration)
+      # @return (see Client#describe_type_registration)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
   end
 end

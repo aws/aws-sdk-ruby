@@ -29,6 +29,7 @@ module Aws::SageMakerRuntime
     #         content_type: "Header",
     #         accept: "Header",
     #         custom_attributes: "CustomAttributesHeader",
+    #         target_model: "TargetModelHeader",
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -37,7 +38,7 @@ module Aws::SageMakerRuntime
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
     #   @return [String]
     #
     # @!attribute [rw] body
@@ -50,7 +51,7 @@ module Aws::SageMakerRuntime
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -62,6 +63,25 @@ module Aws::SageMakerRuntime
     #   @return [String]
     #
     # @!attribute [rw] custom_attributes
+    #   Provides additional information about a request for an inference
+    #   submitted to a model hosted at an Amazon SageMaker endpoint. The
+    #   information is an opaque value that is forwarded verbatim. You could
+    #   use this value, for example, to provide an ID that you can use to
+    #   track a request or to provide other metadata that a service endpoint
+    #   was programmed to process. The value must consist of no more than
+    #   1024 visible US-ASCII characters as specified in [Section 3.3.6.
+    #   Field Value Components][1] of the Hypertext Transfer Protocol
+    #   (HTTP/1.1). This feature is currently supported in the AWS SDKs but
+    #   not in the Amazon SageMaker Python SDK.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7230#section-3.2.6
+    #   @return [String]
+    #
+    # @!attribute [rw] target_model
+    #   Specifies the model to be requested for an inference when invoking a
+    #   multi-model endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput AWS API Documentation
@@ -71,7 +91,8 @@ module Aws::SageMakerRuntime
       :body,
       :content_type,
       :accept,
-      :custom_attributes)
+      :custom_attributes,
+      :target_model)
       include Aws::Structure
     end
 
@@ -83,7 +104,7 @@ module Aws::SageMakerRuntime
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -95,6 +116,24 @@ module Aws::SageMakerRuntime
     #   @return [String]
     #
     # @!attribute [rw] custom_attributes
+    #   Provides additional information in the response about the inference
+    #   returned by a model hosted at an Amazon SageMaker endpoint. The
+    #   information is an opaque value that is forwarded verbatim. You could
+    #   use this value, for example, to return an ID received in the
+    #   `CustomAttributes` header of a request or other metadata that a
+    #   service endpoint was programmed to produce. The value must consist
+    #   of no more than 1024 visible US-ASCII characters as specified in
+    #   [Section 3.3.6. Field Value Components][1] of the Hypertext Transfer
+    #   Protocol (HTTP/1.1). If the customer wants the custom attribute
+    #   returned, the model must set the custom attribute to be included on
+    #   the way back.
+    #
+    #   This feature is currently supported in the AWS SDKs but not in the
+    #   Amazon SageMaker Python SDK.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7230#section-3.2.6
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointOutput AWS API Documentation
@@ -107,7 +146,8 @@ module Aws::SageMakerRuntime
       include Aws::Structure
     end
 
-    # Model (owned by the customer in the container) returned an error 500.
+    # Model (owned by the customer in the container) returned 4xx or 5xx
+    # error code.
     #
     # @!attribute [rw] message
     #   @return [String]

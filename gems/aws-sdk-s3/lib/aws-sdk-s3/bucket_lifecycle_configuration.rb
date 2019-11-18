@@ -30,7 +30,7 @@ module Aws::S3
       @bucket_name
     end
 
-    
+    # Container for a lifecycle rule.
     # @return [Array<Types::LifecycleRule>]
     def rules
       data[:rules]
@@ -234,6 +234,7 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [Types::BucketLifecycleConfiguration] :lifecycle_configuration
+    #   Container for lifecycle rules. You can add as many as 1,000 rules.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

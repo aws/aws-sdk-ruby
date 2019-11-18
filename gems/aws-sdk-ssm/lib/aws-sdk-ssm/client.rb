@@ -1159,6 +1159,12 @@ module Aws::SSM
     #
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions
     #
+    # @option params [String] :category
+    #   Specify a category to assign to an OpsItem.
+    #
+    # @option params [String] :severity
+    #   Specify a severity to assign to an OpsItem.
+    #
     # @return [Types::CreateOpsItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOpsItemResponse#ops_item_id #ops_item_id} => String
@@ -1192,6 +1198,8 @@ module Aws::SSM
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     category: "OpsItemCategory",
+    #     severity: "OpsItemSeverity",
     #   })
     #
     # @example Response structure
@@ -1379,28 +1387,57 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Creates a resource data sync configuration to a single bucket in
-    # Amazon S3. This is an asynchronous operation that returns immediately.
-    # After a successful initial sync is completed, the system continuously
-    # syncs data to the Amazon S3 bucket. To check the status of the sync,
-    # use the ListResourceDataSync.
+    # A resource data sync helps you view data from multiple sources in a
+    # single location. Systems Manager offers two types of resource data
+    # sync: `SyncToDestination` and `SyncFromSource`.
     #
-    # By default, data is not encrypted in Amazon S3. We strongly recommend
-    # that you enable encryption in Amazon S3 to ensure secure data storage.
-    # We also recommend that you secure access to the Amazon S3 bucket by
-    # creating a restrictive bucket policy. For more information, see
+    # You can configure Systems Manager Inventory to use the
+    # `SyncToDestination` type to synchronize Inventory data from multiple
+    # AWS Regions to a single Amazon S3 bucket. For more information, see
     # [Configuring Resource Data Sync for Inventory][1] in the *AWS Systems
     # Manager User Guide*.
+    #
+    # You can configure Systems Manager Explorer to use the
+    # `SyncToDestination` type to synchronize operational work items
+    # (OpsItems) and operational data (OpsData) from multiple AWS Regions to
+    # a single Amazon S3 bucket. You can also configure Explorer to use the
+    # `SyncFromSource` type. This type synchronizes OpsItems and OpsData
+    # from multiple AWS accounts and Regions by using AWS Organizations. For
+    # more information, see [Setting Up Explorer to Display Data from
+    # Multiple Accounts and Regions][2] in the *AWS Systems Manager User
+    # Guide*.
+    #
+    # A resource data sync is an asynchronous operation that returns
+    # immediately. After a successful initial sync is completed, the system
+    # continuously syncs data. To check the status of a sync, use the
+    # ListResourceDataSync.
+    #
+    # <note markdown="1"> By default, data is not encrypted in Amazon S3. We strongly recommend
+    # that you enable encryption in Amazon S3 to ensure secure data storage.
+    # We also recommend that you secure access to the Amazon S3 bucket by
+    # creating a restrictive bucket policy.
+    #
+    #  </note>
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html
     #
     # @option params [required, String] :sync_name
     #   A name for the configuration.
     #
-    # @option params [required, Types::ResourceDataSyncS3Destination] :s3_destination
+    # @option params [Types::ResourceDataSyncS3Destination] :s3_destination
     #   Amazon S3 configuration details for the sync.
+    #
+    # @option params [String] :sync_type
+    #   Specify `SyncToDestination` to create a resource data sync that
+    #   synchronizes data from multiple AWS Regions to an Amazon S3 bucket.
+    #   Specify `SyncFromSource` to synchronize data from multiple AWS
+    #   accounts and Regions, as listed in AWS Organizations.
+    #
+    # @option params [Types::ResourceDataSyncSource] :sync_source
+    #   Specify information about the data sources to synchronize.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1408,12 +1445,26 @@ module Aws::SSM
     #
     #   resp = client.create_resource_data_sync({
     #     sync_name: "ResourceDataSyncName", # required
-    #     s3_destination: { # required
+    #     s3_destination: {
     #       bucket_name: "ResourceDataSyncS3BucketName", # required
     #       prefix: "ResourceDataSyncS3Prefix",
     #       sync_format: "JsonSerDe", # required, accepts JsonSerDe
     #       region: "ResourceDataSyncS3Region", # required
     #       awskms_key_arn: "ResourceDataSyncAWSKMSKeyARN",
+    #     },
+    #     sync_type: "ResourceDataSyncType",
+    #     sync_source: {
+    #       source_type: "ResourceDataSyncSourceType", # required
+    #       aws_organizations_source: {
+    #         organization_source_type: "ResourceDataSyncOrganizationSourceType", # required
+    #         organizational_units: [
+    #           {
+    #             organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
+    #           },
+    #         ],
+    #       },
+    #       source_regions: ["ResourceDataSyncSourceRegion"], # required
+    #       include_future_regions: false,
     #     },
     #   })
     #
@@ -1707,12 +1758,15 @@ module Aws::SSM
     end
 
     # Deletes a Resource Data Sync configuration. After the configuration is
-    # deleted, changes to inventory data on managed instances are no longer
-    # synced with the target Amazon S3 bucket. Deleting a sync configuration
-    # does not delete data in the target Amazon S3 bucket.
+    # deleted, changes to data on managed instances are no longer synced to
+    # or from the target. Deleting a sync configuration does not delete
+    # data.
     #
     # @option params [required, String] :sync_name
     #   The name of the configuration to delete.
+    #
+    # @option params [String] :sync_type
+    #   Specify the type of resource data sync to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1720,6 +1774,7 @@ module Aws::SSM
     #
     #   resp = client.delete_resource_data_sync({
     #     sync_name: "ResourceDataSyncName", # required
+    #     sync_type: "ResourceDataSyncType",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSync AWS API Documentation
@@ -3591,7 +3646,7 @@ module Aws::SSM
     #   resp = client.describe_ops_items({
     #     ops_item_filters: [
     #       {
-    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId
+    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity
     #         values: ["OpsItemFilterValue"], # required
     #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
     #       },
@@ -3616,6 +3671,8 @@ module Aws::SSM
     #   resp.ops_item_summaries[0].operational_data #=> Hash
     #   resp.ops_item_summaries[0].operational_data["OpsItemDataKey"].value #=> String
     #   resp.ops_item_summaries[0].operational_data["OpsItemDataKey"].type #=> String, one of "SearchableString", "String"
+    #   resp.ops_item_summaries[0].category #=> String
+    #   resp.ops_item_summaries[0].severity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeOpsItems AWS API Documentation
     #
@@ -4873,6 +4930,8 @@ module Aws::SSM
     #   resp.ops_item.operational_data #=> Hash
     #   resp.ops_item.operational_data["OpsItemDataKey"].value #=> String
     #   resp.ops_item.operational_data["OpsItemDataKey"].type #=> String, one of "SearchableString", "String"
+    #   resp.ops_item.category #=> String
+    #   resp.ops_item.severity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsItem AWS API Documentation
     #
@@ -4885,12 +4944,18 @@ module Aws::SSM
 
     # View a summary of OpsItems based on specified filters and aggregators.
     #
+    # @option params [String] :sync_name
+    #   Specify the name of a resource data sync to get.
+    #
     # @option params [Array<Types::OpsFilter>] :filters
     #   Optional filters used to scope down the returned OpsItems.
     #
-    # @option params [required, Array<Types::OpsAggregator>] :aggregators
+    # @option params [Array<Types::OpsAggregator>] :aggregators
     #   Optional aggregators that return counts of OpsItems based on one or
     #   more expressions.
+    #
+    # @option params [Array<Types::OpsResultAttribute>] :result_attributes
+    #   The OpsItem data type to return.
     #
     # @option params [String] :next_token
     #   A token to start the list. Use this token to get the next set of
@@ -4909,6 +4974,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_ops_summary({
+    #     sync_name: "ResourceDataSyncName",
     #     filters: [
     #       {
     #         key: "OpsFilterKey", # required
@@ -4916,7 +4982,7 @@ module Aws::SSM
     #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #       },
     #     ],
-    #     aggregators: [ # required
+    #     aggregators: [
     #       {
     #         aggregator_type: "OpsAggregatorType",
     #         type_name: "OpsDataTypeName",
@@ -4936,6 +5002,11 @@ module Aws::SSM
     #         },
     #       },
     #     ],
+    #     result_attributes: [
+    #       {
+    #         type_name: "OpsDataTypeName", # required
+    #       },
+    #     ],
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -4945,6 +5016,7 @@ module Aws::SSM
     #   resp.entities #=> Array
     #   resp.entities[0].id #=> String
     #   resp.entities[0].data #=> Hash
+    #   resp.entities[0].data["OpsEntityItemKey"].capture_time #=> String
     #   resp.entities[0].data["OpsEntityItemKey"].content #=> Array
     #   resp.entities[0].data["OpsEntityItemKey"].content[0] #=> Hash
     #   resp.entities[0].data["OpsEntityItemKey"].content[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -6151,6 +6223,12 @@ module Aws::SSM
     # `NextToken` returned in the call to the parameter of a subsequent
     # call.
     #
+    # @option params [String] :sync_type
+    #   View a list of resource data syncs according to the sync type. Specify
+    #   `SyncToDestination` to view resource data syncs that synchronize data
+    #   to an Amazon S3 buckets. Specify `SyncFromSource` to view resource
+    #   data syncs from AWS Organizations or from multiple AWS Regions.
+    #
     # @option params [String] :next_token
     #   A token to start the list. Use this token to get the next set of
     #   results.
@@ -6168,6 +6246,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resource_data_sync({
+    #     sync_type: "ResourceDataSyncType",
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -6176,6 +6255,15 @@ module Aws::SSM
     #
     #   resp.resource_data_sync_items #=> Array
     #   resp.resource_data_sync_items[0].sync_name #=> String
+    #   resp.resource_data_sync_items[0].sync_type #=> String
+    #   resp.resource_data_sync_items[0].sync_source.source_type #=> String
+    #   resp.resource_data_sync_items[0].sync_source.aws_organizations_source.organization_source_type #=> String
+    #   resp.resource_data_sync_items[0].sync_source.aws_organizations_source.organizational_units #=> Array
+    #   resp.resource_data_sync_items[0].sync_source.aws_organizations_source.organizational_units[0].organizational_unit_id #=> String
+    #   resp.resource_data_sync_items[0].sync_source.source_regions #=> Array
+    #   resp.resource_data_sync_items[0].sync_source.source_regions[0] #=> String
+    #   resp.resource_data_sync_items[0].sync_source.include_future_regions #=> Boolean
+    #   resp.resource_data_sync_items[0].sync_source.state #=> String
     #   resp.resource_data_sync_items[0].s3_destination.bucket_name #=> String
     #   resp.resource_data_sync_items[0].s3_destination.prefix #=> String
     #   resp.resource_data_sync_items[0].s3_destination.sync_format #=> String, one of "JsonSerDe"
@@ -6183,6 +6271,7 @@ module Aws::SSM
     #   resp.resource_data_sync_items[0].s3_destination.awskms_key_arn #=> String
     #   resp.resource_data_sync_items[0].last_sync_time #=> Time
     #   resp.resource_data_sync_items[0].last_successful_sync_time #=> Time
+    #   resp.resource_data_sync_items[0].sync_last_modified_time #=> Time
     #   resp.resource_data_sync_items[0].last_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.resource_data_sync_items[0].sync_created_time #=> Time
     #   resp.resource_data_sync_items[0].last_sync_status_message #=> String
@@ -8654,6 +8743,12 @@ module Aws::SSM
     #   A short heading that describes the nature of the OpsItem and the
     #   impacted resource.
     #
+    # @option params [String] :category
+    #   Specify a new category for an OpsItem.
+    #
+    # @option params [String] :severity
+    #   Specify a new severity for an OpsItem.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -8681,6 +8776,8 @@ module Aws::SSM
     #     status: "Open", # accepts Open, InProgress, Resolved
     #     ops_item_id: "OpsItemId", # required
     #     title: "OpsItemTitle",
+    #     category: "OpsItemCategory",
+    #     severity: "OpsItemSeverity",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItem AWS API Documentation
@@ -8935,7 +9032,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

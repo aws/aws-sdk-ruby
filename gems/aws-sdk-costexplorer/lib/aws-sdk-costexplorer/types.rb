@@ -780,9 +780,6 @@ module Aws::CostExplorer
     #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`, or `HOURLY`.
     #   If `Granularity` isn't set, the response object doesn't include
     #   the `Granularity`, either `MONTHLY` or `DAILY`, or `HOURLY`.
-    #
-    #   The `GetCostAndUsageRequest` operation supports only `DAILY` and
-    #   `MONTHLY` granularities.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -832,7 +829,7 @@ module Aws::CostExplorer
     #
     #   Valid values are `AZ`, `INSTANCE_TYPE`, `LEGAL_ENTITY_NAME`,
     #   `LINKED_ACCOUNT`, `OPERATION`, `PLATFORM`, `PURCHASE_TYPE`,
-    #   `SERVICE`, `TAGS`, `TENANCY`, and `USAGE_TYPE`.
+    #   `SERVICE`, `TAGS`, `TENANCY`, `RECORD_TYPE`, and `USAGE_TYPE`.
     #   @return [Array<Types::GroupDefinition>]
     #
     # @!attribute [rw] next_page_token
@@ -3505,6 +3502,12 @@ module Aws::CostExplorer
     #   recommended Savings Plans, over the length of the lookback period.
     #   @return [String]
     #
+    # @!attribute [rw] estimated_on_demand_cost_with_current_commitment
+    #   The estimated On-Demand costs you would expect with no additional
+    #   commitment, based on your usage of the selected time period and the
+    #   Savings Plans you own.
+    #   @return [String]
+    #
     # @!attribute [rw] estimated_savings_amount
     #   The estimated savings amount based on the recommended Savings Plans
     #   over the length of the lookback period.
@@ -3554,6 +3557,7 @@ module Aws::CostExplorer
       :currency_code,
       :estimated_sp_cost,
       :estimated_on_demand_cost,
+      :estimated_on_demand_cost_with_current_commitment,
       :estimated_savings_amount,
       :estimated_savings_percentage,
       :hourly_commitment_to_purchase,
@@ -3636,6 +3640,12 @@ module Aws::CostExplorer
     #   Savings Plans purchase.
     #   @return [String]
     #
+    # @!attribute [rw] estimated_on_demand_cost_with_current_commitment
+    #   The estimated On-Demand costs you would expect with no additional
+    #   commitment, based on your usage of the selected time period and the
+    #   Savings Plans you own.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansPurchaseRecommendationSummary AWS API Documentation
     #
     class SavingsPlansPurchaseRecommendationSummary < Struct.new(
@@ -3648,7 +3658,8 @@ module Aws::CostExplorer
       :daily_commitment_to_purchase,
       :hourly_commitment_to_purchase,
       :estimated_savings_percentage,
-      :estimated_monthly_savings_amount)
+      :estimated_monthly_savings_amount,
+      :estimated_on_demand_cost_with_current_commitment)
       include Aws::Structure
     end
 

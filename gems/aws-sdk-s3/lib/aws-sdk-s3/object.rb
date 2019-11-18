@@ -46,7 +46,7 @@ module Aws::S3
       data[:delete_marker]
     end
 
-    
+    # Indicates that a range of bytes was specifed.
     # @return [String]
     def accept_ranges
       data[:accept_ranges]
@@ -61,8 +61,26 @@ module Aws::S3
       data[:expiration]
     end
 
-    # Provides information about object restoration operation and expiration
-    # time of the restored object copy.
+    # If the object is an archived object (an object whose storage class is
+    # GLACIER), the response includes this header if either the archive
+    # restoration is in progress (see RestoreObject or an archive copy is
+    # already restored.
+    #
+    # If an archive copy is already restored, the header value indicates
+    # when Amazon S3 is scheduled to delete the object copy. For example:
+    #
+    # `x-amz-restore: ongoing-request="false", expiry-date="Fri, 23 Dec 2012
+    # 00:00:00 GMT"`
+    #
+    # If the object restoration is in progress, the header returns the value
+    # `ongoing-request="true"`.
+    #
+    # For more information about archiving objects, see [Transitioning
+    # Objects: General Considerations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations
     # @return [String]
     def restore
       data[:restore]
@@ -154,8 +172,11 @@ module Aws::S3
       data[:website_redirect_location]
     end
 
-    # The Server-side encryption algorithm used when storing this object in
-    # S3 (e.g., AES256, aws:kms).
+    # If the object is stored using server-side encryption either with an
+    # AWS KMS customer master key (CMK) or an Amazon S3-managed encryption
+    # key, the response includes this header with the value of the
+    # Server-side encryption algorithm used when storing this object in S3
+    # (e.g., AES256, aws:kms).
     # @return [String]
     def server_side_encryption
       data[:server_side_encryption]
@@ -185,13 +206,20 @@ module Aws::S3
     end
 
     # If present, specifies the ID of the AWS Key Management Service (KMS)
-    # master encryption key that was used for the object.
+    # customer master key (CMK) that was used for the object.
     # @return [String]
     def ssekms_key_id
       data[:ssekms_key_id]
     end
 
-    
+    # Provides storage class information of the object. Amazon S3 returns
+    # this header for all objects except for Standard storage class objects.
+    #
+    # For more information, see [Storage Classes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     # @return [String]
     def storage_class
       data[:storage_class]
@@ -204,7 +232,36 @@ module Aws::S3
       data[:request_charged]
     end
 
-    
+    # Amazon S3 can return this header if your request involves a bucket
+    # that is either a source or destination in a replication rule.
+    #
+    # In replication you have a source bucket on which you configure
+    # replication and destination bucket where Amazon S3 stores object
+    # replicas. When you request an object (GetObject) or object metadata
+    # (HeadObject) from these buckets, Amazon S3 will return the
+    # x-amz-replication-status header in the response as follows:
+    #
+    # * If requesting object from the source bucket — Amazon S3 will return
+    #   the x-amz-replication-status header if object in your request is
+    #   eligible for replication.
+    #
+    #   For example, suppose in your replication configuration you specify
+    #   object prefix "TaxDocs" requesting Amazon S3 to replicate objects
+    #   with key prefix "TaxDocs". Then any objects you upload with this
+    #   key name prefix, for example "TaxDocs/document1.pdf", is eligible
+    #   for replication. For any object request with this key name prefix
+    #   Amazon S3 will return the x-amz-replication-status header with value
+    #   PENDING, COMPLETED or FAILED indicating object replication status.
+    #
+    # * If requesting object from the destination bucket — Amazon S3 will
+    #   return the x-amz-replication-status header with value REPLICA if
+    #   object in your request is a replica that Amazon S3 created.
+    #
+    # For more information, see [Replication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     # @return [String]
     def replication_status
       data[:replication_status]
@@ -216,19 +273,36 @@ module Aws::S3
       data[:parts_count]
     end
 
-    # The object lock mode currently in place for this object.
+    # The Object Lock mode, if any, that's in effect for this object. This
+    # header is only returned if the requester has the
+    # `s3:GetObjectRetention` permission. For more information about S3
+    # Object Lock, see [Object Lock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
     # @return [String]
     def object_lock_mode
       data[:object_lock_mode]
     end
 
-    # The date and time when this object's object lock expires.
+    # The date and time when the Object Lock retention period expires. This
+    # header is only returned if the requester has the
+    # `s3:GetObjectRetention` permission.
     # @return [Time]
     def object_lock_retain_until_date
       data[:object_lock_retain_until_date]
     end
 
-    # The Legal Hold status for the specified object.
+    # Specifies whether a legal hold is in effect for this object. This
+    # header is only returned if the requester has the
+    # `s3:GetObjectLegalHold` permission. This header is not returned if the
+    # specified version of this object has never had a legal hold applied.
+    # For more information about S3 Object Lock, see [Object Lock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
     # @return [String]
     def object_lock_legal_hold_status
       data[:object_lock_legal_hold_status]
@@ -563,9 +637,9 @@ module Aws::S3
     #   in conjunction with the TaggingDirective. The tag-set must be encoded
     #   as URL Query parameters
     # @option options [String] :object_lock_mode
-    #   The object lock mode that you want to apply to the copied object.
+    #   The Object Lock mode that you want to apply to the copied object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want the copied object's object lock to
+    #   The date and time when you want the copied object's Object Lock to
     #   expire.
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the copied object.
@@ -591,6 +665,8 @@ module Aws::S3
     # @option options [String] :mfa
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication device.
+    #   Required to permanently delete a versionedobject if versioning is
+    #   configured with MFA Deleteenabled.
     # @option options [String] :version_id
     #   VersionId used to reference a specific version of the object.
     # @option options [String] :request_payer
@@ -600,7 +676,7 @@ module Aws::S3
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
-    #   Indicates whether Amazon S3 object lock should bypass governance-mode
+    #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
     # @return [Types::DeleteObjectOutput]
     def delete(options = {})
@@ -799,10 +875,10 @@ module Aws::S3
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters
     # @option options [String] :object_lock_mode
-    #   Specifies the object lock mode that you want to apply to the uploaded
+    #   Specifies the Object Lock mode that you want to apply to the uploaded
     #   object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   Specifies the date and time when you want the object lock to expire.
+    #   Specifies the date and time when you want the Object Lock to expire.
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the uploaded
     #   object.
@@ -857,30 +933,77 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
-    #   The canned ACL to apply to the object.
+    #   The canned ACL to apply to the object. For more information, see
+    #   [Canned ACL][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
     # @option options [String, IO] :body
     #   Object data.
     # @option options [String] :cache_control
-    #   Specifies caching behavior along the request/reply chain.
+    #   Can be used to specify caching behavior along the request/reply chain.
+    #   For more information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
     # @option options [String] :content_disposition
-    #   Specifies presentational information for the object.
+    #   Specifies presentational information for the object. For more
+    #   information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
     # @option options [String] :content_encoding
     #   Specifies what content encodings have been applied to the object and
     #   thus what decoding mechanisms must be applied to obtain the media-type
-    #   referenced by the Content-Type header field.
+    #   referenced by the Content-Type header field. For more information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
     # @option options [String] :content_language
     #   The language the content is in.
     # @option options [Integer] :content_length
     #   Size of the body in bytes. This parameter is useful when the size of
-    #   the body cannot be determined automatically.
+    #   the body cannot be determined automatically. For more information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
-    #   is auto-populated when using the command from the CLI. This parameted
-    #   is required if object lock parameters are specified.
+    #   The base64-encoded 128-bit MD5 digest of the message (without the
+    #   headers) according to RFC 1864. This header can be used as a message
+    #   integrity check to verify that the data is the same data that was
+    #   originally sent. Although it is optional, we recommend using the
+    #   Content-MD5 mechanism as an end-to-end integrity check. For more
+    #   information about REST request authentication, see [REST
+    #   Authentication][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
     # @option options [String] :content_type
-    #   A standard MIME type describing the format of the object data.
+    #   A standard MIME type describing the format of the contents. For more
+    #   information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
     # @option options [Time,DateTime,Date,Integer,String] :expires
-    #   The date and time at which the object is no longer cacheable.
+    #   The date and time at which the object is no longer cacheable. For more
+    #   information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
     # @option options [String] :grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
@@ -896,11 +1019,32 @@ module Aws::S3
     #   The Server-side encryption algorithm used when storing this object in
     #   S3 (e.g., AES256, aws:kms).
     # @option options [String] :storage_class
-    #   The type of storage to use for the object. Defaults to 'STANDARD'.
+    #   If you don't specify, Standard is the default storage class. Amazon
+    #   S3 supports other storage classes.
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.
-    #   Amazon S3 stores the value of this header in the object metadata.
+    #   Amazon S3 stores the value of this header in the object metadata. For
+    #   information about object metadata, see .
+    #
+    #   In the following example, the request header sets the redirect to an
+    #   object (anotherPage.html) in the same bucket:
+    #
+    #   `x-amz-website-redirect-location: /anotherPage.html`
+    #
+    #   In the following example, the request header sets the object redirect
+    #   to another website:
+    #
+    #   `x-amz-website-redirect-location: http://www.example.com/`
+    #
+    #   For more information about website hosting in Amazon S3, see [Hosting
+    #   Websites on Amazon S3][1] and [How to Configure Website Page
+    #   Redirects][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html
     # @option options [String] :sse_customer_algorithm
     #   Specifies the algorithm to use to when encrypting the object (e.g.,
     #   AES256).
@@ -915,11 +1059,16 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   Specifies the AWS KMS key ID to use for object encryption. All GET and
-    #   PUT requests for an object protected by AWS KMS will fail if not made
-    #   via SSL or using SigV4. Documentation on configuring any of the
-    #   officially supported AWS SDKs and CLI can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   If the x-amz-server-side-encryption is present and has the value of
+    #   aws:kms, this header specifies the ID of the AWS Key Management
+    #   Service (AWS KMS) customer master key (CMK) that was used for the
+    #   object.
+    #
+    #   If the value of x-amz-server-side-encryption is aws:kms, this header
+    #   specifies the ID of the AWS KMS CMK that will be used for the object.
+    #   If you specify x-amz-server-side-encryption:aws:kms, but do not
+    #   provide x-amz-server-side-encryption-aws-kms-key-id, Amazon S3 uses
+    #   the AWS managed CMK in AWS to protect the data.
     # @option options [String] :ssekms_encryption_context
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
@@ -934,11 +1083,16 @@ module Aws::S3
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")
     # @option options [String] :object_lock_mode
-    #   The object lock mode that you want to apply to this object.
+    #   The Object Lock mode that you want to apply to this object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want this object's object lock to expire.
+    #   The date and time when you want this object's Object Lock to expire.
     # @option options [String] :object_lock_legal_hold_status
-    #   The Legal Hold status that you want to apply to the specified object.
+    #   Specifies whether a legal hold will be applied to this object. For
+    #   more information about S3 Object Lock, see [Object Lock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
     # @return [Types::PutObjectOutput]
     def put(options = {})
       options = options.merge(
@@ -1038,7 +1192,9 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :version_id
+    #   VersionId used to reference a specific version of the object.
     # @option options [Types::RestoreRequest] :restore_request
+    #   Container for restore job parameters.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -1170,6 +1326,8 @@ module Aws::S3
       # @option options [String] :mfa
       #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
+      #   Required to permanently delete a versioned object if versioning is
+      #   configured with MFA Delete enabled.
       # @option options [String] :request_payer
       #   Confirms that the requester knows that she or he will be charged for
       #   the request. Bucket owners need not specify this parameter in their
@@ -1178,7 +1336,7 @@ module Aws::S3
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
-      #   Governance-type object lock in place. You must have sufficient
+      #   Governance-type Object Lock in place. You must have sufficient
       #   permissions to perform this operation.
       # @return [void]
       def batch_delete!(options = {})

@@ -437,6 +437,9 @@ module Aws::Pinpoint
     #             sms_template: {
     #               name: "__string",
     #             },
+    #             voice_template: {
+    #               name: "__string",
+    #             },
     #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
@@ -587,6 +590,9 @@ module Aws::Pinpoint
     #         sms_template: {
     #           name: "__string",
     #         },
+    #         voice_template: {
+    #           name: "__string",
+    #         },
     #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
@@ -687,6 +693,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -799,6 +806,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.template_configuration.email_template.name #=> String
     #   resp.campaign_response.template_configuration.push_template.name #=> String
     #   resp.campaign_response.template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.template_configuration.voice_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -829,11 +837,13 @@ module Aws::Pinpoint
     #
     #   resp = client.create_email_template({
     #     email_template_request: { # required
+    #       default_substitutions: "__string",
     #       html_part: "__string",
     #       subject: "__string",
     #       tags: {
     #         "__string" => "__string",
     #       },
+    #       template_description: "__string",
     #       text_part: "__string",
     #     },
     #     template_name: "__string", # required
@@ -1429,6 +1439,7 @@ module Aws::Pinpoint
     #         body: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
+    #         raw_content: "__string",
     #         small_image_icon_url: "__string",
     #         sound: "__string",
     #         title: "__string",
@@ -1438,6 +1449,7 @@ module Aws::Pinpoint
     #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #         body: "__string",
     #         media_url: "__string",
+    #         raw_content: "__string",
     #         sound: "__string",
     #         title: "__string",
     #         url: "__string",
@@ -1447,6 +1459,7 @@ module Aws::Pinpoint
     #         body: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
+    #         raw_content: "__string",
     #         small_image_icon_url: "__string",
     #         sound: "__string",
     #         title: "__string",
@@ -1459,11 +1472,13 @@ module Aws::Pinpoint
     #         title: "__string",
     #         url: "__string",
     #       },
+    #       default_substitutions: "__string",
     #       gcm: {
     #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #         body: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
+    #         raw_content: "__string",
     #         small_image_icon_url: "__string",
     #         sound: "__string",
     #         title: "__string",
@@ -1472,6 +1487,7 @@ module Aws::Pinpoint
     #       tags: {
     #         "__string" => "__string",
     #       },
+    #       template_description: "__string",
     #     },
     #     template_name: "__string", # required
     #   })
@@ -1794,9 +1810,11 @@ module Aws::Pinpoint
     #   resp = client.create_sms_template({
     #     sms_template_request: { # required
     #       body: "__string",
+    #       default_substitutions: "__string",
     #       tags: {
     #         "__string" => "__string",
     #       },
+    #       template_description: "__string",
     #     },
     #     template_name: "__string", # required
     #   })
@@ -1813,6 +1831,50 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def create_sms_template(params = {}, options = {})
       req = build_request(:create_sms_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a message template that you can use in messages that are sent
+    # through the voice channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @option params [required, Types::VoiceTemplateRequest] :voice_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in messages that are sent through the voice channel.
+    #
+    # @return [Types::CreateVoiceTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVoiceTemplateResponse#create_template_message_body #create_template_message_body} => Types::CreateTemplateMessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_voice_template({
+    #     template_name: "__string", # required
+    #     voice_template_request: { # required
+    #       body: "__string",
+    #       default_substitutions: "__string",
+    #       language_code: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #       template_description: "__string",
+    #       voice_id: "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_template_message_body.arn #=> String
+    #   resp.create_template_message_body.message #=> String
+    #   resp.create_template_message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateVoiceTemplate AWS API Documentation
+    #
+    # @overload create_voice_template(params = {})
+    # @param [Hash] params ({})
+    def create_voice_template(params = {}, options = {})
+      req = build_request(:create_voice_template, params)
       req.send_request(options)
     end
 
@@ -2189,6 +2251,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -2301,6 +2364,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.template_configuration.email_template.name #=> String
     #   resp.campaign_response.template_configuration.push_template.name #=> String
     #   resp.campaign_response.template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.template_configuration.voice_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -3016,6 +3080,35 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Deletes a message template that was designed for use in messages that
+    # were sent through the voice channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::DeleteVoiceTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVoiceTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_voice_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteVoiceTemplate AWS API Documentation
+    #
+    # @overload delete_voice_template(params = {})
+    # @param [Hash] params ({})
+    def delete_voice_template(params = {}, options = {})
+      req = build_request(:delete_voice_template, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the status and settings of the ADM channel
     # for an application.
     #
@@ -3519,6 +3612,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -3631,6 +3725,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.template_configuration.email_template.name #=> String
     #   resp.campaign_response.template_configuration.push_template.name #=> String
     #   resp.campaign_response.template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.template_configuration.voice_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -3869,6 +3964,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -3981,6 +4077,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.template_configuration.email_template.name #=> String
     #   resp.campaign_response.template_configuration.push_template.name #=> String
     #   resp.campaign_response.template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.template_configuration.voice_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -4113,6 +4210,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
@@ -4225,6 +4323,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].template_configuration.email_template.name #=> String
     #   resp.campaigns_response.item[0].template_configuration.push_template.name #=> String
     #   resp.campaigns_response.item[0].template_configuration.sms_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.voice_template.name #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -4356,6 +4455,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
@@ -4468,6 +4568,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].template_configuration.email_template.name #=> String
     #   resp.campaigns_response.item[0].template_configuration.push_template.name #=> String
     #   resp.campaigns_response.item[0].template_configuration.sms_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.voice_template.name #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -4580,11 +4681,13 @@ module Aws::Pinpoint
     #
     #   resp.email_template_response.arn #=> String
     #   resp.email_template_response.creation_date #=> String
+    #   resp.email_template_response.default_substitutions #=> String
     #   resp.email_template_response.html_part #=> String
     #   resp.email_template_response.last_modified_date #=> String
     #   resp.email_template_response.subject #=> String
     #   resp.email_template_response.tags #=> Hash
     #   resp.email_template_response.tags["__string"] #=> String
+    #   resp.email_template_response.template_description #=> String
     #   resp.email_template_response.template_name #=> String
     #   resp.email_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
     #   resp.email_template_response.text_part #=> String
@@ -5279,6 +5382,7 @@ module Aws::Pinpoint
     #   resp.push_notification_template_response.adm.body #=> String
     #   resp.push_notification_template_response.adm.image_icon_url #=> String
     #   resp.push_notification_template_response.adm.image_url #=> String
+    #   resp.push_notification_template_response.adm.raw_content #=> String
     #   resp.push_notification_template_response.adm.small_image_icon_url #=> String
     #   resp.push_notification_template_response.adm.sound #=> String
     #   resp.push_notification_template_response.adm.title #=> String
@@ -5286,6 +5390,7 @@ module Aws::Pinpoint
     #   resp.push_notification_template_response.apns.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.push_notification_template_response.apns.body #=> String
     #   resp.push_notification_template_response.apns.media_url #=> String
+    #   resp.push_notification_template_response.apns.raw_content #=> String
     #   resp.push_notification_template_response.apns.sound #=> String
     #   resp.push_notification_template_response.apns.title #=> String
     #   resp.push_notification_template_response.apns.url #=> String
@@ -5294,6 +5399,7 @@ module Aws::Pinpoint
     #   resp.push_notification_template_response.baidu.body #=> String
     #   resp.push_notification_template_response.baidu.image_icon_url #=> String
     #   resp.push_notification_template_response.baidu.image_url #=> String
+    #   resp.push_notification_template_response.baidu.raw_content #=> String
     #   resp.push_notification_template_response.baidu.small_image_icon_url #=> String
     #   resp.push_notification_template_response.baidu.sound #=> String
     #   resp.push_notification_template_response.baidu.title #=> String
@@ -5304,10 +5410,12 @@ module Aws::Pinpoint
     #   resp.push_notification_template_response.default.sound #=> String
     #   resp.push_notification_template_response.default.title #=> String
     #   resp.push_notification_template_response.default.url #=> String
+    #   resp.push_notification_template_response.default_substitutions #=> String
     #   resp.push_notification_template_response.gcm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.push_notification_template_response.gcm.body #=> String
     #   resp.push_notification_template_response.gcm.image_icon_url #=> String
     #   resp.push_notification_template_response.gcm.image_url #=> String
+    #   resp.push_notification_template_response.gcm.raw_content #=> String
     #   resp.push_notification_template_response.gcm.small_image_icon_url #=> String
     #   resp.push_notification_template_response.gcm.sound #=> String
     #   resp.push_notification_template_response.gcm.title #=> String
@@ -5315,6 +5423,7 @@ module Aws::Pinpoint
     #   resp.push_notification_template_response.last_modified_date #=> String
     #   resp.push_notification_template_response.tags #=> Hash
     #   resp.push_notification_template_response.tags["__string"] #=> String
+    #   resp.push_notification_template_response.template_description #=> String
     #   resp.push_notification_template_response.template_name #=> String
     #   resp.push_notification_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
     #
@@ -6037,9 +6146,11 @@ module Aws::Pinpoint
     #   resp.sms_template_response.arn #=> String
     #   resp.sms_template_response.body #=> String
     #   resp.sms_template_response.creation_date #=> String
+    #   resp.sms_template_response.default_substitutions #=> String
     #   resp.sms_template_response.last_modified_date #=> String
     #   resp.sms_template_response.tags #=> Hash
     #   resp.sms_template_response.tags["__string"] #=> String
+    #   resp.sms_template_response.template_description #=> String
     #   resp.sms_template_response.template_name #=> String
     #   resp.sms_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
     #
@@ -6150,6 +6261,45 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_voice_channel(params = {}, options = {})
       req = build_request(:get_voice_channel, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the content and settings for a message template that you can
+    # use in messages that are sent through the voice channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::GetVoiceTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceTemplateResponse#voice_template_response #voice_template_response} => Types::VoiceTemplateResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_template({
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_template_response.arn #=> String
+    #   resp.voice_template_response.body #=> String
+    #   resp.voice_template_response.creation_date #=> String
+    #   resp.voice_template_response.default_substitutions #=> String
+    #   resp.voice_template_response.language_code #=> String
+    #   resp.voice_template_response.last_modified_date #=> String
+    #   resp.voice_template_response.tags #=> Hash
+    #   resp.voice_template_response.tags["__string"] #=> String
+    #   resp.voice_template_response.template_description #=> String
+    #   resp.voice_template_response.template_name #=> String
+    #   resp.voice_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
+    #   resp.voice_template_response.voice_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceTemplate AWS API Documentation
+    #
+    # @overload get_voice_template(params = {})
+    # @param [Hash] params ({})
+    def get_voice_template(params = {}, options = {})
+      req = build_request(:get_voice_template, params)
       req.send_request(options)
     end
 
@@ -6389,9 +6539,11 @@ module Aws::Pinpoint
     #   resp.templates_response.item #=> Array
     #   resp.templates_response.item[0].arn #=> String
     #   resp.templates_response.item[0].creation_date #=> String
+    #   resp.templates_response.item[0].default_substitutions #=> String
     #   resp.templates_response.item[0].last_modified_date #=> String
     #   resp.templates_response.item[0].tags #=> Hash
     #   resp.templates_response.item[0].tags["__string"] #=> String
+    #   resp.templates_response.item[0].template_description #=> String
     #   resp.templates_response.item[0].template_name #=> String
     #   resp.templates_response.item[0].template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
     #   resp.templates_response.next_token #=> String
@@ -6640,8 +6792,7 @@ module Aws::Pinpoint
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::MessageRequest] :message_request
-    #   Specifies the objects that define configuration and other settings for
-    #   a message.
+    #   Specifies the configuration and other settings for a message.
     #
     # @return [Types::SendMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6845,6 +6996,9 @@ module Aws::Pinpoint
     #           name: "__string",
     #         },
     #         sms_template: {
+    #           name: "__string",
+    #         },
+    #         voice_template: {
     #           name: "__string",
     #         },
     #       },
@@ -7062,6 +7216,9 @@ module Aws::Pinpoint
     #           name: "__string",
     #         },
     #         sms_template: {
+    #           name: "__string",
+    #         },
+    #         voice_template: {
     #           name: "__string",
     #         },
     #       },
@@ -7671,6 +7828,9 @@ module Aws::Pinpoint
     #             sms_template: {
     #               name: "__string",
     #             },
+    #             voice_template: {
+    #               name: "__string",
+    #             },
     #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
@@ -7821,6 +7981,9 @@ module Aws::Pinpoint
     #         sms_template: {
     #           name: "__string",
     #         },
+    #         voice_template: {
+    #           name: "__string",
+    #         },
     #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
@@ -7921,6 +8084,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -8033,6 +8197,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.template_configuration.email_template.name #=> String
     #   resp.campaign_response.template_configuration.push_template.name #=> String
     #   resp.campaign_response.template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.template_configuration.voice_template.name #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -8116,11 +8281,13 @@ module Aws::Pinpoint
     #
     #   resp = client.update_email_template({
     #     email_template_request: { # required
+    #       default_substitutions: "__string",
     #       html_part: "__string",
     #       subject: "__string",
     #       tags: {
     #         "__string" => "__string",
     #       },
+    #       template_description: "__string",
     #       text_part: "__string",
     #     },
     #     template_name: "__string", # required
@@ -8984,6 +9151,7 @@ module Aws::Pinpoint
     #         body: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
+    #         raw_content: "__string",
     #         small_image_icon_url: "__string",
     #         sound: "__string",
     #         title: "__string",
@@ -8993,6 +9161,7 @@ module Aws::Pinpoint
     #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #         body: "__string",
     #         media_url: "__string",
+    #         raw_content: "__string",
     #         sound: "__string",
     #         title: "__string",
     #         url: "__string",
@@ -9002,6 +9171,7 @@ module Aws::Pinpoint
     #         body: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
+    #         raw_content: "__string",
     #         small_image_icon_url: "__string",
     #         sound: "__string",
     #         title: "__string",
@@ -9014,11 +9184,13 @@ module Aws::Pinpoint
     #         title: "__string",
     #         url: "__string",
     #       },
+    #       default_substitutions: "__string",
     #       gcm: {
     #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #         body: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
+    #         raw_content: "__string",
     #         small_image_icon_url: "__string",
     #         sound: "__string",
     #         title: "__string",
@@ -9027,6 +9199,7 @@ module Aws::Pinpoint
     #       tags: {
     #         "__string" => "__string",
     #       },
+    #       template_description: "__string",
     #     },
     #     template_name: "__string", # required
     #   })
@@ -9401,9 +9574,11 @@ module Aws::Pinpoint
     #   resp = client.update_sms_template({
     #     sms_template_request: { # required
     #       body: "__string",
+    #       default_substitutions: "__string",
     #       tags: {
     #         "__string" => "__string",
     #       },
+    #       template_description: "__string",
     #     },
     #     template_name: "__string", # required
     #   })
@@ -9466,6 +9641,49 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Updates an existing message template that you can use in messages that
+    # are sent through the voice channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @option params [required, Types::VoiceTemplateRequest] :voice_template_request
+    #   Specifies the content and settings for a message template that can be
+    #   used in messages that are sent through the voice channel.
+    #
+    # @return [Types::UpdateVoiceTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVoiceTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_voice_template({
+    #     template_name: "__string", # required
+    #     voice_template_request: { # required
+    #       body: "__string",
+    #       default_substitutions: "__string",
+    #       language_code: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #       template_description: "__string",
+    #       voice_id: "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceTemplate AWS API Documentation
+    #
+    # @overload update_voice_template(params = {})
+    # @param [Hash] params ({})
+    def update_voice_template(params = {}, options = {})
+      req = build_request(:update_voice_template, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -9479,7 +9697,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

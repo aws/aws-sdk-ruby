@@ -30,7 +30,7 @@ module Aws::S3
       @bucket_name
     end
 
-    
+    # Container for a lifecycle rule.
     # @return [Array<Types::Rule>]
     def rules
       data[:rules]

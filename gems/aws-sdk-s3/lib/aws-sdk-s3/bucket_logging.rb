@@ -30,7 +30,14 @@ module Aws::S3
       @bucket_name
     end
 
-    
+    # Describes where logs are stored and the prefix that Amazon S3 assigns
+    # to all log object keys for a bucket. For more information, see [PUT
+    # Bucket logging][1] in the *Amazon Simple Storage Service API
+    # Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html
     # @return [Types::LoggingEnabled]
     def logging_enabled
       data[:logging_enabled]
@@ -193,7 +200,9 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [required, Types::BucketLoggingStatus] :bucket_logging_status
+    #   Container for logging status information.
     # @option options [String] :content_md5
+    #   The MD5 hash of the `PutBucketLogging` request body.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

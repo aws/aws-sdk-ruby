@@ -150,6 +150,8 @@ module Aws::S3
     Errors = Shapes::ListShape.new(name: 'Errors', flattened: true)
     Event = Shapes::StringShape.new(name: 'Event')
     EventList = Shapes::ListShape.new(name: 'EventList', flattened: true)
+    ExistingObjectReplication = Shapes::StructureShape.new(name: 'ExistingObjectReplication')
+    ExistingObjectReplicationStatus = Shapes::StringShape.new(name: 'ExistingObjectReplicationStatus')
     Expiration = Shapes::StringShape.new(name: 'Expiration')
     ExpirationStatus = Shapes::StringShape.new(name: 'ExpirationStatus')
     ExpiredObjectDeleteMarker = Shapes::BooleanShape.new(name: 'ExpiredObjectDeleteMarker')
@@ -916,6 +918,9 @@ module Aws::S3
     Errors.member = Shapes::ShapeRef.new(shape: Error)
 
     EventList.member = Shapes::ShapeRef.new(shape: Event)
+
+    ExistingObjectReplication.add_member(:status, Shapes::ShapeRef.new(shape: ExistingObjectReplicationStatus, required: true, location_name: "Status"))
+    ExistingObjectReplication.struct_class = Types::ExistingObjectReplication
 
     ExposeHeaders.member = Shapes::ShapeRef.new(shape: ExposeHeader)
 
@@ -1921,6 +1926,7 @@ module Aws::S3
     ReplicationRule.add_member(:filter, Shapes::ShapeRef.new(shape: ReplicationRuleFilter, location_name: "Filter"))
     ReplicationRule.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationRuleStatus, required: true, location_name: "Status"))
     ReplicationRule.add_member(:source_selection_criteria, Shapes::ShapeRef.new(shape: SourceSelectionCriteria, location_name: "SourceSelectionCriteria"))
+    ReplicationRule.add_member(:existing_object_replication, Shapes::ShapeRef.new(shape: ExistingObjectReplication, location_name: "ExistingObjectReplication"))
     ReplicationRule.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
     ReplicationRule.add_member(:delete_marker_replication, Shapes::ShapeRef.new(shape: DeleteMarkerReplication, location_name: "DeleteMarkerReplication"))
     ReplicationRule.struct_class = Types::ReplicationRule

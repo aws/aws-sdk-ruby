@@ -109,6 +109,18 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # An error occurred during a CloudFormation registry operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CFNRegistryException AWS API Documentation
+    #
+    class CFNRegistryException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The input for the CancelUpdateStack action.
     #
     # @note When making an API call, you may pass CancelUpdateStackInput
@@ -1580,6 +1592,54 @@ module Aws::CloudFormation
     #
     class DeleteStackSetOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeregisterTypeInput
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "PrivateTypeArn",
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName",
+    #         version_id: "TypeVersionId",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of a specific version of the type. The version ID is the
+    #   value at the end of the Amazon Resource Name (ARN) assigned to the
+    #   type version when it is registered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeregisterTypeInput AWS API Documentation
+    #
+    class DeregisterTypeInput < Struct.new(
+      :arn,
+      :type,
+      :type_name,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeregisterTypeOutput AWS API Documentation
+    #
+    class DeregisterTypeOutput < Aws::EmptyStructure; end
+
     # The input for the DescribeAccountLimits action.
     #
     # @note When making an API call, you may pass DescribeAccountLimitsInput
@@ -2291,6 +2351,247 @@ module Aws::CloudFormation
     class DescribeStacksOutput < Struct.new(
       :stacks,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTypeInput
+    #   data as a hash:
+    #
+    #       {
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName",
+    #         arn: "TypeArn",
+    #         version_id: "TypeVersionId",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of a specific version of the type. The version ID is the
+    #   value at the end of the Amazon Resource Name (ARN) assigned to the
+    #   type version when it is registered.
+    #
+    #   If you specify a `VersionId`, `DescribeType` returns information
+    #   about that specific type version. Otherwise, it returns information
+    #   about the default type version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeInput AWS API Documentation
+    #
+    class DescribeTypeInput < Struct.new(
+      :type,
+      :type_name,
+      :arn,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the registered type.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version_id
+    #   The ID of the default version of the type. The default version is
+    #   used when the type version is not specified.
+    #
+    #   To set the default version of a type, use ` SetTypeDefaultVersion `.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the registered type.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The schema that defines the type.
+    #
+    #   For more information on type schemas, see [Resource Provider
+    #   Schema][1] in the *CloudFormation CLI User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_type
+    #   The provisioning behavior of the type. AWS CloudFormation determines
+    #   the provisioning type during registration, based on the types of
+    #   handlers in the schema handler package submitted.
+    #
+    #   Valid values include:
+    #
+    #   * `FULLY_MUTABLE`\: The type includes an update handler to process
+    #     updates to the type during stack update operations.
+    #
+    #   * `IMMUTABLE`\: The type does not include an update handler, so the
+    #     type cannot be updated and must instead be replaced during stack
+    #     update operations.
+    #
+    #   * `NON_PROVISIONABLE`\: The type does not include all of the
+    #     following handlers, and therefore cannot actually be provisioned.
+    #
+    #     * create
+    #
+    #     * read
+    #
+    #     * delete
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecated_status
+    #   The deprecation status of the type.
+    #
+    #   Valid values include:
+    #
+    #   * `LIVE`\: The type is registered and can be used in CloudFormation
+    #     operations, dependent on its provisioning behavior and visibility
+    #     scope.
+    #
+    #   * `DEPRECATED`\: The type has been deregistered and can no longer be
+    #     used in CloudFormation operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_config
+    #   Contains logging configuration information for a type.
+    #   @return [Types::LoggingConfig]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM execution role used to
+    #   register the type. If your resource type calls AWS APIs in any of
+    #   its handlers, you must create an <i> <a
+    #   href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM
+    #   execution role</a> </i> that includes the necessary permissions to
+    #   call those AWS APIs, and provision that execution role in your
+    #   account. CloudFormation then assumes that execution role to provide
+    #   your resource type with the appropriate credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] visibility
+    #   The scope at which the type is visible and usable in CloudFormation
+    #   operations.
+    #
+    #   Valid values include:
+    #
+    #   * `PRIVATE`\: The type is only visible and usable within the account
+    #     in which it is registered. Currently, AWS CloudFormation marks any
+    #     types you register as `PRIVATE`.
+    #
+    #   * `PUBLIC`\: The type is publically visible and usable within any
+    #     Amazon account.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_url
+    #   The URL of the source code for the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_url
+    #   The URL of a page providing detailed documentation for this type.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated
+    #   When the specified type version was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] time_created
+    #   When the specified type version was registered.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeOutput AWS API Documentation
+    #
+    class DescribeTypeOutput < Struct.new(
+      :arn,
+      :type,
+      :type_name,
+      :default_version_id,
+      :description,
+      :schema,
+      :provisioning_type,
+      :deprecated_status,
+      :logging_config,
+      :execution_role_arn,
+      :visibility,
+      :source_url,
+      :documentation_url,
+      :last_updated,
+      :time_created)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTypeRegistrationInput
+    #   data as a hash:
+    #
+    #       {
+    #         registration_token: "RegistrationToken", # required
+    #       }
+    #
+    # @!attribute [rw] registration_token
+    #   The identifier for this registration request.
+    #
+    #   This registration token is generated by CloudFormation when you
+    #   initiate a registration request using ` RegisterType `.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeRegistrationInput AWS API Documentation
+    #
+    class DescribeTypeRegistrationInput < Struct.new(
+      :registration_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] progress_status
+    #   The current status of the type registration request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the type registration request.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_arn
+    #   The Amazon Resource Name (ARN) of the type being registered.
+    #
+    #   For registration requests with a `ProgressStatus` of other than
+    #   `COMPLETE`, this will be `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_version_arn
+    #   The Amazon Resource Name (ARN) of this specific version of the type
+    #   being registered.
+    #
+    #   For registration requests with a `ProgressStatus` of other than
+    #   `COMPLETE`, this will be `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeRegistrationOutput AWS API Documentation
+    #
+    class DescribeTypeRegistrationOutput < Struct.new(
+      :progress_status,
+      :description,
+      :type_arn,
+      :type_version_arn)
       include Aws::Structure
     end
 
@@ -3279,6 +3580,317 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTypeRegistrationsInput
+    #   data as a hash:
+    #
+    #       {
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName",
+    #         type_arn: "TypeArn",
+    #         registration_status_filter: "COMPLETE", # accepts COMPLETE, IN_PROGRESS, FAILED
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_status_filter
+    #   The current status of the type registration request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request didn't return all of the
+    #   remaining results, the response object's `NextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   this action again and assign that token to the request object's
+    #   `NextToken` parameter. If there are no remaining results, the
+    #   previous response object's `NextToken` parameter is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeRegistrationsInput AWS API Documentation
+    #
+    class ListTypeRegistrationsInput < Struct.new(
+      :type,
+      :type_name,
+      :type_arn,
+      :registration_status_filter,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_token_list
+    #   A list of type registration tokens.
+    #
+    #   Use ` DescribeTypeRegistration ` to return detailed information
+    #   about a type registration request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all of the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call this action again and assign that token to the request
+    #   object's `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeRegistrationsOutput AWS API Documentation
+    #
+    class ListTypeRegistrationsOutput < Struct.new(
+      :registration_token_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTypeVersionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName",
+    #         arn: "PrivateTypeArn",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The kind of the type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type for which you want version summary information.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type for which you want
+    #   version summary information.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request didn't return all of the
+    #   remaining results, the response object's `NextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   this action again and assign that token to the request object's
+    #   `NextToken` parameter. If there are no remaining results, the
+    #   previous response object's `NextToken` parameter is set to `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecated_status
+    #   The deprecation status of the type versions that you want to get
+    #   summary information about.
+    #
+    #   Valid values include:
+    #
+    #   * `LIVE`\: The type version is registered and can be used in
+    #     CloudFormation operations, dependent on its provisioning behavior
+    #     and visibility scope.
+    #
+    #   * `DEPRECATED`\: The type version has been deregistered and can no
+    #     longer be used in CloudFormation operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeVersionsInput AWS API Documentation
+    #
+    class ListTypeVersionsInput < Struct.new(
+      :type,
+      :type_name,
+      :arn,
+      :max_results,
+      :next_token,
+      :deprecated_status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] type_version_summaries
+    #   A list of `TypeVersionSummary` structures that contain information
+    #   about the specified type's versions.
+    #   @return [Array<Types::TypeVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all of the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call this action again and assign that token to the request
+    #   object's `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeVersionsOutput AWS API Documentation
+    #
+    class ListTypeVersionsOutput < Struct.new(
+      :type_version_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTypesInput
+    #   data as a hash:
+    #
+    #       {
+    #         visibility: "PUBLIC", # accepts PUBLIC, PRIVATE
+    #         provisioning_type: "NON_PROVISIONABLE", # accepts NON_PROVISIONABLE, IMMUTABLE, FULLY_MUTABLE
+    #         deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] visibility
+    #   The scope at which the type is visible and usable in CloudFormation
+    #   operations.
+    #
+    #   Valid values include:
+    #
+    #   * `PRIVATE`\: The type is only visible and usable within the account
+    #     in which it is registered. Currently, AWS CloudFormation marks any
+    #     types you create as `PRIVATE`.
+    #
+    #   * `PUBLIC`\: The type is publically visible and usable within any
+    #     Amazon account.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_type
+    #   The provisioning behavior of the type. AWS CloudFormation determines
+    #   the provisioning type during registration, based on the types of
+    #   handlers in the schema handler package submitted.
+    #
+    #   Valid values include:
+    #
+    #   * `FULLY_MUTABLE`\: The type includes an update handler to process
+    #     updates to the type during stack update operations.
+    #
+    #   * `IMMUTABLE`\: The type does not include an update handler, so the
+    #     type cannot be updated and must instead be replaced during stack
+    #     update operations.
+    #
+    #   * `NON_PROVISIONABLE`\: The type does not include create, read, and
+    #     delete handlers, and therefore cannot actually be provisioned.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecated_status
+    #   The deprecation status of the types that you want to get summary
+    #   information about.
+    #
+    #   Valid values include:
+    #
+    #   * `LIVE`\: The type is registered for use in CloudFormation
+    #     operations.
+    #
+    #   * `DEPRECATED`\: The type has been deregistered and can no longer be
+    #     used in CloudFormation operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request didn't return all of the
+    #   remaining results, the response object's `NextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   this action again and assign that token to the request object's
+    #   `NextToken` parameter. If there are no remaining results, the
+    #   previous response object's `NextToken` parameter is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypesInput AWS API Documentation
+    #
+    class ListTypesInput < Struct.new(
+      :visibility,
+      :provisioning_type,
+      :deprecated_status,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] type_summaries
+    #   A list of `TypeSummary` structures that contain information about
+    #   the specified types.
+    #   @return [Array<Types::TypeSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all of the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call this action again and assign that token to the request
+    #   object's `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypesOutput AWS API Documentation
+    #
+    class ListTypesOutput < Struct.new(
+      :type_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Contains logging configuration information for a type.
+    #
+    # @note When making an API call, you may pass LoggingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         log_role_arn: "RoleArn", # required
+    #         log_group_name: "LogGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] log_role_arn
+    #   The ARN of the role that CloudFormation should assume when sending
+    #   log entries to CloudWatch logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The Amazon CloudWatch log group to which CloudFormation sends error
+    #   logging information when invoking the type's handlers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/LoggingConfig AWS API Documentation
+    #
+    class LoggingConfig < Struct.new(
+      :log_role_arn,
+      :log_group_name)
+      include Aws::Structure
+    end
+
     # The Output data type.
     #
     # @!attribute [rw] output_key
@@ -3478,6 +4090,201 @@ module Aws::CloudFormation
       :expected_value,
       :actual_value,
       :difference_type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RecordHandlerProgressInput
+    #   data as a hash:
+    #
+    #       {
+    #         bearer_token: "ClientToken", # required
+    #         operation_status: "PENDING", # required, accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
+    #         current_operation_status: "PENDING", # accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
+    #         status_message: "StatusMessage",
+    #         error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure
+    #         resource_model: "ResourceModel",
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] bearer_token
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_status
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] current_operation_status
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_model
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RecordHandlerProgressInput AWS API Documentation
+    #
+    class RecordHandlerProgressInput < Struct.new(
+      :bearer_token,
+      :operation_status,
+      :current_operation_status,
+      :status_message,
+      :error_code,
+      :resource_model,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RecordHandlerProgressOutput AWS API Documentation
+    #
+    class RecordHandlerProgressOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RegisterTypeInput
+    #   data as a hash:
+    #
+    #       {
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName", # required
+    #         schema_handler_package: "S3Url", # required
+    #         logging_config: {
+    #           log_role_arn: "RoleArn", # required
+    #           log_group_name: "LogGroupName", # required
+    #         },
+    #         execution_role_arn: "RoleArn",
+    #         client_request_token: "RequestToken",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Currently, the only valid value is `RESOURCE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type being registered.
+    #
+    #   We recommend that type names adhere to the following pattern:
+    #   *company\_or\_organization*\::*service*\::*type*.
+    #
+    #   <note markdown="1"> The following organization namespaces are reserved and cannot be
+    #   used in your resource type names:
+    #
+    #    * `Alexa`
+    #
+    #   * `AMZN`
+    #
+    #   * `Amazon`
+    #
+    #   * `AWS`
+    #
+    #   * `Custom`
+    #
+    #   * `Dev`
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_handler_package
+    #   A url to the S3 bucket containing the schema handler package that
+    #   contains the schema, event handlers, and associated files for the
+    #   type you want to register.
+    #
+    #   For information on generating a schema handler package for the type
+    #   you want to register, see [submit][1] in the *CloudFormation CLI
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_config
+    #   Specifies logging configuration information for a type.
+    #   @return [Types::LoggingConfig]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM execution role to use to
+    #   register the type. If your resource type calls AWS APIs in any of
+    #   its handlers, you must create an <i> <a
+    #   href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM
+    #   execution role</a> </i> that includes the necessary permissions to
+    #   call those AWS APIs, and provision that execution role in your
+    #   account. CloudFormation then assumes that execution role to provide
+    #   your resource type with the appropriate credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier that acts as an idempotency key for this
+    #   registration request. Specifying a client request token prevents
+    #   CloudFormation from generating more than one version of a type from
+    #   the same registeration request, even if the request is submitted
+    #   multiple times.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RegisterTypeInput AWS API Documentation
+    #
+    class RegisterTypeInput < Struct.new(
+      :type,
+      :type_name,
+      :schema_handler_package,
+      :logging_config,
+      :execution_role_arn,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_token
+    #   The identifier for this registration request.
+    #
+    #   Use this registration token when calling ` DescribeTypeRegistration
+    #   `, which returns information about the status and IDs of the type
+    #   registration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RegisterTypeOutput AWS API Documentation
+    #
+    class RegisterTypeOutput < Struct.new(
+      :registration_token)
       include Aws::Structure
     end
 
@@ -3894,6 +4701,53 @@ module Aws::CloudFormation
       :stack_policy_url)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass SetTypeDefaultVersionInput
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "PrivateTypeArn",
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName",
+    #         version_id: "TypeVersionId",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type for which you want
+    #   version summary information.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of a specific version of the type. The version ID is the
+    #   value at the end of the Amazon Resource Name (ARN) assigned to the
+    #   type version when it is registered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetTypeDefaultVersionInput AWS API Documentation
+    #
+    class SetTypeDefaultVersionInput < Struct.new(
+      :arn,
+      :type,
+      :type_name,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetTypeDefaultVersionOutput AWS API Documentation
+    #
+    class SetTypeDefaultVersionOutput < Aws::EmptyStructure; end
 
     # The input for the SignalResource action.
     #
@@ -5433,6 +6287,88 @@ module Aws::CloudFormation
       :parameter_key,
       :default_value,
       :no_echo,
+      :description)
+      include Aws::Structure
+    end
+
+    # Contains summary information about the specified CloudFormation type.
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version_id
+    #   The ID of the default version of the type. The default version is
+    #   used when the type version is not specified.
+    #
+    #   To set the default version of a type, use ` SetTypeDefaultVersion `.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated
+    #   When the current default version of the type was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TypeSummary AWS API Documentation
+    #
+    class TypeSummary < Struct.new(
+      :type,
+      :type_name,
+      :default_version_id,
+      :type_arn,
+      :last_updated,
+      :description)
+      include Aws::Structure
+    end
+
+    # Contains summary information about a specific version of a
+    # CloudFormation type.
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of a specific version of the type. The version ID is the
+    #   value at the end of the Amazon Resource Name (ARN) assigned to the
+    #   type version when it is registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type version.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_created
+    #   When the version was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the type version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TypeVersionSummary AWS API Documentation
+    #
+    class TypeVersionSummary < Struct.new(
+      :type,
+      :type_name,
+      :version_id,
+      :arn,
+      :time_created,
       :description)
       include Aws::Structure
     end

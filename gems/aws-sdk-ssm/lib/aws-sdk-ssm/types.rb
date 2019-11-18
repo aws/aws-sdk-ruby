@@ -2881,6 +2881,8 @@ module Aws::SSM
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         category: "OpsItemCategory",
+    #         severity: "OpsItemSeverity",
     #       }
     #
     # @!attribute [rw] description
@@ -2964,6 +2966,14 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] category
+    #   Specify a category to assign to an OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   Specify a severity to assign to an OpsItem.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItemRequest AWS API Documentation
     #
     class CreateOpsItemRequest < Struct.new(
@@ -2974,7 +2984,9 @@ module Aws::SSM
       :related_ops_items,
       :source,
       :title,
-      :tags)
+      :tags,
+      :category,
+      :severity)
       include Aws::Structure
     end
 
@@ -3182,12 +3194,26 @@ module Aws::SSM
     #
     #       {
     #         sync_name: "ResourceDataSyncName", # required
-    #         s3_destination: { # required
+    #         s3_destination: {
     #           bucket_name: "ResourceDataSyncS3BucketName", # required
     #           prefix: "ResourceDataSyncS3Prefix",
     #           sync_format: "JsonSerDe", # required, accepts JsonSerDe
     #           region: "ResourceDataSyncS3Region", # required
     #           awskms_key_arn: "ResourceDataSyncAWSKMSKeyARN",
+    #         },
+    #         sync_type: "ResourceDataSyncType",
+    #         sync_source: {
+    #           source_type: "ResourceDataSyncSourceType", # required
+    #           aws_organizations_source: {
+    #             organization_source_type: "ResourceDataSyncOrganizationSourceType", # required
+    #             organizational_units: [
+    #               {
+    #                 organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
+    #               },
+    #             ],
+    #           },
+    #           source_regions: ["ResourceDataSyncSourceRegion"], # required
+    #           include_future_regions: false,
     #         },
     #       }
     #
@@ -3199,11 +3225,24 @@ module Aws::SSM
     #   Amazon S3 configuration details for the sync.
     #   @return [Types::ResourceDataSyncS3Destination]
     #
+    # @!attribute [rw] sync_type
+    #   Specify `SyncToDestination` to create a resource data sync that
+    #   synchronizes data from multiple AWS Regions to an Amazon S3 bucket.
+    #   Specify `SyncFromSource` to synchronize data from multiple AWS
+    #   accounts and Regions, as listed in AWS Organizations.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_source
+    #   Specify information about the data sources to synchronize.
+    #   @return [Types::ResourceDataSyncSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateResourceDataSyncRequest AWS API Documentation
     #
     class CreateResourceDataSyncRequest < Struct.new(
       :sync_name,
-      :s3_destination)
+      :s3_destination,
+      :sync_type,
+      :sync_source)
       include Aws::Structure
     end
 
@@ -3521,16 +3560,22 @@ module Aws::SSM
     #
     #       {
     #         sync_name: "ResourceDataSyncName", # required
+    #         sync_type: "ResourceDataSyncType",
     #       }
     #
     # @!attribute [rw] sync_name
     #   The name of the configuration to delete.
     #   @return [String]
     #
+    # @!attribute [rw] sync_type
+    #   Specify the type of resource data sync to delete.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSyncRequest AWS API Documentation
     #
     class DeleteResourceDataSyncRequest < Struct.new(
-      :sync_name)
+      :sync_name,
+      :sync_type)
       include Aws::Structure
     end
 
@@ -5234,7 +5279,7 @@ module Aws::SSM
     #       {
     #         ops_item_filters: [
     #           {
-    #             key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId
+    #             key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity
     #             values: ["OpsItemFilterValue"], # required
     #             operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
     #           },
@@ -7477,6 +7522,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
+    #         sync_name: "ResourceDataSyncName",
     #         filters: [
     #           {
     #             key: "OpsFilterKey", # required
@@ -7484,7 +7530,7 @@ module Aws::SSM
     #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #           },
     #         ],
-    #         aggregators: [ # required
+    #         aggregators: [
     #           {
     #             aggregator_type: "OpsAggregatorType",
     #             type_name: "OpsDataTypeName",
@@ -7504,9 +7550,18 @@ module Aws::SSM
     #             },
     #           },
     #         ],
+    #         result_attributes: [
+    #           {
+    #             type_name: "OpsDataTypeName", # required
+    #           },
+    #         ],
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
+    #
+    # @!attribute [rw] sync_name
+    #   Specify the name of a resource data sync to get.
+    #   @return [String]
     #
     # @!attribute [rw] filters
     #   Optional filters used to scope down the returned OpsItems.
@@ -7516,6 +7571,10 @@ module Aws::SSM
     #   Optional aggregators that return counts of OpsItems based on one or
     #   more expressions.
     #   @return [Array<Types::OpsAggregator>]
+    #
+    # @!attribute [rw] result_attributes
+    #   The OpsItem data type to return.
+    #   @return [Array<Types::OpsResultAttribute>]
     #
     # @!attribute [rw] next_token
     #   A token to start the list. Use this token to get the next set of
@@ -7531,8 +7590,10 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsSummaryRequest AWS API Documentation
     #
     class GetOpsSummaryRequest < Struct.new(
+      :sync_name,
       :filters,
       :aggregators,
+      :result_attributes,
       :next_token,
       :max_results)
       include Aws::Structure
@@ -10227,9 +10288,18 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
+    #         sync_type: "ResourceDataSyncType",
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
+    #
+    # @!attribute [rw] sync_type
+    #   View a list of resource data syncs according to the sync type.
+    #   Specify `SyncToDestination` to view resource data syncs that
+    #   synchronize data to an Amazon S3 buckets. Specify `SyncFromSource`
+    #   to view resource data syncs from AWS Organizations or from multiple
+    #   AWS Regions.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   A token to start the list. Use this token to get the next set of
@@ -10245,6 +10315,7 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceDataSyncRequest AWS API Documentation
     #
     class ListResourceDataSyncRequest < Struct.new(
+      :sync_type,
       :next_token,
       :max_results)
       include Aws::Structure
@@ -11348,6 +11419,10 @@ module Aws::SSM
 
     # The OpsItem summaries result item.
     #
+    # @!attribute [rw] capture_time
+    #   The time OpsItem data was captured.
+    #   @return [String]
+    #
     # @!attribute [rw] content
     #   The detailed data content for an OpsItem summaries result item.
     #   @return [Array<Hash<String,String>>]
@@ -11355,6 +11430,7 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsEntityItem AWS API Documentation
     #
     class OpsEntityItem < Struct.new(
+      :capture_time,
       :content)
       include Aws::Structure
     end
@@ -11497,6 +11573,15 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
     #   @return [Hash<String,Types::OpsItemDataValue>]
     #
+    # @!attribute [rw] category
+    #   An OpsItem category. Category options include: Availability, Cost,
+    #   Performance, Recovery, Security.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the OpsItem. Severity options range from 1 to 4.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItem AWS API Documentation
     #
     class OpsItem < Struct.new(
@@ -11513,7 +11598,9 @@ module Aws::SSM
       :version,
       :title,
       :source,
-      :operational_data)
+      :operational_data,
+      :category,
+      :severity)
       include Aws::Structure
     end
 
@@ -11567,7 +11654,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId
+    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity
     #         values: ["OpsItemFilterValue"], # required
     #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
     #       }
@@ -11721,6 +11808,14 @@ module Aws::SSM
     #   details about the OpsItem.
     #   @return [Hash<String,Types::OpsItemDataValue>]
     #
+    # @!attribute [rw] category
+    #   A list of OpsItems by category.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   A list of OpsItems by severity.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemSummary AWS API Documentation
     #
     class OpsItemSummary < Struct.new(
@@ -11733,7 +11828,31 @@ module Aws::SSM
       :status,
       :ops_item_id,
       :title,
-      :operational_data)
+      :operational_data,
+      :category,
+      :severity)
+      include Aws::Structure
+    end
+
+    # The OpsItem data type to return.
+    #
+    # @note When making an API call, you may pass OpsResultAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         type_name: "OpsDataTypeName", # required
+    #       }
+    #
+    # @!attribute [rw] type_name
+    #   Name of the data type. Valid value: AWS:OpsItem,
+    #   AWS:EC2InstanceInformation, AWS:OpsItemTrendline, or
+    #   AWS:ComplianceSummary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsResultAttribute AWS API Documentation
+    #
+    class OpsResultAttribute < Struct.new(
+      :type_name)
       include Aws::Structure
     end
 
@@ -13642,6 +13761,43 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Information about the AwsOrganizationsSource resource data sync
+    # source. A sync source of this type can synchronize data from AWS
+    # Organizations or, if an AWS Organization is not present, from multiple
+    # AWS Regions.
+    #
+    # @note When making an API call, you may pass ResourceDataSyncAwsOrganizationsSource
+    #   data as a hash:
+    #
+    #       {
+    #         organization_source_type: "ResourceDataSyncOrganizationSourceType", # required
+    #         organizational_units: [
+    #           {
+    #             organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] organization_source_type
+    #   If an AWS Organization is present, this is either
+    #   `OrganizationalUnits` or `EntireOrganization`. For
+    #   `OrganizationalUnits`, the data is aggregated from a set of
+    #   organization units. For `EntireOrganization`, the data is aggregated
+    #   from the entire AWS Organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_units
+    #   The AWS Organizations organization units included in the sync.
+    #   @return [Array<Types::ResourceDataSyncOrganizationalUnit>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncAwsOrganizationsSource AWS API Documentation
+    #
+    class ResourceDataSyncAwsOrganizationsSource < Struct.new(
+      :organization_source_type,
+      :organizational_units)
+      include Aws::Structure
+    end
+
     # You have exceeded the allowed maximum sync configurations.
     #
     # @!attribute [rw] message
@@ -13673,6 +13829,18 @@ module Aws::SSM
     #   The name of the Resource Data Sync.
     #   @return [String]
     #
+    # @!attribute [rw] sync_type
+    #   The type of resource data sync. If `SyncType` is
+    #   `SyncToDestination`, then the resource data sync synchronizes data
+    #   to an Amazon S3 bucket. If the `SyncType` is `SyncFromSource` then
+    #   the resource data sync synchronizes data from AWS Organizations or
+    #   from multiple AWS Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_source
+    #   Information about the source where the data was synchronized.
+    #   @return [Types::ResourceDataSyncSourceWithState]
+    #
     # @!attribute [rw] s3_destination
     #   Configuration information for the target Amazon S3 bucket.
     #   @return [Types::ResourceDataSyncS3Destination]
@@ -13684,6 +13852,10 @@ module Aws::SSM
     # @!attribute [rw] last_successful_sync_time
     #   The last time the sync operations returned a status of `SUCCESSFUL`
     #   (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] sync_last_modified_time
+    #   The date and time the resource data sync was changed.
     #   @return [Time]
     #
     # @!attribute [rw] last_status
@@ -13702,9 +13874,12 @@ module Aws::SSM
     #
     class ResourceDataSyncItem < Struct.new(
       :sync_name,
+      :sync_type,
+      :sync_source,
       :s3_destination,
       :last_sync_time,
       :last_successful_sync_time,
+      :sync_last_modified_time,
       :last_status,
       :sync_created_time,
       :last_sync_status_message)
@@ -13716,10 +13891,38 @@ module Aws::SSM
     # @!attribute [rw] sync_name
     #   @return [String]
     #
+    # @!attribute [rw] sync_type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncNotFoundException AWS API Documentation
     #
     class ResourceDataSyncNotFoundException < Struct.new(
-      :sync_name)
+      :sync_name,
+      :sync_type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The AWS Organizations organizational unit data source for the sync.
+    #
+    # @note When making an API call, you may pass ResourceDataSyncOrganizationalUnit
+    #   data as a hash:
+    #
+    #       {
+    #         organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
+    #       }
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The AWS Organization unit ID data source for the sync.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncOrganizationalUnit AWS API Documentation
+    #
+    class ResourceDataSyncOrganizationalUnit < Struct.new(
+      :organizational_unit_id)
       include Aws::Structure
     end
 
@@ -13769,6 +13972,119 @@ module Aws::SSM
       :sync_format,
       :region,
       :awskms_key_arn)
+      include Aws::Structure
+    end
+
+    # Information about the source of the data included in the resource data
+    # sync.
+    #
+    # @note When making an API call, you may pass ResourceDataSyncSource
+    #   data as a hash:
+    #
+    #       {
+    #         source_type: "ResourceDataSyncSourceType", # required
+    #         aws_organizations_source: {
+    #           organization_source_type: "ResourceDataSyncOrganizationSourceType", # required
+    #           organizational_units: [
+    #             {
+    #               organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
+    #             },
+    #           ],
+    #         },
+    #         source_regions: ["ResourceDataSyncSourceRegion"], # required
+    #         include_future_regions: false,
+    #       }
+    #
+    # @!attribute [rw] source_type
+    #   The type of data source for the resource data sync. `SourceType` is
+    #   either `AwsOrganizations` (if an organization is present in AWS
+    #   Organizations) or `singleAccountMultiRegions`.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_organizations_source
+    #   The field name in `SyncSource` for the
+    #   `ResourceDataSyncAwsOrganizationsSource` type.
+    #   @return [Types::ResourceDataSyncAwsOrganizationsSource]
+    #
+    # @!attribute [rw] source_regions
+    #   The `SyncSource` AWS Regions included in the resource data sync.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include_future_regions
+    #   Whether to automatically synchronize and aggregate data from new AWS
+    #   Regions when those Regions come online.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncSource AWS API Documentation
+    #
+    class ResourceDataSyncSource < Struct.new(
+      :source_type,
+      :aws_organizations_source,
+      :source_regions,
+      :include_future_regions)
+      include Aws::Structure
+    end
+
+    # The data type name for including resource data sync state. There are
+    # four sync states:
+    #
+    # `OrganizationNotExists` (Your organization doesn't exist)
+    #
+    # `NoPermissions` (The system can't locate the service-linked role.
+    # This role is automatically created when a user creates a resource data
+    # sync in Explorer.)
+    #
+    # `InvalidOrganizationalUnit` (You specified or selected an invalid unit
+    # in the resource data sync configuration.)
+    #
+    # `TrustedAccessDisabled` (You disabled Systems Manager access in the
+    # organization in AWS Organizations.)
+    #
+    # @!attribute [rw] source_type
+    #   The type of data source for the resource data sync. `SourceType` is
+    #   either `AwsOrganizations` (if an organization is present in AWS
+    #   Organizations) or `singleAccountMultiRegions`.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_organizations_source
+    #   The field name in `SyncSource` for the
+    #   `ResourceDataSyncAwsOrganizationsSource` type.
+    #   @return [Types::ResourceDataSyncAwsOrganizationsSource]
+    #
+    # @!attribute [rw] source_regions
+    #   The `SyncSource` AWS Regions included in the resource data sync.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include_future_regions
+    #   Whether to automatically synchronize and aggregate data from new AWS
+    #   Regions when those Regions come online.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] state
+    #   The data type name for including resource data sync state. There are
+    #   four sync states:
+    #
+    #   `OrganizationNotExists`\: Your organization doesn't exist.
+    #
+    #   `NoPermissions`\: The system can't locate the service-linked role.
+    #   This role is automatically created when a user creates a resource
+    #   data sync in Explorer.
+    #
+    #   `InvalidOrganizationalUnit`\: You specified or selected an invalid
+    #   unit in the resource data sync configuration.
+    #
+    #   `TrustedAccessDisabled`\: You disabled Systems Manager access in the
+    #   organization in AWS Organizations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncSourceWithState AWS API Documentation
+    #
+    class ResourceDataSyncSourceWithState < Struct.new(
+      :source_type,
+      :aws_organizations_source,
+      :source_regions,
+      :include_future_regions,
+      :state)
       include Aws::Structure
     end
 
@@ -14971,9 +15287,21 @@ module Aws::SSM
     # * (Maintenance window targets only)
     #   `Key=resource-groups:Name,Values=ProductionResourceGroup`
     #
+    #   This example demonstrates how to target all resources in the
+    #   resource group **ProductionResourceGroup** in your maintenance
+    #   window.
+    #
     # * (Maintenance window targets only)
     #   `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
     #   `
+    #
+    #   This example demonstrates how to target only Amazon EC2 instances
+    #   and VPCs in your maintenance window.
+    #
+    # * (State Manager association targets only) `Key=InstanceIds,Values=* `
+    #
+    #   This example demonstrates how to target all managed instances in the
+    #   AWS Region where the association was created.
     #
     # For information about how to send commands that target instances using
     # `Key,Value` parameters, see [Using Targets and Rate Controls to Send
@@ -16190,6 +16518,8 @@ module Aws::SSM
     #         status: "Open", # accepts Open, InProgress, Resolved
     #         ops_item_id: "OpsItemId", # required
     #         title: "OpsItemTitle",
+    #         category: "OpsItemCategory",
+    #         severity: "OpsItemSeverity",
     #       }
     #
     # @!attribute [rw] description
@@ -16271,6 +16601,14 @@ module Aws::SSM
     #   impacted resource.
     #   @return [String]
     #
+    # @!attribute [rw] category
+    #   Specify a new category for an OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   Specify a new severity for an OpsItem.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItemRequest AWS API Documentation
     #
     class UpdateOpsItemRequest < Struct.new(
@@ -16282,7 +16620,9 @@ module Aws::SSM
       :related_ops_items,
       :status,
       :ops_item_id,
-      :title)
+      :title,
+      :category,
+      :severity)
       include Aws::Structure
     end
 

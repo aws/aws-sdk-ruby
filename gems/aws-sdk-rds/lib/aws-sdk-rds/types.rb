@@ -2993,6 +2993,13 @@ module Aws::RDS
     #   protection is enabled. By default, deletion protection is disabled.
     #   For more information, see [ Deleting a DB Instance][1].
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. You can enable or disable deletion protection for
+    #   the DB cluster. For more information, see `CreateDBCluster`. DB
+    #   instances in a DB cluster can be deleted even when deletion
+    #   protection is enabled for the DB cluster.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
@@ -10403,10 +10410,11 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Value must be `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, or
-    #     `256`.
+    #   * For Aurora MySQL, valid capacity values are `1`, `2`, `4`, `8`,
+    #     `16`, `32`, `64`, `128`, and `256`.
     #
-    #   ^
+    #   * For Aurora PostgreSQL, valid capacity values are `2`, `4`, `8`,
+    #     `16`, `32`, `64`, `192`, and `384`.
     #   @return [Integer]
     #
     # @!attribute [rw] seconds_before_timeout
@@ -11847,6 +11855,16 @@ module Aws::RDS
     #   * `11.2.0.4.v12` (supported for 11.2.0.2 DB snapshots)
     #
     #   * `11.2.0.4.v11` (supported for 11.2.0.3 DB snapshots)
+    #
+    #   **PostgreSQL**
+    #
+    #   For the list of engine versions that are available for upgrading a
+    #   DB snapshot, see [ Upgrading the PostgreSQL DB Engine for Amazon
+    #   RDS][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion
     #   @return [String]
     #
     # @!attribute [rw] option_group_name
@@ -16324,8 +16342,11 @@ module Aws::RDS
     #   The minimum capacity for an Aurora DB cluster in `serverless` DB
     #   engine mode.
     #
-    #   Valid capacity values are `1`, `2`, `4`, `8`, `16`, `32`, `64`,
-    #   `128`, and `256`.
+    #   For Aurora MySQL, valid capacity values are `1`, `2`, `4`, `8`,
+    #   `16`, `32`, `64`, `128`, and `256`.
+    #
+    #   For Aurora PostgreSQL, valid capacity values are `2`, `4`, `8`,
+    #   `16`, `32`, `64`, `192`, and `384`.
     #
     #   The minimum capacity must be less than or equal to the maximum
     #   capacity.
@@ -16335,8 +16356,11 @@ module Aws::RDS
     #   The maximum capacity for an Aurora DB cluster in `serverless` DB
     #   engine mode.
     #
-    #   Valid capacity values are `1`, `2`, `4`, `8`, `16`, `32`, `64`,
-    #   `128`, and `256`.
+    #   For Aurora MySQL, valid capacity values are `1`, `2`, `4`, `8`,
+    #   `16`, `32`, `64`, `128`, and `256`.
+    #
+    #   For Aurora PostgreSQL, valid capacity values are `2`, `4`, `8`,
+    #   `16`, `32`, `64`, `192`, and `384`.
     #
     #   The maximum capacity must be greater than or equal to the minimum
     #   capacity.

@@ -46,7 +46,7 @@ module Aws::S3
       @id
     end
 
-    
+    # The entity tag is an MD5 hash of that version of the object
     # @return [String]
     def etag
       data[:etag]
@@ -89,7 +89,7 @@ module Aws::S3
       data[:last_modified]
     end
 
-    
+    # Specifies the Owner of the object.
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -233,6 +233,8 @@ module Aws::S3
     # @option options [String] :mfa
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication device.
+    #   Required to permanently delete a versionedobject if versioning is
+    #   configured with MFA Deleteenabled.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -240,7 +242,7 @@ module Aws::S3
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
-    #   Indicates whether Amazon S3 object lock should bypass governance-mode
+    #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
     # @return [Types::DeleteObjectOutput]
     def delete(options = {})
@@ -475,6 +477,8 @@ module Aws::S3
       # @option options [String] :mfa
       #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
+      #   Required to permanently delete a versioned object if versioning is
+      #   configured with MFA Delete enabled.
       # @option options [String] :request_payer
       #   Confirms that the requester knows that she or he will be charged for
       #   the request. Bucket owners need not specify this parameter in their
@@ -483,7 +487,7 @@ module Aws::S3
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
-      #   Governance-type object lock in place. You must have sufficient
+      #   Governance-type Object Lock in place. You must have sufficient
       #   permissions to perform this operation.
       # @return [void]
       def batch_delete!(options = {})

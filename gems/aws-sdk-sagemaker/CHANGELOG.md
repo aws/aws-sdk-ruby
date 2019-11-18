@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2019-11-18)
+------------------
+
+* Feature - Amazon SageMaker now supports multi-model endpoints to host multiple models on an endpoint using a single inference container.
+
 1.46.0 (2019-10-24)
 ------------------
 
