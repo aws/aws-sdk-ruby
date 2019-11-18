@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::CloudFormation - Updated the API, documentation, and waiters for AWS CloudFormation.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::SageMakerRuntime - Updated the API, and documentation for Amazon SageMaker Runtime.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.399 (2019-11-15)
 ------------------
 
