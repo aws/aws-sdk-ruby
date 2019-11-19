@@ -102,17 +102,17 @@ module Aws
           .to_return(
             :status => 200,
             :body => "my-token\n",
-            :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
-          )
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
+          )-
         stub_request(
           :get,
           "http://169.254.169.254/latest/meta-data/iam/security-credentials/"
-        ).with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+        ).with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(
           :get,
           "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name"
-        ).with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+        ).with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => <<-JSON.strip)
 {
   "Code" : "Success",
@@ -247,13 +247,13 @@ JSON
           .to_return(
             :status => 200,
             :body => "my-token\n",
-            :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
           )
         stub_request(:get, "http://169.254.169.254/latest/meta-data/iam/security-credentials/")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(:get, "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => resp)
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: profile,
@@ -343,17 +343,17 @@ JSON
           .to_return(
             :status => 200,
             :body => "my-token\n",
-            :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
           )
         stub_request(
           :get,
           "http://169.254.169.254/latest/meta-data/iam/security-credentials/"
-        ).with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+        ).with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(
           :get,
           "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name"
-        ).with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+        ).with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => <<-JSON.strip)
 {
   "Code" : "Success",
