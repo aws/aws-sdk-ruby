@@ -11,12 +11,6 @@ module Aws
     # @api private
     class Non200Response < RuntimeError; end
 
-    # @api private
-    class TokenRetrivalError < RuntimeError; end
-
-    # @api private
-    class TokenExpiredError < RuntimeError; end
-
     # These are the errors we trap when attempting to talk to the
     # instance metadata service.  Any of these imply the service
     # is not present, no responding or some other non-recoverable
@@ -32,14 +26,6 @@ module Aws
       Non200Response,
     ]
 
-    # Path base for GET request for profile and credentials
-    # @api private
-    METADATA_PATH_BASE = '/latest/meta-data/iam/security-credentials/'
-
-    # Path for PUT request for token
-    # @api private
-    METADATA_TOKEN_PATH = '/latest/api/token'
-
     # @param [Hash] options
     # @option options [Integer] :retries (5) Number of times to retry
     #   when retrieving credentials.
@@ -54,9 +40,6 @@ module Aws
     # @option options [IO] :http_debug_output (nil) HTTP wire
     #   traces are sent to this object.  You can specify something
     #   like $stdout.
-    # @option options [Integer] :token_ttl Time-to-Live in seconds for EC2
-    #   Metadata Token used for fetching Metadata Profile Credentials, defaults
-    #   to 21600 seconds
     def initialize options = {}
       @retries = options[:retries] || 5
       @ip_address = options[:ip_address] || '169.254.169.254'
@@ -65,7 +48,6 @@ module Aws
       @http_read_timeout = options[:http_read_timeout] || 5
       @http_debug_output = options[:http_debug_output]
       @backoff = backoff(options[:backoff])
-      @token_ttl = options[:token_ttl] || 21600
       super
     end
 
@@ -112,38 +94,15 @@ module Aws
         begin
           retry_errors(NETWORK_ERRORS, max_retries: @retries) do
             open_connection do |conn|
-              # attempt to fetch token to start secure flow first
-              # and rescue to failover
-              begin
-                retry_errors(NETWORK_ERRORS, max_retries: @retries) do
-                  unless token_set?
-                    token_value, ttl = http_put(conn, METADATA_TOKEN_PATH, @token_ttl)
-                    @token = Token.new(token_value, ttl) if token_value && ttl
-                  end
-                end
-              rescue *NETWORK_ERRORS
-                # token attempt failed, reset token
-                # fallback to non-token mode
-                @token = nil
-              end
-
-              if token_set?
-                profile_name = http_get(conn, METADATA_PATH_BASE, @token.value).lines.first.strip
-                http_get(conn, METADATA_PATH_BASE + profile_name, @token.value)
-              else
-                profile_name = http_get(conn, METADATA_PATH_BASE).lines.first.strip
-                http_get(conn, METADATA_PATH_BASE + profile_name)
-              end
+              path = '/latest/meta-data/iam/security-credentials/'
+              profile_name = http_get(conn, path).lines.first.strip
+              http_get(conn, path + profile_name)
             end
           end
         rescue
           '{}'
         end
       end
-    end
-
-    def token_set?
-      @token && !@token.expired?
     end
 
     def _metadata_disabled?
@@ -160,35 +119,10 @@ module Aws
       yield(http).tap { http.finish }
     end
 
-    # GET request fetch profile and credentials
-    def http_get(connection, path, token=nil)
-      headers = {"User-Agent" => "aws-sdk-ruby3/#{CORE_GEM_VERSION}"}
-      headers["x-aws-ec2-metadata-token"] = token if token
-      response = connection.request(Net::HTTP::Get.new(path, headers))
+    def http_get(connection, path)
+      response = connection.request(Net::HTTP::Get.new(path, {"User-Agent" => "aws-sdk-ruby3/#{CORE_GEM_VERSION}"}))
       if response.code.to_i == 200
         response.body
-      else
-        raise Non200Response
-      end
-    end
-
-    # PUT request fetch token with ttl
-    def http_put(connection, path, ttl)
-      headers = {
-        "User-Agent" => "aws-sdk-ruby3/#{CORE_GEM_VERSION}",
-        "x-aws-ec2-metadata-token-ttl-seconds" => ttl.to_s
-      }
-      response = connection.request(Net::HTTP::Put.new(path, headers))
-      case response.code.to_i
-      when 200
-        [
-          response.body,
-          response.header["x-aws-ec2-metadata-token-ttl-seconds"].to_i
-        ]
-      when 401
-        raise TokenExpiredError
-      when 400
-        raise TokenRetrivalError
       else
         raise Non200Response
       end
@@ -208,25 +142,6 @@ module Aws
           raise
         end
       end
-    end
-
-    # @api private
-    # Token used to fetch IMDS profile and credentials
-    class Token
-
-      def initialize(value, ttl)
-        @ttl = ttl
-        @value = value
-        @created_time = Time.now
-      end
-
-      # [String] token value
-      attr_reader :value
-
-      def expired?
-        Time.now - @created_time > @ttl
-      end
-
     end
 
   end
