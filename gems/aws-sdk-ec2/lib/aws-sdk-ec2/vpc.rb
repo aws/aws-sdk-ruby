@@ -846,9 +846,8 @@ module Aws::EC2
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
-    #     the instance. Specified as an ARN.
-    #
-    #   * `image-id` - The ID of the image used to launch the instance.
+    #     the instance. Specified as an ARN. `image-id` - The ID of the image
+    #     used to launch the instance.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -884,6 +883,15 @@ module Aws::EC2
     #     and so on).
     #
     #   * `launch-time` - The time when the instance was launched.
+    #
+    #   * `metadata-http-tokens` - The metadata request authorization state
+    #     (`optional` \| `required`)
+    #
+    #   * `metadata-http-put-response-hop-limit` - The http metadata request
+    #     put response hop limit (integer, possible values `1` to `64`)
+    #
+    #   * `metadata-http-endpoint` - Enable or disable metadata access on http
+    #     endpoint (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).

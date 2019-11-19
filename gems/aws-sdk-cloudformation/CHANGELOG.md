@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2019-11-19)
+------------------
+
+* Feature - This release of AWS CloudFormation StackSets enables users to detect drift on a stack set and the stack instances that belong to that stack set.
+
 1.28.0 (2019-11-18)
 ------------------
 

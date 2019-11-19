@@ -38,8 +38,8 @@ module Aws::IAM
 
     # The stable and unique string identifying the policy.
     #
-    # For more information about IDs, see [IAM Identifiers][1] in the *Using
-    # IAM* guide.
+    # For more information about IDs, see [IAM Identifiers][1] in the *IAM
+    # User Guide*.
     #
     #
     #
@@ -51,8 +51,8 @@ module Aws::IAM
 
     # The path to the policy.
     #
-    # For more information about paths, see [IAM Identifiers][1] in the
-    # *Using IAM* guide.
+    # For more information about paths, see [IAM Identifiers][1] in the *IAM
+    # User Guide*.
     #
     #
     #

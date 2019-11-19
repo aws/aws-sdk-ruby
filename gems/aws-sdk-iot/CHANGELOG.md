@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2019-11-19)
+------------------
+
+* Feature - As part of this release, we are extending the capability of AWS IoT Rules Engine to send messages directly to customer's own web services/applications. Customers can now create topic rules with HTTP actions to route messages from IoT Core directly to URL's that they own. Ownership is proved by creating and confirming topic rule destinations.
+
 1.39.0 (2019-11-13)
 ------------------
 

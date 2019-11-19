@@ -4463,6 +4463,7 @@ module Aws::EC2
     #         public_ip: "String",
     #         certificate_arn: "String",
     #         type: "ipsec.1", # required, accepts ipsec.1
+    #         device_name: "String",
     #         dry_run: false,
     #       }
     #
@@ -4486,6 +4487,12 @@ module Aws::EC2
     #   (`ipsec.1`).
     #   @return [String]
     #
+    # @!attribute [rw] device_name
+    #   A name for the customer gateway device.
+    #
+    #   Length Constraints: Up to 255 characters.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -4500,6 +4507,7 @@ module Aws::EC2
       :public_ip,
       :certificate_arn,
       :type,
+      :device_name,
       :dry_run)
       include Aws::Structure
     end
@@ -8400,6 +8408,10 @@ module Aws::EC2
     #   (`ipsec.1`).
     #   @return [String]
     #
+    # @!attribute [rw] device_name
+    #   The name of customer gateway device.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Any tags assigned to the customer gateway.
     #   @return [Array<Types::Tag>]
@@ -8413,6 +8425,7 @@ module Aws::EC2
       :certificate_arn,
       :state,
       :type,
+      :device_name,
       :tags)
       include Aws::Structure
     end
@@ -13130,9 +13143,8 @@ module Aws::EC2
     #     `xen`).
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
-    #     the instance. Specified as an ARN.
-    #
-    #   * `image-id` - The ID of the image used to launch the instance.
+    #     the instance. Specified as an ARN. `image-id` - The ID of the
+    #     image used to launch the instance.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -13169,6 +13181,15 @@ module Aws::EC2
     #     and so on).
     #
     #   * `launch-time` - The time when the instance was launched.
+    #
+    #   * `metadata-http-tokens` - The metadata request authorization state
+    #     (`optional` \| `required`)
+    #
+    #   * `metadata-http-put-response-hop-limit` - The http metadata request
+    #     put response hop limit (integer, possible values `1` to `64`)
+    #
+    #   * `metadata-http-endpoint` - Enable or disable metadata access on
+    #     http endpoint (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
@@ -18695,6 +18716,9 @@ module Aws::EC2
     #
     #   * `vpn-gateway-id` - The ID of a virtual private gateway associated
     #     with the VPN connection.
+    #
+    #   * `transit-gateway-id` - The ID of a transit gateway associated with
+    #     the VPN connection.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] vpn_connection_ids
@@ -24273,6 +24297,10 @@ module Aws::EC2
     #   The license configurations.
     #   @return [Array<Types::LicenseConfiguration>]
     #
+    # @!attribute [rw] metadata_options
+    #   The metadata options for the instance.
+    #   @return [Types::InstanceMetadataOptionsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -24320,7 +24348,8 @@ module Aws::EC2
       :capacity_reservation_id,
       :capacity_reservation_specification,
       :hibernation_options,
-      :licenses)
+      :licenses,
+      :metadata_options)
       include Aws::Structure
     end
 
@@ -24653,6 +24682,126 @@ module Aws::EC2
     class InstanceMarketOptionsRequest < Struct.new(
       :market_type,
       :spot_options)
+      include Aws::Structure
+    end
+
+    # The metadata options for the instance.
+    #
+    # @note When making an API call, you may pass InstanceMetadataOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         http_tokens: "optional", # accepts optional, required
+    #         http_put_response_hop_limit: 1,
+    #         http_endpoint: "disabled", # accepts disabled, enabled
+    #       }
+    #
+    # @!attribute [rw] http_tokens
+    #   The state of token usage for your instance metadata requests. If the
+    #   parameter is not specified in the request, the default state is
+    #   `optional`.
+    #
+    #   If the state is `optional`, you can choose to retrieve instance
+    #   metadata with or without a signed token header on your request. If
+    #   you retrieve the IAM role credentials without a token, the version
+    #   1.0 role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid signed token, the version 2.0 role
+    #   credentials are returned.
+    #
+    #   If the state is `required`, you must send a signed token header with
+    #   any instance metadata retrieval requests. In this state, retrieving
+    #   the IAM role credentials always returns the version 2.0 credentials;
+    #   the version 1.0 credentials are not available.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. The larger the number, the further instance metadata
+    #   requests can travel.
+    #
+    #   Default: 1
+    #
+    #   Possible values: Integers from 1 to 64
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_endpoint
+    #   This parameter enables or disables the HTTP metadata endpoint on
+    #   your instances. If the parameter is not specified, the default state
+    #   is `enabled`.
+    #
+    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
+    #   your instance metadata.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataOptionsRequest AWS API Documentation
+    #
+    class InstanceMetadataOptionsRequest < Struct.new(
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint)
+      include Aws::Structure
+    end
+
+    # The metadata options for the instance.
+    #
+    # @!attribute [rw] state
+    #   The state of the metadata option changes.
+    #
+    #   `pending` - The metadata options are being updated and the instance
+    #   is not ready to process metadata traffic with the new selection.
+    #
+    #   `applied` - The metadata options have been successfully applied on
+    #   the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_tokens
+    #   The state of token usage for your instance metadata requests. If the
+    #   parameter is not specified in the request, the default state is
+    #   `optional`.
+    #
+    #   If the state is `optional`, you can choose to retrieve instance
+    #   metadata with or without a signed token header on your request. If
+    #   you retrieve the IAM role credentials without a token, the version
+    #   1.0 role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid signed token, the version 2.0 role
+    #   credentials are returned.
+    #
+    #   If the state is `required`, you must send a signed token header with
+    #   any instance metadata retrieval requests. In this state, retrieving
+    #   the IAM role credential always returns the version 2.0 credentials;
+    #   the version 1.0 credentials are not available.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. The larger the number, the further instance metadata
+    #   requests can travel.
+    #
+    #   Default: 1
+    #
+    #   Possible values: Integers from 1 to 64
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_endpoint
+    #   This parameter enables or disables the HTTP metadata endpoint on
+    #   your instances. If the parameter is not specified, the default state
+    #   is `enabled`.
+    #
+    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
+    #   your instance metadata.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataOptionsResponse AWS API Documentation
+    #
+    class InstanceMetadataOptionsResponse < Struct.new(
+      :state,
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint)
       include Aws::Structure
     end
 
@@ -28046,6 +28195,93 @@ module Aws::EC2
     #
     class ModifyInstanceEventStartTimeResult < Struct.new(
       :event)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyInstanceMetadataOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "String", # required
+    #         http_tokens: "optional", # accepts optional, required
+    #         http_put_response_hop_limit: 1,
+    #         http_endpoint: "disabled", # accepts disabled, enabled
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_tokens
+    #   The state of token usage for your instance metadata requests. If the
+    #   parameter is not specified in the request, the default state is
+    #   `optional`.
+    #
+    #   If the state is `optional`, you can choose to retrieve instance
+    #   metadata with or without a signed token header on your request. If
+    #   you retrieve the IAM role credentials without a token, the version
+    #   1.0 role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid signed token, the version 2.0 role
+    #   credentials are returned.
+    #
+    #   If the state is `required`, you must send a signed token header with
+    #   any instance metadata retrieval requests. In this state, retrieving
+    #   the IAM role credential always returns the version 2.0 credentials;
+    #   the version 1.0 credentials are not available.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. The larger the number, the further instance metadata
+    #   requests can travel. If no parameter is specified, the existing
+    #   state is maintained.
+    #
+    #   Possible values: Integers from 1 to 64
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_endpoint
+    #   This parameter enables or disables the HTTP metadata endpoint on
+    #   your instances. If the parameter is not specified, the existing
+    #   state is maintained.
+    #
+    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
+    #   your instance metadata.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataOptionsRequest AWS API Documentation
+    #
+    class ModifyInstanceMetadataOptionsRequest < Struct.new(
+      :instance_id,
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_metadata_options
+    #   The metadata options for the instance.
+    #   @return [Types::InstanceMetadataOptionsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataOptionsResult AWS API Documentation
+    #
+    class ModifyInstanceMetadataOptionsResult < Struct.new(
+      :instance_id,
+      :instance_metadata_options)
       include Aws::Structure
     end
 
@@ -35094,6 +35330,11 @@ module Aws::EC2
     #             license_configuration_arn: "String",
     #           },
     #         ],
+    #         metadata_options: {
+    #           http_tokens: "optional", # accepts optional, required
+    #           http_put_response_hop_limit: 1,
+    #           http_endpoint: "disabled", # accepts disabled, enabled
+    #         },
     #       }
     #
     # @!attribute [rw] block_device_mappings
@@ -35437,6 +35678,15 @@ module Aws::EC2
     #   The license configurations.
     #   @return [Array<Types::LicenseConfigurationRequest>]
     #
+    # @!attribute [rw] metadata_options
+    #   The metadata options for the instance. For more information, see
+    #   [Instance Metadata and User Data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   @return [Types::InstanceMetadataOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
     class RunInstancesRequest < Struct.new(
@@ -35474,7 +35724,8 @@ module Aws::EC2
       :cpu_options,
       :capacity_reservation_specification,
       :hibernation_options,
-      :license_specifications)
+      :license_specifications,
+      :metadata_options)
       include Aws::Structure
     end
 

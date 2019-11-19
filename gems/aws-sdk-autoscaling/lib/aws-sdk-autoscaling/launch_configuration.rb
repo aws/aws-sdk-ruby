@@ -179,7 +179,7 @@ module Aws::AutoScaling
 
     # The maximum hourly price to be paid for any Spot Instance launched to
     # fulfill the request. Spot Instances are launched when the price you
-    # specify exceeds the current Spot market price.
+    # specify exceeds the current Spot price.
     #
     # For more information, see [Launching Spot Instances in Your Auto
     # Scaling Group][1] in the *Amazon EC2 Auto Scaling User Guide*.

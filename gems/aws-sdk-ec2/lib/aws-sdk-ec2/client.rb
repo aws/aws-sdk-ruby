@@ -3667,12 +3667,10 @@ module Aws::EC2
     # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
     # Site-to-Site VPN User Guide*.
     #
-    # You cannot create more than one customer gateway with the same VPN
-    # type, IP address, and BGP ASN parameter values. If you run an
-    # identical request more than one time, the first request creates the
-    # customer gateway, and subsequent requests return information about the
-    # existing customer gateway. The subsequent requests do not create new
-    # customer gateway resources.
+    # To create more than one customer gateway with the same VPN type, IP
+    # address, and BGP ASN, specify a unique device name for each customer
+    # gateway. Identical requests return information about the existing
+    # customer gateway and do not create new customer gateways.
     #
     #
     #
@@ -3693,6 +3691,11 @@ module Aws::EC2
     # @option params [required, String] :type
     #   The type of VPN connection that this customer gateway supports
     #   (`ipsec.1`).
+    #
+    # @option params [String] :device_name
+    #   A name for the customer gateway device.
+    #
+    #   Length Constraints: Up to 255 characters.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3733,6 +3736,7 @@ module Aws::EC2
     #     public_ip: "String",
     #     certificate_arn: "String",
     #     type: "ipsec.1", # required, accepts ipsec.1
+    #     device_name: "String",
     #     dry_run: false,
     #   })
     #
@@ -3744,6 +3748,7 @@ module Aws::EC2
     #   resp.customer_gateway.certificate_arn #=> String
     #   resp.customer_gateway.state #=> String
     #   resp.customer_gateway.type #=> String
+    #   resp.customer_gateway.device_name #=> String
     #   resp.customer_gateway.tags #=> Array
     #   resp.customer_gateway.tags[0].key #=> String
     #   resp.customer_gateway.tags[0].value #=> String
@@ -12137,6 +12142,7 @@ module Aws::EC2
     #   resp.customer_gateways[0].certificate_arn #=> String
     #   resp.customer_gateways[0].state #=> String
     #   resp.customer_gateways[0].type #=> String
+    #   resp.customer_gateways[0].device_name #=> String
     #   resp.customer_gateways[0].tags #=> Array
     #   resp.customer_gateways[0].tags[0].key #=> String
     #   resp.customer_gateways[0].tags[0].value #=> String
@@ -14557,9 +14563,8 @@ module Aws::EC2
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
-    #     the instance. Specified as an ARN.
-    #
-    #   * `image-id` - The ID of the image used to launch the instance.
+    #     the instance. Specified as an ARN. `image-id` - The ID of the image
+    #     used to launch the instance.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -14595,6 +14600,15 @@ module Aws::EC2
     #     and so on).
     #
     #   * `launch-time` - The time when the instance was launched.
+    #
+    #   * `metadata-http-tokens` - The metadata request authorization state
+    #     (`optional` \| `required`)
+    #
+    #   * `metadata-http-put-response-hop-limit` - The http metadata request
+    #     put response hop limit (integer, possible values `1` to `64`)
+    #
+    #   * `metadata-http-endpoint` - Enable or disable metadata access on http
+    #     endpoint (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
@@ -14991,6 +15005,10 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].hibernation_options.configured #=> Boolean
     #   resp.reservations[0].instances[0].licenses #=> Array
     #   resp.reservations[0].instances[0].licenses[0].license_configuration_arn #=> String
+    #   resp.reservations[0].instances[0].metadata_options.state #=> String, one of "pending", "applied"
+    #   resp.reservations[0].instances[0].metadata_options.http_tokens #=> String, one of "optional", "required"
+    #   resp.reservations[0].instances[0].metadata_options.http_put_response_hop_limit #=> Integer
+    #   resp.reservations[0].instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -22058,6 +22076,9 @@ module Aws::EC2
     #   * `vpn-gateway-id` - The ID of a virtual private gateway associated
     #     with the VPN connection.
     #
+    #   * `transit-gateway-id` - The ID of a transit gateway associated with
+    #     the VPN connection.
+    #
     # @option params [Array<String>] :vpn_connection_ids
     #   One or more VPN connection IDs.
     #
@@ -26163,6 +26184,95 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_instance_event_start_time(params = {}, options = {})
       req = build_request(:modify_instance_event_start_time, params)
+      req.send_request(options)
+    end
+
+    # Modify the instance metadata parameters on a running or stopped
+    # instance. When you modify the parameters on a stopped instance, they
+    # are applied when the instance is started. When you modify the
+    # parameters on a running instance, the API responds with a state of
+    # “pending”. After the parameter modifications are successfully applied
+    # to the instance, the state of the modifications changes from “pending”
+    # to “applied” in subsequent describe-instances API calls. For more
+    # information, see [Instance Metadata and User Data][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance.
+    #
+    # @option params [String] :http_tokens
+    #   The state of token usage for your instance metadata requests. If the
+    #   parameter is not specified in the request, the default state is
+    #   `optional`.
+    #
+    #   If the state is `optional`, you can choose to retrieve instance
+    #   metadata with or without a signed token header on your request. If you
+    #   retrieve the IAM role credentials without a token, the version 1.0
+    #   role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid signed token, the version 2.0 role
+    #   credentials are returned.
+    #
+    #   If the state is `required`, you must send a signed token header with
+    #   any instance metadata retrieval requests. In this state, retrieving
+    #   the IAM role credential always returns the version 2.0 credentials;
+    #   the version 1.0 credentials are not available.
+    #
+    # @option params [Integer] :http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. The larger the number, the further instance metadata
+    #   requests can travel. If no parameter is specified, the existing state
+    #   is maintained.
+    #
+    #   Possible values: Integers from 1 to 64
+    #
+    # @option params [String] :http_endpoint
+    #   This parameter enables or disables the HTTP metadata endpoint on your
+    #   instances. If the parameter is not specified, the existing state is
+    #   maintained.
+    #
+    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
+    #   your instance metadata.
+    #
+    #    </note>
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyInstanceMetadataOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceMetadataOptionsResult#instance_id #instance_id} => String
+    #   * {Types::ModifyInstanceMetadataOptionsResult#instance_metadata_options #instance_metadata_options} => Types::InstanceMetadataOptionsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_metadata_options({
+    #     instance_id: "String", # required
+    #     http_tokens: "optional", # accepts optional, required
+    #     http_put_response_hop_limit: 1,
+    #     http_endpoint: "disabled", # accepts disabled, enabled
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.instance_metadata_options.state #=> String, one of "pending", "applied"
+    #   resp.instance_metadata_options.http_tokens #=> String, one of "optional", "required"
+    #   resp.instance_metadata_options.http_put_response_hop_limit #=> Integer
+    #   resp.instance_metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataOptions AWS API Documentation
+    #
+    # @overload modify_instance_metadata_options(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_metadata_options(params = {}, options = {})
+      req = build_request(:modify_instance_metadata_options, params)
       req.send_request(options)
     end
 
@@ -31282,6 +31392,14 @@ module Aws::EC2
     # @option params [Array<Types::LicenseConfigurationRequest>] :license_specifications
     #   The license configurations.
     #
+    # @option params [Types::InstanceMetadataOptionsRequest] :metadata_options
+    #   The metadata options for the instance. For more information, see
+    #   [Instance Metadata and User Data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Reservation#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
@@ -31473,6 +31591,11 @@ module Aws::EC2
     #         license_configuration_arn: "String",
     #       },
     #     ],
+    #     metadata_options: {
+    #       http_tokens: "optional", # accepts optional, required
+    #       http_put_response_hop_limit: 1,
+    #       http_endpoint: "disabled", # accepts disabled, enabled
+    #     },
     #   })
     #
     # @example Response structure
@@ -31588,6 +31711,10 @@ module Aws::EC2
     #   resp.instances[0].hibernation_options.configured #=> Boolean
     #   resp.instances[0].licenses #=> Array
     #   resp.instances[0].licenses[0].license_configuration_arn #=> String
+    #   resp.instances[0].metadata_options.state #=> String, one of "pending", "applied"
+    #   resp.instances[0].metadata_options.http_tokens #=> String, one of "optional", "required"
+    #   resp.instances[0].metadata_options.http_put_response_hop_limit #=> Integer
+    #   resp.instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -32745,7 +32872,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

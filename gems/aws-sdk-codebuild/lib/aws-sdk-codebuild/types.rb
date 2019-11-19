@@ -626,9 +626,9 @@ module Aws::CodeBuild
     #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #         },
     #         environment: { # required
-    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
+    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
     #           image: "NonEmptyString", # required
-    #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+    #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #           environment_variables: [
     #             {
     #               name: "NonEmptyString", # required
@@ -2014,9 +2014,9 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
+    #         type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
     #         image: "NonEmptyString", # required
-    #         compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+    #         compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #         environment_variables: [
     #           {
     #             name: "NonEmptyString", # required
@@ -2035,6 +2035,25 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] type
     #   The type of build environment to use for related builds.
+    #
+    #   * The environment type `ARM_CONTAINER` is available only in regions
+    #     US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia
+    #     Pacific (Sydney), and EU (Frankfurt).
+    #
+    #   * The environment type `LINUX_CONTAINER` with compute type
+    #     `build.general1.2xlarge` is available only in regions US East (N.
+    #     Virginia), US East (N. Virginia), US West (Oregon), Canada
+    #     (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific
+    #     (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia
+    #     Pacific (Sydney), China (Beijing), and China (Ningxia).
+    #
+    #   * The environment type `LINUX_GPU_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (N. Virginia), US West
+    #     (Oregon), Canada (Central), EU (Ireland), EU (London), EU
+    #     (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia
+    #     Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and
+    #     China (Ningxia).
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -2062,8 +2081,23 @@ module Aws::CodeBuild
     #   * `BUILD_GENERAL1_MEDIUM`\: Use up to 7 GB memory and 4 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_LARGE`\: Use up to 15 GB memory and 8 vCPUs for
-    #     builds.
+    #   * `BUILD_GENERAL1_LARGE`\: Use up to 16 GB memory and 8 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_2XLARGE`\: Use up to 145 GB memory, 72 vCPUs, and
+    #     824 GB of SSD storage for builds. This compute type supports
+    #     Docker images up to 100 GB uncompressed.
+    #
+    #   If you use `BUILD_GENERAL1_LARGE`\:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #     memory and 8 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
+    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #     memory and 8 vCPUs on ARM-based processors for builds.
     #
     #   For more information, see [Build Environment Compute Types][1] in
     #   the *AWS CodeBuild User Guide.*
@@ -2574,9 +2608,9 @@ module Aws::CodeBuild
     #         buildspec_override: "String",
     #         insecure_ssl_override: false,
     #         report_build_status_override: false,
-    #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER
+    #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
     #         image_override: "NonEmptyString",
-    #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+    #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #         certificate_override: "String",
     #         cache_override: {
     #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
@@ -2980,9 +3014,9 @@ module Aws::CodeBuild
     #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #         },
     #         environment: {
-    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
+    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
     #           image: "NonEmptyString", # required
-    #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+    #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #           environment_variables: [
     #             {
     #               name: "NonEmptyString", # required

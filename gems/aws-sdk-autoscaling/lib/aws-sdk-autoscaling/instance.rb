@@ -40,6 +40,12 @@ module Aws::AutoScaling
     end
     alias :instance_id :id
 
+    # The instance type of the EC2 instance.
+    # @return [String]
+    def instance_type
+      data[:instance_type]
+    end
+
     # The Availability Zone for the instance.
     # @return [String]
     def availability_zone
@@ -79,6 +85,15 @@ module Aws::AutoScaling
     # @return [Boolean]
     def protected_from_scale_in
       data[:protected_from_scale_in]
+    end
+
+    # The number of capacity units contributed by the instance based on its
+    # instance type.
+    #
+    # Valid Range: Minimum value of 1. Maximum value of 999.
+    # @return [String]
+    def weighted_capacity
+      data[:weighted_capacity]
     end
 
     # @!endgroup

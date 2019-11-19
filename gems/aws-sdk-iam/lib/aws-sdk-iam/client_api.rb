@@ -288,6 +288,7 @@ module Aws::IAM
     ResyncMFADeviceRequest = Shapes::StructureShape.new(name: 'ResyncMFADeviceRequest')
     Role = Shapes::StructureShape.new(name: 'Role')
     RoleDetail = Shapes::StructureShape.new(name: 'RoleDetail')
+    RoleLastUsed = Shapes::StructureShape.new(name: 'RoleLastUsed')
     RoleUsageListType = Shapes::ListShape.new(name: 'RoleUsageListType')
     RoleUsageType = Shapes::StructureShape.new(name: 'RoleUsageType')
     SAMLMetadataDocumentType = Shapes::StringShape.new(name: 'SAMLMetadataDocumentType')
@@ -1549,6 +1550,7 @@ module Aws::IAM
     Role.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
     Role.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     Role.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
+    Role.add_member(:role_last_used, Shapes::ShapeRef.new(shape: RoleLastUsed, location_name: "RoleLastUsed"))
     Role.struct_class = Types::Role
 
     RoleDetail.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
@@ -1562,7 +1564,12 @@ module Aws::IAM
     RoleDetail.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: attachedPoliciesListType, location_name: "AttachedManagedPolicies"))
     RoleDetail.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     RoleDetail.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
+    RoleDetail.add_member(:role_last_used, Shapes::ShapeRef.new(shape: RoleLastUsed, location_name: "RoleLastUsed"))
     RoleDetail.struct_class = Types::RoleDetail
+
+    RoleLastUsed.add_member(:last_used_date, Shapes::ShapeRef.new(shape: dateType, location_name: "LastUsedDate"))
+    RoleLastUsed.add_member(:region, Shapes::ShapeRef.new(shape: stringType, location_name: "Region"))
+    RoleLastUsed.struct_class = Types::RoleLastUsed
 
     RoleUsageListType.member = Shapes::ShapeRef.new(shape: RoleUsageType)
 

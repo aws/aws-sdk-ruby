@@ -1925,6 +1925,8 @@ module Aws::CloudFormation
     #   resp.stack_instance.parameter_overrides[0].resolved_value #=> String
     #   resp.stack_instance.status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
     #   resp.stack_instance.status_reason #=> String
+    #   resp.stack_instance.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
+    #   resp.stack_instance.last_drift_check_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstance AWS API Documentation
     #
@@ -2218,6 +2220,14 @@ module Aws::CloudFormation
     #   resp.stack_set.stack_set_arn #=> String
     #   resp.stack_set.administration_role_arn #=> String
     #   resp.stack_set.execution_role_name #=> String
+    #   resp.stack_set.stack_set_drift_detection_details.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "NOT_CHECKED"
+    #   resp.stack_set.stack_set_drift_detection_details.drift_detection_status #=> String, one of "COMPLETED", "FAILED", "PARTIAL_SUCCESS", "IN_PROGRESS", "STOPPED"
+    #   resp.stack_set.stack_set_drift_detection_details.last_drift_check_timestamp #=> Time
+    #   resp.stack_set.stack_set_drift_detection_details.total_stack_instances_count #=> Integer
+    #   resp.stack_set.stack_set_drift_detection_details.drifted_stack_instances_count #=> Integer
+    #   resp.stack_set.stack_set_drift_detection_details.in_sync_stack_instances_count #=> Integer
+    #   resp.stack_set.stack_set_drift_detection_details.in_progress_stack_instances_count #=> Integer
+    #   resp.stack_set.stack_set_drift_detection_details.failed_stack_instances_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSet AWS API Documentation
     #
@@ -2252,7 +2262,7 @@ module Aws::CloudFormation
     #
     #   resp.stack_set_operation.operation_id #=> String
     #   resp.stack_set_operation.stack_set_id #=> String
-    #   resp.stack_set_operation.action #=> String, one of "CREATE", "UPDATE", "DELETE"
+    #   resp.stack_set_operation.action #=> String, one of "CREATE", "UPDATE", "DELETE", "DETECT_DRIFT"
     #   resp.stack_set_operation.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "STOPPING", "STOPPED"
     #   resp.stack_set_operation.operation_preferences.region_order #=> Array
     #   resp.stack_set_operation.operation_preferences.region_order[0] #=> String
@@ -2265,6 +2275,14 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.execution_role_name #=> String
     #   resp.stack_set_operation.creation_timestamp #=> Time
     #   resp.stack_set_operation.end_timestamp #=> Time
+    #   resp.stack_set_operation.stack_set_drift_detection_details.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "NOT_CHECKED"
+    #   resp.stack_set_operation.stack_set_drift_detection_details.drift_detection_status #=> String, one of "COMPLETED", "FAILED", "PARTIAL_SUCCESS", "IN_PROGRESS", "STOPPED"
+    #   resp.stack_set_operation.stack_set_drift_detection_details.last_drift_check_timestamp #=> Time
+    #   resp.stack_set_operation.stack_set_drift_detection_details.total_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.stack_set_drift_detection_details.drifted_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.stack_set_drift_detection_details.in_sync_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.stack_set_drift_detection_details.in_progress_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.stack_set_drift_detection_details.failed_stack_instances_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperation AWS API Documentation
     #
@@ -2623,6 +2641,100 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def detect_stack_resource_drift(params = {}, options = {})
       req = build_request(:detect_stack_resource_drift, params)
+      req.send_request(options)
+    end
+
+    # Detect drift on a stack set. When CloudFormation performs drift
+    # detection on a stack set, it performs drift detection on the stack
+    # associated with each stack instance in the stack set. For more
+    # information, see [How CloudFormation Performs Drift Detection on a
+    # Stack Set][1].
+    #
+    # `DetectStackSetDrift` returns the `OperationId` of the stack set drift
+    # detection operation. Use this operation id with `
+    # DescribeStackSetOperation ` to monitor the progress of the drift
+    # detection operation. The drift detection operation may take some time,
+    # depending on the number of stack instances included in the stack set,
+    # as well as the number of resources included in each stack.
+    #
+    # Once the operation has completed, use the following actions to return
+    # drift information:
+    #
+    # * Use ` DescribeStackSet ` to return detailed informaiton about the
+    #   stack set, including detailed information about the last *completed*
+    #   drift operation performed on the stack set. (Information about drift
+    #   operations that are in progress is not included.)
+    #
+    # * Use ` ListStackInstances ` to return a list of stack instances
+    #   belonging to the stack set, including the drift status and last
+    #   drift time checked of each instance.
+    #
+    # * Use ` DescribeStackInstance ` to return detailed information about a
+    #   specific stack instance, including its drift status and last drift
+    #   time checked.
+    #
+    # For more information on performing a drift detection operation on a
+    # stack set, see [Detecting Unmanaged Changes in Stack Sets][1].
+    #
+    # You can only run a single drift detection operation on a given stack
+    # set at one time.
+    #
+    # To stop a drift detection stack set operation, use `
+    # StopStackSetOperation `.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
+    #
+    # @option params [required, String] :stack_set_name
+    #   The name of the stack set on which to perform the drift detection
+    #   operation.
+    #
+    # @option params [Types::StackSetOperationPreferences] :operation_preferences
+    #   The user-specified preferences for how AWS CloudFormation performs a
+    #   stack set operation.
+    #
+    #   For more information on maximum concurrent accounts and failure
+    #   tolerance, see [Stack set operation options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #
+    # @option params [String] :operation_id
+    #   *The ID of the stack set operation.*
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DetectStackSetDriftOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectStackSetDriftOutput#operation_id #operation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_stack_set_drift({
+    #     stack_set_name: "StackSetNameOrId", # required
+    #     operation_preferences: {
+    #       region_order: ["Region"],
+    #       failure_tolerance_count: 1,
+    #       failure_tolerance_percentage: 1,
+    #       max_concurrent_count: 1,
+    #       max_concurrent_percentage: 1,
+    #     },
+    #     operation_id: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackSetDrift AWS API Documentation
+    #
+    # @overload detect_stack_set_drift(params = {})
+    # @param [Hash] params ({})
+    def detect_stack_set_drift(params = {}, options = {})
+      req = build_request(:detect_stack_set_drift, params)
       req.send_request(options)
     end
 
@@ -3134,6 +3246,8 @@ module Aws::CloudFormation
     #   resp.summaries[0].stack_id #=> String
     #   resp.summaries[0].status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
     #   resp.summaries[0].status_reason #=> String
+    #   resp.summaries[0].drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
+    #   resp.summaries[0].last_drift_check_timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstances AWS API Documentation
@@ -3296,7 +3410,7 @@ module Aws::CloudFormation
     #
     #   resp.summaries #=> Array
     #   resp.summaries[0].operation_id #=> String
-    #   resp.summaries[0].action #=> String, one of "CREATE", "UPDATE", "DELETE"
+    #   resp.summaries[0].action #=> String, one of "CREATE", "UPDATE", "DELETE", "DETECT_DRIFT"
     #   resp.summaries[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "STOPPING", "STOPPED"
     #   resp.summaries[0].creation_timestamp #=> Time
     #   resp.summaries[0].end_timestamp #=> Time
@@ -3352,6 +3466,8 @@ module Aws::CloudFormation
     #   resp.summaries[0].stack_set_id #=> String
     #   resp.summaries[0].description #=> String
     #   resp.summaries[0].status #=> String, one of "ACTIVE", "DELETED"
+    #   resp.summaries[0].drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
+    #   resp.summaries[0].last_drift_check_timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSets AWS API Documentation
@@ -4903,7 +5019,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

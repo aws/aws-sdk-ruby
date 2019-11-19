@@ -21,7 +21,7 @@ module Aws::IAM
     # @!group Read-Only Attributes
 
     # The path to the user. For more information about paths, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -38,8 +38,8 @@ module Aws::IAM
     end
 
     # The stable and unique string identifying the user. For more
-    # information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    # guide.
+    # information about IDs, see [IAM Identifiers][1] in the *IAM User
+    # Guide*.
     #
     #
     #
@@ -51,7 +51,7 @@ module Aws::IAM
 
     # The Amazon Resource Name (ARN) that identifies the user. For more
     # information about ARNs and how to use ARNs in policies, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -75,7 +75,7 @@ module Aws::IAM
     # The date and time, in [ISO 8601 date-time format][1], when the user's
     # password was last used to sign in to an AWS website. For a list of AWS
     # websites that capture a user's last sign-in time, see the [Credential
-    # Reports][2] topic in the *Using IAM* guide. If a password is used more
+    # Reports][2] topic in the *IAM User Guide*. If a password is used more
     # than once in a five-minute span, only the first use is returned in
     # this field. If the field is null (no value), then it indicates that
     # they never signed in with a password. This can be because:
@@ -86,7 +86,7 @@ module Aws::IAM
     #   this information on October 20, 2014.
     #
     # A null value does not mean that the user *never* had a password. Also,
-    # if the user does not currently have a password, but had one in the
+    # if the user does not currently have a password but had one in the
     # past, then this field contains the date and time the most recent
     # password was used.
     #

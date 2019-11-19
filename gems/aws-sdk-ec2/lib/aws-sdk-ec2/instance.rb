@@ -319,6 +319,12 @@ module Aws::EC2
       data[:licenses]
     end
 
+    # The metadata options for the instance.
+    # @return [Types::InstanceMetadataOptionsResponse]
+    def metadata_options
+      data[:metadata_options]
+    end
+
     # @!endgroup
 
     # @return [Client]

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2019-11-19)
+------------------
+
+* Feature - AWSConfig launches support for conformance packs. A conformance pack is a new resource type that allows you to package a collection of Config rules and remediation actions into a single entity. You can create and deploy conformance packs into your account or across all accounts in your organization
+
 1.38.0 (2019-10-23)
 ------------------
 

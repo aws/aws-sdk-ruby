@@ -1280,6 +1280,296 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Filters the conformance pack by compliance types and AWS Config rule
+    # names.
+    #
+    # @note When making an API call, you may pass ConformancePackComplianceFilters
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_names: ["StringWithCharLimit64"],
+    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #       }
+    #
+    # @!attribute [rw] config_rule_names
+    #   Filters the results by AWS Config rule names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compliance_type
+    #   Filters the results by compliance.
+    #
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackComplianceFilters AWS API Documentation
+    #
+    class ConformancePackComplianceFilters < Struct.new(
+      :config_rule_names,
+      :compliance_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_name
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_compliance_status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackComplianceSummary AWS API Documentation
+    #
+    class ConformancePackComplianceSummary < Struct.new(
+      :conformance_pack_name,
+      :conformance_pack_compliance_status)
+      include Aws::Structure
+    end
+
+    # Returns details of a conformance pack. A conformance pack is a
+    # collection of AWS Config rules that can be easily deployed in an
+    # account and a region.
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_arn
+    #   Amazon Resource Name (ARN) of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_id
+    #   ID of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_bucket
+    #   Location of an Amazon S3 bucket where AWS Config can deliver
+    #   evaluation results and conformance pack template that is used to
+    #   create a pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_key_prefix
+    #   Any folder structure you want to add to an Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_input_parameters
+    #   A list of `ConformancePackInputParameter` objects.
+    #   @return [Array<Types::ConformancePackInputParameter>]
+    #
+    # @!attribute [rw] last_update_requested_time
+    #   Last time when conformation pack update was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackDetail AWS API Documentation
+    #
+    class ConformancePackDetail < Struct.new(
+      :conformance_pack_name,
+      :conformance_pack_arn,
+      :conformance_pack_id,
+      :delivery_s3_bucket,
+      :delivery_s3_key_prefix,
+      :conformance_pack_input_parameters,
+      :last_update_requested_time,
+      :created_by)
+      include Aws::Structure
+    end
+
+    # Filters a conformance pack by AWS Config rule names, compliance types,
+    # AWS resource types, and resource IDs.
+    #
+    # @note When making an API call, you may pass ConformancePackEvaluationFilters
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_names: ["StringWithCharLimit64"],
+    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #         resource_type: "StringWithCharLimit256",
+    #         resource_ids: ["StringWithCharLimit256"],
+    #       }
+    #
+    # @!attribute [rw] config_rule_names
+    #   Filters the results by AWS Config rule names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compliance_type
+    #   Filters the results by compliance.
+    #
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Filters the results by the resource type (for example,
+    #   `"AWS::EC2::Instance"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   Filters the results by resource IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackEvaluationFilters AWS API Documentation
+    #
+    class ConformancePackEvaluationFilters < Struct.new(
+      :config_rule_names,
+      :compliance_type,
+      :resource_type,
+      :resource_ids)
+      include Aws::Structure
+    end
+
+    # The details of a conformance pack evaluation. Provides AWS Config rule
+    # and AWS resource type that was evaluated, the compliance of the
+    # conformance pack, related time stamps, and supplementary information.
+    #
+    # @!attribute [rw] compliance_type
+    #   Filters the results by compliance.
+    #
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_result_identifier
+    #   Uniquely identifies an evaluation result.
+    #   @return [Types::EvaluationResultIdentifier]
+    #
+    # @!attribute [rw] config_rule_invoked_time
+    #   The time when AWS Config rule evaluated AWS resource.
+    #   @return [Time]
+    #
+    # @!attribute [rw] result_recorded_time
+    #   The time when AWS Config recorded the evaluation result.
+    #   @return [Time]
+    #
+    # @!attribute [rw] annotation
+    #   Supplementary information about how the evaluation determined the
+    #   compliance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackEvaluationResult AWS API Documentation
+    #
+    class ConformancePackEvaluationResult < Struct.new(
+      :compliance_type,
+      :evaluation_result_identifier,
+      :config_rule_invoked_time,
+      :result_recorded_time,
+      :annotation)
+      include Aws::Structure
+    end
+
+    # Input parameters in the form of key-value pairs for the conformance
+    # pack, both of which you define. Keys can have a maximum character
+    # length of 128 characters, and values can have a maximum length of 256
+    # characters.
+    #
+    # @note When making an API call, you may pass ConformancePackInputParameter
+    #   data as a hash:
+    #
+    #       {
+    #         parameter_name: "ParameterName", # required
+    #         parameter_value: "ParameterValue", # required
+    #       }
+    #
+    # @!attribute [rw] parameter_name
+    #   One part of a key-value pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_value
+    #   Another part of the key-value pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackInputParameter AWS API Documentation
+    #
+    class ConformancePackInputParameter < Struct.new(
+      :parameter_name,
+      :parameter_value)
+      include Aws::Structure
+    end
+
+    # Compliance information of one or more AWS Config rules within a
+    # conformance pack. You can filter using AWS Config rule names and
+    # compliance types.
+    #
+    # @!attribute [rw] config_rule_name
+    #   Filters the results by AWS Config rule name.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_type
+    #   Filters the results by compliance.
+    #
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackRuleCompliance AWS API Documentation
+    #
+    class ConformancePackRuleCompliance < Struct.new(
+      :config_rule_name,
+      :compliance_type)
+      include Aws::Structure
+    end
+
+    # Status details of a conformance pack.
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_id
+    #   ID of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_arn
+    #   Amazon Resource Name (ARN) of comformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_state
+    #   Indicates deployment status of conformance pack.
+    #
+    #   AWS Config sets the state of the conformance pack to:
+    #
+    #   * CREATE\_IN\_PROGRESS when a conformance pack creation is in
+    #     progress for an account.
+    #
+    #   * CREATE\_COMPLETE when a conformance pack has been successfully
+    #     created in your account.
+    #
+    #   * CREATE\_FAILED when a conformance pack creation failed in your
+    #     account.
+    #
+    #   * DELETE\_IN\_PROGRESS when a conformance pack deletion is in
+    #     progress.
+    #
+    #   * DELETE\_FAILED when a conformance pack deletion failed from your
+    #     account.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_arn
+    #   Amazon Resource Name (ARN) of AWS CloudFormation stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_status_reason
+    #   The reason of conformance pack creation failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_requested_time
+    #   Last time when conformation pack creation and update was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_completed_time
+    #   Last time when conformation pack creation and update was successful.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackStatusDetail AWS API Documentation
+    #
+    class ConformancePackStatusDetail < Struct.new(
+      :conformance_pack_name,
+      :conformance_pack_id,
+      :conformance_pack_arn,
+      :conformance_pack_state,
+      :stack_arn,
+      :conformance_pack_status_reason,
+      :last_update_requested_time,
+      :last_update_completed_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteAggregationAuthorizationRequest
     #   data as a hash:
     #
@@ -1362,6 +1652,24 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteConformancePackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_name: "ConformancePackName", # required
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConformancePackRequest AWS API Documentation
+    #
+    class DeleteConformancePackRequest < Struct.new(
+      :conformance_pack_name)
+      include Aws::Structure
+    end
+
     # The input for the DeleteDeliveryChannel action. The action accepts the
     # following data, in JSON format.
     #
@@ -1424,6 +1732,24 @@ module Aws::ConfigService
     #
     class DeleteOrganizationConfigRuleRequest < Struct.new(
       :organization_config_rule_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteOrganizationConformancePackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_conformance_pack_name: "OrganizationConformancePackName", # required
+    #       }
+    #
+    # @!attribute [rw] organization_conformance_pack_name
+    #   The name of organization conformance pack that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConformancePackRequest AWS API Documentation
+    #
+    class DeleteOrganizationConformancePackRequest < Struct.new(
+      :organization_conformance_pack_name)
       include Aws::Structure
     end
 
@@ -2197,6 +2523,167 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeConformancePackComplianceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_name: "ConformancePackName", # required
+    #         filters: {
+    #           config_rule_names: ["StringWithCharLimit64"],
+    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #         },
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A `ConformancePackComplianceFilters` object.
+    #   @return [Types::ConformancePackComplianceFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of AWS Config rules within a conformance pack are
+    #   returned on each page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackComplianceRequest AWS API Documentation
+    #
+    class DescribeConformancePackComplianceRequest < Struct.new(
+      :conformance_pack_name,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_rule_compliance_list
+    #   Returns a list of `ConformancePackRuleCompliance` objects.
+    #   @return [Array<Types::ConformancePackRuleCompliance>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackComplianceResponse AWS API Documentation
+    #
+    class DescribeConformancePackComplianceResponse < Struct.new(
+      :conformance_pack_name,
+      :conformance_pack_rule_compliance_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeConformancePackStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_names: ["ConformancePackName"],
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_names
+    #   Comma-separated list of conformance pack names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of conformance packs returned on each page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackStatusRequest AWS API Documentation
+    #
+    class DescribeConformancePackStatusRequest < Struct.new(
+      :conformance_pack_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_status_details
+    #   A list of `ConformancePackStatusDetail` objects.
+    #   @return [Array<Types::ConformancePackStatusDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackStatusResponse AWS API Documentation
+    #
+    class DescribeConformancePackStatusResponse < Struct.new(
+      :conformance_pack_status_details,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeConformancePacksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_names: ["ConformancePackName"],
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_names
+    #   Comma-separated list of conformance pack names for which you want
+    #   details. If you do not specify any names, AWS Config returns details
+    #   for all your conformance packs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of conformance packs returned on each page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePacksRequest AWS API Documentation
+    #
+    class DescribeConformancePacksRequest < Struct.new(
+      :conformance_pack_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_details
+    #   Returns a list of `ConformancePackDetail` objects.
+    #   @return [Array<Types::ConformancePackDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePacksResponse AWS API Documentation
+    #
+    class DescribeConformancePacksResponse < Struct.new(
+      :conformance_pack_details,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The input for the DeliveryChannelStatus action.
     #
     # @note When making an API call, you may pass DescribeDeliveryChannelStatusRequest
@@ -2352,7 +2839,7 @@ module Aws::ConfigService
     end
 
     # @!attribute [rw] organization_config_rules
-    #   Retuns a list `OrganizationConfigRule` objects.
+    #   Returns a list of `OrganizationConfigRule` objects.
     #   @return [Array<Types::OrganizationConfigRule>]
     #
     # @!attribute [rw] next_token
@@ -2364,6 +2851,108 @@ module Aws::ConfigService
     #
     class DescribeOrganizationConfigRulesResponse < Struct.new(
       :organization_config_rules,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOrganizationConformancePackStatusesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_conformance_pack_names: ["OrganizationConformancePackName"],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_conformance_pack_names
+    #   The names of organization conformance packs for which you want
+    #   status details. If you do not specify any names, AWS Config returns
+    #   details for all your organization conformance packs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of OrganizationConformancePackStatuses returned
+    #   on each page. If you do no specify a number, AWS Config uses the
+    #   default. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePackStatusesRequest AWS API Documentation
+    #
+    class DescribeOrganizationConformancePackStatusesRequest < Struct.new(
+      :organization_conformance_pack_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_conformance_pack_statuses
+    #   A list of `OrganizationConformancePackStatus` objects.
+    #   @return [Array<Types::OrganizationConformancePackStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePackStatusesResponse AWS API Documentation
+    #
+    class DescribeOrganizationConformancePackStatusesResponse < Struct.new(
+      :organization_conformance_pack_statuses,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOrganizationConformancePacksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_conformance_pack_names: ["OrganizationConformancePackName"],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_conformance_pack_names
+    #   The name that you assign to an organization conformance pack.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of organization config packs returned on each
+    #   page. If you do no specify a number, AWS Config uses the default.
+    #   The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePacksRequest AWS API Documentation
+    #
+    class DescribeOrganizationConformancePacksRequest < Struct.new(
+      :organization_conformance_pack_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_conformance_packs
+    #   Returns a list of OrganizationConformancePacks objects.
+    #   @return [Array<Types::OrganizationConformancePack>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePacksResponse AWS API Documentation
+    #
+    class DescribeOrganizationConformancePacksResponse < Struct.new(
+      :organization_conformance_packs,
       :next_token)
       include Aws::Structure
     end
@@ -3314,6 +3903,113 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetConformancePackComplianceDetailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_name: "ConformancePackName", # required
+    #         filters: {
+    #           config_rule_names: ["StringWithCharLimit64"],
+    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #           resource_type: "StringWithCharLimit256",
+    #           resource_ids: ["StringWithCharLimit256"],
+    #         },
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A `ConformancePackEvaluationFilters` object.
+    #   @return [Types::ConformancePackEvaluationFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of evaluation results returned on each page. If
+    #   you do no specify a number, AWS Config uses the default. The default
+    #   is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceDetailsRequest AWS API Documentation
+    #
+    class GetConformancePackComplianceDetailsRequest < Struct.new(
+      :conformance_pack_name,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_rule_evaluation_results
+    #   Returns a list of `ConformancePackEvaluationResult` objects.
+    #   @return [Array<Types::ConformancePackEvaluationResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceDetailsResponse AWS API Documentation
+    #
+    class GetConformancePackComplianceDetailsResponse < Struct.new(
+      :conformance_pack_name,
+      :conformance_pack_rule_evaluation_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetConformancePackComplianceSummaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_names: ["ConformancePackName"], # required
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_names
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceSummaryRequest AWS API Documentation
+    #
+    class GetConformancePackComplianceSummaryRequest < Struct.new(
+      :conformance_pack_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_compliance_summary_list
+    #   @return [Array<Types::ConformancePackComplianceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceSummaryResponse AWS API Documentation
+    #
+    class GetConformancePackComplianceSummaryResponse < Struct.new(
+      :conformance_pack_compliance_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDiscoveredResourceCountsRequest
     #   data as a hash:
     #
@@ -3406,7 +4102,7 @@ module Aws::ConfigService
     #         organization_config_rule_name: "OrganizationConfigRuleName", # required
     #         filters: {
     #           account_id: "AccountId",
-    #           member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, UPDATE_SUCCESSFUL, UPDATE_FAILED, UPDATE_IN_PROGRESS, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
+    #           member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
     #         },
     #         limit: 1,
     #         next_token: "String",
@@ -3455,6 +4151,66 @@ module Aws::ConfigService
     #
     class GetOrganizationConfigRuleDetailedStatusResponse < Struct.new(
       :organization_config_rule_detailed_status,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetOrganizationConformancePackDetailedStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_conformance_pack_name: "OrganizationConformancePackName", # required
+    #         filters: {
+    #           account_id: "AccountId",
+    #           status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
+    #         },
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_conformance_pack_name
+    #   The name of organization conformance pack for which you want status
+    #   details for member accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   An `OrganizationResourceDetailedStatusFilters` object.
+    #   @return [Types::OrganizationResourceDetailedStatusFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of `OrganizationConformancePackDetailedStatuses`
+    #   returned on each page. If you do not specify a number, AWS Config
+    #   uses the default. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConformancePackDetailedStatusRequest AWS API Documentation
+    #
+    class GetOrganizationConformancePackDetailedStatusRequest < Struct.new(
+      :organization_conformance_pack_name,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_conformance_pack_detailed_statuses
+    #   A list of `OrganizationConformancePackDetailedStatus` objects.
+    #   @return [Array<Types::OrganizationConformancePackDetailedStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConformancePackDetailedStatusResponse AWS API Documentation
+    #
+    class GetOrganizationConformancePackDetailedStatusResponse < Struct.new(
+      :organization_conformance_pack_detailed_statuses,
       :next_token)
       include Aws::Structure
     end
@@ -3880,7 +4636,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] organization_config_rule_arn
-    #   The Amazon Resource Name (ARN) of organization config rule.
+    #   Amazon Resource Name (ARN) of organization config rule.
     #   @return [String]
     #
     # @!attribute [rw] organization_managed_rule_metadata
@@ -3979,6 +4735,207 @@ module Aws::ConfigService
     class OrganizationConfigRuleStatus < Struct.new(
       :organization_config_rule_name,
       :organization_rule_status,
+      :error_code,
+      :error_message,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # An organization conformance pack that has information about
+    # conformance packs that AWS Config creates in member accounts.
+    #
+    # @!attribute [rw] organization_conformance_pack_name
+    #   The name you assign to an organization conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_conformance_pack_arn
+    #   Amazon Resource Name (ARN) of organization conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_bucket
+    #   Location of an Amazon S3 bucket where AWS Config can deliver
+    #   evaluation results and conformance pack template that is used to
+    #   create a pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_key_prefix
+    #   Any folder structure you want to add to an Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_input_parameters
+    #   A list of `ConformancePackInputParameter` objects.
+    #   @return [Array<Types::ConformancePackInputParameter>]
+    #
+    # @!attribute [rw] excluded_accounts
+    #   A comma-separated list of accounts excluded from organization
+    #   conformance pack.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_update_time
+    #   Last time when organization conformation pack was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConformancePack AWS API Documentation
+    #
+    class OrganizationConformancePack < Struct.new(
+      :organization_conformance_pack_name,
+      :organization_conformance_pack_arn,
+      :delivery_s3_bucket,
+      :delivery_s3_key_prefix,
+      :conformance_pack_input_parameters,
+      :excluded_accounts,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # Organization conformance pack creation or deletion status in each
+    # member account. This includes the name of the conformance pack, the
+    # status, error code and error message when the conformance pack
+    # creation or deletion failed.
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of a member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   The name of conformance pack deployed in the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates deployment status for conformance pack in a member
+    #   account. When master account calls `PutOrganizationConformancePack`
+    #   action for the first time, conformance pack status is created in the
+    #   member account. When master account calls
+    #   `PutOrganizationConformancePack` action for the second time,
+    #   conformance pack status is updated in the member account.
+    #   Conformance pack status is deleted when the master account deletes
+    #   `OrganizationConformancePack` and disables service access for
+    #   `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the conformance pack to:
+    #
+    #   * `CREATE_SUCCESSFUL` when conformance pack has been created in the
+    #     member account.
+    #
+    #   * `CREATE_IN_PROGRESS` when conformance pack is being created in the
+    #     member account.
+    #
+    #   * `CREATE_FAILED` when conformance pack creation has failed in the
+    #     member account.
+    #
+    #   * `DELETE_FAILED` when conformance pack deletion has failed in the
+    #     member account.
+    #
+    #   * `DELETE_IN_PROGRESS` when conformance pack is being deleted in the
+    #     member account.
+    #
+    #   * `DELETE_SUCCESSFUL` when conformance pack has been deleted in the
+    #     member account.
+    #
+    #   * `UPDATE_SUCCESSFUL` when conformance pack has been updated in the
+    #     member account.
+    #
+    #   * `UPDATE_IN_PROGRESS` when conformance pack is being updated in the
+    #     member account.
+    #
+    #   * `UPDATE_FAILED` when conformance pack deletion has failed in the
+    #     member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   An error code that is returned when conformance pack creation or
+    #   deletion failed in the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message indicating that conformance pack account creation
+    #   or deletion has failed due to an error in the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The timestamp of the last status update.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConformancePackDetailedStatus AWS API Documentation
+    #
+    class OrganizationConformancePackDetailedStatus < Struct.new(
+      :account_id,
+      :conformance_pack_name,
+      :status,
+      :error_code,
+      :error_message,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # Returns the status for an organization conformance pack in an
+    # organization.
+    #
+    # @!attribute [rw] organization_conformance_pack_name
+    #   The name that you assign to organization conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates deployment status of an organization conformance pack.
+    #   When master account calls PutOrganizationConformancePack for the
+    #   first time, conformance pack status is created in all the member
+    #   accounts. When master account calls PutOrganizationConformancePack
+    #   for the second time, conformance pack status is updated in all the
+    #   member accounts. Additionally, conformance pack status is updated
+    #   when one or more member accounts join or leave an organization.
+    #   Conformance pack status is deleted when the master account deletes
+    #   OrganizationConformancePack in all the member accounts and disables
+    #   service access for `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the conformance pack to:
+    #
+    #   * `CREATE_SUCCESSFUL` when an organization conformance pack has been
+    #     successfully created in all the member accounts.
+    #
+    #   * `CREATE_IN_PROGRESS` when an organization conformance pack
+    #     creation is in progress.
+    #
+    #   * `CREATE_FAILED` when an organization conformance pack creation
+    #     failed in one or more member accounts within that organization.
+    #
+    #   * `DELETE_FAILED` when an organization conformance pack deletion
+    #     failed in one or more member accounts within that organization.
+    #
+    #   * `DELETE_IN_PROGRESS` when an organization conformance pack
+    #     deletion is in progress.
+    #
+    #   * `DELETE_SUCCESSFUL` when an organization conformance pack has been
+    #     successfully deleted from all the member accounts.
+    #
+    #   * `UPDATE_SUCCESSFUL` when an organization conformance pack has been
+    #     successfully updated in all the member accounts.
+    #
+    #   * `UPDATE_IN_PROGRESS` when an organization conformance pack update
+    #     is in progress.
+    #
+    #   * `UPDATE_FAILED` when an organization conformance pack update
+    #     failed in one or more member accounts within that organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   An error code that is returned when organization conformance pack
+    #   creation or deletion has failed in the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message indicating that organization conformance pack
+    #   creation or deletion failed due to an error.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The timestamp of the last update.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConformancePackStatus AWS API Documentation
+    #
+    class OrganizationConformancePackStatus < Struct.new(
+      :organization_conformance_pack_name,
+      :status,
       :error_code,
       :error_message,
       :last_update_time)
@@ -4164,6 +5121,71 @@ module Aws::ConfigService
       :resource_id_scope,
       :tag_key_scope,
       :tag_value_scope)
+      include Aws::Structure
+    end
+
+    # Status filter object to filter results based on specific member
+    # account ID or status type for an organization conformance pack.
+    #
+    # @note When making an API call, you may pass OrganizationResourceDetailedStatusFilters
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId",
+    #         status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of the member account within an
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates deployment status for conformance pack in a member
+    #   account. When master account calls `PutOrganizationConformancePack`
+    #   action for the first time, conformance pack status is created in the
+    #   member account. When master account calls
+    #   `PutOrganizationConformancePack` action for the second time,
+    #   conformance pack status is updated in the member account.
+    #   Conformance pack status is deleted when the master account deletes
+    #   `OrganizationConformancePack` and disables service access for
+    #   `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the conformance pack to:
+    #
+    #   * `CREATE_SUCCESSFUL` when conformance pack has been created in the
+    #     member account.
+    #
+    #   * `CREATE_IN_PROGRESS` when conformance pack is being created in the
+    #     member account.
+    #
+    #   * `CREATE_FAILED` when conformance pack creation has failed in the
+    #     member account.
+    #
+    #   * `DELETE_FAILED` when conformance pack deletion has failed in the
+    #     member account.
+    #
+    #   * `DELETE_IN_PROGRESS` when conformance pack is being deleted in the
+    #     member account.
+    #
+    #   * `DELETE_SUCCESSFUL` when conformance pack has been deleted in the
+    #     member account.
+    #
+    #   * `UPDATE_SUCCESSFUL` when conformance pack has been updated in the
+    #     member account.
+    #
+    #   * `UPDATE_IN_PROGRESS` when conformance pack is being updated in the
+    #     member account.
+    #
+    #   * `UPDATE_FAILED` when conformance pack deletion has failed in the
+    #     member account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationResourceDetailedStatusFilters AWS API Documentation
+    #
+    class OrganizationResourceDetailedStatusFilters < Struct.new(
+      :account_id,
+      :status)
       include Aws::Structure
     end
 
@@ -4378,6 +5400,86 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutConformancePackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_name: "ConformancePackName", # required
+    #         template_s3_uri: "TemplateS3Uri",
+    #         template_body: "TemplateBody",
+    #         delivery_s3_bucket: "DeliveryS3Bucket", # required
+    #         delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
+    #         conformance_pack_input_parameters: [
+    #           {
+    #             parameter_name: "ParameterName", # required
+    #             parameter_value: "ParameterValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack you want to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_s3_uri
+    #   Location of file containing the template body. The uri must point to
+    #   the conformance pack template (max size: 300,000 bytes) that is
+    #   located in an Amazon S3 bucket in the same region as the conformance
+    #   pack.
+    #
+    #   <note markdown="1"> You must have access to read Amazon S3 bucket.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   A string containing full conformance pack template body. Structure
+    #   containing the template body with a minimum length of 1 byte and a
+    #   maximum length of 51,200 bytes.
+    #
+    #   <note markdown="1"> You can only use a YAML template with one resource type, that is,
+    #   config rule.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_bucket
+    #   Location of an Amazon S3 bucket where AWS Config can deliver
+    #   evaluation results. AWS Config stores intermediate files while
+    #   processing conformance pack template.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_key_prefix
+    #   The prefix for the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_input_parameters
+    #   A list of `ConformancePackInputParameter` objects.
+    #   @return [Array<Types::ConformancePackInputParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConformancePackRequest AWS API Documentation
+    #
+    class PutConformancePackRequest < Struct.new(
+      :conformance_pack_name,
+      :template_s3_uri,
+      :template_body,
+      :delivery_s3_bucket,
+      :delivery_s3_key_prefix,
+      :conformance_pack_input_parameters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_arn
+    #   ARN of the conformance pack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConformancePackResponse AWS API Documentation
+    #
+    class PutConformancePackResponse < Struct.new(
+      :conformance_pack_arn)
+      include Aws::Structure
+    end
+
     # The input for the PutDeliveryChannel action.
     #
     # @note When making an API call, you may pass PutDeliveryChannelRequest
@@ -4534,6 +5636,86 @@ module Aws::ConfigService
     #
     class PutOrganizationConfigRuleResponse < Struct.new(
       :organization_config_rule_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutOrganizationConformancePackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_conformance_pack_name: "OrganizationConformancePackName", # required
+    #         template_s3_uri: "TemplateS3Uri",
+    #         template_body: "TemplateBody",
+    #         delivery_s3_bucket: "DeliveryS3Bucket", # required
+    #         delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
+    #         conformance_pack_input_parameters: [
+    #           {
+    #             parameter_name: "ParameterName", # required
+    #             parameter_value: "ParameterValue", # required
+    #           },
+    #         ],
+    #         excluded_accounts: ["AccountId"],
+    #       }
+    #
+    # @!attribute [rw] organization_conformance_pack_name
+    #   Name of the organization conformance pack you want to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_s3_uri
+    #   Location of file containing the template body. The uri must point to
+    #   the conformance pack template (max size: 300,000 bytes).
+    #
+    #   <note markdown="1"> You must have access to read Amazon S3 bucket.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   A string containing full conformance pack template body. Structure
+    #   containing the template body with a minimum length of 1 byte and a
+    #   maximum length of 51,200 bytes.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_bucket
+    #   Location of an Amazon S3 bucket where AWS Config can deliver
+    #   evaluation results. AWS Config stores intermediate files while
+    #   processing conformance pack template.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_key_prefix
+    #   The prefix for the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_input_parameters
+    #   A list of `ConformancePackInputParameter` objects.
+    #   @return [Array<Types::ConformancePackInputParameter>]
+    #
+    # @!attribute [rw] excluded_accounts
+    #   A list of AWS accounts to be excluded from an organization
+    #   conformance pack while deploying a conformance pack.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConformancePackRequest AWS API Documentation
+    #
+    class PutOrganizationConformancePackRequest < Struct.new(
+      :organization_conformance_pack_name,
+      :template_s3_uri,
+      :template_body,
+      :delivery_s3_bucket,
+      :delivery_s3_key_prefix,
+      :conformance_pack_input_parameters,
+      :excluded_accounts)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_conformance_pack_arn
+    #   ARN of the organization conformance pack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConformancePackResponse AWS API Documentation
+    #
+    class PutOrganizationConformancePackResponse < Struct.new(
+      :organization_conformance_pack_arn)
       include Aws::Structure
     end
 
@@ -5690,7 +6872,7 @@ module Aws::ConfigService
     #
     #       {
     #         account_id: "AccountId",
-    #         member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, UPDATE_SUCCESSFUL, UPDATE_FAILED, UPDATE_IN_PROGRESS, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
+    #         member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
     #       }
     #
     # @!attribute [rw] account_id

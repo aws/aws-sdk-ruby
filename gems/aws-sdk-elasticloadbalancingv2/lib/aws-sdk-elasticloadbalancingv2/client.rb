@@ -421,10 +421,10 @@ module Aws::ElasticLoadBalancingV2
     #   The actions for the default rule. The rule must include one forward
     #   action or one or more fixed-response actions.
     #
-    #   If the action type is `forward`, you specify a target group. The
-    #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer. The protocol of the target group must be TCP, TLS, UDP,
-    #   or TCP\_UDP for a Network Load Balancer.
+    #   If the action type is `forward`, you specify one or more target
+    #   groups. The protocol of the target group must be HTTP or HTTPS for an
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
     #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
@@ -587,6 +587,18 @@ module Aws::ElasticLoadBalancingV2
     #           status_code: "FixedResponseActionStatusCode", # required
     #           content_type: "FixedResponseActionContentType",
     #         },
+    #         forward_config: {
+    #           target_groups: [
+    #             {
+    #               target_group_arn: "TargetGroupArn",
+    #               weight: 1,
+    #             },
+    #           ],
+    #           target_group_stickiness_config: {
+    #             enabled: false,
+    #             duration_seconds: 1,
+    #           },
+    #         },
     #       },
     #     ],
     #   })
@@ -637,6 +649,11 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].fixed_response_config.message_body #=> String
     #   resp.listeners[0].default_actions[0].fixed_response_config.status_code #=> String
     #   resp.listeners[0].default_actions[0].fixed_response_config.content_type #=> String
+    #   resp.listeners[0].default_actions[0].forward_config.target_groups #=> Array
+    #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].target_group_arn #=> String
+    #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
+    #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
+    #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListener AWS API Documentation
     #
@@ -925,10 +942,10 @@ module Aws::ElasticLoadBalancingV2
     #   of actions: `forward`, `fixed-response`, or `redirect`, and it must be
     #   the last action to be performed.
     #
-    #   If the action type is `forward`, you specify a target group. The
-    #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer. The protocol of the target group must be TCP, TLS, UDP,
-    #   or TCP\_UDP for a Network Load Balancer.
+    #   If the action type is `forward`, you specify one or more target
+    #   groups. The protocol of the target group must be HTTP or HTTPS for an
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
     #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
@@ -1078,6 +1095,18 @@ module Aws::ElasticLoadBalancingV2
     #           status_code: "FixedResponseActionStatusCode", # required
     #           content_type: "FixedResponseActionContentType",
     #         },
+    #         forward_config: {
+    #           target_groups: [
+    #             {
+    #               target_group_arn: "TargetGroupArn",
+    #               weight: 1,
+    #             },
+    #           ],
+    #           target_group_stickiness_config: {
+    #             enabled: false,
+    #             duration_seconds: 1,
+    #           },
+    #         },
     #       },
     #     ],
     #   })
@@ -1140,6 +1169,11 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].fixed_response_config.message_body #=> String
     #   resp.rules[0].actions[0].fixed_response_config.status_code #=> String
     #   resp.rules[0].actions[0].fixed_response_config.content_type #=> String
+    #   resp.rules[0].actions[0].forward_config.target_groups #=> Array
+    #   resp.rules[0].actions[0].forward_config.target_groups[0].target_group_arn #=> String
+    #   resp.rules[0].actions[0].forward_config.target_groups[0].weight #=> Integer
+    #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
+    #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #   resp.rules[0].is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRule AWS API Documentation
@@ -1766,6 +1800,11 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].fixed_response_config.message_body #=> String
     #   resp.listeners[0].default_actions[0].fixed_response_config.status_code #=> String
     #   resp.listeners[0].default_actions[0].fixed_response_config.content_type #=> String
+    #   resp.listeners[0].default_actions[0].forward_config.target_groups #=> Array
+    #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].target_group_arn #=> String
+    #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
+    #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
+    #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListeners AWS API Documentation
@@ -2086,6 +2125,11 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].fixed_response_config.message_body #=> String
     #   resp.rules[0].actions[0].fixed_response_config.status_code #=> String
     #   resp.rules[0].actions[0].fixed_response_config.content_type #=> String
+    #   resp.rules[0].actions[0].forward_config.target_groups #=> Array
+    #   resp.rules[0].actions[0].forward_config.target_groups[0].target_group_arn #=> String
+    #   resp.rules[0].actions[0].forward_config.target_groups[0].weight #=> Integer
+    #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
+    #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #   resp.rules[0].is_default #=> Boolean
     #   resp.next_marker #=> String
     #
@@ -2609,13 +2653,18 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Modifies the specified properties of the specified listener.
+    # Replaces the specified properties of the specified listener. Any
+    # properties that you do not specify remain unchanged.
     #
-    # Any properties that you do not specify retain their current values.
-    # However, changing the protocol from HTTPS to HTTP, or from TLS to TCP,
-    # removes the security policy and default certificate properties. If you
-    # change the protocol from HTTP to HTTPS, or from TCP to TLS, you must
-    # add the security policy and default certificate properties.
+    # Changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes
+    # the security policy and default certificate properties. If you change
+    # the protocol from HTTP to HTTPS, or from TCP to TLS, you must add the
+    # security policy and default certificate properties.
+    #
+    # To add an item to a list, remove an item from a list, or update an
+    # item in a list, you must provide the entire list. For example, to add
+    # an action, specify a list with the current actions plus the new
+    # action.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -2649,10 +2698,10 @@ module Aws::ElasticLoadBalancingV2
     #   The actions for the default rule. The rule must include one forward
     #   action or one or more fixed-response actions.
     #
-    #   If the action type is `forward`, you specify a target group. The
-    #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer. The protocol of the target group must be TCP, TLS, UDP,
-    #   or TCP\_UDP for a Network Load Balancer.
+    #   If the action type is `forward`, you specify one or more target
+    #   groups. The protocol of the target group must be HTTP or HTTPS for an
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
     #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
@@ -2800,6 +2849,18 @@ module Aws::ElasticLoadBalancingV2
     #           status_code: "FixedResponseActionStatusCode", # required
     #           content_type: "FixedResponseActionContentType",
     #         },
+    #         forward_config: {
+    #           target_groups: [
+    #             {
+    #               target_group_arn: "TargetGroupArn",
+    #               weight: 1,
+    #             },
+    #           ],
+    #           target_group_stickiness_config: {
+    #             enabled: false,
+    #             duration_seconds: 1,
+    #           },
+    #         },
     #       },
     #     ],
     #   })
@@ -2850,6 +2911,11 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].fixed_response_config.message_body #=> String
     #   resp.listeners[0].default_actions[0].fixed_response_config.status_code #=> String
     #   resp.listeners[0].default_actions[0].fixed_response_config.content_type #=> String
+    #   resp.listeners[0].default_actions[0].forward_config.target_groups #=> Array
+    #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].target_group_arn #=> String
+    #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
+    #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
+    #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListener AWS API Documentation
     #
@@ -3034,10 +3100,13 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Modifies the specified rule.
+    # Replaces the specified properties of the specified rule. Any
+    # properties that you do not specify are unchanged.
     #
-    # Any existing properties that you do not modify retain their current
-    # values.
+    # To add an item to a list, remove an item from a list, or update an
+    # item in a list, you must provide the entire list. For example, to add
+    # an action, specify a list with the current actions plus the new
+    # action.
     #
     # To modify the actions for the default rule, use ModifyListener.
     #
@@ -3055,10 +3124,10 @@ module Aws::ElasticLoadBalancingV2
     #   of actions: `forward`, `fixed-response`, or `redirect`, and it must be
     #   the last action to be performed.
     #
-    #   If the action type is `forward`, you specify a target group. The
-    #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer. The protocol of the target group must be TCP, TLS, UDP,
-    #   or TCP\_UDP for a Network Load Balancer.
+    #   If the action type is `forward`, you specify one or more target
+    #   groups. The protocol of the target group must be HTTP or HTTPS for an
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
     #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
@@ -3199,6 +3268,18 @@ module Aws::ElasticLoadBalancingV2
     #           status_code: "FixedResponseActionStatusCode", # required
     #           content_type: "FixedResponseActionContentType",
     #         },
+    #         forward_config: {
+    #           target_groups: [
+    #             {
+    #               target_group_arn: "TargetGroupArn",
+    #               weight: 1,
+    #             },
+    #           ],
+    #           target_group_stickiness_config: {
+    #             enabled: false,
+    #             duration_seconds: 1,
+    #           },
+    #         },
     #       },
     #     ],
     #   })
@@ -3261,6 +3342,11 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].fixed_response_config.message_body #=> String
     #   resp.rules[0].actions[0].fixed_response_config.status_code #=> String
     #   resp.rules[0].actions[0].fixed_response_config.content_type #=> String
+    #   resp.rules[0].actions[0].forward_config.target_groups #=> Array
+    #   resp.rules[0].actions[0].forward_config.target_groups[0].target_group_arn #=> String
+    #   resp.rules[0].actions[0].forward_config.target_groups[0].weight #=> Integer
+    #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
+    #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #   resp.rules[0].is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRule AWS API Documentation
@@ -3821,6 +3907,11 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].fixed_response_config.message_body #=> String
     #   resp.rules[0].actions[0].fixed_response_config.status_code #=> String
     #   resp.rules[0].actions[0].fixed_response_config.content_type #=> String
+    #   resp.rules[0].actions[0].forward_config.target_groups #=> Array
+    #   resp.rules[0].actions[0].forward_config.target_groups[0].target_group_arn #=> String
+    #   resp.rules[0].actions[0].forward_config.target_groups[0].weight #=> Integer
+    #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
+    #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #   resp.rules[0].is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetRulePriorities AWS API Documentation
@@ -3984,7 +4075,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

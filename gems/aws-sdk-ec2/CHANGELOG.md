@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2019-11-19)
+------------------
+
+* Feature - This release adds support for RunInstances to specify the metadata options for new instances; adds a new API, ModifyInstanceMetadataOptions, which lets you modify the metadata options for a running or stopped instance; and adds support for CreateCustomerGateway to specify a device name.
+
 1.116.0 (2019-11-15)
 ------------------
 

@@ -174,6 +174,15 @@ module Aws::AutoScaling
       data[:service_linked_role_arn]
     end
 
+    # The maximum amount of time, in seconds, that an instance can be in
+    # service.
+    #
+    # Valid Range: Minimum value of 604800.
+    # @return [Integer]
+    def max_instance_lifetime
+      data[:max_instance_lifetime]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -809,6 +818,7 @@ module Aws::AutoScaling
     #         overrides: [
     #           {
     #             instance_type: "XmlStringMaxLen255",
+    #             weighted_capacity: "XmlStringMaxLen32",
     #           },
     #         ],
     #       },
@@ -833,18 +843,13 @@ module Aws::AutoScaling
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
     #     service_linked_role_arn: "ResourceName",
+    #     max_instance_lifetime: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
     #   The name of the launch configuration. If you specify
     #   `LaunchConfigurationName` in your update request, you can't specify
     #   `LaunchTemplate` or `MixedInstancesPolicy`.
-    #
-    #   To update an Auto Scaling group with a launch configuration with
-    #   `InstanceMonitoring` set to `false`, you must first disable the
-    #   collection of group metrics. Otherwise, you get an error. If you have
-    #   previously enabled the collection of group metrics, you can disable it
-    #   using DisableMetricsCollection.
     # @option options [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template and version to use to specify the updates. If you
     #   specify `LaunchTemplate` in your update request, you can't specify
@@ -963,6 +968,11 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html
+    # @option options [Integer] :max_instance_lifetime
+    #   The maximum amount of time, in seconds, that an instance can be in
+    #   service.
+    #
+    #   Valid Range: Minimum value of 604800.
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)

@@ -41,6 +41,7 @@ module Aws::AutoScaling
     #         overrides: [
     #           {
     #             instance_type: "XmlStringMaxLen255",
+    #             weighted_capacity: "XmlStringMaxLen32",
     #           },
     #         ],
     #       },
@@ -88,6 +89,7 @@ module Aws::AutoScaling
     #       },
     #     ],
     #     service_linked_role_arn: "ResourceName",
+    #     max_instance_lifetime: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name
@@ -298,6 +300,11 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html
+    # @option options [Integer] :max_instance_lifetime
+    #   The maximum amount of time, in seconds, that an instance can be in
+    #   service.
+    #
+    #   Valid Range: Minimum value of 604800.
     # @return [AutoScalingGroup]
     def create_group(options = {})
       resp = @client.create_auto_scaling_group(options)
@@ -477,18 +484,14 @@ module Aws::AutoScaling
     # @option options [String] :spot_price
     #   The maximum hourly price to be paid for any Spot Instance launched to
     #   fulfill the request. Spot Instances are launched when the price you
-    #   specify exceeds the current Spot market price. For more information,
-    #   see [Launching Spot Instances in Your Auto Scaling Group][1] in the
+    #   specify exceeds the current Spot price. For more information, see
+    #   [Launching Spot Instances in Your Auto Scaling Group][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   If a Spot price is set, then the Auto Scaling group will only launch
-    #   instances when the Spot price has been met, regardless of the setting
-    #   in the Auto Scaling group's `DesiredCapacity`.
-    #
-    #   <note markdown="1"> When you change your Spot price by creating a new launch
+    #   <note markdown="1"> When you change your maximum price by creating a new launch
     #   configuration, running instances will continue to run as long as the
-    #   Spot price for those running instances is higher than the current Spot
-    #   market price.
+    #   maximum price for those running instances is higher than the current
+    #   Spot price.
     #
     #    </note>
     #
@@ -559,7 +562,7 @@ module Aws::AutoScaling
     #   For more information, see [Instance Placement Tenancy][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Valid values: `default` \| `dedicated`
+    #   Valid Values: `default` \| `dedicated`
     #
     #
     #

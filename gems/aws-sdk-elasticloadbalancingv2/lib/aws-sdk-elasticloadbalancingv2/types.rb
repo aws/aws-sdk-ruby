@@ -58,6 +58,18 @@ module Aws::ElasticLoadBalancingV2
     #           status_code: "FixedResponseActionStatusCode", # required
     #           content_type: "FixedResponseActionContentType",
     #         },
+    #         forward_config: {
+    #           target_groups: [
+    #             {
+    #               target_group_arn: "TargetGroupArn",
+    #               weight: 1,
+    #             },
+    #           ],
+    #           target_group_stickiness_config: {
+    #             enabled: false,
+    #             duration_seconds: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] type
@@ -66,7 +78,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group. Specify only
-    #   when `Type` is `forward`.
+    #   when `Type` is `forward` and you want to route to a single target
+    #   group. To route to one or more target groups, use `ForwardConfig`
+    #   instead.
     #   @return [String]
     #
     # @!attribute [rw] authenticate_oidc_config
@@ -100,6 +114,15 @@ module Aws::ElasticLoadBalancingV2
     #   `fixed-response`.
     #   @return [Types::FixedResponseActionConfig]
     #
+    # @!attribute [rw] forward_config
+    #   Information for creating an action that distributes requests among
+    #   one or more target groups. For Network Load Balancers, you can
+    #   specify a single target group. Specify only when `Type` is
+    #   `forward`. If you specify both `ForwardConfig` and `TargetGroupArn`,
+    #   you can specify only one target group using `ForwardConfig` and it
+    #   must be the same target group specified in `TargetGroupArn`.
+    #   @return [Types::ForwardActionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Action AWS API Documentation
     #
     class Action < Struct.new(
@@ -109,7 +132,8 @@ module Aws::ElasticLoadBalancingV2
       :authenticate_cognito_config,
       :order,
       :redirect_config,
-      :fixed_response_config)
+      :fixed_response_config,
+      :forward_config)
       include Aws::Structure
     end
 
@@ -514,6 +538,18 @@ module Aws::ElasticLoadBalancingV2
     #               status_code: "FixedResponseActionStatusCode", # required
     #               content_type: "FixedResponseActionContentType",
     #             },
+    #             forward_config: {
+    #               target_groups: [
+    #                 {
+    #                   target_group_arn: "TargetGroupArn",
+    #                   weight: 1,
+    #                 },
+    #               ],
+    #               target_group_stickiness_config: {
+    #                 enabled: false,
+    #                 duration_seconds: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -552,10 +588,10 @@ module Aws::ElasticLoadBalancingV2
     #   The actions for the default rule. The rule must include one forward
     #   action or one or more fixed-response actions.
     #
-    #   If the action type is `forward`, you specify a target group. The
-    #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer. The protocol of the target group must be
-    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
+    #   If the action type is `forward`, you specify one or more target
+    #   groups. The protocol of the target group must be HTTP or HTTPS for
+    #   an Application Load Balancer. The protocol of the target group must
+    #   be TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
     #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
@@ -798,6 +834,18 @@ module Aws::ElasticLoadBalancingV2
     #               status_code: "FixedResponseActionStatusCode", # required
     #               content_type: "FixedResponseActionContentType",
     #             },
+    #             forward_config: {
+    #               target_groups: [
+    #                 {
+    #                   target_group_arn: "TargetGroupArn",
+    #                   weight: 1,
+    #                 },
+    #               ],
+    #               target_group_stickiness_config: {
+    #                 enabled: false,
+    #                 duration_seconds: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -823,10 +871,10 @@ module Aws::ElasticLoadBalancingV2
     #   types of actions: `forward`, `fixed-response`, or `redirect`, and it
     #   must be the last action to be performed.
     #
-    #   If the action type is `forward`, you specify a target group. The
-    #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer. The protocol of the target group must be
-    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
+    #   If the action type is `forward`, you specify one or more target
+    #   groups. The protocol of the target group must be HTTP or HTTPS for
+    #   an Application Load Balancer. The protocol of the target group must
+    #   be TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
     #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
@@ -1679,6 +1727,41 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about a forward action.
+    #
+    # @note When making an API call, you may pass ForwardActionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         target_groups: [
+    #           {
+    #             target_group_arn: "TargetGroupArn",
+    #             weight: 1,
+    #           },
+    #         ],
+    #         target_group_stickiness_config: {
+    #           enabled: false,
+    #           duration_seconds: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target_groups
+    #   One or more target groups. For Network Load Balancers, you can
+    #   specify a single target group.
+    #   @return [Array<Types::TargetGroupTuple>]
+    #
+    # @!attribute [rw] target_group_stickiness_config
+    #   The target group stickiness for the rule.
+    #   @return [Types::TargetGroupStickinessConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ForwardActionConfig AWS API Documentation
+    #
+    class ForwardActionConfig < Struct.new(
+      :target_groups,
+      :target_group_stickiness_config)
+      include Aws::Structure
+    end
+
     # Information about a host header condition.
     #
     # @note When making an API call, you may pass HostHeaderConditionConfig
@@ -1803,6 +1886,12 @@ module Aws::ElasticLoadBalancingV2
     #   * rules-per-application-load-balancer
     #
     #   * target-groups
+    #
+    #   * target-groups-per-action-on-application-load-balancer
+    #
+    #   * target-groups-per-action-on-network-load-balancer
+    #
+    #   * target-groups-per-application-load-balancer
     #
     #   * targets-per-application-load-balancer
     #
@@ -2146,6 +2235,18 @@ module Aws::ElasticLoadBalancingV2
     #               status_code: "FixedResponseActionStatusCode", # required
     #               content_type: "FixedResponseActionContentType",
     #             },
+    #             forward_config: {
+    #               target_groups: [
+    #                 {
+    #                   target_group_arn: "TargetGroupArn",
+    #                   weight: 1,
+    #                 },
+    #               ],
+    #               target_group_stickiness_config: {
+    #                 enabled: false,
+    #                 duration_seconds: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -2187,10 +2288,10 @@ module Aws::ElasticLoadBalancingV2
     #   The actions for the default rule. The rule must include one forward
     #   action or one or more fixed-response actions.
     #
-    #   If the action type is `forward`, you specify a target group. The
-    #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer. The protocol of the target group must be
-    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
+    #   If the action type is `forward`, you specify one or more target
+    #   groups. The protocol of the target group must be HTTP or HTTPS for
+    #   an Application Load Balancer. The protocol of the target group must
+    #   be TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
     #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
@@ -2352,6 +2453,18 @@ module Aws::ElasticLoadBalancingV2
     #               status_code: "FixedResponseActionStatusCode", # required
     #               content_type: "FixedResponseActionContentType",
     #             },
+    #             forward_config: {
+    #               target_groups: [
+    #                 {
+    #                   target_group_arn: "TargetGroupArn",
+    #                   weight: 1,
+    #                 },
+    #               ],
+    #               target_group_stickiness_config: {
+    #                 enabled: false,
+    #                 duration_seconds: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -2372,10 +2485,10 @@ module Aws::ElasticLoadBalancingV2
     #   types of actions: `forward`, `fixed-response`, or `redirect`, and it
     #   must be the last action to be performed.
     #
-    #   If the action type is `forward`, you specify a target group. The
-    #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer. The protocol of the target group must be
-    #   TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
+    #   If the action type is `forward`, you specify one or more target
+    #   groups. The protocol of the target group must be HTTP or HTTPS for
+    #   an Application Load Balancer. The protocol of the target group must
+    #   be TCP, TLS, UDP, or TCP\_UDP for a Network Load Balancer.
     #
     #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
@@ -3545,6 +3658,61 @@ module Aws::ElasticLoadBalancingV2
     class TargetGroupAttribute < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # Information about the target group stickiness for a rule.
+    #
+    # @note When making an API call, you may pass TargetGroupStickinessConfig
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         duration_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether target group stickiness is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The time period, in seconds, during which requests from a client
+    #   should be routed to the same target group. The range is 1-604800
+    #   seconds (7 days).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroupStickinessConfig AWS API Documentation
+    #
+    class TargetGroupStickinessConfig < Struct.new(
+      :enabled,
+      :duration_seconds)
+      include Aws::Structure
+    end
+
+    # Information about how traffic will be distributed between multiple
+    # target groups in a forward rule.
+    #
+    # @note When making an API call, you may pass TargetGroupTuple
+    #   data as a hash:
+    #
+    #       {
+    #         target_group_arn: "TargetGroupArn",
+    #         weight: 1,
+    #       }
+    #
+    # @!attribute [rw] target_group_arn
+    #   The Amazon Resource Name (ARN) of the target group.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The weight. The range is 0 to 999.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroupTuple AWS API Documentation
+    #
+    class TargetGroupTuple < Struct.new(
+      :target_group_arn,
+      :weight)
       include Aws::Structure
     end
 

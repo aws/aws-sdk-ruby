@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2019-11-19)
+------------------
+
+* Feature - Add support for ARM and GPU-enhanced build environments and a new SSD-backed Linux compute type with additional CPU and memory in CodeBuild
+
 1.42.0 (2019-11-06)
 ------------------
 

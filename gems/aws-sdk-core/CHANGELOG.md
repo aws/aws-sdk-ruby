@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.79.0 (2019-11-19)
+------------------
+
 * Feature - Support EC2 IMDS updates.
 
 3.78.0 (2019-11-15)

@@ -112,6 +112,7 @@ module Aws::ElasticLoadBalancingV2
     FixedResponseActionContentType = Shapes::StringShape.new(name: 'FixedResponseActionContentType')
     FixedResponseActionMessage = Shapes::StringShape.new(name: 'FixedResponseActionMessage')
     FixedResponseActionStatusCode = Shapes::StringShape.new(name: 'FixedResponseActionStatusCode')
+    ForwardActionConfig = Shapes::StructureShape.new(name: 'ForwardActionConfig')
     HealthCheckEnabled = Shapes::BooleanShape.new(name: 'HealthCheckEnabled')
     HealthCheckIntervalSeconds = Shapes::IntegerShape.new(name: 'HealthCheckIntervalSeconds')
     HealthCheckPort = Shapes::StringShape.new(name: 'HealthCheckPort')
@@ -251,9 +252,15 @@ module Aws::ElasticLoadBalancingV2
     TargetGroupAttributeKey = Shapes::StringShape.new(name: 'TargetGroupAttributeKey')
     TargetGroupAttributeValue = Shapes::StringShape.new(name: 'TargetGroupAttributeValue')
     TargetGroupAttributes = Shapes::ListShape.new(name: 'TargetGroupAttributes')
+    TargetGroupList = Shapes::ListShape.new(name: 'TargetGroupList')
     TargetGroupName = Shapes::StringShape.new(name: 'TargetGroupName')
     TargetGroupNames = Shapes::ListShape.new(name: 'TargetGroupNames')
     TargetGroupNotFoundException = Shapes::StructureShape.new(name: 'TargetGroupNotFoundException')
+    TargetGroupStickinessConfig = Shapes::StructureShape.new(name: 'TargetGroupStickinessConfig')
+    TargetGroupStickinessDurationSeconds = Shapes::IntegerShape.new(name: 'TargetGroupStickinessDurationSeconds')
+    TargetGroupStickinessEnabled = Shapes::BooleanShape.new(name: 'TargetGroupStickinessEnabled')
+    TargetGroupTuple = Shapes::StructureShape.new(name: 'TargetGroupTuple')
+    TargetGroupWeight = Shapes::IntegerShape.new(name: 'TargetGroupWeight')
     TargetGroups = Shapes::ListShape.new(name: 'TargetGroups')
     TargetHealth = Shapes::StructureShape.new(name: 'TargetHealth')
     TargetHealthDescription = Shapes::StructureShape.new(name: 'TargetHealthDescription')
@@ -271,6 +278,7 @@ module Aws::ElasticLoadBalancingV2
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TooManyTargetGroupsException = Shapes::StructureShape.new(name: 'TooManyTargetGroupsException')
     TooManyTargetsException = Shapes::StructureShape.new(name: 'TooManyTargetsException')
+    TooManyUniqueTargetGroupsPerLoadBalancerException = Shapes::StructureShape.new(name: 'TooManyUniqueTargetGroupsPerLoadBalancerException')
     UnsupportedProtocolException = Shapes::StructureShape.new(name: 'UnsupportedProtocolException')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     ZoneName = Shapes::StringShape.new(name: 'ZoneName')
@@ -282,6 +290,7 @@ module Aws::ElasticLoadBalancingV2
     Action.add_member(:order, Shapes::ShapeRef.new(shape: ActionOrder, location_name: "Order"))
     Action.add_member(:redirect_config, Shapes::ShapeRef.new(shape: RedirectActionConfig, location_name: "RedirectConfig"))
     Action.add_member(:fixed_response_config, Shapes::ShapeRef.new(shape: FixedResponseActionConfig, location_name: "FixedResponseConfig"))
+    Action.add_member(:forward_config, Shapes::ShapeRef.new(shape: ForwardActionConfig, location_name: "ForwardConfig"))
     Action.struct_class = Types::Action
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
@@ -522,6 +531,10 @@ module Aws::ElasticLoadBalancingV2
     FixedResponseActionConfig.add_member(:status_code, Shapes::ShapeRef.new(shape: FixedResponseActionStatusCode, required: true, location_name: "StatusCode"))
     FixedResponseActionConfig.add_member(:content_type, Shapes::ShapeRef.new(shape: FixedResponseActionContentType, location_name: "ContentType"))
     FixedResponseActionConfig.struct_class = Types::FixedResponseActionConfig
+
+    ForwardActionConfig.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroupList, location_name: "TargetGroups"))
+    ForwardActionConfig.add_member(:target_group_stickiness_config, Shapes::ShapeRef.new(shape: TargetGroupStickinessConfig, location_name: "TargetGroupStickinessConfig"))
+    ForwardActionConfig.struct_class = Types::ForwardActionConfig
 
     HostHeaderConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
     HostHeaderConditionConfig.struct_class = Types::HostHeaderConditionConfig
@@ -809,7 +822,17 @@ module Aws::ElasticLoadBalancingV2
 
     TargetGroupAttributes.member = Shapes::ShapeRef.new(shape: TargetGroupAttribute)
 
+    TargetGroupList.member = Shapes::ShapeRef.new(shape: TargetGroupTuple)
+
     TargetGroupNames.member = Shapes::ShapeRef.new(shape: TargetGroupName)
+
+    TargetGroupStickinessConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: TargetGroupStickinessEnabled, location_name: "Enabled"))
+    TargetGroupStickinessConfig.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: TargetGroupStickinessDurationSeconds, location_name: "DurationSeconds"))
+    TargetGroupStickinessConfig.struct_class = Types::TargetGroupStickinessConfig
+
+    TargetGroupTuple.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: TargetGroupArn, location_name: "TargetGroupArn"))
+    TargetGroupTuple.add_member(:weight, Shapes::ShapeRef.new(shape: TargetGroupWeight, location_name: "Weight"))
+    TargetGroupTuple.struct_class = Types::TargetGroupTuple
 
     TargetGroups.member = Shapes::ShapeRef.new(shape: TargetGroup)
 
@@ -887,6 +910,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUniqueTargetGroupsPerLoadBalancerException)
       end)
 
       api.add_operation(:create_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -929,6 +953,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUniqueTargetGroupsPerLoadBalancerException)
       end)
 
       api.add_operation(:create_target_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1135,6 +1160,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUniqueTargetGroupsPerLoadBalancerException)
       end)
 
       api.add_operation(:modify_load_balancer_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -1163,6 +1189,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUniqueTargetGroupsPerLoadBalancerException)
       end)
 
       api.add_operation(:modify_target_group, Seahorse::Model::Operation.new.tap do |o|

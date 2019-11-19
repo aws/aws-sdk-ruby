@@ -341,6 +341,13 @@ module Aws::AutoScaling
     #   Auto Scaling group uses to call other AWS services on your behalf.
     #   @return [String]
     #
+    # @!attribute [rw] max_instance_lifetime
+    #   The maximum amount of time, in seconds, that an instance can be in
+    #   service.
+    #
+    #   Valid Range: Minimum value of 604800.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
@@ -368,7 +375,8 @@ module Aws::AutoScaling
       :tags,
       :termination_policies,
       :new_instances_protected_from_scale_in,
-      :service_linked_role_arn)
+      :service_linked_role_arn,
+      :max_instance_lifetime)
       include Aws::Structure
     end
 
@@ -435,6 +443,10 @@ module Aws::AutoScaling
     #   The ID of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] instance_type
+    #   The instance type of the EC2 instance.
+    #   @return [String]
+    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group for the instance.
     #   @return [String]
@@ -469,17 +481,26 @@ module Aws::AutoScaling
     #   Amazon EC2 Auto Scaling when scaling in.
     #   @return [Boolean]
     #
+    # @!attribute [rw] weighted_capacity
+    #   The number of capacity units contributed by the instance based on
+    #   its instance type.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 999.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingInstanceDetails AWS API Documentation
     #
     class AutoScalingInstanceDetails < Struct.new(
       :instance_id,
+      :instance_type,
       :auto_scaling_group_name,
       :availability_zone,
       :lifecycle_state,
       :health_status,
       :launch_configuration_name,
       :launch_template,
-      :protected_from_scale_in)
+      :protected_from_scale_in,
+      :weighted_capacity)
       include Aws::Structure
     end
 
@@ -712,6 +733,7 @@ module Aws::AutoScaling
     #             overrides: [
     #               {
     #                 instance_type: "XmlStringMaxLen255",
+    #                 weighted_capacity: "XmlStringMaxLen32",
     #               },
     #             ],
     #           },
@@ -759,6 +781,7 @@ module Aws::AutoScaling
     #           },
     #         ],
     #         service_linked_role_arn: "ResourceName",
+    #         max_instance_lifetime: 1,
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -1012,6 +1035,13 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html
     #   @return [String]
     #
+    # @!attribute [rw] max_instance_lifetime
+    #   The maximum amount of time, in seconds, that an instance can be in
+    #   service.
+    #
+    #   Valid Range: Minimum value of 604800.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
     #
     class CreateAutoScalingGroupType < Struct.new(
@@ -1035,7 +1065,8 @@ module Aws::AutoScaling
       :new_instances_protected_from_scale_in,
       :lifecycle_hook_specification_list,
       :tags,
-      :service_linked_role_arn)
+      :service_linked_role_arn,
+      :max_instance_lifetime)
       include Aws::Structure
     end
 
@@ -1237,18 +1268,14 @@ module Aws::AutoScaling
     # @!attribute [rw] spot_price
     #   The maximum hourly price to be paid for any Spot Instance launched
     #   to fulfill the request. Spot Instances are launched when the price
-    #   you specify exceeds the current Spot market price. For more
-    #   information, see [Launching Spot Instances in Your Auto Scaling
-    #   Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   you specify exceeds the current Spot price. For more information,
+    #   see [Launching Spot Instances in Your Auto Scaling Group][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   If a Spot price is set, then the Auto Scaling group will only launch
-    #   instances when the Spot price has been met, regardless of the
-    #   setting in the Auto Scaling group's `DesiredCapacity`.
-    #
-    #   <note markdown="1"> When you change your Spot price by creating a new launch
+    #   <note markdown="1"> When you change your maximum price by creating a new launch
     #   configuration, running instances will continue to run as long as the
-    #   Spot price for those running instances is higher than the current
-    #   Spot market price.
+    #   maximum price for those running instances is higher than the current
+    #   Spot price.
     #
     #    </note>
     #
@@ -1329,7 +1356,7 @@ module Aws::AutoScaling
     #   For more information, see [Instance Placement Tenancy][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Valid values: `default` \| `dedicated`
+    #   Valid Values: `default` \| `dedicated`
     #
     #
     #
@@ -2304,7 +2331,7 @@ module Aws::AutoScaling
     #   information, see [Amazon EBS Volume Types][1] in the *Amazon EC2
     #   User Guide for Linux Instances*.
     #
-    #   Valid values: `standard` \| `io1` \| `gp2` \| `st1` \| `sc1`
+    #   Valid Values: `standard` \| `io1` \| `gp2` \| `st1` \| `sc1`
     #
     #
     #
@@ -2662,6 +2689,10 @@ module Aws::AutoScaling
     #   The ID of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] instance_type
+    #   The instance type of the EC2 instance.
+    #   @return [String]
+    #
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which the instance is running.
     #   @return [String]
@@ -2691,16 +2722,25 @@ module Aws::AutoScaling
     #   Amazon EC2 Auto Scaling when scaling in.
     #   @return [Boolean]
     #
+    # @!attribute [rw] weighted_capacity
+    #   The number of capacity units contributed by the instance based on
+    #   its instance type.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 999.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Instance AWS API Documentation
     #
     class Instance < Struct.new(
       :instance_id,
+      :instance_type,
       :availability_zone,
       :lifecycle_state,
       :health_status,
       :launch_configuration_name,
       :launch_template,
-      :protected_from_scale_in)
+      :protected_from_scale_in,
+      :weighted_capacity)
       include Aws::Structure
     end
 
@@ -2734,6 +2774,15 @@ module Aws::AutoScaling
     # Instances, and how the Auto Scaling group allocates instance types to
     # fulfill On-Demand and Spot capacity.
     #
+    # When you update `SpotAllocationStrategy`, `SpotInstancePools`, or
+    # `SpotMaxPrice`, this update action does not deploy any changes across
+    # the running Amazon EC2 instances in the group. Your existing Spot
+    # Instances continue to run as long as the maximum price for those
+    # instances is higher than the current Spot price. When scale out
+    # occurs, Amazon EC2 Auto Scaling launches instances based on the new
+    # settings. When scale in occurs, Amazon EC2 Auto Scaling terminates
+    # instances according to the group's termination policies.
+    #
     # @note When making an API call, you may pass InstancesDistribution
     #   data as a hash:
     #
@@ -2765,20 +2814,36 @@ module Aws::AutoScaling
     #   be fulfilled by On-Demand Instances. This base portion is
     #   provisioned first as your group scales.
     #
-    #   The default value is `0`. If you leave this parameter set to `0`,
-    #   On-Demand Instances are launched as a percentage of the Auto Scaling
-    #   group's desired capacity, per the
-    #   `OnDemandPercentageAboveBaseCapacity` setting.
+    #   Default if not set is 0. If you leave it set to 0, On-Demand
+    #   Instances are launched as a percentage of the Auto Scaling group's
+    #   desired capacity, per the `OnDemandPercentageAboveBaseCapacity`
+    #   setting.
+    #
+    #   <note markdown="1"> An update to this setting means a gradual replacement of instances
+    #   to maintain the specified number of On-Demand Instances for your
+    #   base capacity. When replacing instances, Amazon EC2 Auto Scaling
+    #   launches new instances before terminating the old ones.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_percentage_above_base_capacity
     #   Controls the percentages of On-Demand Instances and Spot Instances
-    #   for your additional capacity beyond `OnDemandBaseCapacity`. The
-    #   range is 0–100.
+    #   for your additional capacity beyond `OnDemandBaseCapacity`.
     #
-    #   The default value is `100`. If you leave this parameter set to
-    #   `100`, the percentages are 100% for On-Demand Instances and 0% for
-    #   Spot Instances.
+    #   Default if not set is 100. If you leave it set to 100, the
+    #   percentages are 100% for On-Demand Instances and 0% for Spot
+    #   Instances.
+    #
+    #   <note markdown="1"> An update to this setting means a gradual replacement of instances
+    #   to maintain the percentage of On-Demand Instances for your
+    #   additional capacity above the base capacity. When replacing
+    #   instances, Amazon EC2 Auto Scaling launches new instances before
+    #   terminating the old ones.
+    #
+    #    </note>
+    #
+    #   Valid Range: Minimum value of 0. Maximum value of 100.
     #   @return [Integer]
     #
     # @!attribute [rw] spot_allocation_strategy
@@ -2802,10 +2867,12 @@ module Aws::AutoScaling
     # @!attribute [rw] spot_instance_pools
     #   The number of Spot Instance pools across which to allocate your Spot
     #   Instances. The Spot pools are determined from the different instance
-    #   types in the Overrides array of LaunchTemplate. The range is 1–20.
-    #   The default value is `2`.
+    #   types in the Overrides array of LaunchTemplate. Default if not set
+    #   is 2.
     #
-    #   Valid only when the Spot allocation strategy is `lowest-price`.
+    #   Used only when the Spot allocation strategy is `lowest-price`.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 20.
     #   @return [Integer]
     #
     # @!attribute [rw] spot_max_price
@@ -2974,7 +3041,7 @@ module Aws::AutoScaling
     # @!attribute [rw] spot_price
     #   The maximum hourly price to be paid for any Spot Instance launched
     #   to fulfill the request. Spot Instances are launched when the price
-    #   you specify exceeds the current Spot market price.
+    #   you specify exceeds the current Spot price.
     #
     #   For more information, see [Launching Spot Instances in Your Auto
     #   Scaling Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -3141,6 +3208,12 @@ module Aws::AutoScaling
     # launch template with multiple instance types that can be used to
     # launch On-Demand Instances and Spot Instances.
     #
+    # When you update the launch template or overrides, existing Amazon EC2
+    # instances continue to run. When scale out occurs, Amazon EC2 Auto
+    # Scaling launches instances to match the new settings. When scale in
+    # occurs, Amazon EC2 Auto Scaling terminates instances according to the
+    # group's termination policies.
+    #
     # @note When making an API call, you may pass LaunchTemplate
     #   data as a hash:
     #
@@ -3153,6 +3226,7 @@ module Aws::AutoScaling
     #         overrides: [
     #           {
     #             instance_type: "XmlStringMaxLen255",
+    #             weighted_capacity: "XmlStringMaxLen32",
     #           },
     #         ],
     #       }
@@ -3163,9 +3237,10 @@ module Aws::AutoScaling
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] overrides
-    #   Any parameters that you specify override the same parameters in the
-    #   launch template. Currently, the only supported override is instance
-    #   type. You must specify between 2 and 20 overrides.
+    #   An optional setting. Any parameters that you specify override the
+    #   same parameters in the launch template. Currently, the only
+    #   supported override is instance type. You can specify between 1 and
+    #   20 instance types.
     #   @return [Array<Types::LaunchTemplateOverrides>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplate AWS API Documentation
@@ -3183,6 +3258,7 @@ module Aws::AutoScaling
     #
     #       {
     #         instance_type: "XmlStringMaxLen255",
+    #         weighted_capacity: "XmlStringMaxLen32",
     #       }
     #
     # @!attribute [rw] instance_type
@@ -3196,10 +3272,22 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes
     #   @return [String]
     #
+    # @!attribute [rw] weighted_capacity
+    #   The number of capacity units, which gives the instance type a
+    #   proportional weight to other instance types. For example, larger
+    #   instance types are generally weighted more than smaller instance
+    #   types. These are the same units that you chose to set the desired
+    #   capacity in terms of instances, or a performance attribute such as
+    #   vCPUs, memory, or I/O.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 999.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateOverrides AWS API Documentation
     #
     class LaunchTemplateOverrides < Struct.new(
-      :instance_type)
+      :instance_type,
+      :weighted_capacity)
       include Aws::Structure
     end
 
@@ -3641,6 +3729,7 @@ module Aws::AutoScaling
     #           overrides: [
     #             {
     #               instance_type: "XmlStringMaxLen255",
+    #               weighted_capacity: "XmlStringMaxLen32",
     #             },
     #           ],
     #         },
@@ -3664,8 +3753,8 @@ module Aws::AutoScaling
     # @!attribute [rw] instances_distribution
     #   The instances distribution to use.
     #
-    #   If you leave this parameter unspecified when creating a mixed
-    #   instances policy, the default values are used.
+    #   If you leave this parameter unspecified, the value for each
+    #   parameter in `InstancesDistribution` uses a default value.
     #   @return [Types::InstancesDistribution]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MixedInstancesPolicy AWS API Documentation
@@ -3761,12 +3850,7 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] predefined_metric_type
-    #   The metric type.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_label
-    #   Identifies the resource associated with the metric type. The
-    #   following predefined metrics are available:
+    #   The metric type. The following predefined metrics are available:
     #
     #   * `ASGAverageCPUUtilization` - Average CPU utilization of the Auto
     #     Scaling group.
@@ -3779,19 +3863,23 @@ module Aws::AutoScaling
     #
     #   * `ALBRequestCountPerTarget` - Number of requests completed per
     #     target in an Application Load Balancer target group.
+    #   @return [String]
     #
-    #   For predefined metric types `ASGAverageCPUUtilization`,
-    #   `ASGAverageNetworkIn`, and `ASGAverageNetworkOut`, the parameter
-    #   must not be specified as the resource associated with the metric
-    #   type is the Auto Scaling group. For predefined metric type
-    #   `ALBRequestCountPerTarget`, the parameter must be specified in the
-    #   format:
+    # @!attribute [rw] resource_label
+    #   Identifies the resource associated with the metric type. You can't
+    #   specify a resource label unless the metric type is
+    #   `ALBRequestCountPerTarget` and there is a target group attached to
+    #   the Auto Scaling group.
+    #
+    #   The format is
     #   `app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id
-    #   `, where `app/load-balancer-name/load-balancer-id ` is the final
-    #   portion of the load balancer ARN, and
-    #   `targetgroup/target-group-name/target-group-id ` is the final
-    #   portion of the target group ARN. The target group must be attached
-    #   to the Auto Scaling group.
+    #   `, where
+    #
+    #   * `app/load-balancer-name/load-balancer-id ` is the final portion of
+    #     the load balancer ARN, and
+    #
+    #   * `targetgroup/target-group-name/target-group-id ` is the final
+    #     portion of the target group ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PredefinedMetricSpecification AWS API Documentation
@@ -5053,6 +5141,7 @@ module Aws::AutoScaling
     #             overrides: [
     #               {
     #                 instance_type: "XmlStringMaxLen255",
+    #                 weighted_capacity: "XmlStringMaxLen32",
     #               },
     #             ],
     #           },
@@ -5077,6 +5166,7 @@ module Aws::AutoScaling
     #         termination_policies: ["XmlStringMaxLen1600"],
     #         new_instances_protected_from_scale_in: false,
     #         service_linked_role_arn: "ResourceName",
+    #         max_instance_lifetime: 1,
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -5087,12 +5177,6 @@ module Aws::AutoScaling
     #   The name of the launch configuration. If you specify
     #   `LaunchConfigurationName` in your update request, you can't specify
     #   `LaunchTemplate` or `MixedInstancesPolicy`.
-    #
-    #   To update an Auto Scaling group with a launch configuration with
-    #   `InstanceMonitoring` set to `false`, you must first disable the
-    #   collection of group metrics. Otherwise, you get an error. If you
-    #   have previously enabled the collection of group metrics, you can
-    #   disable it using DisableMetricsCollection.
     #   @return [String]
     #
     # @!attribute [rw] launch_template
@@ -5243,6 +5327,13 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html
     #   @return [String]
     #
+    # @!attribute [rw] max_instance_lifetime
+    #   The maximum amount of time, in seconds, that an instance can be in
+    #   service.
+    #
+    #   Valid Range: Minimum value of 604800.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
     #
     class UpdateAutoScalingGroupType < Struct.new(
@@ -5261,7 +5352,8 @@ module Aws::AutoScaling
       :vpc_zone_identifier,
       :termination_policies,
       :new_instances_protected_from_scale_in,
-      :service_linked_role_arn)
+      :service_linked_role_arn,
+      :max_instance_lifetime)
       include Aws::Structure
     end
 

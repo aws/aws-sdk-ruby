@@ -511,7 +511,7 @@ module Aws::IAM
     # operations.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *Using IAM* guide.
+    # Policies and Inline Policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -2781,7 +2781,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the entity (user or role). For more information about
-    #   paths, see [IAM Identifiers][1] in the *Using IAM* guide.
+    #   paths, see [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4523,7 +4523,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the group. For more information about paths, see [IAM
-    #   Identifiers][1] in the *Using IAM* guide.
+    #   Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4536,8 +4536,8 @@ module Aws::IAM
     #
     # @!attribute [rw] group_id
     #   The stable and unique string identifying the group. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    #   guide.
+    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   Guide*.
     #
     #
     #
@@ -4547,7 +4547,7 @@ module Aws::IAM
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) specifying the group. For more
     #   information about ARNs and how to use them in policies, see [IAM
-    #   Identifiers][1] in the *Using IAM* guide.
+    #   Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4582,7 +4582,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the group. For more information about paths, see [IAM
-    #   Identifiers][1] in the *Using IAM* guide.
+    #   Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4595,8 +4595,8 @@ module Aws::IAM
     #
     # @!attribute [rw] group_id
     #   The stable and unique string identifying the group. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    #   guide.
+    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   Guide*.
     #
     #
     #
@@ -4660,7 +4660,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the instance profile. For more information about paths,
-    #   see [IAM Identifiers][1] in the *Using IAM* guide.
+    #   see [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4673,8 +4673,8 @@ module Aws::IAM
     #
     # @!attribute [rw] instance_profile_id
     #   The stable and unique string identifying the instance profile. For
-    #   more information about IDs, see [IAM Identifiers][1] in the *Using
-    #   IAM* guide.
+    #   more information about IDs, see [IAM Identifiers][1] in the *IAM
+    #   User Guide*.
     #
     #
     #
@@ -4684,7 +4684,7 @@ module Aws::IAM
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) specifying the instance profile. For
     #   more information about ARNs and how to use them in policies, see
-    #   [IAM Identifiers][1] in the *Using IAM* guide.
+    #   [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7250,7 +7250,7 @@ module Aws::IAM
     # GetAccountAuthorizationDetails operation.
     #
     # For more information about managed policies, see [Managed Policies and
-    # Inline Policies][1] in the *Using IAM* guide.
+    # Inline Policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7263,8 +7263,8 @@ module Aws::IAM
     # @!attribute [rw] policy_id
     #   The stable and unique string identifying the policy.
     #
-    #   For more information about IDs, see [IAM Identifiers][1] in the
-    #   *Using IAM* guide.
+    #   For more information about IDs, see [IAM Identifiers][1] in the *IAM
+    #   User Guide*.
     #
     #
     #
@@ -7287,7 +7287,7 @@ module Aws::IAM
     #   The path to the policy.
     #
     #   For more information about paths, see [IAM Identifiers][1] in the
-    #   *Using IAM* guide.
+    #   *IAM User Guide*.
     #
     #
     #
@@ -7299,7 +7299,7 @@ module Aws::IAM
     #   default (operative) version.
     #
     #   For more information about policy versions, see [Versioning for
-    #   Managed Policies][1] in the *Using IAM* guide.
+    #   Managed Policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7515,7 +7515,7 @@ module Aws::IAM
     # GetPolicy, and ListPolicies operations.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *Using IAM* guide.
+    # Policies and Inline Policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7528,8 +7528,8 @@ module Aws::IAM
     # @!attribute [rw] policy_id
     #   The stable and unique string identifying the policy.
     #
-    #   For more information about IDs, see [IAM Identifiers][1] in the
-    #   *Using IAM* guide.
+    #   For more information about IDs, see [IAM Identifiers][1] in the *IAM
+    #   User Guide*.
     #
     #
     #
@@ -7552,7 +7552,7 @@ module Aws::IAM
     #   The path to the policy.
     #
     #   For more information about paths, see [IAM Identifiers][1] in the
-    #   *Using IAM* guide.
+    #   *IAM User Guide*.
     #
     #
     #
@@ -7744,7 +7744,7 @@ module Aws::IAM
     # ListEntitiesForPolicy operation.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *Using IAM* guide.
+    # Policies and Inline Policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7792,7 +7792,7 @@ module Aws::IAM
     # ListEntitiesForPolicy operation.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *Using IAM* guide.
+    # Policies and Inline Policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7827,7 +7827,7 @@ module Aws::IAM
     # ListEntitiesForPolicy operation.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *Using IAM* guide.
+    # Policies and Inline Policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7862,7 +7862,7 @@ module Aws::IAM
     # GetAccountAuthorizationDetails operations.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *Using IAM* guide.
+    # Policies and Inline Policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8509,7 +8509,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the role. For more information about paths, see [IAM
-    #   Identifiers][1] in the *Using IAM* guide.
+    #   Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8522,8 +8522,8 @@ module Aws::IAM
     #
     # @!attribute [rw] role_id
     #   The stable and unique string identifying the role. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    #   guide.
+    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   Guide*.
     #
     #
     #
@@ -8586,6 +8586,20 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] role_last_used
+    #   Contains information about the last time that an IAM role was used.
+    #   This includes the date and time and the Region in which the role was
+    #   last used. Activity is only reported for the trailing 400 days. This
+    #   period can be shorter if your Region began supporting these features
+    #   within the last year. The role might have been used more than 400
+    #   days ago. For more information, see [Regions Where Data Is
+    #   Tracked][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
+    #   @return [Types::RoleLastUsed]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role AWS API Documentation
     #
     class Role < Struct.new(
@@ -8598,7 +8612,8 @@ module Aws::IAM
       :description,
       :max_session_duration,
       :permissions_boundary,
-      :tags)
+      :tags,
+      :role_last_used)
       include Aws::Structure
     end
 
@@ -8610,7 +8625,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the role. For more information about paths, see [IAM
-    #   Identifiers][1] in the *Using IAM* guide.
+    #   Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8623,8 +8638,8 @@ module Aws::IAM
     #
     # @!attribute [rw] role_id
     #   The stable and unique string identifying the role. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    #   guide.
+    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   Guide*.
     #
     #
     #
@@ -8692,6 +8707,20 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] role_last_used
+    #   Contains information about the last time that an IAM role was used.
+    #   This includes the date and time and the Region in which the role was
+    #   last used. Activity is only reported for the trailing 400 days. This
+    #   period can be shorter if your Region began supporting these features
+    #   within the last year. The role might have been used more than 400
+    #   days ago. For more information, see [Regions Where Data Is
+    #   Tracked][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
+    #   @return [Types::RoleLastUsed]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleDetail AWS API Documentation
     #
     class RoleDetail < Struct.new(
@@ -8705,7 +8734,49 @@ module Aws::IAM
       :role_policy_list,
       :attached_managed_policies,
       :permissions_boundary,
-      :tags)
+      :tags,
+      :role_last_used)
+      include Aws::Structure
+    end
+
+    # Contains information about the last time that an IAM role was used.
+    # This includes the date and time and the Region in which the role was
+    # last used. Activity is only reported for the trailing 400 days. This
+    # period can be shorter if your Region began supporting these features
+    # within the last year. The role might have been used more than 400 days
+    # ago. For more information, see [Regions Where Data Is Tracked][1] in
+    # the *IAM User Guide*.
+    #
+    # This data type is returned as a response element in the GetRole and
+    # GetAccountAuthorizationDetails operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
+    #
+    # @!attribute [rw] last_used_date
+    #   The date and time, in [ISO 8601 date-time format][1] that the role
+    #   was last used.
+    #
+    #   This field is null if the role has not been used within the IAM
+    #   tracking period. For more information about the tracking period, see
+    #   [Regions Where Data Is Tracked][2] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
+    #   @return [Time]
+    #
+    # @!attribute [rw] region
+    #   The name of the AWS Region in which the role was last used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleLastUsed AWS API Documentation
+    #
+    class RoleLastUsed < Struct.new(
+      :last_used_date,
+      :region)
       include Aws::Structure
     end
 
@@ -8876,7 +8947,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the server certificate. For more information about
-    #   paths, see [IAM Identifiers][1] in the *Using IAM* guide.
+    #   paths, see [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8889,8 +8960,8 @@ module Aws::IAM
     #
     # @!attribute [rw] server_certificate_id
     #   The stable and unique string identifying the server certificate. For
-    #   more information about IDs, see [IAM Identifiers][1] in the *Using
-    #   IAM* guide.
+    #   more information about IDs, see [IAM Identifiers][1] in the *IAM
+    #   User Guide*.
     #
     #
     #
@@ -8900,7 +8971,7 @@ module Aws::IAM
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) specifying the server certificate.
     #   For more information about ARNs and how to use them in policies, see
-    #   [IAM Identifiers][1] in the *Using IAM* guide.
+    #   [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -11048,7 +11119,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the user. For more information about paths, see [IAM
-    #   Identifiers][1] in the *Using IAM* guide.
+    #   Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -11061,8 +11132,8 @@ module Aws::IAM
     #
     # @!attribute [rw] user_id
     #   The stable and unique string identifying the user. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    #   guide.
+    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   Guide*.
     #
     #
     #
@@ -11072,7 +11143,7 @@ module Aws::IAM
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) that identifies the user. For more
     #   information about ARNs and how to use ARNs in policies, see [IAM
-    #   Identifiers][1] in the *Using IAM* guide.
+    #   Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -11092,7 +11163,7 @@ module Aws::IAM
     #   The date and time, in [ISO 8601 date-time format][1], when the
     #   user's password was last used to sign in to an AWS website. For a
     #   list of AWS websites that capture a user's last sign-in time, see
-    #   the [Credential Reports][2] topic in the *Using IAM* guide. If a
+    #   the [Credential Reports][2] topic in the *IAM User Guide*. If a
     #   password is used more than once in a five-minute span, only the
     #   first use is returned in this field. If the field is null (no
     #   value), then it indicates that they never signed in with a password.
@@ -11104,7 +11175,7 @@ module Aws::IAM
     #     this information on October 20, 2014.
     #
     #   A null value does not mean that the user *never* had a password.
-    #   Also, if the user does not currently have a password, but had one in
+    #   Also, if the user does not currently have a password but had one in
     #   the past, then this field contains the date and time the most recent
     #   password was used.
     #
@@ -11160,7 +11231,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the user. For more information about paths, see [IAM
-    #   Identifiers][1] in the *Using IAM* guide.
+    #   Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -11173,8 +11244,8 @@ module Aws::IAM
     #
     # @!attribute [rw] user_id
     #   The stable and unique string identifying the user. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    #   guide.
+    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   Guide*.
     #
     #
     #

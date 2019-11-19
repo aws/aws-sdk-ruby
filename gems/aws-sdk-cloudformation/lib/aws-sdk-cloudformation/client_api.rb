@@ -100,8 +100,11 @@ module Aws::CloudFormation
     DetectStackDriftOutput = Shapes::StructureShape.new(name: 'DetectStackDriftOutput')
     DetectStackResourceDriftInput = Shapes::StructureShape.new(name: 'DetectStackResourceDriftInput')
     DetectStackResourceDriftOutput = Shapes::StructureShape.new(name: 'DetectStackResourceDriftOutput')
+    DetectStackSetDriftInput = Shapes::StructureShape.new(name: 'DetectStackSetDriftInput')
+    DetectStackSetDriftOutput = Shapes::StructureShape.new(name: 'DetectStackSetDriftOutput')
     DifferenceType = Shapes::StringShape.new(name: 'DifferenceType')
     DisableRollback = Shapes::BooleanShape.new(name: 'DisableRollback')
+    DriftedStackInstancesCount = Shapes::IntegerShape.new(name: 'DriftedStackInstancesCount')
     EnableTerminationProtection = Shapes::BooleanShape.new(name: 'EnableTerminationProtection')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EstimateTemplateCostInput = Shapes::StructureShape.new(name: 'EstimateTemplateCostInput')
@@ -116,6 +119,7 @@ module Aws::CloudFormation
     ExportName = Shapes::StringShape.new(name: 'ExportName')
     ExportValue = Shapes::StringShape.new(name: 'ExportValue')
     Exports = Shapes::ListShape.new(name: 'Exports')
+    FailedStackInstancesCount = Shapes::IntegerShape.new(name: 'FailedStackInstancesCount')
     FailureToleranceCount = Shapes::IntegerShape.new(name: 'FailureToleranceCount')
     FailureTolerancePercentage = Shapes::IntegerShape.new(name: 'FailureTolerancePercentage')
     GetStackPolicyInput = Shapes::StructureShape.new(name: 'GetStackPolicyInput')
@@ -126,6 +130,8 @@ module Aws::CloudFormation
     GetTemplateSummaryOutput = Shapes::StructureShape.new(name: 'GetTemplateSummaryOutput')
     HandlerErrorCode = Shapes::StringShape.new(name: 'HandlerErrorCode')
     Imports = Shapes::ListShape.new(name: 'Imports')
+    InProgressStackInstancesCount = Shapes::IntegerShape.new(name: 'InProgressStackInstancesCount')
+    InSyncStackInstancesCount = Shapes::IntegerShape.new(name: 'InSyncStackInstancesCount')
     InsufficientCapabilitiesException = Shapes::StructureShape.new(name: 'InsufficientCapabilitiesException')
     InvalidChangeSetStatusException = Shapes::StructureShape.new(name: 'InvalidChangeSetStatusException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
@@ -288,6 +294,9 @@ module Aws::CloudFormation
     StackResources = Shapes::ListShape.new(name: 'StackResources')
     StackSet = Shapes::StructureShape.new(name: 'StackSet')
     StackSetARN = Shapes::StringShape.new(name: 'StackSetARN')
+    StackSetDriftDetectionDetails = Shapes::StructureShape.new(name: 'StackSetDriftDetectionDetails')
+    StackSetDriftDetectionStatus = Shapes::StringShape.new(name: 'StackSetDriftDetectionStatus')
+    StackSetDriftStatus = Shapes::StringShape.new(name: 'StackSetDriftStatus')
     StackSetId = Shapes::StringShape.new(name: 'StackSetId')
     StackSetName = Shapes::StringShape.new(name: 'StackSetName')
     StackSetNameOrId = Shapes::StringShape.new(name: 'StackSetNameOrId')
@@ -329,6 +338,7 @@ module Aws::CloudFormation
     TimeoutMinutes = Shapes::IntegerShape.new(name: 'TimeoutMinutes')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TokenAlreadyExistsException = Shapes::StructureShape.new(name: 'TokenAlreadyExistsException')
+    TotalStackInstancesCount = Shapes::IntegerShape.new(name: 'TotalStackInstancesCount')
     TransformName = Shapes::StringShape.new(name: 'TransformName')
     TransformsList = Shapes::ListShape.new(name: 'TransformsList')
     Type = Shapes::StringShape.new(name: 'Type')
@@ -663,6 +673,14 @@ module Aws::CloudFormation
 
     DetectStackResourceDriftOutput.add_member(:stack_resource_drift, Shapes::ShapeRef.new(shape: StackResourceDrift, required: true, location_name: "StackResourceDrift"))
     DetectStackResourceDriftOutput.struct_class = Types::DetectStackResourceDriftOutput
+
+    DetectStackSetDriftInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
+    DetectStackSetDriftInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
+    DetectStackSetDriftInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
+    DetectStackSetDriftInput.struct_class = Types::DetectStackSetDriftInput
+
+    DetectStackSetDriftOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
+    DetectStackSetDriftOutput.struct_class = Types::DetectStackSetDriftOutput
 
     EstimateTemplateCostInput.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
     EstimateTemplateCostInput.add_member(:template_url, Shapes::ShapeRef.new(shape: TemplateURL, location_name: "TemplateURL"))
@@ -1042,6 +1060,8 @@ module Aws::CloudFormation
     StackInstance.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
     StackInstance.add_member(:status, Shapes::ShapeRef.new(shape: StackInstanceStatus, location_name: "Status"))
     StackInstance.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
+    StackInstance.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
+    StackInstance.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
     StackInstance.struct_class = Types::StackInstance
 
     StackInstanceSummaries.member = Shapes::ShapeRef.new(shape: StackInstanceSummary)
@@ -1052,6 +1072,8 @@ module Aws::CloudFormation
     StackInstanceSummary.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
     StackInstanceSummary.add_member(:status, Shapes::ShapeRef.new(shape: StackInstanceStatus, location_name: "Status"))
     StackInstanceSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
+    StackInstanceSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
+    StackInstanceSummary.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
     StackInstanceSummary.struct_class = Types::StackInstanceSummary
 
     StackResource.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
@@ -1127,7 +1149,18 @@ module Aws::CloudFormation
     StackSet.add_member(:stack_set_arn, Shapes::ShapeRef.new(shape: StackSetARN, location_name: "StackSetARN"))
     StackSet.add_member(:administration_role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "AdministrationRoleARN"))
     StackSet.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
+    StackSet.add_member(:stack_set_drift_detection_details, Shapes::ShapeRef.new(shape: StackSetDriftDetectionDetails, location_name: "StackSetDriftDetectionDetails"))
     StackSet.struct_class = Types::StackSet
+
+    StackSetDriftDetectionDetails.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackSetDriftStatus, location_name: "DriftStatus"))
+    StackSetDriftDetectionDetails.add_member(:drift_detection_status, Shapes::ShapeRef.new(shape: StackSetDriftDetectionStatus, location_name: "DriftDetectionStatus"))
+    StackSetDriftDetectionDetails.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
+    StackSetDriftDetectionDetails.add_member(:total_stack_instances_count, Shapes::ShapeRef.new(shape: TotalStackInstancesCount, location_name: "TotalStackInstancesCount"))
+    StackSetDriftDetectionDetails.add_member(:drifted_stack_instances_count, Shapes::ShapeRef.new(shape: DriftedStackInstancesCount, location_name: "DriftedStackInstancesCount"))
+    StackSetDriftDetectionDetails.add_member(:in_sync_stack_instances_count, Shapes::ShapeRef.new(shape: InSyncStackInstancesCount, location_name: "InSyncStackInstancesCount"))
+    StackSetDriftDetectionDetails.add_member(:in_progress_stack_instances_count, Shapes::ShapeRef.new(shape: InProgressStackInstancesCount, location_name: "InProgressStackInstancesCount"))
+    StackSetDriftDetectionDetails.add_member(:failed_stack_instances_count, Shapes::ShapeRef.new(shape: FailedStackInstancesCount, location_name: "FailedStackInstancesCount"))
+    StackSetDriftDetectionDetails.struct_class = Types::StackSetDriftDetectionDetails
 
     StackSetOperation.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
     StackSetOperation.add_member(:stack_set_id, Shapes::ShapeRef.new(shape: StackSetId, location_name: "StackSetId"))
@@ -1139,6 +1172,7 @@ module Aws::CloudFormation
     StackSetOperation.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
     StackSetOperation.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimestamp"))
     StackSetOperation.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
+    StackSetOperation.add_member(:stack_set_drift_detection_details, Shapes::ShapeRef.new(shape: StackSetDriftDetectionDetails, location_name: "StackSetDriftDetectionDetails"))
     StackSetOperation.struct_class = Types::StackSetOperation
 
     StackSetOperationPreferences.add_member(:region_order, Shapes::ShapeRef.new(shape: RegionList, location_name: "RegionOrder"))
@@ -1172,6 +1206,8 @@ module Aws::CloudFormation
     StackSetSummary.add_member(:stack_set_id, Shapes::ShapeRef.new(shape: StackSetId, location_name: "StackSetId"))
     StackSetSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StackSetSummary.add_member(:status, Shapes::ShapeRef.new(shape: StackSetStatus, location_name: "Status"))
+    StackSetSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
+    StackSetSummary.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
     StackSetSummary.struct_class = Types::StackSetSummary
 
     StackStatusFilter.member = Shapes::ShapeRef.new(shape: StackStatus)
@@ -1583,6 +1619,17 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DetectStackResourceDriftInput)
         o.output = Shapes::ShapeRef.new(shape: DetectStackResourceDriftOutput)
+      end)
+
+      api.add_operation(:detect_stack_set_drift, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectStackSetDrift"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetectStackSetDriftInput)
+        o.output = Shapes::ShapeRef.new(shape: DetectStackSetDriftOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
       end)
 
       api.add_operation(:estimate_template_cost, Seahorse::Model::Operation.new.tap do |o|

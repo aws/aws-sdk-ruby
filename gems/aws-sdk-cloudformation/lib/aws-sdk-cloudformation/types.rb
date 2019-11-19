@@ -2673,6 +2673,68 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DetectStackSetDriftInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetNameOrId", # required
+    #         operation_preferences: {
+    #           region_order: ["Region"],
+    #           failure_tolerance_count: 1,
+    #           failure_tolerance_percentage: 1,
+    #           max_concurrent_count: 1,
+    #           max_concurrent_percentage: 1,
+    #         },
+    #         operation_id: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name of the stack set on which to perform the drift detection
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_preferences
+    #   The user-specified preferences for how AWS CloudFormation performs a
+    #   stack set operation.
+    #
+    #   For more information on maximum concurrent accounts and failure
+    #   tolerance, see [Stack set operation options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #   @return [Types::StackSetOperationPreferences]
+    #
+    # @!attribute [rw] operation_id
+    #   *The ID of the stack set operation.*
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackSetDriftInput AWS API Documentation
+    #
+    class DetectStackSetDriftInput < Struct.new(
+      :stack_set_name,
+      :operation_preferences,
+      :operation_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The ID of the drift detection stack set operation.
+    #
+    #   you can use this operation id with ` DescribeStackSetOperation ` to
+    #   monitor the progress of the drift detection operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackSetDriftOutput AWS API Documentation
+    #
+    class DetectStackSetDriftOutput < Struct.new(
+      :operation_id)
+      include Aws::Structure
+    end
+
     # The input for an EstimateTemplateCost action.
     #
     # @note When making an API call, you may pass EstimateTemplateCostInput
@@ -5179,6 +5241,31 @@ module Aws::CloudFormation
     #   this stack instance.
     #   @return [String]
     #
+    # @!attribute [rw] drift_status
+    #   Status of the stack instance's actual configuration compared to the
+    #   expected template and parameter configuration of the stack set to
+    #   which it belongs.
+    #
+    #   * `DRIFTED`\: The stack differs from the expected template and
+    #     parameter configuration of the stack set to which it belongs. A
+    #     stack instance is considered to have drifted if one or more of the
+    #     resources in the associated stack have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked if the stack
+    #     instance differs from its expected stack set configuration.
+    #
+    #   * `IN_SYNC`\: The stack instance's actual configuration matches its
+    #     expected stack set configuration.
+    #
+    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_drift_check_timestamp
+    #   Most recent time when CloudFormation performed a drift detection
+    #   operation on the stack instance. This value will be `NULL` for any
+    #   stack instance on which drift detection has not yet been performed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstance AWS API Documentation
     #
     class StackInstance < Struct.new(
@@ -5188,7 +5275,9 @@ module Aws::CloudFormation
       :stack_id,
       :parameter_overrides,
       :status,
-      :status_reason)
+      :status_reason,
+      :drift_status,
+      :last_drift_check_timestamp)
       include Aws::Structure
     end
 
@@ -5243,6 +5332,31 @@ module Aws::CloudFormation
     #   instance.
     #   @return [String]
     #
+    # @!attribute [rw] drift_status
+    #   Status of the stack instance's actual configuration compared to the
+    #   expected template and parameter configuration of the stack set to
+    #   which it belongs.
+    #
+    #   * `DRIFTED`\: The stack differs from the expected template and
+    #     parameter configuration of the stack set to which it belongs. A
+    #     stack instance is considered to have drifted if one or more of the
+    #     resources in the associated stack have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked if the stack
+    #     instance differs from its expected stack set configuration.
+    #
+    #   * `IN_SYNC`\: The stack instance's actual configuration matches its
+    #     expected stack set configuration.
+    #
+    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_drift_check_timestamp
+    #   Most recent time when CloudFormation performed a drift detection
+    #   operation on the stack instance. This value will be `NULL` for any
+    #   stack instance on which drift detection has not yet been performed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceSummary AWS API Documentation
     #
     class StackInstanceSummary < Struct.new(
@@ -5251,7 +5365,9 @@ module Aws::CloudFormation
       :account,
       :stack_id,
       :status,
-      :status_reason)
+      :status_reason,
+      :drift_status,
+      :last_drift_check_timestamp)
       include Aws::Structure
     end
 
@@ -5738,6 +5854,14 @@ module Aws::CloudFormation
     #   users and groups can include in their stack sets.
     #   @return [String]
     #
+    # @!attribute [rw] stack_set_drift_detection_details
+    #   Detailed information about the drift status of the stack set.
+    #
+    #   For stack sets, contains information about the last *completed*
+    #   drift operation performed on the stack set. Information about drift
+    #   operations currently in progress is not included.
+    #   @return [Types::StackSetDriftDetectionDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSet AWS API Documentation
     #
     class StackSet < Struct.new(
@@ -5751,7 +5875,120 @@ module Aws::CloudFormation
       :tags,
       :stack_set_arn,
       :administration_role_arn,
-      :execution_role_name)
+      :execution_role_name,
+      :stack_set_drift_detection_details)
+      include Aws::Structure
+    end
+
+    # Detailed information about the drift status of the stack set.
+    #
+    # For stack sets, contains information about the last *completed* drift
+    # operation performed on the stack set. Information about drift
+    # operations in-progress is not included.
+    #
+    # For stack set operations, includes information about drift operations
+    # currently being performed on the stack set.
+    #
+    # For more information, see [Detecting Unmanaged Changes in Stack
+    # Sets][1] in the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
+    #
+    # @!attribute [rw] drift_status
+    #   Status of the stack set's actual configuration compared to its
+    #   expected template and parameter configuration. A stack set is
+    #   considered to have drifted if one or more of its stack instances
+    #   have drifted from their expected template and parameter
+    #   configuration.
+    #
+    #   * `DRIFTED`\: One or more of the stack instances belonging to the
+    #     stack set stack differs from the expected template and parameter
+    #     configuration. A stack instance is considered to have drifted if
+    #     one or more of the resources in the associated stack have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked the stack set
+    #     for drift.
+    #
+    #   * `IN_SYNC`\: All of the stack instances belonging to the stack set
+    #     stack match from the expected template and parameter
+    #     configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift_detection_status
+    #   The status of the stack set drift detection operation.
+    #
+    #   * `COMPLETED`\: The drift detection operation completed without
+    #     failing on any stack instances.
+    #
+    #   * `FAILED`\: The drift detection operation exceeded the specified
+    #     failure tolerance.
+    #
+    #   * `PARTIAL_SUCCESS`\: The drift detection operation completed
+    #     without exceeding the failure tolerance for the operation.
+    #
+    #   * `IN_PROGRESS`\: The drift detection operation is currently being
+    #     performed.
+    #
+    #   * `STOPPED`\: The user has cancelled the drift detection operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_drift_check_timestamp
+    #   Most recent time when CloudFormation performed a drift detection
+    #   operation on the stack set. This value will be `NULL` for any stack
+    #   set on which drift detection has not yet been performed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_stack_instances_count
+    #   The total number of stack instances belonging to this stack set.
+    #
+    #   The total number of stack instances is equal to the total of:
+    #
+    #   * Stack instances that match the stack set configuration.
+    #
+    #   * Stack instances that have drifted from the stack set
+    #     configuration.
+    #
+    #   * Stack instances where the drift detection operation has failed.
+    #
+    #   * Stack instances currently being checked for drift.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] drifted_stack_instances_count
+    #   The number of stack instances that have drifted from the expected
+    #   template and parameter configuration of the stack set. A stack
+    #   instance is considered to have drifted if one or more of the
+    #   resources in the associated stack do not match their expected
+    #   configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] in_sync_stack_instances_count
+    #   The number of stack instances which match the expected template and
+    #   parameter configuration of the stack set.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] in_progress_stack_instances_count
+    #   The number of stack instances that are currently being checked for
+    #   drift.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_stack_instances_count
+    #   The number of stack instances for which the drift detection
+    #   operation failed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetDriftDetectionDetails AWS API Documentation
+    #
+    class StackSetDriftDetectionDetails < Struct.new(
+      :drift_status,
+      :drift_detection_status,
+      :last_drift_check_timestamp,
+      :total_stack_instances_count,
+      :drifted_stack_instances_count,
+      :in_sync_stack_instances_count,
+      :in_progress_stack_instances_count,
+      :failed_stack_instances_count)
       include Aws::Structure
     end
 
@@ -5847,6 +6084,22 @@ module Aws::CloudFormation
     #   account or region.
     #   @return [Time]
     #
+    # @!attribute [rw] stack_set_drift_detection_details
+    #   Detailed information about the drift status of the stack set. This
+    #   includes information about drift operations currently being
+    #   performed on the stack set.
+    #
+    #   this information will only be present for stack set operations whose
+    #   `Action` type is `DETECT_DRIFT`.
+    #
+    #   For more information, see [Detecting Unmanaged Changes in Stack
+    #   Sets][1] in the AWS CloudFormation User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
+    #   @return [Types::StackSetDriftDetectionDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperation AWS API Documentation
     #
     class StackSetOperation < Struct.new(
@@ -5859,7 +6112,8 @@ module Aws::CloudFormation
       :administration_role_arn,
       :execution_role_name,
       :creation_timestamp,
-      :end_timestamp)
+      :end_timestamp,
+      :stack_set_drift_detection_details)
       include Aws::Structure
     end
 
@@ -6102,13 +6356,43 @@ module Aws::CloudFormation
     #   The status of the stack set.
     #   @return [String]
     #
+    # @!attribute [rw] drift_status
+    #   Status of the stack set's actual configuration compared to its
+    #   expected template and parameter configuration. A stack set is
+    #   considered to have drifted if one or more of its stack instances
+    #   have drifted from their expected template and parameter
+    #   configuration.
+    #
+    #   * `DRIFTED`\: One or more of the stack instances belonging to the
+    #     stack set stack differs from the expected template and parameter
+    #     configuration. A stack instance is considered to have drifted if
+    #     one or more of the resources in the associated stack have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked the stack set
+    #     for drift.
+    #
+    #   * `IN_SYNC`\: All of the stack instances belonging to the stack set
+    #     stack match from the expected template and parameter
+    #     configuration.
+    #
+    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_drift_check_timestamp
+    #   Most recent time when CloudFormation performed a drift detection
+    #   operation on the stack set. This value will be `NULL` for any stack
+    #   set on which drift detection has not yet been performed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetSummary AWS API Documentation
     #
     class StackSetSummary < Struct.new(
       :stack_set_name,
       :stack_set_id,
       :description,
-      :status)
+      :status,
+      :drift_status,
+      :last_drift_check_timestamp)
       include Aws::Structure
     end
 

@@ -702,6 +702,31 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Confirms a topic rule destination. When you create a rule requiring a
+    # destination, AWS IoT sends a confirmation message to the endpoint or
+    # base address you specify. The message includes a token which you pass
+    # back when calling `ConfirmTopicRuleDestination` to confirm that you
+    # own or have access to the endpoint.
+    #
+    # @option params [required, String] :confirmation_token
+    #   The token used to confirm ownership or access to the topic rule
+    #   confirmation URL.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.confirm_topic_rule_destination({
+    #     confirmation_token: "ConfirmationToken", # required
+    #   })
+    #
+    # @overload confirm_topic_rule_destination(params = {})
+    # @param [Hash] params ({})
+    def confirm_topic_rule_destination(params = {}, options = {})
+      req = build_request(:confirm_topic_rule_destination, params)
+      req.send_request(options)
+    end
+
     # Creates an authorizer.
     #
     # @option params [required, String] :authorizer_name
@@ -1960,6 +1985,23 @@ module Aws::IoT
     #             state_machine_name: "StateMachineName", # required
     #             role_arn: "AwsArn", # required
     #           },
+    #           http: {
+    #             url: "Url", # required
+    #             confirmation_url: "Url",
+    #             headers: [
+    #               {
+    #                 key: "HeaderKey", # required
+    #                 value: "HeaderValue", # required
+    #               },
+    #             ],
+    #             auth: {
+    #               sigv4: {
+    #                 signing_region: "SigningRegion", # required
+    #                 service_name: "ServiceName", # required
+    #                 role_arn: "AwsArn", # required
+    #               },
+    #             },
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -2057,6 +2099,23 @@ module Aws::IoT
     #           state_machine_name: "StateMachineName", # required
     #           role_arn: "AwsArn", # required
     #         },
+    #         http: {
+    #           url: "Url", # required
+    #           confirmation_url: "Url",
+    #           headers: [
+    #             {
+    #               key: "HeaderKey", # required
+    #               value: "HeaderValue", # required
+    #             },
+    #           ],
+    #           auth: {
+    #             sigv4: {
+    #               signing_region: "SigningRegion", # required
+    #               service_name: "ServiceName", # required
+    #               role_arn: "AwsArn", # required
+    #             },
+    #           },
+    #         },
     #       },
     #     },
     #     tags: "String",
@@ -2066,6 +2125,40 @@ module Aws::IoT
     # @param [Hash] params ({})
     def create_topic_rule(params = {}, options = {})
       req = build_request(:create_topic_rule, params)
+      req.send_request(options)
+    end
+
+    # Creates a topic rule destination. The destination must be confirmed
+    # prior to use.
+    #
+    # @option params [required, Types::TopicRuleDestinationConfiguration] :destination_configuration
+    #   The topic rule destination configuration.
+    #
+    # @return [Types::CreateTopicRuleDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTopicRuleDestinationResponse#topic_rule_destination #topic_rule_destination} => Types::TopicRuleDestination
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_topic_rule_destination({
+    #     destination_configuration: { # required
+    #       http_url_configuration: {
+    #         confirmation_url: "Url", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topic_rule_destination.arn #=> String
+    #   resp.topic_rule_destination.status #=> String, one of "ENABLED", "IN_PROGRESS", "DISABLED", "ERROR"
+    #   resp.topic_rule_destination.status_reason #=> String
+    #   resp.topic_rule_destination.http_url_properties.confirmation_url #=> String
+    #
+    # @overload create_topic_rule_destination(params = {})
+    # @param [Hash] params ({})
+    def create_topic_rule_destination(params = {}, options = {})
+      req = build_request(:create_topic_rule_destination, params)
       req.send_request(options)
     end
 
@@ -2612,6 +2705,26 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_topic_rule(params = {}, options = {})
       req = build_request(:delete_topic_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes a topic rule destination.
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the topic rule destination to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_topic_rule_destination({
+    #     arn: "AwsArn", # required
+    #   })
+    #
+    # @overload delete_topic_rule_destination(params = {})
+    # @param [Hash] params ({})
+    def delete_topic_rule_destination(params = {}, options = {})
+      req = build_request(:delete_topic_rule_destination, params)
       req.send_request(options)
     end
 
@@ -3791,8 +3904,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Returns the number of things with distinct values for the aggregation
-    # field.
+    # Returns the approximate count of unique values that match the query.
     #
     # @option params [String] :index_name
     #   The name of the index to search.
@@ -4012,10 +4124,17 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Returns the percentile values for the aggregation field. The results
-    # from GetPercentiles is an approximation. The default percentile
-    # groupings are: 1,5,25,50,75,95,99. You can specify custom percentile
-    # grouping using the percents argument to the GetPercentiles API.
+    # Groups the aggregated values that match the query into percentile
+    # groupings. The default percentile groupings are: 1,5,25,50,75,95,99,
+    # although you can specify your own when you call `GetPercentiles`. This
+    # function returns a value for each percentile group specified (or the
+    # default percentile groupings). The percentile group "1" contains the
+    # aggregated field value that occurs in approximately one percent of the
+    # values that match the query. The percentile group "5" contains the
+    # aggregated field value that occurs in approximately five percent of
+    # the values that match the query, and so on. The result is an
+    # approximation, the more values that match the query, the more accurate
+    # the percentile values.
     #
     # @option params [String] :index_name
     #   The name of the index to search.
@@ -4160,10 +4279,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Gets statistics returns the count, average, sum, minimum, maximum,
-    # sumOfSquares, variance, and standard deviation for the specified
-    # aggregated field. If the aggregation field is of type String, only the
-    # count statistic is returned.
+    # Gets statistics about things that match the specified query.
     #
     # @option params [String] :index_name
     #   The name of the index to search. The default value is `AWS_Things`.
@@ -4173,7 +4289,7 @@ module Aws::IoT
     #   to get the count of all indexed things in your AWS account.
     #
     # @option params [String] :aggregation_field
-    #   The aggregation field name.
+    #   The aggregation field name. Currently not supported.
     #
     # @option params [String] :query_version
     #   The version of the query used to search.
@@ -4291,6 +4407,14 @@ module Aws::IoT
     #   resp.rule.actions[0].step_functions.execution_name_prefix #=> String
     #   resp.rule.actions[0].step_functions.state_machine_name #=> String
     #   resp.rule.actions[0].step_functions.role_arn #=> String
+    #   resp.rule.actions[0].http.url #=> String
+    #   resp.rule.actions[0].http.confirmation_url #=> String
+    #   resp.rule.actions[0].http.headers #=> Array
+    #   resp.rule.actions[0].http.headers[0].key #=> String
+    #   resp.rule.actions[0].http.headers[0].value #=> String
+    #   resp.rule.actions[0].http.auth.sigv4.signing_region #=> String
+    #   resp.rule.actions[0].http.auth.sigv4.service_name #=> String
+    #   resp.rule.actions[0].http.auth.sigv4.role_arn #=> String
     #   resp.rule.rule_disabled #=> Boolean
     #   resp.rule.aws_iot_sql_version #=> String
     #   resp.rule.error_action.dynamo_db.table_name #=> String
@@ -4351,11 +4475,48 @@ module Aws::IoT
     #   resp.rule.error_action.step_functions.execution_name_prefix #=> String
     #   resp.rule.error_action.step_functions.state_machine_name #=> String
     #   resp.rule.error_action.step_functions.role_arn #=> String
+    #   resp.rule.error_action.http.url #=> String
+    #   resp.rule.error_action.http.confirmation_url #=> String
+    #   resp.rule.error_action.http.headers #=> Array
+    #   resp.rule.error_action.http.headers[0].key #=> String
+    #   resp.rule.error_action.http.headers[0].value #=> String
+    #   resp.rule.error_action.http.auth.sigv4.signing_region #=> String
+    #   resp.rule.error_action.http.auth.sigv4.service_name #=> String
+    #   resp.rule.error_action.http.auth.sigv4.role_arn #=> String
     #
     # @overload get_topic_rule(params = {})
     # @param [Hash] params ({})
     def get_topic_rule(params = {}, options = {})
       req = build_request(:get_topic_rule, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a topic rule destination.
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the topic rule destination.
+    #
+    # @return [Types::GetTopicRuleDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTopicRuleDestinationResponse#topic_rule_destination #topic_rule_destination} => Types::TopicRuleDestination
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_topic_rule_destination({
+    #     arn: "AwsArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topic_rule_destination.arn #=> String
+    #   resp.topic_rule_destination.status #=> String, one of "ENABLED", "IN_PROGRESS", "DISABLED", "ERROR"
+    #   resp.topic_rule_destination.status_reason #=> String
+    #   resp.topic_rule_destination.http_url_properties.confirmation_url #=> String
+    #
+    # @overload get_topic_rule_destination(params = {})
+    # @param [Hash] params ({})
+    def get_topic_rule_destination(params = {}, options = {})
+      req = build_request(:get_topic_rule_destination, params)
       req.send_request(options)
     end
 
@@ -6172,6 +6333,42 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists all the topic rule destinations in your AWS account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @return [Types::ListTopicRuleDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTopicRuleDestinationsResponse#destination_summaries #destination_summaries} => Array&lt;Types::TopicRuleDestinationSummary&gt;
+    #   * {Types::ListTopicRuleDestinationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_topic_rule_destinations({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_summaries #=> Array
+    #   resp.destination_summaries[0].arn #=> String
+    #   resp.destination_summaries[0].status #=> String, one of "ENABLED", "IN_PROGRESS", "DISABLED", "ERROR"
+    #   resp.destination_summaries[0].status_reason #=> String
+    #   resp.destination_summaries[0].http_url_summary.confirmation_url #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_topic_rule_destinations(params = {})
+    # @param [Hash] params ({})
+    def list_topic_rule_destinations(params = {}, options = {})
+      req = build_request(:list_topic_rule_destinations, params)
+      req.send_request(options)
+    end
+
     # Lists the rules for the specific topic.
     #
     # @option params [String] :topic
@@ -6432,16 +6629,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Provisions a thing in the device registry. RegisterThing calls other
-    # AWS IoT control plane APIs. These calls might exceed your account
-    # level [ AWS IoT Throttling Limits][1] and cause throttle errors.
-    # Please contact [AWS Customer Support][2] to raise your throttling
-    # limits if necessary.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot
-    # [2]: https://console.aws.amazon.com/support/home
+    # Provisions a thing.
     #
     # @option params [required, String] :template_body
     #   The provisioning template. See [Programmatic Provisioning][1] for more
@@ -6698,6 +6886,23 @@ module Aws::IoT
     #             state_machine_name: "StateMachineName", # required
     #             role_arn: "AwsArn", # required
     #           },
+    #           http: {
+    #             url: "Url", # required
+    #             confirmation_url: "Url",
+    #             headers: [
+    #               {
+    #                 key: "HeaderKey", # required
+    #                 value: "HeaderValue", # required
+    #               },
+    #             ],
+    #             auth: {
+    #               sigv4: {
+    #                 signing_region: "SigningRegion", # required
+    #                 service_name: "ServiceName", # required
+    #                 role_arn: "AwsArn", # required
+    #               },
+    #             },
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -6794,6 +6999,23 @@ module Aws::IoT
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
     #           role_arn: "AwsArn", # required
+    #         },
+    #         http: {
+    #           url: "Url", # required
+    #           confirmation_url: "Url",
+    #           headers: [
+    #             {
+    #               key: "HeaderKey", # required
+    #               value: "HeaderValue", # required
+    #             },
+    #           ],
+    #           auth: {
+    #             sigv4: {
+    #               signing_region: "SigningRegion", # required
+    #               service_name: "ServiceName", # required
+    #               role_arn: "AwsArn", # required
+    #             },
+    #           },
     #         },
     #       },
     #     },
@@ -8261,6 +8483,60 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates a topic rule destination. You use this to change the status,
+    # endpoint URL, or confirmation URL of the destination.
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the topic rule destination.
+    #
+    # @option params [required, String] :status
+    #   The status of the topic rule destination. Valid values are:
+    #
+    #   IN\_PROGRESS
+    #
+    #   : A topic rule destination was created but has not been confirmed. You
+    #     can set `status` to `IN_PROGRESS` by calling
+    #     `UpdateTopicRuleDestination`. Calling `UpdateTopicRuleDestination`
+    #     causes a new confirmation challenge to be sent to your confirmation
+    #     endpoint.
+    #
+    #   ENABLED
+    #
+    #   : Confirmation was completed, and traffic to this destination is
+    #     allowed. You can set `status` to `DISABLED` by calling
+    #     `UpdateTopicRuleDestination`.
+    #
+    #   DISABLED
+    #
+    #   : Confirmation was completed, and traffic to this destination is not
+    #     allowed. You can set `status` to `ENABLED` by calling
+    #     `UpdateTopicRuleDestination`.
+    #
+    #   ERROR
+    #
+    #   : Confirmation could not be completed, for example if the confirmation
+    #     timed out. You can call `GetTopicRuleDestination` for details about
+    #     the error. You can set `status` to `IN_PROGRESS` by calling
+    #     `UpdateTopicRuleDestination`. Calling `UpdateTopicRuleDestination`
+    #     causes a new confirmation challenge to be sent to your confirmation
+    #     endpoint.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_topic_rule_destination({
+    #     arn: "AwsArn", # required
+    #     status: "ENABLED", # required, accepts ENABLED, IN_PROGRESS, DISABLED, ERROR
+    #   })
+    #
+    # @overload update_topic_rule_destination(params = {})
+    # @param [Hash] params ({})
+    def update_topic_rule_destination(params = {}, options = {})
+      req = build_request(:update_topic_rule_destination, params)
+      req.send_request(options)
+    end
+
     # Validates a Device Defender security profile behaviors specification.
     #
     # @option params [required, Array<Types::Behavior>] :behaviors
@@ -8323,7 +8599,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

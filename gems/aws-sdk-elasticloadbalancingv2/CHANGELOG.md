@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2019-11-19)
+------------------
+
+* Feature - This release allows forward actions on Application Load Balancers to route requests to multiple target groups, based on the weight you specify for each target group.
+
 1.37.0 (2019-11-15)
 ------------------
 

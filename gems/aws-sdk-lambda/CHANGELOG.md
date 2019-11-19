@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-11-19)
+------------------
+
+* Feature - This release provides three new runtimes to support Node.js 12 (initially 12.13.0), Python 3.8 and Java 11.
+
 1.31.0 (2019-10-23)
 ------------------
 

@@ -515,6 +515,33 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Deletes the specified conformance pack and all the AWS Config rules
+    # and all evaluation results within that conformance pack.
+    #
+    # AWS Config sets the conformance pack to `DELETE_IN_PROGRESS` until the
+    # deletion is complete. You cannot update a conformance pack while it is
+    # in this state.
+    #
+    # @option params [required, String] :conformance_pack_name
+    #   Name of the conformance pack you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_conformance_pack({
+    #     conformance_pack_name: "ConformancePackName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConformancePack AWS API Documentation
+    #
+    # @overload delete_conformance_pack(params = {})
+    # @param [Hash] params ({})
+    def delete_conformance_pack(params = {}, options = {})
+      req = build_request(:delete_conformance_pack, params)
+      req.send_request(options)
+    end
+
     # Deletes the delivery channel.
     #
     # Before you can delete the delivery channel, you must stop the
@@ -591,6 +618,35 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def delete_organization_config_rule(params = {}, options = {})
       req = build_request(:delete_organization_config_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified organization conformance pack and all of the
+    # config rules and remediation actions from all member accounts in that
+    # organization. Only a master account can delete an organization
+    # conformance pack.
+    #
+    # AWS Config sets the state of a conformance pack to
+    # DELETE\_IN\_PROGRESS until the deletion is complete. You cannot update
+    # a conformance pack while it is in this state.
+    #
+    # @option params [required, String] :organization_conformance_pack_name
+    #   The name of organization conformance pack that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_organization_conformance_pack({
+    #     organization_conformance_pack_name: "OrganizationConformancePackName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConformancePack AWS API Documentation
+    #
+    # @overload delete_organization_conformance_pack(params = {})
+    # @param [Hash] params ({})
+    def delete_organization_conformance_pack(params = {}, options = {})
+      req = build_request(:delete_organization_conformance_pack, params)
       req.send_request(options)
     end
 
@@ -1338,6 +1394,160 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns compliance information for each rule in that conformance pack.
+    #
+    # <note markdown="1"> You must provide exact rule names otherwise AWS Config cannot return
+    # evaluation results due to insufficient data.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :conformance_pack_name
+    #   Name of the conformance pack.
+    #
+    # @option params [Types::ConformancePackComplianceFilters] :filters
+    #   A `ConformancePackComplianceFilters` object.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of AWS Config rules within a conformance pack are
+    #   returned on each page.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string returned in a previous request that you use to
+    #   request the next page of results in a paginated response.
+    #
+    # @return [Types::DescribeConformancePackComplianceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConformancePackComplianceResponse#conformance_pack_name #conformance_pack_name} => String
+    #   * {Types::DescribeConformancePackComplianceResponse#conformance_pack_rule_compliance_list #conformance_pack_rule_compliance_list} => Array&lt;Types::ConformancePackRuleCompliance&gt;
+    #   * {Types::DescribeConformancePackComplianceResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_conformance_pack_compliance({
+    #     conformance_pack_name: "ConformancePackName", # required
+    #     filters: {
+    #       config_rule_names: ["StringWithCharLimit64"],
+    #       compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #     },
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conformance_pack_name #=> String
+    #   resp.conformance_pack_rule_compliance_list #=> Array
+    #   resp.conformance_pack_rule_compliance_list[0].config_rule_name #=> String
+    #   resp.conformance_pack_rule_compliance_list[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackCompliance AWS API Documentation
+    #
+    # @overload describe_conformance_pack_compliance(params = {})
+    # @param [Hash] params ({})
+    def describe_conformance_pack_compliance(params = {}, options = {})
+      req = build_request(:describe_conformance_pack_compliance, params)
+      req.send_request(options)
+    end
+
+    # Provides one or more conformance packs deployment status.
+    #
+    # @option params [Array<String>] :conformance_pack_names
+    #   Comma-separated list of conformance pack names.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of conformance packs returned on each page.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string returned in a previous request that you use to
+    #   request the next page of results in a paginated response.
+    #
+    # @return [Types::DescribeConformancePackStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConformancePackStatusResponse#conformance_pack_status_details #conformance_pack_status_details} => Array&lt;Types::ConformancePackStatusDetail&gt;
+    #   * {Types::DescribeConformancePackStatusResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_conformance_pack_status({
+    #     conformance_pack_names: ["ConformancePackName"],
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conformance_pack_status_details #=> Array
+    #   resp.conformance_pack_status_details[0].conformance_pack_name #=> String
+    #   resp.conformance_pack_status_details[0].conformance_pack_id #=> String
+    #   resp.conformance_pack_status_details[0].conformance_pack_arn #=> String
+    #   resp.conformance_pack_status_details[0].conformance_pack_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.conformance_pack_status_details[0].stack_arn #=> String
+    #   resp.conformance_pack_status_details[0].conformance_pack_status_reason #=> String
+    #   resp.conformance_pack_status_details[0].last_update_requested_time #=> Time
+    #   resp.conformance_pack_status_details[0].last_update_completed_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackStatus AWS API Documentation
+    #
+    # @overload describe_conformance_pack_status(params = {})
+    # @param [Hash] params ({})
+    def describe_conformance_pack_status(params = {}, options = {})
+      req = build_request(:describe_conformance_pack_status, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of one or more conformance packs.
+    #
+    # @option params [Array<String>] :conformance_pack_names
+    #   Comma-separated list of conformance pack names for which you want
+    #   details. If you do not specify any names, AWS Config returns details
+    #   for all your conformance packs.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of conformance packs returned on each page.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string returned in a previous request that you use to
+    #   request the next page of results in a paginated response.
+    #
+    # @return [Types::DescribeConformancePacksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConformancePacksResponse#conformance_pack_details #conformance_pack_details} => Array&lt;Types::ConformancePackDetail&gt;
+    #   * {Types::DescribeConformancePacksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_conformance_packs({
+    #     conformance_pack_names: ["ConformancePackName"],
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conformance_pack_details #=> Array
+    #   resp.conformance_pack_details[0].conformance_pack_name #=> String
+    #   resp.conformance_pack_details[0].conformance_pack_arn #=> String
+    #   resp.conformance_pack_details[0].conformance_pack_id #=> String
+    #   resp.conformance_pack_details[0].delivery_s3_bucket #=> String
+    #   resp.conformance_pack_details[0].delivery_s3_key_prefix #=> String
+    #   resp.conformance_pack_details[0].conformance_pack_input_parameters #=> Array
+    #   resp.conformance_pack_details[0].conformance_pack_input_parameters[0].parameter_name #=> String
+    #   resp.conformance_pack_details[0].conformance_pack_input_parameters[0].parameter_value #=> String
+    #   resp.conformance_pack_details[0].last_update_requested_time #=> Time
+    #   resp.conformance_pack_details[0].created_by #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePacks AWS API Documentation
+    #
+    # @overload describe_conformance_packs(params = {})
+    # @param [Hash] params ({})
+    def describe_conformance_packs(params = {}, options = {})
+      req = build_request(:describe_conformance_packs, params)
+      req.send_request(options)
+    end
+
     # Returns the current status of the specified delivery channel. If a
     # delivery channel is not specified, this action returns the current
     # status of all delivery channels associated with the account.
@@ -1477,7 +1687,7 @@ module Aws::ConfigService
     #
     #   resp.organization_config_rule_statuses #=> Array
     #   resp.organization_config_rule_statuses[0].organization_config_rule_name #=> String
-    #   resp.organization_config_rule_statuses[0].organization_rule_status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "UPDATE_IN_PROGRESS", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.organization_config_rule_statuses[0].organization_rule_status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.organization_config_rule_statuses[0].error_code #=> String
     #   resp.organization_config_rule_statuses[0].error_message #=> String
     #   resp.organization_config_rule_statuses[0].last_update_time #=> Time
@@ -1566,6 +1776,127 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def describe_organization_config_rules(params = {}, options = {})
       req = build_request(:describe_organization_config_rules, params)
+      req.send_request(options)
+    end
+
+    # Provides organization conformance pack deployment status for an
+    # organization.
+    #
+    # <note markdown="1"> The status is not considered successful until organization conformance
+    # pack is successfully deployed in all the member accounts with an
+    # exception of excluded accounts.
+    #
+    #  When you specify the limit and the next token, you receive a paginated
+    # response. Limit and next token are not applicable if you specify
+    # organization conformance pack names. They are only applicable, when
+    # you request all the organization conformance packs.
+    #
+    #  Only a master account can call this API.
+    #
+    #  </note>
+    #
+    # @option params [Array<String>] :organization_conformance_pack_names
+    #   The names of organization conformance packs for which you want status
+    #   details. If you do not specify any names, AWS Config returns details
+    #   for all your organization conformance packs.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of OrganizationConformancePackStatuses returned on
+    #   each page. If you do no specify a number, AWS Config uses the default.
+    #   The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::DescribeOrganizationConformancePackStatusesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOrganizationConformancePackStatusesResponse#organization_conformance_pack_statuses #organization_conformance_pack_statuses} => Array&lt;Types::OrganizationConformancePackStatus&gt;
+    #   * {Types::DescribeOrganizationConformancePackStatusesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_organization_conformance_pack_statuses({
+    #     organization_conformance_pack_names: ["OrganizationConformancePackName"],
+    #     limit: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_conformance_pack_statuses #=> Array
+    #   resp.organization_conformance_pack_statuses[0].organization_conformance_pack_name #=> String
+    #   resp.organization_conformance_pack_statuses[0].status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
+    #   resp.organization_conformance_pack_statuses[0].error_code #=> String
+    #   resp.organization_conformance_pack_statuses[0].error_message #=> String
+    #   resp.organization_conformance_pack_statuses[0].last_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePackStatuses AWS API Documentation
+    #
+    # @overload describe_organization_conformance_pack_statuses(params = {})
+    # @param [Hash] params ({})
+    def describe_organization_conformance_pack_statuses(params = {}, options = {})
+      req = build_request(:describe_organization_conformance_pack_statuses, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of organization conformance packs.
+    #
+    # <note markdown="1"> When you specify the limit and the next token, you receive a paginated
+    # response. Limit and next token are not applicable if you specify
+    # organization conformance packs names. They are only applicable, when
+    # you request all the organization conformance packs. Only a master
+    # account can call this API.
+    #
+    #  </note>
+    #
+    # @option params [Array<String>] :organization_conformance_pack_names
+    #   The name that you assign to an organization conformance pack.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of organization config packs returned on each page.
+    #   If you do no specify a number, AWS Config uses the default. The
+    #   default is 100.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::DescribeOrganizationConformancePacksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOrganizationConformancePacksResponse#organization_conformance_packs #organization_conformance_packs} => Array&lt;Types::OrganizationConformancePack&gt;
+    #   * {Types::DescribeOrganizationConformancePacksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_organization_conformance_packs({
+    #     organization_conformance_pack_names: ["OrganizationConformancePackName"],
+    #     limit: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_conformance_packs #=> Array
+    #   resp.organization_conformance_packs[0].organization_conformance_pack_name #=> String
+    #   resp.organization_conformance_packs[0].organization_conformance_pack_arn #=> String
+    #   resp.organization_conformance_packs[0].delivery_s3_bucket #=> String
+    #   resp.organization_conformance_packs[0].delivery_s3_key_prefix #=> String
+    #   resp.organization_conformance_packs[0].conformance_pack_input_parameters #=> Array
+    #   resp.organization_conformance_packs[0].conformance_pack_input_parameters[0].parameter_name #=> String
+    #   resp.organization_conformance_packs[0].conformance_pack_input_parameters[0].parameter_value #=> String
+    #   resp.organization_conformance_packs[0].excluded_accounts #=> Array
+    #   resp.organization_conformance_packs[0].excluded_accounts[0] #=> String
+    #   resp.organization_conformance_packs[0].last_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePacks AWS API Documentation
+    #
+    # @overload describe_organization_conformance_packs(params = {})
+    # @param [Hash] params ({})
+    def describe_organization_conformance_packs(params = {}, options = {})
+      req = build_request(:describe_organization_conformance_packs, params)
       req.send_request(options)
     end
 
@@ -2305,6 +2636,102 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns compliance details of a conformance pack for all AWS resources
+    # that are monitered by conformance pack.
+    #
+    # @option params [required, String] :conformance_pack_name
+    #   Name of the conformance pack.
+    #
+    # @option params [Types::ConformancePackEvaluationFilters] :filters
+    #   A `ConformancePackEvaluationFilters` object.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of evaluation results returned on each page. If you
+    #   do no specify a number, AWS Config uses the default. The default is
+    #   100.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string returned in a previous request that you use to
+    #   request the next page of results in a paginated response.
+    #
+    # @return [Types::GetConformancePackComplianceDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConformancePackComplianceDetailsResponse#conformance_pack_name #conformance_pack_name} => String
+    #   * {Types::GetConformancePackComplianceDetailsResponse#conformance_pack_rule_evaluation_results #conformance_pack_rule_evaluation_results} => Array&lt;Types::ConformancePackEvaluationResult&gt;
+    #   * {Types::GetConformancePackComplianceDetailsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_conformance_pack_compliance_details({
+    #     conformance_pack_name: "ConformancePackName", # required
+    #     filters: {
+    #       config_rule_names: ["StringWithCharLimit64"],
+    #       compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #       resource_type: "StringWithCharLimit256",
+    #       resource_ids: ["StringWithCharLimit256"],
+    #     },
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conformance_pack_name #=> String
+    #   resp.conformance_pack_rule_evaluation_results #=> Array
+    #   resp.conformance_pack_rule_evaluation_results[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT"
+    #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.config_rule_name #=> String
+    #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_type #=> String
+    #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_id #=> String
+    #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.ordering_timestamp #=> Time
+    #   resp.conformance_pack_rule_evaluation_results[0].config_rule_invoked_time #=> Time
+    #   resp.conformance_pack_rule_evaluation_results[0].result_recorded_time #=> Time
+    #   resp.conformance_pack_rule_evaluation_results[0].annotation #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceDetails AWS API Documentation
+    #
+    # @overload get_conformance_pack_compliance_details(params = {})
+    # @param [Hash] params ({})
+    def get_conformance_pack_compliance_details(params = {}, options = {})
+      req = build_request(:get_conformance_pack_compliance_details, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, Array<String>] :conformance_pack_names
+    #
+    # @option params [Integer] :limit
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::GetConformancePackComplianceSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConformancePackComplianceSummaryResponse#conformance_pack_compliance_summary_list #conformance_pack_compliance_summary_list} => Array&lt;Types::ConformancePackComplianceSummary&gt;
+    #   * {Types::GetConformancePackComplianceSummaryResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_conformance_pack_compliance_summary({
+    #     conformance_pack_names: ["ConformancePackName"], # required
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conformance_pack_compliance_summary_list #=> Array
+    #   resp.conformance_pack_compliance_summary_list[0].conformance_pack_name #=> String
+    #   resp.conformance_pack_compliance_summary_list[0].conformance_pack_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceSummary AWS API Documentation
+    #
+    # @overload get_conformance_pack_compliance_summary(params = {})
+    # @param [Hash] params ({})
+    def get_conformance_pack_compliance_summary(params = {}, options = {})
+      req = build_request(:get_conformance_pack_compliance_summary, params)
+      req.send_request(options)
+    end
+
     # Returns the resource types, the number of each resource type, and the
     # total number of resources that AWS Config is recording in this region
     # for your AWS account.
@@ -2436,7 +2863,7 @@ module Aws::ConfigService
     #     organization_config_rule_name: "OrganizationConfigRuleName", # required
     #     filters: {
     #       account_id: "AccountId",
-    #       member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, UPDATE_SUCCESSFUL, UPDATE_FAILED, UPDATE_IN_PROGRESS, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
+    #       member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
     #     },
     #     limit: 1,
     #     next_token: "String",
@@ -2447,7 +2874,7 @@ module Aws::ConfigService
     #   resp.organization_config_rule_detailed_status #=> Array
     #   resp.organization_config_rule_detailed_status[0].account_id #=> String
     #   resp.organization_config_rule_detailed_status[0].config_rule_name #=> String
-    #   resp.organization_config_rule_detailed_status[0].member_account_rule_status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "UPDATE_IN_PROGRESS", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.organization_config_rule_detailed_status[0].member_account_rule_status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.organization_config_rule_detailed_status[0].error_code #=> String
     #   resp.organization_config_rule_detailed_status[0].error_message #=> String
     #   resp.organization_config_rule_detailed_status[0].last_update_time #=> Time
@@ -2459,6 +2886,64 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def get_organization_config_rule_detailed_status(params = {}, options = {})
       req = build_request(:get_organization_config_rule_detailed_status, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed status for each member account within an organization
+    # for a given organization conformance pack.
+    #
+    # Only a master account can call this API.
+    #
+    # @option params [required, String] :organization_conformance_pack_name
+    #   The name of organization conformance pack for which you want status
+    #   details for member accounts.
+    #
+    # @option params [Types::OrganizationResourceDetailedStatusFilters] :filters
+    #   An `OrganizationResourceDetailedStatusFilters` object.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of `OrganizationConformancePackDetailedStatuses`
+    #   returned on each page. If you do not specify a number, AWS Config uses
+    #   the default. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::GetOrganizationConformancePackDetailedStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOrganizationConformancePackDetailedStatusResponse#organization_conformance_pack_detailed_statuses #organization_conformance_pack_detailed_statuses} => Array&lt;Types::OrganizationConformancePackDetailedStatus&gt;
+    #   * {Types::GetOrganizationConformancePackDetailedStatusResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_organization_conformance_pack_detailed_status({
+    #     organization_conformance_pack_name: "OrganizationConformancePackName", # required
+    #     filters: {
+    #       account_id: "AccountId",
+    #       status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
+    #     },
+    #     limit: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_conformance_pack_detailed_statuses #=> Array
+    #   resp.organization_conformance_pack_detailed_statuses[0].account_id #=> String
+    #   resp.organization_conformance_pack_detailed_statuses[0].conformance_pack_name #=> String
+    #   resp.organization_conformance_pack_detailed_statuses[0].status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
+    #   resp.organization_conformance_pack_detailed_statuses[0].error_code #=> String
+    #   resp.organization_conformance_pack_detailed_statuses[0].error_message #=> String
+    #   resp.organization_conformance_pack_detailed_statuses[0].last_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConformancePackDetailedStatus AWS API Documentation
+    #
+    # @overload get_organization_conformance_pack_detailed_status(params = {})
+    # @param [Hash] params ({})
+    def get_organization_conformance_pack_detailed_status(params = {}, options = {})
+      req = build_request(:get_organization_conformance_pack_detailed_status, params)
       req.send_request(options)
     end
 
@@ -3031,6 +3516,88 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Creates or updates a conformance pack. A conformance pack is a
+    # collection of AWS Config rules that can be easily deployed in an
+    # account and a region.
+    #
+    # This API creates a service linked role
+    # `AWSServiceRoleForConfigConforms` in your account. The service linked
+    # role is created only when the role does not exist in your account. AWS
+    # Config verifies the existence of role with `GetRole` action.
+    #
+    # <note markdown="1"> You must specify either the `TemplateS3Uri` or the `TemplateBody`
+    # parameter, but not both. If you provide both AWS Config uses the
+    # `TemplateS3Uri` parameter and ignores the `TemplateBody` parameter.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :conformance_pack_name
+    #   Name of the conformance pack you want to create.
+    #
+    # @option params [String] :template_s3_uri
+    #   Location of file containing the template body. The uri must point to
+    #   the conformance pack template (max size: 300,000 bytes) that is
+    #   located in an Amazon S3 bucket in the same region as the conformance
+    #   pack.
+    #
+    #   <note markdown="1"> You must have access to read Amazon S3 bucket.
+    #
+    #    </note>
+    #
+    # @option params [String] :template_body
+    #   A string containing full conformance pack template body. Structure
+    #   containing the template body with a minimum length of 1 byte and a
+    #   maximum length of 51,200 bytes.
+    #
+    #   <note markdown="1"> You can only use a YAML template with one resource type, that is,
+    #   config rule.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :delivery_s3_bucket
+    #   Location of an Amazon S3 bucket where AWS Config can deliver
+    #   evaluation results. AWS Config stores intermediate files while
+    #   processing conformance pack template.
+    #
+    # @option params [String] :delivery_s3_key_prefix
+    #   The prefix for the Amazon S3 bucket.
+    #
+    # @option params [Array<Types::ConformancePackInputParameter>] :conformance_pack_input_parameters
+    #   A list of `ConformancePackInputParameter` objects.
+    #
+    # @return [Types::PutConformancePackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutConformancePackResponse#conformance_pack_arn #conformance_pack_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_conformance_pack({
+    #     conformance_pack_name: "ConformancePackName", # required
+    #     template_s3_uri: "TemplateS3Uri",
+    #     template_body: "TemplateBody",
+    #     delivery_s3_bucket: "DeliveryS3Bucket", # required
+    #     delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
+    #     conformance_pack_input_parameters: [
+    #       {
+    #         parameter_name: "ParameterName", # required
+    #         parameter_value: "ParameterValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conformance_pack_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConformancePack AWS API Documentation
+    #
+    # @overload put_conformance_pack(params = {})
+    # @param [Hash] params ({})
+    def put_conformance_pack(params = {}, options = {})
+      req = build_request(:put_conformance_pack, params)
+      req.send_request(options)
+    end
+
     # Creates a delivery channel object to deliver configuration information
     # to an Amazon S3 bucket and Amazon SNS topic.
     #
@@ -3224,6 +3791,89 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def put_organization_config_rule(params = {}, options = {})
       req = build_request(:put_organization_config_rule, params)
+      req.send_request(options)
+    end
+
+    # Deploys conformance packs across member accounts in an AWS
+    # Organization.
+    #
+    # This API enables organization service access through the
+    # `EnableAWSServiceAccess` action and creates a service linked role
+    # AWSServiceRoleForConfigMultiAccountSetup in the master account of your
+    # organization. The service linked role is created only when the role
+    # does not exist in the master account. AWS Config verifies the
+    # existence of role with GetRole action.
+    #
+    # <note markdown="1"> The SPN is `config-multiaccountsetup.amazonaws.com`.
+    #
+    #  You must specify either the `TemplateS3Uri` or the `TemplateBody`
+    # parameter, but not both. If you provide both AWS Config uses the
+    # `TemplateS3Uri` parameter and ignores the `TemplateBody` parameter.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :organization_conformance_pack_name
+    #   Name of the organization conformance pack you want to create.
+    #
+    # @option params [String] :template_s3_uri
+    #   Location of file containing the template body. The uri must point to
+    #   the conformance pack template (max size: 300,000 bytes).
+    #
+    #   <note markdown="1"> You must have access to read Amazon S3 bucket.
+    #
+    #    </note>
+    #
+    # @option params [String] :template_body
+    #   A string containing full conformance pack template body. Structure
+    #   containing the template body with a minimum length of 1 byte and a
+    #   maximum length of 51,200 bytes.
+    #
+    # @option params [required, String] :delivery_s3_bucket
+    #   Location of an Amazon S3 bucket where AWS Config can deliver
+    #   evaluation results. AWS Config stores intermediate files while
+    #   processing conformance pack template.
+    #
+    # @option params [String] :delivery_s3_key_prefix
+    #   The prefix for the Amazon S3 bucket.
+    #
+    # @option params [Array<Types::ConformancePackInputParameter>] :conformance_pack_input_parameters
+    #   A list of `ConformancePackInputParameter` objects.
+    #
+    # @option params [Array<String>] :excluded_accounts
+    #   A list of AWS accounts to be excluded from an organization conformance
+    #   pack while deploying a conformance pack.
+    #
+    # @return [Types::PutOrganizationConformancePackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutOrganizationConformancePackResponse#organization_conformance_pack_arn #organization_conformance_pack_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_organization_conformance_pack({
+    #     organization_conformance_pack_name: "OrganizationConformancePackName", # required
+    #     template_s3_uri: "TemplateS3Uri",
+    #     template_body: "TemplateBody",
+    #     delivery_s3_bucket: "DeliveryS3Bucket", # required
+    #     delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
+    #     conformance_pack_input_parameters: [
+    #       {
+    #         parameter_name: "ParameterName", # required
+    #         parameter_value: "ParameterValue", # required
+    #       },
+    #     ],
+    #     excluded_accounts: ["AccountId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_conformance_pack_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConformancePack AWS API Documentation
+    #
+    # @overload put_organization_conformance_pack(params = {})
+    # @param [Hash] params ({})
+    def put_organization_conformance_pack(params = {}, options = {})
+      req = build_request(:put_organization_conformance_pack, params)
       req.send_request(options)
     end
 
@@ -3697,7 +4347,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

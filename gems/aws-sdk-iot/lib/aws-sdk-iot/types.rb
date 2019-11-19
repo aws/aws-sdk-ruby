@@ -197,6 +197,23 @@ module Aws::IoT
     #           state_machine_name: "StateMachineName", # required
     #           role_arn: "AwsArn", # required
     #         },
+    #         http: {
+    #           url: "Url", # required
+    #           confirmation_url: "Url",
+    #           headers: [
+    #             {
+    #               key: "HeaderKey", # required
+    #               value: "HeaderValue", # required
+    #             },
+    #           ],
+    #           auth: {
+    #             sigv4: {
+    #               signing_region: "SigningRegion", # required
+    #               service_name: "ServiceName", # required
+    #               role_arn: "AwsArn", # required
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] dynamo_db
@@ -265,6 +282,10 @@ module Aws::IoT
     #   Starts execution of a Step Functions state machine.
     #   @return [Types::StepFunctionsAction]
     #
+    # @!attribute [rw] http
+    #   Send data to an HTTPS endpoint.
+    #   @return [Types::HttpAction]
+    #
     class Action < Struct.new(
       :dynamo_db,
       :dynamo_d_bv_2,
@@ -281,7 +302,8 @@ module Aws::IoT
       :salesforce,
       :iot_analytics,
       :iot_events,
-      :step_functions)
+      :step_functions,
+      :http)
       include Aws::Structure
     end
 
@@ -1875,6 +1897,25 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ConfirmTopicRuleDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         confirmation_token: "ConfirmationToken", # required
+    #       }
+    #
+    # @!attribute [rw] confirmation_token
+    #   The token used to confirm ownership or access to the topic rule
+    #   confirmation URL.
+    #   @return [String]
+    #
+    class ConfirmTopicRuleDestinationRequest < Struct.new(
+      :confirmation_token)
+      include Aws::Structure
+    end
+
+    class ConfirmTopicRuleDestinationResponse < Aws::EmptyStructure; end
+
     # A conflicting resource update exception. This exception is thrown when
     # two pending updates cause a conflict.
     #
@@ -3172,6 +3213,35 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateTopicRuleDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         destination_configuration: { # required
+    #           http_url_configuration: {
+    #             confirmation_url: "Url", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] destination_configuration
+    #   The topic rule destination configuration.
+    #   @return [Types::TopicRuleDestinationConfiguration]
+    #
+    class CreateTopicRuleDestinationRequest < Struct.new(
+      :destination_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_rule_destination
+    #   The topic rule destination.
+    #   @return [Types::TopicRuleDestination]
+    #
+    class CreateTopicRuleDestinationResponse < Struct.new(
+      :topic_rule_destination)
+      include Aws::Structure
+    end
+
     # The input for the CreateTopicRule operation.
     #
     # @note When making an API call, you may pass CreateTopicRuleRequest
@@ -3276,6 +3346,23 @@ module Aws::IoT
     #                 state_machine_name: "StateMachineName", # required
     #                 role_arn: "AwsArn", # required
     #               },
+    #               http: {
+    #                 url: "Url", # required
+    #                 confirmation_url: "Url",
+    #                 headers: [
+    #                   {
+    #                     key: "HeaderKey", # required
+    #                     value: "HeaderValue", # required
+    #                   },
+    #                 ],
+    #                 auth: {
+    #                   sigv4: {
+    #                     signing_region: "SigningRegion", # required
+    #                     service_name: "ServiceName", # required
+    #                     role_arn: "AwsArn", # required
+    #                   },
+    #                 },
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -3372,6 +3459,23 @@ module Aws::IoT
     #               execution_name_prefix: "ExecutionNamePrefix",
     #               state_machine_name: "StateMachineName", # required
     #               role_arn: "AwsArn", # required
+    #             },
+    #             http: {
+    #               url: "Url", # required
+    #               confirmation_url: "Url",
+    #               headers: [
+    #                 {
+    #                   key: "HeaderKey", # required
+    #                   value: "HeaderValue", # required
+    #                 },
+    #               ],
+    #               auth: {
+    #                 sigv4: {
+    #                   signing_region: "SigningRegion", # required
+    #                   service_name: "ServiceName", # required
+    #                   role_arn: "AwsArn", # required
+    #                 },
+    #               },
     #             },
     #           },
     #         },
@@ -3944,6 +4048,24 @@ module Aws::IoT
     # The output for the DeleteThingType operation.
     #
     class DeleteThingTypeResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteTopicRuleDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AwsArn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the topic rule destination to delete.
+    #   @return [String]
+    #
+    class DeleteTopicRuleDestinationRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    class DeleteTopicRuleDestinationResponse < Aws::EmptyStructure; end
 
     # The input for the DeleteTopicRule operation.
     #
@@ -5504,7 +5626,7 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Describes the name and data type at a field.
+    # The field to aggregate.
     #
     # @note When making an API call, you may pass Field
     #   data as a hash:
@@ -5519,7 +5641,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The datatype of the field.
+    #   The data type of the field.
     #   @return [String]
     #
     class Field < Struct.new(
@@ -5628,7 +5750,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] cardinality
-    #   The number of things that match the query.
+    #   The approximate count of unique values that match the query.
     #   @return [Integer]
     #
     class GetCardinalityResponse < Struct.new(
@@ -5918,11 +6040,11 @@ module Aws::IoT
     #   @return [Boolean]
     #
     # @!attribute [rw] creation_date
-    #   The date the policy was created.
+    #   The date the policy version was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_date
-    #   The date the policy was last modified.
+    #   The date the policy version was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] generation_id
@@ -5978,7 +6100,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] aggregation_field
-    #   The aggregation field name.
+    #   The aggregation field name. Currently not supported.
     #   @return [String]
     #
     # @!attribute [rw] query_version
@@ -6000,6 +6122,31 @@ module Aws::IoT
     #
     class GetStatisticsResponse < Struct.new(
       :statistics)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTopicRuleDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AwsArn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the topic rule destination.
+    #   @return [String]
+    #
+    class GetTopicRuleDestinationRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_rule_destination
+    #   The topic rule destination.
+    #   @return [Types::TopicRuleDestination]
+    #
+    class GetTopicRuleDestinationResponse < Struct.new(
+      :topic_rule_destination)
       include Aws::Structure
     end
 
@@ -6073,6 +6220,156 @@ module Aws::IoT
     class GroupNameAndArn < Struct.new(
       :group_name,
       :group_arn)
+      include Aws::Structure
+    end
+
+    # Send data to an HTTPS endpoint.
+    #
+    # @note When making an API call, you may pass HttpAction
+    #   data as a hash:
+    #
+    #       {
+    #         url: "Url", # required
+    #         confirmation_url: "Url",
+    #         headers: [
+    #           {
+    #             key: "HeaderKey", # required
+    #             value: "HeaderValue", # required
+    #           },
+    #         ],
+    #         auth: {
+    #           sigv4: {
+    #             signing_region: "SigningRegion", # required
+    #             service_name: "ServiceName", # required
+    #             role_arn: "AwsArn", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] url
+    #   The endpoint URL. If substitution templates are used in the URL, you
+    #   must also specify a `confirmationUrl`. If this is a new destination,
+    #   a new `TopicRuleDestination` is created if possible.
+    #   @return [String]
+    #
+    # @!attribute [rw] confirmation_url
+    #   The URL to which AWS IoT sends a confirmation message. The value of
+    #   the confirmation URL must be a prefix of the endpoint URL. If you do
+    #   not specify a confirmation URL AWS IoT uses the endpoint URL as the
+    #   confirmation URL. If you use substitution templates in the
+    #   confirmationUrl, you must create and enable topic rule destinations
+    #   that match each possible value of the substituion template before
+    #   traffic is allowed to your endpoint URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   The HTTP headers to send with the message data.
+    #   @return [Array<Types::HttpActionHeader>]
+    #
+    # @!attribute [rw] auth
+    #   The authentication method to use when sending data to an HTTPS
+    #   endpoint.
+    #   @return [Types::HttpAuthorization]
+    #
+    class HttpAction < Struct.new(
+      :url,
+      :confirmation_url,
+      :headers,
+      :auth)
+      include Aws::Structure
+    end
+
+    # The HTTP action header.
+    #
+    # @note When making an API call, you may pass HttpActionHeader
+    #   data as a hash:
+    #
+    #       {
+    #         key: "HeaderKey", # required
+    #         value: "HeaderValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The HTTP header key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The HTTP header value. Substitution templates are supported.
+    #   @return [String]
+    #
+    class HttpActionHeader < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # The authorization method used to send messages.
+    #
+    # @note When making an API call, you may pass HttpAuthorization
+    #   data as a hash:
+    #
+    #       {
+    #         sigv4: {
+    #           signing_region: "SigningRegion", # required
+    #           service_name: "ServiceName", # required
+    #           role_arn: "AwsArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sigv4
+    #   Use Sig V4 authorization. For more information, see [Signature
+    #   Version 4 Signing Process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   @return [Types::SigV4Authorization]
+    #
+    class HttpAuthorization < Struct.new(
+      :sigv4)
+      include Aws::Structure
+    end
+
+    # HTTP URL destination configuration used by the topic rule's HTTP
+    # action.
+    #
+    # @note When making an API call, you may pass HttpUrlDestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         confirmation_url: "Url", # required
+    #       }
+    #
+    # @!attribute [rw] confirmation_url
+    #   The URL AWS IoT uses to confirm ownership of or access to the topic
+    #   rule destination URL.
+    #   @return [String]
+    #
+    class HttpUrlDestinationConfiguration < Struct.new(
+      :confirmation_url)
+      include Aws::Structure
+    end
+
+    # HTTP URL destination properties.
+    #
+    # @!attribute [rw] confirmation_url
+    #   The URL used to confirm the HTTP topic rule destination URL.
+    #   @return [String]
+    #
+    class HttpUrlDestinationProperties < Struct.new(
+      :confirmation_url)
+      include Aws::Structure
+    end
+
+    # Information about an HTTP URL destination.
+    #
+    # @!attribute [rw] confirmation_url
+    #   The URL used to confirm ownership of or access to the HTTP topic
+    #   rule destination URL.
+    #   @return [String]
+    #
+    class HttpUrlDestinationSummary < Struct.new(
+      :confirmation_url)
       include Aws::Structure
     end
 
@@ -8677,6 +8974,42 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTopicRuleDestinationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListTopicRuleDestinationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_summaries
+    #   Information about a topic rule destination.
+    #   @return [Array<Types::TopicRuleDestinationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListTopicRuleDestinationsResponse < Struct.new(
+      :destination_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The input for the ListTopicRules operation.
     #
     # @note When making an API call, you may pass ListTopicRulesRequest
@@ -9329,7 +9662,7 @@ module Aws::IoT
     #   @return [Float]
     #
     # @!attribute [rw] value
-    #   The value.
+    #   The value of the percentile.
     #   @return [Float]
     #
     class PercentPair < Struct.new(
@@ -9935,6 +10268,23 @@ module Aws::IoT
     #                 state_machine_name: "StateMachineName", # required
     #                 role_arn: "AwsArn", # required
     #               },
+    #               http: {
+    #                 url: "Url", # required
+    #                 confirmation_url: "Url",
+    #                 headers: [
+    #                   {
+    #                     key: "HeaderKey", # required
+    #                     value: "HeaderValue", # required
+    #                   },
+    #                 ],
+    #                 auth: {
+    #                   sigv4: {
+    #                     signing_region: "SigningRegion", # required
+    #                     service_name: "ServiceName", # required
+    #                     role_arn: "AwsArn", # required
+    #                   },
+    #                 },
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -10031,6 +10381,23 @@ module Aws::IoT
     #               execution_name_prefix: "ExecutionNamePrefix",
     #               state_machine_name: "StateMachineName", # required
     #               role_arn: "AwsArn", # required
+    #             },
+    #             http: {
+    #               url: "Url", # required
+    #               confirmation_url: "Url",
+    #               headers: [
+    #                 {
+    #                   key: "HeaderKey", # required
+    #                   value: "HeaderValue", # required
+    #                 },
+    #               ],
+    #               auth: {
+    #                 sigv4: {
+    #                   signing_region: "SigningRegion", # required
+    #                   service_name: "ServiceName", # required
+    #                   role_arn: "AwsArn", # required
+    #                 },
+    #               },
     #             },
     #           },
     #         },
@@ -10622,6 +10989,36 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Use Sig V4 authorization.
+    #
+    # @note When making an API call, you may pass SigV4Authorization
+    #   data as a hash:
+    #
+    #       {
+    #         signing_region: "SigningRegion", # required
+    #         service_name: "ServiceName", # required
+    #         role_arn: "AwsArn", # required
+    #       }
+    #
+    # @!attribute [rw] signing_region
+    #   The signing region.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The service name to use while signing with Sig V4.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the signing role.
+    #   @return [String]
+    #
+    class SigV4Authorization < Struct.new(
+      :signing_region,
+      :service_name,
+      :role_arn)
+      include Aws::Structure
+    end
+
     # Describes the code-signing profile.
     #
     # @note When making an API call, you may pass SigningProfileParameter
@@ -10945,19 +11342,23 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] average
-    #   The average of the aggregated field values.
+    #   The average of the aggregated fields. If the field data type is
+    #   String this value is indeterminate.
     #   @return [Float]
     #
     # @!attribute [rw] sum
-    #   The sum of the aggregated field values.
+    #   The sum of the aggregated fields. If the field data type is String
+    #   this value is indeterminate.
     #   @return [Float]
     #
     # @!attribute [rw] minimum
-    #   The minimum aggregated field value.
+    #   The minimum value of the aggregated fields. If the field data type
+    #   is String this value is indeterminate.
     #   @return [Float]
     #
     # @!attribute [rw] maximum
-    #   The maximum aggregated field value.
+    #   The maximum value of the aggregated fields. If the field data type
+    #   is String this value is indeterminate.
     #   @return [Float]
     #
     # @!attribute [rw] sum_of_squares
@@ -10969,7 +11370,7 @@ module Aws::IoT
     #   @return [Float]
     #
     # @!attribute [rw] std_deviation
-    #   The standard deviation of the aggregated field valuesl
+    #   The standard deviation of the aggregated field values.
     #   @return [Float]
     #
     class Statistics < Struct.new(
@@ -11577,12 +11978,13 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] managed_fields
-    #   Contains fields that are indexed and whose types are already known
-    #   by the Fleet Indexing service.
+    #   A list of automatically indexed thing group fields.
     #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] custom_fields
-    #   Contains custom field names and their data type.
+    #   A list of thing group fields to index. This list cannot contain any
+    #   managed fields. Use the GetIndexingConfiguration API to get a list
+    #   of managed fields.
     #   @return [Array<Types::Field>]
     #
     class ThingGroupIndexingConfiguration < Struct.new(
@@ -11691,12 +12093,13 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] managed_fields
-    #   Contains fields that are indexed and whose types are already known
-    #   by the Fleet Indexing service.
+    #   A list of automatically indexed thing fields.
     #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] custom_fields
-    #   Contains custom field names and their data type.
+    #   A list of thing fields to index. This list cannot contain any
+    #   managed fields. Use the GetIndexingConfiguration API to get a list
+    #   of managed fields.
     #   @return [Array<Types::Field>]
     #
     class ThingIndexingConfiguration < Struct.new(
@@ -11874,6 +12277,137 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # A topic rule destination.
+    #
+    # @!attribute [rw] arn
+    #   The topic rule destination URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the topic rule destination. Valid values are:
+    #
+    #   IN\_PROGRESS
+    #
+    #   : A topic rule destination was created but has not been confirmed.
+    #     You can set `status` to `IN_PROGRESS` by calling
+    #     `UpdateTopicRuleDestination`. Calling `UpdateTopicRuleDestination`
+    #     causes a new confirmation challenge to be sent to your
+    #     confirmation endpoint.
+    #
+    #   ENABLED
+    #
+    #   : Confirmation was completed, and traffic to this destination is
+    #     allowed. You can set `status` to `DISABLED` by calling
+    #     `UpdateTopicRuleDestination`.
+    #
+    #   DISABLED
+    #
+    #   : Confirmation was completed, and traffic to this destination is not
+    #     allowed. You can set `status` to `ENABLED` by calling
+    #     `UpdateTopicRuleDestination`.
+    #
+    #   ERROR
+    #
+    #   : Confirmation could not be completed, for example if the
+    #     confirmation timed out. You can call `GetTopicRuleDestination` for
+    #     details about the error. You can set `status` to `IN_PROGRESS` by
+    #     calling `UpdateTopicRuleDestination`. Calling
+    #     `UpdateTopicRuleDestination` causes a new confirmation challenge
+    #     to be sent to your confirmation endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional details or reason why the topic rule destination is in
+    #   the current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_url_properties
+    #   Properties of the HTTP URL.
+    #   @return [Types::HttpUrlDestinationProperties]
+    #
+    class TopicRuleDestination < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :http_url_properties)
+      include Aws::Structure
+    end
+
+    # Configuration of the topic rule destination.
+    #
+    # @note When making an API call, you may pass TopicRuleDestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         http_url_configuration: {
+    #           confirmation_url: "Url", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] http_url_configuration
+    #   Configuration of the HTTP URL.
+    #   @return [Types::HttpUrlDestinationConfiguration]
+    #
+    class TopicRuleDestinationConfiguration < Struct.new(
+      :http_url_configuration)
+      include Aws::Structure
+    end
+
+    # Information about the topic rule destination.
+    #
+    # @!attribute [rw] arn
+    #   The topic rule destination ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the topic rule destination. Valid values are:
+    #
+    #   IN\_PROGRESS
+    #
+    #   : A topic rule destination was created but has not been confirmed.
+    #     You can set `status` to `IN_PROGRESS` by calling
+    #     `UpdateTopicRuleDestination`. Calling `UpdateTopicRuleDestination`
+    #     causes a new confirmation challenge to be sent to your
+    #     confirmation endpoint.
+    #
+    #   ENABLED
+    #
+    #   : Confirmation was completed, and traffic to this destination is
+    #     allowed. You can set `status` to `DISABLED` by calling
+    #     `UpdateTopicRuleDestination`.
+    #
+    #   DISABLED
+    #
+    #   : Confirmation was completed, and traffic to this destination is not
+    #     allowed. You can set `status` to `ENABLED` by calling
+    #     `UpdateTopicRuleDestination`.
+    #
+    #   ERROR
+    #
+    #   : Confirmation could not be completed, for example if the
+    #     confirmation timed out. You can call `GetTopicRuleDestination` for
+    #     details about the error. You can set `status` to `IN_PROGRESS` by
+    #     calling `UpdateTopicRuleDestination`. Calling
+    #     `UpdateTopicRuleDestination` causes a new confirmation challenge
+    #     to be sent to your confirmation endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason the topic rule destination is in the current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_url_summary
+    #   Information about the HTTP URL.
+    #   @return [Types::HttpUrlDestinationSummary]
+    #
+    class TopicRuleDestinationSummary < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :http_url_summary)
+      include Aws::Structure
+    end
+
     # Describes a rule.
     #
     # @!attribute [rw] rule_arn
@@ -12007,6 +12541,23 @@ module Aws::IoT
     #               state_machine_name: "StateMachineName", # required
     #               role_arn: "AwsArn", # required
     #             },
+    #             http: {
+    #               url: "Url", # required
+    #               confirmation_url: "Url",
+    #               headers: [
+    #                 {
+    #                   key: "HeaderKey", # required
+    #                   value: "HeaderValue", # required
+    #                 },
+    #               ],
+    #               auth: {
+    #                 sigv4: {
+    #                   signing_region: "SigningRegion", # required
+    #                   service_name: "ServiceName", # required
+    #                   role_arn: "AwsArn", # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         ],
     #         rule_disabled: false,
@@ -12103,6 +12654,23 @@ module Aws::IoT
     #             execution_name_prefix: "ExecutionNamePrefix",
     #             state_machine_name: "StateMachineName", # required
     #             role_arn: "AwsArn", # required
+    #           },
+    #           http: {
+    #             url: "Url", # required
+    #             confirmation_url: "Url",
+    #             headers: [
+    #               {
+    #                 key: "HeaderKey", # required
+    #                 value: "HeaderValue", # required
+    #               },
+    #             ],
+    #             auth: {
+    #               sigv4: {
+    #                 signing_region: "SigningRegion", # required
+    #                 service_name: "ServiceName", # required
+    #                 role_arn: "AwsArn", # required
+    #               },
+    #             },
     #           },
     #         },
     #       }
@@ -13308,6 +13876,59 @@ module Aws::IoT
     # The output from the UpdateThing operation.
     #
     class UpdateThingResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateTopicRuleDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AwsArn", # required
+    #         status: "ENABLED", # required, accepts ENABLED, IN_PROGRESS, DISABLED, ERROR
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the topic rule destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the topic rule destination. Valid values are:
+    #
+    #   IN\_PROGRESS
+    #
+    #   : A topic rule destination was created but has not been confirmed.
+    #     You can set `status` to `IN_PROGRESS` by calling
+    #     `UpdateTopicRuleDestination`. Calling `UpdateTopicRuleDestination`
+    #     causes a new confirmation challenge to be sent to your
+    #     confirmation endpoint.
+    #
+    #   ENABLED
+    #
+    #   : Confirmation was completed, and traffic to this destination is
+    #     allowed. You can set `status` to `DISABLED` by calling
+    #     `UpdateTopicRuleDestination`.
+    #
+    #   DISABLED
+    #
+    #   : Confirmation was completed, and traffic to this destination is not
+    #     allowed. You can set `status` to `ENABLED` by calling
+    #     `UpdateTopicRuleDestination`.
+    #
+    #   ERROR
+    #
+    #   : Confirmation could not be completed, for example if the
+    #     confirmation timed out. You can call `GetTopicRuleDestination` for
+    #     details about the error. You can set `status` to `IN_PROGRESS` by
+    #     calling `UpdateTopicRuleDestination`. Calling
+    #     `UpdateTopicRuleDestination` causes a new confirmation challenge
+    #     to be sent to your confirmation endpoint.
+    #   @return [String]
+    #
+    class UpdateTopicRuleDestinationRequest < Struct.new(
+      :arn,
+      :status)
+      include Aws::Structure
+    end
+
+    class UpdateTopicRuleDestinationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ValidateSecurityProfileBehaviorsRequest
     #   data as a hash:

@@ -32,7 +32,7 @@ module Aws::IAM
     alias :instance_profile_name :name
 
     # The path to the instance profile. For more information about paths,
-    # see [IAM Identifiers][1] in the *Using IAM* guide.
+    # see [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -43,8 +43,8 @@ module Aws::IAM
     end
 
     # The stable and unique string identifying the instance profile. For
-    # more information about IDs, see [IAM Identifiers][1] in the *Using
-    # IAM* guide.
+    # more information about IDs, see [IAM Identifiers][1] in the *IAM User
+    # Guide*.
     #
     #
     #
@@ -56,7 +56,7 @@ module Aws::IAM
 
     # The Amazon Resource Name (ARN) specifying the instance profile. For
     # more information about ARNs and how to use them in policies, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #

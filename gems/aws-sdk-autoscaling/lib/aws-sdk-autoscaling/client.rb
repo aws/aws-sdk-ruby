@@ -828,6 +828,12 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html
     #
+    # @option params [Integer] :max_instance_lifetime
+    #   The maximum amount of time, in seconds, that an instance can be in
+    #   service.
+    #
+    #   Valid Range: Minimum value of 604800.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -899,6 +905,7 @@ module Aws::AutoScaling
     #         overrides: [
     #           {
     #             instance_type: "XmlStringMaxLen255",
+    #             weighted_capacity: "XmlStringMaxLen32",
     #           },
     #         ],
     #       },
@@ -946,6 +953,7 @@ module Aws::AutoScaling
     #       },
     #     ],
     #     service_linked_role_arn: "ResourceName",
+    #     max_instance_lifetime: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup AWS API Documentation
@@ -1117,18 +1125,14 @@ module Aws::AutoScaling
     # @option params [String] :spot_price
     #   The maximum hourly price to be paid for any Spot Instance launched to
     #   fulfill the request. Spot Instances are launched when the price you
-    #   specify exceeds the current Spot market price. For more information,
-    #   see [Launching Spot Instances in Your Auto Scaling Group][1] in the
+    #   specify exceeds the current Spot price. For more information, see
+    #   [Launching Spot Instances in Your Auto Scaling Group][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   If a Spot price is set, then the Auto Scaling group will only launch
-    #   instances when the Spot price has been met, regardless of the setting
-    #   in the Auto Scaling group's `DesiredCapacity`.
-    #
-    #   <note markdown="1"> When you change your Spot price by creating a new launch
+    #   <note markdown="1"> When you change your maximum price by creating a new launch
     #   configuration, running instances will continue to run as long as the
-    #   Spot price for those running instances is higher than the current Spot
-    #   market price.
+    #   maximum price for those running instances is higher than the current
+    #   Spot price.
     #
     #    </note>
     #
@@ -1203,7 +1207,7 @@ module Aws::AutoScaling
     #   For more information, see [Instance Placement Tenancy][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Valid values: `default` \| `dedicated`
+    #   Valid Values: `default` \| `dedicated`
     #
     #
     #
@@ -1835,6 +1839,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.launch_template_specification.version #=> String
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides #=> Array
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_type #=> String
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].weighted_capacity #=> String
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.on_demand_allocation_strategy #=> String
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.on_demand_base_capacity #=> Integer
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.on_demand_percentage_above_base_capacity #=> Integer
@@ -1855,6 +1860,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].health_check_grace_period #=> Integer
     #   resp.auto_scaling_groups[0].instances #=> Array
     #   resp.auto_scaling_groups[0].instances[0].instance_id #=> String
+    #   resp.auto_scaling_groups[0].instances[0].instance_type #=> String
     #   resp.auto_scaling_groups[0].instances[0].availability_zone #=> String
     #   resp.auto_scaling_groups[0].instances[0].lifecycle_state #=> String, one of "Pending", "Pending:Wait", "Pending:Proceed", "Quarantined", "InService", "Terminating", "Terminating:Wait", "Terminating:Proceed", "Terminated", "Detaching", "Detached", "EnteringStandby", "Standby"
     #   resp.auto_scaling_groups[0].instances[0].health_status #=> String
@@ -1863,6 +1869,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].instances[0].launch_template.launch_template_name #=> String
     #   resp.auto_scaling_groups[0].instances[0].launch_template.version #=> String
     #   resp.auto_scaling_groups[0].instances[0].protected_from_scale_in #=> Boolean
+    #   resp.auto_scaling_groups[0].instances[0].weighted_capacity #=> String
     #   resp.auto_scaling_groups[0].created_time #=> Time
     #   resp.auto_scaling_groups[0].suspended_processes #=> Array
     #   resp.auto_scaling_groups[0].suspended_processes[0].process_name #=> String
@@ -1883,6 +1890,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].termination_policies[0] #=> String
     #   resp.auto_scaling_groups[0].new_instances_protected_from_scale_in #=> Boolean
     #   resp.auto_scaling_groups[0].service_linked_role_arn #=> String
+    #   resp.auto_scaling_groups[0].max_instance_lifetime #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingGroups AWS API Documentation
@@ -1952,6 +1960,7 @@ module Aws::AutoScaling
     #
     #   resp.auto_scaling_instances #=> Array
     #   resp.auto_scaling_instances[0].instance_id #=> String
+    #   resp.auto_scaling_instances[0].instance_type #=> String
     #   resp.auto_scaling_instances[0].auto_scaling_group_name #=> String
     #   resp.auto_scaling_instances[0].availability_zone #=> String
     #   resp.auto_scaling_instances[0].lifecycle_state #=> String
@@ -1961,6 +1970,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_instances[0].launch_template.launch_template_name #=> String
     #   resp.auto_scaling_instances[0].launch_template.version #=> String
     #   resp.auto_scaling_instances[0].protected_from_scale_in #=> Boolean
+    #   resp.auto_scaling_instances[0].weighted_capacity #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingInstances AWS API Documentation
@@ -3298,6 +3308,15 @@ module Aws::AutoScaling
 
     # Moves the specified instances into the standby state.
     #
+    # If you choose to decrement the desired capacity of the Auto Scaling
+    # group, the instances can enter standby as long as the desired capacity
+    # of the Auto Scaling group after the instances are placed into standby
+    # is equal to or greater than the minimum capacity of the group.
+    #
+    # If you choose not to decrement the desired capacity of the Auto
+    # Scaling group, the Auto Scaling group launches new instances to
+    # replace the instances on standby.
+    #
     # For more information, see [Temporarily Removing Instances from Your
     # Auto Scaling Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
@@ -3453,6 +3472,9 @@ module Aws::AutoScaling
     end
 
     # Moves the specified instances out of the standby state.
+    #
+    # After you put the instances back in service, the desired capacity is
+    # incremented.
     #
     # For more information, see [Temporarily Removing Instances from Your
     # Auto Scaling Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -4472,8 +4494,7 @@ module Aws::AutoScaling
     # To update an Auto Scaling group, specify the name of the group and the
     # parameter that you want to change. Any parameters that you don't
     # specify are not changed by this update request. The new settings take
-    # effect on any scaling activities after this call returns. Scaling
-    # activities that are currently in progress aren't affected.
+    # effect on any scaling activities after this call returns.
     #
     # If you associate a new launch configuration or template with an Auto
     # Scaling group, all new instances will get the updated configuration.
@@ -4519,12 +4540,6 @@ module Aws::AutoScaling
     #   The name of the launch configuration. If you specify
     #   `LaunchConfigurationName` in your update request, you can't specify
     #   `LaunchTemplate` or `MixedInstancesPolicy`.
-    #
-    #   To update an Auto Scaling group with a launch configuration with
-    #   `InstanceMonitoring` set to `false`, you must first disable the
-    #   collection of group metrics. Otherwise, you get an error. If you have
-    #   previously enabled the collection of group metrics, you can disable it
-    #   using DisableMetricsCollection.
     #
     # @option params [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template and version to use to specify the updates. If you
@@ -4658,6 +4673,12 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html
     #
+    # @option params [Integer] :max_instance_lifetime
+    #   The maximum amount of time, in seconds, that an instance can be in
+    #   service.
+    #
+    #   Valid Range: Minimum value of 604800.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -4709,6 +4730,7 @@ module Aws::AutoScaling
     #         overrides: [
     #           {
     #             instance_type: "XmlStringMaxLen255",
+    #             weighted_capacity: "XmlStringMaxLen32",
     #           },
     #         ],
     #       },
@@ -4733,6 +4755,7 @@ module Aws::AutoScaling
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
     #     service_linked_role_arn: "ResourceName",
+    #     max_instance_lifetime: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
@@ -4757,7 +4780,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

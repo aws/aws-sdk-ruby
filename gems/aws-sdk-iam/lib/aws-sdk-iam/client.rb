@@ -996,6 +996,8 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].tags #=> Array
     #   resp.instance_profile.roles[0].tags[0].key #=> String
     #   resp.instance_profile.roles[0].tags[0].value #=> String
+    #   resp.instance_profile.roles[0].role_last_used.last_used_date #=> Time
+    #   resp.instance_profile.roles[0].role_last_used.region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfile AWS API Documentation
     #
@@ -1603,6 +1605,8 @@ module Aws::IAM
     #   resp.role.tags #=> Array
     #   resp.role.tags[0].key #=> String
     #   resp.role.tags[0].value #=> String
+    #   resp.role.role_last_used.last_used_date #=> Time
+    #   resp.role.role_last_used.region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRole AWS API Documentation
     #
@@ -1768,6 +1772,8 @@ module Aws::IAM
     #   resp.role.tags #=> Array
     #   resp.role.tags[0].key #=> String
     #   resp.role.tags[0].value #=> String
+    #   resp.role.role_last_used.last_used_date #=> Time
+    #   resp.role.role_last_used.region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRole AWS API Documentation
     #
@@ -3948,6 +3954,8 @@ module Aws::IAM
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].tags #=> Array
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].tags[0].key #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].tags[0].value #=> String
+    #   resp.role_detail_list[0].instance_profile_list[0].roles[0].role_last_used.last_used_date #=> Time
+    #   resp.role_detail_list[0].instance_profile_list[0].roles[0].role_last_used.region #=> String
     #   resp.role_detail_list[0].role_policy_list #=> Array
     #   resp.role_detail_list[0].role_policy_list[0].policy_name #=> String
     #   resp.role_detail_list[0].role_policy_list[0].policy_document #=> String
@@ -3959,6 +3967,8 @@ module Aws::IAM
     #   resp.role_detail_list[0].tags #=> Array
     #   resp.role_detail_list[0].tags[0].key #=> String
     #   resp.role_detail_list[0].tags[0].value #=> String
+    #   resp.role_detail_list[0].role_last_used.last_used_date #=> Time
+    #   resp.role_detail_list[0].role_last_used.region #=> String
     #   resp.policies #=> Array
     #   resp.policies[0].policy_name #=> String
     #   resp.policies[0].policy_id #=> String
@@ -4521,6 +4531,8 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].tags #=> Array
     #   resp.instance_profile.roles[0].tags[0].key #=> String
     #   resp.instance_profile.roles[0].tags[0].value #=> String
+    #   resp.instance_profile.roles[0].role_last_used.last_used_date #=> Time
+    #   resp.instance_profile.roles[0].role_last_used.region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfile AWS API Documentation
     #
@@ -4972,8 +4984,13 @@ module Aws::IAM
     #       arn: "arn:aws:iam::123456789012:role/Test-Role", 
     #       assume_role_policy_document: "<URL-encoded-JSON>", 
     #       create_date: Time.parse("2013-04-18T05:01:58Z"), 
+    #       max_session_duration: 3600, 
     #       path: "/", 
     #       role_id: "AROADBQP57FF2AEXAMPLE", 
+    #       role_last_used: {
+    #         last_used_date: Time.parse("2019-11-18T05:01:58Z"), 
+    #         region: "us-east-1", 
+    #       }, 
     #       role_name: "Test-Role", 
     #     }, 
     #   }
@@ -4999,6 +5016,8 @@ module Aws::IAM
     #   resp.role.tags #=> Array
     #   resp.role.tags[0].key #=> String
     #   resp.role.tags[0].value #=> String
+    #   resp.role.role_last_used.last_used_date #=> Time
+    #   resp.role.role_last_used.region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRole AWS API Documentation
     #
@@ -6705,6 +6724,8 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].tags #=> Array
     #   resp.instance_profiles[0].roles[0].tags[0].key #=> String
     #   resp.instance_profiles[0].roles[0].tags[0].value #=> String
+    #   resp.instance_profiles[0].roles[0].role_last_used.last_used_date #=> Time
+    #   resp.instance_profiles[0].roles[0].role_last_used.region #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -6794,6 +6815,8 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].tags #=> Array
     #   resp.instance_profiles[0].roles[0].tags[0].key #=> String
     #   resp.instance_profiles[0].roles[0].tags[0].value #=> String
+    #   resp.instance_profiles[0].roles[0].role_last_used.last_used_date #=> Time
+    #   resp.instance_profiles[0].roles[0].role_last_used.region #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -7488,6 +7511,8 @@ module Aws::IAM
     #   resp.roles[0].tags #=> Array
     #   resp.roles[0].tags[0].key #=> String
     #   resp.roles[0].tags[0].value #=> String
+    #   resp.roles[0].role_last_used.last_used_date #=> Time
+    #   resp.roles[0].role_last_used.region #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -10505,6 +10530,8 @@ module Aws::IAM
     #   resp.role.tags #=> Array
     #   resp.role.tags[0].key #=> String
     #   resp.role.tags[0].value #=> String
+    #   resp.role.role_last_used.last_used_date #=> Time
+    #   resp.role.role_last_used.region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescription AWS API Documentation
     #
@@ -11310,7 +11337,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
