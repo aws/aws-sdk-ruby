@@ -129,7 +129,7 @@ module Aws
           .to_return(
             :status => 200,
             :body => "my-token\n",
-            :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
           )
         stub_request(:get, "http://169.254.169.254#{path}")
           .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
@@ -204,7 +204,7 @@ module Aws
           .to_return(
             :status => 200,
             :body => "my-token\n",
-            :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
           )
         stub_request(:get, "http://169.254.169.254#{path}")
           .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
@@ -344,7 +344,7 @@ module Aws
           .to_return(
             :status => 200,
             :body => "my-token\n",
-            :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
           )
         stub_request(:get, "http://169.254.169.254#{path}")
           .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
