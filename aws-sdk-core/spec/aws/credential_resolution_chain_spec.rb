@@ -82,13 +82,13 @@ module Aws
           .to_return(
             :status => 200,
             :body => "my-token\n",
-            :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
           )
         stub_request(:get, imds_url)
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(:get, "#{imds_url}profile-name")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => <<-JSON.strip)
 {
   "Code" : "Success",
@@ -205,13 +205,13 @@ JSON
           .to_return(
             :status => 200,
             :body => "my-token\n",
-            :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
           )
         stub_request(:get, imds_url)
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(:get, "#{imds_url}profile-name")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => <<-JSON.strip)
 {
   "Code" : "Success",
