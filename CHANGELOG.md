@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature = Aws::Core - Support EC2 IMDS updates.
+
 2.11.400 (2019-11-18)
 ------------------
 
