@@ -155,10 +155,10 @@ module Aws
             :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
           )
         stub_request(:get, "http://169.254.169.254#{path}")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(:get, "http://169.254.169.254#{path}profile-name")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => resp)
         c = InstanceProfileCredentials.new(backoff:0)
         expect(c.credentials.access_key_id).to eq('akid')
@@ -230,10 +230,10 @@ module Aws
             :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
           )
         stub_request(:get, "http://169.254.169.254#{path}")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(:get, "http://169.254.169.254#{path}profile-name")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => resp)
           .to_return(:status => 200, :body => resp2)
       end
@@ -257,11 +257,11 @@ module Aws
 
       it 'retries if the first load fails' do
         stub_request(:get, "http://169.254.169.254#{path}")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 500)
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(:get, "http://169.254.169.254#{path}profile-name")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => resp2)
         c = InstanceProfileCredentials.new(backoff:0)
         expect(c.credentials.access_key_id).to eq('akid-2')
@@ -272,11 +272,11 @@ module Aws
 
       it 'retries if get profile response is invalid JSON' do
         stub_request(:get, "http://169.254.169.254#{path}")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 500)
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(:get, "http://169.254.169.254#{path}profile-name")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => ' ')
           .to_return(:status => 200, :body => '')
           .to_return(:status => 200, :body => '{')
@@ -290,11 +290,11 @@ module Aws
 
       it 'retries invalid JSON exactly 3 times' do
         stub_request(:get, "http://169.254.169.254#{path}")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 500)
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(:get, "http://169.254.169.254#{path}profile-name")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => '')
           .to_return(:status => 200, :body => ' ')
           .to_return(:status => 200, :body => '{')
@@ -309,11 +309,11 @@ module Aws
 
       it 'retries errors parsing expiration time 3 times' do
         stub_request(:get, "http://169.254.169.254#{path}")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 500)
           .to_return(:status => 200, :body => "profile-name\n")
         stub_request(:get, "http://169.254.169.254#{path}profile-name")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_return(:status => 200, :body => '{ "Expiration": "Expiration" }')
           .to_return(:status => 200, :body => '{ "Expiration": "Expiration" }')
           .to_return(:status => 200, :body => '{ "Expiration": "Expiration" }')
@@ -346,7 +346,7 @@ module Aws
           # This handles the case when the service response but returns
           # a JSON document without credentials (error cases)
           stub_request(:get, "http://169.254.169.254#{path}profile-name")
-            .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+            .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
             .to_return(:status => 200, :body => resp)
           c = InstanceProfileCredentials.new
           expect(c.set?).to be(false)
@@ -370,10 +370,10 @@ module Aws
             :headers => {"x-aws-ec2-metadata-token-ttl-seconds": "21600"}
           )
         stub_request(:get, "http://169.254.169.254#{path}")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_raise(Errno::ECONNREFUSED)
         stub_request(:get, "http://169.254.169.254#{path}profile-name")
-          .with(:headers => {"x-aws-ec2-metadata-token": "my-token"})
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
           .to_raise(Errno::ECONNREFUSED)
       end
 
