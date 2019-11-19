@@ -23,8 +23,10 @@ RSpec.configure do |config|
     allow(Dir).to receive(:home).and_raise(ArgumentError)
 
     # disable instance profile credentials
-    ec2_md_path = '/latest/meta-data/iam/security-credentials/'
-    stub_request(:get, "http://169.254.169.254#{ec2_md_path}").to_raise(SocketError)
+    token_path = '/latest/api/token'
+    path = '/latest/meta-data/iam/security-credentials/'
+    stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
+    stub_request(:put, "http://169.254.169.254#{token_path}").to_raise(SocketError)
 
     Aws.shared_config.fresh
   end

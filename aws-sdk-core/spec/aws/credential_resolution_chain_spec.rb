@@ -13,6 +13,14 @@ module Aws
         '..', 'fixtures', 'credentials', 'mock_shared_config'))
     }
 
+    let(:imds_url) {
+      'http://169.254.169.254/latest/meta-data/iam/security-credentials/'
+    }
+
+    let(:imds_token_url) {
+      'http://169.254.169.254/latest/api/token'
+    }
+
     describe "default behavior" do
       before(:each) do
         stub_const('ENV', {})
@@ -56,28 +64,32 @@ module Aws
           "AR_TOKEN"
         )
         client = Aws::S3::Client.new(profile: "ar_plus_creds", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+        expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
       end
 
       it 'prefers shared credential file static credentials over shared config' do
         client = Aws::S3::Client.new(profile: "credentials_first", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("ACCESS_KEY_CRD")
+        expect(client.config.credentials.credentials.access_key_id).to eq("ACCESS_KEY_CRD")
       end
 
       it 'will source static credentials from shared config after shared credentials' do
         client = Aws::S3::Client.new(profile: "incomplete_cred", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("ACCESS_KEY_SC1")
+        expect(client.config.credentials.credentials.access_key_id).to eq("ACCESS_KEY_SC1")
       end
 
       it 'attempts to fetch metadata credentials last' do
-        stub_request(
-          :get,
-          "http://169.254.169.254/latest/meta-data/iam/security-credentials/"
-        ).to_return(:status => 200, :body => "profile-name\n")
-        stub_request(
-          :get,
-          "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name"
-        ).to_return(:status => 200, :body => <<-JSON.strip)
+        stub_request(:put, imds_token_url)
+          .to_return(
+            :status => 200,
+            :body => "my-token\n",
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
+          )
+        stub_request(:get, imds_url)
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
+          .to_return(:status => 200, :body => "profile-name\n")
+        stub_request(:get, "#{imds_url}profile-name")
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
+          .to_return(:status => 200, :body => <<-JSON.strip)
 {
   "Code" : "Success",
   "LastUpdated" : "2013-11-22T20:03:48Z",
@@ -89,11 +101,11 @@ module Aws
 }
 JSON
         client = Aws::S3::Client.new(profile: "nonexistant", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("akid-md")
+        expect(client.config.credentials.credentials.access_key_id).to eq("akid-md")
       end
 
       describe 'Assume Role Resolution' do
-        it 'will not assume a role without source_profile present' do
+        it 'will not assume a role without a source present' do
           expect {
             Aws::S3::Client.new(profile: "ar_no_src", region: "us-east-1")
           }.to raise_error(Errors::NoSourceProfileError)
@@ -114,7 +126,7 @@ JSON
             "AR_TOKEN"
           )
           client = Aws::S3::Client.new(profile: "assumerole_sc", region: "us-east-1")
-          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+          expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
         end
 
         it 'will then try to assume a role from shared config' do
@@ -126,7 +138,7 @@ JSON
             "AR_TOKEN"
           )
           client = Aws::S3::Client.new(profile: "ar_from_self", region: "us-east-1")
-          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+          expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
         end
 
         it 'will assume a role from config using source credentials in shared credentials' do
@@ -138,9 +150,10 @@ JSON
             "AR_TOKEN"
           )
           client = Aws::S3::Client.new(profile: "creds_from_sc", region: "us-east-1")
-          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+          expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
         end
       end
+
     end
 
     describe "AWS_SDK_CONFIG_OPT_OUT set" do
@@ -165,7 +178,7 @@ JSON
           profile: "fooprofile",
           region: "us-east-1"
         )
-        expect(client.config.credentials.access_key_id).to eq("ACCESS_DIRECT")
+        expect(client.config.credentials.credentials.access_key_id).to eq("ACCESS_DIRECT")
       end
 
       it 'prefers ENV credentials over shared config' do
@@ -174,7 +187,7 @@ JSON
           "AWS_SECRET_ACCESS_KEY" => "SECRET_ENV_STUB"
         })
         client = Aws::S3::Client.new(profile: "fooprofile", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("AKID_ENV_STUB")
+        expect(client.config.credentials.credentials.access_key_id).to eq("AKID_ENV_STUB")
       end
 
       it 'will not load credentials from shared config' do
@@ -188,14 +201,18 @@ JSON
       end
 
       it 'attempts to fetch metadata credentials last' do
-        stub_request(
-          :get,
-          "http://169.254.169.254/latest/meta-data/iam/security-credentials/"
-        ).to_return(:status => 200, :body => "profile-name\n")
-        stub_request(
-          :get,
-          "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name"
-        ).to_return(:status => 200, :body => <<-JSON.strip)
+        stub_request(:put, imds_token_url)
+          .to_return(
+            :status => 200,
+            :body => "my-token\n",
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
+          )
+        stub_request(:get, imds_url)
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
+          .to_return(:status => 200, :body => "profile-name\n")
+        stub_request(:get, "#{imds_url}profile-name")
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
+          .to_return(:status => 200, :body => <<-JSON.strip)
 {
   "Code" : "Success",
   "LastUpdated" : "2013-11-22T20:03:48Z",
@@ -207,7 +224,7 @@ JSON
 }
 JSON
         client = Aws::S3::Client.new(profile: "nonexistant", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("akid-md")
+        expect(client.config.credentials.credentials.access_key_id).to eq("akid-md")
       end
     end
 
