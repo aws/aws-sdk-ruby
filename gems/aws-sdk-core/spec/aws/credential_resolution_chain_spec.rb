@@ -98,14 +98,22 @@ module Aws
       end
 
       it 'attempts to fetch metadata credentials last' do
+        stub_request(:put, "http://169.254.169.254/latest/api/token")
+          .to_return(
+            :status => 200,
+            :body => "my-token\n",
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
+          )
         stub_request(
           :get,
           "http://169.254.169.254/latest/meta-data/iam/security-credentials/"
-        ).to_return(:status => 200, :body => "profile-name\n")
+        ).with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
+          .to_return(:status => 200, :body => "profile-name\n")
         stub_request(
           :get,
           "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name"
-        ).to_return(:status => 200, :body => <<-JSON.strip)
+        ).with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
+          .to_return(:status => 200, :body => <<-JSON.strip)
 {
   "Code" : "Success",
   "LastUpdated" : "2013-11-22T20:03:48Z",
@@ -235,10 +243,18 @@ JSON
           "AR_SECRET",
           "AR_TOKEN"
         )
-        stub_request(:get, "http://169.254.169.254/latest/meta-data/iam/security-credentials/").
-          to_return(:status => 200, :body => "profile-name\n")
-        stub_request(:get, "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name").
-          to_return(:status => 200, :body => resp)
+        stub_request(:put, "http://169.254.169.254/latest/api/token")
+          .to_return(
+            :status => 200,
+            :body => "my-token\n",
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
+          )
+        stub_request(:get, "http://169.254.169.254/latest/meta-data/iam/security-credentials/")
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
+          .to_return(:status => 200, :body => "profile-name\n")
+        stub_request(:get, "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name")
+          .with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
+          .to_return(:status => 200, :body => resp)
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: profile,
           region: "us-east-1"
@@ -261,8 +277,8 @@ JSON
         stub_const('ENV', {
           "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI" => path
         })
-        stub_request(:get, "http://169.254.170.2#{path}").
-          to_return(:status => 200, :body => resp)
+        stub_request(:get, "http://169.254.170.2#{path}")
+          .to_return(:status => 200, :body => resp)
         assume_role_stub(
           "arn:aws:iam:123456789012:role/foo",
           "ACCESS_KEY_ECS",
@@ -323,14 +339,22 @@ JSON
       end
 
       it 'attempts to fetch metadata credentials last' do
+        stub_request(:put, "http://169.254.169.254/latest/api/token")
+          .to_return(
+            :status => 200,
+            :body => "my-token\n",
+            :headers => {"x-aws-ec2-metadata-token-ttl-seconds" => "21600"}
+          )
         stub_request(
           :get,
           "http://169.254.169.254/latest/meta-data/iam/security-credentials/"
-        ).to_return(:status => 200, :body => "profile-name\n")
+        ).with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
+          .to_return(:status => 200, :body => "profile-name\n")
         stub_request(
           :get,
           "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name"
-        ).to_return(:status => 200, :body => <<-JSON.strip)
+        ).with(:headers => {"x-aws-ec2-metadata-token" => "my-token"})
+          .to_return(:status => 200, :body => <<-JSON.strip)
 {
   "Code" : "Success",
   "LastUpdated" : "2013-11-22T20:03:48Z",
