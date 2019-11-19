@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.401 (2019-11-19)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
 
 * Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
