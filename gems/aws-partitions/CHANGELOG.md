@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Added `Partition#region?` and `Partition#service?` methods.
+
 1.241.0 (2019-11-19)
 ------------------
 
@@ -1339,4 +1341,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of the `aws-partitions` gem.
-
