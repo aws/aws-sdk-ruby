@@ -1996,6 +1996,9 @@ module Aws::ECS
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
+    #   resp.task_definition.inference_accelerators #=> Array
+    #   resp.task_definition.inference_accelerators[0].device_name #=> String
+    #   resp.task_definition.inference_accelerators[0].device_type #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
     #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
@@ -2098,6 +2101,7 @@ module Aws::ECS
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters AWS API Documentation
     #
@@ -2280,6 +2284,7 @@ module Aws::ECS
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstances AWS API Documentation
     #
@@ -2481,6 +2486,7 @@ module Aws::ECS
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices AWS API Documentation
     #
@@ -2717,6 +2723,9 @@ module Aws::ECS
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
+    #   resp.task_definition.inference_accelerators #=> Array
+    #   resp.task_definition.inference_accelerators[0].device_name #=> String
+    #   resp.task_definition.inference_accelerators[0].device_type #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
     #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
@@ -2810,6 +2819,7 @@ module Aws::ECS
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskSets AWS API Documentation
     #
@@ -2903,32 +2913,23 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.tasks #=> Array
-    #   resp.tasks[0].task_arn #=> String
+    #   resp.tasks[0].attachments #=> Array
+    #   resp.tasks[0].attachments[0].id #=> String
+    #   resp.tasks[0].attachments[0].type #=> String
+    #   resp.tasks[0].attachments[0].status #=> String
+    #   resp.tasks[0].attachments[0].details #=> Array
+    #   resp.tasks[0].attachments[0].details[0].name #=> String
+    #   resp.tasks[0].attachments[0].details[0].value #=> String
+    #   resp.tasks[0].attributes #=> Array
+    #   resp.tasks[0].attributes[0].name #=> String
+    #   resp.tasks[0].attributes[0].value #=> String
+    #   resp.tasks[0].attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.tasks[0].attributes[0].target_id #=> String
+    #   resp.tasks[0].availability_zone #=> String
     #   resp.tasks[0].cluster_arn #=> String
-    #   resp.tasks[0].task_definition_arn #=> String
+    #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
+    #   resp.tasks[0].connectivity_at #=> Time
     #   resp.tasks[0].container_instance_arn #=> String
-    #   resp.tasks[0].overrides.container_overrides #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].name #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].command #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].command[0] #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
-    #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
-    #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
-    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
-    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
-    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
-    #   resp.tasks[0].overrides.task_role_arn #=> String
-    #   resp.tasks[0].overrides.execution_role_arn #=> String
-    #   resp.tasks[0].last_status #=> String
-    #   resp.tasks[0].desired_status #=> String
-    #   resp.tasks[0].cpu #=> String
-    #   resp.tasks[0].memory #=> String
     #   resp.tasks[0].containers #=> Array
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
@@ -2954,39 +2955,57 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
-    #   resp.tasks[0].started_by #=> String
-    #   resp.tasks[0].version #=> Integer
-    #   resp.tasks[0].stopped_reason #=> String
-    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
-    #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
-    #   resp.tasks[0].connectivity_at #=> Time
-    #   resp.tasks[0].pull_started_at #=> Time
-    #   resp.tasks[0].pull_stopped_at #=> Time
-    #   resp.tasks[0].execution_stopped_at #=> Time
+    #   resp.tasks[0].cpu #=> String
     #   resp.tasks[0].created_at #=> Time
-    #   resp.tasks[0].started_at #=> Time
-    #   resp.tasks[0].stopping_at #=> Time
-    #   resp.tasks[0].stopped_at #=> Time
+    #   resp.tasks[0].desired_status #=> String
+    #   resp.tasks[0].execution_stopped_at #=> Time
     #   resp.tasks[0].group #=> String
-    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE"
-    #   resp.tasks[0].platform_version #=> String
-    #   resp.tasks[0].attachments #=> Array
-    #   resp.tasks[0].attachments[0].id #=> String
-    #   resp.tasks[0].attachments[0].type #=> String
-    #   resp.tasks[0].attachments[0].status #=> String
-    #   resp.tasks[0].attachments[0].details #=> Array
-    #   resp.tasks[0].attachments[0].details[0].name #=> String
-    #   resp.tasks[0].attachments[0].details[0].value #=> String
     #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
-    #   resp.tasks[0].tags #=> Array
-    #   resp.tasks[0].tags[0].key #=> String
-    #   resp.tasks[0].tags[0].value #=> String
     #   resp.tasks[0].inference_accelerators #=> Array
     #   resp.tasks[0].inference_accelerators[0].device_name #=> String
     #   resp.tasks[0].inference_accelerators[0].device_type #=> String
+    #   resp.tasks[0].last_status #=> String
+    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.tasks[0].memory #=> String
+    #   resp.tasks[0].overrides.container_overrides #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].name #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].command #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].command[0] #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.cpu #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
+    #   resp.tasks[0].overrides.execution_role_arn #=> String
+    #   resp.tasks[0].overrides.memory #=> String
+    #   resp.tasks[0].overrides.task_role_arn #=> String
+    #   resp.tasks[0].platform_version #=> String
+    #   resp.tasks[0].pull_started_at #=> Time
+    #   resp.tasks[0].pull_stopped_at #=> Time
+    #   resp.tasks[0].started_at #=> Time
+    #   resp.tasks[0].started_by #=> String
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
+    #   resp.tasks[0].stopped_at #=> Time
+    #   resp.tasks[0].stopped_reason #=> String
+    #   resp.tasks[0].stopping_at #=> Time
+    #   resp.tasks[0].tags #=> Array
+    #   resp.tasks[0].tags[0].key #=> String
+    #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].task_arn #=> String
+    #   resp.tasks[0].task_definition_arn #=> String
+    #   resp.tasks[0].version #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks AWS API Documentation
     #
@@ -3064,11 +3083,10 @@ module Aws::ECS
     #   settings are returned.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListAccountSettings` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a `ListAccountSettings` request
+    #   indicating that more results are available to fulfill the request and
+    #   further calls will be needed. If `maxResults` was provided, it is
+    #   possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -3205,10 +3223,10 @@ module Aws::ECS
     #   specify an attribute name to use this parameter.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListAttributes` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a `ListAttributes` request
+    #   indicating that more results are available to fulfill the request and
+    #   further calls will be needed. If `maxResults` was provided, it is
+    #   possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -3263,10 +3281,10 @@ module Aws::ECS
     # Returns a list of existing clusters.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListClusters` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a `ListClusters` request
+    #   indicating that more results are available to fulfill the request and
+    #   further calls will be needed. If `maxResults` was provided, it is
+    #   possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -3353,11 +3371,10 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListContainerInstances` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a `ListContainerInstances` request
+    #   indicating that more results are available to fulfill the request and
+    #   further calls will be needed. If `maxResults` was provided, it is
+    #   possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -3438,10 +3455,10 @@ module Aws::ECS
     #   default cluster is assumed.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListServices` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a `ListServices` request
+    #   indicating that more results are available to fulfill the request and
+    #   further calls will be needed. If `maxResults` was provided, it is
+    #   possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -3588,11 +3605,11 @@ module Aws::ECS
     #   subsequent request.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListTaskDefinitionFamilies` request where `maxResults` was used and
-    #   the results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a `ListTaskDefinitionFamilies`
+    #   request indicating that more results are available to fulfill the
+    #   request and further calls will be needed. If `maxResults` was
+    #   provided, it is possible the number of results to be fewer than
+    #   `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -3702,11 +3719,10 @@ module Aws::ECS
     #   family are listed first.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListTaskDefinitions` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a `ListTaskDefinitions` request
+    #   indicating that more results are available to fulfill the request and
+    #   further calls will be needed. If `maxResults` was provided, it is
+    #   possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -3819,10 +3835,10 @@ module Aws::ECS
     #   family.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated `ListTasks`
-    #   request where `maxResults` was used and the results exceeded the value
-    #   of that parameter. Pagination continues from the end of the previous
-    #   results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a `ListTasks` request indicating
+    #   that more results are available to fulfill the request and further
+    #   calls will be needed. If `maxResults` was provided, it is possible the
+    #   number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -5072,6 +5088,9 @@ module Aws::ECS
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
+    #   resp.task_definition.inference_accelerators #=> Array
+    #   resp.task_definition.inference_accelerators[0].device_name #=> String
+    #   resp.task_definition.inference_accelerators[0].device_type #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
     #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
@@ -5133,10 +5152,43 @@ module Aws::ECS
     #   which to run your task. If you do not specify a cluster, the default
     #   cluster is assumed.
     #
-    # @option params [required, String] :task_definition
-    #   The `family` and `revision` (`family:revision`) or full ARN of the
-    #   task definition to run. If a `revision` is not specified, the latest
-    #   `ACTIVE` revision is used.
+    # @option params [Integer] :count
+    #   The number of instantiations of the specified task to place on your
+    #   cluster. You can specify up to 10 tasks per call.
+    #
+    # @option params [Boolean] :enable_ecs_managed_tags
+    #   Specifies whether to enable Amazon ECS managed tags for the task. For
+    #   more information, see [Tagging Your Amazon ECS Resources][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #
+    # @option params [String] :group
+    #   The name of the task group to associate with the task. The default
+    #   value is the family name of the task definition (for example,
+    #   family:my-family-name).
+    #
+    # @option params [String] :launch_type
+    #   The launch type on which to run your task. For more information, see
+    #   [Amazon ECS Launch Types][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   The network configuration for the task. This parameter is required for
+    #   task definitions that use the `awsvpc` network mode to receive their
+    #   own elastic network interface, and it is not supported for other
+    #   network modes. For more information, see [Task Networking][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [Types::TaskOverride] :overrides
     #   A list of container overrides in JSON format that specify the name of
@@ -5153,27 +5205,6 @@ module Aws::ECS
     #
     #    </note>
     #
-    # @option params [Integer] :count
-    #   The number of instantiations of the specified task to place on your
-    #   cluster. You can specify up to 10 tasks per call.
-    #
-    # @option params [String] :started_by
-    #   An optional tag specified when a task is started. For example, if you
-    #   automatically trigger a task to run a batch process job, you could
-    #   apply a unique identifier for that job to your task with the
-    #   `startedBy` parameter. You can then identify which tasks belong to
-    #   that job by filtering the results of a ListTasks call with the
-    #   `startedBy` value. Up to 36 letters (uppercase and lowercase),
-    #   numbers, hyphens, and underscores are allowed.
-    #
-    #   If a task is started by an Amazon ECS service, then the `startedBy`
-    #   parameter contains the deployment ID of the service that starts it.
-    #
-    # @option params [String] :group
-    #   The name of the task group to associate with the task. The default
-    #   value is the family name of the task definition (for example,
-    #   family:my-family-name).
-    #
     # @option params [Array<Types::PlacementConstraint>] :placement_constraints
     #   An array of placement constraint objects to use for the task. You can
     #   specify up to 10 constraints per task (including constraints in the
@@ -5182,15 +5213,6 @@ module Aws::ECS
     # @option params [Array<Types::PlacementStrategy>] :placement_strategy
     #   The placement strategy objects to use for the task. You can specify a
     #   maximum of five strategy rules per task.
-    #
-    # @option params [String] :launch_type
-    #   The launch type on which to run your task. For more information, see
-    #   [Amazon ECS Launch Types][1] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #
     # @option params [String] :platform_version
     #   The platform version the task should run. A platform version is only
@@ -5203,16 +5225,31 @@ module Aws::ECS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
-    # @option params [Types::NetworkConfiguration] :network_configuration
-    #   The network configuration for the task. This parameter is required for
-    #   task definitions that use the `awsvpc` network mode to receive their
-    #   own elastic network interface, and it is not supported for other
-    #   network modes. For more information, see [Task Networking][1] in the
-    #   *Amazon Elastic Container Service Developer Guide*.
+    # @option params [String] :propagate_tags
+    #   Specifies whether to propagate the tags from the task definition to
+    #   the task. If no value is specified, the tags are not propagated. Tags
+    #   can only be propagated to the task during task creation. To add tags
+    #   to a task after task creation, use the TagResource API action.
     #
+    #   <note markdown="1"> An error will be received if you specify the `SERVICE` option when
+    #   running a task.
     #
+    #    </note>
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    # @option params [String] :reference_id
+    #   The reference ID to use for the task.
+    #
+    # @option params [String] :started_by
+    #   An optional tag specified when a task is started. For example, if you
+    #   automatically trigger a task to run a batch process job, you could
+    #   apply a unique identifier for that job to your task with the
+    #   `startedBy` parameter. You can then identify which tasks belong to
+    #   that job by filtering the results of a ListTasks call with the
+    #   `startedBy` value. Up to 36 letters (uppercase and lowercase),
+    #   numbers, hyphens, and underscores are allowed.
+    #
+    #   If a task is started by an Amazon ECS service, then the `startedBy`
+    #   parameter contains the deployment ID of the service that starts it.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task to help you categorize and
@@ -5244,25 +5281,10 @@ module Aws::ECS
     #     Tags with this prefix do not count against your tags per resource
     #     limit.
     #
-    # @option params [Boolean] :enable_ecs_managed_tags
-    #   Specifies whether to enable Amazon ECS managed tags for the task. For
-    #   more information, see [Tagging Your Amazon ECS Resources][1] in the
-    #   *Amazon Elastic Container Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
-    #
-    # @option params [String] :propagate_tags
-    #   Specifies whether to propagate the tags from the task definition to
-    #   the task. If no value is specified, the tags are not propagated. Tags
-    #   can only be propagated to the task during task creation. To add tags
-    #   to a task after task creation, use the TagResource API action.
-    #
-    #   <note markdown="1"> An error will be received if you specify the `SERVICE` option when
-    #   running a task.
-    #
-    #    </note>
+    # @option params [required, String] :task_definition
+    #   The `family` and `revision` (`family:revision`) or full ARN of the
+    #   task definition to run. If a `revision` is not specified, the latest
+    #   `ACTIVE` revision is used.
     #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5311,7 +5333,17 @@ module Aws::ECS
     #
     #   resp = client.run_task({
     #     cluster: "String",
-    #     task_definition: "String", # required
+    #     count: 1,
+    #     enable_ecs_managed_tags: false,
+    #     group: "String",
+    #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     network_configuration: {
+    #       awsvpc_configuration: {
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
     #     overrides: {
     #       container_overrides: [
     #         {
@@ -5334,18 +5366,17 @@ module Aws::ECS
     #           ],
     #         },
     #       ],
+    #       cpu: "String",
     #       inference_accelerator_overrides: [
     #         {
     #           device_name: "String",
     #           device_type: "String",
     #         },
     #       ],
-    #       task_role_arn: "String",
     #       execution_role_arn: "String",
+    #       memory: "String",
+    #       task_role_arn: "String",
     #     },
-    #     count: 1,
-    #     started_by: "String",
-    #     group: "String",
     #     placement_constraints: [
     #       {
     #         type: "distinctInstance", # accepts distinctInstance, memberOf
@@ -5358,54 +5389,39 @@ module Aws::ECS
     #         field: "String",
     #       },
     #     ],
-    #     launch_type: "EC2", # accepts EC2, FARGATE
     #     platform_version: "String",
-    #     network_configuration: {
-    #       awsvpc_configuration: {
-    #         subnets: ["String"], # required
-    #         security_groups: ["String"],
-    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #       },
-    #     },
+    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #     reference_id: "String",
+    #     started_by: "String",
     #     tags: [
     #       {
     #         key: "TagKey",
     #         value: "TagValue",
     #       },
     #     ],
-    #     enable_ecs_managed_tags: false,
-    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #     task_definition: "String", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.tasks #=> Array
-    #   resp.tasks[0].task_arn #=> String
+    #   resp.tasks[0].attachments #=> Array
+    #   resp.tasks[0].attachments[0].id #=> String
+    #   resp.tasks[0].attachments[0].type #=> String
+    #   resp.tasks[0].attachments[0].status #=> String
+    #   resp.tasks[0].attachments[0].details #=> Array
+    #   resp.tasks[0].attachments[0].details[0].name #=> String
+    #   resp.tasks[0].attachments[0].details[0].value #=> String
+    #   resp.tasks[0].attributes #=> Array
+    #   resp.tasks[0].attributes[0].name #=> String
+    #   resp.tasks[0].attributes[0].value #=> String
+    #   resp.tasks[0].attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.tasks[0].attributes[0].target_id #=> String
+    #   resp.tasks[0].availability_zone #=> String
     #   resp.tasks[0].cluster_arn #=> String
-    #   resp.tasks[0].task_definition_arn #=> String
+    #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
+    #   resp.tasks[0].connectivity_at #=> Time
     #   resp.tasks[0].container_instance_arn #=> String
-    #   resp.tasks[0].overrides.container_overrides #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].name #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].command #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].command[0] #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
-    #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
-    #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
-    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
-    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
-    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
-    #   resp.tasks[0].overrides.task_role_arn #=> String
-    #   resp.tasks[0].overrides.execution_role_arn #=> String
-    #   resp.tasks[0].last_status #=> String
-    #   resp.tasks[0].desired_status #=> String
-    #   resp.tasks[0].cpu #=> String
-    #   resp.tasks[0].memory #=> String
     #   resp.tasks[0].containers #=> Array
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
@@ -5431,39 +5447,57 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
-    #   resp.tasks[0].started_by #=> String
-    #   resp.tasks[0].version #=> Integer
-    #   resp.tasks[0].stopped_reason #=> String
-    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
-    #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
-    #   resp.tasks[0].connectivity_at #=> Time
-    #   resp.tasks[0].pull_started_at #=> Time
-    #   resp.tasks[0].pull_stopped_at #=> Time
-    #   resp.tasks[0].execution_stopped_at #=> Time
+    #   resp.tasks[0].cpu #=> String
     #   resp.tasks[0].created_at #=> Time
-    #   resp.tasks[0].started_at #=> Time
-    #   resp.tasks[0].stopping_at #=> Time
-    #   resp.tasks[0].stopped_at #=> Time
+    #   resp.tasks[0].desired_status #=> String
+    #   resp.tasks[0].execution_stopped_at #=> Time
     #   resp.tasks[0].group #=> String
-    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE"
-    #   resp.tasks[0].platform_version #=> String
-    #   resp.tasks[0].attachments #=> Array
-    #   resp.tasks[0].attachments[0].id #=> String
-    #   resp.tasks[0].attachments[0].type #=> String
-    #   resp.tasks[0].attachments[0].status #=> String
-    #   resp.tasks[0].attachments[0].details #=> Array
-    #   resp.tasks[0].attachments[0].details[0].name #=> String
-    #   resp.tasks[0].attachments[0].details[0].value #=> String
     #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
-    #   resp.tasks[0].tags #=> Array
-    #   resp.tasks[0].tags[0].key #=> String
-    #   resp.tasks[0].tags[0].value #=> String
     #   resp.tasks[0].inference_accelerators #=> Array
     #   resp.tasks[0].inference_accelerators[0].device_name #=> String
     #   resp.tasks[0].inference_accelerators[0].device_type #=> String
+    #   resp.tasks[0].last_status #=> String
+    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.tasks[0].memory #=> String
+    #   resp.tasks[0].overrides.container_overrides #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].name #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].command #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].command[0] #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.cpu #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
+    #   resp.tasks[0].overrides.execution_role_arn #=> String
+    #   resp.tasks[0].overrides.memory #=> String
+    #   resp.tasks[0].overrides.task_role_arn #=> String
+    #   resp.tasks[0].platform_version #=> String
+    #   resp.tasks[0].pull_started_at #=> Time
+    #   resp.tasks[0].pull_stopped_at #=> Time
+    #   resp.tasks[0].started_at #=> Time
+    #   resp.tasks[0].started_by #=> String
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
+    #   resp.tasks[0].stopped_at #=> Time
+    #   resp.tasks[0].stopped_reason #=> String
+    #   resp.tasks[0].stopping_at #=> Time
+    #   resp.tasks[0].tags #=> Array
+    #   resp.tasks[0].tags[0].key #=> String
+    #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].task_arn #=> String
+    #   resp.tasks[0].task_definition_arn #=> String
+    #   resp.tasks[0].version #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTask AWS API Documentation
     #
@@ -5490,10 +5524,29 @@ module Aws::ECS
     #   which to start your task. If you do not specify a cluster, the default
     #   cluster is assumed.
     #
-    # @option params [required, String] :task_definition
-    #   The `family` and `revision` (`family:revision`) or full ARN of the
-    #   task definition to start. If a `revision` is not specified, the latest
-    #   `ACTIVE` revision is used.
+    # @option params [required, Array<String>] :container_instances
+    #   The container instance IDs or full ARN entries for the container
+    #   instances on which you would like to place your task. You can specify
+    #   up to 10 container instances.
+    #
+    # @option params [Boolean] :enable_ecs_managed_tags
+    #   Specifies whether to enable Amazon ECS managed tags for the task. For
+    #   more information, see [Tagging Your Amazon ECS Resources][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #
+    # @option params [String] :group
+    #   The name of the task group to associate with the task. The default
+    #   value is the family name of the task definition (for example,
+    #   family:my-family-name).
+    #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   The VPC subnet and security group configuration for tasks that receive
+    #   their own elastic network interface by using the `awsvpc` networking
+    #   mode.
     #
     # @option params [Types::TaskOverride] :overrides
     #   A list of container overrides in JSON format that specify the name of
@@ -5510,10 +5563,13 @@ module Aws::ECS
     #
     #    </note>
     #
-    # @option params [required, Array<String>] :container_instances
-    #   The container instance IDs or full ARN entries for the container
-    #   instances on which you would like to place your task. You can specify
-    #   up to 10 container instances.
+    # @option params [String] :propagate_tags
+    #   Specifies whether to propagate the tags from the task definition or
+    #   the service to the task. If no value is specified, the tags are not
+    #   propagated.
+    #
+    # @option params [String] :reference_id
+    #   The reference ID to use for the task.
     #
     # @option params [String] :started_by
     #   An optional tag specified when a task is started. For example, if you
@@ -5526,16 +5582,6 @@ module Aws::ECS
     #
     #   If a task is started by an Amazon ECS service, then the `startedBy`
     #   parameter contains the deployment ID of the service that starts it.
-    #
-    # @option params [String] :group
-    #   The name of the task group to associate with the task. The default
-    #   value is the family name of the task definition (for example,
-    #   family:my-family-name).
-    #
-    # @option params [Types::NetworkConfiguration] :network_configuration
-    #   The VPC subnet and security group configuration for tasks that receive
-    #   their own elastic network interface by using the `awsvpc` networking
-    #   mode.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task to help you categorize and
@@ -5567,19 +5613,10 @@ module Aws::ECS
     #     Tags with this prefix do not count against your tags per resource
     #     limit.
     #
-    # @option params [Boolean] :enable_ecs_managed_tags
-    #   Specifies whether to enable Amazon ECS managed tags for the task. For
-    #   more information, see [Tagging Your Amazon ECS Resources][1] in the
-    #   *Amazon Elastic Container Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
-    #
-    # @option params [String] :propagate_tags
-    #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the task. If no value is specified, the tags are not
-    #   propagated.
+    # @option params [required, String] :task_definition
+    #   The `family` and `revision` (`family:revision`) or full ARN of the
+    #   task definition to start. If a `revision` is not specified, the latest
+    #   `ACTIVE` revision is used.
     #
     # @return [Types::StartTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5590,7 +5627,16 @@ module Aws::ECS
     #
     #   resp = client.start_task({
     #     cluster: "String",
-    #     task_definition: "String", # required
+    #     container_instances: ["String"], # required
+    #     enable_ecs_managed_tags: false,
+    #     group: "String",
+    #     network_configuration: {
+    #       awsvpc_configuration: {
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
     #     overrides: {
     #       container_overrides: [
     #         {
@@ -5613,64 +5659,49 @@ module Aws::ECS
     #           ],
     #         },
     #       ],
+    #       cpu: "String",
     #       inference_accelerator_overrides: [
     #         {
     #           device_name: "String",
     #           device_type: "String",
     #         },
     #       ],
-    #       task_role_arn: "String",
     #       execution_role_arn: "String",
+    #       memory: "String",
+    #       task_role_arn: "String",
     #     },
-    #     container_instances: ["String"], # required
+    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #     reference_id: "String",
     #     started_by: "String",
-    #     group: "String",
-    #     network_configuration: {
-    #       awsvpc_configuration: {
-    #         subnets: ["String"], # required
-    #         security_groups: ["String"],
-    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #       },
-    #     },
     #     tags: [
     #       {
     #         key: "TagKey",
     #         value: "TagValue",
     #       },
     #     ],
-    #     enable_ecs_managed_tags: false,
-    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #     task_definition: "String", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.tasks #=> Array
-    #   resp.tasks[0].task_arn #=> String
+    #   resp.tasks[0].attachments #=> Array
+    #   resp.tasks[0].attachments[0].id #=> String
+    #   resp.tasks[0].attachments[0].type #=> String
+    #   resp.tasks[0].attachments[0].status #=> String
+    #   resp.tasks[0].attachments[0].details #=> Array
+    #   resp.tasks[0].attachments[0].details[0].name #=> String
+    #   resp.tasks[0].attachments[0].details[0].value #=> String
+    #   resp.tasks[0].attributes #=> Array
+    #   resp.tasks[0].attributes[0].name #=> String
+    #   resp.tasks[0].attributes[0].value #=> String
+    #   resp.tasks[0].attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.tasks[0].attributes[0].target_id #=> String
+    #   resp.tasks[0].availability_zone #=> String
     #   resp.tasks[0].cluster_arn #=> String
-    #   resp.tasks[0].task_definition_arn #=> String
+    #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
+    #   resp.tasks[0].connectivity_at #=> Time
     #   resp.tasks[0].container_instance_arn #=> String
-    #   resp.tasks[0].overrides.container_overrides #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].name #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].command #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].command[0] #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
-    #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
-    #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
-    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
-    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
-    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
-    #   resp.tasks[0].overrides.task_role_arn #=> String
-    #   resp.tasks[0].overrides.execution_role_arn #=> String
-    #   resp.tasks[0].last_status #=> String
-    #   resp.tasks[0].desired_status #=> String
-    #   resp.tasks[0].cpu #=> String
-    #   resp.tasks[0].memory #=> String
     #   resp.tasks[0].containers #=> Array
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
@@ -5696,39 +5727,57 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
-    #   resp.tasks[0].started_by #=> String
-    #   resp.tasks[0].version #=> Integer
-    #   resp.tasks[0].stopped_reason #=> String
-    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
-    #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
-    #   resp.tasks[0].connectivity_at #=> Time
-    #   resp.tasks[0].pull_started_at #=> Time
-    #   resp.tasks[0].pull_stopped_at #=> Time
-    #   resp.tasks[0].execution_stopped_at #=> Time
+    #   resp.tasks[0].cpu #=> String
     #   resp.tasks[0].created_at #=> Time
-    #   resp.tasks[0].started_at #=> Time
-    #   resp.tasks[0].stopping_at #=> Time
-    #   resp.tasks[0].stopped_at #=> Time
+    #   resp.tasks[0].desired_status #=> String
+    #   resp.tasks[0].execution_stopped_at #=> Time
     #   resp.tasks[0].group #=> String
-    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE"
-    #   resp.tasks[0].platform_version #=> String
-    #   resp.tasks[0].attachments #=> Array
-    #   resp.tasks[0].attachments[0].id #=> String
-    #   resp.tasks[0].attachments[0].type #=> String
-    #   resp.tasks[0].attachments[0].status #=> String
-    #   resp.tasks[0].attachments[0].details #=> Array
-    #   resp.tasks[0].attachments[0].details[0].name #=> String
-    #   resp.tasks[0].attachments[0].details[0].value #=> String
     #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
-    #   resp.tasks[0].tags #=> Array
-    #   resp.tasks[0].tags[0].key #=> String
-    #   resp.tasks[0].tags[0].value #=> String
     #   resp.tasks[0].inference_accelerators #=> Array
     #   resp.tasks[0].inference_accelerators[0].device_name #=> String
     #   resp.tasks[0].inference_accelerators[0].device_type #=> String
+    #   resp.tasks[0].last_status #=> String
+    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.tasks[0].memory #=> String
+    #   resp.tasks[0].overrides.container_overrides #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].name #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].command #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].command[0] #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.cpu #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
+    #   resp.tasks[0].overrides.execution_role_arn #=> String
+    #   resp.tasks[0].overrides.memory #=> String
+    #   resp.tasks[0].overrides.task_role_arn #=> String
+    #   resp.tasks[0].platform_version #=> String
+    #   resp.tasks[0].pull_started_at #=> Time
+    #   resp.tasks[0].pull_stopped_at #=> Time
+    #   resp.tasks[0].started_at #=> Time
+    #   resp.tasks[0].started_by #=> String
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
+    #   resp.tasks[0].stopped_at #=> Time
+    #   resp.tasks[0].stopped_reason #=> String
+    #   resp.tasks[0].stopping_at #=> Time
+    #   resp.tasks[0].tags #=> Array
+    #   resp.tasks[0].tags[0].key #=> String
+    #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].task_arn #=> String
+    #   resp.tasks[0].task_definition_arn #=> String
+    #   resp.tasks[0].version #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTask AWS API Documentation
     #
@@ -5789,32 +5838,23 @@ module Aws::ECS
     #
     # @example Response structure
     #
-    #   resp.task.task_arn #=> String
+    #   resp.task.attachments #=> Array
+    #   resp.task.attachments[0].id #=> String
+    #   resp.task.attachments[0].type #=> String
+    #   resp.task.attachments[0].status #=> String
+    #   resp.task.attachments[0].details #=> Array
+    #   resp.task.attachments[0].details[0].name #=> String
+    #   resp.task.attachments[0].details[0].value #=> String
+    #   resp.task.attributes #=> Array
+    #   resp.task.attributes[0].name #=> String
+    #   resp.task.attributes[0].value #=> String
+    #   resp.task.attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.task.attributes[0].target_id #=> String
+    #   resp.task.availability_zone #=> String
     #   resp.task.cluster_arn #=> String
-    #   resp.task.task_definition_arn #=> String
+    #   resp.task.connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
+    #   resp.task.connectivity_at #=> Time
     #   resp.task.container_instance_arn #=> String
-    #   resp.task.overrides.container_overrides #=> Array
-    #   resp.task.overrides.container_overrides[0].name #=> String
-    #   resp.task.overrides.container_overrides[0].command #=> Array
-    #   resp.task.overrides.container_overrides[0].command[0] #=> String
-    #   resp.task.overrides.container_overrides[0].environment #=> Array
-    #   resp.task.overrides.container_overrides[0].environment[0].name #=> String
-    #   resp.task.overrides.container_overrides[0].environment[0].value #=> String
-    #   resp.task.overrides.container_overrides[0].cpu #=> Integer
-    #   resp.task.overrides.container_overrides[0].memory #=> Integer
-    #   resp.task.overrides.container_overrides[0].memory_reservation #=> Integer
-    #   resp.task.overrides.container_overrides[0].resource_requirements #=> Array
-    #   resp.task.overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.task.overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
-    #   resp.task.overrides.inference_accelerator_overrides #=> Array
-    #   resp.task.overrides.inference_accelerator_overrides[0].device_name #=> String
-    #   resp.task.overrides.inference_accelerator_overrides[0].device_type #=> String
-    #   resp.task.overrides.task_role_arn #=> String
-    #   resp.task.overrides.execution_role_arn #=> String
-    #   resp.task.last_status #=> String
-    #   resp.task.desired_status #=> String
-    #   resp.task.cpu #=> String
-    #   resp.task.memory #=> String
     #   resp.task.containers #=> Array
     #   resp.task.containers[0].container_arn #=> String
     #   resp.task.containers[0].task_arn #=> String
@@ -5840,36 +5880,53 @@ module Aws::ECS
     #   resp.task.containers[0].memory_reservation #=> String
     #   resp.task.containers[0].gpu_ids #=> Array
     #   resp.task.containers[0].gpu_ids[0] #=> String
-    #   resp.task.started_by #=> String
-    #   resp.task.version #=> Integer
-    #   resp.task.stopped_reason #=> String
-    #   resp.task.stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
-    #   resp.task.connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
-    #   resp.task.connectivity_at #=> Time
-    #   resp.task.pull_started_at #=> Time
-    #   resp.task.pull_stopped_at #=> Time
-    #   resp.task.execution_stopped_at #=> Time
+    #   resp.task.cpu #=> String
     #   resp.task.created_at #=> Time
-    #   resp.task.started_at #=> Time
-    #   resp.task.stopping_at #=> Time
-    #   resp.task.stopped_at #=> Time
+    #   resp.task.desired_status #=> String
+    #   resp.task.execution_stopped_at #=> Time
     #   resp.task.group #=> String
-    #   resp.task.launch_type #=> String, one of "EC2", "FARGATE"
-    #   resp.task.platform_version #=> String
-    #   resp.task.attachments #=> Array
-    #   resp.task.attachments[0].id #=> String
-    #   resp.task.attachments[0].type #=> String
-    #   resp.task.attachments[0].status #=> String
-    #   resp.task.attachments[0].details #=> Array
-    #   resp.task.attachments[0].details[0].name #=> String
-    #   resp.task.attachments[0].details[0].value #=> String
     #   resp.task.health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
-    #   resp.task.tags #=> Array
-    #   resp.task.tags[0].key #=> String
-    #   resp.task.tags[0].value #=> String
     #   resp.task.inference_accelerators #=> Array
     #   resp.task.inference_accelerators[0].device_name #=> String
     #   resp.task.inference_accelerators[0].device_type #=> String
+    #   resp.task.last_status #=> String
+    #   resp.task.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task.memory #=> String
+    #   resp.task.overrides.container_overrides #=> Array
+    #   resp.task.overrides.container_overrides[0].name #=> String
+    #   resp.task.overrides.container_overrides[0].command #=> Array
+    #   resp.task.overrides.container_overrides[0].command[0] #=> String
+    #   resp.task.overrides.container_overrides[0].environment #=> Array
+    #   resp.task.overrides.container_overrides[0].environment[0].name #=> String
+    #   resp.task.overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.task.overrides.container_overrides[0].cpu #=> Integer
+    #   resp.task.overrides.container_overrides[0].memory #=> Integer
+    #   resp.task.overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.task.overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task.overrides.cpu #=> String
+    #   resp.task.overrides.inference_accelerator_overrides #=> Array
+    #   resp.task.overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.task.overrides.inference_accelerator_overrides[0].device_type #=> String
+    #   resp.task.overrides.execution_role_arn #=> String
+    #   resp.task.overrides.memory #=> String
+    #   resp.task.overrides.task_role_arn #=> String
+    #   resp.task.platform_version #=> String
+    #   resp.task.pull_started_at #=> Time
+    #   resp.task.pull_stopped_at #=> Time
+    #   resp.task.started_at #=> Time
+    #   resp.task.started_by #=> String
+    #   resp.task.stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
+    #   resp.task.stopped_at #=> Time
+    #   resp.task.stopped_reason #=> String
+    #   resp.task.stopping_at #=> Time
+    #   resp.task.tags #=> Array
+    #   resp.task.tags[0].key #=> String
+    #   resp.task.tags[0].value #=> String
+    #   resp.task.task_arn #=> String
+    #   resp.task.task_definition_arn #=> String
+    #   resp.task.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -6488,6 +6545,7 @@ module Aws::ECS
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState AWS API Documentation
     #
@@ -7029,7 +7087,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

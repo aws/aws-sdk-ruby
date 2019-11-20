@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.242.0 (2019-11-20)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MigrationHubConfig`.
+
 1.241.0 (2019-11-19)
 ------------------
 

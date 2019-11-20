@@ -560,6 +560,7 @@ module Aws::CloudTrail
     #   resp.trail_list[0].cloud_watch_logs_role_arn #=> String
     #   resp.trail_list[0].kms_key_id #=> String
     #   resp.trail_list[0].has_custom_event_selectors #=> Boolean
+    #   resp.trail_list[0].has_insight_selectors #=> Boolean
     #   resp.trail_list[0].is_organization_trail #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrails AWS API Documentation
@@ -632,6 +633,8 @@ module Aws::CloudTrail
     #   resp.event_selectors[0].data_resources[0].type #=> String
     #   resp.event_selectors[0].data_resources[0].values #=> Array
     #   resp.event_selectors[0].data_resources[0].values[0] #=> String
+    #   resp.event_selectors[0].exclude_management_event_sources #=> Array
+    #   resp.event_selectors[0].exclude_management_event_sources[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectors AWS API Documentation
     #
@@ -639,6 +642,66 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def get_event_selectors(params = {}, options = {})
       req = build_request(:get_event_selectors, params)
+      req.send_request(options)
+    end
+
+    # Describes the settings for the Insights event selectors that you
+    # configured for your trail. `GetInsightSelectors` shows if CloudTrail
+    # Insights event logging is enabled on the trail, and if it is, which
+    # insight types are enabled. If you run `GetInsightSelectors` on a trail
+    # that does not have Insights events enabled, the operation throws the
+    # exception `InsightNotEnabledException`
+    #
+    # For more information, see [Logging CloudTrail Insights Events for
+    # Trails ][1] in the *AWS CloudTrail User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
+    #
+    # @option params [required, String] :trail_name
+    #   Specifies the name of the trail or trail ARN. If you specify a trail
+    #   name, the string must meet the following requirements:
+    #
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+    #     underscores (\_), or dashes (-)
+    #
+    #   * Start with a letter or number, and end with a letter or number
+    #
+    #   * Be between 3 and 128 characters
+    #
+    #   * Have no adjacent periods, underscores or dashes. Names like
+    #     `my-_namespace` and `my--namespace` are not valid.
+    #
+    #   * Not be in IP address format (for example, 192.168.5.4)
+    #
+    #   If you specify a trail ARN, it must be in the format:
+    #
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    # @return [Types::GetInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInsightSelectorsResponse#trail_arn #trail_arn} => String
+    #   * {Types::GetInsightSelectorsResponse#insight_selectors #insight_selectors} => Array&lt;Types::InsightSelector&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_insight_selectors({
+    #     trail_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trail_arn #=> String
+    #   resp.insight_selectors #=> Array
+    #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectors AWS API Documentation
+    #
+    # @overload get_insight_selectors(params = {})
+    # @param [Hash] params ({})
+    def get_insight_selectors(params = {}, options = {})
+      req = build_request(:get_insight_selectors, params)
       req.send_request(options)
     end
 
@@ -674,6 +737,7 @@ module Aws::CloudTrail
     #   resp.trail.cloud_watch_logs_role_arn #=> String
     #   resp.trail.kms_key_id #=> String
     #   resp.trail.has_custom_event_selectors #=> Boolean
+    #   resp.trail.has_insight_selectors #=> Boolean
     #   resp.trail.is_organization_trail #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrail AWS API Documentation
@@ -855,6 +919,11 @@ module Aws::CloudTrail
     # Lists trails that are in the current account.
     #
     # @option params [String] :next_token
+    #   The token to use to get the next page of results after a previous API
+    #   call. This token must be passed in with the same parameters that were
+    #   specified in the the original call. For example, if the original call
+    #   specified an AttributeKey of 'Username' with a value of 'root',
+    #   the call with NextToken should include those same parameters.
     #
     # @return [Types::ListTrailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -884,9 +953,10 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Looks up [management events][1] captured by CloudTrail. You can look
-    # up events that occurred in a region within the last 90 days. Lookup
-    # supports the following attributes:
+    # Looks up [management events][1] or [CloudTrail Insights events][2]
+    # that are captured by CloudTrail. You can look up events that occurred
+    # in a region within the last 90 days. Lookup supports the following
+    # attributes for management events:
     #
     # * AWS access key
     #
@@ -904,20 +974,25 @@ module Aws::CloudTrail
     #
     # * User name
     #
+    # Lookup supports the following attributes for Insights events:
+    #
+    # * Event ID
+    #
+    # * Event name
+    #
+    # * Event source
+    #
     # All attributes are optional. The default number of results returned is
     # 50, with a maximum of 50 possible. The response includes a token that
     # you can use to get the next page of results.
     #
-    # The rate of lookup requests is limited to one per second per account.
+    # The rate of lookup requests is limited to two per second per account.
     # If this limit is exceeded, a throttling error occurs.
-    #
-    #  Events that occurred during the selected time range will not be
-    # available for lookup if CloudTrail logging was not enabled when the
-    # events occurred.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events
     #
     # @option params [Array<Types::LookupAttribute>] :lookup_attributes
     #   Contains a list of lookup attributes. Currently the list can contain
@@ -932,6 +1007,12 @@ module Aws::CloudTrail
     #   Specifies that only events that occur before or at the specified time
     #   are returned. If the specified end time is before the specified start
     #   time, an error is returned.
+    #
+    # @option params [String] :event_category
+    #   Specifies the event category. If you do not specify an event category,
+    #   events of the category are not returned in the response. For example,
+    #   if you do not specify `insight` as the value of `EventCategory`, no
+    #   Insights events are returned.
     #
     # @option params [Integer] :max_results
     #   The number of events to return. Possible values are 1 through 50. The
@@ -960,6 +1041,7 @@ module Aws::CloudTrail
     #     ],
     #     start_time: Time.now,
     #     end_time: Time.now,
+    #     event_category: "insight", # accepts insight
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -1073,6 +1155,7 @@ module Aws::CloudTrail
     #             values: ["String"],
     #           },
     #         ],
+    #         exclude_management_event_sources: ["String"],
     #       },
     #     ],
     #   })
@@ -1087,6 +1170,8 @@ module Aws::CloudTrail
     #   resp.event_selectors[0].data_resources[0].type #=> String
     #   resp.event_selectors[0].data_resources[0].values #=> Array
     #   resp.event_selectors[0].data_resources[0].values[0] #=> String
+    #   resp.event_selectors[0].exclude_management_event_sources #=> Array
+    #   resp.event_selectors[0].exclude_management_event_sources[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectors AWS API Documentation
     #
@@ -1094,6 +1179,52 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def put_event_selectors(params = {}, options = {})
       req = build_request(:put_event_selectors, params)
+      req.send_request(options)
+    end
+
+    # Lets you enable Insights event logging by specifying the Insights
+    # selectors that you want to enable on an existing trail. You also use
+    # `PutInsightSelectors` to turn off Insights event logging, by passing
+    # an empty list of insight types. In this release, only
+    # `ApiCallRateInsight` is supported as an Insights selector.
+    #
+    # @option params [required, String] :trail_name
+    #   The name of the CloudTrail trail for which you want to change or add
+    #   Insights selectors.
+    #
+    # @option params [required, Array<Types::InsightSelector>] :insight_selectors
+    #   A JSON string that contains the insight types you want to log on a
+    #   trail. In this release, only `ApiCallRateInsight` is supported as an
+    #   insight type.
+    #
+    # @return [Types::PutInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutInsightSelectorsResponse#trail_arn #trail_arn} => String
+    #   * {Types::PutInsightSelectorsResponse#insight_selectors #insight_selectors} => Array&lt;Types::InsightSelector&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_insight_selectors({
+    #     trail_name: "String", # required
+    #     insight_selectors: [ # required
+    #       {
+    #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trail_arn #=> String
+    #   resp.insight_selectors #=> Array
+    #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectors AWS API Documentation
+    #
+    # @overload put_insight_selectors(params = {})
+    # @param [Hash] params ({})
+    def put_insight_selectors(params = {}, options = {})
+      req = build_request(:put_insight_selectors, params)
       req.send_request(options)
     end
 
@@ -1381,7 +1512,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -124,6 +124,7 @@ module Aws::FSx
     UpdateFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemWindowsConfiguration')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     WeeklyTime = Shapes::StringShape.new(name: 'WeeklyTime')
+    WindowsDeploymentType = Shapes::StringShape.new(name: 'WindowsDeploymentType')
     WindowsFileSystemConfiguration = Shapes::StructureShape.new(name: 'WindowsFileSystemConfiguration')
 
     ActiveDirectoryBackupAttributes.add_member(:domain_name, Shapes::ShapeRef.new(shape: ActiveDirectoryFullyQualifiedName, location_name: "DomainName"))
@@ -209,6 +210,8 @@ module Aws::FSx
 
     CreateFileSystemWindowsConfiguration.add_member(:active_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ActiveDirectoryId"))
     CreateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfiguration, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    CreateFileSystemWindowsConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: WindowsDeploymentType, location_name: "DeploymentType"))
+    CreateFileSystemWindowsConfiguration.add_member(:preferred_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
     CreateFileSystemWindowsConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, required: true, location_name: "ThroughputCapacity"))
     CreateFileSystemWindowsConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     CreateFileSystemWindowsConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
@@ -425,6 +428,10 @@ module Aws::FSx
 
     WindowsFileSystemConfiguration.add_member(:active_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ActiveDirectoryId"))
     WindowsFileSystemConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryAttributes, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    WindowsFileSystemConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: WindowsDeploymentType, location_name: "DeploymentType"))
+    WindowsFileSystemConfiguration.add_member(:remote_administration_endpoint, Shapes::ShapeRef.new(shape: DNSName, location_name: "RemoteAdministrationEndpoint"))
+    WindowsFileSystemConfiguration.add_member(:preferred_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
+    WindowsFileSystemConfiguration.add_member(:preferred_file_server_ip, Shapes::ShapeRef.new(shape: IpAddress, location_name: "PreferredFileServerIp"))
     WindowsFileSystemConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
     WindowsFileSystemConfiguration.add_member(:maintenance_operations_in_progress, Shapes::ShapeRef.new(shape: FileSystemMaintenanceOperations, location_name: "MaintenanceOperationsInProgress"))
     WindowsFileSystemConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))

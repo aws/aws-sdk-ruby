@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2019-11-20)
+------------------
+
+* Feature - Update to configure task to run periodically on a schedule
+
 1.15.0 (2019-10-23)
 ------------------
 

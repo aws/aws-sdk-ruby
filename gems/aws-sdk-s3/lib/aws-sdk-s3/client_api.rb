@@ -313,11 +313,14 @@ module Aws::S3
     MetadataEntry = Shapes::StructureShape.new(name: 'MetadataEntry')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetadataValue = Shapes::StringShape.new(name: 'MetadataValue')
+    Metrics = Shapes::StructureShape.new(name: 'Metrics')
     MetricsAndOperator = Shapes::StructureShape.new(name: 'MetricsAndOperator')
     MetricsConfiguration = Shapes::StructureShape.new(name: 'MetricsConfiguration')
     MetricsConfigurationList = Shapes::ListShape.new(name: 'MetricsConfigurationList', flattened: true)
     MetricsFilter = Shapes::StructureShape.new(name: 'MetricsFilter')
     MetricsId = Shapes::StringShape.new(name: 'MetricsId')
+    MetricsStatus = Shapes::StringShape.new(name: 'MetricsStatus')
+    Minutes = Shapes::IntegerShape.new(name: 'Minutes')
     MissingMeta = Shapes::IntegerShape.new(name: 'MissingMeta')
     MultipartUpload = Shapes::StructureShape.new(name: 'MultipartUpload')
     MultipartUploadId = Shapes::StringShape.new(name: 'MultipartUploadId')
@@ -436,6 +439,9 @@ module Aws::S3
     ReplicationRuleStatus = Shapes::StringShape.new(name: 'ReplicationRuleStatus')
     ReplicationRules = Shapes::ListShape.new(name: 'ReplicationRules', flattened: true)
     ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
+    ReplicationTime = Shapes::StructureShape.new(name: 'ReplicationTime')
+    ReplicationTimeStatus = Shapes::StringShape.new(name: 'ReplicationTimeStatus')
+    ReplicationTimeValue = Shapes::StructureShape.new(name: 'ReplicationTimeValue')
     RequestCharged = Shapes::StringShape.new(name: 'RequestCharged')
     RequestPayer = Shapes::StringShape.new(name: 'RequestPayer')
     RequestPaymentConfiguration = Shapes::StructureShape.new(name: 'RequestPaymentConfiguration')
@@ -894,6 +900,8 @@ module Aws::S3
     Destination.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
     Destination.add_member(:access_control_translation, Shapes::ShapeRef.new(shape: AccessControlTranslation, location_name: "AccessControlTranslation"))
     Destination.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    Destination.add_member(:replication_time, Shapes::ShapeRef.new(shape: ReplicationTime, location_name: "ReplicationTime"))
+    Destination.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
     Destination.struct_class = Types::Destination
 
     Encryption.add_member(:encryption_type, Shapes::ShapeRef.new(shape: ServerSideEncryption, required: true, location_name: "EncryptionType"))
@@ -1507,6 +1515,10 @@ module Aws::S3
     MetadataEntry.add_member(:value, Shapes::ShapeRef.new(shape: MetadataValue, location_name: "Value"))
     MetadataEntry.struct_class = Types::MetadataEntry
 
+    Metrics.add_member(:status, Shapes::ShapeRef.new(shape: MetricsStatus, required: true, location_name: "Status"))
+    Metrics.add_member(:event_threshold, Shapes::ShapeRef.new(shape: ReplicationTimeValue, required: true, location_name: "EventThreshold"))
+    Metrics.struct_class = Types::Metrics
+
     MetricsAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     MetricsAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened"=>true}))
     MetricsAndOperator.struct_class = Types::MetricsAndOperator
@@ -1941,6 +1953,13 @@ module Aws::S3
     ReplicationRuleFilter.struct_class = Types::ReplicationRuleFilter
 
     ReplicationRules.member = Shapes::ShapeRef.new(shape: ReplicationRule)
+
+    ReplicationTime.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationTimeStatus, required: true, location_name: "Status"))
+    ReplicationTime.add_member(:time, Shapes::ShapeRef.new(shape: ReplicationTimeValue, required: true, location_name: "Time"))
+    ReplicationTime.struct_class = Types::ReplicationTime
+
+    ReplicationTimeValue.add_member(:minutes, Shapes::ShapeRef.new(shape: Minutes, location_name: "Minutes"))
+    ReplicationTimeValue.struct_class = Types::ReplicationTimeValue
 
     RequestPaymentConfiguration.add_member(:payer, Shapes::ShapeRef.new(shape: Payer, required: true, location_name: "Payer"))
     RequestPaymentConfiguration.struct_class = Types::RequestPaymentConfiguration

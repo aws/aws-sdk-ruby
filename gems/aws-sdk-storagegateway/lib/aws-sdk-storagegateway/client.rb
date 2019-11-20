@@ -1954,7 +1954,8 @@ module Aws::StorageGateway
     # the upload and download bandwidth rate limit, or you can delete both.
     # If you delete only one of the limits, the other limit remains
     # unchanged. To specify which gateway to work with, use the Amazon
-    # Resource Name (ARN) of the gateway in your request.
+    # Resource Name (ARN) of the gateway in your request. This operation is
+    # supported for the stored volume, cached volume and tape gateway types.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2007,7 +2008,8 @@ module Aws::StorageGateway
     end
 
     # Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials
-    # for a specified iSCSI target and initiator pair.
+    # for a specified iSCSI target and initiator pair. This operation is
+    # supported in volume and tape gateway types.
     #
     # @option params [required, String] :target_arn
     #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
@@ -2378,9 +2380,46 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Returns information about the most recent High Availability monitoring
+    # test that was performed on the host in a cluster. If a test isn't
+    # performed, the status and start time in the response would be null.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #
+    # @return [Types::DescribeAvailabilityMonitorTestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAvailabilityMonitorTestOutput#gateway_arn #gateway_arn} => String
+    #   * {Types::DescribeAvailabilityMonitorTestOutput#status #status} => String
+    #   * {Types::DescribeAvailabilityMonitorTestOutput#start_time #start_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_availability_monitor_test({
+    #     gateway_arn: "GatewayARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #   resp.status #=> String, one of "COMPLETE", "FAILED", "PENDING"
+    #   resp.start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeAvailabilityMonitorTest AWS API Documentation
+    #
+    # @overload describe_availability_monitor_test(params = {})
+    # @param [Hash] params ({})
+    def describe_availability_monitor_test(params = {}, options = {})
+      req = build_request(:describe_availability_monitor_test, params)
+      req.send_request(options)
+    end
+
     # Returns the bandwidth rate limits of a gateway. By default, these
     # limits are not set, which means no bandwidth rate limiting is in
-    # effect.
+    # effect. This operation is supported for the stored volume, cached
+    # volume and tape gateway types.'
     #
     # This operation only returns a value for a bandwidth rate limit only if
     # the limit is set. If no limits are set for the gateway, then this
@@ -2592,7 +2631,8 @@ module Aws::StorageGateway
 
     # Returns an array of Challenge-Handshake Authentication Protocol (CHAP)
     # credentials information for a specified iSCSI target, one for each
-    # target-initiator pair.
+    # target-initiator pair. This operation is supported in the volume and
+    # tape gateway types.
     #
     # @option params [required, String] :target_arn
     #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
@@ -2674,6 +2714,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeGatewayInformationOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeGatewayInformationOutput#vpc_endpoint #vpc_endpoint} => String
     #   * {Types::DescribeGatewayInformationOutput#cloud_watch_log_group_arn #cloud_watch_log_group_arn} => String
+    #   * {Types::DescribeGatewayInformationOutput#host_environment #host_environment} => String
     #
     #
     # @example Example: To describe metadata about the gateway
@@ -2729,6 +2770,7 @@ module Aws::StorageGateway
     #   resp.tags[0].value #=> String
     #   resp.vpc_endpoint #=> String
     #   resp.cloud_watch_log_group_arn #=> String
+    #   resp.host_environment #=> String, one of "VMWARE", "HYPER-V", "EC2", "OTHER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation AWS API Documentation
     #
@@ -2923,6 +2965,7 @@ module Aws::StorageGateway
     #
     #   * {Types::DescribeSMBSettingsOutput#gateway_arn #gateway_arn} => String
     #   * {Types::DescribeSMBSettingsOutput#domain_name #domain_name} => String
+    #   * {Types::DescribeSMBSettingsOutput#active_directory_status #active_directory_status} => String
     #   * {Types::DescribeSMBSettingsOutput#smb_guest_password_set #smb_guest_password_set} => Boolean
     #   * {Types::DescribeSMBSettingsOutput#smb_security_strategy #smb_security_strategy} => String
     #
@@ -2936,6 +2979,7 @@ module Aws::StorageGateway
     #
     #   resp.gateway_arn #=> String
     #   resp.domain_name #=> String
+    #   resp.active_directory_status #=> String, one of "ACCESS_DENIED", "DETACHED", "JOINED", "JOINING", "NETWORK_ERROR", "TIMEOUT", "UNKNOWN_ERROR"
     #   resp.smb_guest_password_set #=> Boolean
     #   resp.smb_security_strategy #=> String, one of "ClientSpecified", "MandatorySigning", "MandatoryEncryption"
     #
@@ -3656,7 +3700,8 @@ module Aws::StorageGateway
     # enables you to recover your data from one gateway to a different
     # gateway without creating a snapshot. It also makes it easier to move
     # your volumes from an on-premises gateway to a gateway hosted on an
-    # Amazon EC2 instance.
+    # Amazon EC2 instance. This operation is only supported in the volume
+    # gateway type.
     #
     # @option params [required, String] :volume_arn
     #   The Amazon Resource Name (ARN) of the volume to detach from the
@@ -3767,9 +3812,16 @@ module Aws::StorageGateway
     #   server. If you need to specify the port number include it after the
     #   colon (“:”). For example, `mydc.mydomain.com:389`.
     #
+    # @option params [Integer] :timeout_in_seconds
+    #   Specifies the time in seconds, in which the `JoinDomain` operation
+    #   must complete. The default is 20 seconds.
+    #
     # @option params [required, String] :user_name
     #   Sets the user name of user who has permission to add the gateway to
-    #   the Active Directory domain.
+    #   the Active Directory domain. The domain user account should be enabled
+    #   to join computers to the domain. For example, you can use the domain
+    #   administrator account or an account with delegated permissions to join
+    #   computers to the domain.
     #
     # @option params [required, String] :password
     #   Sets the password of the user who has permission to add the gateway to
@@ -3778,6 +3830,7 @@ module Aws::StorageGateway
     # @return [Types::JoinDomainOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::JoinDomainOutput#gateway_arn #gateway_arn} => String
+    #   * {Types::JoinDomainOutput#active_directory_status #active_directory_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3786,6 +3839,7 @@ module Aws::StorageGateway
     #     domain_name: "DomainName", # required
     #     organizational_unit: "OrganizationalUnit",
     #     domain_controllers: ["Host"],
+    #     timeout_in_seconds: 1,
     #     user_name: "DomainUserName", # required
     #     password: "DomainUserPassword", # required
     #   })
@@ -3793,6 +3847,7 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.gateway_arn #=> String
+    #   resp.active_directory_status #=> String, one of "ACCESS_DENIED", "DETACHED", "JOINED", "JOINING", "NETWORK_ERROR", "TIMEOUT", "UNKNOWN_ERROR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomain AWS API Documentation
     #
@@ -4019,8 +4074,7 @@ module Aws::StorageGateway
     end
 
     # Lists the tags that have been added to the specified resource. This
-    # operation is only supported in the cached volume, stored volume and
-    # tape gateway type.
+    # operation is supported in storage gateways of all types.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which you want to
@@ -4406,6 +4460,20 @@ module Aws::StorageGateway
     # You can subscribe to be notified through an CloudWatch event when your
     # `RefreshCache` operation completes.
     #
+    # Throttle limit: This API is asynchronous so the gateway will accept no
+    # more than two refreshes at any time. We recommend using the
+    # refresh-complete CloudWatch event notification before issuing
+    # additional requests. For more information, see [Getting Notified About
+    # File Operations][1].
+    #
+    # If you invoke the RefreshCache API when two requests are already being
+    # processed, any new request will cause an
+    # `InvalidGatewayRequestException` error because too many requests were
+    # sent to the server.
+    #
+    # For more information, see
+    # "https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification".
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification
@@ -4458,8 +4526,7 @@ module Aws::StorageGateway
     end
 
     # Removes one or more tags from the specified resource. This operation
-    # is only supported in the cached volume, stored volume and tape gateway
-    # types.
+    # is supported in storage gateways of all types.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource you want to remove the
@@ -4853,6 +4920,46 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Start a test that verifies that the specified gateway is configured
+    # for High Availability monitoring in your host environment. This
+    # request only initiates the test and that a successful response only
+    # indicates that the test was started. It doesn't indicate that the
+    # test passed. For the status of the test, invoke the
+    # `DescribeAvailabilityMonitorTest` API.
+    #
+    # <note markdown="1"> Starting this test will cause your gateway to go offline for a brief
+    # period.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #
+    # @return [Types::StartAvailabilityMonitorTestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAvailabilityMonitorTestOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_availability_monitor_test({
+    #     gateway_arn: "GatewayARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartAvailabilityMonitorTest AWS API Documentation
+    #
+    # @overload start_availability_monitor_test(params = {})
+    # @param [Hash] params ({})
+    def start_availability_monitor_test(params = {}, options = {})
+      req = build_request(:start_availability_monitor_test, params)
+      req.send_request(options)
+    end
+
     # Starts a gateway that you previously shut down (see ShutdownGateway).
     # After the gateway starts, you can then make other API calls, your
     # applications can read from or write to the gateway's storage volumes
@@ -4914,7 +5021,8 @@ module Aws::StorageGateway
     # Updates the bandwidth rate limits of a gateway. You can update both
     # the upload and download bandwidth rate limit or specify only one of
     # the two. If you don't set a bandwidth rate limit, the existing rate
-    # limit remains.
+    # limit remains. This operation is supported for the stored volume,
+    # cached volume and tape gateway types.'
     #
     # By default, a gateway's bandwidth rate limits are not set. If you
     # don't set any limit, the gateway does not have any limitations on its
@@ -4980,6 +5088,7 @@ module Aws::StorageGateway
     # Updates the Challenge-Handshake Authentication Protocol (CHAP)
     # credentials for a specified iSCSI target. By default, a gateway does
     # not have CHAP enabled; however, for added security, you might use it.
+    # This operation is supported in the volume and tape gateway types.
     #
     # When you update CHAP credentials, all existing connections on the
     # target are closed and initiators must reconnect with the new
@@ -5742,7 +5851,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

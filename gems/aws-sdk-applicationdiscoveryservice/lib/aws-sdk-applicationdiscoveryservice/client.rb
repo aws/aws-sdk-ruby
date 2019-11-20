@@ -628,7 +628,7 @@ module Aws::ApplicationDiscoveryService
     # [1]: https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html
     #
     # @option params [Array<String>] :export_ids
-    #   A list of continuous export ids to search for.
+    #   A list of continuous export IDs to search for.
     #
     # @option params [Integer] :max_results
     #   A number between 1 and 100 specifying the maximum number of continuous
@@ -1417,7 +1417,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

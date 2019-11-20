@@ -1309,8 +1309,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for AttachVolume.
-    #
     # @note When making an API call, you may pass AttachVolumeRequest
     #   data as a hash:
     #
@@ -3808,8 +3806,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CopySnapshot.
-    #
     # @note When making an API call, you may pass CopySnapshotRequest
     #   data as a hash:
     #
@@ -3921,6 +3917,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
+    #   The tags to apply to the new snapshot.
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] dry_run
@@ -3945,13 +3942,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CopySnapshot.
-    #
     # @!attribute [rw] snapshot_id
     #   The ID of the new snapshot.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   Any tags applied to the new snapshot.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshotResult AWS API Documentation
@@ -6535,8 +6531,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateSnapshot.
-    #
     # @note When making an API call, you may pass CreateSnapshotRequest
     #   data as a hash:
     #
@@ -6625,10 +6619,10 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action
-    #   without actually making the request. Provides an error response. If
-    #   you have the required permissions, the error response is
-    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] copy_tags_from_source
@@ -7603,8 +7597,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateVolume.
-    #
     # @note When making an API call, you may pass CreateVolumeRequest
     #   data as a hash:
     #
@@ -9379,8 +9371,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteSnapshot.
-    #
     # @note When making an API call, you may pass DeleteSnapshotRequest
     #   data as a hash:
     #
@@ -9818,8 +9808,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteVolume.
-    #
     # @note When making an API call, you may pass DeleteVolumeRequest
     #   data as a hash:
     #
@@ -11512,6 +11500,155 @@ module Aws::EC2
     #
     class DescribeExportTasksResult < Struct.new(
       :export_tasks)
+      include Aws::Structure
+    end
+
+    # Describes fast snapshot restores for a snapshot.
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of fast snapshot restores.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transition_reason
+    #   The reason for the state transition. The possible values are as
+    #   follows:
+    #
+    #   * `Client.UserInitiated` - The state successfully transitioned to
+    #     `enabling` or `disabling`.
+    #
+    #   * `Client.UserInitiated - Lifecycle state transition` - The state
+    #     successfully transitioned to `optimizing`, `enabled`, or
+    #     `disabled`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_alias
+    #   The alias of the snapshot owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabling_time
+    #   The time at which fast snapshot restores entered the `enabling`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] optimizing_time
+    #   The time at which fast snapshot restores entered the `optimizing`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] enabled_time
+    #   The time at which fast snapshot restores entered the `enabled`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] disabling_time
+    #   The time at which fast snapshot restores entered the `disabling`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] disabled_time
+    #   The time at which fast snapshot restores entered the `disabled`
+    #   state.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastSnapshotRestoreSuccessItem AWS API Documentation
+    #
+    class DescribeFastSnapshotRestoreSuccessItem < Struct.new(
+      :snapshot_id,
+      :availability_zone,
+      :state,
+      :state_transition_reason,
+      :owner_id,
+      :owner_alias,
+      :enabling_time,
+      :optimizing_time,
+      :enabled_time,
+      :disabling_time,
+      :disabled_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFastSnapshotRestoresRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   The filters. The possible values are:
+    #
+    #   * `availability-zone`\: The Availability Zone of the snapshot.
+    #
+    #   * `owner-id`\: The ID of the AWS account that owns the snapshot.
+    #
+    #   * `snapshot-id`\: The ID of the snapshot.
+    #
+    #   * `state`\: The state of fast snapshot restores for the snapshot
+    #     (`enabling` \| `optimizing` \| `enabled` \| `disabling` \|
+    #     `disabled`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastSnapshotRestoresRequest AWS API Documentation
+    #
+    class DescribeFastSnapshotRestoresRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fast_snapshot_restores
+    #   Information about the state of fast snapshot restores.
+    #   @return [Array<Types::DescribeFastSnapshotRestoreSuccessItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastSnapshotRestoresResult AWS API Documentation
+    #
+    class DescribeFastSnapshotRestoresResult < Struct.new(
+      :fast_snapshot_restores,
+      :next_token)
       include Aws::Structure
     end
 
@@ -15732,8 +15869,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeSnapshotAttribute.
-    #
     # @note When making an API call, you may pass DescribeSnapshotAttributeRequest
     #   data as a hash:
     #
@@ -15767,8 +15902,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeSnapshotAttribute.
-    #
     # @!attribute [rw] create_volume_permissions
     #   The users and groups that have the permissions for creating volumes
     #   from the snapshot.
@@ -17379,8 +17512,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeVolumeAttribute.
-    #
     # @note When making an API call, you may pass DescribeVolumeAttributeRequest
     #   data as a hash:
     #
@@ -17414,8 +17545,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeVolumeAttribute.
-    #
     # @!attribute [rw] auto_enable_io
     #   The state of `autoEnableIO` attribute.
     #   @return [Types::AttributeBooleanValue]
@@ -18974,8 +19103,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DetachVolume.
-    #
     # @note When making an API call, you may pass DetachVolumeRequest
     #   data as a hash:
     #
@@ -19171,6 +19298,191 @@ module Aws::EC2
     #
     class DisableEbsEncryptionByDefaultResult < Struct.new(
       :ebs_encryption_by_default)
+      include Aws::Structure
+    end
+
+    # Contains information about the errors that occurred when disabling
+    # fast snapshot restores.
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] fast_snapshot_restore_state_errors
+    #   The errors.
+    #   @return [Array<Types::DisableFastSnapshotRestoreStateErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastSnapshotRestoreErrorItem AWS API Documentation
+    #
+    class DisableFastSnapshotRestoreErrorItem < Struct.new(
+      :snapshot_id,
+      :fast_snapshot_restore_state_errors)
+      include Aws::Structure
+    end
+
+    # Describes an error that occurred when disabling fast snapshot
+    # restores.
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastSnapshotRestoreStateError AWS API Documentation
+    #
+    class DisableFastSnapshotRestoreStateError < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Contains information about an error that occurred when disabling fast
+    # snapshot restores.
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error.
+    #   @return [Types::DisableFastSnapshotRestoreStateError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastSnapshotRestoreStateErrorItem AWS API Documentation
+    #
+    class DisableFastSnapshotRestoreStateErrorItem < Struct.new(
+      :availability_zone,
+      :error)
+      include Aws::Structure
+    end
+
+    # Describes fast snapshot restores that were successfully disabled.
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of fast snapshot restores for the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transition_reason
+    #   The reason for the state transition. The possible values are as
+    #   follows:
+    #
+    #   * `Client.UserInitiated` - The state successfully transitioned to
+    #     `enabling` or `disabling`.
+    #
+    #   * `Client.UserInitiated - Lifecycle state transition` - The state
+    #     successfully transitioned to `optimizing`, `enabled`, or
+    #     `disabled`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_alias
+    #   The alias of the snapshot owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabling_time
+    #   The time at which fast snapshot restores entered the `enabling`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] optimizing_time
+    #   The time at which fast snapshot restores entered the `optimizing`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] enabled_time
+    #   The time at which fast snapshot restores entered the `enabled`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] disabling_time
+    #   The time at which fast snapshot restores entered the `disabling`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] disabled_time
+    #   The time at which fast snapshot restores entered the `disabled`
+    #   state.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastSnapshotRestoreSuccessItem AWS API Documentation
+    #
+    class DisableFastSnapshotRestoreSuccessItem < Struct.new(
+      :snapshot_id,
+      :availability_zone,
+      :state,
+      :state_transition_reason,
+      :owner_id,
+      :owner_alias,
+      :enabling_time,
+      :optimizing_time,
+      :enabled_time,
+      :disabling_time,
+      :disabled_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisableFastSnapshotRestoresRequest
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zones: ["String"], # required
+    #         source_snapshot_ids: ["String"], # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] availability_zones
+    #   One or more Availability Zones. For example, `us-east-2a`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_snapshot_ids
+    #   The IDs of one or more snapshots. For example,
+    #   `snap-1234567890abcdef0`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastSnapshotRestoresRequest AWS API Documentation
+    #
+    class DisableFastSnapshotRestoresRequest < Struct.new(
+      :availability_zones,
+      :source_snapshot_ids,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   Information about the snapshots for which fast snapshot restores
+    #   were successfully disabled.
+    #   @return [Array<Types::DisableFastSnapshotRestoreSuccessItem>]
+    #
+    # @!attribute [rw] unsuccessful
+    #   Information about the snapshots for which fast snapshot restores
+    #   could not be disabled.
+    #   @return [Array<Types::DisableFastSnapshotRestoreErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastSnapshotRestoresResult AWS API Documentation
+    #
+    class DisableFastSnapshotRestoresResult < Struct.new(
+      :successful,
+      :unsuccessful)
       include Aws::Structure
     end
 
@@ -20157,6 +20469,191 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains information about the errors that occurred when enabling fast
+    # snapshot restores.
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] fast_snapshot_restore_state_errors
+    #   The errors.
+    #   @return [Array<Types::EnableFastSnapshotRestoreStateErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastSnapshotRestoreErrorItem AWS API Documentation
+    #
+    class EnableFastSnapshotRestoreErrorItem < Struct.new(
+      :snapshot_id,
+      :fast_snapshot_restore_state_errors)
+      include Aws::Structure
+    end
+
+    # Describes an error that occurred when enabling fast snapshot restores.
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastSnapshotRestoreStateError AWS API Documentation
+    #
+    class EnableFastSnapshotRestoreStateError < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Contains information about an error that occurred when enabling fast
+    # snapshot restores.
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error.
+    #   @return [Types::EnableFastSnapshotRestoreStateError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastSnapshotRestoreStateErrorItem AWS API Documentation
+    #
+    class EnableFastSnapshotRestoreStateErrorItem < Struct.new(
+      :availability_zone,
+      :error)
+      include Aws::Structure
+    end
+
+    # Describes fast snapshot restores that were successfully enabled.
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of fast snapshot restores.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transition_reason
+    #   The reason for the state transition. The possible values are as
+    #   follows:
+    #
+    #   * `Client.UserInitiated` - The state successfully transitioned to
+    #     `enabling` or `disabling`.
+    #
+    #   * `Client.UserInitiated - Lifecycle state transition` - The state
+    #     successfully transitioned to `optimizing`, `enabled`, or
+    #     `disabled`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_alias
+    #   The alias of the snapshot owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabling_time
+    #   The time at which fast snapshot restores entered the `enabling`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] optimizing_time
+    #   The time at which fast snapshot restores entered the `optimizing`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] enabled_time
+    #   The time at which fast snapshot restores entered the `enabled`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] disabling_time
+    #   The time at which fast snapshot restores entered the `disabling`
+    #   state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] disabled_time
+    #   The time at which fast snapshot restores entered the `disabled`
+    #   state.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastSnapshotRestoreSuccessItem AWS API Documentation
+    #
+    class EnableFastSnapshotRestoreSuccessItem < Struct.new(
+      :snapshot_id,
+      :availability_zone,
+      :state,
+      :state_transition_reason,
+      :owner_id,
+      :owner_alias,
+      :enabling_time,
+      :optimizing_time,
+      :enabled_time,
+      :disabling_time,
+      :disabled_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableFastSnapshotRestoresRequest
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zones: ["String"], # required
+    #         source_snapshot_ids: ["String"], # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] availability_zones
+    #   One or more Availability Zones. For example, `us-east-2a`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_snapshot_ids
+    #   The IDs of one or more snapshots. For example,
+    #   `snap-1234567890abcdef0`. You can specify a snapshot that was shared
+    #   with you from another AWS account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastSnapshotRestoresRequest AWS API Documentation
+    #
+    class EnableFastSnapshotRestoresRequest < Struct.new(
+      :availability_zones,
+      :source_snapshot_ids,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   Information about the snapshots for which fast snapshot restores
+    #   were successfully enabled.
+    #   @return [Array<Types::EnableFastSnapshotRestoreSuccessItem>]
+    #
+    # @!attribute [rw] unsuccessful
+    #   Information about the snapshots for which fast snapshot restores
+    #   could not be enabled.
+    #   @return [Array<Types::EnableFastSnapshotRestoreErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastSnapshotRestoresResult AWS API Documentation
+    #
+    class EnableFastSnapshotRestoresResult < Struct.new(
+      :successful,
+      :unsuccessful)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableTransitGatewayRouteTablePropagationRequest
     #   data as a hash:
     #
@@ -20230,8 +20727,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for EnableVolumeIO.
-    #
     # @note When making an API call, you may pass EnableVolumeIORequest
     #   data as a hash:
     #
@@ -28548,8 +29043,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifySnapshotAttribute.
-    #
     # @note When making an API call, you may pass ModifySnapshotAttributeRequest
     #   data as a hash:
     #
@@ -29060,8 +29553,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyVolumeAttribute.
-    #
     # @note When making an API call, you may pass ModifyVolumeAttributeRequest
     #   data as a hash:
     #
@@ -34461,8 +34952,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ResetSnapshotAttribute.
-    #
     # @note When making an API call, you may pass ResetSnapshotAttributeRequest
     #   data as a hash:
     #
@@ -41026,6 +41515,11 @@ module Aws::EC2
     #   for Cold HDD, or `standard` for Magnetic volumes.
     #   @return [String]
     #
+    # @!attribute [rw] fast_restored
+    #   Indicates whether the volume was created using fast snapshot
+    #   restore.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Volume AWS API Documentation
     #
     class Volume < Struct.new(
@@ -41040,7 +41534,8 @@ module Aws::EC2
       :volume_id,
       :iops,
       :tags,
-      :volume_type)
+      :volume_type,
+      :fast_restored)
       include Aws::Structure
     end
 

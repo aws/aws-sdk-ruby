@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-11-20)
+------------------
+
+* Feature - DLM now supports Fast Snapshot Restore. You can enable Fast Restore on snapshots created by DLM, provide the AZs and the number of snapshots to be enabled with this capability.
+
 1.20.0 (2019-11-13)
 ------------------
 

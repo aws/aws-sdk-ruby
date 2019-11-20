@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2019-11-20)
+------------------
+
+* Feature - Amazon QuickSight now supports programmatic creation and management of data sources, data sets, dashboards and templates with new APIs. Templates hold dashboard metadata, and can be used to create copies connected to the same or different dataset as required. Also included in this release are APIs for SPICE ingestions, fine-grained access control over AWS resources using AWS Identity and Access Management (IAM) policies, as well AWS tagging. APIs are supported for both Standard and Enterprise Edition, with edition-specific support for specific functionality.
+
 1.13.0 (2019-10-23)
 ------------------
 

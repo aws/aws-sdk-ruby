@@ -414,6 +414,8 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.show_speaker_labels #=> Boolean
     #   resp.transcription_job.settings.max_speaker_labels #=> Integer
     #   resp.transcription_job.settings.channel_identification #=> Boolean
+    #   resp.transcription_job.settings.show_alternatives #=> Boolean
+    #   resp.transcription_job.settings.max_alternatives #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -682,6 +684,8 @@ module Aws::TranscribeService
     #       show_speaker_labels: false,
     #       max_speaker_labels: 1,
     #       channel_identification: false,
+    #       show_alternatives: false,
+    #       max_alternatives: 1,
     #     },
     #   })
     #
@@ -701,6 +705,8 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.show_speaker_labels #=> Boolean
     #   resp.transcription_job.settings.max_speaker_labels #=> Integer
     #   resp.transcription_job.settings.channel_identification #=> Boolean
+    #   resp.transcription_job.settings.show_alternatives #=> Boolean
+    #   resp.transcription_job.settings.max_alternatives #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -793,7 +799,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

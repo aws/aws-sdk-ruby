@@ -32,6 +32,7 @@ module Aws::TranscribeService
     ListTranscriptionJobsResponse = Shapes::StructureShape.new(name: 'ListTranscriptionJobsResponse')
     ListVocabulariesRequest = Shapes::StructureShape.new(name: 'ListVocabulariesRequest')
     ListVocabulariesResponse = Shapes::StructureShape.new(name: 'ListVocabulariesResponse')
+    MaxAlternatives = Shapes::IntegerShape.new(name: 'MaxAlternatives')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxSpeakers = Shapes::IntegerShape.new(name: 'MaxSpeakers')
     Media = Shapes::StructureShape.new(name: 'Media')
@@ -143,6 +144,8 @@ module Aws::TranscribeService
     Settings.add_member(:show_speaker_labels, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowSpeakerLabels"))
     Settings.add_member(:max_speaker_labels, Shapes::ShapeRef.new(shape: MaxSpeakers, location_name: "MaxSpeakerLabels"))
     Settings.add_member(:channel_identification, Shapes::ShapeRef.new(shape: Boolean, location_name: "ChannelIdentification"))
+    Settings.add_member(:show_alternatives, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowAlternatives"))
+    Settings.add_member(:max_alternatives, Shapes::ShapeRef.new(shape: MaxAlternatives, location_name: "MaxAlternatives"))
     Settings.struct_class = Types::Settings
 
     StartTranscriptionJobRequest.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "TranscriptionJobName"))

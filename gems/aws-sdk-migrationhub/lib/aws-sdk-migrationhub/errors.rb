@@ -42,6 +42,22 @@ module Aws::MigrationHub
 
     end
 
+    class HomeRegionNotSetException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MigrationHub::Types::HomeRegionNotSetException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class InternalServerError < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

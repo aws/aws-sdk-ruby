@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2019-11-20)
+------------------
+
+* Feature - Added support for CPU and memory task-level overrides on the RunTask and StartTask APIs.  Added location information to Tasks.
+
 1.52.0 (2019-10-23)
 ------------------
 

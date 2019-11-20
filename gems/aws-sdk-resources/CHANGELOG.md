@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.60.0 (2019-11-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-migrationhubconfig` gem.
+
 3.59.0 (2019-11-13)
 ------------------
 

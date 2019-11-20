@@ -179,7 +179,7 @@ module Aws::MediaStore
     #         container_name: "ContainerName", # required
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -204,7 +204,7 @@ module Aws::MediaStore
     #
     #
     #
-    #   [1]: https://aws.amazon.com/documentation/mediastore/tagging
+    #   [1]: https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CreateContainerInput AWS API Documentation
@@ -713,13 +713,13 @@ module Aws::MediaStore
     #
     #
     #
-    # [1]: https://aws.amazon.com/documentation/mediastore/tagging
+    # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
     #
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       }
     #
@@ -750,7 +750,7 @@ module Aws::MediaStore
     #         resource: "ContainerARN", # required
     #         tags: [ # required
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],

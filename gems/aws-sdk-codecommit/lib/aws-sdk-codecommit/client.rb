@@ -264,6 +264,85 @@ module Aws::CodeCommit
 
     # @!group API Operations
 
+    # Creates an association between an approval rule template and a
+    # specified repository. Then, the next time a pull request is created in
+    # the repository where the destination reference (if specified) matches
+    # the destination reference (branch) for the pull request, an approval
+    # rule that matches the template conditions is automatically created for
+    # that pull request. If no destination references are specified in the
+    # template, an approval rule that matches the template contents is
+    # created for all pull requests in that repository.
+    #
+    # @option params [required, String] :approval_rule_template_name
+    #   The name for the approval rule template.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that you want to associate with the
+    #   template.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_approval_rule_template_with_repository({
+    #     approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #     repository_name: "RepositoryName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/AssociateApprovalRuleTemplateWithRepository AWS API Documentation
+    #
+    # @overload associate_approval_rule_template_with_repository(params = {})
+    # @param [Hash] params ({})
+    def associate_approval_rule_template_with_repository(params = {}, options = {})
+      req = build_request(:associate_approval_rule_template_with_repository, params)
+      req.send_request(options)
+    end
+
+    # Creates an association between an approval rule template and one or
+    # more specified repositories.
+    #
+    # @option params [required, String] :approval_rule_template_name
+    #   The name of the template you want to associate with one or more
+    #   repositories.
+    #
+    # @option params [required, Array<String>] :repository_names
+    #   The names of the repositories you want to associate with the template.
+    #
+    #   <note markdown="1"> The length constraint limit is for each string in the array. The array
+    #   itself can be empty.
+    #
+    #    </note>
+    #
+    # @return [Types::BatchAssociateApprovalRuleTemplateWithRepositoriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAssociateApprovalRuleTemplateWithRepositoriesOutput#associated_repository_names #associated_repository_names} => Array&lt;String&gt;
+    #   * {Types::BatchAssociateApprovalRuleTemplateWithRepositoriesOutput#errors #errors} => Array&lt;Types::BatchAssociateApprovalRuleTemplateWithRepositoriesError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_associate_approval_rule_template_with_repositories({
+    #     approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #     repository_names: ["RepositoryName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associated_repository_names #=> Array
+    #   resp.associated_repository_names[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].repository_name #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchAssociateApprovalRuleTemplateWithRepositories AWS API Documentation
+    #
+    # @overload batch_associate_approval_rule_template_with_repositories(params = {})
+    # @param [Hash] params ({})
+    def batch_associate_approval_rule_template_with_repositories(params = {}, options = {})
+      req = build_request(:batch_associate_approval_rule_template_with_repositories, params)
+      req.send_request(options)
+    end
+
     # Returns information about one or more merge conflicts in the attempted
     # merge of two commit specifiers using the squash or three-way merge
     # strategy.
@@ -274,11 +353,11 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :destination_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :source_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :merge_option
     #   The merge option or strategy you want to use to merge the code.
@@ -295,20 +374,20 @@ module Aws::CodeCommit
     #
     # @option params [String] :conflict_detail_level
     #   The level of conflict detail to use. If unspecified, the default
-    #   FILE\_LEVEL is used, which will return a not mergeable result if the
-    #   same file has differences in both branches. If LINE\_LEVEL is
-    #   specified, a conflict will be considered not mergeable if the same
-    #   file in both branches has differences on the same line.
+    #   FILE\_LEVEL is used, which returns a not-mergeable result if the same
+    #   file has differences in both branches. If LINE\_LEVEL is specified, a
+    #   conflict is considered not mergeable if the same file in both branches
+    #   has differences on the same line.
     #
     # @option params [String] :conflict_resolution_strategy
     #   Specifies which branch to use when resolving conflicts, or whether to
     #   attempt automatically merging two versions of a file. The default is
     #   NONE, which requires any conflicts to be resolved manually before the
-    #   merge operation will be successful.
+    #   merge operation is successful.
     #
     # @option params [String] :next_token
-    #   An enumeration token that when provided in a request, returns the next
-    #   batch of the results.
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
     #
     # @return [Types::BatchDescribeMergeConflictsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -385,14 +464,60 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Removes the association between an approval rule template and one or
+    # more specified repositories.
+    #
+    # @option params [required, String] :approval_rule_template_name
+    #   The name of the template that you want to disassociate from one or
+    #   more repositories.
+    #
+    # @option params [required, Array<String>] :repository_names
+    #   The repository names that you want to disassociate from the approval
+    #   rule template.
+    #
+    #   <note markdown="1"> The length constraint limit is for each string in the array. The array
+    #   itself can be empty.
+    #
+    #    </note>
+    #
+    # @return [Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput#disassociated_repository_names #disassociated_repository_names} => Array&lt;String&gt;
+    #   * {Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput#errors #errors} => Array&lt;Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_approval_rule_template_from_repositories({
+    #     approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #     repository_names: ["RepositoryName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.disassociated_repository_names #=> Array
+    #   resp.disassociated_repository_names[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].repository_name #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchDisassociateApprovalRuleTemplateFromRepositories AWS API Documentation
+    #
+    # @overload batch_disassociate_approval_rule_template_from_repositories(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_approval_rule_template_from_repositories(params = {}, options = {})
+      req = build_request(:batch_disassociate_approval_rule_template_from_repositories, params)
+      req.send_request(options)
+    end
+
     # Returns information about the contents of one or more commits in a
     # repository.
     #
     # @option params [required, Array<String>] :commit_ids
     #   The full commit IDs of the commits to get information about.
     #
-    #   <note markdown="1"> You must supply the full SHAs of each commit. You cannot use shortened
-    #   SHAs.
+    #   <note markdown="1"> You must supply the full SHA IDs of each commit. You cannot use
+    #   shortened SHA IDs.
     #
     #    </note>
     #
@@ -444,15 +569,20 @@ module Aws::CodeCommit
     #
     # <note markdown="1"> The description field for a repository accepts all HTML characters and
     # all valid Unicode characters. Applications that do not HTML-encode the
-    # description and display it in a web page could expose users to
+    # description and display it in a webpage can expose users to
     # potentially malicious code. Make sure that you HTML-encode the
     # description field in any application that uses this API to display the
-    # repository description on a web page.
+    # repository description on a webpage.
     #
     #  </note>
     #
     # @option params [required, Array<String>] :repository_names
     #   The names of the repositories to get information about.
+    #
+    #   <note markdown="1"> The length constraint limit is for each string in the array. The array
+    #   itself can be empty.
+    #
+    #    </note>
     #
     # @return [Types::BatchGetRepositoriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -490,8 +620,98 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Creates a new branch in a repository and points the branch to a
-    # commit.
+    # Creates a template for approval rules that can then be associated with
+    # one or more repositories in your AWS account. When you associate a
+    # template with a repository, AWS CodeCommit creates an approval rule
+    # that matches the conditions of the template for all pull requests that
+    # meet the conditions of the template. For more information, see
+    # AssociateApprovalRuleTemplateWithRepository.
+    #
+    # @option params [required, String] :approval_rule_template_name
+    #   The name of the approval rule template. Provide descriptive names,
+    #   because this name is applied to the approval rules created
+    #   automatically in associated repositories.
+    #
+    # @option params [required, String] :approval_rule_template_content
+    #   The content of the approval rule that is created on pull requests in
+    #   associated repositories. If you specify one or more destination
+    #   references (branches), approval rules are created in an associated
+    #   repository only if their destination references (branches) match those
+    #   specified in the template.
+    #
+    #   <note markdown="1"> When you create the content of the approval rule template, you can
+    #   specify approvers in an approval pool in one of two ways:
+    #
+    #    * **CodeCommitApprovers**\: This option only requires an AWS account
+    #     and a resource. It can be used for both IAM users and federated
+    #     access users whose name matches the provided resource name. This is
+    #     a very powerful option that offers a great deal of flexibility. For
+    #     example, if you specify the AWS account *123456789012* and
+    #     *Mary\_Major*, all of the following are counted as approvals coming
+    #     from that user:
+    #
+    #     * An IAM user in the account
+    #       (arn:aws:iam::*123456789012*\:user/*Mary\_Major*)
+    #
+    #     * A federated user identified in IAM as Mary\_Major
+    #       (arn:aws:sts::*123456789012*\:federated-user/*Mary\_Major*)
+    #
+    #     This option does not recognize an active session of someone assuming
+    #     the role of CodeCommitReview with a role session name of
+    #     *Mary\_Major*
+    #     (arn:aws:sts::*123456789012*\:assumed-role/CodeCommitReview/*Mary\_Major*)
+    #     unless you include a wildcard (*Mary\_Major).
+    #
+    #   * **Fully qualified ARN**\: This option allows you to specify the
+    #     fully qualified Amazon Resource Name (ARN) of the IAM user or role.
+    #
+    #    For more information about IAM ARNs, wildcards, and formats, see [IAM
+    #   Identifiers][1] in the *IAM User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #
+    # @option params [String] :approval_rule_template_description
+    #   The description of the approval rule template. Consider providing a
+    #   description that explains what this template does and when it might be
+    #   appropriate to associate it with repositories.
+    #
+    # @return [Types::CreateApprovalRuleTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApprovalRuleTemplateOutput#approval_rule_template #approval_rule_template} => Types::ApprovalRuleTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_approval_rule_template({
+    #     approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #     approval_rule_template_content: "ApprovalRuleTemplateContent", # required
+    #     approval_rule_template_description: "ApprovalRuleTemplateDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule_template.approval_rule_template_id #=> String
+    #   resp.approval_rule_template.approval_rule_template_name #=> String
+    #   resp.approval_rule_template.approval_rule_template_description #=> String
+    #   resp.approval_rule_template.approval_rule_template_content #=> String
+    #   resp.approval_rule_template.rule_content_sha_256 #=> String
+    #   resp.approval_rule_template.last_modified_date #=> Time
+    #   resp.approval_rule_template.creation_date #=> Time
+    #   resp.approval_rule_template.last_modified_user #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateApprovalRuleTemplate AWS API Documentation
+    #
+    # @overload create_approval_rule_template(params = {})
+    # @param [Hash] params ({})
+    def create_approval_rule_template(params = {}, options = {})
+      req = build_request(:create_approval_rule_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a branch in a repository and points the branch to a commit.
     #
     # <note markdown="1"> Calling the create branch operation does not set a repository's
     # default branch. To do this, call the update default branch operation.
@@ -529,39 +749,38 @@ module Aws::CodeCommit
     # Creates a commit for a repository on the tip of a specified branch.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository where you will create the commit.
+    #   The name of the repository where you create the commit.
     #
     # @option params [required, String] :branch_name
-    #   The name of the branch where you will create the commit.
+    #   The name of the branch where you create the commit.
     #
     # @option params [String] :parent_commit_id
-    #   The ID of the commit that is the parent of the commit you will create.
-    #   If this is an empty repository, this is not required.
+    #   The ID of the commit that is the parent of the commit you create. Not
+    #   required if this is an empty repository.
     #
     # @option params [String] :author_name
-    #   The name of the author who created the commit. This information will
-    #   be used as both the author and committer for the commit.
+    #   The name of the author who created the commit. This information is
+    #   used as both the author and committer for the commit.
     #
     # @option params [String] :email
     #   The email address of the person who created the commit.
     #
     # @option params [String] :commit_message
-    #   The commit message you want to include as part of creating the commit.
-    #   Commit messages are limited to 256 KB. If no message is specified, a
-    #   default message will be used.
+    #   The commit message you want to include in the commit. Commit messages
+    #   are limited to 256 KB. If no message is specified, a default message
+    #   is used.
     #
     # @option params [Boolean] :keep_empty_folders
     #   If the commit contains deletions, whether to keep a folder or folder
-    #   structure if the changes leave the folders empty. If this is specified
-    #   as true, a .gitkeep file will be created for empty folders. The
-    #   default is false.
+    #   structure if the changes leave the folders empty. If true, a ..gitkeep
+    #   file is created for empty folders. The default is false.
     #
     # @option params [Array<Types::PutFileEntry>] :put_files
     #   The files to add or update in this commit.
     #
     # @option params [Array<Types::DeleteFileEntry>] :delete_files
-    #   The files to delete in this commit. These files will still exist in
-    #   prior commits.
+    #   The files to delete in this commit. These files still exist in earlier
+    #   commits.
     #
     # @option params [Array<Types::SetFileModeEntry>] :set_file_modes
     #   The file modes to update for files in this commit.
@@ -637,28 +856,27 @@ module Aws::CodeCommit
     # Creates a pull request in the specified repository.
     #
     # @option params [required, String] :title
-    #   The title of the pull request. This title will be used to identify the
-    #   pull request to other users in the repository.
+    #   The title of the pull request. This title is used to identify the pull
+    #   request to other users in the repository.
     #
     # @option params [String] :description
     #   A description of the pull request.
     #
     # @option params [required, Array<Types::Target>] :targets
     #   The targets for the pull request, including the source of the code to
-    #   be reviewed (the source branch), and the destination where the creator
+    #   be reviewed (the source branch) and the destination where the creator
     #   of the pull request intends the code to be merged after the pull
     #   request is closed (the destination branch).
     #
     # @option params [String] :client_request_token
-    #   A unique, client-generated idempotency token that when provided in a
+    #   A unique, client-generated idempotency token that, when provided in a
     #   request, ensures the request cannot be repeated with a changed
     #   parameter. If a request is received with the same parameters and a
-    #   token is included, the request will return information about the
-    #   initial request that used that token.
+    #   token is included, the request returns information about the initial
+    #   request that used that token.
     #
-    #   <note markdown="1"> The AWS SDKs prepopulate client request tokens. If using an AWS SDK,
-    #   you do not have to generate an idempotency token, as this will be done
-    #   for you.
+    #   <note markdown="1"> The AWS SDKs prepopulate client request tokens. If you are using an
+    #   AWS SDK, an idempotency token is created for you.
     #
     #    </note>
     #
@@ -705,6 +923,17 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
+    #   resp.pull_request.revision_id #=> String
+    #   resp.pull_request.approval_rules #=> Array
+    #   resp.pull_request.approval_rules[0].approval_rule_id #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_name #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_content #=> String
+    #   resp.pull_request.approval_rules[0].rule_content_sha_256 #=> String
+    #   resp.pull_request.approval_rules[0].last_modified_date #=> Time
+    #   resp.pull_request.approval_rules[0].creation_date #=> Time
+    #   resp.pull_request.approval_rules[0].last_modified_user #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_id #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequest AWS API Documentation
     #
@@ -715,16 +944,99 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Creates an approval rule for a pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request for which you want to
+    #   create the approval rule.
+    #
+    # @option params [required, String] :approval_rule_name
+    #   The name for the approval rule.
+    #
+    # @option params [required, String] :approval_rule_content
+    #   The content of the approval rule, including the number of approvals
+    #   needed and the structure of an approval pool defined for approvals, if
+    #   any. For more information about approval pools, see the AWS CodeCommit
+    #   User Guide.
+    #
+    #   <note markdown="1"> When you create the content of the approval rule, you can specify
+    #   approvers in an approval pool in one of two ways:
+    #
+    #    * **CodeCommitApprovers**\: This option only requires an AWS account
+    #     and a resource. It can be used for both IAM users and federated
+    #     access users whose name matches the provided resource name. This is
+    #     a very powerful option that offers a great deal of flexibility. For
+    #     example, if you specify the AWS account *123456789012* and
+    #     *Mary\_Major*, all of the following would be counted as approvals
+    #     coming from that user:
+    #
+    #     * An IAM user in the account
+    #       (arn:aws:iam::*123456789012*\:user/*Mary\_Major*)
+    #
+    #     * A federated user identified in IAM as Mary\_Major
+    #       (arn:aws:sts::*123456789012*\:federated-user/*Mary\_Major*)
+    #
+    #     This option does not recognize an active session of someone assuming
+    #     the role of CodeCommitReview with a role session name of
+    #     *Mary\_Major*
+    #     (arn:aws:sts::*123456789012*\:assumed-role/CodeCommitReview/*Mary\_Major*)
+    #     unless you include a wildcard (*Mary\_Major).
+    #
+    #   * **Fully qualified ARN**\: This option allows you to specify the
+    #     fully qualified Amazon Resource Name (ARN) of the IAM user or role.
+    #
+    #    For more information about IAM ARNs, wildcards, and formats, see [IAM
+    #   Identifiers][1] in the *IAM User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #
+    # @return [Types::CreatePullRequestApprovalRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePullRequestApprovalRuleOutput#approval_rule #approval_rule} => Types::ApprovalRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_pull_request_approval_rule({
+    #     pull_request_id: "PullRequestId", # required
+    #     approval_rule_name: "ApprovalRuleName", # required
+    #     approval_rule_content: "ApprovalRuleContent", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule.approval_rule_id #=> String
+    #   resp.approval_rule.approval_rule_name #=> String
+    #   resp.approval_rule.approval_rule_content #=> String
+    #   resp.approval_rule.rule_content_sha_256 #=> String
+    #   resp.approval_rule.last_modified_date #=> Time
+    #   resp.approval_rule.creation_date #=> Time
+    #   resp.approval_rule.last_modified_user #=> String
+    #   resp.approval_rule.origin_approval_rule_template.approval_rule_template_id #=> String
+    #   resp.approval_rule.origin_approval_rule_template.approval_rule_template_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequestApprovalRule AWS API Documentation
+    #
+    # @overload create_pull_request_approval_rule(params = {})
+    # @param [Hash] params ({})
+    def create_pull_request_approval_rule(params = {}, options = {})
+      req = build_request(:create_pull_request_approval_rule, params)
+      req.send_request(options)
+    end
+
     # Creates a new, empty repository.
     #
     # @option params [required, String] :repository_name
     #   The name of the new repository to be created.
     #
-    #   <note markdown="1"> The repository name must be unique across the calling AWS account. In
-    #   addition, repository names are limited to 100 alphanumeric, dash, and
-    #   underscore characters, and cannot include certain characters. For a
-    #   full description of the limits on repository names, see [Limits][1] in
-    #   the AWS CodeCommit User Guide. The suffix ".git" is prohibited.
+    #   <note markdown="1"> The repository name must be unique across the calling AWS account.
+    #   Repository names are limited to 100 alphanumeric, dash, and underscore
+    #   characters, and cannot include certain characters. For more
+    #   information about the limits on repository names, see [Limits][1] in
+    #   the *AWS CodeCommit User Guide*. The suffix .git is prohibited.
     #
     #    </note>
     #
@@ -737,10 +1049,10 @@ module Aws::CodeCommit
     #
     #   <note markdown="1"> The description field for a repository accepts all HTML characters and
     #   all valid Unicode characters. Applications that do not HTML-encode the
-    #   description and display it in a web page could expose users to
+    #   description and display it in a webpage can expose users to
     #   potentially malicious code. Make sure that you HTML-encode the
     #   description field in any application that uses this API to display the
-    #   repository description on a web page.
+    #   repository description on a webpage.
     #
     #    </note>
     #
@@ -786,8 +1098,8 @@ module Aws::CodeCommit
     # Creates an unreferenced commit that represents the result of merging
     # two branches using a specified merge strategy. This can help you
     # determine the outcome of a potential merge. This API cannot be used
-    # with the fast-forward merge strategy, as that strategy does not create
-    # a merge commit.
+    # with the fast-forward merge strategy because that strategy does not
+    # create a merge commit.
     #
     # <note markdown="1"> This unreferenced merge commit can only be accessed using the
     # GetCommit API or through git commands such as git fetch. To retrieve
@@ -801,32 +1113,31 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :source_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :destination_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :merge_option
     #   The merge option or strategy you want to use to merge the code.
     #
     # @option params [String] :conflict_detail_level
     #   The level of conflict detail to use. If unspecified, the default
-    #   FILE\_LEVEL is used, which will return a not mergeable result if the
-    #   same file has differences in both branches. If LINE\_LEVEL is
-    #   specified, a conflict will be considered not mergeable if the same
-    #   file in both branches has differences on the same line.
+    #   FILE\_LEVEL is used, which returns a not-mergeable result if the same
+    #   file has differences in both branches. If LINE\_LEVEL is specified, a
+    #   conflict is considered not mergeable if the same file in both branches
+    #   has differences on the same line.
     #
     # @option params [String] :conflict_resolution_strategy
     #   Specifies which branch to use when resolving conflicts, or whether to
     #   attempt automatically merging two versions of a file. The default is
     #   NONE, which requires any conflicts to be resolved manually before the
-    #   merge operation will be successful.
+    #   merge operation is successful.
     #
     # @option params [String] :author_name
     #   The name of the author who created the unreferenced commit. This
-    #   information will be used as both the author and committer for the
-    #   commit.
+    #   information is used as both the author and committer for the commit.
     #
     # @option params [String] :email
     #   The email address for the person who created the unreferenced commit.
@@ -837,12 +1148,12 @@ module Aws::CodeCommit
     # @option params [Boolean] :keep_empty_folders
     #   If the commit contains deletions, whether to keep a folder or folder
     #   structure if the changes leave the folders empty. If this is specified
-    #   as true, a .gitkeep file will be created for empty folders. The
-    #   default is false.
+    #   as true, a .gitkeep file is created for empty folders. The default is
+    #   false.
     #
     # @option params [Types::ConflictResolution] :conflict_resolution
-    #   A list of inputs to use when resolving conflicts during a merge if
-    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #   If AUTOMERGE is the conflict resolution strategy, a list of inputs to
+    #   use when resolving conflicts during a merge.
     #
     # @return [Types::CreateUnreferencedMergeCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -896,6 +1207,36 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def create_unreferenced_merge_commit(params = {}, options = {})
       req = build_request(:create_unreferenced_merge_commit, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specified approval rule template. Deleting a template does
+    # not remove approval rules on pull requests already created with the
+    # template.
+    #
+    # @option params [required, String] :approval_rule_template_name
+    #   The name of the approval rule template to delete.
+    #
+    # @return [Types::DeleteApprovalRuleTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteApprovalRuleTemplateOutput#approval_rule_template_id #approval_rule_template_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_approval_rule_template({
+    #     approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule_template_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteApprovalRuleTemplate AWS API Documentation
+    #
+    # @overload delete_approval_rule_template(params = {})
+    # @param [Hash] params ({})
+    def delete_approval_rule_template(params = {}, options = {})
+      req = build_request(:delete_approval_rule_template, params)
       req.send_request(options)
     end
 
@@ -971,50 +1312,48 @@ module Aws::CodeCommit
     end
 
     # Deletes a specified file from a specified branch. A commit is created
-    # on the branch that contains the revision. The file will still exist in
-    # the commits prior to the commit that contains the deletion.
+    # on the branch that contains the revision. The file still exists in the
+    # commits earlier to the commit that contains the deletion.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository that contains the file to delete.
     #
     # @option params [required, String] :branch_name
-    #   The name of the branch where the commit will be made deleting the
-    #   file.
+    #   The name of the branch where the commit that deletes the file is made.
     #
     # @option params [required, String] :file_path
-    #   The fully-qualified path to the file that will be deleted, including
-    #   the full name and extension of that file. For example,
-    #   /examples/file.md is a fully qualified path to a file named file.md in
-    #   a folder named examples.
+    #   The fully qualified path to the file that to be deleted, including the
+    #   full name and extension of that file. For example, /examples/file.md
+    #   is a fully qualified path to a file named file.md in a folder named
+    #   examples.
     #
     # @option params [required, String] :parent_commit_id
     #   The ID of the commit that is the tip of the branch where you want to
-    #   create the commit that will delete the file. This must be the HEAD
-    #   commit for the branch. The commit that deletes the file will be
-    #   created from this commit ID.
+    #   create the commit that deletes the file. This must be the HEAD commit
+    #   for the branch. The commit that deletes the file is created from this
+    #   commit ID.
     #
     # @option params [Boolean] :keep_empty_folders
-    #   Specifies whether to delete the folder or directory that contains the
-    #   file you want to delete if that file is the only object in the folder
-    #   or directory. By default, empty folders will be deleted. This includes
-    #   empty folders that are part of the directory structure. For example,
-    #   if the path to a file is dir1/dir2/dir3/dir4, and dir2 and dir3 are
-    #   empty, deleting the last file in dir4 will also delete the empty
-    #   folders dir4, dir3, and dir2.
+    #   If a file is the only object in the folder or directory, specifies
+    #   whether to delete the folder or directory that contains the file. By
+    #   default, empty folders are deleted. This includes empty folders that
+    #   are part of the directory structure. For example, if the path to a
+    #   file is dir1/dir2/dir3/dir4, and dir2 and dir3 are empty, deleting the
+    #   last file in dir4 also deletes the empty folders dir4, dir3, and dir2.
     #
     # @option params [String] :commit_message
     #   The commit message you want to include as part of deleting the file.
     #   Commit messages are limited to 256 KB. If no message is specified, a
-    #   default message will be used.
+    #   default message is used.
     #
     # @option params [String] :name
     #   The name of the author of the commit that deletes the file. If no name
-    #   is specified, the user's ARN will be used as the author name and
-    #   committer name.
+    #   is specified, the user's ARN is used as the author name and committer
+    #   name.
     #
     # @option params [String] :email
     #   The email address for the commit that deletes the file. If no email
-    #   address is specified, the email address will be left blank.
+    #   address is specified, the email address is left blank.
     #
     # @return [Types::DeleteFileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1052,12 +1391,50 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Deletes an approval rule from a specified pull request. Approval rules
+    # can be deleted from a pull request only if the pull request is open,
+    # and if the approval rule was created specifically for a pull request
+    # and not generated from an approval rule template associated with the
+    # repository where the pull request was created. You cannot delete an
+    # approval rule from a merged or closed pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request that contains the approval
+    #   rule you want to delete.
+    #
+    # @option params [required, String] :approval_rule_name
+    #   The name of the approval rule you want to delete.
+    #
+    # @return [Types::DeletePullRequestApprovalRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePullRequestApprovalRuleOutput#approval_rule_id #approval_rule_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_pull_request_approval_rule({
+    #     pull_request_id: "PullRequestId", # required
+    #     approval_rule_name: "ApprovalRuleName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeletePullRequestApprovalRule AWS API Documentation
+    #
+    # @overload delete_pull_request_approval_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_pull_request_approval_rule(params = {}, options = {})
+      req = build_request(:delete_pull_request_approval_rule, params)
+      req.send_request(options)
+    end
+
     # Deletes a repository. If a specified repository was already deleted, a
-    # null repository ID will be returned.
+    # null repository ID is returned.
     #
     # Deleting a repository also deletes all associated objects and
     # metadata. After a repository is deleted, all future push calls to the
-    # deleted repository will fail.
+    # deleted repository fail.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to delete.
@@ -1088,7 +1465,7 @@ module Aws::CodeCommit
     # Returns information about one or more merge conflicts in the attempted
     # merge of two commit specifiers using the squash or three-way merge
     # strategy. If the merge option for the attempted merge is specified as
-    # FAST\_FORWARD\_MERGE, an exception will be thrown.
+    # FAST\_FORWARD\_MERGE, an exception is thrown.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository where you want to get information about a
@@ -1096,11 +1473,11 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :destination_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :source_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :merge_option
     #   The merge option or strategy you want to use to merge the code.
@@ -1113,20 +1490,20 @@ module Aws::CodeCommit
     #
     # @option params [String] :conflict_detail_level
     #   The level of conflict detail to use. If unspecified, the default
-    #   FILE\_LEVEL is used, which will return a not mergeable result if the
-    #   same file has differences in both branches. If LINE\_LEVEL is
-    #   specified, a conflict will be considered not mergeable if the same
-    #   file in both branches has differences on the same line.
+    #   FILE\_LEVEL is used, which returns a not-mergeable result if the same
+    #   file has differences in both branches. If LINE\_LEVEL is specified, a
+    #   conflict is considered not mergeable if the same file in both branches
+    #   has differences on the same line.
     #
     # @option params [String] :conflict_resolution_strategy
     #   Specifies which branch to use when resolving conflicts, or whether to
     #   attempt automatically merging two versions of a file. The default is
     #   NONE, which requires any conflicts to be resolved manually before the
-    #   merge operation will be successful.
+    #   merge operation is successful.
     #
     # @option params [String] :next_token
-    #   An enumeration token that when provided in a request, returns the next
-    #   batch of the results.
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
     #
     # @return [Types::DescribeMergeConflictsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1209,17 +1586,17 @@ module Aws::CodeCommit
     #
     # @option params [String] :actor_arn
     #   The Amazon Resource Name (ARN) of the user whose actions resulted in
-    #   the event. Examples include updating the pull request with additional
+    #   the event. Examples include updating the pull request with more
     #   commits or changing the status of a pull request.
     #
     # @option params [String] :next_token
-    #   An enumeration token that when provided in a request, returns the next
-    #   batch of the results.
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
     #
     # @option params [Integer] :max_results
-    #   A non-negative integer used to limit the number of returned results.
-    #   The default is 100 events, which is also the maximum number of events
-    #   that can be returned in a result.
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results. The default is 100 events, which is also the maximum number
+    #   of events that can be returned in a result.
     #
     # @return [Types::DescribePullRequestEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1230,7 +1607,7 @@ module Aws::CodeCommit
     #
     #   resp = client.describe_pull_request_events({
     #     pull_request_id: "PullRequestId", # required
-    #     pull_request_event_type: "PULL_REQUEST_CREATED", # accepts PULL_REQUEST_CREATED, PULL_REQUEST_STATUS_CHANGED, PULL_REQUEST_SOURCE_REFERENCE_UPDATED, PULL_REQUEST_MERGE_STATE_CHANGED
+    #     pull_request_event_type: "PULL_REQUEST_CREATED", # accepts PULL_REQUEST_CREATED, PULL_REQUEST_STATUS_CHANGED, PULL_REQUEST_SOURCE_REFERENCE_UPDATED, PULL_REQUEST_MERGE_STATE_CHANGED, PULL_REQUEST_APPROVAL_RULE_CREATED, PULL_REQUEST_APPROVAL_RULE_UPDATED, PULL_REQUEST_APPROVAL_RULE_DELETED, PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN, PULL_REQUEST_APPROVAL_STATE_CHANGED
     #     actor_arn: "Arn",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -1241,7 +1618,7 @@ module Aws::CodeCommit
     #   resp.pull_request_events #=> Array
     #   resp.pull_request_events[0].pull_request_id #=> String
     #   resp.pull_request_events[0].event_date #=> Time
-    #   resp.pull_request_events[0].pull_request_event_type #=> String, one of "PULL_REQUEST_CREATED", "PULL_REQUEST_STATUS_CHANGED", "PULL_REQUEST_SOURCE_REFERENCE_UPDATED", "PULL_REQUEST_MERGE_STATE_CHANGED"
+    #   resp.pull_request_events[0].pull_request_event_type #=> String, one of "PULL_REQUEST_CREATED", "PULL_REQUEST_STATUS_CHANGED", "PULL_REQUEST_SOURCE_REFERENCE_UPDATED", "PULL_REQUEST_MERGE_STATE_CHANGED", "PULL_REQUEST_APPROVAL_RULE_CREATED", "PULL_REQUEST_APPROVAL_RULE_UPDATED", "PULL_REQUEST_APPROVAL_RULE_DELETED", "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN", "PULL_REQUEST_APPROVAL_STATE_CHANGED"
     #   resp.pull_request_events[0].actor_arn #=> String
     #   resp.pull_request_events[0].pull_request_created_event_metadata.repository_name #=> String
     #   resp.pull_request_events[0].pull_request_created_event_metadata.source_commit_id #=> String
@@ -1258,6 +1635,13 @@ module Aws::CodeCommit
     #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.merge_metadata.merged_by #=> String
     #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.merge_metadata.merge_commit_id #=> String
     #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
+    #   resp.pull_request_events[0].approval_rule_event_metadata.approval_rule_name #=> String
+    #   resp.pull_request_events[0].approval_rule_event_metadata.approval_rule_id #=> String
+    #   resp.pull_request_events[0].approval_rule_event_metadata.approval_rule_content #=> String
+    #   resp.pull_request_events[0].approval_state_changed_event_metadata.revision_id #=> String
+    #   resp.pull_request_events[0].approval_state_changed_event_metadata.approval_status #=> String, one of "APPROVE", "REVOKE"
+    #   resp.pull_request_events[0].approval_rule_overridden_event_metadata.revision_id #=> String
+    #   resp.pull_request_events[0].approval_rule_overridden_event_metadata.override_status #=> String, one of "OVERRIDE", "REVOKE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DescribePullRequestEvents AWS API Documentation
@@ -1269,7 +1653,113 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Returns the base-64 encoded content of an individual blob within a
+    # Removes the association between a template and a repository so that
+    # approval rules based on the template are not automatically created
+    # when pull requests are created in the specified repository. This does
+    # not delete any approval rules previously created for pull requests
+    # through the template association.
+    #
+    # @option params [required, String] :approval_rule_template_name
+    #   The name of the approval rule template to disassociate from a
+    #   specified repository.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository you want to disassociate from the template.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_approval_rule_template_from_repository({
+    #     approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #     repository_name: "RepositoryName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DisassociateApprovalRuleTemplateFromRepository AWS API Documentation
+    #
+    # @overload disassociate_approval_rule_template_from_repository(params = {})
+    # @param [Hash] params ({})
+    def disassociate_approval_rule_template_from_repository(params = {}, options = {})
+      req = build_request(:disassociate_approval_rule_template_from_repository, params)
+      req.send_request(options)
+    end
+
+    # Evaluates whether a pull request has met all the conditions specified
+    # in its associated approval rules.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request you want to evaluate.
+    #
+    # @option params [required, String] :revision_id
+    #   The system-generated ID for the pull request revision. To retrieve the
+    #   most recent revision ID for a pull request, use GetPullRequest.
+    #
+    # @return [Types::EvaluatePullRequestApprovalRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EvaluatePullRequestApprovalRulesOutput#evaluation #evaluation} => Types::Evaluation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.evaluate_pull_request_approval_rules({
+    #     pull_request_id: "PullRequestId", # required
+    #     revision_id: "RevisionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation.approved #=> Boolean
+    #   resp.evaluation.overridden #=> Boolean
+    #   resp.evaluation.approval_rules_satisfied #=> Array
+    #   resp.evaluation.approval_rules_satisfied[0] #=> String
+    #   resp.evaluation.approval_rules_not_satisfied #=> Array
+    #   resp.evaluation.approval_rules_not_satisfied[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/EvaluatePullRequestApprovalRules AWS API Documentation
+    #
+    # @overload evaluate_pull_request_approval_rules(params = {})
+    # @param [Hash] params ({})
+    def evaluate_pull_request_approval_rules(params = {}, options = {})
+      req = build_request(:evaluate_pull_request_approval_rules, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specified approval rule template.
+    #
+    # @option params [required, String] :approval_rule_template_name
+    #   The name of the approval rule template for which you want to get
+    #   information.
+    #
+    # @return [Types::GetApprovalRuleTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApprovalRuleTemplateOutput#approval_rule_template #approval_rule_template} => Types::ApprovalRuleTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_approval_rule_template({
+    #     approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule_template.approval_rule_template_id #=> String
+    #   resp.approval_rule_template.approval_rule_template_name #=> String
+    #   resp.approval_rule_template.approval_rule_template_description #=> String
+    #   resp.approval_rule_template.approval_rule_template_content #=> String
+    #   resp.approval_rule_template.rule_content_sha_256 #=> String
+    #   resp.approval_rule_template.last_modified_date #=> Time
+    #   resp.approval_rule_template.creation_date #=> Time
+    #   resp.approval_rule_template.last_modified_user #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetApprovalRuleTemplate AWS API Documentation
+    #
+    # @overload get_approval_rule_template(params = {})
+    # @param [Hash] params ({})
+    def get_approval_rule_template(params = {}, options = {})
+      req = build_request(:get_approval_rule_template, params)
+      req.send_request(options)
+    end
+
+    # Returns the base-64 encoded content of an individual blob in a
     # repository.
     #
     # @option params [required, String] :repository_name
@@ -1382,19 +1872,19 @@ module Aws::CodeCommit
     #
     # @option params [String] :before_commit_id
     #   To establish the directionality of the comparison, the full commit ID
-    #   of the 'before' commit.
+    #   of the before commit.
     #
     # @option params [required, String] :after_commit_id
     #   To establish the directionality of the comparison, the full commit ID
-    #   of the 'after' commit.
+    #   of the after commit.
     #
     # @option params [String] :next_token
     #   An enumeration token that when provided in a request, returns the next
     #   batch of the results.
     #
     # @option params [Integer] :max_results
-    #   A non-negative integer used to limit the number of returned results.
-    #   The default is 100 comments, and is configurable up to 500.
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results. The default is 100 comments, but you can configure up to 500.
     #
     # @return [Types::GetCommentsForComparedCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1460,13 +1950,13 @@ module Aws::CodeCommit
     #   of the branch at the time the comment was made.
     #
     # @option params [String] :next_token
-    #   An enumeration token that when provided in a request, returns the next
-    #   batch of the results.
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
     #
     # @option params [Integer] :max_results
-    #   A non-negative integer used to limit the number of returned results.
-    #   The default is 100 comments. You can return up to 500 comments with a
-    #   single request.
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results. The default is 100 comments. You can return up to 500
+    #   comments with a single request.
     #
     # @return [Types::GetCommentsForPullRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1523,7 +2013,7 @@ module Aws::CodeCommit
     #   The name of the repository to which the commit was made.
     #
     # @option params [required, String] :commit_id
-    #   The commit ID. Commit IDs are the full SHA of the commit.
+    #   The commit ID. Commit IDs are the full SHA ID of the commit.
     #
     # @return [Types::GetCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1561,7 +2051,7 @@ module Aws::CodeCommit
     end
 
     # Returns information about the differences in a valid commit specifier
-    # (such as a branch, tag, HEAD, commit ID or other fully qualified
+    # (such as a branch, tag, HEAD, commit ID, or other fully qualified
     # reference). Results can be limited to a specified path.
     #
     # @option params [required, String] :repository_name
@@ -1569,9 +2059,9 @@ module Aws::CodeCommit
     #
     # @option params [String] :before_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, the full commit ID. Optional. If not
-    #   specified, all changes prior to the `afterCommitSpecifier` value will
-    #   be shown. If you do not use `beforeCommitSpecifier` in your request,
+    #   identify a commit (for example, the full commit ID). Optional. If not
+    #   specified, all changes before the `afterCommitSpecifier` value are
+    #   shown. If you do not use `beforeCommitSpecifier` in your request,
     #   consider limiting the results with `maxResults`.
     #
     # @option params [required, String] :after_commit_specifier
@@ -1582,20 +2072,21 @@ module Aws::CodeCommit
     #   The file path in which to check for differences. Limits the results to
     #   this path. Can also be used to specify the previous name of a
     #   directory or folder. If `beforePath` and `afterPath` are not
-    #   specified, differences will be shown for all paths.
+    #   specified, differences are shown for all paths.
     #
     # @option params [String] :after_path
     #   The file path in which to check differences. Limits the results to
     #   this path. Can also be used to specify the changed name of a directory
-    #   or folder, if it has changed. If not specified, differences will be
-    #   shown for all paths.
+    #   or folder, if it has changed. If not specified, differences are shown
+    #   for all paths.
     #
     # @option params [Integer] :max_results
-    #   A non-negative integer used to limit the number of returned results.
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results.
     #
     # @option params [String] :next_token
-    #   An enumeration token that when provided in a request, returns the next
-    #   batch of the results.
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
     #
     # @return [Types::GetDifferencesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1642,16 +2133,15 @@ module Aws::CodeCommit
     #   The name of the repository that contains the file.
     #
     # @option params [String] :commit_specifier
-    #   The fully-quaified reference that identifies the commit that contains
-    #   the file. For example, you could specify a full commit ID, a tag, a
+    #   The fully quaified reference that identifies the commit that contains
+    #   the file. For example, you can specify a full commit ID, a tag, a
     #   branch name, or a reference such as refs/heads/master. If none is
-    #   provided, then the head commit will be used.
+    #   provided, the head commit is used.
     #
     # @option params [required, String] :file_path
-    #   The fully-qualified path to the file, including the full name and
-    #   extension of the file. For example, /examples/file.md is the
-    #   fully-qualified path to a file named file.md in a folder named
-    #   examples.
+    #   The fully qualified path to the file, including the full name and
+    #   extension of the file. For example, /examples/file.md is the fully
+    #   qualified path to a file named file.md in a folder named examples.
     #
     # @return [Types::GetFileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1694,17 +2184,17 @@ module Aws::CodeCommit
     #   The name of the repository.
     #
     # @option params [String] :commit_specifier
-    #   A fully-qualified reference used to identify a commit that contains
-    #   the version of the folder's content to return. A fully-qualified
+    #   A fully qualified reference used to identify a commit that contains
+    #   the version of the folder's content to return. A fully qualified
     #   reference can be a commit ID, branch name, tag, or reference such as
-    #   HEAD. If no specifier is provided, the folder content will be returned
-    #   as it exists in the HEAD commit.
+    #   HEAD. If no specifier is provided, the folder content is returned as
+    #   it exists in the HEAD commit.
     #
     # @option params [required, String] :folder_path
-    #   The fully-qualified path to the folder whose contents will be
-    #   returned, including the folder name. For example, /examples is a
-    #   fully-qualified path to a folder named examples that was created off
-    #   of the root directory (/) of a repository.
+    #   The fully qualified path to the folder whose contents are returned,
+    #   including the folder name. For example, /examples is a fully-qualified
+    #   path to a folder named examples that was created off of the root
+    #   directory (/) of a repository.
     #
     # @return [Types::GetFolderOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1765,24 +2255,24 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :source_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :destination_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [String] :conflict_detail_level
     #   The level of conflict detail to use. If unspecified, the default
-    #   FILE\_LEVEL is used, which will return a not mergeable result if the
-    #   same file has differences in both branches. If LINE\_LEVEL is
-    #   specified, a conflict will be considered not mergeable if the same
-    #   file in both branches has differences on the same line.
+    #   FILE\_LEVEL is used, which returns a not-mergeable result if the same
+    #   file has differences in both branches. If LINE\_LEVEL is specified, a
+    #   conflict is considered not mergeable if the same file in both branches
+    #   has differences on the same line.
     #
     # @option params [String] :conflict_resolution_strategy
     #   Specifies which branch to use when resolving conflicts, or whether to
     #   attempt automatically merging two versions of a file. The default is
     #   NONE, which requires any conflicts to be resolved manually before the
-    #   merge operation will be successful.
+    #   merge operation is successful.
     #
     # @return [Types::GetMergeCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1825,21 +2315,21 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :destination_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :source_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :merge_option
     #   The merge option or strategy you want to use to merge the code.
     #
     # @option params [String] :conflict_detail_level
     #   The level of conflict detail to use. If unspecified, the default
-    #   FILE\_LEVEL is used, which will return a not mergeable result if the
-    #   same file has differences in both branches. If LINE\_LEVEL is
-    #   specified, a conflict will be considered not mergeable if the same
-    #   file in both branches has differences on the same line.
+    #   FILE\_LEVEL is used, which returns a not-mergeable result if the same
+    #   file has differences in both branches. If LINE\_LEVEL is specified, a
+    #   conflict is considered not mergeable if the same file in both branches
+    #   has differences on the same line.
     #
     # @option params [Integer] :max_conflict_files
     #   The maximum number of files to include in the output.
@@ -1848,11 +2338,11 @@ module Aws::CodeCommit
     #   Specifies which branch to use when resolving conflicts, or whether to
     #   attempt automatically merging two versions of a file. The default is
     #   NONE, which requires any conflicts to be resolved manually before the
-    #   merge operation will be successful.
+    #   merge operation is successful.
     #
     # @option params [String] :next_token
-    #   An enumeration token that when provided in a request, returns the next
-    #   batch of the results.
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
     #
     # @return [Types::GetMergeConflictsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1914,8 +2404,8 @@ module Aws::CodeCommit
     end
 
     # Returns information about the merge options available for merging two
-    # specified branches. For details about why a particular merge option is
-    # not available, use GetMergeConflicts or DescribeMergeConflicts.
+    # specified branches. For details about why a merge option is not
+    # available, use GetMergeConflicts or DescribeMergeConflicts.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository that contains the commits about which you
@@ -1923,24 +2413,24 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :source_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :destination_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [String] :conflict_detail_level
     #   The level of conflict detail to use. If unspecified, the default
-    #   FILE\_LEVEL is used, which will return a not mergeable result if the
-    #   same file has differences in both branches. If LINE\_LEVEL is
-    #   specified, a conflict will be considered not mergeable if the same
-    #   file in both branches has differences on the same line.
+    #   FILE\_LEVEL is used, which returns a not-mergeable result if the same
+    #   file has differences in both branches. If LINE\_LEVEL is specified, a
+    #   conflict is considered not mergeable if the same file in both branches
+    #   has differences on the same line.
     #
     # @option params [String] :conflict_resolution_strategy
     #   Specifies which branch to use when resolving conflicts, or whether to
     #   attempt automatically merging two versions of a file. The default is
     #   NONE, which requires any conflicts to be resolved manually before the
-    #   merge operation will be successful.
+    #   merge operation is successful.
     #
     # @return [Types::GetMergeOptionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2013,6 +2503,17 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
+    #   resp.pull_request.revision_id #=> String
+    #   resp.pull_request.approval_rules #=> Array
+    #   resp.pull_request.approval_rules[0].approval_rule_id #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_name #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_content #=> String
+    #   resp.pull_request.approval_rules[0].rule_content_sha_256 #=> String
+    #   resp.pull_request.approval_rules[0].last_modified_date #=> Time
+    #   resp.pull_request.approval_rules[0].creation_date #=> Time
+    #   resp.pull_request.approval_rules[0].last_modified_user #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_id #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetPullRequest AWS API Documentation
     #
@@ -2023,14 +2524,89 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Gets information about the approval states for a specified pull
+    # request. Approval states only apply to pull requests that have one or
+    # more approval rules applied to them.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID for the pull request.
+    #
+    # @option params [required, String] :revision_id
+    #   The system-generated ID for the pull request revision.
+    #
+    # @return [Types::GetPullRequestApprovalStatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPullRequestApprovalStatesOutput#approvals #approvals} => Array&lt;Types::Approval&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_pull_request_approval_states({
+    #     pull_request_id: "PullRequestId", # required
+    #     revision_id: "RevisionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approvals #=> Array
+    #   resp.approvals[0].user_arn #=> String
+    #   resp.approvals[0].approval_state #=> String, one of "APPROVE", "REVOKE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetPullRequestApprovalStates AWS API Documentation
+    #
+    # @overload get_pull_request_approval_states(params = {})
+    # @param [Hash] params ({})
+    def get_pull_request_approval_states(params = {}, options = {})
+      req = build_request(:get_pull_request_approval_states, params)
+      req.send_request(options)
+    end
+
+    # Returns information about whether approval rules have been set aside
+    # (overridden) for a pull request, and if so, the Amazon Resource Name
+    # (ARN) of the user or identity that overrode the rules and their
+    # requirements for the pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The ID of the pull request for which you want to get information about
+    #   whether approval rules have been set aside (overridden).
+    #
+    # @option params [required, String] :revision_id
+    #   The system-generated ID of the revision for the pull request. To
+    #   retrieve the most recent revision ID, use GetPullRequest.
+    #
+    # @return [Types::GetPullRequestOverrideStateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPullRequestOverrideStateOutput#overridden #overridden} => Boolean
+    #   * {Types::GetPullRequestOverrideStateOutput#overrider #overrider} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_pull_request_override_state({
+    #     pull_request_id: "PullRequestId", # required
+    #     revision_id: "RevisionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.overridden #=> Boolean
+    #   resp.overrider #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetPullRequestOverrideState AWS API Documentation
+    #
+    # @overload get_pull_request_override_state(params = {})
+    # @param [Hash] params ({})
+    def get_pull_request_override_state(params = {}, options = {})
+      req = build_request(:get_pull_request_override_state, params)
+      req.send_request(options)
+    end
+
     # Returns information about a repository.
     #
     # <note markdown="1"> The description field for a repository accepts all HTML characters and
     # all valid Unicode characters. Applications that do not HTML-encode the
-    # description and display it in a web page could expose users to
+    # description and display it in a webpage can expose users to
     # potentially malicious code. Make sure that you HTML-encode the
     # description field in any application that uses this API to display the
-    # repository description on a web page.
+    # repository description on a webpage.
     #
     #  </note>
     #
@@ -2106,6 +2682,88 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Lists all approval rule templates in the specified AWS Region in your
+    # AWS account. If an AWS Region is not specified, the AWS Region where
+    # you are signed in is used.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
+    #
+    # @option params [Integer] :max_results
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results.
+    #
+    # @return [Types::ListApprovalRuleTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApprovalRuleTemplatesOutput#approval_rule_template_names #approval_rule_template_names} => Array&lt;String&gt;
+    #   * {Types::ListApprovalRuleTemplatesOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_approval_rule_templates({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule_template_names #=> Array
+    #   resp.approval_rule_template_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListApprovalRuleTemplates AWS API Documentation
+    #
+    # @overload list_approval_rule_templates(params = {})
+    # @param [Hash] params ({})
+    def list_approval_rule_templates(params = {}, options = {})
+      req = build_request(:list_approval_rule_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists all approval rule templates that are associated with a specified
+    # repository.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository for which you want to list all associated
+    #   approval rule templates.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
+    #
+    # @option params [Integer] :max_results
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results.
+    #
+    # @return [Types::ListAssociatedApprovalRuleTemplatesForRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssociatedApprovalRuleTemplatesForRepositoryOutput#approval_rule_template_names #approval_rule_template_names} => Array&lt;String&gt;
+    #   * {Types::ListAssociatedApprovalRuleTemplatesForRepositoryOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_associated_approval_rule_templates_for_repository({
+    #     repository_name: "RepositoryName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule_template_names #=> Array
+    #   resp.approval_rule_template_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListAssociatedApprovalRuleTemplatesForRepository AWS API Documentation
+    #
+    # @overload list_associated_approval_rule_templates_for_repository(params = {})
+    # @param [Hash] params ({})
+    def list_associated_approval_rule_templates_for_repository(params = {}, options = {})
+      req = build_request(:list_associated_approval_rule_templates_for_repository, params)
+      req.send_request(options)
+    end
+
     # Gets information about one or more branches in a repository.
     #
     # @option params [required, String] :repository_name
@@ -2157,11 +2815,12 @@ module Aws::CodeCommit
     #   results to the pull requests that match the specified status.
     #
     # @option params [String] :next_token
-    #   An enumeration token that when provided in a request, returns the next
-    #   batch of the results.
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
     #
     # @option params [Integer] :max_results
-    #   A non-negative integer used to limit the number of returned results.
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results.
     #
     # @return [Types::ListPullRequestsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2238,10 +2897,53 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Lists all repositories associated with the specified approval rule
+    # template.
+    #
+    # @option params [required, String] :approval_rule_template_name
+    #   The name of the approval rule template for which you want to list
+    #   repositories that are associated with that template.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
+    #
+    # @option params [Integer] :max_results
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results.
+    #
+    # @return [Types::ListRepositoriesForApprovalRuleTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRepositoriesForApprovalRuleTemplateOutput#repository_names #repository_names} => Array&lt;String&gt;
+    #   * {Types::ListRepositoriesForApprovalRuleTemplateOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_repositories_for_approval_rule_template({
+    #     approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_names #=> Array
+    #   resp.repository_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositoriesForApprovalRuleTemplate AWS API Documentation
+    #
+    # @overload list_repositories_for_approval_rule_template(params = {})
+    # @param [Hash] params ({})
+    def list_repositories_for_approval_rule_template(params = {}, options = {})
+      req = build_request(:list_repositories_for_approval_rule_template, params)
+      req.send_request(options)
+    end
+
     # Gets information about AWS tags for a specified Amazon Resource Name
     # (ARN) in AWS CodeCommit. For a list of valid resources in AWS
-    # CodeCommit, see [CodeCommit Resources and Operations][1] in the AWS
-    # CodeCommit User Guide.
+    # CodeCommit, see [CodeCommit Resources and Operations][1] in the<i> AWS
+    # CodeCommit User Guide</i>.
     #
     #
     #
@@ -2252,8 +2954,8 @@ module Aws::CodeCommit
     #   get information about tags, if any.
     #
     # @option params [String] :next_token
-    #   An enumeration token that when provided in a request, returns the next
-    #   batch of the results.
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
     #
     # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2289,14 +2991,14 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :source_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :destination_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [String] :target_branch
-    #   The branch where the merge will be applied.
+    #   The branch where the merge is applied.
     #
     # @return [Types::MergeBranchesByFastForwardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2333,35 +3035,35 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :source_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :destination_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [String] :target_branch
-    #   The branch where the merge will be applied.
+    #   The branch where the merge is applied.
     #
     # @option params [String] :conflict_detail_level
     #   The level of conflict detail to use. If unspecified, the default
-    #   FILE\_LEVEL is used, which will return a not mergeable result if the
-    #   same file has differences in both branches. If LINE\_LEVEL is
-    #   specified, a conflict will be considered not mergeable if the same
-    #   file in both branches has differences on the same line.
+    #   FILE\_LEVEL is used, which returns a not-mergeable result if the same
+    #   file has differences in both branches. If LINE\_LEVEL is specified, a
+    #   conflict is considered not mergeable if the same file in both branches
+    #   has differences on the same line.
     #
     # @option params [String] :conflict_resolution_strategy
     #   Specifies which branch to use when resolving conflicts, or whether to
     #   attempt automatically merging two versions of a file. The default is
     #   NONE, which requires any conflicts to be resolved manually before the
-    #   merge operation will be successful.
+    #   merge operation is successful.
     #
     # @option params [String] :author_name
-    #   The name of the author who created the commit. This information will
-    #   be used as both the author and committer for the commit.
+    #   The name of the author who created the commit. This information is
+    #   used as both the author and committer for the commit.
     #
     # @option params [String] :email
     #   The email address of the person merging the branches. This information
-    #   will be used in the commit information for the merge.
+    #   is used in the commit information for the merge.
     #
     # @option params [String] :commit_message
     #   The commit message for the merge.
@@ -2369,12 +3071,12 @@ module Aws::CodeCommit
     # @option params [Boolean] :keep_empty_folders
     #   If the commit contains deletions, whether to keep a folder or folder
     #   structure if the changes leave the folders empty. If this is specified
-    #   as true, a .gitkeep file will be created for empty folders. The
-    #   default is false.
+    #   as true, a .gitkeep file is created for empty folders. The default is
+    #   false.
     #
     # @option params [Types::ConflictResolution] :conflict_resolution
-    #   A list of inputs to use when resolving conflicts during a merge if
-    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #   If AUTOMERGE is the conflict resolution strategy, a list of inputs to
+    #   use when resolving conflicts during a merge.
     #
     # @return [Types::MergeBranchesBySquashOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2438,48 +3140,47 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :source_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [required, String] :destination_commit_specifier
     #   The branch, tag, HEAD, or other fully qualified reference used to
-    #   identify a commit. For example, a branch name or a full commit ID.
+    #   identify a commit (for example, a branch name or a full commit ID).
     #
     # @option params [String] :target_branch
-    #   The branch where the merge will be applied.
+    #   The branch where the merge is applied.
     #
     # @option params [String] :conflict_detail_level
     #   The level of conflict detail to use. If unspecified, the default
-    #   FILE\_LEVEL is used, which will return a not mergeable result if the
-    #   same file has differences in both branches. If LINE\_LEVEL is
-    #   specified, a conflict will be considered not mergeable if the same
-    #   file in both branches has differences on the same line.
+    #   FILE\_LEVEL is used, which returns a not-mergeable result if the same
+    #   file has differences in both branches. If LINE\_LEVEL is specified, a
+    #   conflict is considered not mergeable if the same file in both branches
+    #   has differences on the same line.
     #
     # @option params [String] :conflict_resolution_strategy
     #   Specifies which branch to use when resolving conflicts, or whether to
     #   attempt automatically merging two versions of a file. The default is
     #   NONE, which requires any conflicts to be resolved manually before the
-    #   merge operation will be successful.
+    #   merge operation is successful.
     #
     # @option params [String] :author_name
-    #   The name of the author who created the commit. This information will
-    #   be used as both the author and committer for the commit.
+    #   The name of the author who created the commit. This information is
+    #   used as both the author and committer for the commit.
     #
     # @option params [String] :email
     #   The email address of the person merging the branches. This information
-    #   will be used in the commit information for the merge.
+    #   is used in the commit information for the merge.
     #
     # @option params [String] :commit_message
     #   The commit message to include in the commit information for the merge.
     #
     # @option params [Boolean] :keep_empty_folders
     #   If the commit contains deletions, whether to keep a folder or folder
-    #   structure if the changes leave the folders empty. If this is specified
-    #   as true, a .gitkeep file will be created for empty folders. The
-    #   default is false.
+    #   structure if the changes leave the folders empty. If true, a .gitkeep
+    #   file is created for empty folders. The default is false.
     #
     # @option params [Types::ConflictResolution] :conflict_resolution
-    #   A list of inputs to use when resolving conflicts during a merge if
-    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #   If AUTOMERGE is the conflict resolution strategy, a list of inputs to
+    #   use when resolving conflicts during a merge.
     #
     # @return [Types::MergeBranchesByThreeWayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2587,6 +3288,17 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
+    #   resp.pull_request.revision_id #=> String
+    #   resp.pull_request.approval_rules #=> Array
+    #   resp.pull_request.approval_rules[0].approval_rule_id #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_name #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_content #=> String
+    #   resp.pull_request.approval_rules[0].rule_content_sha_256 #=> String
+    #   resp.pull_request.approval_rules[0].last_modified_date #=> Time
+    #   resp.pull_request.approval_rules[0].creation_date #=> Time
+    #   resp.pull_request.approval_rules[0].last_modified_user #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_id #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByFastForward AWS API Documentation
     #
@@ -2617,37 +3329,36 @@ module Aws::CodeCommit
     #
     # @option params [String] :conflict_detail_level
     #   The level of conflict detail to use. If unspecified, the default
-    #   FILE\_LEVEL is used, which will return a not mergeable result if the
-    #   same file has differences in both branches. If LINE\_LEVEL is
-    #   specified, a conflict will be considered not mergeable if the same
-    #   file in both branches has differences on the same line.
+    #   FILE\_LEVEL is used, which returns a not-mergeable result if the same
+    #   file has differences in both branches. If LINE\_LEVEL is specified, a
+    #   conflict is considered not mergeable if the same file in both branches
+    #   has differences on the same line.
     #
     # @option params [String] :conflict_resolution_strategy
     #   Specifies which branch to use when resolving conflicts, or whether to
     #   attempt automatically merging two versions of a file. The default is
     #   NONE, which requires any conflicts to be resolved manually before the
-    #   merge operation will be successful.
+    #   merge operation is successful.
     #
     # @option params [String] :commit_message
     #   The commit message to include in the commit information for the merge.
     #
     # @option params [String] :author_name
-    #   The name of the author who created the commit. This information will
-    #   be used as both the author and committer for the commit.
+    #   The name of the author who created the commit. This information is
+    #   used as both the author and committer for the commit.
     #
     # @option params [String] :email
     #   The email address of the person merging the branches. This information
-    #   will be used in the commit information for the merge.
+    #   is used in the commit information for the merge.
     #
     # @option params [Boolean] :keep_empty_folders
     #   If the commit contains deletions, whether to keep a folder or folder
-    #   structure if the changes leave the folders empty. If this is specified
-    #   as true, a .gitkeep file will be created for empty folders. The
-    #   default is false.
+    #   structure if the changes leave the folders empty. If true, a .gitkeep
+    #   file is created for empty folders. The default is false.
     #
     # @option params [Types::ConflictResolution] :conflict_resolution
-    #   A list of inputs to use when resolving conflicts during a merge if
-    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #   If AUTOMERGE is the conflict resolution strategy, a list of inputs to
+    #   use when resolving conflicts during a merge.
     #
     # @return [Types::MergePullRequestBySquashOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2709,6 +3420,17 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
+    #   resp.pull_request.revision_id #=> String
+    #   resp.pull_request.approval_rules #=> Array
+    #   resp.pull_request.approval_rules[0].approval_rule_id #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_name #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_content #=> String
+    #   resp.pull_request.approval_rules[0].rule_content_sha_256 #=> String
+    #   resp.pull_request.approval_rules[0].last_modified_date #=> Time
+    #   resp.pull_request.approval_rules[0].creation_date #=> Time
+    #   resp.pull_request.approval_rules[0].last_modified_user #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_id #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestBySquash AWS API Documentation
     #
@@ -2739,37 +3461,36 @@ module Aws::CodeCommit
     #
     # @option params [String] :conflict_detail_level
     #   The level of conflict detail to use. If unspecified, the default
-    #   FILE\_LEVEL is used, which will return a not mergeable result if the
-    #   same file has differences in both branches. If LINE\_LEVEL is
-    #   specified, a conflict will be considered not mergeable if the same
-    #   file in both branches has differences on the same line.
+    #   FILE\_LEVEL is used, which returns a not-mergeable result if the same
+    #   file has differences in both branches. If LINE\_LEVEL is specified, a
+    #   conflict is considered not mergeable if the same file in both branches
+    #   has differences on the same line.
     #
     # @option params [String] :conflict_resolution_strategy
     #   Specifies which branch to use when resolving conflicts, or whether to
     #   attempt automatically merging two versions of a file. The default is
     #   NONE, which requires any conflicts to be resolved manually before the
-    #   merge operation will be successful.
+    #   merge operation is successful.
     #
     # @option params [String] :commit_message
     #   The commit message to include in the commit information for the merge.
     #
     # @option params [String] :author_name
-    #   The name of the author who created the commit. This information will
-    #   be used as both the author and committer for the commit.
+    #   The name of the author who created the commit. This information is
+    #   used as both the author and committer for the commit.
     #
     # @option params [String] :email
     #   The email address of the person merging the branches. This information
-    #   will be used in the commit information for the merge.
+    #   is used in the commit information for the merge.
     #
     # @option params [Boolean] :keep_empty_folders
     #   If the commit contains deletions, whether to keep a folder or folder
-    #   structure if the changes leave the folders empty. If this is specified
-    #   as true, a .gitkeep file will be created for empty folders. The
-    #   default is false.
+    #   structure if the changes leave the folders empty. If true, a .gitkeep
+    #   file is created for empty folders. The default is false.
     #
     # @option params [Types::ConflictResolution] :conflict_resolution
-    #   A list of inputs to use when resolving conflicts during a merge if
-    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #   If AUTOMERGE is the conflict resolution strategy, a list of inputs to
+    #   use when resolving conflicts during a merge.
     #
     # @return [Types::MergePullRequestByThreeWayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2831,6 +3552,17 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
+    #   resp.pull_request.revision_id #=> String
+    #   resp.pull_request.approval_rules #=> Array
+    #   resp.pull_request.approval_rules[0].approval_rule_id #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_name #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_content #=> String
+    #   resp.pull_request.approval_rules[0].rule_content_sha_256 #=> String
+    #   resp.pull_request.approval_rules[0].last_modified_date #=> Time
+    #   resp.pull_request.approval_rules[0].creation_date #=> Time
+    #   resp.pull_request.approval_rules[0].last_modified_user #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_id #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByThreeWay AWS API Documentation
     #
@@ -2838,6 +3570,44 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def merge_pull_request_by_three_way(params = {}, options = {})
       req = build_request(:merge_pull_request_by_three_way, params)
+      req.send_request(options)
+    end
+
+    # Sets aside (overrides) all approval rule requirements for a specified
+    # pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request for which you want to
+    #   override all approval rule requirements. To get this information, use
+    #   GetPullRequest.
+    #
+    # @option params [required, String] :revision_id
+    #   The system-generated ID of the most recent revision of the pull
+    #   request. You cannot override approval rules for anything but the most
+    #   recent revision of a pull request. To get the revision ID, use
+    #   GetPullRequest.
+    #
+    # @option params [required, String] :override_status
+    #   Whether you want to set aside approval rule requirements for the pull
+    #   request (OVERRIDE) or revoke a previous override and apply approval
+    #   rule requirements (REVOKE). REVOKE status is not stored.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.override_pull_request_approval_rules({
+    #     pull_request_id: "PullRequestId", # required
+    #     revision_id: "RevisionId", # required
+    #     override_status: "OVERRIDE", # required, accepts OVERRIDE, REVOKE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/OverridePullRequestApprovalRules AWS API Documentation
+    #
+    # @overload override_pull_request_approval_rules(params = {})
+    # @param [Hash] params ({})
+    def override_pull_request_approval_rules(params = {}, options = {})
+      req = build_request(:override_pull_request_approval_rules, params)
       req.send_request(options)
     end
 
@@ -2849,16 +3619,12 @@ module Aws::CodeCommit
     #
     # @option params [String] :before_commit_id
     #   To establish the directionality of the comparison, the full commit ID
-    #   of the 'before' commit.
-    #
-    #   <note markdown="1"> This is required for commenting on any commit unless that commit is
-    #   the initial commit.
-    #
-    #    </note>
+    #   of the before commit. Required for commenting on any commit unless
+    #   that commit is the initial commit.
     #
     # @option params [required, String] :after_commit_id
     #   To establish the directionality of the comparison, the full commit ID
-    #   of the 'after' commit.
+    #   of the after commit.
     #
     # @option params [Types::Location] :location
     #   The location of the comparison where you want to comment.
@@ -2867,11 +3633,11 @@ module Aws::CodeCommit
     #   The content of the comment you want to make.
     #
     # @option params [String] :client_request_token
-    #   A unique, client-generated idempotency token that when provided in a
+    #   A unique, client-generated idempotency token that, when provided in a
     #   request, ensures the request cannot be repeated with a changed
     #   parameter. If a request is received with the same parameters and a
-    #   token is included, the request will return information about the
-    #   initial request that used that token.
+    #   token is included, the request returns information about the initial
+    #   request that used that token.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2950,19 +3716,19 @@ module Aws::CodeCommit
     #
     # @option params [Types::Location] :location
     #   The location of the change where you want to post your comment. If no
-    #   location is provided, the comment will be posted as a general comment
-    #   on the pull request difference between the before commit ID and the
-    #   after commit ID.
+    #   location is provided, the comment is posted as a general comment on
+    #   the pull request difference between the before commit ID and the after
+    #   commit ID.
     #
     # @option params [required, String] :content
     #   The content of your comment on the change.
     #
     # @option params [String] :client_request_token
-    #   A unique, client-generated idempotency token that when provided in a
+    #   A unique, client-generated idempotency token that, when provided in a
     #   request, ensures the request cannot be repeated with a changed
     #   parameter. If a request is received with the same parameters and a
-    #   token is included, the request will return information about the
-    #   initial request that used that token.
+    #   token is included, the request returns information about the initial
+    #   request that used that token.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3032,11 +3798,11 @@ module Aws::CodeCommit
     #   GetCommentsForPullRequest.
     #
     # @option params [String] :client_request_token
-    #   A unique, client-generated idempotency token that when provided in a
+    #   A unique, client-generated idempotency token that, when provided in a
     #   request, ensures the request cannot be repeated with a changed
     #   parameter. If a request is received with the same parameters and a
-    #   token is included, the request will return information about the
-    #   initial request that used that token.
+    #   token is included, the request returns information about the initial
+    #   request that used that token.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3084,7 +3850,7 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :branch_name
     #   The name of the branch where you want to add or update the file. If
-    #   this is an empty repository, this branch will be created.
+    #   this is an empty repository, this branch is created.
     #
     # @option params [required, String, IO] :file_content
     #   The content of the file, in binary object format.
@@ -3093,14 +3859,14 @@ module Aws::CodeCommit
     #   The name of the file you want to add or update, including the relative
     #   path to the file in the repository.
     #
-    #   <note markdown="1"> If the path does not currently exist in the repository, the path will
-    #   be created as part of adding the file.
+    #   <note markdown="1"> If the path does not currently exist in the repository, the path is
+    #   created as part of adding the file.
     #
     #    </note>
     #
     # @option params [String] :file_mode
     #   The file mode permissions of the blob. Valid file mode permissions are
-    #   listed below.
+    #   listed here.
     #
     # @option params [String] :parent_commit_id
     #   The full commit ID of the head commit in the branch where you want to
@@ -3109,18 +3875,18 @@ module Aws::CodeCommit
     #   required.
     #
     #   The commit ID must match the ID of the head commit at the time of the
-    #   operation, or an error will occur, and the file will not be added or
+    #   operation. Otherwise, an error occurs, and the file is not added or
     #   updated.
     #
     # @option params [String] :commit_message
-    #   A message about why this file was added or updated. While optional,
-    #   adding a message is strongly encouraged in order to provide a more
-    #   useful commit history for your repository.
+    #   A message about why this file was added or updated. Although it is
+    #   optional, a message makes the commit history for your repository more
+    #   useful.
     #
     # @option params [String] :name
-    #   The name of the person adding or updating the file. While optional,
-    #   adding a name is strongly encouraged in order to provide a more useful
-    #   commit history for your repository.
+    #   The name of the person adding or updating the file. Although it is
+    #   optional, a name makes the commit history for your repository more
+    #   useful.
     #
     # @option params [String] :email
     #   An email address for the person adding or updating the file.
@@ -3160,8 +3926,8 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Replaces all triggers for a repository. This can be used to create or
-    # delete triggers.
+    # Replaces all triggers for a repository. Used to create or delete
+    # triggers.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository where you want to create or update the
@@ -3204,7 +3970,7 @@ module Aws::CodeCommit
 
     # Adds or updates tags for a resource in AWS CodeCommit. For a list of
     # valid resources in AWS CodeCommit, see [CodeCommit Resources and
-    # Operations][1] in the AWS CodeCommit User Guide.
+    # Operations][1] in the *AWS CodeCommit User Guide*.
     #
     #
     #
@@ -3239,8 +4005,8 @@ module Aws::CodeCommit
 
     # Tests the functionality of repository triggers by sending information
     # to the trigger target. If real data is available in the repository,
-    # the test will send data from the last commit. If no data is available,
-    # sample data will be generated.
+    # the test sends data from the last commit. If no data is available,
+    # sample data is generated.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository in which to test the triggers.
@@ -3287,7 +4053,7 @@ module Aws::CodeCommit
 
     # Removes tags for a resource in AWS CodeCommit. For a list of valid
     # resources in AWS CodeCommit, see [CodeCommit Resources and
-    # Operations][1] in the AWS CodeCommit User Guide.
+    # Operations][1] in the *AWS CodeCommit User Guide*.
     #
     #
     #
@@ -3318,6 +4084,132 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Updates the content of an approval rule template. You can change the
+    # number of required approvals, the membership of the approval rule, and
+    # whether an approval pool is defined.
+    #
+    # @option params [required, String] :approval_rule_template_name
+    #   The name of the approval rule template where you want to update the
+    #   content of the rule.
+    #
+    # @option params [required, String] :new_rule_content
+    #   The content that replaces the existing content of the rule. Content
+    #   statements must be complete. You cannot provide only the changes.
+    #
+    # @option params [String] :existing_rule_content_sha_256
+    #   The SHA-256 hash signature for the content of the approval rule. You
+    #   can retrieve this information by using GetPullRequest.
+    #
+    # @return [Types::UpdateApprovalRuleTemplateContentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApprovalRuleTemplateContentOutput#approval_rule_template #approval_rule_template} => Types::ApprovalRuleTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_approval_rule_template_content({
+    #     approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #     new_rule_content: "ApprovalRuleTemplateContent", # required
+    #     existing_rule_content_sha_256: "RuleContentSha256",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule_template.approval_rule_template_id #=> String
+    #   resp.approval_rule_template.approval_rule_template_name #=> String
+    #   resp.approval_rule_template.approval_rule_template_description #=> String
+    #   resp.approval_rule_template.approval_rule_template_content #=> String
+    #   resp.approval_rule_template.rule_content_sha_256 #=> String
+    #   resp.approval_rule_template.last_modified_date #=> Time
+    #   resp.approval_rule_template.creation_date #=> Time
+    #   resp.approval_rule_template.last_modified_user #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateApprovalRuleTemplateContent AWS API Documentation
+    #
+    # @overload update_approval_rule_template_content(params = {})
+    # @param [Hash] params ({})
+    def update_approval_rule_template_content(params = {}, options = {})
+      req = build_request(:update_approval_rule_template_content, params)
+      req.send_request(options)
+    end
+
+    # Updates the description for a specified approval rule template.
+    #
+    # @option params [required, String] :approval_rule_template_name
+    #   The name of the template for which you want to update the description.
+    #
+    # @option params [required, String] :approval_rule_template_description
+    #   The updated description of the approval rule template.
+    #
+    # @return [Types::UpdateApprovalRuleTemplateDescriptionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApprovalRuleTemplateDescriptionOutput#approval_rule_template #approval_rule_template} => Types::ApprovalRuleTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_approval_rule_template_description({
+    #     approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #     approval_rule_template_description: "ApprovalRuleTemplateDescription", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule_template.approval_rule_template_id #=> String
+    #   resp.approval_rule_template.approval_rule_template_name #=> String
+    #   resp.approval_rule_template.approval_rule_template_description #=> String
+    #   resp.approval_rule_template.approval_rule_template_content #=> String
+    #   resp.approval_rule_template.rule_content_sha_256 #=> String
+    #   resp.approval_rule_template.last_modified_date #=> Time
+    #   resp.approval_rule_template.creation_date #=> Time
+    #   resp.approval_rule_template.last_modified_user #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateApprovalRuleTemplateDescription AWS API Documentation
+    #
+    # @overload update_approval_rule_template_description(params = {})
+    # @param [Hash] params ({})
+    def update_approval_rule_template_description(params = {}, options = {})
+      req = build_request(:update_approval_rule_template_description, params)
+      req.send_request(options)
+    end
+
+    # Updates the name of a specified approval rule template.
+    #
+    # @option params [required, String] :old_approval_rule_template_name
+    #   The current name of the approval rule template.
+    #
+    # @option params [required, String] :new_approval_rule_template_name
+    #   The new name you want to apply to the approval rule template.
+    #
+    # @return [Types::UpdateApprovalRuleTemplateNameOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApprovalRuleTemplateNameOutput#approval_rule_template #approval_rule_template} => Types::ApprovalRuleTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_approval_rule_template_name({
+    #     old_approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #     new_approval_rule_template_name: "ApprovalRuleTemplateName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule_template.approval_rule_template_id #=> String
+    #   resp.approval_rule_template.approval_rule_template_name #=> String
+    #   resp.approval_rule_template.approval_rule_template_description #=> String
+    #   resp.approval_rule_template.approval_rule_template_content #=> String
+    #   resp.approval_rule_template.rule_content_sha_256 #=> String
+    #   resp.approval_rule_template.last_modified_date #=> Time
+    #   resp.approval_rule_template.creation_date #=> Time
+    #   resp.approval_rule_template.last_modified_user #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateApprovalRuleTemplateName AWS API Documentation
+    #
+    # @overload update_approval_rule_template_name(params = {})
+    # @param [Hash] params ({})
+    def update_approval_rule_template_name(params = {}, options = {})
+      req = build_request(:update_approval_rule_template_name, params)
+      req.send_request(options)
+    end
+
     # Replaces the contents of a comment.
     #
     # @option params [required, String] :comment_id
@@ -3325,8 +4217,7 @@ module Aws::CodeCommit
     #   ID, use GetCommentsForComparedCommit or GetCommentsForPullRequest.
     #
     # @option params [required, String] :content
-    #   The updated content with which you want to replace the existing
-    #   content of the comment.
+    #   The updated content to replace the existing content of the comment.
     #
     # @return [Types::UpdateCommentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3391,6 +4282,123 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Updates the structure of an approval rule created specifically for a
+    # pull request. For example, you can change the number of required
+    # approvers and the approval pool for approvers.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request.
+    #
+    # @option params [required, String] :approval_rule_name
+    #   The name of the approval rule you want to update.
+    #
+    # @option params [String] :existing_rule_content_sha_256
+    #   The SHA-256 hash signature for the content of the approval rule. You
+    #   can retrieve this information by using GetPullRequest.
+    #
+    # @option params [required, String] :new_rule_content
+    #   The updated content for the approval rule.
+    #
+    #   <note markdown="1"> When you update the content of the approval rule, you can specify
+    #   approvers in an approval pool in one of two ways:
+    #
+    #    * **CodeCommitApprovers**\: This option only requires an AWS account
+    #     and a resource. It can be used for both IAM users and federated
+    #     access users whose name matches the provided resource name. This is
+    #     a very powerful option that offers a great deal of flexibility. For
+    #     example, if you specify the AWS account *123456789012* and
+    #     *Mary\_Major*, all of the following are counted as approvals coming
+    #     from that user:
+    #
+    #     * An IAM user in the account
+    #       (arn:aws:iam::*123456789012*\:user/*Mary\_Major*)
+    #
+    #     * A federated user identified in IAM as Mary\_Major
+    #       (arn:aws:sts::*123456789012*\:federated-user/*Mary\_Major*)
+    #
+    #     This option does not recognize an active session of someone assuming
+    #     the role of CodeCommitReview with a role session name of
+    #     *Mary\_Major*
+    #     (arn:aws:sts::*123456789012*\:assumed-role/CodeCommitReview/*Mary\_Major*)
+    #     unless you include a wildcard (*Mary\_Major).
+    #
+    #   * **Fully qualified ARN**\: This option allows you to specify the
+    #     fully qualified Amazon Resource Name (ARN) of the IAM user or role.
+    #
+    #    For more information about IAM ARNs, wildcards, and formats, see [IAM
+    #   Identifiers][1] in the *IAM User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #
+    # @return [Types::UpdatePullRequestApprovalRuleContentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePullRequestApprovalRuleContentOutput#approval_rule #approval_rule} => Types::ApprovalRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_pull_request_approval_rule_content({
+    #     pull_request_id: "PullRequestId", # required
+    #     approval_rule_name: "ApprovalRuleName", # required
+    #     existing_rule_content_sha_256: "RuleContentSha256",
+    #     new_rule_content: "ApprovalRuleContent", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_rule.approval_rule_id #=> String
+    #   resp.approval_rule.approval_rule_name #=> String
+    #   resp.approval_rule.approval_rule_content #=> String
+    #   resp.approval_rule.rule_content_sha_256 #=> String
+    #   resp.approval_rule.last_modified_date #=> Time
+    #   resp.approval_rule.creation_date #=> Time
+    #   resp.approval_rule.last_modified_user #=> String
+    #   resp.approval_rule.origin_approval_rule_template.approval_rule_template_id #=> String
+    #   resp.approval_rule.origin_approval_rule_template.approval_rule_template_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestApprovalRuleContent AWS API Documentation
+    #
+    # @overload update_pull_request_approval_rule_content(params = {})
+    # @param [Hash] params ({})
+    def update_pull_request_approval_rule_content(params = {}, options = {})
+      req = build_request(:update_pull_request_approval_rule_content, params)
+      req.send_request(options)
+    end
+
+    # Updates the state of a user's approval on a pull request. The user is
+    # derived from the signed-in account when the request is made.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request.
+    #
+    # @option params [required, String] :revision_id
+    #   The system-generated ID of the revision.
+    #
+    # @option params [required, String] :approval_state
+    #   The approval state to associate with the user on the pull request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_pull_request_approval_state({
+    #     pull_request_id: "PullRequestId", # required
+    #     revision_id: "RevisionId", # required
+    #     approval_state: "APPROVE", # required, accepts APPROVE, REVOKE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestApprovalState AWS API Documentation
+    #
+    # @overload update_pull_request_approval_state(params = {})
+    # @param [Hash] params ({})
+    def update_pull_request_approval_state(params = {}, options = {})
+      req = build_request(:update_pull_request_approval_state, params)
+      req.send_request(options)
+    end
+
     # Replaces the contents of the description of a pull request.
     #
     # @option params [required, String] :pull_request_id
@@ -3399,7 +4407,7 @@ module Aws::CodeCommit
     #
     # @option params [required, String] :description
     #   The updated content of the description for the pull request. This
-    #   content will replace the existing description.
+    #   content replaces the existing description.
     #
     # @return [Types::UpdatePullRequestDescriptionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3433,6 +4441,17 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
+    #   resp.pull_request.revision_id #=> String
+    #   resp.pull_request.approval_rules #=> Array
+    #   resp.pull_request.approval_rules[0].approval_rule_id #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_name #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_content #=> String
+    #   resp.pull_request.approval_rules[0].rule_content_sha_256 #=> String
+    #   resp.pull_request.approval_rules[0].last_modified_date #=> Time
+    #   resp.pull_request.approval_rules[0].creation_date #=> Time
+    #   resp.pull_request.approval_rules[0].last_modified_user #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_id #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestDescription AWS API Documentation
     #
@@ -3452,7 +4471,7 @@ module Aws::CodeCommit
     # @option params [required, String] :pull_request_status
     #   The status of the pull request. The only valid operations are to
     #   update the status from `OPEN` to `OPEN`, `OPEN` to `CLOSED` or from
-    #   from `CLOSED` to `CLOSED`.
+    #   `CLOSED` to `CLOSED`.
     #
     # @return [Types::UpdatePullRequestStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3486,6 +4505,17 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
+    #   resp.pull_request.revision_id #=> String
+    #   resp.pull_request.approval_rules #=> Array
+    #   resp.pull_request.approval_rules[0].approval_rule_id #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_name #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_content #=> String
+    #   resp.pull_request.approval_rules[0].rule_content_sha_256 #=> String
+    #   resp.pull_request.approval_rules[0].last_modified_date #=> Time
+    #   resp.pull_request.approval_rules[0].creation_date #=> Time
+    #   resp.pull_request.approval_rules[0].last_modified_user #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_id #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestStatus AWS API Documentation
     #
@@ -3503,7 +4533,7 @@ module Aws::CodeCommit
     #   ListPullRequests.
     #
     # @option params [required, String] :title
-    #   The updated title of the pull request. This will replace the existing
+    #   The updated title of the pull request. This replaces the existing
     #   title.
     #
     # @return [Types::UpdatePullRequestTitleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3538,6 +4568,17 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
+    #   resp.pull_request.revision_id #=> String
+    #   resp.pull_request.approval_rules #=> Array
+    #   resp.pull_request.approval_rules[0].approval_rule_id #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_name #=> String
+    #   resp.pull_request.approval_rules[0].approval_rule_content #=> String
+    #   resp.pull_request.approval_rules[0].rule_content_sha_256 #=> String
+    #   resp.pull_request.approval_rules[0].last_modified_date #=> Time
+    #   resp.pull_request.approval_rules[0].creation_date #=> Time
+    #   resp.pull_request.approval_rules[0].last_modified_user #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_id #=> String
+    #   resp.pull_request.approval_rules[0].origin_approval_rule_template.approval_rule_template_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestTitle AWS API Documentation
     #
@@ -3552,10 +4593,10 @@ module Aws::CodeCommit
     #
     # <note markdown="1"> The description field for a repository accepts all HTML characters and
     # all valid Unicode characters. Applications that do not HTML-encode the
-    # description and display it in a web page could expose users to
+    # description and display it in a webpage can expose users to
     # potentially malicious code. Make sure that you HTML-encode the
     # description field in any application that uses this API to display the
-    # repository description on a web page.
+    # repository description on a webpage.
     #
     #  </note>
     #
@@ -3586,18 +4627,18 @@ module Aws::CodeCommit
     end
 
     # Renames a repository. The repository name must be unique across the
-    # calling AWS account. In addition, repository names are limited to 100
-    # alphanumeric, dash, and underscore characters, and cannot include
-    # certain characters. The suffix ".git" is prohibited. For a full
-    # description of the limits on repository names, see [Limits][1] in the
-    # AWS CodeCommit User Guide.
+    # calling AWS account. Repository names are limited to 100 alphanumeric,
+    # dash, and underscore characters, and cannot include certain
+    # characters. The suffix .git is prohibited. For more information about
+    # the limits on repository names, see [Limits][1] in the AWS CodeCommit
+    # User Guide.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
     #
     # @option params [required, String] :old_name
-    #   The existing name of the repository.
+    #   The current name of the repository.
     #
     # @option params [required, String] :new_name
     #   The new name for the repository.
@@ -3633,7 +4674,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

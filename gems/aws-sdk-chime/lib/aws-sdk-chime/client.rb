@@ -370,6 +370,56 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Creates up to 100 new attendees for an active Amazon Chime SDK
+    # meeting. For more information about the Amazon Chime SDK, see [Using
+    # the Amazon Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @option params [required, Array<Types::CreateAttendeeRequestItem>] :attendees
+    #   The request containing the attendees to create.
+    #
+    # @return [Types::BatchCreateAttendeeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateAttendeeResponse#attendees #attendees} => Array&lt;Types::Attendee&gt;
+    #   * {Types::BatchCreateAttendeeResponse#errors #errors} => Array&lt;Types::CreateAttendeeError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_attendee({
+    #     meeting_id: "GuidString", # required
+    #     attendees: [ # required
+    #       {
+    #         external_user_id: "ExternalUserIdType", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attendees #=> Array
+    #   resp.attendees[0].external_user_id #=> String
+    #   resp.attendees[0].attendee_id #=> String
+    #   resp.attendees[0].join_token #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].external_user_id #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchCreateAttendee AWS API Documentation
+    #
+    # @overload batch_create_attendee(params = {})
+    # @param [Hash] params ({})
+    def batch_create_attendee(params = {}, options = {})
+      req = build_request(:batch_create_attendee, params)
+      req.send_request(options)
+    end
+
     # Adds up to 50 members to a chat room. Members can be either users or
     # bots. The member role designates whether the member is a chat room
     # administrator or a general chat room member.
@@ -687,6 +737,47 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Creates a new attendee for an active Amazon Chime SDK meeting. For
+    # more information about the Amazon Chime SDK, see [Using the Amazon
+    # Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @option params [required, String] :external_user_id
+    #   The Amazon Chime SDK external user ID. Links the attendee to an
+    #   identity managed by a builder application.
+    #
+    # @return [Types::CreateAttendeeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAttendeeResponse#attendee #attendee} => Types::Attendee
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_attendee({
+    #     meeting_id: "GuidString", # required
+    #     external_user_id: "ExternalUserIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attendee.external_user_id #=> String
+    #   resp.attendee.attendee_id #=> String
+    #   resp.attendee.join_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAttendee AWS API Documentation
+    #
+    # @overload create_attendee(params = {})
+    # @param [Hash] params ({})
+    def create_attendee(params = {}, options = {})
+      req = build_request(:create_attendee, params)
+      req.send_request(options)
+    end
+
     # Creates a bot for an Amazon Chime Enterprise account.
     #
     # @option params [required, String] :account_id
@@ -728,6 +819,69 @@ module Aws::Chime
     # @param [Hash] params ({})
     def create_bot(params = {}, options = {})
       req = build_request(:create_bot, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Amazon Chime SDK meeting in the specified media Region
+    # with no initial attendees. For more information about the Amazon Chime
+    # SDK, see [Using the Amazon Chime SDK][1] in the *Amazon Chime
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    #
+    # @option params [required, String] :client_request_token
+    #   The unique identifier for the client request. Use a different token
+    #   for different meetings.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :meeting_host_id
+    #   Reserved.
+    #
+    # @option params [String] :media_region
+    #   The Region in which to create the meeting. Available values:
+    #   `us-east-1`, `us-west-2`.
+    #
+    # @option params [Types::MeetingNotificationConfiguration] :notifications_configuration
+    #   The configuration for resource targets to receive notifications when
+    #   meeting and attendee events occur.
+    #
+    # @return [Types::CreateMeetingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMeetingResponse#meeting #meeting} => Types::Meeting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_meeting({
+    #     client_request_token: "ClientRequestToken", # required
+    #     meeting_host_id: "ExternalUserIdType",
+    #     media_region: "String",
+    #     notifications_configuration: {
+    #       sns_topic_arn: "Arn",
+    #       sqs_queue_arn: "Arn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.meeting.meeting_id #=> String
+    #   resp.meeting.media_placement.audio_host_url #=> String
+    #   resp.meeting.media_placement.screen_data_url #=> String
+    #   resp.meeting.media_placement.screen_sharing_url #=> String
+    #   resp.meeting.media_placement.screen_viewing_url #=> String
+    #   resp.meeting.media_placement.signaling_url #=> String
+    #   resp.meeting.media_placement.turn_control_url #=> String
+    #   resp.meeting.media_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeeting AWS API Documentation
+    #
+    # @overload create_meeting(params = {})
+    # @param [Hash] params ({})
+    def create_meeting(params = {}, options = {})
+      req = build_request(:create_meeting, params)
       req.send_request(options)
     end
 
@@ -1003,6 +1157,40 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Deletes an attendee from the specified Amazon Chime SDK meeting and
+    # deletes their `JoinToken`. Attendees are automatically deleted when a
+    # Amazon Chime SDK meeting is deleted. For more information about the
+    # Amazon Chime SDK, see [Using the Amazon Chime SDK][1] in the *Amazon
+    # Chime Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @option params [required, String] :attendee_id
+    #   The Amazon Chime SDK attendee ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_attendee({
+    #     meeting_id: "GuidString", # required
+    #     attendee_id: "GuidString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAttendee AWS API Documentation
+    #
+    # @overload delete_attendee(params = {})
+    # @param [Hash] params ({})
+    def delete_attendee(params = {}, options = {})
+      req = build_request(:delete_attendee, params)
+      req.send_request(options)
+    end
+
     # Deletes the events configuration that allows a bot to receive outgoing
     # events.
     #
@@ -1027,6 +1215,35 @@ module Aws::Chime
     # @param [Hash] params ({})
     def delete_events_configuration(params = {}, options = {})
       req = build_request(:delete_events_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Amazon Chime SDK meeting. When a meeting is
+    # deleted, its attendees are also deleted and clients can no longer join
+    # it. For more information about the Amazon Chime SDK, see [Using the
+    # Amazon Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_meeting({
+    #     meeting_id: "GuidString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteMeeting AWS API Documentation
+    #
+    # @overload delete_meeting(params = {})
+    # @param [Hash] params ({})
+    def delete_meeting(params = {}, options = {})
+      req = build_request(:delete_meeting, params)
       req.send_request(options)
     end
 
@@ -1429,6 +1646,46 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Gets the Amazon Chime SDK attendee details for a specified meeting ID
+    # and attendee ID. For more information about the Amazon Chime SDK, see
+    # [Using the Amazon Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @option params [required, String] :attendee_id
+    #   The Amazon Chime SDK attendee ID.
+    #
+    # @return [Types::GetAttendeeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAttendeeResponse#attendee #attendee} => Types::Attendee
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_attendee({
+    #     meeting_id: "GuidString", # required
+    #     attendee_id: "GuidString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attendee.external_user_id #=> String
+    #   resp.attendee.attendee_id #=> String
+    #   resp.attendee.join_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAttendee AWS API Documentation
+    #
+    # @overload get_attendee(params = {})
+    # @param [Hash] params ({})
+    def get_attendee(params = {}, options = {})
+      req = build_request(:get_attendee, params)
+      req.send_request(options)
+    end
+
     # Retrieves details for the specified bot, such as bot email address,
     # bot type, status, and display name.
     #
@@ -1525,6 +1782,47 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_global_settings(params = {}, options = {})
       req = build_request(:get_global_settings, params)
+      req.send_request(options)
+    end
+
+    # Gets the Amazon Chime SDK meeting details for the specified meeting
+    # ID. For more information about the Amazon Chime SDK, see [Using the
+    # Amazon Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @return [Types::GetMeetingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMeetingResponse#meeting #meeting} => Types::Meeting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_meeting({
+    #     meeting_id: "GuidString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.meeting.meeting_id #=> String
+    #   resp.meeting.media_placement.audio_host_url #=> String
+    #   resp.meeting.media_placement.screen_data_url #=> String
+    #   resp.meeting.media_placement.screen_sharing_url #=> String
+    #   resp.meeting.media_placement.screen_viewing_url #=> String
+    #   resp.meeting.media_placement.signaling_url #=> String
+    #   resp.meeting.media_placement.turn_control_url #=> String
+    #   resp.meeting.media_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMeeting AWS API Documentation
+    #
+    # @overload get_meeting(params = {})
+    # @param [Hash] params ({})
+    def get_meeting(params = {}, options = {})
+      req = build_request(:get_meeting, params)
       req.send_request(options)
     end
 
@@ -2078,6 +2376,53 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Lists the attendees for the specified Amazon Chime SDK meeting. For
+    # more information about the Amazon Chime SDK, see [Using the Amazon
+    # Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListAttendeesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAttendeesResponse#attendees #attendees} => Array&lt;Types::Attendee&gt;
+    #   * {Types::ListAttendeesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_attendees({
+    #     meeting_id: "GuidString", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attendees #=> Array
+    #   resp.attendees[0].external_user_id #=> String
+    #   resp.attendees[0].attendee_id #=> String
+    #   resp.attendees[0].join_token #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAttendees AWS API Documentation
+    #
+    # @overload list_attendees(params = {})
+    # @param [Hash] params ({})
+    def list_attendees(params = {}, options = {})
+      req = build_request(:list_attendees, params)
+      req.send_request(options)
+    end
+
     # Lists the bots associated with the administrator's Amazon Chime
     # Enterprise account ID.
     #
@@ -2124,6 +2469,54 @@ module Aws::Chime
     # @param [Hash] params ({})
     def list_bots(params = {}, options = {})
       req = build_request(:list_bots, params)
+      req.send_request(options)
+    end
+
+    # Lists up to 100 active Amazon Chime SDK meetings. For more information
+    # about the Amazon Chime SDK, see [Using the Amazon Chime SDK][1] in the
+    # *Amazon Chime Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListMeetingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMeetingsResponse#meetings #meetings} => Array&lt;Types::Meeting&gt;
+    #   * {Types::ListMeetingsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_meetings({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.meetings #=> Array
+    #   resp.meetings[0].meeting_id #=> String
+    #   resp.meetings[0].media_placement.audio_host_url #=> String
+    #   resp.meetings[0].media_placement.screen_data_url #=> String
+    #   resp.meetings[0].media_placement.screen_sharing_url #=> String
+    #   resp.meetings[0].media_placement.screen_viewing_url #=> String
+    #   resp.meetings[0].media_placement.signaling_url #=> String
+    #   resp.meetings[0].media_placement.turn_control_url #=> String
+    #   resp.meetings[0].media_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMeetings AWS API Documentation
+    #
+    # @overload list_meetings(params = {})
+    # @param [Hash] params ({})
+    def list_meetings(params = {}, options = {})
+      req = build_request(:list_meetings, params)
       req.send_request(options)
     end
 
@@ -3496,7 +3889,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

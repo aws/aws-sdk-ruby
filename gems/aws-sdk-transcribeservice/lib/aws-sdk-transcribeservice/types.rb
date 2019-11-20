@@ -484,6 +484,8 @@ module Aws::TranscribeService
     #         show_speaker_labels: false,
     #         max_speaker_labels: 1,
     #         channel_identification: false,
+    #         show_alternatives: false,
+    #         max_alternatives: 1,
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -526,13 +528,28 @@ module Aws::TranscribeService
     #   `BadRequestException`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] show_alternatives
+    #   Determines whether the transcription contains alternative
+    #   transcriptions. If you set the `ShowAlternatives` field to true, you
+    #   must also set the maximum number of alternatives to return in the
+    #   `MaxAlternatives` field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_alternatives
+    #   The number of alternative transcriptions that the service should
+    #   return. If you specify the `MaxAlternatives` field, you must set the
+    #   `ShowAlternatives` field to true.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Settings AWS API Documentation
     #
     class Settings < Struct.new(
       :vocabulary_name,
       :show_speaker_labels,
       :max_speaker_labels,
-      :channel_identification)
+      :channel_identification,
+      :show_alternatives,
+      :max_alternatives)
       include Aws::Structure
     end
 
@@ -554,6 +571,8 @@ module Aws::TranscribeService
     #           show_speaker_labels: false,
     #           max_speaker_labels: 1,
     #           channel_identification: false,
+    #           show_alternatives: false,
+    #           max_alternatives: 1,
     #         },
     #       }
     #

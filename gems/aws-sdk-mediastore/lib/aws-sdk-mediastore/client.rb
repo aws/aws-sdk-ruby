@@ -285,7 +285,7 @@ module Aws::MediaStore
     #
     #
     #
-    #   [1]: https://aws.amazon.com/documentation/mediastore/tagging
+    #   [1]: https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html
     #
     # @return [Types::CreateContainerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -297,7 +297,7 @@ module Aws::MediaStore
     #     container_name: "ContainerName", # required
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -837,7 +837,7 @@ module Aws::MediaStore
     #
     #
     #
-    # [1]: https://aws.amazon.com/documentation/mediastore/tagging
+    # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html
     #
     # @option params [required, String] :resource
     #   The Amazon Resource Name (ARN) for the container.
@@ -860,7 +860,7 @@ module Aws::MediaStore
     #     resource: "ContainerARN", # required
     #     tags: [ # required
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -919,7 +919,7 @@ module Aws::MediaStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastore'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

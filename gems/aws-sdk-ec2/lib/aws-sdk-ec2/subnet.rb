@@ -1141,6 +1141,64 @@ module Aws::EC2
 
     # @example Request syntax with placeholder values
     #
+    #   nat_gateways = subnet.nat_gateways({
+    #     filter: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     nat_gateway_ids: ["String"],
+    #   })
+    # @param [Hash] options ({})
+    # @option options [Array<Types::Filter>] :filter
+    #   One or more filters.
+    #
+    #   * `nat-gateway-id` - The ID of the NAT gateway.
+    #
+    #   * `state` - The state of the NAT gateway (`pending` \| `failed` \|
+    #     `available` \| `deleting` \| `deleted`).
+    #
+    #   * `subnet-id` - The ID of the subnet in which the NAT gateway resides.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
+    # @option options [Array<String>] :nat_gateway_ids
+    #   One or more NAT gateway IDs.
+    # @return [NatGateway::Collection]
+    def nat_gateways(options = {})
+      batches = Enumerator.new do |y|
+        options = Aws::Util.deep_merge(options, filter: [{
+          name: "subnet-id",
+          values: [@id]
+        }])
+        resp = @client.describe_nat_gateways(options)
+        resp.each_page do |page|
+          batch = []
+          page.data.nat_gateways.each do |n|
+            batch << NatGateway.new(
+              id: n.nat_gateway_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
+        end
+      end
+      NatGateway::Collection.new(batches)
+    end
+
+    # @example Request syntax with placeholder values
+    #
     #   network_interfaces = subnet.network_interfaces({
     #     filters: [
     #       {

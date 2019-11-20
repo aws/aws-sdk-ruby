@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-11-20)
+------------------
+
+* Feature - New exception type for use with Migration Hub home region
+
 1.18.0 (2019-10-23)
 ------------------
 

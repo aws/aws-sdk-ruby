@@ -413,6 +413,11 @@ module Aws::DataSync
     #   data to the EFS destination. By default, AWS DataSync uses the root
     #   directory.
     #
+    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example
+    #   `/path/to/folder`.
+    #
+    #    </note>
+    #
     # @option params [required, String] :efs_filesystem_arn
     #   The Amazon Resource Name (ARN) for the Amazon EFS file system.
     #
@@ -645,7 +650,7 @@ module Aws::DataSync
     end
 
     # Defines a file system on an Server Message Block (SMB) server that can
-    # be read from or written to
+    # be read from or written to.
     #
     # @option params [required, String] :subdirectory
     #   The subdirectory in the SMB file system that is used to read data from
@@ -653,6 +658,11 @@ module Aws::DataSync
     #   path should be a path that's exported by the SMB server, or a
     #   subdirectory of that path. The path should be such that it can be
     #   mounted by other SMB clients in your network.
+    #
+    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example
+    #   `/path/to/folder`.
+    #
+    #    </note>
     #
     #   To transfer all the data in the folder you specified, DataSync needs
     #   to have permissions to mount the SMB share, as well as to access all
@@ -790,6 +800,11 @@ module Aws::DataSync
     #   the patterns to exclude. The patterns are delimited by "\|" (that
     #   is, a pipe), for example, `"/folder1|/folder2"`
     #
+    # @option params [Types::TaskSchedule] :schedule
+    #   Specifies a schedule used to periodically transfer files from a source
+    #   to a destination location. The schedule should be specified in UTC
+    #   time. For more information, see task-scheduling.
+    #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents the tag that you want to add to the
     #   resource. The value can be an empty string.
@@ -814,7 +829,7 @@ module Aws::DataSync
     #       gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
     #       preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
     #       preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #       posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
+    #       posix_permissions: "NONE", # accepts NONE, PRESERVE
     #       bytes_per_second: 1,
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #     },
@@ -824,6 +839,9 @@ module Aws::DataSync
     #         value: "FilterValue",
     #       },
     #     ],
+    #     schedule: {
+    #       schedule_expression: "ScheduleExpressionCron", # required
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -948,7 +966,7 @@ module Aws::DataSync
     #   resp.status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.last_connection_time #=> Time
     #   resp.creation_time #=> Time
-    #   resp.endpoint_type #=> String, one of "PUBLIC", "PRIVATE_LINK"
+    #   resp.endpoint_type #=> String, one of "PUBLIC", "PRIVATE_LINK", "FIPS"
     #   resp.private_link_config.vpc_endpoint_id #=> String
     #   resp.private_link_config.private_link_endpoint #=> String
     #   resp.private_link_config.subnet_arns #=> Array
@@ -1137,6 +1155,7 @@ module Aws::DataSync
     #   * {Types::DescribeTaskResponse#destination_network_interface_arns #destination_network_interface_arns} => Array&lt;String&gt;
     #   * {Types::DescribeTaskResponse#options #options} => Types::Options
     #   * {Types::DescribeTaskResponse#excludes #excludes} => Array&lt;Types::FilterRule&gt;
+    #   * {Types::DescribeTaskResponse#schedule #schedule} => Types::TaskSchedule
     #   * {Types::DescribeTaskResponse#error_code #error_code} => String
     #   * {Types::DescribeTaskResponse#error_detail #error_detail} => String
     #   * {Types::DescribeTaskResponse#creation_time #creation_time} => Time
@@ -1168,12 +1187,13 @@ module Aws::DataSync
     #   resp.options.gid #=> String, one of "NONE", "INT_VALUE", "NAME", "BOTH"
     #   resp.options.preserve_deleted_files #=> String, one of "PRESERVE", "REMOVE"
     #   resp.options.preserve_devices #=> String, one of "NONE", "PRESERVE"
-    #   resp.options.posix_permissions #=> String, one of "NONE", "BEST_EFFORT", "PRESERVE"
+    #   resp.options.posix_permissions #=> String, one of "NONE", "PRESERVE"
     #   resp.options.bytes_per_second #=> Integer
     #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
+    #   resp.schedule.schedule_expression #=> String
     #   resp.error_code #=> String
     #   resp.error_detail #=> String
     #   resp.creation_time #=> Time
@@ -1225,7 +1245,7 @@ module Aws::DataSync
     #   resp.options.gid #=> String, one of "NONE", "INT_VALUE", "NAME", "BOTH"
     #   resp.options.preserve_deleted_files #=> String, one of "PRESERVE", "REMOVE"
     #   resp.options.preserve_devices #=> String, one of "NONE", "PRESERVE"
-    #   resp.options.posix_permissions #=> String, one of "NONE", "BEST_EFFORT", "PRESERVE"
+    #   resp.options.posix_permissions #=> String, one of "NONE", "PRESERVE"
     #   resp.options.bytes_per_second #=> Integer
     #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
     #   resp.excludes #=> Array
@@ -1242,6 +1262,7 @@ module Aws::DataSync
     #   resp.bytes_transferred #=> Integer
     #   resp.result.prepare_duration #=> Integer
     #   resp.result.prepare_status #=> String, one of "PENDING", "SUCCESS", "ERROR"
+    #   resp.result.total_duration #=> Integer
     #   resp.result.transfer_duration #=> Integer
     #   resp.result.transfer_status #=> String, one of "PENDING", "SUCCESS", "ERROR"
     #   resp.result.verify_duration #=> Integer
@@ -1518,7 +1539,7 @@ module Aws::DataSync
     #       gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
     #       preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
     #       preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #       posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
+    #       posix_permissions: "NONE", # accepts NONE, PRESERVE
     #       bytes_per_second: 1,
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #     },
@@ -1650,6 +1671,13 @@ module Aws::DataSync
     #   the patterns to exclude. The patterns are delimited by "\|" (that
     #   is, a pipe), for example: `"/folder1|/folder2"`
     #
+    # @option params [Types::TaskSchedule] :schedule
+    #   Specifies a schedule used to periodically transfer files from a source
+    #   to a destination location. You can configure your task to execute
+    #   hourly, daily, weekly or on specific days of the week. You control
+    #   when in the day or hour you want the task to execute. The time you
+    #   specify is UTC time. For more information, see task-scheduling.
+    #
     # @option params [String] :name
     #   The name of the task to update.
     #
@@ -1672,7 +1700,7 @@ module Aws::DataSync
     #       gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
     #       preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
     #       preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #       posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
+    #       posix_permissions: "NONE", # accepts NONE, PRESERVE
     #       bytes_per_second: 1,
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #     },
@@ -1682,6 +1710,9 @@ module Aws::DataSync
     #         value: "FilterValue",
     #       },
     #     ],
+    #     schedule: {
+    #       schedule_expression: "ScheduleExpressionCron", # required
+    #     },
     #     name: "TagValue",
     #     cloud_watch_log_group_arn: "LogGroupArn",
     #   })
@@ -1708,7 +1739,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

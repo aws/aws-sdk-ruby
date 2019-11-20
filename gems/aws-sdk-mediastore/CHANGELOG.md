@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-11-20)
+------------------
+
+* Feature - This release fixes a broken link in the SDK documentation.
+
 1.20.0 (2019-10-23)
 ------------------
 

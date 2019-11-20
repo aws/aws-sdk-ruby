@@ -192,6 +192,11 @@ module Aws::DataSync
     #   file system is used to read data from the EFS source location or
     #   write data to the EFS destination. By default, AWS DataSync uses the
     #   root directory.
+    #
+    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example
+    #   `/path/to/folder`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] efs_filesystem_arn
@@ -466,6 +471,11 @@ module Aws::DataSync
     #   a subdirectory of that path. The path should be such that it can be
     #   mounted by other SMB clients in your network.
     #
+    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example
+    #   `/path/to/folder`.
+    #
+    #    </note>
+    #
     #   To transfer all the data in the folder you specified, DataSync needs
     #   to have permissions to mount the SMB share, as well as to access all
     #   the data in that share. To ensure this, either ensure that the
@@ -565,7 +575,7 @@ module Aws::DataSync
     #           gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
     #           preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
     #           preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
+    #           posix_permissions: "NONE", # accepts NONE, PRESERVE
     #           bytes_per_second: 1,
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         },
@@ -575,6 +585,9 @@ module Aws::DataSync
     #             value: "FilterValue",
     #           },
     #         ],
+    #         schedule: {
+    #           schedule_expression: "ScheduleExpressionCron", # required
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -627,6 +640,12 @@ module Aws::DataSync
     #   (that is, a pipe), for example, `"/folder1|/folder2"`
     #   @return [Array<Types::FilterRule>]
     #
+    # @!attribute [rw] schedule
+    #   Specifies a schedule used to periodically transfer files from a
+    #   source to a destination location. The schedule should be specified
+    #   in UTC time. For more information, see task-scheduling.
+    #   @return [Types::TaskSchedule]
+    #
     # @!attribute [rw] tags
     #   The key-value pair that represents the tag that you want to add to
     #   the resource. The value can be an empty string.
@@ -641,6 +660,7 @@ module Aws::DataSync
       :name,
       :options,
       :excludes,
+      :schedule,
       :tags)
       include Aws::Structure
     end
@@ -1264,6 +1284,11 @@ module Aws::DataSync
     #   (that is, a pipe), for example: `"/folder1|/folder2"`
     #   @return [Array<Types::FilterRule>]
     #
+    # @!attribute [rw] schedule
+    #   The schedule used to periodically transfer files from a source to a
+    #   destination location.
+    #   @return [Types::TaskSchedule]
+    #
     # @!attribute [rw] error_code
     #   Errors that AWS DataSync encountered during execution of the task.
     #   You can use this error code to help troubleshoot issues.
@@ -1293,6 +1318,7 @@ module Aws::DataSync
       :destination_network_interface_arns,
       :options,
       :excludes,
+      :schedule,
       :error_code,
       :error_detail,
       :creation_time)
@@ -1762,7 +1788,7 @@ module Aws::DataSync
     #         gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
     #         preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
     #         preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #         posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
+    #         posix_permissions: "NONE", # accepts NONE, PRESERVE
     #         bytes_per_second: 1,
     #         task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #       }
@@ -1918,11 +1944,12 @@ module Aws::DataSync
     #
     # @!attribute [rw] task_queueing
     #   A value that determines whether tasks should be queued before
-    #   executing the tasks. If set to `Enabled`, the tasks will queued. The
-    #   default is `Enabled`.
+    #   executing the tasks. If set to `ENABLED`, the tasks will be queued.
+    #   The default is `ENABLED`.
     #
     #   If you use the same agent to run multiple tasks you can enable the
-    #   tasks to run in series. For more information see task-queue.
+    #   tasks to run in series. For more information see
+    #   queue-task-execution.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options AWS API Documentation
@@ -2048,7 +2075,7 @@ module Aws::DataSync
     #           gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
     #           preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
     #           preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
+    #           posix_permissions: "NONE", # accepts NONE, PRESERVE
     #           bytes_per_second: 1,
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         },
@@ -2204,6 +2231,11 @@ module Aws::DataSync
     #   The status of the PREPARING phase.
     #   @return [String]
     #
+    # @!attribute [rw] total_duration
+    #   The total time in milliseconds that AWS DataSync took to transfer
+    #   the file from the source to the destination location.
+    #   @return [Integer]
+    #
     # @!attribute [rw] transfer_duration
     #   The total time in milliseconds that AWS DataSync spent in the
     #   TRANSFERRING phase.
@@ -2238,6 +2270,7 @@ module Aws::DataSync
     class TaskExecutionResultDetail < Struct.new(
       :prepare_duration,
       :prepare_status,
+      :total_duration,
       :transfer_duration,
       :transfer_status,
       :verify_duration,
@@ -2270,6 +2303,33 @@ module Aws::DataSync
       :task_arn,
       :status,
       :name)
+      include Aws::Structure
+    end
+
+    # Specifies the schedule you want your task to use for repeated
+    # executions. For more information, see [Schedule Expressions for
+    # Rules][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+    #
+    # @note When making an API call, you may pass TaskSchedule
+    #   data as a hash:
+    #
+    #       {
+    #         schedule_expression: "ScheduleExpressionCron", # required
+    #       }
+    #
+    # @!attribute [rw] schedule_expression
+    #   A cron expression that specifies when AWS DataSync initiates a
+    #   scheduled transfer from a source to a destination location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskSchedule AWS API Documentation
+    #
+    class TaskSchedule < Struct.new(
+      :schedule_expression)
       include Aws::Structure
     end
 
@@ -2350,7 +2410,7 @@ module Aws::DataSync
     #           gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
     #           preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
     #           preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
+    #           posix_permissions: "NONE", # accepts NONE, PRESERVE
     #           bytes_per_second: 1,
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         },
@@ -2360,6 +2420,9 @@ module Aws::DataSync
     #             value: "FilterValue",
     #           },
     #         ],
+    #         schedule: {
+    #           schedule_expression: "ScheduleExpressionCron", # required
+    #         },
     #         name: "TagValue",
     #         cloud_watch_log_group_arn: "LogGroupArn",
     #       }
@@ -2389,6 +2452,15 @@ module Aws::DataSync
     #   (that is, a pipe), for example: `"/folder1|/folder2"`
     #   @return [Array<Types::FilterRule>]
     #
+    # @!attribute [rw] schedule
+    #   Specifies a schedule used to periodically transfer files from a
+    #   source to a destination location. You can configure your task to
+    #   execute hourly, daily, weekly or on specific days of the week. You
+    #   control when in the day or hour you want the task to execute. The
+    #   time you specify is UTC time. For more information, see
+    #   task-scheduling.
+    #   @return [Types::TaskSchedule]
+    #
     # @!attribute [rw] name
     #   The name of the task to update.
     #   @return [String]
@@ -2404,6 +2476,7 @@ module Aws::DataSync
       :task_arn,
       :options,
       :excludes,
+      :schedule,
       :name,
       :cloud_watch_log_group_arn)
       include Aws::Structure

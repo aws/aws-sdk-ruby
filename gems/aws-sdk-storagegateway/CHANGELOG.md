@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2019-11-20)
+------------------
+
+* Feature - The new DescribeAvailabilityMonitorTest API provides the results of the most recent High Availability monitoring test. The new StartAvailabilityMonitorTest API verifies the storage gateway is configured for High Availability monitoring. The new ActiveDirectoryStatus response element has been added to the DescribeSMBSettings and JoinDomain APIs to indicate the status of the gateway after the most recent JoinDomain operation. The new TimeoutInSeconds parameter of the JoinDomain API allows for the configuration of the timeout in which the JoinDomain operation must complete.
+
 1.33.0 (2019-10-23)
 ------------------
 

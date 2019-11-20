@@ -241,6 +241,38 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # An Amazon Chime SDK meeting attendee. Includes a unique `AttendeeId`
+    # and `JoinToken`. The `JoinToken` allows a client to authenticate and
+    # join as the specified attendee. The `JoinToken` expires when the
+    # meeting ends or when DeleteAttendee is called. After that, the
+    # attendee is unable to join the meeting.
+    #
+    # We recommend securely transferring each `JoinToken` from your server
+    # application to the client so that no other client has access to the
+    # token except for the one authorized to represent the attendee.
+    #
+    # @!attribute [rw] external_user_id
+    #   The Amazon Chime SDK external user ID. Links the attendee to an
+    #   identity managed by a builder application.
+    #   @return [String]
+    #
+    # @!attribute [rw] attendee_id
+    #   The Amazon Chime SDK attendee ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] join_token
+    #   The join token used by the Amazon Chime SDK attendee.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Attendee AWS API Documentation
+    #
+    class Attendee < Struct.new(
+      :external_user_id,
+      :attendee_id,
+      :join_token)
+      include Aws::Structure
+    end
+
     # The input parameters don't match the service's restrictions.
     #
     # @!attribute [rw] code
@@ -254,6 +286,52 @@ module Aws::Chime
     class BadRequestException < Struct.new(
       :code,
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchCreateAttendeeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         attendees: [ # required
+    #           {
+    #             external_user_id: "ExternalUserIdType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] attendees
+    #   The request containing the attendees to create.
+    #   @return [Array<Types::CreateAttendeeRequestItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchCreateAttendeeRequest AWS API Documentation
+    #
+    class BatchCreateAttendeeRequest < Struct.new(
+      :meeting_id,
+      :attendees)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attendees
+    #   The attendee information, including attendees IDs and join tokens.
+    #   @return [Array<Types::Attendee>]
+    #
+    # @!attribute [rw] errors
+    #   If the action fails for one or more of the attendees in the request,
+    #   a list of the attendees is returned, along with error codes and
+    #   error messages.
+    #   @return [Array<Types::CreateAttendeeError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchCreateAttendeeResponse AWS API Documentation
+    #
+    class BatchCreateAttendeeResponse < Struct.new(
+      :attendees,
+      :errors)
       include Aws::Structure
     end
 
@@ -613,6 +691,90 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The list of errors returned when errors are encountered during the
+    # BatchCreateAttendee and CreateAttendee actions. This includes external
+    # user IDs, error codes, and error messages.
+    #
+    # @!attribute [rw] external_user_id
+    #   The Amazon Chime SDK external user ID. Links the attendee to an
+    #   identity managed by a builder application.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAttendeeError AWS API Documentation
+    #
+    class CreateAttendeeError < Struct.new(
+      :external_user_id,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAttendeeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         external_user_id: "ExternalUserIdType", # required
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_user_id
+    #   The Amazon Chime SDK external user ID. Links the attendee to an
+    #   identity managed by a builder application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAttendeeRequest AWS API Documentation
+    #
+    class CreateAttendeeRequest < Struct.new(
+      :meeting_id,
+      :external_user_id)
+      include Aws::Structure
+    end
+
+    # The Amazon Chime SDK attendee fields to create, used with the
+    # BatchCreateAttendee action.
+    #
+    # @note When making an API call, you may pass CreateAttendeeRequestItem
+    #   data as a hash:
+    #
+    #       {
+    #         external_user_id: "ExternalUserIdType", # required
+    #       }
+    #
+    # @!attribute [rw] external_user_id
+    #   The Amazon Chime SDK external user ID. Links the attendee to an
+    #   identity managed by a builder application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAttendeeRequestItem AWS API Documentation
+    #
+    class CreateAttendeeRequestItem < Struct.new(
+      :external_user_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attendee
+    #   The attendee information, including attendee ID and join token.
+    #   @return [Types::Attendee]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAttendeeResponse AWS API Documentation
+    #
+    class CreateAttendeeResponse < Struct.new(
+      :attendee)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateBotRequest
     #   data as a hash:
     #
@@ -651,6 +813,63 @@ module Aws::Chime
     #
     class CreateBotResponse < Struct.new(
       :bot)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateMeetingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken", # required
+    #         meeting_host_id: "ExternalUserIdType",
+    #         media_region: "String",
+    #         notifications_configuration: {
+    #           sns_topic_arn: "Arn",
+    #           sqs_queue_arn: "Arn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   The unique identifier for the client request. Use a different token
+    #   for different meetings.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] meeting_host_id
+    #   Reserved.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_region
+    #   The Region in which to create the meeting. Available values:
+    #   `us-east-1`, `us-west-2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] notifications_configuration
+    #   The configuration for resource targets to receive notifications when
+    #   meeting and attendee events occur.
+    #   @return [Types::MeetingNotificationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingRequest AWS API Documentation
+    #
+    class CreateMeetingRequest < Struct.new(
+      :client_request_token,
+      :meeting_host_id,
+      :media_region,
+      :notifications_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] meeting
+    #   The meeting information, including the meeting ID and
+    #   `MediaPlacement`.
+    #   @return [Types::Meeting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingResponse AWS API Documentation
+    #
+    class CreateMeetingResponse < Struct.new(
+      :meeting)
       include Aws::Structure
     end
 
@@ -914,6 +1133,30 @@ module Aws::Chime
     #
     class DeleteAccountResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteAttendeeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         attendee_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] attendee_id
+    #   The Amazon Chime SDK attendee ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAttendeeRequest AWS API Documentation
+    #
+    class DeleteAttendeeRequest < Struct.new(
+      :meeting_id,
+      :attendee_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteEventsConfigurationRequest
     #   data as a hash:
     #
@@ -935,6 +1178,24 @@ module Aws::Chime
     class DeleteEventsConfigurationRequest < Struct.new(
       :account_id,
       :bot_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteMeetingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteMeetingRequest AWS API Documentation
+    #
+    class DeleteMeetingRequest < Struct.new(
+      :meeting_id)
       include Aws::Structure
     end
 
@@ -1327,6 +1588,41 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAttendeeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         attendee_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] attendee_id
+    #   The Amazon Chime SDK attendee ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAttendeeRequest AWS API Documentation
+    #
+    class GetAttendeeRequest < Struct.new(
+      :meeting_id,
+      :attendee_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attendee
+    #   The Amazon Chime SDK attendee information.
+    #   @return [Types::Attendee]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAttendeeResponse AWS API Documentation
+    #
+    class GetAttendeeResponse < Struct.new(
+      :attendee)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetBotRequest
     #   data as a hash:
     #
@@ -1410,6 +1706,35 @@ module Aws::Chime
     class GetGlobalSettingsResponse < Struct.new(
       :business_calling,
       :voice_connector)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMeetingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMeetingRequest AWS API Documentation
+    #
+    class GetMeetingRequest < Struct.new(
+      :meeting_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] meeting
+    #   The Amazon Chime SDK meeting information.
+    #   @return [Types::Meeting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMeetingResponse AWS API Documentation
+    #
+    class GetMeetingResponse < Struct.new(
+      :meeting)
       include Aws::Structure
     end
 
@@ -1912,6 +2237,52 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAttendeesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAttendeesRequest AWS API Documentation
+    #
+    class ListAttendeesRequest < Struct.new(
+      :meeting_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attendees
+    #   The Amazon Chime SDK attendee information.
+    #   @return [Array<Types::Attendee>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAttendeesResponse AWS API Documentation
+    #
+    class ListAttendeesResponse < Struct.new(
+      :attendees,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListBotsRequest
     #   data as a hash:
     #
@@ -1955,6 +2326,46 @@ module Aws::Chime
     #
     class ListBotsResponse < Struct.new(
       :bots,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMeetingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMeetingsRequest AWS API Documentation
+    #
+    class ListMeetingsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] meetings
+    #   The Amazon Chime SDK meeting information.
+    #   @return [Array<Types::Meeting>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMeetingsResponse AWS API Documentation
+    #
+    class ListMeetingsResponse < Struct.new(
+      :meetings,
       :next_token)
       include Aws::Structure
     end
@@ -2379,6 +2790,96 @@ module Aws::Chime
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/LogoutUserResponse AWS API Documentation
     #
     class LogoutUserResponse < Aws::EmptyStructure; end
+
+    # A set of endpoints used by clients to connect to the media service
+    # group for a Amazon Chime SDK meeting.
+    #
+    # @!attribute [rw] audio_host_url
+    #   The audio host URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] screen_data_url
+    #   The screen data URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] screen_sharing_url
+    #   The screen sharing URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] screen_viewing_url
+    #   The screen viewing URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] signaling_url
+    #   The signaling URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] turn_control_url
+    #   The turn control URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MediaPlacement AWS API Documentation
+    #
+    class MediaPlacement < Struct.new(
+      :audio_host_url,
+      :screen_data_url,
+      :screen_sharing_url,
+      :screen_viewing_url,
+      :signaling_url,
+      :turn_control_url)
+      include Aws::Structure
+    end
+
+    # A meeting created using the Amazon Chime SDK.
+    #
+    # @!attribute [rw] meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_placement
+    #   The media placement for the meeting.
+    #   @return [Types::MediaPlacement]
+    #
+    # @!attribute [rw] media_region
+    #   The Region in which to create the meeting. Available values:
+    #   `us-east-1`, `us-west-2`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Meeting AWS API Documentation
+    #
+    class Meeting < Struct.new(
+      :meeting_id,
+      :media_placement,
+      :media_region)
+      include Aws::Structure
+    end
+
+    # The configuration for resource targets to receive notifications when
+    # Amazon Chime SDK meeting and attendee events occur.
+    #
+    # @note When making an API call, you may pass MeetingNotificationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         sns_topic_arn: "Arn",
+    #         sqs_queue_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   The SNS topic ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] sqs_queue_arn
+    #   The SQS queue ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MeetingNotificationConfiguration AWS API Documentation
+    #
+    class MeetingNotificationConfiguration < Struct.new(
+      :sns_topic_arn,
+      :sqs_queue_arn)
+      include Aws::Structure
+    end
 
     # The member details, such as email address, name, member ID, and member
     # type.
