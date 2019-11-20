@@ -323,6 +323,7 @@ to be backwards compatible.
 | AWS MediaConnect                                      | MediaConnect                    | 2018-11-14  |
 | AWS MediaTailor                                       | MediaTailor                     | 2018-04-23  |
 | AWS Migration Hub                                     | MigrationHub                    | 2017-05-31  |
+| AWS Migration Hub Config                              | MigrationHubConfig              | 2019-06-30  |
 | AWS Mobile                                            | Mobile                          | 2017-07-01  |
 | AWS OpsWorks                                          | OpsWorks                        | 2013-02-18  |
 | AWS OpsWorks CM                                       | OpsWorksCM                      | 2016-11-01  |
@@ -450,8 +451,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 | Service Quotas                                        | ServiceQuotas                   | 2019-06-24  |

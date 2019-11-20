@@ -154,6 +154,7 @@ module Aws
     MediaStoreData
     MediaTailor
     MigrationHub
+    MigrationHubConfig
     Mobile
     Neptune
     OpsWorks

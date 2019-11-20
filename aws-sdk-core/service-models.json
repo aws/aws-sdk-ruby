@@ -522,6 +522,10 @@
     "models": "AWSMigrationHub/2017-05-31",
     "endpoint": "mgh"
   },
+  "MigrationHubConfig": {
+    "models": "migrationhub-config/2019-06-30",
+    "endpoint": "migrationhub-config"
+  },
   "Mobile": {
     "models": "mobile/2017-07-01",
     "endpoint": "mobile"
