@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.402 (2019-11-20)
+------------------
+
 * Feature - Aws::MigrationHub - Updated the API, and documentation for AWS Migration Hub.
 
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
