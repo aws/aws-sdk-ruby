@@ -222,7 +222,7 @@ module Aws
 
     describe Partitions::EndpointProvider do
       let(:partition_json) do
-        path = File.expand_path('../mock_partition.json', __FILE__)
+        path = File.expand_path('../test_partition.json', __FILE__)
         JSON.load(File.read(path))
       end
 
