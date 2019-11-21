@@ -219,5 +219,85 @@ module Aws
         end
       end
     end
+
+    describe Partitions::EndpointProvider do
+      let(:partition_json) do
+        path = File.expand_path('../mock_partition.json', __FILE__)
+        JSON.load(File.read(path))
+      end
+
+      before { Partitions.add(partition_json) }
+
+      describe '.resolve' do
+        it 'resolves the endpoint to the pattern with https' do
+          expect(
+            Partitions::EndpointProvider.resolve(
+              'us-peccy-1',
+              'peccy-service'
+            )
+          ).to eq('https://peccy-service.us-peccy-1.amazonaws.com')
+        end
+
+        it 'respects hostname formulas' do
+          expect(
+            Partitions::EndpointProvider.resolve(
+              'us-peccy-1',
+              'crazy-peccy-service'
+            )
+          ).to eq('https://us-peccy-1.crazy-peccy-service.amazonaws.com')
+        end
+
+        context 'global service' do
+          it 'resolves a global endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'peccy-global',
+                'global-peccy-service'
+              )
+            ).to eq('https://global-peccy-service.amazonaws.com')
+          end
+        end
+
+        context 'STS' do
+          it 'resolves an STS regional endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-1',
+                'sts',
+                'regional'
+              )
+            ).to eq('https://sts.us-east-1.amazonaws.com')
+          end
+
+          it 'defaults to legacy global behavior' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-1',
+                'sts'
+              )
+            ).to eq('https://sts.amazonaws.com')
+          end
+        end
+      end
+
+      describe '.signing_region' do
+        it 'gets the signing region for a given region and service' do
+          expect(
+            Partitions::EndpointProvider.signing_region(
+              'peccy-global',
+              'global-peccy-service'
+            )
+          ).to eq('us-peccy-1')
+        end
+      end
+
+      describe '.dns_suffix_for' do
+        it 'gets the dns suffix for a region' do
+          expect(
+            Partitions::EndpointProvider.dns_suffix_for('us-peccy-1')
+          ).to eq('amazonaws.com')
+        end
+      end
+    end
   end
 end

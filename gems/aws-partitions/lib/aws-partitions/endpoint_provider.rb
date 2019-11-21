@@ -60,19 +60,19 @@ module Aws
 
       # @api private Use the static class methods instead.
       def dns_suffix_for(region)
-        partition = get_partition(region)
-        partition['dnsSuffix']
+        get_partition(region)['dnsSuffix']
       end
 
       private
 
       def endpoint_for(region, service, sts_regional_endpoints)
         partition = get_partition(region)
-        endpoint = default_endpoint(partition, service, region)
         service_cfg = partition.fetch('services', {}).fetch(service, {})
 
-        # Check for service-level default endpoint.
-        endpoint = service_cfg.fetch('defaults', {}).fetch('hostname', endpoint)
+        # Find the default endpoint
+        endpoint = service_cfg
+                   .fetch('defaults', {})
+                   .fetch('hostname', partition['defaults']['hostname'])
 
         # Check for sts legacy behavior
         sts_legacy = service == 'sts' &&
@@ -90,18 +90,14 @@ module Aws
         end
 
         # Check for service/region level endpoint.
-        endpoint = service_cfg.fetch('endpoints', {})
-                              .fetch(region, {}).fetch('hostname', endpoint)
+        endpoint = service_cfg
+                   .fetch('endpoints', {})
+                   .fetch(region, {}).fetch('hostname', endpoint)
 
-        endpoint
-      end
-
-      def default_endpoint(partition, service, region)
-        hostname_template = partition['defaults']['hostname']
-        hostname_template
-          .sub('{region}', region)
-          .sub('{service}', service)
-          .sub('{dnsSuffix}', partition['dnsSuffix'])
+        # Replace placeholders from the endpoints
+        endpoint.sub('{region}', region)
+                .sub('{service}', service)
+                .sub('{dnsSuffix}', partition['dnsSuffix'])
       end
 
       def get_partition(region)
@@ -120,7 +116,7 @@ module Aws
         @rules['partitions'].find do |p|
           region.match(p['regionRegex']) ||
             p['services'].values.find do |svc|
-              svc['endpoints'].key?(region) if svc.key? 'endpoints'
+              svc['endpoints'].key?(region) if svc.key?('endpoints')
             end
         end
       end
