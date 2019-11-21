@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.403 (2019-11-21)
+------------------
+
 * Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
 
 * Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
