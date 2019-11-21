@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2019-11-21)
+------------------
+
+* Feature - With this release, you can convert an existing Amazon DynamoDB table to a global table by adding replicas in other AWS Regions.
+
 1.38.0 (2019-11-12)
 ------------------
 

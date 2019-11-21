@@ -889,6 +889,10 @@ module Aws::DynamoDB
     # a replication relationship between two or more DynamoDB tables with
     # the same table name in the provided Regions.
     #
+    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    #
+    #  </note>
+    #
     # If you want to add a new replica table to a global table, each of the
     # following conditions must be true:
     #
@@ -920,6 +924,10 @@ module Aws::DynamoDB
     # tables. You should also provision equal replicated write capacity
     # units to matching secondary indexes across your global table.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
+    #
     # @option params [required, String] :global_table_name
     #   The global table name.
     #
@@ -945,6 +953,14 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.global_table_description.replication_group[0].replica_status_description #=> String
+    #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
+    #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
+    #   resp.global_table_description.replication_group[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -1306,7 +1322,7 @@ module Aws::DynamoDB
     #       write_capacity_units: 1, # required
     #     },
     #     stream_specification: {
-    #       stream_enabled: false,
+    #       stream_enabled: false, # required
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
     #     sse_specification: {
@@ -1377,6 +1393,17 @@ module Aws::DynamoDB
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
+    #   resp.table_description.global_table_version #=> String
+    #   resp.table_description.replicas #=> Array
+    #   resp.table_description.replicas[0].region_name #=> String
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.replicas[0].replica_status_description #=> String
+    #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
+    #   resp.table_description.replicas[0].kms_master_key_id #=> String
+    #   resp.table_description.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -1855,6 +1882,17 @@ module Aws::DynamoDB
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
+    #   resp.table_description.global_table_version #=> String
+    #   resp.table_description.replicas #=> Array
+    #   resp.table_description.replicas[0].region_name #=> String
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.replicas[0].replica_status_description #=> String
+    #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
+    #   resp.table_description.replicas[0].kms_master_key_id #=> String
+    #   resp.table_description.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -2015,6 +2053,14 @@ module Aws::DynamoDB
 
     # Returns information about the specified global table.
     #
+    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
+    #
     # @option params [required, String] :global_table_name
     #   The name of the global table.
     #
@@ -2032,6 +2078,14 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.global_table_description.replication_group[0].replica_status_description #=> String
+    #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
+    #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
+    #   resp.global_table_description.replication_group[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -2047,6 +2101,14 @@ module Aws::DynamoDB
     end
 
     # Describes Region-specific settings for a global table.
+    #
+    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
     #
     # @option params [required, String] :global_table_name
     #   The name of the global table to describe.
@@ -2067,7 +2129,7 @@ module Aws::DynamoDB
     #   resp.global_table_name #=> String
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
-    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
     #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
@@ -2362,6 +2424,17 @@ module Aws::DynamoDB
     #   resp.table.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table.latest_stream_label #=> String
     #   resp.table.latest_stream_arn #=> String
+    #   resp.table.global_table_version #=> String
+    #   resp.table.replicas #=> Array
+    #   resp.table.replicas[0].region_name #=> String
+    #   resp.table.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table.replicas[0].replica_status_description #=> String
+    #   resp.table.replicas[0].replica_status_percent_progress #=> String
+    #   resp.table.replicas[0].kms_master_key_id #=> String
+    #   resp.table.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table.replicas[0].global_secondary_indexes #=> Array
+    #   resp.table.replicas[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.table.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table.restore_summary.source_backup_arn #=> String
     #   resp.table.restore_summary.source_table_arn #=> String
     #   resp.table.restore_summary.restore_date_time #=> Time
@@ -2376,6 +2449,90 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def describe_table(params = {}, options = {})
       req = build_request(:describe_table, params)
+      req.send_request(options)
+    end
+
+    # Describes auto scaling settings across replicas of the global table at
+    # once.
+    #
+    # <note markdown="1"> This method only applies to [Version 2019.11.21][1] of global tables.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @return [Types::DescribeTableReplicaAutoScalingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTableReplicaAutoScalingOutput#table_auto_scaling_description #table_auto_scaling_description} => Types::TableAutoScalingDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_table_replica_auto_scaling({
+    #     table_name: "TableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_auto_scaling_description.table_name #=> String
+    #   resp.table_auto_scaling_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_auto_scaling_description.replicas #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].region_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableReplicaAutoScaling AWS API Documentation
+    #
+    # @overload describe_table_replica_auto_scaling(params = {})
+    # @param [Hash] params ({})
+    def describe_table_replica_auto_scaling(params = {}, options = {})
+      req = build_request(:describe_table_replica_auto_scaling, params)
       req.send_request(options)
     end
 
@@ -2689,6 +2846,14 @@ module Aws::DynamoDB
     end
 
     # Lists all global tables that have a replica in the specified Region.
+    #
+    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
     #
     # @option params [String] :exclusive_start_global_table_name
     #   The first global table name that this operation will evaluate.
@@ -3851,6 +4016,17 @@ module Aws::DynamoDB
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
+    #   resp.table_description.global_table_version #=> String
+    #   resp.table_description.replicas #=> Array
+    #   resp.table_description.replicas[0].region_name #=> String
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.replicas[0].replica_status_description #=> String
+    #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
+    #   resp.table_description.replicas[0].kms_master_key_id #=> String
+    #   resp.table_description.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -4045,6 +4221,17 @@ module Aws::DynamoDB
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
+    #   resp.table_description.global_table_version #=> String
+    #   resp.table_description.replicas #=> Array
+    #   resp.table_description.replicas[0].region_name #=> String
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.replicas[0].replica_status_description #=> String
+    #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
+    #   resp.table_description.replicas[0].kms_master_key_id #=> String
+    #   resp.table_description.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -4994,6 +5181,14 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.global_table_description.replication_group[0].replica_status_description #=> String
+    #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
+    #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
+    #   resp.global_table_description.replication_group[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -5143,7 +5338,7 @@ module Aws::DynamoDB
     #   resp.global_table_name #=> String
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
-    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
     #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
@@ -5685,6 +5880,19 @@ module Aws::DynamoDB
     # @option params [Types::SSESpecification] :sse_specification
     #   The new server-side encryption settings for the specified table.
     #
+    # @option params [Array<Types::ReplicationGroupUpdate>] :replica_updates
+    #   A list of replica update actions (create, delete, or update) for the
+    #   table.
+    #
+    #   <note markdown="1"> This property only applies to [Version 2019.11.21][1] of global
+    #   tables.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    #
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
@@ -5786,7 +5994,7 @@ module Aws::DynamoDB
     #       },
     #     ],
     #     stream_specification: {
-    #       stream_enabled: false,
+    #       stream_enabled: false, # required
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
     #     sse_specification: {
@@ -5794,6 +6002,43 @@ module Aws::DynamoDB
     #       sse_type: "AES256", # accepts AES256, KMS
     #       kms_master_key_id: "KMSMasterKeyId",
     #     },
+    #     replica_updates: [
+    #       {
+    #         create: {
+    #           region_name: "RegionName", # required
+    #           kms_master_key_id: "KMSMasterKeyId",
+    #           provisioned_throughput_override: {
+    #             read_capacity_units: 1,
+    #           },
+    #           global_secondary_indexes: [
+    #             {
+    #               index_name: "IndexName", # required
+    #               provisioned_throughput_override: {
+    #                 read_capacity_units: 1,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         update: {
+    #           region_name: "RegionName", # required
+    #           kms_master_key_id: "KMSMasterKeyId",
+    #           provisioned_throughput_override: {
+    #             read_capacity_units: 1,
+    #           },
+    #           global_secondary_indexes: [
+    #             {
+    #               index_name: "IndexName", # required
+    #               provisioned_throughput_override: {
+    #                 read_capacity_units: 1,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         delete: {
+    #           region_name: "RegionName", # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5851,6 +6096,17 @@ module Aws::DynamoDB
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
+    #   resp.table_description.global_table_version #=> String
+    #   resp.table_description.replicas #=> Array
+    #   resp.table_description.replicas[0].region_name #=> String
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.replicas[0].replica_status_description #=> String
+    #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
+    #   resp.table_description.replicas[0].kms_master_key_id #=> String
+    #   resp.table_description.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -5865,6 +6121,176 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def update_table(params = {}, options = {})
       req = build_request(:update_table, params)
+      req.send_request(options)
+    end
+
+    # Updates auto scaling settings on your global tables at once.
+    #
+    # <note markdown="1"> This method only applies to [Version 2019.11.21][1] of global tables.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    #
+    # @option params [Array<Types::GlobalSecondaryIndexAutoScalingUpdate>] :global_secondary_index_updates
+    #   Represents the auto scaling settings of the global secondary indexes
+    #   of the replica to be updated.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the global table to be updated.
+    #
+    # @option params [Types::AutoScalingSettingsUpdate] :provisioned_write_capacity_auto_scaling_update
+    #   Represents the auto scaling settings to be modified for a global table
+    #   or global secondary index.
+    #
+    # @option params [Array<Types::ReplicaAutoScalingUpdate>] :replica_updates
+    #   Represents the auto scaling settings of replicas of the table that
+    #   will be modified.
+    #
+    # @return [Types::UpdateTableReplicaAutoScalingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTableReplicaAutoScalingOutput#table_auto_scaling_description #table_auto_scaling_description} => Types::TableAutoScalingDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_table_replica_auto_scaling({
+    #     global_secondary_index_updates: [
+    #       {
+    #         index_name: "IndexName",
+    #         provisioned_write_capacity_auto_scaling_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     table_name: "TableName", # required
+    #     provisioned_write_capacity_auto_scaling_update: {
+    #       minimum_units: 1,
+    #       maximum_units: 1,
+    #       auto_scaling_disabled: false,
+    #       auto_scaling_role_arn: "AutoScalingRoleArn",
+    #       scaling_policy_update: {
+    #         policy_name: "AutoScalingPolicyName",
+    #         target_tracking_scaling_policy_configuration: { # required
+    #           disable_scale_in: false,
+    #           scale_in_cooldown: 1,
+    #           scale_out_cooldown: 1,
+    #           target_value: 1.0, # required
+    #         },
+    #       },
+    #     },
+    #     replica_updates: [
+    #       {
+    #         region_name: "RegionName", # required
+    #         replica_global_secondary_index_updates: [
+    #           {
+    #             index_name: "IndexName",
+    #             provisioned_read_capacity_auto_scaling_update: {
+    #               minimum_units: 1,
+    #               maximum_units: 1,
+    #               auto_scaling_disabled: false,
+    #               auto_scaling_role_arn: "AutoScalingRoleArn",
+    #               scaling_policy_update: {
+    #                 policy_name: "AutoScalingPolicyName",
+    #                 target_tracking_scaling_policy_configuration: { # required
+    #                   disable_scale_in: false,
+    #                   scale_in_cooldown: 1,
+    #                   scale_out_cooldown: 1,
+    #                   target_value: 1.0, # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         replica_provisioned_read_capacity_auto_scaling_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_auto_scaling_description.table_name #=> String
+    #   resp.table_auto_scaling_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_auto_scaling_description.replicas #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].region_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].index_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableReplicaAutoScaling AWS API Documentation
+    #
+    # @overload update_table_replica_auto_scaling(params = {})
+    # @param [Hash] params ({})
+    def update_table_replica_auto_scaling(params = {}, options = {})
+      req = build_request(:update_table_replica_auto_scaling, params)
       req.send_request(options)
     end
 
@@ -5953,7 +6379,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

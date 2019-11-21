@@ -8977,6 +8977,57 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Update a resource data sync. After you create a resource data sync for
+    # a Region, you can't change the account options for that sync. For
+    # example, if you create a sync in the us-east-2 (Ohio) Region and you
+    # choose the Include only the current account option, you can't edit
+    # that sync later and choose the Include all accounts from my AWS
+    # Organizations configuration option. Instead, you must delete the first
+    # resource data sync, and create a new one.
+    #
+    # @option params [required, String] :sync_name
+    #   The name of the resource data sync you want to update.
+    #
+    # @option params [required, String] :sync_type
+    #   The type of resource data sync. If `SyncType` is `SyncToDestination`,
+    #   then the resource data sync synchronizes data to an Amazon S3 bucket.
+    #   If the `SyncType` is `SyncFromSource` then the resource data sync
+    #   synchronizes data from AWS Organizations or from multiple AWS Regions.
+    #
+    # @option params [required, Types::ResourceDataSyncSource] :sync_source
+    #   Specify information about the data sources to synchronize.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_data_sync({
+    #     sync_name: "ResourceDataSyncName", # required
+    #     sync_type: "ResourceDataSyncType", # required
+    #     sync_source: { # required
+    #       source_type: "ResourceDataSyncSourceType", # required
+    #       aws_organizations_source: {
+    #         organization_source_type: "ResourceDataSyncOrganizationSourceType", # required
+    #         organizational_units: [
+    #           {
+    #             organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
+    #           },
+    #         ],
+    #       },
+    #       source_regions: ["ResourceDataSyncSourceRegion"], # required
+    #       include_future_regions: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateResourceDataSync AWS API Documentation
+    #
+    # @overload update_resource_data_sync(params = {})
+    # @param [Hash] params ({})
+    def update_resource_data_sync(params = {}, options = {})
+      req = build_request(:update_resource_data_sync, params)
+      req.send_request(options)
+    end
+
     # `ServiceSetting` is an account-level setting for an AWS service. This
     # setting defines how a user interacts with or uses a service or a
     # feature of a service. For example, if an AWS service charges money to
@@ -9032,7 +9083,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

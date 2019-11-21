@@ -8,6 +8,32 @@
 module Aws::Connect
   module Types
 
+    # A chat message.
+    #
+    # @note When making an API call, you may pass ChatMessage
+    #   data as a hash:
+    #
+    #       {
+    #         content_type: "ChatContentType", # required
+    #         content: "ChatContent", # required
+    #       }
+    #
+    # @!attribute [rw] content_type
+    #   The type of the content. Supported types are text/plain.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the chat message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ChatMessage AWS API Documentation
+    #
+    class ChatMessage < Struct.new(
+      :content_type,
+      :content)
+      include Aws::Structure
+    end
+
     # Contains summary information about a contact flow.
     #
     # @!attribute [rw] id
@@ -201,7 +227,7 @@ module Aws::Connect
     #   data as a hash:
     #
     #       {
-    #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED
+    #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
     #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #       }
     #
@@ -430,7 +456,7 @@ module Aws::Connect
     #
     #       {
     #         queues: ["QueueId"],
-    #         channels: ["VOICE"], # accepts VOICE
+    #         channels: ["VOICE"], # accepts VOICE, CHAT
     #       }
     #
     # @!attribute [rw] queues
@@ -492,12 +518,12 @@ module Aws::Connect
     #         instance_id: "InstanceId", # required
     #         filters: { # required
     #           queues: ["QueueId"],
-    #           channels: ["VOICE"], # accepts VOICE
+    #           channels: ["VOICE"], # accepts VOICE, CHAT
     #         },
     #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #         current_metrics: [ # required
     #           {
-    #             name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED
+    #             name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
     #             unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #           },
     #         ],
@@ -552,6 +578,10 @@ module Aws::Connect
     #
     #   : Unit: COUNT
     #
+    #   AGENTS\_ON\_CONTACT
+    #
+    #   : Unit: COUNT
+    #
     #   AGENTS\_ONLINE
     #
     #   : Unit: COUNT
@@ -571,6 +601,14 @@ module Aws::Connect
     #   OLDEST\_CONTACT\_AGE
     #
     #   : Unit: SECONDS
+    #
+    #   SLOTS\_ACTIVE
+    #
+    #   : Unit: COUNT
+    #
+    #   SLOTS\_AVAILABLE
+    #
+    #   : Unit: COUNT
     #   @return [Array<Types::CurrentMetric>]
     #
     # @!attribute [rw] next_token
@@ -664,7 +702,7 @@ module Aws::Connect
     #         end_time: Time.now, # required
     #         filters: { # required
     #           queues: ["QueueId"],
-    #           channels: ["VOICE"], # accepts VOICE
+    #           channels: ["VOICE"], # accepts VOICE, CHAT
     #         },
     #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #         historical_metrics: [ # required
@@ -1689,6 +1727,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The customer's details.
+    #
+    # @note When making an API call, you may pass ParticipantDetails
+    #   data as a hash:
+    #
+    #       {
+    #         display_name: "DisplayName", # required
+    #       }
+    #
+    # @!attribute [rw] display_name
+    #   Display name of the participant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ParticipantDetails AWS API Documentation
+    #
+    class ParticipantDetails < Struct.new(
+      :display_name)
+      include Aws::Structure
+    end
+
     # Contains summary information about a phone number for a contact
     # center.
     #
@@ -1826,6 +1884,99 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartChatContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #         attributes: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #         participant_details: { # required
+    #           display_name: "DisplayName", # required
+    #         },
+    #         initial_message: {
+    #           content_type: "ChatContentType", # required
+    #           content: "ChatContent", # required
+    #         },
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow for the chat.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in contact
+    #   flows just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] participant_details
+    #   Information identifying the participant.
+    #   @return [Types::ParticipantDetails]
+    #
+    # @!attribute [rw] initial_message
+    #   The initial message to be sent to the newly created chat.
+    #   @return [Types::ChatMessage]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
+    #
+    class StartChatContactRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :attributes,
+      :participant_details,
+      :initial_message,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_id
+    #   The identifier of this contact within the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_id
+    #   The identifier for a chat participant. The participantId for a chat
+    #   participant is the same throughout the chat lifecycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_token
+    #   The token used by the chat participant to call
+    #   [CreateParticipantConnection][1]. The participant token is valid for
+    #   the lifetime of a chat participant.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactResponse AWS API Documentation
+    #
+    class StartChatContactResponse < Struct.new(
+      :contact_id,
+      :participant_id,
+      :participant_token)
       include Aws::Structure
     end
 

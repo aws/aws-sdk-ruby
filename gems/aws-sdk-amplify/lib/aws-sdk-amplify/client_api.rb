@@ -28,7 +28,9 @@ module Aws::Amplify
     AutoBranchCreationConfig = Shapes::StructureShape.new(name: 'AutoBranchCreationConfig')
     AutoBranchCreationPattern = Shapes::StringShape.new(name: 'AutoBranchCreationPattern')
     AutoBranchCreationPatterns = Shapes::ListShape.new(name: 'AutoBranchCreationPatterns')
+    BackendEnvironment = Shapes::StructureShape.new(name: 'BackendEnvironment')
     BackendEnvironmentArn = Shapes::StringShape.new(name: 'BackendEnvironmentArn')
+    BackendEnvironments = Shapes::ListShape.new(name: 'BackendEnvironments')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BasicAuthCredentials = Shapes::StringShape.new(name: 'BasicAuthCredentials')
     Branch = Shapes::StructureShape.new(name: 'Branch')
@@ -45,6 +47,8 @@ module Aws::Amplify
     Context = Shapes::StringShape.new(name: 'Context')
     CreateAppRequest = Shapes::StructureShape.new(name: 'CreateAppRequest')
     CreateAppResult = Shapes::StructureShape.new(name: 'CreateAppResult')
+    CreateBackendEnvironmentRequest = Shapes::StructureShape.new(name: 'CreateBackendEnvironmentRequest')
+    CreateBackendEnvironmentResult = Shapes::StructureShape.new(name: 'CreateBackendEnvironmentResult')
     CreateBranchRequest = Shapes::StructureShape.new(name: 'CreateBranchRequest')
     CreateBranchResult = Shapes::StructureShape.new(name: 'CreateBranchResult')
     CreateDeploymentRequest = Shapes::StructureShape.new(name: 'CreateDeploymentRequest')
@@ -62,6 +66,8 @@ module Aws::Amplify
     DefaultDomain = Shapes::StringShape.new(name: 'DefaultDomain')
     DeleteAppRequest = Shapes::StructureShape.new(name: 'DeleteAppRequest')
     DeleteAppResult = Shapes::StructureShape.new(name: 'DeleteAppResult')
+    DeleteBackendEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteBackendEnvironmentRequest')
+    DeleteBackendEnvironmentResult = Shapes::StructureShape.new(name: 'DeleteBackendEnvironmentResult')
     DeleteBranchRequest = Shapes::StructureShape.new(name: 'DeleteBranchRequest')
     DeleteBranchResult = Shapes::StructureShape.new(name: 'DeleteBranchResult')
     DeleteDomainAssociationRequest = Shapes::StructureShape.new(name: 'DeleteDomainAssociationRequest')
@@ -71,6 +77,7 @@ module Aws::Amplify
     DeleteWebhookRequest = Shapes::StructureShape.new(name: 'DeleteWebhookRequest')
     DeleteWebhookResult = Shapes::StructureShape.new(name: 'DeleteWebhookResult')
     DependentServiceFailureException = Shapes::StructureShape.new(name: 'DependentServiceFailureException')
+    DeploymentArtifacts = Shapes::StringShape.new(name: 'DeploymentArtifacts')
     Description = Shapes::StringShape.new(name: 'Description')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     DomainAssociation = Shapes::StructureShape.new(name: 'DomainAssociation')
@@ -89,6 +96,7 @@ module Aws::Amplify
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     EnvKey = Shapes::StringShape.new(name: 'EnvKey')
     EnvValue = Shapes::StringShape.new(name: 'EnvValue')
+    EnvironmentName = Shapes::StringShape.new(name: 'EnvironmentName')
     EnvironmentVariables = Shapes::MapShape.new(name: 'EnvironmentVariables')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FileMap = Shapes::MapShape.new(name: 'FileMap')
@@ -101,6 +109,8 @@ module Aws::Amplify
     GetAppResult = Shapes::StructureShape.new(name: 'GetAppResult')
     GetArtifactUrlRequest = Shapes::StructureShape.new(name: 'GetArtifactUrlRequest')
     GetArtifactUrlResult = Shapes::StructureShape.new(name: 'GetArtifactUrlResult')
+    GetBackendEnvironmentRequest = Shapes::StructureShape.new(name: 'GetBackendEnvironmentRequest')
+    GetBackendEnvironmentResult = Shapes::StructureShape.new(name: 'GetBackendEnvironmentResult')
     GetBranchRequest = Shapes::StructureShape.new(name: 'GetBranchRequest')
     GetBranchResult = Shapes::StructureShape.new(name: 'GetBranchResult')
     GetDomainAssociationRequest = Shapes::StructureShape.new(name: 'GetDomainAssociationRequest')
@@ -124,6 +134,8 @@ module Aws::Amplify
     ListAppsResult = Shapes::StructureShape.new(name: 'ListAppsResult')
     ListArtifactsRequest = Shapes::StructureShape.new(name: 'ListArtifactsRequest')
     ListArtifactsResult = Shapes::StructureShape.new(name: 'ListArtifactsResult')
+    ListBackendEnvironmentsRequest = Shapes::StructureShape.new(name: 'ListBackendEnvironmentsRequest')
+    ListBackendEnvironmentsResult = Shapes::StructureShape.new(name: 'ListBackendEnvironmentsResult')
     ListBranchesRequest = Shapes::StructureShape.new(name: 'ListBranchesRequest')
     ListBranchesResult = Shapes::StructureShape.new(name: 'ListBranchesResult')
     ListDomainAssociationsRequest = Shapes::StructureShape.new(name: 'ListDomainAssociationsRequest')
@@ -151,6 +163,7 @@ module Aws::Amplify
     ServiceRoleArn = Shapes::StringShape.new(name: 'ServiceRoleArn')
     Source = Shapes::StringShape.new(name: 'Source')
     SourceUrl = Shapes::StringShape.new(name: 'SourceUrl')
+    StackName = Shapes::StringShape.new(name: 'StackName')
     Stage = Shapes::StringShape.new(name: 'Stage')
     StartDeploymentRequest = Shapes::StructureShape.new(name: 'StartDeploymentRequest')
     StartDeploymentResult = Shapes::StructureShape.new(name: 'StartDeploymentResult')
@@ -247,6 +260,16 @@ module Aws::Amplify
 
     AutoBranchCreationPatterns.member = Shapes::ShapeRef.new(shape: AutoBranchCreationPattern)
 
+    BackendEnvironment.add_member(:backend_environment_arn, Shapes::ShapeRef.new(shape: BackendEnvironmentArn, required: true, location_name: "backendEnvironmentArn"))
+    BackendEnvironment.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location_name: "environmentName"))
+    BackendEnvironment.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "stackName"))
+    BackendEnvironment.add_member(:deployment_artifacts, Shapes::ShapeRef.new(shape: DeploymentArtifacts, location_name: "deploymentArtifacts"))
+    BackendEnvironment.add_member(:create_time, Shapes::ShapeRef.new(shape: CreateTime, required: true, location_name: "createTime"))
+    BackendEnvironment.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, required: true, location_name: "updateTime"))
+    BackendEnvironment.struct_class = Types::BackendEnvironment
+
+    BackendEnvironments.member = Shapes::ShapeRef.new(shape: BackendEnvironment)
+
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
 
@@ -301,6 +324,15 @@ module Aws::Amplify
 
     CreateAppResult.add_member(:app, Shapes::ShapeRef.new(shape: App, required: true, location_name: "app"))
     CreateAppResult.struct_class = Types::CreateAppResult
+
+    CreateBackendEnvironmentRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
+    CreateBackendEnvironmentRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location_name: "environmentName"))
+    CreateBackendEnvironmentRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "stackName"))
+    CreateBackendEnvironmentRequest.add_member(:deployment_artifacts, Shapes::ShapeRef.new(shape: DeploymentArtifacts, location_name: "deploymentArtifacts"))
+    CreateBackendEnvironmentRequest.struct_class = Types::CreateBackendEnvironmentRequest
+
+    CreateBackendEnvironmentResult.add_member(:backend_environment, Shapes::ShapeRef.new(shape: BackendEnvironment, required: true, location_name: "backendEnvironment"))
+    CreateBackendEnvironmentResult.struct_class = Types::CreateBackendEnvironmentResult
 
     CreateBranchRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     CreateBranchRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "branchName"))
@@ -366,6 +398,13 @@ module Aws::Amplify
 
     DeleteAppResult.add_member(:app, Shapes::ShapeRef.new(shape: App, required: true, location_name: "app"))
     DeleteAppResult.struct_class = Types::DeleteAppResult
+
+    DeleteBackendEnvironmentRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
+    DeleteBackendEnvironmentRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "environmentName"))
+    DeleteBackendEnvironmentRequest.struct_class = Types::DeleteBackendEnvironmentRequest
+
+    DeleteBackendEnvironmentResult.add_member(:backend_environment, Shapes::ShapeRef.new(shape: BackendEnvironment, required: true, location_name: "backendEnvironment"))
+    DeleteBackendEnvironmentResult.struct_class = Types::DeleteBackendEnvironmentResult
 
     DeleteBranchRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     DeleteBranchRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location: "uri", location_name: "branchName"))
@@ -440,6 +479,13 @@ module Aws::Amplify
     GetArtifactUrlResult.add_member(:artifact_url, Shapes::ShapeRef.new(shape: ArtifactUrl, required: true, location_name: "artifactUrl"))
     GetArtifactUrlResult.struct_class = Types::GetArtifactUrlResult
 
+    GetBackendEnvironmentRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
+    GetBackendEnvironmentRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "environmentName"))
+    GetBackendEnvironmentRequest.struct_class = Types::GetBackendEnvironmentRequest
+
+    GetBackendEnvironmentResult.add_member(:backend_environment, Shapes::ShapeRef.new(shape: BackendEnvironment, required: true, location_name: "backendEnvironment"))
+    GetBackendEnvironmentResult.struct_class = Types::GetBackendEnvironmentResult
+
     GetBranchRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     GetBranchRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location: "uri", location_name: "branchName"))
     GetBranchRequest.struct_class = Types::GetBranchRequest
@@ -509,6 +555,16 @@ module Aws::Amplify
     ListArtifactsResult.add_member(:artifacts, Shapes::ShapeRef.new(shape: Artifacts, required: true, location_name: "artifacts"))
     ListArtifactsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListArtifactsResult.struct_class = Types::ListArtifactsResult
+
+    ListBackendEnvironmentsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
+    ListBackendEnvironmentsRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "environmentName"))
+    ListBackendEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListBackendEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListBackendEnvironmentsRequest.struct_class = Types::ListBackendEnvironmentsRequest
+
+    ListBackendEnvironmentsResult.add_member(:backend_environments, Shapes::ShapeRef.new(shape: BackendEnvironments, required: true, location_name: "backendEnvironments"))
+    ListBackendEnvironmentsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBackendEnvironmentsResult.struct_class = Types::ListBackendEnvironmentsResult
 
     ListBranchesRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     ListBranchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -750,6 +806,19 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceFailureException)
       end)
 
+      api.add_operation(:create_backend_environment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBackendEnvironment"
+        o.http_method = "POST"
+        o.http_request_uri = "/apps/{appId}/backendenvironments"
+        o.input = Shapes::ShapeRef.new(shape: CreateBackendEnvironmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBackendEnvironmentResult)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:create_branch, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateBranch"
         o.http_method = "POST"
@@ -813,6 +882,19 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceFailureException)
+      end)
+
+      api.add_operation(:delete_backend_environment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBackendEnvironment"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/apps/{appId}/backendenvironments/{environmentName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBackendEnvironmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBackendEnvironmentResult)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceFailureException)
       end)
@@ -906,6 +988,18 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:get_backend_environment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBackendEnvironment"
+        o.http_method = "GET"
+        o.http_request_uri = "/apps/{appId}/backendenvironments/{environmentName}"
+        o.input = Shapes::ShapeRef.new(shape: GetBackendEnvironmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBackendEnvironmentResult)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:get_branch, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBranch"
         o.http_method = "GET"
@@ -977,6 +1071,17 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:list_backend_environments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBackendEnvironments"
+        o.http_method = "GET"
+        o.http_request_uri = "/apps/{appId}/backendenvironments"
+        o.input = Shapes::ShapeRef.new(shape: ListBackendEnvironmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBackendEnvironmentsResult)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:list_branches, Seahorse::Model::Operation.new.tap do |o|

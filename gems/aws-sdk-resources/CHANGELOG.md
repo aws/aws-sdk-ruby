@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.61.0 (2019-11-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-connectparticipant` gem.
+
 3.60.0 (2019-11-20)
 ------------------
 

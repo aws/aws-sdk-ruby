@@ -515,8 +515,9 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
-    # Deletes the specified conformance pack and all the AWS Config rules
-    # and all evaluation results within that conformance pack.
+    # Deletes the specified conformance pack and all the AWS Config rules,
+    # remediation actions, and all evaluation results within that
+    # conformance pack.
     #
     # AWS Config sets the conformance pack to `DELETE_IN_PROGRESS` until the
     # deletion is complete. You cannot update a conformance pack while it is
@@ -746,6 +747,35 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def delete_remediation_exceptions(params = {}, options = {})
       req = build_request(:delete_remediation_exceptions, params)
+      req.send_request(options)
+    end
+
+    # Records the configuration state for a custom resource that has been
+    # deleted. This API records a new ConfigurationItem with a
+    # ResourceDeleted status. You can retrieve the ConfigurationItems
+    # recorded for this resource in your AWS Config History.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of the resource.
+    #
+    # @option params [required, String] :resource_id
+    #   Unique identifier of the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_config({
+    #     resource_type: "ResourceTypeString", # required
+    #     resource_id: "ResourceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteResourceConfig AWS API Documentation
+    #
+    # @overload delete_resource_config(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_config(params = {}, options = {})
+      req = build_request(:delete_resource_config, params)
       req.send_request(options)
     end
 
@@ -1394,10 +1424,9 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
-    # Returns compliance information for each rule in that conformance pack.
+    # Returns compliance details for each rule in that conformance pack.
     #
-    # <note markdown="1"> You must provide exact rule names otherwise AWS Config cannot return
-    # evaluation results due to insufficient data.
+    # <note markdown="1"> You must provide exact rule names.
     #
     #  </note>
     #
@@ -1452,11 +1481,15 @@ module Aws::ConfigService
 
     # Provides one or more conformance packs deployment status.
     #
+    # <note markdown="1"> If there are no conformance packs then you will see an empty result.
+    #
+    #  </note>
+    #
     # @option params [Array<String>] :conformance_pack_names
     #   Comma-separated list of conformance pack names.
     #
     # @option params [Integer] :limit
-    #   The maximum number of conformance packs returned on each page.
+    #   The maximum number of conformance packs status returned on each page.
     #
     # @option params [String] :next_token
     #   The `nextToken` string returned in a previous request that you use to
@@ -1844,10 +1877,13 @@ module Aws::ConfigService
     # Returns a list of organization conformance packs.
     #
     # <note markdown="1"> When you specify the limit and the next token, you receive a paginated
-    # response. Limit and next token are not applicable if you specify
-    # organization conformance packs names. They are only applicable, when
-    # you request all the organization conformance packs. Only a master
-    # account can call this API.
+    # response.
+    #
+    #  Limit and next token are not applicable if you specify organization
+    # conformance packs names. They are only applicable, when you request
+    # all the organization conformance packs.
+    #
+    #  Only a master account can call this API.
     #
     #  </note>
     #
@@ -2697,11 +2733,19 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns compliance details for the conformance pack based on the
+    # cumulative compliance results of all the rules in that conformance
+    # pack.
+    #
     # @option params [required, Array<String>] :conformance_pack_names
+    #   Names of conformance packs.
     #
     # @option params [Integer] :limit
+    #   The maximum number of conformance packs returned on each page.
     #
     # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
     #
     # @return [Types::GetConformancePackComplianceSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3518,7 +3562,7 @@ module Aws::ConfigService
 
     # Creates or updates a conformance pack. A conformance pack is a
     # collection of AWS Config rules that can be easily deployed in an
-    # account and a region.
+    # account and a region and across AWS Organization.
     #
     # This API creates a service linked role
     # `AWSServiceRoleForConfigConforms` in your account. The service linked
@@ -3535,10 +3579,10 @@ module Aws::ConfigService
     #   Name of the conformance pack you want to create.
     #
     # @option params [String] :template_s3_uri
-    #   Location of file containing the template body. The uri must point to
-    #   the conformance pack template (max size: 300,000 bytes) that is
-    #   located in an Amazon S3 bucket in the same region as the conformance
-    #   pack.
+    #   Location of file containing the template body
+    #   (`s3://bucketname/prefix`). The uri must point to the conformance pack
+    #   template (max size: 300 KB) that is located in an Amazon S3 bucket in
+    #   the same region as the conformance pack.
     #
     #   <note markdown="1"> You must have access to read Amazon S3 bucket.
     #
@@ -3550,14 +3594,13 @@ module Aws::ConfigService
     #   maximum length of 51,200 bytes.
     #
     #   <note markdown="1"> You can only use a YAML template with one resource type, that is,
-    #   config rule.
+    #   config rule and a remediation action.
     #
     #    </note>
     #
     # @option params [required, String] :delivery_s3_bucket
-    #   Location of an Amazon S3 bucket where AWS Config can deliver
-    #   evaluation results. AWS Config stores intermediate files while
-    #   processing conformance pack template.
+    #   AWS Config stores intermediate files while processing conformance pack
+    #   template.
     #
     # @option params [String] :delivery_s3_key_prefix
     #   The prefix for the Amazon S3 bucket.
@@ -3797,18 +3840,25 @@ module Aws::ConfigService
     # Deploys conformance packs across member accounts in an AWS
     # Organization.
     #
-    # This API enables organization service access through the
+    # This API enables organization service access for
+    # `config-multiaccountsetup.amazonaws.com` through the
     # `EnableAWSServiceAccess` action and creates a service linked role
-    # AWSServiceRoleForConfigMultiAccountSetup in the master account of your
-    # organization. The service linked role is created only when the role
-    # does not exist in the master account. AWS Config verifies the
+    # `AWSServiceRoleForConfigMultiAccountSetup` in the master account of
+    # your organization. The service linked role is created only when the
+    # role does not exist in the master account. AWS Config verifies the
     # existence of role with GetRole action.
     #
-    # <note markdown="1"> The SPN is `config-multiaccountsetup.amazonaws.com`.
-    #
-    #  You must specify either the `TemplateS3Uri` or the `TemplateBody`
+    # <note markdown="1"> You must specify either the `TemplateS3Uri` or the `TemplateBody`
     # parameter, but not both. If you provide both AWS Config uses the
     # `TemplateS3Uri` parameter and ignores the `TemplateBody` parameter.
+    #
+    #  AWS Config sets the state of a conformance pack to
+    # CREATE\_IN\_PROGRESS and UPDATE\_IN\_PROGRESS until the confomance
+    # pack is created or updated. You cannot update a conformance pack while
+    # it is in this state.
+    #
+    #  You can create 6 conformance packs with 25 AWS Config rules in each
+    # pack.
     #
     #  </note>
     #
@@ -3817,7 +3867,7 @@ module Aws::ConfigService
     #
     # @option params [String] :template_s3_uri
     #   Location of file containing the template body. The uri must point to
-    #   the conformance pack template (max size: 300,000 bytes).
+    #   the conformance pack template (max size: 300 KB).
     #
     #   <note markdown="1"> You must have access to read Amazon S3 bucket.
     #
@@ -3832,6 +3882,15 @@ module Aws::ConfigService
     #   Location of an Amazon S3 bucket where AWS Config can deliver
     #   evaluation results. AWS Config stores intermediate files while
     #   processing conformance pack template.
+    #
+    #   The delivery bucket name should start with awsconfigconforms. For
+    #   example: "Resource": "arn:aws:s3:::your\_bucket\_name/*". For
+    #   more information, see [Permissions for cross account bucket
+    #   access][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html
     #
     # @option params [String] :delivery_s3_key_prefix
     #   The prefix for the Amazon S3 bucket.
@@ -4012,6 +4071,77 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def put_remediation_exceptions(params = {}, options = {})
       req = build_request(:put_remediation_exceptions, params)
+      req.send_request(options)
+    end
+
+    # Records the configuration state for the resource provided in the
+    # request. The configuration state of a resource is represented in AWS
+    # Config as Configuration Items. Once this API records the configuration
+    # item, you can retrieve the list of configuration items for the custom
+    # resource type using existing AWS Config APIs.
+    #
+    # <note markdown="1"> The custom resource type must be registered with AWS CloudFormation.
+    # This API accepts the configuration item registered with AWS
+    # CloudFormation.
+    #
+    #  When you call this API, AWS Config only stores configuration state of
+    # the resource provided in the request. This API does not change or
+    # remediate the configuration of the resource.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :resource_type
+    #   The type of the resource. The custom resource type must be registered
+    #   with AWS CloudFormation.
+    #
+    #   <note markdown="1"> You cannot use the organization names “aws”, “amzn”, “amazon”,
+    #   “alexa”, “custom” with custom resource types. It is the first part of
+    #   the ResourceType up to the first ::.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :schema_version_id
+    #   Version of the schema registered for the ResourceType in AWS
+    #   CloudFormation.
+    #
+    # @option params [required, String] :resource_id
+    #   Unique identifier of the resource.
+    #
+    # @option params [String] :resource_name
+    #   Name of the resource.
+    #
+    # @option params [required, String] :configuration
+    #   The configuration object of the resource in valid JSON format. It must
+    #   match the schema registered with AWS CloudFormation.
+    #
+    #   <note markdown="1"> The configuration JSON must not exceed 64 KB.
+    #
+    #    </note>
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags associated with the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_config({
+    #     resource_type: "ResourceTypeString", # required
+    #     schema_version_id: "SchemaVersionId", # required
+    #     resource_id: "ResourceId", # required
+    #     resource_name: "ResourceName",
+    #     configuration: "Configuration", # required
+    #     tags: {
+    #       "Name" => "Value",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutResourceConfig AWS API Documentation
+    #
+    # @overload put_resource_config(params = {})
+    # @param [Hash] params ({})
+    def put_resource_config(params = {}, options = {})
+      req = build_request(:put_resource_config, params)
       req.send_request(options)
     end
 
@@ -4347,7 +4477,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -48,6 +48,7 @@ module Aws
   autoload :ComprehendMedical, 'aws-sdk-comprehendmedical'
   autoload :ConfigService, 'aws-sdk-configservice'
   autoload :Connect, 'aws-sdk-connect'
+  autoload :ConnectParticipant, 'aws-sdk-connectparticipant'
   autoload :CostExplorer, 'aws-sdk-costexplorer'
   autoload :CostandUsageReportService, 'aws-sdk-costandusagereportservice'
   autoload :DAX, 'aws-sdk-dax'

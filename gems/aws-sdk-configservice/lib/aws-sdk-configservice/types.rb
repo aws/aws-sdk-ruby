@@ -1146,11 +1146,14 @@ module Aws::ConfigService
     #   information about CloudTrail, see [What Is AWS CloudTrail][1].
     #
     #   An empty field indicates that the current configuration was not
-    #   initiated by any event.
+    #   initiated by any event. As of Version 1.3, the relatedEvents field
+    #   is empty. You can access the [LookupEvents API][2] in the *AWS
+    #   CloudTrail API Reference* to retrieve the events for the resource.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_LookupEvents.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] relationships
@@ -1309,10 +1312,15 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Summary includes the name and status of the conformance pack.
+    #
     # @!attribute [rw] conformance_pack_name
+    #   The name of the conformance pack name.
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_compliance_status
+    #   The status of the conformance pack. The allowed values are COMPLIANT
+    #   and NON\_COMPLIANT.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackComplianceSummary AWS API Documentation
@@ -1324,8 +1332,8 @@ module Aws::ConfigService
     end
 
     # Returns details of a conformance pack. A conformance pack is a
-    # collection of AWS Config rules that can be easily deployed in an
-    # account and a region.
+    # collection of AWS Config rules and remediation actions that can be
+    # easily deployed in an account and a region.
     #
     # @!attribute [rw] conformance_pack_name
     #   Name of the conformance pack.
@@ -1340,13 +1348,13 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_bucket
-    #   Location of an Amazon S3 bucket where AWS Config can deliver
-    #   evaluation results and conformance pack template that is used to
-    #   create a pack.
+    #   Conformance pack template that is used to create a pack. The
+    #   delivery bucket name should start with awsconfigconforms. For
+    #   example: "Resource": "arn:aws:s3:::your\_bucket\_name/*".
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
-    #   Any folder structure you want to add to an Amazon S3 bucket.
+    #   The prefix for the Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_input_parameters
@@ -1358,6 +1366,7 @@ module Aws::ConfigService
     #   @return [Time]
     #
     # @!attribute [rw] created_by
+    #   AWS service that created the conformance pack.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackDetail AWS API Documentation
@@ -1404,6 +1413,11 @@ module Aws::ConfigService
     #
     # @!attribute [rw] resource_ids
     #   Filters the results by resource IDs.
+    #
+    #   <note markdown="1"> This is valid only when you provide resource type. If there is no
+    #   resource type, you will see an error.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackEvaluationFilters AWS API Documentation
@@ -1421,9 +1435,8 @@ module Aws::ConfigService
     # conformance pack, related time stamps, and supplementary information.
     #
     # @!attribute [rw] compliance_type
-    #   Filters the results by compliance.
-    #
-    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   The compliance type. The allowed values are `COMPLIANT` and
+    #   `NON_COMPLIANT`.
     #   @return [String]
     #
     # @!attribute [rw] evaluation_result_identifier
@@ -1488,11 +1501,11 @@ module Aws::ConfigService
     # compliance types.
     #
     # @!attribute [rw] config_rule_name
-    #   Filters the results by AWS Config rule name.
+    #   Name of the config rule.
     #   @return [String]
     #
     # @!attribute [rw] compliance_type
-    #   Filters the results by compliance.
+    #   Compliance of the AWS Config rule
     #
     #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
     #   @return [String]
@@ -1536,7 +1549,7 @@ module Aws::ConfigService
     #   * DELETE\_IN\_PROGRESS when a conformance pack deletion is in
     #     progress.
     #
-    #   * DELETE\_FAILED when a conformance pack deletion failed from your
+    #   * DELETE\_FAILED when a conformance pack deletion failed in your
     #     account.
     #   @return [String]
     #
@@ -1848,6 +1861,30 @@ module Aws::ConfigService
     #
     class DeleteRemediationExceptionsResponse < Struct.new(
       :failed_batches)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "ResourceTypeString", # required
+    #         resource_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Unique identifier of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteResourceConfigRequest AWS API Documentation
+    #
+    class DeleteResourceConfigRequest < Struct.new(
+      :resource_type,
+      :resource_id)
       include Aws::Structure
     end
 
@@ -2600,7 +2637,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
-    #   The maximum number of conformance packs returned on each page.
+    #   The maximum number of conformance packs status returned on each
+    #   page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -3979,12 +4017,16 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] conformance_pack_names
+    #   Names of conformance packs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
+    #   The maximum number of conformance packs returned on each page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceSummaryRequest AWS API Documentation
@@ -3997,9 +4039,12 @@ module Aws::ConfigService
     end
 
     # @!attribute [rw] conformance_pack_compliance_summary_list
+    #   A list of `ConformancePackComplianceSummary` objects.
     #   @return [Array<Types::ConformancePackComplianceSummary>]
     #
     # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceSummaryResponse AWS API Documentation
@@ -4919,7 +4964,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] error_code
     #   An error code that is returned when organization conformance pack
-    #   creation or deletion has failed in the member account.
+    #   creation or deletion has failed in a member account.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -5422,10 +5467,10 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] template_s3_uri
-    #   Location of file containing the template body. The uri must point to
-    #   the conformance pack template (max size: 300,000 bytes) that is
-    #   located in an Amazon S3 bucket in the same region as the conformance
-    #   pack.
+    #   Location of file containing the template body
+    #   (`s3://bucketname/prefix`). The uri must point to the conformance
+    #   pack template (max size: 300 KB) that is located in an Amazon S3
+    #   bucket in the same region as the conformance pack.
     #
     #   <note markdown="1"> You must have access to read Amazon S3 bucket.
     #
@@ -5438,15 +5483,14 @@ module Aws::ConfigService
     #   maximum length of 51,200 bytes.
     #
     #   <note markdown="1"> You can only use a YAML template with one resource type, that is,
-    #   config rule.
+    #   config rule and a remediation action.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_bucket
-    #   Location of an Amazon S3 bucket where AWS Config can deliver
-    #   evaluation results. AWS Config stores intermediate files while
-    #   processing conformance pack template.
+    #   AWS Config stores intermediate files while processing conformance
+    #   pack template.
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
@@ -5663,7 +5707,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] template_s3_uri
     #   Location of file containing the template body. The uri must point to
-    #   the conformance pack template (max size: 300,000 bytes).
+    #   the conformance pack template (max size: 300 KB).
     #
     #   <note markdown="1"> You must have access to read Amazon S3 bucket.
     #
@@ -5680,6 +5724,15 @@ module Aws::ConfigService
     #   Location of an Amazon S3 bucket where AWS Config can deliver
     #   evaluation results. AWS Config stores intermediate files while
     #   processing conformance pack template.
+    #
+    #   The delivery bucket name should start with awsconfigconforms. For
+    #   example: "Resource": "arn:aws:s3:::your\_bucket\_name/*". For
+    #   more information, see [Permissions for cross account bucket
+    #   access][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
@@ -5831,6 +5884,69 @@ module Aws::ConfigService
     #
     class PutRemediationExceptionsResponse < Struct.new(
       :failed_batches)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "ResourceTypeString", # required
+    #         schema_version_id: "SchemaVersionId", # required
+    #         resource_id: "ResourceId", # required
+    #         resource_name: "ResourceName",
+    #         configuration: "Configuration", # required
+    #         tags: {
+    #           "Name" => "Value",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource. The custom resource type must be
+    #   registered with AWS CloudFormation.
+    #
+    #   <note markdown="1"> You cannot use the organization names “aws”, “amzn”, “amazon”,
+    #   “alexa”, “custom” with custom resource types. It is the first part
+    #   of the ResourceType up to the first ::.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version_id
+    #   Version of the schema registered for the ResourceType in AWS
+    #   CloudFormation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Unique identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   Name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration object of the resource in valid JSON format. It
+    #   must match the schema registered with AWS CloudFormation.
+    #
+    #   <note markdown="1"> The configuration JSON must not exceed 64 KB.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutResourceConfigRequest AWS API Documentation
+    #
+    class PutResourceConfigRequest < Struct.new(
+      :resource_type,
+      :schema_version_id,
+      :resource_id,
+      :resource_name,
+      :configuration,
+      :tags)
       include Aws::Structure
     end
 

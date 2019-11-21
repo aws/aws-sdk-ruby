@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-11-21)
+------------------
+
+* Feature - Documentation updates for the AWS Marketplace Metering Service.
+
 1.20.0 (2019-11-14)
 ------------------
 

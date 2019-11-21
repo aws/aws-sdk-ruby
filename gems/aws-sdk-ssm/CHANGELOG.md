@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2019-11-21)
+------------------
+
+* Feature - The release contains new API and API changes for AWS Systems Manager Explorer product.
+
 1.62.0 (2019-11-18)
 ------------------
 

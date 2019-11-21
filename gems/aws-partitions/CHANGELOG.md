@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.243.0 (2019-11-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ConnectParticipant`.
+
 1.242.0 (2019-11-20)
 ------------------
 

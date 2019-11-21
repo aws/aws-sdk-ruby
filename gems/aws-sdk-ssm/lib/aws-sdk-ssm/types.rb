@@ -13798,6 +13798,19 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Another `UpdateResourceDataSync` request is being processed. Wait a
+    # few minutes and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncConflictException AWS API Documentation
+    #
+    class ResourceDataSyncConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # You have exceeded the allowed maximum sync configurations.
     #
     # @!attribute [rw] message
@@ -16862,6 +16875,56 @@ module Aws::SSM
       :sources)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateResourceDataSyncRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sync_name: "ResourceDataSyncName", # required
+    #         sync_type: "ResourceDataSyncType", # required
+    #         sync_source: { # required
+    #           source_type: "ResourceDataSyncSourceType", # required
+    #           aws_organizations_source: {
+    #             organization_source_type: "ResourceDataSyncOrganizationSourceType", # required
+    #             organizational_units: [
+    #               {
+    #                 organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
+    #               },
+    #             ],
+    #           },
+    #           source_regions: ["ResourceDataSyncSourceRegion"], # required
+    #           include_future_regions: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sync_name
+    #   The name of the resource data sync you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_type
+    #   The type of resource data sync. If `SyncType` is
+    #   `SyncToDestination`, then the resource data sync synchronizes data
+    #   to an Amazon S3 bucket. If the `SyncType` is `SyncFromSource` then
+    #   the resource data sync synchronizes data from AWS Organizations or
+    #   from multiple AWS Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_source
+    #   Specify information about the data sources to synchronize.
+    #   @return [Types::ResourceDataSyncSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateResourceDataSyncRequest AWS API Documentation
+    #
+    class UpdateResourceDataSyncRequest < Struct.new(
+      :sync_name,
+      :sync_type,
+      :sync_source)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateResourceDataSyncResult AWS API Documentation
+    #
+    class UpdateResourceDataSyncResult < Aws::EmptyStructure; end
 
     # The request body of the UpdateServiceSetting API action.
     #

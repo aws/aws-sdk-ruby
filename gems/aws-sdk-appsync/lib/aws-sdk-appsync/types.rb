@@ -62,6 +62,75 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # @!attribute [rw] ttl
+    #   TTL in seconds for cache entries.
+    #
+    #   Valid values are between 1 and 3600 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] api_caching_behavior
+    #   Caching behavior.
+    #
+    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #     are cached.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_encryption_enabled
+    #   Transit encryption flag when connecting to cache. This setting
+    #   cannot be updated after creation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] at_rest_encryption_enabled
+    #   At rest encryption flag for cache. This setting cannot be updated
+    #   after creation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] type
+    #   The cache instance type.
+    #
+    #   * **T2\_SMALL**\: A t2.small instance type.
+    #
+    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #
+    #   * **R4\_LARGE**\: A r4.large instance type.
+    #
+    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #
+    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #
+    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #
+    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The cache instance status.
+    #
+    #   * **AVAILABLE**\: The instance is available for use.
+    #
+    #   * **CREATING**\: The instance is currently creating.
+    #
+    #   * **DELETING**\: The instance is currently deleting.
+    #
+    #   * **MODIFYING**\: The instance is currently modifying.
+    #
+    #   * **FAILED**\: The instance has failed creation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiCache AWS API Documentation
+    #
+    class ApiCache < Struct.new(
+      :ttl,
+      :api_caching_behavior,
+      :transit_encryption_enabled,
+      :at_rest_encryption_enabled,
+      :type,
+      :status)
+      include Aws::Structure
+    end
+
     # Describes an API key.
     #
     # Customers invoke AWS AppSync GraphQL API operations with API keys as
@@ -235,6 +304,37 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # The caching configuration for a resolver that has caching enabled.
+    #
+    # @note When making an API call, you may pass CachingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         ttl: 1,
+    #         caching_keys: ["String"],
+    #       }
+    #
+    # @!attribute [rw] ttl
+    #   The TTL in seconds for a resolver that has caching enabled.
+    #
+    #   Valid values are between 1 and 3600 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] caching_keys
+    #   The caching keys for a resolver that has caching enabled.
+    #
+    #   Valid values are entries from the `$context.identity` and
+    #   `$context.arguments` maps.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CachingConfig AWS API Documentation
+    #
+    class CachingConfig < Struct.new(
+      :ttl,
+      :caching_keys)
+      include Aws::Structure
+    end
+
     # Describes an Amazon Cognito user pool configuration.
     #
     # @note When making an API call, you may pass CognitoUserPoolConfig
@@ -278,6 +378,92 @@ module Aws::AppSync
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # Represents the input of a `CreateApiCache` operation.
+    #
+    # @note When making an API call, you may pass CreateApiCacheRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #         ttl: 1, # required
+    #         transit_encryption_enabled: false,
+    #         at_rest_encryption_enabled: false,
+    #         api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
+    #         type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The GraphQL API Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] ttl
+    #   TTL in seconds for cache entries.
+    #
+    #   Valid values are between 1 and 3600 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] transit_encryption_enabled
+    #   Transit encryption flag when connecting to cache. This setting
+    #   cannot be updated after creation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] at_rest_encryption_enabled
+    #   At rest encryption flag for cache. This setting cannot be updated
+    #   after creation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] api_caching_behavior
+    #   Caching behavior.
+    #
+    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #     are cached.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The cache instance type.
+    #
+    #   * **T2\_SMALL**\: A t2.small instance type.
+    #
+    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #
+    #   * **R4\_LARGE**\: A r4.large instance type.
+    #
+    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #
+    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #
+    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #
+    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiCacheRequest AWS API Documentation
+    #
+    class CreateApiCacheRequest < Struct.new(
+      :api_id,
+      :ttl,
+      :transit_encryption_enabled,
+      :at_rest_encryption_enabled,
+      :api_caching_behavior,
+      :type)
+      include Aws::Structure
+    end
+
+    # Represents the output of a `CreateApiCache` operation.
+    #
+    # @!attribute [rw] api_cache
+    #   The `ApiCache` object.
+    #   @return [Types::ApiCache]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiCacheResponse AWS API Documentation
+    #
+    class CreateApiCacheResponse < Struct.new(
+      :api_cache)
       include Aws::Structure
     end
 
@@ -338,6 +524,12 @@ module Aws::AppSync
     #           table_name: "String", # required
     #           aws_region: "String", # required
     #           use_caller_credentials: false,
+    #           delta_sync_config: {
+    #             base_table_ttl: 1,
+    #             delta_sync_table_name: "String",
+    #             delta_sync_table_ttl: 1,
+    #           },
+    #           versioned: false,
     #         },
     #         lambda_config: {
     #           lambda_function_arn: "String", # required
@@ -615,6 +807,17 @@ module Aws::AppSync
     #         pipeline_config: {
     #           functions: ["String"],
     #         },
+    #         sync_config: {
+    #           conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #           conflict_detection: "VERSION", # accepts VERSION, NONE
+    #           lambda_conflict_handler_config: {
+    #             lambda_conflict_handler_arn: "String",
+    #           },
+    #         },
+    #         caching_config: {
+    #           ttl: 1,
+    #           caching_keys: ["String"],
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -662,6 +865,14 @@ module Aws::AppSync
     #   The `PipelineConfig`.
     #   @return [Types::PipelineConfig]
     #
+    # @!attribute [rw] sync_config
+    #   The `SyncConfig` for a resolver attached to a versioned datasource.
+    #   @return [Types::SyncConfig]
+    #
+    # @!attribute [rw] caching_config
+    #   The caching configuration for the resolver.
+    #   @return [Types::CachingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolverRequest AWS API Documentation
     #
     class CreateResolverRequest < Struct.new(
@@ -672,7 +883,9 @@ module Aws::AppSync
       :request_mapping_template,
       :response_mapping_template,
       :kind,
-      :pipeline_config)
+      :pipeline_config,
+      :sync_config,
+      :caching_config)
       include Aws::Structure
     end
 
@@ -811,6 +1024,32 @@ module Aws::AppSync
       :relational_database_config)
       include Aws::Structure
     end
+
+    # Represents the input of a `DeleteApiCache` operation.
+    #
+    # @note When making an API call, you may pass DeleteApiCacheRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The API ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiCacheRequest AWS API Documentation
+    #
+    class DeleteApiCacheRequest < Struct.new(
+      :api_id)
+      include Aws::Structure
+    end
+
+    # Represents the output of a `DeleteApiCache` operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiCacheResponse AWS API Documentation
+    #
+    class DeleteApiCacheResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteApiKeyRequest
     #   data as a hash:
@@ -980,6 +1219,39 @@ module Aws::AppSync
     #
     class DeleteTypeResponse < Aws::EmptyStructure; end
 
+    # Describes a Delta Sync configuration.
+    #
+    # @note When making an API call, you may pass DeltaSyncConfig
+    #   data as a hash:
+    #
+    #       {
+    #         base_table_ttl: 1,
+    #         delta_sync_table_name: "String",
+    #         delta_sync_table_ttl: 1,
+    #       }
+    #
+    # @!attribute [rw] base_table_ttl
+    #   The number of minutes an Item is stored in the datasource.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delta_sync_table_name
+    #   The Delta Sync table name.
+    #   @return [String]
+    #
+    # @!attribute [rw] delta_sync_table_ttl
+    #   The number of minutes a Delta Sync log entry is stored in the Delta
+    #   Sync table.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeltaSyncConfig AWS API Documentation
+    #
+    class DeltaSyncConfig < Struct.new(
+      :base_table_ttl,
+      :delta_sync_table_name,
+      :delta_sync_table_ttl)
+      include Aws::Structure
+    end
+
     # Describes an Amazon DynamoDB data source configuration.
     #
     # @note When making an API call, you may pass DynamodbDataSourceConfig
@@ -989,6 +1261,12 @@ module Aws::AppSync
     #         table_name: "String", # required
     #         aws_region: "String", # required
     #         use_caller_credentials: false,
+    #         delta_sync_config: {
+    #           base_table_ttl: 1,
+    #           delta_sync_table_name: "String",
+    #           delta_sync_table_ttl: 1,
+    #         },
+    #         versioned: false,
     #       }
     #
     # @!attribute [rw] table_name
@@ -1003,12 +1281,23 @@ module Aws::AppSync
     #   Set to TRUE to use Amazon Cognito credentials with this data source.
     #   @return [Boolean]
     #
+    # @!attribute [rw] delta_sync_config
+    #   The `DeltaSyncConfig` for a versioned datasource.
+    #   @return [Types::DeltaSyncConfig]
+    #
+    # @!attribute [rw] versioned
+    #   Set to TRUE to use Conflict Detection and Resolution with this data
+    #   source.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DynamodbDataSourceConfig AWS API Documentation
     #
     class DynamodbDataSourceConfig < Struct.new(
       :table_name,
       :aws_region,
-      :use_caller_credentials)
+      :use_caller_credentials,
+      :delta_sync_config,
+      :versioned)
       include Aws::Structure
     end
 
@@ -1037,6 +1326,32 @@ module Aws::AppSync
       :aws_region)
       include Aws::Structure
     end
+
+    # Represents the input of a `FlushApiCache` operation.
+    #
+    # @note When making an API call, you may pass FlushApiCacheRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The API ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/FlushApiCacheRequest AWS API Documentation
+    #
+    class FlushApiCacheRequest < Struct.new(
+      :api_id)
+      include Aws::Structure
+    end
+
+    # Represents the output of a `FlushApiCache` operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/FlushApiCacheResponse AWS API Documentation
+    #
+    class FlushApiCacheResponse < Aws::EmptyStructure; end
 
     # A function is a reusable entity. Multiple functions can be used to
     # compose the resolver logic.
@@ -1086,6 +1401,38 @@ module Aws::AppSync
       :request_mapping_template,
       :response_mapping_template,
       :function_version)
+      include Aws::Structure
+    end
+
+    # Represents the input of a `GetApiCache` operation.
+    #
+    # @note When making an API call, you may pass GetApiCacheRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The API ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiCacheRequest AWS API Documentation
+    #
+    class GetApiCacheRequest < Struct.new(
+      :api_id)
+      include Aws::Structure
+    end
+
+    # Represents the output of a `GetApiCache` operation.
+    #
+    # @!attribute [rw] api_cache
+    #   @return [Types::ApiCache]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiCacheResponse AWS API Documentation
+    #
+    class GetApiCacheResponse < Struct.new(
+      :api_cache)
       include Aws::Structure
     end
 
@@ -1471,6 +1818,24 @@ module Aws::AppSync
     #
     class InternalFailureException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass LambdaConflictHandlerConfig
+    #   data as a hash:
+    #
+    #       {
+    #         lambda_conflict_handler_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] lambda_conflict_handler_arn
+    #   The Arn for the Lambda function to use as the Conflict Handler.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LambdaConflictHandlerConfig AWS API Documentation
+    #
+    class LambdaConflictHandlerConfig < Struct.new(
+      :lambda_conflict_handler_arn)
       include Aws::Structure
     end
 
@@ -2148,6 +2513,14 @@ module Aws::AppSync
     #   The `PipelineConfig`.
     #   @return [Types::PipelineConfig]
     #
+    # @!attribute [rw] sync_config
+    #   The `SyncConfig` for a resolver attached to a versioned datasource.
+    #   @return [Types::SyncConfig]
+    #
+    # @!attribute [rw] caching_config
+    #   The caching configuration for the resolver.
+    #   @return [Types::CachingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Resolver AWS API Documentation
     #
     class Resolver < Struct.new(
@@ -2158,7 +2531,9 @@ module Aws::AppSync
       :request_mapping_template,
       :response_mapping_template,
       :kind,
-      :pipeline_config)
+      :pipeline_config,
+      :sync_config,
+      :caching_config)
       include Aws::Structure
     end
 
@@ -2196,6 +2571,60 @@ module Aws::AppSync
     #
     class StartSchemaCreationResponse < Struct.new(
       :status)
+      include Aws::Structure
+    end
+
+    # Describes a Sync configuration for a resolver.
+    #
+    # Contains information on which Conflict Detection as well as Resolution
+    # strategy should be performed when the resolver is invoked.
+    #
+    # @note When making an API call, you may pass SyncConfig
+    #   data as a hash:
+    #
+    #       {
+    #         conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #         conflict_detection: "VERSION", # accepts VERSION, NONE
+    #         lambda_conflict_handler_config: {
+    #           lambda_conflict_handler_arn: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] conflict_handler
+    #   The Conflict Resolution strategy to perform in the event of a
+    #   conflict.
+    #
+    #   * **OPTIMISTIC\_CONCURRENCY**\: Resolve conflicts by rejecting
+    #     mutations when versions do not match the latest version at the
+    #     server.
+    #
+    #   * **AUTOMERGE**\: Resolve conflicts with the Automerge conflict
+    #     resolution strategy.
+    #
+    #   * **LAMBDA**\: Resolve conflicts with a Lambda function supplied in
+    #     the LambdaConflictHandlerConfig.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflict_detection
+    #   The Conflict Detection strategy to use.
+    #
+    #   * **VERSION**\: Detect conflicts based on object versions for this
+    #     resolver.
+    #
+    #   * **NONE**\: Do not detect conflicts when executing this resolver.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_conflict_handler_config
+    #   The `LambdaConflictHandlerConfig` when configuring LAMBDA as the
+    #   Conflict Handler.
+    #   @return [Types::LambdaConflictHandlerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/SyncConfig AWS API Documentation
+    #
+    class SyncConfig < Struct.new(
+      :conflict_handler,
+      :conflict_detection,
+      :lambda_conflict_handler_config)
       include Aws::Structure
     end
 
@@ -2302,6 +2731,78 @@ module Aws::AppSync
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # Represents the input of a `UpdateApiCache` operation.
+    #
+    # @note When making an API call, you may pass UpdateApiCacheRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #         ttl: 1, # required
+    #         api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
+    #         type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The GraphQL API Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] ttl
+    #   TTL in seconds for cache entries.
+    #
+    #   Valid values are between 1 and 3600 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] api_caching_behavior
+    #   Caching behavior.
+    #
+    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #     are cached.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The cache instance type.
+    #
+    #   * **T2\_SMALL**\: A t2.small instance type.
+    #
+    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #
+    #   * **R4\_LARGE**\: A r4.large instance type.
+    #
+    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #
+    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #
+    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #
+    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiCacheRequest AWS API Documentation
+    #
+    class UpdateApiCacheRequest < Struct.new(
+      :api_id,
+      :ttl,
+      :api_caching_behavior,
+      :type)
+      include Aws::Structure
+    end
+
+    # Represents the output of a `UpdateApiCache` operation.
+    #
+    # @!attribute [rw] api_cache
+    #   The `ApiCache` object.
+    #   @return [Types::ApiCache]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiCacheResponse AWS API Documentation
+    #
+    class UpdateApiCacheResponse < Struct.new(
+      :api_cache)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateApiKeyRequest
     #   data as a hash:
     #
@@ -2364,6 +2865,12 @@ module Aws::AppSync
     #           table_name: "String", # required
     #           aws_region: "String", # required
     #           use_caller_credentials: false,
+    #           delta_sync_config: {
+    #             base_table_ttl: 1,
+    #             delta_sync_table_name: "String",
+    #             delta_sync_table_ttl: 1,
+    #           },
+    #           versioned: false,
     #         },
     #         lambda_config: {
     #           lambda_function_arn: "String", # required
@@ -2645,6 +3152,17 @@ module Aws::AppSync
     #         pipeline_config: {
     #           functions: ["String"],
     #         },
+    #         sync_config: {
+    #           conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #           conflict_detection: "VERSION", # accepts VERSION, NONE
+    #           lambda_conflict_handler_config: {
+    #             lambda_conflict_handler_arn: "String",
+    #           },
+    #         },
+    #         caching_config: {
+    #           ttl: 1,
+    #           caching_keys: ["String"],
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -2688,6 +3206,14 @@ module Aws::AppSync
     #   The `PipelineConfig`.
     #   @return [Types::PipelineConfig]
     #
+    # @!attribute [rw] sync_config
+    #   The `SyncConfig` for a resolver attached to a versioned datasource.
+    #   @return [Types::SyncConfig]
+    #
+    # @!attribute [rw] caching_config
+    #   The caching configuration for the resolver.
+    #   @return [Types::CachingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolverRequest AWS API Documentation
     #
     class UpdateResolverRequest < Struct.new(
@@ -2698,7 +3224,9 @@ module Aws::AppSync
       :request_mapping_template,
       :response_mapping_template,
       :kind,
-      :pipeline_config)
+      :pipeline_config,
+      :sync_config,
+      :caching_config)
       include Aws::Structure
     end
 

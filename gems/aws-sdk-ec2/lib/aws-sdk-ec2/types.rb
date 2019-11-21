@@ -429,7 +429,8 @@ module Aws::EC2
     #         auto_placement: "on", # accepts on, off
     #         availability_zone: "String", # required
     #         client_token: "String",
-    #         instance_type: "String", # required
+    #         instance_type: "String",
+    #         instance_family: "String",
     #         quantity: 1, # required
     #         tag_specifications: [
     #           {
@@ -474,9 +475,25 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   Specifies the instance type for which to configure your Dedicated
-    #   Hosts. When you specify the instance type, that is the only instance
-    #   type that you can launch onto that host.
+    #   Specifies the instance type to be supported by the Dedicated Hosts.
+    #   If you specify an instance type, the Dedicated Hosts support
+    #   instances of the specified instance type only.
+    #
+    #   If you want the Dedicated Hosts to support multiple instance types
+    #   in a specific instance family, omit this parameter and specify
+    #   **InstanceFamily** instead. You cannot specify **InstanceType** and
+    #   **InstanceFamily** in the same request.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_family
+    #   Specifies the instance family to be supported by the Dedicated
+    #   Hosts. If you specify an instance family, the Dedicated Hosts
+    #   support multiple instance types within that instance family.
+    #
+    #   If you want the Dedicated Hosts to support a specific instance type
+    #   only, omit this parameter and specify **InstanceType** instead. You
+    #   cannot specify **InstanceFamily** and **InstanceType** in the same
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] quantity
@@ -508,6 +525,7 @@ module Aws::EC2
       :availability_zone,
       :client_token,
       :instance_type,
+      :instance_family,
       :quantity,
       :tag_specifications,
       :host_recovery)
@@ -1868,15 +1886,20 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The capacity information for instances launched onto the Dedicated
-    # Host.
+    # The capacity information for instances that can be launched onto the
+    # Dedicated Host.
     #
     # @!attribute [rw] available_instance_capacity
-    #   The total number of instances supported by the Dedicated Host.
+    #   The number of instances that can be launched onto the Dedicated Host
+    #   depending on the host's available capacity. For Dedicated Hosts
+    #   that support multiple instance types, this parameter represents the
+    #   number of instances for each instance size that is supported on the
+    #   host.
     #   @return [Array<Types::InstanceCapacity>]
     #
     # @!attribute [rw] available_v_cpus
-    #   The number of vCPUs available on the Dedicated Host.
+    #   The number of vCPUs available for launching instances onto the
+    #   Dedicated Host.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailableCapacity AWS API Documentation
@@ -3697,7 +3720,7 @@ module Aws::EC2
     #         client_token: "String",
     #         description: "String",
     #         encrypted: false,
-    #         kms_key_id: "KmsKeyId",
+    #         kms_key_id: "String",
     #         name: "String", # required
     #         source_image_id: "String", # required
     #         source_region: "String", # required
@@ -5252,7 +5275,7 @@ module Aws::EC2
     #         ],
     #         description: "String",
     #         dry_run: false,
-    #         instance_id: "InstanceId", # required
+    #         instance_id: "String", # required
     #         name: "String", # required
     #         no_reboot: false,
     #       }
@@ -10153,7 +10176,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         image_id: "ImageId", # required
+    #         image_id: "String", # required
     #         dry_run: false,
     #       }
     #
@@ -22986,8 +23009,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] available_capacity
-    #   The number of new instances that can be launched onto the Dedicated
-    #   Host.
+    #   Information about the instances running on the Dedicated Host.
     #   @return [Types::AvailableCapacity]
     #
     # @!attribute [rw] client_token
@@ -23040,6 +23062,23 @@ module Aws::EC2
     #   Dedicated Host.
     #   @return [String]
     #
+    # @!attribute [rw] allows_multiple_instance_types
+    #   Indicates whether the Dedicated Host supports multiple instance
+    #   types of the same instance family, or a specific instance type only.
+    #   `one` indicates that the Dedicated Host supports multiple instance
+    #   types in the instance family. `off` indicates that the Dedicated
+    #   Host supports a single instance type only.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the Dedicated Host.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which the Dedicated Host is
+    #   allocated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
     #
     class Host < Struct.new(
@@ -23055,26 +23094,34 @@ module Aws::EC2
       :allocation_time,
       :release_time,
       :tags,
-      :host_recovery)
+      :host_recovery,
+      :allows_multiple_instance_types,
+      :owner_id,
+      :availability_zone_id)
       include Aws::Structure
     end
 
     # Describes an instance running on a Dedicated Host.
     #
     # @!attribute [rw] instance_id
-    #   the IDs of instances that are running on the Dedicated Host.
+    #   The ID of instance that is running on the Dedicated Host.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type size (for example, `m3.medium`) of the running
+    #   The instance type (for example, `m3.medium`) of the running
     #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostInstance AWS API Documentation
     #
     class HostInstance < Struct.new(
       :instance_id,
-      :instance_type)
+      :instance_type,
+      :owner_id)
       include Aws::Structure
     end
 
@@ -23122,15 +23169,21 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes properties of a Dedicated Host.
+    # Describes the properties of a Dedicated Host.
     #
     # @!attribute [rw] cores
     #   The number of cores on the Dedicated Host.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_type
-    #   The instance type size that the Dedicated Host supports (for
-    #   example, `m3.medium`).
+    #   The instance type supported by the Dedicated Host. For example,
+    #   `m5.large`. If the host supports multiple instance types, no
+    #   **instanceType** is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_family
+    #   The instance family supported by the Dedicated Host. For example,
+    #   `m5`.
     #   @return [String]
     #
     # @!attribute [rw] sockets
@@ -23138,7 +23191,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] total_v_cpus
-    #   The number of vCPUs on the Dedicated Host.
+    #   The total number of vCPUs on the Dedicated Host.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostProperties AWS API Documentation
@@ -23146,6 +23199,7 @@ module Aws::EC2
     class HostProperties < Struct.new(
       :cores,
       :instance_type,
+      :instance_family,
       :sockets,
       :total_v_cpus)
       include Aws::Structure
@@ -23695,6 +23749,39 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The request information of license configurations.
+    #
+    # @note When making an API call, you may pass ImportImageLicenseConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         license_configuration_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] license_configuration_arn
+    #   The ARN of a license configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageLicenseConfigurationRequest AWS API Documentation
+    #
+    class ImportImageLicenseConfigurationRequest < Struct.new(
+      :license_configuration_arn)
+      include Aws::Structure
+    end
+
+    # The response information of license configurations.
+    #
+    # @!attribute [rw] license_configuration_arn
+    #   The ARN of a license configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageLicenseConfigurationResponse AWS API Documentation
+    #
+    class ImportImageLicenseConfigurationResponse < Struct.new(
+      :license_configuration_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportImageRequest
     #   data as a hash:
     #
@@ -23724,10 +23811,15 @@ module Aws::EC2
     #         dry_run: false,
     #         encrypted: false,
     #         hypervisor: "String",
-    #         kms_key_id: "KmsKeyId",
+    #         kms_key_id: "String",
     #         license_type: "String",
     #         platform: "String",
     #         role_name: "String",
+    #         license_specifications: [
+    #           {
+    #             license_configuration_arn: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] architecture
@@ -23842,6 +23934,10 @@ module Aws::EC2
     #   'vmimport'.
     #   @return [String]
     #
+    # @!attribute [rw] license_specifications
+    #   The ARNs of the license configurations.
+    #   @return [Array<Types::ImportImageLicenseConfigurationRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageRequest AWS API Documentation
     #
     class ImportImageRequest < Struct.new(
@@ -23856,7 +23952,8 @@ module Aws::EC2
       :kms_key_id,
       :license_type,
       :platform,
-      :role_name)
+      :role_name,
+      :license_specifications)
       include Aws::Structure
     end
 
@@ -23913,6 +24010,10 @@ module Aws::EC2
     #   A detailed status message of the import task.
     #   @return [String]
     #
+    # @!attribute [rw] license_specifications
+    #   The ARNs of the license configurations.
+    #   @return [Array<Types::ImportImageLicenseConfigurationResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageResult AWS API Documentation
     #
     class ImportImageResult < Struct.new(
@@ -23928,7 +24029,8 @@ module Aws::EC2
       :progress,
       :snapshot_details,
       :status,
-      :status_message)
+      :status_message,
+      :license_specifications)
       include Aws::Structure
     end
 
@@ -23992,6 +24094,11 @@ module Aws::EC2
     #   A descriptive status message for the import image task.
     #   @return [String]
     #
+    # @!attribute [rw] license_specifications
+    #   The ARNs of the license configurations associated to the import
+    #   image task.
+    #   @return [Array<Types::ImportImageLicenseConfigurationResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageTask AWS API Documentation
     #
     class ImportImageTask < Struct.new(
@@ -24007,7 +24114,8 @@ module Aws::EC2
       :progress,
       :snapshot_details,
       :status,
-      :status_message)
+      :status_message,
+      :license_specifications)
       include Aws::Structure
     end
 
@@ -25000,20 +25108,21 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Information about the instance type that the Dedicated Host supports.
+    # Information about the number of instances that can be launched onto
+    # the Dedicated Host.
     #
     # @!attribute [rw] available_capacity
-    #   The number of instances that can still be launched onto the
-    #   Dedicated Host.
+    #   The number of instances that can be launched onto the Dedicated Host
+    #   based on the host's available capacity.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_type
-    #   The instance type size supported by the Dedicated Host.
+    #   The instance type supported by the Dedicated Host.
     #   @return [String]
     #
     # @!attribute [rw] total_capacity
     #   The total number of instances that can be launched onto the
-    #   Dedicated Host.
+    #   Dedicated Host if there are no instances running on it.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCapacity AWS API Documentation
@@ -28114,6 +28223,8 @@ module Aws::EC2
     #         auto_placement: "on", # accepts on, off
     #         host_ids: ["String"], # required
     #         host_recovery: "on", # accepts on, off
+    #         instance_type: "String",
+    #         instance_family: "String",
     #       }
     #
     # @!attribute [rw] auto_placement
@@ -28134,12 +28245,36 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
     #   @return [String]
     #
+    # @!attribute [rw] instance_type
+    #   Specifies the instance type to be supported by the Dedicated Host.
+    #   Specify this parameter to modify a Dedicated Host to support only a
+    #   specific instance type.
+    #
+    #   If you want to modify a Dedicated Host to support multiple instance
+    #   types in its current instance family, omit this parameter and
+    #   specify **InstanceFamily** instead. You cannot specify
+    #   **InstanceType** and **InstanceFamily** in the same request.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_family
+    #   Specifies the instance family to be supported by the Dedicated Host.
+    #   Specify this parameter to modify a Dedicated Host to support
+    #   multiple instance types within its current instance family.
+    #
+    #   If you want to modify a Dedicated Host to support a specific
+    #   instance type only, omit this parameter and specify **InstanceType**
+    #   instead. You cannot specify **InstanceFamily** and **InstanceType**
+    #   in the same request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyHostsRequest AWS API Documentation
     #
     class ModifyHostsRequest < Struct.new(
       :auto_placement,
       :host_ids,
-      :host_recovery)
+      :host_recovery,
+      :instance_type,
+      :instance_family)
       include Aws::Structure
     end
 
@@ -28250,7 +28385,7 @@ module Aws::EC2
     #       {
     #         attribute: "String",
     #         description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         image_id: "ImageId", # required
+    #         image_id: "String", # required
     #         launch_permission: {
     #           add: [
     #             {
@@ -32543,10 +32678,10 @@ module Aws::EC2
     #         description: "String",
     #         dry_run: false,
     #         ena_support: false,
-    #         kernel_id: "KernelId",
+    #         kernel_id: "String",
     #         name: "String", # required
     #         billing_products: ["String"],
-    #         ramdisk_id: "RamdiskId",
+    #         ramdisk_id: "String",
     #         root_device_name: "String",
     #         sriov_net_support: "String",
     #         virtualization_type: "String",
@@ -34850,7 +34985,7 @@ module Aws::EC2
     #
     #       {
     #         attribute: "launchPermission", # required, accepts launchPermission
-    #         image_id: "ImageId", # required
+    #         image_id: "String", # required
     #         dry_run: false,
     #       }
     #

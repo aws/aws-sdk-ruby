@@ -94,9 +94,9 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
-    # A metering record has already been emitted by the same EC2 instance
-    # for the given \\\{usageDimension, timestamp\\} with a different
-    # usageQuantity.
+    # A metering record has already been emitted by the same EC2 instance,
+    # ECS task, or EKS pod for the given \\\{usageDimension, timestamp\\}
+    # with a different usageQuantity.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -150,9 +150,9 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
-    # The endpoint being called is in a Region different from your EC2
-    # instance. The Region of the Metering Service endpoint and the Region
-    # of the EC2 instance must match.
+    # The endpoint being called is in a AWS Region different from your EC2
+    # instance, ECS task, or EKS pod. The Region of the Metering Service
+    # endpoint and the AWS Region of the resource must match.
     #
     # @!attribute [rw] message
     #   @return [String]

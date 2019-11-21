@@ -413,6 +413,51 @@ module Aws::Amplify
       req.send_request(options)
     end
 
+    # Creates a new backend environment for an Amplify App.
+    #
+    # @option params [required, String] :app_id
+    #   Unique Id for an Amplify App.
+    #
+    # @option params [required, String] :environment_name
+    #   Name for the backend environment.
+    #
+    # @option params [String] :stack_name
+    #   CloudFormation stack name of backend environment.
+    #
+    # @option params [String] :deployment_artifacts
+    #   Name of deployment artifacts.
+    #
+    # @return [Types::CreateBackendEnvironmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBackendEnvironmentResult#backend_environment #backend_environment} => Types::BackendEnvironment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_backend_environment({
+    #     app_id: "AppId", # required
+    #     environment_name: "EnvironmentName", # required
+    #     stack_name: "StackName",
+    #     deployment_artifacts: "DeploymentArtifacts",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backend_environment.backend_environment_arn #=> String
+    #   resp.backend_environment.environment_name #=> String
+    #   resp.backend_environment.stack_name #=> String
+    #   resp.backend_environment.deployment_artifacts #=> String
+    #   resp.backend_environment.create_time #=> Time
+    #   resp.backend_environment.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBackendEnvironment AWS API Documentation
+    #
+    # @overload create_backend_environment(params = {})
+    # @param [Hash] params ({})
+    def create_backend_environment(params = {}, options = {})
+      req = build_request(:create_backend_environment, params)
+      req.send_request(options)
+    end
+
     # Creates a new Branch for an Amplify App.
     #
     # @option params [required, String] :app_id
@@ -750,6 +795,43 @@ module Aws::Amplify
       req.send_request(options)
     end
 
+    # Delete backend environment for an Amplify App.
+    #
+    # @option params [required, String] :app_id
+    #   Unique Id of an Amplify App.
+    #
+    # @option params [required, String] :environment_name
+    #   Name of a backend environment of an Amplify App.
+    #
+    # @return [Types::DeleteBackendEnvironmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBackendEnvironmentResult#backend_environment #backend_environment} => Types::BackendEnvironment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_backend_environment({
+    #     app_id: "AppId", # required
+    #     environment_name: "EnvironmentName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backend_environment.backend_environment_arn #=> String
+    #   resp.backend_environment.environment_name #=> String
+    #   resp.backend_environment.stack_name #=> String
+    #   resp.backend_environment.deployment_artifacts #=> String
+    #   resp.backend_environment.create_time #=> Time
+    #   resp.backend_environment.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBackendEnvironment AWS API Documentation
+    #
+    # @overload delete_backend_environment(params = {})
+    # @param [Hash] params ({})
+    def delete_backend_environment(params = {}, options = {})
+      req = build_request(:delete_backend_environment, params)
+      req.send_request(options)
+    end
+
     # Deletes a branch for an Amplify App.
     #
     # @option params [required, String] :app_id
@@ -1069,6 +1151,43 @@ module Aws::Amplify
       req.send_request(options)
     end
 
+    # Retrieves a backend environment for an Amplify App.
+    #
+    # @option params [required, String] :app_id
+    #   Unique Id for an Amplify App.
+    #
+    # @option params [required, String] :environment_name
+    #   Name for the backend environment.
+    #
+    # @return [Types::GetBackendEnvironmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBackendEnvironmentResult#backend_environment #backend_environment} => Types::BackendEnvironment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_backend_environment({
+    #     app_id: "AppId", # required
+    #     environment_name: "EnvironmentName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backend_environment.backend_environment_arn #=> String
+    #   resp.backend_environment.environment_name #=> String
+    #   resp.backend_environment.stack_name #=> String
+    #   resp.backend_environment.deployment_artifacts #=> String
+    #   resp.backend_environment.create_time #=> Time
+    #   resp.backend_environment.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBackendEnvironment AWS API Documentation
+    #
+    # @overload get_backend_environment(params = {})
+    # @param [Hash] params ({})
+    def get_backend_environment(params = {}, options = {})
+      req = build_request(:get_backend_environment, params)
+      req.send_request(options)
+    end
+
     # Retrieves a branch for an Amplify App.
     #
     # @option params [required, String] :app_id
@@ -1385,6 +1504,56 @@ module Aws::Amplify
     # @param [Hash] params ({})
     def list_artifacts(params = {}, options = {})
       req = build_request(:list_artifacts, params)
+      req.send_request(options)
+    end
+
+    # Lists backend environments for an Amplify App.
+    #
+    # @option params [required, String] :app_id
+    #   Unique Id for an amplify App.
+    #
+    # @option params [String] :environment_name
+    #   Name of the backend environment
+    #
+    # @option params [String] :next_token
+    #   Pagination token. Set to null to start listing backen environments
+    #   from start. If a non-null pagination token is returned in a result,
+    #   then pass its value in here to list more backend environments.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of records to list in a single response.
+    #
+    # @return [Types::ListBackendEnvironmentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBackendEnvironmentsResult#backend_environments #backend_environments} => Array&lt;Types::BackendEnvironment&gt;
+    #   * {Types::ListBackendEnvironmentsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_backend_environments({
+    #     app_id: "AppId", # required
+    #     environment_name: "EnvironmentName",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backend_environments #=> Array
+    #   resp.backend_environments[0].backend_environment_arn #=> String
+    #   resp.backend_environments[0].environment_name #=> String
+    #   resp.backend_environments[0].stack_name #=> String
+    #   resp.backend_environments[0].deployment_artifacts #=> String
+    #   resp.backend_environments[0].create_time #=> Time
+    #   resp.backend_environments[0].update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBackendEnvironments AWS API Documentation
+    #
+    # @overload list_backend_environments(params = {})
+    # @param [Hash] params ({})
+    def list_backend_environments(params = {}, options = {})
+      req = build_request(:list_backend_environments, params)
       req.send_request(options)
     end
 
@@ -2242,7 +2411,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

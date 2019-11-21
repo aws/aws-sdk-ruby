@@ -572,6 +572,7 @@ module Aws::Lex
     #   * {Types::PostContentResponse#intent_name #intent_name} => String
     #   * {Types::PostContentResponse#slots #slots} => String
     #   * {Types::PostContentResponse#session_attributes #session_attributes} => String
+    #   * {Types::PostContentResponse#sentiment_response #sentiment_response} => String
     #   * {Types::PostContentResponse#message #message} => String
     #   * {Types::PostContentResponse#message_format #message_format} => String
     #   * {Types::PostContentResponse#dialog_state #dialog_state} => String
@@ -598,6 +599,7 @@ module Aws::Lex
     #   resp.intent_name #=> String
     #   resp.slots #=> String
     #   resp.session_attributes #=> String
+    #   resp.sentiment_response #=> String
     #   resp.message #=> String
     #   resp.message_format #=> String, one of "PlainText", "CustomPayload", "SSML", "Composite"
     #   resp.dialog_state #=> String, one of "ElicitIntent", "ConfirmIntent", "ElicitSlot", "Fulfilled", "ReadyForFulfillment", "Failed"
@@ -735,6 +737,7 @@ module Aws::Lex
     #   * {Types::PostTextResponse#slots #slots} => Hash&lt;String,String&gt;
     #   * {Types::PostTextResponse#session_attributes #session_attributes} => Hash&lt;String,String&gt;
     #   * {Types::PostTextResponse#message #message} => String
+    #   * {Types::PostTextResponse#sentiment_response #sentiment_response} => Types::SentimentResponse
     #   * {Types::PostTextResponse#message_format #message_format} => String
     #   * {Types::PostTextResponse#dialog_state #dialog_state} => String
     #   * {Types::PostTextResponse#slot_to_elicit #slot_to_elicit} => String
@@ -763,6 +766,8 @@ module Aws::Lex
     #   resp.session_attributes #=> Hash
     #   resp.session_attributes["String"] #=> String
     #   resp.message #=> String
+    #   resp.sentiment_response.sentiment_label #=> String
+    #   resp.sentiment_response.sentiment_score #=> String
     #   resp.message_format #=> String, one of "PlainText", "CustomPayload", "SSML", "Composite"
     #   resp.dialog_state #=> String, one of "ElicitIntent", "ConfirmIntent", "ElicitSlot", "Fulfilled", "ReadyForFulfillment", "Failed"
     #   resp.slot_to_elicit #=> String
@@ -950,7 +955,7 @@ module Aws::Lex
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lex'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

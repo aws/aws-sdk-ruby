@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2019-11-21)
+------------------
+
+* Feature - AWS Config launches Custom Configuration Items. A new feature which allows customers to publish resource configuration for third-party resources, custom, or on-premises servers.
+
 1.39.0 (2019-11-19)
 ------------------
 

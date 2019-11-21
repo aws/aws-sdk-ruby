@@ -602,6 +602,10 @@ module Aws::Connect
     #
     #   : Unit: COUNT
     #
+    #   AGENTS\_ON\_CONTACT
+    #
+    #   : Unit: COUNT
+    #
     #   AGENTS\_ONLINE
     #
     #   : Unit: COUNT
@@ -621,6 +625,14 @@ module Aws::Connect
     #   OLDEST\_CONTACT\_AGE
     #
     #   : Unit: SECONDS
+    #
+    #   SLOTS\_ACTIVE
+    #
+    #   : Unit: COUNT
+    #
+    #   SLOTS\_AVAILABLE
+    #
+    #   : Unit: COUNT
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -646,12 +658,12 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     filters: { # required
     #       queues: ["QueueId"],
-    #       channels: ["VOICE"], # accepts VOICE
+    #       channels: ["VOICE"], # accepts VOICE, CHAT
     #     },
     #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #     current_metrics: [ # required
     #       {
-    #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED
+    #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
     #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #       },
     #     ],
@@ -665,9 +677,9 @@ module Aws::Connect
     #   resp.metric_results #=> Array
     #   resp.metric_results[0].dimensions.queue.id #=> String
     #   resp.metric_results[0].dimensions.queue.arn #=> String
-    #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE"
+    #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT"
     #   resp.metric_results[0].collections #=> Array
-    #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED"
+    #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE"
     #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "COUNT", "PERCENT"
     #   resp.metric_results[0].collections[0].value #=> Float
     #   resp.data_snapshot_time #=> Time
@@ -940,7 +952,7 @@ module Aws::Connect
     #     end_time: Time.now, # required
     #     filters: { # required
     #       queues: ["QueueId"],
-    #       channels: ["VOICE"], # accepts VOICE
+    #       channels: ["VOICE"], # accepts VOICE, CHAT
     #     },
     #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #     historical_metrics: [ # required
@@ -964,7 +976,7 @@ module Aws::Connect
     #   resp.metric_results #=> Array
     #   resp.metric_results[0].dimensions.queue.id #=> String
     #   resp.metric_results[0].dimensions.queue.arn #=> String
-    #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE"
+    #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT"
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "CONTACTS_QUEUED", "CONTACTS_HANDLED", "CONTACTS_ABANDONED", "CONTACTS_CONSULTED", "CONTACTS_AGENT_HUNG_UP_FIRST", "CONTACTS_HANDLED_INCOMING", "CONTACTS_HANDLED_OUTBOUND", "CONTACTS_HOLD_ABANDONS", "CONTACTS_TRANSFERRED_IN", "CONTACTS_TRANSFERRED_OUT", "CONTACTS_TRANSFERRED_IN_FROM_QUEUE", "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE", "CONTACTS_MISSED", "CALLBACK_CONTACTS_HANDLED", "API_CONTACTS_HANDLED", "OCCUPANCY", "HANDLE_TIME", "AFTER_CONTACT_WORK_TIME", "QUEUED_TIME", "ABANDON_TIME", "QUEUE_ANSWER_TIME", "HOLD_TIME", "INTERACTION_TIME", "INTERACTION_AND_HOLD_TIME", "SERVICE_LEVEL"
     #   resp.metric_results[0].collections[0].metric.threshold.comparison #=> String, one of "LT"
@@ -1383,6 +1395,88 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Initiates a contact flow to start a new chat for the customer.
+    # Response of this API provides a token required to obtain credentials
+    # from the [CreateParticipantConnection][1] API in the Amazon Connect
+    # Participant Service.
+    #
+    # When a new chat contact is successfully created, clients need to
+    # subscribe to the participant’s connection for the created chat within
+    # 5 minutes. This is achieved by invoking
+    # [CreateParticipantConnection][1] with WEBSOCKET and
+    # CONNECTION\_CREDENTIALS.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the contact flow for the chat.
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in contact
+    #   flows just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
+    #
+    # @option params [required, Types::ParticipantDetails] :participant_details
+    #   Information identifying the participant.
+    #
+    # @option params [Types::ChatMessage] :initial_message
+    #   The initial message to be sent to the newly created chat.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartChatContactResponse#contact_id #contact_id} => String
+    #   * {Types::StartChatContactResponse#participant_id #participant_id} => String
+    #   * {Types::StartChatContactResponse#participant_token #participant_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_chat_contact({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId", # required
+    #     attributes: {
+    #       "AttributeName" => "AttributeValue",
+    #     },
+    #     participant_details: { # required
+    #       display_name: "DisplayName", # required
+    #     },
+    #     initial_message: {
+    #       content_type: "ChatContentType", # required
+    #       content: "ChatContent", # required
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_id #=> String
+    #   resp.participant_id #=> String
+    #   resp.participant_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContact AWS API Documentation
+    #
+    # @overload start_chat_contact(params = {})
+    # @param [Hash] params ({})
+    def start_chat_contact(params = {}, options = {})
+      req = build_request(:start_chat_contact, params)
+      req.send_request(options)
+    end
+
     # Initiates a contact flow to place an outbound call to a customer.
     #
     # There is a 60 second dialing timeout for this operation. If the call
@@ -1772,7 +1866,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

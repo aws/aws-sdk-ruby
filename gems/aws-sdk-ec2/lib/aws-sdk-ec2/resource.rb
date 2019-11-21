@@ -1170,10 +1170,10 @@ module Aws::EC2
     #     description: "String",
     #     dry_run: false,
     #     ena_support: false,
-    #     kernel_id: "KernelId",
+    #     kernel_id: "String",
     #     name: "String", # required
     #     billing_products: ["String"],
-    #     ramdisk_id: "RamdiskId",
+    #     ramdisk_id: "String",
     #     root_device_name: "String",
     #     sriov_net_support: "String",
     #     virtualization_type: "String",

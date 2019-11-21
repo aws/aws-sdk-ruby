@@ -132,6 +132,7 @@ module Aws::ConfigService
     DeleteRemediationConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteRemediationConfigurationResponse')
     DeleteRemediationExceptionsRequest = Shapes::StructureShape.new(name: 'DeleteRemediationExceptionsRequest')
     DeleteRemediationExceptionsResponse = Shapes::StructureShape.new(name: 'DeleteRemediationExceptionsResponse')
+    DeleteResourceConfigRequest = Shapes::StructureShape.new(name: 'DeleteResourceConfigRequest')
     DeleteRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteRetentionConfigurationRequest')
     DeliverConfigSnapshotRequest = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotRequest')
     DeliverConfigSnapshotResponse = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotResponse')
@@ -273,6 +274,7 @@ module Aws::ConfigService
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaxActiveResourcesExceededException = Shapes::StructureShape.new(name: 'MaxActiveResourcesExceededException')
     MaxNumberOfConfigRulesExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigRulesExceededException')
     MaxNumberOfConfigurationRecordersExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigurationRecordersExceededException')
     MaxNumberOfConformancePacksExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConformancePacksExceededException')
@@ -357,6 +359,7 @@ module Aws::ConfigService
     PutRemediationConfigurationsResponse = Shapes::StructureShape.new(name: 'PutRemediationConfigurationsResponse')
     PutRemediationExceptionsRequest = Shapes::StructureShape.new(name: 'PutRemediationExceptionsRequest')
     PutRemediationExceptionsResponse = Shapes::StructureShape.new(name: 'PutRemediationExceptionsResponse')
+    PutResourceConfigRequest = Shapes::StructureShape.new(name: 'PutResourceConfigRequest')
     PutRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'PutRetentionConfigurationRequest')
     PutRetentionConfigurationResponse = Shapes::StructureShape.new(name: 'PutRetentionConfigurationResponse')
     QueryInfo = Shapes::StructureShape.new(name: 'QueryInfo')
@@ -405,6 +408,7 @@ module Aws::ConfigService
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
+    ResourceTypeString = Shapes::StringShape.new(name: 'ResourceTypeString')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     ResourceTypesScope = Shapes::ListShape.new(name: 'ResourceTypesScope')
     ResourceValue = Shapes::StructureShape.new(name: 'ResourceValue')
@@ -416,6 +420,7 @@ module Aws::ConfigService
     RetentionConfigurationNameList = Shapes::ListShape.new(name: 'RetentionConfigurationNameList')
     RetentionPeriodInDays = Shapes::IntegerShape.new(name: 'RetentionPeriodInDays')
     RuleLimit = Shapes::IntegerShape.new(name: 'RuleLimit')
+    SchemaVersionId = Shapes::StringShape.new(name: 'SchemaVersionId')
     Scope = Shapes::StructureShape.new(name: 'Scope')
     SelectResourceConfigRequest = Shapes::StructureShape.new(name: 'SelectResourceConfigRequest')
     SelectResourceConfigResponse = Shapes::StructureShape.new(name: 'SelectResourceConfigResponse')
@@ -822,6 +827,10 @@ module Aws::ConfigService
 
     DeleteRemediationExceptionsResponse.add_member(:failed_batches, Shapes::ShapeRef.new(shape: FailedDeleteRemediationExceptionsBatches, location_name: "FailedBatches"))
     DeleteRemediationExceptionsResponse.struct_class = Types::DeleteRemediationExceptionsResponse
+
+    DeleteResourceConfigRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceTypeString, required: true, location_name: "ResourceType"))
+    DeleteResourceConfigRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+    DeleteResourceConfigRequest.struct_class = Types::DeleteResourceConfigRequest
 
     DeleteRetentionConfigurationRequest.add_member(:retention_configuration_name, Shapes::ShapeRef.new(shape: RetentionConfigurationName, required: true, location_name: "RetentionConfigurationName"))
     DeleteRetentionConfigurationRequest.struct_class = Types::DeleteRetentionConfigurationRequest
@@ -1472,6 +1481,14 @@ module Aws::ConfigService
     PutRemediationExceptionsResponse.add_member(:failed_batches, Shapes::ShapeRef.new(shape: FailedRemediationExceptionBatches, location_name: "FailedBatches"))
     PutRemediationExceptionsResponse.struct_class = Types::PutRemediationExceptionsResponse
 
+    PutResourceConfigRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceTypeString, required: true, location_name: "ResourceType"))
+    PutResourceConfigRequest.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionId, required: true, location_name: "SchemaVersionId"))
+    PutResourceConfigRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+    PutResourceConfigRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ResourceName"))
+    PutResourceConfigRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, required: true, location_name: "Configuration"))
+    PutResourceConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    PutResourceConfigRequest.struct_class = Types::PutResourceConfigRequest
+
     PutRetentionConfigurationRequest.add_member(:retention_period_in_days, Shapes::ShapeRef.new(shape: RetentionPeriodInDays, required: true, location_name: "RetentionPeriodInDays"))
     PutRetentionConfigurationRequest.struct_class = Types::PutRetentionConfigurationRequest
 
@@ -1848,6 +1865,16 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: DeleteRemediationExceptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteRemediationExceptionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRemediationExceptionException)
+      end)
+
+      api.add_operation(:delete_resource_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourceConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourceConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NoRunningConfigurationRecorderException)
       end)
 
       api.add_operation(:delete_retention_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -2476,6 +2503,18 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: PutRemediationExceptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: PutRemediationExceptionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:put_resource_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourceConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourceConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+        o.errors << Shapes::ShapeRef.new(shape: NoRunningConfigurationRecorderException)
+        o.errors << Shapes::ShapeRef.new(shape: MaxActiveResourcesExceededException)
       end)
 
       api.add_operation(:put_retention_configuration, Seahorse::Model::Operation.new.tap do |o|

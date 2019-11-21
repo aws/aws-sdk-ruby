@@ -730,6 +730,14 @@ module Aws::Lex
     #   information.
     #   @return [String]
     #
+    # @!attribute [rw] sentiment_response
+    #   The sentiment expressed in and utterance.
+    #
+    #   When the bot is configured to send utterances to Amazon Comprehend
+    #   for sentiment analysis, this field contains the result of the
+    #   analysis.
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   The message to convey to the user. The message can come from the
     #   bot's configuration or from a Lambda function.
@@ -847,6 +855,7 @@ module Aws::Lex
       :intent_name,
       :slots,
       :session_attributes,
+      :sentiment_response,
       :message,
       :message_format,
       :dialog_state,
@@ -995,6 +1004,14 @@ module Aws::Lex
     #   the client in its response.
     #   @return [String]
     #
+    # @!attribute [rw] sentiment_response
+    #   The sentiment expressed in and utterance.
+    #
+    #   When the bot is configured to send utterances to Amazon Comprehend
+    #   for sentiment analysis, this field contains the result of the
+    #   analysis.
+    #   @return [Types::SentimentResponse]
+    #
     # @!attribute [rw] message_format
     #   The format of the response message. One of the following values:
     #
@@ -1078,6 +1095,7 @@ module Aws::Lex
       :slots,
       :session_attributes,
       :message,
+      :sentiment_response,
       :message_format,
       :dialog_state,
       :slot_to_elicit,
@@ -1345,6 +1363,29 @@ module Aws::Lex
       :version,
       :content_type,
       :generic_attachments)
+      include Aws::Structure
+    end
+
+    # The sentiment expressed in an utterance.
+    #
+    # When the bot is configured to send utterances to Amazon Comprehend for
+    # sentiment analysis, this field structure contains the result of the
+    # analysis.
+    #
+    # @!attribute [rw] sentiment_label
+    #   The inferred sentiment that Amazon Comprehend has the highest
+    #   confidence in.
+    #   @return [String]
+    #
+    # @!attribute [rw] sentiment_score
+    #   The likelihood that the sentiment was correctly inferred.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/SentimentResponse AWS API Documentation
+    #
+    class SentimentResponse < Struct.new(
+      :sentiment_label,
+      :sentiment_score)
       include Aws::Structure
     end
 

@@ -640,8 +640,8 @@ module Aws::EC2
     end
 
     # Allocates a Dedicated Host to your account. At a minimum, specify the
-    # instance size type, Availability Zone, and quantity of hosts to
-    # allocate.
+    # supported instance type or instance family, the Availability Zone in
+    # which to allocate the host, and the number of hosts to allocate.
     #
     # @option params [String] :auto_placement
     #   Indicates whether the host accepts any untargeted instance launches
@@ -668,10 +668,25 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
-    # @option params [required, String] :instance_type
-    #   Specifies the instance type for which to configure your Dedicated
-    #   Hosts. When you specify the instance type, that is the only instance
-    #   type that you can launch onto that host.
+    # @option params [String] :instance_type
+    #   Specifies the instance type to be supported by the Dedicated Hosts. If
+    #   you specify an instance type, the Dedicated Hosts support instances of
+    #   the specified instance type only.
+    #
+    #   If you want the Dedicated Hosts to support multiple instance types in
+    #   a specific instance family, omit this parameter and specify
+    #   **InstanceFamily** instead. You cannot specify **InstanceType** and
+    #   **InstanceFamily** in the same request.
+    #
+    # @option params [String] :instance_family
+    #   Specifies the instance family to be supported by the Dedicated Hosts.
+    #   If you specify an instance family, the Dedicated Hosts support
+    #   multiple instance types within that instance family.
+    #
+    #   If you want the Dedicated Hosts to support a specific instance type
+    #   only, omit this parameter and specify **InstanceType** instead. You
+    #   cannot specify **InstanceFamily** and **InstanceType** in the same
+    #   request.
     #
     # @option params [required, Integer] :quantity
     #   The number of Dedicated Hosts to allocate to your account with these
@@ -701,7 +716,8 @@ module Aws::EC2
     #     auto_placement: "on", # accepts on, off
     #     availability_zone: "String", # required
     #     client_token: "String",
-    #     instance_type: "String", # required
+    #     instance_type: "String",
+    #     instance_family: "String",
     #     quantity: 1, # required
     #     tag_specifications: [
     #       {
@@ -2996,7 +3012,7 @@ module Aws::EC2
     #     client_token: "String",
     #     description: "String",
     #     encrypted: false,
-    #     kms_key_id: "KmsKeyId",
+    #     kms_key_id: "String",
     #     name: "String", # required
     #     source_image_id: "String", # required
     #     source_region: "String", # required
@@ -4642,7 +4658,7 @@ module Aws::EC2
     #     ],
     #     description: "String",
     #     dry_run: false,
-    #     instance_id: "InstanceId", # required
+    #     instance_id: "String", # required
     #     name: "String", # required
     #     no_reboot: false,
     #   })
@@ -10788,7 +10804,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_image({
-    #     image_id: "ImageId", # required
+    #     image_id: "String", # required
     #     dry_run: false,
     #   })
     #
@@ -13134,11 +13150,11 @@ module Aws::EC2
     # Describes the Dedicated Host reservations that are available to
     # purchase.
     #
-    # The results describe all the Dedicated Host reservation offerings,
-    # including offerings that may not match the instance family and Region
-    # of your Dedicated Hosts. When purchasing an offering, ensure that the
-    # instance family and Region of the offering matches that of the
-    # Dedicated Hosts with which it is to be associated. For more
+    # The results describe all of the Dedicated Host reservation offerings,
+    # including offerings that might not match the instance family and
+    # Region of your Dedicated Hosts. When purchasing an offering, ensure
+    # that the instance family and Region of the offering matches that of
+    # the Dedicated Hosts with which it is to be associated. For more
     # information about supported instance types, see [Dedicated Hosts
     # Overview][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
@@ -13393,12 +13409,14 @@ module Aws::EC2
     #   resp.hosts[0].host_id #=> String
     #   resp.hosts[0].host_properties.cores #=> Integer
     #   resp.hosts[0].host_properties.instance_type #=> String
+    #   resp.hosts[0].host_properties.instance_family #=> String
     #   resp.hosts[0].host_properties.sockets #=> Integer
     #   resp.hosts[0].host_properties.total_v_cpus #=> Integer
     #   resp.hosts[0].host_reservation_id #=> String
     #   resp.hosts[0].instances #=> Array
     #   resp.hosts[0].instances[0].instance_id #=> String
     #   resp.hosts[0].instances[0].instance_type #=> String
+    #   resp.hosts[0].instances[0].owner_id #=> String
     #   resp.hosts[0].state #=> String, one of "available", "under-assessment", "permanent-failure", "released", "released-permanent-failure", "pending"
     #   resp.hosts[0].allocation_time #=> Time
     #   resp.hosts[0].release_time #=> Time
@@ -13406,6 +13424,9 @@ module Aws::EC2
     #   resp.hosts[0].tags[0].key #=> String
     #   resp.hosts[0].tags[0].value #=> String
     #   resp.hosts[0].host_recovery #=> String, one of "on", "off"
+    #   resp.hosts[0].allows_multiple_instance_types #=> String, one of "on", "off"
+    #   resp.hosts[0].owner_id #=> String
+    #   resp.hosts[0].availability_zone_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHosts AWS API Documentation
@@ -14040,6 +14061,8 @@ module Aws::EC2
     #   resp.import_image_tasks[0].snapshot_details[0].user_bucket.s3_key #=> String
     #   resp.import_image_tasks[0].status #=> String
     #   resp.import_image_tasks[0].status_message #=> String
+    #   resp.import_image_tasks[0].license_specifications #=> Array
+    #   resp.import_image_tasks[0].license_specifications[0].license_configuration_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasks AWS API Documentation
@@ -24797,6 +24820,9 @@ module Aws::EC2
     #   The name of the role to use when not using the default role,
     #   'vmimport'.
     #
+    # @option params [Array<Types::ImportImageLicenseConfigurationRequest>] :license_specifications
+    #   The ARNs of the license configurations.
+    #
     # @return [Types::ImportImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportImageResult#architecture #architecture} => String
@@ -24812,6 +24838,7 @@ module Aws::EC2
     #   * {Types::ImportImageResult#snapshot_details #snapshot_details} => Array&lt;Types::SnapshotDetail&gt;
     #   * {Types::ImportImageResult#status #status} => String
     #   * {Types::ImportImageResult#status_message #status_message} => String
+    #   * {Types::ImportImageResult#license_specifications #license_specifications} => Array&lt;Types::ImportImageLicenseConfigurationResponse&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -24841,10 +24868,15 @@ module Aws::EC2
     #     dry_run: false,
     #     encrypted: false,
     #     hypervisor: "String",
-    #     kms_key_id: "KmsKeyId",
+    #     kms_key_id: "String",
     #     license_type: "String",
     #     platform: "String",
     #     role_name: "String",
+    #     license_specifications: [
+    #       {
+    #         license_configuration_arn: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -24873,6 +24905,8 @@ module Aws::EC2
     #   resp.snapshot_details[0].user_bucket.s3_key #=> String
     #   resp.status #=> String
     #   resp.status_message #=> String
+    #   resp.license_specifications #=> Array
+    #   resp.license_specifications[0].license_configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImage AWS API Documentation
     #
@@ -25695,6 +25729,10 @@ module Aws::EC2
     # provided, the instance is launched onto a suitable host with
     # auto-placement enabled.
     #
+    # You can also use this API action to modify a Dedicated Host to support
+    # either multiple instance types in an instance family, or to support a
+    # specific instance type only.
+    #
     # @option params [String] :auto_placement
     #   Specify whether to enable or disable auto-placement.
     #
@@ -25710,6 +25748,26 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
     #
+    # @option params [String] :instance_type
+    #   Specifies the instance type to be supported by the Dedicated Host.
+    #   Specify this parameter to modify a Dedicated Host to support only a
+    #   specific instance type.
+    #
+    #   If you want to modify a Dedicated Host to support multiple instance
+    #   types in its current instance family, omit this parameter and specify
+    #   **InstanceFamily** instead. You cannot specify **InstanceType** and
+    #   **InstanceFamily** in the same request.
+    #
+    # @option params [String] :instance_family
+    #   Specifies the instance family to be supported by the Dedicated Host.
+    #   Specify this parameter to modify a Dedicated Host to support multiple
+    #   instance types within its current instance family.
+    #
+    #   If you want to modify a Dedicated Host to support a specific instance
+    #   type only, omit this parameter and specify **InstanceType** instead.
+    #   You cannot specify **InstanceFamily** and **InstanceType** in the same
+    #   request.
+    #
     # @return [Types::ModifyHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyHostsResult#successful #successful} => Array&lt;String&gt;
@@ -25721,6 +25779,8 @@ module Aws::EC2
     #     auto_placement: "on", # accepts on, off
     #     host_ids: ["String"], # required
     #     host_recovery: "on", # accepts on, off
+    #     instance_type: "String",
+    #     instance_family: "String",
     #   })
     #
     # @example Response structure
@@ -25986,7 +26046,7 @@ module Aws::EC2
     #   resp = client.modify_image_attribute({
     #     attribute: "String",
     #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #     image_id: "ImageId", # required
+    #     image_id: "String", # required
     #     launch_permission: {
     #       add: [
     #         {
@@ -29112,10 +29172,10 @@ module Aws::EC2
     #     description: "String",
     #     dry_run: false,
     #     ena_support: false,
-    #     kernel_id: "KernelId",
+    #     kernel_id: "String",
     #     name: "String", # required
     #     billing_products: ["String"],
-    #     ramdisk_id: "RamdiskId",
+    #     ramdisk_id: "String",
     #     root_device_name: "String",
     #     sriov_net_support: "String",
     #     virtualization_type: "String",
@@ -30700,7 +30760,7 @@ module Aws::EC2
     #
     #   resp = client.reset_image_attribute({
     #     attribute: "launchPermission", # required, accepts launchPermission
-    #     image_id: "ImageId", # required
+    #     image_id: "String", # required
     #     dry_run: false,
     #   })
     #
@@ -33073,7 +33133,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

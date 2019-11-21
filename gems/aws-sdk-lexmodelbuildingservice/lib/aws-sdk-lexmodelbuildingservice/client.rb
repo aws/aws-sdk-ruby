@@ -300,6 +300,7 @@ module Aws::LexModelBuildingService
     #   * {Types::CreateBotVersionResponse#version #version} => String
     #   * {Types::CreateBotVersionResponse#locale #locale} => String
     #   * {Types::CreateBotVersionResponse#child_directed #child_directed} => Boolean
+    #   * {Types::CreateBotVersionResponse#detect_sentiment #detect_sentiment} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -336,6 +337,7 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.child_directed #=> Boolean
+    #   resp.detect_sentiment #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersion AWS API Documentation
     #
@@ -544,7 +546,13 @@ module Aws::LexModelBuildingService
 
     # Deletes all versions of the bot, including the `$LATEST` version. To
     # delete a specific version of the bot, use the DeleteBotVersion
-    # operation.
+    # operation. The `DeleteBot` operation doesn't immediately remove the
+    # bot schema. Instead, it is marked for deletion and removed later.
+    #
+    # Amazon Lex stores utterances indefinitely for improving the ability of
+    # your bot to respond to user inputs. These utterances are not removed
+    # when the bot is deleted. To remove the utterances, use the
+    # DeleteUtterances operation.
     #
     # If a bot has an alias, you can't delete it. Instead, the `DeleteBot`
     # operation returns a `ResourceInUseException` exception that includes a
@@ -827,8 +835,11 @@ module Aws::LexModelBuildingService
     # operation, and then stored indefinitely for use in improving the
     # ability of your bot to respond to user input.
     #
-    # Use the `DeleteStoredUtterances` operation to manually delete stored
-    # utterances for a specific user.
+    # Use the `DeleteUtterances` operation to manually delete stored
+    # utterances for a specific user. When you use the `DeleteUtterances`
+    # operation, utterances stored for improving your bot's ability to
+    # respond to user input are deleted immediately. Utterances stored for
+    # use with the `GetUtterancesView` operation are deleted after 15 days.
     #
     # This operation requires permissions for the `lex:DeleteUtterances`
     # action.
@@ -892,6 +903,7 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotResponse#version #version} => String
     #   * {Types::GetBotResponse#locale #locale} => String
     #   * {Types::GetBotResponse#child_directed #child_directed} => Boolean
+    #   * {Types::GetBotResponse#detect_sentiment #detect_sentiment} => Boolean
     #
     #
     # @example Example: To get information about a bot
@@ -983,6 +995,7 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.child_directed #=> Boolean
+    #   resp.detect_sentiment #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBot AWS API Documentation
     #
@@ -2266,12 +2279,16 @@ module Aws::LexModelBuildingService
     # about the old version and the new so that you can compare the
     # performance across the two versions.
     #
-    # <note markdown="1"> Utterance statistics are generated once a day. Data is available for
-    # the last 15 days. You can request information for up to 5 versions in
-    # each request. The response contains information about a maximum of 100
-    # utterances for each version.
+    # Utterance statistics are generated once a day. Data is available for
+    # the last 15 days. You can request information for up to 5 versions of
+    # your bot in each request. Amazon Lex returns the most frequent
+    # utterances received by the bot in the last 15 days. The response
+    # contains information about a maximum of 100 utterances for each
+    # version.
     #
-    #  </note>
+    # If you set `childDirected` field to true when you created your bot, or
+    # if you opted out of participating in improving Amazon Lex, utterances
+    # are not available.
     #
     # This operation requires permissions for the `lex:GetUtterancesView`
     # action.
@@ -2285,7 +2302,7 @@ module Aws::LexModelBuildingService
     #   returned. The limit is 5 versions per request.
     #
     # @option params [required, String] :status_type
-    #   To return utterances that were recognized and handled, use`Detected`.
+    #   To return utterances that were recognized and handled, use `Detected`.
     #   To return utterances that were not recognized, use `Missed`.
     #
     # @return [Types::GetUtterancesViewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2337,7 +2354,7 @@ module Aws::LexModelBuildingService
     # which are set to their default values. If you don't specify values for
     # required fields, Amazon Lex throws an exception. This operation
     # requires permissions for the lex:PutBot action. For more information,
-    # see auth-and-access-control.
+    # see security-iam.
     # `
     #
     # @option params [required, String] :name
@@ -2354,7 +2371,7 @@ module Aws::LexModelBuildingService
     # @option params [Types::Prompt] :clarification_prompt
     #   When Amazon Lex doesn't understand the user's intent, it uses this
     #   message to get clarification. To specify how many times Amazon Lex
-    #   should repeate the clarification prompt, use the `maxAttempts` field.
+    #   should repeat the clarification prompt, use the `maxAttempts` field.
     #   If Amazon Lex still doesn't understand, it sends the message in the
     #   `abortStatement` field.
     #
@@ -2363,6 +2380,35 @@ module Aws::LexModelBuildingService
     #   pizza and drinks, you might create this clarification prompt: "What
     #   would you like to do? You can say 'Order a pizza' or 'Order a
     #   drink.'"
+    #
+    #   If you have defined a fallback intent, it will be invoked if the
+    #   clarification prompt is repeated the number of times defined in the
+    #   `maxAttempts` field. For more information, see [
+    #   AMAZON.FallbackIntent][1].
+    #
+    #   If you don't define a clarification prompt, at runtime Amazon Lex
+    #   will return a 400 Bad Request exception in three cases:
+    #
+    #   * Follow-up prompt - When the user responds to a follow-up prompt but
+    #     does not provide an intent. For example, in response to a follow-up
+    #     prompt that says "Would you like anything else today?" the user
+    #     says "Yes." Amazon Lex will return a 400 Bad Request exception
+    #     because it does not have a clarification prompt to send to the user
+    #     to get an intent.
+    #
+    #   * Lambda function - When using a Lambda function, you return an
+    #     `ElicitIntent` dialog type. Since Amazon Lex does not have a
+    #     clarification prompt to get an intent from the user, it returns a
+    #     400 Bad Request exception.
+    #
+    #   * PutSession operation - When using the `PutSession` operation, you
+    #     send an `ElicitIntent` dialog type. Since Amazon Lex does not have a
+    #     clarification prompt to get an intent from the user, it returns a
+    #     400 Bad Request exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html
     #
     # @option params [Types::Statement] :abort_statement
     #   When Amazon Lex can't understand the user's input in context, it
@@ -2381,6 +2427,14 @@ module Aws::LexModelBuildingService
     #   one of the intents. This intent might require the `CrustType` slot.
     #   You specify the `valueElicitationPrompt` field when you create the
     #   `CrustType` slot.
+    #
+    #   If you have defined a fallback intent the abort statement will not be
+    #   sent to the user, the fallback intent is used instead. For more
+    #   information, see [ AMAZON.FallbackIntent][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html
     #
     # @option params [Integer] :idle_session_ttl_in_seconds
     #   The maximum time in seconds that Amazon Lex retains the data gathered
@@ -2405,12 +2459,12 @@ module Aws::LexModelBuildingService
     # @option params [String] :voice_id
     #   The Amazon Polly voice ID that you want Amazon Lex to use for voice
     #   interactions with the user. The locale configured for the voice must
-    #   match the locale of the bot. For more information, see [Available
-    #   Voices][1] in the *Amazon Polly Developer Guide*.
+    #   match the locale of the bot. For more information, see [Voices in
+    #   Amazon Polly][1] in the *Amazon Polly Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/voicelist.html
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/voicelist.html
     #
     # @option params [String] :checksum
     #   Identifies a specific revision of the `$LATEST` version.
@@ -2468,7 +2522,15 @@ module Aws::LexModelBuildingService
     #
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #
+    # @option params [Boolean] :detect_sentiment
+    #   When set to `true` user utterances are sent to Amazon Comprehend for
+    #   sentiment analysis. If you don't specify `detectSentiment`, the
+    #   default is `false`.
+    #
     # @option params [Boolean] :create_version
+    #   When set to `true` a new numbered version of the bot is created. This
+    #   is the same as calling the `CreateBotVersion` operation. If you don't
+    #   specify `createVersion`, the default is `false`.
     #
     # @return [Types::PutBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2488,6 +2550,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutBotResponse#locale #locale} => String
     #   * {Types::PutBotResponse#child_directed #child_directed} => Boolean
     #   * {Types::PutBotResponse#create_version #create_version} => Boolean
+    #   * {Types::PutBotResponse#detect_sentiment #detect_sentiment} => Boolean
     #
     #
     # @example Example: To create a bot
@@ -2617,6 +2680,7 @@ module Aws::LexModelBuildingService
     #     process_behavior: "SAVE", # accepts SAVE, BUILD
     #     locale: "en-US", # required, accepts en-US, en-GB, de-DE
     #     child_directed: false, # required
+    #     detect_sentiment: false,
     #     create_version: false,
     #   })
     #
@@ -2649,6 +2713,7 @@ module Aws::LexModelBuildingService
     #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.child_directed #=> Boolean
     #   resp.create_version #=> Boolean
+    #   resp.detect_sentiment #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBot AWS API Documentation
     #
@@ -2914,6 +2979,9 @@ module Aws::LexModelBuildingService
     #   exception.
     #
     # @option params [Boolean] :create_version
+    #   When set to `true` a new numbered version of the intent is created.
+    #   This is the same as calling the `CreateIntentVersion` operation. If
+    #   you do not specify `createVersion`, the default is `false`.
     #
     # @return [Types::PutIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3448,6 +3516,9 @@ module Aws::LexModelBuildingService
     #   `ORIGINAL_VALUE`.
     #
     # @option params [Boolean] :create_version
+    #   When set to `true` a new numbered version of the slot type is created.
+    #   This is the same as calling the `CreateSlotTypeVersion` operation. If
+    #   you do not specify `createVersion`, the default is `false`.
     #
     # @return [Types::PutSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3613,7 +3684,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
