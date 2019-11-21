@@ -3,7 +3,6 @@ Unreleased Changes
 
 * Feature - Added `Partition#region?` and `Partition#service?` methods.
 
-=======
 1.242.0 (2019-11-20)
 ------------------
 
