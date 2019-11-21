@@ -373,6 +373,7 @@ to be backwards compatible.
 | Amazon Cognito Identity Provider                      | CognitoIdentityProvider         | 2016-04-18  |
 | Amazon Cognito Sync                                   | CognitoSync                     | 2014-06-30  |
 | Amazon Comprehend                                     | Comprehend                      | 2017-11-27  |
+| Amazon Connect Participant Service                    | ConnectParticipant              | 2018-09-07  |
 | Amazon Connect Service                                | Connect                         | 2017-08-08  |
 | Amazon Data Lifecycle Manager                         | DLM                             | 2018-01-12  |
 | Amazon DocumentDB with MongoDB compatibility          | DocDB                           | 2014-10-31  |
@@ -451,8 +452,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 | Service Quotas                                        | ServiceQuotas                   | 2019-06-24  |

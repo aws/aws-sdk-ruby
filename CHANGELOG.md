@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
+
+* Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
+
+* Feature - Aws::MarketplaceMetering - Updated the documentation for AWSMarketplace Metering.
+
+* Feature - Aws::Lex - Updated the API, and documentation for Amazon Lex Runtime Service.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::TranscribeService - Updated the API for Amazon Transcribe Service.
+
+* Feature - Aws::ConnectParticipant - Added support for a new service, Amazon Connect Participant Service.
+
 2.11.402 (2019-11-20)
 ------------------
 

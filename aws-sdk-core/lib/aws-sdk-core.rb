@@ -68,6 +68,7 @@ module Aws
     ComprehendMedical
     ConfigService
     Connect
+    ConnectParticipant
     CostExplorer
     CostandUsageReportService
     DAX

@@ -178,6 +178,10 @@
     "models": "connect/2017-08-08",
     "endpoint": "connect"
   },
+  "ConnectParticipant": {
+    "models": "connectparticipant/2018-09-07",
+    "endpoint": "participant.connect"
+  },
   "CostExplorer": {
     "models": "ce/2017-10-25",
     "endpoint": "ce"
