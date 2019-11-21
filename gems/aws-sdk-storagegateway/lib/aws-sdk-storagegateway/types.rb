@@ -2034,6 +2034,51 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeAvailabilityMonitorTestInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeAvailabilityMonitorTestInput AWS API Documentation
+    #
+    class DescribeAvailabilityMonitorTestInput < Struct.new(
+      :gateway_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the High Availability monitoring test. If a test
+    #   hasn't been performed, the value of this field is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time the High Availability monitoring test was started. If a
+    #   test hasn't been performed, the value of this field is null.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeAvailabilityMonitorTestOutput AWS API Documentation
+    #
+    class DescribeAvailabilityMonitorTestOutput < Struct.new(
+      :gateway_arn,
+      :status,
+      :start_time)
+      include Aws::Structure
+    end
+
     # A JSON object containing the of the gateway.
     #
     # @note When making an API call, you may pass DescribeBandwidthRateLimitInput
@@ -2338,8 +2383,12 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_log_group_arn
-    #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group
-    #   that was used to monitor and log events in the gateway.
+    #   The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group
+    #   that is used to monitor events in the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_environment
+    #   The type of hypervisor environment used by the host.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
@@ -2358,7 +2407,8 @@ module Aws::StorageGateway
       :ec2_instance_region,
       :tags,
       :vpc_endpoint,
-      :cloud_watch_log_group_arn)
+      :cloud_watch_log_group_arn,
+      :host_environment)
       include Aws::Structure
     end
 
@@ -2547,6 +2597,30 @@ module Aws::StorageGateway
     #   The name of the domain that the gateway is joined to.
     #   @return [String]
     #
+    # @!attribute [rw] active_directory_status
+    #   Indicates the status of a gateway that is a member of the Active
+    #   Directory domain.
+    #
+    #   * ACCESS\_DENIED: Indicates that the `JoinDomain` operation failed
+    #     due to an authentication error.
+    #
+    #   * DETACHED: Indicates that gateway is not joined to a domain.
+    #
+    #   * JOINED: Indicates that the gateway has successfully joined a
+    #     domain.
+    #
+    #   * JOINING: Indicates that a `JoinDomain` operation is in progress.
+    #
+    #   * NETWORK\_ERROR: Indicates that `JoinDomain` operation failed due
+    #     to a network or connectivity error.
+    #
+    #   * TIMEOUT: Indicates that the `JoinDomain` operation failed because
+    #     the operation didn't complete within the allotted time.
+    #
+    #   * UNKNOWN\_ERROR: Indicates that the `JoinDomain` operation failed
+    #     due to another type of error.
+    #   @return [String]
+    #
     # @!attribute [rw] smb_guest_password_set
     #   This value is true if a password for the guest user “smbguest” is
     #   set, and otherwise false.
@@ -2577,6 +2651,7 @@ module Aws::StorageGateway
     class DescribeSMBSettingsOutput < Struct.new(
       :gateway_arn,
       :domain_name,
+      :active_directory_status,
       :smb_guest_password_set,
       :smb_security_strategy)
       include Aws::Structure
@@ -3422,6 +3497,7 @@ module Aws::StorageGateway
     #         domain_name: "DomainName", # required
     #         organizational_unit: "OrganizationalUnit",
     #         domain_controllers: ["Host"],
+    #         timeout_in_seconds: 1,
     #         user_name: "DomainUserName", # required
     #         password: "DomainUserPassword", # required
     #       }
@@ -3449,9 +3525,17 @@ module Aws::StorageGateway
     #   colon (“:”). For example, `mydc.mydomain.com:389`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] timeout_in_seconds
+    #   Specifies the time in seconds, in which the `JoinDomain` operation
+    #   must complete. The default is 20 seconds.
+    #   @return [Integer]
+    #
     # @!attribute [rw] user_name
     #   Sets the user name of user who has permission to add the gateway to
-    #   the Active Directory domain.
+    #   the Active Directory domain. The domain user account should be
+    #   enabled to join computers to the domain. For example, you can use
+    #   the domain administrator account or an account with delegated
+    #   permissions to join computers to the domain.
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -3466,6 +3550,7 @@ module Aws::StorageGateway
       :domain_name,
       :organizational_unit,
       :domain_controllers,
+      :timeout_in_seconds,
       :user_name,
       :password)
       include Aws::Structure
@@ -3478,10 +3563,35 @@ module Aws::StorageGateway
     #   domain.
     #   @return [String]
     #
+    # @!attribute [rw] active_directory_status
+    #   Indicates the status of the gateway as a member of the Active
+    #   Directory domain.
+    #
+    #   * ACCESS\_DENIED: Indicates that the `JoinDomain` operation failed
+    #     due to an authentication error.
+    #
+    #   * DETACHED: Indicates that gateway is not joined to a domain.
+    #
+    #   * JOINED: Indicates that the gateway has successfully joined a
+    #     domain.
+    #
+    #   * JOINING: Indicates that a `JoinDomain` operation is in progress.
+    #
+    #   * NETWORK\_ERROR: Indicates that `JoinDomain` operation failed due
+    #     to a network or connectivity error.
+    #
+    #   * TIMEOUT: Indicates that the `JoinDomain` operation failed because
+    #     the operation didn't complete within the allotted time.
+    #
+    #   * UNKNOWN\_ERROR: Indicates that the `JoinDomain` operation failed
+    #     due to another type of error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomainOutput AWS API Documentation
     #
     class JoinDomainOutput < Struct.new(
-      :gateway_arn)
+      :gateway_arn,
+      :active_directory_status)
       include Aws::Structure
     end
 
@@ -4689,6 +4799,39 @@ module Aws::StorageGateway
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGatewayOutput AWS API Documentation
     #
     class ShutdownGatewayOutput < Struct.new(
+      :gateway_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartAvailabilityMonitorTestInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartAvailabilityMonitorTestInput AWS API Documentation
+    #
+    class StartAvailabilityMonitorTestInput < Struct.new(
+      :gateway_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartAvailabilityMonitorTestOutput AWS API Documentation
+    #
+    class StartAvailabilityMonitorTestOutput < Struct.new(
       :gateway_arn)
       include Aws::Structure
     end

@@ -710,7 +710,7 @@ module Aws::ApplicationDiscoveryService
     #       }
     #
     # @!attribute [rw] export_ids
-    #   A list of continuous export ids to search for.
+    #   A list of continuous export IDs to search for.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -1130,6 +1130,16 @@ module Aws::ApplicationDiscoveryService
       :servers_mappedto_tags,
       :agent_summary,
       :connector_summary)
+      include Aws::Structure
+    end
+
+    # The home region is not set. Set the home region to continue.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class HomeRegionNotSetException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

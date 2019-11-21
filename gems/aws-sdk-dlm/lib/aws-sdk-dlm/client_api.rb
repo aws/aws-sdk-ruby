@@ -11,6 +11,8 @@ module Aws::DLM
 
     include Seahorse::Model
 
+    AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
+    AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     CopyTags = Shapes::BooleanShape.new(name: 'CopyTags')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyRequest')
@@ -22,6 +24,7 @@ module Aws::DLM
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExcludeBootVolume = Shapes::BooleanShape.new(name: 'ExcludeBootVolume')
     ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
+    FastRestoreRule = Shapes::StructureShape.new(name: 'FastRestoreRule')
     GetLifecyclePoliciesRequest = Shapes::StructureShape.new(name: 'GetLifecyclePoliciesRequest')
     GetLifecyclePoliciesResponse = Shapes::StructureShape.new(name: 'GetLifecyclePoliciesResponse')
     GetLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'GetLifecyclePolicyRequest')
@@ -77,6 +80,8 @@ module Aws::DLM
     UpdateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyResponse')
     VariableTagsList = Shapes::ListShape.new(name: 'VariableTagsList')
 
+    AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
+
     CreateLifecyclePolicyRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, required: true, location_name: "Description"))
     CreateLifecyclePolicyRequest.add_member(:state, Shapes::ShapeRef.new(shape: SettablePolicyStateValues, required: true, location_name: "State"))
@@ -96,6 +101,10 @@ module Aws::DLM
     DeleteLifecyclePolicyRequest.struct_class = Types::DeleteLifecyclePolicyRequest
 
     DeleteLifecyclePolicyResponse.struct_class = Types::DeleteLifecyclePolicyResponse
+
+    FastRestoreRule.add_member(:count, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "Count"))
+    FastRestoreRule.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZoneList, required: true, location_name: "AvailabilityZones"))
+    FastRestoreRule.struct_class = Types::FastRestoreRule
 
     GetLifecyclePoliciesRequest.add_member(:policy_ids, Shapes::ShapeRef.new(shape: PolicyIdList, location: "querystring", location_name: "policyIds"))
     GetLifecyclePoliciesRequest.add_member(:state, Shapes::ShapeRef.new(shape: GettablePolicyStateValues, location: "querystring", location_name: "state"))
@@ -185,6 +194,7 @@ module Aws::DLM
     Schedule.add_member(:variable_tags, Shapes::ShapeRef.new(shape: VariableTagsList, location_name: "VariableTags"))
     Schedule.add_member(:create_rule, Shapes::ShapeRef.new(shape: CreateRule, location_name: "CreateRule"))
     Schedule.add_member(:retain_rule, Shapes::ShapeRef.new(shape: RetainRule, location_name: "RetainRule"))
+    Schedule.add_member(:fast_restore_rule, Shapes::ShapeRef.new(shape: FastRestoreRule, location_name: "FastRestoreRule"))
     Schedule.struct_class = Types::Schedule
 
     ScheduleList.member = Shapes::ShapeRef.new(shape: Schedule)

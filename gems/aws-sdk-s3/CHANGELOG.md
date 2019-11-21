@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2019-11-20)
+------------------
+
+* Feature - This release introduces support for Amazon S3 Replication Time Control, a new feature of S3 Replication that provides a predictable replication time backed by a Service Level Agreement. S3 Replication Time Control helps customers meet compliance or business requirements for data replication, and provides visibility into the replication process with new Amazon CloudWatch Metrics.
+
 1.56.0 (2019-11-18)
 ------------------
 

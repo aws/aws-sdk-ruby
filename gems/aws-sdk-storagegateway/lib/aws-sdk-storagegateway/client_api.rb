@@ -14,6 +14,7 @@ module Aws::StorageGateway
     ActivateGatewayInput = Shapes::StructureShape.new(name: 'ActivateGatewayInput')
     ActivateGatewayOutput = Shapes::StructureShape.new(name: 'ActivateGatewayOutput')
     ActivationKey = Shapes::StringShape.new(name: 'ActivationKey')
+    ActiveDirectoryStatus = Shapes::StringShape.new(name: 'ActiveDirectoryStatus')
     AddCacheInput = Shapes::StructureShape.new(name: 'AddCacheInput')
     AddCacheOutput = Shapes::StructureShape.new(name: 'AddCacheOutput')
     AddTagsToResourceInput = Shapes::StructureShape.new(name: 'AddTagsToResourceInput')
@@ -27,6 +28,7 @@ module Aws::StorageGateway
     AttachVolumeInput = Shapes::StructureShape.new(name: 'AttachVolumeInput')
     AttachVolumeOutput = Shapes::StructureShape.new(name: 'AttachVolumeOutput')
     Authentication = Shapes::StringShape.new(name: 'Authentication')
+    AvailabilityMonitorTestStatus = Shapes::StringShape.new(name: 'AvailabilityMonitorTestStatus')
     BandwidthDownloadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthDownloadRateLimit')
     BandwidthType = Shapes::StringShape.new(name: 'BandwidthType')
     BandwidthUploadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthUploadRateLimit')
@@ -77,6 +79,8 @@ module Aws::StorageGateway
     DeleteTapeOutput = Shapes::StructureShape.new(name: 'DeleteTapeOutput')
     DeleteVolumeInput = Shapes::StructureShape.new(name: 'DeleteVolumeInput')
     DeleteVolumeOutput = Shapes::StructureShape.new(name: 'DeleteVolumeOutput')
+    DescribeAvailabilityMonitorTestInput = Shapes::StructureShape.new(name: 'DescribeAvailabilityMonitorTestInput')
+    DescribeAvailabilityMonitorTestOutput = Shapes::StructureShape.new(name: 'DescribeAvailabilityMonitorTestOutput')
     DescribeBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitInput')
     DescribeBandwidthRateLimitOutput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitOutput')
     DescribeCacheInput = Shapes::StructureShape.new(name: 'DescribeCacheInput')
@@ -155,6 +159,7 @@ module Aws::StorageGateway
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
     Gateways = Shapes::ListShape.new(name: 'Gateways')
     Host = Shapes::StringShape.new(name: 'Host')
+    HostEnvironment = Shapes::StringShape.new(name: 'HostEnvironment')
     Hosts = Shapes::ListShape.new(name: 'Hosts')
     HourOfDay = Shapes::IntegerShape.new(name: 'HourOfDay')
     IPV4AddressCIDR = Shapes::StringShape.new(name: 'IPV4AddressCIDR')
@@ -233,6 +238,8 @@ module Aws::StorageGateway
     SnapshotDescription = Shapes::StringShape.new(name: 'SnapshotDescription')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
     Squash = Shapes::StringShape.new(name: 'Squash')
+    StartAvailabilityMonitorTestInput = Shapes::StructureShape.new(name: 'StartAvailabilityMonitorTestInput')
+    StartAvailabilityMonitorTestOutput = Shapes::StructureShape.new(name: 'StartAvailabilityMonitorTestOutput')
     StartGatewayInput = Shapes::StructureShape.new(name: 'StartGatewayInput')
     StartGatewayOutput = Shapes::StructureShape.new(name: 'StartGatewayOutput')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
@@ -265,6 +272,7 @@ module Aws::StorageGateway
     TargetARN = Shapes::StringShape.new(name: 'TargetARN')
     TargetName = Shapes::StringShape.new(name: 'TargetName')
     Time = Shapes::TimestampShape.new(name: 'Time')
+    TimeoutInSeconds = Shapes::IntegerShape.new(name: 'TimeoutInSeconds')
     UpdateBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitInput')
     UpdateBandwidthRateLimitOutput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitOutput')
     UpdateChapCredentialsInput = Shapes::StructureShape.new(name: 'UpdateChapCredentialsInput')
@@ -581,6 +589,14 @@ module Aws::StorageGateway
     DeleteVolumeOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
     DeleteVolumeOutput.struct_class = Types::DeleteVolumeOutput
 
+    DescribeAvailabilityMonitorTestInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    DescribeAvailabilityMonitorTestInput.struct_class = Types::DescribeAvailabilityMonitorTestInput
+
+    DescribeAvailabilityMonitorTestOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    DescribeAvailabilityMonitorTestOutput.add_member(:status, Shapes::ShapeRef.new(shape: AvailabilityMonitorTestStatus, location_name: "Status"))
+    DescribeAvailabilityMonitorTestOutput.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "StartTime"))
+    DescribeAvailabilityMonitorTestOutput.struct_class = Types::DescribeAvailabilityMonitorTestOutput
+
     DescribeBandwidthRateLimitInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     DescribeBandwidthRateLimitInput.struct_class = Types::DescribeBandwidthRateLimitInput
 
@@ -630,6 +646,7 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeGatewayInformationOutput.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: string, location_name: "VPCEndpoint"))
     DescribeGatewayInformationOutput.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
+    DescribeGatewayInformationOutput.add_member(:host_environment, Shapes::ShapeRef.new(shape: HostEnvironment, location_name: "HostEnvironment"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
@@ -660,6 +677,7 @@ module Aws::StorageGateway
 
     DescribeSMBSettingsOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     DescribeSMBSettingsOutput.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    DescribeSMBSettingsOutput.add_member(:active_directory_status, Shapes::ShapeRef.new(shape: ActiveDirectoryStatus, location_name: "ActiveDirectoryStatus"))
     DescribeSMBSettingsOutput.add_member(:smb_guest_password_set, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBGuestPasswordSet"))
     DescribeSMBSettingsOutput.add_member(:smb_security_strategy, Shapes::ShapeRef.new(shape: SMBSecurityStrategy, location_name: "SMBSecurityStrategy"))
     DescribeSMBSettingsOutput.struct_class = Types::DescribeSMBSettingsOutput
@@ -820,11 +838,13 @@ module Aws::StorageGateway
     JoinDomainInput.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     JoinDomainInput.add_member(:organizational_unit, Shapes::ShapeRef.new(shape: OrganizationalUnit, location_name: "OrganizationalUnit"))
     JoinDomainInput.add_member(:domain_controllers, Shapes::ShapeRef.new(shape: Hosts, location_name: "DomainControllers"))
+    JoinDomainInput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "TimeoutInSeconds"))
     JoinDomainInput.add_member(:user_name, Shapes::ShapeRef.new(shape: DomainUserName, required: true, location_name: "UserName"))
     JoinDomainInput.add_member(:password, Shapes::ShapeRef.new(shape: DomainUserPassword, required: true, location_name: "Password"))
     JoinDomainInput.struct_class = Types::JoinDomainInput
 
     JoinDomainOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    JoinDomainOutput.add_member(:active_directory_status, Shapes::ShapeRef.new(shape: ActiveDirectoryStatus, location_name: "ActiveDirectoryStatus"))
     JoinDomainOutput.struct_class = Types::JoinDomainOutput
 
     ListFileSharesInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
@@ -1017,6 +1037,12 @@ module Aws::StorageGateway
 
     ShutdownGatewayOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     ShutdownGatewayOutput.struct_class = Types::ShutdownGatewayOutput
+
+    StartAvailabilityMonitorTestInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    StartAvailabilityMonitorTestInput.struct_class = Types::StartAvailabilityMonitorTestInput
+
+    StartAvailabilityMonitorTestOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    StartAvailabilityMonitorTestOutput.struct_class = Types::StartAvailabilityMonitorTestOutput
 
     StartGatewayInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     StartGatewayInput.struct_class = Types::StartGatewayInput
@@ -1516,6 +1542,16 @@ module Aws::StorageGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_availability_monitor_test, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAvailabilityMonitorTest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAvailabilityMonitorTestInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAvailabilityMonitorTestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_bandwidth_rate_limit, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeBandwidthRateLimit"
         o.http_method = "POST"
@@ -1936,6 +1972,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ShutdownGatewayInput)
         o.output = Shapes::ShapeRef.new(shape: ShutdownGatewayOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:start_availability_monitor_test, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAvailabilityMonitorTest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartAvailabilityMonitorTestInput)
+        o.output = Shapes::ShapeRef.new(shape: StartAvailabilityMonitorTestOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

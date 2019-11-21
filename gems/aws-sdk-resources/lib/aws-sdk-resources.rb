@@ -134,6 +134,7 @@ module Aws
   autoload :MediaStoreData, 'aws-sdk-mediastoredata'
   autoload :MediaTailor, 'aws-sdk-mediatailor'
   autoload :MigrationHub, 'aws-sdk-migrationhub'
+  autoload :MigrationHubConfig, 'aws-sdk-migrationhubconfig'
   autoload :Mobile, 'aws-sdk-mobile'
   autoload :Neptune, 'aws-sdk-neptune'
   autoload :OpsWorks, 'aws-sdk-opsworks'

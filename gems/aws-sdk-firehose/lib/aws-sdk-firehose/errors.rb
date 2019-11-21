@@ -42,6 +42,27 @@ module Aws::Firehose
 
     end
 
+    class InvalidKMSResourceException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Firehose::Types::InvalidKMSResourceException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class LimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

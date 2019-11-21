@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-11-20)
+------------------
+
+* Feature - With this release Amazon Transcribe enables alternative transcriptions so that you can see different interpretations of transcribed audio.
+
 1.31.0 (2019-11-12)
 ------------------
 

@@ -366,6 +366,7 @@ module Aws::EC2
     # @option options [required, String] :source_region
     #   The ID of the Region that contains the snapshot to be copied.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new snapshot.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

@@ -317,6 +317,10 @@ module Aws::DLM
     #           retain_rule: {
     #             count: 1, # required
     #           },
+    #           fast_restore_rule: {
+    #             count: 1, # required
+    #             availability_zones: ["AvailabilityZone"], # required
+    #           },
     #         },
     #       ],
     #       parameters: {
@@ -467,6 +471,9 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].create_rule.times #=> Array
     #   resp.policy.policy_details.schedules[0].create_rule.times[0] #=> String
     #   resp.policy.policy_details.schedules[0].retain_rule.count #=> Integer
+    #   resp.policy.policy_details.schedules[0].fast_restore_rule.count #=> Integer
+    #   resp.policy.policy_details.schedules[0].fast_restore_rule.availability_zones #=> Array
+    #   resp.policy.policy_details.schedules[0].fast_restore_rule.availability_zones[0] #=> String
     #   resp.policy.policy_details.parameters.exclude_boot_volume #=> Boolean
     #   resp.policy.tags #=> Hash
     #   resp.policy.tags["TagKey"] #=> String
@@ -625,6 +632,10 @@ module Aws::DLM
     #           retain_rule: {
     #             count: 1, # required
     #           },
+    #           fast_restore_rule: {
+    #             count: 1, # required
+    #             availability_zones: ["AvailabilityZone"], # required
+    #           },
     #         },
     #       ],
     #       parameters: {
@@ -655,7 +666,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

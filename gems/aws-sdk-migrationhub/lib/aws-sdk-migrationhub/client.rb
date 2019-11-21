@@ -283,7 +283,8 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #
     # @option params [required, Types::CreatedArtifact] :created_artifact
     #   An ARN of the AWS resource related to the migration (e.g., AMI, EC2
@@ -317,13 +318,14 @@ module Aws::MigrationHub
     end
 
     # Associates a discovered resource ID from Application Discovery Service
-    # (ADS) with a migration task.
+    # with a migration task.
     #
     # @option params [required, String] :progress_update_stream
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   The identifier given to the MigrationTask.
+    #   The identifier given to the MigrationTask. *Do not store personal data
+    #   in this field.*
     #
     # @option params [required, Types::DiscoveredResource] :discovered_resource
     #   Object representing a Resource.
@@ -363,7 +365,8 @@ module Aws::MigrationHub
     # is scoped to the AWS account.
     #
     # @option params [required, String] :progress_update_stream_name
-    #   The name of the ProgressUpdateStream.
+    #   The name of the ProgressUpdateStream. *Do not store personal data in
+    #   this field.*
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -402,7 +405,7 @@ module Aws::MigrationHub
     #   `ListProgressUpdateStreams` call.
     #
     # * `CreateProgressUpdateStream`, `ImportMigrationTask`,
-    #   `NotifyMigrationTaskState`, and all Associate\[*\] APIs realted to
+    #   `NotifyMigrationTaskState`, and all Associate\[*\] APIs related to
     #   the tasks belonging to the stream will throw
     #   "InvalidInputException" if the stream of the same name is in the
     #   process of being deleted.
@@ -413,7 +416,8 @@ module Aws::MigrationHub
     #   (without any resources associated with the old stream).
     #
     # @option params [required, String] :progress_update_stream_name
-    #   The name of the ProgressUpdateStream.
+    #   The name of the ProgressUpdateStream. *Do not store personal data in
+    #   this field.*
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -440,8 +444,8 @@ module Aws::MigrationHub
     # Gets the migration status of an application.
     #
     # @option params [required, String] :application_id
-    #   The configurationId in ADS that uniquely identifies the grouped
-    #   application.
+    #   The configurationId in Application Discovery Service that uniquely
+    #   identifies the grouped application.
     #
     # @return [Types::DescribeApplicationStateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -475,7 +479,8 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   The identifier given to the MigrationTask.
+    #   The identifier given to the MigrationTask. *Do not store personal data
+    #   in this field.*
     #
     # @return [Types::DescribeMigrationTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -530,7 +535,8 @@ module Aws::MigrationHub
     #
     # @option params [required, String] :migration_task_name
     #   Unique identifier that references the migration task to be
-    #   disassociated with the artifact.
+    #   disassociated with the artifact. *Do not store personal data in this
+    #   field.*
     #
     # @option params [required, String] :created_artifact_name
     #   An ARN of the AWS resource related to the migration (e.g., AMI, EC2
@@ -560,17 +566,19 @@ module Aws::MigrationHub
       req.send_request(options)
     end
 
-    # Disassociate an Application Discovery Service (ADS) discovered
-    # resource from a migration task.
+    # Disassociate an Application Discovery Service discovered resource from
+    # a migration task.
     #
     # @option params [required, String] :progress_update_stream
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   The identifier given to the MigrationTask.
+    #   The identifier given to the MigrationTask. *Do not store personal data
+    #   in this field.*
     #
     # @option params [required, String] :configuration_id
-    #   ConfigurationId of the ADS resource to be disassociated.
+    #   ConfigurationId of the Application Discovery Service resource to be
+    #   disassociated.
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -604,10 +612,11 @@ module Aws::MigrationHub
     # Migration Hub.
     #
     # @option params [required, String] :progress_update_stream
-    #   The name of the ProgressUpdateStream.
+    #   The name of the ProgressUpdateStream. &gt;
     #
     # @option params [required, String] :migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -647,7 +656,8 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #
     # @option params [String] :next_token
     #   If a `NextToken` was returned by a previous call, there are more
@@ -693,7 +703,8 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   The name of the MigrationTask.
+    #   The name of the MigrationTask. *Do not store personal data in this
+    #   field.*
     #
     # @option params [String] :next_token
     #   If a `NextToken` was returned by a previous call, there are more
@@ -832,11 +843,14 @@ module Aws::MigrationHub
     # IN_PROGRESS | COMPLETED`.
     #
     # @option params [required, String] :application_id
-    #   The configurationId in ADS that uniquely identifies the grouped
-    #   application.
+    #   The configurationId in Application Discovery Service that uniquely
+    #   identifies the grouped application.
     #
     # @option params [required, String] :status
     #   Status of the application - Not Started, In-Progress, Complete.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :update_date_time
+    #   The timestamp when the application state changed.
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -849,6 +863,7 @@ module Aws::MigrationHub
     #   resp = client.notify_application_state({
     #     application_id: "ApplicationId", # required
     #     status: "NOT_STARTED", # required, accepts NOT_STARTED, IN_PROGRESS, COMPLETED
+    #     update_date_time: Time.now,
     #     dry_run: false,
     #   })
     #
@@ -877,7 +892,8 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #
     # @option params [required, Types::Task] :task
     #   Information about the task's progress and status.
@@ -922,15 +938,15 @@ module Aws::MigrationHub
     end
 
     # Provides identifying details of the resource being migrated so that it
-    # can be associated in the Application Discovery Service (ADS)'s
-    # repository. This association occurs asynchronously after
-    # `PutResourceAttributes` returns.
+    # can be associated in the Application Discovery Service repository.
+    # This association occurs asynchronously after `PutResourceAttributes`
+    # returns.
     #
     # * Keep in mind that subsequent calls to PutResourceAttributes will
     #   override previously stored attributes. For example, if it is first
     #   called with a MAC address, but later, it is desired to *add* an IP
     #   address, it will then be required to call it with *both* the IP and
-    #   MAC addresses to prevent overiding the MAC address.
+    #   MAC addresses to prevent overriding the MAC address.
     #
     # * Note the instructions regarding the special use case of the [
     #   `ResourceAttributeList` ][1] parameter when specifying any "VM"
@@ -950,12 +966,13 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #
     # @option params [required, Array<Types::ResourceAttribute>] :resource_attribute_list
     #   Information about the resource that is being migrated. This data will
     #   be used to map the task to a resource in the Application Discovery
-    #   Service (ADS)'s repository.
+    #   Service repository.
     #
     #   <note markdown="1"> Takes the object array of `ResourceAttribute` where the `Type` field
     #   is reserved for the following values: `IPV4_ADDRESS | IPV6_ADDRESS |
@@ -969,9 +986,9 @@ module Aws::MigrationHub
     #     it is required that `VM_MANAGER_ID`, as a minimum, is always set. If
     #     `VM_MANAGER_ID` is not set, then all "VM" fields will be discarded
     #     and "VM" fields will not be used for matching the migration task
-    #     to a server in Application Discovery Service (ADS)'s repository.
-    #     See the [Example][1] section below for a use case of specifying
-    #     "VM" related values.
+    #     to a server in Application Discovery Service repository. See the
+    #     [Example][1] section below for a use case of specifying "VM"
+    #     related values.
     #
     #   * If a server you are trying to match has multiple IP or MAC
     #     addresses, you should provide as many as you know in separate
@@ -1024,7 +1041,7 @@ module Aws::MigrationHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhub'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

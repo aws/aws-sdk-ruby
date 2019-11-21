@@ -413,6 +413,10 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.backup.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.backup.file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.backup.file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.backup.file_system.windows_configuration.preferred_file_server_ip #=> String
     #   resp.backup.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.backup.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -485,16 +489,22 @@ module Aws::FSx
     # @option params [required, Integer] :storage_capacity
     #   The storage capacity of the file system being created.
     #
-    #   For Windows file systems, the storage capacity has a minimum of 300
-    #   GiB, and a maximum of 65,536 GiB.
+    #   For Windows file systems, valid values are 32 GiB - 65,536 GiB.
     #
-    #   For Lustre file systems, the storage capacity has a minimum of 3,600
-    #   GiB. Storage capacity is provisioned in increments of 3,600 GiB.
+    #   For Lustre file systems, valid values are 1,200, 2,400, 3,600, then
+    #   continuing in increments of 3600 GiB.
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   The IDs of the subnets that the file system will be accessible from.
-    #   File systems support only one subnet. The file server is also launched
-    #   in that subnet's Availability Zone.
+    #   Specifies the IDs of the subnets that the file system will be
+    #   accessible from. For Windows `MULTI_AZ_1` file system deployment
+    #   types, provide exactly two subnet IDs, one for the preferred file
+    #   server and one for the standy file server. You specify one of these
+    #   subnets as the preferred subnet using the `WindowsConfiguration >
+    #   PreferredSubnetID` property.
+    #
+    #   For Windows `SINGLE_AZ_1` file system deployment types and Lustre file
+    #   systems, provide exactly one subnet ID. The file server is launched in
+    #   that subnet's Availability Zone.
     #
     # @option params [Array<String>] :security_group_ids
     #   A list of IDs specifying the security groups to apply to all network
@@ -614,6 +624,8 @@ module Aws::FSx
     #         password: "DirectoryPassword", # required
     #         dns_ips: ["IpAddress"], # required
     #       },
+    #       deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1
+    #       preferred_subnet_id: "SubnetId",
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
@@ -655,6 +667,10 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.windows_configuration.preferred_file_server_ip #=> String
     #   resp.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -828,6 +844,8 @@ module Aws::FSx
     #         password: "DirectoryPassword", # required
     #         dns_ips: ["IpAddress"], # required
     #       },
+    #       deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1
+    #       preferred_subnet_id: "SubnetId",
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
@@ -863,6 +881,10 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.windows_configuration.preferred_file_server_ip #=> String
     #   resp.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -1179,6 +1201,10 @@ module Aws::FSx
     #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.backups[0].file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.backups[0].file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.backups[0].file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.backups[0].file_system.windows_configuration.preferred_file_server_ip #=> String
     #   resp.backups[0].file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.backups[0].file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -1331,6 +1357,10 @@ module Aws::FSx
     #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.file_systems[0].windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.file_systems[0].windows_configuration.remote_administration_endpoint #=> String
+    #   resp.file_systems[0].windows_configuration.preferred_subnet_id #=> String
+    #   resp.file_systems[0].windows_configuration.preferred_file_server_ip #=> String
     #   resp.file_systems[0].windows_configuration.throughput_capacity #=> Integer
     #   resp.file_systems[0].windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_systems[0].windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -1645,6 +1675,10 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.windows_configuration.preferred_file_server_ip #=> String
     #   resp.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -1679,7 +1713,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

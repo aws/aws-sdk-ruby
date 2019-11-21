@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2019-11-20)
+------------------
+
+* Feature - This release of Amazon Elastic Compute Cloud (Amazon EC2) introduces support for Amazon Elastic Block Store (Amazon EBS) fast snapshot restores.
+
 1.117.0 (2019-11-19)
 ------------------
 

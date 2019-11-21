@@ -121,6 +121,12 @@ module Aws::EC2
       data[:volume_type]
     end
 
+    # Indicates whether the volume was created using fast snapshot restore.
+    # @return [Boolean]
+    def fast_restored
+      data[:fast_restored]
+    end
+
     # @!endgroup
 
     # @return [Client]

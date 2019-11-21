@@ -14,12 +14,51 @@ module Aws::CodeCommit
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     ActorDoesNotExistException = Shapes::StructureShape.new(name: 'ActorDoesNotExistException')
     AdditionalData = Shapes::StringShape.new(name: 'AdditionalData')
+    Approval = Shapes::StructureShape.new(name: 'Approval')
+    ApprovalList = Shapes::ListShape.new(name: 'ApprovalList')
+    ApprovalRule = Shapes::StructureShape.new(name: 'ApprovalRule')
+    ApprovalRuleContent = Shapes::StringShape.new(name: 'ApprovalRuleContent')
+    ApprovalRuleContentRequiredException = Shapes::StructureShape.new(name: 'ApprovalRuleContentRequiredException')
+    ApprovalRuleDoesNotExistException = Shapes::StructureShape.new(name: 'ApprovalRuleDoesNotExistException')
+    ApprovalRuleEventMetadata = Shapes::StructureShape.new(name: 'ApprovalRuleEventMetadata')
+    ApprovalRuleId = Shapes::StringShape.new(name: 'ApprovalRuleId')
+    ApprovalRuleName = Shapes::StringShape.new(name: 'ApprovalRuleName')
+    ApprovalRuleNameAlreadyExistsException = Shapes::StructureShape.new(name: 'ApprovalRuleNameAlreadyExistsException')
+    ApprovalRuleNameRequiredException = Shapes::StructureShape.new(name: 'ApprovalRuleNameRequiredException')
+    ApprovalRuleOverriddenEventMetadata = Shapes::StructureShape.new(name: 'ApprovalRuleOverriddenEventMetadata')
+    ApprovalRuleTemplate = Shapes::StructureShape.new(name: 'ApprovalRuleTemplate')
+    ApprovalRuleTemplateContent = Shapes::StringShape.new(name: 'ApprovalRuleTemplateContent')
+    ApprovalRuleTemplateContentRequiredException = Shapes::StructureShape.new(name: 'ApprovalRuleTemplateContentRequiredException')
+    ApprovalRuleTemplateDescription = Shapes::StringShape.new(name: 'ApprovalRuleTemplateDescription')
+    ApprovalRuleTemplateDoesNotExistException = Shapes::StructureShape.new(name: 'ApprovalRuleTemplateDoesNotExistException')
+    ApprovalRuleTemplateId = Shapes::StringShape.new(name: 'ApprovalRuleTemplateId')
+    ApprovalRuleTemplateInUseException = Shapes::StructureShape.new(name: 'ApprovalRuleTemplateInUseException')
+    ApprovalRuleTemplateName = Shapes::StringShape.new(name: 'ApprovalRuleTemplateName')
+    ApprovalRuleTemplateNameAlreadyExistsException = Shapes::StructureShape.new(name: 'ApprovalRuleTemplateNameAlreadyExistsException')
+    ApprovalRuleTemplateNameList = Shapes::ListShape.new(name: 'ApprovalRuleTemplateNameList')
+    ApprovalRuleTemplateNameRequiredException = Shapes::StructureShape.new(name: 'ApprovalRuleTemplateNameRequiredException')
+    ApprovalRulesList = Shapes::ListShape.new(name: 'ApprovalRulesList')
+    ApprovalRulesNotSatisfiedList = Shapes::ListShape.new(name: 'ApprovalRulesNotSatisfiedList')
+    ApprovalRulesSatisfiedList = Shapes::ListShape.new(name: 'ApprovalRulesSatisfiedList')
+    ApprovalState = Shapes::StringShape.new(name: 'ApprovalState')
+    ApprovalStateChangedEventMetadata = Shapes::StructureShape.new(name: 'ApprovalStateChangedEventMetadata')
+    ApprovalStateRequiredException = Shapes::StructureShape.new(name: 'ApprovalStateRequiredException')
+    Approved = Shapes::BooleanShape.new(name: 'Approved')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AssociateApprovalRuleTemplateWithRepositoryInput = Shapes::StructureShape.new(name: 'AssociateApprovalRuleTemplateWithRepositoryInput')
     AuthorDoesNotExistException = Shapes::StructureShape.new(name: 'AuthorDoesNotExistException')
+    BatchAssociateApprovalRuleTemplateWithRepositoriesError = Shapes::StructureShape.new(name: 'BatchAssociateApprovalRuleTemplateWithRepositoriesError')
+    BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList = Shapes::ListShape.new(name: 'BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList')
+    BatchAssociateApprovalRuleTemplateWithRepositoriesInput = Shapes::StructureShape.new(name: 'BatchAssociateApprovalRuleTemplateWithRepositoriesInput')
+    BatchAssociateApprovalRuleTemplateWithRepositoriesOutput = Shapes::StructureShape.new(name: 'BatchAssociateApprovalRuleTemplateWithRepositoriesOutput')
     BatchDescribeMergeConflictsError = Shapes::StructureShape.new(name: 'BatchDescribeMergeConflictsError')
     BatchDescribeMergeConflictsErrors = Shapes::ListShape.new(name: 'BatchDescribeMergeConflictsErrors')
     BatchDescribeMergeConflictsInput = Shapes::StructureShape.new(name: 'BatchDescribeMergeConflictsInput')
     BatchDescribeMergeConflictsOutput = Shapes::StructureShape.new(name: 'BatchDescribeMergeConflictsOutput')
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesError = Shapes::StructureShape.new(name: 'BatchDisassociateApprovalRuleTemplateFromRepositoriesError')
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList = Shapes::ListShape.new(name: 'BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList')
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesInput = Shapes::StructureShape.new(name: 'BatchDisassociateApprovalRuleTemplateFromRepositoriesInput')
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput = Shapes::StructureShape.new(name: 'BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput')
     BatchGetCommitsError = Shapes::StructureShape.new(name: 'BatchGetCommitsError')
     BatchGetCommitsErrorsList = Shapes::ListShape.new(name: 'BatchGetCommitsErrorsList')
     BatchGetCommitsInput = Shapes::StructureShape.new(name: 'BatchGetCommitsInput')
@@ -37,6 +76,8 @@ module Aws::CodeCommit
     BranchNameIsTagNameException = Shapes::StructureShape.new(name: 'BranchNameIsTagNameException')
     BranchNameList = Shapes::ListShape.new(name: 'BranchNameList')
     BranchNameRequiredException = Shapes::StructureShape.new(name: 'BranchNameRequiredException')
+    CannotDeleteApprovalRuleFromTemplateException = Shapes::StructureShape.new(name: 'CannotDeleteApprovalRuleFromTemplateException')
+    CannotModifyApprovalRuleFromTemplateException = Shapes::StructureShape.new(name: 'CannotModifyApprovalRuleFromTemplateException')
     CapitalBoolean = Shapes::BooleanShape.new(name: 'CapitalBoolean')
     ChangeTypeEnum = Shapes::StringShape.new(name: 'ChangeTypeEnum')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
@@ -77,9 +118,13 @@ module Aws::CodeCommit
     ConflictResolutionStrategyTypeEnum = Shapes::StringShape.new(name: 'ConflictResolutionStrategyTypeEnum')
     Conflicts = Shapes::ListShape.new(name: 'Conflicts')
     Content = Shapes::StringShape.new(name: 'Content')
+    CreateApprovalRuleTemplateInput = Shapes::StructureShape.new(name: 'CreateApprovalRuleTemplateInput')
+    CreateApprovalRuleTemplateOutput = Shapes::StructureShape.new(name: 'CreateApprovalRuleTemplateOutput')
     CreateBranchInput = Shapes::StructureShape.new(name: 'CreateBranchInput')
     CreateCommitInput = Shapes::StructureShape.new(name: 'CreateCommitInput')
     CreateCommitOutput = Shapes::StructureShape.new(name: 'CreateCommitOutput')
+    CreatePullRequestApprovalRuleInput = Shapes::StructureShape.new(name: 'CreatePullRequestApprovalRuleInput')
+    CreatePullRequestApprovalRuleOutput = Shapes::StructureShape.new(name: 'CreatePullRequestApprovalRuleOutput')
     CreatePullRequestInput = Shapes::StructureShape.new(name: 'CreatePullRequestInput')
     CreatePullRequestOutput = Shapes::StructureShape.new(name: 'CreatePullRequestOutput')
     CreateRepositoryInput = Shapes::StructureShape.new(name: 'CreateRepositoryInput')
@@ -89,6 +134,8 @@ module Aws::CodeCommit
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
     Date = Shapes::StringShape.new(name: 'Date')
     DefaultBranchCannotBeDeletedException = Shapes::StructureShape.new(name: 'DefaultBranchCannotBeDeletedException')
+    DeleteApprovalRuleTemplateInput = Shapes::StructureShape.new(name: 'DeleteApprovalRuleTemplateInput')
+    DeleteApprovalRuleTemplateOutput = Shapes::StructureShape.new(name: 'DeleteApprovalRuleTemplateOutput')
     DeleteBranchInput = Shapes::StructureShape.new(name: 'DeleteBranchInput')
     DeleteBranchOutput = Shapes::StructureShape.new(name: 'DeleteBranchOutput')
     DeleteCommentContentInput = Shapes::StructureShape.new(name: 'DeleteCommentContentInput')
@@ -97,6 +144,8 @@ module Aws::CodeCommit
     DeleteFileEntry = Shapes::StructureShape.new(name: 'DeleteFileEntry')
     DeleteFileInput = Shapes::StructureShape.new(name: 'DeleteFileInput')
     DeleteFileOutput = Shapes::StructureShape.new(name: 'DeleteFileOutput')
+    DeletePullRequestApprovalRuleInput = Shapes::StructureShape.new(name: 'DeletePullRequestApprovalRuleInput')
+    DeletePullRequestApprovalRuleOutput = Shapes::StructureShape.new(name: 'DeletePullRequestApprovalRuleOutput')
     DeleteRepositoryInput = Shapes::StructureShape.new(name: 'DeleteRepositoryInput')
     DeleteRepositoryOutput = Shapes::StructureShape.new(name: 'DeleteRepositoryOutput')
     DescribeMergeConflictsInput = Shapes::StructureShape.new(name: 'DescribeMergeConflictsInput')
@@ -107,6 +156,7 @@ module Aws::CodeCommit
     Difference = Shapes::StructureShape.new(name: 'Difference')
     DifferenceList = Shapes::ListShape.new(name: 'DifferenceList')
     DirectoryNameConflictsWithFileNameException = Shapes::StructureShape.new(name: 'DirectoryNameConflictsWithFileNameException')
+    DisassociateApprovalRuleTemplateFromRepositoryInput = Shapes::StructureShape.new(name: 'DisassociateApprovalRuleTemplateFromRepositoryInput')
     Email = Shapes::StringShape.new(name: 'Email')
     EncryptionIntegrityChecksFailedException = Shapes::StructureShape.new(name: 'EncryptionIntegrityChecksFailedException')
     EncryptionKeyAccessDeniedException = Shapes::StructureShape.new(name: 'EncryptionKeyAccessDeniedException')
@@ -115,6 +165,9 @@ module Aws::CodeCommit
     EncryptionKeyUnavailableException = Shapes::StructureShape.new(name: 'EncryptionKeyUnavailableException')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    EvaluatePullRequestApprovalRulesInput = Shapes::StructureShape.new(name: 'EvaluatePullRequestApprovalRulesInput')
+    EvaluatePullRequestApprovalRulesOutput = Shapes::StructureShape.new(name: 'EvaluatePullRequestApprovalRulesOutput')
+    Evaluation = Shapes::StructureShape.new(name: 'Evaluation')
     EventDate = Shapes::TimestampShape.new(name: 'EventDate')
     ExceptionName = Shapes::StringShape.new(name: 'ExceptionName')
     File = Shapes::StructureShape.new(name: 'File')
@@ -140,6 +193,8 @@ module Aws::CodeCommit
     FolderContentSizeLimitExceededException = Shapes::StructureShape.new(name: 'FolderContentSizeLimitExceededException')
     FolderDoesNotExistException = Shapes::StructureShape.new(name: 'FolderDoesNotExistException')
     FolderList = Shapes::ListShape.new(name: 'FolderList')
+    GetApprovalRuleTemplateInput = Shapes::StructureShape.new(name: 'GetApprovalRuleTemplateInput')
+    GetApprovalRuleTemplateOutput = Shapes::StructureShape.new(name: 'GetApprovalRuleTemplateOutput')
     GetBlobInput = Shapes::StructureShape.new(name: 'GetBlobInput')
     GetBlobOutput = Shapes::StructureShape.new(name: 'GetBlobOutput')
     GetBranchInput = Shapes::StructureShape.new(name: 'GetBranchInput')
@@ -164,8 +219,12 @@ module Aws::CodeCommit
     GetMergeConflictsOutput = Shapes::StructureShape.new(name: 'GetMergeConflictsOutput')
     GetMergeOptionsInput = Shapes::StructureShape.new(name: 'GetMergeOptionsInput')
     GetMergeOptionsOutput = Shapes::StructureShape.new(name: 'GetMergeOptionsOutput')
+    GetPullRequestApprovalStatesInput = Shapes::StructureShape.new(name: 'GetPullRequestApprovalStatesInput')
+    GetPullRequestApprovalStatesOutput = Shapes::StructureShape.new(name: 'GetPullRequestApprovalStatesOutput')
     GetPullRequestInput = Shapes::StructureShape.new(name: 'GetPullRequestInput')
     GetPullRequestOutput = Shapes::StructureShape.new(name: 'GetPullRequestOutput')
+    GetPullRequestOverrideStateInput = Shapes::StructureShape.new(name: 'GetPullRequestOverrideStateInput')
+    GetPullRequestOverrideStateOutput = Shapes::StructureShape.new(name: 'GetPullRequestOverrideStateOutput')
     GetRepositoryInput = Shapes::StructureShape.new(name: 'GetRepositoryInput')
     GetRepositoryOutput = Shapes::StructureShape.new(name: 'GetRepositoryOutput')
     GetRepositoryTriggersInput = Shapes::StructureShape.new(name: 'GetRepositoryTriggersInput')
@@ -173,6 +232,12 @@ module Aws::CodeCommit
     HunkContent = Shapes::StringShape.new(name: 'HunkContent')
     IdempotencyParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotencyParameterMismatchException')
     InvalidActorArnException = Shapes::StructureShape.new(name: 'InvalidActorArnException')
+    InvalidApprovalRuleContentException = Shapes::StructureShape.new(name: 'InvalidApprovalRuleContentException')
+    InvalidApprovalRuleNameException = Shapes::StructureShape.new(name: 'InvalidApprovalRuleNameException')
+    InvalidApprovalRuleTemplateContentException = Shapes::StructureShape.new(name: 'InvalidApprovalRuleTemplateContentException')
+    InvalidApprovalRuleTemplateDescriptionException = Shapes::StructureShape.new(name: 'InvalidApprovalRuleTemplateDescriptionException')
+    InvalidApprovalRuleTemplateNameException = Shapes::StructureShape.new(name: 'InvalidApprovalRuleTemplateNameException')
+    InvalidApprovalStateException = Shapes::StructureShape.new(name: 'InvalidApprovalStateException')
     InvalidAuthorArnException = Shapes::StructureShape.new(name: 'InvalidAuthorArnException')
     InvalidBlobIdException = Shapes::StructureShape.new(name: 'InvalidBlobIdException')
     InvalidBranchNameException = Shapes::StructureShape.new(name: 'InvalidBranchNameException')
@@ -196,6 +261,7 @@ module Aws::CodeCommit
     InvalidMaxResultsException = Shapes::StructureShape.new(name: 'InvalidMaxResultsException')
     InvalidMergeOptionException = Shapes::StructureShape.new(name: 'InvalidMergeOptionException')
     InvalidOrderException = Shapes::StructureShape.new(name: 'InvalidOrderException')
+    InvalidOverrideStatusException = Shapes::StructureShape.new(name: 'InvalidOverrideStatusException')
     InvalidParentCommitIdException = Shapes::StructureShape.new(name: 'InvalidParentCommitIdException')
     InvalidPathException = Shapes::StructureShape.new(name: 'InvalidPathException')
     InvalidPullRequestEventTypeException = Shapes::StructureShape.new(name: 'InvalidPullRequestEventTypeException')
@@ -215,6 +281,8 @@ module Aws::CodeCommit
     InvalidRepositoryTriggerNameException = Shapes::StructureShape.new(name: 'InvalidRepositoryTriggerNameException')
     InvalidRepositoryTriggerRegionException = Shapes::StructureShape.new(name: 'InvalidRepositoryTriggerRegionException')
     InvalidResourceArnException = Shapes::StructureShape.new(name: 'InvalidResourceArnException')
+    InvalidRevisionIdException = Shapes::StructureShape.new(name: 'InvalidRevisionIdException')
+    InvalidRuleContentSha256Exception = Shapes::StructureShape.new(name: 'InvalidRuleContentSha256Exception')
     InvalidSortByException = Shapes::StructureShape.new(name: 'InvalidSortByException')
     InvalidSourceCommitSpecifierException = Shapes::StructureShape.new(name: 'InvalidSourceCommitSpecifierException')
     InvalidSystemTagUsageException = Shapes::StructureShape.new(name: 'InvalidSystemTagUsageException')
@@ -237,10 +305,16 @@ module Aws::CodeCommit
     LastModifiedDate = Shapes::TimestampShape.new(name: 'LastModifiedDate')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
     LineNumber = Shapes::IntegerShape.new(name: 'LineNumber')
+    ListApprovalRuleTemplatesInput = Shapes::StructureShape.new(name: 'ListApprovalRuleTemplatesInput')
+    ListApprovalRuleTemplatesOutput = Shapes::StructureShape.new(name: 'ListApprovalRuleTemplatesOutput')
+    ListAssociatedApprovalRuleTemplatesForRepositoryInput = Shapes::StructureShape.new(name: 'ListAssociatedApprovalRuleTemplatesForRepositoryInput')
+    ListAssociatedApprovalRuleTemplatesForRepositoryOutput = Shapes::StructureShape.new(name: 'ListAssociatedApprovalRuleTemplatesForRepositoryOutput')
     ListBranchesInput = Shapes::StructureShape.new(name: 'ListBranchesInput')
     ListBranchesOutput = Shapes::StructureShape.new(name: 'ListBranchesOutput')
     ListPullRequestsInput = Shapes::StructureShape.new(name: 'ListPullRequestsInput')
     ListPullRequestsOutput = Shapes::StructureShape.new(name: 'ListPullRequestsOutput')
+    ListRepositoriesForApprovalRuleTemplateInput = Shapes::StructureShape.new(name: 'ListRepositoriesForApprovalRuleTemplateInput')
+    ListRepositoriesForApprovalRuleTemplateOutput = Shapes::StructureShape.new(name: 'ListRepositoriesForApprovalRuleTemplateOutput')
     ListRepositoriesInput = Shapes::StructureShape.new(name: 'ListRepositoriesInput')
     ListRepositoriesOutput = Shapes::StructureShape.new(name: 'ListRepositoriesOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
@@ -253,9 +327,11 @@ module Aws::CodeCommit
     MaximumFileContentToLoadExceededException = Shapes::StructureShape.new(name: 'MaximumFileContentToLoadExceededException')
     MaximumFileEntriesExceededException = Shapes::StructureShape.new(name: 'MaximumFileEntriesExceededException')
     MaximumItemsToCompareExceededException = Shapes::StructureShape.new(name: 'MaximumItemsToCompareExceededException')
+    MaximumNumberOfApprovalsExceededException = Shapes::StructureShape.new(name: 'MaximumNumberOfApprovalsExceededException')
     MaximumOpenPullRequestsExceededException = Shapes::StructureShape.new(name: 'MaximumOpenPullRequestsExceededException')
     MaximumRepositoryNamesExceededException = Shapes::StructureShape.new(name: 'MaximumRepositoryNamesExceededException')
     MaximumRepositoryTriggersExceededException = Shapes::StructureShape.new(name: 'MaximumRepositoryTriggersExceededException')
+    MaximumRuleTemplatesAssociatedWithRepositoryException = Shapes::StructureShape.new(name: 'MaximumRuleTemplatesAssociatedWithRepositoryException')
     MergeBranchesByFastForwardInput = Shapes::StructureShape.new(name: 'MergeBranchesByFastForwardInput')
     MergeBranchesByFastForwardOutput = Shapes::StructureShape.new(name: 'MergeBranchesByFastForwardOutput')
     MergeBranchesBySquashInput = Shapes::StructureShape.new(name: 'MergeBranchesBySquashInput')
@@ -285,11 +361,19 @@ module Aws::CodeCommit
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NoChangeException = Shapes::StructureShape.new(name: 'NoChangeException')
     NumberOfConflicts = Shapes::IntegerShape.new(name: 'NumberOfConflicts')
+    NumberOfRuleTemplatesExceededException = Shapes::StructureShape.new(name: 'NumberOfRuleTemplatesExceededException')
+    NumberOfRulesExceededException = Shapes::StructureShape.new(name: 'NumberOfRulesExceededException')
     ObjectId = Shapes::StringShape.new(name: 'ObjectId')
     ObjectSize = Shapes::IntegerShape.new(name: 'ObjectSize')
     ObjectTypeEnum = Shapes::StringShape.new(name: 'ObjectTypeEnum')
     ObjectTypes = Shapes::StructureShape.new(name: 'ObjectTypes')
     OrderEnum = Shapes::StringShape.new(name: 'OrderEnum')
+    OriginApprovalRuleTemplate = Shapes::StructureShape.new(name: 'OriginApprovalRuleTemplate')
+    Overridden = Shapes::BooleanShape.new(name: 'Overridden')
+    OverrideAlreadySetException = Shapes::StructureShape.new(name: 'OverrideAlreadySetException')
+    OverridePullRequestApprovalRulesInput = Shapes::StructureShape.new(name: 'OverridePullRequestApprovalRulesInput')
+    OverrideStatus = Shapes::StringShape.new(name: 'OverrideStatus')
+    OverrideStatusRequiredException = Shapes::StructureShape.new(name: 'OverrideStatusRequiredException')
     ParentCommitDoesNotExistException = Shapes::StructureShape.new(name: 'ParentCommitDoesNotExistException')
     ParentCommitIdOutdatedException = Shapes::StructureShape.new(name: 'ParentCommitIdOutdatedException')
     ParentCommitIdRequiredException = Shapes::StructureShape.new(name: 'ParentCommitIdRequiredException')
@@ -306,6 +390,8 @@ module Aws::CodeCommit
     PostCommentReplyOutput = Shapes::StructureShape.new(name: 'PostCommentReplyOutput')
     PullRequest = Shapes::StructureShape.new(name: 'PullRequest')
     PullRequestAlreadyClosedException = Shapes::StructureShape.new(name: 'PullRequestAlreadyClosedException')
+    PullRequestApprovalRulesNotSatisfiedException = Shapes::StructureShape.new(name: 'PullRequestApprovalRulesNotSatisfiedException')
+    PullRequestCannotBeApprovedByAuthorException = Shapes::StructureShape.new(name: 'PullRequestCannotBeApprovedByAuthorException')
     PullRequestCreatedEventMetadata = Shapes::StructureShape.new(name: 'PullRequestCreatedEventMetadata')
     PullRequestDoesNotExistException = Shapes::StructureShape.new(name: 'PullRequestDoesNotExistException')
     PullRequestEvent = Shapes::StructureShape.new(name: 'PullRequestEvent')
@@ -372,6 +458,10 @@ module Aws::CodeCommit
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArnRequiredException = Shapes::StructureShape.new(name: 'ResourceArnRequiredException')
     RestrictedSourceFileException = Shapes::StructureShape.new(name: 'RestrictedSourceFileException')
+    RevisionId = Shapes::StringShape.new(name: 'RevisionId')
+    RevisionIdRequiredException = Shapes::StructureShape.new(name: 'RevisionIdRequiredException')
+    RevisionNotCurrentException = Shapes::StructureShape.new(name: 'RevisionNotCurrentException')
+    RuleContentSha256 = Shapes::StringShape.new(name: 'RuleContentSha256')
     SameFileContentException = Shapes::StructureShape.new(name: 'SameFileContentException')
     SamePathRequestException = Shapes::StructureShape.new(name: 'SamePathRequestException')
     SetFileModeEntries = Shapes::ListShape.new(name: 'SetFileModeEntries')
@@ -404,9 +494,18 @@ module Aws::CodeCommit
     TitleRequiredException = Shapes::StructureShape.new(name: 'TitleRequiredException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UpdateApprovalRuleTemplateContentInput = Shapes::StructureShape.new(name: 'UpdateApprovalRuleTemplateContentInput')
+    UpdateApprovalRuleTemplateContentOutput = Shapes::StructureShape.new(name: 'UpdateApprovalRuleTemplateContentOutput')
+    UpdateApprovalRuleTemplateDescriptionInput = Shapes::StructureShape.new(name: 'UpdateApprovalRuleTemplateDescriptionInput')
+    UpdateApprovalRuleTemplateDescriptionOutput = Shapes::StructureShape.new(name: 'UpdateApprovalRuleTemplateDescriptionOutput')
+    UpdateApprovalRuleTemplateNameInput = Shapes::StructureShape.new(name: 'UpdateApprovalRuleTemplateNameInput')
+    UpdateApprovalRuleTemplateNameOutput = Shapes::StructureShape.new(name: 'UpdateApprovalRuleTemplateNameOutput')
     UpdateCommentInput = Shapes::StructureShape.new(name: 'UpdateCommentInput')
     UpdateCommentOutput = Shapes::StructureShape.new(name: 'UpdateCommentOutput')
     UpdateDefaultBranchInput = Shapes::StructureShape.new(name: 'UpdateDefaultBranchInput')
+    UpdatePullRequestApprovalRuleContentInput = Shapes::StructureShape.new(name: 'UpdatePullRequestApprovalRuleContentInput')
+    UpdatePullRequestApprovalRuleContentOutput = Shapes::StructureShape.new(name: 'UpdatePullRequestApprovalRuleContentOutput')
+    UpdatePullRequestApprovalStateInput = Shapes::StructureShape.new(name: 'UpdatePullRequestApprovalStateInput')
     UpdatePullRequestDescriptionInput = Shapes::StructureShape.new(name: 'UpdatePullRequestDescriptionInput')
     UpdatePullRequestDescriptionOutput = Shapes::StructureShape.new(name: 'UpdatePullRequestDescriptionOutput')
     UpdatePullRequestStatusInput = Shapes::StructureShape.new(name: 'UpdatePullRequestStatusInput')
@@ -417,6 +516,72 @@ module Aws::CodeCommit
     UpdateRepositoryNameInput = Shapes::StructureShape.new(name: 'UpdateRepositoryNameInput')
     UserInfo = Shapes::StructureShape.new(name: 'UserInfo')
     blob = Shapes::BlobShape.new(name: 'blob')
+
+    Approval.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "userArn"))
+    Approval.add_member(:approval_state, Shapes::ShapeRef.new(shape: ApprovalState, location_name: "approvalState"))
+    Approval.struct_class = Types::Approval
+
+    ApprovalList.member = Shapes::ShapeRef.new(shape: Approval)
+
+    ApprovalRule.add_member(:approval_rule_id, Shapes::ShapeRef.new(shape: ApprovalRuleId, location_name: "approvalRuleId"))
+    ApprovalRule.add_member(:approval_rule_name, Shapes::ShapeRef.new(shape: ApprovalRuleName, location_name: "approvalRuleName"))
+    ApprovalRule.add_member(:approval_rule_content, Shapes::ShapeRef.new(shape: ApprovalRuleContent, location_name: "approvalRuleContent"))
+    ApprovalRule.add_member(:rule_content_sha_256, Shapes::ShapeRef.new(shape: RuleContentSha256, location_name: "ruleContentSha256"))
+    ApprovalRule.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "lastModifiedDate"))
+    ApprovalRule.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
+    ApprovalRule.add_member(:last_modified_user, Shapes::ShapeRef.new(shape: Arn, location_name: "lastModifiedUser"))
+    ApprovalRule.add_member(:origin_approval_rule_template, Shapes::ShapeRef.new(shape: OriginApprovalRuleTemplate, location_name: "originApprovalRuleTemplate"))
+    ApprovalRule.struct_class = Types::ApprovalRule
+
+    ApprovalRuleEventMetadata.add_member(:approval_rule_name, Shapes::ShapeRef.new(shape: ApprovalRuleName, location_name: "approvalRuleName"))
+    ApprovalRuleEventMetadata.add_member(:approval_rule_id, Shapes::ShapeRef.new(shape: ApprovalRuleId, location_name: "approvalRuleId"))
+    ApprovalRuleEventMetadata.add_member(:approval_rule_content, Shapes::ShapeRef.new(shape: ApprovalRuleContent, location_name: "approvalRuleContent"))
+    ApprovalRuleEventMetadata.struct_class = Types::ApprovalRuleEventMetadata
+
+    ApprovalRuleOverriddenEventMetadata.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    ApprovalRuleOverriddenEventMetadata.add_member(:override_status, Shapes::ShapeRef.new(shape: OverrideStatus, location_name: "overrideStatus"))
+    ApprovalRuleOverriddenEventMetadata.struct_class = Types::ApprovalRuleOverriddenEventMetadata
+
+    ApprovalRuleTemplate.add_member(:approval_rule_template_id, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateId, location_name: "approvalRuleTemplateId"))
+    ApprovalRuleTemplate.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName"))
+    ApprovalRuleTemplate.add_member(:approval_rule_template_description, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDescription, location_name: "approvalRuleTemplateDescription"))
+    ApprovalRuleTemplate.add_member(:approval_rule_template_content, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateContent, location_name: "approvalRuleTemplateContent"))
+    ApprovalRuleTemplate.add_member(:rule_content_sha_256, Shapes::ShapeRef.new(shape: RuleContentSha256, location_name: "ruleContentSha256"))
+    ApprovalRuleTemplate.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "lastModifiedDate"))
+    ApprovalRuleTemplate.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
+    ApprovalRuleTemplate.add_member(:last_modified_user, Shapes::ShapeRef.new(shape: Arn, location_name: "lastModifiedUser"))
+    ApprovalRuleTemplate.struct_class = Types::ApprovalRuleTemplate
+
+    ApprovalRuleTemplateNameList.member = Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName)
+
+    ApprovalRulesList.member = Shapes::ShapeRef.new(shape: ApprovalRule)
+
+    ApprovalRulesNotSatisfiedList.member = Shapes::ShapeRef.new(shape: ApprovalRuleName)
+
+    ApprovalRulesSatisfiedList.member = Shapes::ShapeRef.new(shape: ApprovalRuleName)
+
+    ApprovalStateChangedEventMetadata.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    ApprovalStateChangedEventMetadata.add_member(:approval_status, Shapes::ShapeRef.new(shape: ApprovalState, location_name: "approvalStatus"))
+    ApprovalStateChangedEventMetadata.struct_class = Types::ApprovalStateChangedEventMetadata
+
+    AssociateApprovalRuleTemplateWithRepositoryInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
+    AssociateApprovalRuleTemplateWithRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    AssociateApprovalRuleTemplateWithRepositoryInput.struct_class = Types::AssociateApprovalRuleTemplateWithRepositoryInput
+
+    BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesError.struct_class = Types::BatchAssociateApprovalRuleTemplateWithRepositoriesError
+
+    BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList.member = Shapes::ShapeRef.new(shape: BatchAssociateApprovalRuleTemplateWithRepositoriesError)
+
+    BatchAssociateApprovalRuleTemplateWithRepositoriesInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesInput.add_member(:repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, required: true, location_name: "repositoryNames"))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesInput.struct_class = Types::BatchAssociateApprovalRuleTemplateWithRepositoriesInput
+
+    BatchAssociateApprovalRuleTemplateWithRepositoriesOutput.add_member(:associated_repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, required: true, location_name: "associatedRepositoryNames"))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, required: true, location_name: "errors"))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesOutput.struct_class = Types::BatchAssociateApprovalRuleTemplateWithRepositoriesOutput
 
     BatchDescribeMergeConflictsError.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
     BatchDescribeMergeConflictsError.add_member(:exception_name, Shapes::ShapeRef.new(shape: ExceptionName, required: true, location_name: "exceptionName"))
@@ -444,6 +609,21 @@ module Aws::CodeCommit
     BatchDescribeMergeConflictsOutput.add_member(:source_commit_id, Shapes::ShapeRef.new(shape: ObjectId, required: true, location_name: "sourceCommitId"))
     BatchDescribeMergeConflictsOutput.add_member(:base_commit_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "baseCommitId"))
     BatchDescribeMergeConflictsOutput.struct_class = Types::BatchDescribeMergeConflictsOutput
+
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesError.struct_class = Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesError
+
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList.member = Shapes::ShapeRef.new(shape: BatchDisassociateApprovalRuleTemplateFromRepositoriesError)
+
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.add_member(:repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, required: true, location_name: "repositoryNames"))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.struct_class = Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesInput
+
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput.add_member(:disassociated_repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, required: true, location_name: "disassociatedRepositoryNames"))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, required: true, location_name: "errors"))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput.struct_class = Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput
 
     BatchGetCommitsError.add_member(:commit_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
     BatchGetCommitsError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
@@ -551,6 +731,14 @@ module Aws::CodeCommit
 
     Conflicts.member = Shapes::ShapeRef.new(shape: Conflict)
 
+    CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
+    CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_content, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateContent, required: true, location_name: "approvalRuleTemplateContent"))
+    CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_description, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDescription, location_name: "approvalRuleTemplateDescription"))
+    CreateApprovalRuleTemplateInput.struct_class = Types::CreateApprovalRuleTemplateInput
+
+    CreateApprovalRuleTemplateOutput.add_member(:approval_rule_template, Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, required: true, location_name: "approvalRuleTemplate"))
+    CreateApprovalRuleTemplateOutput.struct_class = Types::CreateApprovalRuleTemplateOutput
+
     CreateBranchInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     CreateBranchInput.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "branchName"))
     CreateBranchInput.add_member(:commit_id, Shapes::ShapeRef.new(shape: CommitId, required: true, location_name: "commitId"))
@@ -574,6 +762,14 @@ module Aws::CodeCommit
     CreateCommitOutput.add_member(:files_updated, Shapes::ShapeRef.new(shape: FilesMetadata, location_name: "filesUpdated"))
     CreateCommitOutput.add_member(:files_deleted, Shapes::ShapeRef.new(shape: FilesMetadata, location_name: "filesDeleted"))
     CreateCommitOutput.struct_class = Types::CreateCommitOutput
+
+    CreatePullRequestApprovalRuleInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
+    CreatePullRequestApprovalRuleInput.add_member(:approval_rule_name, Shapes::ShapeRef.new(shape: ApprovalRuleName, required: true, location_name: "approvalRuleName"))
+    CreatePullRequestApprovalRuleInput.add_member(:approval_rule_content, Shapes::ShapeRef.new(shape: ApprovalRuleContent, required: true, location_name: "approvalRuleContent"))
+    CreatePullRequestApprovalRuleInput.struct_class = Types::CreatePullRequestApprovalRuleInput
+
+    CreatePullRequestApprovalRuleOutput.add_member(:approval_rule, Shapes::ShapeRef.new(shape: ApprovalRule, required: true, location_name: "approvalRule"))
+    CreatePullRequestApprovalRuleOutput.struct_class = Types::CreatePullRequestApprovalRuleOutput
 
     CreatePullRequestInput.add_member(:title, Shapes::ShapeRef.new(shape: Title, required: true, location_name: "title"))
     CreatePullRequestInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -609,6 +805,12 @@ module Aws::CodeCommit
     CreateUnreferencedMergeCommitOutput.add_member(:tree_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
     CreateUnreferencedMergeCommitOutput.struct_class = Types::CreateUnreferencedMergeCommitOutput
 
+    DeleteApprovalRuleTemplateInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
+    DeleteApprovalRuleTemplateInput.struct_class = Types::DeleteApprovalRuleTemplateInput
+
+    DeleteApprovalRuleTemplateOutput.add_member(:approval_rule_template_id, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateId, required: true, location_name: "approvalRuleTemplateId"))
+    DeleteApprovalRuleTemplateOutput.struct_class = Types::DeleteApprovalRuleTemplateOutput
+
     DeleteBranchInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     DeleteBranchInput.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "branchName"))
     DeleteBranchInput.struct_class = Types::DeleteBranchInput
@@ -642,6 +844,13 @@ module Aws::CodeCommit
     DeleteFileOutput.add_member(:tree_id, Shapes::ShapeRef.new(shape: ObjectId, required: true, location_name: "treeId"))
     DeleteFileOutput.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
     DeleteFileOutput.struct_class = Types::DeleteFileOutput
+
+    DeletePullRequestApprovalRuleInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
+    DeletePullRequestApprovalRuleInput.add_member(:approval_rule_name, Shapes::ShapeRef.new(shape: ApprovalRuleName, required: true, location_name: "approvalRuleName"))
+    DeletePullRequestApprovalRuleInput.struct_class = Types::DeletePullRequestApprovalRuleInput
+
+    DeletePullRequestApprovalRuleOutput.add_member(:approval_rule_id, Shapes::ShapeRef.new(shape: ApprovalRuleId, required: true, location_name: "approvalRuleId"))
+    DeletePullRequestApprovalRuleOutput.struct_class = Types::DeletePullRequestApprovalRuleOutput
 
     DeleteRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     DeleteRepositoryInput.struct_class = Types::DeleteRepositoryInput
@@ -686,6 +895,23 @@ module Aws::CodeCommit
 
     DifferenceList.member = Shapes::ShapeRef.new(shape: Difference)
 
+    DisassociateApprovalRuleTemplateFromRepositoryInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
+    DisassociateApprovalRuleTemplateFromRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    DisassociateApprovalRuleTemplateFromRepositoryInput.struct_class = Types::DisassociateApprovalRuleTemplateFromRepositoryInput
+
+    EvaluatePullRequestApprovalRulesInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
+    EvaluatePullRequestApprovalRulesInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
+    EvaluatePullRequestApprovalRulesInput.struct_class = Types::EvaluatePullRequestApprovalRulesInput
+
+    EvaluatePullRequestApprovalRulesOutput.add_member(:evaluation, Shapes::ShapeRef.new(shape: Evaluation, required: true, location_name: "evaluation"))
+    EvaluatePullRequestApprovalRulesOutput.struct_class = Types::EvaluatePullRequestApprovalRulesOutput
+
+    Evaluation.add_member(:approved, Shapes::ShapeRef.new(shape: Approved, location_name: "approved"))
+    Evaluation.add_member(:overridden, Shapes::ShapeRef.new(shape: Overridden, location_name: "overridden"))
+    Evaluation.add_member(:approval_rules_satisfied, Shapes::ShapeRef.new(shape: ApprovalRulesSatisfiedList, location_name: "approvalRulesSatisfied"))
+    Evaluation.add_member(:approval_rules_not_satisfied, Shapes::ShapeRef.new(shape: ApprovalRulesNotSatisfiedList, location_name: "approvalRulesNotSatisfied"))
+    Evaluation.struct_class = Types::Evaluation
+
     File.add_member(:blob_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId"))
     File.add_member(:absolute_path, Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
     File.add_member(:relative_path, Shapes::ShapeRef.new(shape: Path, location_name: "relativePath"))
@@ -719,6 +945,12 @@ module Aws::CodeCommit
     Folder.struct_class = Types::Folder
 
     FolderList.member = Shapes::ShapeRef.new(shape: Folder)
+
+    GetApprovalRuleTemplateInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
+    GetApprovalRuleTemplateInput.struct_class = Types::GetApprovalRuleTemplateInput
+
+    GetApprovalRuleTemplateOutput.add_member(:approval_rule_template, Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, required: true, location_name: "approvalRuleTemplate"))
+    GetApprovalRuleTemplateOutput.struct_class = Types::GetApprovalRuleTemplateOutput
 
     GetBlobInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     GetBlobInput.add_member(:blob_id, Shapes::ShapeRef.new(shape: ObjectId, required: true, location_name: "blobId"))
@@ -854,11 +1086,26 @@ module Aws::CodeCommit
     GetMergeOptionsOutput.add_member(:base_commit_id, Shapes::ShapeRef.new(shape: ObjectId, required: true, location_name: "baseCommitId"))
     GetMergeOptionsOutput.struct_class = Types::GetMergeOptionsOutput
 
+    GetPullRequestApprovalStatesInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
+    GetPullRequestApprovalStatesInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
+    GetPullRequestApprovalStatesInput.struct_class = Types::GetPullRequestApprovalStatesInput
+
+    GetPullRequestApprovalStatesOutput.add_member(:approvals, Shapes::ShapeRef.new(shape: ApprovalList, location_name: "approvals"))
+    GetPullRequestApprovalStatesOutput.struct_class = Types::GetPullRequestApprovalStatesOutput
+
     GetPullRequestInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
     GetPullRequestInput.struct_class = Types::GetPullRequestInput
 
     GetPullRequestOutput.add_member(:pull_request, Shapes::ShapeRef.new(shape: PullRequest, required: true, location_name: "pullRequest"))
     GetPullRequestOutput.struct_class = Types::GetPullRequestOutput
+
+    GetPullRequestOverrideStateInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
+    GetPullRequestOverrideStateInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
+    GetPullRequestOverrideStateInput.struct_class = Types::GetPullRequestOverrideStateInput
+
+    GetPullRequestOverrideStateOutput.add_member(:overridden, Shapes::ShapeRef.new(shape: Overridden, location_name: "overridden"))
+    GetPullRequestOverrideStateOutput.add_member(:overrider, Shapes::ShapeRef.new(shape: Arn, location_name: "overrider"))
+    GetPullRequestOverrideStateOutput.struct_class = Types::GetPullRequestOverrideStateOutput
 
     GetRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     GetRepositoryInput.struct_class = Types::GetRepositoryInput
@@ -878,6 +1125,23 @@ module Aws::CodeCommit
     IsBinaryFile.add_member(:base, Shapes::ShapeRef.new(shape: CapitalBoolean, location_name: "base"))
     IsBinaryFile.struct_class = Types::IsBinaryFile
 
+    ListApprovalRuleTemplatesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListApprovalRuleTemplatesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListApprovalRuleTemplatesInput.struct_class = Types::ListApprovalRuleTemplatesInput
+
+    ListApprovalRuleTemplatesOutput.add_member(:approval_rule_template_names, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameList, location_name: "approvalRuleTemplateNames"))
+    ListApprovalRuleTemplatesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListApprovalRuleTemplatesOutput.struct_class = Types::ListApprovalRuleTemplatesOutput
+
+    ListAssociatedApprovalRuleTemplatesForRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    ListAssociatedApprovalRuleTemplatesForRepositoryInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAssociatedApprovalRuleTemplatesForRepositoryInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAssociatedApprovalRuleTemplatesForRepositoryInput.struct_class = Types::ListAssociatedApprovalRuleTemplatesForRepositoryInput
+
+    ListAssociatedApprovalRuleTemplatesForRepositoryOutput.add_member(:approval_rule_template_names, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameList, location_name: "approvalRuleTemplateNames"))
+    ListAssociatedApprovalRuleTemplatesForRepositoryOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAssociatedApprovalRuleTemplatesForRepositoryOutput.struct_class = Types::ListAssociatedApprovalRuleTemplatesForRepositoryOutput
+
     ListBranchesInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     ListBranchesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListBranchesInput.struct_class = Types::ListBranchesInput
@@ -896,6 +1160,15 @@ module Aws::CodeCommit
     ListPullRequestsOutput.add_member(:pull_request_ids, Shapes::ShapeRef.new(shape: PullRequestIdList, required: true, location_name: "pullRequestIds"))
     ListPullRequestsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPullRequestsOutput.struct_class = Types::ListPullRequestsOutput
+
+    ListRepositoriesForApprovalRuleTemplateInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
+    ListRepositoriesForApprovalRuleTemplateInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRepositoriesForApprovalRuleTemplateInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListRepositoriesForApprovalRuleTemplateInput.struct_class = Types::ListRepositoriesForApprovalRuleTemplateInput
+
+    ListRepositoriesForApprovalRuleTemplateOutput.add_member(:repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "repositoryNames"))
+    ListRepositoriesForApprovalRuleTemplateOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRepositoriesForApprovalRuleTemplateOutput.struct_class = Types::ListRepositoriesForApprovalRuleTemplateOutput
 
     ListRepositoriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListRepositoriesInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortByEnum, location_name: "sortBy"))
@@ -1031,6 +1304,15 @@ module Aws::CodeCommit
     ObjectTypes.add_member(:base, Shapes::ShapeRef.new(shape: ObjectTypeEnum, location_name: "base"))
     ObjectTypes.struct_class = Types::ObjectTypes
 
+    OriginApprovalRuleTemplate.add_member(:approval_rule_template_id, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateId, location_name: "approvalRuleTemplateId"))
+    OriginApprovalRuleTemplate.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName"))
+    OriginApprovalRuleTemplate.struct_class = Types::OriginApprovalRuleTemplate
+
+    OverridePullRequestApprovalRulesInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
+    OverridePullRequestApprovalRulesInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
+    OverridePullRequestApprovalRulesInput.add_member(:override_status, Shapes::ShapeRef.new(shape: OverrideStatus, required: true, location_name: "overrideStatus"))
+    OverridePullRequestApprovalRulesInput.struct_class = Types::OverridePullRequestApprovalRulesInput
+
     ParentList.member = Shapes::ShapeRef.new(shape: ObjectId)
 
     PostCommentForComparedCommitInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -1086,6 +1368,8 @@ module Aws::CodeCommit
     PullRequest.add_member(:author_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "authorArn"))
     PullRequest.add_member(:pull_request_targets, Shapes::ShapeRef.new(shape: PullRequestTargetList, location_name: "pullRequestTargets"))
     PullRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    PullRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    PullRequest.add_member(:approval_rules, Shapes::ShapeRef.new(shape: ApprovalRulesList, location_name: "approvalRules"))
     PullRequest.struct_class = Types::PullRequest
 
     PullRequestCreatedEventMetadata.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
@@ -1102,6 +1386,9 @@ module Aws::CodeCommit
     PullRequestEvent.add_member(:pull_request_status_changed_event_metadata, Shapes::ShapeRef.new(shape: PullRequestStatusChangedEventMetadata, location_name: "pullRequestStatusChangedEventMetadata"))
     PullRequestEvent.add_member(:pull_request_source_reference_updated_event_metadata, Shapes::ShapeRef.new(shape: PullRequestSourceReferenceUpdatedEventMetadata, location_name: "pullRequestSourceReferenceUpdatedEventMetadata"))
     PullRequestEvent.add_member(:pull_request_merged_state_changed_event_metadata, Shapes::ShapeRef.new(shape: PullRequestMergedStateChangedEventMetadata, location_name: "pullRequestMergedStateChangedEventMetadata"))
+    PullRequestEvent.add_member(:approval_rule_event_metadata, Shapes::ShapeRef.new(shape: ApprovalRuleEventMetadata, location_name: "approvalRuleEventMetadata"))
+    PullRequestEvent.add_member(:approval_state_changed_event_metadata, Shapes::ShapeRef.new(shape: ApprovalStateChangedEventMetadata, location_name: "approvalStateChangedEventMetadata"))
+    PullRequestEvent.add_member(:approval_rule_overridden_event_metadata, Shapes::ShapeRef.new(shape: ApprovalRuleOverriddenEventMetadata, location_name: "approvalRuleOverriddenEventMetadata"))
     PullRequestEvent.struct_class = Types::PullRequestEvent
 
     PullRequestEventList.member = Shapes::ShapeRef.new(shape: PullRequestEvent)
@@ -1268,6 +1555,28 @@ module Aws::CodeCommit
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeysList, required: true, location_name: "tagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
+    UpdateApprovalRuleTemplateContentInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
+    UpdateApprovalRuleTemplateContentInput.add_member(:new_rule_content, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateContent, required: true, location_name: "newRuleContent"))
+    UpdateApprovalRuleTemplateContentInput.add_member(:existing_rule_content_sha_256, Shapes::ShapeRef.new(shape: RuleContentSha256, location_name: "existingRuleContentSha256"))
+    UpdateApprovalRuleTemplateContentInput.struct_class = Types::UpdateApprovalRuleTemplateContentInput
+
+    UpdateApprovalRuleTemplateContentOutput.add_member(:approval_rule_template, Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, required: true, location_name: "approvalRuleTemplate"))
+    UpdateApprovalRuleTemplateContentOutput.struct_class = Types::UpdateApprovalRuleTemplateContentOutput
+
+    UpdateApprovalRuleTemplateDescriptionInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
+    UpdateApprovalRuleTemplateDescriptionInput.add_member(:approval_rule_template_description, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDescription, required: true, location_name: "approvalRuleTemplateDescription"))
+    UpdateApprovalRuleTemplateDescriptionInput.struct_class = Types::UpdateApprovalRuleTemplateDescriptionInput
+
+    UpdateApprovalRuleTemplateDescriptionOutput.add_member(:approval_rule_template, Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, required: true, location_name: "approvalRuleTemplate"))
+    UpdateApprovalRuleTemplateDescriptionOutput.struct_class = Types::UpdateApprovalRuleTemplateDescriptionOutput
+
+    UpdateApprovalRuleTemplateNameInput.add_member(:old_approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "oldApprovalRuleTemplateName"))
+    UpdateApprovalRuleTemplateNameInput.add_member(:new_approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "newApprovalRuleTemplateName"))
+    UpdateApprovalRuleTemplateNameInput.struct_class = Types::UpdateApprovalRuleTemplateNameInput
+
+    UpdateApprovalRuleTemplateNameOutput.add_member(:approval_rule_template, Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, required: true, location_name: "approvalRuleTemplate"))
+    UpdateApprovalRuleTemplateNameOutput.struct_class = Types::UpdateApprovalRuleTemplateNameOutput
+
     UpdateCommentInput.add_member(:comment_id, Shapes::ShapeRef.new(shape: CommentId, required: true, location_name: "commentId"))
     UpdateCommentInput.add_member(:content, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "content"))
     UpdateCommentInput.struct_class = Types::UpdateCommentInput
@@ -1278,6 +1587,20 @@ module Aws::CodeCommit
     UpdateDefaultBranchInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     UpdateDefaultBranchInput.add_member(:default_branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "defaultBranchName"))
     UpdateDefaultBranchInput.struct_class = Types::UpdateDefaultBranchInput
+
+    UpdatePullRequestApprovalRuleContentInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
+    UpdatePullRequestApprovalRuleContentInput.add_member(:approval_rule_name, Shapes::ShapeRef.new(shape: ApprovalRuleName, required: true, location_name: "approvalRuleName"))
+    UpdatePullRequestApprovalRuleContentInput.add_member(:existing_rule_content_sha_256, Shapes::ShapeRef.new(shape: RuleContentSha256, location_name: "existingRuleContentSha256"))
+    UpdatePullRequestApprovalRuleContentInput.add_member(:new_rule_content, Shapes::ShapeRef.new(shape: ApprovalRuleContent, required: true, location_name: "newRuleContent"))
+    UpdatePullRequestApprovalRuleContentInput.struct_class = Types::UpdatePullRequestApprovalRuleContentInput
+
+    UpdatePullRequestApprovalRuleContentOutput.add_member(:approval_rule, Shapes::ShapeRef.new(shape: ApprovalRule, required: true, location_name: "approvalRule"))
+    UpdatePullRequestApprovalRuleContentOutput.struct_class = Types::UpdatePullRequestApprovalRuleContentOutput
+
+    UpdatePullRequestApprovalStateInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
+    UpdatePullRequestApprovalStateInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
+    UpdatePullRequestApprovalStateInput.add_member(:approval_state, Shapes::ShapeRef.new(shape: ApprovalState, required: true, location_name: "approvalState"))
+    UpdatePullRequestApprovalStateInput.struct_class = Types::UpdatePullRequestApprovalStateInput
 
     UpdatePullRequestDescriptionInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
     UpdatePullRequestDescriptionInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
@@ -1332,6 +1655,44 @@ module Aws::CodeCommit
         "uid" => "codecommit-2015-04-13",
       }
 
+      api.add_operation(:associate_approval_rule_template_with_repository, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateApprovalRuleTemplateWithRepository"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateApprovalRuleTemplateWithRepositoryInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: MaximumRuleTemplatesAssociatedWithRepositoryException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:batch_associate_approval_rule_template_with_repositories, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchAssociateApprovalRuleTemplateWithRepositories"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchAssociateApprovalRuleTemplateWithRepositoriesInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchAssociateApprovalRuleTemplateWithRepositoriesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNamesRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: MaximumRepositoryNamesExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
       api.add_operation(:batch_describe_merge_conflicts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchDescribeMergeConflicts"
         o.http_method = "POST"
@@ -1354,6 +1715,24 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
         o.errors << Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
         o.errors << Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:batch_disassociate_approval_rule_template_from_repositories, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDisassociateApprovalRuleTemplateFromRepositories"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchDisassociateApprovalRuleTemplateFromRepositoriesInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNamesRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: MaximumRepositoryNamesExceededException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
@@ -1393,6 +1772,21 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:create_approval_rule_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateApprovalRuleTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateApprovalRuleTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateApprovalRuleTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateContentRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateContentException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateDescriptionException)
+        o.errors << Shapes::ShapeRef.new(shape: NumberOfRuleTemplatesExceededException)
       end)
 
       api.add_operation(:create_branch, Seahorse::Model::Operation.new.tap do |o|
@@ -1496,6 +1890,29 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: SourceAndDestinationAreSameException)
       end)
 
+      api.add_operation(:create_pull_request_approval_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePullRequestApprovalRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreatePullRequestApprovalRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: CreatePullRequestApprovalRuleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleNameAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleContentRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleContentException)
+        o.errors << Shapes::ShapeRef.new(shape: NumberOfRulesExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
       api.add_operation(:create_repository, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRepository"
         o.http_method = "POST"
@@ -1562,6 +1979,17 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
       end)
 
+      api.add_operation(:delete_approval_rule_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApprovalRuleTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApprovalRuleTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApprovalRuleTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateInUseException)
+      end)
+
       api.add_operation(:delete_branch, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBranch"
         o.http_method = "POST"
@@ -1616,6 +2044,26 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: NameLengthExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEmailException)
         o.errors << Shapes::ShapeRef.new(shape: CommitMessageLengthExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:delete_pull_request_approval_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePullRequestApprovalRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePullRequestApprovalRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: DeletePullRequestApprovalRuleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleNameException)
+        o.errors << Shapes::ShapeRef.new(shape: CannotDeleteApprovalRuleFromTemplateException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
@@ -1700,6 +2148,55 @@ module Aws::CodeCommit
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:disassociate_approval_rule_template_from_repository, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateApprovalRuleTemplateFromRepository"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateApprovalRuleTemplateFromRepositoryInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:evaluate_pull_request_approval_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EvaluatePullRequestApprovalRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EvaluatePullRequestApprovalRulesInput)
+        o.output = Shapes::ShapeRef.new(shape: EvaluatePullRequestApprovalRulesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRevisionIdException)
+        o.errors << Shapes::ShapeRef.new(shape: RevisionIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: RevisionNotCurrentException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:get_approval_rule_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApprovalRuleTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetApprovalRuleTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: GetApprovalRuleTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
       end)
 
       api.add_operation(:get_blob, Seahorse::Model::Operation.new.tap do |o|
@@ -2000,6 +2497,42 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
       end)
 
+      api.add_operation(:get_pull_request_approval_states, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPullRequestApprovalStates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPullRequestApprovalStatesInput)
+        o.output = Shapes::ShapeRef.new(shape: GetPullRequestApprovalStatesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRevisionIdException)
+        o.errors << Shapes::ShapeRef.new(shape: RevisionIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:get_pull_request_override_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPullRequestOverrideState"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPullRequestOverrideStateInput)
+        o.output = Shapes::ShapeRef.new(shape: GetPullRequestOverrideStateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRevisionIdException)
+        o.errors << Shapes::ShapeRef.new(shape: RevisionIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
       api.add_operation(:get_repository, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRepository"
         o.http_method = "POST"
@@ -2030,6 +2563,46 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:list_approval_rule_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApprovalRuleTemplates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListApprovalRuleTemplatesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListApprovalRuleTemplatesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_associated_approval_rule_templates_for_repository, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssociatedApprovalRuleTemplatesForRepository"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAssociatedApprovalRuleTemplatesForRepositoryInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAssociatedApprovalRuleTemplatesForRepositoryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_branches, Seahorse::Model::Operation.new.tap do |o|
@@ -2091,6 +2664,30 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidOrderException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
         o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_repositories_for_approval_rule_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRepositoriesForApprovalRuleTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRepositoriesForApprovalRuleTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRepositoriesForApprovalRuleTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }
@@ -2249,6 +2846,7 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentReferenceUpdateException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestApprovalRulesNotSatisfiedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
@@ -2294,6 +2892,7 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotAssociatedWithPullRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestApprovalRulesNotSatisfiedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
@@ -2339,6 +2938,30 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotAssociatedWithPullRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentReferenceUpdateException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestApprovalRulesNotSatisfiedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:override_pull_request_approval_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "OverridePullRequestApprovalRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: OverridePullRequestApprovalRulesInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRevisionIdException)
+        o.errors << Shapes::ShapeRef.new(shape: RevisionIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOverrideStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: OverrideStatusRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: OverrideAlreadySetException)
+        o.errors << Shapes::ShapeRef.new(shape: RevisionNotCurrentException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
@@ -2559,6 +3182,44 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
       end)
 
+      api.add_operation(:update_approval_rule_template_content, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApprovalRuleTemplateContent"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateContentInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateContentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateContentException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRuleContentSha256Exception)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateContentRequiredException)
+      end)
+
+      api.add_operation(:update_approval_rule_template_description, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApprovalRuleTemplateDescription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateDescriptionInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateDescriptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateDescriptionException)
+      end)
+
+      api.add_operation(:update_approval_rule_template_name, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApprovalRuleTemplateName"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateNameInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateNameOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameAlreadyExistsException)
+      end)
+
       api.add_operation(:update_comment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateComment"
         o.http_method = "POST"
@@ -2586,6 +3247,54 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: BranchNameRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBranchNameException)
         o.errors << Shapes::ShapeRef.new(shape: BranchDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:update_pull_request_approval_rule_content, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePullRequestApprovalRuleContent"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePullRequestApprovalRuleContentInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePullRequestApprovalRuleContentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRuleContentSha256Exception)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalRuleContentRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalRuleContentException)
+        o.errors << Shapes::ShapeRef.new(shape: CannotModifyApprovalRuleFromTemplateException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:update_pull_request_approval_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePullRequestApprovalState"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePullRequestApprovalStateInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRevisionIdException)
+        o.errors << Shapes::ShapeRef.new(shape: RevisionIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ApprovalStateRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestCannotBeApprovedByAuthorException)
+        o.errors << Shapes::ShapeRef.new(shape: RevisionNotCurrentException)
+        o.errors << Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
+        o.errors << Shapes::ShapeRef.new(shape: MaximumNumberOfApprovalsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)

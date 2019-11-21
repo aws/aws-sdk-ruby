@@ -3117,6 +3117,7 @@ module Aws::EC2
     #   The ID of the EBS snapshot to copy.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new snapshot.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6663,10 +6664,10 @@ module Aws::EC2
     #   Tags to apply to every snapshot specified by the instance.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action
-    #   without actually making the request. Provides an error response. If
-    #   you have the required permissions, the error response is
-    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :copy_tags_from_source
     #   Copies the tags from the specified volume to corresponding snapshot.
@@ -7892,6 +7893,7 @@ module Aws::EC2
     #   * {Types::Volume#iops #iops} => Integer
     #   * {Types::Volume#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Volume#volume_type #volume_type} => String
+    #   * {Types::Volume#fast_restored #fast_restored} => Boolean
     #
     #
     # @example Example: To create a new volume
@@ -7991,6 +7993,7 @@ module Aws::EC2
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.fast_restored #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolume AWS API Documentation
     #
@@ -12518,6 +12521,79 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_export_tasks(params = {}, options = {})
       req = build_request(:describe_export_tasks, params)
+      req.send_request(options)
+    end
+
+    # Describes the state of fast snapshot restores for your snapshots.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters. The possible values are:
+    #
+    #   * `availability-zone`\: The Availability Zone of the snapshot.
+    #
+    #   * `owner-id`\: The ID of the AWS account that owns the snapshot.
+    #
+    #   * `snapshot-id`\: The ID of the snapshot.
+    #
+    #   * `state`\: The state of fast snapshot restores for the snapshot
+    #     (`enabling` \| `optimizing` \| `enabled` \| `disabling` \|
+    #     `disabled`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeFastSnapshotRestoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFastSnapshotRestoresResult#fast_snapshot_restores #fast_snapshot_restores} => Array&lt;Types::DescribeFastSnapshotRestoreSuccessItem&gt;
+    #   * {Types::DescribeFastSnapshotRestoresResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fast_snapshot_restores({
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fast_snapshot_restores #=> Array
+    #   resp.fast_snapshot_restores[0].snapshot_id #=> String
+    #   resp.fast_snapshot_restores[0].availability_zone #=> String
+    #   resp.fast_snapshot_restores[0].state #=> String, one of "enabling", "optimizing", "enabled", "disabling", "disabled"
+    #   resp.fast_snapshot_restores[0].state_transition_reason #=> String
+    #   resp.fast_snapshot_restores[0].owner_id #=> String
+    #   resp.fast_snapshot_restores[0].owner_alias #=> String
+    #   resp.fast_snapshot_restores[0].enabling_time #=> Time
+    #   resp.fast_snapshot_restores[0].optimizing_time #=> Time
+    #   resp.fast_snapshot_restores[0].enabled_time #=> Time
+    #   resp.fast_snapshot_restores[0].disabling_time #=> Time
+    #   resp.fast_snapshot_restores[0].disabled_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastSnapshotRestores AWS API Documentation
+    #
+    # @overload describe_fast_snapshot_restores(params = {})
+    # @param [Hash] params ({})
+    def describe_fast_snapshot_restores(params = {}, options = {})
+      req = build_request(:describe_fast_snapshot_restores, params)
       req.send_request(options)
     end
 
@@ -20943,6 +21019,7 @@ module Aws::EC2
     #   resp.volumes[0].tags[0].key #=> String
     #   resp.volumes[0].tags[0].value #=> String
     #   resp.volumes[0].volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.volumes[0].fast_restored #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumes AWS API Documentation
@@ -22595,6 +22672,65 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Disables fast snapshot restores for the specified snapshots in the
+    # specified Availability Zones.
+    #
+    # @option params [required, Array<String>] :availability_zones
+    #   One or more Availability Zones. For example, `us-east-2a`.
+    #
+    # @option params [required, Array<String>] :source_snapshot_ids
+    #   The IDs of one or more snapshots. For example,
+    #   `snap-1234567890abcdef0`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableFastSnapshotRestoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableFastSnapshotRestoresResult#successful #successful} => Array&lt;Types::DisableFastSnapshotRestoreSuccessItem&gt;
+    #   * {Types::DisableFastSnapshotRestoresResult#unsuccessful #unsuccessful} => Array&lt;Types::DisableFastSnapshotRestoreErrorItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_fast_snapshot_restores({
+    #     availability_zones: ["String"], # required
+    #     source_snapshot_ids: ["String"], # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].snapshot_id #=> String
+    #   resp.successful[0].availability_zone #=> String
+    #   resp.successful[0].state #=> String, one of "enabling", "optimizing", "enabled", "disabling", "disabled"
+    #   resp.successful[0].state_transition_reason #=> String
+    #   resp.successful[0].owner_id #=> String
+    #   resp.successful[0].owner_alias #=> String
+    #   resp.successful[0].enabling_time #=> Time
+    #   resp.successful[0].optimizing_time #=> Time
+    #   resp.successful[0].enabled_time #=> Time
+    #   resp.successful[0].disabling_time #=> Time
+    #   resp.successful[0].disabled_time #=> Time
+    #   resp.unsuccessful #=> Array
+    #   resp.unsuccessful[0].snapshot_id #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors #=> Array
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].availability_zone #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].error.code #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastSnapshotRestores AWS API Documentation
+    #
+    # @overload disable_fast_snapshot_restores(params = {})
+    # @param [Hash] params ({})
+    def disable_fast_snapshot_restores(params = {}, options = {})
+      req = build_request(:disable_fast_snapshot_restores, params)
+      req.send_request(options)
+    end
+
     # Disables the specified resource attachment from propagating routes to
     # the specified propagation route table.
     #
@@ -23144,6 +23280,71 @@ module Aws::EC2
     # @param [Hash] params ({})
     def enable_ebs_encryption_by_default(params = {}, options = {})
       req = build_request(:enable_ebs_encryption_by_default, params)
+      req.send_request(options)
+    end
+
+    # Enables fast snapshot restores for the specified snapshots in the
+    # specified Availability Zones.
+    #
+    # You get the full benefit of fast snapshot restores after they enter
+    # the `enabled` state. To get the current state of fast snapshot
+    # restores, use DescribeFastSnapshotRestores. To disable fast snapshot
+    # restores, use DisableFastSnapshotRestores.
+    #
+    # @option params [required, Array<String>] :availability_zones
+    #   One or more Availability Zones. For example, `us-east-2a`.
+    #
+    # @option params [required, Array<String>] :source_snapshot_ids
+    #   The IDs of one or more snapshots. For example,
+    #   `snap-1234567890abcdef0`. You can specify a snapshot that was shared
+    #   with you from another AWS account.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableFastSnapshotRestoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableFastSnapshotRestoresResult#successful #successful} => Array&lt;Types::EnableFastSnapshotRestoreSuccessItem&gt;
+    #   * {Types::EnableFastSnapshotRestoresResult#unsuccessful #unsuccessful} => Array&lt;Types::EnableFastSnapshotRestoreErrorItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_fast_snapshot_restores({
+    #     availability_zones: ["String"], # required
+    #     source_snapshot_ids: ["String"], # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].snapshot_id #=> String
+    #   resp.successful[0].availability_zone #=> String
+    #   resp.successful[0].state #=> String, one of "enabling", "optimizing", "enabled", "disabling", "disabled"
+    #   resp.successful[0].state_transition_reason #=> String
+    #   resp.successful[0].owner_id #=> String
+    #   resp.successful[0].owner_alias #=> String
+    #   resp.successful[0].enabling_time #=> Time
+    #   resp.successful[0].optimizing_time #=> Time
+    #   resp.successful[0].enabled_time #=> Time
+    #   resp.successful[0].disabling_time #=> Time
+    #   resp.successful[0].disabled_time #=> Time
+    #   resp.unsuccessful #=> Array
+    #   resp.unsuccessful[0].snapshot_id #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors #=> Array
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].availability_zone #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].error.code #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastSnapshotRestores AWS API Documentation
+    #
+    # @overload enable_fast_snapshot_restores(params = {})
+    # @param [Hash] params ({})
+    def enable_fast_snapshot_restores(params = {}, options = {})
+      req = build_request(:enable_fast_snapshot_restores, params)
       req.send_request(options)
     end
 
@@ -32872,7 +33073,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -32958,6 +33159,7 @@ module Aws::EC2
     # | nat_gateway_available           | {#describe_nat_gateways}            | 15       | 40            |
     # | network_interface_available     | {#describe_network_interfaces}      | 20       | 10            |
     # | password_data_available         | {#get_password_data}                | 15       | 40            |
+    # | security_group_exists           | {#describe_security_groups}         | 5        | 6             |
     # | snapshot_completed              | {#describe_snapshots}               | 15       | 40            |
     # | spot_instance_request_fulfilled | {#describe_spot_instance_requests}  | 15       | 40            |
     # | subnet_available                | {#describe_subnets}                 | 15       | 40            |
@@ -33039,6 +33241,7 @@ module Aws::EC2
         nat_gateway_available: Waiters::NatGatewayAvailable,
         network_interface_available: Waiters::NetworkInterfaceAvailable,
         password_data_available: Waiters::PasswordDataAvailable,
+        security_group_exists: Waiters::SecurityGroupExists,
         snapshot_completed: Waiters::SnapshotCompleted,
         spot_instance_request_fulfilled: Waiters::SpotInstanceRequestFulfilled,
         subnet_available: Waiters::SubnetAvailable,

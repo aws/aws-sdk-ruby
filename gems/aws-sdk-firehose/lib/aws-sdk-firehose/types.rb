@@ -168,6 +168,10 @@ module Aws::Firehose
     #           kinesis_stream_arn: "KinesisStreamARN", # required
     #           role_arn: "RoleARN", # required
     #         },
+    #         delivery_stream_encryption_configuration_input: {
+    #           key_arn: "AWSKMSKeyARN",
+    #           key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #         },
     #         s3_destination_configuration: {
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
@@ -517,6 +521,11 @@ module Aws::Firehose
     #   source stream.
     #   @return [Types::KinesisStreamSourceConfiguration]
     #
+    # @!attribute [rw] delivery_stream_encryption_configuration_input
+    #   Used to specify the type and Amazon Resource Name (ARN) of the KMS
+    #   key needed for Server-Side Encryption (SSE).
+    #   @return [Types::DeliveryStreamEncryptionConfigurationInput]
+    #
     # @!attribute [rw] s3_destination_configuration
     #   \[Deprecated\] The destination in Amazon S3. You can specify only
     #   one destination.
@@ -561,6 +570,7 @@ module Aws::Firehose
       :delivery_stream_name,
       :delivery_stream_type,
       :kinesis_stream_source_configuration,
+      :delivery_stream_encryption_configuration_input,
       :s3_destination_configuration,
       :extended_s3_destination_configuration,
       :redshift_destination_configuration,
@@ -681,16 +691,35 @@ module Aws::Firehose
     #
     #       {
     #         delivery_stream_name: "DeliveryStreamName", # required
+    #         allow_force_delete: false,
     #       }
     #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream.
     #   @return [String]
     #
+    # @!attribute [rw] allow_force_delete
+    #   Set this to true if you want to delete the delivery stream even if
+    #   Kinesis Data Firehose is unable to retire the grant for the CMK.
+    #   Kinesis Data Firehose might be unable to retire the grant due to a
+    #   customer error, such as when the CMK or the grant are in an invalid
+    #   state. If you force deletion, you can then use the [RevokeGrant][1]
+    #   operation to revoke the grant you gave to Kinesis Data Firehose. If
+    #   a failure to retire the grant happens due to an AWS KMS issue,
+    #   Kinesis Data Firehose keeps retrying the delete operation.
+    #
+    #   The default value is false.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStreamInput AWS API Documentation
     #
     class DeleteDeliveryStreamInput < Struct.new(
-      :delivery_stream_name)
+      :delivery_stream_name,
+      :allow_force_delete)
       include Aws::Structure
     end
 
@@ -715,8 +744,18 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_status
-    #   The status of the delivery stream.
+    #   The status of the delivery stream. If the status of a delivery
+    #   stream is `CREATING_FAILED`, this status doesn't change, and you
+    #   can't invoke `CreateDeliveryStream` again on it. However, you can
+    #   invoke the DeleteDeliveryStream operation to delete it.
     #   @return [String]
+    #
+    # @!attribute [rw] failure_description
+    #   Provides details in case one of the following operations fails due
+    #   to an error related to KMS: CreateDeliveryStream,
+    #   DeleteDeliveryStream, StartDeliveryStreamEncryption,
+    #   StopDeliveryStreamEncryption.
+    #   @return [Types::FailureDescription]
     #
     # @!attribute [rw] delivery_stream_encryption_configuration
     #   Indicates the server-side encryption (SSE) status for the delivery
@@ -767,6 +806,7 @@ module Aws::Firehose
       :delivery_stream_name,
       :delivery_stream_arn,
       :delivery_stream_status,
+      :failure_description,
       :delivery_stream_encryption_configuration,
       :delivery_stream_type,
       :version_id,
@@ -778,18 +818,99 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Indicates the server-side encryption (SSE) status for the delivery
-    # stream.
+    # Contains information about the server-side encryption (SSE) status for
+    # the delivery stream, the type customer master key (CMK) in use, if
+    # any, and the ARN of the CMK. You can get
+    # `DeliveryStreamEncryptionConfiguration` by invoking the
+    # DescribeDeliveryStream operation.
+    #
+    # @!attribute [rw] key_arn
+    #   If `KeyType` is `CUSTOMER_MANAGED_CMK`, this field contains the ARN
+    #   of the customer managed CMK. If `KeyType` is `AWS_OWNED_CMK`,
+    #   `DeliveryStreamEncryptionConfiguration` doesn't contain a value for
+    #   `KeyARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   Indicates the type of customer master key (CMK) that is used for
+    #   encryption. The default setting is `AWS_OWNED_CMK`. For more
+    #   information about CMKs, see [Customer Master Keys (CMKs)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
+    #   @return [String]
     #
     # @!attribute [rw] status
-    #   For a full description of the different values of this status, see
-    #   StartDeliveryStreamEncryption and StopDeliveryStreamEncryption.
+    #   This is the server-side encryption (SSE) status for the delivery
+    #   stream. For a full description of the different values of this
+    #   status, see StartDeliveryStreamEncryption and
+    #   StopDeliveryStreamEncryption. If this status is `ENABLING_FAILED` or
+    #   `DISABLING_FAILED`, it is the status of the most recent attempt to
+    #   enable or disable SSE, respectively.
     #   @return [String]
+    #
+    # @!attribute [rw] failure_description
+    #   Provides details in case one of the following operations fails due
+    #   to an error related to KMS: CreateDeliveryStream,
+    #   DeleteDeliveryStream, StartDeliveryStreamEncryption,
+    #   StopDeliveryStreamEncryption.
+    #   @return [Types::FailureDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeliveryStreamEncryptionConfiguration AWS API Documentation
     #
     class DeliveryStreamEncryptionConfiguration < Struct.new(
-      :status)
+      :key_arn,
+      :key_type,
+      :status,
+      :failure_description)
+      include Aws::Structure
+    end
+
+    # Used to specify the type and Amazon Resource Name (ARN) of the CMK
+    # needed for Server-Side Encryption (SSE).
+    #
+    # @note When making an API call, you may pass DeliveryStreamEncryptionConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         key_arn: "AWSKMSKeyARN",
+    #         key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #       }
+    #
+    # @!attribute [rw] key_arn
+    #   If you set `KeyType` to `CUSTOMER_MANAGED_CMK`, you must specify the
+    #   Amazon Resource Name (ARN) of the CMK. If you set `KeyType` to
+    #   `AWS_OWNED_CMK`, Kinesis Data Firehose uses a service-account CMK.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   Indicates the type of customer master key (CMK) to use for
+    #   encryption. The default setting is `AWS_OWNED_CMK`. For more
+    #   information about CMKs, see [Customer Master Keys (CMKs)][1]. When
+    #   you invoke CreateDeliveryStream or StartDeliveryStreamEncryption
+    #   with `KeyType` set to CUSTOMER\_MANAGED\_CMK, Kinesis Data Firehose
+    #   invokes the Amazon KMS operation [CreateGrant][2] to create a grant
+    #   that allows the Kinesis Data Firehose service to use the customer
+    #   managed CMK to perform encryption and decryption. Kinesis Data
+    #   Firehose manages that grant.
+    #
+    #   When you invoke StartDeliveryStreamEncryption to change the CMK for
+    #   a delivery stream that is already encrypted with a customer managed
+    #   CMK, Kinesis Data Firehose schedules the grant it had on the old CMK
+    #   for retirement.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
+    #   [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeliveryStreamEncryptionConfigurationInput AWS API Documentation
+    #
+    class DeliveryStreamEncryptionConfigurationInput < Struct.new(
+      :key_arn,
+      :key_type)
       include Aws::Structure
     end
 
@@ -1953,6 +2074,26 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Provides details in case one of the following operations fails due to
+    # an error related to KMS: CreateDeliveryStream, DeleteDeliveryStream,
+    # StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
+    #
+    # @!attribute [rw] type
+    #   The type of error that caused the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   A message providing details about the error that caused the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/FailureDescription AWS API Documentation
+    #
+    class FailureDescription < Struct.new(
+      :type,
+      :details)
+      include Aws::Structure
+    end
+
     # The native Hive / HCatalog JsonSerDe. Used by Kinesis Data Firehose
     # for deserializing data, which means converting it from the JSON format
     # in preparation for serializing it to the Parquet or ORC format. This
@@ -2032,6 +2173,26 @@ module Aws::Firehose
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/InvalidArgumentException AWS API Documentation
     #
     class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Kinesis Data Firehose throws this exception when an attempt to put
+    # records or to start or stop delivery stream encryption fails. This
+    # happens when the KMS service throws one of the following exception
+    # types: `AccessDeniedException`, `InvalidStateException`,
+    # `DisabledException`, or `NotFoundException`.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/InvalidKMSResourceException AWS API Documentation
+    #
+    class InvalidKMSResourceException < Struct.new(
+      :code,
       :message)
       include Aws::Structure
     end
@@ -2504,7 +2665,7 @@ module Aws::Firehose
     #   The compression code to use over data blocks. The possible values
     #   are `UNCOMPRESSED`, `SNAPPY`, and `GZIP`, with the default being
     #   `SNAPPY`. Use `SNAPPY` for higher decompression speed. Use `GZIP` if
-    #   the compression ration is more important than speed.
+    #   the compression ratio is more important than speed.
     #   @return [String]
     #
     # @!attribute [rw] enable_dictionary_compression
@@ -3989,6 +4150,10 @@ module Aws::Firehose
     #
     #       {
     #         delivery_stream_name: "DeliveryStreamName", # required
+    #         delivery_stream_encryption_configuration_input: {
+    #           key_arn: "AWSKMSKeyARN",
+    #           key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #         },
     #       }
     #
     # @!attribute [rw] delivery_stream_name
@@ -3996,10 +4161,16 @@ module Aws::Firehose
     #   server-side encryption (SSE).
     #   @return [String]
     #
+    # @!attribute [rw] delivery_stream_encryption_configuration_input
+    #   Used to specify the type and Amazon Resource Name (ARN) of the KMS
+    #   key needed for Server-Side Encryption (SSE).
+    #   @return [Types::DeliveryStreamEncryptionConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StartDeliveryStreamEncryptionInput AWS API Documentation
     #
     class StartDeliveryStreamEncryptionInput < Struct.new(
-      :delivery_stream_name)
+      :delivery_stream_name,
+      :delivery_stream_encryption_configuration_input)
       include Aws::Structure
     end
 

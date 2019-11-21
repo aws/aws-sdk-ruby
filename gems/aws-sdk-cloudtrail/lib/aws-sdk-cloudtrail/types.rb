@@ -301,9 +301,9 @@ module Aws::CloudTrail
 
     # The Amazon S3 buckets or AWS Lambda functions that you specify in your
     # event selectors for your trail to log data events. Data events provide
-    # insight into the resource operations performed on or within a resource
-    # itself. These are also known as data plane operations. You can specify
-    # up to 250 data resources for a trail.
+    # information about the resource operations performed on or within a
+    # resource itself. These are also known as data plane operations. You
+    # can specify up to 250 data resources for a trail.
     #
     # <note markdown="1"> The total number of allowed data resources is 250. This number can be
     # distributed between 1 and 5 event selectors, but the total cannot
@@ -503,7 +503,12 @@ module Aws::CloudTrail
     # returns an error.
     #
     # @!attribute [rw] trail_list
-    #   The list of trail objects.
+    #   The list of trail objects. Trail objects with string values are only
+    #   returned if values for the objects exist in a trail's
+    #   configuration. For example, `SNSTopicName` and `SNSTopicARN` are
+    #   only returned in results if a trail is configured to send SNS
+    #   notifications. Similarly, `KMSKeyId` only appears in results if a
+    #   trail's log files are encrypted with AWS KMS-managed keys.
     #   @return [Array<Types::Trail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrailsResponse AWS API Documentation
@@ -594,6 +599,7 @@ module Aws::CloudTrail
     #             values: ["String"],
     #           },
     #         ],
+    #         exclude_management_event_sources: ["String"],
     #       }
     #
     # @!attribute [rw] read_write_type
@@ -636,12 +642,22 @@ module Aws::CloudTrail
     #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #   @return [Array<Types::DataResource>]
     #
+    # @!attribute [rw] exclude_management_event_sources
+    #   An optional list of service event sources from which you do not want
+    #   management events to be logged on your trail. In this release, the
+    #   list can be empty (disables the filter), or it can filter out AWS
+    #   Key Management Service events by containing `"kms.amazonaws.com"`.
+    #   By default, `ExcludeManagementEventSources` is empty, and AWS KMS
+    #   events are included in events that are logged to your trail.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventSelector AWS API Documentation
     #
     class EventSelector < Struct.new(
       :read_write_type,
       :include_management_events,
-      :data_resources)
+      :data_resources,
+      :exclude_management_event_sources)
       include Aws::Structure
     end
 
@@ -693,6 +709,60 @@ module Aws::CloudTrail
     class GetEventSelectorsResponse < Struct.new(
       :trail_arn,
       :event_selectors)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetInsightSelectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         trail_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] trail_name
+    #   Specifies the name of the trail or trail ARN. If you specify a trail
+    #   name, the string must meet the following requirements:
+    #
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+    #     underscores (\_), or dashes (-)
+    #
+    #   * Start with a letter or number, and end with a letter or number
+    #
+    #   * Be between 3 and 128 characters
+    #
+    #   * Have no adjacent periods, underscores or dashes. Names like
+    #     `my-_namespace` and `my--namespace` are not valid.
+    #
+    #   * Not be in IP address format (for example, 192.168.5.4)
+    #
+    #   If you specify a trail ARN, it must be in the format:
+    #
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectorsRequest AWS API Documentation
+    #
+    class GetInsightSelectorsRequest < Struct.new(
+      :trail_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trail_arn
+    #   The Amazon Resource Name (ARN) of a trail for which you want to get
+    #   Insights selectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_selectors
+    #   A JSON string that contains the insight types you want to log on a
+    #   trail. In this release, only `ApiCallRateInsight` is supported as an
+    #   insight type.
+    #   @return [Array<Types::InsightSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectorsResponse AWS API Documentation
+    #
+    class GetInsightSelectorsResponse < Struct.new(
+      :trail_arn,
+      :insight_selectors)
       include Aws::Structure
     end
 
@@ -889,6 +959,28 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # A JSON string that contains a list of insight types that are logged on
+    # a trail.
+    #
+    # @note When making an API call, you may pass InsightSelector
+    #   data as a hash:
+    #
+    #       {
+    #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight
+    #       }
+    #
+    # @!attribute [rw] insight_type
+    #   The type of insights to log on a trail. In this release, only
+    #   `ApiCallRateInsight` is supported as an insight type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsightSelector AWS API Documentation
+    #
+    class InsightSelector < Struct.new(
+      :insight_type)
+      include Aws::Structure
+    end
+
     # Requests the public keys for a specified time range.
     #
     # @note When making an API call, you may pass ListPublicKeysRequest
@@ -1004,6 +1096,12 @@ module Aws::CloudTrail
     #       }
     #
     # @!attribute [rw] next_token
+    #   The token to use to get the next page of results after a previous
+    #   API call. This token must be passed in with the same parameters that
+    #   were specified in the the original call. For example, if the
+    #   original call specified an AttributeKey of 'Username' with a value
+    #   of 'root', the call with NextToken should include those same
+    #   parameters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTrailsRequest AWS API Documentation
@@ -1019,6 +1117,12 @@ module Aws::CloudTrail
     #   @return [Array<Types::TrailInfo>]
     #
     # @!attribute [rw] next_token
+    #   The token to use to get the next page of results after a previous
+    #   API call. If the token does not appear, there are no more results to
+    #   return. The token must be passed in with the same parameters as the
+    #   previous call. For example, if the original call specified an
+    #   AttributeKey of 'Username' with a value of 'root', the call with
+    #   NextToken should include those same parameters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTrailsResponse AWS API Documentation
@@ -1069,6 +1173,7 @@ module Aws::CloudTrail
     #         ],
     #         start_time: Time.now,
     #         end_time: Time.now,
+    #         event_category: "insight", # accepts insight
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -1090,6 +1195,13 @@ module Aws::CloudTrail
     #   start time, an error is returned.
     #   @return [Time]
     #
+    # @!attribute [rw] event_category
+    #   Specifies the event category. If you do not specify an event
+    #   category, events of the category are not returned in the response.
+    #   For example, if you do not specify `insight` as the value of
+    #   `EventCategory`, no Insights events are returned.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The number of events to return. Possible values are 1 through 50.
     #   The default is 50.
@@ -1110,6 +1222,7 @@ module Aws::CloudTrail
       :lookup_attributes,
       :start_time,
       :end_time,
+      :event_category,
       :max_results,
       :next_token)
       include Aws::Structure
@@ -1183,6 +1296,7 @@ module Aws::CloudTrail
     #                 values: ["String"],
     #               },
     #             ],
+    #             exclude_management_event_sources: ["String"],
     #           },
     #         ],
     #       }
@@ -1237,6 +1351,56 @@ module Aws::CloudTrail
     class PutEventSelectorsResponse < Struct.new(
       :trail_arn,
       :event_selectors)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutInsightSelectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         trail_name: "String", # required
+    #         insight_selectors: [ # required
+    #           {
+    #             insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] trail_name
+    #   The name of the CloudTrail trail for which you want to change or add
+    #   Insights selectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_selectors
+    #   A JSON string that contains the insight types you want to log on a
+    #   trail. In this release, only `ApiCallRateInsight` is supported as an
+    #   insight type.
+    #   @return [Array<Types::InsightSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsRequest AWS API Documentation
+    #
+    class PutInsightSelectorsRequest < Struct.new(
+      :trail_name,
+      :insight_selectors)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trail_arn
+    #   The Amazon Resource Name (ARN) of a trail for which you want to
+    #   change or add Insights selectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_selectors
+    #   A JSON string that contains the insight types you want to log on a
+    #   trail. In this release, only `ApiCallRateInsight` is supported as an
+    #   insight type.
+    #   @return [Array<Types::InsightSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsResponse AWS API Documentation
+    #
+    class PutInsightSelectorsResponse < Struct.new(
+      :trail_arn,
+      :insight_selectors)
       include Aws::Structure
     end
 
@@ -1507,6 +1671,11 @@ module Aws::CloudTrail
     #   Specifies if the trail has custom event selectors.
     #   @return [Boolean]
     #
+    # @!attribute [rw] has_insight_selectors
+    #   Specifies whether a trail has insight types specified in an
+    #   `InsightSelector` list.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] is_organization_trail
     #   Specifies whether the trail is an organization trail.
     #   @return [Boolean]
@@ -1528,6 +1697,7 @@ module Aws::CloudTrail
       :cloud_watch_logs_role_arn,
       :kms_key_id,
       :has_custom_event_selectors,
+      :has_insight_selectors,
       :is_organization_trail)
       include Aws::Structure
     end

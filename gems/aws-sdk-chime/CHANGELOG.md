@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2019-11-20)
+------------------
+
+* Feature - Adds APIs to create and manage meeting session resources for the Amazon Chime SDK
+
 1.16.0 (2019-11-15)
 ------------------
 

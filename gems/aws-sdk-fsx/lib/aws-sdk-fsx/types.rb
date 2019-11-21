@@ -274,6 +274,8 @@ module Aws::FSx
     #             password: "DirectoryPassword", # required
     #             dns_ips: ["IpAddress"], # required
     #           },
+    #           deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1
+    #           preferred_subnet_id: "SubnetId",
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           daily_automatic_backup_start_time: "DailyTime",
@@ -445,6 +447,8 @@ module Aws::FSx
     #             password: "DirectoryPassword", # required
     #             dns_ips: ["IpAddress"], # required
     #           },
+    #           deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1
+    #           preferred_subnet_id: "SubnetId",
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           daily_automatic_backup_start_time: "DailyTime",
@@ -476,16 +480,22 @@ module Aws::FSx
     # @!attribute [rw] storage_capacity
     #   The storage capacity of the file system being created.
     #
-    #   For Windows file systems, the storage capacity has a minimum of 300
-    #   GiB, and a maximum of 65,536 GiB.
+    #   For Windows file systems, valid values are 32 GiB - 65,536 GiB.
     #
-    #   For Lustre file systems, the storage capacity has a minimum of 3,600
-    #   GiB. Storage capacity is provisioned in increments of 3,600 GiB.
+    #   For Lustre file systems, valid values are 1,200, 2,400, 3,600, then
+    #   continuing in increments of 3600 GiB.
     #   @return [Integer]
     #
     # @!attribute [rw] subnet_ids
-    #   The IDs of the subnets that the file system will be accessible from.
-    #   File systems support only one subnet. The file server is also
+    #   Specifies the IDs of the subnets that the file system will be
+    #   accessible from. For Windows `MULTI_AZ_1` file system deployment
+    #   types, provide exactly two subnet IDs, one for the preferred file
+    #   server and one for the standy file server. You specify one of these
+    #   subnets as the preferred subnet using the `WindowsConfiguration >
+    #   PreferredSubnetID` property.
+    #
+    #   For Windows `SINGLE_AZ_1` file system deployment types and Lustre
+    #   file systems, provide exactly one subnet ID. The file server is
     #   launched in that subnet's Availability Zone.
     #   @return [Array<String>]
     #
@@ -566,6 +576,8 @@ module Aws::FSx
     #           password: "DirectoryPassword", # required
     #           dns_ips: ["IpAddress"], # required
     #         },
+    #         deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1
+    #         preferred_subnet_id: "SubnetId",
     #         throughput_capacity: 1, # required
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         daily_automatic_backup_start_time: "DailyTime",
@@ -583,6 +595,36 @@ module Aws::FSx
     #   Server instance to your self-managed (including on-premises)
     #   Microsoft Active Directory (AD) directory.
     #   @return [Types::SelfManagedActiveDirectoryConfiguration]
+    #
+    # @!attribute [rw] deployment_type
+    #   Specifies the file system deployment type, valid values are the
+    #   following:
+    #
+    #   * MULTI\_AZ\_1 - Deploys a high availability file system that is
+    #     configured for Multi-AZ redundancy to tolerate temporary
+    #     Availability Zone (AZ) unavailability. You can only deploy a
+    #     Multi-AZ file system in AWS Regions that have a minimum of three
+    #     Availability Zones.
+    #
+    #   * SINGLE\_AZ\_1 - (Default) Choose to deploy a file system that is
+    #     configured for single AZ redundancy.
+    #
+    #   To learn more about high availability Multi-AZ file systems, see [
+    #   High Availability for Amazon FSx for Windows File Server][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_subnet_id
+    #   Required when `DeploymentType` is set to `MULTI_AZ_1`. This
+    #   specifies the subnet in which you want the preferred file server to
+    #   be located. For in-AWS applications, we recommend that you launch
+    #   your clients in the same Availability Zone (AZ) as your preferred
+    #   file server to reduce cross-AZ data transfer costs and minimize
+    #   latency.
+    #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
@@ -621,6 +663,8 @@ module Aws::FSx
     class CreateFileSystemWindowsConfiguration < Struct.new(
       :active_directory_id,
       :self_managed_active_directory_configuration,
+      :deployment_type,
+      :preferred_subnet_id,
       :throughput_capacity,
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
@@ -994,19 +1038,19 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] lifecycle
-    #   The lifecycle status of the file system:
+    #   The lifecycle status of the file system, following are the possible
+    #   values and what they mean:
     #
-    #   * `AVAILABLE` indicates that the file system is reachable and
-    #     available for use.
+    #   * `AVAILABLE` - The file system is in a healthy state, and is
+    #     reachable and available for use.
     #
-    #   * `CREATING` indicates that Amazon FSx is in the process of creating
-    #     the new file system.
+    #   * `CREATING` - Amazon FSx is creating the new file system.
     #
-    #   * `DELETING` indicates that Amazon FSx is in the process of deleting
-    #     the file system.
+    #   * `DELETING` - Amazon FSx is deleting an existing file system.
     #
-    #   * `FAILED` indicates that Amazon FSx was not able to create the file
-    #     system.
+    #   * `FAILED` - An existing file system has experienced an
+    #     unrecoverable failure. When creating a new file system, Amazon FSx
+    #     was unable to create the file system.
     #
     #   * `MISCONFIGURED` indicates that the file system is in a failed but
     #     recoverable state.
@@ -1490,10 +1534,11 @@ module Aws::FSx
     # @!attribute [rw] file_system_administrators_group
     #   (Optional) The name of the domain group whose members are granted
     #   administrative privileges for the file system. Administrative
-    #   privileges include taking ownership of files and folders, and
-    #   setting audit controls (audit ACLs) on files and folders. The group
-    #   that you specify must already exist in your domain. If you don't
-    #   provide one, your AD domain's Domain Admins group is used.
+    #   privileges include taking ownership of files and folders, setting
+    #   audit controls (audit ACLs) on files and folders, and administering
+    #   the file system remotely by using the FSx Remote PowerShell. The
+    #   group that you specify must already exist in your domain. If you
+    #   don't provide one, your AD domain's Domain Admins group is used.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -1870,6 +1915,60 @@ module Aws::FSx
     #   (AD) directory to which the Windows File Server instance is joined.
     #   @return [Types::SelfManagedActiveDirectoryAttributes]
     #
+    # @!attribute [rw] deployment_type
+    #   Specifies the file system deployment type, valid values are the
+    #   following:
+    #
+    #   * `MULTI_AZ_1` - Specifies a high availability file system that is
+    #     configured for Multi-AZ redundancy to tolerate temporary
+    #     Availability Zone (AZ) unavailability.
+    #
+    #   * `SINGLE_AZ_1` - (Default) Specifies a file system that is
+    #     configured for single AZ redundancy.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_administration_endpoint
+    #   For `MULTI_AZ_1` deployment types, use this endpoint when performing
+    #   administrative tasks on the file system using Amazon FSx Remote
+    #   PowerShell.
+    #
+    #   For `SINGLE_AZ_1` deployment types, this is the DNS name of the file
+    #   system.
+    #
+    #   This endpoint is temporarily unavailable when the file system is
+    #   undergoing maintenance.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_subnet_id
+    #   For `MULTI_AZ_1` deployment types, it specifies the ID of the subnet
+    #   where the preferred file server is located. Must be one of the two
+    #   subnet IDs specified in `SubnetIds` property. Amazon FSx serves
+    #   traffic from this subnet except in the event of a failover to the
+    #   secondary file server.
+    #
+    #   For `SINGLE_AZ_1` deployment types, this value is the same as that
+    #   for `SubnetIDs`.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_file_server_ip
+    #   For `MULTI_AZ_1` deployment types, the IP address of the primary, or
+    #   preferred, file server.
+    #
+    #   Use this IP address when mounting the file system on Linux SMB
+    #   clients or Windows SMB clients that are not joined to a Microsoft
+    #   Active Directory. Applicable for both `SINGLE_AZ_1` and `MULTI_AZ_1`
+    #   deployment types. This IP address is temporarily unavailable when
+    #   the file system is undergoing maintenance. For Linux and Windows SMB
+    #   clients that are joined to an Active Directory, use the file
+    #   system's DNSName instead. For more information and instruction on
+    #   mapping and mounting file shares, see
+    #   [https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html
+    #   @return [String]
+    #
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
     #   per second.
@@ -1909,6 +2008,10 @@ module Aws::FSx
     class WindowsFileSystemConfiguration < Struct.new(
       :active_directory_id,
       :self_managed_active_directory_configuration,
+      :deployment_type,
+      :remote_administration_endpoint,
+      :preferred_subnet_id,
+      :preferred_file_server_ip,
       :throughput_capacity,
       :maintenance_operations_in_progress,
       :weekly_maintenance_start_time,

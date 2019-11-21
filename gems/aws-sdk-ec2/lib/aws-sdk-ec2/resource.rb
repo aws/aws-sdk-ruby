@@ -538,6 +538,40 @@ module Aws::EC2
 
     # @example Request syntax with placeholder values
     #
+    #   natgateway = ec2.create_nat_gateway({
+    #     allocation_id: "AllocationId", # required
+    #     client_token: "String",
+    #     subnet_id: "SubnetId", # required
+    #   })
+    # @param [Hash] options ({})
+    # @option options [required, String] :allocation_id
+    #   The allocation ID of an Elastic IP address to associate with the NAT
+    #   gateway. If the Elastic IP address is associated with another
+    #   resource, you must first disassociate it.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   Constraint: Maximum 64 ASCII characters.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    # @option options [required, String] :subnet_id
+    #   The subnet in which to create the NAT gateway.
+    # @return [NatGateway]
+    def create_nat_gateway(options = {})
+      resp = @client.create_nat_gateway(options)
+      NatGateway.new(
+        id: resp.data.nat_gateway.nat_gateway_id,
+        data: resp.data.nat_gateway,
+        client: @client
+      )
+    end
+
+    # @example Request syntax with placeholder values
+    #
     #   networkacl = ec2.create_network_acl({
     #     dry_run: false,
     #     vpc_id: "VpcId", # required
@@ -1961,6 +1995,69 @@ module Aws::EC2
         y.yield(batch)
       end
       KeyPairInfo::Collection.new(batches)
+    end
+
+    # @param [String] id
+    # @return [NatGateway]
+    def nat_gateway(id)
+      NatGateway.new(
+        id: id,
+        client: @client
+      )
+    end
+
+    # @example Request syntax with placeholder values
+    #
+    #   nat_gateways = ec2.nat_gateways({
+    #     filter: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     nat_gateway_ids: ["String"],
+    #   })
+    # @param [Hash] options ({})
+    # @option options [Array<Types::Filter>] :filter
+    #   One or more filters.
+    #
+    #   * `nat-gateway-id` - The ID of the NAT gateway.
+    #
+    #   * `state` - The state of the NAT gateway (`pending` \| `failed` \|
+    #     `available` \| `deleting` \| `deleted`).
+    #
+    #   * `subnet-id` - The ID of the subnet in which the NAT gateway resides.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
+    # @option options [Array<String>] :nat_gateway_ids
+    #   One or more NAT gateway IDs.
+    # @return [NatGateway::Collection]
+    def nat_gateways(options = {})
+      batches = Enumerator.new do |y|
+        resp = @client.describe_nat_gateways(options)
+        resp.each_page do |page|
+          batch = []
+          page.data.nat_gateways.each do |n|
+            batch << NatGateway.new(
+              id: n.nat_gateway_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
+        end
+      end
+      NatGateway::Collection.new(batches)
     end
 
     # @param [String] id

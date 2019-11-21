@@ -983,9 +983,8 @@ module Aws::ECS
     #   ECS-optimized Linux AMI][2] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
-    #   This parameter is available for tasks using the Fargate launch type
-    #   in the Ohio (us-east-2) region only and the task or service requires
-    #   platform version 1.3.0 or later.
+    #   For tasks using the Fargate launch type, the task or service
+    #   requires platform version `1.3.0` or later.
     #
     #
     #
@@ -1017,9 +1016,8 @@ module Aws::ECS
     #   ECS-optimized Linux AMI][2] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
-    #   This parameter is available for tasks using the Fargate launch type
-    #   in the Ohio (us-east-2) region only and the task or service requires
-    #   platform version 1.3.0 or later.
+    #   For tasks using the Fargate launch type, the task or service
+    #   requires platform version `1.3.0` or later.
     #
     #
     #
@@ -1029,11 +1027,11 @@ module Aws::ECS
     #
     # @!attribute [rw] stop_timeout
     #   Time duration (in seconds) to wait before the container is
-    #   forcefully killed if it doesn't exit normally on its own. For tasks
-    #   using the Fargate launch type, the max `stopTimeout` value is 2
-    #   minutes. This parameter is available for tasks using the Fargate
-    #   launch type in the Ohio (us-east-2) region only and the task or
-    #   service requires platform version 1.3.0 or later.
+    #   forcefully killed if it doesn't exit normally on its own.
+    #
+    #   For tasks using the Fargate launch type, the max `stopTimeout` value
+    #   is 2 minutes and the task or service requires platform version
+    #   `1.3.0` or later.
     #
     #   For tasks using the EC2 launch type, the stop timeout value for the
     #   container takes precedence over the `ECS_CONTAINER_STOP_TIMEOUT`
@@ -3546,11 +3544,16 @@ module Aws::ECS
     #   The reason for the failure.
     #   @return [String]
     #
+    # @!attribute [rw] detail
+    #   The details of the failure.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Failure AWS API Documentation
     #
     class Failure < Struct.new(
       :arn,
-      :reason)
+      :reason,
+      :detail)
       include Aws::Structure
     end
 
@@ -4119,11 +4122,10 @@ module Aws::ECS
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListAccountSettings` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a `ListAccountSettings` request
+    #   indicating that more results are available to fulfill the request
+    #   and further calls will be needed. If `maxResults` was provided, it
+    #   is possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only
     #   used to retrieve the next items in a list and not for other
@@ -4208,10 +4210,10 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListAttributes` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a `ListAttributes` request
+    #   indicating that more results are available to fulfill the request
+    #   and further calls will be needed. If `maxResults` was provided, it
+    #   is possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only
     #   used to retrieve the next items in a list and not for other
@@ -4272,10 +4274,10 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListClusters` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a `ListClusters` request
+    #   indicating that more results are available to fulfill the request
+    #   and further calls will be needed. If `maxResults` was provided, it
+    #   is possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only
     #   used to retrieve the next items in a list and not for other
@@ -4352,11 +4354,11 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListContainerInstances` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a `ListContainerInstances`
+    #   request indicating that more results are available to fulfill the
+    #   request and further calls will be needed. If `maxResults` was
+    #   provided, it is possible the number of results to be fewer than
+    #   `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only
     #   used to retrieve the next items in a list and not for other
@@ -4436,10 +4438,10 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListServices` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a `ListServices` request
+    #   indicating that more results are available to fulfill the request
+    #   and further calls will be needed. If `maxResults` was provided, it
+    #   is possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only
     #   used to retrieve the next items in a list and not for other
@@ -4560,11 +4562,11 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListTaskDefinitionFamilies` request where `maxResults` was used and
-    #   the results exceeded the value of that parameter. Pagination
-    #   continues from the end of the previous results that returned the
-    #   `nextToken` value.
+    #   The `nextToken` value returned from a `ListTaskDefinitionFamilies`
+    #   request indicating that more results are available to fulfill the
+    #   request and further calls will be needed. If `maxResults` was
+    #   provided, it is possible the number of results to be fewer than
+    #   `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only
     #   used to retrieve the next items in a list and not for other
@@ -4654,11 +4656,10 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListTaskDefinitions` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a `ListTaskDefinitions` request
+    #   indicating that more results are available to fulfill the request
+    #   and further calls will be needed. If `maxResults` was provided, it
+    #   is possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only
     #   used to retrieve the next items in a list and not for other
@@ -4746,10 +4747,10 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated `ListTasks`
-    #   request where `maxResults` was used and the results exceeded the
-    #   value of that parameter. Pagination continues from the end of the
-    #   previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a `ListTasks` request indicating
+    #   that more results are available to fulfill the request and further
+    #   calls will be needed. If `maxResults` was provided, it is possible
+    #   the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only
     #   used to retrieve the next items in a list and not for other
@@ -4937,23 +4938,19 @@ module Aws::ECS
     #   can communicate with by default.
     #
     #   For tasks using the Fargate launch type, the supported log drivers
-    #   are `awslogs`, `splunk`, and `awsfirelens`.
+    #   are `awslogs` and `splunk`.
     #
     #   For tasks using the EC2 launch type, the supported log drivers are
     #   `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`, `logentries`,
-    #   `syslog`, `splunk`, and `awsfirelens`.
+    #   `syslog`, and `splunk`.
     #
     #   For more information about using the `awslogs` log driver, see
     #   [Using the awslogs Log Driver][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
-    #   For more information about using the `awsfirelens` log driver, see
-    #   [Custom Log Routing][2] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
-    #
     #   <note markdown="1"> If you have a custom driver that is not listed above that you would
     #   like to work with the Amazon ECS container agent, you can fork the
-    #   Amazon ECS container agent project that is [available on GitHub][3]
+    #   Amazon ECS container agent project that is [available on GitHub][2]
     #   and customize it to work with that driver. We encourage you to
     #   submit pull requests for changes that you would like to have
     #   included. However, Amazon Web Services does not currently support
@@ -4970,8 +4967,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
-    #   [3]: https://github.com/aws/amazon-ecs-agent
+    #   [2]: https://github.com/aws/amazon-ecs-agent
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -6398,7 +6394,17 @@ module Aws::ECS
     #
     #       {
     #         cluster: "String",
-    #         task_definition: "String", # required
+    #         count: 1,
+    #         enable_ecs_managed_tags: false,
+    #         group: "String",
+    #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["String"], # required
+    #             security_groups: ["String"],
+    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
     #         overrides: {
     #           container_overrides: [
     #             {
@@ -6421,18 +6427,17 @@ module Aws::ECS
     #               ],
     #             },
     #           ],
+    #           cpu: "String",
     #           inference_accelerator_overrides: [
     #             {
     #               device_name: "String",
     #               device_type: "String",
     #             },
     #           ],
-    #           task_role_arn: "String",
     #           execution_role_arn: "String",
+    #           memory: "String",
+    #           task_role_arn: "String",
     #         },
-    #         count: 1,
-    #         started_by: "String",
-    #         group: "String",
     #         placement_constraints: [
     #           {
     #             type: "distinctInstance", # accepts distinctInstance, memberOf
@@ -6445,23 +6450,17 @@ module Aws::ECS
     #             field: "String",
     #           },
     #         ],
-    #         launch_type: "EC2", # accepts EC2, FARGATE
     #         platform_version: "String",
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             subnets: ["String"], # required
-    #             security_groups: ["String"],
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
+    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #         reference_id: "String",
+    #         started_by: "String",
     #         tags: [
     #           {
     #             key: "TagKey",
     #             value: "TagValue",
     #           },
     #         ],
-    #         enable_ecs_managed_tags: false,
-    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #         task_definition: "String", # required
     #       }
     #
     # @!attribute [rw] cluster
@@ -6470,11 +6469,48 @@ module Aws::ECS
     #   cluster is assumed.
     #   @return [String]
     #
-    # @!attribute [rw] task_definition
-    #   The `family` and `revision` (`family:revision`) or full ARN of the
-    #   task definition to run. If a `revision` is not specified, the latest
-    #   `ACTIVE` revision is used.
+    # @!attribute [rw] count
+    #   The number of instantiations of the specified task to place on your
+    #   cluster. You can specify up to 10 tasks per call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enable_ecs_managed_tags
+    #   Specifies whether to enable Amazon ECS managed tags for the task.
+    #   For more information, see [Tagging Your Amazon ECS Resources][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] group
+    #   The name of the task group to associate with the task. The default
+    #   value is the family name of the task definition (for example,
+    #   family:my-family-name).
     #   @return [String]
+    #
+    # @!attribute [rw] launch_type
+    #   The launch type on which to run your task. For more information, see
+    #   [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for the task. This parameter is required
+    #   for task definitions that use the `awsvpc` network mode to receive
+    #   their own elastic network interface, and it is not supported for
+    #   other network modes. For more information, see [Task Networking][1]
+    #   in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] overrides
     #   A list of container overrides in JSON format that specify the name
@@ -6492,30 +6528,6 @@ module Aws::ECS
     #    </note>
     #   @return [Types::TaskOverride]
     #
-    # @!attribute [rw] count
-    #   The number of instantiations of the specified task to place on your
-    #   cluster. You can specify up to 10 tasks per call.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] started_by
-    #   An optional tag specified when a task is started. For example, if
-    #   you automatically trigger a task to run a batch process job, you
-    #   could apply a unique identifier for that job to your task with the
-    #   `startedBy` parameter. You can then identify which tasks belong to
-    #   that job by filtering the results of a ListTasks call with the
-    #   `startedBy` value. Up to 36 letters (uppercase and lowercase),
-    #   numbers, hyphens, and underscores are allowed.
-    #
-    #   If a task is started by an Amazon ECS service, then the `startedBy`
-    #   parameter contains the deployment ID of the service that starts it.
-    #   @return [String]
-    #
-    # @!attribute [rw] group
-    #   The name of the task group to associate with the task. The default
-    #   value is the family name of the task definition (for example,
-    #   family:my-family-name).
-    #   @return [String]
-    #
     # @!attribute [rw] placement_constraints
     #   An array of placement constraint objects to use for the task. You
     #   can specify up to 10 constraints per task (including constraints in
@@ -6526,16 +6538,6 @@ module Aws::ECS
     #   The placement strategy objects to use for the task. You can specify
     #   a maximum of five strategy rules per task.
     #   @return [Array<Types::PlacementStrategy>]
-    #
-    # @!attribute [rw] launch_type
-    #   The launch type on which to run your task. For more information, see
-    #   [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
-    #   Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
-    #   @return [String]
     #
     # @!attribute [rw] platform_version
     #   The platform version the task should run. A platform version is only
@@ -6549,17 +6551,34 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
-    # @!attribute [rw] network_configuration
-    #   The network configuration for the task. This parameter is required
-    #   for task definitions that use the `awsvpc` network mode to receive
-    #   their own elastic network interface, and it is not supported for
-    #   other network modes. For more information, see [Task Networking][1]
-    #   in the *Amazon Elastic Container Service Developer Guide*.
+    # @!attribute [rw] propagate_tags
+    #   Specifies whether to propagate the tags from the task definition to
+    #   the task. If no value is specified, the tags are not propagated.
+    #   Tags can only be propagated to the task during task creation. To add
+    #   tags to a task after task creation, use the TagResource API action.
     #
+    #   <note markdown="1"> An error will be received if you specify the `SERVICE` option when
+    #   running a task.
     #
+    #    </note>
+    #   @return [String]
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
-    #   @return [Types::NetworkConfiguration]
+    # @!attribute [rw] reference_id
+    #   The reference ID to use for the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_by
+    #   An optional tag specified when a task is started. For example, if
+    #   you automatically trigger a task to run a batch process job, you
+    #   could apply a unique identifier for that job to your task with the
+    #   `startedBy` parameter. You can then identify which tasks belong to
+    #   that job by filtering the results of a ListTasks call with the
+    #   `startedBy` value. Up to 36 letters (uppercase and lowercase),
+    #   numbers, hyphens, and underscores are allowed.
+    #
+    #   If a task is started by an Amazon ECS service, then the `startedBy`
+    #   parameter contains the deployment ID of the service that starts it.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   The metadata that you apply to the task to help you categorize and
@@ -6592,45 +6611,30 @@ module Aws::ECS
     #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] enable_ecs_managed_tags
-    #   Specifies whether to enable Amazon ECS managed tags for the task.
-    #   For more information, see [Tagging Your Amazon ECS Resources][1] in
-    #   the *Amazon Elastic Container Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] propagate_tags
-    #   Specifies whether to propagate the tags from the task definition to
-    #   the task. If no value is specified, the tags are not propagated.
-    #   Tags can only be propagated to the task during task creation. To add
-    #   tags to a task after task creation, use the TagResource API action.
-    #
-    #   <note markdown="1"> An error will be received if you specify the `SERVICE` option when
-    #   running a task.
-    #
-    #    </note>
+    # @!attribute [rw] task_definition
+    #   The `family` and `revision` (`family:revision`) or full ARN of the
+    #   task definition to run. If a `revision` is not specified, the latest
+    #   `ACTIVE` revision is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest AWS API Documentation
     #
     class RunTaskRequest < Struct.new(
       :cluster,
-      :task_definition,
-      :overrides,
       :count,
-      :started_by,
+      :enable_ecs_managed_tags,
       :group,
+      :launch_type,
+      :network_configuration,
+      :overrides,
       :placement_constraints,
       :placement_strategy,
-      :launch_type,
       :platform_version,
-      :network_configuration,
+      :propagate_tags,
+      :reference_id,
+      :started_by,
       :tags,
-      :enable_ecs_managed_tags,
-      :propagate_tags)
+      :task_definition)
       include Aws::Structure
     end
 
@@ -7115,7 +7119,16 @@ module Aws::ECS
     #
     #       {
     #         cluster: "String",
-    #         task_definition: "String", # required
+    #         container_instances: ["String"], # required
+    #         enable_ecs_managed_tags: false,
+    #         group: "String",
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["String"], # required
+    #             security_groups: ["String"],
+    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
     #         overrides: {
     #           container_overrides: [
     #             {
@@ -7138,33 +7151,27 @@ module Aws::ECS
     #               ],
     #             },
     #           ],
+    #           cpu: "String",
     #           inference_accelerator_overrides: [
     #             {
     #               device_name: "String",
     #               device_type: "String",
     #             },
     #           ],
-    #           task_role_arn: "String",
     #           execution_role_arn: "String",
+    #           memory: "String",
+    #           task_role_arn: "String",
     #         },
-    #         container_instances: ["String"], # required
+    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #         reference_id: "String",
     #         started_by: "String",
-    #         group: "String",
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             subnets: ["String"], # required
-    #             security_groups: ["String"],
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
     #         tags: [
     #           {
     #             key: "TagKey",
     #             value: "TagValue",
     #           },
     #         ],
-    #         enable_ecs_managed_tags: false,
-    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #         task_definition: "String", # required
     #       }
     #
     # @!attribute [rw] cluster
@@ -7173,11 +7180,33 @@ module Aws::ECS
     #   default cluster is assumed.
     #   @return [String]
     #
-    # @!attribute [rw] task_definition
-    #   The `family` and `revision` (`family:revision`) or full ARN of the
-    #   task definition to start. If a `revision` is not specified, the
-    #   latest `ACTIVE` revision is used.
+    # @!attribute [rw] container_instances
+    #   The container instance IDs or full ARN entries for the container
+    #   instances on which you would like to place your task. You can
+    #   specify up to 10 container instances.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enable_ecs_managed_tags
+    #   Specifies whether to enable Amazon ECS managed tags for the task.
+    #   For more information, see [Tagging Your Amazon ECS Resources][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] group
+    #   The name of the task group to associate with the task. The default
+    #   value is the family name of the task definition (for example,
+    #   family:my-family-name).
     #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The VPC subnet and security group configuration for tasks that
+    #   receive their own elastic network interface by using the `awsvpc`
+    #   networking mode.
+    #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] overrides
     #   A list of container overrides in JSON format that specify the name
@@ -7195,11 +7224,15 @@ module Aws::ECS
     #    </note>
     #   @return [Types::TaskOverride]
     #
-    # @!attribute [rw] container_instances
-    #   The container instance IDs or full ARN entries for the container
-    #   instances on which you would like to place your task. You can
-    #   specify up to 10 container instances.
-    #   @return [Array<String>]
+    # @!attribute [rw] propagate_tags
+    #   Specifies whether to propagate the tags from the task definition or
+    #   the service to the task. If no value is specified, the tags are not
+    #   propagated.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_id
+    #   The reference ID to use for the task.
+    #   @return [String]
     #
     # @!attribute [rw] started_by
     #   An optional tag specified when a task is started. For example, if
@@ -7213,18 +7246,6 @@ module Aws::ECS
     #   If a task is started by an Amazon ECS service, then the `startedBy`
     #   parameter contains the deployment ID of the service that starts it.
     #   @return [String]
-    #
-    # @!attribute [rw] group
-    #   The name of the task group to associate with the task. The default
-    #   value is the family name of the task definition (for example,
-    #   family:my-family-name).
-    #   @return [String]
-    #
-    # @!attribute [rw] network_configuration
-    #   The VPC subnet and security group configuration for tasks that
-    #   receive their own elastic network interface by using the `awsvpc`
-    #   networking mode.
-    #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] tags
     #   The metadata that you apply to the task to help you categorize and
@@ -7257,35 +7278,26 @@ module Aws::ECS
     #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] enable_ecs_managed_tags
-    #   Specifies whether to enable Amazon ECS managed tags for the task.
-    #   For more information, see [Tagging Your Amazon ECS Resources][1] in
-    #   the *Amazon Elastic Container Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] propagate_tags
-    #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the task. If no value is specified, the tags are not
-    #   propagated.
+    # @!attribute [rw] task_definition
+    #   The `family` and `revision` (`family:revision`) or full ARN of the
+    #   task definition to start. If a `revision` is not specified, the
+    #   latest `ACTIVE` revision is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTaskRequest AWS API Documentation
     #
     class StartTaskRequest < Struct.new(
       :cluster,
-      :task_definition,
-      :overrides,
       :container_instances,
-      :started_by,
+      :enable_ecs_managed_tags,
       :group,
       :network_configuration,
+      :overrides,
+      :propagate_tags,
+      :reference_id,
+      :started_by,
       :tags,
-      :enable_ecs_managed_tags,
-      :propagate_tags)
+      :task_definition)
       include Aws::Structure
     end
 
@@ -7744,43 +7756,39 @@ module Aws::ECS
 
     # Details on a task in a cluster.
     #
-    # @!attribute [rw] task_arn
-    #   The Amazon Resource Name (ARN) of the task.
+    # @!attribute [rw] attachments
+    #   The Elastic Network Adapter associated with the task if the task
+    #   uses the `awsvpc` network mode.
+    #   @return [Array<Types::Attachment>]
+    #
+    # @!attribute [rw] attributes
+    #   The attributes of the task
+    #   @return [Array<Types::Attribute>]
+    #
+    # @!attribute [rw] availability_zone
+    #   The availability zone of the task.
     #   @return [String]
     #
     # @!attribute [rw] cluster_arn
     #   The ARN of the cluster that hosts the task.
     #   @return [String]
     #
-    # @!attribute [rw] task_definition_arn
-    #   The ARN of the task definition that creates the task.
+    # @!attribute [rw] connectivity
+    #   The connectivity status of a task.
     #   @return [String]
+    #
+    # @!attribute [rw] connectivity_at
+    #   The Unix timestamp for when the task last went into `CONNECTED`
+    #   status.
+    #   @return [Time]
     #
     # @!attribute [rw] container_instance_arn
     #   The ARN of the container instances that host the task.
     #   @return [String]
     #
-    # @!attribute [rw] overrides
-    #   One or more container overrides.
-    #   @return [Types::TaskOverride]
-    #
-    # @!attribute [rw] last_status
-    #   The last known status of the task. For more information, see [Task
-    #   Lifecycle][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html
-    #   @return [String]
-    #
-    # @!attribute [rw] desired_status
-    #   The desired status of the task. For more information, see [Task
-    #   Lifecycle][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html
-    #   @return [String]
+    # @!attribute [rw] containers
+    #   The containers associated with the task.
+    #   @return [Array<Types::Container>]
     #
     # @!attribute [rw] cpu
     #   The number of CPU units used by the task as expressed in a task
@@ -7815,6 +7823,69 @@ module Aws::ECS
     #     30720 (30 GB) in increments of 1024 (1 GB)
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp for when the task was created (the task entered
+    #   the `PENDING` state).
+    #   @return [Time]
+    #
+    # @!attribute [rw] desired_status
+    #   The desired status of the task. For more information, see [Task
+    #   Lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_stopped_at
+    #   The Unix timestamp for when the task execution stopped.
+    #   @return [Time]
+    #
+    # @!attribute [rw] group
+    #   The name of the task group associated with the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_status
+    #   The health status for the task, which is determined by the health of
+    #   the essential containers in the task. If all essential containers in
+    #   the task are reporting as `HEALTHY`, then the task status also
+    #   reports as `HEALTHY`. If any essential containers in the task are
+    #   reporting as `UNHEALTHY` or `UNKNOWN`, then the task status also
+    #   reports as `UNHEALTHY` or `UNKNOWN`, accordingly.
+    #
+    #   <note markdown="1"> The Amazon ECS container agent does not monitor or report on Docker
+    #   health checks that are embedded in a container image (such as those
+    #   specified in a parent image or from the image's Dockerfile) and not
+    #   specified in the container definition. Health check parameters that
+    #   are specified in a container definition override any Docker health
+    #   checks that exist in the container image.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_accelerators
+    #   The Elastic Inference accelerator associated with the task.
+    #   @return [Array<Types::InferenceAccelerator>]
+    #
+    # @!attribute [rw] last_status
+    #   The last known status of the task. For more information, see [Task
+    #   Lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_type
+    #   The launch type on which your task is running. For more information,
+    #   see [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   @return [String]
+    #
     # @!attribute [rw] memory
     #   The amount of memory (in MiB) used by the task as expressed in a
     #   task definition. It can be expressed as an integer using MiB, for
@@ -7844,89 +7915,9 @@ module Aws::ECS
     #     - Available `cpu` values: 4096 (4 vCPU)
     #   @return [String]
     #
-    # @!attribute [rw] containers
-    #   The containers associated with the task.
-    #   @return [Array<Types::Container>]
-    #
-    # @!attribute [rw] started_by
-    #   The tag specified when a task is started. If the task is started by
-    #   an Amazon ECS service, then the `startedBy` parameter contains the
-    #   deployment ID of the service that starts it.
-    #   @return [String]
-    #
-    # @!attribute [rw] version
-    #   The version counter for the task. Every time a task experiences a
-    #   change that triggers a CloudWatch event, the version counter is
-    #   incremented. If you are replicating your Amazon ECS task state with
-    #   CloudWatch Events, you can compare the version of a task reported by
-    #   the Amazon ECS API actions with the version reported in CloudWatch
-    #   Events for the task (inside the `detail` object) to verify that the
-    #   version in your event stream is current.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] stopped_reason
-    #   The reason that the task was stopped.
-    #   @return [String]
-    #
-    # @!attribute [rw] stop_code
-    #   The stop code indicating why a task was stopped. The `stoppedReason`
-    #   may contain additional details.
-    #   @return [String]
-    #
-    # @!attribute [rw] connectivity
-    #   The connectivity status of a task.
-    #   @return [String]
-    #
-    # @!attribute [rw] connectivity_at
-    #   The Unix timestamp for when the task last went into `CONNECTED`
-    #   status.
-    #   @return [Time]
-    #
-    # @!attribute [rw] pull_started_at
-    #   The Unix timestamp for when the container image pull began.
-    #   @return [Time]
-    #
-    # @!attribute [rw] pull_stopped_at
-    #   The Unix timestamp for when the container image pull completed.
-    #   @return [Time]
-    #
-    # @!attribute [rw] execution_stopped_at
-    #   The Unix timestamp for when the task execution stopped.
-    #   @return [Time]
-    #
-    # @!attribute [rw] created_at
-    #   The Unix timestamp for when the task was created (the task entered
-    #   the `PENDING` state).
-    #   @return [Time]
-    #
-    # @!attribute [rw] started_at
-    #   The Unix timestamp for when the task started (the task transitioned
-    #   from the `PENDING` state to the `RUNNING` state).
-    #   @return [Time]
-    #
-    # @!attribute [rw] stopping_at
-    #   The Unix timestamp for when the task stops (transitions from the
-    #   `RUNNING` state to `STOPPED`).
-    #   @return [Time]
-    #
-    # @!attribute [rw] stopped_at
-    #   The Unix timestamp for when the task was stopped (the task
-    #   transitioned from the `RUNNING` state to the `STOPPED` state).
-    #   @return [Time]
-    #
-    # @!attribute [rw] group
-    #   The name of the task group associated with the task.
-    #   @return [String]
-    #
-    # @!attribute [rw] launch_type
-    #   The launch type on which your task is running. For more information,
-    #   see [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
-    #   Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
-    #   @return [String]
+    # @!attribute [rw] overrides
+    #   One or more container overrides.
+    #   @return [Types::TaskOverride]
     #
     # @!attribute [rw] platform_version
     #   The platform version on which your task is running. A platform
@@ -7941,28 +7932,43 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
-    # @!attribute [rw] attachments
-    #   The Elastic Network Adapter associated with the task if the task
-    #   uses the `awsvpc` network mode.
-    #   @return [Array<Types::Attachment>]
+    # @!attribute [rw] pull_started_at
+    #   The Unix timestamp for when the container image pull began.
+    #   @return [Time]
     #
-    # @!attribute [rw] health_status
-    #   The health status for the task, which is determined by the health of
-    #   the essential containers in the task. If all essential containers in
-    #   the task are reporting as `HEALTHY`, then the task status also
-    #   reports as `HEALTHY`. If any essential containers in the task are
-    #   reporting as `UNHEALTHY` or `UNKNOWN`, then the task status also
-    #   reports as `UNHEALTHY` or `UNKNOWN`, accordingly.
+    # @!attribute [rw] pull_stopped_at
+    #   The Unix timestamp for when the container image pull completed.
+    #   @return [Time]
     #
-    #   <note markdown="1"> The Amazon ECS container agent does not monitor or report on Docker
-    #   health checks that are embedded in a container image (such as those
-    #   specified in a parent image or from the image's Dockerfile) and not
-    #   specified in the container definition. Health check parameters that
-    #   are specified in a container definition override any Docker health
-    #   checks that exist in the container image.
+    # @!attribute [rw] started_at
+    #   The Unix timestamp for when the task started (the task transitioned
+    #   from the `PENDING` state to the `RUNNING` state).
+    #   @return [Time]
     #
-    #    </note>
+    # @!attribute [rw] started_by
+    #   The tag specified when a task is started. If the task is started by
+    #   an Amazon ECS service, then the `startedBy` parameter contains the
+    #   deployment ID of the service that starts it.
     #   @return [String]
+    #
+    # @!attribute [rw] stop_code
+    #   The stop code indicating why a task was stopped. The `stoppedReason`
+    #   may contain additional details.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopped_at
+    #   The Unix timestamp for when the task was stopped (the task
+    #   transitioned from the `RUNNING` state to the `STOPPED` state).
+    #   @return [Time]
+    #
+    # @!attribute [rw] stopped_reason
+    #   The reason that the task was stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopping_at
+    #   The Unix timestamp for when the task stops (transitions from the
+    #   `RUNNING` state to `STOPPED`).
+    #   @return [Time]
     #
     # @!attribute [rw] tags
     #   The metadata that you apply to the task to help you categorize and
@@ -7995,43 +8001,59 @@ module Aws::ECS
     #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] inference_accelerators
-    #   The Elastic Inference accelerator associated with the task.
-    #   @return [Array<Types::InferenceAccelerator>]
+    # @!attribute [rw] task_arn
+    #   The Amazon Resource Name (ARN) of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_definition_arn
+    #   The ARN of the task definition that creates the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version counter for the task. Every time a task experiences a
+    #   change that triggers a CloudWatch event, the version counter is
+    #   incremented. If you are replicating your Amazon ECS task state with
+    #   CloudWatch Events, you can compare the version of a task reported by
+    #   the Amazon ECS API actions with the version reported in CloudWatch
+    #   Events for the task (inside the `detail` object) to verify that the
+    #   version in your event stream is current.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task AWS API Documentation
     #
     class Task < Struct.new(
-      :task_arn,
+      :attachments,
+      :attributes,
+      :availability_zone,
       :cluster_arn,
-      :task_definition_arn,
-      :container_instance_arn,
-      :overrides,
-      :last_status,
-      :desired_status,
-      :cpu,
-      :memory,
-      :containers,
-      :started_by,
-      :version,
-      :stopped_reason,
-      :stop_code,
       :connectivity,
       :connectivity_at,
+      :container_instance_arn,
+      :containers,
+      :cpu,
+      :created_at,
+      :desired_status,
+      :execution_stopped_at,
+      :group,
+      :health_status,
+      :inference_accelerators,
+      :last_status,
+      :launch_type,
+      :memory,
+      :overrides,
+      :platform_version,
       :pull_started_at,
       :pull_stopped_at,
-      :execution_stopped_at,
-      :created_at,
       :started_at,
-      :stopping_at,
+      :started_by,
+      :stop_code,
       :stopped_at,
-      :group,
-      :launch_type,
-      :platform_version,
-      :attachments,
-      :health_status,
+      :stopped_reason,
+      :stopping_at,
       :tags,
-      :inference_accelerators)
+      :task_arn,
+      :task_definition_arn,
+      :version)
       include Aws::Structure
     end
 
@@ -8246,6 +8268,10 @@ module Aws::ECS
     #     - Available `cpu` values: 4096 (4 vCPU)
     #   @return [String]
     #
+    # @!attribute [rw] inference_accelerators
+    #   The Elastic Inference accelerator associated with the task.
+    #   @return [Array<Types::InferenceAccelerator>]
+    #
     # @!attribute [rw] pid_mode
     #   The process namespace to use for the containers in the task. The
     #   valid values are `host` or `task`. If `host` is specified, then all
@@ -8348,6 +8374,7 @@ module Aws::ECS
       :requires_compatibilities,
       :cpu,
       :memory,
+      :inference_accelerators,
       :pid_mode,
       :ipc_mode,
       :proxy_configuration)
@@ -8425,23 +8452,38 @@ module Aws::ECS
     #             ],
     #           },
     #         ],
+    #         cpu: "String",
     #         inference_accelerator_overrides: [
     #           {
     #             device_name: "String",
     #             device_type: "String",
     #           },
     #         ],
-    #         task_role_arn: "String",
     #         execution_role_arn: "String",
+    #         memory: "String",
+    #         task_role_arn: "String",
     #       }
     #
     # @!attribute [rw] container_overrides
     #   One or more container overrides sent to a task.
     #   @return [Array<Types::ContainerOverride>]
     #
+    # @!attribute [rw] cpu
+    #   The cpu override for the task.
+    #   @return [String]
+    #
     # @!attribute [rw] inference_accelerator_overrides
     #   The Elastic Inference accelerator override for the task.
     #   @return [Array<Types::InferenceAcceleratorOverride>]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the task execution role that the
+    #   Amazon ECS container agent and the Docker daemon can assume.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory
+    #   The memory override for the task.
+    #   @return [String]
     #
     # @!attribute [rw] task_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that containers in
@@ -8449,18 +8491,15 @@ module Aws::ECS
     #   permissions that are specified in this role.
     #   @return [String]
     #
-    # @!attribute [rw] execution_role_arn
-    #   The Amazon Resource Name (ARN) of the task execution role that the
-    #   Amazon ECS container agent and the Docker daemon can assume.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskOverride AWS API Documentation
     #
     class TaskOverride < Struct.new(
       :container_overrides,
+      :cpu,
       :inference_accelerator_overrides,
-      :task_role_arn,
-      :execution_role_arn)
+      :execution_role_arn,
+      :memory,
+      :task_role_arn)
       include Aws::Structure
     end
 

@@ -98,6 +98,7 @@ module Aws::EC2
     AvailabilityZoneMessage = Shapes::StructureShape.new(name: 'AvailabilityZoneMessage')
     AvailabilityZoneMessageList = Shapes::ListShape.new(name: 'AvailabilityZoneMessageList')
     AvailabilityZoneState = Shapes::StringShape.new(name: 'AvailabilityZoneState')
+    AvailabilityZoneStringList = Shapes::ListShape.new(name: 'AvailabilityZoneStringList')
     AvailableCapacity = Shapes::StructureShape.new(name: 'AvailableCapacity')
     AvailableInstanceCapacityList = Shapes::ListShape.new(name: 'AvailableInstanceCapacityList')
     BatchState = Shapes::StringShape.new(name: 'BatchState')
@@ -457,6 +458,11 @@ module Aws::EC2
     DescribeExportImageTasksResult = Shapes::StructureShape.new(name: 'DescribeExportImageTasksResult')
     DescribeExportTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportTasksRequest')
     DescribeExportTasksResult = Shapes::StructureShape.new(name: 'DescribeExportTasksResult')
+    DescribeFastSnapshotRestoreSuccessItem = Shapes::StructureShape.new(name: 'DescribeFastSnapshotRestoreSuccessItem')
+    DescribeFastSnapshotRestoreSuccessSet = Shapes::ListShape.new(name: 'DescribeFastSnapshotRestoreSuccessSet')
+    DescribeFastSnapshotRestoresMaxResults = Shapes::IntegerShape.new(name: 'DescribeFastSnapshotRestoresMaxResults')
+    DescribeFastSnapshotRestoresRequest = Shapes::StructureShape.new(name: 'DescribeFastSnapshotRestoresRequest')
+    DescribeFastSnapshotRestoresResult = Shapes::StructureShape.new(name: 'DescribeFastSnapshotRestoresResult')
     DescribeFleetError = Shapes::StructureShape.new(name: 'DescribeFleetError')
     DescribeFleetHistoryRequest = Shapes::StructureShape.new(name: 'DescribeFleetHistoryRequest')
     DescribeFleetHistoryResult = Shapes::StructureShape.new(name: 'DescribeFleetHistoryResult')
@@ -659,6 +665,15 @@ module Aws::EC2
     DirectoryServiceAuthenticationRequest = Shapes::StructureShape.new(name: 'DirectoryServiceAuthenticationRequest')
     DisableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultRequest')
     DisableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultResult')
+    DisableFastSnapshotRestoreErrorItem = Shapes::StructureShape.new(name: 'DisableFastSnapshotRestoreErrorItem')
+    DisableFastSnapshotRestoreErrorSet = Shapes::ListShape.new(name: 'DisableFastSnapshotRestoreErrorSet')
+    DisableFastSnapshotRestoreStateError = Shapes::StructureShape.new(name: 'DisableFastSnapshotRestoreStateError')
+    DisableFastSnapshotRestoreStateErrorItem = Shapes::StructureShape.new(name: 'DisableFastSnapshotRestoreStateErrorItem')
+    DisableFastSnapshotRestoreStateErrorSet = Shapes::ListShape.new(name: 'DisableFastSnapshotRestoreStateErrorSet')
+    DisableFastSnapshotRestoreSuccessItem = Shapes::StructureShape.new(name: 'DisableFastSnapshotRestoreSuccessItem')
+    DisableFastSnapshotRestoreSuccessSet = Shapes::ListShape.new(name: 'DisableFastSnapshotRestoreSuccessSet')
+    DisableFastSnapshotRestoresRequest = Shapes::StructureShape.new(name: 'DisableFastSnapshotRestoresRequest')
+    DisableFastSnapshotRestoresResult = Shapes::StructureShape.new(name: 'DisableFastSnapshotRestoresResult')
     DisableTransitGatewayRouteTablePropagationRequest = Shapes::StructureShape.new(name: 'DisableTransitGatewayRouteTablePropagationRequest')
     DisableTransitGatewayRouteTablePropagationResult = Shapes::StructureShape.new(name: 'DisableTransitGatewayRouteTablePropagationResult')
     DisableVgwRoutePropagationRequest = Shapes::StructureShape.new(name: 'DisableVgwRoutePropagationRequest')
@@ -716,6 +731,15 @@ module Aws::EC2
     ElasticInferenceAccelerators = Shapes::ListShape.new(name: 'ElasticInferenceAccelerators')
     EnableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultRequest')
     EnableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultResult')
+    EnableFastSnapshotRestoreErrorItem = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoreErrorItem')
+    EnableFastSnapshotRestoreErrorSet = Shapes::ListShape.new(name: 'EnableFastSnapshotRestoreErrorSet')
+    EnableFastSnapshotRestoreStateError = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoreStateError')
+    EnableFastSnapshotRestoreStateErrorItem = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoreStateErrorItem')
+    EnableFastSnapshotRestoreStateErrorSet = Shapes::ListShape.new(name: 'EnableFastSnapshotRestoreStateErrorSet')
+    EnableFastSnapshotRestoreSuccessItem = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoreSuccessItem')
+    EnableFastSnapshotRestoreSuccessSet = Shapes::ListShape.new(name: 'EnableFastSnapshotRestoreSuccessSet')
+    EnableFastSnapshotRestoresRequest = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoresRequest')
+    EnableFastSnapshotRestoresResult = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoresResult')
     EnableTransitGatewayRouteTablePropagationRequest = Shapes::StructureShape.new(name: 'EnableTransitGatewayRouteTablePropagationRequest')
     EnableTransitGatewayRouteTablePropagationResult = Shapes::StructureShape.new(name: 'EnableTransitGatewayRouteTablePropagationResult')
     EnableVgwRoutePropagationRequest = Shapes::StructureShape.new(name: 'EnableVgwRoutePropagationRequest')
@@ -754,6 +778,7 @@ module Aws::EC2
     ExportTransitGatewayRoutesResult = Shapes::StructureShape.new(name: 'ExportTransitGatewayRoutesResult')
     FailedQueuedPurchaseDeletion = Shapes::StructureShape.new(name: 'FailedQueuedPurchaseDeletion')
     FailedQueuedPurchaseDeletionSet = Shapes::ListShape.new(name: 'FailedQueuedPurchaseDeletionSet')
+    FastSnapshotRestoreStateCode = Shapes::StringShape.new(name: 'FastSnapshotRestoreStateCode')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FleetActivityStatus = Shapes::StringShape.new(name: 'FleetActivityStatus')
@@ -1997,6 +2022,8 @@ module Aws::EC2
     AvailabilityZoneMessage.struct_class = Types::AvailabilityZoneMessage
 
     AvailabilityZoneMessageList.member = Shapes::ShapeRef.new(shape: AvailabilityZoneMessage, location_name: "item")
+
+    AvailabilityZoneStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone")
 
     AvailableCapacity.add_member(:available_instance_capacity, Shapes::ShapeRef.new(shape: AvailableInstanceCapacityList, location_name: "availableInstanceCapacity"))
     AvailableCapacity.add_member(:available_v_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "availableVCpus"))
@@ -3448,6 +3475,31 @@ module Aws::EC2
     DescribeExportTasksResult.add_member(:export_tasks, Shapes::ShapeRef.new(shape: ExportTaskList, location_name: "exportTaskSet"))
     DescribeExportTasksResult.struct_class = Types::DescribeExportTasksResult
 
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:state, Shapes::ShapeRef.new(shape: FastSnapshotRestoreStateCode, location_name: "state"))
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:state_transition_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateTransitionReason"))
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:owner_alias, Shapes::ShapeRef.new(shape: String, location_name: "ownerAlias"))
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:enabling_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "enablingTime"))
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:optimizing_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "optimizingTime"))
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:enabled_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "enabledTime"))
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:disabling_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "disablingTime"))
+    DescribeFastSnapshotRestoreSuccessItem.add_member(:disabled_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "disabledTime"))
+    DescribeFastSnapshotRestoreSuccessItem.struct_class = Types::DescribeFastSnapshotRestoreSuccessItem
+
+    DescribeFastSnapshotRestoreSuccessSet.member = Shapes::ShapeRef.new(shape: DescribeFastSnapshotRestoreSuccessItem, location_name: "item")
+
+    DescribeFastSnapshotRestoresRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeFastSnapshotRestoresRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeFastSnapshotRestoresMaxResults, location_name: "MaxResults"))
+    DescribeFastSnapshotRestoresRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFastSnapshotRestoresRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeFastSnapshotRestoresRequest.struct_class = Types::DescribeFastSnapshotRestoresRequest
+
+    DescribeFastSnapshotRestoresResult.add_member(:fast_snapshot_restores, Shapes::ShapeRef.new(shape: DescribeFastSnapshotRestoreSuccessSet, location_name: "fastSnapshotRestoreSet"))
+    DescribeFastSnapshotRestoresResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeFastSnapshotRestoresResult.struct_class = Types::DescribeFastSnapshotRestoresResult
+
     DescribeFleetError.add_member(:launch_template_and_overrides, Shapes::ShapeRef.new(shape: LaunchTemplateAndOverridesResponse, location_name: "launchTemplateAndOverrides"))
     DescribeFleetError.add_member(:lifecycle, Shapes::ShapeRef.new(shape: InstanceLifecycle, location_name: "lifecycle"))
     DescribeFleetError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "errorCode"))
@@ -4360,6 +4412,46 @@ module Aws::EC2
     DisableEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
     DisableEbsEncryptionByDefaultResult.struct_class = Types::DisableEbsEncryptionByDefaultResult
 
+    DisableFastSnapshotRestoreErrorItem.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    DisableFastSnapshotRestoreErrorItem.add_member(:fast_snapshot_restore_state_errors, Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoreStateErrorSet, location_name: "fastSnapshotRestoreStateErrorSet"))
+    DisableFastSnapshotRestoreErrorItem.struct_class = Types::DisableFastSnapshotRestoreErrorItem
+
+    DisableFastSnapshotRestoreErrorSet.member = Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoreErrorItem, location_name: "item")
+
+    DisableFastSnapshotRestoreStateError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    DisableFastSnapshotRestoreStateError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DisableFastSnapshotRestoreStateError.struct_class = Types::DisableFastSnapshotRestoreStateError
+
+    DisableFastSnapshotRestoreStateErrorItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    DisableFastSnapshotRestoreStateErrorItem.add_member(:error, Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoreStateError, location_name: "error"))
+    DisableFastSnapshotRestoreStateErrorItem.struct_class = Types::DisableFastSnapshotRestoreStateErrorItem
+
+    DisableFastSnapshotRestoreStateErrorSet.member = Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoreStateErrorItem, location_name: "item")
+
+    DisableFastSnapshotRestoreSuccessItem.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    DisableFastSnapshotRestoreSuccessItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    DisableFastSnapshotRestoreSuccessItem.add_member(:state, Shapes::ShapeRef.new(shape: FastSnapshotRestoreStateCode, location_name: "state"))
+    DisableFastSnapshotRestoreSuccessItem.add_member(:state_transition_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateTransitionReason"))
+    DisableFastSnapshotRestoreSuccessItem.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    DisableFastSnapshotRestoreSuccessItem.add_member(:owner_alias, Shapes::ShapeRef.new(shape: String, location_name: "ownerAlias"))
+    DisableFastSnapshotRestoreSuccessItem.add_member(:enabling_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "enablingTime"))
+    DisableFastSnapshotRestoreSuccessItem.add_member(:optimizing_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "optimizingTime"))
+    DisableFastSnapshotRestoreSuccessItem.add_member(:enabled_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "enabledTime"))
+    DisableFastSnapshotRestoreSuccessItem.add_member(:disabling_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "disablingTime"))
+    DisableFastSnapshotRestoreSuccessItem.add_member(:disabled_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "disabledTime"))
+    DisableFastSnapshotRestoreSuccessItem.struct_class = Types::DisableFastSnapshotRestoreSuccessItem
+
+    DisableFastSnapshotRestoreSuccessSet.member = Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoreSuccessItem, location_name: "item")
+
+    DisableFastSnapshotRestoresRequest.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZoneStringList, required: true, location_name: "AvailabilityZone"))
+    DisableFastSnapshotRestoresRequest.add_member(:source_snapshot_ids, Shapes::ShapeRef.new(shape: SnapshotIdStringList, required: true, location_name: "SourceSnapshotId"))
+    DisableFastSnapshotRestoresRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableFastSnapshotRestoresRequest.struct_class = Types::DisableFastSnapshotRestoresRequest
+
+    DisableFastSnapshotRestoresResult.add_member(:successful, Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoreSuccessSet, location_name: "successful"))
+    DisableFastSnapshotRestoresResult.add_member(:unsuccessful, Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoreErrorSet, location_name: "unsuccessful"))
+    DisableFastSnapshotRestoresResult.struct_class = Types::DisableFastSnapshotRestoresResult
+
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -4544,6 +4636,46 @@ module Aws::EC2
 
     EnableEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
     EnableEbsEncryptionByDefaultResult.struct_class = Types::EnableEbsEncryptionByDefaultResult
+
+    EnableFastSnapshotRestoreErrorItem.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    EnableFastSnapshotRestoreErrorItem.add_member(:fast_snapshot_restore_state_errors, Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoreStateErrorSet, location_name: "fastSnapshotRestoreStateErrorSet"))
+    EnableFastSnapshotRestoreErrorItem.struct_class = Types::EnableFastSnapshotRestoreErrorItem
+
+    EnableFastSnapshotRestoreErrorSet.member = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoreErrorItem, location_name: "item")
+
+    EnableFastSnapshotRestoreStateError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    EnableFastSnapshotRestoreStateError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    EnableFastSnapshotRestoreStateError.struct_class = Types::EnableFastSnapshotRestoreStateError
+
+    EnableFastSnapshotRestoreStateErrorItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    EnableFastSnapshotRestoreStateErrorItem.add_member(:error, Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoreStateError, location_name: "error"))
+    EnableFastSnapshotRestoreStateErrorItem.struct_class = Types::EnableFastSnapshotRestoreStateErrorItem
+
+    EnableFastSnapshotRestoreStateErrorSet.member = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoreStateErrorItem, location_name: "item")
+
+    EnableFastSnapshotRestoreSuccessItem.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    EnableFastSnapshotRestoreSuccessItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    EnableFastSnapshotRestoreSuccessItem.add_member(:state, Shapes::ShapeRef.new(shape: FastSnapshotRestoreStateCode, location_name: "state"))
+    EnableFastSnapshotRestoreSuccessItem.add_member(:state_transition_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateTransitionReason"))
+    EnableFastSnapshotRestoreSuccessItem.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    EnableFastSnapshotRestoreSuccessItem.add_member(:owner_alias, Shapes::ShapeRef.new(shape: String, location_name: "ownerAlias"))
+    EnableFastSnapshotRestoreSuccessItem.add_member(:enabling_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "enablingTime"))
+    EnableFastSnapshotRestoreSuccessItem.add_member(:optimizing_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "optimizingTime"))
+    EnableFastSnapshotRestoreSuccessItem.add_member(:enabled_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "enabledTime"))
+    EnableFastSnapshotRestoreSuccessItem.add_member(:disabling_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "disablingTime"))
+    EnableFastSnapshotRestoreSuccessItem.add_member(:disabled_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "disabledTime"))
+    EnableFastSnapshotRestoreSuccessItem.struct_class = Types::EnableFastSnapshotRestoreSuccessItem
+
+    EnableFastSnapshotRestoreSuccessSet.member = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoreSuccessItem, location_name: "item")
+
+    EnableFastSnapshotRestoresRequest.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZoneStringList, required: true, location_name: "AvailabilityZone"))
+    EnableFastSnapshotRestoresRequest.add_member(:source_snapshot_ids, Shapes::ShapeRef.new(shape: SnapshotIdStringList, required: true, location_name: "SourceSnapshotId"))
+    EnableFastSnapshotRestoresRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableFastSnapshotRestoresRequest.struct_class = Types::EnableFastSnapshotRestoresRequest
+
+    EnableFastSnapshotRestoresResult.add_member(:successful, Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoreSuccessSet, location_name: "successful"))
+    EnableFastSnapshotRestoresResult.add_member(:unsuccessful, Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoreErrorSet, location_name: "unsuccessful"))
+    EnableFastSnapshotRestoresResult.struct_class = Types::EnableFastSnapshotRestoresResult
 
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
@@ -8127,6 +8259,7 @@ module Aws::EC2
     Volume.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "iops"))
     Volume.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Volume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
+    Volume.add_member(:fast_restored, Shapes::ShapeRef.new(shape: Boolean, location_name: "fastRestored"))
     Volume.struct_class = Types::Volume
 
     VolumeAttachment.add_member(:attach_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "attachTime"))
@@ -9674,6 +9807,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeExportImageTasksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeExportImageTasksResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_export_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -9682,6 +9821,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeExportTasksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeExportTasksResult)
+      end)
+
+      api.add_operation(:describe_fast_snapshot_restores, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFastSnapshotRestores"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFastSnapshotRestoresRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFastSnapshotRestoresResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_fleet_history, Seahorse::Model::Operation.new.tap do |o|
@@ -10687,6 +10840,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisableEbsEncryptionByDefaultResult)
       end)
 
+      api.add_operation(:disable_fast_snapshot_restores, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableFastSnapshotRestores"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoresRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoresResult)
+      end)
+
       api.add_operation(:disable_transit_gateway_route_table_propagation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableTransitGatewayRouteTablePropagation"
         o.http_method = "POST"
@@ -10781,6 +10942,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: EnableEbsEncryptionByDefaultRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableEbsEncryptionByDefaultResult)
+      end)
+
+      api.add_operation(:enable_fast_snapshot_restores, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableFastSnapshotRestores"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoresRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoresResult)
       end)
 
       api.add_operation(:enable_transit_gateway_route_table_propagation, Seahorse::Model::Operation.new.tap do |o|

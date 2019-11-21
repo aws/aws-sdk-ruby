@@ -350,6 +350,7 @@ module Aws
             'MediaStoreData' => 'data.mediastore',
             'MediaTailor' => 'api.mediatailor',
             'MigrationHub' => 'mgh',
+            'MigrationHubConfig' => 'migrationhub-config',
             'Mobile' => 'mobile',
             'Neptune' => 'rds',
             'OpsWorks' => 'opsworks',

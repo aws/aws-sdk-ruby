@@ -144,6 +144,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-mediastoredata', '~> 1')
   spec.add_dependency('aws-sdk-mediatailor', '~> 1')
   spec.add_dependency('aws-sdk-migrationhub', '~> 1')
+  spec.add_dependency('aws-sdk-migrationhubconfig', '~> 1')
   spec.add_dependency('aws-sdk-mobile', '~> 1')
   spec.add_dependency('aws-sdk-neptune', '~> 1')
   spec.add_dependency('aws-sdk-opsworks', '~> 1')

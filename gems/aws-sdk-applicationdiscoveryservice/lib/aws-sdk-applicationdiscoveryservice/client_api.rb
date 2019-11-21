@@ -100,6 +100,7 @@ module Aws::ApplicationDiscoveryService
     Filters = Shapes::ListShape.new(name: 'Filters')
     GetDiscoverySummaryRequest = Shapes::StructureShape.new(name: 'GetDiscoverySummaryRequest')
     GetDiscoverySummaryResponse = Shapes::StructureShape.new(name: 'GetDiscoverySummaryResponse')
+    HomeRegionNotSetException = Shapes::StructureShape.new(name: 'HomeRegionNotSetException')
     ImportStatus = Shapes::StringShape.new(name: 'ImportStatus')
     ImportTask = Shapes::StructureShape.new(name: 'ImportTask')
     ImportTaskFilter = Shapes::StructureShape.new(name: 'ImportTaskFilter')
@@ -405,6 +406,9 @@ module Aws::ApplicationDiscoveryService
     GetDiscoverySummaryResponse.add_member(:connector_summary, Shapes::ShapeRef.new(shape: CustomerConnectorInfo, location_name: "connectorSummary"))
     GetDiscoverySummaryResponse.struct_class = Types::GetDiscoverySummaryResponse
 
+    HomeRegionNotSetException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    HomeRegionNotSetException.struct_class = Types::HomeRegionNotSetException
+
     ImportTask.add_member(:import_task_id, Shapes::ShapeRef.new(shape: ImportTaskIdentifier, location_name: "importTaskId"))
     ImportTask.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
     ImportTask.add_member(:name, Shapes::ShapeRef.new(shape: ImportTaskName, location_name: "name"))
@@ -581,6 +585,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:batch_delete_import_data, Seahorse::Model::Operation.new.tap do |o|
@@ -590,8 +595,10 @@ module Aws::ApplicationDiscoveryService
         o.input = Shapes::ShapeRef.new(shape: BatchDeleteImportDataRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchDeleteImportDataResponse)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
@@ -604,6 +611,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -617,6 +625,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:delete_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -629,6 +638,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:delete_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -642,6 +652,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:describe_agents, Seahorse::Model::Operation.new.tap do |o|
@@ -654,6 +665,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:describe_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -666,6 +678,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:describe_continuous_exports, Seahorse::Model::Operation.new.tap do |o|
@@ -680,6 +693,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -700,6 +714,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:describe_export_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -712,6 +727,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:describe_import_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -721,8 +737,10 @@ module Aws::ApplicationDiscoveryService
         o.input = Shapes::ShapeRef.new(shape: DescribeImportTasksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeImportTasksResponse)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -742,6 +760,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:disassociate_configuration_items_from_application, Seahorse::Model::Operation.new.tap do |o|
@@ -754,6 +773,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:export_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -768,6 +788,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:get_discovery_summary, Seahorse::Model::Operation.new.tap do |o|
@@ -780,6 +801,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:list_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -793,6 +815,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:list_server_neighbors, Seahorse::Model::Operation.new.tap do |o|
@@ -805,6 +828,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:start_continuous_export, Seahorse::Model::Operation.new.tap do |o|
@@ -820,6 +844,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:start_data_collection_by_agent_ids, Seahorse::Model::Operation.new.tap do |o|
@@ -832,6 +857,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:start_export_task, Seahorse::Model::Operation.new.tap do |o|
@@ -845,6 +871,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:start_import_task, Seahorse::Model::Operation.new.tap do |o|
@@ -855,8 +882,10 @@ module Aws::ApplicationDiscoveryService
         o.output = Shapes::ShapeRef.new(shape: StartImportTaskResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:stop_continuous_export, Seahorse::Model::Operation.new.tap do |o|
@@ -872,6 +901,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:stop_data_collection_by_agent_ids, Seahorse::Model::Operation.new.tap do |o|
@@ -884,6 +914,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
@@ -896,6 +927,7 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
     end
 

@@ -48,6 +48,10 @@ module Aws::DLM
     #               retain_rule: {
     #                 count: 1, # required
     #               },
+    #               fast_restore_rule: {
+    #                 count: 1, # required
+    #                 availability_zones: ["AvailabilityZone"], # required
+    #               },
     #             },
     #           ],
     #           parameters: {
@@ -161,6 +165,32 @@ module Aws::DLM
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/DeleteLifecyclePolicyResponse AWS API Documentation
     #
     class DeleteLifecyclePolicyResponse < Aws::EmptyStructure; end
+
+    # Specifies when to enable fast snapshot restore.
+    #
+    # @note When making an API call, you may pass FastRestoreRule
+    #   data as a hash:
+    #
+    #       {
+    #         count: 1, # required
+    #         availability_zones: ["AvailabilityZone"], # required
+    #       }
+    #
+    # @!attribute [rw] count
+    #   The number of snapshots to be enabled with fast snapshot restore.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] availability_zones
+    #   The Availability Zones in which to enable fast snapshot restore.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/FastRestoreRule AWS API Documentation
+    #
+    class FastRestoreRule < Struct.new(
+      :count,
+      :availability_zones)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass GetLifecyclePoliciesRequest
     #   data as a hash:
@@ -494,6 +524,10 @@ module Aws::DLM
     #             retain_rule: {
     #               count: 1, # required
     #             },
+    #             fast_restore_rule: {
+    #               count: 1, # required
+    #               availability_zones: ["AvailabilityZone"], # required
+    #             },
     #           },
     #         ],
     #         parameters: {
@@ -609,6 +643,10 @@ module Aws::DLM
     #         retain_rule: {
     #           count: 1, # required
     #         },
+    #         fast_restore_rule: {
+    #           count: 1, # required
+    #           availability_zones: ["AvailabilityZone"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -641,6 +679,10 @@ module Aws::DLM
     #   The retain rule.
     #   @return [Types::RetainRule]
     #
+    # @!attribute [rw] fast_restore_rule
+    #   Enable fast snapshot restore.
+    #   @return [Types::FastRestoreRule]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Schedule AWS API Documentation
     #
     class Schedule < Struct.new(
@@ -649,7 +691,8 @@ module Aws::DLM
       :tags_to_add,
       :variable_tags,
       :create_rule,
-      :retain_rule)
+      :retain_rule,
+      :fast_restore_rule)
       include Aws::Structure
     end
 
@@ -777,6 +820,10 @@ module Aws::DLM
     #               },
     #               retain_rule: {
     #                 count: 1, # required
+    #               },
+    #               fast_restore_rule: {
+    #                 count: 1, # required
+    #                 availability_zones: ["AvailabilityZone"], # required
     #               },
     #             },
     #           ],
