@@ -17,6 +17,7 @@ rvm:
 sudo: false
 
 env:
+  - AWS_REGION='us-west-2'
   - PURE_RUBY=1
   - KITCHEN_SINK=1
 
@@ -26,8 +27,10 @@ bundler_args: --without docs release repl
 
 matrix:
   exclude:
-    - rvm: jruby-9.1.16.0
+    - rvm: jruby
       env: KITCHEN_SINK=1
+    - rvm: jruby
+      env: PURE_RUBY=1
   include:
     - rvm: 2.3
       env: OLD_OJ=1
@@ -35,8 +38,6 @@ matrix:
       env: OLD_OX=1
     - rvm: 2.5
       env: NO_H2=1
-    - rvm: jruby
-      env: PURE_RUBY=0
   allow_failures:
     - rvm: jruby
 
