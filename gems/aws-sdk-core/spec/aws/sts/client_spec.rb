@@ -5,12 +5,12 @@ module Aws
     describe Client do
 
       it 'constructs the proper endpoint in gov-cloud' do
-        client = Client.new(region: 'us-gov-west-1', credentials: Credentials.new('akid', 'secret'))
+        client = Client.new(region:'us-gov-west-1', credentials: Credentials.new('akid', 'secret'))
         expect(client.config.endpoint.to_s).to eq('https://sts.us-gov-west-1.amazonaws.com')
       end
 
       it 'makes assume_role_with_* calls without authentication' do
-        client = Aws::STS::Client.new(region: 'us-east-1', credentials: nil)
+        client = Aws::STS::Client.new(region:'us-east-1', credentials:nil)
         client.handle(step: :send) do |context|
           Seahorse::Client::Response.new(context: context)
         end
