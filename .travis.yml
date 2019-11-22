@@ -20,7 +20,7 @@ env:
   - PURE_RUBY=1
   - KITCHEN_SINK=1
 
-script: bundle exec rake test:spec
+script: rake test
 
 bundler_args: --without docs release repl
 
