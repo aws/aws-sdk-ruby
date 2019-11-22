@@ -1,5 +1,8 @@
 language: ruby
 
+before_install:
+  - gem install bundler -v '< 2'
+
 rvm:
   - 1.9.3
   - 2.0.0
@@ -8,7 +11,8 @@ rvm:
   - 2.3
   - 2.4
   - 2.5
-  - jruby-9.1.16.0
+  - 2.6
+  - jruby
 
 sudo: false
 
@@ -29,6 +33,10 @@ matrix:
       env: OLD_OJ=1
     - rvm: 2.3
       env: OLD_OX=1
+    - rvm: 2.5
+      env: NO_H2=1
+  allow_failures:
+    - rvm: jruby
 
 notifications:
   webhooks:

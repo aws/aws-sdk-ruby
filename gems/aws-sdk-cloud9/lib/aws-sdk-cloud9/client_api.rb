@@ -34,6 +34,8 @@ module Aws::Cloud9
     EnvironmentDescription = Shapes::StringShape.new(name: 'EnvironmentDescription')
     EnvironmentId = Shapes::StringShape.new(name: 'EnvironmentId')
     EnvironmentIdList = Shapes::ListShape.new(name: 'EnvironmentIdList')
+    EnvironmentLifecycle = Shapes::StructureShape.new(name: 'EnvironmentLifecycle')
+    EnvironmentLifecycleStatus = Shapes::StringShape.new(name: 'EnvironmentLifecycleStatus')
     EnvironmentList = Shapes::ListShape.new(name: 'EnvironmentList')
     EnvironmentMember = Shapes::StructureShape.new(name: 'EnvironmentMember')
     EnvironmentMembersList = Shapes::ListShape.new(name: 'EnvironmentMembersList')
@@ -124,9 +126,15 @@ module Aws::Cloud9
     Environment.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentType, location_name: "type"))
     Environment.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     Environment.add_member(:owner_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownerArn"))
+    Environment.add_member(:lifecycle, Shapes::ShapeRef.new(shape: EnvironmentLifecycle, location_name: "lifecycle"))
     Environment.struct_class = Types::Environment
 
     EnvironmentIdList.member = Shapes::ShapeRef.new(shape: EnvironmentId)
+
+    EnvironmentLifecycle.add_member(:status, Shapes::ShapeRef.new(shape: EnvironmentLifecycleStatus, location_name: "status"))
+    EnvironmentLifecycle.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    EnvironmentLifecycle.add_member(:failure_resource, Shapes::ShapeRef.new(shape: String, location_name: "failureResource"))
+    EnvironmentLifecycle.struct_class = Types::EnvironmentLifecycle
 
     EnvironmentList.member = Shapes::ShapeRef.new(shape: Environment)
 
@@ -171,12 +179,15 @@ module Aws::Cloud9
       api.version = "2017-09-23"
 
       api.metadata = {
+        "apiVersion" => "2017-09-23",
         "endpointPrefix" => "cloud9",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Cloud9",
+        "serviceId" => "Cloud9",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSCloud9WorkspaceManagementService",
+        "uid" => "cloud9-2017-09-23",
       }
 
       api.add_operation(:create_environment_ec2, Seahorse::Model::Operation.new.tap do |o|

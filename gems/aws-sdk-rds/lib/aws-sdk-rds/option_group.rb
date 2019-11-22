@@ -236,12 +236,7 @@ module Aws::RDS
     # @option options [required, String] :option_group_description
     #   The description of the option group.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   Tags to assign to the option group.
     # @return [OptionGroup]
     def create(options = {})
       options = options.merge(option_group_name: @name)
@@ -271,24 +266,24 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-option-group`
     # @option options [required, String] :target_option_group_description
     #   The description for the copied option group.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [OptionGroup]
     def copy(options = {})
       options = options.merge(source_option_group_identifier: @name)
@@ -347,9 +342,9 @@ module Aws::RDS
     # @option options [Array<String>] :options_to_remove
     #   Options in this list are removed from the option group.
     # @option options [Boolean] :apply_immediately
-    #   Indicates whether the changes should be applied immediately, or during
-    #   the next maintenance window for each instance associated with the
-    #   option group.
+    #   A value that indicates whether to apply the change immediately or
+    #   during the next maintenance window for each instance associated with
+    #   the option group.
     # @return [OptionGroup]
     def modify(options = {})
       options = options.merge(option_group_name: @name)

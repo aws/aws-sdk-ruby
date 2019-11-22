@@ -61,8 +61,8 @@ module Aws
       # You can pass `virtual_host: true` to use the bucket name as the
       # host name.
       #
-      #     bucket = s3.bucket('my.bucket.com', virtual_host: true)
-      #     bucket.url
+      #     bucket = s3.bucket('my.bucket.com')
+      #     bucket.url(virtual_host: true)
       #     #=> "http://my.bucket.com"
       #
       # @option options [Boolean] :virtual_host (false) When `true`,
@@ -113,6 +113,10 @@ module Aws
         else
           url.path += '/' unless url.path[-1] == '/'
           url.path += Seahorse::Util.uri_escape(name)
+        end
+        if (client.config.region == 'us-east-1') &&
+          (client.config.s3_us_east_1_regional_endpoint == 'legacy')
+          url.host = Plugins::IADRegionalEndpoint.legacy_host(url.host)
         end
         url.to_s
       end

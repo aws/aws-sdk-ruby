@@ -22,13 +22,19 @@ module Aws::KinesisVideoMedia
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     InvalidEndpointException = Shapes::StructureShape.new(name: 'InvalidEndpointException')
     NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
-    Payload = Shapes::BlobShape.new(name: 'Payload')
+    Payload = Shapes::BlobShape.new(name: 'Payload', streaming: true)
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     StartSelector = Shapes::StructureShape.new(name: 'StartSelector')
     StartSelectorType = Shapes::StringShape.new(name: 'StartSelectorType')
     StreamName = Shapes::StringShape.new(name: 'StreamName')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+
+    ClientLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ClientLimitExceededException.struct_class = Types::ClientLimitExceededException
+
+    ConnectionLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConnectionLimitExceededException.struct_class = Types::ConnectionLimitExceededException
 
     GetMediaInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     GetMediaInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
@@ -40,6 +46,18 @@ module Aws::KinesisVideoMedia
     GetMediaOutput.struct_class = Types::GetMediaOutput
     GetMediaOutput[:payload] = :payload
     GetMediaOutput[:payload_member] = GetMediaOutput.member(:payload)
+
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
+    InvalidEndpointException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidEndpointException.struct_class = Types::InvalidEndpointException
+
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotAuthorizedException.struct_class = Types::NotAuthorizedException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     StartSelector.add_member(:start_selector_type, Shapes::ShapeRef.new(shape: StartSelectorType, required: true, location_name: "StartSelectorType"))
     StartSelector.add_member(:after_fragment_number, Shapes::ShapeRef.new(shape: FragmentNumberString, location_name: "AfterFragmentNumber"))
@@ -54,10 +72,14 @@ module Aws::KinesisVideoMedia
       api.version = "2017-09-30"
 
       api.metadata = {
+        "apiVersion" => "2017-09-30",
         "endpointPrefix" => "kinesisvideo",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "Kinesis Video Media",
         "serviceFullName" => "Amazon Kinesis Video Streams Media",
+        "serviceId" => "Kinesis Video Media",
         "signatureVersion" => "v4",
+        "uid" => "kinesis-video-media-2017-09-30",
       }
 
       api.add_operation(:get_media, Seahorse::Model::Operation.new.tap do |o|

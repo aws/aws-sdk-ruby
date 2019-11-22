@@ -24,7 +24,7 @@ module AwsSdkCodeGenerator
       end
 
       def homepage
-        @custom ? 'http://gem-homepage.com' : 'http://github.com/aws/aws-sdk-ruby'
+        @custom ? 'http://gem-homepage.com' : 'https://github.com/aws/aws-sdk-ruby'
       end
 
       def email

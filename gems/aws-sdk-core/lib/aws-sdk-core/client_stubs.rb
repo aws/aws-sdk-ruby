@@ -184,12 +184,18 @@ module Aws
 
     # Allows you to access all of the requests that the stubbed client has made
     #
+    # @params [Boolean] exclude_presign Setting to true for filtering out not sent requests from
+    #                 generating presigned urls. Default to false.
     # @return [Array] Returns an array of the api requests made, each request object contains the
     #                 :operation_name, :params, and :context of the request. 
     # @raise [NotImplementedError] Raises `NotImplementedError` when the client is not stubbed
-    def api_requests
+    def api_requests(options = {})
       if config.stub_responses
-        @api_requests
+        if options[:exclude_presign]
+          @api_requests.reject {|req| req[:context][:presigned_url] }
+        else
+          @api_requests
+        end
       else
         msg = 'This method is only implemented for stubbed clients, and is '
         msg << 'available when you enable stubbing in the constructor with `stub_responses: true`'
@@ -285,7 +291,7 @@ module Aws
     def data_to_http_resp(operation_name, data)
       api = config.api
       operation = api.operation(operation_name)
-      ParamValidator.validate!(operation.output, data)
+      ParamValidator.new(operation.output, input: false).validate!(data)
       protocol_helper.stub_data(api, operation, data)
     end
 

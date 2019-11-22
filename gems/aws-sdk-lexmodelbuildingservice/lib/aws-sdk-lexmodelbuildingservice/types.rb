@@ -8,6 +8,19 @@
 module Aws::LexModelBuildingService
   module Types
 
+    # The request is not well formed. For example, a value is invalid or a
+    # required field is missing. Check the field values, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Provides information about a bot alias.
     #
     # @!attribute [rw] name
@@ -256,6 +269,18 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # There was a conflict processing the request. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateBotVersionRequest
     #   data as a hash:
     #
@@ -384,6 +409,11 @@ module Aws::LexModelBuildingService
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #   @return [Boolean]
     #
+    # @!attribute [rw] detect_sentiment
+    #   Indicates whether utterances entered by the user should be sent to
+    #   Amazon Comprehend for sentiment analysis.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersionResponse AWS API Documentation
     #
     class CreateBotVersionResponse < Struct.new(
@@ -401,7 +431,8 @@ module Aws::LexModelBuildingService
       :checksum,
       :version,
       :locale,
-      :child_directed)
+      :child_directed,
+      :detect_sentiment)
       include Aws::Structure
     end
 
@@ -1298,10 +1329,19 @@ module Aws::LexModelBuildingService
     #   @return [Types::Statement]
     #
     # @!attribute [rw] status
-    #   The status of the bot. If the bot is ready to run, the status is
-    #   `READY`. If there was a problem with building the bot, the status is
-    #   `FAILED` and the `failureReason` explains why the bot did not build.
-    #   If the bot was saved but not built, the status is `NOT BUILT`.
+    #   The status of the bot.
+    #
+    #   When the status is `BUILDING` Amazon Lex is building the bot for
+    #   testing and use.
+    #
+    #   If the status of the bot is `READY_BASIC_TESTING`, you can test the
+    #   bot using the exact utterances specified in the bot's intents. When
+    #   the bot is ready for full testing or to run, the status is `READY`.
+    #
+    #   If there was a problem with building the bot, the status is `FAILED`
+    #   and the `failureReason` field explains why the bot did not build.
+    #
+    #   If the bot was saved but not built, the status is `NOT_BUILT`.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -1375,6 +1415,11 @@ module Aws::LexModelBuildingService
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #   @return [Boolean]
     #
+    # @!attribute [rw] detect_sentiment
+    #   Indicates whether user utterances should be sent to Amazon
+    #   Comprehend for sentiment analysis.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotResponse AWS API Documentation
     #
     class GetBotResponse < Struct.new(
@@ -1392,7 +1437,8 @@ module Aws::LexModelBuildingService
       :checksum,
       :version,
       :locale,
-      :child_directed)
+      :child_directed,
+      :detect_sentiment)
       include Aws::Structure
     end
 
@@ -2253,8 +2299,8 @@ module Aws::LexModelBuildingService
     #   @return [Array<String>]
     #
     # @!attribute [rw] status_type
-    #   To return utterances that were recognized and handled,
-    #   use`Detected`. To return utterances that were not recognized, use
+    #   To return utterances that were recognized and handled, use
+    #   `Detected`. To return utterances that were not recognized, use
     #   `Missed`.
     #   @return [String]
     #
@@ -2275,7 +2321,8 @@ module Aws::LexModelBuildingService
     #   An array of UtteranceList objects, each containing a list of
     #   UtteranceData objects describing the utterances that were processed
     #   by your bot. The response contains a maximum of 100 `UtteranceData`
-    #   objects for each version.
+    #   objects for each version. Amazon Lex returns the most frequent
+    #   utterances received by the bot in the last 15 days.
     #   @return [Array<Types::UtteranceList>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetUtterancesViewResponse AWS API Documentation
@@ -2346,6 +2393,34 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # An internal Amazon Lex error occurred. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request exceeded a limit. Try your request again.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
     # The message object that provides the message text and its type.
     #
     # @note When making an API call, you may pass Message
@@ -2377,6 +2452,33 @@ module Aws::LexModelBuildingService
       :content_type,
       :content,
       :group_number)
+      include Aws::Structure
+    end
+
+    # The resource specified in the request was not found. Check the
+    # resource and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The checksum of the resource that you are trying to change does not
+    # match the checksum in the request. Check the resource's checksum and
+    # try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PreconditionFailedException AWS API Documentation
+    #
+    class PreconditionFailedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2559,6 +2661,7 @@ module Aws::LexModelBuildingService
     #         process_behavior: "SAVE", # accepts SAVE, BUILD
     #         locale: "en-US", # required, accepts en-US, en-GB, de-DE
     #         child_directed: false, # required
+    #         detect_sentiment: false,
     #         create_version: false,
     #       }
     #
@@ -2579,15 +2682,44 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] clarification_prompt
     #   When Amazon Lex doesn't understand the user's intent, it uses this
     #   message to get clarification. To specify how many times Amazon Lex
-    #   should repeate the clarification prompt, use the `maxAttempts`
-    #   field. If Amazon Lex still doesn't understand, it sends the message
-    #   in the `abortStatement` field.
+    #   should repeat the clarification prompt, use the `maxAttempts` field.
+    #   If Amazon Lex still doesn't understand, it sends the message in the
+    #   `abortStatement` field.
     #
     #   When you create a clarification prompt, make sure that it suggests
     #   the correct response from the user. for example, for a bot that
     #   orders pizza and drinks, you might create this clarification prompt:
     #   "What would you like to do? You can say 'Order a pizza' or
     #   'Order a drink.'"
+    #
+    #   If you have defined a fallback intent, it will be invoked if the
+    #   clarification prompt is repeated the number of times defined in the
+    #   `maxAttempts` field. For more information, see [
+    #   AMAZON.FallbackIntent][1].
+    #
+    #   If you don't define a clarification prompt, at runtime Amazon Lex
+    #   will return a 400 Bad Request exception in three cases:
+    #
+    #   * Follow-up prompt - When the user responds to a follow-up prompt
+    #     but does not provide an intent. For example, in response to a
+    #     follow-up prompt that says "Would you like anything else today?"
+    #     the user says "Yes." Amazon Lex will return a 400 Bad Request
+    #     exception because it does not have a clarification prompt to send
+    #     to the user to get an intent.
+    #
+    #   * Lambda function - When using a Lambda function, you return an
+    #     `ElicitIntent` dialog type. Since Amazon Lex does not have a
+    #     clarification prompt to get an intent from the user, it returns a
+    #     400 Bad Request exception.
+    #
+    #   * PutSession operation - When using the `PutSession` operation, you
+    #     send an `ElicitIntent` dialog type. Since Amazon Lex does not have
+    #     a clarification prompt to get an intent from the user, it returns
+    #     a 400 Bad Request exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] abort_statement
@@ -2607,6 +2739,14 @@ module Aws::LexModelBuildingService
     #   one of the intents. This intent might require the `CrustType` slot.
     #   You specify the `valueElicitationPrompt` field when you create the
     #   `CrustType` slot.
+    #
+    #   If you have defined a fallback intent the abort statement will not
+    #   be sent to the user, the fallback intent is used instead. For more
+    #   information, see [ AMAZON.FallbackIntent][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html
     #   @return [Types::Statement]
     #
     # @!attribute [rw] idle_session_ttl_in_seconds
@@ -2633,12 +2773,12 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] voice_id
     #   The Amazon Polly voice ID that you want Amazon Lex to use for voice
     #   interactions with the user. The locale configured for the voice must
-    #   match the locale of the bot. For more information, see [Available
-    #   Voices][1] in the *Amazon Polly Developer Guide*.
+    #   match the locale of the bot. For more information, see [Voices in
+    #   Amazon Polly][1] in the *Amazon Polly Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/voicelist.html
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/voicelist.html
     #   @return [String]
     #
     # @!attribute [rw] checksum
@@ -2702,7 +2842,16 @@ module Aws::LexModelBuildingService
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #   @return [Boolean]
     #
+    # @!attribute [rw] detect_sentiment
+    #   When set to `true` user utterances are sent to Amazon Comprehend for
+    #   sentiment analysis. If you don't specify `detectSentiment`, the
+    #   default is `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] create_version
+    #   When set to `true` a new numbered version of the bot is created.
+    #   This is the same as calling the `CreateBotVersion` operation. If you
+    #   don't specify `createVersion`, the default is `false`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotRequest AWS API Documentation
@@ -2719,6 +2868,7 @@ module Aws::LexModelBuildingService
       :process_behavior,
       :locale,
       :child_directed,
+      :detect_sentiment,
       :create_version)
       include Aws::Structure
     end
@@ -2748,13 +2898,21 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] status
     #   When you send a request to create a bot with `processBehavior` set
     #   to `BUILD`, Amazon Lex sets the `status` response element to
-    #   `BUILDING`. After Amazon Lex builds the bot, it sets `status` to
-    #   `READY`. If Amazon Lex can't build the bot, Amazon Lex sets
-    #   `status` to `FAILED`. Amazon Lex returns the reason for the failure
-    #   in the `failureReason` response element.
+    #   `BUILDING`.
     #
-    #   When you set `processBehavior`to `SAVE`, Amazon Lex sets the status
+    #   In the `READY_BASIC_TESTING` state you can test the bot with user
+    #   inputs that exactly match the utterances configured for the bot's
+    #   intents and values in the slot types.
+    #
+    #   If Amazon Lex can't build the bot, Amazon Lex sets `status` to
+    #   `FAILED`. Amazon Lex returns the reason for the failure in the
+    #   `failureReason` response element.
+    #
+    #   When you set `processBehavior` to `SAVE`, Amazon Lex sets the status
     #   code to `NOT BUILT`.
+    #
+    #   When the bot is in the `READY` state you can test and publish the
+    #   bot.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -2828,6 +2986,16 @@ module Aws::LexModelBuildingService
     #   @return [Boolean]
     #
     # @!attribute [rw] create_version
+    #   `True` if a new version of the bot was created. If the
+    #   `createVersion` field was not specified in the request, the
+    #   `createVersion` field is set to false in the response.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] detect_sentiment
+    #   `true` if the bot is configured to send user utterances to Amazon
+    #   Comprehend for sentiment analysis. If the `detectSentiment` field
+    #   was not specified in the request, the `detectSentiment` field is
+    #   `false` in the response.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotResponse AWS API Documentation
@@ -2848,7 +3016,8 @@ module Aws::LexModelBuildingService
       :version,
       :locale,
       :child_directed,
-      :create_version)
+      :create_version,
+      :detect_sentiment)
       include Aws::Structure
     end
 
@@ -3100,6 +3269,9 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] create_version
+    #   When set to `true` a new numbered version of the intent is created.
+    #   This is the same as calling the `CreateIntentVersion` operation. If
+    #   you do not specify `createVersion`, the default is `false`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentRequest AWS API Documentation
@@ -3194,6 +3366,9 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] create_version
+    #   `True` if a new version of the intent was created. If the
+    #   `createVersion` field was not specified in the request, the
+    #   `createVersion` field is set to false in the response.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentResponse AWS API Documentation
@@ -3300,6 +3475,10 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] create_version
+    #   When set to `true` a new numbered version of the slot type is
+    #   created. This is the same as calling the `CreateSlotTypeVersion`
+    #   operation. If you do not specify `createVersion`, the default is
+    #   `false`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeRequest AWS API Documentation
@@ -3351,6 +3530,9 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] create_version
+    #   `True` if a new version of the slot type was created. If the
+    #   `createVersion` field was not specified in the request, the
+    #   `createVersion` field is set to false in the response.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeResponse AWS API Documentation
@@ -3365,6 +3547,36 @@ module Aws::LexModelBuildingService
       :checksum,
       :value_selection_strategy,
       :create_version)
+      include Aws::Structure
+    end
+
+    # The resource that you are attempting to delete is referred to by
+    # another resource. Use this information to remove references to the
+    # resource that you are trying to delete.
+    #
+    # The body of the exception contains a JSON object that describes the
+    # resource.
+    #
+    # `\{ "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,`
+    #
+    # `"resourceReference": \{`
+    #
+    # `"name": string, "version": string \} \}`
+    #
+    # @!attribute [rw] reference_type
+    #   @return [String]
+    #
+    # @!attribute [rw] example_reference
+    #   Describes the resource that refers to the resource that you are
+    #   attempting to delete. This object is returned as part of the
+    #   `ResourceInUseException` exception.
+    #   @return [Types::ResourceReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :reference_type,
+      :example_reference)
       include Aws::Structure
     end
 

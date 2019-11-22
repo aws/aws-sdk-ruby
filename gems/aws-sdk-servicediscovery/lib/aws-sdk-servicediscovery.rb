@@ -15,7 +15,7 @@ require_relative 'aws-sdk-servicediscovery/errors'
 require_relative 'aws-sdk-servicediscovery/resource'
 require_relative 'aws-sdk-servicediscovery/customizations'
 
-# This module provides support for Amazon Route 53 Auto Naming. This module is available in the
+# This module provides support for AWS Cloud Map. This module is available in the
 # `aws-sdk-servicediscovery` gem.
 #
 # # Client
@@ -28,7 +28,7 @@ require_relative 'aws-sdk-servicediscovery/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon Route 53 Auto Naming all
+# Errors returned from AWS Cloud Map all
 # extend {Errors::ServiceError}.
 #
 #     begin
@@ -42,6 +42,6 @@ require_relative 'aws-sdk-servicediscovery/customizations'
 # @service
 module Aws::ServiceDiscovery
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.19.0'
 
 end

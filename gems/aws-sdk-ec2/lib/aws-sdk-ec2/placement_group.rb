@@ -43,6 +43,13 @@ module Aws::EC2
       data[:strategy]
     end
 
+    # The number of partitions. Valid only if **strategy** is set to
+    # `partition`.
+    # @return [Integer]
+    def partition_count
+      data[:partition_count]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -209,12 +216,13 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
     #
-    #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The instance architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -244,15 +252,18 @@ module Aws::EC2
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
     #
+    #   * `hibernation-options.configured` - A Boolean that indicates whether
+    #     the instance is enabled for hibernation. A value of `true` means
+    #     that the instance is enabled for hibernation.
+    #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.
     #
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
-    #     the instance. Specified as an ARN.
-    #
-    #   * `image-id` - The ID of the image used to launch the instance.
+    #     the instance. Specified as an ARN. `image-id` - The ID of the image
+    #     used to launch the instance.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -288,6 +299,15 @@ module Aws::EC2
     #     and so on).
     #
     #   * `launch-time` - The time when the instance was launched.
+    #
+    #   * `metadata-http-tokens` - The metadata request authorization state
+    #     (`optional` \| `required`)
+    #
+    #   * `metadata-http-put-response-hop-limit` - The http metadata request
+    #     put response hop limit (integer, possible values `1` to `64`)
+    #
+    #   * `metadata-http-endpoint` - Enable or disable metadata access on http
+    #     endpoint (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
@@ -394,8 +414,11 @@ module Aws::EC2
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
     #
-    #   * `platform` - The platform. Use `windows` if you have Windows
-    #     instances; otherwise, leave blank.
+    #   * `placement-partition-number` - The partition in which the instance
+    #     is located.
+    #
+    #   * `platform` - The platform. To list only Windows instances, use
+    #     `windows`.
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -464,7 +487,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
     # @option options [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     # @option options [Boolean] :dry_run

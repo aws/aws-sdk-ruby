@@ -10,10 +10,10 @@ module Aws::Rekognition
 
     # Structure containing the estimated age range, in years, for a face.
     #
-    # Rekognition estimates an age-range for faces detected in the input
-    # image. Estimated age ranges can overlap; a face of a 5 year old may
-    # have an estimated range of 4-6 whilst the face of a 6 year old may
-    # have an estimated range of 4-8.
+    # Amazon Rekognition estimates an age range for faces detected in the
+    # input image. Estimated age ranges can overlap. A face of a 5-year-old
+    # might have an estimated range of 4-6, while the face of a 6-year-old
+    # might have an estimated range of 4-8.
     #
     # @!attribute [rw] low
     #   The lowest estimated age.
@@ -46,7 +46,7 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Identifies the bounding box around the object, face or text. The
+    # Identifies the bounding box around the label, face, or text. The
     # `left` (x-coordinate) and `top` (y-coordinate) are coordinates
     # representing the top and left sides of the bounding box. Note that the
     # upper-left corner of the image is the origin (0,0).
@@ -97,7 +97,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Provides information about a celebrity recognized by the operation.
+    # Provides information about a celebrity recognized by the
+    # RecognizeCelebrities operation.
     #
     # @!attribute [rw] urls
     #   An array of URLs pointing to additional information about the
@@ -119,7 +120,7 @@ module Aws::Rekognition
     #   @return [Types::ComparedFace]
     #
     # @!attribute [rw] match_confidence
-    #   The confidence, in percentage, that Rekognition has that the
+    #   The confidence, in percentage, that Amazon Rekognition has that the
     #   recognized face is the celebrity.
     #   @return [Float]
     #
@@ -189,7 +190,7 @@ module Aws::Rekognition
     end
 
     # Provides information about a face in a target image that matches the
-    # source image face analysed by `CompareFaces`. The `Face` property
+    # source image face analyzed by `CompareFaces`. The `Face` property
     # contains the bounding box of the face in the target image. The
     # `Similarity` property is the confidence that the source image face
     # matches the face in the bounding box.
@@ -230,18 +231,29 @@ module Aws::Rekognition
     #           },
     #         },
     #         similarity_threshold: 1.0,
+    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #       }
     #
     # @!attribute [rw] source_image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] target_image
     #   The target image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] similarity_threshold
@@ -249,10 +261,27 @@ module Aws::Rekognition
     #   must meet to be included in the `FaceMatches` array.
     #   @return [Float]
     #
+    # @!attribute [rw] quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't compared. If you specify
+    #   `AUTO`, Amazon Rekognition chooses the quality bar. If you specify
+    #   `LOW`, `MEDIUM`, or `HIGH`, filtering removes all faces that don’t
+    #   meet the chosen quality bar. The default value is `AUTO`. The
+    #   quality bar is based on a variety of common use cases. Low-quality
+    #   detections can occur for a number of reasons. Some examples are an
+    #   object that's misidentified as a face, a face that's too blurry,
+    #   or a face with a pose that's too extreme to use. If you specify
+    #   `NONE`, no filtering is performed.
+    #
+    #   To use quality filtering, the collection you are using must be
+    #   associated with version 3 of the face model or higher.
+    #   @return [String]
+    #
     class CompareFacesRequest < Struct.new(
       :source_image,
       :target_image,
-      :similarity_threshold)
+      :similarity_threshold,
+      :quality_filter)
       include Aws::Structure
     end
 
@@ -274,39 +303,37 @@ module Aws::Rekognition
     #   @return [Array<Types::ComparedFace>]
     #
     # @!attribute [rw] source_image_orientation_correction
-    #   The orientation of the source image (counterclockwise direction). If
-    #   your application displays the source image, you can use this value
-    #   to correct image orientation. The bounding box coordinates returned
-    #   in `SourceImageFace` represent the location of the face before the
-    #   image orientation is corrected.
+    #   The value of `SourceImageOrientationCorrection` is always null.
     #
-    #   <note markdown="1"> If the source image is in .jpeg format, it might contain
-    #   exchangeable image (Exif) metadata that includes the image's
-    #   orientation. If the Exif metadata for the source image populates the
-    #   orientation field, the value of `OrientationCorrection` is null and
-    #   the `SourceImageFace` bounding box coordinates represent the
-    #   location of the face after Exif metadata is used to correct the
+    #   If the input image is in .jpeg format, it might contain exchangeable
+    #   image file format (Exif) metadata that includes the image's
+    #   orientation. Amazon Rekognition uses this orientation information to
+    #   perform image correction. The bounding box coordinates are
+    #   translated to represent object locations after the orientation
+    #   information in the Exif metadata is used to correct the image
     #   orientation. Images in .png format don't contain Exif metadata.
     #
-    #    </note>
+    #   Amazon Rekognition doesn’t perform image correction for images in
+    #   .png format and .jpeg images without orientation information in the
+    #   image Exif metadata. The bounding box coordinates aren't translated
+    #   and represent the object locations before the image is rotated.
     #   @return [String]
     #
     # @!attribute [rw] target_image_orientation_correction
-    #   The orientation of the target image (in counterclockwise direction).
-    #   If your application displays the target image, you can use this
-    #   value to correct the orientation of the image. The bounding box
-    #   coordinates returned in `FaceMatches` and `UnmatchedFaces` represent
-    #   face locations before the image orientation is corrected.
+    #   The value of `TargetImageOrientationCorrection` is always null.
     #
-    #   <note markdown="1"> If the target image is in .jpg format, it might contain Exif
-    #   metadata that includes the orientation of the image. If the Exif
-    #   metadata for the target image populates the orientation field, the
-    #   value of `OrientationCorrection` is null and the bounding box
-    #   coordinates in `FaceMatches` and `UnmatchedFaces` represent the
-    #   location of the face after Exif metadata is used to correct the
+    #   If the input image is in .jpeg format, it might contain exchangeable
+    #   image file format (Exif) metadata that includes the image's
+    #   orientation. Amazon Rekognition uses this orientation information to
+    #   perform image correction. The bounding box coordinates are
+    #   translated to represent object locations after the orientation
+    #   information in the Exif metadata is used to correct the image
     #   orientation. Images in .png format don't contain Exif metadata.
     #
-    #    </note>
+    #   Amazon Rekognition doesn’t perform image correction for images in
+    #   .png format and .jpeg images without orientation information in the
+    #   image Exif metadata. The bounding box coordinates aren't translated
+    #   and represent the object locations before the image is rotated.
     #   @return [String]
     #
     class CompareFacesResponse < Struct.new(
@@ -318,7 +345,7 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Provides face metadata for target image faces that are analysed by
+    # Provides face metadata for target image faces that are analyzed by
     # `CompareFaces` and `RecognizeCelebrities`.
     #
     # @!attribute [rw] bounding_box
@@ -371,15 +398,15 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about a moderation label detection in a stored video.
+    # Information about an unsafe content label detection in a stored video.
     #
     # @!attribute [rw] timestamp
     #   Time, in milliseconds from the beginning of the video, that the
-    #   moderation label was detected.
+    #   unsafe content label was detected.
     #   @return [Integer]
     #
     # @!attribute [rw] moderation_label
-    #   The moderation label detected by in the stored video.
+    #   The unsafe content label detected by in the stored video.
     #   @return [Types::ModerationLabel]
     #
     class ContentModerationDetection < Struct.new(
@@ -464,7 +491,8 @@ module Aws::Rekognition
     # @!attribute [rw] name
     #   An identifier you assign to the stream processor. You can use `Name`
     #   to manage the stream processor. For example, you can get the current
-    #   status of the stream processor by calling . `Name` is idempotent.
+    #   status of the stream processor by calling DescribeStreamProcessor.
+    #   `Name` is idempotent.
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -569,6 +597,53 @@ module Aws::Rekognition
 
     class DeleteStreamProcessorResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DescribeCollectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         collection_id: "CollectionId", # required
+    #       }
+    #
+    # @!attribute [rw] collection_id
+    #   The ID of the collection to describe.
+    #   @return [String]
+    #
+    class DescribeCollectionRequest < Struct.new(
+      :collection_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] face_count
+    #   The number of faces that are indexed into the collection. To index
+    #   faces into a collection, use IndexFaces.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] face_model_version
+    #   The version of the face model that's used by the collection for
+    #   face detection.
+    #
+    #   For more information, see Model Versioning in the Amazon Rekognition
+    #   Developer Guide.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_arn
+    #   The Amazon Resource Name (ARN) of the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The number of milliseconds since the Unix epoch time until the
+    #   creation of the collection. The Unix epoch time is 00:00:00
+    #   Coordinated Universal Time (UTC), Thursday, 1 January 1970.
+    #   @return [Time]
+    #
+    class DescribeCollectionResponse < Struct.new(
+      :face_count,
+      :face_model_version,
+      :collection_arn,
+      :creation_timestamp)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeStreamProcessorRequest
     #   data as a hash:
     #
@@ -663,6 +738,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] attributes
@@ -670,9 +750,9 @@ module Aws::Rekognition
     #   the default list of attributes or all attributes. If you don't
     #   specify a value for `Attributes` or if you specify `["DEFAULT"]`,
     #   the API returns the following subset of facial attributes:
-    #   `BoundingBox`, `Confidence`, `Pose`, `Quality` and `Landmarks`. If
-    #   you provide `["ALL"]`, all facial attributes are returned but the
-    #   operation will take longer to complete.
+    #   `BoundingBox`, `Confidence`, `Pose`, `Quality`, and `Landmarks`. If
+    #   you provide `["ALL"]`, all facial attributes are returned, but the
+    #   operation takes longer to complete.
     #
     #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a
     #   logical AND operator to determine which attributes to return (in
@@ -690,21 +770,20 @@ module Aws::Rekognition
     #   @return [Array<Types::FaceDetail>]
     #
     # @!attribute [rw] orientation_correction
-    #   The orientation of the input image (counter-clockwise direction). If
-    #   your application displays the image, you can use this value to
-    #   correct image orientation. The bounding box coordinates returned in
-    #   `FaceDetails` represent face locations before the image orientation
-    #   is corrected.
+    #   The value of `OrientationCorrection` is always null.
     #
-    #   <note markdown="1"> If the input image is in .jpeg format, it might contain exchangeable
-    #   image (Exif) metadata that includes the image's orientation. If so,
-    #   and the Exif metadata for the input image populates the orientation
-    #   field, the value of `OrientationCorrection` is null and the
-    #   `FaceDetails` bounding box coordinates represent face locations
-    #   after Exif metadata is used to correct the image orientation. Images
-    #   in .png format don't contain Exif metadata.
+    #   If the input image is in .jpeg format, it might contain exchangeable
+    #   image file format (Exif) metadata that includes the image's
+    #   orientation. Amazon Rekognition uses this orientation information to
+    #   perform image correction. The bounding box coordinates are
+    #   translated to represent object locations after the orientation
+    #   information in the Exif metadata is used to correct the image
+    #   orientation. Images in .png format don't contain Exif metadata.
     #
-    #    </note>
+    #   Amazon Rekognition doesn’t perform image correction for images in
+    #   .png format and .jpeg images without orientation information in the
+    #   image Exif metadata. The bounding box coordinates aren't translated
+    #   and represent the object locations before the image is rotated.
     #   @return [String]
     #
     class DetectFacesResponse < Struct.new(
@@ -731,8 +810,14 @@ module Aws::Rekognition
     #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an S3 object. If you use
-    #   the AWS CLI to call Amazon Rekognition operations, passing
-    #   base64-encoded image bytes is not supported.
+    #   the AWS CLI to call Amazon Rekognition operations, passing image
+    #   bytes is not supported. Images stored in an S3 Bucket do not need to
+    #   be base64-encoded.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_labels
@@ -747,7 +832,7 @@ module Aws::Rekognition
     #   than this specified value.
     #
     #   If `MinConfidence` is not specified, the operation returns labels
-    #   with a confidence values greater than or equal to 50 percent.
+    #   with a confidence values greater than or equal to 55 percent.
     #   @return [Float]
     #
     class DetectLabelsRequest < Struct.new(
@@ -762,22 +847,31 @@ module Aws::Rekognition
     #   @return [Array<Types::Label>]
     #
     # @!attribute [rw] orientation_correction
-    #   The orientation of the input image (counter-clockwise direction). If
-    #   your application displays the image, you can use this value to
-    #   correct the orientation. If Amazon Rekognition detects that the
-    #   input image was rotated (for example, by 90 degrees), it first
-    #   corrects the orientation before detecting the labels.
+    #   The value of `OrientationCorrection` is always null.
     #
-    #   <note markdown="1"> If the input image Exif metadata populates the orientation field,
-    #   Amazon Rekognition does not perform orientation correction and the
-    #   value of OrientationCorrection will be null.
+    #   If the input image is in .jpeg format, it might contain exchangeable
+    #   image file format (Exif) metadata that includes the image's
+    #   orientation. Amazon Rekognition uses this orientation information to
+    #   perform image correction. The bounding box coordinates are
+    #   translated to represent object locations after the orientation
+    #   information in the Exif metadata is used to correct the image
+    #   orientation. Images in .png format don't contain Exif metadata.
     #
-    #    </note>
+    #   Amazon Rekognition doesn’t perform image correction for images in
+    #   .png format and .jpeg images without orientation information in the
+    #   image Exif metadata. The bounding box coordinates aren't translated
+    #   and represent the object locations before the image is rotated.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_model_version
+    #   Version number of the label detection model that was used to detect
+    #   labels.
     #   @return [String]
     #
     class DetectLabelsResponse < Struct.new(
       :labels,
-      :orientation_correction)
+      :orientation_correction,
+      :label_model_version)
       include Aws::Structure
     end
 
@@ -800,6 +894,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] min_confidence
@@ -818,12 +917,18 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] moderation_labels
-    #   Array of detected Moderation labels and the time, in millseconds
+    #   Array of detected Moderation labels and the time, in milliseconds
     #   from the start of the video, they were detected.
     #   @return [Array<Types::ModerationLabel>]
     #
+    # @!attribute [rw] moderation_model_version
+    #   Version number of the moderation detection model that was used to
+    #   detect unsafe content.
+    #   @return [String]
+    #
     class DetectModerationLabelsResponse < Struct.new(
-      :moderation_labels)
+      :moderation_labels,
+      :moderation_model_version)
       include Aws::Structure
     end
 
@@ -845,6 +950,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an Amazon S3 object. If
     #   you use the AWS CLI to call Amazon Rekognition operations, you
     #   can't pass image bytes.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     class DetectTextRequest < Struct.new(
@@ -861,8 +971,12 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # The emotions detected on the face, and the confidence level in the
-    # determination. For example, HAPPY, SAD, and ANGRY.
+    # The emotions that appear to be expressed on the face, and the
+    # confidence level in the determination. The API is only making a
+    # determination of the physical appearance of a person's face. It is
+    # not a determination of the person’s internal emotional state and
+    # should not be used in such a way. For example, a person pretending to
+    # have a sad face might not be sad emotionally.
     #
     # @!attribute [rw] type
     #   Type of emotion detected.
@@ -954,12 +1068,12 @@ module Aws::Rekognition
     # all facial attributes. The default attributes are `BoundingBox`,
     # `Confidence`, `Landmarks`, `Pose`, and `Quality`.
     #
-    # is the only Amazon Rekognition Video stored video operation that can
-    # return a `FaceDetail` object with all attributes. To specify which
-    # attributes to return, use the `FaceAttributes` input parameter for .
-    # The following Amazon Rekognition Video operations return only the
-    # default attributes. The corresponding Start operations don't have a
-    # `FaceAttributes` input parameter.
+    # GetFaceDetection is the only Amazon Rekognition Video stored video
+    # operation that can return a `FaceDetail` object with all attributes.
+    # To specify which attributes to return, use the `FaceAttributes` input
+    # parameter for StartFaceDetection. The following Amazon Rekognition
+    # Video operations return only the default attributes. The corresponding
+    # Start operations don't have a `FaceAttributes` input parameter.
     #
     # * GetCelebrityRecognition
     #
@@ -967,10 +1081,10 @@ module Aws::Rekognition
     #
     # * GetFaceSearch
     #
-    # The Amazon Rekognition Image and operations can return all facial
-    # attributes. To specify which attributes to return, use the
-    # `Attributes` input parameter for `DetectFaces`. For `IndexFaces`, use
-    # the `DetectAttributes` input parameter.
+    # The Amazon Rekognition Image DetectFaces and IndexFaces operations can
+    # return all facial attributes. To specify which attributes to return,
+    # use the `Attributes` input parameter for `DetectFaces`. For
+    # `IndexFaces`, use the `DetectAttributes` input parameter.
     #
     # @!attribute [rw] bounding_box
     #   Bounding box of the face. Default attribute.
@@ -997,7 +1111,7 @@ module Aws::Rekognition
     #   @return [Types::Sunglasses]
     #
     # @!attribute [rw] gender
-    #   Gender of the face and the confidence level in the determination.
+    #   The predicted gender of a detected face.
     #   @return [Types::Gender]
     #
     # @!attribute [rw] beard
@@ -1021,8 +1135,12 @@ module Aws::Rekognition
     #   @return [Types::MouthOpen]
     #
     # @!attribute [rw] emotions
-    #   The emotions detected on the face, and the confidence level in the
-    #   determination. For example, HAPPY, SAD, and ANGRY.
+    #   The emotions that appear to be expressed on the face, and the
+    #   confidence level in the determination. The API is only making a
+    #   determination of the physical appearance of a person's face. It is
+    #   not a determination of the person’s internal emotional state and
+    #   should not be used in such a way. For example, a person pretending
+    #   to have a sad face might not be sad emotionally.
     #   @return [Array<Types::Emotion>]
     #
     # @!attribute [rw] landmarks
@@ -1099,8 +1217,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Object containing both the face metadata (stored in the back-end
-    # database) and facial attributes that are detected but aren't stored
+    # Object containing both the face metadata (stored in the backend
+    # database), and facial attributes that are detected but aren't stored
     # in the database.
     #
     # @!attribute [rw] face
@@ -1121,7 +1239,8 @@ module Aws::Rekognition
     end
 
     # Input face recognition parameters for an Amazon Rekognition stream
-    # processor. `FaceRecognitionSettings` is a request parameter for .
+    # processor. `FaceRecognitionSettings` is a request parameter for
+    # CreateStreamProcessor.
     #
     # @note When making an API call, you may pass FaceSearchSettings
     #   data as a hash:
@@ -1148,14 +1267,30 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Gender of the face and the confidence level in the determination.
+    # The predicted gender of a detected face.
+    #
+    # Amazon Rekognition makes gender binary (male/female) predictions based
+    # on the physical appearance of a face in a particular image. This kind
+    # of prediction is not designed to categorize a person’s gender
+    # identity, and you shouldn't use Amazon Rekognition to make such a
+    # determination. For example, a male actor wearing a long-haired wig and
+    # earrings for a role might be predicted as female.
+    #
+    # Using Amazon Rekognition to make gender binary predictions is best
+    # suited for use cases where aggregate gender distribution statistics
+    # need to be analyzed without identifying specific users. For example,
+    # the percentage of female users compared to male users on a social
+    # media platform.
+    #
+    # We don't recommend using gender binary predictions to make decisions
+    # that impact  an individual's rights, privacy, or access to services.
     #
     # @!attribute [rw] value
-    #   Gender of the face.
+    #   The predicted gender of the face.
     #   @return [String]
     #
     # @!attribute [rw] confidence
-    #   Level of confidence in the determination.
+    #   Level of confidence in the prediction.
     #   @return [Float]
     #
     class Gender < Struct.new(
@@ -1164,7 +1299,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about where text detected by is located on an image.
+    # Information about where the text detected by DetectText is located on
+    # an image.
     #
     # @!attribute [rw] bounding_box
     #   An axis-aligned coarse representation of the detected text's
@@ -1191,7 +1327,8 @@ module Aws::Rekognition
     #
     # @!attribute [rw] id
     #   The ID for the celebrity. You get the celebrity ID from a call to
-    #   the operation, which recognizes celebrities in an image.
+    #   the RecognizeCelebrities operation, which recognizes celebrities in
+    #   an image.
     #   @return [String]
     #
     class GetCelebrityInfoRequest < Struct.new(
@@ -1302,8 +1439,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] job_id
-    #   The identifier for the content moderation job. Use `JobId` to
-    #   identify the job in a subsequent call to `GetContentModeration`.
+    #   The identifier for the unsafe content job. Use `JobId` to identify
+    #   the job in a subsequent call to `GetContentModeration`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1317,7 +1454,7 @@ module Aws::Rekognition
     #   If the previous response was incomplete (because there is more data
     #   to retrieve), Amazon Rekognition returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
-    #   of content moderation labels.
+    #   of unsafe content labels.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -1337,7 +1474,7 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] job_status
-    #   The current status of the content moderation job.
+    #   The current status of the unsafe content analysis job.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -1352,13 +1489,19 @@ module Aws::Rekognition
     #   @return [Types::VideoMetadata]
     #
     # @!attribute [rw] moderation_labels
-    #   The detected moderation labels and the time(s) they were detected.
+    #   The detected unsafe content labels and the time(s) they were
+    #   detected.
     #   @return [Array<Types::ContentModerationDetection>]
     #
     # @!attribute [rw] next_token
     #   If the response is truncated, Amazon Rekognition Video returns this
     #   token that you can use in the subsequent request to retrieve the
-    #   next set of moderation labels.
+    #   next set of unsafe content labels.
+    #   @return [String]
+    #
+    # @!attribute [rw] moderation_model_version
+    #   Version number of the moderation detection model that was used to
+    #   detect unsafe content.
     #   @return [String]
     #
     class GetContentModerationResponse < Struct.new(
@@ -1366,7 +1509,8 @@ module Aws::Rekognition
       :status_message,
       :video_metadata,
       :moderation_labels,
-      :next_token)
+      :next_token,
+      :moderation_model_version)
       include Aws::Structure
     end
 
@@ -1506,13 +1650,14 @@ module Aws::Rekognition
     #   @return [Types::VideoMetadata]
     #
     # @!attribute [rw] persons
-    #   An array of persons, , in the video whose face(s) match the face(s)
-    #   in an Amazon Rekognition collection. It also includes time
-    #   information for when persons are matched in the video. You specify
-    #   the input collection in an initial call to `StartFaceSearch`. Each
-    #   `Persons` element includes a time the person was matched, face match
-    #   details (`FaceMatches`) for matching faces in the collection, and
-    #   person information (`Person`) for the matched person.
+    #   An array of persons, PersonMatch, in the video whose face(s) match
+    #   the face(s) in an Amazon Rekognition collection. It also includes
+    #   time information for when persons are matched in the video. You
+    #   specify the input collection in an initial call to
+    #   `StartFaceSearch`. Each `Persons` element includes a time the person
+    #   was matched, face match details (`FaceMatches`) for matching faces
+    #   in the collection, and person information (`Person`) for the matched
+    #   person.
     #   @return [Array<Types::PersonMatch>]
     #
     class GetFaceSearchResponse < Struct.new(
@@ -1597,12 +1742,18 @@ module Aws::Rekognition
     #   video, that the label was detected.
     #   @return [Array<Types::LabelDetection>]
     #
+    # @!attribute [rw] label_model_version
+    #   Version number of the label detection model that was used to detect
+    #   labels.
+    #   @return [String]
+    #
     class GetLabelDetectionResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
-      :labels)
+      :labels,
+      :label_model_version)
       include Aws::Structure
     end
 
@@ -1673,9 +1824,9 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] persons
-    #   An array of the persons detected in the video and the times they are
-    #   tracked throughout the video. An array element will exist for each
-    #   time the person is tracked.
+    #   An array of the persons detected in the video and the time(s) their
+    #   path was tracked throughout the video. An array element will exist
+    #   for each time a person's path is tracked.
     #   @return [Array<Types::PersonDetection>]
     #
     class GetPersonTrackingResponse < Struct.new(
@@ -1689,27 +1840,27 @@ module Aws::Rekognition
 
     # Provides the input image either as bytes or an S3 object.
     #
-    # You pass image bytes to a Rekognition API operation by using the
-    # `Bytes` property. For example, you would use the `Bytes` property to
-    # pass an image loaded from a local file system. Image bytes passed by
-    # using the `Bytes` property must be base64-encoded. Your code may not
-    # need to encode image bytes if you are using an AWS SDK to call
-    # Rekognition API operations.
+    # You pass image bytes to an Amazon Rekognition API operation by using
+    # the `Bytes` property. For example, you would use the `Bytes` property
+    # to pass an image loaded from a local file system. Image bytes passed
+    # by using the `Bytes` property must be base64-encoded. Your code may
+    # not need to encode image bytes if you are using an AWS SDK to call
+    # Amazon Rekognition API operations.
     #
     # For more information, see Analyzing an Image Loaded from a Local File
     # System in the Amazon Rekognition Developer Guide.
     #
-    # You pass images stored in an S3 bucket to a Rekognition API operation
-    # by using the `S3Object` property. Images stored in an S3 bucket do not
-    # need to be base64-encoded.
+    # You pass images stored in an S3 bucket to an Amazon Rekognition API
+    # operation by using the `S3Object` property. Images stored in an S3
+    # bucket do not need to be base64-encoded.
     #
     # The region for the S3 bucket containing the S3 object must match the
     # region you use for Amazon Rekognition operations.
     #
-    # If you use the Amazon CLI to call Amazon Rekognition operations,
-    # passing image bytes using the Bytes property is not supported. You
-    # must first upload the image to an Amazon S3 bucket and then call the
-    # operation using the S3Object property.
+    # If you use the AWS CLI to call Amazon Rekognition operations, passing
+    # image bytes using the Bytes property is not supported. You must first
+    # upload the image to an Amazon S3 bucket and then call the operation
+    # using the S3Object property.
     #
     # For Amazon Rekognition to process an S3 object, the user must have
     # permission to access the S3 object. For more information, see Resource
@@ -1776,6 +1927,8 @@ module Aws::Rekognition
     #         },
     #         external_image_id: "ExternalImageId",
     #         detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL
+    #         max_faces: 1,
+    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #       }
     #
     # @!attribute [rw] collection_id
@@ -1786,11 +1939,16 @@ module Aws::Rekognition
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
-    #   base64-encoded image bytes is not supported.
+    #   base64-encoded image bytes isn't supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] external_image_id
-    #   ID you want to assign to all the faces detected in the image.
+    #   The ID you want to assign to all the faces detected in the image.
     #   @return [String]
     #
     # @!attribute [rw] detection_attributes
@@ -1798,20 +1956,59 @@ module Aws::Rekognition
     #   be the default list of attributes or all attributes. If you don't
     #   specify a value for `Attributes` or if you specify `["DEFAULT"]`,
     #   the API returns the following subset of facial attributes:
-    #   `BoundingBox`, `Confidence`, `Pose`, `Quality` and `Landmarks`. If
-    #   you provide `["ALL"]`, all facial attributes are returned but the
-    #   operation will take longer to complete.
+    #   `BoundingBox`, `Confidence`, `Pose`, `Quality`, and `Landmarks`. If
+    #   you provide `["ALL"]`, all facial attributes are returned, but the
+    #   operation takes longer to complete.
     #
     #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a
     #   logical AND operator to determine which attributes to return (in
     #   this case, all attributes).
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_faces
+    #   The maximum number of faces to index. The value of `MaxFaces` must
+    #   be greater than or equal to 1. `IndexFaces` returns no more than 100
+    #   detected faces in an image, even if you specify a larger value for
+    #   `MaxFaces`.
+    #
+    #   If `IndexFaces` detects more faces than the value of `MaxFaces`, the
+    #   faces with the lowest quality are filtered out first. If there are
+    #   still more faces than the value of `MaxFaces`, the faces with the
+    #   smallest bounding boxes are filtered out (up to the number that's
+    #   needed to satisfy the value of `MaxFaces`). Information about the
+    #   unindexed faces is available in the `UnindexedFaces` array.
+    #
+    #   The faces that are returned by `IndexFaces` are sorted by the
+    #   largest face bounding box size to the smallest size, in descending
+    #   order.
+    #
+    #   `MaxFaces` can be used with a collection associated with any version
+    #   of the face model.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't indexed. If you specify
+    #   `AUTO`, Amazon Rekognition chooses the quality bar. If you specify
+    #   `LOW`, `MEDIUM`, or `HIGH`, filtering removes all faces that don’t
+    #   meet the chosen quality bar. The default value is `AUTO`. The
+    #   quality bar is based on a variety of common use cases. Low-quality
+    #   detections can occur for a number of reasons. Some examples are an
+    #   object that's misidentified as a face, a face that's too blurry,
+    #   or a face with a pose that's too extreme to use. If you specify
+    #   `NONE`, no filtering is performed.
+    #
+    #   To use quality filtering, the collection you are using must be
+    #   associated with version 3 of the face model or higher.
+    #   @return [String]
+    #
     class IndexFacesRequest < Struct.new(
       :collection_id,
       :image,
       :external_image_id,
-      :detection_attributes)
+      :detection_attributes,
+      :max_faces,
+      :quality_filter)
       include Aws::Structure
     end
 
@@ -1822,31 +2019,70 @@ module Aws::Rekognition
     #   @return [Array<Types::FaceRecord>]
     #
     # @!attribute [rw] orientation_correction
-    #   The orientation of the input image (counterclockwise direction). If
-    #   your application displays the image, you can use this value to
-    #   correct image orientation. The bounding box coordinates returned in
-    #   `FaceRecords` represent face locations before the image orientation
-    #   is corrected.
+    #   If your collection is associated with a face detection model that's
+    #   later than version 3.0, the value of `OrientationCorrection` is
+    #   always null and no orientation information is returned.
     #
-    #   <note markdown="1"> If the input image is in jpeg format, it might contain exchangeable
-    #   image (Exif) metadata. If so, and the Exif metadata populates the
-    #   orientation field, the value of `OrientationCorrection` is null and
-    #   the bounding box coordinates in `FaceRecords` represent face
-    #   locations after Exif metadata is used to correct the image
-    #   orientation. Images in .png format don't contain Exif metadata.
+    #   If your collection is associated with a face detection model that's
+    #   version 3.0 or earlier, the following applies:
     #
-    #    </note>
+    #   * If the input image is in .jpeg format, it might contain
+    #     exchangeable image file format (Exif) metadata that includes the
+    #     image's orientation. Amazon Rekognition uses this orientation
+    #     information to perform image correction - the bounding box
+    #     coordinates are translated to represent object locations after the
+    #     orientation information in the Exif metadata is used to correct
+    #     the image orientation. Images in .png format don't contain Exif
+    #     metadata. The value of `OrientationCorrection` is null.
+    #
+    #   * If the image doesn't contain orientation information in its Exif
+    #     metadata, Amazon Rekognition returns an estimated orientation
+    #     (ROTATE\_0, ROTATE\_90, ROTATE\_180, ROTATE\_270). Amazon
+    #     Rekognition doesn’t perform image correction for images. The
+    #     bounding box coordinates aren't translated and represent the
+    #     object locations before the image is rotated.
+    #
+    #   Bounding box information is returned in the `FaceRecords` array. You
+    #   can get the version of the face detection model by calling
+    #   DescribeCollection.
     #   @return [String]
     #
     # @!attribute [rw] face_model_version
-    #   Version number of the face detection model associated with the input
-    #   collection (`CollectionId`).
+    #   The version number of the face detection model that's associated
+    #   with the input collection (`CollectionId`).
     #   @return [String]
+    #
+    # @!attribute [rw] unindexed_faces
+    #   An array of faces that were detected in the image but weren't
+    #   indexed. They weren't indexed because the quality filter identified
+    #   them as low quality, or the `MaxFaces` request parameter filtered
+    #   them out. To use the quality filter, you specify the `QualityFilter`
+    #   request parameter.
+    #   @return [Array<Types::UnindexedFace>]
     #
     class IndexFacesResponse < Struct.new(
       :face_records,
       :orientation_correction,
-      :face_model_version)
+      :face_model_version,
+      :unindexed_faces)
+      include Aws::Structure
+    end
+
+    # An instance of a label returned by Amazon Rekognition Image
+    # (DetectLabels) or by Amazon Rekognition Video (GetLabelDetection).
+    #
+    # @!attribute [rw] bounding_box
+    #   The position of the label instance on the image.
+    #   @return [Types::BoundingBox]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that Amazon Rekognition has in the accuracy of the
+    #   bounding box.
+    #   @return [Float]
+    #
+    class Instance < Struct.new(
+      :bounding_box,
+      :confidence)
       include Aws::Structure
     end
 
@@ -1892,20 +2128,34 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Structure containing details about the detected label, including name,
-    # and level of confidence.
+    # Structure containing details about the detected label, including the
+    # name, detected instances, parent labels, and level of confidence.
     #
     # @!attribute [rw] name
-    #   The name (label) of the object.
+    #   The name (label) of the object or scene.
     #   @return [String]
     #
     # @!attribute [rw] confidence
     #   Level of confidence.
     #   @return [Float]
     #
+    # @!attribute [rw] instances
+    #   If `Label` represents an object, `Instances` contains the bounding
+    #   boxes for each instance of the detected object. Bounding boxes are
+    #   returned for common object labels such as people, cars, furniture,
+    #   apparel or pets.
+    #   @return [Array<Types::Instance>]
+    #
+    # @!attribute [rw] parents
+    #   The parent labels for a label. The response includes all ancestor
+    #   labels.
+    #   @return [Array<Types::Parent>]
+    #
     class Label < Struct.new(
       :name,
-      :confidence)
+      :confidence,
+      :instances,
+      :parents)
       include Aws::Structure
     end
 
@@ -1930,20 +2180,20 @@ module Aws::Rekognition
     # Indicates the location of the landmark on the face.
     #
     # @!attribute [rw] type
-    #   Type of the landmark.
+    #   Type of landmark.
     #   @return [String]
     #
     # @!attribute [rw] x
-    #   x-coordinate from the top left of the landmark expressed as the
-    #   ratio of the width of the image. For example, if the images is
-    #   700x200 and the x-coordinate of the landmark is at 350 pixels, this
+    #   The x-coordinate from the top left of the landmark expressed as the
+    #   ratio of the width of the image. For example, if the image is 700 x
+    #   200 and the x-coordinate of the landmark is at 350 pixels, this
     #   value is 0.5.
     #   @return [Float]
     #
     # @!attribute [rw] y
-    #   y-coordinate from the top left of the landmark expressed as the
-    #   ratio of the height of the image. For example, if the images is
-    #   700x200 and the y-coordinate of the landmark is at 100 pixels, this
+    #   The y-coordinate from the top left of the landmark expressed as the
+    #   ratio of the height of the image. For example, if the image is 700 x
+    #   200 and the y-coordinate of the landmark is at 100 pixels, this
     #   value is 0.5.
     #   @return [Float]
     #
@@ -2095,8 +2345,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Provides information about a single type of moderated content found in
-    # an image or video. Each type of moderated content has a label within a
+    # Provides information about a single type of unsafe content found in an
+    # image or video. Each type of moderated content has a label within a
     # hierarchical taxonomy. For more information, see Detecting Unsafe
     # Content in the Amazon Rekognition Developer Guide.
     #
@@ -2110,11 +2360,11 @@ module Aws::Rekognition
     #   @return [Float]
     #
     # @!attribute [rw] name
-    #   The label name for the type of content detected in the image.
+    #   The label name for the type of unsafe content detected in the image.
     #   @return [String]
     #
     # @!attribute [rw] parent_name
-    #   The name for the parent label. Labels at the top-level of the
+    #   The name for the parent label. Labels at the top level of the
     #   hierarchy have the parent label `""`.
     #   @return [String]
     #
@@ -2188,6 +2438,17 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # A parent label for a label. A label can have 0, 1, or more parents.
+    #
+    # @!attribute [rw] name
+    #   The name of the parent label.
+    #   @return [String]
+    #
+    class Parent < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # Details about a person detected in a video analysis request.
     #
     # @!attribute [rw] index
@@ -2211,21 +2472,21 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Details and tracking information for a single time a person is tracked
-    # in a video. Amazon Rekognition operations that track persons return an
-    # array of `PersonDetection` objects with elements for each time a
-    # person is tracked in a video.
+    # Details and path tracking information for a single time a person's
+    # path is tracked in a video. Amazon Rekognition operations that track
+    # people's paths return an array of `PersonDetection` objects with
+    # elements for each time a person's path is tracked in a video.
     #
-    # For more information, see API\_GetPersonTracking in the Amazon
-    # Rekognition Developer Guide.
+    # For more information, see GetPersonTracking in the Amazon Rekognition
+    # Developer Guide.
     #
     # @!attribute [rw] timestamp
     #   The time, in milliseconds from the start of the video, that the
-    #   person was tracked.
+    #   person's path was tracked.
     #   @return [Integer]
     #
     # @!attribute [rw] person
-    #   Details about a person tracked in a video.
+    #   Details about a person whose path was tracked in a video.
     #   @return [Types::PersonDetail]
     #
     class PersonDetection < Struct.new(
@@ -2234,11 +2495,12 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about a person whose face matches a face(s) in a Amazon
+    # Information about a person whose face matches a face(s) in an Amazon
     # Rekognition collection. Includes information about the faces in the
-    # Amazon Rekognition collection (, information about the person
-    # (PersonDetail) and the timestamp for when the person was detected in a
-    # video. An array of `PersonMatch` objects is returned by .
+    # Amazon Rekognition collection (FaceMatch), information about the
+    # person (PersonDetail), and the time stamp for when the person was
+    # detected in a video. An array of `PersonMatch` objects is returned by
+    # GetFaceSearch.
     #
     # @!attribute [rw] timestamp
     #   The time, in milliseconds from the beginning of the video, that the
@@ -2266,9 +2528,10 @@ module Aws::Rekognition
     # input image is 700x200 and the operation returns X=0.5 and Y=0.25,
     # then the point is at the (350,50) pixel coordinate on the image.
     #
-    # An array of `Point` objects, `Polygon`, is returned by . `Polygon`
-    # represents a fine-grained polygon around detected text. For more
-    # information, see Geometry in the Amazon Rekognition Developer Guide.
+    # An array of `Point` objects, `Polygon`, is returned by DetectText.
+    # `Polygon` represents a fine-grained polygon around detected text. For
+    # more information, see Geometry in the Amazon Rekognition Developer
+    # Guide.
     #
     # @!attribute [rw] x
     #   The value of the X coordinate for a point on a `Polygon`.
@@ -2324,6 +2587,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     class RecognizeCelebritiesRequest < Struct.new(
@@ -2350,7 +2618,7 @@ module Aws::Rekognition
     #   <note markdown="1"> If the input image is in .jpeg format, it might contain exchangeable
     #   image (Exif) metadata that includes the image's orientation. If so,
     #   and the Exif metadata for the input image populates the orientation
-    #   field, the value of `OrientationCorrection` is null and the
+    #   field, the value of `OrientationCorrection` is null. The
     #   `CelebrityFaces` and `UnrecognizedFaces` bounding box coordinates
     #   represent face locations after Exif metadata is used to correct the
     #   image orientation. Images in .png format don't contain Exif
@@ -2372,8 +2640,8 @@ module Aws::Rekognition
     # region you use for Amazon Rekognition operations.
     #
     # For Amazon Rekognition to process an S3 object, the user must have
-    # permission to access the S3 object. For more information, see Resource
-    # Based Policies in the Amazon Rekognition Developer Guide.
+    # permission to access the S3 object. For more information, see
+    # Resource-Based Policies in the Amazon Rekognition Developer Guide.
     #
     # @note When making an API call, you may pass S3Object
     #   data as a hash:
@@ -2419,6 +2687,7 @@ module Aws::Rekognition
     #         },
     #         max_faces: 1,
     #         face_match_threshold: 1.0,
+    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #       }
     #
     # @!attribute [rw] collection_id
@@ -2429,6 +2698,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_faces
@@ -2439,14 +2713,31 @@ module Aws::Rekognition
     # @!attribute [rw] face_match_threshold
     #   (Optional) Specifies the minimum confidence in the face match to
     #   return. For example, don't return any matches where confidence in
-    #   matches is less than 70%.
+    #   matches is less than 70%. The default value is 80%.
     #   @return [Float]
+    #
+    # @!attribute [rw] quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't searched for in the
+    #   collection. If you specify `AUTO`, Amazon Rekognition chooses the
+    #   quality bar. If you specify `LOW`, `MEDIUM`, or `HIGH`, filtering
+    #   removes all faces that don’t meet the chosen quality bar. The
+    #   default value is `AUTO`. The quality bar is based on a variety of
+    #   common use cases. Low-quality detections can occur for a number of
+    #   reasons. Some examples are an object that's misidentified as a
+    #   face, a face that's too blurry, or a face with a pose that's too
+    #   extreme to use. If you specify `NONE`, no filtering is performed.
+    #
+    #   To use quality filtering, the collection you are using must be
+    #   associated with version 3 of the face model or higher.
+    #   @return [String]
     #
     class SearchFacesByImageRequest < Struct.new(
       :collection_id,
       :image,
       :max_faces,
-      :face_match_threshold)
+      :face_match_threshold,
+      :quality_filter)
       include Aws::Structure
     end
 
@@ -2504,7 +2795,7 @@ module Aws::Rekognition
     # @!attribute [rw] face_match_threshold
     #   Optional value specifying the minimum confidence in the face match
     #   to return. For example, don't return any matches where confidence
-    #   in matches is less than 70%.
+    #   in matches is less than 70%. The default value is 80%.
     #   @return [Float]
     #
     class SearchFacesRequest < Struct.new(
@@ -2591,8 +2882,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartCelebrityRecognitionRequest < Struct.new(
@@ -2635,8 +2928,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] video
-    #   The video in which you want to moderate content. The video must be
-    #   stored in an Amazon S3 bucket.
+    #   The video in which you want to detect unsafe content. The video must
+    #   be stored in an Amazon S3 bucket.
     #   @return [Types::Video]
     #
     # @!attribute [rw] min_confidence
@@ -2645,7 +2938,9 @@ module Aws::Rekognition
     #   how certain Amazon Rekognition is that the moderated content is
     #   correctly identified. 0 is the lowest confidence. 100 is the highest
     #   confidence. Amazon Rekognition doesn't return any moderated content
-    #   labels with a confidence level lower than this specified value.
+    #   labels with a confidence level lower than this specified value. If
+    #   you don't specify `MinConfidence`, `GetContentModeration` returns
+    #   labels with confidence values greater than or equal to 50 percent.
     #   @return [Float]
     #
     # @!attribute [rw] client_request_token
@@ -2657,12 +2952,14 @@ module Aws::Rekognition
     #
     # @!attribute [rw] notification_channel
     #   The Amazon SNS topic ARN that you want Amazon Rekognition Video to
-    #   publish the completion status of the content moderation analysis to.
+    #   publish the completion status of the unsafe content analysis to.
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartContentModerationRequest < Struct.new(
@@ -2675,8 +2972,8 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] job_id
-    #   The identifier for the content moderation analysis job. Use `JobId`
-    #   to identify the job in a subsequent call to `GetContentModeration`.
+    #   The identifier for the unsafe content analysis job. Use `JobId` to
+    #   identify the job in a subsequent call to `GetContentModeration`.
     #   @return [String]
     #
     class StartContentModerationResponse < Struct.new(
@@ -2732,8 +3029,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartFaceDetectionRequest < Struct.new(
@@ -2791,7 +3090,7 @@ module Aws::Rekognition
     # @!attribute [rw] face_match_threshold
     #   The minimum confidence in the person match to return. For example,
     #   don't return any matches where confidence in matches is less than
-    #   70%.
+    #   70%. The default value is 80%.
     #   @return [Float]
     #
     # @!attribute [rw] collection_id
@@ -2804,8 +3103,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartFaceSearchRequest < Struct.new(
@@ -2878,8 +3179,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartLabelDetectionRequest < Struct.new(
@@ -2938,8 +3241,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartPersonTrackingRequest < Struct.new(
@@ -2986,7 +3291,7 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] name
-    #   The name of a stream processor created by .
+    #   The name of a stream processor created by CreateStreamProcessor.
     #   @return [String]
     #
     class StopStreamProcessorRequest < Struct.new(
@@ -2997,10 +3302,11 @@ module Aws::Rekognition
     class StopStreamProcessorResponse < Aws::EmptyStructure; end
 
     # An object that recognizes faces in a streaming video. An Amazon
-    # Rekognition stream processor is created by a call to . The request
-    # parameters for `CreateStreamProcessor` describe the Kinesis video
-    # stream source for the streaming video, face recognition parameters,
-    # and where to stream the analysis resullts.
+    # Rekognition stream processor is created by a call to
+    # CreateStreamProcessor. The request parameters for
+    # `CreateStreamProcessor` describe the Kinesis video stream source for
+    # the streaming video, face recognition parameters, and where to stream
+    # the analysis resullts.
     #
     # @!attribute [rw] name
     #   Name of the Amazon Rekognition stream processor.
@@ -3101,7 +3407,7 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about a word or line of text detected by .
+    # Information about a word or line of text detected by DetectText.
     #
     # The `DetectedText` field contains the text that Amazon Rekognition
     # detected in the image.
@@ -3155,9 +3461,44 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # A face that IndexFaces detected, but didn't index. Use the `Reasons`
+    # response attribute to determine why a face wasn't indexed.
+    #
+    # @!attribute [rw] reasons
+    #   An array of reasons that specify why a face wasn't indexed.
+    #
+    #   * EXTREME\_POSE - The face is at a pose that can't be detected. For
+    #     example, the head is turned too far away from the camera.
+    #
+    #   * EXCEEDS\_MAX\_FACES - The number of faces detected is already
+    #     higher than that specified by the `MaxFaces` input parameter for
+    #     `IndexFaces`.
+    #
+    #   * LOW\_BRIGHTNESS - The image is too dark.
+    #
+    #   * LOW\_SHARPNESS - The image is too blurry.
+    #
+    #   * LOW\_CONFIDENCE - The face was detected with a low confidence.
+    #
+    #   * SMALL\_BOUNDING\_BOX - The bounding box around the face is too
+    #     small.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] face_detail
+    #   The structure that contains attributes of a face that
+    #   `IndexFaces`detected, but didn't index.
+    #   @return [Types::FaceDetail]
+    #
+    class UnindexedFace < Struct.new(
+      :reasons,
+      :face_detail)
+      include Aws::Structure
+    end
+
     # Video file stored in an Amazon S3 bucket. Amazon Rekognition video
-    # start operations such as use `Video` to specify a video for analysis.
-    # The supported file formats are .mp4, .mov and .avi.
+    # start operations such as StartLabelDetection use `Video` to specify a
+    # video for analysis. The supported file formats are .mp4, .mov and
+    # .avi.
     #
     # @note When making an API call, you may pass Video
     #   data as a hash:

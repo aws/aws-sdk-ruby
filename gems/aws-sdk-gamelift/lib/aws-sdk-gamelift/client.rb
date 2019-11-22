@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +48,215 @@ module Aws::GameLift
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -186,13 +284,19 @@ module Aws::GameLift
     # If any player rejects the match, or if acceptances are not received
     # before a specified timeout, the proposed match is dropped. The
     # matchmaking tickets are then handled in one of two ways: For tickets
-    # where all players accepted the match, the ticket status is returned to
-    # `SEARCHING` to find a new match. For tickets where one or more players
-    # failed to accept the match, the ticket status is set to `FAILED`, and
-    # processing is terminated. A new matchmaking request for these players
-    # can be submitted as needed.
+    # where one or more players rejected the match, the ticket status is
+    # returned to `SEARCHING` to find a new match. For tickets where one or
+    # more players failed to respond, the ticket status is set to
+    # `CANCELLED`, and processing is terminated. A new matchmaking request
+    # for these players can be submitted as needed.
     #
-    # Matchmaking-related operations include:
+    # **Learn more**
+    #
+    # [ Add FlexMatch to a Game Client][1]
+    #
+    # [ FlexMatch Events Reference][2]
+    #
+    # **Related operations**
     #
     # * StartMatchmaking
     #
@@ -203,6 +307,11 @@ module Aws::GameLift
     # * AcceptMatch
     #
     # * StartMatchBackfill
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-events.html
     #
     # @option params [required, String] :ticket_id
     #   Unique identifier for a matchmaking ticket. The ticket must be in
@@ -254,8 +363,6 @@ module Aws::GameLift
     # record is returned, including an alias ID, which you can reference
     # when creating a game session. You can reassign an alias to another
     # fleet by calling `UpdateAlias`.
-    #
-    # Alias-related operations include:
     #
     # * CreateAlias
     #
@@ -321,23 +428,21 @@ module Aws::GameLift
     # Amazon Simple Storage Service (Amazon S3) location.
     #
     # Game server binaries must be combined into a `.zip` file for use with
-    # Amazon GameLift. See [Uploading Your Game][1] for more information.
+    # Amazon GameLift.
     #
     # To create new builds quickly and easily, use the AWS CLI command <b>
     # <a
-    # href="http://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html">upload-build</a>
+    # href="https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html">upload-build</a>
     # </b>. This helper command uploads your build and creates a new build
     # record in one step, and automatically handles the necessary
-    # permissions. See [ Upload Build Files to Amazon GameLift][2] for more
-    # help.
+    # permissions.
     #
     # The `CreateBuild` operation should be used only when you need to
     # manually upload your build files, as in the following scenarios:
     #
     # * Store a build file in an Amazon S3 bucket under your own AWS
     #   account. To use this option, you must first give Amazon GameLift
-    #   access to that Amazon S3 bucket. See [ Create a Build with Files in
-    #   Amazon S3][3] for detailed help. To create a new build record using
+    #   access to that Amazon S3 bucket. To create a new build record using
     #   files in your Amazon S3 bucket, call `CreateBuild` and specify a
     #   build name, operating system, and the storage location of your game
     #   build.
@@ -348,7 +453,7 @@ module Aws::GameLift
     #   record and returns an Amazon S3 storage location (bucket and key
     #   only) and temporary access credentials. Use the credentials to
     #   manually upload your build file to the storage location (see the
-    #   Amazon S3 topic [Uploading Objects][4]). You can upload files to a
+    #   Amazon S3 topic [Uploading Objects][1]). You can upload files to a
     #   location only once.
     #
     # If successful, this operation creates a new build record with a unique
@@ -356,7 +461,13 @@ module Aws::GameLift
     # DescribeBuild to check the status of your build. A build must be in
     # `READY` status before it can be used to create fleets.
     #
-    # Build-related operations include:
+    # **Learn more**
+    #
+    # [Uploading Your Game][2]
+    #
+    # [ Create a Build with Files in Amazon S3][3]
+    #
+    # **Related operations**
     #
     # * CreateBuild
     #
@@ -370,27 +481,27 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html
-    # [2]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html
-    # [3]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build
-    # [4]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build
     #
     # @option params [String] :name
     #   Descriptive label that is associated with a build. Build names do not
     #   need to be unique. You can use UpdateBuild to change this value later.
     #
     # @option params [String] :version
-    #   Version that is associated with this build. Version strings do not
-    #   need to be unique. You can use UpdateBuild to change this value later.
+    #   Version that is associated with a build or script. Version strings do
+    #   not need to be unique. You can use UpdateBuild to change this value
+    #   later.
     #
     # @option params [Types::S3Location] :storage_location
     #   Information indicating where your game build files are stored. Use
     #   this parameter only when creating a build with files stored in an
     #   Amazon S3 bucket that you own. The storage location must specify an
-    #   Amazon S3 bucket name and key, as well as a role ARN that you set up
-    #   to allow Amazon GameLift to access your Amazon S3 bucket. The S3
-    #   bucket must be in the same region that you want to create a new build
-    #   in.
+    #   Amazon S3 bucket name and key, as well as a the ARN for a role that
+    #   you set up to allow Amazon GameLift to access your Amazon S3 bucket.
+    #   The S3 bucket must be in the same region that you want to create a new
+    #   build in.
     #
     # @option params [String] :operating_system
     #   Operating system that the game server binaries are built to run on.
@@ -415,8 +526,9 @@ module Aws::GameLift
     #       bucket: "NonEmptyString",
     #       key: "NonEmptyString",
     #       role_arn: "NonEmptyString",
+    #       object_version: "NonEmptyString",
     #     },
-    #     operating_system: "WINDOWS_2012", # accepts WINDOWS_2012, AMAZON_LINUX
+    #     operating_system: "WINDOWS_2012", # accepts WINDOWS_2012, AMAZON_LINUX, AMAZON_LINUX_2
     #   })
     #
     # @example Response structure
@@ -426,7 +538,7 @@ module Aws::GameLift
     #   resp.build.version #=> String
     #   resp.build.status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.build.size_on_disk #=> Integer
-    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
     #   resp.build.creation_time #=> Time
     #   resp.upload_credentials.access_key_id #=> String
     #   resp.upload_credentials.secret_access_key #=> String
@@ -434,6 +546,7 @@ module Aws::GameLift
     #   resp.storage_location.bucket #=> String
     #   resp.storage_location.key #=> String
     #   resp.storage_location.role_arn #=> String
+    #   resp.storage_location.object_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuild AWS API Documentation
     #
@@ -444,39 +557,26 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Creates a new fleet to run your game servers. A fleet is a set of
-    # Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can
-    # run multiple server processes to host game sessions. You set up a
-    # fleet to use instances with certain hardware specifications (see
-    # [Amazon EC2 Instance Types][1] for more information), and deploy your
-    # game build to run on each instance.
+    # Creates a new fleet to run your game servers. whether they are custom
+    # game builds or Realtime Servers with game-specific script. A fleet is
+    # a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of
+    # which can host multiple game sessions. When creating a fleet, you
+    # choose the hardware specifications, set some configuration options,
+    # and specify the game server to deploy on the new fleet.
     #
-    # To create a new fleet, you must specify the following: (1) a fleet
-    # name, (2) the build ID of a successfully uploaded game build, (3) an
-    # EC2 instance type, and (4) a run-time configuration, which describes
-    # the server processes to run on each instance in the fleet. If you
-    # don't specify a fleet type (on-demand or spot), the new fleet uses
-    # on-demand instances by default.
+    # To create a new fleet, you must provide the following: (1) a fleet
+    # name, (2) an EC2 instance type and fleet type (spot or on-demand), (3)
+    # the build ID for your game build or script ID if using Realtime
+    # Servers, and (4) a run-time configuration, which determines how game
+    # servers will run on each instance in the fleet.
     #
-    # You can also configure the new fleet with the following settings:
+    # <note markdown="1"> When creating a Realtime Servers fleet, we recommend using a minimal
+    # version of the Realtime script (see this [ working code example ][1]).
+    # This will make it much easier to troubleshoot any fleet creation
+    # issues. Once the fleet is active, you can update your Realtime script
+    # as needed.
     #
-    # * Fleet description
-    #
-    # * Access permissions for inbound traffic
-    #
-    # * Fleet-wide game session protection
-    #
-    # * Resource usage limits
-    # ^
-    #
-    # * VPC peering connection (see [VPC Peering with Amazon GameLift
-    #   Fleets][2])
-    #
-    # ^
-    #
-    # If you use Amazon CloudWatch for metrics, you can add the new fleet to
-    # a metric group. By adding multiple fleets to a metric group, you can
-    # view aggregated metrics for all the fleets in the group.
+    #  </note>
     #
     # If the `CreateFleet` call is successful, Amazon GameLift performs the
     # following tasks. You can track the process of a fleet by checking the
@@ -490,8 +590,8 @@ module Aws::GameLift
     #   Sets the fleet's target capacity to 1 (desired instances), which
     #   triggers Amazon GameLift to start one new EC2 instance.
     #
-    # * Downloads the game build to the new instance and installs it.
-    #   Statuses: `DOWNLOADING`, `VALIDATING`, `BUILDING`.
+    # * Downloads the game build or Realtime script to the new instance and
+    #   installs it. Statuses: `DOWNLOADING`, `VALIDATING`, `BUILDING`.
     #
     # * Starts launching server processes on the instance. If the fleet is
     #   configured to run multiple server processes per instance, Amazon
@@ -501,7 +601,13 @@ module Aws::GameLift
     # * Sets the fleet's status to `ACTIVE` as soon as one server process
     #   is ready to host a game session.
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][2]
+    #
+    # [ Debug Fleet Creation Issues][3]
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -543,8 +649,9 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://aws.amazon.com/ec2/instance-types/
-    # [2]: http://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-script.html#realtime-script-examples
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html
     #
     # @option params [required, String] :name
     #   Descriptive label that is associated with a fleet. Fleet names do not
@@ -553,11 +660,17 @@ module Aws::GameLift
     # @option params [String] :description
     #   Human-readable description of a fleet.
     #
-    # @option params [required, String] :build_id
+    # @option params [String] :build_id
     #   Unique identifier for a build to be deployed on the new fleet. The
-    #   build must have been successfully uploaded to Amazon GameLift and be
-    #   in a `READY` status. This fleet setting cannot be changed once the
-    #   fleet is created.
+    #   custom game server build must have been successfully uploaded to
+    #   Amazon GameLift and be in a `READY` status. This fleet setting cannot
+    #   be changed once the fleet is created.
+    #
+    # @option params [String] :script_id
+    #   Unique identifier for a Realtime script to be deployed on the new
+    #   fleet. The Realtime script must have been successfully uploaded to
+    #   Amazon GameLift. This fleet setting cannot be changed once the fleet
+    #   is created.
     #
     # @option params [String] :server_launch_path
     #   This parameter is no longer used. Instead, specify a server launch
@@ -580,7 +693,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process
     #
     # @option params [required, String] :ec2_instance_type
     #   Name of an EC2 instance type that is supported in Amazon GameLift. A
@@ -595,10 +708,12 @@ module Aws::GameLift
     #
     # @option params [Array<Types::IpPermission>] :ec2_inbound_permissions
     #   Range of IP addresses and port settings that permit inbound traffic to
-    #   access server processes running on the fleet. If no inbound
-    #   permissions are set, including both IP address range and port range,
-    #   the server processes in the fleet cannot accept connections. You can
-    #   specify one or more sets of permissions for a fleet.
+    #   access game sessions that running on the fleet. For fleets using a
+    #   custom game build, this parameter is required before game sessions
+    #   running on the fleet can accept connections. For Realtime Servers
+    #   fleets, Amazon GameLift automatically sets TCP and UDP ranges for use
+    #   by the Realtime servers. You can specify multiple permission settings
+    #   or add more by updating the fleet.
     #
     # @option params [String] :new_game_session_protection_policy
     #   Game session protection policy to apply to all instances in this
@@ -616,28 +731,24 @@ module Aws::GameLift
     #
     # @option params [Types::RuntimeConfiguration] :runtime_configuration
     #   Instructions for launching server processes on each instance in the
-    #   fleet. The run-time configuration for a fleet has a collection of
-    #   server process configurations, one for each type of server process to
-    #   run on an instance. A server process configuration specifies the
-    #   location of the server executable, launch parameters, and the number
-    #   of concurrent processes with that configuration to maintain on each
-    #   instance. A CreateFleet request must include a run-time configuration
-    #   with at least one server process configuration; otherwise the request
-    #   fails with an invalid request exception. (This parameter replaces the
-    #   parameters `ServerLaunchPath` and `ServerLaunchParameters`; requests
-    #   that contain values for these parameters instead of a run-time
-    #   configuration will continue to work.)
+    #   fleet. Server processes run either a custom game build executable or a
+    #   Realtime Servers script. The run-time configuration lists the types of
+    #   server processes to run on an instance and includes the following
+    #   configuration settings: the server executable or launch script file,
+    #   launch parameters, and the number of processes to run concurrently on
+    #   each instance. A CreateFleet request must include a run-time
+    #   configuration with at least one server process configuration.
     #
     # @option params [Types::ResourceCreationLimitPolicy] :resource_creation_limit_policy
     #   Policy that limits the number of game sessions an individual player
     #   can create over a span of time for this fleet.
     #
     # @option params [Array<String>] :metric_groups
-    #   Name of a metric group to add this fleet to. A metric group tracks
-    #   metrics across all fleets in the group. Use an existing metric group
-    #   name to add this fleet to the group, or use a new name to create a new
-    #   metric group. A fleet can only be included in one metric group at a
-    #   time.
+    #   Name of an Amazon CloudWatch metric group to add this fleet to. A
+    #   metric group aggregates the metrics for all fleets in the group.
+    #   Specify an existing metric group name, or provide a new name to create
+    #   a new metric group. A fleet can only be included in one metric group
+    #   at a time.
     #
     # @option params [String] :peer_vpc_aws_account_id
     #   Unique identifier for the AWS account with the VPC that you want to
@@ -647,24 +758,41 @@ module Aws::GameLift
     # @option params [String] :peer_vpc_id
     #   Unique identifier for a VPC with resources to be accessed by your
     #   Amazon GameLift fleet. The VPC must be in the same region where your
-    #   fleet is deployed. To get VPC information, including IDs, use the
-    #   Virtual Private Cloud service tools, including the VPC Dashboard in
-    #   the AWS Management Console.
+    #   fleet is deployed. Look up a VPC ID using the [VPC Dashboard][1] in
+    #   the AWS Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/vpc/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #
     # @option params [String] :fleet_type
     #   Indicates whether to use on-demand instances or spot instances for
     #   this fleet. If empty, the default is ON\_DEMAND. Both categories of
-    #   instances use identical hardware and configurations, based on the
-    #   instance type selected for this fleet. You can acquire on-demand
-    #   instances at any time for a fixed price and keep them as long as you
-    #   need them. Spot instances have lower prices, but spot pricing is
-    #   variable, and while in use they can be interrupted (with a two-minute
-    #   notification). Learn more about Amazon GameLift spot instances with at
-    #   [ Choose Computing Resources][1].
+    #   instances use identical hardware and configurations based on the
+    #   instance type selected for this fleet. Learn more about [ On-Demand
+    #   versus Spot Instances][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot
+    #
+    # @option params [String] :instance_role_arn
+    #   Unique identifier for an AWS IAM role that manages access to your AWS
+    #   services. With an instance role ARN set, any application that runs on
+    #   an instance in this fleet can assume the role, including install
+    #   scripts, server processes, daemons (background processes). Create a
+    #   role or look up a role's ARN using the [IAM dashboard][1] in the AWS
+    #   Management Console. Learn more about using on-box credentials for your
+    #   game servers at [ Access external resources from a game server][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/iam/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #
+    # @option params [Types::CertificateConfiguration] :certificate_configuration
     #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -675,11 +803,12 @@ module Aws::GameLift
     #   resp = client.create_fleet({
     #     name: "NonZeroAndMaxString", # required
     #     description: "NonZeroAndMaxString",
-    #     build_id: "BuildId", # required
+    #     build_id: "BuildId",
+    #     script_id: "ScriptId",
     #     server_launch_path: "NonZeroAndMaxString",
     #     server_launch_parameters: "NonZeroAndMaxString",
     #     log_paths: ["NonZeroAndMaxString"],
-    #     ec2_instance_type: "t2.micro", # required, accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge
+    #     ec2_instance_type: "t2.micro", # required, accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge
     #     ec2_inbound_permissions: [
     #       {
     #         from_port: 1, # required
@@ -708,6 +837,10 @@ module Aws::GameLift
     #     peer_vpc_aws_account_id: "NonZeroAndMaxString",
     #     peer_vpc_id: "NonZeroAndMaxString",
     #     fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+    #     instance_role_arn: "NonEmptyString",
+    #     certificate_configuration: {
+    #       certificate_type: "DISABLED", # required, accepts DISABLED, GENERATED
+    #     },
     #   })
     #
     # @example Response structure
@@ -715,25 +848,28 @@ module Aws::GameLift
     #   resp.fleet_attributes.fleet_id #=> String
     #   resp.fleet_attributes.fleet_arn #=> String
     #   resp.fleet_attributes.fleet_type #=> String, one of "ON_DEMAND", "SPOT"
-    #   resp.fleet_attributes.instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
+    #   resp.fleet_attributes.instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.fleet_attributes.description #=> String
     #   resp.fleet_attributes.name #=> String
     #   resp.fleet_attributes.creation_time #=> Time
     #   resp.fleet_attributes.termination_time #=> Time
     #   resp.fleet_attributes.status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED"
     #   resp.fleet_attributes.build_id #=> String
+    #   resp.fleet_attributes.script_id #=> String
     #   resp.fleet_attributes.server_launch_path #=> String
     #   resp.fleet_attributes.server_launch_parameters #=> String
     #   resp.fleet_attributes.log_paths #=> Array
     #   resp.fleet_attributes.log_paths[0] #=> String
     #   resp.fleet_attributes.new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
-    #   resp.fleet_attributes.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+    #   resp.fleet_attributes.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
     #   resp.fleet_attributes.resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.fleet_attributes.resource_creation_limit_policy.policy_period_in_minutes #=> Integer
     #   resp.fleet_attributes.metric_groups #=> Array
     #   resp.fleet_attributes.metric_groups[0] #=> String
     #   resp.fleet_attributes.stopped_actions #=> Array
     #   resp.fleet_attributes.stopped_actions[0] #=> String, one of "AUTO_SCALING"
+    #   resp.fleet_attributes.instance_role_arn #=> String
+    #   resp.fleet_attributes.certificate_configuration.certificate_type #=> String, one of "DISABLED", "GENERATED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet AWS API Documentation
     #
@@ -777,8 +913,6 @@ module Aws::GameLift
     # the log files.
     #
     # *Available in Amazon GameLift Local.*
-    #
-    # Game-session-related operations include:
     #
     # * CreateGameSession
     #
@@ -825,7 +959,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @option params [String] :creator_id
     #   Unique identifier for a player or entity creating the game session.
@@ -860,7 +994,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @return [Types::CreateGameSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -900,6 +1034,7 @@ module Aws::GameLift
     #   resp.game_session.game_properties[0].key #=> String
     #   resp.game_session.game_properties[0].value #=> String
     #   resp.game_session.ip_address #=> String
+    #   resp.game_session.dns_name #=> String
     #   resp.game_session.port #=> Integer
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
@@ -949,8 +1084,6 @@ module Aws::GameLift
     # To create a new queue, provide a name, timeout value, a list of
     # destinations and, if desired, a set of latency policies. If
     # successful, a new queue object is returned.
-    #
-    # Queue-related operations include:
     #
     # * CreateGameSessionQueue
     #
@@ -1044,24 +1177,22 @@ module Aws::GameLift
     # use when placing a new game session for the match; and the maximum
     # time allowed for a matchmaking attempt.
     #
-    # **Player acceptance** -- In each configuration, you have the option to
-    # require that all players accept participation in a proposed match. To
-    # enable this feature, set *AcceptanceRequired* to true and specify a
-    # time limit for player acceptance. Players have the option to accept or
-    # reject a proposed match, and a match does not move ahead to game
-    # session placement unless all matched players accept.
+    # There are two ways to track the progress of matchmaking tickets: (1)
+    # polling ticket status with DescribeMatchmaking; or (2) receiving
+    # notifications with Amazon Simple Notification Service (SNS). To use
+    # notifications, you first need to set up an SNS topic to receive the
+    # notifications, and provide the topic ARN in the matchmaking
+    # configuration. Since notifications promise only "best effort"
+    # delivery, we recommend calling `DescribeMatchmaking` if no
+    # notifications are received within 30 seconds.
     #
-    # **Matchmaking status notification** -- There are two ways to track the
-    # progress of matchmaking tickets: (1) polling ticket status with
-    # DescribeMatchmaking; or (2) receiving notifications with Amazon Simple
-    # Notification Service (SNS). To use notifications, you first need to
-    # set up an SNS topic to receive the notifications, and provide the
-    # topic ARN in the matchmaking configuration (see [ Setting up
-    # Notifications for Matchmaking][1]). Since notifications promise only
-    # "best effort" delivery, we recommend calling `DescribeMatchmaking`
-    # if no notifications are received within 30 seconds.
+    # **Learn more**
     #
-    # Operations related to match configurations and rule sets include:
+    # [ Design a FlexMatch Matchmaker][1]
+    #
+    # [ Setting up Notifications for Matchmaking][2]
+    #
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -1077,9 +1208,12 @@ module Aws::GameLift
     #
     # * ValidateMatchmakingRuleSet
     #
+    # * DeleteMatchmakingRuleSet
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
     #
     # @option params [required, String] :name
     #   Unique identifier for a matchmaking configuration. This name is used
@@ -1092,19 +1226,19 @@ module Aws::GameLift
     # @option params [required, Array<String>] :game_session_queue_arns
     #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
     #   queue and uniquely identifies it. Format is
-    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
-    #   These queues are used when placing game sessions for matches that are
-    #   created with this matchmaking configuration. Queues can be located in
-    #   any region.
+    #   `arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue
+    #   name>`. These queues are used when placing game sessions for matches
+    #   that are created with this matchmaking configuration. Queues can be
+    #   located in any region.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #
     # @option params [required, Integer] :request_timeout_seconds
     #   Maximum duration, in seconds, that a matchmaking ticket can remain in
-    #   process before timing out. Requests that time out can be resubmitted
-    #   as needed.
+    #   process before timing out. Requests that fail due to timing out can be
+    #   resubmitted as needed.
     #
     # @option params [Integer] :acceptance_timeout_seconds
     #   Length of time (in seconds) to wait for players to accept a proposed
@@ -1112,7 +1246,7 @@ module Aws::GameLift
     #   timeout, the ticket continues to look for an acceptable match.
     #
     # @option params [required, Boolean] :acceptance_required
-    #   Flag that determines whether or not a match that was created with this
+    #   Flag that determines whether a match that was created with this
     #   configuration must be accepted by the matched players. To require
     #   acceptance, set to TRUE.
     #
@@ -1131,7 +1265,7 @@ module Aws::GameLift
     #   only 10 players are selected for the match.
     #
     # @option params [String] :custom_event_data
-    #   Information to attached to all events related to the matchmaking
+    #   Information to be added to all events related to this matchmaking
     #   configuration.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
@@ -1143,7 +1277,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @option params [String] :game_session_data
     #   Set of custom game session properties, formatted as a single string
@@ -1154,7 +1288,19 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #
+    # @option params [String] :backfill_mode
+    #   Method used to backfill game sessions created with this matchmaking
+    #   configuration. Specify MANUAL when your game manages backfill requests
+    #   manually or does not use the match backfill feature. Specify AUTOMATIC
+    #   to have GameLift create a StartMatchBackfill request whenever a game
+    #   session has one or more open slots. Learn more about manual and
+    #   automatic backfill in [ Backfill Existing Games with FlexMatch][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
     #
     # @return [Types::CreateMatchmakingConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1180,6 +1326,7 @@ module Aws::GameLift
     #       },
     #     ],
     #     game_session_data: "GameSessionData",
+    #     backfill_mode: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
     #   })
     #
     # @example Response structure
@@ -1200,6 +1347,7 @@ module Aws::GameLift
     #   resp.configuration.game_properties[0].key #=> String
     #   resp.configuration.game_properties[0].value #=> String
     #   resp.configuration.game_session_data #=> String
+    #   resp.configuration.backfill_mode #=> String, one of "AUTOMATIC", "MANUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfiguration AWS API Documentation
     #
@@ -1213,28 +1361,26 @@ module Aws::GameLift
     # Creates a new rule set for FlexMatch matchmaking. A rule set describes
     # the type of match to create, such as the number and size of teams, and
     # sets the parameters for acceptable player matches, such as minimum
-    # skill level or character type. Rule sets are used in matchmaking
-    # configurations, which define how matchmaking requests are handled.
-    # Each MatchmakingConfiguration uses one rule set; you can set up
-    # multiple rule sets to handle the scenarios that suit your game (such
-    # as for different game modes), and create a separate matchmaking
-    # configuration for each rule set. See additional information on rule
-    # set content in the MatchmakingRuleSet structure. For help creating
-    # rule sets, including useful examples, see the topic [ Adding FlexMatch
-    # to Your Game][1].
+    # skill level or character type. A rule set is used by a
+    # MatchmakingConfiguration.
     #
-    # Once created, matchmaking rule sets cannot be changed or deleted, so
-    # we recommend checking the rule set syntax using
-    # ValidateMatchmakingRuleSet before creating the rule set.
+    # To create a matchmaking rule set, provide unique rule set name and the
+    # rule set body in JSON format. Rule sets must be defined in the same
+    # region as the matchmaking configuration they are used with.
     #
-    # To create a matchmaking rule set, provide the set of rules and a
-    # unique name. Rule sets must be defined in the same region as the
-    # matchmaking configuration they will be used with. Rule sets cannot be
-    # edited or deleted. If you need to change a rule set, create a new one
-    # with the necessary edits and then update matchmaking configurations to
-    # use the new rule set.
+    # Since matchmaking rule sets cannot be edited, it is a good idea to
+    # check the rule set syntax using ValidateMatchmakingRuleSet before
+    # creating a new rule set.
     #
-    # Operations related to match configurations and rule sets include:
+    # **Learn more**
+    #
+    # * [Build a Rule Set][1]
+    #
+    # * [Design a Matchmaker][2]
+    #
+    # * [Matchmaking with FlexMatch][3]
+    #
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -1250,18 +1396,24 @@ module Aws::GameLift
     #
     # * ValidateMatchmakingRuleSet
     #
+    # * DeleteMatchmakingRuleSet
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html
     #
     # @option params [required, String] :name
-    #   Unique identifier for a matchmaking rule set. This name is used to
-    #   identify the rule set associated with a matchmaking configuration.
+    #   Unique identifier for a matchmaking rule set. A matchmaking
+    #   configuration identifies the rule set it uses by this name value.
+    #   (Note: The rule set name is different from the optional "name" field
+    #   in the rule set body.)
     #
     # @option params [required, String] :rule_set_body
-    #   Collection of matchmaking rules, formatted as a JSON string. (Note
-    #   that comments are not allowed in JSON, but most elements support a
-    #   description field.)
+    #   Collection of matchmaking rules, formatted as a JSON string. Comments
+    #   are not allowed in JSON, but most elements support a description
+    #   field.
     #
     # @return [Types::CreateMatchmakingRuleSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1289,20 +1441,20 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Adds a player to a game session and creates a player session record.
-    # Before a player can be added, a game session must have an `ACTIVE`
-    # status, have a creation policy of `ALLOW_ALL`, and have an open player
-    # slot. To add a group of players to a game session, use
-    # CreatePlayerSessions.
+    # Reserves an open player slot in an active game session. Before a
+    # player can be added, a game session must have an `ACTIVE` status, have
+    # a creation policy of `ALLOW_ALL`, and have an open player slot. To add
+    # a group of players to a game session, use CreatePlayerSessions. When
+    # the player connects to the game server and references a player session
+    # ID, the game server contacts the Amazon GameLift service to validate
+    # the player reservation and accept the player.
     #
     # To create a player session, specify a game session ID, player ID, and
-    # optionally a string of player data. If successful, the player is added
-    # to the game session and a new PlayerSession object is returned. Player
-    # sessions cannot be updated.
+    # optionally a string of player data. If successful, a slot is reserved
+    # in the game session for the player and a new PlayerSession object is
+    # returned. Player sessions cannot be updated.
     #
     # *Available in Amazon GameLift Local.*
-    #
-    # Player-session-related operations include:
     #
     # * CreatePlayerSession
     #
@@ -1351,6 +1503,7 @@ module Aws::GameLift
     #   resp.player_session.termination_time #=> Time
     #   resp.player_session.status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
     #   resp.player_session.ip_address #=> String
+    #   resp.player_session.dns_name #=> String
     #   resp.player_session.port #=> Integer
     #   resp.player_session.player_data #=> String
     #
@@ -1363,20 +1516,20 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Adds a group of players to a game session. This action is useful with
-    # a team matching feature. Before players can be added, a game session
-    # must have an `ACTIVE` status, have a creation policy of `ALLOW_ALL`,
-    # and have an open player slot. To add a single player to a game
-    # session, use CreatePlayerSession.
+    # Reserves open slots in a game session for a group of players. Before
+    # players can be added, a game session must have an `ACTIVE` status,
+    # have a creation policy of `ALLOW_ALL`, and have an open player slot.
+    # To add a single player to a game session, use CreatePlayerSession.
+    # When a player connects to the game server and references a player
+    # session ID, the game server contacts the Amazon GameLift service to
+    # validate the player reservation and accept the player.
     #
     # To create player sessions, specify a game session ID, a list of player
-    # IDs, and optionally a set of player data strings. If successful, the
-    # players are added to the game session and a set of new PlayerSession
-    # objects is returned. Player sessions cannot be updated.
+    # IDs, and optionally a set of player data strings. If successful, a
+    # slot is reserved in the game session for each player and a set of new
+    # PlayerSession objects is returned. Player sessions cannot be updated.
     #
     # *Available in Amazon GameLift Local.*
-    #
-    # Player-session-related operations include:
     #
     # * CreatePlayerSession
     #
@@ -1430,6 +1583,7 @@ module Aws::GameLift
     #   resp.player_sessions[0].termination_time #=> Time
     #   resp.player_sessions[0].status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
     #   resp.player_sessions[0].ip_address #=> String
+    #   resp.player_sessions[0].dns_name #=> String
     #   resp.player_sessions[0].port #=> Integer
     #   resp.player_sessions[0].player_data #=> String
     #
@@ -1439,6 +1593,124 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def create_player_sessions(params = {}, options = {})
       req = build_request(:create_player_sessions, params)
+      req.send_request(options)
+    end
+
+    # Creates a new script record for your Realtime Servers script. Realtime
+    # scripts are JavaScript that provide configuration settings and
+    # optional custom game logic for your game. The script is deployed when
+    # you create a Realtime Servers fleet to host your game sessions. Script
+    # logic is executed during an active game session.
+    #
+    # To create a new script record, specify a script name and provide the
+    # script file(s). The script files and all dependencies must be zipped
+    # into a single file. You can pull the zip file from either of these
+    # locations:
+    #
+    # * A locally available directory. Use the *ZipFile* parameter for this
+    #   option.
+    #
+    # * An Amazon Simple Storage Service (Amazon S3) bucket under your AWS
+    #   account. Use the *StorageLocation* parameter for this option.
+    #   You'll need to have an Identity Access Management (IAM) role that
+    #   allows the Amazon GameLift service to access your S3 bucket.
+    #
+    # If the call is successful, a new script record is created with a
+    # unique script ID. If the script file is provided as a local file, the
+    # file is uploaded to an Amazon GameLift-owned S3 bucket and the script
+    # record's storage location reflects this location. If the script file
+    # is provided as an S3 bucket, Amazon GameLift accesses the file at this
+    # storage location as needed for deployment.
+    #
+    # **Learn more**
+    #
+    # [Amazon GameLift Realtime Servers][1]
+    #
+    # [Set Up a Role for Amazon GameLift Access][2]
+    #
+    # **Related operations**
+    #
+    # * CreateScript
+    #
+    # * ListScripts
+    #
+    # * DescribeScript
+    #
+    # * UpdateScript
+    #
+    # * DeleteScript
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html
+    #
+    # @option params [String] :name
+    #   Descriptive label that is associated with a script. Script names do
+    #   not need to be unique. You can use UpdateScript to change this value
+    #   later.
+    #
+    # @option params [String] :version
+    #   Version that is associated with a build or script. Version strings do
+    #   not need to be unique. You can use UpdateScript to change this value
+    #   later.
+    #
+    # @option params [Types::S3Location] :storage_location
+    #   Location of the Amazon S3 bucket where a zipped file containing your
+    #   Realtime scripts is stored. The storage location must specify the
+    #   Amazon S3 bucket name, the zip file name (the "key"), and a role ARN
+    #   that allows Amazon GameLift to access the Amazon S3 storage location.
+    #   The S3 bucket must be in the same region where you want to create a
+    #   new script. By default, Amazon GameLift uploads the latest version of
+    #   the zip file; if you have S3 object versioning turned on, you can use
+    #   the `ObjectVersion` parameter to specify an earlier version.
+    #
+    # @option params [String, IO] :zip_file
+    #   Data object containing your Realtime scripts and dependencies as a zip
+    #   file. The zip file can have one or multiple files. Maximum size of a
+    #   zip file is 5 MB.
+    #
+    #   When using the AWS CLI tool to create a script, this parameter is set
+    #   to the zip file name. It must be prepended with the string
+    #   "fileb://" to indicate that the file data is a binary object. For
+    #   example: `--zip-file fileb://myRealtimeScript.zip`.
+    #
+    # @return [Types::CreateScriptOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateScriptOutput#script #script} => Types::Script
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_script({
+    #     name: "NonZeroAndMaxString",
+    #     version: "NonZeroAndMaxString",
+    #     storage_location: {
+    #       bucket: "NonEmptyString",
+    #       key: "NonEmptyString",
+    #       role_arn: "NonEmptyString",
+    #       object_version: "NonEmptyString",
+    #     },
+    #     zip_file: "data",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.script.script_id #=> String
+    #   resp.script.name #=> String
+    #   resp.script.version #=> String
+    #   resp.script.size_on_disk #=> Integer
+    #   resp.script.creation_time #=> Time
+    #   resp.script.storage_location.bucket #=> String
+    #   resp.script.storage_location.key #=> String
+    #   resp.script.storage_location.role_arn #=> String
+    #   resp.script.storage_location.object_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateScript AWS API Documentation
+    #
+    # @overload create_script(params = {})
+    # @param [Hash] params ({})
+    def create_script(params = {}, options = {})
+      req = build_request(:create_script, params)
       req.send_request(options)
     end
 
@@ -1474,8 +1746,6 @@ module Aws::GameLift
     # a call to DeleteVpcPeeringAuthorization. You must create or delete the
     # peering connection while the authorization is valid.
     #
-    # VPC peering connection operations include:
-    #
     # * CreateVpcPeeringAuthorization
     #
     # * DescribeVpcPeeringAuthorizations
@@ -1490,7 +1760,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #
     # @option params [required, String] :game_lift_aws_account_id
     #   Unique identifier for the AWS account that you use to manage your
@@ -1500,9 +1770,14 @@ module Aws::GameLift
     # @option params [required, String] :peer_vpc_id
     #   Unique identifier for a VPC with resources to be accessed by your
     #   Amazon GameLift fleet. The VPC must be in the same region where your
-    #   fleet is deployed. To get VPC information, including IDs, use the
-    #   Virtual Private Cloud service tools, including the VPC Dashboard in
-    #   the AWS Management Console.
+    #   fleet is deployed. Look up a VPC ID using the [VPC Dashboard][1] in
+    #   the AWS Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/vpc/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #
     # @return [Types::CreateVpcPeeringAuthorizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1559,8 +1834,6 @@ module Aws::GameLift
     # monitoring fleet events for success or failure using
     # DescribeFleetEvents.
     #
-    # VPC peering connection operations include:
-    #
     # * CreateVpcPeeringAuthorization
     #
     # * DescribeVpcPeeringAuthorizations
@@ -1575,7 +1848,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet. This tells Amazon GameLift which
@@ -1589,9 +1862,14 @@ module Aws::GameLift
     # @option params [required, String] :peer_vpc_id
     #   Unique identifier for a VPC with resources to be accessed by your
     #   Amazon GameLift fleet. The VPC must be in the same region where your
-    #   fleet is deployed. To get VPC information, including IDs, use the
-    #   Virtual Private Cloud service tools, including the VPC Dashboard in
-    #   the AWS Management Console.
+    #   fleet is deployed. Look up a VPC ID using the [VPC Dashboard][1] in
+    #   the AWS Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/vpc/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1616,8 +1894,6 @@ module Aws::GameLift
     # clients attempting to access a server process using the deleted alias
     # receive an error. To delete an alias, specify the alias ID to be
     # deleted.
-    #
-    # Alias-related operations include:
     #
     # * CreateAlias
     #
@@ -1659,7 +1935,11 @@ module Aws::GameLift
     # the status of any active fleets using the build, but you can no longer
     # create new fleets with the deleted build.
     #
-    # Build-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Builds][1]
+    #
+    # **Related operations**
     #
     # * CreateBuild
     #
@@ -1670,6 +1950,10 @@ module Aws::GameLift
     # * UpdateBuild
     #
     # * DeleteBuild
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html
     #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to delete.
@@ -1695,10 +1979,20 @@ module Aws::GameLift
     # must set the fleet's desired capacity to zero. See
     # UpdateFleetCapacity.
     #
+    # If the fleet being deleted has a VPC peering connection, you first
+    # need to get a valid authorization (good for 24 hours) by calling
+    # CreateVpcPeeringAuthorization. You do not need to explicitly delete
+    # the VPC peering connection--this is done as part of the delete fleet
+    # process.
+    #
     # This action removes the fleet's resources and the fleet record. Once
     # a fleet is deleted, you can no longer use that fleet.
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -1738,6 +2032,10 @@ module Aws::GameLift
     #
     #   * StopFleetActions
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to be deleted.
     #
@@ -1761,8 +2059,6 @@ module Aws::GameLift
     # Deletes a game session queue. This action means that any
     # StartGameSessionPlacement requests that reference this queue will
     # fail. To delete a queue, specify the queue name.
-    #
-    # Queue-related operations include:
     #
     # * CreateGameSessionQueue
     #
@@ -1797,7 +2093,7 @@ module Aws::GameLift
     # specify the configuration name. A matchmaking configuration cannot be
     # deleted if it is being used in any active matchmaking tickets.
     #
-    # Operations related to match configurations and rule sets include:
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -1812,6 +2108,8 @@ module Aws::GameLift
     # * DescribeMatchmakingRuleSets
     #
     # * ValidateMatchmakingRuleSet
+    #
+    # * DeleteMatchmakingRuleSet
     #
     # @option params [required, String] :name
     #   Unique identifier for a matchmaking configuration
@@ -1833,6 +2131,60 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # Deletes an existing matchmaking rule set. To delete the rule set,
+    # provide the rule set name. Rule sets cannot be deleted if they are
+    # currently being used by a matchmaking configuration.
+    #
+    # **Learn more**
+    #
+    # * [Build a Rule Set][1]
+    #
+    # ^
+    #
+    # **Related operations**
+    #
+    # * CreateMatchmakingConfiguration
+    #
+    # * DescribeMatchmakingConfigurations
+    #
+    # * UpdateMatchmakingConfiguration
+    #
+    # * DeleteMatchmakingConfiguration
+    #
+    # * CreateMatchmakingRuleSet
+    #
+    # * DescribeMatchmakingRuleSets
+    #
+    # * ValidateMatchmakingRuleSet
+    #
+    # * DeleteMatchmakingRuleSet
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html
+    #
+    # @option params [required, String] :name
+    #   Unique identifier for a matchmaking rule set to be deleted. (Note: The
+    #   rule set name is different from the optional "name" field in the
+    #   rule set body.)
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_matchmaking_rule_set({
+    #     name: "MatchmakingIdStringModel", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingRuleSet AWS API Documentation
+    #
+    # @overload delete_matchmaking_rule_set(params = {})
+    # @param [Hash] params ({})
+    def delete_matchmaking_rule_set(params = {}, options = {})
+      req = build_request(:delete_matchmaking_rule_set, params)
+      req.send_request(options)
+    end
+
     # Deletes a fleet scaling policy. This action means that the policy is
     # no longer in force and removes all record of it. To delete a scaling
     # policy, specify both the scaling policy name and the fleet ID it is
@@ -1840,8 +2192,6 @@ module Aws::GameLift
     #
     # To temporarily suspend scaling policies, call StopFleetActions. This
     # operation suspends all policies for the fleet.
-    #
-    # Operations related to fleet capacity scaling include:
     #
     # * DescribeFleetCapacity
     #
@@ -1888,11 +2238,59 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Cancels a pending VPC peering authorization for the specified VPC. If
-    # the authorization has already been used to create a peering
-    # connection, call DeleteVpcPeeringConnection to remove the connection.
+    # Deletes a Realtime script. This action permanently deletes the script
+    # record. If script files were uploaded, they are also deleted (files
+    # stored in an S3 bucket are not deleted).
     #
-    # VPC peering connection operations include:
+    # To delete a script, specify the script ID. Before deleting a script,
+    # be sure to terminate all fleets that are deployed with the script
+    # being deleted. Fleet instances periodically check for script updates,
+    # and if the script record no longer exists, the instance will go into
+    # an error state and be unable to host game sessions.
+    #
+    # **Learn more**
+    #
+    # [Amazon GameLift Realtime Servers][1]
+    #
+    # **Related operations**
+    #
+    # * CreateScript
+    #
+    # * ListScripts
+    #
+    # * DescribeScript
+    #
+    # * UpdateScript
+    #
+    # * DeleteScript
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+    #
+    # @option params [required, String] :script_id
+    #   Unique identifier for a Realtime script to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_script({
+    #     script_id: "ScriptId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScript AWS API Documentation
+    #
+    # @overload delete_script(params = {})
+    # @param [Hash] params ({})
+    def delete_script(params = {}, options = {})
+      req = build_request(:delete_script, params)
+      req.send_request(options)
+    end
+
+    # Cancels a pending VPC peering authorization for the specified VPC. If
+    # you need to delete an existing VPC peering connection, call
+    # DeleteVpcPeeringConnection.
     #
     # * CreateVpcPeeringAuthorization
     #
@@ -1914,9 +2312,14 @@ module Aws::GameLift
     # @option params [required, String] :peer_vpc_id
     #   Unique identifier for a VPC with resources to be accessed by your
     #   Amazon GameLift fleet. The VPC must be in the same region where your
-    #   fleet is deployed. To get VPC information, including IDs, use the
-    #   Virtual Private Cloud service tools, including the VPC Dashboard in
-    #   the AWS Management Console.
+    #   fleet is deployed. Look up a VPC ID using the [VPC Dashboard][1] in
+    #   the AWS Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/vpc/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1946,8 +2349,6 @@ module Aws::GameLift
     # account that is used to manage the Amazon GameLift fleets. Identify
     # the connection to delete by the connection ID and fleet ID. If
     # successful, the connection is removed.
-    #
-    # VPC peering connection operations include:
     #
     # * CreateVpcPeeringAuthorization
     #
@@ -1994,8 +2395,6 @@ module Aws::GameLift
     #
     # To get alias properties, specify the alias ID. If successful, the
     # requested alias record is returned.
-    #
-    # Alias-related operations include:
     #
     # * CreateAlias
     #
@@ -2048,7 +2447,11 @@ module Aws::GameLift
     # build ID. If successful, an object containing the build properties is
     # returned.
     #
-    # Build-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Builds][1]
+    #
+    # **Related operations**
     #
     # * CreateBuild
     #
@@ -2059,6 +2462,10 @@ module Aws::GameLift
     # * UpdateBuild
     #
     # * DeleteBuild
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html
     #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to retrieve properties for.
@@ -2080,7 +2487,7 @@ module Aws::GameLift
     #   resp.build.version #=> String
     #   resp.build.status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.build.size_on_disk #=> Integer
-    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
     #   resp.build.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeBuild AWS API Documentation
@@ -2103,7 +2510,11 @@ module Aws::GameLift
     # GameLift can be found in the AWS Management Console for Amazon
     # GameLift (see the drop-down list in the upper right corner).
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -2143,6 +2554,10 @@ module Aws::GameLift
     #
     #   * StopFleetActions
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    #
     # @option params [String] :ec2_instance_type
     #   Name of an EC2 instance type that is supported in Amazon GameLift. A
     #   fleet instance type determines the computing resources of each
@@ -2162,13 +2577,13 @@ module Aws::GameLift
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_ec2_instance_limits({
-    #     ec2_instance_type: "t2.micro", # accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge
+    #     ec2_instance_type: "t2.micro", # accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge
     #   })
     #
     # @example Response structure
     #
     #   resp.ec2_instance_limits #=> Array
-    #   resp.ec2_instance_limits[0].ec2_instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
+    #   resp.ec2_instance_limits[0].ec2_instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.ec2_instance_limits[0].current_instances #=> Integer
     #   resp.ec2_instance_limits[0].instance_limit #=> Integer
     #
@@ -2196,7 +2611,11 @@ module Aws::GameLift
     #
     #  </note>
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -2235,6 +2654,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [Array<String>] :fleet_ids
     #   Unique identifier for a fleet(s) to retrieve attributes for. To
@@ -2272,25 +2695,28 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].fleet_id #=> String
     #   resp.fleet_attributes[0].fleet_arn #=> String
     #   resp.fleet_attributes[0].fleet_type #=> String, one of "ON_DEMAND", "SPOT"
-    #   resp.fleet_attributes[0].instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
+    #   resp.fleet_attributes[0].instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.fleet_attributes[0].description #=> String
     #   resp.fleet_attributes[0].name #=> String
     #   resp.fleet_attributes[0].creation_time #=> Time
     #   resp.fleet_attributes[0].termination_time #=> Time
     #   resp.fleet_attributes[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED"
     #   resp.fleet_attributes[0].build_id #=> String
+    #   resp.fleet_attributes[0].script_id #=> String
     #   resp.fleet_attributes[0].server_launch_path #=> String
     #   resp.fleet_attributes[0].server_launch_parameters #=> String
     #   resp.fleet_attributes[0].log_paths #=> Array
     #   resp.fleet_attributes[0].log_paths[0] #=> String
     #   resp.fleet_attributes[0].new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
-    #   resp.fleet_attributes[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+    #   resp.fleet_attributes[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
     #   resp.fleet_attributes[0].resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.fleet_attributes[0].resource_creation_limit_policy.policy_period_in_minutes #=> Integer
     #   resp.fleet_attributes[0].metric_groups #=> Array
     #   resp.fleet_attributes[0].metric_groups[0] #=> String
     #   resp.fleet_attributes[0].stopped_actions #=> Array
     #   resp.fleet_attributes[0].stopped_actions[0] #=> String, one of "AUTO_SCALING"
+    #   resp.fleet_attributes[0].instance_role_arn #=> String
+    #   resp.fleet_attributes[0].certificate_configuration.certificate_type #=> String, one of "DISABLED", "GENERATED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes AWS API Documentation
@@ -2318,7 +2744,11 @@ module Aws::GameLift
     #
     #  </note>
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -2357,6 +2787,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [Array<String>] :fleet_ids
     #   Unique identifier for a fleet(s) to retrieve capacity information for.
@@ -2393,7 +2827,7 @@ module Aws::GameLift
     #
     #   resp.fleet_capacity #=> Array
     #   resp.fleet_capacity[0].fleet_id #=> String
-    #   resp.fleet_capacity[0].instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
+    #   resp.fleet_capacity[0].instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.fleet_capacity[0].instance_counts.desired #=> Integer
     #   resp.fleet_capacity[0].instance_counts.minimum #=> Integer
     #   resp.fleet_capacity[0].instance_counts.maximum #=> Integer
@@ -2418,7 +2852,11 @@ module Aws::GameLift
     # successful, a collection of event log entries matching the request are
     # returned.
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -2457,6 +2895,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to get event logs for.
@@ -2525,7 +2967,11 @@ module Aws::GameLift
     # requested fleet ID. If the requested fleet has been deleted, the
     # result set is empty.
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -2564,6 +3010,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to retrieve port settings for.
@@ -2609,7 +3059,11 @@ module Aws::GameLift
     #
     #  </note>
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -2648,6 +3102,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [Array<String>] :fleet_ids
     #   Unique identifier for a fleet(s) to retrieve utilization data for. To
@@ -2710,8 +3168,6 @@ module Aws::GameLift
     # session status. Use the pagination parameters to retrieve results as a
     # set of sequential pages. If successful, a GameSessionDetail object is
     # returned for each session matching the request.
-    #
-    # Game-session-related operations include:
     #
     # * CreateGameSession
     #
@@ -2790,6 +3246,7 @@ module Aws::GameLift
     #   resp.game_session_details[0].game_session.game_properties[0].key #=> String
     #   resp.game_session_details[0].game_session.game_properties[0].value #=> String
     #   resp.game_session_details[0].game_session.ip_address #=> String
+    #   resp.game_session_details[0].game_session.dns_name #=> String
     #   resp.game_session_details[0].game_session.port #=> Integer
     #   resp.game_session_details[0].game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session_details[0].game_session.creator_id #=> String
@@ -2810,8 +3267,6 @@ module Aws::GameLift
     # Retrieves properties and current status of a game session placement
     # request. To get game session placement details, specify the placement
     # ID. If successful, a GameSessionPlacement object is returned.
-    #
-    # Game-session-related operations include:
     #
     # * CreateGameSession
     #
@@ -2850,7 +3305,7 @@ module Aws::GameLift
     #
     #   resp.game_session_placement.placement_id #=> String
     #   resp.game_session_placement.game_session_queue_name #=> String
-    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT"
+    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT", "FAILED"
     #   resp.game_session_placement.game_properties #=> Array
     #   resp.game_session_placement.game_properties[0].key #=> String
     #   resp.game_session_placement.game_properties[0].value #=> String
@@ -2866,6 +3321,7 @@ module Aws::GameLift
     #   resp.game_session_placement.start_time #=> Time
     #   resp.game_session_placement.end_time #=> Time
     #   resp.game_session_placement.ip_address #=> String
+    #   resp.game_session_placement.dns_name #=> String
     #   resp.game_session_placement.port #=> Integer
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
@@ -2888,8 +3344,6 @@ module Aws::GameLift
     # GameSessionQueue object is returned for each requested queue. When
     # specifying a list of queues, objects are returned only for queues that
     # currently exist in the region.
-    #
-    # Queue-related operations include:
     #
     # * CreateGameSessionQueue
     #
@@ -2960,8 +3414,6 @@ module Aws::GameLift
     # each game session matching the request.
     #
     # *Available in Amazon GameLift Local.*
-    #
-    # Game-session-related operations include:
     #
     # * CreateGameSession
     #
@@ -3040,6 +3492,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].game_properties[0].key #=> String
     #   resp.game_sessions[0].game_properties[0].value #=> String
     #   resp.game_sessions[0].ip_address #=> String
+    #   resp.game_sessions[0].dns_name #=> String
     #   resp.game_sessions[0].port #=> Integer
     #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_sessions[0].creator_id #=> String
@@ -3101,8 +3554,9 @@ module Aws::GameLift
     #   resp.instances[0].fleet_id #=> String
     #   resp.instances[0].instance_id #=> String
     #   resp.instances[0].ip_address #=> String
-    #   resp.instances[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
-    #   resp.instances[0].type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
+    #   resp.instances[0].dns_name #=> String
+    #   resp.instances[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.instances[0].type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.instances[0].status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
     #   resp.instances[0].creation_time #=> Time
     #   resp.next_token #=> String
@@ -3130,7 +3584,13 @@ module Aws::GameLift
     # If the request is successful, a ticket object is returned for each
     # requested ID that currently exists.
     #
-    # Matchmaking-related operations include:
+    # **Learn more**
+    #
+    # [ Add FlexMatch to a Game Client][1]
+    #
+    # [ Set Up FlexMatch Event Notification][2]
+    #
+    # **Related operations**
     #
     # * StartMatchmaking
     #
@@ -3141,6 +3601,11 @@ module Aws::GameLift
     # * AcceptMatch
     #
     # * StartMatchBackfill
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguidematch-notification.html
     #
     # @option params [required, Array<String>] :ticket_ids
     #   Unique identifier for a matchmaking ticket. You can include up to 10
@@ -3175,6 +3640,7 @@ module Aws::GameLift
     #   resp.ticket_list[0].players[0].latency_in_ms["NonEmptyString"] #=> Integer
     #   resp.ticket_list[0].game_session_connection_info.game_session_arn #=> String
     #   resp.ticket_list[0].game_session_connection_info.ip_address #=> String
+    #   resp.ticket_list[0].game_session_connection_info.dns_name #=> String
     #   resp.ticket_list[0].game_session_connection_info.port #=> Integer
     #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions #=> Array
     #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions[0].player_id #=> String
@@ -3190,7 +3656,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves the details of FlexMatch matchmaking configurations. with
+    # Retrieves the details of FlexMatch matchmaking configurations. With
     # this operation, you have the following options: (1) retrieve all
     # existing configurations, (2) provide the names of one or more
     # configurations to retrieve, or (3) retrieve all configurations that
@@ -3200,7 +3666,11 @@ module Aws::GameLift
     # name. When specifying a list of names, only configurations that
     # currently exist are returned.
     #
-    # Operations related to match configurations and rule sets include:
+    # **Learn more**
+    #
+    # [ Setting Up FlexMatch Matchmakers][1]
+    #
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -3215,6 +3685,12 @@ module Aws::GameLift
     # * DescribeMatchmakingRuleSets
     #
     # * ValidateMatchmakingRuleSet
+    #
+    # * DeleteMatchmakingRuleSet
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/matchmaker-build.html
     #
     # @option params [Array<String>] :names
     #   Unique identifier for a matchmaking configuration(s) to retrieve. To
@@ -3267,6 +3743,7 @@ module Aws::GameLift
     #   resp.configurations[0].game_properties[0].key #=> String
     #   resp.configurations[0].game_properties[0].value #=> String
     #   resp.configurations[0].game_session_data #=> String
+    #   resp.configurations[0].backfill_mode #=> String, one of "AUTOMATIC", "MANUAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurations AWS API Documentation
@@ -3284,7 +3761,13 @@ module Aws::GameLift
     # pagination parameters to retrieve results as a set of sequential
     # pages. If successful, a rule set is returned for each requested name.
     #
-    # Operations related to match configurations and rule sets include:
+    # **Learn more**
+    #
+    # * [Build a Rule Set][1]
+    #
+    # ^
+    #
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -3300,9 +3783,16 @@ module Aws::GameLift
     #
     # * ValidateMatchmakingRuleSet
     #
+    # * DeleteMatchmakingRuleSet
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html
+    #
     # @option params [Array<String>] :names
-    #   Unique identifier for a matchmaking rule set. This name is used to
-    #   identify the rule set associated with a matchmaking configuration.
+    #   List of one or more matchmaking rule set names to retrieve details
+    #   for. (Note: The rule set name is different from the optional "name"
+    #   field in the rule set body.)
     #
     # @option params [Integer] :limit
     #   Maximum number of results to return. Use this parameter with
@@ -3358,8 +3848,6 @@ module Aws::GameLift
     # request.
     #
     # *Available in Amazon GameLift Local.*
-    #
-    # Player-session-related operations include:
     #
     # * CreatePlayerSession
     #
@@ -3441,6 +3929,7 @@ module Aws::GameLift
     #   resp.player_sessions[0].termination_time #=> Time
     #   resp.player_sessions[0].status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
     #   resp.player_sessions[0].ip_address #=> String
+    #   resp.player_sessions[0].dns_name #=> String
     #   resp.player_sessions[0].port #=> Integer
     #   resp.player_sessions[0].player_data #=> String
     #   resp.next_token #=> String
@@ -3458,7 +3947,11 @@ module Aws::GameLift
     # The run-time configuration tells Amazon GameLift how to launch server
     # processes on instances in the fleet.
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -3497,6 +3990,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to get the run-time configuration for.
@@ -3542,8 +4039,6 @@ module Aws::GameLift
     # scaling policies, which remains ACTIVE. To see whether a fleet's
     # scaling policies are in force or suspended, call
     # DescribeFleetAttributes and check the stopped actions.
-    #
-    # Operations related to fleet capacity scaling include:
     #
     # * DescribeFleetCapacity
     #
@@ -3637,12 +4132,69 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # Retrieves properties for a Realtime script.
+    #
+    # To request a script record, specify the script ID. If successful, an
+    # object containing the script properties is returned.
+    #
+    # **Learn more**
+    #
+    # [Amazon GameLift Realtime Servers][1]
+    #
+    # **Related operations**
+    #
+    # * CreateScript
+    #
+    # * ListScripts
+    #
+    # * DescribeScript
+    #
+    # * UpdateScript
+    #
+    # * DeleteScript
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+    #
+    # @option params [required, String] :script_id
+    #   Unique identifier for a Realtime script to retrieve properties for.
+    #
+    # @return [Types::DescribeScriptOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScriptOutput#script #script} => Types::Script
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_script({
+    #     script_id: "ScriptId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.script.script_id #=> String
+    #   resp.script.name #=> String
+    #   resp.script.version #=> String
+    #   resp.script.size_on_disk #=> Integer
+    #   resp.script.creation_time #=> Time
+    #   resp.script.storage_location.bucket #=> String
+    #   resp.script.storage_location.key #=> String
+    #   resp.script.storage_location.role_arn #=> String
+    #   resp.script.storage_location.object_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScript AWS API Documentation
+    #
+    # @overload describe_script(params = {})
+    # @param [Hash] params ({})
+    def describe_script(params = {}, options = {})
+      req = build_request(:describe_script, params)
+      req.send_request(options)
+    end
+
     # Retrieves valid VPC peering authorizations that are pending for the
     # AWS account. This operation returns all VPC peering authorizations and
     # requests for peering. This includes those initiated and received by
     # this account.
-    #
-    # VPC peering connection operations include:
     #
     # * CreateVpcPeeringAuthorization
     #
@@ -3688,8 +4240,6 @@ module Aws::GameLift
     # records. If successful, the retrieved information includes both active
     # and pending connections. Active connections identify the IpV4 CIDR
     # block that the VPC uses to connect.
-    #
-    # VPC peering connection operations include:
     #
     # * CreateVpcPeeringAuthorization
     #
@@ -3746,8 +4296,6 @@ module Aws::GameLift
     #
     #  </note>
     #
-    # Game-session-related operations include:
-    #
     # * CreateGameSession
     #
     # * DescribeGameSessions
@@ -3770,7 +4318,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift
     #
     # @option params [required, String] :game_session_id
     #   Unique identifier for the game session to get logs for.
@@ -3813,14 +4361,15 @@ module Aws::GameLift
     # example later in this topic). For more information on remote access,
     # see [Remotely Accessing an Instance][1].
     #
-    # To request access to a specific instance, specify the IDs of the
-    # instance and the fleet it belongs to. If successful, an InstanceAccess
-    # object is returned containing the instance's IP address and a set of
-    # credentials.
+    # To request access to a specific instance, specify the IDs of both the
+    # instance and the fleet it belongs to. You can retrieve a fleet's
+    # instance IDs by calling DescribeInstances. If successful, an
+    # InstanceAccess object is returned containing the instance's IP
+    # address and a set of credentials.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet that contains the instance you want
@@ -3848,7 +4397,7 @@ module Aws::GameLift
     #   resp.instance_access.fleet_id #=> String
     #   resp.instance_access.instance_id #=> String
     #   resp.instance_access.ip_address #=> String
-    #   resp.instance_access.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+    #   resp.instance_access.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
     #   resp.instance_access.credentials.user_name #=> String
     #   resp.instance_access.credentials.secret #=> String
     #
@@ -3868,8 +4417,6 @@ module Aws::GameLift
     # <note markdown="1"> Returned aliases are not listed in any particular order.
     #
     #  </note>
-    #
-    # Alias-related operations include:
     #
     # * CreateAlias
     #
@@ -3957,7 +4504,11 @@ module Aws::GameLift
     #
     #  </note>
     #
-    # Build-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Builds][1]
+    #
+    # **Related operations**
     #
     # * CreateBuild
     #
@@ -3968,6 +4519,10 @@ module Aws::GameLift
     # * UpdateBuild
     #
     # * DeleteBuild
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html
     #
     # @option params [String] :status
     #   Build status to filter results by. To retrieve all builds, leave this
@@ -4016,7 +4571,7 @@ module Aws::GameLift
     #   resp.builds[0].version #=> String
     #   resp.builds[0].status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.builds[0].size_on_disk #=> Integer
-    #   resp.builds[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+    #   resp.builds[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
     #   resp.builds[0].creation_time #=> Time
     #   resp.next_token #=> String
     #
@@ -4030,14 +4585,19 @@ module Aws::GameLift
     end
 
     # Retrieves a collection of fleet records for this AWS account. You can
-    # filter the result set by build ID. Use the pagination parameters to
-    # retrieve results in sequential pages.
+    # filter the result set to find only those fleets that are deployed with
+    # a specific build or script. Use the pagination parameters to retrieve
+    # results in sequential pages.
     #
-    # <note markdown="1"> Fleet records are not listed in any particular order.
+    # <note markdown="1"> Fleet records are not listed in a particular order.
     #
     #  </note>
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Set Up Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -4077,10 +4637,19 @@ module Aws::GameLift
     #
     #   * StopFleetActions
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    #
     # @option params [String] :build_id
     #   Unique identifier for a build to return fleets for. Use this parameter
     #   to return only fleets using the specified build. To retrieve all
     #   fleets, leave this parameter empty.
+    #
+    # @option params [String] :script_id
+    #   Unique identifier for a Realtime script to return fleets for. Use this
+    #   parameter to return only fleets using the specified script. To
+    #   retrieve all fleets, leave this parameter empty.
     #
     # @option params [Integer] :limit
     #   Maximum number of results to return. Use this parameter with
@@ -4100,6 +4669,7 @@ module Aws::GameLift
     #
     #   resp = client.list_fleets({
     #     build_id: "BuildId",
+    #     script_id: "ScriptId",
     #     limit: 1,
     #     next_token: "NonZeroAndMaxString",
     #   })
@@ -4116,6 +4686,73 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def list_fleets(params = {}, options = {})
       req = build_request(:list_fleets, params)
+      req.send_request(options)
+    end
+
+    # Retrieves script records for all Realtime scripts that are associated
+    # with the AWS account in use.
+    #
+    # **Learn more**
+    #
+    # [Amazon GameLift Realtime Servers][1]
+    #
+    # **Related operations**
+    #
+    # * CreateScript
+    #
+    # * ListScripts
+    #
+    # * DescribeScript
+    #
+    # * UpdateScript
+    #
+    # * DeleteScript
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+    #
+    # @option params [Integer] :limit
+    #   Maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #
+    # @option params [String] :next_token
+    #   Token that indicates the start of the next sequential page of results.
+    #   Use the token that is returned with a previous call to this action. To
+    #   start at the beginning of the result set, do not specify a value.
+    #
+    # @return [Types::ListScriptsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScriptsOutput#scripts #scripts} => Array&lt;Types::Script&gt;
+    #   * {Types::ListScriptsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scripts({
+    #     limit: 1,
+    #     next_token: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scripts #=> Array
+    #   resp.scripts[0].script_id #=> String
+    #   resp.scripts[0].name #=> String
+    #   resp.scripts[0].version #=> String
+    #   resp.scripts[0].size_on_disk #=> Integer
+    #   resp.scripts[0].creation_time #=> Time
+    #   resp.scripts[0].storage_location.bucket #=> String
+    #   resp.scripts[0].storage_location.key #=> String
+    #   resp.scripts[0].storage_location.role_arn #=> String
+    #   resp.scripts[0].storage_location.object_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListScripts AWS API Documentation
+    #
+    # @overload list_scripts(params = {})
+    # @param [Hash] params ({})
+    def list_scripts(params = {}, options = {})
+      req = build_request(:list_scripts, params)
       req.send_request(options)
     end
 
@@ -4203,8 +4840,6 @@ module Aws::GameLift
     # the fleet's auto-scaling actions are temporarily suspended, the new
     # policy will be in force once the fleet actions are restarted.
     #
-    # Operations related to fleet capacity scaling include:
-    #
     # * DescribeFleetCapacity
     #
     # * UpdateFleetCapacity
@@ -4227,7 +4862,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-autoscaling.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-autoscaling.html
     #
     # @option params [required, String] :name
     #   Descriptive label that is associated with a scaling policy. Policy
@@ -4311,7 +4946,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html
     #
     # @option params [String] :policy_type
     #   Type of scaling policy to create. For a target-based policy, set the
@@ -4366,6 +5001,26 @@ module Aws::GameLift
     # are returned, along with the S3 storage location associated with the
     # build ID.
     #
+    # **Learn more**
+    #
+    # [Uploading Your Game][1]
+    #
+    # **Related operations**
+    #
+    # * CreateBuild
+    #
+    # * ListBuilds
+    #
+    # * DescribeBuild
+    #
+    # * UpdateBuild
+    #
+    # * DeleteBuild
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html
+    #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to get credentials for.
     #
@@ -4388,6 +5043,7 @@ module Aws::GameLift
     #   resp.storage_location.bucket #=> String
     #   resp.storage_location.key #=> String
     #   resp.storage_location.role_arn #=> String
+    #   resp.storage_location.object_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentials AWS API Documentation
     #
@@ -4400,8 +5056,6 @@ module Aws::GameLift
 
     # Retrieves the fleet ID that a specified alias is currently pointing
     # to.
-    #
-    # Alias-related operations include:
     #
     # * CreateAlias
     #
@@ -4498,8 +5152,6 @@ module Aws::GameLift
     # separately and combine the results. This search feature finds only
     # game sessions that are in `ACTIVE` status. To locate games in statuses
     # other than active, use DescribeGameSessionDetails.
-    #
-    # Game-session-related operations include:
     #
     # * CreateGameSession
     #
@@ -4636,6 +5288,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].game_properties[0].key #=> String
     #   resp.game_sessions[0].game_properties[0].value #=> String
     #   resp.game_sessions[0].ip_address #=> String
+    #   resp.game_sessions[0].dns_name #=> String
     #   resp.game_sessions[0].port #=> Integer
     #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_sessions[0].creator_id #=> String
@@ -4663,27 +5316,53 @@ module Aws::GameLift
     # this operation will have no effect. You can view a fleet's stopped
     # actions using DescribeFleetAttributes.
     #
-    # Operations related to fleet capacity scaling include:
+    # **Learn more**
     #
-    # * DescribeFleetCapacity
+    # [ Working with Fleets][1].
     #
-    # * UpdateFleetCapacity
+    # **Related operations**
     #
-    # * DescribeEC2InstanceLimits
+    # * CreateFleet
     #
-    # * Manage scaling policies:
+    # * ListFleets
     #
-    #   * PutScalingPolicy (auto-scaling)
+    # * DeleteFleet
     #
-    #   * DescribeScalingPolicies (auto-scaling)
+    # * Describe fleets:
     #
-    #   * DeleteScalingPolicy (auto-scaling)
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
     #
     # * Manage fleet actions:
     #
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet
@@ -4739,8 +5418,10 @@ module Aws::GameLift
     # * A unique ID (such as a UUID) for the placement. You use this ID to
     #   track the status of the placement request
     #
-    # * (Optional) A set of IDs and player data for each player you want to
-    #   join to the new game session
+    # * (Optional) A set of player data and a unique player ID for each
+    #   player that you are joining to the new game session (player data is
+    #   optional, but if you include it, you must also provide a unique ID
+    #   for each player)
     #
     # * Latency data for all players (if you want to optimize game play for
     #   the players)
@@ -4752,8 +5433,6 @@ module Aws::GameLift
     # status is `FULFILLED`, a new game session has been created and a game
     # session ARN and region are referenced. If the placement request times
     # out, you can resubmit the request or retry it with a different queue.
-    #
-    # Game-session-related operations include:
     #
     # * CreateGameSession
     #
@@ -4792,7 +5471,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @option params [required, Integer] :maximum_player_session_count
     #   Maximum number of players that can be connected simultaneously to the
@@ -4819,7 +5498,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @return [Types::StartGameSessionPlacementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4858,7 +5537,7 @@ module Aws::GameLift
     #
     #   resp.game_session_placement.placement_id #=> String
     #   resp.game_session_placement.game_session_queue_name #=> String
-    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT"
+    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT", "FAILED"
     #   resp.game_session_placement.game_properties #=> Array
     #   resp.game_session_placement.game_properties[0].key #=> String
     #   resp.game_session_placement.game_properties[0].value #=> String
@@ -4874,6 +5553,7 @@ module Aws::GameLift
     #   resp.game_session_placement.start_time #=> Time
     #   resp.game_session_placement.end_time #=> Time
     #   resp.game_session_placement.ip_address #=> String
+    #   resp.game_session_placement.dns_name #=> String
     #   resp.game_session_placement.port #=> Integer
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
@@ -4904,9 +5584,7 @@ module Aws::GameLift
     # that describes all current players in the game session. If successful,
     # a match backfill ticket is created and returned with status set to
     # QUEUED. The ticket is placed in the matchmaker's ticket pool and
-    # processed. Track the status of the ticket to respond as needed. For
-    # more detail how to set up backfilling, see [ Backfill Existing Games
-    # with FlexMatch][1].
+    # processed. Track the status of the ticket to respond as needed.
     #
     # The process of finding backfill matches is essentially identical to
     # the initial matchmaking process. The matchmaker searches the pool and
@@ -4916,9 +5594,15 @@ module Aws::GameLift
     # the match are updated with the game session's connection information,
     # and the GameSession object is updated to include matchmaker data on
     # the new players. For more detail on how match backfill requests are
-    # processed, see [ How Amazon GameLift FlexMatch Works][2].
+    # processed, see [ How Amazon GameLift FlexMatch Works][1].
     #
-    # Matchmaking-related operations include:
+    # **Learn more**
+    #
+    # [ Backfill Existing Games with FlexMatch][2]
+    #
+    # [ How GameLift FlexMatch Works][1]
+    #
+    # **Related operations**
     #
     # * StartMatchmaking
     #
@@ -4932,8 +5616,8 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
-    # [2]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
     #
     # @option params [String] :ticket_id
     #   Unique identifier for a matchmaking ticket. If no ticket ID is
@@ -4957,7 +5641,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #
     # @option params [required, Array<Types::Player>] :players
     #   Match information on all players that are currently assigned to the
@@ -4976,7 +5660,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
     #
     # @return [Types::StartMatchBackfillOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5020,6 +5704,7 @@ module Aws::GameLift
     #   resp.matchmaking_ticket.players[0].latency_in_ms["NonEmptyString"] #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.game_session_arn #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.ip_address #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.dns_name #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.port #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions #=> Array
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_id #=> String
@@ -5044,9 +5729,7 @@ module Aws::GameLift
     # start with a single player or a group of players who want to play
     # together. FlexMatch finds additional players as needed to fill the
     # match. Match type, rules, and the queue used to place a new game
-    # session are defined in a `MatchmakingConfiguration`. For complete
-    # information on setting up and using FlexMatch, see the topic [ Adding
-    # FlexMatch to Your Game][1].
+    # session are defined in a `MatchmakingConfiguration`.
     #
     # To start matchmaking, provide a unique ticket ID, specify a
     # matchmaking configuration, and include the players to be matched. You
@@ -5104,7 +5787,17 @@ module Aws::GameLift
     #     matchmaking tickets. Matched players can use the connection
     #     information to join the game.
     #
-    # Matchmaking-related operations include:
+    # **Learn more**
+    #
+    # [ Add FlexMatch to a Game Client][1]
+    #
+    # [ Set Up FlexMatch Event Notification][2]
+    #
+    # [ FlexMatch Integration Roadmap][3]
+    #
+    # [ How GameLift FlexMatch Works][4]
+    #
+    # **Related operations**
     #
     # * StartMatchmaking
     #
@@ -5118,7 +5811,10 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-tasks.html
+    # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html
     #
     # @option params [String] :ticket_id
     #   Unique identifier for a matchmaking ticket. If no ticket ID is
@@ -5179,6 +5875,7 @@ module Aws::GameLift
     #   resp.matchmaking_ticket.players[0].latency_in_ms["NonEmptyString"] #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.game_session_arn #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.ip_address #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.dns_name #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.port #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions #=> Array
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_id #=> String
@@ -5207,6 +5904,54 @@ module Aws::GameLift
     # desired instances setting (FleetCapacity. Changes to the fleet's
     # capacity must be done manually using UpdateFleetCapacity.
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * DeleteFleet
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet actions:
+    #
+    #   * StartFleetActions
+    #
+    #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet
     #
@@ -5234,8 +5979,6 @@ module Aws::GameLift
     # Cancels a game session placement that is in `PENDING` status. To stop
     # a placement, provide the placement ID values. If successful, the
     # placement is moved to `CANCELLED` status.
-    #
-    # Game-session-related operations include:
     #
     # * CreateGameSession
     #
@@ -5274,7 +6017,7 @@ module Aws::GameLift
     #
     #   resp.game_session_placement.placement_id #=> String
     #   resp.game_session_placement.game_session_queue_name #=> String
-    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT"
+    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT", "FAILED"
     #   resp.game_session_placement.game_properties #=> Array
     #   resp.game_session_placement.game_properties[0].key #=> String
     #   resp.game_session_placement.game_properties[0].value #=> String
@@ -5290,6 +6033,7 @@ module Aws::GameLift
     #   resp.game_session_placement.start_time #=> Time
     #   resp.game_session_placement.end_time #=> Time
     #   resp.game_session_placement.ip_address #=> String
+    #   resp.game_session_placement.dns_name #=> String
     #   resp.game_session_placement.port #=> Integer
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
@@ -5306,12 +6050,27 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Cancels a matchmaking ticket that is currently being processed. To
-    # stop the matchmaking operation, specify the ticket ID. If successful,
-    # work on the ticket is stopped, and the ticket status is changed to
-    # `CANCELLED`.
+    # Cancels a matchmaking ticket or match backfill ticket that is
+    # currently being processed. To stop the matchmaking operation, specify
+    # the ticket ID. If successful, work on the ticket is stopped, and the
+    # ticket status is changed to `CANCELLED`.
     #
-    # Matchmaking-related operations include:
+    # This call is also used to turn off automatic backfill for an
+    # individual game session. This is for game sessions that are created
+    # with a matchmaking configuration that has automatic backfill enabled.
+    # The ticket ID is included in the `MatchmakerData` of an updated game
+    # session object, which is provided to the game server.
+    #
+    # <note markdown="1"> If the action is successful, the service sends back an empty JSON
+    # struct with the HTTP 200 response (not an empty HTTP body).
+    #
+    #  </note>
+    #
+    # **Learn more**
+    #
+    # [ Add FlexMatch to a Game Client][1]
+    #
+    # **Related operations**
     #
     # * StartMatchmaking
     #
@@ -5322,6 +6081,10 @@ module Aws::GameLift
     # * AcceptMatch
     #
     # * StartMatchBackfill
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html
     #
     # @option params [required, String] :ticket_id
     #   Unique identifier for a matchmaking ticket.
@@ -5347,8 +6110,6 @@ module Aws::GameLift
     # alias ID to be updated and provide the information to be changed. To
     # reassign an alias to another fleet, provide an updated routing
     # strategy. If successful, the updated alias record is returned.
-    #
-    # Alias-related operations include:
     #
     # * CreateAlias
     #
@@ -5419,7 +6180,11 @@ module Aws::GameLift
     # provide the new values. If successful, a build object containing the
     # updated metadata is returned.
     #
-    # Build-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Builds][1]
+    #
+    # **Related operations**
     #
     # * CreateBuild
     #
@@ -5431,6 +6196,10 @@ module Aws::GameLift
     #
     # * DeleteBuild
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html
+    #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to update.
     #
@@ -5439,8 +6208,8 @@ module Aws::GameLift
     #   need to be unique.
     #
     # @option params [String] :version
-    #   Version that is associated with this build. Version strings do not
-    #   need to be unique.
+    #   Version that is associated with a build or script. Version strings do
+    #   not need to be unique.
     #
     # @return [Types::UpdateBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5461,7 +6230,7 @@ module Aws::GameLift
     #   resp.build.version #=> String
     #   resp.build.status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.build.size_on_disk #=> Integer
-    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
     #   resp.build.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateBuild AWS API Documentation
@@ -5478,7 +6247,11 @@ module Aws::GameLift
     # you want to change. If successful, the fleet ID for the updated fleet
     # is returned.
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -5517,6 +6290,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to update attribute metadata for.
@@ -5601,7 +6378,11 @@ module Aws::GameLift
     # desired instance count is higher than the instance type's limit, the
     # "Limit Exceeded" exception occurs.
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -5640,6 +6421,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to update capacity for.
@@ -5689,7 +6474,11 @@ module Aws::GameLift
     # match existing fleet permissions. If successful, the fleet ID for the
     # updated fleet is returned.
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -5728,6 +6517,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to update port settings for.
@@ -5784,8 +6577,6 @@ module Aws::GameLift
     # new players can join the session. To update a game session, specify
     # the game session ID and the values you want to change. If successful,
     # an updated GameSession object is returned.
-    #
-    # Game-session-related operations include:
     #
     # * CreateGameSession
     #
@@ -5860,6 +6651,7 @@ module Aws::GameLift
     #   resp.game_session.game_properties[0].key #=> String
     #   resp.game_session.game_properties[0].value #=> String
     #   resp.game_session.ip_address #=> String
+    #   resp.game_session.dns_name #=> String
     #   resp.game_session.port #=> Integer
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
@@ -5879,8 +6671,6 @@ module Aws::GameLift
     # game session requests in the queue are processed. To update settings,
     # specify the queue name to be updated and provide the new settings.
     # When updating destinations, provide a complete list of destinations.
-    #
-    # Queue-related operations include:
     #
     # * CreateGameSessionQueue
     #
@@ -5960,11 +6750,16 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Updates settings for a FlexMatch matchmaking configuration. To update
-    # settings, specify the configuration name to be updated and provide the
-    # new settings.
+    # Updates settings for a FlexMatch matchmaking configuration. These
+    # changes affect all matches and game sessions that are created after
+    # the update. To update settings, specify the configuration name to be
+    # updated and provide the new settings.
     #
-    # Operations related to match configurations and rule sets include:
+    # **Learn more**
+    #
+    # [ Design a FlexMatch Matchmaker][1]
+    #
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -5980,6 +6775,12 @@ module Aws::GameLift
     #
     # * ValidateMatchmakingRuleSet
     #
+    # * DeleteMatchmakingRuleSet
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html
+    #
     # @option params [required, String] :name
     #   Unique identifier for a matchmaking configuration to update.
     #
@@ -5989,19 +6790,19 @@ module Aws::GameLift
     # @option params [Array<String>] :game_session_queue_arns
     #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
     #   queue and uniquely identifies it. Format is
-    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
-    #   These queues are used when placing game sessions for matches that are
-    #   created with this matchmaking configuration. Queues can be located in
-    #   any region.
+    #   `arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue
+    #   name>`. These queues are used when placing game sessions for matches
+    #   that are created with this matchmaking configuration. Queues can be
+    #   located in any region.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #
     # @option params [Integer] :request_timeout_seconds
     #   Maximum duration, in seconds, that a matchmaking ticket can remain in
-    #   process before timing out. Requests that time out can be resubmitted
-    #   as needed.
+    #   process before timing out. Requests that fail due to timing out can be
+    #   resubmitted as needed.
     #
     # @option params [Integer] :acceptance_timeout_seconds
     #   Length of time (in seconds) to wait for players to accept a proposed
@@ -6009,7 +6810,7 @@ module Aws::GameLift
     #   timeout, the ticket continues to look for an acceptable match.
     #
     # @option params [Boolean] :acceptance_required
-    #   Flag that determines whether or not a match that was created with this
+    #   Flag that determines whether a match that was created with this
     #   configuration must be accepted by the matched players. To require
     #   acceptance, set to TRUE.
     #
@@ -6024,7 +6825,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
     #
     # @option params [Integer] :additional_player_count
     #   Number of player slots in a match to keep open for future players. For
@@ -6033,7 +6834,7 @@ module Aws::GameLift
     #   only 10 players are selected for the match.
     #
     # @option params [String] :custom_event_data
-    #   Information to attached to all events related to the matchmaking
+    #   Information to add to all events related to the matchmaking
     #   configuration.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
@@ -6045,7 +6846,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @option params [String] :game_session_data
     #   Set of custom game session properties, formatted as a single string
@@ -6056,7 +6857,19 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #
+    # @option params [String] :backfill_mode
+    #   Method used to backfill game sessions created with this matchmaking
+    #   configuration. Specify MANUAL when your game manages backfill requests
+    #   manually or does not use the match backfill feature. Specify AUTOMATIC
+    #   to have GameLift create a StartMatchBackfill request whenever a game
+    #   session has one or more open slots. Learn more about manual and
+    #   automatic backfill in [Backfill Existing Games with FlexMatch][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
     #
     # @return [Types::UpdateMatchmakingConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6082,6 +6895,7 @@ module Aws::GameLift
     #       },
     #     ],
     #     game_session_data: "GameSessionData",
+    #     backfill_mode: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
     #   })
     #
     # @example Response structure
@@ -6102,6 +6916,7 @@ module Aws::GameLift
     #   resp.configuration.game_properties[0].key #=> String
     #   resp.configuration.game_properties[0].value #=> String
     #   resp.configuration.game_session_data #=> String
+    #   resp.configuration.backfill_mode #=> String, one of "AUTOMATIC", "MANUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfiguration AWS API Documentation
     #
@@ -6119,20 +6934,22 @@ module Aws::GameLift
     # to be in an `ACTIVE` status.
     #
     # To update run-time configuration, specify the fleet ID and provide a
-    # `RuntimeConfiguration` object with the updated collection of server
-    # process configurations.
+    # `RuntimeConfiguration` object with an updated set of server process
+    # configurations.
     #
     # Each instance in a Amazon GameLift fleet checks regularly for an
     # updated run-time configuration and changes how it launches server
     # processes to comply with the latest version. Existing server processes
-    # are not affected by the update; they continue to run until they end,
-    # while Amazon GameLift simply adds new server processes to fit the
-    # current run-time configuration. As a result, the run-time
-    # configuration changes are applied gradually as existing processes shut
-    # down and new processes are launched in Amazon GameLift's normal
-    # process recycling activity.
+    # are not affected by the update; run-time configuration changes are
+    # applied gradually as existing processes shut down and new processes
+    # are launched during Amazon GameLift's normal process recycling
+    # activity.
     #
-    # Fleet-related operations include:
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -6172,17 +6989,22 @@ module Aws::GameLift
     #
     #   * StopFleetActions
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to update run-time configuration for.
     #
     # @option params [required, Types::RuntimeConfiguration] :runtime_configuration
     #   Instructions for launching server processes on each instance in the
-    #   fleet. The run-time configuration for a fleet has a collection of
-    #   server process configurations, one for each type of server process to
-    #   run on an instance. A server process configuration specifies the
-    #   location of the server executable, launch parameters, and the number
-    #   of concurrent processes with that configuration to maintain on each
-    #   instance.
+    #   fleet. Server processes run either a custom game build executable or a
+    #   Realtime Servers script. The run-time configuration lists the types of
+    #   server processes to run on an instance and includes the following
+    #   configuration settings: the server executable or launch script file,
+    #   launch parameters, and the number of processes to run concurrently on
+    #   each instance. A CreateFleet request must include a run-time
+    #   configuration with at least one server process configuration.
     #
     # @return [Types::UpdateRuntimeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6223,12 +7045,124 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Validates the syntax of a matchmaking rule or rule set. This operation
-    # checks that the rule set uses syntactically correct JSON and that it
-    # conforms to allowed property expressions. To validate syntax, provide
-    # a rule set string.
+    # Updates Realtime script metadata and content.
     #
-    # Operations related to match configurations and rule sets include:
+    # To update script metadata, specify the script ID and provide updated
+    # name and/or version values.
+    #
+    # To update script content, provide an updated zip file by pointing to
+    # either a local file or an Amazon S3 bucket location. You can use
+    # either method regardless of how the original script was uploaded. Use
+    # the *Version* parameter to track updates to the script.
+    #
+    # If the call is successful, the updated metadata is stored in the
+    # script record and a revised script is uploaded to the Amazon GameLift
+    # service. Once the script is updated and acquired by a fleet instance,
+    # the new version is used for all new game sessions.
+    #
+    # **Learn more**
+    #
+    # [Amazon GameLift Realtime Servers][1]
+    #
+    # **Related operations**
+    #
+    # * CreateScript
+    #
+    # * ListScripts
+    #
+    # * DescribeScript
+    #
+    # * UpdateScript
+    #
+    # * DeleteScript
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+    #
+    # @option params [required, String] :script_id
+    #   Unique identifier for a Realtime script to update.
+    #
+    # @option params [String] :name
+    #   Descriptive label that is associated with a script. Script names do
+    #   not need to be unique.
+    #
+    # @option params [String] :version
+    #   Version that is associated with a build or script. Version strings do
+    #   not need to be unique.
+    #
+    # @option params [Types::S3Location] :storage_location
+    #   Location of the Amazon S3 bucket where a zipped file containing your
+    #   Realtime scripts is stored. The storage location must specify the
+    #   Amazon S3 bucket name, the zip file name (the "key"), and a role ARN
+    #   that allows Amazon GameLift to access the Amazon S3 storage location.
+    #   The S3 bucket must be in the same region where you want to create a
+    #   new script. By default, Amazon GameLift uploads the latest version of
+    #   the zip file; if you have S3 object versioning turned on, you can use
+    #   the `ObjectVersion` parameter to specify an earlier version.
+    #
+    # @option params [String, IO] :zip_file
+    #   Data object containing your Realtime scripts and dependencies as a zip
+    #   file. The zip file can have one or multiple files. Maximum size of a
+    #   zip file is 5 MB.
+    #
+    #   When using the AWS CLI tool to create a script, this parameter is set
+    #   to the zip file name. It must be prepended with the string
+    #   "fileb://" to indicate that the file data is a binary object. For
+    #   example: `--zip-file fileb://myRealtimeScript.zip`.
+    #
+    # @return [Types::UpdateScriptOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateScriptOutput#script #script} => Types::Script
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_script({
+    #     script_id: "ScriptId", # required
+    #     name: "NonZeroAndMaxString",
+    #     version: "NonZeroAndMaxString",
+    #     storage_location: {
+    #       bucket: "NonEmptyString",
+    #       key: "NonEmptyString",
+    #       role_arn: "NonEmptyString",
+    #       object_version: "NonEmptyString",
+    #     },
+    #     zip_file: "data",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.script.script_id #=> String
+    #   resp.script.name #=> String
+    #   resp.script.version #=> String
+    #   resp.script.size_on_disk #=> Integer
+    #   resp.script.creation_time #=> Time
+    #   resp.script.storage_location.bucket #=> String
+    #   resp.script.storage_location.key #=> String
+    #   resp.script.storage_location.role_arn #=> String
+    #   resp.script.storage_location.object_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateScript AWS API Documentation
+    #
+    # @overload update_script(params = {})
+    # @param [Hash] params ({})
+    def update_script(params = {}, options = {})
+      req = build_request(:update_script, params)
+      req.send_request(options)
+    end
+
+    # Validates the syntax of a matchmaking rule or rule set. This operation
+    # checks that the rule set is using syntactically correct JSON and that
+    # it conforms to allowed property expressions. To validate syntax,
+    # provide a rule set JSON string.
+    #
+    # **Learn more**
+    #
+    # * [Build a Rule Set][1]
+    #
+    # ^
+    #
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -6243,6 +7177,12 @@ module Aws::GameLift
     # * DescribeMatchmakingRuleSets
     #
     # * ValidateMatchmakingRuleSet
+    #
+    # * DeleteMatchmakingRuleSet
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html
     #
     # @option params [required, String] :rule_set_body
     #   Collection of matchmaking rules to validate, formatted as a JSON
@@ -6284,7 +7224,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

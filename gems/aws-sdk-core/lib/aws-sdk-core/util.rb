@@ -43,6 +43,24 @@ module Aws
           end
         end
       end
+
+      def monotonic_milliseconds
+        if defined?(Process::CLOCK_MONOTONIC)
+          Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
+        else
+          DateTime.now.strftime('%Q').to_i
+        end
+      end
+
+      def str_2_bool(str)
+        case str.to_s
+        when "true" then true
+        when "false" then false
+        else
+          nil
+        end
+      end
+
     end
   end
 end

@@ -17,6 +17,7 @@ module Aws::TranscribeService
     CreateVocabularyRequest = Shapes::StructureShape.new(name: 'CreateVocabularyRequest')
     CreateVocabularyResponse = Shapes::StructureShape.new(name: 'CreateVocabularyResponse')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DeleteTranscriptionJobRequest = Shapes::StructureShape.new(name: 'DeleteTranscriptionJobRequest')
     DeleteVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteVocabularyRequest')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     GetTranscriptionJobRequest = Shapes::StructureShape.new(name: 'GetTranscriptionJobRequest')
@@ -24,12 +25,14 @@ module Aws::TranscribeService
     GetVocabularyRequest = Shapes::StructureShape.new(name: 'GetVocabularyRequest')
     GetVocabularyResponse = Shapes::StructureShape.new(name: 'GetVocabularyResponse')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
+    KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListTranscriptionJobsRequest = Shapes::StructureShape.new(name: 'ListTranscriptionJobsRequest')
     ListTranscriptionJobsResponse = Shapes::StructureShape.new(name: 'ListTranscriptionJobsResponse')
     ListVocabulariesRequest = Shapes::StructureShape.new(name: 'ListVocabulariesRequest')
     ListVocabulariesResponse = Shapes::StructureShape.new(name: 'ListVocabulariesResponse')
+    MaxAlternatives = Shapes::IntegerShape.new(name: 'MaxAlternatives')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxSpeakers = Shapes::IntegerShape.new(name: 'MaxSpeakers')
     Media = Shapes::StructureShape.new(name: 'Media')
@@ -59,9 +62,16 @@ module Aws::TranscribeService
     VocabularyName = Shapes::StringShape.new(name: 'VocabularyName')
     VocabularyState = Shapes::StringShape.new(name: 'VocabularyState')
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
     CreateVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
-    CreateVocabularyRequest.add_member(:phrases, Shapes::ShapeRef.new(shape: Phrases, required: true, location_name: "Phrases"))
+    CreateVocabularyRequest.add_member(:phrases, Shapes::ShapeRef.new(shape: Phrases, location_name: "Phrases"))
+    CreateVocabularyRequest.add_member(:vocabulary_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "VocabularyFileUri"))
     CreateVocabularyRequest.struct_class = Types::CreateVocabularyRequest
 
     CreateVocabularyResponse.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
@@ -70,6 +80,9 @@ module Aws::TranscribeService
     CreateVocabularyResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
     CreateVocabularyResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     CreateVocabularyResponse.struct_class = Types::CreateVocabularyResponse
+
+    DeleteTranscriptionJobRequest.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "TranscriptionJobName"))
+    DeleteTranscriptionJobRequest.struct_class = Types::DeleteTranscriptionJobRequest
 
     DeleteVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
     DeleteVocabularyRequest.struct_class = Types::DeleteVocabularyRequest
@@ -90,6 +103,12 @@ module Aws::TranscribeService
     GetVocabularyResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     GetVocabularyResponse.add_member(:download_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "DownloadUri"))
     GetVocabularyResponse.struct_class = Types::GetVocabularyResponse
+
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListTranscriptionJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "Status"))
     ListTranscriptionJobsRequest.add_member(:job_name_contains, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "JobNameContains"))
@@ -116,20 +135,26 @@ module Aws::TranscribeService
     Media.add_member(:media_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "MediaFileUri"))
     Media.struct_class = Types::Media
 
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     Phrases.member = Shapes::ShapeRef.new(shape: Phrase)
 
     Settings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
     Settings.add_member(:show_speaker_labels, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowSpeakerLabels"))
     Settings.add_member(:max_speaker_labels, Shapes::ShapeRef.new(shape: MaxSpeakers, location_name: "MaxSpeakerLabels"))
     Settings.add_member(:channel_identification, Shapes::ShapeRef.new(shape: Boolean, location_name: "ChannelIdentification"))
+    Settings.add_member(:show_alternatives, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowAlternatives"))
+    Settings.add_member(:max_alternatives, Shapes::ShapeRef.new(shape: MaxAlternatives, location_name: "MaxAlternatives"))
     Settings.struct_class = Types::Settings
 
     StartTranscriptionJobRequest.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "TranscriptionJobName"))
     StartTranscriptionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     StartTranscriptionJobRequest.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, location_name: "MediaSampleRateHertz"))
-    StartTranscriptionJobRequest.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, required: true, location_name: "MediaFormat"))
+    StartTranscriptionJobRequest.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, location_name: "MediaFormat"))
     StartTranscriptionJobRequest.add_member(:media, Shapes::ShapeRef.new(shape: Media, required: true, location_name: "Media"))
     StartTranscriptionJobRequest.add_member(:output_bucket_name, Shapes::ShapeRef.new(shape: OutputBucketName, location_name: "OutputBucketName"))
+    StartTranscriptionJobRequest.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "OutputEncryptionKMSKeyId"))
     StartTranscriptionJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "Settings"))
     StartTranscriptionJobRequest.struct_class = Types::StartTranscriptionJobRequest
 
@@ -165,7 +190,8 @@ module Aws::TranscribeService
 
     UpdateVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
     UpdateVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
-    UpdateVocabularyRequest.add_member(:phrases, Shapes::ShapeRef.new(shape: Phrases, required: true, location_name: "Phrases"))
+    UpdateVocabularyRequest.add_member(:phrases, Shapes::ShapeRef.new(shape: Phrases, location_name: "Phrases"))
+    UpdateVocabularyRequest.add_member(:vocabulary_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "VocabularyFileUri"))
     UpdateVocabularyRequest.struct_class = Types::UpdateVocabularyRequest
 
     UpdateVocabularyResponse.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
@@ -189,13 +215,16 @@ module Aws::TranscribeService
       api.version = "2017-10-26"
 
       api.metadata = {
+        "apiVersion" => "2017-10-26",
         "endpointPrefix" => "transcribe",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Transcribe Service",
+        "serviceId" => "Transcribe",
         "signatureVersion" => "v4",
         "signingName" => "transcribe",
         "targetPrefix" => "Transcribe",
+        "uid" => "transcribe-2017-10-26",
       }
 
       api.add_operation(:create_vocabulary, Seahorse::Model::Operation.new.tap do |o|
@@ -208,6 +237,17 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_transcription_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTranscriptionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTranscriptionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:delete_vocabulary, Seahorse::Model::Operation.new.tap do |o|

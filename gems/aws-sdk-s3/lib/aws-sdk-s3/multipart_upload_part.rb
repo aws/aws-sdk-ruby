@@ -66,7 +66,7 @@ module Aws::S3
       data[:etag]
     end
 
-    # Size of the uploaded part data.
+    # Size in bytes of the uploaded part data.
     # @return [Integer]
     def size
       data[:size]
@@ -235,7 +235,7 @@ module Aws::S3
     #   must use the form bytes=first-last, where the first and last are the
     #   zero-based byte offsets to copy. For example, bytes=0-9 indicates that
     #   you want to copy the first ten bytes of the source. You can copy a
-    #   range only if the source object is greater than 5 GB.
+    #   range only if the source object is greater than 5 MB.
     # @option options [String] :sse_customer_algorithm
     #   Specifies the algorithm to use to when encrypting the object (e.g.,
     #   AES256).
@@ -298,7 +298,9 @@ module Aws::S3
     #   Size of the body in bytes. This parameter is useful when the size of
     #   the body cannot be determined automatically.
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data.
+    #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
+    #   is auto-populated when using the command from the CLI. This parameted
+    #   is required if object lock parameters are specified.
     # @option options [String] :sse_customer_algorithm
     #   Specifies the algorithm to use to when encrypting the object (e.g.,
     #   AES256).

@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
@@ -45,114 +50,207 @@ module Aws::EC2
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::EC2)
     add_plugin(Aws::EC2::Plugins::CopyEncryptedSnapshot)
     add_plugin(Aws::EC2::Plugins::RegionValidation)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -207,6 +305,58 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Accepts a request to attach a VPC to a transit gateway.
+    #
+    # The VPC attachment must be in the `pendingAcceptance` state. Use
+    # DescribeTransitGatewayVpcAttachments to view your pending VPC
+    # attachment requests. Use RejectTransitGatewayVpcAttachment to reject a
+    # VPC attachment request.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AcceptTransitGatewayVpcAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptTransitGatewayVpcAttachmentResult#transit_gateway_vpc_attachment #transit_gateway_vpc_attachment} => Types::TransitGatewayVpcAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_transit_gateway_vpc_attachment({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_vpc_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_vpc_attachment.transit_gateway_id #=> String
+    #   resp.transit_gateway_vpc_attachment.vpc_id #=> String
+    #   resp.transit_gateway_vpc_attachment.vpc_owner_id #=> String
+    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachment.subnet_ids #=> Array
+    #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
+    #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
+    #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.tags #=> Array
+    #   resp.transit_gateway_vpc_attachment.tags[0].key #=> String
+    #   resp.transit_gateway_vpc_attachment.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptTransitGatewayVpcAttachment AWS API Documentation
+    #
+    # @overload accept_transit_gateway_vpc_attachment(params = {})
+    # @param [Hash] params ({})
+    def accept_transit_gateway_vpc_attachment(params = {}, options = {})
+      req = build_request(:accept_transit_gateway_vpc_attachment, params)
+      req.send_request(options)
+    end
+
     # Accepts one or more interface VPC endpoint connection requests to your
     # VPC endpoint service.
     #
@@ -230,7 +380,7 @@ module Aws::EC2
     #
     #   resp = client.accept_vpc_endpoint_connections({
     #     dry_run: false,
-    #     service_id: "String", # required
+    #     service_id: "ServiceId", # required
     #     vpc_endpoint_ids: ["String"], # required
     #   })
     #
@@ -255,8 +405,8 @@ module Aws::EC2
     # must be the owner of the peer VPC. Use DescribeVpcPeeringConnections
     # to view your outstanding VPC peering connection requests.
     #
-    # For an inter-region VPC peering connection request, you must accept
-    # the VPC peering connection in the region of the accepter VPC.
+    # For an inter-Region VPC peering connection request, you must accept
+    # the VPC peering connection in the Region of the accepter VPC.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -276,7 +426,7 @@ module Aws::EC2
     #
     #   resp = client.accept_vpc_peering_connection({
     #     dry_run: false,
-    #     vpc_peering_connection_id: "String",
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
     #
     # @example Response structure
@@ -320,25 +470,92 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Allocates an Elastic IP address.
+    # Advertises an IPv4 address range that is provisioned for use with your
+    # AWS resources through bring your own IP addresses (BYOIP).
+    #
+    # You can perform this operation at most once every 10 seconds, even if
+    # you specify different address ranges each time.
+    #
+    # We recommend that you stop advertising the BYOIP CIDR from other
+    # locations when you advertise it from AWS. To minimize down time, you
+    # can configure your AWS resources to use an address from a BYOIP CIDR
+    # before it is advertised, and then simultaneously stop advertising it
+    # from the current location and start advertising it through AWS.
+    #
+    # It can take a few minutes before traffic to the specified addresses
+    # starts routing to AWS because of BGP propagation delays.
+    #
+    # To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
+    #
+    # @option params [required, String] :cidr
+    #   The IPv4 address range, in CIDR notation. This must be the exact range
+    #   that you provisioned. You can't advertise only a portion of the
+    #   provisioned range.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AdvertiseByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AdvertiseByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.advertise_byoip_cidr({
+    #     cidr: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.description #=> String
+    #   resp.byoip_cidr.status_message #=> String
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdvertiseByoipCidr AWS API Documentation
+    #
+    # @overload advertise_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def advertise_byoip_cidr(params = {}, options = {})
+      req = build_request(:advertise_byoip_cidr, params)
+      req.send_request(options)
+    end
+
+    # Allocates an Elastic IP address to your AWS account. After you
+    # allocate the Elastic IP address you can associate it with an instance
+    # or network interface. After you release an Elastic IP address, it is
+    # released to the IP address pool and can be allocated to a different
+    # AWS account.
+    #
+    # You can allocate an Elastic IP address from an address pool owned by
+    # AWS or from an address pool created from a public IPv4 address range
+    # that you have brought to AWS for use with your AWS resources using
+    # bring your own IP addresses (BYOIP). For more information, see [Bring
+    # Your Own IP Addresses (BYOIP)][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
+    #
+    # \[EC2-VPC\] If you release an Elastic IP address, you might be able to
+    # recover it. You cannot recover an Elastic IP address that you released
+    # after it is allocated to another AWS account. You cannot recover an
+    # Elastic IP address for EC2-Classic. To attempt to recover an Elastic
+    # IP address that you released, specify it in this operation.
     #
     # An Elastic IP address is for use either in the EC2-Classic platform or
     # in a VPC. By default, you can allocate 5 Elastic IP addresses for
-    # EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per
-    # region.
+    # EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per
+    # Region.
     #
-    # If you release an Elastic IP address for use in a VPC, you might be
-    # able to recover it. To recover an Elastic IP address that you
-    # released, specify it in the `Address` parameter. Note that you cannot
-    # recover an Elastic IP address that you released after it is allocated
-    # to another AWS account.
-    #
-    # For more information, see [Elastic IP Addresses][1] in the *Amazon
+    # For more information, see [Elastic IP Addresses][2] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
     #
     # @option params [String] :domain
     #   Set to `vpc` to allocate the address for use with instances in a VPC.
@@ -346,7 +563,14 @@ module Aws::EC2
     #   Default: The address is for use with instances in EC2-Classic.
     #
     # @option params [String] :address
-    #   \[EC2-VPC\] The Elastic IP address to recover.
+    #   \[EC2-VPC\] The Elastic IP address to recover or an IPv4 address from
+    #   an address pool.
+    #
+    # @option params [String] :public_ipv_4_pool
+    #   The ID of an address pool that you own. Use this parameter to let
+    #   Amazon EC2 select an address from the address pool. To specify a
+    #   specific address from the address pool, use the `Address` parameter
+    #   instead.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -358,6 +582,7 @@ module Aws::EC2
     #
     #   * {Types::AllocateAddressResult#public_ip #public_ip} => String
     #   * {Types::AllocateAddressResult#allocation_id #allocation_id} => String
+    #   * {Types::AllocateAddressResult#public_ipv_4_pool #public_ipv_4_pool} => String
     #   * {Types::AllocateAddressResult#domain #domain} => String
     #
     #
@@ -394,6 +619,7 @@ module Aws::EC2
     #   resp = client.allocate_address({
     #     domain: "vpc", # accepts vpc, standard
     #     address: "String",
+    #     public_ipv_4_pool: "String",
     #     dry_run: false,
     #   })
     #
@@ -401,6 +627,7 @@ module Aws::EC2
     #
     #   resp.public_ip #=> String
     #   resp.allocation_id #=> String
+    #   resp.public_ipv_4_pool #=> String
     #   resp.domain #=> String, one of "vpc", "standard"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddress AWS API Documentation
@@ -413,36 +640,71 @@ module Aws::EC2
     end
 
     # Allocates a Dedicated Host to your account. At a minimum, specify the
-    # instance size type, Availability Zone, and quantity of hosts to
-    # allocate.
+    # supported instance type or instance family, the Availability Zone in
+    # which to allocate the host, and the number of hosts to allocate.
     #
     # @option params [String] :auto_placement
-    #   This is enabled by default. This property allows instances to be
-    #   automatically placed onto available Dedicated Hosts, when you are
-    #   launching instances without specifying a host ID.
+    #   Indicates whether the host accepts any untargeted instance launches
+    #   that match its instance type configuration, or if it only accepts Host
+    #   tenancy instance launches that specify its unique host ID. For more
+    #   information, see [ Understanding Instance Placement and Host
+    #   Affinity][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
-    #   Default: Enabled
+    #   Default: `on`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-understanding
     #
     # @option params [required, String] :availability_zone
-    #   The Availability Zone for the Dedicated Hosts.
+    #   The Availability Zone in which to allocate the Dedicated Host.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Idempotency][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
-    # @option params [required, String] :instance_type
-    #   Specify the instance type for which to configure your Dedicated Hosts.
-    #   When you specify the instance type, that is the only instance type
-    #   that you can launch onto that host.
+    # @option params [String] :instance_type
+    #   Specifies the instance type to be supported by the Dedicated Hosts. If
+    #   you specify an instance type, the Dedicated Hosts support instances of
+    #   the specified instance type only.
+    #
+    #   If you want the Dedicated Hosts to support multiple instance types in
+    #   a specific instance family, omit this parameter and specify
+    #   **InstanceFamily** instead. You cannot specify **InstanceType** and
+    #   **InstanceFamily** in the same request.
+    #
+    # @option params [String] :instance_family
+    #   Specifies the instance family to be supported by the Dedicated Hosts.
+    #   If you specify an instance family, the Dedicated Hosts support
+    #   multiple instance types within that instance family.
+    #
+    #   If you want the Dedicated Hosts to support a specific instance type
+    #   only, omit this parameter and specify **InstanceType** instead. You
+    #   cannot specify **InstanceFamily** and **InstanceType** in the same
+    #   request.
     #
     # @option params [required, Integer] :quantity
     #   The number of Dedicated Hosts to allocate to your account with these
     #   parameters.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the Dedicated Host during creation.
+    #
+    # @option params [String] :host_recovery
+    #   Indicates whether to enable or disable host recovery for the Dedicated
+    #   Host. Host recovery is disabled by default. For more information, see
+    #   [ Host Recovery][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `off`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
     #
     # @return [Types::AllocateHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -454,8 +716,21 @@ module Aws::EC2
     #     auto_placement: "on", # accepts on, off
     #     availability_zone: "String", # required
     #     client_token: "String",
-    #     instance_type: "String", # required
+    #     instance_type: "String",
+    #     instance_family: "String",
     #     quantity: 1, # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     host_recovery: "on", # accepts on, off
     #   })
     #
     # @example Response structure
@@ -472,6 +747,54 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Applies a security group to the association between the target network
+    # and the Client VPN endpoint. This action replaces the existing
+    # security groups with the specified security groups.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [required, String] :vpc_id
+    #   The ID of the VPC in which the associated target network is located.
+    #
+    # @option params [required, Array<String>] :security_group_ids
+    #   The IDs of the security groups to apply to the associated target
+    #   network. Up to 5 security groups can be applied to an associated
+    #   target network.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ApplySecurityGroupsToClientVpnTargetNetworkResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ApplySecurityGroupsToClientVpnTargetNetworkResult#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.apply_security_groups_to_client_vpn_target_network({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     vpc_id: "VpcId", # required
+    #     security_group_ids: ["String"], # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_group_ids #=> Array
+    #   resp.security_group_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ApplySecurityGroupsToClientVpnTargetNetwork AWS API Documentation
+    #
+    # @overload apply_security_groups_to_client_vpn_target_network(params = {})
+    # @param [Hash] params ({})
+    def apply_security_groups_to_client_vpn_target_network(params = {}, options = {})
+      req = build_request(:apply_security_groups_to_client_vpn_target_network, params)
+      req.send_request(options)
+    end
+
     # Assigns one or more IPv6 addresses to the specified network interface.
     # You can specify one or more specific IPv6 addresses, or you can
     # specify the number of IPv6 addresses to be automatically assigned from
@@ -483,7 +806,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
     #
     # @option params [Integer] :ipv_6_address_count
     #   The number of IPv6 addresses to assign to the network interface.
@@ -509,7 +832,7 @@ module Aws::EC2
     #   resp = client.assign_ipv_6_addresses({
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: ["String"],
-    #     network_interface_id: "String", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
     #   })
     #
     # @example Response structure
@@ -528,21 +851,30 @@ module Aws::EC2
     end
 
     # Assigns one or more secondary private IP addresses to the specified
-    # network interface. You can specify one or more specific secondary IP
-    # addresses, or you can specify the number of secondary IP addresses to
-    # be automatically assigned within the subnet's CIDR block range. The
-    # number of secondary IP addresses that you can assign to an instance
-    # varies by instance type. For information about instance types, see
-    # [Instance Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    # For more information about Elastic IP addresses, see [Elastic IP
-    # Addresses][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # network interface.
     #
-    # AssignPrivateIpAddresses is available only in EC2-VPC.
+    # You can specify one or more specific secondary IP addresses, or you
+    # can specify the number of secondary IP addresses to be automatically
+    # assigned within the subnet's CIDR block range. The number of
+    # secondary IP addresses that you can assign to an instance varies by
+    # instance type. For information about instance types, see [Instance
+    # Types][1] in the *Amazon Elastic Compute Cloud User Guide*. For more
+    # information about Elastic IP addresses, see [Elastic IP Addresses][2]
+    # in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # When you move a secondary private IP address to another network
+    # interface, any Elastic IP address that is associated with the IP
+    # address is also moved.
+    #
+    # Remapping an IP address is an asynchronous operation. When you move an
+    # IP address from one network interface to another, check
+    # `network/interfaces/macs/mac/local-ipv4s` in the instance metadata to
+    # confirm that the remapping is complete.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
     #
     # @option params [Boolean] :allow_reassignment
     #   Indicates whether to allow an IP address that is already assigned to
@@ -565,7 +897,10 @@ module Aws::EC2
     #   interface. You can't specify this parameter when also specifying
     #   private IP addresses.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::AssignPrivateIpAddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssignPrivateIpAddressesResult#network_interface_id #network_interface_id} => String
+    #   * {Types::AssignPrivateIpAddressesResult#assigned_private_ip_addresses #assigned_private_ip_addresses} => Array&lt;Types::AssignedPrivateIpAddress&gt;
     #
     #
     # @example Example: To assign a specific secondary private IP address to an interface
@@ -594,10 +929,16 @@ module Aws::EC2
     #
     #   resp = client.assign_private_ip_addresses({
     #     allow_reassignment: false,
-    #     network_interface_id: "String", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
     #     private_ip_addresses: ["String"],
     #     secondary_private_ip_address_count: 1,
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_interface_id #=> String
+    #   resp.assigned_private_ip_addresses #=> Array
+    #   resp.assigned_private_ip_addresses[0].private_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddresses AWS API Documentation
     #
@@ -609,7 +950,8 @@ module Aws::EC2
     end
 
     # Associates an Elastic IP address with an instance or a network
-    # interface.
+    # interface. Before you can use an Elastic IP address, you must allocate
+    # it to your account.
     #
     # An Elastic IP address is for use in either the EC2-Classic platform or
     # in a VPC. For more information, see [Elastic IP Addresses][1] in the
@@ -639,7 +981,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
     # [2]: http://aws.amazon.com/ec2/pricing/
     #
     # @option params [String] :allocation_id
@@ -652,7 +994,8 @@ module Aws::EC2
     #   exactly one network interface is attached.
     #
     # @option params [String] :public_ip
-    #   The Elastic IP address. This is required for EC2-Classic.
+    #   The Elastic IP address to associate with the instance. This is
+    #   required for EC2-Classic.
     #
     # @option params [Boolean] :allow_reassociation
     #   \[EC2-VPC\] For a VPC in an EC2-Classic account, specify true to allow
@@ -672,6 +1015,9 @@ module Aws::EC2
     # @option params [String] :network_interface_id
     #   \[EC2-VPC\] The ID of the network interface. If the instance has more
     #   than one network interface, you must specify a network interface ID.
+    #
+    #   For EC2-VPC, you can specify either the instance ID or the network
+    #   interface ID, but not both.
     #
     # @option params [String] :private_ip_address
     #   \[EC2-VPC\] The primary or secondary private IP address to associate
@@ -724,12 +1070,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_address({
-    #     allocation_id: "String",
-    #     instance_id: "String",
+    #     allocation_id: "AllocationId",
+    #     instance_id: "InstanceId",
     #     public_ip: "String",
     #     allow_reassociation: false,
     #     dry_run: false,
-    #     network_interface_id: "String",
+    #     network_interface_id: "NetworkInterfaceId",
     #     private_ip_address: "String",
     #   })
     #
@@ -743,6 +1089,65 @@ module Aws::EC2
     # @param [Hash] params ({})
     def associate_address(params = {}, options = {})
       req = build_request(:associate_address, params)
+      req.send_request(options)
+    end
+
+    # Associates a target network with a Client VPN endpoint. A target
+    # network is a subnet in a VPC. You can associate multiple subnets from
+    # the same VPC with a Client VPN endpoint. You can associate only one
+    # subnet in each Availability Zone. We recommend that you associate at
+    # least two subnets to provide Availability Zone redundancy.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [required, String] :subnet_id
+    #   The ID of the subnet to associate with the Client VPN endpoint.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AssociateClientVpnTargetNetworkResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateClientVpnTargetNetworkResult#association_id #association_id} => String
+    #   * {Types::AssociateClientVpnTargetNetworkResult#status #status} => Types::AssociationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_client_vpn_target_network({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     subnet_id: "SubnetId", # required
+    #     client_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_id #=> String
+    #   resp.status.code #=> String, one of "associating", "associated", "association-failed", "disassociating", "disassociated"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateClientVpnTargetNetwork AWS API Documentation
+    #
+    # @overload associate_client_vpn_target_network(params = {})
+    # @param [Hash] params ({})
+    def associate_client_vpn_target_network(params = {}, options = {})
+      req = build_request(:associate_client_vpn_target_network, params)
       req.send_request(options)
     end
 
@@ -761,7 +1166,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
     #
     # @option params [required, String] :dhcp_options_id
     #   The ID of the DHCP options set, or `default` to associate no DHCP
@@ -800,8 +1205,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_dhcp_options({
-    #     dhcp_options_id: "String", # required
-    #     vpc_id: "String", # required
+    #     dhcp_options_id: "DhcpOptionsId", # required
+    #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
     #
@@ -860,7 +1265,7 @@ module Aws::EC2
     #       arn: "String",
     #       name: "String",
     #     },
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     #
     # @example Response structure
@@ -888,12 +1293,12 @@ module Aws::EC2
     # to disassociate the route table from the subnet later. A route table
     # can be associated with multiple subnets.
     #
-    # For more information about route tables, see [Route Tables][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Route Tables][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -930,8 +1335,8 @@ module Aws::EC2
     #
     #   resp = client.associate_route_table({
     #     dry_run: false,
-    #     route_table_id: "String", # required
-    #     subnet_id: "String", # required
+    #     route_table_id: "RouteTableId", # required
+    #     subnet_id: "SubnetId", # required
     #   })
     #
     # @example Response structure
@@ -967,7 +1372,7 @@ module Aws::EC2
     #
     #   resp = client.associate_subnet_cidr_block({
     #     ipv_6_cidr_block: "String", # required
-    #     subnet_id: "String", # required
+    #     subnet_id: "SubnetId", # required
     #   })
     #
     # @example Response structure
@@ -987,6 +1392,51 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Associates the specified attachment with the specified transit gateway
+    # route table. You can associate only one route table with an
+    # attachment.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AssociateTransitGatewayRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateTransitGatewayRouteTableResult#association #association} => Types::TransitGatewayAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_transit_gateway_route_table({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association.transit_gateway_route_table_id #=> String
+    #   resp.association.transit_gateway_attachment_id #=> String
+    #   resp.association.resource_id #=> String
+    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.association.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTransitGatewayRouteTable AWS API Documentation
+    #
+    # @overload associate_transit_gateway_route_table(params = {})
+    # @param [Hash] params ({})
+    def associate_transit_gateway_route_table(params = {}, options = {})
+      req = build_request(:associate_transit_gateway_route_table, params)
+      req.send_request(options)
+    end
+
     # Associates a CIDR block with your VPC. You can associate a secondary
     # IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR
     # block. The IPv6 CIDR block size is fixed at /56.
@@ -997,7 +1447,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html#VPC_Sizing
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing
     #
     # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
@@ -1021,7 +1471,7 @@ module Aws::EC2
     #   resp = client.associate_vpc_cidr_block({
     #     amazon_provided_ipv_6_cidr_block: false,
     #     cidr_block: "String",
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -1085,8 +1535,8 @@ module Aws::EC2
     #   resp = client.attach_classic_link_vpc({
     #     dry_run: false,
     #     groups: ["String"], # required
-    #     instance_id: "String", # required
-    #     vpc_id: "String", # required
+    #     instance_id: "InstanceId", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -1102,14 +1552,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Attaches an Internet gateway to a VPC, enabling connectivity between
-    # the Internet and the VPC. For more information about your VPC and
-    # Internet gateway, see the [Amazon Virtual Private Cloud User
+    # Attaches an internet gateway to a VPC, enabling connectivity between
+    # the internet and the VPC. For more information about your VPC and
+    # internet gateway, see the [Amazon Virtual Private Cloud User
     # Guide][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1118,7 +1568,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -1139,8 +1589,8 @@ module Aws::EC2
     #
     #   resp = client.attach_internet_gateway({
     #     dry_run: false,
-    #     internet_gateway_id: "String", # required
-    #     vpc_id: "String", # required
+    #     internet_gateway_id: "InternetGatewayId", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachInternetGateway AWS API Documentation
@@ -1194,8 +1644,8 @@ module Aws::EC2
     #   resp = client.attach_network_interface({
     #     device_index: 1, # required
     #     dry_run: false,
-    #     instance_id: "String", # required
-    #     network_interface_id: "String", # required
+    #     instance_id: "InstanceId", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
     #   })
     #
     # @example Response structure
@@ -1214,15 +1664,12 @@ module Aws::EC2
     # Attaches an EBS volume to a running or stopped instance and exposes it
     # to the instance with the specified device name.
     #
-    # Encrypted EBS volumes may only be attached to instances that support
+    # Encrypted EBS volumes must be attached to instances that support
     # Amazon EBS encryption. For more information, see [Amazon EBS
     # Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    # For a list of supported device names, see [Attaching an EBS Volume to
-    # an Instance][2]. Any device names that aren't reserved for instance
-    # store volumes can be used for EBS volumes. For more information, see
-    # [Amazon EC2 Instance Store][3] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # After you attach an EBS volume, you must make it available. For more
+    # information, see [Making an EBS Volume Available For Use][2].
     #
     # If a volume has an AWS Marketplace product code:
     #
@@ -1237,14 +1684,14 @@ module Aws::EC2
     #   the product. For example, you can't detach a volume from a Windows
     #   instance and attach it to a Linux instance.
     #
-    # For more information about EBS volumes, see [Attaching Amazon EBS
-    # Volumes][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # For more information, see [Attaching Amazon EBS Volumes][3] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html
-    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html
     #
     # @option params [required, String] :device
     #   The device name (for example, `/dev/sdh` or `xvdh`).
@@ -1295,8 +1742,8 @@ module Aws::EC2
     #
     #   resp = client.attach_volume({
     #     device: "String", # required
-    #     instance_id: "String", # required
-    #     volume_id: "String", # required
+    #     instance_id: "InstanceId", # required
+    #     volume_id: "VolumeId", # required
     #     dry_run: false,
     #   })
     #
@@ -1321,12 +1768,12 @@ module Aws::EC2
     # Attaches a virtual private gateway to a VPC. You can attach one
     # virtual private gateway to one VPC at a time.
     #
-    # For more information, see [AWS Managed VPN Connections][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -1347,8 +1794,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_vpn_gateway({
-    #     vpc_id: "String", # required
-    #     vpn_gateway_id: "String", # required
+    #     vpc_id: "VpcId", # required
+    #     vpn_gateway_id: "VpnGatewayId", # required
     #     dry_run: false,
     #   })
     #
@@ -1366,29 +1813,99 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Adds one or more egress rules to a security group for
-    # use with a VPC. Specifically, this action permits instances to send
-    # traffic to one or more destination IPv4 or IPv6 CIDR address ranges,
-    # or to one or more destination security groups for the same VPC. This
-    # action doesn't apply to security groups for use in EC2-Classic. For
-    # more information, see [Security Groups for Your VPC][1] in the *Amazon
-    # Virtual Private Cloud User Guide*. For more information about security
-    # group limits, see [Amazon VPC Limits][2].
+    # Adds an ingress authorization rule to a Client VPN endpoint. Ingress
+    # authorization rules act as firewall rules that grant access to
+    # networks. You must configure ingress authorization rules to enable
+    # clients to access resources in AWS or on-premises networks.
     #
-    # Each rule consists of the protocol (for example, TCP), plus either a
-    # CIDR range or a source group. For the TCP and UDP protocols, you must
-    # also specify the destination port or port range. For the ICMP
-    # protocol, you must also specify the ICMP type and code. You can use -1
-    # for the type or code to mean all types or all codes. You can
-    # optionally specify a description for the rule.
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [required, String] :target_network_cidr
+    #   The IPv4 address range, in CIDR notation, of the network for which
+    #   access is being authorized.
+    #
+    # @option params [String] :access_group_id
+    #   The ID of the Active Directory group to grant access.
+    #
+    # @option params [Boolean] :authorize_all_groups
+    #   Indicates whether to grant access to all clients. Use `true` to grant
+    #   all clients who successfully establish a VPN connection access to the
+    #   network.
+    #
+    # @option params [String] :description
+    #   A brief description of the authorization rule.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AuthorizeClientVpnIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AuthorizeClientVpnIngressResult#status #status} => Types::ClientVpnAuthorizationRuleStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.authorize_client_vpn_ingress({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     target_network_cidr: "String", # required
+    #     access_group_id: "String",
+    #     authorize_all_groups: false,
+    #     description: "String",
+    #     client_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.code #=> String, one of "authorizing", "active", "failed", "revoking"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeClientVpnIngress AWS API Documentation
+    #
+    # @overload authorize_client_vpn_ingress(params = {})
+    # @param [Hash] params ({})
+    def authorize_client_vpn_ingress(params = {}, options = {})
+      req = build_request(:authorize_client_vpn_ingress, params)
+      req.send_request(options)
+    end
+
+    # \[VPC only\] Adds the specified egress rules to a security group for
+    # use with a VPC.
+    #
+    # An outbound rule permits instances to send traffic to the specified
+    # IPv4 or IPv6 CIDR address ranges, or to the instances associated with
+    # the specified destination security groups.
+    #
+    # You specify a protocol for each rule (for example, TCP). For the TCP
+    # and UDP protocols, you must also specify the destination port or port
+    # range. For the ICMP protocol, you must also specify the ICMP type and
+    # code. You can use -1 for the type or code to mean all types or all
+    # codes.
     #
     # Rule changes are propagated to affected instances as quickly as
     # possible. However, a small delay might occur.
     #
+    # For more information about VPC security group limits, see [Amazon VPC
+    # Limits][1].
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
-    # [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1400,9 +1917,8 @@ module Aws::EC2
     #   The ID of the security group.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a destination
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range in the same set of permissions.
     #
     # @option params [String] :cidr_ip
     #   Not supported. Use a set of IP permissions to specify the CIDR.
@@ -1534,40 +2050,42 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Adds one or more ingress rules to a security group.
+    # Adds the specified ingress rules to a security group.
+    #
+    # An inbound rule permits instances to receive traffic from the
+    # specified IPv4 or IPv6 CIDR address ranges, or from the instances
+    # associated with the specified destination security groups.
+    #
+    # You specify a protocol for each rule (for example, TCP). For TCP and
+    # UDP, you must also specify the destination port or port range. For
+    # ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You
+    # can use -1 to mean all types or all codes.
     #
     # Rule changes are propagated to instances within the security group as
     # quickly as possible. However, a small delay might occur.
     #
-    # \[EC2-Classic\] This action gives one or more IPv4 CIDR address ranges
-    # permission to access a security group in your account, or gives one or
-    # more security groups (called the *source groups*) permission to access
-    # a security group for your account. A source group can be for your own
-    # AWS account, or another. You can have up to 100 rules per group.
-    #
-    # \[EC2-VPC\] This action gives one or more IPv4 or IPv6 CIDR address
-    # ranges permission to access a security group in your VPC, or gives one
-    # or more other security groups (called the *source groups*) permission
-    # to access a security group for your VPC. The security groups must all
-    # be for the same VPC or a peer VPC in a VPC peering connection. For
-    # more information about VPC security group limits, see [Amazon VPC
+    # For more information about VPC security group limits, see [Amazon VPC
     # Limits][1].
     #
-    # You can optionally specify a description for the security group rule.
     #
     #
-    #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @option params [String] :cidr_ip
-    #   The CIDR IPv4 address range. You can't specify this parameter when
-    #   specifying a source security group.
+    #   The IPv4 address range, in CIDR format. You can't specify this
+    #   parameter when specifying a source security group. To specify an IPv6
+    #   address range, use a set of IP permissions.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     # @option params [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1` to
-    #   specify all types. If you specify all ICMP/ICMPv6 types, you must
-    #   specify all codes.
+    #   The start of port range for the TCP and UDP protocols, or an ICMP type
+    #   number. For the ICMP type number, use `-1` to specify all types. If
+    #   you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     # @option params [String] :group_id
     #   The ID of the security group. You must specify either the security
@@ -1580,17 +2098,18 @@ module Aws::EC2
     #   request.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. Can be used to specify multiple
-    #   rules in a single command.
+    #   The sets of IP permissions.
     #
     # @option params [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
-    #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`, or
-    #   `58` (ICMPv6), traffic on all ports is allowed, regardless of any
-    #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
-    #   port range. For protocol `58` (ICMPv6), you can optionally specify a
-    #   port range; if you don't, traffic for all types and codes is allowed.
+    #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
+    #
+    #   \[VPC only\] Use `-1` to specify all protocols. If you specify `-1` or
+    #   a protocol other than `tcp`, `udp`, or `icmp`, traffic on all ports is
+    #   allowed, regardless of any ports you specify.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     #
     #
@@ -1606,8 +2125,8 @@ module Aws::EC2
     #   EC2-VPC, the source security group must be in the same VPC.
     #
     # @option params [String] :source_security_group_owner_id
-    #   \[EC2-Classic\] The AWS account ID for the source security group, if
-    #   the source security group is in a different account. You can't
+    #   \[nondefault VPC\] The AWS account ID for the source security group,
+    #   if the source security group is in a different account. You can't
     #   specify this parameter in combination with the following parameters:
     #   the CIDR IP address range, the IP protocol, the start of the port
     #   range, and the end of the port range. Creates rules that grant full
@@ -1615,10 +2134,12 @@ module Aws::EC2
     #   protocol and port range, use a set of IP permissions instead.
     #
     # @option params [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
-    #   code number. For the ICMP/ICMPv6 code number, use `-1` to specify all
-    #   codes. If you specify all ICMP/ICMPv6 types, you must specify all
-    #   codes.
+    #   The end of port range for the TCP and UDP protocols, or an ICMP code
+    #   number. For the ICMP code number, use `-1` to specify all codes. If
+    #   you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1805,7 +2326,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.bundle_instance({
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     storage: { # required
     #       s3: {
     #         aws_access_key_id: "String",
@@ -1891,6 +2412,50 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Cancels the specified Capacity Reservation, releases the reserved
+    # capacity, and changes the Capacity Reservation's state to
+    # `cancelled`.
+    #
+    # Instances running in the reserved capacity continue running until you
+    # stop them. Stopped instances that target the Capacity Reservation can
+    # no longer launch. Modify these instances to either target a different
+    # Capacity Reservation, launch On-Demand Instance capacity, or run in
+    # any open Capacity Reservation that has matching attributes and
+    # sufficient capacity.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation to be cancelled.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CancelCapacityReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelCapacityReservationResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_capacity_reservation({
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelCapacityReservation AWS API Documentation
+    #
+    # @overload cancel_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def cancel_capacity_reservation(params = {}, options = {})
+      req = build_request(:cancel_capacity_reservation, params)
+      req.send_request(options)
+    end
+
     # Cancels an active conversion task. The task can be the import of an
     # instance or volume. The action removes all artifacts of the
     # conversion, including a partially uploaded volume or instance. If the
@@ -1902,7 +2467,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html
     #
     # @option params [required, String] :conversion_task_id
     #   The ID of the conversion task.
@@ -1921,7 +2486,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_conversion_task({
-    #     conversion_task_id: "String", # required
+    #     conversion_task_id: "ConversionTaskId", # required
     #     dry_run: false,
     #     reason_message: "String",
     #   })
@@ -1949,7 +2514,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_export_task({
-    #     export_task_id: "String", # required
+    #     export_task_id: "ExportTaskId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelExportTask AWS API Documentation
@@ -1986,7 +2551,7 @@ module Aws::EC2
     #   resp = client.cancel_import_task({
     #     cancel_reason: "String",
     #     dry_run: false,
-    #     import_task_id: "String",
+    #     import_task_id: "ImportTaskId",
     #   })
     #
     # @example Response structure
@@ -2012,7 +2577,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
     #
     # @option params [required, String] :reserved_instances_listing_id
     #   The ID of the Reserved Instance listing.
@@ -2024,7 +2589,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_reserved_instances_listing({
-    #     reserved_instances_listing_id: "String", # required
+    #     reserved_instances_listing_id: "ReservedInstancesListingId", # required
     #   })
     #
     # @example Response structure
@@ -2260,7 +2825,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.confirm_product_instance({
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     product_code: "String", # required
     #     dry_run: false,
     #   })
@@ -2279,7 +2844,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Copies the specified Amazon FPGA Image (AFI) to the current region.
+    # Copies the specified Amazon FPGA Image (AFI) to the current Region.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2297,7 +2862,7 @@ module Aws::EC2
     #   The name for the new AFI. The default is the name of the source AFI.
     #
     # @option params [required, String] :source_region
-    #   The region that contains the source AFI.
+    #   The Region that contains the source AFI.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -2306,7 +2871,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
     # @return [Types::CopyFpgaImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2336,9 +2901,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Initiates the copy of an AMI from the specified source region to the
-    # current region. You specify the destination region by using its
+    # Initiates the copy of an AMI from the specified source Region to the
+    # current Region. You specify the destination Region by using its
     # endpoint when making the request.
+    #
+    # Copies of encrypted backing snapshots for the AMI are encrypted.
+    # Copies of unencrypted backing snapshots remain unencrypted, unless you
+    # set `Encrypted` during the copy operation. You cannot create an
+    # unencrypted copy of an encrypted backing snapshot.
     #
     # For more information about the prerequisites and limits when copying
     # an AMI, see [Copying an AMI][1] in the *Amazon Elastic Compute Cloud
@@ -2346,7 +2916,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -2355,21 +2925,23 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
     # @option params [String] :description
-    #   A description for the new AMI in the destination region.
+    #   A description for the new AMI in the destination Region.
     #
     # @option params [Boolean] :encrypted
     #   Specifies whether the destination snapshots of the copied image should
-    #   be encrypted. The default CMK for EBS is used unless a non-default AWS
-    #   Key Management Service (AWS KMS) CMK is specified with `KmsKeyId`. For
-    #   more information, see [Amazon EBS Encryption][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   be encrypted. You can encrypt a copy of an unencrypted snapshot, but
+    #   you cannot create an unencrypted copy of an encrypted snapshot. The
+    #   default CMK for EBS is used unless you specify a non-default AWS Key
+    #   Management Service (AWS KMS) CMK using `KmsKeyId`. For more
+    #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
@@ -2378,38 +2950,34 @@ module Aws::EC2
     #   this parameter is not specified, the default CMK for EBS is used. If a
     #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   "alias/". For example:
     #
-    #   * Key ID
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * Key alias, in the form `alias/ExampleAlias `
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #   * Alias name: `alias/ExampleAlias`
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
     #
     #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
     #   may appear to complete even though you provided an invalid identifier.
     #   This action will eventually report failure.
     #
-    #   The specified CMK must exist in the region that the snapshot is being
+    #   The specified CMK must exist in the Region that the snapshot is being
     #   copied to.
     #
     # @option params [required, String] :name
-    #   The name of the new AMI in the destination region.
+    #   The name of the new AMI in the destination Region.
     #
     # @option params [required, String] :source_image_id
     #   The ID of the AMI to copy.
     #
     # @option params [required, String] :source_region
-    #   The name of the region that contains the AMI to copy.
+    #   The name of the Region that contains the AMI to copy.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2465,17 +3033,15 @@ module Aws::EC2
     end
 
     # Copies a point-in-time snapshot of an EBS volume and stores it in
-    # Amazon S3. You can copy the snapshot within the same region or from
-    # one region to another. You can use the snapshot to create EBS volumes
-    # or Amazon Machine Images (AMIs). The snapshot is copied to the
-    # regional endpoint that you send the HTTP request to.
+    # Amazon S3. You can copy the snapshot within the same Region or from
+    # one Region to another. You can use the snapshot to create EBS volumes
+    # or Amazon Machine Images (AMIs).
     #
     # Copies of encrypted EBS snapshots remain encrypted. Copies of
-    # unencrypted snapshots remain unencrypted, unless the `Encrypted` flag
-    # is specified during the snapshot copy operation. By default, encrypted
-    # snapshot copies use the default AWS Key Management Service (AWS KMS)
-    # customer master key (CMK); however, you can specify a non-default CMK
-    # with the `KmsKeyId` parameter.
+    # unencrypted snapshots remain unencrypted, unless you enable encryption
+    # for the snapshot copy operation. By default, encrypted snapshot copies
+    # use the default AWS Key Management Service (AWS KMS) customer master
+    # key (CMK); however, you can specify a different CMK.
     #
     # To copy an encrypted snapshot that has been shared from another
     # account, you must have permissions for the CMK used to encrypt the
@@ -2489,62 +3055,55 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html
     #
     # @option params [String] :description
     #   A description for the EBS snapshot.
     #
     # @option params [String] :destination_region
-    #   The destination region to use in the `PresignedUrl` parameter of a
+    #   The destination Region to use in the `PresignedUrl` parameter of a
     #   snapshot copy operation. This parameter is only valid for specifying
-    #   the destination region in a `PresignedUrl` parameter, where it is
+    #   the destination Region in a `PresignedUrl` parameter, where it is
     #   required.
     #
     #   The snapshot copy is sent to the regional endpoint that you sent the
     #   HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With the
     #   AWS CLI, this is specified using the `--region` parameter or the
-    #   default region in your AWS configuration file.
+    #   default Region in your AWS configuration file.
     #
     # @option params [Boolean] :encrypted
-    #   Specifies whether the destination snapshot should be encrypted. You
-    #   can encrypt a copy of an unencrypted snapshot using this flag, but you
-    #   cannot use it to create an unencrypted copy from an encrypted
-    #   snapshot. Your default CMK for EBS is used unless a non-default AWS
-    #   Key Management Service (AWS KMS) CMK is specified with `KmsKeyId`. For
-    #   more information, see [Amazon EBS Encryption][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   To encrypt a copy of an unencrypted snapshot if encryption by default
+    #   is not enabled, enable encryption using this parameter. Otherwise,
+    #   omit this parameter. Encrypted snapshots are encrypted, even if you
+    #   omit this parameter and encryption by default is not enabled. You
+    #   cannot set this parameter to false. For more information, see [Amazon
+    #   EBS Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use when creating the encrypted volume. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. If a
-    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
+    #   is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
+    #   ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     #
     # @option params [String] :presigned_url
     #   When you copy an encrypted source snapshot using the Amazon EC2 Query
@@ -2564,14 +3123,17 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
-    #   [2]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #
     # @option params [required, String] :source_region
-    #   The ID of the region that contains the snapshot to be copied.
+    #   The ID of the Region that contains the snapshot to be copied.
     #
     # @option params [required, String] :source_snapshot_id
     #   The ID of the EBS snapshot to copy.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new snapshot.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2582,6 +3144,7 @@ module Aws::EC2
     # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopySnapshotResult#snapshot_id #snapshot_id} => String
+    #   * {Types::CopySnapshotResult#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To copy a snapshot
@@ -2636,12 +3199,26 @@ module Aws::EC2
     #     presigned_url: "String",
     #     source_region: "String", # required
     #     source_snapshot_id: "String", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.snapshot_id #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshot AWS API Documentation
     #
@@ -2652,12 +3229,445 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates a new Capacity Reservation with the specified attributes.
+    #
+    # Capacity Reservations enable you to reserve capacity for your Amazon
+    # EC2 instances in a specific Availability Zone for any duration. This
+    # gives you the flexibility to selectively add capacity reservations and
+    # still get the Regional RI discounts for that usage. By creating
+    # Capacity Reservations, you ensure that you always have access to
+    # Amazon EC2 capacity when you need it, for as long as you need it. For
+    # more information, see [Capacity Reservations][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    # Your request to create a Capacity Reservation could fail if Amazon EC2
+    # does not have sufficient capacity to fulfill the request. If your
+    # request fails due to Amazon EC2 capacity constraints, either try again
+    # at a later time, try in a different Availability Zone, or request a
+    # smaller capacity reservation. If your application is flexible across
+    # instance types and sizes, try to create a Capacity Reservation with
+    # different instance attributes.
+    #
+    # Your request could also fail if the requested quantity exceeds your
+    # On-Demand Instance limit for the selected instance type. If your
+    # request fails due to limit constraints, increase your On-Demand
+    # Instance limit for the required instance type and try again. For more
+    # information about increasing your instance limits, see [Amazon EC2
+    # Service Limits][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   Constraint: Maximum 64 ASCII characters.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :instance_type
+    #   The instance type for which to reserve capacity. For more information,
+    #   see [Instance Types][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #
+    # @option params [required, String] :instance_platform
+    #   The type of operating system for which to reserve capacity.
+    #
+    # @option params [String] :availability_zone
+    #   The Availability Zone in which to create the Capacity Reservation.
+    #
+    # @option params [String] :availability_zone_id
+    #   The ID of the Availability Zone in which to create the Capacity
+    #   Reservation.
+    #
+    # @option params [String] :tenancy
+    #   Indicates the tenancy of the Capacity Reservation. A Capacity
+    #   Reservation can have one of the following tenancy settings:
+    #
+    #   * `default` - The Capacity Reservation is created on hardware that is
+    #     shared with other AWS accounts.
+    #
+    #   * `dedicated` - The Capacity Reservation is created on single-tenant
+    #     hardware that is dedicated to a single AWS account.
+    #
+    # @option params [required, Integer] :instance_count
+    #   The number of instances for which to reserve capacity.
+    #
+    # @option params [Boolean] :ebs_optimized
+    #   Indicates whether the Capacity Reservation supports EBS-optimized
+    #   instances. This optimization provides dedicated throughput to Amazon
+    #   EBS and an optimized configuration stack to provide optimal I/O
+    #   performance. This optimization isn't available with all instance
+    #   types. Additional usage charges apply when using an EBS- optimized
+    #   instance.
+    #
+    # @option params [Boolean] :ephemeral_storage
+    #   Indicates whether the Capacity Reservation supports instances with
+    #   temporary, block-level storage.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   The date and time at which the Capacity Reservation expires. When a
+    #   Capacity Reservation expires, the reserved capacity is released and
+    #   you can no longer launch instances into it. The Capacity
+    #   Reservation's state changes to `expired` when it reaches its end date
+    #   and time.
+    #
+    #   You must provide an `EndDate` value if `EndDateType` is `limited`.
+    #   Omit `EndDate` if `EndDateType` is `unlimited`.
+    #
+    #   If the `EndDateType` is `limited`, the Capacity Reservation is
+    #   cancelled within an hour from the specified time. For example, if you
+    #   specify 5/31/2019, 13:30:55, the Capacity Reservation is guaranteed to
+    #   end between 13:30:55 and 14:30:55 on 5/31/2019.
+    #
+    # @option params [String] :end_date_type
+    #   Indicates the way in which the Capacity Reservation ends. A Capacity
+    #   Reservation can have one of the following end types:
+    #
+    #   * `unlimited` - The Capacity Reservation remains active until you
+    #     explicitly cancel it. Do not provide an `EndDate` if the
+    #     `EndDateType` is `unlimited`.
+    #
+    #   * `limited` - The Capacity Reservation expires automatically at a
+    #     specified date and time. You must provide an `EndDate` value if the
+    #     `EndDateType` value is `limited`.
+    #
+    # @option params [String] :instance_match_criteria
+    #   Indicates the type of instance launches that the Capacity Reservation
+    #   accepts. The options include:
+    #
+    #   * `open` - The Capacity Reservation automatically matches all
+    #     instances that have matching attributes (instance type, platform,
+    #     and Availability Zone). Instances that have matching attributes run
+    #     in the Capacity Reservation automatically without specifying any
+    #     additional parameters.
+    #
+    #   * `targeted` - The Capacity Reservation only accepts instances that
+    #     have matching attributes (instance type, platform, and Availability
+    #     Zone), and explicitly target the Capacity Reservation. This ensures
+    #     that only permitted instances can use the reserved capacity.
+    #
+    #   Default: `open`
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the Capacity Reservation during launch.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateCapacityReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCapacityReservationResult#capacity_reservation #capacity_reservation} => Types::CapacityReservation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_capacity_reservation({
+    #     client_token: "String",
+    #     instance_type: "String", # required
+    #     instance_platform: "Linux/UNIX", # required, accepts Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard, Windows with SQL Server Web, Linux with SQL Server Standard, Linux with SQL Server Web, Linux with SQL Server Enterprise
+    #     availability_zone: "String",
+    #     availability_zone_id: "String",
+    #     tenancy: "default", # accepts default, dedicated
+    #     instance_count: 1, # required
+    #     ebs_optimized: false,
+    #     ephemeral_storage: false,
+    #     end_date: Time.now,
+    #     end_date_type: "unlimited", # accepts unlimited, limited
+    #     instance_match_criteria: "open", # accepts open, targeted
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_reservation.capacity_reservation_id #=> String
+    #   resp.capacity_reservation.owner_id #=> String
+    #   resp.capacity_reservation.capacity_reservation_arn #=> String
+    #   resp.capacity_reservation.availability_zone_id #=> String
+    #   resp.capacity_reservation.instance_type #=> String
+    #   resp.capacity_reservation.instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise"
+    #   resp.capacity_reservation.availability_zone #=> String
+    #   resp.capacity_reservation.tenancy #=> String, one of "default", "dedicated"
+    #   resp.capacity_reservation.total_instance_count #=> Integer
+    #   resp.capacity_reservation.available_instance_count #=> Integer
+    #   resp.capacity_reservation.ebs_optimized #=> Boolean
+    #   resp.capacity_reservation.ephemeral_storage #=> Boolean
+    #   resp.capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.capacity_reservation.end_date #=> Time
+    #   resp.capacity_reservation.end_date_type #=> String, one of "unlimited", "limited"
+    #   resp.capacity_reservation.instance_match_criteria #=> String, one of "open", "targeted"
+    #   resp.capacity_reservation.create_date #=> Time
+    #   resp.capacity_reservation.tags #=> Array
+    #   resp.capacity_reservation.tags[0].key #=> String
+    #   resp.capacity_reservation.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservation AWS API Documentation
+    #
+    # @overload create_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def create_capacity_reservation(params = {}, options = {})
+      req = build_request(:create_capacity_reservation, params)
+      req.send_request(options)
+    end
+
+    # Creates a Client VPN endpoint. A Client VPN endpoint is the resource
+    # you create and configure to enable and manage client VPN sessions. It
+    # is the destination endpoint at which all client VPN sessions are
+    # terminated.
+    #
+    # @option params [required, String] :client_cidr_block
+    #   The IPv4 address range, in CIDR notation, from which to assign client
+    #   IP addresses. The address range cannot overlap with the local CIDR of
+    #   the VPC in which the associated subnet is located, or the routes that
+    #   you add manually. The address range cannot be changed after the Client
+    #   VPN endpoint has been created. The CIDR block should be /22 or
+    #   greater.
+    #
+    # @option params [required, String] :server_certificate_arn
+    #   The ARN of the server certificate. For more information, see the [AWS
+    #   Certificate Manager User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/
+    #
+    # @option params [required, Array<Types::ClientVpnAuthenticationRequest>] :authentication_options
+    #   Information about the authentication method to be used to authenticate
+    #   clients.
+    #
+    # @option params [required, Types::ConnectionLogOptions] :connection_log_options
+    #   Information about the client connection logging options.
+    #
+    #   If you enable client connection logging, data about client connections
+    #   is sent to a Cloudwatch Logs log stream. The following information is
+    #   logged:
+    #
+    #   * Client connection requests
+    #
+    #   * Client connection results (successful and unsuccessful)
+    #
+    #   * Reasons for unsuccessful client connection requests
+    #
+    #   * Client connection termination time
+    #
+    # @option params [Array<String>] :dns_servers
+    #   Information about the DNS servers to be used for DNS resolution. A
+    #   Client VPN endpoint can have up to two DNS servers. If no DNS server
+    #   is specified, the DNS address configured on the device is used for the
+    #   DNS server.
+    #
+    # @option params [String] :transport_protocol
+    #   The transport protocol to be used by the VPN session.
+    #
+    #   Default value: `udp`
+    #
+    # @option params [String] :description
+    #   A brief description of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :split_tunnel
+    #   Indicates whether split-tunnel is enabled on the AWS Client VPN
+    #   endpoint.
+    #
+    #   By default, split-tunnel on a VPN endpoint is disabled.
+    #
+    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
+    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the Client VPN endpoint during creation.
+    #
+    # @return [Types::CreateClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateClientVpnEndpointResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
+    #   * {Types::CreateClientVpnEndpointResult#status #status} => Types::ClientVpnEndpointStatus
+    #   * {Types::CreateClientVpnEndpointResult#dns_name #dns_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_client_vpn_endpoint({
+    #     client_cidr_block: "String", # required
+    #     server_certificate_arn: "String", # required
+    #     authentication_options: [ # required
+    #       {
+    #         type: "certificate-authentication", # accepts certificate-authentication, directory-service-authentication
+    #         active_directory: {
+    #           directory_id: "String",
+    #         },
+    #         mutual_authentication: {
+    #           client_root_certificate_chain_arn: "String",
+    #         },
+    #       },
+    #     ],
+    #     connection_log_options: { # required
+    #       enabled: false,
+    #       cloudwatch_log_group: "String",
+    #       cloudwatch_log_stream: "String",
+    #     },
+    #     dns_servers: ["String"],
+    #     transport_protocol: "tcp", # accepts tcp, udp
+    #     description: "String",
+    #     split_tunnel: false,
+    #     dry_run: false,
+    #     client_token: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_vpn_endpoint_id #=> String
+    #   resp.status.code #=> String, one of "pending-associate", "available", "deleting", "deleted"
+    #   resp.status.message #=> String
+    #   resp.dns_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpoint AWS API Documentation
+    #
+    # @overload create_client_vpn_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_client_vpn_endpoint(params = {}, options = {})
+      req = build_request(:create_client_vpn_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Adds a route to a network to a Client VPN endpoint. Each Client VPN
+    # endpoint has a route table that describes the available destination
+    # network routes. Each route in the route table specifies the path for
+    # traﬃc to speciﬁc resources or networks.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to which to add the route.
+    #
+    # @option params [required, String] :destination_cidr_block
+    #   The IPv4 address range, in CIDR notation, of the route destination.
+    #   For example:
+    #
+    #   * To add a route for Internet access, enter `0.0.0.0/0`
+    #
+    #   * To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR
+    #     range
+    #
+    #   * To add a route for an on-premises network, enter the AWS
+    #     Site-to-Site VPN connection's IPv4 CIDR range
+    #
+    #   Route address ranges cannot overlap with the CIDR range specified for
+    #   client allocation.
+    #
+    # @option params [required, String] :target_vpc_subnet_id
+    #   The ID of the subnet through which you want to route traffic. The
+    #   specified subnet must be an existing target network of the Client VPN
+    #   endpoint.
+    #
+    # @option params [String] :description
+    #   A brief description of the route.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateClientVpnRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateClientVpnRouteResult#status #status} => Types::ClientVpnRouteStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_client_vpn_route({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     destination_cidr_block: "String", # required
+    #     target_vpc_subnet_id: "String", # required
+    #     description: "String",
+    #     client_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.code #=> String, one of "creating", "active", "failed", "deleting"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnRoute AWS API Documentation
+    #
+    # @overload create_client_vpn_route(params = {})
+    # @param [Hash] params ({})
+    def create_client_vpn_route(params = {}, options = {})
+      req = build_request(:create_client_vpn_route, params)
+      req.send_request(options)
+    end
+
     # Provides information to AWS about your VPN customer gateway device.
     # The customer gateway is the appliance at your end of the VPN
     # connection. (The device on the AWS side of the VPN connection is the
     # virtual private gateway.) You must provide the Internet-routable IP
     # address of the customer gateway's external interface. The IP address
-    # must be static and may be behind a device performing network address
+    # must be static and can be behind a device performing network address
     # translation (NAT).
     #
     # For devices that use Border Gateway Protocol (BGP), you can also
@@ -2667,36 +3677,42 @@ module Aws::EC2
     #
     # <note markdown="1"> Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534,
     # with the exception of 7224, which is reserved in the `us-east-1`
-    # region, and 9059, which is reserved in the `eu-west-1` region.
+    # Region, and 9059, which is reserved in the `eu-west-1` Region.
     #
     #  </note>
     #
-    # For more information about VPN customer gateways, see [AWS Managed VPN
-    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
-    # You cannot create more than one customer gateway with the same VPN
-    # type, IP address, and BGP ASN parameter values. If you run an
-    # identical request more than one time, the first request creates the
-    # customer gateway, and subsequent requests return information about the
-    # existing customer gateway. The subsequent requests do not create new
-    # customer gateway resources.
+    # To create more than one customer gateway with the same VPN type, IP
+    # address, and BGP ASN, specify a unique device name for each customer
+    # gateway. Identical requests return information about the existing
+    # customer gateway and do not create new customer gateways.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [required, Integer] :bgp_asn
     #   For devices that support BGP, the customer gateway's BGP ASN.
     #
     #   Default: 65000
     #
-    # @option params [required, String] :public_ip
+    # @option params [String] :public_ip
     #   The Internet-routable IP address for the customer gateway's outside
     #   interface. The address must be static.
+    #
+    # @option params [String] :certificate_arn
+    #   The Amazon Resource Name (ARN) for the customer gateway certificate.
     #
     # @option params [required, String] :type
     #   The type of VPN connection that this customer gateway supports
     #   (`ipsec.1`).
+    #
+    # @option params [String] :device_name
+    #   A name for the customer gateway device.
+    #
+    #   Length Constraints: Up to 255 characters.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2734,8 +3750,10 @@ module Aws::EC2
     #
     #   resp = client.create_customer_gateway({
     #     bgp_asn: 1, # required
-    #     public_ip: "String", # required
+    #     public_ip: "String",
+    #     certificate_arn: "String",
     #     type: "ipsec.1", # required, accepts ipsec.1
+    #     device_name: "String",
     #     dry_run: false,
     #   })
     #
@@ -2744,8 +3762,10 @@ module Aws::EC2
     #   resp.customer_gateway.bgp_asn #=> String
     #   resp.customer_gateway.customer_gateway_id #=> String
     #   resp.customer_gateway.ip_address #=> String
+    #   resp.customer_gateway.certificate_arn #=> String
     #   resp.customer_gateway.state #=> String
     #   resp.customer_gateway.type #=> String
+    #   resp.customer_gateway.device_name #=> String
     #   resp.customer_gateway.tags #=> Array
     #   resp.customer_gateway.tags[0].key #=> String
     #   resp.customer_gateway.tags[0].value #=> String
@@ -2767,7 +3787,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html#create-default-subnet
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-subnet
     #
     # @option params [required, String] :availability_zone
     #   The Availability Zone in which to create the default subnet.
@@ -2792,6 +3812,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.subnet.availability_zone #=> String
+    #   resp.subnet.availability_zone_id #=> String
     #   resp.subnet.available_ip_address_count #=> Integer
     #   resp.subnet.cidr_block #=> String
     #   resp.subnet.default_for_az #=> Boolean
@@ -2799,6 +3820,7 @@ module Aws::EC2
     #   resp.subnet.state #=> String, one of "pending", "available"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.vpc_id #=> String
+    #   resp.subnet.owner_id #=> String
     #   resp.subnet.assign_ipv_6_address_on_creation #=> Boolean
     #   resp.subnet.ipv_6_cidr_block_association_set #=> Array
     #   resp.subnet.ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -2808,6 +3830,7 @@ module Aws::EC2
     #   resp.subnet.tags #=> Array
     #   resp.subnet.tags[0].key #=> String
     #   resp.subnet.tags[0].value #=> String
+    #   resp.subnet.subnet_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnet AWS API Documentation
     #
@@ -2824,18 +3847,18 @@ module Aws::EC2
     # in the *Amazon Virtual Private Cloud User Guide*. You cannot specify
     # the components of the default VPC yourself.
     #
-    # You can create a default VPC if you deleted your previous default VPC.
-    # You cannot have more than one default VPC per region.
+    # If you deleted your previous default VPC, you can create a default
+    # VPC. You cannot have more than one default VPC per Region.
     #
     # If your account supports EC2-Classic, you cannot use this action to
-    # create a default VPC in a region that supports EC2-Classic. If you
-    # want a default VPC in a region that supports EC2-Classic, see "I
+    # create a default VPC in a Region that supports EC2-Classic. If you
+    # want a default VPC in a Region that supports EC2-Classic, see "I
     # really want a default VPC for my existing EC2 account. Is that
     # possible?" in the [Default VPCs FAQ][2].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html
     # [2]: http://aws.amazon.com/vpc/faqs/#Default_VPCs
     #
     # @option params [Boolean] :dry_run
@@ -2860,6 +3883,7 @@ module Aws::EC2
     #   resp.vpc.dhcp_options_id #=> String
     #   resp.vpc.state #=> String, one of "pending", "available"
     #   resp.vpc.vpc_id #=> String
+    #   resp.vpc.owner_id #=> String
     #   resp.vpc.instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.vpc.ipv_6_cidr_block_association_set #=> Array
     #   resp.vpc.ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -2895,13 +3919,13 @@ module Aws::EC2
     #   servers, or AmazonProvidedDNS. The default DHCP option set specifies
     #   AmazonProvidedDNS. If specifying more than one domain name server,
     #   specify the IP addresses in a single parameter, separated by commas.
-    #   If you want your instance to receive a custom DNS hostname as
-    #   specified in `domain-name`, you must set `domain-name-servers` to a
-    #   custom DNS server.
+    #   To have your instance receive a custom DNS hostname as specified in
+    #   `domain-name`, you must set `domain-name-servers` to a custom DNS
+    #   server.
     #
     # * `domain-name` - If you're using AmazonProvidedDNS in `us-east-1`,
     #   specify `ec2.internal`. If you're using AmazonProvidedDNS in
-    #   another region, specify `region.compute.internal` (for example,
+    #   another Region, specify `region.compute.internal` (for example,
     #   `ap-northeast-1.compute.internal`). Otherwise, specify a domain name
     #   (for example, `MyCompany.com`). This value is used to complete
     #   unqualified DNS hostnames. **Important**\: Some Linux operating
@@ -2924,16 +3948,16 @@ module Aws::EC2
     #
     # Your VPC automatically starts out with a set of DHCP options that
     # includes only a DNS server that we provide (AmazonProvidedDNS). If you
-    # create a set of options, and if your VPC has an Internet gateway, make
+    # create a set of options, and if your VPC has an internet gateway, make
     # sure to set the `domain-name-servers` option either to
     # `AmazonProvidedDNS` or to a domain name server of your choice. For
-    # more information about DHCP options, see [DHCP Options Sets][2] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # more information, see [DHCP Options Sets][2] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
     # [1]: http://www.ietf.org/rfc/rfc2132.txt
-    # [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
     #
     # @option params [required, Array<Types::NewDhcpConfiguration>] :dhcp_configurations
     #   A DHCP configuration option.
@@ -3004,6 +4028,7 @@ module Aws::EC2
     #   resp.dhcp_options.dhcp_configurations[0].values #=> Array
     #   resp.dhcp_options.dhcp_configurations[0].values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.dhcp_options.dhcp_options_id #=> String
+    #   resp.dhcp_options.owner_id #=> String
     #   resp.dhcp_options.tags #=> Array
     #   resp.dhcp_options.tags[0].key #=> String
     #   resp.dhcp_options.tags[0].value #=> String
@@ -3017,20 +4042,20 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[IPv6 only\] Creates an egress-only Internet gateway for your VPC. An
-    # egress-only Internet gateway is used to enable outbound communication
-    # over IPv6 from instances in your VPC to the Internet, and prevents
+    # \[IPv6 only\] Creates an egress-only internet gateway for your VPC. An
+    # egress-only internet gateway is used to enable outbound communication
+    # over IPv6 from instances in your VPC to the internet, and prevents
     # hosts outside of your VPC from initiating an IPv6 connection with your
     # instance.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3039,7 +4064,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :vpc_id
-    #   The ID of the VPC for which to create the egress-only Internet
+    #   The ID of the VPC for which to create the egress-only internet
     #   gateway.
     #
     # @return [Types::CreateEgressOnlyInternetGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3052,7 +4077,7 @@ module Aws::EC2
     #   resp = client.create_egress_only_internet_gateway({
     #     client_token: "String",
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -3083,7 +4108,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3098,13 +4123,13 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::SpotOptionsRequest] :spot_options
     #   Describes the configuration of Spot Instances in an EC2 Fleet.
     #
     # @option params [Types::OnDemandOptionsRequest] :on_demand_options
-    #   The allocation strategy of On-Demand Instances in an EC2 Fleet.
+    #   Describes the configuration of On-Demand Instances in an EC2 Fleet.
     #
     # @option params [String] :excess_capacity_termination_policy
     #   Indicates whether running instances should be terminated if the total
@@ -3115,23 +4140,26 @@ module Aws::EC2
     #   The configuration for the EC2 Fleet.
     #
     # @option params [required, Types::TargetCapacitySpecificationRequest] :target_capacity_specification
-    #   The `TotalTargetCapacity`, `OnDemandTargetCapacity`,
-    #   `SpotTargetCapacity`, and `DefaultCapacityType` structure.
+    #   The number of units to request.
     #
     # @option params [Boolean] :terminate_instances_with_expiration
     #   Indicates whether running instances should be terminated when the EC2
     #   Fleet expires.
     #
     # @option params [String] :type
-    #   The type of request. Indicates whether the EC2 Fleet only `requests`
-    #   the target capacity, or also attempts to `maintain` it. If you request
-    #   a certain target capacity, EC2 Fleet only places the required
-    #   requests. It does not attempt to replenish instances if capacity is
-    #   diminished, and does not submit requests in alternative capacity pools
-    #   if capacity is unavailable. To maintain a certain target capacity, EC2
-    #   Fleet places the required requests to meet this target capacity. It
-    #   also automatically replenishes any interrupted Spot Instances.
-    #   Default: `maintain`.
+    #   The type of the request. By default, the EC2 Fleet places an
+    #   asynchronous request for your desired capacity, and maintains it by
+    #   replenishing interrupted Spot Instances (`maintain`). A value of
+    #   `instant` places a synchronous one-time request, and returns errors
+    #   for any instances that could not be launched. A value of `request`
+    #   places an asynchronous one-time request without maintaining capacity
+    #   or submitting requests in alternative capacity pools if capacity is
+    #   unavailable. For more information, see [EC2 Fleet Request Types][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type
     #
     # @option params [Time,DateTime,Date,Integer,String] :valid_from
     #   The start date and time of the request, in UTC format (for example,
@@ -3141,8 +4169,8 @@ module Aws::EC2
     # @option params [Time,DateTime,Date,Integer,String] :valid_until
     #   The end date and time of the request, in UTC format (for example,
     #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new EC2 Fleet
-    #   requests are placed or able to fulfill the request. The default end
-    #   date is 7 days from the current date.
+    #   requests are placed or able to fulfill the request. If no value is
+    #   specified, the request remains until you cancel it.
     #
     # @option params [Boolean] :replace_unhealthy_instances
     #   Indicates whether EC2 Fleet should replace unhealthy instances.
@@ -3156,12 +4184,14 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetResult#fleet_id #fleet_id} => String
+    #   * {Types::CreateFleetResult#errors #errors} => Array&lt;Types::CreateFleetError&gt;
+    #   * {Types::CreateFleetResult#instances #instances} => Array&lt;Types::CreateFleetInstance&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3169,12 +4199,20 @@ module Aws::EC2
     #     dry_run: false,
     #     client_token: "String",
     #     spot_options: {
-    #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified
+    #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
     #       instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #       instance_pools_to_use_count: 1,
+    #       single_instance_type: false,
+    #       single_availability_zone: false,
+    #       min_target_capacity: 1,
+    #       max_total_price: "String",
     #     },
     #     on_demand_options: {
     #       allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
+    #       single_instance_type: false,
+    #       single_availability_zone: false,
+    #       min_target_capacity: 1,
+    #       max_total_price: "String",
     #     },
     #     excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
     #     launch_template_configs: [ # required
@@ -3186,12 +4224,21 @@ module Aws::EC2
     #         },
     #         overrides: [
     #           {
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #             max_price: "String",
     #             subnet_id: "String",
     #             availability_zone: "String",
     #             weighted_capacity: 1.0,
     #             priority: 1.0,
+    #             placement: {
+    #               availability_zone: "String",
+    #               affinity: "String",
+    #               group_name: "String",
+    #               partition_number: 1,
+    #               host_id: "String",
+    #               tenancy: "default", # accepts default, dedicated, host
+    #               spread_domain: "String",
+    #             },
     #           },
     #         ],
     #       },
@@ -3203,13 +4250,13 @@ module Aws::EC2
     #       default_target_capacity_type: "spot", # accepts spot, on-demand
     #     },
     #     terminate_instances_with_expiration: false,
-    #     type: "request", # accepts request, maintain
+    #     type: "request", # accepts request, maintain, instant
     #     valid_from: Time.now,
     #     valid_until: Time.now,
     #     replace_unhealthy_instances: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -3223,6 +4270,36 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.fleet_id #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].launch_template_and_overrides.launch_template_specification.launch_template_id #=> String
+    #   resp.errors[0].launch_template_and_overrides.launch_template_specification.launch_template_name #=> String
+    #   resp.errors[0].launch_template_and_overrides.launch_template_specification.version #=> String
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
+    #   resp.errors[0].launch_template_and_overrides.overrides.max_price #=> String
+    #   resp.errors[0].launch_template_and_overrides.overrides.subnet_id #=> String
+    #   resp.errors[0].launch_template_and_overrides.overrides.availability_zone #=> String
+    #   resp.errors[0].launch_template_and_overrides.overrides.weighted_capacity #=> Float
+    #   resp.errors[0].launch_template_and_overrides.overrides.priority #=> Float
+    #   resp.errors[0].launch_template_and_overrides.overrides.placement.group_name #=> String
+    #   resp.errors[0].lifecycle #=> String, one of "spot", "on-demand"
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.instances #=> Array
+    #   resp.instances[0].launch_template_and_overrides.launch_template_specification.launch_template_id #=> String
+    #   resp.instances[0].launch_template_and_overrides.launch_template_specification.launch_template_name #=> String
+    #   resp.instances[0].launch_template_and_overrides.launch_template_specification.version #=> String
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
+    #   resp.instances[0].launch_template_and_overrides.overrides.max_price #=> String
+    #   resp.instances[0].launch_template_and_overrides.overrides.subnet_id #=> String
+    #   resp.instances[0].launch_template_and_overrides.overrides.availability_zone #=> String
+    #   resp.instances[0].launch_template_and_overrides.overrides.weighted_capacity #=> Float
+    #   resp.instances[0].launch_template_and_overrides.overrides.priority #=> Float
+    #   resp.instances[0].launch_template_and_overrides.overrides.placement.group_name #=> String
+    #   resp.instances[0].lifecycle #=> String, one of "spot", "on-demand"
+    #   resp.instances[0].instance_ids #=> Array
+    #   resp.instances[0].instance_ids[0] #=> String
+    #   resp.instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
+    #   resp.instances[0].platform #=> String, one of "Windows"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleet AWS API Documentation
     #
@@ -3233,51 +4310,118 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates one or more flow logs to capture IP traffic for a specific
-    # network interface, subnet, or VPC. Flow logs are delivered to a
-    # specified log group in Amazon CloudWatch Logs. If you specify a VPC or
-    # subnet in the request, a log stream is created in CloudWatch Logs for
-    # each network interface in the subnet or VPC. Log streams can include
-    # information about accepted and rejected traffic to a network
-    # interface. You can view the data in your log streams using Amazon
-    # CloudWatch Logs.
+    # Creates one or more flow logs to capture information about IP traffic
+    # for a specific network interface, subnet, or VPC.
     #
-    # In your request, you must also specify an IAM role that has permission
-    # to publish logs to CloudWatch Logs.
+    # Flow log data for a monitored network interface is recorded as flow
+    # log records, which are log events consisting of fields that describe
+    # the traffic flow. For more information, see [Flow Log Records][1] in
+    # the *Amazon Virtual Private Cloud User Guide*.
     #
-    # For more information, see [VPC Flow Logs][1] in the *Amazon Virtual
+    # When publishing to CloudWatch Logs, flow log records are published to
+    # a log group, and each network interface has a unique log stream in the
+    # log group. When publishing to Amazon S3, flow log records for all of
+    # the monitored network interfaces are published to a single log file
+    # object that is stored in the specified bucket.
+    #
+    # For more information, see [VPC Flow Logs][2] in the *Amazon Virtual
     # Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
-    # @option params [required, String] :deliver_logs_permission_arn
-    #   The ARN for the IAM role that's used to post flow logs to a
-    #   CloudWatch Logs log group.
+    # @option params [String] :deliver_logs_permission_arn
+    #   The ARN for the IAM role that permits Amazon EC2 to publish flow logs
+    #   to a CloudWatch Logs log group in your account.
     #
-    # @option params [required, String] :log_group_name
-    #   The name of the CloudWatch log group.
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
+    #
+    # @option params [String] :log_group_name
+    #   The name of a new or existing CloudWatch Logs log group where Amazon
+    #   EC2 publishes your flow logs.
+    #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
     #
     # @option params [required, Array<String>] :resource_ids
-    #   One or more subnet, network interface, or VPC IDs.
+    #   The ID of the subnet, network interface, or VPC for which you want to
+    #   create a flow log.
     #
     #   Constraints: Maximum of 1000 resources
     #
     # @option params [required, String] :resource_type
-    #   The type of resource on which to create the flow log.
+    #   The type of resource for which to create the flow log. For example, if
+    #   you specified a VPC ID for the `ResourceId` property, specify `VPC`
+    #   for this property.
     #
     # @option params [required, String] :traffic_type
-    #   The type of traffic to log.
+    #   The type of traffic to log. You can log traffic that the resource
+    #   accepts or rejects, or all traffic.
+    #
+    # @option params [String] :log_destination_type
+    #   Specifies the type of destination to which the flow log data is to be
+    #   published. Flow log data can be published to CloudWatch Logs or Amazon
+    #   S3. To publish flow log data to CloudWatch Logs, specify
+    #   `cloud-watch-logs`. To publish flow log data to Amazon S3, specify
+    #   `s3`.
+    #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
+    #
+    #   Default: `cloud-watch-logs`
+    #
+    # @option params [String] :log_destination
+    #   Specifies the destination to which the flow log data is to be
+    #   published. Flow log data can be published to a CloudWatch Logs log
+    #   group or an Amazon S3 bucket. The value specified for this parameter
+    #   depends on the value specified for `LogDestinationType`.
+    #
+    #   If LogDestinationType is not specified or `cloud-watch-logs`, specify
+    #   the Amazon Resource Name (ARN) of the CloudWatch Logs log group.
+    #
+    #   If LogDestinationType is `s3`, specify the ARN of the Amazon S3
+    #   bucket. You can also specify a subfolder in the bucket. To specify a
+    #   subfolder in the bucket, use the following ARN format:
+    #   `bucket_ARN/subfolder_name/`. For example, to specify a subfolder
+    #   named `my-logs` in a bucket named `my-bucket`, use the following ARN:
+    #   `arn:aws:s3:::my-bucket/my-logs/`. You cannot use `AWSLogs` as a
+    #   subfolder name. This is a reserved term.
+    #
+    # @option params [String] :log_format
+    #   The fields to include in the flow log record, in the order in which
+    #   they should appear. For a list of available fields, see [Flow Log
+    #   Records][1]. If you omit this parameter, the flow log is created using
+    #   the default format. If you specify this parameter, you must specify at
+    #   least one field.
+    #
+    #   Specify the fields using the `$\{field-id\}` format, separated by
+    #   spaces. For the AWS CLI, use single quotation marks (' ') to
+    #   surround the parameter value.
+    #
+    #   Only applicable to flow logs that are published to an Amazon S3
+    #   bucket.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
     #
     # @return [Types::CreateFlowLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3288,12 +4432,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_flow_logs({
+    #     dry_run: false,
     #     client_token: "String",
-    #     deliver_logs_permission_arn: "String", # required
-    #     log_group_name: "String", # required
+    #     deliver_logs_permission_arn: "String",
+    #     log_group_name: "String",
     #     resource_ids: ["String"], # required
     #     resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface
     #     traffic_type: "ACCEPT", # required, accepts ACCEPT, REJECT, ALL
+    #     log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3
+    #     log_destination: "String",
+    #     log_format: "String",
     #   })
     #
     # @example Response structure
@@ -3322,7 +4470,7 @@ module Aws::EC2
     # for use, check the output logs.
     #
     # An AFI contains the FPGA bitstream that is ready to download to an
-    # FPGA. You can securely deploy an AFI on one or more FPGA-accelerated
+    # FPGA. You can securely deploy an AFI on multiple FPGA-accelerated
     # instances. For more information, see the [AWS FPGA Hardware
     # Development Kit][1].
     #
@@ -3356,7 +4504,10 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the FPGA image during creation.
     #
     # @return [Types::CreateFpgaImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3378,6 +4529,17 @@ module Aws::EC2
     #     description: "String",
     #     name: "String",
     #     client_token: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3408,10 +4570,12 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   Information about one or more block device mappings.
+    #   The block device mappings. This parameter cannot be used to modify the
+    #   encryption status of existing volumes or snapshots. To create an AMI
+    #   with encrypted snapshots, use the CopyImage action.
     #
     # @option params [String] :description
     #   A description for the new image.
@@ -3481,13 +4645,13 @@ module Aws::EC2
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           encrypted: false,
+    #           kms_key_id: "String",
     #         },
     #         no_device: "String",
     #       },
@@ -3521,7 +4685,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html
+    # [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html
     #
     # @option params [String] :description
     #   A description for the conversion task or the resource being exported.
@@ -3550,7 +4714,7 @@ module Aws::EC2
     #       s3_bucket: "String",
     #       s3_prefix: "String",
     #     },
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     target_environment: "citrix", # accepts citrix, vmware, microsoft
     #   })
     #
@@ -3576,15 +4740,15 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates an Internet gateway for use with a VPC. After creating the
-    # Internet gateway, you attach it to a VPC using AttachInternetGateway.
+    # Creates an internet gateway for use with a VPC. After creating the
+    # internet gateway, you attach it to a VPC using AttachInternetGateway.
     #
-    # For more information about your VPC and Internet gateway, see the
+    # For more information about your VPC and internet gateway, see the
     # [Amazon Virtual Private Cloud User Guide][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3627,6 +4791,7 @@ module Aws::EC2
     #   resp.internet_gateway.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.internet_gateway.attachments[0].vpc_id #=> String
     #   resp.internet_gateway.internet_gateway_id #=> String
+    #   resp.internet_gateway.owner_id #=> String
     #   resp.internet_gateway.tags #=> Array
     #   resp.internet_gateway.tags[0].key #=> String
     #   resp.internet_gateway.tags[0].value #=> String
@@ -3646,18 +4811,18 @@ module Aws::EC2
     # PKCS#1 private key. If a key with the specified name already exists,
     # Amazon EC2 returns an error.
     #
-    # You can have up to five thousand key pairs per region.
+    # You can have up to five thousand key pairs per Region.
     #
-    # The key pair returned to you is available only in the region in which
+    # The key pair returned to you is available only in the Region in which
     # you create it. If you prefer, you can create your own key pair using a
-    # third-party tool and upload it to any region using ImportKeyPair.
+    # third-party tool and upload it to any Region using ImportKeyPair.
     #
     # For more information, see [Key Pairs][1] in the *Amazon Elastic
     # Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
     #
     # @option params [required, String] :key_name
     #   A unique name for the key pair.
@@ -3688,7 +4853,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_key_pair({
-    #     key_name: "String", # required
+    #     key_name: "KeyPairName", # required
     #     dry_run: false,
     #   })
     #
@@ -3723,9 +4888,11 @@ module Aws::EC2
     #   idempotency of the request. For more information, see [Ensuring
     #   Idempotency][1].
     #
+    #   Constraint: Maximum 128 ASCII characters.
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, String] :launch_template_name
     #   A name for the launch template.
@@ -3735,6 +4902,9 @@ module Aws::EC2
     #
     # @option params [required, Types::RequestLaunchTemplateData] :launch_template_data
     #   The information for the launch template.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the launch template during creation.
     #
     # @return [Types::CreateLaunchTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3823,6 +4993,7 @@ module Aws::EC2
     #           description: "String",
     #           device_index: 1,
     #           groups: ["String"],
+    #           interface_type: "String",
     #           ipv_6_address_count: 1,
     #           ipv_6_addresses: [
     #             {
@@ -3842,7 +5013,7 @@ module Aws::EC2
     #         },
     #       ],
     #       image_id: "String",
-    #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #       key_name: "String",
     #       monitoring: {
     #         enabled: false,
@@ -3861,7 +5032,7 @@ module Aws::EC2
     #       user_data: "String",
     #       tag_specifications: [
     #         {
-    #           resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #           resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #           tags: [
     #             {
     #               key: "String",
@@ -3871,6 +5042,11 @@ module Aws::EC2
     #         },
     #       ],
     #       elastic_gpu_specifications: [
+    #         {
+    #           type: "String", # required
+    #         },
+    #       ],
+    #       elastic_inference_accelerators: [
     #         {
     #           type: "String", # required
     #         },
@@ -3894,7 +5070,32 @@ module Aws::EC2
     #         core_count: 1,
     #         threads_per_core: 1,
     #       },
+    #       capacity_reservation_specification: {
+    #         capacity_reservation_preference: "open", # accepts open, none
+    #         capacity_reservation_target: {
+    #           capacity_reservation_id: "String",
+    #         },
+    #       },
+    #       license_specifications: [
+    #         {
+    #           license_configuration_arn: "String",
+    #         },
+    #       ],
+    #       hibernation_options: {
+    #         configured: false,
+    #       },
     #     },
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3937,9 +5138,11 @@ module Aws::EC2
     #   idempotency of the request. For more information, see [Ensuring
     #   Idempotency][1].
     #
+    #   Constraint: Maximum 128 ASCII characters.
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :launch_template_id
     #   The ID of the launch template. You must specify either the launch
@@ -3953,7 +5156,9 @@ module Aws::EC2
     #   The version number of the launch template version on which to base the
     #   new version. The new version inherits the same launch parameters as
     #   the source version, except for parameters that you specify in
-    #   LaunchTemplateData.
+    #   `LaunchTemplateData`. Snapshots applied to the block device mapping
+    #   are ignored when creating a new version unless they are explicitly
+    #   included.
     #
     # @option params [String] :version_description
     #   A description for the version of the launch template.
@@ -4014,7 +5219,7 @@ module Aws::EC2
     #   resp = client.create_launch_template_version({
     #     dry_run: false,
     #     client_token: "String",
-    #     launch_template_id: "String",
+    #     launch_template_id: "LaunchTemplateId",
     #     launch_template_name: "LaunchTemplateName",
     #     source_version: "String",
     #     version_description: "VersionDescription",
@@ -4048,6 +5253,7 @@ module Aws::EC2
     #           description: "String",
     #           device_index: 1,
     #           groups: ["String"],
+    #           interface_type: "String",
     #           ipv_6_address_count: 1,
     #           ipv_6_addresses: [
     #             {
@@ -4067,7 +5273,7 @@ module Aws::EC2
     #         },
     #       ],
     #       image_id: "String",
-    #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #       key_name: "String",
     #       monitoring: {
     #         enabled: false,
@@ -4086,7 +5292,7 @@ module Aws::EC2
     #       user_data: "String",
     #       tag_specifications: [
     #         {
-    #           resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #           resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #           tags: [
     #             {
     #               key: "String",
@@ -4096,6 +5302,11 @@ module Aws::EC2
     #         },
     #       ],
     #       elastic_gpu_specifications: [
+    #         {
+    #           type: "String", # required
+    #         },
+    #       ],
+    #       elastic_inference_accelerators: [
     #         {
     #           type: "String", # required
     #         },
@@ -4118,6 +5329,20 @@ module Aws::EC2
     #       cpu_options: {
     #         core_count: 1,
     #         threads_per_core: 1,
+    #       },
+    #       capacity_reservation_specification: {
+    #         capacity_reservation_preference: "open", # accepts open, none
+    #         capacity_reservation_target: {
+    #           capacity_reservation_id: "String",
+    #         },
+    #       },
+    #       license_specifications: [
+    #         {
+    #           license_configuration_arn: "String",
+    #         },
+    #       ],
+    #       hibernation_options: {
+    #         configured: false,
     #       },
     #     },
     #   })
@@ -4153,6 +5378,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].device_index #=> Integer
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].groups #=> Array
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].groups[0] #=> String
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].interface_type #=> String
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].ipv_6_address_count #=> Integer
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
@@ -4164,7 +5390,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].subnet_id #=> String
     #   resp.launch_template_version.launch_template_data.image_id #=> String
-    #   resp.launch_template_version.launch_template_data.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.launch_template_version.launch_template_data.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.launch_template_version.launch_template_data.key_name #=> String
     #   resp.launch_template_version.launch_template_data.monitoring.enabled #=> Boolean
     #   resp.launch_template_version.launch_template_data.placement.availability_zone #=> String
@@ -4178,12 +5404,14 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
     #   resp.launch_template_version.launch_template_data.user_data #=> String
     #   resp.launch_template_version.launch_template_data.tag_specifications #=> Array
-    #   resp.launch_template_version.launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.launch_template_version.launch_template_data.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "elastic-ip", "fleet", "fpga-image", "host-reservation", "image", "instance", "internet-gateway", "launch-template", "natgateway", "network-acl", "network-interface", "reserved-instances", "route-table", "security-group", "snapshot", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway"
     #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags #=> Array
     #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags[0].key #=> String
     #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags[0].value #=> String
     #   resp.launch_template_version.launch_template_data.elastic_gpu_specifications #=> Array
     #   resp.launch_template_version.launch_template_data.elastic_gpu_specifications[0].type #=> String
+    #   resp.launch_template_version.launch_template_data.elastic_inference_accelerators #=> Array
+    #   resp.launch_template_version.launch_template_data.elastic_inference_accelerators[0].type #=> String
     #   resp.launch_template_version.launch_template_data.security_group_ids #=> Array
     #   resp.launch_template_version.launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_version.launch_template_data.security_groups #=> Array
@@ -4197,6 +5425,11 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.credit_specification.cpu_credits #=> String
     #   resp.launch_template_version.launch_template_data.cpu_options.core_count #=> Integer
     #   resp.launch_template_version.launch_template_data.cpu_options.threads_per_core #=> Integer
+    #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.launch_template_version.launch_template_data.license_specifications #=> Array
+    #   resp.launch_template_version.launch_template_data.license_specifications[0].license_configuration_arn #=> String
+    #   resp.launch_template_version.launch_template_data.hibernation_options.configured #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersion AWS API Documentation
     #
@@ -4217,7 +5450,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #
     # @option params [required, String] :allocation_id
     #   The allocation ID of an Elastic IP address to associate with the NAT
@@ -4225,7 +5458,7 @@ module Aws::EC2
     #   resource, you must first disassociate it.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
@@ -4233,7 +5466,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, String] :subnet_id
     #   The subnet in which to create the NAT gateway.
@@ -4273,9 +5506,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_nat_gateway({
-    #     allocation_id: "String", # required
+    #     allocation_id: "AllocationId", # required
     #     client_token: "String",
-    #     subnet_id: "String", # required
+    #     subnet_id: "SubnetId", # required
     #   })
     #
     # @example Response structure
@@ -4316,12 +5549,12 @@ module Aws::EC2
     # of security (in addition to security groups) for the instances in your
     # VPC.
     #
-    # For more information about network ACLs, see [Network ACLs][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Network ACLs][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4378,7 +5611,7 @@ module Aws::EC2
     #
     #   resp = client.create_network_acl({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -4404,6 +5637,7 @@ module Aws::EC2
     #   resp.network_acl.tags[0].key #=> String
     #   resp.network_acl.tags[0].value #=> String
     #   resp.network_acl.vpc_id #=> String
+    #   resp.network_acl.owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAcl AWS API Documentation
     #
@@ -4435,7 +5669,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html
     #
     # @option params [String] :cidr_block
     #   The IPv4 network range to allow or deny, in CIDR notation (for example
@@ -4453,8 +5687,8 @@ module Aws::EC2
     #
     # @option params [Types::IcmpTypeCode] :icmp_type_code
     #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6
-    #   CIDR block.
+    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR
+    #   block.
     #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range to allow or deny, in CIDR notation (for example
@@ -4464,17 +5698,18 @@ module Aws::EC2
     #   The ID of the network ACL.
     #
     # @option params [Types::PortRange] :port_range
-    #   TCP or UDP protocols: The range of ports the rule applies to.
+    #   TCP or UDP protocols: The range of ports the rule applies to. Required
+    #   if specifying protocol 6 (TCP) or 17 (UDP).
     #
     # @option params [required, String] :protocol
-    #   The protocol. A value of `-1` or `all` means all protocols. If you
-    #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
-    #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
-    #   any ports or ICMP types or codes you specify. If you specify protocol
-    #   `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP
-    #   types and codes allowed, regardless of any that you specify. If you
-    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
-    #   must specify an ICMP type and code.
+    #   The protocol number. A value of "-1" means all protocols. If you
+    #   specify "-1" or a protocol number other than "6" (TCP), "17"
+    #   (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of
+    #   any ports or ICMP types or codes that you specify. If you specify
+    #   protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for
+    #   all ICMP types and codes allowed, regardless of any that you specify.
+    #   If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR
+    #   block, you must specify an ICMP type and code.
     #
     # @option params [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
@@ -4502,7 +5737,7 @@ module Aws::EC2
     #       from: 53, 
     #       to: 53, 
     #     }, 
-    #     protocol: "udp", 
+    #     protocol: "17", 
     #     rule_action: "allow", 
     #     rule_number: 100, 
     #   })
@@ -4518,7 +5753,7 @@ module Aws::EC2
     #       type: 1,
     #     },
     #     ipv_6_cidr_block: "String",
-    #     network_acl_id: "String", # required
+    #     network_acl_id: "NetworkAclId", # required
     #     port_range: {
     #       from: 1,
     #       to: 1,
@@ -4544,7 +5779,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
     #
     # @option params [String] :description
     #   A description for the network interface.
@@ -4594,7 +5829,16 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    #
+    # @option params [String] :interface_type
+    #   Indicates the type of network interface. To create an Elastic Fabric
+    #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
+    #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
@@ -4668,7 +5912,8 @@ module Aws::EC2
     #       },
     #     ],
     #     secondary_private_ip_address_count: 1,
-    #     subnet_id: "String", # required
+    #     interface_type: "efa", # accepts efa
+    #     subnet_id: "SubnetId", # required
     #   })
     #
     # @example Response structure
@@ -4690,7 +5935,7 @@ module Aws::EC2
     #   resp.network_interface.groups #=> Array
     #   resp.network_interface.groups[0].group_name #=> String
     #   resp.network_interface.groups[0].group_id #=> String
-    #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway"
+    #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway", "efa"
     #   resp.network_interface.ipv_6_addresses #=> Array
     #   resp.network_interface.ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interface.mac_address #=> String
@@ -4757,7 +6002,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_network_interface_permission({
-    #     network_interface_id: "String", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
     #     aws_account_id: "String",
     #     aws_service: "String",
     #     permission: "INSTANCE-ATTACH", # required, accepts INSTANCE-ATTACH, EIP-ASSOCIATE
@@ -4790,14 +6035,16 @@ module Aws::EC2
     # A `cluster` placement group is a logical grouping of instances within
     # a single Availability Zone that benefit from low network latency, high
     # network throughput. A `spread` placement group places instances on
-    # distinct hardware.
+    # distinct hardware. A `partition` placement group places groups of
+    # instances in different partitions, where instances in one partition do
+    # not share the same hardware with instances in another partition.
     #
     # For more information, see [Placement Groups][1] in the *Amazon Elastic
     # Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4805,14 +6052,18 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [required, String] :group_name
+    # @option params [String] :group_name
     #   A name for the placement group. Must be unique within the scope of
-    #   your account for the region.
+    #   your account for the Region.
     #
     #   Constraints: Up to 255 ASCII characters
     #
-    # @option params [required, String] :strategy
+    # @option params [String] :strategy
     #   The placement strategy.
+    #
+    # @option params [Integer] :partition_count
+    #   The number of partitions. Valid only when **Strategy** is set to
+    #   `partition`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4834,8 +6085,9 @@ module Aws::EC2
     #
     #   resp = client.create_placement_group({
     #     dry_run: false,
-    #     group_name: "String", # required
-    #     strategy: "cluster", # required, accepts cluster, spread
+    #     group_name: "String",
+    #     strategy: "cluster", # accepts cluster, spread, partition
+    #     partition_count: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroup AWS API Documentation
@@ -4853,10 +6105,8 @@ module Aws::EC2
     # Reserved Instances, you can use the DescribeReservedInstances
     # operation.
     #
-    # <note markdown="1"> Only Standard Reserved Instances with a capacity reservation can be
-    # sold in the Reserved Instance Marketplace. Convertible Reserved
-    # Instances and Standard Reserved Instances with a regional benefit
-    # cannot be sold.
+    # <note markdown="1"> Only Standard Reserved Instances can be sold in the Reserved Instance
+    # Marketplace. Convertible Reserved Instances cannot be sold.
     #
     #  </note>
     #
@@ -4880,7 +6130,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -4889,7 +6139,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, Integer] :instance_count
     #   The number of instances that are a part of a Reserved Instance account
@@ -4956,9 +6206,9 @@ module Aws::EC2
 
     # Creates a route in a route table within a VPC.
     #
-    # You must specify one of the following targets: Internet gateway or
+    # You must specify one of the following targets: internet gateway or
     # virtual private gateway, NAT instance, NAT gateway, VPC peering
-    # connection, network interface, or egress-only Internet gateway.
+    # connection, network interface, or egress-only internet gateway.
     #
     # When determining how to route traffic, we use the route with the most
     # specific match. For example, traffic is destined for the IPv4 address
@@ -4979,7 +6229,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
     # @option params [String] :destination_cidr_block
     #   The IPv4 CIDR address block used for the destination match. Routing
@@ -4996,10 +6246,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     #
     # @option params [String] :gateway_id
-    #   The ID of an Internet gateway or virtual private gateway attached to
+    #   The ID of an internet gateway or virtual private gateway attached to
     #   your VPC.
     #
     # @option params [String] :instance_id
@@ -5009,6 +6259,9 @@ module Aws::EC2
     #
     # @option params [String] :nat_gateway_id
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
+    #
+    # @option params [String] :transit_gateway_id
+    #   The ID of a transit gateway.
     #
     # @option params [String] :network_interface_id
     #   The ID of a network interface.
@@ -5041,13 +6294,14 @@ module Aws::EC2
     #     destination_cidr_block: "String",
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
-    #     egress_only_internet_gateway_id: "String",
-    #     gateway_id: "String",
-    #     instance_id: "String",
-    #     nat_gateway_id: "String",
-    #     network_interface_id: "String",
-    #     route_table_id: "String", # required
-    #     vpc_peering_connection_id: "String",
+    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
+    #     gateway_id: "RouteTableGatewayId",
+    #     instance_id: "InstanceId",
+    #     nat_gateway_id: "NatGatewayId",
+    #     transit_gateway_id: "TransitGatewayId",
+    #     network_interface_id: "NetworkInterfaceId",
+    #     route_table_id: "RouteTableId", # required
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
     #
     # @example Response structure
@@ -5066,12 +6320,12 @@ module Aws::EC2
     # Creates a route table for the specified VPC. After you create a route
     # table, you can add routes and associate the table with a subnet.
     #
-    # For more information about route tables, see [Route Tables][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Route Tables][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5120,7 +6374,7 @@ module Aws::EC2
     #
     #   resp = client.create_route_table({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -5142,6 +6396,7 @@ module Aws::EC2
     #   resp.route_table.routes[0].instance_id #=> String
     #   resp.route_table.routes[0].instance_owner_id #=> String
     #   resp.route_table.routes[0].nat_gateway_id #=> String
+    #   resp.route_table.routes[0].transit_gateway_id #=> String
     #   resp.route_table.routes[0].network_interface_id #=> String
     #   resp.route_table.routes[0].origin #=> String, one of "CreateRouteTable", "CreateRoute", "EnableVgwRoutePropagation"
     #   resp.route_table.routes[0].state #=> String, one of "active", "blackhole"
@@ -5150,6 +6405,7 @@ module Aws::EC2
     #   resp.route_table.tags[0].key #=> String
     #   resp.route_table.tags[0].value #=> String
     #   resp.route_table.vpc_id #=> String
+    #   resp.route_table.owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTable AWS API Documentation
     #
@@ -5162,15 +6418,11 @@ module Aws::EC2
 
     # Creates a security group.
     #
-    # A security group is for use with instances either in the EC2-Classic
-    # platform or in a specific VPC. For more information, see [Amazon EC2
-    # Security Groups][1] in the *Amazon Elastic Compute Cloud User Guide*
-    # and [Security Groups for Your VPC][2] in the *Amazon Virtual Private
-    # Cloud User Guide*.
-    #
-    # EC2-Classic: You can have up to 500 security groups.
-    #
-    #  EC2-VPC: You can create up to 500 security groups per VPC.
+    # A security group acts as a virtual firewall for your instance to
+    # control inbound and outbound traffic. For more information, see
+    # [Amazon EC2 Security Groups][1] in the *Amazon Elastic Compute Cloud
+    # User Guide* and [Security Groups for Your VPC][2] in the *Amazon
+    # Virtual Private Cloud User Guide*.
     #
     # When you create a security group, you specify a friendly name of your
     # choice. You can have a security group for use in EC2-Classic with the
@@ -5189,10 +6441,14 @@ module Aws::EC2
     # AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress,
     # RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress.
     #
+    # For more information about VPC security group limits, see [Amazon VPC
+    # Limits][3].
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
-    # [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
+    # [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @option params [required, String] :description
     #   A description for the security group. This is informational only.
@@ -5248,7 +6504,7 @@ module Aws::EC2
     #   resp = client.create_security_group({
     #     description: "String", # required
     #     group_name: "String", # required
-    #     vpc_id: "String",
+    #     vpc_id: "VpcId",
     #     dry_run: false,
     #   })
     #
@@ -5300,9 +6556,9 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html
-    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :description
     #   A description for the snapshot.
@@ -5364,10 +6620,10 @@ module Aws::EC2
     #
     #   resp = client.create_snapshot({
     #     description: "String",
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -5407,6 +6663,83 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates crash-consistent snapshots of multiple EBS volumes and stores
+    # the data in S3. Volumes are chosen by specifying an instance. Any
+    # attached volumes will produce one snapshot each that is
+    # crash-consistent across the instance. Boot volumes can be excluded by
+    # changing the parameters.
+    #
+    # @option params [String] :description
+    #   A description propagated to every snapshot specified by the instance.
+    #
+    # @option params [required, Types::InstanceSpecification] :instance_specification
+    #   The instance to specify which volumes should be included in the
+    #   snapshots.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to apply to every snapshot specified by the instance.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :copy_tags_from_source
+    #   Copies the tags from the specified volume to corresponding snapshot.
+    #
+    # @return [Types::CreateSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSnapshotsResult#snapshots #snapshots} => Array&lt;Types::SnapshotInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_snapshots({
+    #     description: "String",
+    #     instance_specification: { # required
+    #       instance_id: "String",
+    #       exclude_boot_volume: false,
+    #     },
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #     copy_tags_from_source: "volume", # accepts volume
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshots #=> Array
+    #   resp.snapshots[0].description #=> String
+    #   resp.snapshots[0].tags #=> Array
+    #   resp.snapshots[0].tags[0].key #=> String
+    #   resp.snapshots[0].tags[0].value #=> String
+    #   resp.snapshots[0].encrypted #=> Boolean
+    #   resp.snapshots[0].volume_id #=> String
+    #   resp.snapshots[0].state #=> String, one of "pending", "completed", "error"
+    #   resp.snapshots[0].volume_size #=> Integer
+    #   resp.snapshots[0].start_time #=> Time
+    #   resp.snapshots[0].progress #=> String
+    #   resp.snapshots[0].owner_id #=> String
+    #   resp.snapshots[0].snapshot_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshots AWS API Documentation
+    #
+    # @overload create_snapshots(params = {})
+    # @param [Hash] params ({})
+    def create_snapshots(params = {}, options = {})
+      req = build_request(:create_snapshots, params)
+      req.send_request(options)
+    end
+
     # Creates a data feed for Spot Instances, enabling you to view Spot
     # Instance usage logs. You can create one data feed per AWS account. For
     # more information, see [Spot Instance Data Feed][1] in the *Amazon EC2
@@ -5414,7 +6747,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html
     #
     # @option params [required, String] :bucket
     #   The Amazon S3 bucket in which to store the Spot Instance data feed.
@@ -5480,14 +6813,14 @@ module Aws::EC2
 
     # Creates a subnet in an existing VPC.
     #
-    # When you create each subnet, you provide the VPC ID and the IPv4 CIDR
-    # block you want for the subnet. After you create a subnet, you can't
-    # change its CIDR block. The size of the subnet's IPv4 CIDR block can
-    # be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4
-    # CIDR block. If you create more than one subnet in a VPC, the subnets'
-    # CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you
-    # can create uses a /28 netmask (16 IPv4 addresses), and the largest
-    # uses a /16 netmask (65,536 IPv4 addresses).
+    # When you create each subnet, you provide the VPC ID and IPv4 CIDR
+    # block for the subnet. After you create a subnet, you can't change its
+    # CIDR block. The size of the subnet's IPv4 CIDR block can be the same
+    # as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block.
+    # If you create more than one subnet in a VPC, the subnets' CIDR blocks
+    # must not overlap. The smallest IPv4 subnet (and VPC) you can create
+    # uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16
+    # netmask (65,536 IPv4 addresses).
     #
     # If you've associated an IPv6 CIDR block with your VPC, you can create
     # a subnet with an IPv6 CIDR block that uses a /64 prefix length.
@@ -5510,7 +6843,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
     #
     # @option params [String] :availability_zone
     #   The Availability Zone for the subnet.
@@ -5518,6 +6851,9 @@ module Aws::EC2
     #   Default: AWS selects one for you. If you create more than one subnet
     #   in your VPC, we may not necessarily select a different zone for each
     #   subnet.
+    #
+    # @option params [String] :availability_zone_id
+    #   The AZ ID of the subnet.
     #
     # @option params [required, String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
@@ -5567,15 +6903,17 @@ module Aws::EC2
     #
     #   resp = client.create_subnet({
     #     availability_zone: "String",
+    #     availability_zone_id: "String",
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.subnet.availability_zone #=> String
+    #   resp.subnet.availability_zone_id #=> String
     #   resp.subnet.available_ip_address_count #=> Integer
     #   resp.subnet.cidr_block #=> String
     #   resp.subnet.default_for_az #=> Boolean
@@ -5583,6 +6921,7 @@ module Aws::EC2
     #   resp.subnet.state #=> String, one of "pending", "available"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.vpc_id #=> String
+    #   resp.subnet.owner_id #=> String
     #   resp.subnet.assign_ipv_6_address_on_creation #=> Boolean
     #   resp.subnet.ipv_6_cidr_block_association_set #=> Array
     #   resp.subnet.ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -5592,6 +6931,7 @@ module Aws::EC2
     #   resp.subnet.tags #=> Array
     #   resp.subnet.tags[0].key #=> String
     #   resp.subnet.tags[0].value #=> String
+    #   resp.subnet.subnet_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnet AWS API Documentation
     #
@@ -5602,7 +6942,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Adds or overwrites one or more tags for the specified Amazon EC2
+    # Adds or overwrites the specified tags for the specified Amazon EC2
     # resource or resources. Each resource can have a maximum of 50 tags.
     # Each tag consists of a key and optional value. Tag keys must be unique
     # per resource.
@@ -5615,8 +6955,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5625,12 +6965,15 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :resources
-    #   The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
+    #   The IDs of the resources, separated by spaces.
+    #
+    #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
+    #   request into smaller batches.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5674,6 +7017,760 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates a Traffic Mirror filter.
+    #
+    # A Traffic Mirror filter is a set of rules that defines the traffic to
+    # mirror.
+    #
+    # By default, no traffic is mirrored. To mirror traffic, use
+    # [CreateTrafficMirrorFilterRule][1] to add Traffic Mirror rules to the
+    # filter. The rules you add define what traffic gets mirrored. You can
+    # also use [ModifyTrafficMirrorFilterNetworkServices][2] to mirror
+    # supported network services.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilterRule.htm
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyTrafficMirrorFilterNetworkServices.html
+    #
+    # @option params [String] :description
+    #   The description of the Traffic Mirror filter.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to a Traffic Mirror filter.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateTrafficMirrorFilterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTrafficMirrorFilterResult#traffic_mirror_filter #traffic_mirror_filter} => Types::TrafficMirrorFilter
+    #   * {Types::CreateTrafficMirrorFilterResult#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_traffic_mirror_filter({
+    #     description: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_filter.traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filter.ingress_filter_rules #=> Array
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].traffic_mirror_filter_rule_id #=> String
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].traffic_direction #=> String, one of "ingress", "egress"
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].rule_number #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].rule_action #=> String, one of "accept", "reject"
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].protocol #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].destination_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].destination_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].source_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].source_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].destination_cidr_block #=> String
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].source_cidr_block #=> String
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].description #=> String
+    #   resp.traffic_mirror_filter.egress_filter_rules #=> Array
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].traffic_mirror_filter_rule_id #=> String
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].traffic_direction #=> String, one of "ingress", "egress"
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].rule_number #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].rule_action #=> String, one of "accept", "reject"
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].protocol #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].destination_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].destination_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].source_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].source_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].destination_cidr_block #=> String
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].source_cidr_block #=> String
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].description #=> String
+    #   resp.traffic_mirror_filter.network_services #=> Array
+    #   resp.traffic_mirror_filter.network_services[0] #=> String, one of "amazon-dns"
+    #   resp.traffic_mirror_filter.description #=> String
+    #   resp.traffic_mirror_filter.tags #=> Array
+    #   resp.traffic_mirror_filter.tags[0].key #=> String
+    #   resp.traffic_mirror_filter.tags[0].value #=> String
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilter AWS API Documentation
+    #
+    # @overload create_traffic_mirror_filter(params = {})
+    # @param [Hash] params ({})
+    def create_traffic_mirror_filter(params = {}, options = {})
+      req = build_request(:create_traffic_mirror_filter, params)
+      req.send_request(options)
+    end
+
+    # Creates a Traffic Mirror filter rule.
+    #
+    # A Traffic Mirror rule defines the Traffic Mirror source traffic to
+    # mirror.
+    #
+    # You need the Traffic Mirror filter ID when you create the rule.
+    #
+    # @option params [required, String] :traffic_mirror_filter_id
+    #   The ID of the filter that this rule is associated with.
+    #
+    # @option params [required, String] :traffic_direction
+    #   The type of traffic (`ingress` \| `egress`).
+    #
+    # @option params [required, Integer] :rule_number
+    #   The number of the Traffic Mirror rule. This number must be unique for
+    #   each Traffic Mirror rule in a given direction. The rules are processed
+    #   in ascending order by rule number.
+    #
+    # @option params [required, String] :rule_action
+    #   The action to take (`accept` \| `reject`) on the filtered traffic.
+    #
+    # @option params [Types::TrafficMirrorPortRangeRequest] :destination_port_range
+    #   The destination port range.
+    #
+    # @option params [Types::TrafficMirrorPortRangeRequest] :source_port_range
+    #   The source port range.
+    #
+    # @option params [Integer] :protocol
+    #   The protocol, for example UDP, to assign to the Traffic Mirror rule.
+    #
+    #   For information about the protocol value, see [Protocol Numbers][1] on
+    #   the Internet Assigned Numbers Authority (IANA) website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
+    #
+    # @option params [required, String] :destination_cidr_block
+    #   The destination CIDR block to assign to the Traffic Mirror rule.
+    #
+    # @option params [required, String] :source_cidr_block
+    #   The source CIDR block to assign to the Traffic Mirror rule.
+    #
+    # @option params [String] :description
+    #   The description of the Traffic Mirror rule.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateTrafficMirrorFilterRuleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTrafficMirrorFilterRuleResult#traffic_mirror_filter_rule #traffic_mirror_filter_rule} => Types::TrafficMirrorFilterRule
+    #   * {Types::CreateTrafficMirrorFilterRuleResult#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_traffic_mirror_filter_rule({
+    #     traffic_mirror_filter_id: "TrafficMirrorFilterId", # required
+    #     traffic_direction: "ingress", # required, accepts ingress, egress
+    #     rule_number: 1, # required
+    #     rule_action: "accept", # required, accepts accept, reject
+    #     destination_port_range: {
+    #       from_port: 1,
+    #       to_port: 1,
+    #     },
+    #     source_port_range: {
+    #       from_port: 1,
+    #       to_port: 1,
+    #     },
+    #     protocol: 1,
+    #     destination_cidr_block: "String", # required
+    #     source_cidr_block: "String", # required
+    #     description: "String",
+    #     dry_run: false,
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_filter_rule.traffic_mirror_filter_rule_id #=> String
+    #   resp.traffic_mirror_filter_rule.traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filter_rule.traffic_direction #=> String, one of "ingress", "egress"
+    #   resp.traffic_mirror_filter_rule.rule_number #=> Integer
+    #   resp.traffic_mirror_filter_rule.rule_action #=> String, one of "accept", "reject"
+    #   resp.traffic_mirror_filter_rule.protocol #=> Integer
+    #   resp.traffic_mirror_filter_rule.destination_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter_rule.destination_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter_rule.source_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter_rule.source_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter_rule.destination_cidr_block #=> String
+    #   resp.traffic_mirror_filter_rule.source_cidr_block #=> String
+    #   resp.traffic_mirror_filter_rule.description #=> String
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRule AWS API Documentation
+    #
+    # @overload create_traffic_mirror_filter_rule(params = {})
+    # @param [Hash] params ({})
+    def create_traffic_mirror_filter_rule(params = {}, options = {})
+      req = build_request(:create_traffic_mirror_filter_rule, params)
+      req.send_request(options)
+    end
+
+    # Creates a Traffic Mirror session.
+    #
+    # A Traffic Mirror session actively copies packets from a Traffic Mirror
+    # source to a Traffic Mirror target. Create a filter, and then assign it
+    # to the session to define a subset of the traffic to mirror, for
+    # example all TCP traffic.
+    #
+    # The Traffic Mirror source and the Traffic Mirror target (monitoring
+    # appliances) can be in the same VPC, or in a different VPC connected
+    # via VPC peering or a transit gateway.
+    #
+    # By default, no traffic is mirrored. Use [CreateTrafficMirrorFilter][1]
+    # to create filter rules that specify the traffic to mirror.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.htm
+    #
+    # @option params [required, String] :network_interface_id
+    #   The ID of the source network interface.
+    #
+    # @option params [required, String] :traffic_mirror_target_id
+    #   The ID of the Traffic Mirror target.
+    #
+    # @option params [required, String] :traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #
+    # @option params [Integer] :packet_length
+    #   The number of bytes in each packet to mirror. These are bytes after
+    #   the VXLAN header. Do not specify this parameter when you want to
+    #   mirror the entire packet. To mirror a subset of the packet, set this
+    #   to the length (in bytes) that you want to mirror. For example, if you
+    #   set this value to 100, then the first 100 bytes that meet the filter
+    #   criteria are copied to the target.
+    #
+    #   If you do not want to mirror the entire packet, use the `PacketLength`
+    #   parameter to specify the number of bytes in each packet to mirror.
+    #
+    # @option params [required, Integer] :session_number
+    #   The session number determines the order in which sessions are
+    #   evaluated when an interface is used by multiple sessions. The first
+    #   session with a matching filter is the one that mirrors the packets.
+    #
+    #   Valid values are 1-32766.
+    #
+    # @option params [Integer] :virtual_network_id
+    #   The VXLAN ID for the Traffic Mirror session. For more information
+    #   about the VXLAN protocol, see [RFC 7348][1]. If you do not specify a
+    #   `VirtualNetworkId`, an account-wide unique id is chosen at random.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7348
+    #
+    # @option params [String] :description
+    #   The description of the Traffic Mirror session.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to a Traffic Mirror session.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateTrafficMirrorSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTrafficMirrorSessionResult#traffic_mirror_session #traffic_mirror_session} => Types::TrafficMirrorSession
+    #   * {Types::CreateTrafficMirrorSessionResult#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_traffic_mirror_session({
+    #     network_interface_id: "NetworkInterfaceId", # required
+    #     traffic_mirror_target_id: "TrafficMirrorTargetId", # required
+    #     traffic_mirror_filter_id: "TrafficMirrorFilterId", # required
+    #     packet_length: 1,
+    #     session_number: 1, # required
+    #     virtual_network_id: 1,
+    #     description: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_session.traffic_mirror_session_id #=> String
+    #   resp.traffic_mirror_session.traffic_mirror_target_id #=> String
+    #   resp.traffic_mirror_session.traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_session.network_interface_id #=> String
+    #   resp.traffic_mirror_session.owner_id #=> String
+    #   resp.traffic_mirror_session.packet_length #=> Integer
+    #   resp.traffic_mirror_session.session_number #=> Integer
+    #   resp.traffic_mirror_session.virtual_network_id #=> Integer
+    #   resp.traffic_mirror_session.description #=> String
+    #   resp.traffic_mirror_session.tags #=> Array
+    #   resp.traffic_mirror_session.tags[0].key #=> String
+    #   resp.traffic_mirror_session.tags[0].value #=> String
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorSession AWS API Documentation
+    #
+    # @overload create_traffic_mirror_session(params = {})
+    # @param [Hash] params ({})
+    def create_traffic_mirror_session(params = {}, options = {})
+      req = build_request(:create_traffic_mirror_session, params)
+      req.send_request(options)
+    end
+
+    # Creates a target for your Traffic Mirror session.
+    #
+    # A Traffic Mirror target is the destination for mirrored traffic. The
+    # Traffic Mirror source and the Traffic Mirror target (monitoring
+    # appliances) can be in the same VPC, or in different VPCs connected via
+    # VPC peering or a transit gateway.
+    #
+    # A Traffic Mirror target can be a network interface, or a Network Load
+    # Balancer.
+    #
+    # To use the target in a Traffic Mirror session, use
+    # [CreateTrafficMirrorSession][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorSession.htm
+    #
+    # @option params [String] :network_interface_id
+    #   The network interface ID that is associated with the target.
+    #
+    # @option params [String] :network_load_balancer_arn
+    #   The Amazon Resource Name (ARN) of the Network Load Balancer that is
+    #   associated with the target.
+    #
+    # @option params [String] :description
+    #   The description of the Traffic Mirror target.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the Traffic Mirror target.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateTrafficMirrorTargetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTrafficMirrorTargetResult#traffic_mirror_target #traffic_mirror_target} => Types::TrafficMirrorTarget
+    #   * {Types::CreateTrafficMirrorTargetResult#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_traffic_mirror_target({
+    #     network_interface_id: "NetworkInterfaceId",
+    #     network_load_balancer_arn: "String",
+    #     description: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_target.traffic_mirror_target_id #=> String
+    #   resp.traffic_mirror_target.network_interface_id #=> String
+    #   resp.traffic_mirror_target.network_load_balancer_arn #=> String
+    #   resp.traffic_mirror_target.type #=> String, one of "network-interface", "network-load-balancer"
+    #   resp.traffic_mirror_target.description #=> String
+    #   resp.traffic_mirror_target.owner_id #=> String
+    #   resp.traffic_mirror_target.tags #=> Array
+    #   resp.traffic_mirror_target.tags[0].key #=> String
+    #   resp.traffic_mirror_target.tags[0].value #=> String
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorTarget AWS API Documentation
+    #
+    # @overload create_traffic_mirror_target(params = {})
+    # @param [Hash] params ({})
+    def create_traffic_mirror_target(params = {}, options = {})
+      req = build_request(:create_traffic_mirror_target, params)
+      req.send_request(options)
+    end
+
+    # Creates a transit gateway.
+    #
+    # You can use a transit gateway to interconnect your virtual private
+    # clouds (VPC) and on-premises networks. After the transit gateway
+    # enters the `available` state, you can attach your VPCs and VPN
+    # connections to the transit gateway.
+    #
+    # To attach your VPCs, use CreateTransitGatewayVpcAttachment.
+    #
+    # To attach a VPN connection, use CreateCustomerGateway to create a
+    # customer gateway and specify the ID of the customer gateway and the ID
+    # of the transit gateway in a call to CreateVpnConnection.
+    #
+    # When you create a transit gateway, we create a default transit gateway
+    # route table and use it as the default association route table and the
+    # default propagation route table. You can use
+    # CreateTransitGatewayRouteTable to create additional transit gateway
+    # route tables. If you disable automatic route propagation, we do not
+    # create a default transit gateway route table. You can use
+    # EnableTransitGatewayRouteTablePropagation to propagate routes from a
+    # resource attachment to a transit gateway route table. If you disable
+    # automatic associations, you can use AssociateTransitGatewayRouteTable
+    # to associate a resource attachment with a transit gateway route table.
+    #
+    # @option params [String] :description
+    #   A description of the transit gateway.
+    #
+    # @option params [Types::TransitGatewayRequestOptions] :options
+    #   The transit gateway options.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the transit gateway.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateTransitGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTransitGatewayResult#transit_gateway #transit_gateway} => Types::TransitGateway
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_transit_gateway({
+    #     description: "String",
+    #     options: {
+    #       amazon_side_asn: 1,
+    #       auto_accept_shared_attachments: "enable", # accepts enable, disable
+    #       default_route_table_association: "enable", # accepts enable, disable
+    #       default_route_table_propagation: "enable", # accepts enable, disable
+    #       vpn_ecmp_support: "enable", # accepts enable, disable
+    #       dns_support: "enable", # accepts enable, disable
+    #     },
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway.transit_gateway_id #=> String
+    #   resp.transit_gateway.transit_gateway_arn #=> String
+    #   resp.transit_gateway.state #=> String, one of "pending", "available", "modifying", "deleting", "deleted"
+    #   resp.transit_gateway.owner_id #=> String
+    #   resp.transit_gateway.description #=> String
+    #   resp.transit_gateway.creation_time #=> Time
+    #   resp.transit_gateway.options.amazon_side_asn #=> Integer
+    #   resp.transit_gateway.options.auto_accept_shared_attachments #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.default_route_table_association #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.association_default_route_table_id #=> String
+    #   resp.transit_gateway.options.default_route_table_propagation #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.propagation_default_route_table_id #=> String
+    #   resp.transit_gateway.options.vpn_ecmp_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.tags #=> Array
+    #   resp.transit_gateway.tags[0].key #=> String
+    #   resp.transit_gateway.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGateway AWS API Documentation
+    #
+    # @overload create_transit_gateway(params = {})
+    # @param [Hash] params ({})
+    def create_transit_gateway(params = {}, options = {})
+      req = build_request(:create_transit_gateway, params)
+      req.send_request(options)
+    end
+
+    # Creates a static route for the specified transit gateway route table.
+    #
+    # @option params [required, String] :destination_cidr_block
+    #   The CIDR range used for destination matches. Routing decisions are
+    #   based on the most specific match.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Boolean] :blackhole
+    #   Indicates whether to drop traffic that matches this route.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateTransitGatewayRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTransitGatewayRouteResult#route #route} => Types::TransitGatewayRoute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_transit_gateway_route({
+    #     destination_cidr_block: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
+    #     blackhole: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.route.destination_cidr_block #=> String
+    #   resp.route.transit_gateway_attachments #=> Array
+    #   resp.route.transit_gateway_attachments[0].resource_id #=> String
+    #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.route.type #=> String, one of "static", "propagated"
+    #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayRoute AWS API Documentation
+    #
+    # @overload create_transit_gateway_route(params = {})
+    # @param [Hash] params ({})
+    def create_transit_gateway_route(params = {}, options = {})
+      req = build_request(:create_transit_gateway_route, params)
+      req.send_request(options)
+    end
+
+    # Creates a route table for the specified transit gateway.
+    #
+    # @option params [required, String] :transit_gateway_id
+    #   The ID of the transit gateway.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the transit gateway route table.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateTransitGatewayRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTransitGatewayRouteTableResult#transit_gateway_route_table #transit_gateway_route_table} => Types::TransitGatewayRouteTable
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_transit_gateway_route_table({
+    #     transit_gateway_id: "TransitGatewayId", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_route_table.transit_gateway_route_table_id #=> String
+    #   resp.transit_gateway_route_table.transit_gateway_id #=> String
+    #   resp.transit_gateway_route_table.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.transit_gateway_route_table.default_association_route_table #=> Boolean
+    #   resp.transit_gateway_route_table.default_propagation_route_table #=> Boolean
+    #   resp.transit_gateway_route_table.creation_time #=> Time
+    #   resp.transit_gateway_route_table.tags #=> Array
+    #   resp.transit_gateway_route_table.tags[0].key #=> String
+    #   resp.transit_gateway_route_table.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayRouteTable AWS API Documentation
+    #
+    # @overload create_transit_gateway_route_table(params = {})
+    # @param [Hash] params ({})
+    def create_transit_gateway_route_table(params = {}, options = {})
+      req = build_request(:create_transit_gateway_route_table, params)
+      req.send_request(options)
+    end
+
+    # Attaches the specified VPC to the specified transit gateway.
+    #
+    # If you attach a VPC with a CIDR range that overlaps the CIDR range of
+    # a VPC that is already attached, the new VPC CIDR range is not
+    # propagated to the default propagation route table.
+    #
+    # To send VPC traffic to an attached transit gateway, add a route to the
+    # VPC route table using CreateRoute.
+    #
+    # @option params [required, String] :transit_gateway_id
+    #   The ID of the transit gateway.
+    #
+    # @option params [required, String] :vpc_id
+    #   The ID of the VPC.
+    #
+    # @option params [required, Array<String>] :subnet_ids
+    #   The IDs of one or more subnets. You can specify only one subnet per
+    #   Availability Zone. You must specify at least one subnet, but we
+    #   recommend that you specify two subnets for better availability. The
+    #   transit gateway uses one IP address from each specified subnet.
+    #
+    # @option params [Types::CreateTransitGatewayVpcAttachmentRequestOptions] :options
+    #   The VPC attachment options.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the VPC attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateTransitGatewayVpcAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTransitGatewayVpcAttachmentResult#transit_gateway_vpc_attachment #transit_gateway_vpc_attachment} => Types::TransitGatewayVpcAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_transit_gateway_vpc_attachment({
+    #     transit_gateway_id: "TransitGatewayId", # required
+    #     vpc_id: "VpcId", # required
+    #     subnet_ids: ["String"], # required
+    #     options: {
+    #       dns_support: "enable", # accepts enable, disable
+    #       ipv_6_support: "enable", # accepts enable, disable
+    #     },
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_vpc_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_vpc_attachment.transit_gateway_id #=> String
+    #   resp.transit_gateway_vpc_attachment.vpc_id #=> String
+    #   resp.transit_gateway_vpc_attachment.vpc_owner_id #=> String
+    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachment.subnet_ids #=> Array
+    #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
+    #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
+    #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.tags #=> Array
+    #   resp.transit_gateway_vpc_attachment.tags[0].key #=> String
+    #   resp.transit_gateway_vpc_attachment.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayVpcAttachment AWS API Documentation
+    #
+    # @overload create_transit_gateway_vpc_attachment(params = {})
+    # @param [Hash] params ({})
+    def create_transit_gateway_vpc_attachment(params = {}, options = {})
+      req = build_request(:create_transit_gateway_vpc_attachment, params)
+      req.send_request(options)
+    end
+
     # Creates an EBS volume that can be attached to an instance in the same
     # Availability Zone. The volume is created in the regional endpoint that
     # you send the HTTP request to. For more information see [Regions and
@@ -5683,12 +7780,11 @@ module Aws::EC2
     # snapshot. Any AWS Marketplace product codes from the snapshot are
     # propagated to the volume.
     #
-    # You can create encrypted volumes with the `Encrypted` parameter.
-    # Encrypted volumes may only be attached to instances that support
-    # Amazon EBS encryption. Volumes that are created from encrypted
-    # snapshots are also automatically encrypted. For more information, see
-    # [Amazon EBS Encryption][2] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # You can create encrypted volumes. Encrypted volumes must be attached
+    # to instances that support Amazon EBS encryption. Volumes that are
+    # created from encrypted snapshots are also automatically encrypted. For
+    # more information, see [Amazon EBS Encryption][2] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     # You can tag your volumes during creation. For more information, see
     # [Tagging Your Amazon EC2 Resources][3] in the *Amazon Elastic Compute
@@ -5699,94 +7795,96 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
-    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
-    # [4]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html
     #
     # @option params [required, String] :availability_zone
-    #   The Availability Zone in which to create the volume. Use
-    #   DescribeAvailabilityZones to list the Availability Zones that are
-    #   currently available to you.
+    #   The Availability Zone in which to create the volume.
     #
     # @option params [Boolean] :encrypted
-    #   Specifies whether the volume should be encrypted. Encrypted Amazon EBS
-    #   volumes may only be attached to instances that support Amazon EBS
-    #   encryption. Volumes that are created from encrypted snapshots are
-    #   automatically encrypted. There is no way to create an encrypted volume
-    #   from an unencrypted snapshot or vice versa. If your AMI uses encrypted
-    #   volumes, you can only launch it on supported instance types. For more
-    #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   Specifies whether the volume should be encrypted. The effect of
+    #   setting the encryption state to `true` depends on the volume origin
+    #   (new or from a snapshot), starting encryption state, ownership, and
+    #   whether encryption by default is enabled. For more information, see
+    #   [Encryption by Default][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #   Encrypted Amazon EBS volumes must be attached to instances that
+    #   support Amazon EBS encryption. For more information, see [Supported
+    #   Instance Types][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #
     # @option params [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
-    #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
-    #   Volume Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
+    #   IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed
+    #   only on [Nitro-based instances][1]. Other instance families guarantee
+    #   performance up to 32,000 IOPS. For more information, see [Amazon EBS
+    #   Volume Types][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #
     # @option params [String] :kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use when creating the encrypted volume. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. If a
-    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
+    #   is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
+    #   ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     #
     # @option params [Integer] :size
     #   The size of the volume, in GiBs.
     #
-    #   Constraints: 1-16384 for `gp2`, 4-16384 for `io1`, 500-16384 for
-    #   `st1`, 500-16384 for `sc1`, and 1-1024 for `standard`. If you specify
-    #   a snapshot, the volume size must be equal to or larger than the
-    #   snapshot size.
+    #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1`, 500-16,384 for
+    #   `st1`, 500-16,384 for `sc1`, and 1-1,024 for `standard`. If you
+    #   specify a snapshot, the volume size must be equal to or larger than
+    #   the snapshot size.
     #
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
     #
+    #   <note markdown="1"> At least one of Size or SnapshotId is required.
+    #
+    #    </note>
+    #
     # @option params [String] :snapshot_id
     #   The snapshot from which to create the volume.
+    #
+    #   <note markdown="1"> At least one of Size or SnapshotId are required.
+    #
+    #    </note>
     #
     # @option params [String] :volume_type
     #   The volume type. This can be `gp2` for General Purpose SSD, `io1` for
     #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
     #   Cold HDD, or `standard` for Magnetic volumes.
     #
-    #   Defaults: If no volume type is specified, the default is `standard` in
-    #   us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1,
-    #   ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2,
-    #   ap-south-1, us-gov-west-1, and cn-north-1. In all other regions, EBS
-    #   defaults to `gp2`.
+    #   Default: `gp2`
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5811,6 +7909,7 @@ module Aws::EC2
     #   * {Types::Volume#iops #iops} => Integer
     #   * {Types::Volume#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Volume#volume_type #volume_type} => String
+    #   * {Types::Volume#fast_restored #fast_restored} => Boolean
     #
     #
     # @example Example: To create a new volume
@@ -5870,14 +7969,14 @@ module Aws::EC2
     #     availability_zone: "String", # required
     #     encrypted: false,
     #     iops: 1,
-    #     kms_key_id: "String",
+    #     kms_key_id: "KmsKeyId",
     #     size: 1,
-    #     snapshot_id: "String",
+    #     snapshot_id: "SnapshotId",
     #     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #     dry_run: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -5910,6 +8009,7 @@ module Aws::EC2
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.fast_restored #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolume AWS API Documentation
     #
@@ -5922,9 +8022,9 @@ module Aws::EC2
 
     # Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you
     # can create uses a /28 netmask (16 IPv4 addresses), and the largest
-    # uses a /16 netmask (65,536 IPv4 addresses). To help you decide how big
-    # to make your VPC, see [Your VPC and Subnets][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # uses a /16 netmask (65,536 IPv4 addresses). For more information about
+    # how large to make your VPC, see [Your VPC and Subnets][1] in the
+    # *Amazon Virtual Private Cloud User Guide*.
     #
     # You can optionally request an Amazon-provided IPv6 CIDR block for the
     # VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated
@@ -5932,10 +8032,9 @@ module Aws::EC2
     # range for your VPC.
     #
     # By default, each instance you launch in the VPC has the default DHCP
-    # options, which includes only a default DNS server that we provide
-    # (AmazonProvidedDNS). For more information about DHCP options, see
-    # [DHCP Options Sets][2] in the *Amazon Virtual Private Cloud User
-    # Guide*.
+    # options, which include only a default DNS server that we provide
+    # (AmazonProvidedDNS). For more information, see [DHCP Options Sets][2]
+    # in the *Amazon Virtual Private Cloud User Guide*.
     #
     # You can specify the instance tenancy value for the VPC when you create
     # it. You can't change this value for the VPC after you create it. For
@@ -5944,9 +8043,9 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
-    # [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html
-    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
     #
     # @option params [required, String] :cidr_block
     #   The IPv4 network range for the VPC, in CIDR notation. For example,
@@ -6015,6 +8114,7 @@ module Aws::EC2
     #   resp.vpc.dhcp_options_id #=> String
     #   resp.vpc.state #=> String, one of "pending", "available"
     #   resp.vpc.vpc_id #=> String
+    #   resp.vpc.owner_id #=> String
     #   resp.vpc.instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.vpc.ipv_6_cidr_block_association_set #=> Array
     #   resp.vpc.ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -6061,7 +8161,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6083,10 +8183,10 @@ module Aws::EC2
     #   provider.
     #
     # @option params [String] :policy_document
-    #   (Gateway endpoint) A policy to attach to the endpoint that controls
-    #   access to the service. The policy must be in valid JSON format. If
-    #   this parameter is not specified, we attach a default policy that
-    #   allows full access to the service.
+    #   A policy to attach to the endpoint that controls access to the
+    #   service. The policy must be in valid JSON format. If this parameter is
+    #   not specified, we attach a default policy that allows full access to
+    #   the service.
     #
     # @option params [Array<String>] :route_table_ids
     #   (Gateway endpoint) One or more route table IDs.
@@ -6106,12 +8206,12 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Boolean] :private_dns_enabled
     #   (Interface endpoint) Indicate whether to associate a private hosted
     #   zone with the specified VPC. The private hosted zone contains a record
-    #   set for the default public DNS name for the service for the region
+    #   set for the default public DNS name for the service for the Region
     #   (for example, `kinesis.us-east-1.amazonaws.com`) which resolves to the
     #   private IP addresses of the endpoint network interfaces in the VPC.
     #   This enables you to make requests to the default public DNS name for
@@ -6134,7 +8234,7 @@ module Aws::EC2
     #   resp = client.create_vpc_endpoint({
     #     dry_run: false,
     #     vpc_endpoint_type: "Interface", # accepts Interface, Gateway
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #     service_name: "String", # required
     #     policy_document: "String",
     #     route_table_ids: ["String"],
@@ -6160,12 +8260,17 @@ module Aws::EC2
     #   resp.vpc_endpoint.groups[0].group_id #=> String
     #   resp.vpc_endpoint.groups[0].group_name #=> String
     #   resp.vpc_endpoint.private_dns_enabled #=> Boolean
+    #   resp.vpc_endpoint.requester_managed #=> Boolean
     #   resp.vpc_endpoint.network_interface_ids #=> Array
     #   resp.vpc_endpoint.network_interface_ids[0] #=> String
     #   resp.vpc_endpoint.dns_entries #=> Array
     #   resp.vpc_endpoint.dns_entries[0].dns_name #=> String
     #   resp.vpc_endpoint.dns_entries[0].hosted_zone_id #=> String
     #   resp.vpc_endpoint.creation_timestamp #=> Time
+    #   resp.vpc_endpoint.tags #=> Array
+    #   resp.vpc_endpoint.tags[0].key #=> String
+    #   resp.vpc_endpoint.tags[0].value #=> String
+    #   resp.vpc_endpoint.owner_id #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpoint AWS API Documentation
@@ -6187,7 +8292,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6215,7 +8320,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::CreateVpcEndpointConnectionNotificationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6226,8 +8331,8 @@ module Aws::EC2
     #
     #   resp = client.create_vpc_endpoint_connection_notification({
     #     dry_run: false,
-    #     service_id: "String",
-    #     vpc_endpoint_id: "String",
+    #     service_id: "ServiceId",
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     connection_notification_arn: "String", # required
     #     connection_events: ["String"], # required
     #     client_token: "String",
@@ -6266,7 +8371,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/endpoint-service.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6290,7 +8395,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
     # @return [Types::CreateVpcEndpointServiceConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6316,11 +8421,15 @@ module Aws::EC2
     #   resp.service_configuration.availability_zones #=> Array
     #   resp.service_configuration.availability_zones[0] #=> String
     #   resp.service_configuration.acceptance_required #=> Boolean
+    #   resp.service_configuration.manages_vpc_endpoints #=> Boolean
     #   resp.service_configuration.network_load_balancer_arns #=> Array
     #   resp.service_configuration.network_load_balancer_arns[0] #=> String
     #   resp.service_configuration.base_endpoint_dns_names #=> Array
     #   resp.service_configuration.base_endpoint_dns_names[0] #=> String
     #   resp.service_configuration.private_dns_name #=> String
+    #   resp.service_configuration.tags #=> Array
+    #   resp.service_configuration.tags[0].key #=> String
+    #   resp.service_configuration.tags[0].value #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointServiceConfiguration AWS API Documentation
@@ -6335,7 +8444,7 @@ module Aws::EC2
     # Requests a VPC peering connection between two VPCs: a requester VPC
     # that you own and an accepter VPC with which to create the connection.
     # The accepter VPC can belong to another AWS account and can be in a
-    # different region to the requester VPC. The requester VPC and accepter
+    # different Region to the requester VPC. The requester VPC and accepter
     # VPC cannot have overlapping CIDR blocks.
     #
     # <note markdown="1"> Limitations and rules apply to a VPC peering connection. For more
@@ -6354,7 +8463,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/vpc-peering-basics.html#vpc-peering-limitations
+    # [1]: https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6376,10 +8485,10 @@ module Aws::EC2
     #   request.
     #
     # @option params [String] :peer_region
-    #   The region code for the accepter VPC, if the accepter VPC is located
-    #   in a region other than the region in which you make the request.
+    #   The Region code for the accepter VPC, if the accepter VPC is located
+    #   in a Region other than the Region in which you make the request.
     #
-    #   Default: The region in which you make the request.
+    #   Default: The Region in which you make the request.
     #
     # @return [Types::CreateVpcPeeringConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6391,7 +8500,7 @@ module Aws::EC2
     #     dry_run: false,
     #     peer_owner_id: "String",
     #     peer_vpc_id: "String",
-    #     vpc_id: "String",
+    #     vpc_id: "VpcId",
     #     peer_region: "String",
     #   })
     #
@@ -6437,7 +8546,7 @@ module Aws::EC2
     end
 
     # Creates a VPN connection between an existing virtual private gateway
-    # and a VPN customer gateway. The only supported connection type is
+    # and a VPN customer gateway. The supported connection type is
     # `ipsec.1`.
     #
     # The response includes information that you need to give to your
@@ -6454,12 +8563,12 @@ module Aws::EC2
     # This is an idempotent operation. If you perform the operation more
     # than once, Amazon EC2 doesn't return an error.
     #
-    # For more information, see [AWS Managed VPN Connections][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [required, String] :customer_gateway_id
     #   The ID of the customer gateway.
@@ -6467,8 +8576,13 @@ module Aws::EC2
     # @option params [required, String] :type
     #   The type of VPN connection (`ipsec.1`).
     #
-    # @option params [required, String] :vpn_gateway_id
-    #   The ID of the virtual private gateway.
+    # @option params [String] :vpn_gateway_id
+    #   The ID of the virtual private gateway. If you specify a virtual
+    #   private gateway, you cannot specify a transit gateway.
+    #
+    # @option params [String] :transit_gateway_id
+    #   The ID of the transit gateway. If you specify a transit gateway, you
+    #   cannot specify a virtual private gateway.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6486,9 +8600,10 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_vpn_connection({
-    #     customer_gateway_id: "String", # required
+    #     customer_gateway_id: "CustomerGatewayId", # required
     #     type: "String", # required
-    #     vpn_gateway_id: "String", # required
+    #     vpn_gateway_id: "VpnGatewayId",
+    #     transit_gateway_id: "TransitGatewayId",
     #     dry_run: false,
     #     options: {
     #       static_routes_only: false,
@@ -6496,6 +8611,47 @@ module Aws::EC2
     #         {
     #           tunnel_inside_cidr: "String",
     #           pre_shared_key: "String",
+    #           phase_1_lifetime_seconds: 1,
+    #           phase_2_lifetime_seconds: 1,
+    #           rekey_margin_time_seconds: 1,
+    #           rekey_fuzz_percentage: 1,
+    #           replay_window_size: 1,
+    #           dpd_timeout_seconds: 1,
+    #           phase_1_encryption_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_2_encryption_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_1_integrity_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_2_integrity_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_1_dh_group_numbers: [
+    #             {
+    #               value: 1,
+    #             },
+    #           ],
+    #           phase_2_dh_group_numbers: [
+    #             {
+    #               value: 1,
+    #             },
+    #           ],
+    #           ike_versions: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
     #         },
     #       ],
     #     },
@@ -6510,7 +8666,32 @@ module Aws::EC2
     #   resp.vpn_connection.type #=> String, one of "ipsec.1"
     #   resp.vpn_connection.vpn_connection_id #=> String
     #   resp.vpn_connection.vpn_gateway_id #=> String
+    #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_margin_time_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_fuzz_percentage #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].replay_window_size #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].dpd_timeout_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -6524,6 +8705,7 @@ module Aws::EC2
     #   resp.vpn_connection.vgw_telemetry[0].outside_ip_address #=> String
     #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnection AWS API Documentation
     #
@@ -6539,12 +8721,12 @@ module Aws::EC2
     # static route allows traffic to be routed from the virtual private
     # gateway to the VPN customer gateway.
     #
-    # For more information about VPN connections, see [AWS Managed VPN
-    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [required, String] :destination_cidr_block
     #   The CIDR block associated with the local subnet of the customer
@@ -6559,7 +8741,7 @@ module Aws::EC2
     #
     #   resp = client.create_vpn_connection_route({
     #     destination_cidr_block: "String", # required
-    #     vpn_connection_id: "String", # required
+    #     vpn_connection_id: "VpnConnectionId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRoute AWS API Documentation
@@ -6575,12 +8757,12 @@ module Aws::EC2
     # endpoint on the VPC side of your VPN connection. You can create a
     # virtual private gateway before creating the VPC itself.
     #
-    # For more information about virtual private gateways, see [AWS Managed
-    # VPN Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [String] :availability_zone
     #   The Availability Zone for the virtual private gateway.
@@ -6638,6 +8820,92 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes the specified Client VPN endpoint. You must disassociate all
+    # target networks before you can delete a Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN to be deleted.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteClientVpnEndpointResult#status #status} => Types::ClientVpnEndpointStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_client_vpn_endpoint({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.code #=> String, one of "pending-associate", "available", "deleting", "deleted"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnEndpoint AWS API Documentation
+    #
+    # @overload delete_client_vpn_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_client_vpn_endpoint(params = {}, options = {})
+      req = build_request(:delete_client_vpn_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Deletes a route from a Client VPN endpoint. You can only delete routes
+    # that you manually added using the **CreateClientVpnRoute** action. You
+    # cannot delete routes that were automatically added when associating a
+    # subnet. To remove routes that have been automatically added,
+    # disassociate the target subnet from the Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint from which the route is to be
+    #   deleted.
+    #
+    # @option params [String] :target_vpc_subnet_id
+    #   The ID of the target subnet used by the route.
+    #
+    # @option params [required, String] :destination_cidr_block
+    #   The IPv4 address range, in CIDR notation, of the route to be deleted.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteClientVpnRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteClientVpnRouteResult#status #status} => Types::ClientVpnRouteStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_client_vpn_route({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     target_vpc_subnet_id: "String",
+    #     destination_cidr_block: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.code #=> String, one of "creating", "active", "failed", "deleting"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnRoute AWS API Documentation
+    #
+    # @overload delete_client_vpn_route(params = {})
+    # @param [Hash] params ({})
+    def delete_client_vpn_route(params = {}, options = {})
+      req = build_request(:delete_client_vpn_route, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified customer gateway. You must delete the VPN
     # connection before you can delete the customer gateway.
     #
@@ -6664,7 +8932,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_customer_gateway({
-    #     customer_gateway_id: "String", # required
+    #     customer_gateway_id: "CustomerGatewayId", # required
     #     dry_run: false,
     #   })
     #
@@ -6705,7 +8973,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_dhcp_options({
-    #     dhcp_options_id: "String", # required
+    #     dhcp_options_id: "DhcpOptionsId", # required
     #     dry_run: false,
     #   })
     #
@@ -6718,7 +8986,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes an egress-only Internet gateway.
+    # Deletes an egress-only internet gateway.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6727,7 +8995,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :egress_only_internet_gateway_id
-    #   The ID of the egress-only Internet gateway.
+    #   The ID of the egress-only internet gateway.
     #
     # @return [Types::DeleteEgressOnlyInternetGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6791,8 +9059,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.successful_fleet_deletions #=> Array
-    #   resp.successful_fleet_deletions[0].current_fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted-running", "deleted-terminating", "modifying"
-    #   resp.successful_fleet_deletions[0].previous_fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted-running", "deleted-terminating", "modifying"
+    #   resp.successful_fleet_deletions[0].current_fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted_running", "deleted_terminating", "modifying"
+    #   resp.successful_fleet_deletions[0].previous_fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted_running", "deleted_terminating", "modifying"
     #   resp.successful_fleet_deletions[0].fleet_id #=> String
     #   resp.unsuccessful_fleet_deletions #=> Array
     #   resp.unsuccessful_fleet_deletions[0].error.code #=> String, one of "fleetIdDoesNotExist", "fleetIdMalformed", "fleetNotInDeletableState", "unexpectedError"
@@ -6810,8 +9078,16 @@ module Aws::EC2
 
     # Deletes one or more flow logs.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [required, Array<String>] :flow_log_ids
     #   One or more flow log IDs.
+    #
+    #   Constraint: Maximum of 1000 flow log IDs.
     #
     # @return [Types::DeleteFlowLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6820,6 +9096,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_flow_logs({
+    #     dry_run: false,
     #     flow_log_ids: ["String"], # required
     #   })
     #
@@ -6858,7 +9135,7 @@ module Aws::EC2
     #
     #   resp = client.delete_fpga_image({
     #     dry_run: false,
-    #     fpga_image_id: "String", # required
+    #     fpga_image_id: "FpgaImageId", # required
     #   })
     #
     # @example Response structure
@@ -6874,7 +9151,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes the specified Internet gateway. You must detach the Internet
+    # Deletes the specified internet gateway. You must detach the internet
     # gateway from the VPC before you can delete it.
     #
     # @option params [Boolean] :dry_run
@@ -6884,7 +9161,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6901,7 +9178,7 @@ module Aws::EC2
     #
     #   resp = client.delete_internet_gateway({
     #     dry_run: false,
-    #     internet_gateway_id: "String", # required
+    #     internet_gateway_id: "InternetGatewayId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteInternetGateway AWS API Documentation
@@ -6998,7 +9275,7 @@ module Aws::EC2
     #
     #   resp = client.delete_launch_template({
     #     dry_run: false,
-    #     launch_template_id: "String",
+    #     launch_template_id: "LaunchTemplateId",
     #     launch_template_name: "LaunchTemplateName",
     #   })
     #
@@ -7080,7 +9357,7 @@ module Aws::EC2
     #
     #   resp = client.delete_launch_template_versions({
     #     dry_run: false,
-    #     launch_template_id: "String",
+    #     launch_template_id: "LaunchTemplateId",
     #     launch_template_name: "LaunchTemplateName",
     #     versions: ["String"], # required
     #   })
@@ -7136,7 +9413,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_nat_gateway({
-    #     nat_gateway_id: "String", # required
+    #     nat_gateway_id: "NatGatewayId", # required
     #   })
     #
     # @example Response structure
@@ -7180,7 +9457,7 @@ module Aws::EC2
     #
     #   resp = client.delete_network_acl({
     #     dry_run: false,
-    #     network_acl_id: "String", # required
+    #     network_acl_id: "NetworkAclId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAcl AWS API Documentation
@@ -7228,7 +9505,7 @@ module Aws::EC2
     #   resp = client.delete_network_acl_entry({
     #     dry_run: false,
     #     egress: false, # required
-    #     network_acl_id: "String", # required
+    #     network_acl_id: "NetworkAclId", # required
     #     rule_number: 1, # required
     #   })
     #
@@ -7268,7 +9545,7 @@ module Aws::EC2
     #
     #   resp = client.delete_network_interface({
     #     dry_run: false,
-    #     network_interface_id: "String", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterface AWS API Documentation
@@ -7330,7 +9607,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -7372,6 +9649,47 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes the queued purchases for the specified Reserved Instances.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, Array<String>] :reserved_instances_ids
+    #   The IDs of the Reserved Instances.
+    #
+    # @return [Types::DeleteQueuedReservedInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteQueuedReservedInstancesResult#successful_queued_purchase_deletions #successful_queued_purchase_deletions} => Array&lt;Types::SuccessfulQueuedPurchaseDeletion&gt;
+    #   * {Types::DeleteQueuedReservedInstancesResult#failed_queued_purchase_deletions #failed_queued_purchase_deletions} => Array&lt;Types::FailedQueuedPurchaseDeletion&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_queued_reserved_instances({
+    #     dry_run: false,
+    #     reserved_instances_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_queued_purchase_deletions #=> Array
+    #   resp.successful_queued_purchase_deletions[0].reserved_instances_id #=> String
+    #   resp.failed_queued_purchase_deletions #=> Array
+    #   resp.failed_queued_purchase_deletions[0].error.code #=> String, one of "reserved-instances-id-invalid", "reserved-instances-not-in-queued-state", "unexpected-error"
+    #   resp.failed_queued_purchase_deletions[0].error.message #=> String
+    #   resp.failed_queued_purchase_deletions[0].reserved_instances_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteQueuedReservedInstances AWS API Documentation
+    #
+    # @overload delete_queued_reserved_instances(params = {})
+    # @param [Hash] params ({})
+    def delete_queued_reserved_instances(params = {}, options = {})
+      req = build_request(:delete_queued_reserved_instances, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified route from the specified route table.
     #
     # @option params [String] :destination_cidr_block
@@ -7409,7 +9727,7 @@ module Aws::EC2
     #     destination_cidr_block: "String",
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
-    #     route_table_id: "String", # required
+    #     route_table_id: "RouteTableId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRoute AWS API Documentation
@@ -7532,7 +9850,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-snapshot.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-snapshot.html
     #
     # @option params [required, String] :snapshot_id
     #   The ID of the EBS snapshot.
@@ -7562,7 +9880,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_snapshot({
-    #     snapshot_id: "String", # required
+    #     snapshot_id: "SnapshotId", # required
     #     dry_run: false,
     #   })
     #
@@ -7634,7 +9952,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_subnet({
-    #     subnet_id: "String", # required
+    #     subnet_id: "SubnetId", # required
     #     dry_run: false,
     #   })
     #
@@ -7655,7 +9973,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -7664,14 +9982,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :resources
-    #   The IDs of one or more resources.
+    #   The IDs of the resources, separated by spaces.
+    #
+    #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
+    #   request into smaller batches.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   One or more tags to delete. Specify a tag key and an optional tag
-    #   value to delete specific tags. If you specify a tag key without a tag
-    #   value, we delete any tag with this key regardless of its value. If you
-    #   specify a tag key with an empty string as the tag value, we delete the
-    #   tag only if its value is an empty string.
+    #   The tags to delete. Specify a tag key and an optional tag value to
+    #   delete specific tags. If you specify a tag key without a tag value, we
+    #   delete any tag with this key regardless of its value. If you specify a
+    #   tag key with an empty string as the tag value, we delete the tag only
+    #   if its value is an empty string.
     #
     #   If you omit this parameter, we delete all user-defined tags for the
     #   specified resources. We do not delete AWS-generated tags (tags that
@@ -7718,6 +10039,342 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes the specified Traffic Mirror filter.
+    #
+    # You cannot delete a Traffic Mirror filter that is in use by a Traffic
+    # Mirror session.
+    #
+    # @option params [required, String] :traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTrafficMirrorFilterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTrafficMirrorFilterResult#traffic_mirror_filter_id #traffic_mirror_filter_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_traffic_mirror_filter({
+    #     traffic_mirror_filter_id: "TrafficMirrorFilterId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_filter_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilter AWS API Documentation
+    #
+    # @overload delete_traffic_mirror_filter(params = {})
+    # @param [Hash] params ({})
+    def delete_traffic_mirror_filter(params = {}, options = {})
+      req = build_request(:delete_traffic_mirror_filter, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Traffic Mirror rule.
+    #
+    # @option params [required, String] :traffic_mirror_filter_rule_id
+    #   The ID of the Traffic Mirror rule.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTrafficMirrorFilterRuleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTrafficMirrorFilterRuleResult#traffic_mirror_filter_rule_id #traffic_mirror_filter_rule_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_traffic_mirror_filter_rule({
+    #     traffic_mirror_filter_rule_id: "TrafficMirrorFilterRuleId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_filter_rule_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilterRule AWS API Documentation
+    #
+    # @overload delete_traffic_mirror_filter_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_traffic_mirror_filter_rule(params = {}, options = {})
+      req = build_request(:delete_traffic_mirror_filter_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Traffic Mirror session.
+    #
+    # @option params [required, String] :traffic_mirror_session_id
+    #   The ID of the Traffic Mirror session.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTrafficMirrorSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTrafficMirrorSessionResult#traffic_mirror_session_id #traffic_mirror_session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_traffic_mirror_session({
+    #     traffic_mirror_session_id: "TrafficMirrorSessionId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorSession AWS API Documentation
+    #
+    # @overload delete_traffic_mirror_session(params = {})
+    # @param [Hash] params ({})
+    def delete_traffic_mirror_session(params = {}, options = {})
+      req = build_request(:delete_traffic_mirror_session, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Traffic Mirror target.
+    #
+    # You cannot delete a Traffic Mirror target that is in use by a Traffic
+    # Mirror session.
+    #
+    # @option params [required, String] :traffic_mirror_target_id
+    #   The ID of the Traffic Mirror target.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTrafficMirrorTargetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTrafficMirrorTargetResult#traffic_mirror_target_id #traffic_mirror_target_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_traffic_mirror_target({
+    #     traffic_mirror_target_id: "TrafficMirrorTargetId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_target_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorTarget AWS API Documentation
+    #
+    # @overload delete_traffic_mirror_target(params = {})
+    # @param [Hash] params ({})
+    def delete_traffic_mirror_target(params = {}, options = {})
+      req = build_request(:delete_traffic_mirror_target, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified transit gateway.
+    #
+    # @option params [required, String] :transit_gateway_id
+    #   The ID of the transit gateway.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTransitGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTransitGatewayResult#transit_gateway #transit_gateway} => Types::TransitGateway
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_transit_gateway({
+    #     transit_gateway_id: "TransitGatewayId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway.transit_gateway_id #=> String
+    #   resp.transit_gateway.transit_gateway_arn #=> String
+    #   resp.transit_gateway.state #=> String, one of "pending", "available", "modifying", "deleting", "deleted"
+    #   resp.transit_gateway.owner_id #=> String
+    #   resp.transit_gateway.description #=> String
+    #   resp.transit_gateway.creation_time #=> Time
+    #   resp.transit_gateway.options.amazon_side_asn #=> Integer
+    #   resp.transit_gateway.options.auto_accept_shared_attachments #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.default_route_table_association #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.association_default_route_table_id #=> String
+    #   resp.transit_gateway.options.default_route_table_propagation #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.propagation_default_route_table_id #=> String
+    #   resp.transit_gateway.options.vpn_ecmp_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.tags #=> Array
+    #   resp.transit_gateway.tags[0].key #=> String
+    #   resp.transit_gateway.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGateway AWS API Documentation
+    #
+    # @overload delete_transit_gateway(params = {})
+    # @param [Hash] params ({})
+    def delete_transit_gateway(params = {}, options = {})
+      req = build_request(:delete_transit_gateway, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified route from the specified transit gateway route
+    # table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [required, String] :destination_cidr_block
+    #   The CIDR range for the route. This must match the CIDR for the route
+    #   exactly.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTransitGatewayRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTransitGatewayRouteResult#route #route} => Types::TransitGatewayRoute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_transit_gateway_route({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     destination_cidr_block: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.route.destination_cidr_block #=> String
+    #   resp.route.transit_gateway_attachments #=> Array
+    #   resp.route.transit_gateway_attachments[0].resource_id #=> String
+    #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.route.type #=> String, one of "static", "propagated"
+    #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayRoute AWS API Documentation
+    #
+    # @overload delete_transit_gateway_route(params = {})
+    # @param [Hash] params ({})
+    def delete_transit_gateway_route(params = {}, options = {})
+      req = build_request(:delete_transit_gateway_route, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified transit gateway route table. You must
+    # disassociate the route table from any transit gateway route tables
+    # before you can delete it.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTransitGatewayRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTransitGatewayRouteTableResult#transit_gateway_route_table #transit_gateway_route_table} => Types::TransitGatewayRouteTable
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_transit_gateway_route_table({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_route_table.transit_gateway_route_table_id #=> String
+    #   resp.transit_gateway_route_table.transit_gateway_id #=> String
+    #   resp.transit_gateway_route_table.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.transit_gateway_route_table.default_association_route_table #=> Boolean
+    #   resp.transit_gateway_route_table.default_propagation_route_table #=> Boolean
+    #   resp.transit_gateway_route_table.creation_time #=> Time
+    #   resp.transit_gateway_route_table.tags #=> Array
+    #   resp.transit_gateway_route_table.tags[0].key #=> String
+    #   resp.transit_gateway_route_table.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayRouteTable AWS API Documentation
+    #
+    # @overload delete_transit_gateway_route_table(params = {})
+    # @param [Hash] params ({})
+    def delete_transit_gateway_route_table(params = {}, options = {})
+      req = build_request(:delete_transit_gateway_route_table, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified VPC attachment.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTransitGatewayVpcAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTransitGatewayVpcAttachmentResult#transit_gateway_vpc_attachment #transit_gateway_vpc_attachment} => Types::TransitGatewayVpcAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_transit_gateway_vpc_attachment({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_vpc_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_vpc_attachment.transit_gateway_id #=> String
+    #   resp.transit_gateway_vpc_attachment.vpc_id #=> String
+    #   resp.transit_gateway_vpc_attachment.vpc_owner_id #=> String
+    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachment.subnet_ids #=> Array
+    #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
+    #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
+    #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.tags #=> Array
+    #   resp.transit_gateway_vpc_attachment.tags[0].key #=> String
+    #   resp.transit_gateway_vpc_attachment.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayVpcAttachment AWS API Documentation
+    #
+    # @overload delete_transit_gateway_vpc_attachment(params = {})
+    # @param [Hash] params ({})
+    def delete_transit_gateway_vpc_attachment(params = {}, options = {})
+      req = build_request(:delete_transit_gateway_vpc_attachment, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified EBS volume. The volume must be in the
     # `available` state (not attached to an instance).
     #
@@ -7728,7 +10385,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-volume.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-volume.html
     #
     # @option params [required, String] :volume_id
     #   The ID of the volume.
@@ -7758,7 +10415,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_volume({
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     dry_run: false,
     #   })
     #
@@ -7801,7 +10458,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_vpc({
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
     #
@@ -7958,7 +10615,7 @@ module Aws::EC2
     #
     #   resp = client.delete_vpc_peering_connection({
     #     dry_run: false,
-    #     vpc_peering_connection_id: "String", # required
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId", # required
     #   })
     #
     # @example Response structure
@@ -8000,7 +10657,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_vpn_connection({
-    #     vpn_connection_id: "String", # required
+    #     vpn_connection_id: "VpnConnectionId", # required
     #     dry_run: false,
     #   })
     #
@@ -8031,7 +10688,7 @@ module Aws::EC2
     #
     #   resp = client.delete_vpn_connection_route({
     #     destination_cidr_block: "String", # required
-    #     vpn_connection_id: "String", # required
+    #     vpn_connection_id: "VpnConnectionId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionRoute AWS API Documentation
@@ -8063,7 +10720,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_vpn_gateway({
-    #     vpn_gateway_id: "String", # required
+    #     vpn_gateway_id: "VpnGatewayId", # required
     #     dry_run: false,
     #   })
     #
@@ -8073,6 +10730,52 @@ module Aws::EC2
     # @param [Hash] params ({})
     def delete_vpn_gateway(params = {}, options = {})
       req = build_request(:delete_vpn_gateway, params)
+      req.send_request(options)
+    end
+
+    # Releases the specified address range that you provisioned for use with
+    # your AWS resources through bring your own IP addresses (BYOIP) and
+    # deletes the corresponding address pool.
+    #
+    # Before you can release an address range, you must stop advertising it
+    # using WithdrawByoipCidr and you must not have any IP addresses
+    # allocated from its address range.
+    #
+    # @option params [required, String] :cidr
+    #   The public IPv4 address range, in CIDR notation. The prefix must be
+    #   the same prefix that you specified when you provisioned the address
+    #   range.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeprovisionByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeprovisionByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deprovision_byoip_cidr({
+    #     cidr: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.description #=> String
+    #   resp.byoip_cidr.status_message #=> String
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionByoipCidr AWS API Documentation
+    #
+    # @overload deprovision_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def deprovision_byoip_cidr(params = {}, options = {})
+      req = build_request(:deprovision_byoip_cidr, params)
       req.send_request(options)
     end
 
@@ -8136,7 +10839,7 @@ module Aws::EC2
     #   that you can allocate for use with EC2-VPC.
     #
     # @option params [Array<String>] :attribute_names
-    #   One or more account attribute names.
+    #   The account attribute names.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -8263,7 +10966,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your Elastic IP addresses.
+    # Describes the specified Elastic IP addresses or all of your Elastic IP
+    # addresses.
     #
     # An Elastic IP address is for use in either the EC2-Classic platform or
     # in a VPC. For more information, see [Elastic IP Addresses][1] in the
@@ -8271,7 +10975,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
@@ -8307,14 +11011,12 @@ module Aws::EC2
     #     regardless of the tag value.
     #
     # @option params [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #   One or more Elastic IP addresses.
     #
     #   Default: Describes all your Elastic IP addresses.
     #
     # @option params [Array<String>] :allocation_ids
-    #   \[EC2-VPC\] One or more allocation IDs.
-    #
-    #   Default: Describes all your Elastic IP addresses.
+    #   \[EC2-VPC\] Information about the allocation IDs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -8440,6 +11142,7 @@ module Aws::EC2
     #   resp.addresses[0].tags #=> Array
     #   resp.addresses[0].tags[0].key #=> String
     #   resp.addresses[0].tags[0].value #=> String
+    #   resp.addresses[0].public_ipv_4_pool #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddresses AWS API Documentation
     #
@@ -8451,8 +11154,8 @@ module Aws::EC2
     end
 
     # Describes the longer ID format settings for all resource types in a
-    # specific region. This request is useful for performing a quick audit
-    # to determine whether a specific region is fully opted in for longer
+    # specific Region. This request is useful for performing a quick audit
+    # to determine whether a specific Region is fully opted in for longer
     # IDs (17-character IDs).
     #
     # This request only returns information about resource types that
@@ -8504,10 +11207,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of the Availability Zones that are available to
-    # you. The results include zones only for the region you're currently
-    # using. If there is an event impacting an Availability Zone, you can
-    # use this request to view the state and any provided message for that
+    # Describes the Availability Zones that are available to you. The
+    # results include zones only for the Region you're currently using. If
+    # there is an event impacting an Availability Zone, you can use this
+    # request to view the state and any provided message for that
     # Availability Zone.
     #
     # For more information, see [Regions and Availability Zones][1] in the
@@ -8515,24 +11218,30 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `message` - Information about the Availability Zone.
     #
-    #   * `region-name` - The name of the region for the Availability Zone
+    #   * `region-name` - The name of the Region for the Availability Zone
     #     (for example, `us-east-1`).
     #
     #   * `state` - The state of the Availability Zone (`available` \|
     #     `information` \| `impaired` \| `unavailable`).
     #
+    #   * `zone-id` - The ID of the Availability Zone (for example,
+    #     `use1-az1`).
+    #
     #   * `zone-name` - The name of the Availability Zone (for example,
     #     `us-east-1a`).
     #
     # @option params [Array<String>] :zone_names
-    #   The names of one or more Availability Zones.
+    #   The names of the Availability Zones.
+    #
+    # @option params [Array<String>] :zone_ids
+    #   The IDs of the Availability Zones.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -8597,6 +11306,7 @@ module Aws::EC2
     #       },
     #     ],
     #     zone_names: ["String"],
+    #     zone_ids: ["String"],
     #     dry_run: false,
     #   })
     #
@@ -8608,6 +11318,7 @@ module Aws::EC2
     #   resp.availability_zones[0].messages[0].message #=> String
     #   resp.availability_zones[0].region_name #=> String
     #   resp.availability_zones[0].zone_name #=> String
+    #   resp.availability_zones[0].zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZones AWS API Documentation
     #
@@ -8618,7 +11329,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your bundling tasks.
+    # Describes the specified bundle tasks or all of your bundle tasks.
     #
     # <note markdown="1"> Completed bundle tasks are listed for only a limited time. If your
     # bundle task is no longer in the list, you can still register an AMI
@@ -8628,12 +11339,12 @@ module Aws::EC2
     #  </note>
     #
     # @option params [Array<String>] :bundle_ids
-    #   One or more bundle task IDs.
+    #   The bundle task IDs.
     #
     #   Default: Describes all your bundle tasks.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `bundle-id` - The ID of the bundle task.
     #
@@ -8708,9 +11419,138 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the IP address ranges that were specified in calls to
+    # ProvisionByoipCidr.
+    #
+    # To describe the address pools that were created when you provisioned
+    # the address ranges, use DescribePublicIpv4Pools.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::DescribeByoipCidrsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeByoipCidrsResult#byoip_cidrs #byoip_cidrs} => Array&lt;Types::ByoipCidr&gt;
+    #   * {Types::DescribeByoipCidrsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_byoip_cidrs({
+    #     dry_run: false,
+    #     max_results: 1, # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidrs #=> Array
+    #   resp.byoip_cidrs[0].cidr #=> String
+    #   resp.byoip_cidrs[0].description #=> String
+    #   resp.byoip_cidrs[0].status_message #=> String
+    #   resp.byoip_cidrs[0].state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeByoipCidrs AWS API Documentation
+    #
+    # @overload describe_byoip_cidrs(params = {})
+    # @param [Hash] params ({})
+    def describe_byoip_cidrs(params = {}, options = {})
+      req = build_request(:describe_byoip_cidrs, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more of your Capacity Reservations. The results
+    # describe only the Capacity Reservations in the AWS Region that you're
+    # currently using.
+    #
+    # @option params [Array<String>] :capacity_reservation_ids
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned nextToken value.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeCapacityReservationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCapacityReservationsResult#next_token #next_token} => String
+    #   * {Types::DescribeCapacityReservationsResult#capacity_reservations #capacity_reservations} => Array&lt;Types::CapacityReservation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_capacity_reservations({
+    #     capacity_reservation_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.capacity_reservations #=> Array
+    #   resp.capacity_reservations[0].capacity_reservation_id #=> String
+    #   resp.capacity_reservations[0].owner_id #=> String
+    #   resp.capacity_reservations[0].capacity_reservation_arn #=> String
+    #   resp.capacity_reservations[0].availability_zone_id #=> String
+    #   resp.capacity_reservations[0].instance_type #=> String
+    #   resp.capacity_reservations[0].instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise"
+    #   resp.capacity_reservations[0].availability_zone #=> String
+    #   resp.capacity_reservations[0].tenancy #=> String, one of "default", "dedicated"
+    #   resp.capacity_reservations[0].total_instance_count #=> Integer
+    #   resp.capacity_reservations[0].available_instance_count #=> Integer
+    #   resp.capacity_reservations[0].ebs_optimized #=> Boolean
+    #   resp.capacity_reservations[0].ephemeral_storage #=> Boolean
+    #   resp.capacity_reservations[0].state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.capacity_reservations[0].end_date #=> Time
+    #   resp.capacity_reservations[0].end_date_type #=> String, one of "unlimited", "limited"
+    #   resp.capacity_reservations[0].instance_match_criteria #=> String, one of "open", "targeted"
+    #   resp.capacity_reservations[0].create_date #=> Time
+    #   resp.capacity_reservations[0].tags #=> Array
+    #   resp.capacity_reservations[0].tags[0].key #=> String
+    #   resp.capacity_reservations[0].tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservations AWS API Documentation
+    #
+    # @overload describe_capacity_reservations(params = {})
+    # @param [Hash] params ({})
+    def describe_capacity_reservations(params = {}, options = {})
+      req = build_request(:describe_capacity_reservations, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your linked EC2-Classic instances. This
     # request only returns information about EC2-Classic instances linked to
-    # a VPC through ClassicLink; you cannot use this request to return
+    # a VPC through ClassicLink. You cannot use this request to return
     # information about other instances.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -8731,7 +11571,9 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
-    #   * `vpc-id` - The ID of the VPC that the instance is linked to.
+    #   * `vpc-id` - The ID of the VPC to which the instance is linked.
+    #
+    #     `vpc-id` - The ID of the VPC that the instance is linked to.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -8744,18 +11586,15 @@ module Aws::EC2
     #   ClassicLink.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results of the initial request can be seen by
-    #   sending another request with the returned `NextToken` value. This
-    #   value can be between 5 and 1000; if `MaxResults` is given a value
-    #   larger than 1000, only 1000 results are returned. You cannot specify
-    #   this parameter and the instance IDs parameter in the same request.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     #   Constraint: If the value is greater than 1000, we return only 1000
     #   items.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @return [Types::DescribeClassicLinkInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8799,19 +11638,370 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your conversion tasks. For more information,
-    # see the [VM Import/Export User Guide][1].
+    # Describes the authorization rules for a specified Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #
+    # @return [Types::DescribeClientVpnAuthorizationRulesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientVpnAuthorizationRulesResult#authorization_rules #authorization_rules} => Array&lt;Types::AuthorizationRule&gt;
+    #   * {Types::DescribeClientVpnAuthorizationRulesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_vpn_authorization_rules({
+    #     client_vpn_endpoint_id: "String", # required
+    #     dry_run: false,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorization_rules #=> Array
+    #   resp.authorization_rules[0].client_vpn_endpoint_id #=> String
+    #   resp.authorization_rules[0].description #=> String
+    #   resp.authorization_rules[0].group_id #=> String
+    #   resp.authorization_rules[0].access_all #=> Boolean
+    #   resp.authorization_rules[0].destination_cidr #=> String
+    #   resp.authorization_rules[0].status.code #=> String, one of "authorizing", "active", "failed", "revoking"
+    #   resp.authorization_rules[0].status.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnAuthorizationRules AWS API Documentation
+    #
+    # @overload describe_client_vpn_authorization_rules(params = {})
+    # @param [Hash] params ({})
+    def describe_client_vpn_authorization_rules(params = {}, options = {})
+      req = build_request(:describe_client_vpn_authorization_rules, params)
+      req.send_request(options)
+    end
+
+    # Describes active client connections and connections that have been
+    # terminated within the last 60 minutes for the specified Client VPN
+    # endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeClientVpnConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientVpnConnectionsResult#connections #connections} => Array&lt;Types::ClientVpnConnection&gt;
+    #   * {Types::DescribeClientVpnConnectionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_vpn_connections({
+    #     client_vpn_endpoint_id: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connections #=> Array
+    #   resp.connections[0].client_vpn_endpoint_id #=> String
+    #   resp.connections[0].timestamp #=> String
+    #   resp.connections[0].connection_id #=> String
+    #   resp.connections[0].username #=> String
+    #   resp.connections[0].connection_established_time #=> String
+    #   resp.connections[0].ingress_bytes #=> String
+    #   resp.connections[0].egress_bytes #=> String
+    #   resp.connections[0].ingress_packets #=> String
+    #   resp.connections[0].egress_packets #=> String
+    #   resp.connections[0].client_ip #=> String
+    #   resp.connections[0].common_name #=> String
+    #   resp.connections[0].status.code #=> String, one of "active", "failed-to-terminate", "terminating", "terminated"
+    #   resp.connections[0].status.message #=> String
+    #   resp.connections[0].connection_end_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnConnections AWS API Documentation
+    #
+    # @overload describe_client_vpn_connections(params = {})
+    # @param [Hash] params ({})
+    def describe_client_vpn_connections(params = {}, options = {})
+      req = build_request(:describe_client_vpn_connections, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more Client VPN endpoints in the account.
+    #
+    # @option params [Array<String>] :client_vpn_endpoint_ids
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeClientVpnEndpointsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientVpnEndpointsResult#client_vpn_endpoints #client_vpn_endpoints} => Array&lt;Types::ClientVpnEndpoint&gt;
+    #   * {Types::DescribeClientVpnEndpointsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_vpn_endpoints({
+    #     client_vpn_endpoint_ids: ["String"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_vpn_endpoints #=> Array
+    #   resp.client_vpn_endpoints[0].client_vpn_endpoint_id #=> String
+    #   resp.client_vpn_endpoints[0].description #=> String
+    #   resp.client_vpn_endpoints[0].status.code #=> String, one of "pending-associate", "available", "deleting", "deleted"
+    #   resp.client_vpn_endpoints[0].status.message #=> String
+    #   resp.client_vpn_endpoints[0].creation_time #=> String
+    #   resp.client_vpn_endpoints[0].deletion_time #=> String
+    #   resp.client_vpn_endpoints[0].dns_name #=> String
+    #   resp.client_vpn_endpoints[0].client_cidr_block #=> String
+    #   resp.client_vpn_endpoints[0].dns_servers #=> Array
+    #   resp.client_vpn_endpoints[0].dns_servers[0] #=> String
+    #   resp.client_vpn_endpoints[0].split_tunnel #=> Boolean
+    #   resp.client_vpn_endpoints[0].vpn_protocol #=> String, one of "openvpn"
+    #   resp.client_vpn_endpoints[0].transport_protocol #=> String, one of "tcp", "udp"
+    #   resp.client_vpn_endpoints[0].associated_target_networks #=> Array
+    #   resp.client_vpn_endpoints[0].associated_target_networks[0].network_id #=> String
+    #   resp.client_vpn_endpoints[0].associated_target_networks[0].network_type #=> String, one of "vpc"
+    #   resp.client_vpn_endpoints[0].server_certificate_arn #=> String
+    #   resp.client_vpn_endpoints[0].authentication_options #=> Array
+    #   resp.client_vpn_endpoints[0].authentication_options[0].type #=> String, one of "certificate-authentication", "directory-service-authentication"
+    #   resp.client_vpn_endpoints[0].authentication_options[0].active_directory.directory_id #=> String
+    #   resp.client_vpn_endpoints[0].authentication_options[0].mutual_authentication.client_root_certificate_chain #=> String
+    #   resp.client_vpn_endpoints[0].connection_log_options.enabled #=> Boolean
+    #   resp.client_vpn_endpoints[0].connection_log_options.cloudwatch_log_group #=> String
+    #   resp.client_vpn_endpoints[0].connection_log_options.cloudwatch_log_stream #=> String
+    #   resp.client_vpn_endpoints[0].tags #=> Array
+    #   resp.client_vpn_endpoints[0].tags[0].key #=> String
+    #   resp.client_vpn_endpoints[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpoints AWS API Documentation
+    #
+    # @overload describe_client_vpn_endpoints(params = {})
+    # @param [Hash] params ({})
+    def describe_client_vpn_endpoints(params = {}, options = {})
+      req = build_request(:describe_client_vpn_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Describes the routes for the specified Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeClientVpnRoutesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientVpnRoutesResult#routes #routes} => Array&lt;Types::ClientVpnRoute&gt;
+    #   * {Types::DescribeClientVpnRoutesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_vpn_routes({
+    #     client_vpn_endpoint_id: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.routes #=> Array
+    #   resp.routes[0].client_vpn_endpoint_id #=> String
+    #   resp.routes[0].destination_cidr #=> String
+    #   resp.routes[0].target_subnet #=> String
+    #   resp.routes[0].type #=> String
+    #   resp.routes[0].origin #=> String
+    #   resp.routes[0].status.code #=> String, one of "creating", "active", "failed", "deleting"
+    #   resp.routes[0].status.message #=> String
+    #   resp.routes[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnRoutes AWS API Documentation
+    #
+    # @overload describe_client_vpn_routes(params = {})
+    # @param [Hash] params ({})
+    def describe_client_vpn_routes(params = {}, options = {})
+      req = build_request(:describe_client_vpn_routes, params)
+      req.send_request(options)
+    end
+
+    # Describes the target networks associated with the specified Client VPN
+    # endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Array<String>] :association_ids
+    #   The IDs of the target network associations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeClientVpnTargetNetworksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientVpnTargetNetworksResult#client_vpn_target_networks #client_vpn_target_networks} => Array&lt;Types::TargetNetwork&gt;
+    #   * {Types::DescribeClientVpnTargetNetworksResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_vpn_target_networks({
+    #     client_vpn_endpoint_id: "String", # required
+    #     association_ids: ["String"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_vpn_target_networks #=> Array
+    #   resp.client_vpn_target_networks[0].association_id #=> String
+    #   resp.client_vpn_target_networks[0].vpc_id #=> String
+    #   resp.client_vpn_target_networks[0].target_network_id #=> String
+    #   resp.client_vpn_target_networks[0].client_vpn_endpoint_id #=> String
+    #   resp.client_vpn_target_networks[0].status.code #=> String, one of "associating", "associated", "association-failed", "disassociating", "disassociated"
+    #   resp.client_vpn_target_networks[0].status.message #=> String
+    #   resp.client_vpn_target_networks[0].security_groups #=> Array
+    #   resp.client_vpn_target_networks[0].security_groups[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnTargetNetworks AWS API Documentation
+    #
+    # @overload describe_client_vpn_target_networks(params = {})
+    # @param [Hash] params ({})
+    def describe_client_vpn_target_networks(params = {}, options = {})
+      req = build_request(:describe_client_vpn_target_networks, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified conversion tasks or all your conversion tasks.
+    # For more information, see the [VM Import/Export User Guide][1].
     #
     # For information about the import manifest referenced by this API
     # action, see [VM Import Manifest][2].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
+    # [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
     # @option params [Array<String>] :conversion_task_ids
-    #   One or more conversion task IDs.
+    #   The conversion task IDs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -8876,12 +12066,12 @@ module Aws::EC2
 
     # Describes one or more of your VPN customer gateways.
     #
-    # For more information about VPN customer gateways, see [AWS Managed VPN
-    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [Array<String>] :customer_gateway_ids
     #   One or more customer gateway IDs.
@@ -8968,8 +12158,10 @@ module Aws::EC2
     #   resp.customer_gateways[0].bgp_asn #=> String
     #   resp.customer_gateways[0].customer_gateway_id #=> String
     #   resp.customer_gateways[0].ip_address #=> String
+    #   resp.customer_gateways[0].certificate_arn #=> String
     #   resp.customer_gateways[0].state #=> String
     #   resp.customer_gateways[0].type #=> String
+    #   resp.customer_gateways[0].device_name #=> String
     #   resp.customer_gateways[0].tags #=> Array
     #   resp.customer_gateways[0].tags[0].key #=> String
     #   resp.customer_gateways[0].tags[0].value #=> String
@@ -8985,12 +12177,12 @@ module Aws::EC2
 
     # Describes one or more of your DHCP options sets.
     #
-    # For more information about DHCP options sets, see [DHCP Options
-    # Sets][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [DHCP Options Sets][1] in the *Amazon
+    # Virtual Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
     #
     # @option params [Array<String>] :dhcp_options_ids
     #   The IDs of one or more DHCP options sets.
@@ -9000,11 +12192,14 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `dhcp-options-id` - The ID of a set of DHCP options.
+    #   * `dhcp-options-id` - The ID of a DHCP options set.
     #
     #   * `key` - The key for one of the options (for example, `domain-name`).
     #
     #   * `value` - The value for one of the options.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the DHCP options
+    #     set.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -9022,9 +12217,18 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeDhcpOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDhcpOptionsResult#dhcp_options #dhcp_options} => Array&lt;Types::DhcpOptions&gt;
+    #   * {Types::DescribeDhcpOptionsResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a DHCP options set
@@ -9070,6 +12274,8 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -9080,9 +12286,11 @@ module Aws::EC2
     #   resp.dhcp_options[0].dhcp_configurations[0].values #=> Array
     #   resp.dhcp_options[0].dhcp_configurations[0].values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.dhcp_options[0].dhcp_options_id #=> String
+    #   resp.dhcp_options[0].owner_id #=> String
     #   resp.dhcp_options[0].tags #=> Array
     #   resp.dhcp_options[0].tags[0].key #=> String
     #   resp.dhcp_options[0].tags[0].value #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptions AWS API Documentation
     #
@@ -9093,7 +12301,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your egress-only Internet gateways.
+    # Describes one or more of your egress-only internet gateways.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9102,17 +12310,15 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :egress_only_internet_gateway_ids
-    #   One or more egress-only Internet gateway IDs.
+    #   One or more egress-only internet gateway IDs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `NextToken` value. This value can be between 5 and
-    #   1000; if `MaxResults` is given a value larger than 1000, only 1000
-    #   results are returned.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @return [Types::DescribeEgressOnlyInternetGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9146,15 +12352,16 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the Elastic GPUs associated with your instances. For more
-    # information about Elastic GPUs, see [Amazon EC2 Elastic GPUs][1].
+    # Describes the Elastic Graphics accelerator associated with your
+    # instances. For more information about Elastic Graphics, see [Amazon
+    # Elastic Graphics][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-gpus.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
     #
     # @option params [Array<String>] :elastic_gpu_ids
-    #   One or more Elastic GPU IDs.
+    #   The Elastic Graphics accelerator IDs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9163,21 +12370,22 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
-    #   * `availability-zone` - The Availability Zone in which the Elastic GPU
-    #     resides.
+    #   * `availability-zone` - The Availability Zone in which the Elastic
+    #     Graphics accelerator resides.
     #
-    #   * `elastic-gpu-health` - The status of the Elastic GPU (`OK` \|
-    #     `IMPAIRED`).
+    #   * `elastic-gpu-health` - The status of the Elastic Graphics
+    #     accelerator (`OK` \| `IMPAIRED`).
     #
-    #   * `elastic-gpu-state` - The state of the Elastic GPU (`ATTACHED`).
+    #   * `elastic-gpu-state` - The state of the Elastic Graphics accelerator
+    #     (`ATTACHED`).
     #
-    #   * `elastic-gpu-type` - The type of Elastic GPU; for example,
-    #     `eg1.medium`.
+    #   * `elastic-gpu-type` - The type of Elastic Graphics accelerator; for
+    #     example, `eg1.medium`.
     #
-    #   * `instance-id` - The ID of the instance to which the Elastic GPU is
-    #     associated.
+    #   * `instance-id` - The ID of the instance to which the Elastic Graphics
+    #     accelerator is associated.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. To retrieve
@@ -9229,10 +12437,75 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your export tasks.
+    # Describes the specified export image tasks or all your export image
+    # tasks.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filter tasks using the `task-state` filter and one of the following
+    #   values: `active`, `completed`, `deleting`, or `deleted`.
+    #
+    # @option params [Array<String>] :export_image_task_ids
+    #   The IDs of the export image tasks.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates the next page of results.
+    #
+    # @return [Types::DescribeExportImageTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExportImageTasksResult#export_image_tasks #export_image_tasks} => Array&lt;Types::ExportImageTask&gt;
+    #   * {Types::DescribeExportImageTasksResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_export_image_tasks({
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     export_image_task_ids: ["String"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_image_tasks #=> Array
+    #   resp.export_image_tasks[0].description #=> String
+    #   resp.export_image_tasks[0].export_image_task_id #=> String
+    #   resp.export_image_tasks[0].image_id #=> String
+    #   resp.export_image_tasks[0].progress #=> String
+    #   resp.export_image_tasks[0].s3_export_location.s3_bucket #=> String
+    #   resp.export_image_tasks[0].s3_export_location.s3_prefix #=> String
+    #   resp.export_image_tasks[0].status #=> String
+    #   resp.export_image_tasks[0].status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportImageTasks AWS API Documentation
+    #
+    # @overload describe_export_image_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_export_image_tasks(params = {}, options = {})
+      req = build_request(:describe_export_image_tasks, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified export instance tasks or all your export
+    # instance tasks.
     #
     # @option params [Array<String>] :export_task_ids
-    #   One or more export task IDs.
+    #   The export task IDs.
     #
     # @return [Types::DescribeExportTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9267,8 +12540,86 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the state of fast snapshot restores for your snapshots.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters. The possible values are:
+    #
+    #   * `availability-zone`\: The Availability Zone of the snapshot.
+    #
+    #   * `owner-id`\: The ID of the AWS account that owns the snapshot.
+    #
+    #   * `snapshot-id`\: The ID of the snapshot.
+    #
+    #   * `state`\: The state of fast snapshot restores for the snapshot
+    #     (`enabling` \| `optimizing` \| `enabled` \| `disabling` \|
+    #     `disabled`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeFastSnapshotRestoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFastSnapshotRestoresResult#fast_snapshot_restores #fast_snapshot_restores} => Array&lt;Types::DescribeFastSnapshotRestoreSuccessItem&gt;
+    #   * {Types::DescribeFastSnapshotRestoresResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fast_snapshot_restores({
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fast_snapshot_restores #=> Array
+    #   resp.fast_snapshot_restores[0].snapshot_id #=> String
+    #   resp.fast_snapshot_restores[0].availability_zone #=> String
+    #   resp.fast_snapshot_restores[0].state #=> String, one of "enabling", "optimizing", "enabled", "disabling", "disabled"
+    #   resp.fast_snapshot_restores[0].state_transition_reason #=> String
+    #   resp.fast_snapshot_restores[0].owner_id #=> String
+    #   resp.fast_snapshot_restores[0].owner_alias #=> String
+    #   resp.fast_snapshot_restores[0].enabling_time #=> Time
+    #   resp.fast_snapshot_restores[0].optimizing_time #=> Time
+    #   resp.fast_snapshot_restores[0].enabled_time #=> Time
+    #   resp.fast_snapshot_restores[0].disabling_time #=> Time
+    #   resp.fast_snapshot_restores[0].disabled_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastSnapshotRestores AWS API Documentation
+    #
+    # @overload describe_fast_snapshot_restores(params = {})
+    # @param [Hash] params ({})
+    def describe_fast_snapshot_restores(params = {}, options = {})
+      req = build_request(:describe_fast_snapshot_restores, params)
+      req.send_request(options)
+    end
+
     # Describes the events for the specified EC2 Fleet during the specified
     # time.
+    #
+    # EC2 Fleet events are delayed by up to 30 seconds before they can be
+    # described. This ensures that you can query by the last evaluated time
+    # and not miss a recorded event. EC2 Fleet events are available for 48
+    # hours.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9357,7 +12708,7 @@ module Aws::EC2
     #   The ID of the EC2 Fleet.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-type` - The instance type.
     #
@@ -9403,7 +12754,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your EC2 Fleet.
+    # Describes the specified EC2 Fleets or all your EC2 Fleets.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9424,7 +12775,7 @@ module Aws::EC2
     #   The ID of the EC2 Fleets.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `activity-status` - The progress of the EC2 Fleet ( `error` \|
     #     `pending-fulfillment` \| `pending-termination` \| `fulfilled`).
@@ -9440,7 +12791,7 @@ module Aws::EC2
     #   * `replace-unhealthy-instances` - Indicates whether EC2 Fleet should
     #     replace unhealthy instances (`true` \| `false`).
     #
-    #   * `type` - The type of request (`request` \| `maintain`).
+    #   * `type` - The type of request (`instant` \| `request` \| `maintain`).
     #
     # @return [Types::DescribeFleetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9466,10 +12817,10 @@ module Aws::EC2
     #
     #   resp.next_token #=> String
     #   resp.fleets #=> Array
-    #   resp.fleets[0].activity_status #=> String, one of "error", "pending-fulfillment", "pending-termination", "fulfilled"
+    #   resp.fleets[0].activity_status #=> String, one of "error", "pending_fulfillment", "pending_termination", "fulfilled"
     #   resp.fleets[0].create_time #=> Time
     #   resp.fleets[0].fleet_id #=> String
-    #   resp.fleets[0].fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted-running", "deleted-terminating", "modifying"
+    #   resp.fleets[0].fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted_running", "deleted_terminating", "modifying"
     #   resp.fleets[0].client_token #=> String
     #   resp.fleets[0].excess_capacity_termination_policy #=> String, one of "no-termination", "termination"
     #   resp.fleets[0].fulfilled_capacity #=> Float
@@ -9479,28 +12830,67 @@ module Aws::EC2
     #   resp.fleets[0].launch_template_configs[0].launch_template_specification.launch_template_name #=> String
     #   resp.fleets[0].launch_template_configs[0].launch_template_specification.version #=> String
     #   resp.fleets[0].launch_template_configs[0].overrides #=> Array
-    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.fleets[0].launch_template_configs[0].overrides[0].max_price #=> String
     #   resp.fleets[0].launch_template_configs[0].overrides[0].subnet_id #=> String
     #   resp.fleets[0].launch_template_configs[0].overrides[0].availability_zone #=> String
     #   resp.fleets[0].launch_template_configs[0].overrides[0].weighted_capacity #=> Float
     #   resp.fleets[0].launch_template_configs[0].overrides[0].priority #=> Float
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].placement.group_name #=> String
     #   resp.fleets[0].target_capacity_specification.total_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.on_demand_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.spot_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.default_target_capacity_type #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].terminate_instances_with_expiration #=> Boolean
-    #   resp.fleets[0].type #=> String, one of "request", "maintain"
+    #   resp.fleets[0].type #=> String, one of "request", "maintain", "instant"
     #   resp.fleets[0].valid_from #=> Time
     #   resp.fleets[0].valid_until #=> Time
     #   resp.fleets[0].replace_unhealthy_instances #=> Boolean
-    #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified"
+    #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified", "capacity-optimized"
     #   resp.fleets[0].spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.fleets[0].spot_options.instance_pools_to_use_count #=> Integer
+    #   resp.fleets[0].spot_options.single_instance_type #=> Boolean
+    #   resp.fleets[0].spot_options.single_availability_zone #=> Boolean
+    #   resp.fleets[0].spot_options.min_target_capacity #=> Integer
+    #   resp.fleets[0].spot_options.max_total_price #=> String
     #   resp.fleets[0].on_demand_options.allocation_strategy #=> String, one of "lowest-price", "prioritized"
+    #   resp.fleets[0].on_demand_options.single_instance_type #=> Boolean
+    #   resp.fleets[0].on_demand_options.single_availability_zone #=> Boolean
+    #   resp.fleets[0].on_demand_options.min_target_capacity #=> Integer
+    #   resp.fleets[0].on_demand_options.max_total_price #=> String
     #   resp.fleets[0].tags #=> Array
     #   resp.fleets[0].tags[0].key #=> String
     #   resp.fleets[0].tags[0].value #=> String
+    #   resp.fleets[0].errors #=> Array
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.launch_template_specification.launch_template_id #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.launch_template_specification.launch_template_name #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.launch_template_specification.version #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.max_price #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.subnet_id #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.availability_zone #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.weighted_capacity #=> Float
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.priority #=> Float
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.placement.group_name #=> String
+    #   resp.fleets[0].errors[0].lifecycle #=> String, one of "spot", "on-demand"
+    #   resp.fleets[0].errors[0].error_code #=> String
+    #   resp.fleets[0].errors[0].error_message #=> String
+    #   resp.fleets[0].instances #=> Array
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.launch_template_specification.launch_template_id #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.launch_template_specification.launch_template_name #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.launch_template_specification.version #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.max_price #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.subnet_id #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.availability_zone #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.weighted_capacity #=> Float
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.priority #=> Float
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.placement.group_name #=> String
+    #   resp.fleets[0].instances[0].lifecycle #=> String, one of "spot", "on-demand"
+    #   resp.fleets[0].instances[0].instance_ids #=> Array
+    #   resp.fleets[0].instances[0].instance_ids[0] #=> String
+    #   resp.fleets[0].instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
+    #   resp.fleets[0].instances[0].platform #=> String, one of "Windows"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleets AWS API Documentation
     #
@@ -9515,11 +12905,21 @@ module Aws::EC2
     # logs (the log streams for the network interfaces), you must use the
     # CloudWatch Logs console or the CloudWatch Logs API.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filter
     #   One or more filters.
     #
     #   * `deliver-log-status` - The status of the logs delivery (`SUCCESS` \|
     #     `FAILED`).
+    #
+    #   * `log-destination-type` - The type of destination to which the flow
+    #     log publishes data. Possible destination types include
+    #     `cloud-watch-logs` and `S3`.
     #
     #   * `flow-log-id` - The ID of the flow log.
     #
@@ -9527,21 +12927,21 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the VPC, subnet, or network interface.
     #
-    #   * `traffic-type` - The type of traffic (`ACCEPT` \| `REJECT` \| `ALL`)
+    #   * `traffic-type` - The type of traffic (`ACCEPT` \| `REJECT` \|
+    #     `ALL`).
     #
     # @option params [Array<String>] :flow_log_ids
     #   One or more flow log IDs.
     #
+    #   Constraint: Maximum of 1000 flow log IDs.
+    #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `NextToken` value. This value can be between 5 and
-    #   1000; if `MaxResults` is given a value larger than 1000, only 1000
-    #   results are returned. You cannot specify this parameter and the flow
-    #   log IDs parameter in the same request.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @return [Types::DescribeFlowLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9551,6 +12951,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_flow_logs({
+    #     dry_run: false,
     #     filter: [
     #       {
     #         name: "String",
@@ -9574,6 +12975,9 @@ module Aws::EC2
     #   resp.flow_logs[0].log_group_name #=> String
     #   resp.flow_logs[0].resource_id #=> String
     #   resp.flow_logs[0].traffic_type #=> String, one of "ACCEPT", "REJECT", "ALL"
+    #   resp.flow_logs[0].log_destination_type #=> String, one of "cloud-watch-logs", "s3"
+    #   resp.flow_logs[0].log_destination #=> String
+    #   resp.flow_logs[0].log_format #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogs AWS API Documentation
@@ -9633,7 +13037,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more available Amazon FPGA Images (AFIs). These
+    # Describes the Amazon FPGA Images (AFIs) available to you. These
     # include public AFIs, private AFIs that you own, and AFIs owned by
     # other AWS accounts for which you have load permissions.
     #
@@ -9644,7 +13048,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :fpga_image_ids
-    #   One or more AFI IDs.
+    #   The AFI IDs.
     #
     # @option params [Array<String>] :owners
     #   Filters the AFI by owner. Specify an AWS account ID, `self` (owner is
@@ -9652,7 +13056,7 @@ module Aws::EC2
     #   `amazon` \| `aws-marketplace`).
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `create-time` - The creation time of the AFI.
     #
@@ -9736,6 +13140,7 @@ module Aws::EC2
     #   resp.fpga_images[0].tags[0].key #=> String
     #   resp.fpga_images[0].tags[0].value #=> String
     #   resp.fpga_images[0].public #=> Boolean
+    #   resp.fpga_images[0].data_retention_support #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImages AWS API Documentation
@@ -9750,20 +13155,20 @@ module Aws::EC2
     # Describes the Dedicated Host reservations that are available to
     # purchase.
     #
-    # The results describe all the Dedicated Host reservation offerings,
-    # including offerings that may not match the instance family and region
-    # of your Dedicated Hosts. When purchasing an offering, ensure that the
-    # instance family and Region of the offering matches that of the
-    # Dedicated Hosts with which it is to be associated . For more
+    # The results describe all of the Dedicated Host reservation offerings,
+    # including offerings that might not match the instance family and
+    # Region of your Dedicated Hosts. When purchasing an offering, ensure
+    # that the instance family and Region of the offering matches that of
+    # the Dedicated Hosts with which it is to be associated. For more
     # information about supported instance types, see [Dedicated Hosts
     # Overview][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html
     #
     # @option params [Array<Types::Filter>] :filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-family` - The instance family of the offering (for
     #     example, `m4`).
@@ -9844,7 +13249,7 @@ module Aws::EC2
     # your account.
     #
     # @option params [Array<Types::Filter>] :filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-family` - The instance family (for example, `m4`).
     #
@@ -9854,14 +13259,24 @@ module Aws::EC2
     #   * `state` - The state of the reservation (`payment-pending` \|
     #     `payment-failed` \| `active` \| `retired`).
     #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
     # @option params [Array<String>] :host_reservation_id_set
-    #   One or more host reservation IDs.
+    #   The host reservation IDs.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
     #   with the returned `nextToken` value. This value can be between 5 and
-    #   500.If `maxResults` is given a larger value than 500, you receive an
+    #   500. If `maxResults` is given a larger value than 500, you receive an
     #   error.
     #
     # @option params [String] :next_token
@@ -9903,6 +13318,9 @@ module Aws::EC2
     #   resp.host_reservation_set[0].start #=> Time
     #   resp.host_reservation_set[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired"
     #   resp.host_reservation_set[0].upfront_price #=> String
+    #   resp.host_reservation_set[0].tags #=> Array
+    #   resp.host_reservation_set[0].tags[0].key #=> String
+    #   resp.host_reservation_set[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservations AWS API Documentation
@@ -9914,15 +13332,15 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your Dedicated Hosts.
+    # Describes the specified Dedicated Hosts or all your Dedicated Hosts.
     #
-    # The results describe only the Dedicated Hosts in the region you're
+    # The results describe only the Dedicated Hosts in the Region you're
     # currently using. All listed instances consume capacity on your
     # Dedicated Host. Dedicated Hosts that have recently been released are
     # listed with the state `released`.
     #
     # @option params [Array<Types::Filter>] :filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `auto-placement` - Whether auto-placement is enabled or disabled
     #     (`on` \| `off`).
@@ -9955,11 +13373,13 @@ module Aws::EC2
     #   page. The remaining results can be seen by sending another request
     #   with the returned `nextToken` value. This value can be between 5 and
     #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error. You cannot specify this parameter and the host IDs parameter in
-    #   the same request.
+    #   error.
+    #
+    #   You cannot specify this parameter and the host IDs parameter in the
+    #   same request.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token to use to retrieve the next page of results.
     #
     # @return [Types::DescribeHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9994,18 +13414,24 @@ module Aws::EC2
     #   resp.hosts[0].host_id #=> String
     #   resp.hosts[0].host_properties.cores #=> Integer
     #   resp.hosts[0].host_properties.instance_type #=> String
+    #   resp.hosts[0].host_properties.instance_family #=> String
     #   resp.hosts[0].host_properties.sockets #=> Integer
     #   resp.hosts[0].host_properties.total_v_cpus #=> Integer
     #   resp.hosts[0].host_reservation_id #=> String
     #   resp.hosts[0].instances #=> Array
     #   resp.hosts[0].instances[0].instance_id #=> String
     #   resp.hosts[0].instances[0].instance_type #=> String
-    #   resp.hosts[0].state #=> String, one of "available", "under-assessment", "permanent-failure", "released", "released-permanent-failure"
+    #   resp.hosts[0].instances[0].owner_id #=> String
+    #   resp.hosts[0].state #=> String, one of "available", "under-assessment", "permanent-failure", "released", "released-permanent-failure", "pending"
     #   resp.hosts[0].allocation_time #=> Time
     #   resp.hosts[0].release_time #=> Time
     #   resp.hosts[0].tags #=> Array
     #   resp.hosts[0].tags[0].key #=> String
     #   resp.hosts[0].tags[0].value #=> String
+    #   resp.hosts[0].host_recovery #=> String, one of "on", "off"
+    #   resp.hosts[0].allows_multiple_instance_types #=> String, one of "on", "off"
+    #   resp.hosts[0].owner_id #=> String
+    #   resp.hosts[0].availability_zone_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHosts AWS API Documentation
@@ -10020,10 +13446,10 @@ module Aws::EC2
     # Describes your IAM instance profile associations.
     #
     # @option params [Array<String>] :association_ids
-    #   One or more IAM instance profile associations.
+    #   The IAM instance profile associations.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -10103,7 +13529,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the ID format settings for your resources on a per-region
+    # Describes the ID format settings for your resources on a per-Region
     # basis, for example, to view which resource types are enabled for
     # longer IDs. This request only returns information about resource types
     # whose ID formats can be modified; it does not return information about
@@ -10192,7 +13618,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
     #
     # @option params [required, String] :principal_arn
     #   The ARN of the principal, which can be an IAM role, IAM user, or the
@@ -10301,13 +13727,13 @@ module Aws::EC2
     #   resp.block_device_mappings #=> Array
     #   resp.block_device_mappings[0].device_name #=> String
     #   resp.block_device_mappings[0].virtual_name #=> String
-    #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.block_device_mappings[0].no_device #=> String
     #   resp.image_id #=> String
     #   resp.launch_permissions #=> Array
@@ -10330,15 +13756,17 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of the images (AMIs, AKIs, and ARIs) available
-    # to you. Images available to you include public images, private images
-    # that you own, and private images owned by other AWS accounts but for
-    # which you have explicit launch permissions.
+    # Describes the specified images (AMIs, AKIs, and ARIs) available to you
+    # or all of the images available to you.
     #
-    # <note markdown="1"> Deregistered images are included in the returned results for an
-    # unspecified interval after deregistration.
+    # The images available to you include public images, private images that
+    # you own, and private images owned by other AWS accounts for which you
+    # have explicit launch permissions.
     #
-    #  </note>
+    # Recently deregistered images appear in the returned results for a
+    # short interval and then return empty results. After all instances that
+    # reference a deregistered AMI are terminated, specifying the ID of the
+    # image results in an error indicating that the AMI ID cannot be found.
     #
     # @option params [Array<String>] :executable_users
     #   Scopes the images by users with explicit launch permissions. Specify
@@ -10346,9 +13774,10 @@ module Aws::EC2
     #   (public AMIs).
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
-    #   * `architecture` - The image architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The image architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `block-device-mapping.delete-on-termination` - A Boolean value that
     #     indicates whether the Amazon EBS volume is deleted on instance
@@ -10365,6 +13794,9 @@ module Aws::EC2
     #
     #   * `block-device-mapping.volume-type` - The volume type of the EBS
     #     volume (`gp2` \| `io1` \| `st1 `\| `sc1` \| `standard`).
+    #
+    #   * `block-device-mapping.encrypted` - A Boolean that indicates whether
+    #     the EBS volume is encrypted.
     #
     #   * `description` - The description of the image (provided during image
     #     creation).
@@ -10433,7 +13865,7 @@ module Aws::EC2
     #     `hvm`).
     #
     # @option params [Array<String>] :image_ids
-    #   One or more image IDs.
+    #   The image IDs.
     #
     #   Default: Describes all images available to you.
     #
@@ -10516,7 +13948,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.images #=> Array
-    #   resp.images[0].architecture #=> String, one of "i386", "x86_64"
+    #   resp.images[0].architecture #=> String, one of "i386", "x86_64", "arm64"
     #   resp.images[0].creation_date #=> String
     #   resp.images[0].image_id #=> String
     #   resp.images[0].image_location #=> String
@@ -10533,13 +13965,13 @@ module Aws::EC2
     #   resp.images[0].block_device_mappings #=> Array
     #   resp.images[0].block_device_mappings[0].device_name #=> String
     #   resp.images[0].block_device_mappings[0].virtual_name #=> String
-    #   resp.images[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.images[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.images[0].block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.images[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.images[0].block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.images[0].block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.images[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.images[0].block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.images[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.images[0].block_device_mappings[0].no_device #=> String
     #   resp.images[0].description #=> String
     #   resp.images[0].ena_support #=> Boolean
@@ -10576,15 +14008,13 @@ module Aws::EC2
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filter tasks using the `task-state` filter and one of the following
-    #   values: active, completed, deleting, deleted.
+    #   values: `active`, `completed`, `deleting`, or `deleted`.
     #
     # @option params [Array<String>] :import_task_ids
-    #   A list of import image task IDs.
+    #   The IDs of the import image tasks.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of results to return in a single call.
     #
     # @option params [String] :next_token
     #   A token that indicates the next page of results.
@@ -10614,9 +14044,11 @@ module Aws::EC2
     #   resp.import_image_tasks #=> Array
     #   resp.import_image_tasks[0].architecture #=> String
     #   resp.import_image_tasks[0].description #=> String
+    #   resp.import_image_tasks[0].encrypted #=> Boolean
     #   resp.import_image_tasks[0].hypervisor #=> String
     #   resp.import_image_tasks[0].image_id #=> String
     #   resp.import_image_tasks[0].import_task_id #=> String
+    #   resp.import_image_tasks[0].kms_key_id #=> String
     #   resp.import_image_tasks[0].license_type #=> String
     #   resp.import_image_tasks[0].platform #=> String
     #   resp.import_image_tasks[0].progress #=> String
@@ -10634,6 +14066,8 @@ module Aws::EC2
     #   resp.import_image_tasks[0].snapshot_details[0].user_bucket.s3_key #=> String
     #   resp.import_image_tasks[0].status #=> String
     #   resp.import_image_tasks[0].status_message #=> String
+    #   resp.import_image_tasks[0].license_specifications #=> Array
+    #   resp.import_image_tasks[0].license_specifications[0].license_configuration_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasks AWS API Documentation
@@ -10654,7 +14088,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     # @option params [Array<String>] :import_task_ids
     #   A list of import snapshot task IDs.
@@ -10694,7 +14128,9 @@ module Aws::EC2
     #   resp.import_snapshot_tasks[0].import_task_id #=> String
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.description #=> String
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.disk_image_size #=> Float
+    #   resp.import_snapshot_tasks[0].snapshot_task_detail.encrypted #=> Boolean
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.format #=> String
+    #   resp.import_snapshot_tasks[0].snapshot_task_detail.kms_key_id #=> String
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.progress #=> String
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.snapshot_id #=> String
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.status #=> String
@@ -10865,15 +14301,20 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the credit option for CPU usage of one or more of your T2
+    # Describes the credit option for CPU usage of the specified T2 or T3
     # instances. The credit options are `standard` and `unlimited`.
     #
-    # If you do not specify an instance ID, Amazon EC2 returns only the T2
-    # instances with the `unlimited` credit option. If you specify one or
-    # more instance IDs, Amazon EC2 returns the credit option (`standard` or
-    # `unlimited`) of those instances. If you specify an instance ID that is
-    # not valid, such as an instance that is not a T2 instance, an error is
-    # returned.
+    # If you do not specify an instance ID, Amazon EC2 returns T2 and T3
+    # instances with the `unlimited` credit option, as well as instances
+    # that were previously configured as T2 or T3 with the `unlimited`
+    # credit option. For example, if you resize a T2 instance, while it is
+    # configured as `unlimited`, to an M4 instance, Amazon EC2 returns the
+    # M4 instance.
+    #
+    # If you specify one or more instance IDs, Amazon EC2 returns the credit
+    # option (`standard` or `unlimited`) of those instances. If you specify
+    # an instance ID that is not valid, such as an instance that is not a T2
+    # or T3 instance, an error is returned.
     #
     # Recently terminated instances might appear in the returned results.
     # This interval is usually less than one hour.
@@ -10883,12 +14324,12 @@ module Aws::EC2
     # instance IDs at all, the call fails. If you specify only instance IDs
     # in an unaffected zone, the call works normally.
     #
-    # For more information, see [T2 Instances][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # For more information, see [Burstable Performance Instances][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -10897,14 +14338,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-id` - The ID of the instance.
     #
     #   ^
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     #
@@ -10955,9 +14396,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the status of one or more instances. By default, only
-    # running instances are described, unless you specifically indicate to
-    # return the status of all instances.
+    # Describes the status of the specified instances or all of your
+    # instances. By default, only running instances are described, unless
+    # you specifically indicate to return the status of all instances.
     #
     # Instance status includes the following components:
     #
@@ -10980,13 +14421,13 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html
-    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html
-    # [4]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -10996,10 +14437,16 @@ module Aws::EC2
     #
     #   * `event.description` - A description of the event.
     #
+    #   * `event.instance-event-id` - The ID of the event whose date and time
+    #     you are modifying.
+    #
     #   * `event.not-after` - The latest end time for the scheduled event (for
     #     example, `2014-09-15T17:15:20.000Z`).
     #
     #   * `event.not-before` - The earliest start time for the scheduled event
+    #     (for example, `2014-09-15T17:15:20.000Z`).
+    #
+    #   * `event.not-before-deadline` - The deadline for starting the event
     #     (for example, `2014-09-15T17:15:20.000Z`).
     #
     #   * `instance-state-code` - The code for the instance state, as a 16-bit
@@ -11029,7 +14476,7 @@ module Aws::EC2
     #     `not-applicable`).
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     #
@@ -11125,10 +14572,12 @@ module Aws::EC2
     #   resp.instance_statuses #=> Array
     #   resp.instance_statuses[0].availability_zone #=> String
     #   resp.instance_statuses[0].events #=> Array
+    #   resp.instance_statuses[0].events[0].instance_event_id #=> String
     #   resp.instance_statuses[0].events[0].code #=> String, one of "instance-reboot", "system-reboot", "system-maintenance", "instance-retirement", "instance-stop"
     #   resp.instance_statuses[0].events[0].description #=> String
     #   resp.instance_statuses[0].events[0].not_after #=> Time
     #   resp.instance_statuses[0].events[0].not_before #=> Time
+    #   resp.instance_statuses[0].events[0].not_before_deadline #=> Time
     #   resp.instance_statuses[0].instance_id #=> String
     #   resp.instance_statuses[0].instance_state.code #=> Integer
     #   resp.instance_statuses[0].instance_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
@@ -11153,7 +14602,264 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your instances.
+    # Returns a list of all instance types offered. The results can be
+    # filtered by location (Region or Availability Zone). If no location is
+    # specified, the instance types offered in the current Region are
+    # returned.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :location_type
+    #   The location type.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    #   * `location` - This depends on the location type. For example, if the
+    #     location type is `region` (default), the location is the Region code
+    #     (for example, `us-east-2`.)
+    #
+    #   * `instance-type` - The instance type.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the next token value.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @return [Types::DescribeInstanceTypeOfferingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceTypeOfferingsResult#instance_type_offerings #instance_type_offerings} => Array&lt;Types::InstanceTypeOffering&gt;
+    #   * {Types::DescribeInstanceTypeOfferingsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_type_offerings({
+    #     dry_run: false,
+    #     location_type: "region", # accepts region, availability-zone, availability-zone-id
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_type_offerings #=> Array
+    #   resp.instance_type_offerings[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
+    #   resp.instance_type_offerings[0].location_type #=> String, one of "region", "availability-zone", "availability-zone-id"
+    #   resp.instance_type_offerings[0].location #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypeOfferings AWS API Documentation
+    #
+    # @overload describe_instance_type_offerings(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_type_offerings(params = {}, options = {})
+      req = build_request(:describe_instance_type_offerings, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all instance types offered in your current AWS
+    # Region. The results can be filtered by the attributes of the instance
+    # types.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :instance_types
+    #   The instance types. For more information, see [Instance Types][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    #   * `auto-recovery-supported` - Indicates whether auto recovery is
+    #     supported. (`true` \| `false`)
+    #
+    #   * `bare-metal` - Indicates whether it is a bare metal instance type.
+    #     (`true` \| `false`)
+    #
+    #   * `burstable-performance-supported` - Indicates whether it is a
+    #     burstable performance instance type. (`true` \| `false`)
+    #
+    #   * `current-generation` - Indicates whether this instance type is the
+    #     latest generation instance type of an instance family. (`true` \|
+    #     `false`)
+    #
+    #   * `ebs-info.ebs-optimized-support` - Indicates whether the instance
+    #     type is EBS-optimized. (`true` \| `false`)
+    #
+    #   * `ebs-info.encryption-support` - Indicates whether EBS encryption is
+    #     supported. (`true` \| `false`)
+    #
+    #   * `free-tier-eligible` - Indicates whether the instance type is
+    #     eligible to use in the free tier. (`true` \| `false`)
+    #
+    #   * `hibernation-supported` - Indicates whether On-Demand hibernation is
+    #     supported. (`true` \| `false`)
+    #
+    #   * `hypervisor` - The hypervisor used. (`nitro` \| `xen`)
+    #
+    #   * `instance-storage-info.disk.count` - The number of local disks.
+    #
+    #   * `instance-storage-info.disk.size-in-gb` - The storage size of each
+    #     instance storage disk, in GB.
+    #
+    #   * `instance-storage-info.disk.type` - The storage technology for the
+    #     local instance storage disks. (`hdd` \| `ssd`)
+    #
+    #   * `instance-storage-info.total-size-in-gb` - The total amount of
+    #     storage available from all local instance storage, in GB.
+    #
+    #   * `instance-storage-supported` - Indicates whether the instance type
+    #     has local instance storage. (`true` \| `false`)
+    #
+    #   * `memory-info.size-in-mib` - The memory size.
+    #
+    #   * `network-info.ena-support` - Indicates whether Elastic Network
+    #     Adapter (ENA) is supported or required. (`required` \| `supported`
+    #     \| `unsupported`)
+    #
+    #   * `network-info.ipv4-addresses-per-interface` - The maximum number of
+    #     private IPv4 addresses per network interface.
+    #
+    #   * `network-info.ipv6-addresses-per-interface` - The maximum number of
+    #     private IPv6 addresses per network interface.
+    #
+    #   * `network-info.ipv6-supported` - Indicates whether the instance type
+    #     supports IPv6. (`true` \| `false`)
+    #
+    #   * `network-info.maximum-network-interfaces` - The maximum number of
+    #     network interfaces per instance.
+    #
+    #   * `network-info.network-performance` - Describes the network
+    #     performance.
+    #
+    #   * `processor-info.sustained-clock-speed-in-ghz` - The CPU clock speed,
+    #     in GHz.
+    #
+    #   * `vcpu-info.default-cores` - The default number of cores for the
+    #     instance type.
+    #
+    #   * `vcpu-info.default-threads-per-core` - The default number of threads
+    #     per cores for the instance type.
+    #
+    #   * `vcpu-info.default-vcpus` - The default number of vCPUs for the
+    #     instance type.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the next token value.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @return [Types::DescribeInstanceTypesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceTypesResult#instance_types #instance_types} => Array&lt;Types::InstanceTypeInfo&gt;
+    #   * {Types::DescribeInstanceTypesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_types({
+    #     dry_run: false,
+    #     instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_types #=> Array
+    #   resp.instance_types[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
+    #   resp.instance_types[0].current_generation #=> Boolean
+    #   resp.instance_types[0].free_tier_eligible #=> Boolean
+    #   resp.instance_types[0].supported_usage_classes #=> Array
+    #   resp.instance_types[0].supported_usage_classes[0] #=> String, one of "spot", "on-demand"
+    #   resp.instance_types[0].supported_root_devices #=> Array
+    #   resp.instance_types[0].supported_root_devices[0] #=> String, one of "ebs", "instance-store"
+    #   resp.instance_types[0].bare_metal #=> Boolean
+    #   resp.instance_types[0].hypervisor #=> String, one of "nitro", "xen"
+    #   resp.instance_types[0].processor_info.supported_architectures #=> Array
+    #   resp.instance_types[0].processor_info.supported_architectures[0] #=> String, one of "i386", "x86_64", "arm64"
+    #   resp.instance_types[0].processor_info.sustained_clock_speed_in_ghz #=> Float
+    #   resp.instance_types[0].v_cpu_info.default_v_cpus #=> Integer
+    #   resp.instance_types[0].v_cpu_info.default_cores #=> Integer
+    #   resp.instance_types[0].v_cpu_info.default_threads_per_core #=> Integer
+    #   resp.instance_types[0].v_cpu_info.valid_cores #=> Array
+    #   resp.instance_types[0].v_cpu_info.valid_cores[0] #=> Integer
+    #   resp.instance_types[0].v_cpu_info.valid_threads_per_core #=> Array
+    #   resp.instance_types[0].v_cpu_info.valid_threads_per_core[0] #=> Integer
+    #   resp.instance_types[0].memory_info.size_in_mi_b #=> Integer
+    #   resp.instance_types[0].instance_storage_supported #=> Boolean
+    #   resp.instance_types[0].instance_storage_info.total_size_in_gb #=> Integer
+    #   resp.instance_types[0].instance_storage_info.disks #=> Array
+    #   resp.instance_types[0].instance_storage_info.disks[0].size_in_gb #=> Integer
+    #   resp.instance_types[0].instance_storage_info.disks[0].count #=> Integer
+    #   resp.instance_types[0].instance_storage_info.disks[0].type #=> String, one of "hdd", "ssd"
+    #   resp.instance_types[0].ebs_info.ebs_optimized_support #=> String, one of "unsupported", "supported", "default"
+    #   resp.instance_types[0].ebs_info.encryption_support #=> String, one of "unsupported", "supported"
+    #   resp.instance_types[0].network_info.network_performance #=> String
+    #   resp.instance_types[0].network_info.maximum_network_interfaces #=> Integer
+    #   resp.instance_types[0].network_info.ipv_4_addresses_per_interface #=> Integer
+    #   resp.instance_types[0].network_info.ipv_6_addresses_per_interface #=> Integer
+    #   resp.instance_types[0].network_info.ipv_6_supported #=> Boolean
+    #   resp.instance_types[0].network_info.ena_support #=> String, one of "unsupported", "supported", "required"
+    #   resp.instance_types[0].gpu_info.gpus #=> Array
+    #   resp.instance_types[0].gpu_info.gpus[0].name #=> String
+    #   resp.instance_types[0].gpu_info.gpus[0].manufacturer #=> String
+    #   resp.instance_types[0].gpu_info.gpus[0].count #=> Integer
+    #   resp.instance_types[0].gpu_info.gpus[0].memory_info.size_in_mi_b #=> Integer
+    #   resp.instance_types[0].gpu_info.total_gpu_memory_in_mi_b #=> Integer
+    #   resp.instance_types[0].fpga_info.fpgas #=> Array
+    #   resp.instance_types[0].fpga_info.fpgas[0].name #=> String
+    #   resp.instance_types[0].fpga_info.fpgas[0].manufacturer #=> String
+    #   resp.instance_types[0].fpga_info.fpgas[0].count #=> Integer
+    #   resp.instance_types[0].fpga_info.fpgas[0].memory_info.size_in_mi_b #=> Integer
+    #   resp.instance_types[0].fpga_info.total_fpga_memory_in_mi_b #=> Integer
+    #   resp.instance_types[0].placement_group_info.supported_strategies #=> Array
+    #   resp.instance_types[0].placement_group_info.supported_strategies[0] #=> String, one of "cluster", "partition", "spread"
+    #   resp.instance_types[0].hibernation_supported #=> Boolean
+    #   resp.instance_types[0].burstable_performance_supported #=> Boolean
+    #   resp.instance_types[0].dedicated_hosts_supported #=> Boolean
+    #   resp.instance_types[0].auto_recovery_supported #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypes AWS API Documentation
+    #
+    # @overload describe_instance_types(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_types(params = {}, options = {})
+      req = build_request(:describe_instance_types, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified instances or all of AWS account's instances.
     #
     # If you specify one or more instance IDs, Amazon EC2 returns
     # information for those instances. If you do not specify instance IDs,
@@ -11172,12 +14878,13 @@ module Aws::EC2
     # IDs that are in an unaffected zone, the call works normally.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
     #
-    #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The instance architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -11207,15 +14914,18 @@ module Aws::EC2
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
     #
+    #   * `hibernation-options.configured` - A Boolean that indicates whether
+    #     the instance is enabled for hibernation. A value of `true` means
+    #     that the instance is enabled for hibernation.
+    #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.
     #
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
-    #     the instance. Specified as an ARN.
-    #
-    #   * `image-id` - The ID of the image used to launch the instance.
+    #     the instance. Specified as an ARN. `image-id` - The ID of the image
+    #     used to launch the instance.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -11251,6 +14961,15 @@ module Aws::EC2
     #     and so on).
     #
     #   * `launch-time` - The time when the instance was launched.
+    #
+    #   * `metadata-http-tokens` - The metadata request authorization state
+    #     (`optional` \| `required`)
+    #
+    #   * `metadata-http-put-response-hop-limit` - The http metadata request
+    #     put response hop limit (integer, possible values `1` to `64`)
+    #
+    #   * `metadata-http-endpoint` - Enable or disable metadata access on http
+    #     endpoint (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
@@ -11357,8 +15076,11 @@ module Aws::EC2
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
     #
-    #   * `platform` - The platform. Use `windows` if you have Windows
-    #     instances; otherwise, leave blank.
+    #   * `placement-partition-number` - The partition in which the instance
+    #     is located.
+    #
+    #   * `platform` - The platform. To list only Windows instances, use
+    #     `windows`.
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -11428,7 +15150,7 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     #
@@ -11540,7 +15262,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].ami_launch_index #=> Integer
     #   resp.reservations[0].instances[0].image_id #=> String
     #   resp.reservations[0].instances[0].instance_id #=> String
-    #   resp.reservations[0].instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.reservations[0].instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.reservations[0].instances[0].kernel_id #=> String
     #   resp.reservations[0].instances[0].key_name #=> String
     #   resp.reservations[0].instances[0].launch_time #=> Time
@@ -11548,6 +15270,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].placement.availability_zone #=> String
     #   resp.reservations[0].instances[0].placement.affinity #=> String
     #   resp.reservations[0].instances[0].placement.group_name #=> String
+    #   resp.reservations[0].instances[0].placement.partition_number #=> Integer
     #   resp.reservations[0].instances[0].placement.host_id #=> String
     #   resp.reservations[0].instances[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.reservations[0].instances[0].placement.spread_domain #=> String
@@ -11565,7 +15288,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].state_transition_reason #=> String
     #   resp.reservations[0].instances[0].subnet_id #=> String
     #   resp.reservations[0].instances[0].vpc_id #=> String
-    #   resp.reservations[0].instances[0].architecture #=> String, one of "i386", "x86_64"
+    #   resp.reservations[0].instances[0].architecture #=> String, one of "i386", "x86_64", "arm64"
     #   resp.reservations[0].instances[0].block_device_mappings #=> Array
     #   resp.reservations[0].instances[0].block_device_mappings[0].device_name #=> String
     #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.attach_time #=> Time
@@ -11584,6 +15307,11 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_association_id #=> String
     #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_association_state #=> String
     #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_association_time #=> String
+    #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations #=> Array
+    #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_arn #=> String
+    #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_id #=> String
+    #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_state #=> String
+    #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_time #=> Time
     #   resp.reservations[0].instances[0].network_interfaces #=> Array
     #   resp.reservations[0].instances[0].network_interfaces[0].association.ip_owner_id #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].association.public_dns_name #=> String
@@ -11615,6 +15343,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].network_interfaces[0].status #=> String, one of "available", "associated", "attaching", "in-use", "detaching"
     #   resp.reservations[0].instances[0].network_interfaces[0].subnet_id #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].vpc_id #=> String
+    #   resp.reservations[0].instances[0].network_interfaces[0].interface_type #=> String
     #   resp.reservations[0].instances[0].root_device_name #=> String
     #   resp.reservations[0].instances[0].root_device_type #=> String, one of "ebs", "instance-store"
     #   resp.reservations[0].instances[0].security_groups #=> Array
@@ -11631,6 +15360,16 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #   resp.reservations[0].instances[0].cpu_options.core_count #=> Integer
     #   resp.reservations[0].instances[0].cpu_options.threads_per_core #=> Integer
+    #   resp.reservations[0].instances[0].capacity_reservation_id #=> String
+    #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.reservations[0].instances[0].hibernation_options.configured #=> Boolean
+    #   resp.reservations[0].instances[0].licenses #=> Array
+    #   resp.reservations[0].instances[0].licenses[0].license_configuration_arn #=> String
+    #   resp.reservations[0].instances[0].metadata_options.state #=> String, one of "pending", "applied"
+    #   resp.reservations[0].instances[0].metadata_options.http_tokens #=> String, one of "optional", "required"
+    #   resp.reservations[0].instances[0].metadata_options.http_put_response_hop_limit #=> Integer
+    #   resp.reservations[0].instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -11645,7 +15384,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your Internet gateways.
+    # Describes one or more of your internet gateways.
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -11657,6 +15396,9 @@ module Aws::EC2
     #   * `attachment.vpc-id` - The ID of an attached VPC.
     #
     #   * `internet-gateway-id` - The ID of the Internet gateway.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the internet
+    #     gateway.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -11675,13 +15417,22 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :internet_gateway_ids
-    #   One or more Internet gateway IDs.
+    #   One or more internet gateway IDs.
     #
-    #   Default: Describes all your Internet gateways.
+    #   Default: Describes all your internet gateways.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @return [Types::DescribeInternetGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeInternetGatewaysResult#internet_gateways #internet_gateways} => Array&lt;Types::InternetGateway&gt;
+    #   * {Types::DescribeInternetGatewaysResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe the Internet gateway for a VPC
@@ -11727,6 +15478,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     internet_gateway_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -11736,9 +15489,11 @@ module Aws::EC2
     #   resp.internet_gateways[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.internet_gateways[0].attachments[0].vpc_id #=> String
     #   resp.internet_gateways[0].internet_gateway_id #=> String
+    #   resp.internet_gateways[0].owner_id #=> String
     #   resp.internet_gateways[0].tags #=> Array
     #   resp.internet_gateways[0].tags[0].key #=> String
     #   resp.internet_gateways[0].tags[0].value #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGateways AWS API Documentation
     #
@@ -11749,24 +15504,24 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your key pairs.
+    # Describes the specified key pairs or all of your key pairs.
     #
     # For more information about key pairs, see [Key Pairs][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `fingerprint` - The fingerprint of the key pair.
     #
     #   * `key-name` - The name of the key pair.
     #
     # @option params [Array<String>] :key_names
-    #   One or more key pair names.
+    #   The key pair names.
     #
     #   Default: Describes all your key pairs.
     #
@@ -12002,6 +15757,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].device_index #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].groups #=> Array
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].groups[0] #=> String
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].interface_type #=> String
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].ipv_6_address_count #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
@@ -12013,7 +15769,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].subnet_id #=> String
     #   resp.launch_template_versions[0].launch_template_data.image_id #=> String
-    #   resp.launch_template_versions[0].launch_template_data.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.launch_template_versions[0].launch_template_data.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.launch_template_versions[0].launch_template_data.key_name #=> String
     #   resp.launch_template_versions[0].launch_template_data.monitoring.enabled #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.placement.availability_zone #=> String
@@ -12027,12 +15783,14 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
     #   resp.launch_template_versions[0].launch_template_data.user_data #=> String
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications #=> Array
-    #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "elastic-ip", "fleet", "fpga-image", "host-reservation", "image", "instance", "internet-gateway", "launch-template", "natgateway", "network-acl", "network-interface", "reserved-instances", "route-table", "security-group", "snapshot", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway"
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags #=> Array
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags[0].key #=> String
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags[0].value #=> String
     #   resp.launch_template_versions[0].launch_template_data.elastic_gpu_specifications #=> Array
     #   resp.launch_template_versions[0].launch_template_data.elastic_gpu_specifications[0].type #=> String
+    #   resp.launch_template_versions[0].launch_template_data.elastic_inference_accelerators #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.elastic_inference_accelerators[0].type #=> String
     #   resp.launch_template_versions[0].launch_template_data.security_group_ids #=> Array
     #   resp.launch_template_versions[0].launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_versions[0].launch_template_data.security_groups #=> Array
@@ -12046,6 +15804,11 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.credit_specification.cpu_credits #=> String
     #   resp.launch_template_versions[0].launch_template_data.cpu_options.core_count #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.cpu_options.threads_per_core #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.license_specifications #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.license_specifications[0].license_configuration_arn #=> String
+    #   resp.launch_template_versions[0].launch_template_data.hibernation_options.configured #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -12094,7 +15857,7 @@ module Aws::EC2
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. To retrieve
     #   the remaining results, make another call with the returned `NextToken`
-    #   value. This value can be between 5 and 1000.
+    #   value. This value can be between 1 and 200.
     #
     # @return [Types::DescribeLaunchTemplatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12194,7 +15957,7 @@ module Aws::EC2
     #   Default: If no value is provided, the default is 1000.
     #
     # @option params [String] :next_token
-    #   The token to use to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @option params [Array<String>] :public_ips
     #   One or more Elastic IP addresses.
@@ -12253,7 +16016,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of the your NAT gateways.
+    # Describes one or more of your NAT gateways.
     #
     # @option params [Array<Types::Filter>] :filter
     #   One or more filters.
@@ -12278,18 +16041,15 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
-    #
-    #   Constraint: If the value specified is greater than 1000, we return
-    #   only 1000 items.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @option params [Array<String>] :nat_gateway_ids
     #   One or more NAT gateway IDs.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @return [Types::DescribeNatGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12384,12 +16144,12 @@ module Aws::EC2
 
     # Describes one or more of your network ACLs.
     #
-    # For more information about network ACLs, see [Network ACLs][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Network ACLs][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -12407,9 +16167,6 @@ module Aws::EC2
     #     the VPC.
     #
     #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
-    #
-    #   * `entry.egress` - Indicates whether the entry applies to egress
-    #     traffic.
     #
     #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
     #
@@ -12430,9 +16187,11 @@ module Aws::EC2
     #     \| `deny`).
     #
     #   * `entry.rule-number` - The number of an entry (in other words, rule)
-    #     in the ACL's set of entries.
+    #     in the set of ACL entries.
     #
     #   * `network-acl-id` - The ID of the network ACL.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the network ACL.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -12457,9 +16216,18 @@ module Aws::EC2
     #
     #   Default: Describes all your network ACLs.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeNetworkAclsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeNetworkAclsResult#network_acls #network_acls} => Array&lt;Types::NetworkAcl&gt;
+    #   * {Types::DescribeNetworkAclsResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a network ACL
@@ -12519,6 +16287,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     network_acl_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -12545,6 +16315,8 @@ module Aws::EC2
     #   resp.network_acls[0].tags[0].key #=> String
     #   resp.network_acls[0].tags[0].value #=> String
     #   resp.network_acls[0].vpc_id #=> String
+    #   resp.network_acls[0].owner_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAcls AWS API Documentation
     #
@@ -12794,7 +16566,7 @@ module Aws::EC2
     #
     #   * `attachment.attachment-id` - The ID of the interface attachment.
     #
-    #   * `attachment.attach.time` - The time that the network interface was
+    #   * `attachment.attach-time` - The time that the network interface was
     #     attached to an instance.
     #
     #   * `attachment.delete-on-termination` - Indicates whether the
@@ -12849,7 +16621,7 @@ module Aws::EC2
     #     being managed by an AWS service (for example, AWS Management
     #     Console, Auto Scaling, and so on).
     #
-    #   * `source-desk-check` - Indicates whether the network interface
+    #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
     #     checking is enabled, and `false` means checking is disabled. The
     #     value must be `false` for the network interface to perform network
@@ -12885,9 +16657,18 @@ module Aws::EC2
     #
     #   Default: Describes all your network interfaces.
     #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. The request
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
     # @return [Types::DescribeNetworkInterfacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeNetworkInterfacesResult#network_interfaces #network_interfaces} => Array&lt;Types::NetworkInterface&gt;
+    #   * {Types::DescribeNetworkInterfacesResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a network interface
@@ -12965,6 +16746,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     network_interface_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -12987,7 +16770,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].groups #=> Array
     #   resp.network_interfaces[0].groups[0].group_name #=> String
     #   resp.network_interfaces[0].groups[0].group_id #=> String
-    #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway"
+    #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway", "efa"
     #   resp.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interfaces[0].mac_address #=> String
@@ -13013,6 +16796,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].tag_set[0].key #=> String
     #   resp.network_interfaces[0].tag_set[0].value #=> String
     #   resp.network_interfaces[0].vpc_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaces AWS API Documentation
     #
@@ -13023,16 +16807,16 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your placement groups. For more information,
-    # see [Placement Groups][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # Describes the specified placement groups or all of your placement
+    # groups. For more information, see [Placement Groups][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `group-name` - The name of the placement group.
     #
@@ -13040,7 +16824,7 @@ module Aws::EC2
     #     \| `deleting` \| `deleted`).
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
-    #     `spread`).
+    #     `spread` \| `partition`).
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -13049,7 +16833,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :group_names
-    #   One or more placement group names.
+    #   The names of the placement groups.
     #
     #   Default: Describes all your placement groups, or only those otherwise
     #   specified.
@@ -13076,7 +16860,8 @@ module Aws::EC2
     #   resp.placement_groups #=> Array
     #   resp.placement_groups[0].group_name #=> String
     #   resp.placement_groups[0].state #=> String, one of "pending", "available", "deleting", "deleted"
-    #   resp.placement_groups[0].strategy #=> String, one of "cluster", "spread"
+    #   resp.placement_groups[0].strategy #=> String, one of "cluster", "spread", "partition"
+    #   resp.placement_groups[0].partition_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroups AWS API Documentation
     #
@@ -13109,16 +16894,12 @@ module Aws::EC2
     #   * `prefix-list-name`\: The name of a prefix list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
-    #
-    #   Constraint: If the value specified is greater than 1000, we return
-    #   only 1000 items.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @option params [String] :next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a prior call.)
+    #   The token for the next page of results.
     #
     # @option params [Array<String>] :prefix_list_ids
     #   One or more prefix list IDs.
@@ -13241,31 +17022,93 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more regions that are currently available to you.
+    # Describes the specified IPv4 address pools.
     #
-    # For a list of the regions supported by Amazon EC2, see [Regions and
+    # @option params [Array<String>] :pool_ids
+    #   The IDs of the address pools.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @return [Types::DescribePublicIpv4PoolsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePublicIpv4PoolsResult#public_ipv_4_pools #public_ipv_4_pools} => Array&lt;Types::PublicIpv4Pool&gt;
+    #   * {Types::DescribePublicIpv4PoolsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_public_ipv_4_pools({
+    #     pool_ids: ["String"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_ipv_4_pools #=> Array
+    #   resp.public_ipv_4_pools[0].pool_id #=> String
+    #   resp.public_ipv_4_pools[0].description #=> String
+    #   resp.public_ipv_4_pools[0].pool_address_ranges #=> Array
+    #   resp.public_ipv_4_pools[0].pool_address_ranges[0].first_address #=> String
+    #   resp.public_ipv_4_pools[0].pool_address_ranges[0].last_address #=> String
+    #   resp.public_ipv_4_pools[0].pool_address_ranges[0].address_count #=> Integer
+    #   resp.public_ipv_4_pools[0].pool_address_ranges[0].available_address_count #=> Integer
+    #   resp.public_ipv_4_pools[0].total_address_count #=> Integer
+    #   resp.public_ipv_4_pools[0].total_available_address_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePublicIpv4Pools AWS API Documentation
+    #
+    # @overload describe_public_ipv_4_pools(params = {})
+    # @param [Hash] params ({})
+    def describe_public_ipv_4_pools(params = {}, options = {})
+      req = build_request(:describe_public_ipv_4_pools, params)
+      req.send_request(options)
+    end
+
+    # Describes the Regions that are enabled for your account, or all
+    # Regions.
+    #
+    # For a list of the Regions supported by Amazon EC2, see [ Regions and
     # Endpoints][1].
     #
+    # For information about enabling and disabling Regions for your account,
+    # see [Managing AWS Regions][2] in the *AWS General Reference*.
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
-    #   * `endpoint` - The endpoint of the region (for example,
+    #   * `endpoint` - The endpoint of the Region (for example,
     #     `ec2.us-east-1.amazonaws.com`).
     #
-    #   * `region-name` - The name of the region (for example, `us-east-1`).
+    #   * `opt-in-status` - The opt-in status of the Region
+    #     (`opt-in-not-required` \| `opted-in` \| `not-opted-in`).
+    #
+    #   * `region-name` - The name of the Region (for example, `us-east-1`).
     #
     # @option params [Array<String>] :region_names
-    #   The names of one or more regions.
+    #   The names of the Regions. You can specify any Regions, whether they
+    #   are enabled and disabled for your account.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Boolean] :all_regions
+    #   Indicates whether to display all Regions, including Regions that are
+    #   disabled for your account.
     #
     # @return [Types::DescribeRegionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13340,6 +17183,7 @@ module Aws::EC2
     #     ],
     #     region_names: ["String"],
     #     dry_run: false,
+    #     all_regions: false,
     #   })
     #
     # @example Response structure
@@ -13347,6 +17191,7 @@ module Aws::EC2
     #   resp.regions #=> Array
     #   resp.regions[0].endpoint #=> String
     #   resp.regions[0].region_name #=> String
+    #   resp.regions[0].opt_in_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegions AWS API Documentation
     #
@@ -13364,7 +17209,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -13467,11 +17312,11 @@ module Aws::EC2
     #   resp.reserved_instances[0].end #=> Time
     #   resp.reserved_instances[0].fixed_price #=> Float
     #   resp.reserved_instances[0].instance_count #=> Integer
-    #   resp.reserved_instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.reserved_instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.reserved_instances[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
     #   resp.reserved_instances[0].reserved_instances_id #=> String
     #   resp.reserved_instances[0].start #=> Time
-    #   resp.reserved_instances[0].state #=> String, one of "payment-pending", "active", "payment-failed", "retired"
+    #   resp.reserved_instances[0].state #=> String, one of "payment-pending", "active", "payment-failed", "retired", "queued", "queued-deleted"
     #   resp.reserved_instances[0].usage_price #=> Float
     #   resp.reserved_instances[0].currency_code #=> String, one of "USD"
     #   resp.reserved_instances[0].instance_tenancy #=> String, one of "default", "dedicated", "host"
@@ -13520,7 +17365,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -13599,7 +17444,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -13675,7 +17520,7 @@ module Aws::EC2
     #   resp.reserved_instances_modifications[0].modification_results[0].reserved_instances_id #=> String
     #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.availability_zone #=> String
     #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.instance_count #=> Integer
-    #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.platform #=> String
     #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.scope #=> String, one of "Availability Zone", "Region"
     #   resp.reserved_instances_modifications[0].reserved_instances_ids #=> Array
@@ -13710,7 +17555,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
     #
     # @option params [String] :availability_zone
     #   The Availability Zone in which the Reserved Instance can be used.
@@ -13766,7 +17611,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #
     # @option params [Integer] :max_duration
     #   The maximum duration (in seconds) to filter when searching for
@@ -13845,7 +17690,7 @@ module Aws::EC2
     #       },
     #     ],
     #     include_marketplace: false,
-    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #     max_duration: 1,
     #     max_instance_count: 1,
     #     min_duration: 1,
@@ -13865,7 +17710,7 @@ module Aws::EC2
     #   resp.reserved_instances_offerings[0].availability_zone #=> String
     #   resp.reserved_instances_offerings[0].duration #=> Integer
     #   resp.reserved_instances_offerings[0].fixed_price #=> Float
-    #   resp.reserved_instances_offerings[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.reserved_instances_offerings[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.reserved_instances_offerings[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
     #   resp.reserved_instances_offerings[0].reserved_instances_offering_id #=> String
     #   resp.reserved_instances_offerings[0].usage_price #=> Float
@@ -13899,12 +17744,12 @@ module Aws::EC2
     # implicitly associated with the main route table. This command does not
     # return the subnet ID for implicit associations.
     #
-    # For more information about route tables, see [Route Tables][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Route Tables][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -13921,6 +17766,8 @@ module Aws::EC2
     #   * `association.main` - Indicates whether the route table is the main
     #     route table for the VPC (`true` \| `false`). Route tables that do
     #     not have an association ID are not returned in the response.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the route table.
     #
     #   * `route-table-id` - The ID of the route table.
     #
@@ -13943,6 +17790,8 @@ module Aws::EC2
     #     the table.
     #
     #   * `route.nat-gateway-id` - The ID of a NAT gateway.
+    #
+    #   * `route.transit-gateway-id` - The ID of a transit gateway.
     #
     #   * `route.origin` - Describes how the route was created.
     #     `CreateRouteTable` indicates that the route was automatically
@@ -13970,6 +17819,8 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
+    #   * `transit-gateway-id` - The ID of a transit gateway.
+    #
     #   * `vpc-id` - The ID of the VPC for the route table.
     #
     # @option params [Boolean] :dry_run
@@ -13983,9 +17834,18 @@ module Aws::EC2
     #
     #   Default: Describes all your route tables.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeRouteTablesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRouteTablesResult#route_tables #route_tables} => Array&lt;Types::RouteTable&gt;
+    #   * {Types::DescribeRouteTablesResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a route table
@@ -14037,6 +17897,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     route_table_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -14059,6 +17921,7 @@ module Aws::EC2
     #   resp.route_tables[0].routes[0].instance_id #=> String
     #   resp.route_tables[0].routes[0].instance_owner_id #=> String
     #   resp.route_tables[0].routes[0].nat_gateway_id #=> String
+    #   resp.route_tables[0].routes[0].transit_gateway_id #=> String
     #   resp.route_tables[0].routes[0].network_interface_id #=> String
     #   resp.route_tables[0].routes[0].origin #=> String, one of "CreateRouteTable", "CreateRoute", "EnableVgwRoutePropagation"
     #   resp.route_tables[0].routes[0].state #=> String, one of "active", "blackhole"
@@ -14067,6 +17930,8 @@ module Aws::EC2
     #   resp.route_tables[0].tags[0].key #=> String
     #   resp.route_tables[0].tags[0].value #=> String
     #   resp.route_tables[0].vpc_id #=> String
+    #   resp.route_tables[0].owner_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTables AWS API Documentation
     #
@@ -14096,7 +17961,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone (for example,
     #     `us-west-2a`).
@@ -14245,7 +18110,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your Scheduled Instances.
+    # Describes the specified Scheduled Instances or all your Scheduled
+    # Instances.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -14254,7 +18120,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone (for example,
     #     `us-west-2a`).
@@ -14276,7 +18142,7 @@ module Aws::EC2
     #   The token for the next set of results.
     #
     # @option params [Array<String>] :scheduled_instance_ids
-    #   One or more Scheduled Instance IDs.
+    #   The Scheduled Instance IDs.
     #
     # @option params [Types::SlotStartTimeRangeRequest] :slot_start_time_range
     #   The time period for the first schedule to start.
@@ -14380,18 +18246,18 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Describes the VPCs on the other side of a VPC peering
+    # \[VPC only\] Describes the VPCs on the other side of a VPC peering
     # connection that are referencing the security groups you've specified
     # in this request.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
-    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :group_id
-    #   One or more security group IDs in your account.
+    #   The IDs of the security groups in your account.
     #
     # @return [Types::DescribeSecurityGroupReferencesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14442,7 +18308,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your security groups.
+    # Describes the specified security groups or all of your security
+    # groups.
     #
     # A security group is for use with instances either in the EC2-Classic
     # platform or in a specific VPC. For more information, see [Amazon EC2
@@ -14452,13 +18319,13 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
-    # [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
+    # [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters. If using multiple filters for rules, the results
-    #   include security groups for which any combination of rules - not
-    #   necessarily a single rule - match all filters.
+    #   The filters. If using multiple filters for rules, the results include
+    #   security groups for which any combination of rules - not necessarily a
+    #   single rule - match all filters.
     #
     #   * `description` - The description of the security group.
     #
@@ -14536,13 +18403,13 @@ module Aws::EC2
     #     created.
     #
     # @option params [Array<String>] :group_ids
-    #   One or more security group IDs. Required for security groups in a
+    #   The IDs of the security groups. Required for security groups in a
     #   nondefault VPC.
     #
     #   Default: Describes all your security groups.
     #
     # @option params [Array<String>] :group_names
-    #   \[EC2-Classic and default VPC only\] One or more security group names.
+    #   \[EC2-Classic and default VPC only\] The names of the security groups.
     #   You can specify either the security group name or the security group
     #   ID. For security groups in a nondefault VPC, use the `group-name`
     #   filter to describe security groups by name.
@@ -14691,7 +18558,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
     #
     # @option params [required, String] :attribute
     #   The snapshot attribute you would like to view.
@@ -14756,11 +18623,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of the EBS snapshots available to you. Available
-    # snapshots include public snapshots available for any AWS account to
-    # launch, private snapshots that you own, and private snapshots owned by
-    # another AWS account but for which you've been given explicit create
-    # volume permissions.
+    # Describes the specified EBS snapshots available to you or all of the
+    # EBS snapshots available to you.
+    #
+    # The snapshots available to you include public snapshots, private
+    # snapshots that you own, and private snapshots owned by other AWS
+    # accounts for which you have explicit create volume permissions.
     #
     # The create volume permissions fall into the following categories:
     #
@@ -14808,17 +18676,20 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `description` - A description of the snapshot.
     #
+    #   * `encrypted` - Indicates whether the snapshot is encrypted (`true` \|
+    #     `false`)
+    #
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
-    #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
-    #     confused with the user-configured AWS account alias, which is set
-    #     from the IAM console.
+    #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
+    #     owners. Not to be confused with the user-configured AWS account
+    #     alias, which is set from the IAM console.
     #
     #   * `owner-id` - The ID of the AWS account that owns the snapshot.
     #
@@ -14866,17 +18737,16 @@ module Aws::EC2
     #   value. This value is `null` when there are no more results to return.
     #
     # @option params [Array<String>] :owner_ids
-    #   Returns the snapshots owned by the specified owner. Multiple owners
-    #   can be specified.
+    #   Describes the snapshots owned by these owners.
     #
     # @option params [Array<String>] :restorable_by_user_ids
-    #   One or more AWS accounts IDs that can create volumes from the
-    #   snapshot.
+    #   The IDs of the AWS accounts that can create volumes from the snapshot.
     #
     # @option params [Array<String>] :snapshot_ids
-    #   One or more snapshot IDs.
+    #   The snapshot IDs.
     #
-    #   Default: Describes snapshots for which you have launch permissions.
+    #   Default: Describes the snapshots for which you have create volume
+    #   permissions.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -15005,7 +18875,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -15139,7 +19009,8 @@ module Aws::EC2
     #
     # Spot Fleet events are delayed by up to 30 seconds before they can be
     # described. This ensures that you can query by the last evaluated time
-    # and not miss a recorded event.
+    # and not miss a recorded event. Spot Fleet events are available for 48
+    # hours.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -15227,7 +19098,7 @@ module Aws::EC2
     #
     #   resp = client.describe_spot_fleet_request_history({
     #     dry_run: false,
-    #     event_type: "instanceChange", # accepts instanceChange, fleetRequestChange, error
+    #     event_type: "instanceChange", # accepts instanceChange, fleetRequestChange, error, information
     #     max_results: 1,
     #     next_token: "String",
     #     spot_fleet_request_id: "String", # required
@@ -15240,7 +19111,7 @@ module Aws::EC2
     #   resp.history_records[0].event_information.event_description #=> String
     #   resp.history_records[0].event_information.event_sub_type #=> String
     #   resp.history_records[0].event_information.instance_id #=> String
-    #   resp.history_records[0].event_type #=> String, one of "instanceChange", "fleetRequestChange", "error"
+    #   resp.history_records[0].event_type #=> String, one of "instanceChange", "fleetRequestChange", "error", "information"
     #   resp.history_records[0].timestamp #=> Time
     #   resp.last_evaluated_time #=> Time
     #   resp.next_token #=> String
@@ -15355,7 +19226,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs #=> Array
     #   resp.spot_fleet_request_configs[0].activity_status #=> String, one of "error", "pending_fulfillment", "pending_termination", "fulfilled"
     #   resp.spot_fleet_request_configs[0].create_time #=> Time
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.allocation_strategy #=> String, one of "lowestPrice", "diversified"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.allocation_strategy #=> String, one of "lowestPrice", "diversified", "capacityOptimized"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_allocation_strategy #=> String, one of "lowestPrice", "prioritized"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.client_token #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.excess_capacity_termination_policy #=> String, one of "noTermination", "default"
@@ -15370,19 +19241,19 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].device_name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].virtual_name #=> String
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].no_device #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].ebs_optimized #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].iam_instance_profile.arn #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].iam_instance_profile.name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].image_id #=> String
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].kernel_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].key_name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].monitoring.enabled #=> Boolean
@@ -15403,6 +19274,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].subnet_id #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].interface_type #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.availability_zone #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.group_name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
@@ -15412,7 +19284,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].user_data #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].weighted_capacity #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "elastic-ip", "fleet", "fpga-image", "host-reservation", "image", "instance", "internet-gateway", "launch-template", "natgateway", "network-acl", "network-interface", "reserved-instances", "route-table", "security-group", "snapshot", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags[0].key #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags[0].value #=> String
@@ -15421,7 +19293,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.version #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].subnet_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].availability_zone #=> String
@@ -15430,8 +19302,10 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_target_capacity #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_max_total_price #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_max_total_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.terminate_instances_with_expiration #=> Boolean
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.type #=> String, one of "request", "maintain"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.type #=> String, one of "request", "maintain", "instant"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.valid_from #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.valid_until #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.replace_unhealthy_instances #=> Boolean
@@ -15461,6 +19335,14 @@ module Aws::EC2
     # the identifier of the instance. Alternatively, you can use
     # DescribeInstances with a filter to look for instances where the
     # instance lifecycle is `spot`.
+    #
+    # We recommend that you set `MaxResults` to a value between 5 and 1000
+    # to limit the number of results returned. This paginates the output,
+    # which makes the list more manageable and returns the results faster.
+    # If the list of results exceeds your `MaxResults` value, then that
+    # number of results is returned along with a `NextToken` value that can
+    # be passed to a subsequent `DescribeSpotInstanceRequests` request to
+    # retrieve the remaining results.
     #
     # Spot Instance requests are deleted four hours after they are canceled
     # and their instances are terminated.
@@ -15585,7 +19467,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -15596,9 +19478,19 @@ module Aws::EC2
     # @option params [Array<String>] :spot_instance_request_ids
     #   One or more Spot Instance request IDs.
     #
+    # @option params [String] :next_token
+    #   The token to request the next set of results. This value is `null`
+    #   when there are no more results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 5 and 1000. To retrieve the remaining results, make
+    #   another call with the returned `NextToken` value.
+    #
     # @return [Types::DescribeSpotInstanceRequestsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSpotInstanceRequestsResult#spot_instance_requests #spot_instance_requests} => Array&lt;Types::SpotInstanceRequest&gt;
+    #   * {Types::DescribeSpotInstanceRequestsResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a Spot Instance request
@@ -15665,6 +19557,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     spot_instance_request_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -15686,19 +19580,19 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings #=> Array
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].device_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].virtual_name #=> String
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
     #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.arn #=> String
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.name #=> String
     #   resp.spot_instance_requests[0].launch_specification.image_id #=> String
-    #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.spot_instance_requests[0].launch_specification.kernel_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.key_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces #=> Array
@@ -15718,6 +19612,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].subnet_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].interface_type #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.tenancy #=> String, one of "default", "dedicated", "host"
@@ -15739,6 +19634,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].valid_from #=> Time
     #   resp.spot_instance_requests[0].valid_until #=> Time
     #   resp.spot_instance_requests[0].instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequests AWS API Documentation
     #
@@ -15761,7 +19657,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -15871,7 +19767,7 @@ module Aws::EC2
     #     availability_zone: "String",
     #     dry_run: false,
     #     end_time: Time.now,
-    #     instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #     instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #     max_results: 1,
     #     next_token: "String",
     #     product_descriptions: ["String"],
@@ -15883,7 +19779,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #   resp.spot_price_history #=> Array
     #   resp.spot_price_history[0].availability_zone #=> String
-    #   resp.spot_price_history[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.spot_price_history[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.spot_price_history[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
     #   resp.spot_price_history[0].spot_price #=> String
     #   resp.spot_price_history[0].timestamp #=> Time
@@ -15897,16 +19793,16 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Describes the stale security group rules for security
+    # \[VPC only\] Describes the stale security group rules for security
     # groups in a specified VPC. Rules are stale when they reference a
     # deleted security group in a peer VPC, or a security group in a peer
     # VPC for which the VPC peering connection has been deleted.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
-    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. The request
@@ -15930,8 +19826,8 @@ module Aws::EC2
     #   resp = client.describe_stale_security_groups({
     #     dry_run: false,
     #     max_results: 1,
-    #     next_token: "NextToken",
-    #     vpc_id: "String", # required
+    #     next_token: "DescribeStaleSecurityGroupsNextToken",
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -15986,30 +19882,33 @@ module Aws::EC2
 
     # Describes one or more of your subnets.
     #
-    # For more information about subnets, see [Your VPC and Subnets][1] in
-    # the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Your VPC and Subnets][1] in the *Amazon
+    # Virtual Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `availabilityZone` - The Availability Zone for the subnet. You can
-    #     also use `availability-zone` as the filter name.
+    #   * `availability-zone` - The Availability Zone for the subnet. You can
+    #     also use `availabilityZone` as the filter name.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone for the
+    #     subnet. You can also use `availabilityZoneId` as the filter name.
     #
     #   * `available-ip-address-count` - The number of IPv4 addresses in the
     #     subnet that are available.
     #
-    #   * `cidrBlock` - The IPv4 CIDR block of the subnet. The CIDR block you
+    #   * `cidr-block` - The IPv4 CIDR block of the subnet. The CIDR block you
     #     specify must exactly match the subnet's CIDR block for information
     #     to be returned for the subnet. You can also use `cidr` or
-    #     `cidr-block` as the filter names.
+    #     `cidrBlock` as the filter names.
     #
-    #   * `defaultForAz` - Indicates whether this is the default subnet for
-    #     the Availability Zone. You can also use `default-for-az` as the
-    #     filter name.
+    #   * `default-for-az` - Indicates whether this is the default subnet for
+    #     the Availability Zone. You can also use `defaultForAz` as the filter
+    #     name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -16020,7 +19919,11 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the subnet.
+    #
     #   * `state` - The state of the subnet (`pending` \| `available`).
+    #
+    #   * `subnet-arn` - The Amazon Resource Name (ARN) of the subnet.
     #
     #   * `subnet-id` - The ID of the subnet.
     #
@@ -16047,9 +19950,18 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeSubnetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSubnetsResult#subnets #subnets} => Array&lt;Types::Subnet&gt;
+    #   * {Types::DescribeSubnetsResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe the subnets for a VPC
@@ -16094,12 +20006,15 @@ module Aws::EC2
     #     ],
     #     subnet_ids: ["String"],
     #     dry_run: false,
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.subnets #=> Array
     #   resp.subnets[0].availability_zone #=> String
+    #   resp.subnets[0].availability_zone_id #=> String
     #   resp.subnets[0].available_ip_address_count #=> Integer
     #   resp.subnets[0].cidr_block #=> String
     #   resp.subnets[0].default_for_az #=> Boolean
@@ -16107,6 +20022,7 @@ module Aws::EC2
     #   resp.subnets[0].state #=> String, one of "pending", "available"
     #   resp.subnets[0].subnet_id #=> String
     #   resp.subnets[0].vpc_id #=> String
+    #   resp.subnets[0].owner_id #=> String
     #   resp.subnets[0].assign_ipv_6_address_on_creation #=> Boolean
     #   resp.subnets[0].ipv_6_cidr_block_association_set #=> Array
     #   resp.subnets[0].ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -16116,6 +20032,8 @@ module Aws::EC2
     #   resp.subnets[0].tags #=> Array
     #   resp.subnets[0].tags[0].key #=> String
     #   resp.subnets[0].tags[0].value #=> String
+    #   resp.subnets[0].subnet_arn #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnets AWS API Documentation
     #
@@ -16126,14 +20044,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of the tags for your EC2 resources.
+    # Describes the specified tags for your EC2 resources.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
     # the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16142,20 +20060,24 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `key` - The tag key.
     #
-    #   * `resource-id` - The resource ID.
+    #   * `resource-id` - The ID of the resource.
     #
     #   * `resource-type` - The resource type (`customer-gateway` \|
-    #     `dhcp-options` \| `elastic-ip` \| `fleet` \| `fpga-image` \| `image`
-    #     \| `instance` \| `internet-gateway` \| `launch-template` \|
-    #     `natgateway` \| `network-acl` \| `network-interface` \|
-    #     `reserved-instances` \| `route-table` \| `security-group` \|
-    #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
-    #     `vpc` \| `vpc-peering-connection` \| `vpn-connection` \|
-    #     `vpn-gateway`).
+    #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
+    #     `fpga-image` \| `image` \| `instance` \| `host-reservation` \|
+    #     `internet-gateway` \| `launch-template` \| `natgateway` \|
+    #     `network-acl` \| `network-interface` \| `reserved-instances` \|
+    #     `route-table` \| `security-group` \| `snapshot` \|
+    #     `spot-instances-request` \| `subnet` \| `volume` \| `vpc` \|
+    #     `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of the tag. For
+    #     example, specify "tag:Owner" for the filter name and "TeamA" for
+    #     the filter value to find resources with the tag "Owner=TeamA".
     #
     #   * `value` - The tag value.
     #
@@ -16226,7 +20148,7 @@ module Aws::EC2
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].resource_id #=> String
-    #   resp.tags[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.tags[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "elastic-ip", "fleet", "fpga-image", "host-reservation", "image", "instance", "internet-gateway", "launch-template", "natgateway", "network-acl", "network-interface", "reserved-instances", "route-table", "security-group", "snapshot", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway"
     #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTags AWS API Documentation
@@ -16238,6 +20160,640 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes one or more Traffic Mirror filters.
+    #
+    # @option params [Array<String>] :traffic_mirror_filter_ids
+    #   The ID of the Traffic Mirror filter.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `description`\: The Traffic Mirror filter description.
+    #
+    #   * `traffic-mirror-filter-id`\: The ID of the Traffic Mirror filter.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::DescribeTrafficMirrorFiltersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTrafficMirrorFiltersResult#traffic_mirror_filters #traffic_mirror_filters} => Array&lt;Types::TrafficMirrorFilter&gt;
+    #   * {Types::DescribeTrafficMirrorFiltersResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_traffic_mirror_filters({
+    #     traffic_mirror_filter_ids: ["String"],
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_filters #=> Array
+    #   resp.traffic_mirror_filters[0].traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules #=> Array
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].traffic_mirror_filter_rule_id #=> String
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].traffic_direction #=> String, one of "ingress", "egress"
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].rule_number #=> Integer
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].rule_action #=> String, one of "accept", "reject"
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].protocol #=> Integer
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].destination_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].destination_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].source_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].source_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].destination_cidr_block #=> String
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].source_cidr_block #=> String
+    #   resp.traffic_mirror_filters[0].ingress_filter_rules[0].description #=> String
+    #   resp.traffic_mirror_filters[0].egress_filter_rules #=> Array
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].traffic_mirror_filter_rule_id #=> String
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].traffic_direction #=> String, one of "ingress", "egress"
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].rule_number #=> Integer
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].rule_action #=> String, one of "accept", "reject"
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].protocol #=> Integer
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].destination_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].destination_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].source_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].source_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].destination_cidr_block #=> String
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].source_cidr_block #=> String
+    #   resp.traffic_mirror_filters[0].egress_filter_rules[0].description #=> String
+    #   resp.traffic_mirror_filters[0].network_services #=> Array
+    #   resp.traffic_mirror_filters[0].network_services[0] #=> String, one of "amazon-dns"
+    #   resp.traffic_mirror_filters[0].description #=> String
+    #   resp.traffic_mirror_filters[0].tags #=> Array
+    #   resp.traffic_mirror_filters[0].tags[0].key #=> String
+    #   resp.traffic_mirror_filters[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorFilters AWS API Documentation
+    #
+    # @overload describe_traffic_mirror_filters(params = {})
+    # @param [Hash] params ({})
+    def describe_traffic_mirror_filters(params = {}, options = {})
+      req = build_request(:describe_traffic_mirror_filters, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more Traffic Mirror sessions. By default, all Traffic
+    # Mirror sessions are described. Alternatively, you can filter the
+    # results.
+    #
+    # @option params [Array<String>] :traffic_mirror_session_ids
+    #   The ID of the Traffic Mirror session.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `description`\: The Traffic Mirror session description.
+    #
+    #   * `network-interface-id`\: The ID of the Traffic Mirror session
+    #     network interface.
+    #
+    #   * `owner-id`\: The ID of the account that owns the Traffic Mirror
+    #     session.
+    #
+    #   * `packet-length`\: The assigned number of packets to mirror.
+    #
+    #   * `session-number`\: The assigned session number.
+    #
+    #   * `traffic-mirror-filter-id`\: The ID of the Traffic Mirror filter.
+    #
+    #   * `traffic-mirror-session-id`\: The ID of the Traffic Mirror session.
+    #
+    #   * `traffic-mirror-target-id`\: The ID of the Traffic Mirror target.
+    #
+    #   * `virtual-network-id`\: The virtual network ID of the Traffic Mirror
+    #     session.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::DescribeTrafficMirrorSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTrafficMirrorSessionsResult#traffic_mirror_sessions #traffic_mirror_sessions} => Array&lt;Types::TrafficMirrorSession&gt;
+    #   * {Types::DescribeTrafficMirrorSessionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_traffic_mirror_sessions({
+    #     traffic_mirror_session_ids: ["String"],
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_sessions #=> Array
+    #   resp.traffic_mirror_sessions[0].traffic_mirror_session_id #=> String
+    #   resp.traffic_mirror_sessions[0].traffic_mirror_target_id #=> String
+    #   resp.traffic_mirror_sessions[0].traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_sessions[0].network_interface_id #=> String
+    #   resp.traffic_mirror_sessions[0].owner_id #=> String
+    #   resp.traffic_mirror_sessions[0].packet_length #=> Integer
+    #   resp.traffic_mirror_sessions[0].session_number #=> Integer
+    #   resp.traffic_mirror_sessions[0].virtual_network_id #=> Integer
+    #   resp.traffic_mirror_sessions[0].description #=> String
+    #   resp.traffic_mirror_sessions[0].tags #=> Array
+    #   resp.traffic_mirror_sessions[0].tags[0].key #=> String
+    #   resp.traffic_mirror_sessions[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorSessions AWS API Documentation
+    #
+    # @overload describe_traffic_mirror_sessions(params = {})
+    # @param [Hash] params ({})
+    def describe_traffic_mirror_sessions(params = {}, options = {})
+      req = build_request(:describe_traffic_mirror_sessions, params)
+      req.send_request(options)
+    end
+
+    # Information about one or more Traffic Mirror targets.
+    #
+    # @option params [Array<String>] :traffic_mirror_target_ids
+    #   The ID of the Traffic Mirror targets.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `description`\: The Traffic Mirror target description.
+    #
+    #   * `network-interface-id`\: The ID of the Traffic Mirror session
+    #     network interface.
+    #
+    #   * `network-load-balancer-arn`\: The Amazon Resource Name (ARN) of the
+    #     Network Load Balancer that is associated with the session.
+    #
+    #   * `owner-id`\: The ID of the account that owns the Traffic Mirror
+    #     session.
+    #
+    #   * `traffic-mirror-target-id`\: The ID of the Traffic Mirror target.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::DescribeTrafficMirrorTargetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTrafficMirrorTargetsResult#traffic_mirror_targets #traffic_mirror_targets} => Array&lt;Types::TrafficMirrorTarget&gt;
+    #   * {Types::DescribeTrafficMirrorTargetsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_traffic_mirror_targets({
+    #     traffic_mirror_target_ids: ["String"],
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_targets #=> Array
+    #   resp.traffic_mirror_targets[0].traffic_mirror_target_id #=> String
+    #   resp.traffic_mirror_targets[0].network_interface_id #=> String
+    #   resp.traffic_mirror_targets[0].network_load_balancer_arn #=> String
+    #   resp.traffic_mirror_targets[0].type #=> String, one of "network-interface", "network-load-balancer"
+    #   resp.traffic_mirror_targets[0].description #=> String
+    #   resp.traffic_mirror_targets[0].owner_id #=> String
+    #   resp.traffic_mirror_targets[0].tags #=> Array
+    #   resp.traffic_mirror_targets[0].tags[0].key #=> String
+    #   resp.traffic_mirror_targets[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorTargets AWS API Documentation
+    #
+    # @overload describe_traffic_mirror_targets(params = {})
+    # @param [Hash] params ({})
+    def describe_traffic_mirror_targets(params = {}, options = {})
+      req = build_request(:describe_traffic_mirror_targets, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more attachments between resources and transit
+    # gateways. By default, all attachments are described. Alternatively,
+    # you can filter the results by attachment ID, attachment state,
+    # resource ID, or resource owner.
+    #
+    # @option params [Array<String>] :transit_gateway_attachment_ids
+    #   The IDs of the attachments.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `association.state` - The state of the association (`associating` \|
+    #     `associated` \| `disassociating`).
+    #
+    #   * `association.transit-gateway-route-table-id` - The ID of the route
+    #     table for the transit gateway.
+    #
+    #   * `resource-id` - The ID of the resource.
+    #
+    #   * `resource-owner-id` - The ID of the AWS account that owns the
+    #     resource.
+    #
+    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `transit-gateway-owner-id` - The ID of the AWS account that owns the
+    #     transit gateway.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeTransitGatewayAttachmentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTransitGatewayAttachmentsResult#transit_gateway_attachments #transit_gateway_attachments} => Array&lt;Types::TransitGatewayAttachment&gt;
+    #   * {Types::DescribeTransitGatewayAttachmentsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_transit_gateway_attachments({
+    #     transit_gateway_attachment_ids: ["String"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_attachments #=> Array
+    #   resp.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_attachments[0].transit_gateway_id #=> String
+    #   resp.transit_gateway_attachments[0].transit_gateway_owner_id #=> String
+    #   resp.transit_gateway_attachments[0].resource_owner_id #=> String
+    #   resp.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.transit_gateway_attachments[0].resource_id #=> String
+    #   resp.transit_gateway_attachments[0].state #=> String, one of "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_attachments[0].association.transit_gateway_route_table_id #=> String
+    #   resp.transit_gateway_attachments[0].association.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #   resp.transit_gateway_attachments[0].creation_time #=> Time
+    #   resp.transit_gateway_attachments[0].tags #=> Array
+    #   resp.transit_gateway_attachments[0].tags[0].key #=> String
+    #   resp.transit_gateway_attachments[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayAttachments AWS API Documentation
+    #
+    # @overload describe_transit_gateway_attachments(params = {})
+    # @param [Hash] params ({})
+    def describe_transit_gateway_attachments(params = {}, options = {})
+      req = build_request(:describe_transit_gateway_attachments, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more transit gateway route tables. By default, all
+    # transit gateway route tables are described. Alternatively, you can
+    # filter the results.
+    #
+    # @option params [Array<String>] :transit_gateway_route_table_ids
+    #   The IDs of the transit gateway route tables.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `default-association-route-table` - Indicates whether this is the
+    #     default association route table for the transit gateway (`true` \|
+    #     `false`).
+    #
+    #   * `default-propagation-route-table` - Indicates whether this is the
+    #     default propagation route table for the transit gateway (`true` \|
+    #     `false`).
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `transit-gateway-route-table-id` - The ID of the transit gateway
+    #     route table.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeTransitGatewayRouteTablesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTransitGatewayRouteTablesResult#transit_gateway_route_tables #transit_gateway_route_tables} => Array&lt;Types::TransitGatewayRouteTable&gt;
+    #   * {Types::DescribeTransitGatewayRouteTablesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_transit_gateway_route_tables({
+    #     transit_gateway_route_table_ids: ["String"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_route_tables #=> Array
+    #   resp.transit_gateway_route_tables[0].transit_gateway_route_table_id #=> String
+    #   resp.transit_gateway_route_tables[0].transit_gateway_id #=> String
+    #   resp.transit_gateway_route_tables[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.transit_gateway_route_tables[0].default_association_route_table #=> Boolean
+    #   resp.transit_gateway_route_tables[0].default_propagation_route_table #=> Boolean
+    #   resp.transit_gateway_route_tables[0].creation_time #=> Time
+    #   resp.transit_gateway_route_tables[0].tags #=> Array
+    #   resp.transit_gateway_route_tables[0].tags[0].key #=> String
+    #   resp.transit_gateway_route_tables[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayRouteTables AWS API Documentation
+    #
+    # @overload describe_transit_gateway_route_tables(params = {})
+    # @param [Hash] params ({})
+    def describe_transit_gateway_route_tables(params = {}, options = {})
+      req = build_request(:describe_transit_gateway_route_tables, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more VPC attachments. By default, all VPC attachments
+    # are described. Alternatively, you can filter the results.
+    #
+    # @option params [Array<String>] :transit_gateway_attachment_ids
+    #   The IDs of the attachments.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `vpc-id` - The ID of the VPC.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeTransitGatewayVpcAttachmentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTransitGatewayVpcAttachmentsResult#transit_gateway_vpc_attachments #transit_gateway_vpc_attachments} => Array&lt;Types::TransitGatewayVpcAttachment&gt;
+    #   * {Types::DescribeTransitGatewayVpcAttachmentsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_transit_gateway_vpc_attachments({
+    #     transit_gateway_attachment_ids: ["String"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_vpc_attachments #=> Array
+    #   resp.transit_gateway_vpc_attachments[0].transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_vpc_attachments[0].transit_gateway_id #=> String
+    #   resp.transit_gateway_vpc_attachments[0].vpc_id #=> String
+    #   resp.transit_gateway_vpc_attachments[0].vpc_owner_id #=> String
+    #   resp.transit_gateway_vpc_attachments[0].state #=> String, one of "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachments[0].subnet_ids #=> Array
+    #   resp.transit_gateway_vpc_attachments[0].subnet_ids[0] #=> String
+    #   resp.transit_gateway_vpc_attachments[0].creation_time #=> Time
+    #   resp.transit_gateway_vpc_attachments[0].options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachments[0].options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachments[0].tags #=> Array
+    #   resp.transit_gateway_vpc_attachments[0].tags[0].key #=> String
+    #   resp.transit_gateway_vpc_attachments[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayVpcAttachments AWS API Documentation
+    #
+    # @overload describe_transit_gateway_vpc_attachments(params = {})
+    # @param [Hash] params ({})
+    def describe_transit_gateway_vpc_attachments(params = {}, options = {})
+      req = build_request(:describe_transit_gateway_vpc_attachments, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more transit gateways. By default, all transit
+    # gateways are described. Alternatively, you can filter the results.
+    #
+    # @option params [Array<String>] :transit_gateway_ids
+    #   The IDs of the transit gateways.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `options.propagation-default-route-table-id` - The ID of the default
+    #     propagation route table.
+    #
+    #   * `options.amazon-side-asn` - The private ASN for the Amazon side of a
+    #     BGP session.
+    #
+    #   * `options.association-default-route-table-id` - The ID of the default
+    #     association route table.
+    #
+    #   * `options.auto-accept-shared-attachments` - Indicates whether there
+    #     is automatic acceptance of attachment requests (`enable` \|
+    #     `disable`).
+    #
+    #   * `options.default-route-table-association` - Indicates whether
+    #     resource attachments are automatically associated with the default
+    #     association route table (`enable` \| `disable`).
+    #
+    #   * `options.default-route-table-propagation` - Indicates whether
+    #     resource attachments automatically propagate routes to the default
+    #     propagation route table (`enable` \| `disable`).
+    #
+    #   * `options.dns-support` - Indicates whether DNS support is enabled
+    #     (`enable` \| `disable`).
+    #
+    #   * `options.vpn-ecmp-support` - Indicates whether Equal Cost Multipath
+    #     Protocol support is enabled (`enable` \| `disable`).
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the transit
+    #     gateway.
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeTransitGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTransitGatewaysResult#transit_gateways #transit_gateways} => Array&lt;Types::TransitGateway&gt;
+    #   * {Types::DescribeTransitGatewaysResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_transit_gateways({
+    #     transit_gateway_ids: ["String"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateways #=> Array
+    #   resp.transit_gateways[0].transit_gateway_id #=> String
+    #   resp.transit_gateways[0].transit_gateway_arn #=> String
+    #   resp.transit_gateways[0].state #=> String, one of "pending", "available", "modifying", "deleting", "deleted"
+    #   resp.transit_gateways[0].owner_id #=> String
+    #   resp.transit_gateways[0].description #=> String
+    #   resp.transit_gateways[0].creation_time #=> Time
+    #   resp.transit_gateways[0].options.amazon_side_asn #=> Integer
+    #   resp.transit_gateways[0].options.auto_accept_shared_attachments #=> String, one of "enable", "disable"
+    #   resp.transit_gateways[0].options.default_route_table_association #=> String, one of "enable", "disable"
+    #   resp.transit_gateways[0].options.association_default_route_table_id #=> String
+    #   resp.transit_gateways[0].options.default_route_table_propagation #=> String, one of "enable", "disable"
+    #   resp.transit_gateways[0].options.propagation_default_route_table_id #=> String
+    #   resp.transit_gateways[0].options.vpn_ecmp_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateways[0].options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateways[0].tags #=> Array
+    #   resp.transit_gateways[0].tags[0].key #=> String
+    #   resp.transit_gateways[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGateways AWS API Documentation
+    #
+    # @overload describe_transit_gateways(params = {})
+    # @param [Hash] params ({})
+    def describe_transit_gateways(params = {}, options = {})
+      req = build_request(:describe_transit_gateways, params)
+      req.send_request(options)
+    end
+
     # Describes the specified attribute of the specified volume. You can
     # specify only one attribute at a time.
     #
@@ -16246,9 +20802,9 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
     #
-    # @option params [String] :attribute
+    # @option params [required, String] :attribute
     #   The attribute of the volume. This parameter is required.
     #
     # @option params [required, String] :volume_id
@@ -16287,7 +20843,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_volume_attribute({
-    #     attribute: "autoEnableIO", # accepts autoEnableIO, productCodes
+    #     attribute: "autoEnableIO", # required, accepts autoEnableIO, productCodes
     #     volume_id: "String", # required
     #     dry_run: false,
     #   })
@@ -16352,10 +20908,10 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `action.code` - The action code for the event (for example,
     #     `enable-volume-io`).
@@ -16408,7 +20964,7 @@ module Aws::EC2
     #   `null` when there are no more results to return.
     #
     # @option params [Array<String>] :volume_ids
-    #   One or more volume IDs.
+    #   The IDs of the volumes.
     #
     #   Default: Describes all your volumes.
     #
@@ -16529,7 +21085,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the specified EBS volumes.
+    # Describes the specified EBS volumes or all of your EBS volumes.
     #
     # If you are describing a long list of volumes, you can paginate the
     # output to make the list more manageable. The `MaxResults` parameter
@@ -16544,10 +21100,10 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `attachment.attach-time` - The time stamp when the attachment
     #     initiated.
@@ -16569,7 +21125,8 @@ module Aws::EC2
     #
     #   * `create-time` - The time stamp when the volume was created.
     #
-    #   * `encrypted` - The encryption status of the volume.
+    #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
+    #     `false`)
     #
     #   * `size` - The size of the volume, in GiB.
     #
@@ -16596,7 +21153,7 @@ module Aws::EC2
     #     Magnetic volumes.
     #
     # @option params [Array<String>] :volume_ids
-    #   One or more volume IDs.
+    #   The volume IDs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16747,6 +21304,7 @@ module Aws::EC2
     #   resp.volumes[0].tags[0].key #=> String
     #   resp.volumes[0].tags[0].value #=> String
     #   resp.volumes[0].volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.volumes[0].fast_restored #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumes AWS API Documentation
@@ -16776,8 +21334,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16786,14 +21344,13 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :volume_ids
-    #   One or more volume IDs for which in-progress modifications will be
+    #   The IDs of the volumes for which in-progress modifications will be
     #   described.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters. Supported filters: `volume-id`,
-    #   `modification-state`, `target-size`, `target-iops`,
-    #   `target-volume-type`, `original-size`, `original-iops`,
-    #   `original-volume-type`, `start-time`.
+    #   The filters. Supported filters: `volume-id`, `modification-state`,
+    #   `target-size`, `target-iops`, `target-volume-type`, `original-size`,
+    #   `original-iops`, `original-volume-type`, `start-time`.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned by a previous paginated request.
@@ -17003,16 +21560,15 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @option params [String] :next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a prior call.)
+    #   The token for the next page of results.
     #
     # @option params [Array<String>] :vpc_ids
     #   One or more VPC IDs.
@@ -17026,7 +21582,7 @@ module Aws::EC2
     #
     #   resp = client.describe_vpc_classic_link_dns_support({
     #     max_results: 1,
-    #     next_token: "NextToken",
+    #     next_token: "DescribeVpcClassicLinkDnsSupportNextToken",
     #     vpc_ids: ["String"],
     #   })
     #
@@ -17185,6 +21741,11 @@ module Aws::EC2
     #   resp.vpc_endpoint_connections[0].vpc_endpoint_owner #=> String
     #   resp.vpc_endpoint_connections[0].vpc_endpoint_state #=> String, one of "PendingAcceptance", "Pending", "Available", "Deleting", "Deleted", "Rejected", "Failed", "Expired"
     #   resp.vpc_endpoint_connections[0].creation_timestamp #=> Time
+    #   resp.vpc_endpoint_connections[0].dns_entries #=> Array
+    #   resp.vpc_endpoint_connections[0].dns_entries[0].dns_name #=> String
+    #   resp.vpc_endpoint_connections[0].dns_entries[0].hosted_zone_id #=> String
+    #   resp.vpc_endpoint_connections[0].network_load_balancer_arns #=> Array
+    #   resp.vpc_endpoint_connections[0].network_load_balancer_arns[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnections AWS API Documentation
@@ -17217,6 +21778,16 @@ module Aws::EC2
     #
     #   * `service-state` - The state of the service (`Pending` \| `Available`
     #     \| `Deleting` \| `Deleted` \| `Failed`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
@@ -17259,11 +21830,15 @@ module Aws::EC2
     #   resp.service_configurations[0].availability_zones #=> Array
     #   resp.service_configurations[0].availability_zones[0] #=> String
     #   resp.service_configurations[0].acceptance_required #=> Boolean
+    #   resp.service_configurations[0].manages_vpc_endpoints #=> Boolean
     #   resp.service_configurations[0].network_load_balancer_arns #=> Array
     #   resp.service_configurations[0].network_load_balancer_arns[0] #=> String
     #   resp.service_configurations[0].base_endpoint_dns_names #=> Array
     #   resp.service_configurations[0].base_endpoint_dns_names[0] #=> String
     #   resp.service_configurations[0].private_dns_name #=> String
+    #   resp.service_configurations[0].tags #=> Array
+    #   resp.service_configurations[0].tags[0].key #=> String
+    #   resp.service_configurations[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServiceConfigurations AWS API Documentation
@@ -17357,7 +21932,15 @@ module Aws::EC2
     #
     #   * `service-name`\: The name of the service.
     #
-    #   ^
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. The request
@@ -17398,6 +21981,7 @@ module Aws::EC2
     #   resp.service_names[0] #=> String
     #   resp.service_details #=> Array
     #   resp.service_details[0].service_name #=> String
+    #   resp.service_details[0].service_id #=> String
     #   resp.service_details[0].service_type #=> Array
     #   resp.service_details[0].service_type[0].service_type #=> String, one of "Interface", "Gateway"
     #   resp.service_details[0].availability_zones #=> Array
@@ -17408,6 +21992,10 @@ module Aws::EC2
     #   resp.service_details[0].private_dns_name #=> String
     #   resp.service_details[0].vpc_endpoint_policy_supported #=> Boolean
     #   resp.service_details[0].acceptance_required #=> Boolean
+    #   resp.service_details[0].manages_vpc_endpoints #=> Boolean
+    #   resp.service_details[0].tags #=> Array
+    #   resp.service_details[0].tags[0].key #=> String
+    #   resp.service_details[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServices AWS API Documentation
@@ -17439,8 +22027,19 @@ module Aws::EC2
     #
     #   * `vpc-endpoint-id`\: The ID of the endpoint.
     #
-    #   * `vpc-endpoint-state`\: The state of the endpoint. (`pending` \|
-    #     `available` \| `deleting` \| `deleted`)
+    #   * `vpc-endpoint-state` - The state of the endpoint
+    #     (`pendingAcceptance` \| `pending` \| `available` \| `deleting` \|
+    #     `deleted` \| `rejected` \| `failed`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. The request
@@ -17491,12 +22090,17 @@ module Aws::EC2
     #   resp.vpc_endpoints[0].groups[0].group_id #=> String
     #   resp.vpc_endpoints[0].groups[0].group_name #=> String
     #   resp.vpc_endpoints[0].private_dns_enabled #=> Boolean
+    #   resp.vpc_endpoints[0].requester_managed #=> Boolean
     #   resp.vpc_endpoints[0].network_interface_ids #=> Array
     #   resp.vpc_endpoints[0].network_interface_ids[0] #=> String
     #   resp.vpc_endpoints[0].dns_entries #=> Array
     #   resp.vpc_endpoints[0].dns_entries[0].dns_name #=> String
     #   resp.vpc_endpoints[0].dns_entries[0].hosted_zone_id #=> String
     #   resp.vpc_endpoints[0].creation_timestamp #=> Time
+    #   resp.vpc_endpoints[0].tags #=> Array
+    #   resp.vpc_endpoints[0].tags[0].key #=> String
+    #   resp.vpc_endpoints[0].tags[0].value #=> String
+    #   resp.vpc_endpoints[0].owner_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpoints AWS API Documentation
@@ -17562,9 +22166,18 @@ module Aws::EC2
     #
     #   Default: Describes all your VPC peering connections.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeVpcPeeringConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeVpcPeeringConnectionsResult#vpc_peering_connections #vpc_peering_connections} => Array&lt;Types::VpcPeeringConnection&gt;
+    #   * {Types::DescribeVpcPeeringConnectionsResult#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -17577,6 +22190,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     vpc_peering_connection_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -17611,6 +22226,7 @@ module Aws::EC2
     #   resp.vpc_peering_connections[0].tags[0].key #=> String
     #   resp.vpc_peering_connections[0].tags[0].value #=> String
     #   resp.vpc_peering_connections[0].vpc_peering_connection_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnections AWS API Documentation
     #
@@ -17653,6 +22269,8 @@ module Aws::EC2
     #
     #   * `isDefault` - Indicates whether the VPC is the default VPC.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the VPC.
+    #
     #   * `state` - The state of the VPC (`pending` \| `available`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
@@ -17678,9 +22296,18 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeVpcsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeVpcsResult#vpcs #vpcs} => Array&lt;Types::Vpc&gt;
+    #   * {Types::DescribeVpcsResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a VPC
@@ -17724,6 +22351,8 @@ module Aws::EC2
     #     ],
     #     vpc_ids: ["String"],
     #     dry_run: false,
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -17733,6 +22362,7 @@ module Aws::EC2
     #   resp.vpcs[0].dhcp_options_id #=> String
     #   resp.vpcs[0].state #=> String, one of "pending", "available"
     #   resp.vpcs[0].vpc_id #=> String
+    #   resp.vpcs[0].owner_id #=> String
     #   resp.vpcs[0].instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.vpcs[0].ipv_6_cidr_block_association_set #=> Array
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -17748,6 +22378,7 @@ module Aws::EC2
     #   resp.vpcs[0].tags #=> Array
     #   resp.vpcs[0].tags[0].key #=> String
     #   resp.vpcs[0].tags[0].value #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcs AWS API Documentation
     #
@@ -17760,12 +22391,12 @@ module Aws::EC2
 
     # Describes one or more of your VPN connections.
     #
-    # For more information about VPN connections, see [AWS Managed VPN
-    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -17807,6 +22438,9 @@ module Aws::EC2
     #   * `vpn-gateway-id` - The ID of a virtual private gateway associated
     #     with the VPN connection.
     #
+    #   * `transit-gateway-id` - The ID of a transit gateway associated with
+    #     the VPN connection.
+    #
     # @option params [Array<String>] :vpn_connection_ids
     #   One or more VPN connection IDs.
     #
@@ -17845,7 +22479,32 @@ module Aws::EC2
     #   resp.vpn_connections[0].type #=> String, one of "ipsec.1"
     #   resp.vpn_connections[0].vpn_connection_id #=> String
     #   resp.vpn_connections[0].vpn_gateway_id #=> String
+    #   resp.vpn_connections[0].transit_gateway_id #=> String
     #   resp.vpn_connections[0].options.static_routes_only #=> Boolean
+    #   resp.vpn_connections[0].options.tunnel_options #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].outside_ip_address #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].pre_shared_key #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].rekey_margin_time_seconds #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].rekey_fuzz_percentage #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].replay_window_size #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].dpd_timeout_seconds #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_encryption_algorithms #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_encryption_algorithms #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_integrity_algorithms #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_integrity_algorithms #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_dh_group_numbers #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_dh_group_numbers #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].ike_versions #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connections[0].routes #=> Array
     #   resp.vpn_connections[0].routes[0].destination_cidr_block #=> String
     #   resp.vpn_connections[0].routes[0].source #=> String, one of "Static"
@@ -17859,6 +22518,7 @@ module Aws::EC2
     #   resp.vpn_connections[0].vgw_telemetry[0].outside_ip_address #=> String
     #   resp.vpn_connections[0].vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connections[0].vgw_telemetry[0].status_message #=> String
+    #   resp.vpn_connections[0].vgw_telemetry[0].certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnections AWS API Documentation
     #
@@ -17871,12 +22531,12 @@ module Aws::EC2
 
     # Describes one or more of your virtual private gateways.
     #
-    # For more information about virtual private gateways, see [AWS Managed
-    # VPN Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -17988,8 +22648,8 @@ module Aws::EC2
     #
     #   resp = client.detach_classic_link_vpc({
     #     dry_run: false,
-    #     instance_id: "String", # required
-    #     vpc_id: "String", # required
+    #     instance_id: "InstanceId", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -18005,8 +22665,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Detaches an Internet gateway from a VPC, disabling connectivity
-    # between the Internet and the VPC. The VPC must not contain any running
+    # Detaches an internet gateway from a VPC, disabling connectivity
+    # between the internet and the VPC. The VPC must not contain any running
     # instances with Elastic IP addresses or public IPv4 addresses.
     #
     # @option params [Boolean] :dry_run
@@ -18016,7 +22676,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -18037,8 +22697,8 @@ module Aws::EC2
     #
     #   resp = client.detach_internet_gateway({
     #     dry_run: false,
-    #     internet_gateway_id: "String", # required
-    #     vpc_id: "String", # required
+    #     internet_gateway_id: "InternetGatewayId", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachInternetGateway AWS API Documentation
@@ -18064,6 +22724,26 @@ module Aws::EC2
     # @option params [Boolean] :force
     #   Specifies whether to force a detachment.
     #
+    #   <note markdown="1"> * Use the `Force` parameter only as a last resort to detach a network
+    #     interface from a failed instance.
+    #
+    #   * If you use the `Force` parameter to detach a network interface, you
+    #     might not be able to attach a different network interface to the
+    #     same index on the instance without first stopping and starting the
+    #     instance.
+    #
+    #   * If you force the detachment of a network interface, the [instance
+    #     metadata][1] might not get updated. This means that the attributes
+    #     associated with the detached network interface might still be
+    #     visible. The instance metadata will get updated when you stop and
+    #     start the instance.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -18078,7 +22758,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_network_interface({
-    #     attachment_id: "String", # required
+    #     attachment_id: "AttachmentId", # required
     #     dry_run: false,
     #     force: false,
     #   })
@@ -18109,7 +22789,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html
     #
     # @option params [String] :device
     #   The device name.
@@ -18168,8 +22848,8 @@ module Aws::EC2
     #   resp = client.detach_volume({
     #     device: "String",
     #     force: false,
-    #     instance_id: "String",
-    #     volume_id: "String", # required
+    #     instance_id: "InstanceId",
+    #     volume_id: "VolumeId", # required
     #     dry_run: false,
     #   })
     #
@@ -18218,8 +22898,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_vpn_gateway({
-    #     vpc_id: "String", # required
-    #     vpn_gateway_id: "String", # required
+    #     vpc_id: "VpcId", # required
+    #     vpn_gateway_id: "VpnGatewayId", # required
     #     dry_run: false,
     #   })
     #
@@ -18229,6 +22909,154 @@ module Aws::EC2
     # @param [Hash] params ({})
     def detach_vpn_gateway(params = {}, options = {})
       req = build_request(:detach_vpn_gateway, params)
+      req.send_request(options)
+    end
+
+    # Disables EBS encryption by default for your account in the current
+    # Region.
+    #
+    # After you disable encryption by default, you can still create
+    # encrypted volumes by enabling encryption when you create each volume.
+    #
+    # Disabling encryption by default does not change the encryption status
+    # of your existing volumes.
+    #
+    # For more information, see [Amazon EBS Encryption][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableEbsEncryptionByDefaultResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableEbsEncryptionByDefaultResult#ebs_encryption_by_default #ebs_encryption_by_default} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_ebs_encryption_by_default({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ebs_encryption_by_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableEbsEncryptionByDefault AWS API Documentation
+    #
+    # @overload disable_ebs_encryption_by_default(params = {})
+    # @param [Hash] params ({})
+    def disable_ebs_encryption_by_default(params = {}, options = {})
+      req = build_request(:disable_ebs_encryption_by_default, params)
+      req.send_request(options)
+    end
+
+    # Disables fast snapshot restores for the specified snapshots in the
+    # specified Availability Zones.
+    #
+    # @option params [required, Array<String>] :availability_zones
+    #   One or more Availability Zones. For example, `us-east-2a`.
+    #
+    # @option params [required, Array<String>] :source_snapshot_ids
+    #   The IDs of one or more snapshots. For example,
+    #   `snap-1234567890abcdef0`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableFastSnapshotRestoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableFastSnapshotRestoresResult#successful #successful} => Array&lt;Types::DisableFastSnapshotRestoreSuccessItem&gt;
+    #   * {Types::DisableFastSnapshotRestoresResult#unsuccessful #unsuccessful} => Array&lt;Types::DisableFastSnapshotRestoreErrorItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_fast_snapshot_restores({
+    #     availability_zones: ["String"], # required
+    #     source_snapshot_ids: ["String"], # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].snapshot_id #=> String
+    #   resp.successful[0].availability_zone #=> String
+    #   resp.successful[0].state #=> String, one of "enabling", "optimizing", "enabled", "disabling", "disabled"
+    #   resp.successful[0].state_transition_reason #=> String
+    #   resp.successful[0].owner_id #=> String
+    #   resp.successful[0].owner_alias #=> String
+    #   resp.successful[0].enabling_time #=> Time
+    #   resp.successful[0].optimizing_time #=> Time
+    #   resp.successful[0].enabled_time #=> Time
+    #   resp.successful[0].disabling_time #=> Time
+    #   resp.successful[0].disabled_time #=> Time
+    #   resp.unsuccessful #=> Array
+    #   resp.unsuccessful[0].snapshot_id #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors #=> Array
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].availability_zone #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].error.code #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastSnapshotRestores AWS API Documentation
+    #
+    # @overload disable_fast_snapshot_restores(params = {})
+    # @param [Hash] params ({})
+    def disable_fast_snapshot_restores(params = {}, options = {})
+      req = build_request(:disable_fast_snapshot_restores, params)
+      req.send_request(options)
+    end
+
+    # Disables the specified resource attachment from propagating routes to
+    # the specified propagation route table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the propagation route table.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableTransitGatewayRouteTablePropagationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableTransitGatewayRouteTablePropagationResult#propagation #propagation} => Types::TransitGatewayPropagation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_transit_gateway_route_table_propagation({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.propagation.transit_gateway_attachment_id #=> String
+    #   resp.propagation.resource_id #=> String
+    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.propagation.transit_gateway_route_table_id #=> String
+    #   resp.propagation.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableTransitGatewayRouteTablePropagation AWS API Documentation
+    #
+    # @overload disable_transit_gateway_route_table_propagation(params = {})
+    # @param [Hash] params ({})
+    def disable_transit_gateway_route_table_propagation(params = {}, options = {})
+      req = build_request(:disable_transit_gateway_route_table_propagation, params)
       req.send_request(options)
     end
 
@@ -18256,8 +23084,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_vgw_route_propagation({
-    #     gateway_id: "String", # required
-    #     route_table_id: "String", # required
+    #     gateway_id: "VpnGatewayId", # required
+    #     route_table_id: "RouteTableId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagation AWS API Documentation
@@ -18289,7 +23117,7 @@ module Aws::EC2
     #
     #   resp = client.disable_vpc_classic_link({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -18308,12 +23136,12 @@ module Aws::EC2
     # Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames
     # resolve to public IP addresses when addressed between a linked
     # EC2-Classic instance and instances in the VPC to which it's linked.
-    # For more information about ClassicLink, see [ClassicLink][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # For more information, see [ClassicLink][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
     #
     # @option params [String] :vpc_id
     #   The ID of the VPC.
@@ -18325,7 +23153,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_vpc_classic_link_dns_support({
-    #     vpc_id: "String",
+    #     vpc_id: "VpcId",
     #   })
     #
     # @example Response structure
@@ -18353,7 +23181,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
     #
     # @option params [String] :association_id
     #   \[EC2-VPC\] The association ID. Required for EC2-VPC.
@@ -18400,6 +23228,59 @@ module Aws::EC2
     # @param [Hash] params ({})
     def disassociate_address(params = {}, options = {})
       req = build_request(:disassociate_address, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a target network from the specified Client VPN endpoint.
+    # When you disassociate the last target network from a Client VPN, the
+    # following happens:
+    #
+    # * The route that was automatically added for the VPC is deleted
+    #
+    # * All active client connections are terminated
+    #
+    # * New client connections are disallowed
+    #
+    # * The Client VPN endpoint's status changes to `pending-associate`
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint from which to disassociate the
+    #   target network.
+    #
+    # @option params [required, String] :association_id
+    #   The ID of the target network association.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisassociateClientVpnTargetNetworkResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateClientVpnTargetNetworkResult#association_id #association_id} => String
+    #   * {Types::DisassociateClientVpnTargetNetworkResult#status #status} => Types::AssociationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_client_vpn_target_network({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     association_id: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_id #=> String
+    #   resp.status.code #=> String, one of "associating", "associated", "association-failed", "disassociating", "disassociated"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateClientVpnTargetNetwork AWS API Documentation
+    #
+    # @overload disassociate_client_vpn_target_network(params = {})
+    # @param [Hash] params ({})
+    def disassociate_client_vpn_target_network(params = {}, options = {})
+      req = build_request(:disassociate_client_vpn_target_network, params)
       req.send_request(options)
     end
 
@@ -18470,7 +23351,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
     # @option params [required, String] :association_id
     #   The association ID representing the current association between the
@@ -18496,7 +23377,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_route_table({
-    #     association_id: "String", # required
+    #     association_id: "RouteTableAssociationId", # required
     #     dry_run: false,
     #   })
     #
@@ -18525,7 +23406,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_subnet_cidr_block({
-    #     association_id: "String", # required
+    #     association_id: "SubnetCidrAssociationId", # required
     #   })
     #
     # @example Response structure
@@ -18542,6 +23423,50 @@ module Aws::EC2
     # @param [Hash] params ({})
     def disassociate_subnet_cidr_block(params = {}, options = {})
       req = build_request(:disassociate_subnet_cidr_block, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a resource attachment from a transit gateway route
+    # table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisassociateTransitGatewayRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateTransitGatewayRouteTableResult#association #association} => Types::TransitGatewayAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_transit_gateway_route_table({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association.transit_gateway_route_table_id #=> String
+    #   resp.association.transit_gateway_attachment_id #=> String
+    #   resp.association.resource_id #=> String
+    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.association.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTransitGatewayRouteTable AWS API Documentation
+    #
+    # @overload disassociate_transit_gateway_route_table(params = {})
+    # @param [Hash] params ({})
+    def disassociate_transit_gateway_route_table(params = {}, options = {})
+      req = build_request(:disassociate_transit_gateway_route_table, params)
       req.send_request(options)
     end
 
@@ -18566,7 +23491,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_vpc_cidr_block({
-    #     association_id: "String", # required
+    #     association_id: "VpcCidrAssociationId", # required
     #   })
     #
     # @example Response structure
@@ -18590,14 +23515,179 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Enables EBS encryption by default for your account in the current
+    # Region.
+    #
+    # After you enable encryption by default, the EBS volumes that you
+    # create are are always encrypted, either using the default CMK or the
+    # CMK that you specified when you created each volume. For more
+    # information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    # You can specify the default CMK for encryption by default using
+    # ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId.
+    #
+    # Enabling encryption by default has no effect on the encryption status
+    # of your existing volumes.
+    #
+    # After you enable encryption by default, you can no longer launch
+    # instances using instance types that do not support encryption. For
+    # more information, see [Supported Instance Types][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableEbsEncryptionByDefaultResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableEbsEncryptionByDefaultResult#ebs_encryption_by_default #ebs_encryption_by_default} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_ebs_encryption_by_default({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ebs_encryption_by_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableEbsEncryptionByDefault AWS API Documentation
+    #
+    # @overload enable_ebs_encryption_by_default(params = {})
+    # @param [Hash] params ({})
+    def enable_ebs_encryption_by_default(params = {}, options = {})
+      req = build_request(:enable_ebs_encryption_by_default, params)
+      req.send_request(options)
+    end
+
+    # Enables fast snapshot restores for the specified snapshots in the
+    # specified Availability Zones.
+    #
+    # You get the full benefit of fast snapshot restores after they enter
+    # the `enabled` state. To get the current state of fast snapshot
+    # restores, use DescribeFastSnapshotRestores. To disable fast snapshot
+    # restores, use DisableFastSnapshotRestores.
+    #
+    # @option params [required, Array<String>] :availability_zones
+    #   One or more Availability Zones. For example, `us-east-2a`.
+    #
+    # @option params [required, Array<String>] :source_snapshot_ids
+    #   The IDs of one or more snapshots. For example,
+    #   `snap-1234567890abcdef0`. You can specify a snapshot that was shared
+    #   with you from another AWS account.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableFastSnapshotRestoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableFastSnapshotRestoresResult#successful #successful} => Array&lt;Types::EnableFastSnapshotRestoreSuccessItem&gt;
+    #   * {Types::EnableFastSnapshotRestoresResult#unsuccessful #unsuccessful} => Array&lt;Types::EnableFastSnapshotRestoreErrorItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_fast_snapshot_restores({
+    #     availability_zones: ["String"], # required
+    #     source_snapshot_ids: ["String"], # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].snapshot_id #=> String
+    #   resp.successful[0].availability_zone #=> String
+    #   resp.successful[0].state #=> String, one of "enabling", "optimizing", "enabled", "disabling", "disabled"
+    #   resp.successful[0].state_transition_reason #=> String
+    #   resp.successful[0].owner_id #=> String
+    #   resp.successful[0].owner_alias #=> String
+    #   resp.successful[0].enabling_time #=> Time
+    #   resp.successful[0].optimizing_time #=> Time
+    #   resp.successful[0].enabled_time #=> Time
+    #   resp.successful[0].disabling_time #=> Time
+    #   resp.successful[0].disabled_time #=> Time
+    #   resp.unsuccessful #=> Array
+    #   resp.unsuccessful[0].snapshot_id #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors #=> Array
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].availability_zone #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].error.code #=> String
+    #   resp.unsuccessful[0].fast_snapshot_restore_state_errors[0].error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastSnapshotRestores AWS API Documentation
+    #
+    # @overload enable_fast_snapshot_restores(params = {})
+    # @param [Hash] params ({})
+    def enable_fast_snapshot_restores(params = {}, options = {})
+      req = build_request(:enable_fast_snapshot_restores, params)
+      req.send_request(options)
+    end
+
+    # Enables the specified attachment to propagate routes to the specified
+    # propagation route table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the propagation route table.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableTransitGatewayRouteTablePropagationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableTransitGatewayRouteTablePropagationResult#propagation #propagation} => Types::TransitGatewayPropagation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_transit_gateway_route_table_propagation({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.propagation.transit_gateway_attachment_id #=> String
+    #   resp.propagation.resource_id #=> String
+    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.propagation.transit_gateway_route_table_id #=> String
+    #   resp.propagation.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableTransitGatewayRouteTablePropagation AWS API Documentation
+    #
+    # @overload enable_transit_gateway_route_table_propagation(params = {})
+    # @param [Hash] params ({})
+    def enable_transit_gateway_route_table_propagation(params = {}, options = {})
+      req = build_request(:enable_transit_gateway_route_table_propagation, params)
+      req.send_request(options)
+    end
+
     # Enables a virtual private gateway (VGW) to propagate routes to the
     # specified route table of a VPC.
     #
     # @option params [required, String] :gateway_id
-    #   The ID of the virtual private gateway.
+    #   The ID of the virtual private gateway that is attached to a VPC. The
+    #   virtual private gateway must be attached to the same VPC that the
+    #   routing tables are associated with.
     #
     # @option params [required, String] :route_table_id
-    #   The ID of the route table.
+    #   The ID of the route table. The routing table must be associated with
+    #   the same VPC that the virtual private gateway is attached to.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -18614,8 +23704,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_vgw_route_propagation({
-    #     gateway_id: "String", # required
-    #     route_table_id: "String", # required
+    #     gateway_id: "VpnGatewayId", # required
+    #     route_table_id: "RouteTableId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagation AWS API Documentation
@@ -18654,7 +23744,7 @@ module Aws::EC2
     #
     #   resp = client.enable_volume_io({
     #     dry_run: false,
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVolumeIO AWS API Documentation
@@ -18669,7 +23759,7 @@ module Aws::EC2
     # Enables a VPC for ClassicLink. You can then link EC2-Classic instances
     # to your ClassicLink-enabled VPC to allow communication over private IP
     # addresses. You cannot enable your VPC for ClassicLink if any of your
-    # VPC's route tables have existing routes for address ranges within the
+    # VPC route tables have existing routes for address ranges within the
     # `10.0.0.0/8` IP address range, excluding local routes for VPCs in the
     # `10.0.0.0/16` and `10.1.0.0/16` IP address ranges. For more
     # information, see [ClassicLink][1] in the *Amazon Elastic Compute Cloud
@@ -18677,7 +23767,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18696,7 +23786,7 @@ module Aws::EC2
     #
     #   resp = client.enable_vpc_classic_link({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -18717,12 +23807,12 @@ module Aws::EC2
     # its private IP address when addressed from an instance in the VPC to
     # which it's linked. Similarly, the DNS hostname of an instance in a
     # VPC resolves to its private IP address when addressed from a linked
-    # EC2-Classic instance. For more information about ClassicLink, see
-    # [ClassicLink][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # EC2-Classic instance. For more information, see [ClassicLink][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
     #
     # @option params [String] :vpc_id
     #   The ID of the VPC.
@@ -18734,7 +23824,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_vpc_classic_link_dns_support({
-    #     vpc_id: "String",
+    #     vpc_id: "VpcId",
     #   })
     #
     # @example Response structure
@@ -18750,23 +23840,339 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Downloads the client certificate revocation list for the specified
+    # Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ExportClientVpnClientCertificateRevocationListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportClientVpnClientCertificateRevocationListResult#certificate_revocation_list #certificate_revocation_list} => String
+    #   * {Types::ExportClientVpnClientCertificateRevocationListResult#status #status} => Types::ClientCertificateRevocationListStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_client_vpn_client_certificate_revocation_list({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_revocation_list #=> String
+    #   resp.status.code #=> String, one of "pending", "active"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientCertificateRevocationList AWS API Documentation
+    #
+    # @overload export_client_vpn_client_certificate_revocation_list(params = {})
+    # @param [Hash] params ({})
+    def export_client_vpn_client_certificate_revocation_list(params = {}, options = {})
+      req = build_request(:export_client_vpn_client_certificate_revocation_list, params)
+      req.send_request(options)
+    end
+
+    # Downloads the contents of the Client VPN endpoint configuration file
+    # for the specified Client VPN endpoint. The Client VPN endpoint
+    # configuration file includes the Client VPN endpoint and certificate
+    # information clients need to establish a connection with the Client VPN
+    # endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ExportClientVpnClientConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportClientVpnClientConfigurationResult#client_configuration #client_configuration} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_client_vpn_client_configuration({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_configuration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientConfiguration AWS API Documentation
+    #
+    # @overload export_client_vpn_client_configuration(params = {})
+    # @param [Hash] params ({})
+    def export_client_vpn_client_configuration(params = {}, options = {})
+      req = build_request(:export_client_vpn_client_configuration, params)
+      req.send_request(options)
+    end
+
+    # Exports an Amazon Machine Image (AMI) to a VM file. For more
+    # information, see [Exporting a VM Directory from an Amazon Machine
+    # Image (AMI)][1] in the *VM Import/Export User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport_image.html
+    #
+    # @option params [String] :client_token
+    #   Token to enable idempotency for export image requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   A description of the image being exported. The maximum length is 255
+    #   bytes.
+    #
+    # @option params [required, String] :disk_image_format
+    #   The disk image format.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the image.
+    #
+    # @option params [required, Types::ExportTaskS3LocationRequest] :s3_export_location
+    #   Information about the destination S3 bucket. The bucket must exist and
+    #   grant WRITE and READ\_ACP permissions to the AWS account
+    #   vm-import-export@amazon.com.
+    #
+    # @option params [String] :role_name
+    #   The name of the role that grants VM Import/Export permission to export
+    #   images to your S3 bucket. If this parameter is not specified, the
+    #   default role is named 'vmimport'.
+    #
+    # @return [Types::ExportImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportImageResult#description #description} => String
+    #   * {Types::ExportImageResult#disk_image_format #disk_image_format} => String
+    #   * {Types::ExportImageResult#export_image_task_id #export_image_task_id} => String
+    #   * {Types::ExportImageResult#image_id #image_id} => String
+    #   * {Types::ExportImageResult#role_name #role_name} => String
+    #   * {Types::ExportImageResult#progress #progress} => String
+    #   * {Types::ExportImageResult#s3_export_location #s3_export_location} => Types::ExportTaskS3Location
+    #   * {Types::ExportImageResult#status #status} => String
+    #   * {Types::ExportImageResult#status_message #status_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_image({
+    #     client_token: "String",
+    #     description: "String",
+    #     disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #     dry_run: false,
+    #     image_id: "ImageId", # required
+    #     s3_export_location: { # required
+    #       s3_bucket: "String", # required
+    #       s3_prefix: "String",
+    #     },
+    #     role_name: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.disk_image_format #=> String, one of "VMDK", "RAW", "VHD"
+    #   resp.export_image_task_id #=> String
+    #   resp.image_id #=> String
+    #   resp.role_name #=> String
+    #   resp.progress #=> String
+    #   resp.s3_export_location.s3_bucket #=> String
+    #   resp.s3_export_location.s3_prefix #=> String
+    #   resp.status #=> String
+    #   resp.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImage AWS API Documentation
+    #
+    # @overload export_image(params = {})
+    # @param [Hash] params ({})
+    def export_image(params = {}, options = {})
+      req = build_request(:export_image, params)
+      req.send_request(options)
+    end
+
+    # Exports routes from the specified transit gateway route table to the
+    # specified S3 bucket. By default, all routes are exported.
+    # Alternatively, you can filter by CIDR range.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the route table.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `attachment.transit-gateway-attachment-id` - The id of the transit
+    #     gateway attachment.
+    #
+    #   * `attachment.resource-id` - The resource id of the transit gateway
+    #     attachment.
+    #
+    #   * `route-search.exact-match` - The exact match of the specified
+    #     filter.
+    #
+    #   * `route-search.longest-prefix-match` - The longest prefix that
+    #     matches the route.
+    #
+    #   * `route-search.subnet-of-match` - The routes with a subnet that match
+    #     the specified CIDR filter.
+    #
+    #   * `route-search.supernet-of-match` - The routes with a CIDR that
+    #     encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+    #     10.0.1.0/31 routes in your route table and you specify
+    #     supernet-of-match as 10.0.1.0/30, then the result returns
+    #     10.0.1.0/29.
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
+    #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
+    #
+    #   * `type` - The type of route (`active` \| `blackhole`).
+    #
+    # @option params [required, String] :s3_bucket
+    #   The name of the S3 bucket.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ExportTransitGatewayRoutesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportTransitGatewayRoutesResult#s3_location #s3_location} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_transit_gateway_routes({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     s3_bucket: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.s3_location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportTransitGatewayRoutes AWS API Documentation
+    #
+    # @overload export_transit_gateway_routes(params = {})
+    # @param [Hash] params ({})
+    def export_transit_gateway_routes(params = {}, options = {})
+      req = build_request(:export_transit_gateway_routes, params)
+      req.send_request(options)
+    end
+
+    # Gets usage information about a Capacity Reservation. If the Capacity
+    # Reservation is shared, it shows usage information for the Capacity
+    # Reservation owner and each AWS account that is currently using the
+    # shared capacity. If the Capacity Reservation is not shared, it shows
+    # only the Capacity Reservation owner's usage.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned nextToken value.
+    #
+    #   Valid range: Minimum value of 1. Maximum value of 1000.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetCapacityReservationUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCapacityReservationUsageResult#next_token #next_token} => String
+    #   * {Types::GetCapacityReservationUsageResult#capacity_reservation_id #capacity_reservation_id} => String
+    #   * {Types::GetCapacityReservationUsageResult#instance_type #instance_type} => String
+    #   * {Types::GetCapacityReservationUsageResult#total_instance_count #total_instance_count} => Integer
+    #   * {Types::GetCapacityReservationUsageResult#available_instance_count #available_instance_count} => Integer
+    #   * {Types::GetCapacityReservationUsageResult#state #state} => String
+    #   * {Types::GetCapacityReservationUsageResult#instance_usages #instance_usages} => Array&lt;Types::InstanceUsage&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_capacity_reservation_usage({
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.capacity_reservation_id #=> String
+    #   resp.instance_type #=> String
+    #   resp.total_instance_count #=> Integer
+    #   resp.available_instance_count #=> Integer
+    #   resp.state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.instance_usages #=> Array
+    #   resp.instance_usages[0].account_id #=> String
+    #   resp.instance_usages[0].used_instance_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityReservationUsage AWS API Documentation
+    #
+    # @overload get_capacity_reservation_usage(params = {})
+    # @param [Hash] params ({})
+    def get_capacity_reservation_usage(params = {}, options = {})
+      req = build_request(:get_capacity_reservation_usage, params)
+      req.send_request(options)
+    end
+
     # Gets the console output for the specified instance. For Linux
     # instances, the instance console output displays the exact console
     # output that would normally be displayed on a physical monitor attached
     # to a computer. For Windows instances, the instance console output
-    # includes output from the EC2Config service.
-    #
-    # GetConsoleOutput returns up to 64 KB of console output shortly after
-    # it's generated by the instance.
+    # includes the last three system event log errors.
     #
     # By default, the console output returns buffered information that was
     # posted shortly after an instance transition state (start, stop,
     # reboot, or terminate). This information is available for at least one
-    # hour after the most recent post.
+    # hour after the most recent post. Only the most recent 64 KB of console
+    # output is available.
     #
     # You can optionally retrieve the latest serial console output at any
-    # time during the instance lifecycle. This option is only supported on
-    # C5, M5, and `i3.metal` instances.
+    # time during the instance lifecycle. This option is supported on
+    # instance types that use the Nitro hypervisor.
+    #
+    # For more information, see [Instance Console Output][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#instance-console-console-output
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -18807,7 +24213,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_console_output({
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     dry_run: false,
     #     latest: false,
     #   })
@@ -18854,7 +24260,7 @@ module Aws::EC2
     #
     #   resp = client.get_console_screenshot({
     #     dry_run: false,
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     wake_up: false,
     #   })
     #
@@ -18869,6 +24275,86 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_console_screenshot(params = {}, options = {})
       req = build_request(:get_console_screenshot, params)
+      req.send_request(options)
+    end
+
+    # Describes the default customer master key (CMK) for EBS encryption by
+    # default for your account in this Region. You can change the default
+    # CMK for encryption by default using ModifyEbsDefaultKmsKeyId or
+    # ResetEbsDefaultKmsKeyId.
+    #
+    # For more information, see [Amazon EBS Encryption][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetEbsDefaultKmsKeyIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEbsDefaultKmsKeyIdResult#kms_key_id #kms_key_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ebs_default_kms_key_id({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsDefaultKmsKeyId AWS API Documentation
+    #
+    # @overload get_ebs_default_kms_key_id(params = {})
+    # @param [Hash] params ({})
+    def get_ebs_default_kms_key_id(params = {}, options = {})
+      req = build_request(:get_ebs_default_kms_key_id, params)
+      req.send_request(options)
+    end
+
+    # Describes whether EBS encryption by default is enabled for your
+    # account in the current Region.
+    #
+    # For more information, see [Amazon EBS Encryption][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetEbsEncryptionByDefaultResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEbsEncryptionByDefaultResult#ebs_encryption_by_default #ebs_encryption_by_default} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ebs_encryption_by_default({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ebs_encryption_by_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsEncryptionByDefault AWS API Documentation
+    #
+    # @overload get_ebs_encryption_by_default(params = {})
+    # @param [Hash] params ({})
+    def get_ebs_encryption_by_default(params = {}, options = {})
+      req = build_request(:get_ebs_encryption_by_default, params)
       req.send_request(options)
     end
 
@@ -18896,8 +24382,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_host_reservation_purchase_preview({
-    #     host_id_set: ["String"], # required
-    #     offering_id: "String", # required
+    #     host_id_set: ["HostId"], # required
+    #     offering_id: "OfferingId", # required
     #   })
     #
     # @example Response structure
@@ -19007,7 +24493,7 @@ module Aws::EC2
     #
     #   resp = client.get_launch_template_data({
     #     dry_run: false,
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     #
     # @example Response structure
@@ -19034,6 +24520,7 @@ module Aws::EC2
     #   resp.launch_template_data.network_interfaces[0].device_index #=> Integer
     #   resp.launch_template_data.network_interfaces[0].groups #=> Array
     #   resp.launch_template_data.network_interfaces[0].groups[0] #=> String
+    #   resp.launch_template_data.network_interfaces[0].interface_type #=> String
     #   resp.launch_template_data.network_interfaces[0].ipv_6_address_count #=> Integer
     #   resp.launch_template_data.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.launch_template_data.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
@@ -19045,7 +24532,7 @@ module Aws::EC2
     #   resp.launch_template_data.network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.launch_template_data.network_interfaces[0].subnet_id #=> String
     #   resp.launch_template_data.image_id #=> String
-    #   resp.launch_template_data.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.launch_template_data.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.launch_template_data.key_name #=> String
     #   resp.launch_template_data.monitoring.enabled #=> Boolean
     #   resp.launch_template_data.placement.availability_zone #=> String
@@ -19059,12 +24546,14 @@ module Aws::EC2
     #   resp.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
     #   resp.launch_template_data.user_data #=> String
     #   resp.launch_template_data.tag_specifications #=> Array
-    #   resp.launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.launch_template_data.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "elastic-ip", "fleet", "fpga-image", "host-reservation", "image", "instance", "internet-gateway", "launch-template", "natgateway", "network-acl", "network-interface", "reserved-instances", "route-table", "security-group", "snapshot", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway"
     #   resp.launch_template_data.tag_specifications[0].tags #=> Array
     #   resp.launch_template_data.tag_specifications[0].tags[0].key #=> String
     #   resp.launch_template_data.tag_specifications[0].tags[0].value #=> String
     #   resp.launch_template_data.elastic_gpu_specifications #=> Array
     #   resp.launch_template_data.elastic_gpu_specifications[0].type #=> String
+    #   resp.launch_template_data.elastic_inference_accelerators #=> Array
+    #   resp.launch_template_data.elastic_inference_accelerators[0].type #=> String
     #   resp.launch_template_data.security_group_ids #=> Array
     #   resp.launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_data.security_groups #=> Array
@@ -19078,6 +24567,11 @@ module Aws::EC2
     #   resp.launch_template_data.credit_specification.cpu_credits #=> String
     #   resp.launch_template_data.cpu_options.core_count #=> Integer
     #   resp.launch_template_data.cpu_options.threads_per_core #=> Integer
+    #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.launch_template_data.license_specifications #=> Array
+    #   resp.launch_template_data.license_specifications[0].license_configuration_arn #=> String
+    #   resp.launch_template_data.hibernation_options.configured #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -19112,8 +24606,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the Windows instance.
@@ -19133,7 +24627,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_password_data({
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     dry_run: false,
     #   })
     #
@@ -19230,6 +24724,255 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Lists the route tables to which the specified resource attachment
+    # propagates routes.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `transit-gateway-route-table-id` - The ID of the transit gateway
+    #     route table.
+    #
+    #   ^
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetTransitGatewayAttachmentPropagationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTransitGatewayAttachmentPropagationsResult#transit_gateway_attachment_propagations #transit_gateway_attachment_propagations} => Array&lt;Types::TransitGatewayAttachmentPropagation&gt;
+    #   * {Types::GetTransitGatewayAttachmentPropagationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_transit_gateway_attachment_propagations({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_attachment_propagations #=> Array
+    #   resp.transit_gateway_attachment_propagations[0].transit_gateway_route_table_id #=> String
+    #   resp.transit_gateway_attachment_propagations[0].state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayAttachmentPropagations AWS API Documentation
+    #
+    # @overload get_transit_gateway_attachment_propagations(params = {})
+    # @param [Hash] params ({})
+    def get_transit_gateway_attachment_propagations(params = {}, options = {})
+      req = build_request(:get_transit_gateway_attachment_propagations, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the associations for the specified transit
+    # gateway route table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `resource-id` - The ID of the resource.
+    #
+    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetTransitGatewayRouteTableAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTransitGatewayRouteTableAssociationsResult#associations #associations} => Array&lt;Types::TransitGatewayRouteTableAssociation&gt;
+    #   * {Types::GetTransitGatewayRouteTableAssociationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_transit_gateway_route_table_associations({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations #=> Array
+    #   resp.associations[0].transit_gateway_attachment_id #=> String
+    #   resp.associations[0].resource_id #=> String
+    #   resp.associations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.associations[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayRouteTableAssociations AWS API Documentation
+    #
+    # @overload get_transit_gateway_route_table_associations(params = {})
+    # @param [Hash] params ({})
+    def get_transit_gateway_route_table_associations(params = {}, options = {})
+      req = build_request(:get_transit_gateway_route_table_associations, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the route table propagations for the specified
+    # transit gateway route table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `resource-id` - The ID of the resource.
+    #
+    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetTransitGatewayRouteTablePropagationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTransitGatewayRouteTablePropagationsResult#transit_gateway_route_table_propagations #transit_gateway_route_table_propagations} => Array&lt;Types::TransitGatewayRouteTablePropagation&gt;
+    #   * {Types::GetTransitGatewayRouteTablePropagationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_transit_gateway_route_table_propagations({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_route_table_propagations #=> Array
+    #   resp.transit_gateway_route_table_propagations[0].transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_route_table_propagations[0].resource_id #=> String
+    #   resp.transit_gateway_route_table_propagations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.transit_gateway_route_table_propagations[0].state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayRouteTablePropagations AWS API Documentation
+    #
+    # @overload get_transit_gateway_route_table_propagations(params = {})
+    # @param [Hash] params ({})
+    def get_transit_gateway_route_table_propagations(params = {}, options = {})
+      req = build_request(:get_transit_gateway_route_table_propagations, params)
+      req.send_request(options)
+    end
+
+    # Uploads a client certificate revocation list to the specified Client
+    # VPN endpoint. Uploading a client certificate revocation list
+    # overwrites the existing client certificate revocation list.
+    #
+    # Uploading a client certificate revocation list resets existing client
+    # connections.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to which the client certificate
+    #   revocation list applies.
+    #
+    # @option params [required, String] :certificate_revocation_list
+    #   The client certificate revocation list file. For more information, see
+    #   [Generate a Client Certificate Revocation List][1] in the *AWS Client
+    #   VPN Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ImportClientVpnClientCertificateRevocationListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportClientVpnClientCertificateRevocationListResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_client_vpn_client_certificate_revocation_list({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     certificate_revocation_list: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportClientVpnClientCertificateRevocationList AWS API Documentation
+    #
+    # @overload import_client_vpn_client_certificate_revocation_list(params = {})
+    # @param [Hash] params ({})
+    def import_client_vpn_client_certificate_revocation_list(params = {}, options = {})
+      req = build_request(:import_client_vpn_client_certificate_revocation_list, params)
+      req.send_request(options)
+    end
+
     # Import single or multi-volume disk images or EBS snapshots into an
     # Amazon Machine Image (AMI). For more information, see [Importing a VM
     # as an Image Using VM Import/Export][1] in the *VM Import/Export User
@@ -19237,12 +24980,12 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html
+    # [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html
     #
     # @option params [String] :architecture
     #   The architecture of the virtual machine.
     #
-    #   Valid values: `i386` \| `x86_64`
+    #   Valid values: `i386` \| `x86_64` \| `arm64`
     #
     # @option params [Types::ClientData] :client_data
     #   The client-specific data.
@@ -19262,25 +25005,73 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Boolean] :encrypted
+    #   Specifies whether the destination AMI of the imported image should be
+    #   encrypted. The default CMK for EBS is used unless you specify a
+    #   non-default AWS Key Management Service (AWS KMS) CMK using `KmsKeyId`.
+    #   For more information, see [Amazon EBS Encryption][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #
     # @option params [String] :hypervisor
     #   The target hypervisor platform.
     #
     #   Valid values: `xen`
     #
+    # @option params [String] :kms_key_id
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted AMI. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the Region of the CMK, the AWS account ID of
+    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
+    #     example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
+    #   may appear to complete even though you provided an invalid identifier.
+    #   This action will eventually report failure.
+    #
+    #   The specified CMK must exist in the Region that the AMI is being
+    #   copied to.
+    #
     # @option params [String] :license_type
     #   The license type to be used for the Amazon Machine Image (AMI) after
     #   importing.
     #
-    #   **Note:** You may only use BYOL if you have existing licenses with
-    #   rights to use these licenses in a third party cloud like AWS. For more
+    #   By default, we detect the source-system operating system (OS) and
+    #   apply the appropriate license. Specify `AWS` to replace the
+    #   source-system license with an AWS license, if appropriate. Specify
+    #   `BYOL` to retain the source-system license, if appropriate.
+    #
+    #   To use `BYOL`, you must have existing licenses with rights to use
+    #   these licenses in a third party cloud, such as AWS. For more
     #   information, see [Prerequisites][1] in the VM Import/Export User
     #   Guide.
     #
-    #   Valid values: `AWS` \| `BYOL`
     #
     #
-    #
-    #   [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image
+    #   [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image
     #
     # @option params [String] :platform
     #   The operating system of the virtual machine.
@@ -19291,19 +25082,25 @@ module Aws::EC2
     #   The name of the role to use when not using the default role,
     #   'vmimport'.
     #
+    # @option params [Array<Types::ImportImageLicenseConfigurationRequest>] :license_specifications
+    #   The ARNs of the license configurations.
+    #
     # @return [Types::ImportImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportImageResult#architecture #architecture} => String
     #   * {Types::ImportImageResult#description #description} => String
+    #   * {Types::ImportImageResult#encrypted #encrypted} => Boolean
     #   * {Types::ImportImageResult#hypervisor #hypervisor} => String
     #   * {Types::ImportImageResult#image_id #image_id} => String
     #   * {Types::ImportImageResult#import_task_id #import_task_id} => String
+    #   * {Types::ImportImageResult#kms_key_id #kms_key_id} => String
     #   * {Types::ImportImageResult#license_type #license_type} => String
     #   * {Types::ImportImageResult#platform #platform} => String
     #   * {Types::ImportImageResult#progress #progress} => String
     #   * {Types::ImportImageResult#snapshot_details #snapshot_details} => Array&lt;Types::SnapshotDetail&gt;
     #   * {Types::ImportImageResult#status #status} => String
     #   * {Types::ImportImageResult#status_message #status_message} => String
+    #   * {Types::ImportImageResult#license_specifications #license_specifications} => Array&lt;Types::ImportImageLicenseConfigurationResponse&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -19331,19 +25128,28 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
+    #     encrypted: false,
     #     hypervisor: "String",
+    #     kms_key_id: "String",
     #     license_type: "String",
     #     platform: "String",
     #     role_name: "String",
+    #     license_specifications: [
+    #       {
+    #         license_configuration_arn: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.architecture #=> String
     #   resp.description #=> String
+    #   resp.encrypted #=> Boolean
     #   resp.hypervisor #=> String
     #   resp.image_id #=> String
     #   resp.import_task_id #=> String
+    #   resp.kms_key_id #=> String
     #   resp.license_type #=> String
     #   resp.platform #=> String
     #   resp.progress #=> String
@@ -19361,6 +25167,8 @@ module Aws::EC2
     #   resp.snapshot_details[0].user_bucket.s3_key #=> String
     #   resp.status #=> String
     #   resp.status_message #=> String
+    #   resp.license_specifications #=> Array
+    #   resp.license_specifications[0].license_configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImage AWS API Documentation
     #
@@ -19381,8 +25189,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
     # @option params [String] :description
     #   A description for the instance being imported.
@@ -19426,16 +25234,17 @@ module Aws::EC2
     #     dry_run: false,
     #     launch_specification: {
     #       additional_info: "String",
-    #       architecture: "i386", # accepts i386, x86_64
+    #       architecture: "i386", # accepts i386, x86_64, arm64
     #       group_ids: ["String"],
     #       group_names: ["String"],
     #       instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #       monitoring: false,
     #       placement: {
     #         availability_zone: "String",
     #         affinity: "String",
     #         group_name: "String",
+    #         partition_number: 1,
     #         host_id: "String",
     #         tenancy: "default", # accepts default, dedicated, host
     #         spread_domain: "String",
@@ -19504,7 +25313,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -19566,6 +25375,51 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Boolean] :encrypted
+    #   Specifies whether the destination snapshot of the imported image
+    #   should be encrypted. The default CMK for EBS is used unless you
+    #   specify a non-default AWS Key Management Service (AWS KMS) CMK using
+    #   `KmsKeyId`. For more information, see [Amazon EBS Encryption][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #
+    # @option params [String] :kms_key_id
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted snapshot. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the Region of the CMK, the AWS account ID of
+    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
+    #     example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
+    #   may appear to complete even though you provided an invalid identifier.
+    #   This action will eventually report failure.
+    #
+    #   The specified CMK must exist in the Region that the snapshot is being
+    #   copied to.
+    #
     # @option params [String] :role_name
     #   The name of the role to use when not using the default role,
     #   'vmimport'.
@@ -19597,6 +25451,8 @@ module Aws::EC2
     #       },
     #     },
     #     dry_run: false,
+    #     encrypted: false,
+    #     kms_key_id: "KmsKeyId",
     #     role_name: "String",
     #   })
     #
@@ -19606,7 +25462,9 @@ module Aws::EC2
     #   resp.import_task_id #=> String
     #   resp.snapshot_task_detail.description #=> String
     #   resp.snapshot_task_detail.disk_image_size #=> Float
+    #   resp.snapshot_task_detail.encrypted #=> Boolean
     #   resp.snapshot_task_detail.format #=> String
+    #   resp.snapshot_task_detail.kms_key_id #=> String
     #   resp.snapshot_task_detail.progress #=> String
     #   resp.snapshot_task_detail.snapshot_id #=> String
     #   resp.snapshot_task_detail.status #=> String
@@ -19632,8 +25490,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/importing-your-volumes-into-amazon-ebs.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/importing-your-volumes-into-amazon-ebs.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
     # @option params [required, String] :availability_zone
     #   The Availability Zone for the resulting EBS volume.
@@ -19716,9 +25574,272 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies a Capacity Reservation's capacity and the conditions under
+    # which it is to be released. You cannot change a Capacity
+    # Reservation's instance type, EBS optimization, instance store
+    # settings, platform, Availability Zone, or instance eligibility. If you
+    # need to modify any of these attributes, we recommend that you cancel
+    # the Capacity Reservation, and then create a new one with the required
+    # attributes.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [Integer] :instance_count
+    #   The number of instances for which to reserve capacity.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   The date and time at which the Capacity Reservation expires. When a
+    #   Capacity Reservation expires, the reserved capacity is released and
+    #   you can no longer launch instances into it. The Capacity
+    #   Reservation's state changes to `expired` when it reaches its end date
+    #   and time.
+    #
+    #   The Capacity Reservation is cancelled within an hour from the
+    #   specified time. For example, if you specify 5/31/2019, 13:30:55, the
+    #   Capacity Reservation is guaranteed to end between 13:30:55 and
+    #   14:30:55 on 5/31/2019.
+    #
+    #   You must provide an `EndDate` value if `EndDateType` is `limited`.
+    #   Omit `EndDate` if `EndDateType` is `unlimited`.
+    #
+    # @option params [String] :end_date_type
+    #   Indicates the way in which the Capacity Reservation ends. A Capacity
+    #   Reservation can have one of the following end types:
+    #
+    #   * `unlimited` - The Capacity Reservation remains active until you
+    #     explicitly cancel it. Do not provide an `EndDate` value if
+    #     `EndDateType` is `unlimited`.
+    #
+    #   * `limited` - The Capacity Reservation expires automatically at a
+    #     specified date and time. You must provide an `EndDate` value if
+    #     `EndDateType` is `limited`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyCapacityReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyCapacityReservationResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_capacity_reservation({
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #     instance_count: 1,
+    #     end_date: Time.now,
+    #     end_date_type: "unlimited", # accepts unlimited, limited
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservation AWS API Documentation
+    #
+    # @overload modify_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def modify_capacity_reservation(params = {}, options = {})
+      req = build_request(:modify_capacity_reservation, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified Client VPN endpoint. You can only modify an
+    # endpoint's server certificate information, client connection logging
+    # information, DNS server, and description. Modifying the DNS server
+    # resets existing client connections.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to modify.
+    #
+    # @option params [String] :server_certificate_arn
+    #   The ARN of the server certificate to be used. The server certificate
+    #   must be provisioned in AWS Certificate Manager (ACM).
+    #
+    # @option params [Types::ConnectionLogOptions] :connection_log_options
+    #   Information about the client connection logging options.
+    #
+    #   If you enable client connection logging, data about client connections
+    #   is sent to a Cloudwatch Logs log stream. The following information is
+    #   logged:
+    #
+    #   * Client connection requests
+    #
+    #   * Client connection results (successful and unsuccessful)
+    #
+    #   * Reasons for unsuccessful client connection requests
+    #
+    #   * Client connection termination time
+    #
+    # @option params [Types::DnsServersOptionsModifyStructure] :dns_servers
+    #   Information about the DNS servers to be used by Client VPN
+    #   connections. A Client VPN endpoint can have up to two DNS servers.
+    #
+    # @option params [String] :description
+    #   A brief description of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :split_tunnel
+    #   Indicates whether the VPN is split-tunnel.
+    #
+    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
+    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyClientVpnEndpointResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_client_vpn_endpoint({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     server_certificate_arn: "String",
+    #     connection_log_options: {
+    #       enabled: false,
+    #       cloudwatch_log_group: "String",
+    #       cloudwatch_log_stream: "String",
+    #     },
+    #     dns_servers: {
+    #       custom_dns_servers: ["String"],
+    #       enabled: false,
+    #     },
+    #     description: "String",
+    #     split_tunnel: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpoint AWS API Documentation
+    #
+    # @overload modify_client_vpn_endpoint(params = {})
+    # @param [Hash] params ({})
+    def modify_client_vpn_endpoint(params = {}, options = {})
+      req = build_request(:modify_client_vpn_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Changes the default customer master key (CMK) for EBS encryption by
+    # default for your account in this Region.
+    #
+    # AWS creates a unique AWS managed CMK in each Region for use with
+    # encryption by default. If you change the default CMK to a customer
+    # managed CMK, it is used instead of the AWS managed CMK. To reset the
+    # default CMK to the AWS managed CMK for EBS, use
+    # ResetEbsDefaultKmsKeyId.
+    #
+    # If you delete or disable the customer managed CMK that you specified
+    # for use with encryption by default, your instances will fail to
+    # launch.
+    #
+    # For more information, see [Amazon EBS Encryption][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #
+    # @option params [required, String] :kms_key_id
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
+    #   is specified, the encrypted state must be `true`.
+    #
+    #   You can specify the CMK using any of the following:
+    #
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #
+    #   * Key alias. For example, alias/ExampleAlias.
+    #
+    #   * Key ARN. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * Alias ARN. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
+    #   ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyEbsDefaultKmsKeyIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyEbsDefaultKmsKeyIdResult#kms_key_id #kms_key_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_ebs_default_kms_key_id({
+    #     kms_key_id: "KmsKeyId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyEbsDefaultKmsKeyId AWS API Documentation
+    #
+    # @overload modify_ebs_default_kms_key_id(params = {})
+    # @param [Hash] params ({})
+    def modify_ebs_default_kms_key_id(params = {}, options = {})
+      req = build_request(:modify_ebs_default_kms_key_id, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified EC2 Fleet.
     #
+    # You can only modify an EC2 Fleet request of type `maintain`.
+    #
     # While the EC2 Fleet is being modified, it is in the `modifying` state.
+    #
+    # To scale up your EC2 Fleet, increase its target capacity. The EC2
+    # Fleet launches the additional Spot Instances according to the
+    # allocation strategy for the EC2 Fleet request. If the allocation
+    # strategy is `lowest-price`, the EC2 Fleet launches instances using the
+    # Spot Instance pool with the lowest price. If the allocation strategy
+    # is `diversified`, the EC2 Fleet distributes the instances across the
+    # Spot Instance pools. If the allocation strategy is
+    # `capacity-optimized`, EC2 Fleet launches instances from Spot Instance
+    # pools with optimal capacity for the number of instances that are
+    # launching.
+    #
+    # To scale down your EC2 Fleet, decrease its target capacity. First, the
+    # EC2 Fleet cancels any open requests that exceed the new target
+    # capacity. You can request that the EC2 Fleet terminate Spot Instances
+    # until the size of the fleet no longer exceeds the new target capacity.
+    # If the allocation strategy is `lowest-price`, the EC2 Fleet terminates
+    # the instances with the highest price per unit. If the allocation
+    # strategy is `capacity-optimized`, the EC2 Fleet terminates the
+    # instances in the Spot Instance pools that have the least available
+    # Spot Instance capacity. If the allocation strategy is `diversified`,
+    # the EC2 Fleet terminates instances across the Spot Instance pools.
+    # Alternatively, you can request that the EC2 Fleet keep the fleet at
+    # its current size, but not replace any Spot Instances that are
+    # interrupted or that you terminate manually.
+    #
+    # If you are finished with your EC2 Fleet for now, but will use it again
+    # later, you can set the target capacity to 0.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -19787,16 +25908,16 @@ module Aws::EC2
     #   The operation type.
     #
     # @option params [Array<String>] :user_ids
-    #   One or more AWS account IDs. This parameter is valid only when
-    #   modifying the `loadPermission` attribute.
+    #   The AWS account IDs. This parameter is valid only when modifying the
+    #   `loadPermission` attribute.
     #
     # @option params [Array<String>] :user_groups
-    #   One or more user groups. This parameter is valid only when modifying
-    #   the `loadPermission` attribute.
+    #   The user groups. This parameter is valid only when modifying the
+    #   `loadPermission` attribute.
     #
     # @option params [Array<String>] :product_codes
-    #   One or more product codes. After you add a product code to an AFI, it
-    #   can't be removed. This parameter is valid only when modifying the
+    #   The product codes. After you add a product code to an AFI, it can't
+    #   be removed. This parameter is valid only when modifying the
     #   `productCodes` attribute.
     #
     # @option params [Types::LoadPermissionModifications] :load_permission
@@ -19816,7 +25937,7 @@ module Aws::EC2
     #
     #   resp = client.modify_fpga_image_attribute({
     #     dry_run: false,
-    #     fpga_image_id: "String", # required
+    #     fpga_image_id: "FpgaImageId", # required
     #     attribute: "description", # accepts description, name, loadPermission, productCodes
     #     operation_type: "add", # accepts add, remove
     #     user_ids: ["String"],
@@ -19866,15 +25987,48 @@ module Aws::EC2
     # tenancy of `host` but without a specific host ID are placed onto any
     # available Dedicated Host in your account that has auto-placement
     # enabled. When auto-placement is disabled, you need to provide a host
-    # ID ito have the instance launch onto a specific host. If no host ID is
+    # ID to have the instance launch onto a specific host. If no host ID is
     # provided, the instance is launched onto a suitable host with
     # auto-placement enabled.
     #
-    # @option params [required, String] :auto_placement
+    # You can also use this API action to modify a Dedicated Host to support
+    # either multiple instance types in an instance family, or to support a
+    # specific instance type only.
+    #
+    # @option params [String] :auto_placement
     #   Specify whether to enable or disable auto-placement.
     #
     # @option params [required, Array<String>] :host_ids
     #   The IDs of the Dedicated Hosts to modify.
+    #
+    # @option params [String] :host_recovery
+    #   Indicates whether to enable or disable host recovery for the Dedicated
+    #   Host. For more information, see [ Host Recovery][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
+    #
+    # @option params [String] :instance_type
+    #   Specifies the instance type to be supported by the Dedicated Host.
+    #   Specify this parameter to modify a Dedicated Host to support only a
+    #   specific instance type.
+    #
+    #   If you want to modify a Dedicated Host to support multiple instance
+    #   types in its current instance family, omit this parameter and specify
+    #   **InstanceFamily** instead. You cannot specify **InstanceType** and
+    #   **InstanceFamily** in the same request.
+    #
+    # @option params [String] :instance_family
+    #   Specifies the instance family to be supported by the Dedicated Host.
+    #   Specify this parameter to modify a Dedicated Host to support multiple
+    #   instance types within its current instance family.
+    #
+    #   If you want to modify a Dedicated Host to support a specific instance
+    #   type only, omit this parameter and specify **InstanceType** instead.
+    #   You cannot specify **InstanceFamily** and **InstanceType** in the same
+    #   request.
     #
     # @return [Types::ModifyHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -19884,8 +26038,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_hosts({
-    #     auto_placement: "on", # required, accepts on, off
+    #     auto_placement: "on", # accepts on, off
     #     host_ids: ["String"], # required
+    #     host_recovery: "on", # accepts on, off
+    #     instance_type: "String",
+    #     instance_family: "String",
     #   })
     #
     # @example Response structure
@@ -19906,7 +26063,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the ID format for the specified resource on a per-region
+    # Modifies the ID format for the specified resource on a per-Region
     # basis. You can specify that resources should receive longer IDs
     # (17-character IDs) when they are created.
     #
@@ -19938,7 +26095,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
     #
     # @option params [required, String] :resource
     #   The type of resource: `bundle` \| `conversion-task` \|
@@ -20008,7 +26165,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
     #
     # @option params [required, String] :principal_arn
     #   The ARN of the principal, which can be an IAM user, IAM role, or the
@@ -20083,15 +26240,15 @@ module Aws::EC2
     #   `Attribute` parameter is `launchPermission`.
     #
     # @option params [Array<String>] :product_codes
-    #   One or more DevPay product codes. After you add a product code to an
-    #   AMI, it can't be removed.
+    #   The DevPay product codes. After you add a product code to an AMI, it
+    #   can't be removed.
     #
     # @option params [Array<String>] :user_groups
-    #   One or more user groups. This parameter can be used only when the
-    #   `Attribute` parameter is `launchPermission`.
+    #   The user groups. This parameter can be used only when the `Attribute`
+    #   parameter is `launchPermission`.
     #
     # @option params [Array<String>] :user_ids
-    #   One or more AWS account IDs. This parameter can be used only when the
+    #   The AWS account IDs. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     #
     # @option params [String] :value
@@ -20199,7 +26356,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html
     #
     # @option params [Types::AttributeBooleanValue] :source_dest_check
     #   Specifies whether source/destination checking is enabled. A value of
@@ -20223,7 +26380,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM
     #
     # @option params [Types::AttributeBooleanValue] :disable_api_termination
     #   If the value is `true`, you can't terminate the instance using the
@@ -20270,7 +26427,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #
     # @option params [Types::AttributeValue] :kernel
     #   Changes the instance's kernel to the specified value. We recommend
@@ -20279,7 +26436,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
     #
     # @option params [Types::AttributeValue] :ramdisk
     #   Changes the instance's RAM disk to the specified value. We recommend
@@ -20288,7 +26445,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
     #
     # @option params [Types::AttributeValue] :sriov_net_support
     #   Set to `simple` to enable enhanced networking with the Intel 82599
@@ -20373,7 +26530,7 @@ module Aws::EC2
     #       value: false,
     #     },
     #     groups: ["String"],
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     instance_type: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     kernel: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -20394,15 +26551,62 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the credit option for CPU usage on a running or stopped T2
-    # instance. The credit options are `standard` and `unlimited`.
+    # Modifies the Capacity Reservation settings for a stopped instance. Use
+    # this action to configure an instance to target a specific Capacity
+    # Reservation, run in any `open` Capacity Reservation with matching
+    # attributes, or run On-Demand Instance capacity.
     #
-    # For more information, see [T2 Instances][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # @option params [required, String] :instance_id
+    #   The ID of the instance to be modified.
+    #
+    # @option params [required, Types::CapacityReservationSpecification] :capacity_reservation_specification
+    #   Information about the Capacity Reservation targeting option.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyInstanceCapacityReservationAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceCapacityReservationAttributesResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_capacity_reservation_attributes({
+    #     instance_id: "InstanceId", # required
+    #     capacity_reservation_specification: { # required
+    #       capacity_reservation_preference: "open", # accepts open, none
+    #       capacity_reservation_target: {
+    #         capacity_reservation_id: "String",
+    #       },
+    #     },
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCapacityReservationAttributes AWS API Documentation
+    #
+    # @overload modify_instance_capacity_reservation_attributes(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_capacity_reservation_attributes(params = {}, options = {})
+      req = build_request(:modify_instance_capacity_reservation_attributes, params)
+      req.send_request(options)
+    end
+
+    # Modifies the credit option for CPU usage on a running or stopped T2 or
+    # T3 instance. The credit options are `standard` and `unlimited`.
+    #
+    # For more information, see [Burstable Performance Instances][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -20417,7 +26621,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, Array<Types::InstanceCreditSpecificationRequest>] :instance_credit_specifications
     #   Information about the credit option for CPU usage.
@@ -20458,6 +26662,143 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the start time for a scheduled Amazon EC2 instance event.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance with the scheduled event.
+    #
+    # @option params [required, String] :instance_event_id
+    #   The ID of the event whose date and time you are modifying.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :not_before
+    #   The new date and time when the event will take place.
+    #
+    # @return [Types::ModifyInstanceEventStartTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceEventStartTimeResult#event #event} => Types::InstanceStatusEvent
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_event_start_time({
+    #     dry_run: false,
+    #     instance_id: "InstanceId", # required
+    #     instance_event_id: "String", # required
+    #     not_before: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event.instance_event_id #=> String
+    #   resp.event.code #=> String, one of "instance-reboot", "system-reboot", "system-maintenance", "instance-retirement", "instance-stop"
+    #   resp.event.description #=> String
+    #   resp.event.not_after #=> Time
+    #   resp.event.not_before #=> Time
+    #   resp.event.not_before_deadline #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceEventStartTime AWS API Documentation
+    #
+    # @overload modify_instance_event_start_time(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_event_start_time(params = {}, options = {})
+      req = build_request(:modify_instance_event_start_time, params)
+      req.send_request(options)
+    end
+
+    # Modify the instance metadata parameters on a running or stopped
+    # instance. When you modify the parameters on a stopped instance, they
+    # are applied when the instance is started. When you modify the
+    # parameters on a running instance, the API responds with a state of
+    # “pending”. After the parameter modifications are successfully applied
+    # to the instance, the state of the modifications changes from “pending”
+    # to “applied” in subsequent describe-instances API calls. For more
+    # information, see [Instance Metadata and User Data][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance.
+    #
+    # @option params [String] :http_tokens
+    #   The state of token usage for your instance metadata requests. If the
+    #   parameter is not specified in the request, the default state is
+    #   `optional`.
+    #
+    #   If the state is `optional`, you can choose to retrieve instance
+    #   metadata with or without a signed token header on your request. If you
+    #   retrieve the IAM role credentials without a token, the version 1.0
+    #   role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid signed token, the version 2.0 role
+    #   credentials are returned.
+    #
+    #   If the state is `required`, you must send a signed token header with
+    #   any instance metadata retrieval requests. In this state, retrieving
+    #   the IAM role credential always returns the version 2.0 credentials;
+    #   the version 1.0 credentials are not available.
+    #
+    # @option params [Integer] :http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. The larger the number, the further instance metadata
+    #   requests can travel. If no parameter is specified, the existing state
+    #   is maintained.
+    #
+    #   Possible values: Integers from 1 to 64
+    #
+    # @option params [String] :http_endpoint
+    #   This parameter enables or disables the HTTP metadata endpoint on your
+    #   instances. If the parameter is not specified, the existing state is
+    #   maintained.
+    #
+    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
+    #   your instance metadata.
+    #
+    #    </note>
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyInstanceMetadataOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceMetadataOptionsResult#instance_id #instance_id} => String
+    #   * {Types::ModifyInstanceMetadataOptionsResult#instance_metadata_options #instance_metadata_options} => Types::InstanceMetadataOptionsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_metadata_options({
+    #     instance_id: "String", # required
+    #     http_tokens: "optional", # accepts optional, required
+    #     http_put_response_hop_limit: 1,
+    #     http_endpoint: "disabled", # accepts disabled, enabled
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.instance_metadata_options.state #=> String, one of "pending", "applied"
+    #   resp.instance_metadata_options.http_tokens #=> String, one of "optional", "required"
+    #   resp.instance_metadata_options.http_put_response_hop_limit #=> Integer
+    #   resp.instance_metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataOptions AWS API Documentation
+    #
+    # @overload modify_instance_metadata_options(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_metadata_options(params = {}, options = {})
+      req = build_request(:modify_instance_metadata_options, params)
+      req.send_request(options)
+    end
+
     # Modifies the placement attributes for a specified instance. You can do
     # the following:
     #
@@ -20479,13 +26820,13 @@ module Aws::EC2
     # group name must be specified in the request. Affinity and tenancy can
     # be modified in the same request.
     #
-    # To modify the host ID, tenancy, or placement group for an instance,
-    # the instance must be in the `stopped` state.
+    # To modify the host ID, tenancy, placement group, or partition for an
+    # instance, the instance must be in the `stopped` state.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
     # @option params [String] :affinity
     #   The affinity setting for the instance.
@@ -20493,8 +26834,8 @@ module Aws::EC2
     # @option params [String] :group_name
     #   The name of the placement group in which to place the instance. For
     #   spread placement groups, the instance must have a tenancy of
-    #   `default`. For cluster placement groups, the instance must have a
-    #   tenancy of `default` or `dedicated`.
+    #   `default`. For cluster and partition placement groups, the instance
+    #   must have a tenancy of `default` or `dedicated`.
     #
     #   To remove an instance from a placement group, specify an empty string
     #   ("").
@@ -20508,6 +26849,9 @@ module Aws::EC2
     # @option params [String] :tenancy
     #   The tenancy for the instance.
     #
+    # @option params [Integer] :partition_number
+    #   Reserved for future use.
+    #
     # @return [Types::ModifyInstancePlacementResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyInstancePlacementResult#return #return} => Boolean
@@ -20516,10 +26860,11 @@ module Aws::EC2
     #
     #   resp = client.modify_instance_placement({
     #     affinity: "default", # accepts default, host
-    #     group_name: "String",
-    #     host_id: "String",
-    #     instance_id: "String", # required
+    #     group_name: "PlacementGroupName",
+    #     host_id: "HostId",
+    #     instance_id: "InstanceId", # required
     #     tenancy: "dedicated", # accepts dedicated, host
+    #     partition_number: 1,
     #   })
     #
     # @example Response structure
@@ -20551,9 +26896,11 @@ module Aws::EC2
     #   idempotency of the request. For more information, see [Ensuring
     #   Idempotency][1].
     #
+    #   Constraint: Maximum 128 ASCII characters.
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :launch_template_id
     #   The ID of the launch template. You must specify either the launch
@@ -20598,7 +26945,7 @@ module Aws::EC2
     #   resp = client.modify_launch_template({
     #     dry_run: false,
     #     client_token: "String",
-    #     launch_template_id: "String",
+    #     launch_template_id: "LaunchTemplateId",
     #     launch_template_name: "LaunchTemplateName",
     #     default_version: "String",
     #   })
@@ -20625,7 +26972,8 @@ module Aws::EC2
     end
 
     # Modifies the specified network interface attribute. You can specify
-    # only one attribute at a time.
+    # only one attribute at a time. You can use this action to attach and
+    # detach security groups from an existing EC2 instance.
     #
     # @option params [Types::NetworkInterfaceAttachmentChanges] :attachment
     #   Information about the interface attachment. If modifying the 'delete
@@ -20659,7 +27007,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -20720,7 +27068,7 @@ module Aws::EC2
     #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     dry_run: false,
     #     groups: ["String"],
-    #     network_interface_id: "String", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
     #     source_dest_check: {
     #       value: false,
     #     },
@@ -20745,7 +27093,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html
     #
     # @option params [required, Array<String>] :reserved_instances_ids
     #   The IDs of the Reserved Instances to modify.
@@ -20757,7 +27105,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, Array<Types::ReservedInstancesConfiguration>] :target_configurations
     #   The configuration settings for the Reserved Instances to modify.
@@ -20775,7 +27123,7 @@ module Aws::EC2
     #       {
     #         availability_zone: "String",
     #         instance_count: 1,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #         platform: "String",
     #         scope: "Availability Zone", # accepts Availability Zone, Region
     #       },
@@ -20797,9 +27145,10 @@ module Aws::EC2
 
     # Adds or removes permission settings for the specified snapshot. You
     # may add or remove specified AWS account IDs from a snapshot's list of
-    # create volume permissions, but you cannot do both in a single API
-    # call. If you need to both add and remove account IDs for a snapshot,
-    # you must use multiple API calls.
+    # create volume permissions, but you cannot do both in a single
+    # operation. If you need to both add and remove account IDs for a
+    # snapshot, you must use multiple operations. You can make up to 500
+    # modifications to a snapshot in a single operation.
     #
     # Encrypted snapshots and snapshots with AWS Marketplace product codes
     # cannot be made public. Snapshots encrypted with your default CMK
@@ -20811,7 +27160,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html
     #
     # @option params [String] :attribute
     #   The snapshot attribute to modify. Only volume creation permissions can
@@ -20896,7 +27245,7 @@ module Aws::EC2
     #     },
     #     group_names: ["String"],
     #     operation_type: "add", # accepts add, remove
-    #     snapshot_id: "String", # required
+    #     snapshot_id: "SnapshotId", # required
     #     user_ids: ["String"],
     #     dry_run: false,
     #   })
@@ -20912,6 +27261,8 @@ module Aws::EC2
 
     # Modifies the specified Spot Fleet request.
     #
+    # You can only modify a Spot Fleet request of type `maintain`.
+    #
     # While the Spot Fleet request is being modified, it is in the
     # `modifying` state.
     #
@@ -20919,9 +27270,12 @@ module Aws::EC2
     # Fleet launches the additional Spot Instances according to the
     # allocation strategy for the Spot Fleet request. If the allocation
     # strategy is `lowestPrice`, the Spot Fleet launches instances using the
-    # Spot pool with the lowest price. If the allocation strategy is
-    # `diversified`, the Spot Fleet distributes the instances across the
-    # Spot pools.
+    # Spot Instance pool with the lowest price. If the allocation strategy
+    # is `diversified`, the Spot Fleet distributes the instances across the
+    # Spot Instance pools. If the allocation strategy is
+    # `capacityOptimized`, Spot Fleet launches instances from Spot Instance
+    # pools with optimal capacity for the number of instances that are
+    # launching.
     #
     # To scale down your Spot Fleet, decrease its target capacity. First,
     # the Spot Fleet cancels any open requests that exceed the new target
@@ -20929,10 +27283,13 @@ module Aws::EC2
     # until the size of the fleet no longer exceeds the new target capacity.
     # If the allocation strategy is `lowestPrice`, the Spot Fleet terminates
     # the instances with the highest price per unit. If the allocation
-    # strategy is `diversified`, the Spot Fleet terminates instances across
-    # the Spot pools. Alternatively, you can request that the Spot Fleet
-    # keep the fleet at its current size, but not replace any Spot Instances
-    # that are interrupted or that you terminate manually.
+    # strategy is `capacityOptimized`, the Spot Fleet terminates the
+    # instances in the Spot Instance pools that have the least available
+    # Spot Instance capacity. If the allocation strategy is `diversified`,
+    # the Spot Fleet terminates instances across the Spot Instance pools.
+    # Alternatively, you can request that the Spot Fleet keep the fleet at
+    # its current size, but not replace any Spot Instances that are
+    # interrupted or that you terminate manually.
     #
     # If you are finished with your Spot Fleet for now, but will use it
     # again later, you can set the target capacity to 0.
@@ -20947,6 +27304,9 @@ module Aws::EC2
     #
     # @option params [Integer] :target_capacity
     #   The size of the fleet.
+    #
+    # @option params [Integer] :on_demand_target_capacity
+    #   The number of On-Demand Instances in the fleet.
     #
     # @return [Types::ModifySpotFleetRequestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20987,8 +27347,9 @@ module Aws::EC2
     #
     #   resp = client.modify_spot_fleet_request({
     #     excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
-    #     spot_fleet_request_id: "String", # required
+    #     spot_fleet_request_id: "SpotFleetRequestId", # required
     #     target_capacity: 1,
+    #     on_demand_target_capacity: 1,
     #   })
     #
     # @example Response structure
@@ -21018,11 +27379,8 @@ module Aws::EC2
     #   created using version `2016-11-15` or later of the Amazon EC2 API.
     #
     # @option params [Types::AttributeBooleanValue] :map_public_ip_on_launch
-    #   Specify `true` to indicate that network interfaces created in the
-    #   specified subnet should be assigned a public IPv4 address. This
-    #   includes a network interface that's created when launching an
-    #   instance into the subnet (the instance therefore receives a public
-    #   IPv4 address).
+    #   Specify `true` to indicate that ENIs attached to instances created in
+    #   the specified subnet should be assigned a public IPv4 address.
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
@@ -21051,7 +27409,7 @@ module Aws::EC2
     #     map_public_ip_on_launch: {
     #       value: false,
     #     },
-    #     subnet_id: "String", # required
+    #     subnet_id: "SubnetId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttribute AWS API Documentation
@@ -21060,6 +27418,353 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_subnet_attribute(params = {}, options = {})
       req = build_request(:modify_subnet_attribute, params)
+      req.send_request(options)
+    end
+
+    # Allows or restricts mirroring network services.
+    #
+    # By default, Amazon DNS network services are not eligible for Traffic
+    # Mirror. Use `AddNetworkServices` to add network services to a Traffic
+    # Mirror filter. When a network service is added to the Traffic Mirror
+    # filter, all traffic related to that network service will be mirrored.
+    # When you no longer want to mirror network services, use
+    # `RemoveNetworkServices` to remove the network services from the
+    # Traffic Mirror filter.
+    #
+    # For information about filter rule properties, see [Network
+    # Services][1] in the <i>Traffic Mirroring User Guide </i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html
+    #
+    # @option params [required, String] :traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #
+    # @option params [Array<String>] :add_network_services
+    #   The network service, for example Amazon DNS, that you want to mirror.
+    #
+    # @option params [Array<String>] :remove_network_services
+    #   The network service, for example Amazon DNS, that you no longer want
+    #   to mirror.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyTrafficMirrorFilterNetworkServicesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTrafficMirrorFilterNetworkServicesResult#traffic_mirror_filter #traffic_mirror_filter} => Types::TrafficMirrorFilter
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_traffic_mirror_filter_network_services({
+    #     traffic_mirror_filter_id: "TrafficMirrorFilterId", # required
+    #     add_network_services: ["amazon-dns"], # accepts amazon-dns
+    #     remove_network_services: ["amazon-dns"], # accepts amazon-dns
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_filter.traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filter.ingress_filter_rules #=> Array
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].traffic_mirror_filter_rule_id #=> String
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].traffic_direction #=> String, one of "ingress", "egress"
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].rule_number #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].rule_action #=> String, one of "accept", "reject"
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].protocol #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].destination_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].destination_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].source_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].source_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].destination_cidr_block #=> String
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].source_cidr_block #=> String
+    #   resp.traffic_mirror_filter.ingress_filter_rules[0].description #=> String
+    #   resp.traffic_mirror_filter.egress_filter_rules #=> Array
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].traffic_mirror_filter_rule_id #=> String
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].traffic_direction #=> String, one of "ingress", "egress"
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].rule_number #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].rule_action #=> String, one of "accept", "reject"
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].protocol #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].destination_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].destination_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].source_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].source_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].destination_cidr_block #=> String
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].source_cidr_block #=> String
+    #   resp.traffic_mirror_filter.egress_filter_rules[0].description #=> String
+    #   resp.traffic_mirror_filter.network_services #=> Array
+    #   resp.traffic_mirror_filter.network_services[0] #=> String, one of "amazon-dns"
+    #   resp.traffic_mirror_filter.description #=> String
+    #   resp.traffic_mirror_filter.tags #=> Array
+    #   resp.traffic_mirror_filter.tags[0].key #=> String
+    #   resp.traffic_mirror_filter.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterNetworkServices AWS API Documentation
+    #
+    # @overload modify_traffic_mirror_filter_network_services(params = {})
+    # @param [Hash] params ({})
+    def modify_traffic_mirror_filter_network_services(params = {}, options = {})
+      req = build_request(:modify_traffic_mirror_filter_network_services, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified Traffic Mirror rule.
+    #
+    # `DestinationCidrBlock` and `SourceCidrBlock` must both be an IPv4
+    # range or an IPv6 range.
+    #
+    # @option params [required, String] :traffic_mirror_filter_rule_id
+    #   The ID of the Traffic Mirror rule.
+    #
+    # @option params [String] :traffic_direction
+    #   The type of traffic (`ingress` \| `egress`) to assign to the rule.
+    #
+    # @option params [Integer] :rule_number
+    #   The number of the Traffic Mirror rule. This number must be unique for
+    #   each Traffic Mirror rule in a given direction. The rules are processed
+    #   in ascending order by rule number.
+    #
+    # @option params [String] :rule_action
+    #   The action to assign to the rule.
+    #
+    # @option params [Types::TrafficMirrorPortRangeRequest] :destination_port_range
+    #   The destination ports that are associated with the Traffic Mirror
+    #   rule.
+    #
+    # @option params [Types::TrafficMirrorPortRangeRequest] :source_port_range
+    #   The port range to assign to the Traffic Mirror rule.
+    #
+    # @option params [Integer] :protocol
+    #   The protocol, for example TCP, to assign to the Traffic Mirror rule.
+    #
+    # @option params [String] :destination_cidr_block
+    #   The destination CIDR block to assign to the Traffic Mirror rule.
+    #
+    # @option params [String] :source_cidr_block
+    #   The source CIDR block to assign to the Traffic Mirror rule.
+    #
+    # @option params [String] :description
+    #   The description to assign to the Traffic Mirror rule.
+    #
+    # @option params [Array<String>] :remove_fields
+    #   The properties that you want to remove from the Traffic Mirror filter
+    #   rule.
+    #
+    #   When you remove a property from a Traffic Mirror filter rule, the
+    #   property is set to the default.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyTrafficMirrorFilterRuleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTrafficMirrorFilterRuleResult#traffic_mirror_filter_rule #traffic_mirror_filter_rule} => Types::TrafficMirrorFilterRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_traffic_mirror_filter_rule({
+    #     traffic_mirror_filter_rule_id: "TrafficMirrorFilterRuleId", # required
+    #     traffic_direction: "ingress", # accepts ingress, egress
+    #     rule_number: 1,
+    #     rule_action: "accept", # accepts accept, reject
+    #     destination_port_range: {
+    #       from_port: 1,
+    #       to_port: 1,
+    #     },
+    #     source_port_range: {
+    #       from_port: 1,
+    #       to_port: 1,
+    #     },
+    #     protocol: 1,
+    #     destination_cidr_block: "String",
+    #     source_cidr_block: "String",
+    #     description: "String",
+    #     remove_fields: ["destination-port-range"], # accepts destination-port-range, source-port-range, protocol, description
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_filter_rule.traffic_mirror_filter_rule_id #=> String
+    #   resp.traffic_mirror_filter_rule.traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_filter_rule.traffic_direction #=> String, one of "ingress", "egress"
+    #   resp.traffic_mirror_filter_rule.rule_number #=> Integer
+    #   resp.traffic_mirror_filter_rule.rule_action #=> String, one of "accept", "reject"
+    #   resp.traffic_mirror_filter_rule.protocol #=> Integer
+    #   resp.traffic_mirror_filter_rule.destination_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter_rule.destination_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter_rule.source_port_range.from_port #=> Integer
+    #   resp.traffic_mirror_filter_rule.source_port_range.to_port #=> Integer
+    #   resp.traffic_mirror_filter_rule.destination_cidr_block #=> String
+    #   resp.traffic_mirror_filter_rule.source_cidr_block #=> String
+    #   resp.traffic_mirror_filter_rule.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterRule AWS API Documentation
+    #
+    # @overload modify_traffic_mirror_filter_rule(params = {})
+    # @param [Hash] params ({})
+    def modify_traffic_mirror_filter_rule(params = {}, options = {})
+      req = build_request(:modify_traffic_mirror_filter_rule, params)
+      req.send_request(options)
+    end
+
+    # Modifies a Traffic Mirror session.
+    #
+    # @option params [required, String] :traffic_mirror_session_id
+    #   The ID of the Traffic Mirror session.
+    #
+    # @option params [String] :traffic_mirror_target_id
+    #   The Traffic Mirror target. The target must be in the same VPC as the
+    #   source, or have a VPC peering connection with the source.
+    #
+    # @option params [String] :traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #
+    # @option params [Integer] :packet_length
+    #   The number of bytes in each packet to mirror. These are bytes after
+    #   the VXLAN header. To mirror a subset, set this to the length (in
+    #   bytes) to mirror. For example, if you set this value to 100, then the
+    #   first 100 bytes that meet the filter criteria are copied to the
+    #   target. Do not specify this parameter when you want to mirror the
+    #   entire packet.
+    #
+    # @option params [Integer] :session_number
+    #   The session number determines the order in which sessions are
+    #   evaluated when an interface is used by multiple sessions. The first
+    #   session with a matching filter is the one that mirrors the packets.
+    #
+    #   Valid values are 1-32766.
+    #
+    # @option params [Integer] :virtual_network_id
+    #   The virtual network ID of the Traffic Mirror session.
+    #
+    # @option params [String] :description
+    #   The description to assign to the Traffic Mirror session.
+    #
+    # @option params [Array<String>] :remove_fields
+    #   The properties that you want to remove from the Traffic Mirror
+    #   session.
+    #
+    #   When you remove a property from a Traffic Mirror session, the property
+    #   is set to the default.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyTrafficMirrorSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTrafficMirrorSessionResult#traffic_mirror_session #traffic_mirror_session} => Types::TrafficMirrorSession
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_traffic_mirror_session({
+    #     traffic_mirror_session_id: "TrafficMirrorSessionId", # required
+    #     traffic_mirror_target_id: "TrafficMirrorTargetId",
+    #     traffic_mirror_filter_id: "TrafficMirrorFilterId",
+    #     packet_length: 1,
+    #     session_number: 1,
+    #     virtual_network_id: 1,
+    #     description: "String",
+    #     remove_fields: ["packet-length"], # accepts packet-length, description, virtual-network-id
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_mirror_session.traffic_mirror_session_id #=> String
+    #   resp.traffic_mirror_session.traffic_mirror_target_id #=> String
+    #   resp.traffic_mirror_session.traffic_mirror_filter_id #=> String
+    #   resp.traffic_mirror_session.network_interface_id #=> String
+    #   resp.traffic_mirror_session.owner_id #=> String
+    #   resp.traffic_mirror_session.packet_length #=> Integer
+    #   resp.traffic_mirror_session.session_number #=> Integer
+    #   resp.traffic_mirror_session.virtual_network_id #=> Integer
+    #   resp.traffic_mirror_session.description #=> String
+    #   resp.traffic_mirror_session.tags #=> Array
+    #   resp.traffic_mirror_session.tags[0].key #=> String
+    #   resp.traffic_mirror_session.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorSession AWS API Documentation
+    #
+    # @overload modify_traffic_mirror_session(params = {})
+    # @param [Hash] params ({})
+    def modify_traffic_mirror_session(params = {}, options = {})
+      req = build_request(:modify_traffic_mirror_session, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified VPC attachment.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Array<String>] :add_subnet_ids
+    #   The IDs of one or more subnets to add. You can specify at most one
+    #   subnet per Availability Zone.
+    #
+    # @option params [Array<String>] :remove_subnet_ids
+    #   The IDs of one or more subnets to remove.
+    #
+    # @option params [Types::ModifyTransitGatewayVpcAttachmentRequestOptions] :options
+    #   The new VPC attachment options.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyTransitGatewayVpcAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTransitGatewayVpcAttachmentResult#transit_gateway_vpc_attachment #transit_gateway_vpc_attachment} => Types::TransitGatewayVpcAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_transit_gateway_vpc_attachment({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     add_subnet_ids: ["String"],
+    #     remove_subnet_ids: ["String"],
+    #     options: {
+    #       dns_support: "enable", # accepts enable, disable
+    #       ipv_6_support: "enable", # accepts enable, disable
+    #     },
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_vpc_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_vpc_attachment.transit_gateway_id #=> String
+    #   resp.transit_gateway_vpc_attachment.vpc_id #=> String
+    #   resp.transit_gateway_vpc_attachment.vpc_owner_id #=> String
+    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachment.subnet_ids #=> Array
+    #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
+    #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
+    #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.tags #=> Array
+    #   resp.transit_gateway_vpc_attachment.tags[0].key #=> String
+    #   resp.transit_gateway_vpc_attachment.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayVpcAttachment AWS API Documentation
+    #
+    # @overload modify_transit_gateway_vpc_attachment(params = {})
+    # @param [Hash] params ({})
+    def modify_transit_gateway_vpc_attachment(params = {}, options = {})
+      req = build_request(:modify_transit_gateway_vpc_attachment, params)
       req.send_request(options)
     end
 
@@ -21083,8 +27788,8 @@ module Aws::EC2
     # You can use CloudWatch Events to check the status of a modification to
     # an EBS volume. For information about CloudWatch Events, see the
     # [Amazon CloudWatch Events User Guide][5]. You can also track the
-    # status of a modification using the DescribeVolumesModifications API.
-    # For information about tracking status changes using either method, see
+    # status of a modification using DescribeVolumesModifications. For
+    # information about tracking status changes using either method, see
     # [Monitoring Volume Modifications][6].
     #
     # With previous-generation instance types, resizing an EBS volume may
@@ -21099,12 +27804,12 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html
-    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux
-    # [4]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html#recognize-expanded-volume-windows
-    # [5]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
-    # [6]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html#recognize-expanded-volume-windows
+    # [5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21125,7 +27830,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #
     # @option params [String] :volume_type
     #   The target EBS volume type of the volume.
@@ -21143,7 +27848,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops
     #
     # @return [Types::ModifyVolumeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21153,7 +27858,7 @@ module Aws::EC2
     #
     #   resp = client.modify_volume({
     #     dry_run: false,
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     size: 1,
     #     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #     iops: 1,
@@ -21234,7 +27939,7 @@ module Aws::EC2
     #     auto_enable_io: {
     #       value: false,
     #     },
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     dry_run: false,
     #   })
     #
@@ -21262,9 +27967,9 @@ module Aws::EC2
     #   Indicates whether the DNS resolution is supported for the VPC. If
     #   enabled, queries to the Amazon provided DNS server at the
     #   169.254.169.253 IP address, or the reserved IP address at the base of
-    #   the VPC network range "plus two" will succeed. If disabled, the
-    #   Amazon provided DNS service in the VPC that resolves public DNS
-    #   hostnames to IP addresses is not enabled.
+    #   the VPC network range "plus two" succeed. If disabled, the Amazon
+    #   provided DNS service in the VPC that resolves public DNS hostnames to
+    #   IP addresses is not enabled.
     #
     #   You cannot modify the DNS resolution and DNS hostnames attributes in
     #   the same request. Use separate requests for each attribute.
@@ -21309,7 +28014,7 @@ module Aws::EC2
     #     enable_dns_support: {
     #       value: false,
     #     },
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcAttribute AWS API Documentation
@@ -21328,7 +28033,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21344,8 +28049,8 @@ module Aws::EC2
     #   default policy. The default policy allows full access to the service.
     #
     # @option params [String] :policy_document
-    #   (Gateway endpoint) A policy document to attach to the endpoint. The
-    #   policy must be in valid JSON format.
+    #   A policy to attach to the endpoint that controls access to the
+    #   service. The policy must be in valid JSON format.
     #
     # @option params [Array<String>] :add_route_table_ids
     #   (Gateway endpoint) One or more route tables IDs to associate with the
@@ -21383,7 +28088,7 @@ module Aws::EC2
     #
     #   resp = client.modify_vpc_endpoint({
     #     dry_run: false,
-    #     vpc_endpoint_id: "String", # required
+    #     vpc_endpoint_id: "VpcEndpointId", # required
     #     reset_policy: false,
     #     policy_document: "String",
     #     add_route_table_ids: ["String"],
@@ -21436,7 +28141,7 @@ module Aws::EC2
     #
     #   resp = client.modify_vpc_endpoint_connection_notification({
     #     dry_run: false,
-    #     connection_notification_id: "String", # required
+    #     connection_notification_id: "ConnectionNotificationId", # required
     #     connection_notification_arn: "String",
     #     connection_events: ["String"],
     #   })
@@ -21488,7 +28193,7 @@ module Aws::EC2
     #
     #   resp = client.modify_vpc_endpoint_service_configuration({
     #     dry_run: false,
-    #     service_id: "String", # required
+    #     service_id: "ServiceId", # required
     #     acceptance_required: false,
     #     add_network_load_balancer_arns: ["String"],
     #     remove_network_load_balancer_arns: ["String"],
@@ -21511,9 +28216,14 @@ module Aws::EC2
     # add or remove permissions for service consumers (IAM users, IAM roles,
     # and AWS accounts) to connect to your endpoint service.
     #
+    # If you grant permissions to all principals, the service is public. Any
+    # users who know the name of a public service can send a request to
+    # attach an endpoint. If the service does not require manual approval,
+    # attachments are automatically approved.
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/endpoint-service.html
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21525,12 +28235,13 @@ module Aws::EC2
     #   The ID of the service.
     #
     # @option params [Array<String>] :add_allowed_principals
-    #   One or more Amazon Resource Names (ARNs) of principals for which to
-    #   allow permission. Specify `*` to allow all principals.
+    #   The Amazon Resource Names (ARN) of one or more principals. Permissions
+    #   are granted to the principals in this list. To grant permissions to
+    #   all principals, specify an asterisk (*).
     #
     # @option params [Array<String>] :remove_allowed_principals
-    #   One or more Amazon Resource Names (ARNs) of principals for which to
-    #   remove permission.
+    #   The Amazon Resource Names (ARN) of one or more principals. Permissions
+    #   are revoked for principals in this list.
     #
     # @return [Types::ModifyVpcEndpointServicePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21572,19 +28283,24 @@ module Aws::EC2
     # * Enable/disable the ability to resolve public DNS hostnames to
     #   private IP addresses when queried from instances in the peer VPC.
     #
-    # If the peered VPCs are in different accounts, each owner must initiate
-    # a separate request to modify the peering connection options, depending
-    # on whether their VPC was the requester or accepter for the VPC peering
-    # connection. If the peered VPCs are in the same account, you can modify
-    # the requester and accepter options in the same request. To confirm
-    # which VPC is the accepter and requester for a VPC peering connection,
-    # use the DescribeVpcPeeringConnections command.
+    # If the peered VPCs are in the same AWS account, you can enable DNS
+    # resolution for queries from the local VPC. This ensures that queries
+    # from the local VPC resolve to private IP addresses in the peer VPC.
+    # This option is not available if the peered VPCs are in different AWS
+    # accounts or different Regions. For peered VPCs in different AWS
+    # accounts, each AWS account owner must initiate a separate request to
+    # modify the peering connection options. For inter-region peering
+    # connections, you must use the Region for the requester VPC to modify
+    # the requester VPC peering options and the Region for the accepter VPC
+    # to modify the accepter VPC peering options. To verify which VPCs are
+    # the accepter and the requester for a VPC peering connection, use the
+    # DescribeVpcPeeringConnections command.
     #
     # @option params [Types::PeeringConnectionOptionsRequest] :accepter_peering_connection_options
     #   The VPC peering connection options for the accepter VPC.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -21614,7 +28330,7 @@ module Aws::EC2
     #       allow_egress_from_local_classic_link_to_remote_vpc: false,
     #       allow_egress_from_local_vpc_to_remote_classic_link: false,
     #     },
-    #     vpc_peering_connection_id: "String", # required
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId", # required
     #   })
     #
     # @example Response structure
@@ -21644,12 +28360,12 @@ module Aws::EC2
     # otherwise during launch. The tenancy of any existing instances in the
     # VPC is not affected.
     #
-    # For more information about Dedicated Instances, see [Dedicated
-    # Instances][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # For more information, see [Dedicated Instances][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -21658,7 +28374,7 @@ module Aws::EC2
     #   The instance tenancy attribute for the VPC.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -21670,7 +28386,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_vpc_tenancy({
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #     instance_tenancy: "default", # required, accepts default
     #     dry_run: false,
     #   })
@@ -21688,6 +28404,371 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the target gateway of an AWS Site-to-Site VPN connection. The
+    # following migration options are available:
+    #
+    # * An existing virtual private gateway to a new virtual private gateway
+    #
+    # * An existing virtual private gateway to a transit gateway
+    #
+    # * An existing transit gateway to a new transit gateway
+    #
+    # * An existing transit gateway to a virtual private gateway
+    #
+    # Before you perform the migration to the new gateway, you must
+    # configure the new gateway. Use CreateVpnGateway to create a virtual
+    # private gateway, or CreateTransitGateway to create a transit gateway.
+    #
+    # This step is required when you migrate from a virtual private gateway
+    # with static routes to a transit gateway.
+    #
+    # You must delete the static routes before you migrate to the new
+    # gateway.
+    #
+    # Keep a copy of the static route before you delete it. You will need to
+    # add back these routes to the transit gateway after the VPN connection
+    # migration is complete.
+    #
+    # After you migrate to the new gateway, you might need to modify your
+    # VPC route table. Use CreateRoute and DeleteRoute to make the changes
+    # described in [VPN Gateway Target Modification Required VPC Route Table
+    # Updates][1] in the *AWS Site-to-Site VPN User Guide*.
+    #
+    # When the new gateway is a transit gateway, modify the transit gateway
+    # route table to allow traffic between the VPC and the AWS Site-to-Site
+    # VPN connection. Use CreateTransitGatewayRoute to add the routes.
+    #
+    # If you deleted VPN static routes, you must add the static routes to
+    # the transit gateway route table.
+    #
+    # After you perform this operation, the AWS VPN endpoint's IP addresses
+    # on the AWS side and the tunnel options remain intact. Your s2slong;
+    # connection will be temporarily unavailable for approximately 10
+    # minutes while we provision the new endpoints
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing
+    #
+    # @option params [required, String] :vpn_connection_id
+    #   The ID of the VPN connection.
+    #
+    # @option params [String] :transit_gateway_id
+    #   The ID of the transit gateway.
+    #
+    # @option params [String] :customer_gateway_id
+    #   The ID of the customer gateway at your end of the VPN connection.
+    #
+    # @option params [String] :vpn_gateway_id
+    #   The ID of the virtual private gateway at the AWS side of the VPN
+    #   connection.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyVpnConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVpnConnectionResult#vpn_connection #vpn_connection} => Types::VpnConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_vpn_connection({
+    #     vpn_connection_id: "VpnConnectionId", # required
+    #     transit_gateway_id: "TransitGatewayId",
+    #     customer_gateway_id: "CustomerGatewayId",
+    #     vpn_gateway_id: "VpnGatewayId",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpn_connection.customer_gateway_configuration #=> String
+    #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.category #=> String
+    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
+    #   resp.vpn_connection.vpn_connection_id #=> String
+    #   resp.vpn_connection.vpn_gateway_id #=> String
+    #   resp.vpn_connection.transit_gateway_id #=> String
+    #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_margin_time_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_fuzz_percentage #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].replay_window_size #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].dpd_timeout_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
+    #   resp.vpn_connection.routes #=> Array
+    #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
+    #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
+    #   resp.vpn_connection.routes[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.tags #=> Array
+    #   resp.vpn_connection.tags[0].key #=> String
+    #   resp.vpn_connection.tags[0].value #=> String
+    #   resp.vpn_connection.vgw_telemetry #=> Array
+    #   resp.vpn_connection.vgw_telemetry[0].accepted_route_count #=> Integer
+    #   resp.vpn_connection.vgw_telemetry[0].last_status_change #=> Time
+    #   resp.vpn_connection.vgw_telemetry[0].outside_ip_address #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
+    #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnection AWS API Documentation
+    #
+    # @overload modify_vpn_connection(params = {})
+    # @param [Hash] params ({})
+    def modify_vpn_connection(params = {}, options = {})
+      req = build_request(:modify_vpn_connection, params)
+      req.send_request(options)
+    end
+
+    # Modifies the VPN tunnel endpoint certificate.
+    #
+    # @option params [required, String] :vpn_connection_id
+    #   The ID of the AWS Site-to-Site VPN connection.
+    #
+    # @option params [required, String] :vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyVpnTunnelCertificateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVpnTunnelCertificateResult#vpn_connection #vpn_connection} => Types::VpnConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_vpn_tunnel_certificate({
+    #     vpn_connection_id: "VpnConnectionId", # required
+    #     vpn_tunnel_outside_ip_address: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpn_connection.customer_gateway_configuration #=> String
+    #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.category #=> String
+    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
+    #   resp.vpn_connection.vpn_connection_id #=> String
+    #   resp.vpn_connection.vpn_gateway_id #=> String
+    #   resp.vpn_connection.transit_gateway_id #=> String
+    #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_margin_time_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_fuzz_percentage #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].replay_window_size #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].dpd_timeout_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
+    #   resp.vpn_connection.routes #=> Array
+    #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
+    #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
+    #   resp.vpn_connection.routes[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.tags #=> Array
+    #   resp.vpn_connection.tags[0].key #=> String
+    #   resp.vpn_connection.tags[0].value #=> String
+    #   resp.vpn_connection.vgw_telemetry #=> Array
+    #   resp.vpn_connection.vgw_telemetry[0].accepted_route_count #=> Integer
+    #   resp.vpn_connection.vgw_telemetry[0].last_status_change #=> Time
+    #   resp.vpn_connection.vgw_telemetry[0].outside_ip_address #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
+    #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelCertificate AWS API Documentation
+    #
+    # @overload modify_vpn_tunnel_certificate(params = {})
+    # @param [Hash] params ({})
+    def modify_vpn_tunnel_certificate(params = {}, options = {})
+      req = build_request(:modify_vpn_tunnel_certificate, params)
+      req.send_request(options)
+    end
+
+    # Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN
+    # connection. You can modify multiple options for a tunnel in a single
+    # request, but you can only modify one tunnel at a time. For more
+    # information, see [Site-to-Site VPN Tunnel Options for Your
+    # Site-to-Site VPN Connection][1] in the *AWS Site-to-Site VPN User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html
+    #
+    # @option params [required, String] :vpn_connection_id
+    #   The ID of the AWS Site-to-Site VPN connection.
+    #
+    # @option params [required, String] :vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #
+    # @option params [required, Types::ModifyVpnTunnelOptionsSpecification] :tunnel_options
+    #   The tunnel options to modify.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyVpnTunnelOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVpnTunnelOptionsResult#vpn_connection #vpn_connection} => Types::VpnConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_vpn_tunnel_options({
+    #     vpn_connection_id: "VpnConnectionId", # required
+    #     vpn_tunnel_outside_ip_address: "String", # required
+    #     tunnel_options: { # required
+    #       tunnel_inside_cidr: "String",
+    #       pre_shared_key: "String",
+    #       phase_1_lifetime_seconds: 1,
+    #       phase_2_lifetime_seconds: 1,
+    #       rekey_margin_time_seconds: 1,
+    #       rekey_fuzz_percentage: 1,
+    #       replay_window_size: 1,
+    #       dpd_timeout_seconds: 1,
+    #       phase_1_encryption_algorithms: [
+    #         {
+    #           value: "String",
+    #         },
+    #       ],
+    #       phase_2_encryption_algorithms: [
+    #         {
+    #           value: "String",
+    #         },
+    #       ],
+    #       phase_1_integrity_algorithms: [
+    #         {
+    #           value: "String",
+    #         },
+    #       ],
+    #       phase_2_integrity_algorithms: [
+    #         {
+    #           value: "String",
+    #         },
+    #       ],
+    #       phase_1_dh_group_numbers: [
+    #         {
+    #           value: 1,
+    #         },
+    #       ],
+    #       phase_2_dh_group_numbers: [
+    #         {
+    #           value: 1,
+    #         },
+    #       ],
+    #       ike_versions: [
+    #         {
+    #           value: "String",
+    #         },
+    #       ],
+    #     },
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpn_connection.customer_gateway_configuration #=> String
+    #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.category #=> String
+    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
+    #   resp.vpn_connection.vpn_connection_id #=> String
+    #   resp.vpn_connection.vpn_gateway_id #=> String
+    #   resp.vpn_connection.transit_gateway_id #=> String
+    #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_margin_time_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_fuzz_percentage #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].replay_window_size #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].dpd_timeout_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
+    #   resp.vpn_connection.routes #=> Array
+    #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
+    #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
+    #   resp.vpn_connection.routes[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.tags #=> Array
+    #   resp.vpn_connection.tags[0].key #=> String
+    #   resp.vpn_connection.tags[0].value #=> String
+    #   resp.vpn_connection.vgw_telemetry #=> Array
+    #   resp.vpn_connection.vgw_telemetry[0].accepted_route_count #=> Integer
+    #   resp.vpn_connection.vgw_telemetry[0].last_status_change #=> Time
+    #   resp.vpn_connection.vgw_telemetry[0].outside_ip_address #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
+    #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptions AWS API Documentation
+    #
+    # @overload modify_vpn_tunnel_options(params = {})
+    # @param [Hash] params ({})
+    def modify_vpn_tunnel_options(params = {}, options = {})
+      req = build_request(:modify_vpn_tunnel_options, params)
+      req.send_request(options)
+    end
+
     # Enables detailed monitoring for a running instance. Otherwise, basic
     # monitoring is enabled. For more information, see [Monitoring Your
     # Instances and Volumes][1] in the *Amazon Elastic Compute Cloud User
@@ -21697,10 +28778,10 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21792,19 +28873,94 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Provisions an address range for use with your AWS resources through
+    # bring your own IP addresses (BYOIP) and creates a corresponding
+    # address pool. After the address range is provisioned, it is ready to
+    # be advertised using AdvertiseByoipCidr.
+    #
+    # AWS verifies that you own the address range and are authorized to
+    # advertise it. You must ensure that the address range is registered to
+    # you and that you created an RPKI ROA to authorize Amazon ASNs 16509
+    # and 14618 to advertise the address range. For more information, see
+    # [Bring Your Own IP Addresses (BYOIP)][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    # Provisioning an address range is an asynchronous operation, so the
+    # call returns immediately, but the address range is not ready to use
+    # until its status changes from `pending-provision` to `provisioned`. To
+    # monitor the status of an address range, use DescribeByoipCidrs. To
+    # allocate an Elastic IP address from your address pool, use
+    # AllocateAddress with either the specific address from the address pool
+    # or the ID of the address pool.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
+    #
+    # @option params [required, String] :cidr
+    #   The public IPv4 address range, in CIDR notation. The most specific
+    #   prefix that you can specify is /24. The address range cannot overlap
+    #   with another address range that you've brought to this or another
+    #   Region.
+    #
+    # @option params [Types::CidrAuthorizationContext] :cidr_authorization_context
+    #   A signed document that proves that you are authorized to bring the
+    #   specified IP address range to Amazon using BYOIP.
+    #
+    # @option params [String] :description
+    #   A description for the address range and the address pool.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ProvisionByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ProvisionByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.provision_byoip_cidr({
+    #     cidr: "String", # required
+    #     cidr_authorization_context: {
+    #       message: "String", # required
+    #       signature: "String", # required
+    #     },
+    #     description: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.description #=> String
+    #   resp.byoip_cidr.status_message #=> String
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidr AWS API Documentation
+    #
+    # @overload provision_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def provision_byoip_cidr(params = {}, options = {})
+      req = build_request(:provision_byoip_cidr, params)
+      req.send_request(options)
+    end
+
     # Purchase a reservation with configurations that match those of your
     # Dedicated Host. You must have active Dedicated Hosts in your account
     # before you purchase a reservation. This action results in the
     # specified reservation being purchased and charged to your account.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [How to Ensure Idempotency][1]
-    #   in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :currency_code
     #   The currency in which the `totalUpfrontPrice`, `LimitPrice`, and
@@ -21840,9 +28996,9 @@ module Aws::EC2
     #   resp = client.purchase_host_reservation({
     #     client_token: "String",
     #     currency_code: "USD", # accepts USD
-    #     host_id_set: ["String"], # required
+    #     host_id_set: ["HostId"], # required
     #     limit_price: "String",
-    #     offering_id: "String", # required
+    #     offering_id: "OfferingId", # required
     #   })
     #
     # @example Response structure
@@ -21880,14 +29036,18 @@ module Aws::EC2
     # purchased a Reserved Instance, you can check for your new Reserved
     # Instance with DescribeReservedInstances.
     #
+    # To queue a purchase for a future date and time, specify a purchase
+    # time. If you do not specify a purchase time, the default is the
+    # current time.
+    #
     # For more information, see [Reserved Instances][1] and [Reserved
     # Instance Marketplace][2] in the *Amazon Elastic Compute Cloud User
     # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
     #
     # @option params [required, Integer] :instance_count
     #   The number of Reserved Instances to purchase.
@@ -21906,6 +29066,10 @@ module Aws::EC2
     #   total order and ensure that the Reserved Instances are not purchased
     #   at unexpected prices.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :purchase_time
+    #   The time at which to purchase the Reserved Instance, in UTC format
+    #   (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #
     # @return [Types::PurchaseReservedInstancesOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseReservedInstancesOfferingResult#reserved_instances_id #reserved_instances_id} => String
@@ -21920,6 +29084,7 @@ module Aws::EC2
     #       amount: 1.0,
     #       currency_code: "USD", # accepts USD
     #     },
+    #     purchase_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -21935,7 +29100,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Purchases one or more Scheduled Instances with the specified schedule.
+    # Purchases the Scheduled Instances with the specified schedule.
     #
     # Scheduled Instances enable you to purchase Amazon EC2 compute capacity
     # by the hour for a one-year term. Before you can purchase a Scheduled
@@ -21956,7 +29121,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21965,7 +29130,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<Types::PurchaseRequest>] :purchase_requests
-    #   One or more purchase requests.
+    #   The purchase requests.
     #
     # @return [Types::PurchaseScheduledInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -22061,7 +29226,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Requests a reboot of one or more instances. This operation is
+    # Requests a reboot of the specified instances. This operation is
     # asynchronous; it only queues a request to reboot the specified
     # instances. The operation succeeds if the instances are valid and
     # belong to you. Requests to reboot terminated instances are ignored.
@@ -22075,10 +29240,10 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -22139,18 +29304,26 @@ module Aws::EC2
     # You can't register an image where a secondary (non-root) snapshot has
     # AWS Marketplace product codes.
     #
-    # Some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and
-    # SUSE Linux Enterprise Server (SLES), use the EC2 billing product code
-    # associated with an AMI to verify the subscription status for package
-    # updates. Creating an AMI from an EBS snapshot does not maintain this
-    # billing code, and instances launched from such an AMI are not able to
-    # connect to package update infrastructure. If you purchase a Reserved
-    # Instance offering for one of these Linux distributions and launch
-    # instances using an AMI that does not contain the required billing
-    # code, your Reserved Instance is not applied to these instances.
+    # Windows and some Linux distributions, such as Red Hat Enterprise Linux
+    # (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing
+    # product code associated with an AMI to verify the subscription status
+    # for package updates. To create a new AMI for operating systems that
+    # require a billing product code, do the following:
     #
-    # To create an AMI for operating systems that require a billing code,
-    # see CreateImage.
+    # 1.  Launch an instance from an existing AMI with that billing product
+    #     code.
+    #
+    # 2.  Customize the instance.
+    #
+    # 3.  Create a new AMI from the instance using CreateImage to preserve
+    #     the billing product code association.
+    #
+    # If you purchase a Reserved Instance to apply to an On-Demand Instance
+    # that was launched from an AMI with a billing product code, make sure
+    # that the Reserved Instance has the matching billing product code. If
+    # you purchase a Reserved Instance without the matching billing product
+    # code, the Reserved Instance will not be applied to the On-Demand
+    # Instance.
     #
     # If needed, you can deregister an AMI at any time. Any modifications
     # you make to an AMI backed by an instance store volume invalidates its
@@ -22159,11 +29332,18 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html
     #
     # @option params [String] :image_location
-    #   The full path to your AMI manifest in Amazon S3 storage.
+    #   The full path to your AMI manifest in Amazon S3 storage. The specified
+    #   bucket must have the `aws-exec-read` canned access control list (ACL)
+    #   to ensure that it can be accessed by Amazon EC2. For more information,
+    #   see [Canned ACLs][1] in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
     #
     # @option params [String] :architecture
     #   The architecture of the AMI.
@@ -22172,7 +29352,7 @@ module Aws::EC2
     #   AMIs, the architecture specified in the manifest file.
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     #
     # @option params [String] :description
     #   A description for your AMI.
@@ -22234,19 +29414,19 @@ module Aws::EC2
     #
     #   resp = client.register_image({
     #     image_location: "String",
-    #     architecture: "i386", # accepts i386, x86_64
+    #     architecture: "i386", # accepts i386, x86_64, arm64
     #     block_device_mappings: [
     #       {
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           encrypted: false,
+    #           kms_key_id: "String",
     #         },
     #         no_device: "String",
     #       },
@@ -22276,6 +29456,58 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Rejects a request to attach a VPC to a transit gateway.
+    #
+    # The VPC attachment must be in the `pendingAcceptance` state. Use
+    # DescribeTransitGatewayVpcAttachments to view your pending VPC
+    # attachment requests. Use AcceptTransitGatewayVpcAttachment to accept a
+    # VPC attachment request.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::RejectTransitGatewayVpcAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectTransitGatewayVpcAttachmentResult#transit_gateway_vpc_attachment #transit_gateway_vpc_attachment} => Types::TransitGatewayVpcAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_transit_gateway_vpc_attachment({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_vpc_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_vpc_attachment.transit_gateway_id #=> String
+    #   resp.transit_gateway_vpc_attachment.vpc_id #=> String
+    #   resp.transit_gateway_vpc_attachment.vpc_owner_id #=> String
+    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachment.subnet_ids #=> Array
+    #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
+    #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
+    #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.tags #=> Array
+    #   resp.transit_gateway_vpc_attachment.tags[0].key #=> String
+    #   resp.transit_gateway_vpc_attachment.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectTransitGatewayVpcAttachment AWS API Documentation
+    #
+    # @overload reject_transit_gateway_vpc_attachment(params = {})
+    # @param [Hash] params ({})
+    def reject_transit_gateway_vpc_attachment(params = {}, options = {})
+      req = build_request(:reject_transit_gateway_vpc_attachment, params)
+      req.send_request(options)
+    end
+
     # Rejects one or more VPC endpoint connection requests to your VPC
     # endpoint service.
     #
@@ -22299,7 +29531,7 @@ module Aws::EC2
     #
     #   resp = client.reject_vpc_endpoint_connections({
     #     dry_run: false,
-    #     service_id: "String", # required
+    #     service_id: "ServiceId", # required
     #     vpc_endpoint_ids: ["String"], # required
     #   })
     #
@@ -22343,7 +29575,7 @@ module Aws::EC2
     #
     #   resp = client.reject_vpc_peering_connection({
     #     dry_run: false,
-    #     vpc_peering_connection_id: "String", # required
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId", # required
     #   })
     #
     # @example Response structure
@@ -22415,7 +29647,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.release_address({
-    #     allocation_id: "String",
+    #     allocation_id: "AllocationId",
     #     public_ip: "String",
     #     dry_run: false,
     #   })
@@ -22433,8 +29665,8 @@ module Aws::EC2
     # released. On-Demand billing is stopped and the host goes into
     # `released` state. The host ID of Dedicated Hosts that have been
     # released can no longer be specified in another request, for example,
-    # ModifyHosts. You must stop or terminate all instances on a host before
-    # it can be released.
+    # to modify the host. You must stop or terminate all instances on a host
+    # before it can be released.
     #
     # When Dedicated Hosts are released, it may take some time for them to
     # stop counting toward your limit and you may receive capacity errors
@@ -22522,14 +29754,14 @@ module Aws::EC2
 
     # Changes which network ACL a subnet is associated with. By default when
     # you create a subnet, it's automatically associated with the default
-    # network ACL. For more information about network ACLs, see [Network
-    # ACLs][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # network ACL. For more information, see [Network ACLs][1] in the
+    # *Amazon Virtual Private Cloud User Guide*.
     #
     # This is an idempotent operation.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html
     #
     # @option params [required, String] :association_id
     #   The ID of the current association between the original network ACL and
@@ -22566,9 +29798,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.replace_network_acl_association({
-    #     association_id: "String", # required
+    #     association_id: "NetworkAclAssociationId", # required
     #     dry_run: false,
-    #     network_acl_id: "String", # required
+    #     network_acl_id: "NetworkAclId", # required
     #   })
     #
     # @example Response structure
@@ -22584,13 +29816,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Replaces an entry (rule) in a network ACL. For more information about
-    # network ACLs, see [Network ACLs][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # Replaces an entry (rule) in a network ACL. For more information, see
+    # [Network ACLs][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html
     #
     # @option params [String] :cidr_block
     #   The IPv4 network range to allow or deny, in CIDR notation (for example
@@ -22609,8 +29840,8 @@ module Aws::EC2
     #
     # @option params [Types::IcmpTypeCode] :icmp_type_code
     #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an IPv6
-    #   CIDR block.
+    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR
+    #   block.
     #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range to allow or deny, in CIDR notation (for example
@@ -22621,17 +29852,17 @@ module Aws::EC2
     #
     # @option params [Types::PortRange] :port_range
     #   TCP or UDP protocols: The range of ports the rule applies to. Required
-    #   if specifying TCP (6) or UDP (17) for the protocol.
+    #   if specifying protocol 6 (TCP) or 17 (UDP).
     #
     # @option params [required, String] :protocol
-    #   The IP protocol. You can specify `all` or `-1` to mean all protocols.
-    #   If you specify `all`, `-1`, or a protocol number other than `tcp`,
-    #   `udp`, or `icmp`, traffic on all ports is allowed, regardless of any
-    #   ports or ICMP types or codes you specify. If you specify protocol `58`
-    #   (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types
-    #   and codes allowed, regardless of any that you specify. If you specify
-    #   protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you must
-    #   specify an ICMP type and code.
+    #   The protocol number. A value of "-1" means all protocols. If you
+    #   specify "-1" or a protocol number other than "6" (TCP), "17"
+    #   (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of
+    #   any ports or ICMP types or codes that you specify. If you specify
+    #   protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for
+    #   all ICMP types and codes allowed, regardless of any that you specify.
+    #   If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR
+    #   block, you must specify an ICMP type and code.
     #
     # @option params [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
@@ -22655,7 +29886,7 @@ module Aws::EC2
     #       from: 53, 
     #       to: 53, 
     #     }, 
-    #     protocol: "udp", 
+    #     protocol: "17", 
     #     rule_action: "allow", 
     #     rule_number: 100, 
     #   })
@@ -22671,7 +29902,7 @@ module Aws::EC2
     #       type: 1,
     #     },
     #     ipv_6_cidr_block: "String",
-    #     network_acl_id: "String", # required
+    #     network_acl_id: "NetworkAclId", # required
     #     port_range: {
     #       from: 1,
     #       to: 1,
@@ -22691,24 +29922,26 @@ module Aws::EC2
     end
 
     # Replaces an existing route within a route table in a VPC. You must
-    # provide only one of the following: Internet gateway or virtual private
+    # provide only one of the following: internet gateway or virtual private
     # gateway, NAT instance, NAT gateway, VPC peering connection, network
-    # interface, or egress-only Internet gateway.
+    # interface, or egress-only internet gateway.
     #
-    # For more information about route tables, see [Route Tables][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Route Tables][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
     # @option params [String] :destination_cidr_block
     #   The IPv4 CIDR address block used for the destination match. The value
-    #   you provide must match the CIDR of an existing route in the table.
+    #   that you provide must match the CIDR of an existing route in the
+    #   table.
     #
     # @option params [String] :destination_ipv_6_cidr_block
     #   The IPv6 CIDR address block used for the destination match. The value
-    #   you provide must match the CIDR of an existing route in the table.
+    #   that you provide must match the CIDR of an existing route in the
+    #   table.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -22717,16 +29950,19 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     #
     # @option params [String] :gateway_id
-    #   The ID of an Internet gateway or virtual private gateway.
+    #   The ID of an internet gateway or virtual private gateway.
     #
     # @option params [String] :instance_id
     #   The ID of a NAT instance in your VPC.
     #
     # @option params [String] :nat_gateway_id
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
+    #
+    # @option params [String] :transit_gateway_id
+    #   The ID of a transit gateway.
     #
     # @option params [String] :network_interface_id
     #   The ID of a network interface.
@@ -22757,13 +29993,14 @@ module Aws::EC2
     #     destination_cidr_block: "String",
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
-    #     egress_only_internet_gateway_id: "String",
-    #     gateway_id: "String",
-    #     instance_id: "String",
-    #     nat_gateway_id: "String",
-    #     network_interface_id: "String",
-    #     route_table_id: "String", # required
-    #     vpc_peering_connection_id: "String",
+    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
+    #     gateway_id: "RouteTableGatewayId",
+    #     instance_id: "InstanceId",
+    #     nat_gateway_id: "NatGatewayId",
+    #     transit_gateway_id: "TransitGatewayId",
+    #     network_interface_id: "NetworkInterfaceId",
+    #     route_table_id: "RouteTableId", # required
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRoute AWS API Documentation
@@ -22788,7 +30025,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
     # @option params [required, String] :association_id
     #   The association ID.
@@ -22824,9 +30061,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.replace_route_table_association({
-    #     association_id: "String", # required
+    #     association_id: "RouteTableAssociationId", # required
     #     dry_run: false,
-    #     route_table_id: "String", # required
+    #     route_table_id: "RouteTableId", # required
     #   })
     #
     # @example Response structure
@@ -22839,6 +30076,61 @@ module Aws::EC2
     # @param [Hash] params ({})
     def replace_route_table_association(params = {}, options = {})
       req = build_request(:replace_route_table_association, params)
+      req.send_request(options)
+    end
+
+    # Replaces the specified route in the specified transit gateway route
+    # table.
+    #
+    # @option params [required, String] :destination_cidr_block
+    #   The CIDR range used for the destination match. Routing decisions are
+    #   based on the most specific match.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the route table.
+    #
+    # @option params [String] :transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Boolean] :blackhole
+    #   Indicates whether traffic matching this route is to be dropped.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ReplaceTransitGatewayRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReplaceTransitGatewayRouteResult#route #route} => Types::TransitGatewayRoute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.replace_transit_gateway_route({
+    #     destination_cidr_block: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
+    #     blackhole: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.route.destination_cidr_block #=> String
+    #   resp.route.transit_gateway_attachments #=> Array
+    #   resp.route.transit_gateway_attachments[0].resource_id #=> String
+    #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.route.type #=> String, one of "static", "propagated"
+    #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceTransitGatewayRoute AWS API Documentation
+    #
+    # @overload replace_transit_gateway_route(params = {})
+    # @param [Hash] params ({})
+    def replace_transit_gateway_route(params = {}, options = {})
+      req = build_request(:replace_transit_gateway_route, params)
       req.send_request(options)
     end
 
@@ -22865,11 +30157,10 @@ module Aws::EC2
     #   The time at which the reported instance health state ended.
     #
     # @option params [required, Array<String>] :instances
-    #   One or more instances.
+    #   The instances.
     #
     # @option params [required, Array<String>] :reason_codes
-    #   One or more reason codes that describe the health state of your
-    #   instance.
+    #   The reason codes that describe the health state of your instance.
     #
     #   * `instance-stuck-in-state`\: My instance is stuck in a state.
     #
@@ -22936,10 +30227,10 @@ module Aws::EC2
     # specifications that vary by instance type, AMI, Availability Zone, or
     # subnet.
     #
-    # By default, the Spot Fleet requests Spot Instances in the Spot pool
-    # where the price per unit is the lowest. Each launch specification can
-    # include its own instance weighting that reflects the value of the
-    # instance type to your application workload.
+    # By default, the Spot Fleet requests Spot Instances in the Spot
+    # Instance pool where the price per unit is the lowest. Each launch
+    # specification can include its own instance weighting that reflects the
+    # value of the instance type to your application workload.
     #
     # Alternatively, you can specify that the Spot Fleet distribute the
     # target capacity across the Spot pools included in its launch
@@ -22956,7 +30247,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -23127,7 +30418,7 @@ module Aws::EC2
     #   resp = client.request_spot_fleet({
     #     dry_run: false,
     #     spot_fleet_request_config: { # required
-    #       allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified
+    #       allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #       on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #       client_token: "String",
     #       excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
@@ -23148,13 +30439,13 @@ module Aws::EC2
     #               device_name: "String",
     #               virtual_name: "String",
     #               ebs: {
-    #                 encrypted: false,
     #                 delete_on_termination: false,
     #                 iops: 1,
-    #                 kms_key_id: "String",
     #                 snapshot_id: "String",
     #                 volume_size: 1,
     #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                 encrypted: false,
+    #                 kms_key_id: "String",
     #               },
     #               no_device: "String",
     #             },
@@ -23165,7 +30456,7 @@ module Aws::EC2
     #             name: "String",
     #           },
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #           kernel_id: "String",
     #           key_name: "String",
     #           monitoring: {
@@ -23194,6 +30485,7 @@ module Aws::EC2
     #               ],
     #               secondary_private_ip_address_count: 1,
     #               subnet_id: "String",
+    #               interface_type: "String",
     #             },
     #           ],
     #           placement: {
@@ -23208,7 +30500,7 @@ module Aws::EC2
     #           weighted_capacity: 1.0,
     #           tag_specifications: [
     #             {
-    #               resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #               tags: [
     #                 {
     #                   key: "String",
@@ -23228,7 +30520,7 @@ module Aws::EC2
     #           },
     #           overrides: [
     #             {
-    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #               spot_price: "String",
     #               subnet_id: "String",
     #               availability_zone: "String",
@@ -23241,24 +30533,26 @@ module Aws::EC2
     #       spot_price: "String",
     #       target_capacity: 1, # required
     #       on_demand_target_capacity: 1,
+    #       on_demand_max_total_price: "String",
+    #       spot_max_total_price: "String",
     #       terminate_instances_with_expiration: false,
-    #       type: "request", # accepts request, maintain
+    #       type: "request", # accepts request, maintain, instant
     #       valid_from: Time.now,
     #       valid_until: Time.now,
     #       replace_unhealthy_instances: false,
     #       instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #       load_balancers_config: {
     #         classic_load_balancers_config: {
-    #           classic_load_balancers: [ # required
+    #           classic_load_balancers: [
     #             {
-    #               name: "String", # required
+    #               name: "String",
     #             },
     #           ],
     #         },
     #         target_groups_config: {
-    #           target_groups: [ # required
+    #           target_groups: [
     #             {
-    #               arn: "String", # required
+    #               arn: "String",
     #             },
     #           ],
     #         },
@@ -23287,7 +30581,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html
     #
     # @option params [String] :availability_zone_group
     #   The user-specified name for a logical grouping of requests.
@@ -23333,7 +30627,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -23370,6 +30664,10 @@ module Aws::EC2
     #   all instances launch, the request expires, or the request is canceled.
     #   If the request is persistent, the request becomes active at this date
     #   and time and remains active until it expires or is canceled.
+    #
+    #   The specified start date and time cannot be equal to the current date
+    #   and time. You must specify a start date and time that occurs after the
+    #   current date and time.
     #
     # @option params [Time,DateTime,Date,Integer,String] :valid_until
     #   The end date of the request. If this is a one-time request, the
@@ -23455,13 +30753,13 @@ module Aws::EC2
     #           device_name: "String",
     #           virtual_name: "String",
     #           ebs: {
-    #             encrypted: false,
     #             delete_on_termination: false,
     #             iops: 1,
-    #             kms_key_id: "String",
     #             snapshot_id: "String",
     #             volume_size: 1,
     #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #             encrypted: false,
+    #             kms_key_id: "String",
     #           },
     #           no_device: "String",
     #         },
@@ -23472,7 +30770,7 @@ module Aws::EC2
     #         name: "String",
     #       },
     #       image_id: "String",
-    #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #       kernel_id: "String",
     #       key_name: "String",
     #       monitoring: {
@@ -23501,6 +30799,7 @@ module Aws::EC2
     #           ],
     #           secondary_private_ip_address_count: 1,
     #           subnet_id: "String",
+    #           interface_type: "String",
     #         },
     #       ],
     #       placement: {
@@ -23538,19 +30837,19 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings #=> Array
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].device_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].virtual_name #=> String
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
     #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.arn #=> String
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.name #=> String
     #   resp.spot_instance_requests[0].launch_specification.image_id #=> String
-    #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.spot_instance_requests[0].launch_specification.kernel_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.key_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces #=> Array
@@ -23570,6 +30869,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].subnet_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].interface_type #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.tenancy #=> String, one of "default", "dedicated", "host"
@@ -23601,6 +30901,47 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Resets the default customer master key (CMK) for EBS encryption for
+    # your account in this Region to the AWS managed CMK for EBS.
+    #
+    # After resetting the default CMK to the AWS managed CMK, you can
+    # continue to encrypt by a customer managed CMK by specifying it when
+    # you create the volume. For more information, see [Amazon EBS
+    # Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ResetEbsDefaultKmsKeyIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetEbsDefaultKmsKeyIdResult#kms_key_id #kms_key_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_ebs_default_kms_key_id({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetEbsDefaultKmsKeyId AWS API Documentation
+    #
+    # @overload reset_ebs_default_kms_key_id(params = {})
+    # @param [Hash] params ({})
+    def reset_ebs_default_kms_key_id(params = {}, options = {})
+      req = build_request(:reset_ebs_default_kms_key_id, params)
+      req.send_request(options)
+    end
+
     # Resets the specified attribute of the specified Amazon FPGA Image
     # (AFI) to its default value. You can only reset the load permission
     # attribute.
@@ -23625,7 +30966,7 @@ module Aws::EC2
     #
     #   resp = client.reset_fpga_image_attribute({
     #     dry_run: false,
-    #     fpga_image_id: "String", # required
+    #     fpga_image_id: "FpgaImageId", # required
     #     attribute: "loadPermission", # accepts loadPermission
     #   })
     #
@@ -23707,7 +31048,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
     #
     # @option params [required, String] :attribute
     #   The attribute to reset.
@@ -23746,7 +31087,7 @@ module Aws::EC2
     #   resp = client.reset_instance_attribute({
     #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
     #     dry_run: false,
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetInstanceAttribute AWS API Documentation
@@ -23779,7 +31120,7 @@ module Aws::EC2
     #
     #   resp = client.reset_network_interface_attribute({
     #     dry_run: false,
-    #     network_interface_id: "String", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
     #     source_dest_check: "String",
     #   })
     #
@@ -23800,7 +31141,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html
     #
     # @option params [required, String] :attribute
     #   The attribute to reset. Currently, only the attribute for permission
@@ -23836,7 +31177,7 @@ module Aws::EC2
     #
     #   resp = client.reset_snapshot_attribute({
     #     attribute: "productCodes", # required, accepts productCodes, createVolumePermission
-    #     snapshot_id: "String", # required
+    #     snapshot_id: "SnapshotId", # required
     #     dry_run: false,
     #   })
     #
@@ -23905,9 +31246,59 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Removes one or more egress rules from a security
-    # group for EC2-VPC. This action doesn't apply to security groups for
-    # use in EC2-Classic. To remove a rule, the values that you specify (for
+    # Removes an ingress authorization rule from a Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint with which the authorization rule is
+    #   associated.
+    #
+    # @option params [required, String] :target_network_cidr
+    #   The IPv4 address range, in CIDR notation, of the network for which
+    #   access is being removed.
+    #
+    # @option params [String] :access_group_id
+    #   The ID of the Active Directory group for which to revoke access.
+    #
+    # @option params [Boolean] :revoke_all_groups
+    #   Indicates whether access should be revoked for all clients.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::RevokeClientVpnIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RevokeClientVpnIngressResult#status #status} => Types::ClientVpnAuthorizationRuleStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_client_vpn_ingress({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     target_network_cidr: "String", # required
+    #     access_group_id: "String",
+    #     revoke_all_groups: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.code #=> String, one of "authorizing", "active", "failed", "revoking"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeClientVpnIngress AWS API Documentation
+    #
+    # @overload revoke_client_vpn_ingress(params = {})
+    # @param [Hash] params ({})
+    def revoke_client_vpn_ingress(params = {}, options = {})
+      req = build_request(:revoke_client_vpn_ingress, params)
+      req.send_request(options)
+    end
+
+    # \[VPC only\] Removes the specified egress rules from a security group
+    # for EC2-VPC. This action doesn't apply to security groups for use in
+    # EC2-Classic. To remove a rule, the values that you specify (for
     # example, ports) must match the existing rule's values exactly.
     #
     # Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or
@@ -23930,9 +31321,8 @@ module Aws::EC2
     #   The ID of the security group.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a destination
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range in the same set of permissions.
     #
     # @option params [String] :cidr_ip
     #   Not supported. Use a set of IP permissions to specify the CIDR.
@@ -24015,12 +31405,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Removes one or more ingress rules from a security group. To remove a
+    # Removes the specified ingress rules from a security group. To remove a
     # rule, the values that you specify (for example, ports) must match the
     # existing rule's values exactly.
     #
-    # <note markdown="1"> \[EC2-Classic security groups only\] If the values you specify do not
-    # match the existing rule's values, no error is returned. Use
+    # <note markdown="1"> \[EC2-Classic only\] If the values you specify do not match the
+    # existing rule's values, no error is returned. Use
     # DescribeSecurityGroups to verify that the rule has been removed.
     #
     #  </note>
@@ -24054,9 +31444,8 @@ module Aws::EC2
     #   request.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a source
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a source security group
+    #   and a CIDR IP address range in the same set of permissions.
     #
     # @option params [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
@@ -24213,26 +31602,21 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
-    # [4]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
-    # [5]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
-    # [6]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
-    # [7]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html
-    # [8]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    # [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html
+    # [8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   One or more block device mapping entries. You can't specify both a
-    #   snapshot ID and an encryption value. This is because only blank
-    #   volumes can be encrypted on creation. If a snapshot is the basis for a
-    #   volume, it is not blank and its encryption status is used for the
-    #   volume encryption status.
+    #   The block device mapping entries.
     #
     # @option params [String] :image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages. An AMI
-    #   is required to launch an instance and must be specified here or in a
-    #   launch template.
+    #   The ID of the AMI. An AMI ID is required to launch an instance and
+    #   must be specified here or in a launch template.
     #
     # @option params [String] :instance_type
     #   The instance type. For more information, see [Instance Types][1] in
@@ -24242,22 +31626,28 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #
     # @option params [Integer] :ipv_6_address_count
-    #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
+    #   \[EC2-VPC\] The number of IPv6 addresses to associate with the primary
     #   network interface. Amazon EC2 chooses the IPv6 addresses from the
     #   range of your subnet. You cannot specify this option and the option to
     #   assign specific IPv6 addresses in the same request. You can specify
     #   this option if you've specified a minimum number of instances to
     #   launch.
     #
+    #   You cannot specify this option and the network interfaces option in
+    #   the same request.
+    #
     # @option params [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
-    #   subnet to associate with the primary network interface. You cannot
-    #   specify this option and the option to assign a number of IPv6
-    #   addresses in the same request. You cannot specify this option if
-    #   you've specified a minimum number of instances to launch.
+    #   \[EC2-VPC\] The IPv6 addresses from the range of the subnet to
+    #   associate with the primary network interface. You cannot specify this
+    #   option and the option to assign a number of IPv6 addresses in the same
+    #   request. You cannot specify this option if you've specified a minimum
+    #   number of instances to launch.
+    #
+    #   You cannot specify this option and the network interfaces option in
+    #   the same request.
     #
     # @option params [String] :kernel_id
     #   The ID of the kernel.
@@ -24268,15 +31658,20 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
     #
     # @option params [String] :key_name
     #   The name of the key pair. You can create a key pair using
-    #   CreateKeyPair or ImportKeyPair.
+    #   [CreateKeyPair][1] or [ImportKeyPair][2].
     #
     #   If you do not specify a key pair, you can't connect to the instance
     #   unless you choose an AMI that is configured to allow users another way
     #   to log in.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     #
     # @option params [required, Integer] :max_count
     #   The maximum number of instances to launch. If you specify more
@@ -24308,13 +31703,16 @@ module Aws::EC2
     #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
     #
     # @option params [Types::RunInstancesMonitoringEnabled] :monitoring
-    #   The monitoring for the instance.
+    #   Specifies whether detailed monitoring is enabled for the instance.
     #
     # @option params [Types::Placement] :placement
     #   The placement for the instance.
     #
     # @option params [String] :ramdisk_id
-    #   The ID of the RAM disk.
+    #   The ID of the RAM disk to select. Some kernels require additional
+    #   drivers at launch. Check the kernel requirements for information about
+    #   whether you need to specify a RAM disk. To find kernel requirements,
+    #   go to the AWS Resource Center and search for the kernel ID.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
     #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
@@ -24322,34 +31720,46 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
     #
     # @option params [Array<String>] :security_group_ids
-    #   One or more security group IDs. You can create a security group using
-    #   CreateSecurityGroup.
+    #   The IDs of the security groups. You can create a security group using
+    #   [CreateSecurityGroup][1].
     #
-    #   Default: Amazon EC2 uses the default security group.
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     #
     # @option params [Array<String>] :security_groups
-    #   \[EC2-Classic, default VPC\] One or more security group names. For a
+    #   \[EC2-Classic, default VPC\] The names of the security groups. For a
     #   nondefault VPC, you must use security group IDs instead.
+    #
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
     #
     #   Default: Amazon EC2 uses the default security group.
     #
     # @option params [String] :subnet_id
     #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
     #
+    #   If you specify a network interface, you must specify any subnets as
+    #   part of the network interface.
+    #
     # @option params [String] :user_data
     #   The user data to make available to the instance. For more information,
     #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
     #   [Adding User Data][2] (Windows). If you are using a command line tool,
     #   base64-encoding is performed for you, and you can load the text from a
-    #   file. Otherwise, you must provide base64-encoded text.
+    #   file. Otherwise, you must provide base64-encoded text. User data is
+    #   limited to 16 KB.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
     #
     # @option params [String] :additional_info
     #   Reserved.
@@ -24363,17 +31773,21 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Boolean] :disable_api_termination
     #   If you set this parameter to `true`, you can't terminate the instance
     #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
-    #   change this attribute to `false` after launch, use
-    #   ModifyInstanceAttribute. Alternatively, if you set
-    #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can terminate
-    #   the instance by running the shutdown command from the instance.
+    #   change this attribute after launch, use [ModifyInstanceAttribute][1].
+    #   Alternatively, if you set `InstanceInitiatedShutdownBehavior` to
+    #   `terminate`, you can terminate the instance by running the shutdown
+    #   command from the instance.
     #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -24402,7 +31816,9 @@ module Aws::EC2
     #   Default: `stop`
     #
     # @option params [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   One or more network interfaces.
+    #   The network interfaces to associate with the instance. If you specify
+    #   a network interface, you must specify any security groups and subnets
+    #   as part of the network interface.
     #
     # @option params [String] :private_ip_address
     #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
@@ -24414,14 +31830,35 @@ module Aws::EC2
     #   specification. You cannot specify this option if you're launching
     #   more than one instance in the request.
     #
+    #   You cannot specify this option and the network interfaces option in
+    #   the same request.
+    #
     # @option params [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
-    #   An elastic GPU to associate with the instance.
+    #   An elastic GPU to associate with the instance. An Elastic GPU is a GPU
+    #   resource that you can attach to your Windows instance to accelerate
+    #   the graphics performance of your applications. For more information,
+    #   see [ Amazon EC2 Elastic GPUs][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
+    #
+    # @option params [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to all
     #   instances or volumes that are created during launch. To tag a resource
-    #   after it has been created, see CreateTags.
+    #   after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #
     # @option params [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template to use to launch the instances. Any parameters
@@ -24437,16 +31874,18 @@ module Aws::EC2
     #   `stop`.
     #
     # @option params [Types::CreditSpecificationRequest] :credit_specification
-    #   The credit option for CPU usage of the instance. Valid values are
-    #   `standard` and `unlimited`. To change this attribute after launch, use
-    #   ModifyInstanceCreditSpecification. For more information, see [T2
-    #   Instances][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   The credit option for CPU usage of the T2 or T3 instance. Valid values
+    #   are `standard` and `unlimited`. To change this attribute after launch,
+    #   use [ ModifyInstanceCreditSpecification][1]. For more information, see
+    #   [Burstable Performance Instances][2] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
     #
-    #   Default: `standard`
+    #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Types::CpuOptionsRequest] :cpu_options
     #   The CPU options for the instance. For more information, see
@@ -24455,7 +31894,34 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    #
+    # @option params [Types::CapacityReservationSpecification] :capacity_reservation_specification
+    #   Information about the Capacity Reservation targeting option. If you do
+    #   not specify this parameter, the instance's Capacity Reservation
+    #   preference defaults to `open`, which enables it to run in any open
+    #   Capacity Reservation that has matching attributes (instance type,
+    #   platform, Availability Zone).
+    #
+    # @option params [Types::HibernationOptionsRequest] :hibernation_options
+    #   Indicates whether an instance is enabled for hibernation. For more
+    #   information, see [Hibernate Your Instance][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #
+    # @option params [Array<Types::LicenseConfigurationRequest>] :license_specifications
+    #   The license configurations.
+    #
+    # @option params [Types::InstanceMetadataOptionsRequest] :metadata_options
+    #   The metadata options for the instance. For more information, see
+    #   [Instance Metadata and User Data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -24514,19 +31980,19 @@ module Aws::EC2
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           encrypted: false,
+    #           kms_key_id: "String",
     #         },
     #         no_device: "String",
     #       },
     #     ],
-    #     image_id: "String",
-    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge
+    #     image_id: "ImageId",
+    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
@@ -24544,6 +32010,7 @@ module Aws::EC2
     #       availability_zone: "String",
     #       affinity: "String",
     #       group_name: "String",
+    #       partition_number: 1,
     #       host_id: "String",
     #       tenancy: "default", # accepts default, dedicated, host
     #       spread_domain: "String",
@@ -24586,6 +32053,7 @@ module Aws::EC2
     #         ],
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "String",
+    #         interface_type: "String",
     #       },
     #     ],
     #     private_ip_address: "String",
@@ -24594,9 +32062,14 @@ module Aws::EC2
     #         type: "String", # required
     #       },
     #     ],
+    #     elastic_inference_accelerators: [
+    #       {
+    #         type: "String", # required
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -24627,6 +32100,25 @@ module Aws::EC2
     #       core_count: 1,
     #       threads_per_core: 1,
     #     },
+    #     capacity_reservation_specification: {
+    #       capacity_reservation_preference: "open", # accepts open, none
+    #       capacity_reservation_target: {
+    #         capacity_reservation_id: "String",
+    #       },
+    #     },
+    #     hibernation_options: {
+    #       configured: false,
+    #     },
+    #     license_specifications: [
+    #       {
+    #         license_configuration_arn: "String",
+    #       },
+    #     ],
+    #     metadata_options: {
+    #       http_tokens: "optional", # accepts optional, required
+    #       http_put_response_hop_limit: 1,
+    #       http_endpoint: "disabled", # accepts disabled, enabled
+    #     },
     #   })
     #
     # @example Response structure
@@ -24638,7 +32130,7 @@ module Aws::EC2
     #   resp.instances[0].ami_launch_index #=> Integer
     #   resp.instances[0].image_id #=> String
     #   resp.instances[0].instance_id #=> String
-    #   resp.instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.12xlarge", "m5d.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge"
+    #   resp.instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge"
     #   resp.instances[0].kernel_id #=> String
     #   resp.instances[0].key_name #=> String
     #   resp.instances[0].launch_time #=> Time
@@ -24646,6 +32138,7 @@ module Aws::EC2
     #   resp.instances[0].placement.availability_zone #=> String
     #   resp.instances[0].placement.affinity #=> String
     #   resp.instances[0].placement.group_name #=> String
+    #   resp.instances[0].placement.partition_number #=> Integer
     #   resp.instances[0].placement.host_id #=> String
     #   resp.instances[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.instances[0].placement.spread_domain #=> String
@@ -24663,7 +32156,7 @@ module Aws::EC2
     #   resp.instances[0].state_transition_reason #=> String
     #   resp.instances[0].subnet_id #=> String
     #   resp.instances[0].vpc_id #=> String
-    #   resp.instances[0].architecture #=> String, one of "i386", "x86_64"
+    #   resp.instances[0].architecture #=> String, one of "i386", "x86_64", "arm64"
     #   resp.instances[0].block_device_mappings #=> Array
     #   resp.instances[0].block_device_mappings[0].device_name #=> String
     #   resp.instances[0].block_device_mappings[0].ebs.attach_time #=> Time
@@ -24682,6 +32175,11 @@ module Aws::EC2
     #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_association_id #=> String
     #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_association_state #=> String
     #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_association_time #=> String
+    #   resp.instances[0].elastic_inference_accelerator_associations #=> Array
+    #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_arn #=> String
+    #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_id #=> String
+    #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_state #=> String
+    #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_time #=> Time
     #   resp.instances[0].network_interfaces #=> Array
     #   resp.instances[0].network_interfaces[0].association.ip_owner_id #=> String
     #   resp.instances[0].network_interfaces[0].association.public_dns_name #=> String
@@ -24713,6 +32211,7 @@ module Aws::EC2
     #   resp.instances[0].network_interfaces[0].status #=> String, one of "available", "associated", "attaching", "in-use", "detaching"
     #   resp.instances[0].network_interfaces[0].subnet_id #=> String
     #   resp.instances[0].network_interfaces[0].vpc_id #=> String
+    #   resp.instances[0].network_interfaces[0].interface_type #=> String
     #   resp.instances[0].root_device_name #=> String
     #   resp.instances[0].root_device_type #=> String, one of "ebs", "instance-store"
     #   resp.instances[0].security_groups #=> Array
@@ -24729,6 +32228,16 @@ module Aws::EC2
     #   resp.instances[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #   resp.instances[0].cpu_options.core_count #=> Integer
     #   resp.instances[0].cpu_options.threads_per_core #=> Integer
+    #   resp.instances[0].capacity_reservation_id #=> String
+    #   resp.instances[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.instances[0].hibernation_options.configured #=> Boolean
+    #   resp.instances[0].licenses #=> Array
+    #   resp.instances[0].licenses[0].license_configuration_arn #=> String
+    #   resp.instances[0].metadata_options.state #=> String, one of "pending", "applied"
+    #   resp.instances[0].metadata_options.http_tokens #=> String, one of "optional", "required"
+    #   resp.instances[0].metadata_options.http_put_response_hop_limit #=> Integer
+    #   resp.instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -24756,7 +32265,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-scheduled-instances.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-scheduled-instances.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that ensures the idempotency of the
@@ -24767,7 +32276,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -24925,7 +32434,7 @@ module Aws::EC2
     #       subnet_id: "String",
     #       user_data: "String",
     #     },
-    #     scheduled_instance_id: "String", # required
+    #     scheduled_instance_id: "ScheduledInstanceId", # required
     #   })
     #
     # @example Response structure
@@ -24939,6 +32448,143 @@ module Aws::EC2
     # @param [Hash] params ({})
     def run_scheduled_instances(params = {}, options = {})
       req = build_request(:run_scheduled_instances, params)
+      req.send_request(options)
+    end
+
+    # Searches for routes in the specified transit gateway route table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [required, Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `attachment.transit-gateway-attachment-id`- The id of the transit
+    #     gateway attachment.
+    #
+    #   * `attachment.resource-id` - The resource id of the transit gateway
+    #     attachment.
+    #
+    #   * `attachment.resource-type` - The attachment resource type (`vpc` \|
+    #     `vpn`).
+    #
+    #   * `route-search.exact-match` - The exact match of the specified
+    #     filter.
+    #
+    #   * `route-search.longest-prefix-match` - The longest prefix that
+    #     matches the route.
+    #
+    #   * `route-search.subnet-of-match` - The routes with a subnet that match
+    #     the specified CIDR filter.
+    #
+    #   * `route-search.supernet-of-match` - The routes with a CIDR that
+    #     encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+    #     10.0.1.0/31 routes in your route table and you specify
+    #     supernet-of-match as 10.0.1.0/30, then the result returns
+    #     10.0.1.0/29.
+    #
+    #   * `state` - The state of the route (`active` \| `blackhole`).
+    #
+    #   * `type` - The type of route (`propagated` \| `static`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of routes to return.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::SearchTransitGatewayRoutesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchTransitGatewayRoutesResult#routes #routes} => Array&lt;Types::TransitGatewayRoute&gt;
+    #   * {Types::SearchTransitGatewayRoutesResult#additional_routes_available #additional_routes_available} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_transit_gateway_routes({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     filters: [ # required
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.routes #=> Array
+    #   resp.routes[0].destination_cidr_block #=> String
+    #   resp.routes[0].transit_gateway_attachments #=> Array
+    #   resp.routes[0].transit_gateway_attachments[0].resource_id #=> String
+    #   resp.routes[0].transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
+    #   resp.routes[0].transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
+    #   resp.routes[0].type #=> String, one of "static", "propagated"
+    #   resp.routes[0].state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
+    #   resp.additional_routes_available #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchTransitGatewayRoutes AWS API Documentation
+    #
+    # @overload search_transit_gateway_routes(params = {})
+    # @param [Hash] params ({})
+    def search_transit_gateway_routes(params = {}, options = {})
+      req = build_request(:search_transit_gateway_routes, params)
+      req.send_request(options)
+    end
+
+    # Sends a diagnostic interrupt to the specified Amazon EC2 instance to
+    # trigger a *kernel panic* (on Linux instances), or a *blue
+    # screen*/*stop error* (on Windows instances). For instances based on
+    # Intel and AMD processors, the interrupt is received as a *non-maskable
+    # interrupt* (NMI).
+    #
+    # In general, the operating system crashes and reboots when a kernel
+    # panic or stop error is triggered. The operating system can also be
+    # configured to perform diagnostic tasks, such as generating a memory
+    # dump file, loading a secondary kernel, or obtaining a call trace.
+    #
+    # Before sending a diagnostic interrupt to your instance, ensure that
+    # its operating system is configured to perform the required diagnostic
+    # tasks.
+    #
+    # For more information about configuring your operating system to
+    # generate a crash dump when a kernel panic or stop error occurs, see
+    # [Send a Diagnostic Interrupt][1] (Linux instances) or [Send a
+    # Diagnostic Interrupt][2] (Windows instances).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_diagnostic_interrupt({
+    #     instance_id: "InstanceId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SendDiagnosticInterrupt AWS API Documentation
+    #
+    # @overload send_diagnostic_interrupt(params = {})
+    # @param [Hash] params ({})
+    def send_diagnostic_interrupt(params = {}, options = {})
+      req = build_request(:send_diagnostic_interrupt, params)
       req.send_request(options)
     end
 
@@ -24970,10 +32616,10 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #
     # @option params [String] :additional_info
     #   Reserved.
@@ -25044,6 +32690,11 @@ module Aws::EC2
 
     # Stops an Amazon EBS-backed instance.
     #
+    # You can use the Stop action to hibernate an instance if the instance
+    # is [enabled for hibernation][1] and it meets the [hibernation
+    # prerequisites][2]. For more information, see [Hibernate Your
+    # Instance][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
     # We don't charge usage for a stopped instance, or data transfer fees;
     # however, your root partition Amazon EBS volume remains and continues
     # to persist your data, and you are charged for Amazon EBS volume usage.
@@ -25055,36 +32706,57 @@ module Aws::EC2
     # EC2 charges a one-minute minimum for instance usage, and thereafter
     # charges per second for instance usage.
     #
-    # You can't start or stop Spot Instances, and you can't stop instance
-    # store-backed instances.
+    # You can't start, stop, or hibernate Spot Instances, and you can't
+    # stop or hibernate instance store-backed instances. For information
+    # about using hibernation for Spot Instances, see [Hibernating
+    # Interrupted Spot Instances][4] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
-    # When you stop an instance, we shut it down. You can restart your
-    # instance at any time. Before stopping an instance, make sure it is in
-    # a state from which it can be restarted. Stopping an instance does not
-    # preserve data stored in RAM.
+    # When you stop or hibernate an instance, we shut it down. You can
+    # restart your instance at any time. Before stopping or hibernating an
+    # instance, make sure it is in a state from which it can be restarted.
+    # Stopping an instance does not preserve data stored in RAM, but
+    # hibernating an instance does preserve data stored in RAM. If an
+    # instance cannot hibernate successfully, a normal shutdown occurs.
     #
-    # Stopping an instance is different to rebooting or terminating it. For
-    # example, when you stop an instance, the root device and any other
-    # devices attached to the instance persist. When you terminate an
-    # instance, the root device and any other devices attached during the
-    # instance launch are automatically deleted. For more information about
-    # the differences between rebooting, stopping, and terminating
-    # instances, see [Instance Lifecycle][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # Stopping and hibernating an instance is different to rebooting or
+    # terminating it. For example, when you stop or hibernate an instance,
+    # the root device and any other devices attached to the instance
+    # persist. When you terminate an instance, the root device and any other
+    # devices attached during the instance launch are automatically deleted.
+    # For more information about the differences between rebooting,
+    # stopping, hibernating, and terminating instances, see [Instance
+    # Lifecycle][5] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # When you stop an instance, we attempt to shut it down forcibly after a
     # short while. If your instance appears stuck in the stopping state
     # after a period of time, there may be an issue with the underlying host
     # computer. For more information, see [Troubleshooting Stopping Your
-    # Instance][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # Instance][6] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#enabling-hibernation
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html#hibernate-spot-instances
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
+    #
+    # @option params [Boolean] :hibernate
+    #   Hibernates the instance if the instance was enabled for hibernation at
+    #   launch. If the instance cannot hibernate successfully, a normal
+    #   shutdown occurs. For more information, see [Hibernate Your
+    #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -25136,6 +32808,7 @@ module Aws::EC2
     #
     #   resp = client.stop_instances({
     #     instance_ids: ["String"], # required
+    #     hibernate: false,
     #     dry_run: false,
     #     force: false,
     #   })
@@ -25158,8 +32831,64 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Shuts down one or more instances. This operation is idempotent; if you
-    # terminate an instance more than once, each call succeeds.
+    # Terminates active Client VPN endpoint connections. This action can be
+    # used to terminate a specific client connection, or up to five
+    # connections established by a specific user.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to which the client is connected.
+    #
+    # @option params [String] :connection_id
+    #   The ID of the client connection to be terminated.
+    #
+    # @option params [String] :username
+    #   The name of the user who initiated the connection. Use this option to
+    #   terminate all active connections for the specified user. This option
+    #   can only be used if the user has established up to five connections.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::TerminateClientVpnConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TerminateClientVpnConnectionsResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
+    #   * {Types::TerminateClientVpnConnectionsResult#username #username} => String
+    #   * {Types::TerminateClientVpnConnectionsResult#connection_statuses #connection_statuses} => Array&lt;Types::TerminateConnectionStatus&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_client_vpn_connections({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     connection_id: "String",
+    #     username: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_vpn_endpoint_id #=> String
+    #   resp.username #=> String
+    #   resp.connection_statuses #=> Array
+    #   resp.connection_statuses[0].connection_id #=> String
+    #   resp.connection_statuses[0].previous_status.code #=> String, one of "active", "failed-to-terminate", "terminating", "terminated"
+    #   resp.connection_statuses[0].previous_status.message #=> String
+    #   resp.connection_statuses[0].current_status.code #=> String, one of "active", "failed-to-terminate", "terminating", "terminated"
+    #   resp.connection_statuses[0].current_status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateClientVpnConnections AWS API Documentation
+    #
+    # @overload terminate_client_vpn_connections(params = {})
+    # @param [Hash] params ({})
+    def terminate_client_vpn_connections(params = {}, options = {})
+      req = build_request(:terminate_client_vpn_connections, params)
+      req.send_request(options)
+    end
+
+    # Shuts down the specified instances. This operation is idempotent; if
+    # you terminate an instance more than once, each call succeeds.
     #
     # If you specify multiple instances and the request fails (for example,
     # because of a single incorrect instance ID), none of the instances are
@@ -25189,11 +32918,11 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #
     #   Constraints: Up to 1000 instance IDs. We recommend breaking up this
     #   request into smaller batches.
@@ -25278,7 +33007,7 @@ module Aws::EC2
     #
     #   resp = client.unassign_ipv_6_addresses({
     #     ipv_6_addresses: ["String"], # required
-    #     network_interface_id: "String", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
     #   })
     #
     # @example Response structure
@@ -25324,7 +33053,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.unassign_private_ip_addresses({
-    #     network_interface_id: "String", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
     #     private_ip_addresses: ["String"], # required
     #   })
     #
@@ -25343,10 +33072,10 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -25380,8 +33109,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Updates the description of an egress (outbound)
-    # security group rule. You can replace an existing description, or add a
+    # \[VPC only\] Updates the description of an egress (outbound) security
+    # group rule. You can replace an existing description, or add a
     # description to a rule that did not have one previously.
     #
     # You specify the description as part of the IP permissions structure.
@@ -25608,6 +33337,51 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Stops advertising an IPv4 address range that is provisioned as an
+    # address pool.
+    #
+    # You can perform this operation at most once every 10 seconds, even if
+    # you specify different address ranges each time.
+    #
+    # It can take a few minutes before traffic to the specified addresses
+    # stops routing to AWS because of BGP propagation delays.
+    #
+    # @option params [required, String] :cidr
+    #   The public IPv4 address range, in CIDR notation.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::WithdrawByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::WithdrawByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.withdraw_byoip_cidr({
+    #     cidr: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.description #=> String
+    #   resp.byoip_cidr.status_message #=> String
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/WithdrawByoipCidr AWS API Documentation
+    #
+    # @overload withdraw_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def withdraw_byoip_cidr(params = {}, options = {})
+      req = build_request(:withdraw_byoip_cidr, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -25621,7 +33395,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -25638,7 +33412,7 @@ module Aws::EC2
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #
@@ -25707,6 +33481,7 @@ module Aws::EC2
     # | nat_gateway_available           | {#describe_nat_gateways}            | 15       | 40            |
     # | network_interface_available     | {#describe_network_interfaces}      | 20       | 10            |
     # | password_data_available         | {#get_password_data}                | 15       | 40            |
+    # | security_group_exists           | {#describe_security_groups}         | 5        | 6             |
     # | snapshot_completed              | {#describe_snapshots}               | 15       | 40            |
     # | spot_instance_request_fulfilled | {#describe_spot_instance_requests}  | 15       | 40            |
     # | subnet_available                | {#describe_subnets}                 | 15       | 40            |
@@ -25788,6 +33563,7 @@ module Aws::EC2
         nat_gateway_available: Waiters::NatGatewayAvailable,
         network_interface_available: Waiters::NetworkInterfaceAvailable,
         password_data_available: Waiters::PasswordDataAvailable,
+        security_group_exists: Waiters::SecurityGroupExists,
         snapshot_completed: Waiters::SnapshotCompleted,
         spot_instance_request_fulfilled: Waiters::SpotInstanceRequestFulfilled,
         subnet_available: Waiters::SubnetAvailable,

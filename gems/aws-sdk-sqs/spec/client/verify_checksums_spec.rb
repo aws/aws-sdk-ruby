@@ -84,6 +84,16 @@ module Aws
             }.not_to raise_error
           end
 
+          it 'does not raise an error with empty message attributes' do
+            expect {
+              client.send_message(
+                queue_url:'https://queue.url',
+                message_body: message_body,
+                message_attributes: {},
+              )
+            }.not_to raise_error
+          end
+
           context 'when data types have custom labels' do
             let(:md5_of_attributes) { '5b7ef6c8a8d46001c7cdadaeea917aa4' }
 

@@ -1,6 +1,126 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-11-19)
+------------------
+
+* Feature - This release provides three new runtimes to support Node.js 12 (initially 12.13.0), Python 3.8 and Java 11.
+
+1.31.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-08-29)
+------------------
+
+* Feature - Adds a "MaximumBatchingWindowInSeconds" parameter to event source mapping api's. Usable by Dynamodb and Kinesis event sources.
+
+1.29.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-05-13)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-04-25)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-02-12)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-01-17)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2018-11-29)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2018-11-20)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2018-11-19)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2018-10-24)
+------------------
+
+* Feature - API update.
+
+1.12.0 (2018-10-23)
+------------------
+
+* Feature - API update.
+
+1.11.0 (2018-10-15)
+------------------
+
+* Feature - API update.
+
+1.10.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+1.9.0 (2018-09-05)
+------------------
+
+* Feature - API update.
+
 1.8.0 (2018-07-09)
 ------------------
 

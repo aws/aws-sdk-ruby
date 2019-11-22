@@ -16,7 +16,8 @@ module Aws::DLM
     #         description: "PolicyDescription", # required
     #         state: "ENABLED", # required, accepts ENABLED, DISABLED
     #         policy_details: { # required
-    #           resource_types: ["VOLUME"], # accepts VOLUME
+    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #           target_tags: [
     #             {
     #               key: "String", # required
@@ -26,7 +27,14 @@ module Aws::DLM
     #           schedules: [
     #             {
     #               name: "ScheduleName",
+    #               copy_tags: false,
     #               tags_to_add: [
+    #                 {
+    #                   key: "String", # required
+    #                   value: "String", # required
+    #                 },
+    #               ],
+    #               variable_tags: [
     #                 {
     #                   key: "String", # required
     #                   value: "String", # required
@@ -40,8 +48,18 @@ module Aws::DLM
     #               retain_rule: {
     #                 count: 1, # required
     #               },
+    #               fast_restore_rule: {
+    #                 count: 1, # required
+    #                 availability_zones: ["AvailabilityZone"], # required
+    #               },
     #             },
     #           ],
+    #           parameters: {
+    #             exclude_boot_volume: false,
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
     #         },
     #       }
     #
@@ -60,10 +78,12 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] policy_details
-    #   The configuration of the lifecycle policy.
-    #
-    #   Target tags cannot be re-used across lifecycle policies.
+    #   The configuration details of the lifecycle policy.
     #   @return [Types::PolicyDetails]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the lifecycle policy during creation.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CreateLifecyclePolicyRequest AWS API Documentation
     #
@@ -71,7 +91,8 @@ module Aws::DLM
       :execution_role_arn,
       :description,
       :state,
-      :policy_details)
+      :policy_details,
+      :tags)
       include Aws::Structure
     end
 
@@ -98,7 +119,8 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] interval
-    #   The interval. The supported values are 12 and 24.
+    #   The interval between snapshots. The supported values are 2, 3, 4, 6,
+    #   8, 12, and 24.
     #   @return [Integer]
     #
     # @!attribute [rw] interval_unit
@@ -106,7 +128,8 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] times
-    #   The time, in UTC, to start the operation.
+    #   The time, in UTC, to start the operation. The supported format is
+    #   hh:mm.
     #
     #   The operation occurs within a one-hour window following the
     #   specified time.
@@ -143,13 +166,39 @@ module Aws::DLM
     #
     class DeleteLifecyclePolicyResponse < Aws::EmptyStructure; end
 
+    # Specifies when to enable fast snapshot restore.
+    #
+    # @note When making an API call, you may pass FastRestoreRule
+    #   data as a hash:
+    #
+    #       {
+    #         count: 1, # required
+    #         availability_zones: ["AvailabilityZone"], # required
+    #       }
+    #
+    # @!attribute [rw] count
+    #   The number of snapshots to be enabled with fast snapshot restore.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] availability_zones
+    #   The Availability Zones in which to enable fast snapshot restore.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/FastRestoreRule AWS API Documentation
+    #
+    class FastRestoreRule < Struct.new(
+      :count,
+      :availability_zones)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetLifecyclePoliciesRequest
     #   data as a hash:
     #
     #       {
     #         policy_ids: ["PolicyId"],
     #         state: "ENABLED", # accepts ENABLED, DISABLED, ERROR
-    #         resource_types: ["VOLUME"], # accepts VOLUME
+    #         resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #         target_tags: ["TagFilter"],
     #         tags_to_add: ["TagFilter"],
     #       }
@@ -167,17 +216,18 @@ module Aws::DLM
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_tags
-    #   The target tags.
+    #   The target tag for a policy.
     #
-    #   Tags are strings in the format `key:value`.
+    #   Tags are strings in the format `key=value`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags_to_add
-    #   The tags to add to the resources.
+    #   The tags to add to objects created by the policy.
     #
-    #   Tags are strings in the format `key:value`.
+    #   Tags are strings in the format `key=value`.
     #
-    #   These tags are added in addition to the AWS-added lifecycle tags.
+    #   These user-defined tags are added in addition to the AWS-added
+    #   lifecycle tags.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/GetLifecyclePoliciesRequest AWS API Documentation
@@ -231,6 +281,49 @@ module Aws::DLM
       include Aws::Structure
     end
 
+    # The service failed in an unexpected way.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
+    # Bad request. The request is missing required parameters or has invalid
+    # parameters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] required_parameters
+    #   The request omitted one or more required parameters.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mutually_exclusive_parameters
+    #   The request included parameters that cannot be provided together.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message,
+      :code,
+      :required_parameters,
+      :mutually_exclusive_parameters)
+      include Aws::Structure
+    end
+
     # Detailed information about a lifecycle policy.
     #
     # @!attribute [rw] policy_id
@@ -243,6 +336,10 @@ module Aws::DLM
     #
     # @!attribute [rw] state
     #   The activation state of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The description of the status.
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
@@ -262,16 +359,27 @@ module Aws::DLM
     #   The configuration of the lifecycle policy
     #   @return [Types::PolicyDetails]
     #
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN) of the policy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LifecyclePolicy AWS API Documentation
     #
     class LifecyclePolicy < Struct.new(
       :policy_id,
       :description,
       :state,
+      :status_message,
       :execution_role_arn,
       :date_created,
       :date_modified,
-      :policy_details)
+      :policy_details,
+      :tags,
+      :policy_arn)
       include Aws::Structure
     end
 
@@ -289,12 +397,92 @@ module Aws::DLM
     #   The activation state of the lifecycle policy.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LifecyclePolicySummary AWS API Documentation
     #
     class LifecyclePolicySummary < Struct.new(
       :policy_id,
       :description,
-      :state)
+      :state,
+      :tags)
+      include Aws::Structure
+    end
+
+    # The request failed because a limit was exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Value is the type of resource for which a limit was exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message,
+      :code,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "PolicyArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Information about the tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # Optional parameters that can be added to the policy. The set of valid
+    # parameters depends on the combination of `policyType` and
+    # `resourceType` values.
+    #
+    # @note When making an API call, you may pass Parameters
+    #   data as a hash:
+    #
+    #       {
+    #         exclude_boot_volume: false,
+    #       }
+    #
+    # @!attribute [rw] exclude_boot_volume
+    #   When executing an EBS Snapshot Management – Instance policy, execute
+    #   all CreateSnapshots calls with the `excludeBootVolume` set to the
+    #   supplied field. Defaults to false. Only valid for EBS Snapshot
+    #   Management – Instance policies.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Parameters AWS API Documentation
+    #
+    class Parameters < Struct.new(
+      :exclude_boot_volume)
       include Aws::Structure
     end
 
@@ -304,7 +492,8 @@ module Aws::DLM
     #   data as a hash:
     #
     #       {
-    #         resource_types: ["VOLUME"], # accepts VOLUME
+    #         policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #         resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #         target_tags: [
     #           {
     #             key: "String", # required
@@ -314,7 +503,14 @@ module Aws::DLM
     #         schedules: [
     #           {
     #             name: "ScheduleName",
+    #             copy_tags: false,
     #             tags_to_add: [
+    #               {
+    #                 key: "String", # required
+    #                 value: "String", # required
+    #               },
+    #             ],
+    #             variable_tags: [
     #               {
     #                 key: "String", # required
     #                 value: "String", # required
@@ -328,28 +524,73 @@ module Aws::DLM
     #             retain_rule: {
     #               count: 1, # required
     #             },
+    #             fast_restore_rule: {
+    #               count: 1, # required
+    #               availability_zones: ["AvailabilityZone"], # required
+    #             },
     #           },
     #         ],
+    #         parameters: {
+    #           exclude_boot_volume: false,
+    #         },
     #       }
+    #
+    # @!attribute [rw] policy_type
+    #   This field determines the valid target resource types and actions a
+    #   policy can manage. This field defaults to EBS\_SNAPSHOT\_MANAGEMENT
+    #   if not present.
+    #   @return [String]
     #
     # @!attribute [rw] resource_types
     #   The resource type.
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_tags
-    #   The target tags.
+    #   The single tag that identifies targeted resources for this policy.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] schedules
-    #   The schedule.
+    #   The schedule of policy-defined actions.
     #   @return [Array<Types::Schedule>]
+    #
+    # @!attribute [rw] parameters
+    #   A set of optional parameters that can be provided by the policy.
+    #   @return [Types::Parameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/PolicyDetails AWS API Documentation
     #
     class PolicyDetails < Struct.new(
+      :policy_type,
       :resource_types,
       :target_tags,
-      :schedules)
+      :schedules,
+      :parameters)
+      include Aws::Structure
+    end
+
+    # A requested resource was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Value is the type of resource that was not found.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   Value is a list of resource IDs that were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :code,
+      :resource_type,
+      :resource_ids)
       include Aws::Structure
     end
 
@@ -381,7 +622,14 @@ module Aws::DLM
     #
     #       {
     #         name: "ScheduleName",
+    #         copy_tags: false,
     #         tags_to_add: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #         variable_tags: [
     #           {
     #             key: "String", # required
     #             value: "String", # required
@@ -395,15 +643,32 @@ module Aws::DLM
     #         retain_rule: {
     #           count: 1, # required
     #         },
+    #         fast_restore_rule: {
+    #           count: 1, # required
+    #           availability_zones: ["AvailabilityZone"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
     #   The name of the schedule.
     #   @return [String]
     #
+    # @!attribute [rw] copy_tags
+    #   Copy all user-defined tags on a source volume to snapshots of the
+    #   volume created by this policy.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags_to_add
-    #   The tags to add to policy-created resources. These tags are added in
-    #   addition to the default lifecycle tags.
+    #   The tags to apply to policy-created resources. These user-defined
+    #   tags are in addition to the AWS-added lifecycle tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] variable_tags
+    #   A collection of key/value pairs with values determined dynamically
+    #   when the policy is executed. Keys may be any valid Amazon EC2 tag
+    #   key. Values must be in one of the two following formats:
+    #   `$(instance-id)` or `$(timestamp)`. Variable tags are only valid for
+    #   EBS Snapshot Management – Instance policies.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] create_rule
@@ -414,13 +679,20 @@ module Aws::DLM
     #   The retain rule.
     #   @return [Types::RetainRule]
     #
+    # @!attribute [rw] fast_restore_rule
+    #   Enable fast snapshot restore.
+    #   @return [Types::FastRestoreRule]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Schedule AWS API Documentation
     #
     class Schedule < Struct.new(
       :name,
+      :copy_tags,
       :tags_to_add,
+      :variable_tags,
       :create_rule,
-      :retain_rule)
+      :retain_rule,
+      :fast_restore_rule)
       include Aws::Structure
     end
 
@@ -450,6 +722,64 @@ module Aws::DLM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "PolicyArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "PolicyArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateLifecyclePolicyRequest
     #   data as a hash:
     #
@@ -459,7 +789,8 @@ module Aws::DLM
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #         description: "PolicyDescription",
     #         policy_details: {
-    #           resource_types: ["VOLUME"], # accepts VOLUME
+    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #           target_tags: [
     #             {
     #               key: "String", # required
@@ -469,7 +800,14 @@ module Aws::DLM
     #           schedules: [
     #             {
     #               name: "ScheduleName",
+    #               copy_tags: false,
     #               tags_to_add: [
+    #                 {
+    #                   key: "String", # required
+    #                   value: "String", # required
+    #                 },
+    #               ],
+    #               variable_tags: [
     #                 {
     #                   key: "String", # required
     #                   value: "String", # required
@@ -483,8 +821,15 @@ module Aws::DLM
     #               retain_rule: {
     #                 count: 1, # required
     #               },
+    #               fast_restore_rule: {
+    #                 count: 1, # required
+    #                 availability_zones: ["AvailabilityZone"], # required
+    #               },
     #             },
     #           ],
+    #           parameters: {
+    #             exclude_boot_volume: false,
+    #           },
     #         },
     #       }
     #
@@ -506,9 +851,8 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] policy_details
-    #   The configuration of the lifecycle policy.
-    #
-    #   Target tags cannot be re-used across policies.
+    #   The configuration of the lifecycle policy. You cannot update the
+    #   policy type or the resource type.
     #   @return [Types::PolicyDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/UpdateLifecyclePolicyRequest AWS API Documentation

@@ -93,6 +93,7 @@ module Aws::SES
     DeleteTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTemplateRequest')
     DeleteTemplateResponse = Shapes::StructureShape.new(name: 'DeleteTemplateResponse')
     DeleteVerifiedEmailAddressRequest = Shapes::StructureShape.new(name: 'DeleteVerifiedEmailAddressRequest')
+    DeliveryOptions = Shapes::StructureShape.new(name: 'DeliveryOptions')
     DescribeActiveReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'DescribeActiveReceiptRuleSetRequest')
     DescribeActiveReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'DescribeActiveReceiptRuleSetResponse')
     DescribeConfigurationSetRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationSetRequest')
@@ -155,6 +156,7 @@ module Aws::SES
     IdentityVerificationAttributes = Shapes::StructureShape.new(name: 'IdentityVerificationAttributes')
     InvalidCloudWatchDestinationException = Shapes::StructureShape.new(name: 'InvalidCloudWatchDestinationException')
     InvalidConfigurationSetException = Shapes::StructureShape.new(name: 'InvalidConfigurationSetException')
+    InvalidDeliveryOptionsException = Shapes::StructureShape.new(name: 'InvalidDeliveryOptionsException')
     InvalidFirehoseDestinationException = Shapes::StructureShape.new(name: 'InvalidFirehoseDestinationException')
     InvalidLambdaFunctionException = Shapes::StructureShape.new(name: 'InvalidLambdaFunctionException')
     InvalidPolicyException = Shapes::StructureShape.new(name: 'InvalidPolicyException')
@@ -211,6 +213,8 @@ module Aws::SES
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PolicyNameList = Shapes::ListShape.new(name: 'PolicyNameList')
     ProductionAccessNotGrantedException = Shapes::StructureShape.new(name: 'ProductionAccessNotGrantedException')
+    PutConfigurationSetDeliveryOptionsRequest = Shapes::StructureShape.new(name: 'PutConfigurationSetDeliveryOptionsRequest')
+    PutConfigurationSetDeliveryOptionsResponse = Shapes::StructureShape.new(name: 'PutConfigurationSetDeliveryOptionsResponse')
     PutIdentityPolicyRequest = Shapes::StructureShape.new(name: 'PutIdentityPolicyRequest')
     PutIdentityPolicyResponse = Shapes::StructureShape.new(name: 'PutIdentityPolicyResponse')
     RawMessage = Shapes::StructureShape.new(name: 'RawMessage')
@@ -327,6 +331,9 @@ module Aws::SES
 
     AddressList.member = Shapes::ShapeRef.new(shape: Address)
 
+    AlreadyExistsException.add_member(:name, Shapes::ShapeRef.new(shape: RuleOrRuleSetName, location_name: "Name"))
+    AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
     Body.add_member(:text, Shapes::ShapeRef.new(shape: Content, location_name: "Text"))
     Body.add_member(:html, Shapes::ShapeRef.new(shape: Content, location_name: "Html"))
     Body.struct_class = Types::Body
@@ -360,6 +367,9 @@ module Aws::SES
 
     BulkEmailDestinationStatusList.member = Shapes::ShapeRef.new(shape: BulkEmailDestinationStatus)
 
+    CannotDeleteException.add_member(:name, Shapes::ShapeRef.new(shape: RuleOrRuleSetName, location_name: "Name"))
+    CannotDeleteException.struct_class = Types::CannotDeleteException
+
     CloneReceiptRuleSetRequest.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, required: true, location_name: "RuleSetName"))
     CloneReceiptRuleSetRequest.add_member(:original_rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, required: true, location_name: "OriginalRuleSetName"))
     CloneReceiptRuleSetRequest.struct_class = Types::CloneReceiptRuleSetRequest
@@ -379,7 +389,16 @@ module Aws::SES
     ConfigurationSet.add_member(:name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "Name"))
     ConfigurationSet.struct_class = Types::ConfigurationSet
 
+    ConfigurationSetAlreadyExistsException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    ConfigurationSetAlreadyExistsException.struct_class = Types::ConfigurationSetAlreadyExistsException
+
     ConfigurationSetAttributeList.member = Shapes::ShapeRef.new(shape: ConfigurationSetAttribute)
+
+    ConfigurationSetDoesNotExistException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    ConfigurationSetDoesNotExistException.struct_class = Types::ConfigurationSetDoesNotExistException
+
+    ConfigurationSetSendingPausedException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    ConfigurationSetSendingPausedException.struct_class = Types::ConfigurationSetSendingPausedException
 
     ConfigurationSets.member = Shapes::ShapeRef.new(shape: ConfigurationSet)
 
@@ -441,6 +460,12 @@ module Aws::SES
     CustomVerificationEmailTemplate.add_member(:failure_redirection_url, Shapes::ShapeRef.new(shape: FailureRedirectionURL, location_name: "FailureRedirectionURL"))
     CustomVerificationEmailTemplate.struct_class = Types::CustomVerificationEmailTemplate
 
+    CustomVerificationEmailTemplateAlreadyExistsException.add_member(:custom_verification_email_template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "CustomVerificationEmailTemplateName"))
+    CustomVerificationEmailTemplateAlreadyExistsException.struct_class = Types::CustomVerificationEmailTemplateAlreadyExistsException
+
+    CustomVerificationEmailTemplateDoesNotExistException.add_member(:custom_verification_email_template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "CustomVerificationEmailTemplateName"))
+    CustomVerificationEmailTemplateDoesNotExistException.struct_class = Types::CustomVerificationEmailTemplateDoesNotExistException
+
     CustomVerificationEmailTemplates.member = Shapes::ShapeRef.new(shape: CustomVerificationEmailTemplate)
 
     DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
@@ -497,6 +522,9 @@ module Aws::SES
     DeleteVerifiedEmailAddressRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "EmailAddress"))
     DeleteVerifiedEmailAddressRequest.struct_class = Types::DeleteVerifiedEmailAddressRequest
 
+    DeliveryOptions.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
+    DeliveryOptions.struct_class = Types::DeliveryOptions
+
     DescribeActiveReceiptRuleSetRequest.struct_class = Types::DescribeActiveReceiptRuleSetRequest
 
     DescribeActiveReceiptRuleSetResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: ReceiptRuleSetMetadata, location_name: "Metadata"))
@@ -510,6 +538,7 @@ module Aws::SES
     DescribeConfigurationSetResponse.add_member(:configuration_set, Shapes::ShapeRef.new(shape: ConfigurationSet, location_name: "ConfigurationSet"))
     DescribeConfigurationSetResponse.add_member(:event_destinations, Shapes::ShapeRef.new(shape: EventDestinations, location_name: "EventDestinations"))
     DescribeConfigurationSetResponse.add_member(:tracking_options, Shapes::ShapeRef.new(shape: TrackingOptions, location_name: "TrackingOptions"))
+    DescribeConfigurationSetResponse.add_member(:delivery_options, Shapes::ShapeRef.new(shape: DeliveryOptions, location_name: "DeliveryOptions"))
     DescribeConfigurationSetResponse.add_member(:reputation_options, Shapes::ShapeRef.new(shape: ReputationOptions, location_name: "ReputationOptions"))
     DescribeConfigurationSetResponse.struct_class = Types::DescribeConfigurationSetResponse
 
@@ -543,6 +572,14 @@ module Aws::SES
     EventDestination.add_member(:sns_destination, Shapes::ShapeRef.new(shape: SNSDestination, location_name: "SNSDestination"))
     EventDestination.struct_class = Types::EventDestination
 
+    EventDestinationAlreadyExistsException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    EventDestinationAlreadyExistsException.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName"))
+    EventDestinationAlreadyExistsException.struct_class = Types::EventDestinationAlreadyExistsException
+
+    EventDestinationDoesNotExistException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    EventDestinationDoesNotExistException.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName"))
+    EventDestinationDoesNotExistException.struct_class = Types::EventDestinationDoesNotExistException
+
     EventDestinations.member = Shapes::ShapeRef.new(shape: EventDestination)
 
     EventTypes.member = Shapes::ShapeRef.new(shape: EventType)
@@ -552,6 +589,9 @@ module Aws::SES
     ExtensionField.struct_class = Types::ExtensionField
 
     ExtensionFieldList.member = Shapes::ShapeRef.new(shape: ExtensionField)
+
+    FromEmailAddressNotVerifiedException.add_member(:from_email_address, Shapes::ShapeRef.new(shape: FromAddress, location_name: "FromEmailAddress"))
+    FromEmailAddressNotVerifiedException.struct_class = Types::FromEmailAddressNotVerifiedException
 
     GetAccountSendingEnabledResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
     GetAccountSendingEnabledResponse.struct_class = Types::GetAccountSendingEnabledResponse
@@ -637,6 +677,33 @@ module Aws::SES
     IdentityVerificationAttributes.add_member(:verification_token, Shapes::ShapeRef.new(shape: VerificationToken, location_name: "VerificationToken"))
     IdentityVerificationAttributes.struct_class = Types::IdentityVerificationAttributes
 
+    InvalidCloudWatchDestinationException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    InvalidCloudWatchDestinationException.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName"))
+    InvalidCloudWatchDestinationException.struct_class = Types::InvalidCloudWatchDestinationException
+
+    InvalidFirehoseDestinationException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    InvalidFirehoseDestinationException.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName"))
+    InvalidFirehoseDestinationException.struct_class = Types::InvalidFirehoseDestinationException
+
+    InvalidLambdaFunctionException.add_member(:function_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "FunctionArn"))
+    InvalidLambdaFunctionException.struct_class = Types::InvalidLambdaFunctionException
+
+    InvalidRenderingParameterException.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    InvalidRenderingParameterException.struct_class = Types::InvalidRenderingParameterException
+
+    InvalidS3ConfigurationException.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "Bucket"))
+    InvalidS3ConfigurationException.struct_class = Types::InvalidS3ConfigurationException
+
+    InvalidSNSDestinationException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    InvalidSNSDestinationException.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName"))
+    InvalidSNSDestinationException.struct_class = Types::InvalidSNSDestinationException
+
+    InvalidSnsTopicException.add_member(:topic, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "Topic"))
+    InvalidSnsTopicException.struct_class = Types::InvalidSnsTopicException
+
+    InvalidTemplateException.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    InvalidTemplateException.struct_class = Types::InvalidTemplateException
+
     KinesisFirehoseDestination.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "IAMRoleARN"))
     KinesisFirehoseDestination.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "DeliveryStreamARN"))
     KinesisFirehoseDestination.struct_class = Types::KinesisFirehoseDestination
@@ -718,6 +785,9 @@ module Aws::SES
 
     MessageTagList.member = Shapes::ShapeRef.new(shape: MessageTag)
 
+    MissingRenderingAttributeException.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    MissingRenderingAttributeException.struct_class = Types::MissingRenderingAttributeException
+
     NotificationAttributes.key = Shapes::ShapeRef.new(shape: Identity)
     NotificationAttributes.value = Shapes::ShapeRef.new(shape: IdentityNotificationAttributes)
 
@@ -725,6 +795,12 @@ module Aws::SES
     PolicyMap.value = Shapes::ShapeRef.new(shape: Policy)
 
     PolicyNameList.member = Shapes::ShapeRef.new(shape: PolicyName)
+
+    PutConfigurationSetDeliveryOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+    PutConfigurationSetDeliveryOptionsRequest.add_member(:delivery_options, Shapes::ShapeRef.new(shape: DeliveryOptions, location_name: "DeliveryOptions"))
+    PutConfigurationSetDeliveryOptionsRequest.struct_class = Types::PutConfigurationSetDeliveryOptionsRequest
+
+    PutConfigurationSetDeliveryOptionsResponse.struct_class = Types::PutConfigurationSetDeliveryOptionsResponse
 
     PutIdentityPolicyRequest.add_member(:identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "Identity"))
     PutIdentityPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "PolicyName"))
@@ -796,6 +872,12 @@ module Aws::SES
     ReputationOptions.add_member(:reputation_metrics_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "ReputationMetricsEnabled"))
     ReputationOptions.add_member(:last_fresh_start, Shapes::ShapeRef.new(shape: LastFreshStart, location_name: "LastFreshStart"))
     ReputationOptions.struct_class = Types::ReputationOptions
+
+    RuleDoesNotExistException.add_member(:name, Shapes::ShapeRef.new(shape: RuleOrRuleSetName, location_name: "Name"))
+    RuleDoesNotExistException.struct_class = Types::RuleDoesNotExistException
+
+    RuleSetDoesNotExistException.add_member(:name, Shapes::ShapeRef.new(shape: RuleOrRuleSetName, location_name: "Name"))
+    RuleSetDoesNotExistException.struct_class = Types::RuleSetDoesNotExistException
 
     S3Action.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TopicArn"))
     S3Action.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "BucketName"))
@@ -952,6 +1034,9 @@ module Aws::SES
     Template.add_member(:html_part, Shapes::ShapeRef.new(shape: HtmlPart, location_name: "HtmlPart"))
     Template.struct_class = Types::Template
 
+    TemplateDoesNotExistException.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    TemplateDoesNotExistException.struct_class = Types::TemplateDoesNotExistException
+
     TemplateMetadata.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "Name"))
     TemplateMetadata.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     TemplateMetadata.struct_class = Types::TemplateMetadata
@@ -967,6 +1052,12 @@ module Aws::SES
 
     TrackingOptions.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, location_name: "CustomRedirectDomain"))
     TrackingOptions.struct_class = Types::TrackingOptions
+
+    TrackingOptionsAlreadyExistsException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    TrackingOptionsAlreadyExistsException.struct_class = Types::TrackingOptionsAlreadyExistsException
+
+    TrackingOptionsDoesNotExistException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    TrackingOptionsDoesNotExistException.struct_class = Types::TrackingOptionsDoesNotExistException
 
     UpdateAccountSendingEnabledRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
     UpdateAccountSendingEnabledRequest.struct_class = Types::UpdateAccountSendingEnabledRequest
@@ -1046,11 +1137,15 @@ module Aws::SES
       api.version = "2010-12-01"
 
       api.metadata = {
+        "apiVersion" => "2010-12-01",
         "endpointPrefix" => "email",
         "protocol" => "query",
+        "serviceAbbreviation" => "Amazon SES",
         "serviceFullName" => "Amazon Simple Email Service",
+        "serviceId" => "SES",
         "signatureVersion" => "v4",
         "signingName" => "ses",
+        "uid" => "email-2010-12-01",
         "xmlNamespace" => "http://ses.amazonaws.com/doc/2010-12-01/",
       }
 
@@ -1446,6 +1541,16 @@ module Aws::SES
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: ListVerifiedEmailAddressesResponse)
+      end)
+
+      api.add_operation(:put_configuration_set_delivery_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutConfigurationSetDeliveryOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutConfigurationSetDeliveryOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutConfigurationSetDeliveryOptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDeliveryOptionsException)
       end)
 
       api.add_operation(:put_identity_policy, Seahorse::Model::Operation.new.tap do |o|

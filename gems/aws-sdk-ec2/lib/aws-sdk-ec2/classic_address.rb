@@ -81,6 +81,12 @@ module Aws::EC2
       data[:tags]
     end
 
+    # The ID of an address pool.
+    # @return [String]
+    def public_ipv_4_pool
+      data[:public_ipv_4_pool]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -216,11 +222,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.associate({
-    #     allocation_id: "String",
-    #     instance_id: "String",
+    #     allocation_id: "AllocationId",
+    #     instance_id: "InstanceId",
     #     allow_reassociation: false,
     #     dry_run: false,
-    #     network_interface_id: "String",
+    #     network_interface_id: "NetworkInterfaceId",
     #     private_ip_address: "String",
     #   })
     # @param [Hash] options ({})
@@ -247,6 +253,9 @@ module Aws::EC2
     # @option options [String] :network_interface_id
     #   \[EC2-VPC\] The ID of the network interface. If the instance has more
     #   than one network interface, you must specify a network interface ID.
+    #
+    #   For EC2-VPC, you can specify either the instance ID or the network
+    #   interface ID, but not both.
     # @option options [String] :private_ip_address
     #   \[EC2-VPC\] The primary or secondary private IP address to associate
     #   with the Elastic IP address. If no private IP address is specified,
@@ -283,7 +292,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.release({
-    #     allocation_id: "String",
+    #     allocation_id: "AllocationId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

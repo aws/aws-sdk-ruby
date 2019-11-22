@@ -375,6 +375,10 @@ module Aws::Cloud9
     #   The Amazon Resource Name (ARN) of the environment owner.
     #   @return [String]
     #
+    # @!attribute [rw] lifecycle
+    #   The state of the environment in its creation or deletion lifecycle.
+    #   @return [Types::EnvironmentLifecycle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/Environment AWS API Documentation
     #
     class Environment < Struct.new(
@@ -383,7 +387,44 @@ module Aws::Cloud9
       :description,
       :type,
       :arn,
-      :owner_arn)
+      :owner_arn,
+      :lifecycle)
+      include Aws::Structure
+    end
+
+    # Information about the current creation or deletion lifecycle state of
+    # an AWS Cloud9 development environment.
+    #
+    # @!attribute [rw] status
+    #   The current creation or deletion lifecycle state of the environment.
+    #
+    #   * `CREATING`\: The environment is in the process of being created.
+    #
+    #   * `CREATED`\: The environment was successfully created.
+    #
+    #   * `CREATE_FAILED`\: The environment failed to be created.
+    #
+    #   * `DELETING`\: The environment is in the process of being deleted.
+    #
+    #   * `DELETE_FAILED`\: The environment failed to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Any informational message about the lifecycle state of the
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_resource
+    #   If the environment failed to delete, the Amazon Resource Name (ARN)
+    #   of the related AWS resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/EnvironmentLifecycle AWS API Documentation
+    #
+    class EnvironmentLifecycle < Struct.new(
+      :status,
+      :reason,
+      :failure_resource)
       include Aws::Structure
     end
 

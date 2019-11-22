@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +48,215 @@ module Aws::ApplicationAutoScaling
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -166,14 +264,24 @@ module Aws::ApplicationAutoScaling
 
     # @!group API Operations
 
-    # Deletes the specified Application Auto Scaling scaling policy.
+    # Deletes the specified scaling policy for an Application Auto Scaling
+    # scalable target.
     #
-    # Deleting a policy deletes the underlying alarm action, but does not
-    # delete the CloudWatch alarm associated with the scaling policy, even
-    # if it no longer has an associated action.
+    # Deleting a step scaling policy deletes the underlying alarm action,
+    # but does not delete the CloudWatch alarm associated with the scaling
+    # policy, even if it no longer has an associated action.
+    #
+    # For more information, see [Delete a Step Scaling Policy][1] and
+    # [Delete a Target Tracking Scaling Policy][2] in the *Application Auto
+    # Scaling User Guide*.
     #
     # To create a scaling policy or update an existing one, see
     # PutScalingPolicy.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html#delete-step-scaling-policy
+    # [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#delete-target-tracking-policy
     #
     # @option params [required, String] :policy_name
     #   The name of the scaling policy.
@@ -196,8 +304,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -224,7 +332,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -234,7 +347,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -255,7 +368,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -300,7 +414,15 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Deletes the specified Application Auto Scaling scheduled action.
+    # Deletes the specified scheduled action for an Application Auto Scaling
+    # scalable target.
+    #
+    # For more information, see [Delete a Scheduled Action][1] in the
+    # *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html#delete-scheduled-action
     #
     # @option params [required, String] :service_namespace
     #   The namespace of the AWS service that provides the resource or
@@ -323,8 +445,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -351,9 +473,14 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
     #
-    # @option params [String] :scalable_dimension
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
+    #
+    # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
     #
@@ -361,7 +488,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -382,7 +509,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -398,7 +526,7 @@ module Aws::ApplicationAutoScaling
     #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #     scheduled_action_name: "ResourceIdMaxLen1600", # required
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledAction AWS API Documentation
@@ -410,7 +538,7 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Deregisters a scalable target.
+    # Deregisters an Application Auto Scaling scalable target.
     #
     # Deregistering a scalable target deletes the scaling policies that are
     # associated with it.
@@ -436,8 +564,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -464,7 +592,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
@@ -475,7 +608,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -496,7 +629,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -542,8 +676,8 @@ module Aws::ApplicationAutoScaling
     # Gets information about the scalable targets in the specified
     # namespace.
     #
-    # You can filter the results using the `ResourceIds` and
-    # `ScalableDimension` parameters.
+    # You can filter the results using `ResourceIds` and
+    # `ScalableDimension`.
     #
     # To create a scalable target or update an existing one, see
     # RegisterScalableTarget. If you are no longer using a scalable target,
@@ -568,8 +702,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -596,7 +730,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
@@ -608,7 +747,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -629,7 +768,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -672,9 +812,14 @@ module Aws::ApplicationAutoScaling
     #         max_capacity: 10, 
     #         min_capacity: 1, 
     #         resource_id: "service/default/web-app", 
-    #         role_arn: "arn:aws:iam::012345678910:role/ApplicationAutoscalingECSRole", 
+    #         role_arn: "arn:aws:iam::012345678910:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService", 
     #         scalable_dimension: "ecs:service:DesiredCount", 
     #         service_namespace: "ecs", 
+    #         suspended_state: {
+    #           dynamic_scaling_in_suspended: false, 
+    #           dynamic_scaling_out_suspended: false, 
+    #           scheduled_scaling_suspended: false, 
+    #         }, 
     #       }, 
     #     ], 
     #   }
@@ -699,6 +844,9 @@ module Aws::ApplicationAutoScaling
     #   resp.scalable_targets[0].max_capacity #=> Integer
     #   resp.scalable_targets[0].role_arn #=> String
     #   resp.scalable_targets[0].creation_time #=> Time
+    #   resp.scalable_targets[0].suspended_state.dynamic_scaling_in_suspended #=> Boolean
+    #   resp.scalable_targets[0].suspended_state.dynamic_scaling_out_suspended #=> Boolean
+    #   resp.scalable_targets[0].suspended_state.scheduled_scaling_suspended #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargets AWS API Documentation
@@ -713,8 +861,7 @@ module Aws::ApplicationAutoScaling
     # Provides descriptive information about the scaling activities in the
     # specified namespace from the previous six weeks.
     #
-    # You can filter the results using the `ResourceId` and
-    # `ScalableDimension` parameters.
+    # You can filter the results using `ResourceId` and `ScalableDimension`.
     #
     # Scaling activities are triggered by CloudWatch alarms that are
     # associated with scaling policies. To view the scaling policies for a
@@ -740,8 +887,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -768,7 +915,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -779,7 +931,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -800,7 +952,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -891,10 +1044,11 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Describes the scaling policies for the specified service namespace.
+    # Describes the Application Auto Scaling scaling policies for the
+    # specified service namespace.
     #
-    # You can filter the results using the `ResourceId`,
-    # `ScalableDimension`, and `PolicyNames` parameters.
+    # You can filter the results using `ResourceId`, `ScalableDimension`,
+    # and `PolicyNames`.
     #
     # To create a scaling policy or update an existing one, see
     # PutScalingPolicy. If you are no longer using a scaling policy, you can
@@ -922,8 +1076,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -950,7 +1104,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -961,7 +1120,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -982,7 +1141,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1105,7 +1265,8 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Describes the scheduled actions for the specified service namespace.
+    # Describes the Application Auto Scaling scheduled actions for the
+    # specified service namespace.
     #
     # You can filter the results using the `ResourceId`,
     # `ScalableDimension`, and `ScheduledActionNames` parameters.
@@ -1136,8 +1297,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1164,7 +1325,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -1175,7 +1341,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -1196,7 +1362,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1264,8 +1431,8 @@ module Aws::ApplicationAutoScaling
     # Each scalable target is identified by a service namespace, resource
     # ID, and scalable dimension. A scaling policy applies to the scalable
     # target identified by those three attributes. You cannot create a
-    # scaling policy until you register the scalable target using
-    # RegisterScalableTarget.
+    # scaling policy until you have registered the resource as a scalable
+    # target using RegisterScalableTarget.
     #
     # To update a policy, specify its policy name and the parameters that
     # you want to change. Any parameters that you don't specify are not
@@ -1274,6 +1441,25 @@ module Aws::ApplicationAutoScaling
     # You can view the scaling policies for a service namespace using
     # DescribeScalingPolicies. If you are no longer using a scaling policy,
     # you can delete it using DeleteScalingPolicy.
+    #
+    # Multiple scaling policies can be in force at the same time for the
+    # same scalable target. You can have one or more target tracking scaling
+    # policies, one or more step scaling policies, or both. However, there
+    # is a chance that multiple policies could conflict, instructing the
+    # scalable target to scale out or in at the same time. Application Auto
+    # Scaling gives precedence to the policy that provides the largest
+    # capacity for both scale out and scale in. For example, if one policy
+    # increases capacity by 3, another policy increases capacity by 200
+    # percent, and the current capacity is 10, Application Auto Scaling uses
+    # the policy with the highest calculated capacity (200% of 10 = 20) and
+    # scales out to 30.
+    #
+    # Learn more about how to work with scaling policies in the [Application
+    # Auto Scaling User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html
     #
     # @option params [required, String] :policy_name
     #   The name of the scaling policy.
@@ -1296,8 +1482,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1324,7 +1510,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -1334,7 +1525,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -1355,7 +1546,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1365,12 +1557,22 @@ module Aws::ApplicationAutoScaling
     #
     # @option params [String] :policy_type
     #   The policy type. This parameter is required if you are creating a
-    #   policy.
+    #   scaling policy.
     #
-    #   For DynamoDB, only `TargetTrackingScaling` is supported. For Amazon
-    #   ECS, Spot Fleet, and Amazon RDS, both `StepScaling` and
-    #   `TargetTrackingScaling` are supported. For any other service, only
-    #   `StepScaling` is supported.
+    #   The following policy types are supported:
+    #
+    #   `TargetTrackingScaling`—Not supported for Amazon EMR or AppStream
+    #
+    #   `StepScaling`—Not supported for Amazon DynamoDB
+    #
+    #   For more information, see [Target Tracking Scaling Policies][1] and
+    #   [Step Scaling Policies][2] in the *Application Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
     #
     # @option params [Types::StepScalingPolicyConfiguration] :step_scaling_policy_configuration
     #   A step scaling policy.
@@ -1379,7 +1581,8 @@ module Aws::ApplicationAutoScaling
     #   type is `StepScaling`.
     #
     # @option params [Types::TargetTrackingScalingPolicyConfiguration] :target_tracking_scaling_policy_configuration
-    #   A target tracking policy.
+    #   A target tracking scaling policy. Includes support for predefined or
+    #   customized metrics.
     #
     #   This parameter is required if you are creating a policy and the policy
     #   type is `TargetTrackingScaling`.
@@ -1390,9 +1593,127 @@ module Aws::ApplicationAutoScaling
     #   * {Types::PutScalingPolicyResponse#alarms #alarms} => Array&lt;Types::Alarm&gt;
     #
     #
-    # @example Example: To apply a scaling policy to an Amazon ECS service
+    # @example Example: To apply a target tracking scaling policy with a predefined metric specification
     #
-    #   # This example applies a scaling policy to an Amazon ECS service called web-app in the default cluster. The policy
+    #   # The following example applies a target tracking scaling policy with a predefined metric specification to an Amazon ECS
+    #   # service called web-app in the default cluster. The policy keeps the average CPU utilization of the service at 75
+    #   # percent, with scale-out and scale-in cooldown periods of 60 seconds.
+    #
+    #   resp = client.put_scaling_policy({
+    #     policy_name: "cpu75-target-tracking-scaling-policy", 
+    #     policy_type: "TargetTrackingScaling", 
+    #     resource_id: "service/default/web-app", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #     target_tracking_scaling_policy_configuration: {
+    #       predefined_metric_specification: {
+    #         predefined_metric_type: "ECSServiceAverageCPUUtilization", 
+    #       }, 
+    #       scale_in_cooldown: 60, 
+    #       scale_out_cooldown: 60, 
+    #       target_value: 75, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alarms: [
+    #       {
+    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca", 
+    #         alarm_name: "TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca", 
+    #       }, 
+    #       {
+    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmLow-1b437334-d19b-4a63-a812-6c67aaf2910d", 
+    #         alarm_name: "TargetTracking-service/default/web-app-AlarmLow-1b437334-d19b-4a63-a812-6c67aaf2910d", 
+    #       }, 
+    #     ], 
+    #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/cpu75-target-tracking-scaling-policy", 
+    #   }
+    #
+    # @example Example: To apply a target tracking scaling policy with a customized metric specification
+    #
+    #   # The following example applies a target tracking scaling policy with a customized metric specification to an Amazon ECS
+    #   # service called web-app in the default cluster. The policy keeps the average utilization of the service at 75 percent,
+    #   # with scale-out and scale-in cooldown periods of 60 seconds. 
+    #
+    #   resp = client.put_scaling_policy({
+    #     policy_name: "cms75-target-tracking-scaling-policy", 
+    #     policy_type: "TargetTrackingScaling", 
+    #     resource_id: "service/default/web-app", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #     target_tracking_scaling_policy_configuration: {
+    #       customized_metric_specification: {
+    #         dimensions: [
+    #           {
+    #             name: "MyOptionalMetricDimensionName", 
+    #             value: "MyOptionalMetricDimensionValue", 
+    #           }, 
+    #         ], 
+    #         metric_name: "MyUtilizationMetric", 
+    #         namespace: "MyNamespace", 
+    #         statistic: "Average", 
+    #         unit: "Percent", 
+    #       }, 
+    #       scale_in_cooldown: 60, 
+    #       scale_out_cooldown: 60, 
+    #       target_value: 75, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alarms: [
+    #       {
+    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmHigh-9bc77b56-0571-4276-ba0f-d4178882e0a0", 
+    #         alarm_name: "TargetTracking-service/default/web-app-AlarmHigh-9bc77b56-0571-4276-ba0f-d4178882e0a0", 
+    #       }, 
+    #       {
+    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmLow-9b6ad934-6d37-438e-9e05-02836ddcbdc4", 
+    #         alarm_name: "TargetTracking-service/default/web-app-AlarmLow-9b6ad934-6d37-438e-9e05-02836ddcbdc4", 
+    #       }, 
+    #     ], 
+    #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy: 8784a896-b2ba-47a1-b08c-27301cc499a1:resource/ecs/service/default/web-app:policyName/cms75-target-tracking-scaling-policy", 
+    #   }
+    #
+    # @example Example: To apply a target tracking scaling policy for scale out only
+    #
+    #   # The following example applies a target tracking scaling policy to an Amazon ECS service called web-app in the default
+    #   # cluster. The policy is used to scale out the ECS service when the RequestCountPerTarget metric from the Application Load
+    #   # Balancer exceeds the threshold.
+    #
+    #   resp = client.put_scaling_policy({
+    #     policy_name: "alb-scale-out-target-tracking-scaling-policy", 
+    #     policy_type: "TargetTrackingScaling", 
+    #     resource_id: "service/default/web-app", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #     target_tracking_scaling_policy_configuration: {
+    #       disable_scale_in: true, 
+    #       predefined_metric_specification: {
+    #         predefined_metric_type: "ALBRequestCountPerTarget", 
+    #         resource_label: "app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d", 
+    #       }, 
+    #       scale_in_cooldown: 60, 
+    #       scale_out_cooldown: 60, 
+    #       target_value: 1000, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alarms: [
+    #       {
+    #         alarm_arn: "TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca", 
+    #         alarm_name: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca", 
+    #       }, 
+    #     ], 
+    #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/alb-scale-out-target-tracking-scaling-policy", 
+    #   }
+    #
+    # @example Example: To apply a step scaling policy to an Amazon ECS service
+    #
+    #   # This example applies a step scaling policy to an Amazon ECS service called web-app in the default cluster. The policy
     #   # increases the desired count of the service by 200%, with a cool down period of 60 seconds.
     #
     #   resp = client.put_scaling_policy({
@@ -1418,10 +1739,10 @@ module Aws::ApplicationAutoScaling
     #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/web-app-cpu-gt-75", 
     #   }
     #
-    # @example Example: To apply a scaling policy to an Amazon EC2 Spot fleet
+    # @example Example: To apply a step scaling policy to an Amazon EC2 Spot fleet
     #
-    #   # This example applies a scaling policy to an Amazon EC2 Spot fleet. The policy increases the target capacity of the spot
-    #   # fleet by 200%, with a cool down period of 180 seconds.",
+    #   # This example applies a step scaling policy to an Amazon EC2 Spot fleet. The policy increases the target capacity of the
+    #   # spot fleet by 200%, with a cool down period of 180 seconds.",
     #
     #   resp = client.put_scaling_policy({
     #     policy_name: "fleet-cpu-gt-75", 
@@ -1513,8 +1834,8 @@ module Aws::ApplicationAutoScaling
     # Each scalable target is identified by a service namespace, resource
     # ID, and scalable dimension. A scheduled action applies to the scalable
     # target identified by those three attributes. You cannot create a
-    # scheduled action until you register the scalable target using
-    # RegisterScalableTarget.
+    # scheduled action until you have registered the resource as a scalable
+    # target using RegisterScalableTarget.
     #
     # To update an action, specify its name and the parameters that you want
     # to change. If you don't specify start and end times, the old values
@@ -1524,6 +1845,13 @@ module Aws::ApplicationAutoScaling
     # You can view the scheduled actions using DescribeScheduledActions. If
     # you are no longer using a scheduled action, you can delete it using
     # DeleteScheduledAction.
+    #
+    # Learn more about how to work with scheduled actions in the
+    # [Application Auto Scaling User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html
     #
     # @option params [required, String] :service_namespace
     #   The namespace of the AWS service that provides the resource or
@@ -1538,11 +1866,11 @@ module Aws::ApplicationAutoScaling
     # @option params [String] :schedule
     #   The schedule for this action. The following formats are supported:
     #
-    #   * At expressions - `at(yyyy-mm-ddThh:mm:ss)`
+    #   * At expressions - "`at(yyyy-mm-ddThh:mm:ss)`"
     #
-    #   * Rate expressions - `rate(value unit)`
+    #   * Rate expressions - "`rate(value unit)`"
     #
-    #   * Cron expressions - `cron(fields)`
+    #   * Cron expressions - "`cron(fields)`"
     #
     #   At expressions are useful for one-time schedules. Specify the time, in
     #   UTC.
@@ -1555,7 +1883,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
     #
     # @option params [required, String] :scheduled_action_name
     #   The name of the scheduled action.
@@ -1568,8 +1896,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1596,18 +1924,22 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
     #
-    # @option params [String] :scalable_dimension
-    #   The scalable dimension. This parameter is required if you are creating
-    #   a scheduled action. This string consists of the service namespace,
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
+    #
+    # @option params [required, String] :scalable_dimension
+    #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
     #
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -1628,7 +1960,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1658,7 +1991,7 @@ module Aws::ApplicationAutoScaling
     #     schedule: "ResourceIdMaxLen1600",
     #     scheduled_action_name: "ScheduledActionName", # required
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     scalable_target_action: {
@@ -1677,16 +2010,27 @@ module Aws::ApplicationAutoScaling
     end
 
     # Registers or updates a scalable target. A scalable target is a
-    # resource that Application Auto Scaling can scale out or scale in.
-    # After you have registered a scalable target, you can use this
-    # operation to update the minimum and maximum values for its scalable
-    # dimension.
+    # resource that Application Auto Scaling can scale out and scale in.
+    # Scalable targets are uniquely identified by the combination of
+    # resource ID, scalable dimension, and namespace.
     #
-    # After you register a scalable target, you can create and apply scaling
-    # policies using PutScalingPolicy. You can view the scaling policies for
-    # a service namespace using DescribeScalableTargets. If you no longer
-    # need a scalable target, you can deregister it using
-    # DeregisterScalableTarget.
+    # When you register a new scalable target, you must specify values for
+    # minimum and maximum capacity. Application Auto Scaling will not scale
+    # capacity to values that are outside of this range.
+    #
+    # To update a scalable target, specify the parameter that you want to
+    # change as well as the following parameters that identify the scalable
+    # target: resource ID, scalable dimension, and namespace. Any parameters
+    # that you don't specify are not changed by this update request.
+    #
+    # After you register a scalable target, you do not need to register it
+    # again to use other Application Auto Scaling operations. To see which
+    # resources have been registered, use DescribeScalableTargets. You can
+    # also view the scaling policies for a service namespace by using
+    # DescribeScalableTargets.
+    #
+    # If you no longer need a scalable target, you can deregister it by
+    # using DeregisterScalableTarget.
     #
     # @option params [required, String] :service_namespace
     #   The namespace of the AWS service that provides the resource or
@@ -1699,15 +2043,16 @@ module Aws::ApplicationAutoScaling
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the resource associated with the scalable target.
-    #   This string consists of the resource type and unique identifier.
+    #   The identifier of the resource that is associated with the scalable
+    #   target. This string consists of the resource type and unique
+    #   identifier.
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1734,7 +2079,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
@@ -1745,7 +2095,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -1766,7 +2116,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1775,12 +2126,12 @@ module Aws::ApplicationAutoScaling
     #     a custom resource provided by your own application or service.
     #
     # @option params [Integer] :min_capacity
-    #   The minimum value to scale to in response to a scale in event. This
-    #   parameter is required if you are registering a scalable target.
+    #   The minimum value to scale to in response to a scale-in event.
+    #   `MinCapacity` is required to register a scalable target.
     #
     # @option params [Integer] :max_capacity
-    #   The maximum value to scale to in response to a scale out event. This
-    #   parameter is required if you are registering a scalable target.
+    #   The maximum value to scale to in response to a scale-out event.
+    #   `MaxCapacity` is required to register a scalable target.
     #
     # @option params [String] :role_arn
     #   Application Auto Scaling creates a service-linked role that grants it
@@ -1788,14 +2139,40 @@ module Aws::ApplicationAutoScaling
     #   information, see [Service-Linked Roles for Application Auto
     #   Scaling][1].
     #
-    #   For resources that are not supported using a service-linked role, this
-    #   parameter is required and must specify the ARN of an IAM role that
-    #   allows Application Auto Scaling to modify the scalable target on your
-    #   behalf.
+    #   For Amazon EMR, this parameter is required, and it must specify the
+    #   ARN of an IAM role that allows Application Auto Scaling to modify the
+    #   scalable target on your behalf.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/application/userguide/application-autoscaling-service-linked-roles.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html
+    #
+    # @option params [Types::SuspendedState] :suspended_state
+    #   An embedded object that contains attributes and attribute values that
+    #   are used to suspend and resume automatic scaling. Setting the value of
+    #   an attribute to `true` suspends the specified scaling activities.
+    #   Setting it to `false` (default) resumes the specified scaling
+    #   activities.
+    #
+    #   **Suspension Outcomes**
+    #
+    #   * For `DynamicScalingInSuspended`, while a suspension is in effect,
+    #     all scale-in activities that are triggered by a scaling policy are
+    #     suspended.
+    #
+    #   * For `DynamicScalingOutSuspended`, while a suspension is in effect,
+    #     all scale-out activities that are triggered by a scaling policy are
+    #     suspended.
+    #
+    #   * For `ScheduledScalingSuspended`, while a suspension is in effect,
+    #     all scaling activities that involve scheduled actions are suspended.
+    #
+    #   For more information, see [Suspend and Resume Application Auto
+    #   Scaling][1] in the *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1809,7 +2186,6 @@ module Aws::ApplicationAutoScaling
     #     max_capacity: 10, 
     #     min_capacity: 1, 
     #     resource_id: "service/default/web-app", 
-    #     role_arn: "arn:aws:iam::012345678910:role/ApplicationAutoscalingECSRole", 
     #     scalable_dimension: "ecs:service:DesiredCount", 
     #     service_namespace: "ecs", 
     #   })
@@ -1823,7 +2199,6 @@ module Aws::ApplicationAutoScaling
     #     max_capacity: 10, 
     #     min_capacity: 1, 
     #     resource_id: "spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3", 
-    #     role_arn: "arn:aws:iam::012345678910:role/ApplicationAutoscalingSpotRole", 
     #     scalable_dimension: "ec2:spot-fleet-request:TargetCapacity", 
     #     service_namespace: "ec2", 
     #   })
@@ -1841,6 +2216,11 @@ module Aws::ApplicationAutoScaling
     #     min_capacity: 1,
     #     max_capacity: 1,
     #     role_arn: "ResourceIdMaxLen1600",
+    #     suspended_state: {
+    #       dynamic_scaling_in_suspended: false,
+    #       dynamic_scaling_out_suspended: false,
+    #       scheduled_scaling_suspended: false,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTarget AWS API Documentation
@@ -1865,7 +2245,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -16,6 +16,7 @@ module Aws::MediaStore
     AllowedOrigins = Shapes::ListShape.new(name: 'AllowedOrigins')
     Container = Shapes::StructureShape.new(name: 'Container')
     ContainerARN = Shapes::StringShape.new(name: 'ContainerARN')
+    ContainerAccessLoggingEnabled = Shapes::BooleanShape.new(name: 'ContainerAccessLoggingEnabled')
     ContainerInUseException = Shapes::StructureShape.new(name: 'ContainerInUseException')
     ContainerList = Shapes::ListShape.new(name: 'ContainerList')
     ContainerListLimit = Shapes::IntegerShape.new(name: 'ContainerListLimit')
@@ -34,6 +35,8 @@ module Aws::MediaStore
     DeleteContainerPolicyOutput = Shapes::StructureShape.new(name: 'DeleteContainerPolicyOutput')
     DeleteCorsPolicyInput = Shapes::StructureShape.new(name: 'DeleteCorsPolicyInput')
     DeleteCorsPolicyOutput = Shapes::StructureShape.new(name: 'DeleteCorsPolicyOutput')
+    DeleteLifecyclePolicyInput = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyInput')
+    DeleteLifecyclePolicyOutput = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyOutput')
     DescribeContainerInput = Shapes::StructureShape.new(name: 'DescribeContainerInput')
     DescribeContainerOutput = Shapes::StructureShape.new(name: 'DescribeContainerOutput')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
@@ -43,11 +46,16 @@ module Aws::MediaStore
     GetContainerPolicyOutput = Shapes::StructureShape.new(name: 'GetContainerPolicyOutput')
     GetCorsPolicyInput = Shapes::StructureShape.new(name: 'GetCorsPolicyInput')
     GetCorsPolicyOutput = Shapes::StructureShape.new(name: 'GetCorsPolicyOutput')
+    GetLifecyclePolicyInput = Shapes::StructureShape.new(name: 'GetLifecyclePolicyInput')
+    GetLifecyclePolicyOutput = Shapes::StructureShape.new(name: 'GetLifecyclePolicyOutput')
     Header = Shapes::StringShape.new(name: 'Header')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
+    LifecyclePolicy = Shapes::StringShape.new(name: 'LifecyclePolicy')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListContainersInput = Shapes::StructureShape.new(name: 'ListContainersInput')
     ListContainersOutput = Shapes::StructureShape.new(name: 'ListContainersOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MaxAgeSeconds = Shapes::IntegerShape.new(name: 'MaxAgeSeconds')
     MethodName = Shapes::StringShape.new(name: 'MethodName')
     Origin = Shapes::StringShape.new(name: 'Origin')
@@ -57,7 +65,22 @@ module Aws::MediaStore
     PutContainerPolicyOutput = Shapes::StructureShape.new(name: 'PutContainerPolicyOutput')
     PutCorsPolicyInput = Shapes::StructureShape.new(name: 'PutCorsPolicyInput')
     PutCorsPolicyOutput = Shapes::StructureShape.new(name: 'PutCorsPolicyOutput')
+    PutLifecyclePolicyInput = Shapes::StructureShape.new(name: 'PutLifecyclePolicyInput')
+    PutLifecyclePolicyOutput = Shapes::StructureShape.new(name: 'PutLifecyclePolicyOutput')
+    StartAccessLoggingInput = Shapes::StructureShape.new(name: 'StartAccessLoggingInput')
+    StartAccessLoggingOutput = Shapes::StructureShape.new(name: 'StartAccessLoggingOutput')
+    StopAccessLoggingInput = Shapes::StructureShape.new(name: 'StopAccessLoggingInput')
+    StopAccessLoggingOutput = Shapes::StructureShape.new(name: 'StopAccessLoggingOutput')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
 
     AllowedHeaders.member = Shapes::ShapeRef.new(shape: Header)
 
@@ -70,20 +93,31 @@ module Aws::MediaStore
     Container.add_member(:arn, Shapes::ShapeRef.new(shape: ContainerARN, location_name: "ARN"))
     Container.add_member(:name, Shapes::ShapeRef.new(shape: ContainerName, location_name: "Name"))
     Container.add_member(:status, Shapes::ShapeRef.new(shape: ContainerStatus, location_name: "Status"))
+    Container.add_member(:access_logging_enabled, Shapes::ShapeRef.new(shape: ContainerAccessLoggingEnabled, location_name: "AccessLoggingEnabled"))
     Container.struct_class = Types::Container
+
+    ContainerInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ContainerInUseException.struct_class = Types::ContainerInUseException
 
     ContainerList.member = Shapes::ShapeRef.new(shape: Container)
 
+    ContainerNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ContainerNotFoundException.struct_class = Types::ContainerNotFoundException
+
     CorsPolicy.member = Shapes::ShapeRef.new(shape: CorsRule)
 
-    CorsRule.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: AllowedOrigins, location_name: "AllowedOrigins"))
+    CorsPolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CorsPolicyNotFoundException.struct_class = Types::CorsPolicyNotFoundException
+
+    CorsRule.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: AllowedOrigins, required: true, location_name: "AllowedOrigins"))
     CorsRule.add_member(:allowed_methods, Shapes::ShapeRef.new(shape: AllowedMethods, location_name: "AllowedMethods"))
-    CorsRule.add_member(:allowed_headers, Shapes::ShapeRef.new(shape: AllowedHeaders, location_name: "AllowedHeaders"))
+    CorsRule.add_member(:allowed_headers, Shapes::ShapeRef.new(shape: AllowedHeaders, required: true, location_name: "AllowedHeaders"))
     CorsRule.add_member(:max_age_seconds, Shapes::ShapeRef.new(shape: MaxAgeSeconds, location_name: "MaxAgeSeconds"))
     CorsRule.add_member(:expose_headers, Shapes::ShapeRef.new(shape: ExposeHeaders, location_name: "ExposeHeaders"))
     CorsRule.struct_class = Types::CorsRule
 
     CreateContainerInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    CreateContainerInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateContainerInput.struct_class = Types::CreateContainerInput
 
     CreateContainerOutput.add_member(:container, Shapes::ShapeRef.new(shape: Container, required: true, location_name: "Container"))
@@ -103,6 +137,11 @@ module Aws::MediaStore
     DeleteCorsPolicyInput.struct_class = Types::DeleteCorsPolicyInput
 
     DeleteCorsPolicyOutput.struct_class = Types::DeleteCorsPolicyOutput
+
+    DeleteLifecyclePolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    DeleteLifecyclePolicyInput.struct_class = Types::DeleteLifecyclePolicyInput
+
+    DeleteLifecyclePolicyOutput.struct_class = Types::DeleteLifecyclePolicyOutput
 
     DescribeContainerInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName"))
     DescribeContainerInput.struct_class = Types::DescribeContainerInput
@@ -124,6 +163,18 @@ module Aws::MediaStore
     GetCorsPolicyOutput.add_member(:cors_policy, Shapes::ShapeRef.new(shape: CorsPolicy, required: true, location_name: "CorsPolicy"))
     GetCorsPolicyOutput.struct_class = Types::GetCorsPolicyOutput
 
+    GetLifecyclePolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    GetLifecyclePolicyInput.struct_class = Types::GetLifecyclePolicyInput
+
+    GetLifecyclePolicyOutput.add_member(:lifecycle_policy, Shapes::ShapeRef.new(shape: LifecyclePolicy, required: true, location_name: "LifecyclePolicy"))
+    GetLifecyclePolicyOutput.struct_class = Types::GetLifecyclePolicyOutput
+
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerError.struct_class = Types::InternalServerError
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListContainersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListContainersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ContainerListLimit, location_name: "MaxResults"))
     ListContainersInput.struct_class = Types::ListContainersInput
@@ -131,6 +182,15 @@ module Aws::MediaStore
     ListContainersOutput.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerList, required: true, location_name: "Containers"))
     ListContainersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListContainersOutput.struct_class = Types::ListContainersOutput
+
+    ListTagsForResourceInput.add_member(:resource, Shapes::ShapeRef.new(shape: ContainerARN, required: true, location_name: "Resource"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
+    PolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PolicyNotFoundException.struct_class = Types::PolicyNotFoundException
 
     PutContainerPolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
     PutContainerPolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: ContainerPolicy, required: true, location_name: "Policy"))
@@ -144,6 +204,42 @@ module Aws::MediaStore
 
     PutCorsPolicyOutput.struct_class = Types::PutCorsPolicyOutput
 
+    PutLifecyclePolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    PutLifecyclePolicyInput.add_member(:lifecycle_policy, Shapes::ShapeRef.new(shape: LifecyclePolicy, required: true, location_name: "LifecyclePolicy"))
+    PutLifecyclePolicyInput.struct_class = Types::PutLifecyclePolicyInput
+
+    PutLifecyclePolicyOutput.struct_class = Types::PutLifecyclePolicyOutput
+
+    StartAccessLoggingInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    StartAccessLoggingInput.struct_class = Types::StartAccessLoggingInput
+
+    StartAccessLoggingOutput.struct_class = Types::StartAccessLoggingOutput
+
+    StopAccessLoggingInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    StopAccessLoggingInput.struct_class = Types::StopAccessLoggingInput
+
+    StopAccessLoggingOutput.struct_class = Types::StopAccessLoggingOutput
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceInput.add_member(:resource, Shapes::ShapeRef.new(shape: ContainerARN, required: true, location_name: "Resource"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    UntagResourceInput.add_member(:resource, Shapes::ShapeRef.new(shape: ContainerARN, required: true, location_name: "Resource"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -151,13 +247,17 @@ module Aws::MediaStore
       api.version = "2017-09-01"
 
       api.metadata = {
+        "apiVersion" => "2017-09-01",
         "endpointPrefix" => "mediastore",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "MediaStore",
         "serviceFullName" => "AWS Elemental MediaStore",
+        "serviceId" => "MediaStore",
         "signatureVersion" => "v4",
         "signingName" => "mediastore",
         "targetPrefix" => "MediaStore_20170901",
+        "uid" => "mediastore-2017-09-01",
       }
 
       api.add_operation(:create_container, Seahorse::Model::Operation.new.tap do |o|
@@ -206,6 +306,18 @@ module Aws::MediaStore
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:delete_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLifecyclePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_container, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeContainer"
         o.http_method = "POST"
@@ -240,12 +352,41 @@ module Aws::MediaStore
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:get_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLifecyclePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLifecyclePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetLifecyclePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:list_containers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListContainers"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListContainersInput)
         o.output = Shapes::ShapeRef.new(shape: ListContainersOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -268,6 +409,61 @@ module Aws::MediaStore
         o.output = Shapes::ShapeRef.new(shape: PutCorsPolicyOutput)
         o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:put_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutLifecyclePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutLifecyclePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: PutLifecyclePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:start_access_logging, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAccessLogging"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartAccessLoggingInput)
+        o.output = Shapes::ShapeRef.new(shape: StartAccessLoggingOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:stop_access_logging, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopAccessLogging"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopAccessLoggingInput)
+        o.output = Shapes::ShapeRef.new(shape: StopAccessLoggingOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
     end

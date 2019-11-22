@@ -80,6 +80,12 @@ module Aws::EC2
       data[:tags]
     end
 
+    # The ID of an address pool.
+    # @return [String]
+    def public_ipv_4_pool
+      data[:public_ipv_4_pool]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -215,11 +221,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc_address.associate({
-    #     instance_id: "String",
+    #     instance_id: "InstanceId",
     #     public_ip: "String",
     #     allow_reassociation: false,
     #     dry_run: false,
-    #     network_interface_id: "String",
+    #     network_interface_id: "NetworkInterfaceId",
     #     private_ip_address: "String",
     #   })
     # @param [Hash] options ({})
@@ -229,7 +235,8 @@ module Aws::EC2
     #   but not both. The operation fails if you specify an instance ID unless
     #   exactly one network interface is attached.
     # @option options [String] :public_ip
-    #   The Elastic IP address. This is required for EC2-Classic.
+    #   The Elastic IP address to associate with the instance. This is
+    #   required for EC2-Classic.
     # @option options [Boolean] :allow_reassociation
     #   \[EC2-VPC\] For a VPC in an EC2-Classic account, specify true to allow
     #   an Elastic IP address that is already associated with an instance or
@@ -246,6 +253,9 @@ module Aws::EC2
     # @option options [String] :network_interface_id
     #   \[EC2-VPC\] The ID of the network interface. If the instance has more
     #   than one network interface, you must specify a network interface ID.
+    #
+    #   For EC2-VPC, you can specify either the instance ID or the network
+    #   interface ID, but not both.
     # @option options [String] :private_ip_address
     #   \[EC2-VPC\] The primary or secondary private IP address to associate
     #   with the Elastic IP address. If no private IP address is specified,

@@ -10,9 +10,9 @@ Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-servicediscovery'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
   spec.summary       = 'AWS SDK for Ruby - ServiceDiscovery'
-  spec.description   = 'Official AWS Ruby gem for Amazon Route 53 Auto Naming (ServiceDiscovery). This gem is part of the AWS SDK for Ruby.'
+  spec.description   = 'Official AWS Ruby gem for AWS Cloud Map (ServiceDiscovery). This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
-  spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
+  spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
   spec.email         = ['trevrowe@amazon.com']
   spec.require_paths = ['lib']
@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-servicediscovery/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3')
-  spec.add_dependency('aws-sigv4', '~> 1.0')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.71.0')
+  spec.add_dependency('aws-sigv4', '~> 1.1')
 
 end

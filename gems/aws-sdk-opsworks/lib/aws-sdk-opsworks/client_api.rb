@@ -976,6 +976,9 @@ module Aws::OpsWorks
     ReportedOs.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
     ReportedOs.struct_class = Types::ReportedOs
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     SelfUserProfile.add_member(:iam_user_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamUserArn"))
     SelfUserProfile.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     SelfUserProfile.add_member(:ssh_username, Shapes::ShapeRef.new(shape: String, location_name: "SshUsername"))
@@ -1211,6 +1214,9 @@ module Aws::OpsWorks
 
     UserProfiles.member = Shapes::ShapeRef.new(shape: UserProfile)
 
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ValidationException.struct_class = Types::ValidationException
+
     Volume.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "VolumeId"))
     Volume.add_member(:ec2_volume_id, Shapes::ShapeRef.new(shape: String, location_name: "Ec2VolumeId"))
     Volume.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -1256,12 +1262,15 @@ module Aws::OpsWorks
       api.version = "2013-02-18"
 
       api.metadata = {
+        "apiVersion" => "2013-02-18",
         "endpointPrefix" => "opsworks",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS OpsWorks",
+        "serviceId" => "OpsWorks",
         "signatureVersion" => "v4",
         "targetPrefix" => "OpsWorks_20130218",
+        "uid" => "opsworks-2013-02-18",
       }
 
       api.add_operation(:assign_instance, Seahorse::Model::Operation.new.tap do |o|

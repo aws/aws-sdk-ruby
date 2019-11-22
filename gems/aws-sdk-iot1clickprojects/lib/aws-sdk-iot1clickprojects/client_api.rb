@@ -50,6 +50,8 @@ module Aws::IoT1ClickProjects
     ListPlacementsResponse = Shapes::StructureShape.new(name: 'ListPlacementsResponse')
     ListProjectsRequest = Shapes::StructureShape.new(name: 'ListProjectsRequest')
     ListProjectsResponse = Shapes::StructureShape.new(name: 'ListProjectsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -59,14 +61,23 @@ module Aws::IoT1ClickProjects
     PlacementSummary = Shapes::StructureShape.new(name: 'PlacementSummary')
     PlacementSummaryList = Shapes::ListShape.new(name: 'PlacementSummaryList')
     PlacementTemplate = Shapes::StructureShape.new(name: 'PlacementTemplate')
+    ProjectArn = Shapes::StringShape.new(name: 'ProjectArn')
     ProjectDescription = Shapes::StructureShape.new(name: 'ProjectDescription')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
     ProjectSummary = Shapes::StructureShape.new(name: 'ProjectSummary')
     ProjectSummaryList = Shapes::ListShape.new(name: 'ProjectSummaryList')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Time = Shapes::TimestampShape.new(name: 'Time')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdatePlacementRequest = Shapes::StructureShape.new(name: 'UpdatePlacementRequest')
     UpdatePlacementResponse = Shapes::StructureShape.new(name: 'UpdatePlacementResponse')
     UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
@@ -90,6 +101,7 @@ module Aws::IoT1ClickProjects
     CreateProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     CreateProjectRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateProjectRequest.add_member(:placement_template, Shapes::ShapeRef.new(shape: PlacementTemplate, location_name: "placementTemplate"))
+    CreateProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
 
     CreateProjectResponse.struct_class = Types::CreateProjectResponse
@@ -148,6 +160,14 @@ module Aws::IoT1ClickProjects
     GetDevicesInPlacementResponse.add_member(:devices, Shapes::ShapeRef.new(shape: DeviceMap, required: true, location_name: "devices"))
     GetDevicesInPlacementResponse.struct_class = Types::GetDevicesInPlacementResponse
 
+    InternalFailureException.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    InvalidRequestException.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     ListPlacementsRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
     ListPlacementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListPlacementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -164,6 +184,12 @@ module Aws::IoT1ClickProjects
     ListProjectsResponse.add_member(:projects, Shapes::ShapeRef.new(shape: ProjectSummaryList, required: true, location_name: "projects"))
     ListProjectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListProjectsResponse.struct_class = Types::ListProjectsResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     PlacementAttributeMap.key = Shapes::ShapeRef.new(shape: AttributeName)
     PlacementAttributeMap.value = Shapes::ShapeRef.new(shape: AttributeValue)
@@ -187,19 +213,52 @@ module Aws::IoT1ClickProjects
     PlacementTemplate.add_member(:device_templates, Shapes::ShapeRef.new(shape: DeviceTemplateMap, location_name: "deviceTemplates"))
     PlacementTemplate.struct_class = Types::PlacementTemplate
 
+    ProjectDescription.add_member(:arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "arn"))
     ProjectDescription.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     ProjectDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     ProjectDescription.add_member(:created_date, Shapes::ShapeRef.new(shape: Time, required: true, location_name: "createdDate"))
     ProjectDescription.add_member(:updated_date, Shapes::ShapeRef.new(shape: Time, required: true, location_name: "updatedDate"))
     ProjectDescription.add_member(:placement_template, Shapes::ShapeRef.new(shape: PlacementTemplate, location_name: "placementTemplate"))
+    ProjectDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ProjectDescription.struct_class = Types::ProjectDescription
 
+    ProjectSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "arn"))
     ProjectSummary.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     ProjectSummary.add_member(:created_date, Shapes::ShapeRef.new(shape: Time, required: true, location_name: "createdDate"))
     ProjectSummary.add_member(:updated_date, Shapes::ShapeRef.new(shape: Time, required: true, location_name: "updatedDate"))
+    ProjectSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ProjectSummary.struct_class = Types::ProjectSummary
 
     ProjectSummaryList.member = Shapes::ShapeRef.new(shape: ProjectSummary)
+
+    ResourceConflictException.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
+    ResourceConflictException.struct_class = Types::ResourceConflictException
+
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TooManyRequestsException.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdatePlacementRequest.add_member(:placement_name, Shapes::ShapeRef.new(shape: PlacementName, required: true, location: "uri", location_name: "placementName"))
     UpdatePlacementRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
@@ -222,12 +281,16 @@ module Aws::IoT1ClickProjects
       api.version = "2018-05-14"
 
       api.metadata = {
+        "apiVersion" => "2018-05-14",
         "endpointPrefix" => "projects.iot1click",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "AWS IoT 1-Click Projects",
         "serviceFullName" => "AWS IoT 1-Click Projects Service",
+        "serviceId" => "IoT 1Click Projects",
         "signatureVersion" => "v4",
         "signingName" => "iot1click",
+        "uid" => "iot1click-projects-2018-05-14",
       }
 
       api.add_operation(:associate_device_with_placement, Seahorse::Model::Operation.new.tap do |o|
@@ -343,6 +406,12 @@ module Aws::IoT1ClickProjects
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_projects, Seahorse::Model::Operation.new.tap do |o|
@@ -353,6 +422,45 @@ module Aws::IoT1ClickProjects
         o.output = Shapes::ShapeRef.new(shape: ListProjectsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_placement, Seahorse::Model::Operation.new.tap do |o|

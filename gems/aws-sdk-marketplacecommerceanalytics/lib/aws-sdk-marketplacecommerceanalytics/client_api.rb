@@ -45,6 +45,9 @@ module Aws::MarketplaceCommerceAnalytics
     GenerateDataSetResult.add_member(:data_set_request_id, Shapes::ShapeRef.new(shape: DataSetRequestId, location_name: "dataSetRequestId"))
     GenerateDataSetResult.struct_class = Types::GenerateDataSetResult
 
+    MarketplaceCommerceAnalyticsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    MarketplaceCommerceAnalyticsException.struct_class = Types::MarketplaceCommerceAnalyticsException
+
     StartSupportDataExportRequest.add_member(:data_set_type, Shapes::ShapeRef.new(shape: SupportDataSetType, required: true, location_name: "dataSetType"))
     StartSupportDataExportRequest.add_member(:from_date, Shapes::ShapeRef.new(shape: FromDate, required: true, location_name: "fromDate"))
     StartSupportDataExportRequest.add_member(:role_name_arn, Shapes::ShapeRef.new(shape: RoleNameArn, required: true, location_name: "roleNameArn"))
@@ -64,13 +67,16 @@ module Aws::MarketplaceCommerceAnalytics
       api.version = "2015-07-01"
 
       api.metadata = {
+        "apiVersion" => "2015-07-01",
         "endpointPrefix" => "marketplacecommerceanalytics",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Marketplace Commerce Analytics",
+        "serviceId" => "Marketplace Commerce Analytics",
         "signatureVersion" => "v4",
         "signingName" => "marketplacecommerceanalytics",
         "targetPrefix" => "MarketplaceCommerceAnalytics20150701",
+        "uid" => "marketplacecommerceanalytics-2015-07-01",
       }
 
       api.add_operation(:generate_data_set, Seahorse::Model::Operation.new.tap do |o|

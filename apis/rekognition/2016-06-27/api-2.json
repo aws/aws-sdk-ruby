@@ -118,6 +118,23 @@
         {"shape":"ProvisionedThroughputExceededException"}
       ]
     },
+    "DescribeCollection":{
+      "name":"DescribeCollection",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeCollectionRequest"},
+      "output":{"shape":"DescribeCollectionResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "DescribeStreamProcessor":{
       "name":"DescribeStreamProcessor",
       "http":{
@@ -751,7 +768,8 @@
       "members":{
         "SourceImage":{"shape":"Image"},
         "TargetImage":{"shape":"Image"},
-        "SimilarityThreshold":{"shape":"Percent"}
+        "SimilarityThreshold":{"shape":"Percent"},
+        "QualityFilter":{"shape":"QualityFilter"}
       }
     },
     "CompareFacesResponse":{
@@ -893,6 +911,22 @@
       "members":{
       }
     },
+    "DescribeCollectionRequest":{
+      "type":"structure",
+      "required":["CollectionId"],
+      "members":{
+        "CollectionId":{"shape":"CollectionId"}
+      }
+    },
+    "DescribeCollectionResponse":{
+      "type":"structure",
+      "members":{
+        "FaceCount":{"shape":"ULong"},
+        "FaceModelVersion":{"shape":"String"},
+        "CollectionARN":{"shape":"String"},
+        "CreationTimestamp":{"shape":"DateTime"}
+      }
+    },
     "DescribeStreamProcessorRequest":{
       "type":"structure",
       "required":["Name"],
@@ -943,7 +977,8 @@
       "type":"structure",
       "members":{
         "Labels":{"shape":"Labels"},
-        "OrientationCorrection":{"shape":"OrientationCorrection"}
+        "OrientationCorrection":{"shape":"OrientationCorrection"},
+        "LabelModelVersion":{"shape":"String"}
       }
     },
     "DetectModerationLabelsRequest":{
@@ -957,7 +992,8 @@
     "DetectModerationLabelsResponse":{
       "type":"structure",
       "members":{
-        "ModerationLabels":{"shape":"ModerationLabels"}
+        "ModerationLabels":{"shape":"ModerationLabels"},
+        "ModerationModelVersion":{"shape":"String"}
       }
     },
     "DetectTextRequest":{
@@ -990,7 +1026,8 @@
         "DISGUSTED",
         "SURPRISED",
         "CALM",
-        "UNKNOWN"
+        "UNKNOWN",
+        "FEAR"
       ]
     },
     "Emotions":{
@@ -1196,7 +1233,8 @@
         "StatusMessage":{"shape":"StatusMessage"},
         "VideoMetadata":{"shape":"VideoMetadata"},
         "ModerationLabels":{"shape":"ContentModerationDetections"},
-        "NextToken":{"shape":"PaginationToken"}
+        "NextToken":{"shape":"PaginationToken"},
+        "ModerationModelVersion":{"shape":"String"}
       }
     },
     "GetFaceDetectionRequest":{
@@ -1255,7 +1293,8 @@
         "StatusMessage":{"shape":"StatusMessage"},
         "VideoMetadata":{"shape":"VideoMetadata"},
         "NextToken":{"shape":"PaginationToken"},
-        "Labels":{"shape":"LabelDetections"}
+        "Labels":{"shape":"LabelDetections"},
+        "LabelModelVersion":{"shape":"String"}
       }
     },
     "GetPersonTrackingRequest":{
@@ -1323,7 +1362,9 @@
         "CollectionId":{"shape":"CollectionId"},
         "Image":{"shape":"Image"},
         "ExternalImageId":{"shape":"ExternalImageId"},
-        "DetectionAttributes":{"shape":"Attributes"}
+        "DetectionAttributes":{"shape":"Attributes"},
+        "MaxFaces":{"shape":"MaxFacesToIndex"},
+        "QualityFilter":{"shape":"QualityFilter"}
       }
     },
     "IndexFacesResponse":{
@@ -1331,8 +1372,20 @@
       "members":{
         "FaceRecords":{"shape":"FaceRecordList"},
         "OrientationCorrection":{"shape":"OrientationCorrection"},
-        "FaceModelVersion":{"shape":"String"}
+        "FaceModelVersion":{"shape":"String"},
+        "UnindexedFaces":{"shape":"UnindexedFaces"}
       }
+    },
+    "Instance":{
+      "type":"structure",
+      "members":{
+        "BoundingBox":{"shape":"BoundingBox"},
+        "Confidence":{"shape":"Percent"}
+      }
+    },
+    "Instances":{
+      "type":"list",
+      "member":{"shape":"Instance"}
     },
     "InternalServerError":{
       "type":"structure",
@@ -1401,7 +1454,9 @@
       "type":"structure",
       "members":{
         "Name":{"shape":"String"},
-        "Confidence":{"shape":"Percent"}
+        "Confidence":{"shape":"Percent"},
+        "Instances":{"shape":"Instances"},
+        "Parents":{"shape":"Parents"}
       }
     },
     "LabelDetection":{
@@ -1461,7 +1516,12 @@
         "mouthUp",
         "mouthDown",
         "leftPupil",
-        "rightPupil"
+        "rightPupil",
+        "upperJawlineLeft",
+        "midJawlineLeft",
+        "chinBottom",
+        "midJawlineRight",
+        "upperJawlineRight"
       ]
     },
     "Landmarks":{
@@ -1525,6 +1585,10 @@
       "max":4096,
       "min":1
     },
+    "MaxFacesToIndex":{
+      "type":"integer",
+      "min":1
+    },
     "MaxResults":{
       "type":"integer",
       "min":1
@@ -1583,6 +1647,16 @@
     "PaginationToken":{
       "type":"string",
       "max":255
+    },
+    "Parent":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"String"}
+      }
+    },
+    "Parents":{
+      "type":"list",
+      "member":{"shape":"Parent"}
     },
     "Percent":{
       "type":"float",
@@ -1652,6 +1726,32 @@
       "members":{
       },
       "exception":true
+    },
+    "QualityFilter":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "AUTO",
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
+    "Reason":{
+      "type":"string",
+      "enum":[
+        "EXCEEDS_MAX_FACES",
+        "EXTREME_POSE",
+        "LOW_BRIGHTNESS",
+        "LOW_SHARPNESS",
+        "LOW_CONFIDENCE",
+        "SMALL_BOUNDING_BOX",
+        "LOW_FACE_QUALITY"
+      ]
+    },
+    "Reasons":{
+      "type":"list",
+      "member":{"shape":"Reason"}
     },
     "RecognizeCelebritiesRequest":{
       "type":"structure",
@@ -1732,7 +1832,8 @@
         "CollectionId":{"shape":"CollectionId"},
         "Image":{"shape":"Image"},
         "MaxFaces":{"shape":"MaxFaces"},
-        "FaceMatchThreshold":{"shape":"Percent"}
+        "FaceMatchThreshold":{"shape":"Percent"},
+        "QualityFilter":{"shape":"QualityFilter"}
       }
     },
     "SearchFacesByImageResponse":{
@@ -1995,6 +2096,17 @@
     "ULong":{
       "type":"long",
       "min":0
+    },
+    "UnindexedFace":{
+      "type":"structure",
+      "members":{
+        "Reasons":{"shape":"Reasons"},
+        "FaceDetail":{"shape":"FaceDetail"}
+      }
+    },
+    "UnindexedFaces":{
+      "type":"list",
+      "member":{"shape":"UnindexedFace"}
     },
     "Url":{"type":"string"},
     "Urls":{

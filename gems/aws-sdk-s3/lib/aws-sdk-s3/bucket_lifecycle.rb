@@ -30,6 +30,7 @@ module Aws::S3
       @bucket_name
     end
 
+    # Container for a lifecycle rule.
     # @return [Array<Types::Rule>]
     def rules
       data[:rules]
@@ -196,11 +197,11 @@ module Aws::S3
     #           transition: {
     #             date: Time.now,
     #             days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #           },
     #           noncurrent_version_transition: {
     #             noncurrent_days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #           },
     #           noncurrent_version_expiration: {
     #             noncurrent_days: 1,

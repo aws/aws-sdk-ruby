@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +48,215 @@ module Aws::MediaStore
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -176,6 +274,19 @@ module Aws::MediaStore
     #   every region, as long as you don’t have an existing container with
     #   that name.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key:value pairs that you define. These values can be
+    #   anything that you want. Typically, the tag key represents a category
+    #   (such as "environment") and the tag value represents a specific
+    #   value within that category (such as "test," "development," or
+    #   "production"). You can add up to 50 tags to each container. For more
+    #   information about tagging, including naming and usage conventions, see
+    #   [Tagging Resources in MediaStore][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html
+    #
     # @return [Types::CreateContainerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateContainerOutput#container #container} => Types::Container
@@ -184,6 +295,12 @@ module Aws::MediaStore
     #
     #   resp = client.create_container({
     #     container_name: "ContainerName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -193,6 +310,7 @@ module Aws::MediaStore
     #   resp.container.arn #=> String
     #   resp.container.name #=> String
     #   resp.container.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.container.access_logging_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CreateContainer AWS API Documentation
     #
@@ -277,6 +395,29 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
+    # Removes an object lifecycle policy from a container. It takes up to 20
+    # minutes for the change to take effect.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that holds the object lifecycle policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lifecycle_policy({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteLifecyclePolicy AWS API Documentation
+    #
+    # @overload delete_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_lifecycle_policy(params = {}, options = {})
+      req = build_request(:delete_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
     # Retrieves the properties of the requested container. This request is
     # commonly used to retrieve the endpoint of a container. An endpoint is
     # a value assigned by the service when a new container is created. A
@@ -305,6 +446,7 @@ module Aws::MediaStore
     #   resp.container.arn #=> String
     #   resp.container.name #=> String
     #   resp.container.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.container.access_logging_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DescribeContainer AWS API Documentation
     #
@@ -391,6 +533,35 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
+    # Retrieves the object lifecycle policy that is assigned to a container.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that the object lifecycle policy is assigned
+    #   to.
+    #
+    # @return [Types::GetLifecyclePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLifecyclePolicyOutput#lifecycle_policy #lifecycle_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lifecycle_policy({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetLifecyclePolicy AWS API Documentation
+    #
+    # @overload get_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def get_lifecycle_policy(params = {}, options = {})
+      req = build_request(:get_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
     # Lists the properties of all containers in AWS Elemental MediaStore.
     #
     # You can query to receive all the containers in one response. Or you
@@ -434,6 +605,7 @@ module Aws::MediaStore
     #   resp.containers[0].arn #=> String
     #   resp.containers[0].name #=> String
     #   resp.containers[0].status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.containers[0].access_logging_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ListContainers AWS API Documentation
@@ -442,6 +614,36 @@ module Aws::MediaStore
     # @param [Hash] params ({})
     def list_containers(params = {}, options = {})
       req = build_request(:list_containers, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the tags assigned to the specified container.
+    #
+    # @option params [required, String] :resource
+    #   The Amazon Resource Name (ARN) for the container.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource: "ContainerARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -500,6 +702,13 @@ module Aws::MediaStore
     # rules to a CORS policy. If more than one rule applies, the service
     # uses the first applicable rule listed.
     #
+    # To learn more about CORS, see [Cross-Origin Resource Sharing (CORS) in
+    # AWS Elemental MediaStore][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html
+    #
     # @option params [required, String] :container_name
     #   The name of the container that you want to assign the CORS policy to.
     #
@@ -514,9 +723,9 @@ module Aws::MediaStore
     #     container_name: "ContainerName", # required
     #     cors_policy: [ # required
     #       {
-    #         allowed_origins: ["Origin"],
+    #         allowed_origins: ["Origin"], # required
     #         allowed_methods: ["PUT"], # accepts PUT, GET, DELETE, HEAD
-    #         allowed_headers: ["Header"],
+    #         allowed_headers: ["Header"], # required
     #         max_age_seconds: 1,
     #         expose_headers: ["Header"],
     #       },
@@ -529,6 +738,171 @@ module Aws::MediaStore
     # @param [Hash] params ({})
     def put_cors_policy(params = {}, options = {})
       req = build_request(:put_cors_policy, params)
+      req.send_request(options)
+    end
+
+    # Writes an object lifecycle policy to a container. If the container
+    # already has an object lifecycle policy, the service replaces the
+    # existing policy with the new policy. It takes up to 20 minutes for the
+    # change to take effect.
+    #
+    # For information about how to construct an object lifecycle policy, see
+    # [Components of an Object Lifecycle Policy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that you want to assign the object lifecycle
+    #   policy to.
+    #
+    # @option params [required, String] :lifecycle_policy
+    #   The object lifecycle policy to apply to the container.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_lifecycle_policy({
+    #     container_name: "ContainerName", # required
+    #     lifecycle_policy: "LifecyclePolicy", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutLifecyclePolicy AWS API Documentation
+    #
+    # @overload put_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def put_lifecycle_policy(params = {}, options = {})
+      req = build_request(:put_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
+    # Starts access logging on the specified container. When you enable
+    # access logging on a container, MediaStore delivers access logs for
+    # objects stored in that container to Amazon CloudWatch Logs.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that you want to start access logging on.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_access_logging({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StartAccessLogging AWS API Documentation
+    #
+    # @overload start_access_logging(params = {})
+    # @param [Hash] params ({})
+    def start_access_logging(params = {}, options = {})
+      req = build_request(:start_access_logging, params)
+      req.send_request(options)
+    end
+
+    # Stops access logging on the specified container. When you stop access
+    # logging on a container, MediaStore stops sending access logs to Amazon
+    # CloudWatch Logs. These access logs are not saved and are not
+    # retrievable.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that you want to stop access logging on.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_access_logging({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StopAccessLogging AWS API Documentation
+    #
+    # @overload stop_access_logging(params = {})
+    # @param [Hash] params ({})
+    def stop_access_logging(params = {}, options = {})
+      req = build_request(:stop_access_logging, params)
+      req.send_request(options)
+    end
+
+    # Adds tags to the specified AWS Elemental MediaStore container. Tags
+    # are key:value pairs that you can associate with AWS resources. For
+    # example, the tag key might be "customer" and the tag value might be
+    # "companyA." You can specify one or more tags to add to each
+    # container. You can add up to 50 tags to each container. For more
+    # information about tagging, including naming and usage conventions, see
+    # [Tagging Resources in MediaStore][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html
+    #
+    # @option params [required, String] :resource
+    #   The Amazon Resource Name (ARN) for the container.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   An array of key:value pairs that you want to add to the container. You
+    #   need to specify only the tags that you want to add or update. For
+    #   example, suppose a container already has two tags (customer:CompanyA
+    #   and priority:High). You want to change the priority tag and also add a
+    #   third tag (type:Contract). For TagResource, you specify the following
+    #   tags: priority:Medium, type:Contract. The result is that your
+    #   container has three tags: customer:CompanyA, priority:Medium, and
+    #   type:Contract.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource: "ContainerARN", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from the specified container. You can specify one or more
+    # tags to remove.
+    #
+    # @option params [required, String] :resource
+    #   The Amazon Resource Name (ARN) for the container.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A comma-separated list of keys for tags that you want to remove from
+    #   the container. For example, if your container has two tags
+    #   (customer:CompanyA and priority:High) and you want to remove one of
+    #   the tags (priority:High), you specify the key for the tag that you
+    #   want to remove (priority).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource: "ContainerARN", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -545,7 +919,7 @@ module Aws::MediaStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastore'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

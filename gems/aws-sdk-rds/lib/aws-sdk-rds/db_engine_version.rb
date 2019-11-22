@@ -59,7 +59,7 @@ module Aws::RDS
     end
 
     # The default character set for new instances of this engine version, if
-    # the `CharacterSetName` parameter of the CreateDBInstance API is not
+    # the `CharacterSetName` parameter of the CreateDBInstance API isn't
     # specified.
     # @return [Types::CharacterSet]
     def default_character_set
@@ -101,10 +101,34 @@ module Aws::RDS
       data[:supports_log_exports_to_cloudwatch_logs]
     end
 
-    # Indicates whether the database engine version supports read replicas.
+    # Indicates whether the database engine version supports Read Replicas.
     # @return [Boolean]
     def supports_read_replica
       data[:supports_read_replica]
+    end
+
+    # A list of the supported DB engine modes.
+    # @return [Array<String>]
+    def supported_engine_modes
+      data[:supported_engine_modes]
+    end
+
+    # A list of features supported by the DB engine. Supported feature names
+    # include the following.
+    #
+    # * s3Import
+    #
+    # ^
+    # @return [Array<String>]
+    def supported_feature_names
+      data[:supported_feature_names]
+    end
+
+    # The status of the DB engine version, either `available` or
+    # `deprecated`.
+    # @return [String]
+    def status
+      data[:status]
     end
 
     # @!endgroup
@@ -262,7 +286,7 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [OptionGroupOption::Collection]
     def option_group_options(options = {})
       batches = Enumerator.new do |y|
@@ -299,10 +323,10 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [String] :option_group_name
-    #   The name of the option group to describe. Cannot be supplied together
+    #   The name of the option group to describe. Can't be supplied together
     #   with EngineName or MajorEngineVersion.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [OptionGroup::Collection]
     def option_groups(options = {})
       batches = Enumerator.new do |y|

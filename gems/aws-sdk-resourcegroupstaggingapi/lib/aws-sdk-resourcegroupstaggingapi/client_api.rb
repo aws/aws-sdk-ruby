@@ -86,6 +86,15 @@ module Aws::ResourceGroupsTaggingAPI
     GetTagValuesOutput.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValuesOutputList, location_name: "TagValues"))
     GetTagValuesOutput.struct_class = Types::GetTagValuesOutput
 
+    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InternalServiceException.struct_class = Types::InternalServiceException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    PaginationTokenExpiredException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    PaginationTokenExpiredException.struct_class = Types::PaginationTokenExpiredException
+
     ResourceARNList.member = Shapes::ShapeRef.new(shape: ResourceARN)
 
     ResourceTagMapping.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
@@ -126,6 +135,9 @@ module Aws::ResourceGroupsTaggingAPI
 
     TagValuesOutputList.member = Shapes::ShapeRef.new(shape: TagValue)
 
+    ThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ThrottledException.struct_class = Types::ThrottledException
+
     UntagResourcesInput.add_member(:resource_arn_list, Shapes::ShapeRef.new(shape: ResourceARNList, required: true, location_name: "ResourceARNList"))
     UntagResourcesInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyListForUntag, required: true, location_name: "TagKeys"))
     UntagResourcesInput.struct_class = Types::UntagResourcesInput
@@ -140,12 +152,15 @@ module Aws::ResourceGroupsTaggingAPI
       api.version = "2017-01-26"
 
       api.metadata = {
+        "apiVersion" => "2017-01-26",
         "endpointPrefix" => "tagging",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Resource Groups Tagging API",
+        "serviceId" => "Resource Groups Tagging API",
         "signatureVersion" => "v4",
         "targetPrefix" => "ResourceGroupsTaggingAPI_20170126",
+        "uid" => "resourcegroupstaggingapi-2017-01-26",
       }
 
       api.add_operation(:get_resources, Seahorse::Model::Operation.new.tap do |o|

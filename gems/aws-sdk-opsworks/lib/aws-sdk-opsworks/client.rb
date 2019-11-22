@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +48,215 @@ module Aws::OpsWorks
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -184,7 +282,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :instance_id
     #   The instance ID.
@@ -224,8 +322,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :volume_id
     #   The volume ID.
@@ -263,8 +361,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :elastic_ip
     #   The Elastic IP address.
@@ -308,9 +406,9 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/layers-elb.html
-    # [2]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html
-    # [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers-elb.html
+    # [2]: https://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html
+    # [3]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :elastic_load_balancer_name
     #   The Elastic Load Balancing instance's name.
@@ -348,8 +446,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-cloning.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-cloning.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :source_stack_id
     #   The source stack ID.
@@ -363,7 +461,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #
     # @option params [String] :vpc_id
     #   The ID of the VPC that the cloned stack is to be launched into. It
@@ -396,8 +494,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
     # @option params [Hash<String,String>] :attributes
     #   A list of stack attributes and values as key/value pairs to be added
@@ -422,7 +520,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #
     # @option params [String] :default_instance_profile_arn
     #   The Amazon Resource Name (ARN) of an IAM profile that is the default
@@ -431,16 +529,16 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #
     # @option params [String] :default_os
     #   The stack's operating system, which must be set to one of the
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
-    #     Linux 2015.03`.
+    #     `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -470,8 +568,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
     #
     # @option params [String] :hostname_theme
     #   The stack's host name theme, with spaces are replaced by underscores.
@@ -488,7 +586,7 @@ module Aws::OpsWorks
     #
     #   * `Fruits`
     #
-    #   * `Greek_Deities`
+    #   * `Greek_Deities_and_Titans`
     #
     #   * `Legendary_creatures_from_Japan`
     #
@@ -514,7 +612,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #
     # @option params [String] :default_subnet_id
     #   The stack's default VPC subnet ID. This parameter is required if you
@@ -537,7 +635,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     #
     # @option params [Types::StackConfigurationManager] :configuration_manager
     #   The configuration manager. When you clone a stack we recommend that
@@ -552,7 +650,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #
     # @option params [Boolean] :use_custom_cookbooks
     #   Whether to use custom cookbooks.
@@ -584,17 +682,17 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #
     # @option params [Types::Source] :custom_cookbooks_source
     #   Contains the information required to retrieve an app or cookbook from
-    #   a repository. For more information, see [Creating Apps][1] or [Custom
-    #   Recipes and Cookbooks][2].
+    #   a repository. For more information, see [Adding Apps][1] or [Cookbooks
+    #   and Recipes][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     #
     # @option params [String] :default_ssh_key_name
     #   A default Amazon EC2 key pair name. The default value is none. If you
@@ -607,9 +705,9 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
-    #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
+    #   [3]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
     #
     # @option params [Boolean] :clone_permissions
     #   Whether to clone the source stack's permissions.
@@ -625,7 +723,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     #
     # @option params [String] :agent_version
     #   The default AWS OpsWorks Stacks agent version. You have the following
@@ -719,8 +817,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -771,19 +869,18 @@ module Aws::OpsWorks
     #   There is no specific limit on the number of environment variables.
     #   However, the size of the associated data structure - which includes
     #   the variables' names, values, and protected flag values - cannot
-    #   exceed 10 KB (10240 Bytes). This limit should accommodate most if not
-    #   all use cases. Exceeding it will cause an exception with the message,
-    #   "Environment: is too large (maximum is 10KB)."
+    #   exceed 20 KB. This limit should accommodate most if not all use cases.
+    #   Exceeding it will cause an exception with the message, "Environment:
+    #   is too large (maximum is 20KB)."
     #
-    #   <note markdown="1"> This parameter is supported only by Chef 11.10 stacks. If you have
-    #   specified one or more environment variables, you cannot modify the
-    #   stack's Chef version.
+    #   <note markdown="1"> If you have specified one or more environment variables, you cannot
+    #   modify the stack's Chef version.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
     #
     # @return [Types::CreateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -854,9 +951,9 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html
-    # [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html
+    # [3]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -879,18 +976,20 @@ module Aws::OpsWorks
     #   A user-defined comment.
     #
     # @option params [String] :custom_json
-    #   A string that contains user-defined, custom JSON. It is used to
-    #   override the corresponding default stack configuration JSON values.
-    #   The string should be in the following format:
+    #   A string that contains user-defined, custom JSON. You can use this
+    #   parameter to override some corresponding default stack configuration
+    #   JSON values. The string should be in the following format:
     #
     #   `"\{"key1": "value1", "key2": "value2",...\}"`
     #
     #   For more information about custom JSON, see [Use Custom JSON to Modify
-    #   the Stack Configuration Attributes][1].
+    #   the Stack Configuration Attributes][1] and [Overriding Attributes With
+    #   Custom JSON][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
     #
     # @return [Types::CreateDeploymentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -936,8 +1035,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -956,7 +1055,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #
     # @option params [String] :auto_scaling_type
     #   For load-based or time-based instances, the type. Windows stacks can
@@ -970,9 +1069,9 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
-    #     Linux 2015.03`.
+    #     `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -1002,8 +1101,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
     #
     # @option params [String] :ami_id
     #   A custom AMI ID to be used to create the instance. The AMI should be
@@ -1016,7 +1115,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
     #
     # @option params [String] :ssh_key_name
     #   The instance's Amazon EC2 key-pair name.
@@ -1027,7 +1126,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #
     # @option params [String] :virtualization_type
     #   The instance's virtualization type, `paravirtual` or `hvm`.
@@ -1046,7 +1145,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #
     # @option params [String] :root_device_type
     #   The instance root device type. For more information, see [Storage for
@@ -1054,7 +1153,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
     #   An array of `BlockDeviceMapping` objects that specify the instance's
@@ -1063,7 +1162,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
     #
     # @option params [Boolean] :install_updates_on_boot
     #   Whether to install operating system and package updates when the
@@ -1112,7 +1211,7 @@ module Aws::OpsWorks
     #
     #
     #   [1]: http://aws.amazon.com/ec2/dedicated-hosts/
-    #   [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html
+    #   [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html
     #   [3]: http://aws.amazon.com/ec2/purchasing-options/dedicated-instances/
     #
     # @return [Types::CreateInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1186,8 +1285,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The layer stack ID.
@@ -1213,7 +1312,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
     #
     # @option params [Hash<String,String>] :attributes
     #   One or more user-defined key-value pairs to be added to the stack
@@ -1232,7 +1331,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #
     # @option params [String] :custom_json
     #   A JSON-formatted string containing custom stack configuration and
@@ -1242,7 +1341,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
     #
     # @option params [Array<String>] :custom_security_group_ids
     #   An array containing the layer custom security group IDs.
@@ -1264,8 +1363,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     #
     # @option params [Boolean] :auto_assign_public_ips
     #   For stacks that are running in a VPC, whether to automatically assign
@@ -1274,7 +1373,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     #
     # @option params [Types::Recipes] :custom_recipes
     #   A `LayerCustomRecipes` object that specifies the layer custom recipes.
@@ -1390,8 +1489,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-edit.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-edit.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :name
     #   The stack name.
@@ -1422,7 +1521,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #
     # @option params [String] :vpc_id
     #   The ID of the VPC that the stack is to be launched into. The VPC must
@@ -1455,8 +1554,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
     # @option params [Hash<String,String>] :attributes
     #   One or more user-defined key-value pairs to be added to the stack
@@ -1471,7 +1570,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #
     # @option params [required, String] :default_instance_profile_arn
     #   The Amazon Resource Name (ARN) of an IAM profile that is the default
@@ -1480,7 +1579,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #
     # @option params [String] :default_os
     #   The stack's default operating system, which is installed on every
@@ -1488,9 +1587,9 @@ module Aws::OpsWorks
     #   create the instance. You can specify one of the following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
-    #     Linux 2015.03`.
+    #     `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -1515,8 +1614,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
     #
     # @option params [String] :hostname_theme
     #   The stack's host name theme, with spaces replaced by underscores. The
@@ -1533,7 +1632,7 @@ module Aws::OpsWorks
     #
     #   * `Fruits`
     #
-    #   * `Greek_Deities`
+    #   * `Greek_Deities_and_Titans`
     #
     #   * `Legendary_creatures_from_Japan`
     #
@@ -1559,7 +1658,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #
     # @option params [String] :default_subnet_id
     #   The stack's default VPC subnet ID. This parameter is required if you
@@ -1583,7 +1682,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     #
     # @option params [Types::StackConfigurationManager] :configuration_manager
     #   The configuration manager. When you create a stack we recommend that
@@ -1598,7 +1697,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #
     # @option params [Boolean] :use_custom_cookbooks
     #   Whether the stack uses custom cookbooks.
@@ -1629,17 +1728,17 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #
     # @option params [Types::Source] :custom_cookbooks_source
     #   Contains the information required to retrieve an app or cookbook from
-    #   a repository. For more information, see [Creating Apps][1] or [Custom
-    #   Recipes and Cookbooks][2].
+    #   a repository. For more information, see [Adding Apps][1] or [Cookbooks
+    #   and Recipes][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     #
     # @option params [String] :default_ssh_key_name
     #   A default Amazon EC2 key pair name. The default value is none. If you
@@ -1652,9 +1751,9 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
-    #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
+    #   [3]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
     #
     # @option params [String] :default_root_device_type
     #   The default root device type. This value is the default for all
@@ -1664,7 +1763,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     #
     # @option params [String] :agent_version
     #   The default AWS OpsWorks Stacks agent version. You have the following
@@ -1755,7 +1854,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :iam_user_arn
     #   The user's IAM ARN; this can also be a federated user's ARN.
@@ -1778,7 +1877,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
     #
     # @return [Types::CreateUserProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1815,7 +1914,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :app_id
     #   The app ID.
@@ -1849,8 +1948,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-delete.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-delete.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :instance_id
     #   The instance ID.
@@ -1891,8 +1990,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-delete.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-delete.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :layer_id
     #   The layer ID.
@@ -1925,8 +2024,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-shutting.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-shutting.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -1957,7 +2056,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :iam_user_arn
     #   The user's IAM ARN. This can also be a federated user's ARN.
@@ -1986,12 +2085,12 @@ module Aws::OpsWorks
     # Manage permissions level for the stack or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see
-    # [http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html][2].
+    # [https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html][2].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html#workinglayers-ecscluster-delete
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html#workinglayers-ecscluster-delete
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :ecs_cluster_arn
     #   The cluster's Amazon Resource Number (ARN).
@@ -2024,8 +2123,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :elastic_ip
     #   The Elastic IP address.
@@ -2059,7 +2158,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :instance_id
     #   The instance ID.
@@ -2090,7 +2189,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :rds_db_instance_arn
     #   The Amazon RDS instance's ARN.
@@ -2122,8 +2221,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :volume_id
     #   The AWS OpsWorks Stacks volume ID, which is the GUID that AWS OpsWorks
@@ -2202,7 +2301,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :stack_id
     #   The app stack ID. If you use this parameter, `DescribeApps` returns a
@@ -2280,7 +2379,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :deployment_id
     #   The deployment ID. If you include this parameter, `DescribeCommands`
@@ -2346,7 +2445,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :stack_id
     #   The stack ID. If you include this parameter, the command returns a
@@ -2417,7 +2516,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [Array<String>] :ecs_cluster_arns
     #   A list of ARNs, one for each cluster to be described.
@@ -2487,8 +2586,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :instance_id
     #   The instance ID. If you include this parameter, `DescribeElasticIps`
@@ -2550,7 +2649,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :stack_id
     #   A stack ID. The action describes the stack's Elastic Load Balancing
@@ -2610,7 +2709,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :stack_id
     #   A stack ID. If you use this parameter, `DescribeInstances` returns
@@ -2717,7 +2816,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :stack_id
     #   The stack ID.
@@ -2830,7 +2929,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, Array<String>] :layer_ids
     #   An array of layer IDs.
@@ -2885,7 +2984,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @return [Types::DescribeMyUserProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2945,7 +3044,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :iam_user_arn
     #   The user's IAM ARN. This can also be a federated user's ARN. For
@@ -2953,7 +3052,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #
     # @option params [String] :stack_id
     #   The stack ID.
@@ -3001,7 +3100,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :instance_id
     #   The instance ID. If you use this parameter, `DescribeRaidArrays`
@@ -3066,7 +3165,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The ID of the stack with which the instances are registered. The
@@ -3120,7 +3219,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :stack_id
     #   The stack ID. If you use this parameter, `DescribeServiceErrors`
@@ -3177,7 +3276,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -3220,7 +3319,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -3282,7 +3381,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [Array<String>] :stack_ids
     #   An array of stack IDs that specify the stacks to be described. If you
@@ -3357,7 +3456,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, Array<String>] :instance_ids
     #   An array of instance IDs.
@@ -3409,7 +3508,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [Array<String>] :iam_user_arns
     #   An array of IAM or federated user ARNs that identify the users to be
@@ -3457,7 +3556,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :instance_id
     #   The instance ID. If you use this parameter, `DescribeVolumes` returns
@@ -3526,7 +3625,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :elastic_load_balancer_name
     #   The Elastic Load Balancing instance's name.
@@ -3564,8 +3663,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :elastic_ip
     #   The Elastic IP address.
@@ -3597,7 +3696,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :layer_id
     #   The layer ID.
@@ -3721,8 +3820,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :instance_id
     #   The instance ID.
@@ -3756,8 +3855,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :ecs_cluster_arn
     #   The cluster's ARN.
@@ -3802,8 +3901,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :elastic_ip
     #   The Elastic IP address.
@@ -3862,9 +3961,9 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html
-    # [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html
+    # [3]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The ID of the stack that the instance is to be registered with.
@@ -3929,7 +4028,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -3975,8 +4074,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :ec2_volume_id
     #   The Amazon EBS volume ID.
@@ -4026,8 +4125,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :layer_id
     #   The layer ID.
@@ -4093,8 +4192,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -4127,7 +4226,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4161,8 +4260,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :instance_id
     #   The instance ID.
@@ -4220,8 +4319,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :instance_id
     #   The instance ID.
@@ -4252,7 +4351,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -4287,14 +4386,20 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :instance_id
     #   The instance ID.
     #
     # @option params [Boolean] :force
-    #   Specifies whether to force an instance to stop.
+    #   Specifies whether to force an instance to stop. If the instance's
+    #   root device type is `ebs`, or EBS-backed, adding the `Force` parameter
+    #   to the `StopInstances` API call disassociates the AWS OpsWorks Stacks
+    #   instance from EC2, and forces deletion of *only* the OpsWorks Stacks
+    #   instance. You must also delete the formerly-associated instance in EC2
+    #   after troubleshooting and replacing the AWS OpsWorks Stacks instance
+    #   with a new one.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4323,7 +4428,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -4351,7 +4456,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The stack or layer's Amazon Resource Number (ARN).
@@ -4407,7 +4512,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :instance_id
     #   The instance ID.
@@ -4439,8 +4544,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :volume_id
     #   The volume ID.
@@ -4497,7 +4602,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :app_id
     #   The app ID.
@@ -4540,19 +4645,18 @@ module Aws::OpsWorks
     #   There is no specific limit on the number of environment variables.
     #   However, the size of the associated data structure - which includes
     #   the variables' names, values, and protected flag values - cannot
-    #   exceed 10 KB (10240 Bytes). This limit should accommodate most if not
-    #   all use cases. Exceeding it will cause an exception with the message,
-    #   "Environment: is too large (maximum is 10KB)."
+    #   exceed 20 KB. This limit should accommodate most if not all use cases.
+    #   Exceeding it will cause an exception with the message, "Environment:
+    #   is too large (maximum is 20 KB)."
     #
-    #   <note markdown="1"> This parameter is supported only by Chef 11.10 stacks. If you have
-    #   specified one or more environment variables, you cannot modify the
-    #   stack's Chef version.
+    #   <note markdown="1"> If you have specified one or more environment variables, you cannot
+    #   modify the stack's Chef version.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4616,8 +4720,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :elastic_ip
     #   The IP address for which you want to update the name.
@@ -4652,7 +4756,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :instance_id
     #   The instance ID.
@@ -4671,7 +4775,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #
     # @option params [String] :auto_scaling_type
     #   For load-based or time-based instances, the type. Windows stacks can
@@ -4685,9 +4789,9 @@ module Aws::OpsWorks
     #   following. You cannot update an instance that is using a custom AMI.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
-    #     Linux 2015.03`.
+    #     `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -4720,8 +4824,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
     #
     # @option params [String] :ami_id
     #   The ID of the AMI that was used to create the instance. The value of
@@ -4740,7 +4844,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #
     # @option params [Boolean] :install_updates_on_boot
     #   Whether to install operating system and package updates when the
@@ -4814,7 +4918,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :layer_id
     #   The layer ID.
@@ -4834,7 +4938,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
     #
     # @option params [Hash<String,String>] :attributes
     #   One or more user-defined key/value pairs to be added to the stack
@@ -4851,7 +4955,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #
     # @option params [String] :custom_json
     #   A JSON-formatted string containing custom stack configuration and
@@ -4860,7 +4964,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
     #
     # @option params [Array<String>] :custom_security_group_ids
     #   An array containing the layer's custom security group IDs.
@@ -4882,8 +4986,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     #
     # @option params [Boolean] :auto_assign_public_ips
     #   For stacks that are running in a VPC, whether to automatically assign
@@ -4892,7 +4996,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     #
     # @option params [Types::Recipes] :custom_recipes
     #   A `LayerCustomRecipes` object that specifies the layer's custom
@@ -4998,7 +5102,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :ssh_public_key
     #   The user's SSH public key.
@@ -5029,7 +5133,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :rds_db_instance_arn
     #   The Amazon RDS instance's ARN.
@@ -5068,7 +5172,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :stack_id
     #   The stack ID.
@@ -5090,16 +5194,16 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #
     # @option params [String] :default_os
     #   The stack's operating system, which must be set to one of the
     #   following:
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
-    #     Linux 2015.03`.
+    #     `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -5124,8 +5228,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
     #
     # @option params [String] :hostname_theme
     #   The stack's new host name theme, with spaces replaced by underscores.
@@ -5142,7 +5246,7 @@ module Aws::OpsWorks
     #
     #   * `Fruits`
     #
-    #   * `Greek_Deities`
+    #   * `Greek_Deities_and_Titans`
     #
     #   * `Legendary_creatures_from_Japan`
     #
@@ -5167,7 +5271,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #
     # @option params [String] :default_subnet_id
     #   The stack's default VPC subnet ID. This parameter is required if you
@@ -5190,7 +5294,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     #
     # @option params [Types::StackConfigurationManager] :configuration_manager
     #   The configuration manager. When you update a stack, we recommend that
@@ -5205,20 +5309,20 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #
     # @option params [Boolean] :use_custom_cookbooks
     #   Whether the stack uses custom cookbooks.
     #
     # @option params [Types::Source] :custom_cookbooks_source
     #   Contains the information required to retrieve an app or cookbook from
-    #   a repository. For more information, see [Creating Apps][1] or [Custom
-    #   Recipes and Cookbooks][2].
+    #   a repository. For more information, see [Adding Apps][1] or [Cookbooks
+    #   and Recipes][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     #
     # @option params [String] :default_ssh_key_name
     #   A default Amazon EC2 key-pair name. The default value is `none`. If
@@ -5231,9 +5335,9 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
-    #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
+    #   [3]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
     #
     # @option params [String] :default_root_device_type
     #   The default root device type. This value is used by default for all
@@ -5242,7 +5346,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     #
     # @option params [Boolean] :use_opsworks_security_groups
     #   Whether to associate the AWS OpsWorks Stacks built-in security groups
@@ -5270,7 +5374,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #
     # @option params [String] :agent_version
     #   The default AWS OpsWorks Stacks agent version. You have the following
@@ -5353,7 +5457,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :iam_user_arn
     #   The user IAM ARN. This can also be a federated user's ARN.
@@ -5376,7 +5480,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5408,8 +5512,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [required, String] :volume_id
     #   The volume ID.
@@ -5452,7 +5556,7 @@ module Aws::OpsWorks
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworks'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -5469,7 +5573,7 @@ module Aws::OpsWorks
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

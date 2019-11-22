@@ -1,10 +1,28 @@
 {
   "pagination": {
+    "DescribeCustomAvailabilityZones": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "CustomAvailabilityZones"
+    },
+    "DescribeDBClusters": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBClusters"
+    },
     "DescribeDBEngineVersions": {
       "input_token": "Marker",
       "limit_key": "MaxRecords",
       "output_token": "Marker",
       "result_key": "DBEngineVersions"
+    },
+    "DescribeDBInstanceAutomatedBackups": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBInstanceAutomatedBackups"
     },
     "DescribeDBInstances": {
       "input_token": "Marker",
@@ -65,6 +83,18 @@
       "limit_key": "MaxRecords",
       "output_token": "Marker",
       "result_key": "Events"
+    },
+    "DescribeGlobalClusters": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "GlobalClusters"
+    },
+    "DescribeInstallationMedia": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "InstallationMedia"
     },
     "DescribeOptionGroupOptions": {
       "input_token": "Marker",

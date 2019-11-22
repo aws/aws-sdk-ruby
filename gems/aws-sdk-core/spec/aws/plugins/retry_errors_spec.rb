@@ -18,14 +18,14 @@ module Aws
         config = config.build!
         expect(config.retry_max_delay).to eq(0)
       end
-      
+
       it 'defaults config.retry_base_delay to 0.3' do
         config = Seahorse::Client::Configuration.new
         RetryErrors.new.add_options(config)
         config = config.build!
         expect(config.retry_base_delay).to eq(0.3)
       end
-      
+
       it 'defaults config.retry_jitter to :none' do
         config = Seahorse::Client::Configuration.new
         RetryErrors.new.add_options(config)
@@ -41,27 +41,32 @@ module Aws
 
         describe '#expired_credentials?' do
 
-          it 'returns true if the error code is InvalidClientTokenId' do
+          it 'returns true for InvalidClientTokenId' do
             error = RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
-          it 'returns true if the error code is UnrecognizedClientException' do
+          it 'returns true for UnrecognizedClientException' do
             error = RetryErrorsSvc::Errors::UnrecognizedClientException.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
-          it 'returns true if the error code is InvalidAccessKeyId' do
+          it 'returns true for InvalidAccessKeyId' do
             error = RetryErrorsSvc::Errors::InvalidAccessKeyId.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
-          it 'returns true if the error code is AuthFailure' do
+          it 'returns true for AuthFailure' do
             error = RetryErrorsSvc::Errors::AuthFailure.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
-          it 'returns true if the error code matches /expired/' do
+          it 'returns true for InvalidIdentityToken' do
+            error = RetryErrorsSvc::Errors::InvalidIdentityToken.new(nil,nil)
+            expect(inspector(error).expired_credentials?).to be(true)
+          end
+
+          it 'returns true for error types that match /expired/' do
             error = RetryErrorsSvc::Errors::SomethingExpiredError.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
@@ -78,6 +83,11 @@ module Aws
           it 'returns true for Throttling' do
             error = RetryErrorsSvc::Errors::Throttling.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
+          end
+
+          it 'returns true for response status code 429' do
+            error = RetryErrorsSvc::Errors::SomeRandomError.new(nil,nil)
+            expect(inspector(error, 429).throttling_error?).to be(true)
           end
 
           it 'returns true for ThrottlingException' do
@@ -110,7 +120,17 @@ module Aws
             expect(inspector(error).throttling_error?).to be(true)
           end
 
-          it 'returns true for error codes that match /throttl/' do
+          it 'returns true for TooManyRequestsException' do
+            error = RetryErrorsSvc::Errors::TooManyRequestsException.new(nil,nil)
+            expect(inspector(error).throttling_error?).to be(true)
+          end
+
+          it 'returns true for PriorRequestNotComplete' do
+            error = RetryErrorsSvc::Errors::PriorRequestNotComplete.new(nil,nil)
+            expect(inspector(error).throttling_error?).to be(true)
+          end
+
+          it 'returns true for error types that match /throttl/' do
             error = RetryErrorsSvc::Errors::Throttled.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
           end
@@ -157,7 +177,7 @@ module Aws
 
         describe '#networking?' do
 
-          it 'returns true if the error code is RequestTimeout' do
+          it 'returns true for RequestTimeout' do
             error = RetryErrorsSvc::Errors::RequestTimeout.new(nil,nil)
             expect(inspector(error).networking?).to be(true)
           end
@@ -178,19 +198,35 @@ module Aws
             expect(inspector(error, 200).networking?).to be(true)
           end
 
+          it 'returns true if the error is wrapped in a NoSuchEndpointError' do
+            req = double('request', endpoint: 'https://example.com')
+            context = double('ctx', http_request: req)
+            error = Errors::NoSuchEndpointError.new(context: context)
+            expect(inspector(error).networking?).to be(true)
+          end
+
         end
+
       end
 
       describe 'Handler' do
 
         let(:credentials) { Credentials.new('akid', 'secret') }
 
+        let(:cache) { EndpointCache.new }
+
+        let(:api) { Seahorse::Model::Api.new }
+
         let(:config) {
           cfg = Seahorse::Client::Configuration.new
           cfg.add_option(:credentials, credentials)
+          cfg.add_option(:endpoint_cache, cache)
+          cfg.add_option(:api, api)
           RetryErrors.new.add_options(cfg)
           cfg.build!
         }
+
+        let(:operation) { Seahorse::Model::Operation.new }
 
         let(:resp) { Seahorse::Client::Response.new }
 
@@ -198,6 +234,8 @@ module Aws
 
         before(:each) do
           resp.context.config = config
+          operation.endpoint_discovery = {}
+          resp.context.operation = operation
           resp.context.http_response.status_code = 400
         end
 
@@ -308,7 +346,7 @@ module Aws
         it 'raises KeyError with invalid jitter function' do
           config.retry_jitter = :unknown
           resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          expect(-> { handle { |context| resp } }).to raise_error(KeyError)
+          expect { handle { |context| resp } }.to raise_error(KeyError)
         end
 
         it 'adjusts delay with custom jitter'  do
@@ -353,6 +391,20 @@ module Aws
         it 'retries if creds expire and are refreshable' do
           expect(credentials).to receive(:refresh!).exactly(3).times
           resp.error = RetryErrorsSvc::Errors::AuthFailure.new(nil,nil)
+          handle { |context| resp }
+          expect(resp.context.retries).to eq(3)
+        end
+
+        it 'retries if endpoint discovery error is detected' do
+          config.api.endpoint_operation = :describe_endpoints
+          DescribeEndpointsRequest = Seahorse::Model::Shapes::StructureShape.new(
+            name:'DescribeEndpointsRequest')
+          config.api.add_operation(:describe_endpoints, Seahorse::Model::Operation.new.tap do |o|
+            o.endpoint_operation = true
+            o.input = Seahorse::Model::Shapes::ShapeRef.new(shape: DescribeEndpointsRequest)
+          end)
+          resp.error = Errors::EndpointDiscoveryError.new
+
           handle { |context| resp }
           expect(resp.context.retries).to eq(3)
         end

@@ -69,6 +69,149 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
+    # Location and destination information about the source code files
+    # provided with the project request. The source code is uploaded to the
+    # new project source repository after project creation.
+    #
+    # @note When making an API call, you may pass Code
+    #   data as a hash:
+    #
+    #       {
+    #         source: { # required
+    #           s3: { # required
+    #             bucket_name: "BucketName",
+    #             bucket_key: "BucketKey",
+    #           },
+    #         },
+    #         destination: { # required
+    #           code_commit: {
+    #             name: "RepositoryName", # required
+    #           },
+    #           git_hub: {
+    #             name: "RepositoryName", # required
+    #             description: "RepositoryDescription",
+    #             type: "RepositoryType", # required
+    #             owner: "RepositoryOwner", # required
+    #             private_repository: false, # required
+    #             issues_enabled: false, # required
+    #             token: "GitHubPersonalToken", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] source
+    #   The location where the source code files provided with the project
+    #   request are stored. AWS CodeStar retrieves the files during project
+    #   creation.
+    #   @return [Types::CodeSource]
+    #
+    # @!attribute [rw] destination
+    #   The repository to be created in AWS CodeStar. Valid values are AWS
+    #   CodeCommit or GitHub. After AWS CodeStar provisions the new
+    #   repository, the source code files provided with the project request
+    #   are placed in the repository.
+    #   @return [Types::CodeDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/Code AWS API Documentation
+    #
+    class Code < Struct.new(
+      :source,
+      :destination)
+      include Aws::Structure
+    end
+
+    # Information about the AWS CodeCommit repository to be created in AWS
+    # CodeStar. This is where the source code files provided with the
+    # project request will be uploaded after project creation.
+    #
+    # @note When making an API call, you may pass CodeCommitCodeDestination
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RepositoryName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the AWS CodeCommit repository to be created in AWS
+    #   CodeStar.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CodeCommitCodeDestination AWS API Documentation
+    #
+    class CodeCommitCodeDestination < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # The repository to be created in AWS CodeStar. Valid values are AWS
+    # CodeCommit or GitHub. After AWS CodeStar provisions the new
+    # repository, the source code files provided with the project request
+    # are placed in the repository.
+    #
+    # @note When making an API call, you may pass CodeDestination
+    #   data as a hash:
+    #
+    #       {
+    #         code_commit: {
+    #           name: "RepositoryName", # required
+    #         },
+    #         git_hub: {
+    #           name: "RepositoryName", # required
+    #           description: "RepositoryDescription",
+    #           type: "RepositoryType", # required
+    #           owner: "RepositoryOwner", # required
+    #           private_repository: false, # required
+    #           issues_enabled: false, # required
+    #           token: "GitHubPersonalToken", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] code_commit
+    #   Information about the AWS CodeCommit repository to be created in AWS
+    #   CodeStar. This is where the source code files provided with the
+    #   project request will be uploaded after project creation.
+    #   @return [Types::CodeCommitCodeDestination]
+    #
+    # @!attribute [rw] git_hub
+    #   Information about the GitHub repository to be created in AWS
+    #   CodeStar. This is where the source code files provided with the
+    #   project request will be uploaded after project creation.
+    #   @return [Types::GitHubCodeDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CodeDestination AWS API Documentation
+    #
+    class CodeDestination < Struct.new(
+      :code_commit,
+      :git_hub)
+      include Aws::Structure
+    end
+
+    # The location where the source code files provided with the project
+    # request are stored. AWS CodeStar retrieves the files during project
+    # creation.
+    #
+    # @note When making an API call, you may pass CodeSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3: { # required
+    #           bucket_name: "BucketName",
+    #           bucket_key: "BucketKey",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3
+    #   Information about the Amazon S3 location where the source code files
+    #   provided with the project request are stored.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CodeSource AWS API Documentation
+    #
+    class CodeSource < Struct.new(
+      :s3)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateProjectRequest
     #   data as a hash:
     #
@@ -77,23 +220,80 @@ module Aws::CodeStar
     #         id: "ProjectId", # required
     #         description: "ProjectDescription",
     #         client_request_token: "ClientRequestToken",
+    #         source_code: [
+    #           {
+    #             source: { # required
+    #               s3: { # required
+    #                 bucket_name: "BucketName",
+    #                 bucket_key: "BucketKey",
+    #               },
+    #             },
+    #             destination: { # required
+    #               code_commit: {
+    #                 name: "RepositoryName", # required
+    #               },
+    #               git_hub: {
+    #                 name: "RepositoryName", # required
+    #                 description: "RepositoryDescription",
+    #                 type: "RepositoryType", # required
+    #                 owner: "RepositoryOwner", # required
+    #                 private_repository: false, # required
+    #                 issues_enabled: false, # required
+    #                 token: "GitHubPersonalToken", # required
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         toolchain: {
+    #           source: { # required
+    #             s3: { # required
+    #               bucket_name: "BucketName",
+    #               bucket_key: "BucketKey",
+    #             },
+    #           },
+    #           role_arn: "RoleArn",
+    #           stack_parameters: {
+    #             "TemplateParameterKey" => "TemplateParameterValue",
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
-    #   Reserved for future use.
+    #   The display name for the project to be created in AWS CodeStar.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Reserved for future use.
+    #   The ID of the project to be created in AWS CodeStar.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Reserved for future use.
+    #   The description of the project, if any.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   Reserved for future use.
+    #   A user- or system-generated token that identifies the entity that
+    #   requested project creation. This token can be used to repeat the
+    #   request.
     #   @return [String]
+    #
+    # @!attribute [rw] source_code
+    #   A list of the Code objects submitted with the project request. If
+    #   this parameter is specified, the request must also include the
+    #   toolchain parameter.
+    #   @return [Array<Types::Code>]
+    #
+    # @!attribute [rw] toolchain
+    #   The name of the toolchain template file submitted with the project
+    #   request. If this parameter is specified, the request must also
+    #   include the sourceCode parameter.
+    #   @return [Types::Toolchain]
+    #
+    # @!attribute [rw] tags
+    #   The tags created for the project.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProjectRequest AWS API Documentation
     #
@@ -101,20 +301,24 @@ module Aws::CodeStar
       :name,
       :id,
       :description,
-      :client_request_token)
+      :client_request_token,
+      :source_code,
+      :toolchain,
+      :tags)
       include Aws::Structure
     end
 
     # @!attribute [rw] id
-    #   Reserved for future use.
+    #   The ID of the project.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   Reserved for future use.
+    #   The Amazon Resource Name (ARN) of the created project.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   Reserved for future use.
+    #   A user- or system-generated token that identifies the entity that
+    #   requested project creation.
     #   @return [String]
     #
     # @!attribute [rw] project_template_id
@@ -350,6 +554,10 @@ module Aws::CodeStar
     #   project.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The project creation or deletion status.
+    #   @return [Types::ProjectStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProjectResult AWS API Documentation
     #
     class DescribeProjectResult < Struct.new(
@@ -360,7 +568,8 @@ module Aws::CodeStar
       :client_request_token,
       :created_time_stamp,
       :stack_id,
-      :project_template_id)
+      :project_template_id,
+      :status)
       include Aws::Structure
     end
 
@@ -463,6 +672,68 @@ module Aws::CodeStar
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DisassociateTeamMemberResult AWS API Documentation
     #
     class DisassociateTeamMemberResult < Aws::EmptyStructure; end
+
+    # Information about the GitHub repository to be created in AWS CodeStar.
+    # This is where the source code files provided with the project request
+    # will be uploaded after project creation.
+    #
+    # @note When making an API call, you may pass GitHubCodeDestination
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RepositoryName", # required
+    #         description: "RepositoryDescription",
+    #         type: "RepositoryType", # required
+    #         owner: "RepositoryOwner", # required
+    #         private_repository: false, # required
+    #         issues_enabled: false, # required
+    #         token: "GitHubPersonalToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the GitHub repository to be created in AWS CodeStar.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description for the GitHub repository to be created in AWS CodeStar.
+    #   This description displays in GitHub after the repository is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of GitHub repository to be created in AWS CodeStar. Valid
+    #   values are User or Organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The GitHub username for the owner of the GitHub repository to be
+    #   created in AWS CodeStar. If this repository should be owned by a
+    #   GitHub organization, provide its name.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_repository
+    #   Whether the GitHub repository is to be a private repository.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] issues_enabled
+    #   Whether to enable issues for the GitHub repository.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] token
+    #   The GitHub user's personal access token for the GitHub repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/GitHubCodeDestination AWS API Documentation
+    #
+    class GitHubCodeDestination < Struct.new(
+      :name,
+      :description,
+      :type,
+      :owner,
+      :private_repository,
+      :issues_enabled,
+      :token)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass ListProjectsRequest
     #   data as a hash:
@@ -692,6 +963,26 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
+    # An indication of whether a project creation or deletion is failed or
+    # successful.
+    #
+    # @!attribute [rw] state
+    #   The phase of completion for a project creation or deletion.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   In the case of a project creation or deletion failure, a reason for
+    #   the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectStatus AWS API Documentation
+    #
+    class ProjectStatus < Struct.new(
+      :state,
+      :reason)
+      include Aws::Structure
+    end
+
     # Information about the metadata for a project.
     #
     # @!attribute [rw] project_id
@@ -720,6 +1011,35 @@ module Aws::CodeStar
     #
     class Resource < Struct.new(
       :id)
+      include Aws::Structure
+    end
+
+    # The Amazon S3 location where the source code files provided with the
+    # project request are stored.
+    #
+    # @note When making an API call, you may pass S3Location
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "BucketName",
+    #         bucket_key: "BucketKey",
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The Amazon S3 bucket name where the source code files provided with
+    #   the project request are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_key
+    #   The Amazon S3 object key where the source code files provided with
+    #   the project request are stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/S3Location AWS API Documentation
+    #
+    class S3Location < Struct.new(
+      :bucket_name,
+      :bucket_key)
       include Aws::Structure
     end
 
@@ -787,6 +1107,77 @@ module Aws::CodeStar
       :user_arn,
       :project_role,
       :remote_access_allowed)
+      include Aws::Structure
+    end
+
+    # The toolchain template file provided with the project request. AWS
+    # CodeStar uses the template to provision the toolchain stack in AWS
+    # CloudFormation.
+    #
+    # @note When making an API call, you may pass Toolchain
+    #   data as a hash:
+    #
+    #       {
+    #         source: { # required
+    #           s3: { # required
+    #             bucket_name: "BucketName",
+    #             bucket_key: "BucketKey",
+    #           },
+    #         },
+    #         role_arn: "RoleArn",
+    #         stack_parameters: {
+    #           "TemplateParameterKey" => "TemplateParameterValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] source
+    #   The Amazon S3 location where the toolchain template file provided
+    #   with the project request is stored. AWS CodeStar retrieves the file
+    #   during project creation.
+    #   @return [Types::ToolchainSource]
+    #
+    # @!attribute [rw] role_arn
+    #   The service role ARN for AWS CodeStar to use for the toolchain
+    #   template during stack provisioning.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_parameters
+    #   The list of parameter overrides to be passed into the toolchain
+    #   template during stack provisioning, if any.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/Toolchain AWS API Documentation
+    #
+    class Toolchain < Struct.new(
+      :source,
+      :role_arn,
+      :stack_parameters)
+      include Aws::Structure
+    end
+
+    # The Amazon S3 location where the toolchain template file provided with
+    # the project request is stored. AWS CodeStar retrieves the file during
+    # project creation.
+    #
+    # @note When making an API call, you may pass ToolchainSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3: { # required
+    #           bucket_name: "BucketName",
+    #           bucket_key: "BucketKey",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3
+    #   The Amazon S3 bucket where the toolchain template file provided with
+    #   the project request is stored.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ToolchainSource AWS API Documentation
+    #
+    class ToolchainSource < Struct.new(
+      :s3)
       include Aws::Structure
     end
 

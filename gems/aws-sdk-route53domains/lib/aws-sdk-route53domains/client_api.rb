@@ -184,6 +184,9 @@ module Aws::Route53Domains
     DisableDomainTransferLockResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, required: true, location_name: "OperationId"))
     DisableDomainTransferLockResponse.struct_class = Types::DisableDomainTransferLockResponse
 
+    DomainLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DomainLimitExceeded.struct_class = Types::DomainLimitExceeded
+
     DomainStatusList.member = Shapes::ShapeRef.new(shape: DomainStatus)
 
     DomainSuggestion.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
@@ -202,6 +205,9 @@ module Aws::Route53Domains
 
     DomainTransferability.add_member(:transferable, Shapes::ShapeRef.new(shape: Transferable, location_name: "Transferable"))
     DomainTransferability.struct_class = Types::DomainTransferability
+
+    DuplicateRequest.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DuplicateRequest.struct_class = Types::DuplicateRequest
 
     EnableDomainAutoRenewRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     EnableDomainAutoRenewRequest.struct_class = Types::EnableDomainAutoRenewRequest
@@ -274,6 +280,9 @@ module Aws::Route53Domains
 
     GlueIpList.member = Shapes::ShapeRef.new(shape: GlueIp)
 
+    InvalidInput.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidInput.struct_class = Types::InvalidInput
+
     ListDomainsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "Marker"))
     ListDomainsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location_name: "MaxItems"))
     ListDomainsRequest.struct_class = Types::ListDomainsRequest
@@ -302,6 +311,9 @@ module Aws::Route53Domains
     Nameserver.struct_class = Types::Nameserver
 
     NameserverList.member = Shapes::ShapeRef.new(shape: Nameserver)
+
+    OperationLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    OperationLimitExceeded.struct_class = Types::OperationLimitExceeded
 
     OperationSummary.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, required: true, location_name: "OperationId"))
     OperationSummary.add_member(:status, Shapes::ShapeRef.new(shape: OperationStatus, required: true, location_name: "Status"))
@@ -348,6 +360,9 @@ module Aws::Route53Domains
     RetrieveDomainAuthCodeResponse.add_member(:auth_code, Shapes::ShapeRef.new(shape: DomainAuthCode, required: true, location_name: "AuthCode"))
     RetrieveDomainAuthCodeResponse.struct_class = Types::RetrieveDomainAuthCodeResponse
 
+    TLDRulesViolation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TLDRulesViolation.struct_class = Types::TLDRulesViolation
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -372,6 +387,9 @@ module Aws::Route53Domains
 
     TransferDomainResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, required: true, location_name: "OperationId"))
     TransferDomainResponse.struct_class = Types::TransferDomainResponse
+
+    UnsupportedTLD.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnsupportedTLD.struct_class = Types::UnsupportedTLD
 
     UpdateDomainContactPrivacyRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     UpdateDomainContactPrivacyRequest.add_member(:admin_privacy, Shapes::ShapeRef.new(shape: Boolean, location_name: "AdminPrivacy"))
@@ -422,12 +440,14 @@ module Aws::Route53Domains
       api.version = "2014-05-15"
 
       api.metadata = {
+        "apiVersion" => "2014-05-15",
         "endpointPrefix" => "route53domains",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Route 53 Domains",
         "signatureVersion" => "v4",
         "targetPrefix" => "Route53Domains_v20140515",
+        "uid" => "route53domains-2014-05-15",
       }
 
       api.add_operation(:check_domain_availability, Seahorse::Model::Operation.new.tap do |o|

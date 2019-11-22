@@ -218,6 +218,12 @@ module Aws::EC2
       data[:elastic_gpu_associations]
     end
 
+    # The elastic inference accelerator associated with the instance.
+    # @return [Array<Types::ElasticInferenceAcceleratorAssociation>]
+    def elastic_inference_accelerator_associations
+      data[:elastic_inference_accelerator_associations]
+    end
+
     # The device name of the root device volume (for example, `/dev/sda1`).
     # @return [String]
     def root_device_name
@@ -231,7 +237,7 @@ module Aws::EC2
       data[:root_device_type]
     end
 
-    # One or more security groups for the instance.
+    # The security groups for the instance.
     # @return [Array<Types::GroupIdentifier>]
     def security_groups
       data[:security_groups]
@@ -246,7 +252,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
     # @return [Boolean]
     def source_dest_check
       data[:source_dest_check]
@@ -287,6 +293,36 @@ module Aws::EC2
     # @return [Types::CpuOptions]
     def cpu_options
       data[:cpu_options]
+    end
+
+    # The ID of the Capacity Reservation.
+    # @return [String]
+    def capacity_reservation_id
+      data[:capacity_reservation_id]
+    end
+
+    # Information about the Capacity Reservation targeting option.
+    # @return [Types::CapacityReservationSpecificationResponse]
+    def capacity_reservation_specification
+      data[:capacity_reservation_specification]
+    end
+
+    # Indicates whether the instance is enabled for hibernation.
+    # @return [Types::HibernationOptions]
+    def hibernation_options
+      data[:hibernation_options]
+    end
+
+    # The license configurations.
+    # @return [Array<Types::LicenseConfiguration>]
+    def licenses
+      data[:licenses]
+    end
+
+    # The metadata options for the instance.
+    # @return [Types::InstanceMetadataOptionsResponse]
+    def metadata_options
+      data[:metadata_options]
     end
 
     # @!endgroup
@@ -344,10 +380,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Instance]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(instance_ids: [@id]))
       Instance.new({
         id: @id,
@@ -362,10 +398,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Instance]
-    def wait_until_running(options = {})
+    def wait_until_running(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceRunning.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(instance_ids: [@id]))
       Instance.new({
         id: @id,
@@ -380,10 +416,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Instance]
-    def wait_until_stopped(options = {})
+    def wait_until_stopped(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceStopped.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(instance_ids: [@id]))
       Instance.new({
         id: @id,
@@ -398,10 +434,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Instance]
-    def wait_until_terminated(options = {})
+    def wait_until_terminated(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceTerminated.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(instance_ids: [@id]))
       Instance.new({
         id: @id,
@@ -512,7 +548,7 @@ module Aws::EC2
     #   instance.attach_classic_link_vpc({
     #     dry_run: false,
     #     groups: ["String"], # required
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -536,7 +572,7 @@ module Aws::EC2
     #
     #   instance.attach_volume({
     #     device: "String", # required
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -588,13 +624,13 @@ module Aws::EC2
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           encrypted: false,
+    #           kms_key_id: "String",
     #         },
     #         no_device: "String",
     #       },
@@ -606,7 +642,9 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   Information about one or more block device mappings.
+    #   The block device mappings. This parameter cannot be used to modify the
+    #   encryption status of existing volumes or snapshots. To create an AMI
+    #   with encrypted snapshots, use the CopyImage action.
     # @option options [String] :description
     #   A description for the new image.
     # @option options [Boolean] :dry_run
@@ -654,9 +692,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
@@ -700,7 +738,7 @@ module Aws::EC2
     #
     #   instance.detach_classic_link_vpc({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -722,7 +760,7 @@ module Aws::EC2
     #   instance.detach_volume({
     #     device: "String",
     #     force: false,
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -811,7 +849,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM
     # @option options [Types::AttributeBooleanValue] :disable_api_termination
     #   If the value is `true`, you can't terminate the instance using the
     #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
@@ -848,7 +886,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     # @option options [Types::AttributeValue] :kernel
     #   Changes the instance's kernel to the specified value. We recommend
     #   that you use PV-GRUB instead of kernels and RAM disks. For more
@@ -856,7 +894,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
     # @option options [Types::AttributeValue] :ramdisk
     #   Changes the instance's RAM disk to the specified value. We recommend
     #   that you use PV-GRUB instead of kernels and RAM disks. For more
@@ -864,7 +902,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
     # @option options [Types::AttributeValue] :sriov_net_support
     #   Set to `simple` to enable enhanced networking with the Intel 82599
     #   Virtual Function interface for the instance.
@@ -965,8 +1003,7 @@ module Aws::EC2
     # @option options [Time,DateTime,Date,Integer,String] :end_time
     #   The time at which the reported instance health state ended.
     # @option options [required, Array<String>] :reason_codes
-    #   One or more reason codes that describe the health state of your
-    #   instance.
+    #   The reason codes that describe the health state of your instance.
     #
     #   * `instance-stuck-in-state`\: My instance is stuck in a state.
     #
@@ -1115,10 +1152,22 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.stop({
+    #     hibernate: false,
     #     dry_run: false,
     #     force: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :hibernate
+    #   Hibernates the instance if the instance was enabled for hibernation at
+    #   launch. If the instance cannot hibernate successfully, a normal
+    #   shutdown occurs. For more information, see [Hibernate Your
+    #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1263,7 +1312,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `attachment.attach-time` - The time stamp when the attachment
     #     initiated.
@@ -1285,7 +1334,8 @@ module Aws::EC2
     #
     #   * `create-time` - The time stamp when the volume was created.
     #
-    #   * `encrypted` - The encryption status of the volume.
+    #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
+    #     `false`)
     #
     #   * `size` - The size of the volume, in GiB.
     #
@@ -1311,7 +1361,7 @@ module Aws::EC2
     #     Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
     #     Magnetic volumes.
     # @option options [Array<String>] :volume_ids
-    #   One or more volume IDs.
+    #   The volume IDs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1399,13 +1449,11 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     # @option options [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #   One or more Elastic IP addresses.
     #
     #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
-    #   \[EC2-VPC\] One or more allocation IDs.
-    #
-    #   Default: Describes all your Elastic IP addresses.
+    #   \[EC2-VPC\] Information about the allocation IDs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1499,9 +1547,9 @@ module Aws::EC2
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [required, Array<Types::Tag>] :tags
-      #   One or more tags. The `value` parameter is required, but if you don't
-      #   want the tag to have a value, specify the parameter with no value, and
-      #   we set the value to an empty string.
+      #   The tags. The `value` parameter is required, but if you don't want
+      #   the tag to have a value, specify the parameter with no value, and we
+      #   set the value to an empty string.
       # @return [void]
       def batch_create_tags(options = {})
         batch_enum.each do |batch|
@@ -1593,10 +1641,22 @@ module Aws::EC2
       # @example Request syntax with placeholder values
       #
       #   instance.batch_stop({
+      #     hibernate: false,
       #     dry_run: false,
       #     force: false,
       #   })
       # @param options ({})
+      # @option options [Boolean] :hibernate
+      #   Hibernates the instance if the instance was enabled for hibernation at
+      #   launch. If the instance cannot hibernate successfully, a normal
+      #   shutdown occurs. For more information, see [Hibernate Your
+      #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+      #
+      #   Default: `false`
+      #
+      #
+      #
+      #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.

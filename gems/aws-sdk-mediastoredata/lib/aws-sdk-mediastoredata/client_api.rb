@@ -35,7 +35,7 @@ module Aws::MediaStoreData
     ObjectNotFoundException = Shapes::StructureShape.new(name: 'ObjectNotFoundException')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PathNaming = Shapes::StringShape.new(name: 'PathNaming')
-    PayloadBlob = Shapes::BlobShape.new(name: 'PayloadBlob')
+    PayloadBlob = Shapes::BlobShape.new(name: 'PayloadBlob', streaming: true)
     PutObjectRequest = Shapes::StructureShape.new(name: 'PutObjectRequest')
     PutObjectResponse = Shapes::StructureShape.new(name: 'PutObjectResponse')
     RangePattern = Shapes::StringShape.new(name: 'RangePattern')
@@ -44,7 +44,11 @@ module Aws::MediaStoreData
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     StringPrimitive = Shapes::StringShape.new(name: 'StringPrimitive')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
+    UploadAvailability = Shapes::StringShape.new(name: 'UploadAvailability')
     statusCode = Shapes::IntegerShape.new(name: 'statusCode')
+
+    ContainerNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ContainerNotFoundException.struct_class = Types::ContainerNotFoundException
 
     DeleteObjectRequest.add_member(:path, Shapes::ShapeRef.new(shape: PathNaming, required: true, location: "uri", location_name: "Path"))
     DeleteObjectRequest.struct_class = Types::DeleteObjectRequest
@@ -77,6 +81,9 @@ module Aws::MediaStoreData
     GetObjectResponse[:payload] = :body
     GetObjectResponse[:payload_member] = GetObjectResponse.member(:body)
 
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerError.struct_class = Types::InternalServerError
+
     Item.add_member(:name, Shapes::ShapeRef.new(shape: ItemName, location_name: "Name"))
     Item.add_member(:type, Shapes::ShapeRef.new(shape: ItemType, location_name: "Type"))
     Item.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
@@ -96,11 +103,15 @@ module Aws::MediaStoreData
     ListItemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListItemsResponse.struct_class = Types::ListItemsResponse
 
+    ObjectNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ObjectNotFoundException.struct_class = Types::ObjectNotFoundException
+
     PutObjectRequest.add_member(:body, Shapes::ShapeRef.new(shape: PayloadBlob, required: true, location_name: "Body"))
     PutObjectRequest.add_member(:path, Shapes::ShapeRef.new(shape: PathNaming, required: true, location: "uri", location_name: "Path"))
     PutObjectRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location: "header", location_name: "Content-Type"))
     PutObjectRequest.add_member(:cache_control, Shapes::ShapeRef.new(shape: StringPrimitive, location: "header", location_name: "Cache-Control"))
     PutObjectRequest.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location: "header", location_name: "x-amz-storage-class"))
+    PutObjectRequest.add_member(:upload_availability, Shapes::ShapeRef.new(shape: UploadAvailability, location: "header", location_name: "x-amz-upload-availability"))
     PutObjectRequest.struct_class = Types::PutObjectRequest
     PutObjectRequest[:payload] = :body
     PutObjectRequest[:payload_member] = PutObjectRequest.member(:body)
@@ -110,6 +121,9 @@ module Aws::MediaStoreData
     PutObjectResponse.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
     PutObjectResponse.struct_class = Types::PutObjectResponse
 
+    RequestedRangeNotSatisfiableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RequestedRangeNotSatisfiableException.struct_class = Types::RequestedRangeNotSatisfiableException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -117,11 +131,15 @@ module Aws::MediaStoreData
       api.version = "2017-09-01"
 
       api.metadata = {
+        "apiVersion" => "2017-09-01",
         "endpointPrefix" => "data.mediastore",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "MediaStore Data",
         "serviceFullName" => "AWS Elemental MediaStore Data Plane",
+        "serviceId" => "MediaStore Data",
         "signatureVersion" => "v4",
         "signingName" => "mediastore",
+        "uid" => "mediastore-data-2017-09-01",
       }
 
       api.add_operation(:delete_object, Seahorse::Model::Operation.new.tap do |o|
@@ -166,6 +184,12 @@ module Aws::MediaStoreData
         o.output = Shapes::ShapeRef.new(shape: ListItemsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_object, Seahorse::Model::Operation.new.tap do |o|

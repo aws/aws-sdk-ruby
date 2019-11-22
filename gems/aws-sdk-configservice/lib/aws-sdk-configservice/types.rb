@@ -144,6 +144,52 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # The details that identify a resource that is collected by AWS Config
+    # aggregator, including the resource type, ID, (if available) the custom
+    # resource name, the source account, and source region.
+    #
+    # @note When making an API call, you may pass AggregateResourceIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         source_account_id: "AccountId", # required
+    #         source_region: "AwsRegion", # required
+    #         resource_id: "ResourceId", # required
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
+    #         resource_name: "ResourceName",
+    #       }
+    #
+    # @!attribute [rw] source_account_id
+    #   The 12-digit account ID of the source account.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source region where data is aggregated.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the AWS resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the AWS resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the AWS resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregateResourceIdentifier AWS API Documentation
+    #
+    class AggregateResourceIdentifier < Struct.new(
+      :source_account_id,
+      :source_region,
+      :resource_id,
+      :resource_type,
+      :resource_name)
+      include Aws::Structure
+    end
+
     # The current sync status between the source and the aggregator account.
     #
     # @!attribute [rw] source_id
@@ -231,7 +277,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The 12 digit AWS account ID associated with the resource.
+    #   The 12-digit AWS account ID associated with the resource.
     #   @return [String]
     #
     # @!attribute [rw] configuration_item_capture_time
@@ -305,13 +351,63 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetAggregateResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         resource_identifiers: [ # required
+    #           {
+    #             source_account_id: "AccountId", # required
+    #             source_region: "AwsRegion", # required
+    #             resource_id: "ResourceId", # required
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
+    #             resource_name: "ResourceName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifiers
+    #   A list of aggregate ResourceIdentifiers objects.
+    #   @return [Array<Types::AggregateResourceIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetAggregateResourceConfigRequest AWS API Documentation
+    #
+    class BatchGetAggregateResourceConfigRequest < Struct.new(
+      :configuration_aggregator_name,
+      :resource_identifiers)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] base_configuration_items
+    #   A list that contains the current configuration of one or more
+    #   resources.
+    #   @return [Array<Types::BaseConfigurationItem>]
+    #
+    # @!attribute [rw] unprocessed_resource_identifiers
+    #   A list of resource identifiers that were not processed with current
+    #   scope. The list is empty if all the resources are processed.
+    #   @return [Array<Types::AggregateResourceIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetAggregateResourceConfigResponse AWS API Documentation
+    #
+    class BatchGetAggregateResourceConfigResponse < Struct.new(
+      :base_configuration_items,
+      :unprocessed_resource_identifiers)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchGetResourceConfigRequest
     #   data as a hash:
     #
     #       {
     #         resource_keys: [ # required
     #           {
-    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #             resource_id: "ResourceId", # required
     #           },
     #         ],
@@ -563,7 +659,7 @@ module Aws::ConfigService
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
+    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
     #
     # @note When making an API call, you may pass ConfigRule
     #   data as a hash:
@@ -593,6 +689,7 @@ module Aws::ConfigService
     #         input_parameters: "StringWithCharLimit1024",
     #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #         config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
+    #         created_by: "StringWithCharLimit256",
     #       }
     #
     # @!attribute [rw] config_rule_name
@@ -670,6 +767,15 @@ module Aws::ConfigService
     #   erased and are no longer available.
     #   @return [String]
     #
+    # @!attribute [rw] created_by
+    #   Service principal name of the service that created the rule.
+    #
+    #   <note markdown="1"> The field is populated only if the service linked rule is created by
+    #   a service. The field is empty if you create your own rule.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRule AWS API Documentation
     #
     class ConfigRule < Struct.new(
@@ -681,7 +787,8 @@ module Aws::ConfigService
       :source,
       :input_parameters,
       :maximum_execution_frequency,
-      :config_rule_state)
+      :config_rule_state,
+      :created_by)
       include Aws::Structure
     end
 
@@ -837,12 +944,6 @@ module Aws::ConfigService
     # Provides options for how often AWS Config delivers configuration
     # snapshots to the Amazon S3 bucket in your delivery channel.
     #
-    # <note markdown="1"> If you want to create a rule that triggers evaluations for your
-    # resources when AWS Config delivers the configuration snapshot, see the
-    # following:
-    #
-    #  </note>
-    #
     # The frequency for a rule that triggers evaluations for your resources
     # when AWS Config delivers the configuration snapshot is set by one of
     # two values, depending on which is less frequent:
@@ -911,7 +1012,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html
+    #   [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html
     #   @return [String]
     #
     # @!attribute [rw] last_error_code
@@ -1006,7 +1107,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the resource.
+    #   accoun
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -1045,11 +1146,14 @@ module Aws::ConfigService
     #   information about CloudTrail, see [What Is AWS CloudTrail][1].
     #
     #   An empty field indicates that the current configuration was not
-    #   initiated by any event.
+    #   initiated by any event. As of Version 1.3, the relatedEvents field
+    #   is empty. You can access the [LookupEvents API][2] in the *AWS
+    #   CloudTrail API Reference* to retrieve the events for the resource.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_LookupEvents.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] relationships
@@ -1102,7 +1206,7 @@ module Aws::ConfigService
     #         recording_group: {
     #           all_supported: false,
     #           include_global_resource_types: false,
-    #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
+    #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         },
     #       }
     #
@@ -1176,6 +1280,306 @@ module Aws::ConfigService
       :last_error_code,
       :last_error_message,
       :last_status_change_time)
+      include Aws::Structure
+    end
+
+    # Filters the conformance pack by compliance types and AWS Config rule
+    # names.
+    #
+    # @note When making an API call, you may pass ConformancePackComplianceFilters
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_names: ["StringWithCharLimit64"],
+    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #       }
+    #
+    # @!attribute [rw] config_rule_names
+    #   Filters the results by AWS Config rule names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compliance_type
+    #   Filters the results by compliance.
+    #
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackComplianceFilters AWS API Documentation
+    #
+    class ConformancePackComplianceFilters < Struct.new(
+      :config_rule_names,
+      :compliance_type)
+      include Aws::Structure
+    end
+
+    # Summary includes the name and status of the conformance pack.
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   The name of the conformance pack name.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_compliance_status
+    #   The status of the conformance pack. The allowed values are COMPLIANT
+    #   and NON\_COMPLIANT.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackComplianceSummary AWS API Documentation
+    #
+    class ConformancePackComplianceSummary < Struct.new(
+      :conformance_pack_name,
+      :conformance_pack_compliance_status)
+      include Aws::Structure
+    end
+
+    # Returns details of a conformance pack. A conformance pack is a
+    # collection of AWS Config rules and remediation actions that can be
+    # easily deployed in an account and a region.
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_arn
+    #   Amazon Resource Name (ARN) of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_id
+    #   ID of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_bucket
+    #   Conformance pack template that is used to create a pack. The
+    #   delivery bucket name should start with awsconfigconforms. For
+    #   example: "Resource": "arn:aws:s3:::your\_bucket\_name/*".
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_key_prefix
+    #   The prefix for the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_input_parameters
+    #   A list of `ConformancePackInputParameter` objects.
+    #   @return [Array<Types::ConformancePackInputParameter>]
+    #
+    # @!attribute [rw] last_update_requested_time
+    #   Last time when conformation pack update was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   AWS service that created the conformance pack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackDetail AWS API Documentation
+    #
+    class ConformancePackDetail < Struct.new(
+      :conformance_pack_name,
+      :conformance_pack_arn,
+      :conformance_pack_id,
+      :delivery_s3_bucket,
+      :delivery_s3_key_prefix,
+      :conformance_pack_input_parameters,
+      :last_update_requested_time,
+      :created_by)
+      include Aws::Structure
+    end
+
+    # Filters a conformance pack by AWS Config rule names, compliance types,
+    # AWS resource types, and resource IDs.
+    #
+    # @note When making an API call, you may pass ConformancePackEvaluationFilters
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_names: ["StringWithCharLimit64"],
+    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #         resource_type: "StringWithCharLimit256",
+    #         resource_ids: ["StringWithCharLimit256"],
+    #       }
+    #
+    # @!attribute [rw] config_rule_names
+    #   Filters the results by AWS Config rule names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compliance_type
+    #   Filters the results by compliance.
+    #
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Filters the results by the resource type (for example,
+    #   `"AWS::EC2::Instance"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   Filters the results by resource IDs.
+    #
+    #   <note markdown="1"> This is valid only when you provide resource type. If there is no
+    #   resource type, you will see an error.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackEvaluationFilters AWS API Documentation
+    #
+    class ConformancePackEvaluationFilters < Struct.new(
+      :config_rule_names,
+      :compliance_type,
+      :resource_type,
+      :resource_ids)
+      include Aws::Structure
+    end
+
+    # The details of a conformance pack evaluation. Provides AWS Config rule
+    # and AWS resource type that was evaluated, the compliance of the
+    # conformance pack, related time stamps, and supplementary information.
+    #
+    # @!attribute [rw] compliance_type
+    #   The compliance type. The allowed values are `COMPLIANT` and
+    #   `NON_COMPLIANT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_result_identifier
+    #   Uniquely identifies an evaluation result.
+    #   @return [Types::EvaluationResultIdentifier]
+    #
+    # @!attribute [rw] config_rule_invoked_time
+    #   The time when AWS Config rule evaluated AWS resource.
+    #   @return [Time]
+    #
+    # @!attribute [rw] result_recorded_time
+    #   The time when AWS Config recorded the evaluation result.
+    #   @return [Time]
+    #
+    # @!attribute [rw] annotation
+    #   Supplementary information about how the evaluation determined the
+    #   compliance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackEvaluationResult AWS API Documentation
+    #
+    class ConformancePackEvaluationResult < Struct.new(
+      :compliance_type,
+      :evaluation_result_identifier,
+      :config_rule_invoked_time,
+      :result_recorded_time,
+      :annotation)
+      include Aws::Structure
+    end
+
+    # Input parameters in the form of key-value pairs for the conformance
+    # pack, both of which you define. Keys can have a maximum character
+    # length of 128 characters, and values can have a maximum length of 256
+    # characters.
+    #
+    # @note When making an API call, you may pass ConformancePackInputParameter
+    #   data as a hash:
+    #
+    #       {
+    #         parameter_name: "ParameterName", # required
+    #         parameter_value: "ParameterValue", # required
+    #       }
+    #
+    # @!attribute [rw] parameter_name
+    #   One part of a key-value pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_value
+    #   Another part of the key-value pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackInputParameter AWS API Documentation
+    #
+    class ConformancePackInputParameter < Struct.new(
+      :parameter_name,
+      :parameter_value)
+      include Aws::Structure
+    end
+
+    # Compliance information of one or more AWS Config rules within a
+    # conformance pack. You can filter using AWS Config rule names and
+    # compliance types.
+    #
+    # @!attribute [rw] config_rule_name
+    #   Name of the config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_type
+    #   Compliance of the AWS Config rule
+    #
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackRuleCompliance AWS API Documentation
+    #
+    class ConformancePackRuleCompliance < Struct.new(
+      :config_rule_name,
+      :compliance_type)
+      include Aws::Structure
+    end
+
+    # Status details of a conformance pack.
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_id
+    #   ID of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_arn
+    #   Amazon Resource Name (ARN) of comformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_state
+    #   Indicates deployment status of conformance pack.
+    #
+    #   AWS Config sets the state of the conformance pack to:
+    #
+    #   * CREATE\_IN\_PROGRESS when a conformance pack creation is in
+    #     progress for an account.
+    #
+    #   * CREATE\_COMPLETE when a conformance pack has been successfully
+    #     created in your account.
+    #
+    #   * CREATE\_FAILED when a conformance pack creation failed in your
+    #     account.
+    #
+    #   * DELETE\_IN\_PROGRESS when a conformance pack deletion is in
+    #     progress.
+    #
+    #   * DELETE\_FAILED when a conformance pack deletion failed in your
+    #     account.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_arn
+    #   Amazon Resource Name (ARN) of AWS CloudFormation stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_status_reason
+    #   The reason of conformance pack creation failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_requested_time
+    #   Last time when conformation pack creation and update was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_completed_time
+    #   Last time when conformation pack creation and update was successful.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackStatusDetail AWS API Documentation
+    #
+    class ConformancePackStatusDetail < Struct.new(
+      :conformance_pack_name,
+      :conformance_pack_id,
+      :conformance_pack_arn,
+      :conformance_pack_state,
+      :stack_arn,
+      :conformance_pack_status_reason,
+      :last_update_requested_time,
+      :last_update_completed_time)
       include Aws::Structure
     end
 
@@ -1261,6 +1665,24 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteConformancePackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_name: "ConformancePackName", # required
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConformancePackRequest AWS API Documentation
+    #
+    class DeleteConformancePackRequest < Struct.new(
+      :conformance_pack_name)
+      include Aws::Structure
+    end
+
     # The input for the DeleteDeliveryChannel action. The action accepts the
     # following data, in JSON format.
     #
@@ -1308,6 +1730,42 @@ module Aws::ConfigService
     #
     class DeleteEvaluationResultsResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteOrganizationConfigRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
+    #       }
+    #
+    # @!attribute [rw] organization_config_rule_name
+    #   The name of organization config rule that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConfigRuleRequest AWS API Documentation
+    #
+    class DeleteOrganizationConfigRuleRequest < Struct.new(
+      :organization_config_rule_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteOrganizationConformancePackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_conformance_pack_name: "OrganizationConformancePackName", # required
+    #       }
+    #
+    # @!attribute [rw] organization_conformance_pack_name
+    #   The name of organization conformance pack that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConformancePackRequest AWS API Documentation
+    #
+    class DeleteOrganizationConformancePackRequest < Struct.new(
+      :organization_conformance_pack_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeletePendingAggregationRequestRequest
     #   data as a hash:
     #
@@ -1329,6 +1787,104 @@ module Aws::ConfigService
     class DeletePendingAggregationRequestRequest < Struct.new(
       :requester_account_id,
       :requester_aws_region)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteRemediationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         resource_type: "String",
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule for which you want to delete
+    #   remediation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationConfigurationRequest AWS API Documentation
+    #
+    class DeleteRemediationConfigurationRequest < Struct.new(
+      :config_rule_name,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationConfigurationResponse AWS API Documentation
+    #
+    class DeleteRemediationConfigurationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteRemediationExceptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         resource_keys: [ # required
+    #           {
+    #             resource_type: "StringWithCharLimit256",
+    #             resource_id: "StringWithCharLimit1024",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule for which you want to delete
+    #   remediation exception configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_keys
+    #   An exception list of resource exception keys to be processed with
+    #   the current request. AWS Config adds exception for each resource
+    #   key. For example, AWS Config adds 3 exceptions for 3 resource keys.
+    #   @return [Array<Types::RemediationExceptionResourceKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationExceptionsRequest AWS API Documentation
+    #
+    class DeleteRemediationExceptionsRequest < Struct.new(
+      :config_rule_name,
+      :resource_keys)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_batches
+    #   Returns a list of failed delete remediation exceptions batch
+    #   objects. Each object in the batch consists of a list of failed items
+    #   and failure messages.
+    #   @return [Array<Types::FailedDeleteRemediationExceptionsBatch>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationExceptionsResponse AWS API Documentation
+    #
+    class DeleteRemediationExceptionsResponse < Struct.new(
+      :failed_batches)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "ResourceTypeString", # required
+    #         resource_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Unique identifier of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteResourceConfigRequest AWS API Documentation
+    #
+    class DeleteResourceConfigRequest < Struct.new(
+      :resource_type,
+      :resource_id)
       include Aws::Structure
     end
 
@@ -1420,7 +1976,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -1438,7 +1994,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html
     #   @return [String]
     #
     # @!attribute [rw] config_snapshot_delivery_properties
@@ -1519,8 +2075,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregateComplianceByConfigRulesRequest AWS API Documentation
@@ -1538,8 +2094,8 @@ module Aws::ConfigService
     #   @return [Array<Types::AggregateComplianceByConfigRule>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregateComplianceByConfigRulesResponse AWS API Documentation
@@ -1565,8 +2121,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregationAuthorizationsRequest AWS API Documentation
@@ -1583,8 +2139,8 @@ module Aws::ConfigService
     #   @return [Array<Types::AggregationAuthorization>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregationAuthorizationsResponse AWS API Documentation
@@ -1599,7 +2155,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         config_rule_names: ["StringWithCharLimit64"],
+    #         config_rule_names: ["ConfigRuleName"],
     #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
     #         next_token: "String",
     #       }
@@ -1612,8 +2168,7 @@ module Aws::ConfigService
     # @!attribute [rw] compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
-    #   `INSUFFICIENT_DATA`.
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1675,7 +2230,8 @@ module Aws::ConfigService
     # @!attribute [rw] compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
+    #   `INSUFFICIENT_DATA`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
@@ -1722,7 +2278,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         config_rule_names: ["StringWithCharLimit64"],
+    #         config_rule_names: ["ConfigRuleName"],
     #         next_token: "String",
     #         limit: 1,
     #       }
@@ -1742,7 +2298,7 @@ module Aws::ConfigService
     #   The number of rule evaluation results that you want returned.
     #
     #   This parameter is required if the rule limit for your account is
-    #   more than the default of 50 rules.
+    #   more than the default of 150 rules.
     #
     #   For information about requesting a rule limit increase, see [AWS
     #   Config Limits][1] in the *AWS General Reference Guide*.
@@ -1782,7 +2338,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         config_rule_names: ["StringWithCharLimit64"],
+    #         config_rule_names: ["ConfigRuleName"],
     #         next_token: "String",
     #       }
     #
@@ -1847,8 +2403,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1872,8 +2428,8 @@ module Aws::ConfigService
     #   @return [Array<Types::AggregatedSourceStatus>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregatorSourcesStatusResponse AWS API Documentation
@@ -1898,8 +2454,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1922,8 +2478,8 @@ module Aws::ConfigService
     #   @return [Array<Types::ConfigurationAggregator>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregatorsResponse AWS API Documentation
@@ -2004,6 +2560,168 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeConformancePackComplianceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_name: "ConformancePackName", # required
+    #         filters: {
+    #           config_rule_names: ["StringWithCharLimit64"],
+    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #         },
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A `ConformancePackComplianceFilters` object.
+    #   @return [Types::ConformancePackComplianceFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of AWS Config rules within a conformance pack are
+    #   returned on each page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackComplianceRequest AWS API Documentation
+    #
+    class DescribeConformancePackComplianceRequest < Struct.new(
+      :conformance_pack_name,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_rule_compliance_list
+    #   Returns a list of `ConformancePackRuleCompliance` objects.
+    #   @return [Array<Types::ConformancePackRuleCompliance>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackComplianceResponse AWS API Documentation
+    #
+    class DescribeConformancePackComplianceResponse < Struct.new(
+      :conformance_pack_name,
+      :conformance_pack_rule_compliance_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeConformancePackStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_names: ["ConformancePackName"],
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_names
+    #   Comma-separated list of conformance pack names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of conformance packs status returned on each
+    #   page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackStatusRequest AWS API Documentation
+    #
+    class DescribeConformancePackStatusRequest < Struct.new(
+      :conformance_pack_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_status_details
+    #   A list of `ConformancePackStatusDetail` objects.
+    #   @return [Array<Types::ConformancePackStatusDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackStatusResponse AWS API Documentation
+    #
+    class DescribeConformancePackStatusResponse < Struct.new(
+      :conformance_pack_status_details,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeConformancePacksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_names: ["ConformancePackName"],
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_names
+    #   Comma-separated list of conformance pack names for which you want
+    #   details. If you do not specify any names, AWS Config returns details
+    #   for all your conformance packs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of conformance packs returned on each page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePacksRequest AWS API Documentation
+    #
+    class DescribeConformancePacksRequest < Struct.new(
+      :conformance_pack_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_details
+    #   Returns a list of `ConformancePackDetail` objects.
+    #   @return [Array<Types::ConformancePackDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePacksResponse AWS API Documentation
+    #
+    class DescribeConformancePacksResponse < Struct.new(
+      :conformance_pack_details,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The input for the DeliveryChannelStatus action.
     #
     # @note When making an API call, you may pass DescribeDeliveryChannelStatusRequest
@@ -2071,6 +2789,212 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeOrganizationConfigRuleStatusesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_config_rule_names: ["StringWithCharLimit64"],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_config_rule_names
+    #   The names of organization config rules for which you want status
+    #   details. If you do not specify any names, AWS Config returns details
+    #   for all your organization AWS Confg rules.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of `OrganizationConfigRuleStatuses` returned on
+    #   each page. If you do no specify a number, AWS Config uses the
+    #   default. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRuleStatusesRequest AWS API Documentation
+    #
+    class DescribeOrganizationConfigRuleStatusesRequest < Struct.new(
+      :organization_config_rule_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_config_rule_statuses
+    #   A list of `OrganizationConfigRuleStatus` objects.
+    #   @return [Array<Types::OrganizationConfigRuleStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRuleStatusesResponse AWS API Documentation
+    #
+    class DescribeOrganizationConfigRuleStatusesResponse < Struct.new(
+      :organization_config_rule_statuses,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOrganizationConfigRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_config_rule_names: ["StringWithCharLimit64"],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_config_rule_names
+    #   The names of organization config rules for which you want details.
+    #   If you do not specify any names, AWS Config returns details for all
+    #   your organization config rules.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of organization config rules returned on each
+    #   page. If you do no specify a number, AWS Config uses the default.
+    #   The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRulesRequest AWS API Documentation
+    #
+    class DescribeOrganizationConfigRulesRequest < Struct.new(
+      :organization_config_rule_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_config_rules
+    #   Returns a list of `OrganizationConfigRule` objects.
+    #   @return [Array<Types::OrganizationConfigRule>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRulesResponse AWS API Documentation
+    #
+    class DescribeOrganizationConfigRulesResponse < Struct.new(
+      :organization_config_rules,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOrganizationConformancePackStatusesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_conformance_pack_names: ["OrganizationConformancePackName"],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_conformance_pack_names
+    #   The names of organization conformance packs for which you want
+    #   status details. If you do not specify any names, AWS Config returns
+    #   details for all your organization conformance packs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of OrganizationConformancePackStatuses returned
+    #   on each page. If you do no specify a number, AWS Config uses the
+    #   default. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePackStatusesRequest AWS API Documentation
+    #
+    class DescribeOrganizationConformancePackStatusesRequest < Struct.new(
+      :organization_conformance_pack_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_conformance_pack_statuses
+    #   A list of `OrganizationConformancePackStatus` objects.
+    #   @return [Array<Types::OrganizationConformancePackStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePackStatusesResponse AWS API Documentation
+    #
+    class DescribeOrganizationConformancePackStatusesResponse < Struct.new(
+      :organization_conformance_pack_statuses,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOrganizationConformancePacksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_conformance_pack_names: ["OrganizationConformancePackName"],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_conformance_pack_names
+    #   The name that you assign to an organization conformance pack.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of organization config packs returned on each
+    #   page. If you do no specify a number, AWS Config uses the default.
+    #   The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePacksRequest AWS API Documentation
+    #
+    class DescribeOrganizationConformancePacksRequest < Struct.new(
+      :organization_conformance_pack_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_conformance_packs
+    #   Returns a list of OrganizationConformancePacks objects.
+    #   @return [Array<Types::OrganizationConformancePack>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePacksResponse AWS API Documentation
+    #
+    class DescribeOrganizationConformancePacksResponse < Struct.new(
+      :organization_conformance_packs,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribePendingAggregationRequestsRequest
     #   data as a hash:
     #
@@ -2085,8 +3009,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribePendingAggregationRequestsRequest AWS API Documentation
@@ -2102,14 +3026,170 @@ module Aws::ConfigService
     #   @return [Array<Types::PendingAggregationRequest>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribePendingAggregationRequestsResponse AWS API Documentation
     #
     class DescribePendingAggregationRequestsResponse < Struct.new(
       :pending_aggregation_requests,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeRemediationConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_names: ["ConfigRuleName"], # required
+    #       }
+    #
+    # @!attribute [rw] config_rule_names
+    #   A list of AWS Config rule names of remediation configurations for
+    #   which you want details.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationConfigurationsRequest AWS API Documentation
+    #
+    class DescribeRemediationConfigurationsRequest < Struct.new(
+      :config_rule_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remediation_configurations
+    #   Returns a remediation configuration object.
+    #   @return [Array<Types::RemediationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationConfigurationsResponse AWS API Documentation
+    #
+    class DescribeRemediationConfigurationsResponse < Struct.new(
+      :remediation_configurations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeRemediationExceptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         resource_keys: [
+    #           {
+    #             resource_type: "StringWithCharLimit256",
+    #             resource_id: "StringWithCharLimit1024",
+    #           },
+    #         ],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_keys
+    #   An exception list of resource exception keys to be processed with
+    #   the current request. AWS Config adds exception for each resource
+    #   key. For example, AWS Config adds 3 exceptions for 3 resource keys.
+    #   @return [Array<Types::RemediationExceptionResourceKey>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of RemediationExceptionResourceKey returned on
+    #   each page. The default is 25. If you specify 0, AWS Config uses the
+    #   default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExceptionsRequest AWS API Documentation
+    #
+    class DescribeRemediationExceptionsRequest < Struct.new(
+      :config_rule_name,
+      :resource_keys,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remediation_exceptions
+    #   Returns a list of remediation exception objects.
+    #   @return [Array<Types::RemediationException>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExceptionsResponse AWS API Documentation
+    #
+    class DescribeRemediationExceptionsResponse < Struct.new(
+      :remediation_exceptions,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeRemediationExecutionStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         resource_keys: [
+    #           {
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
+    #             resource_id: "ResourceId", # required
+    #           },
+    #         ],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   A list of AWS Config rule names.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_keys
+    #   A list of resource keys to be processed with the current request.
+    #   Each element in the list consists of the resource type and resource
+    #   ID.
+    #   @return [Array<Types::ResourceKey>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of RemediationExecutionStatuses returned on each
+    #   page. The default is maximum. If you specify 0, AWS Config uses the
+    #   default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExecutionStatusRequest AWS API Documentation
+    #
+    class DescribeRemediationExecutionStatusRequest < Struct.new(
+      :config_rule_name,
+      :resource_keys,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remediation_execution_statuses
+    #   Returns a list of remediation execution statuses objects.
+    #   @return [Array<Types::RemediationExecutionStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExecutionStatusResponse AWS API Documentation
+    #
+    class DescribeRemediationExecutionStatusResponse < Struct.new(
+      :remediation_execution_statuses,
       :next_token)
       include Aws::Structure
     end
@@ -2321,6 +3401,103 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # The controls that AWS Config uses for executing remediations.
+    #
+    # @note When making an API call, you may pass ExecutionControls
+    #   data as a hash:
+    #
+    #       {
+    #         ssm_controls: {
+    #           concurrent_execution_rate_percentage: 1,
+    #           error_percentage: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ssm_controls
+    #   A SsmControls object.
+    #   @return [Types::SsmControls]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ExecutionControls AWS API Documentation
+    #
+    class ExecutionControls < Struct.new(
+      :ssm_controls)
+      include Aws::Structure
+    end
+
+    # List of each of the failed delete remediation exceptions with specific
+    # reasons.
+    #
+    # @!attribute [rw] failure_message
+    #   Returns a failure message for delete remediation exception. For
+    #   example, AWS Config creates an exception due to an internal error.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items
+    #   Returns remediation exception resource key object of the failed
+    #   items.
+    #   @return [Array<Types::RemediationExceptionResourceKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FailedDeleteRemediationExceptionsBatch AWS API Documentation
+    #
+    class FailedDeleteRemediationExceptionsBatch < Struct.new(
+      :failure_message,
+      :failed_items)
+      include Aws::Structure
+    end
+
+    # List of each of the failed remediations with specific reasons.
+    #
+    # @!attribute [rw] failure_message
+    #   Returns a failure message. For example, the resource is already
+    #   compliant.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items
+    #   Returns remediation configurations of the failed items.
+    #   @return [Array<Types::RemediationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FailedRemediationBatch AWS API Documentation
+    #
+    class FailedRemediationBatch < Struct.new(
+      :failure_message,
+      :failed_items)
+      include Aws::Structure
+    end
+
+    # List of each of the failed remediation exceptions with specific
+    # reasons.
+    #
+    # @!attribute [rw] failure_message
+    #   Returns a failure message. For example, the auto-remediation has
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items
+    #   Returns remediation exception resource key object of the failed
+    #   items.
+    #   @return [Array<Types::RemediationException>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FailedRemediationExceptionBatch AWS API Documentation
+    #
+    class FailedRemediationExceptionBatch < Struct.new(
+      :failure_message,
+      :failed_items)
+      include Aws::Structure
+    end
+
+    # Details about the fields such as name of the field.
+    #
+    # @!attribute [rw] name
+    #   Name of the field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FieldInfo AWS API Documentation
+    #
+    class FieldInfo < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAggregateComplianceDetailsByConfigRuleRequest
     #   data as a hash:
     #
@@ -2369,8 +3546,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateComplianceDetailsByConfigRuleRequest AWS API Documentation
@@ -2391,8 +3568,8 @@ module Aws::ConfigService
     #   @return [Array<Types::AggregateEvaluationResult>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateComplianceDetailsByConfigRuleResponse AWS API Documentation
@@ -2437,8 +3614,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateConfigRuleComplianceSummaryRequest AWS API Documentation
@@ -2461,8 +3638,8 @@ module Aws::ConfigService
     #   @return [Array<Types::AggregateComplianceCount>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateConfigRuleComplianceSummaryResponse AWS API Documentation
@@ -2471,6 +3648,125 @@ module Aws::ConfigService
       :group_by_key,
       :aggregate_compliance_counts,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAggregateDiscoveredResourceCountsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         filters: {
+    #           resource_type: "AWS::EC2::CustomerGateway", # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
+    #           account_id: "AccountId",
+    #           region: "AwsRegion",
+    #         },
+    #         group_by_key: "RESOURCE_TYPE", # accepts RESOURCE_TYPE, ACCOUNT_ID, AWS_REGION
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters the results based on the `ResourceCountFilters` object.
+    #   @return [Types::ResourceCountFilters]
+    #
+    # @!attribute [rw] group_by_key
+    #   The key to group the resource counts.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of GroupedResourceCount objects returned on each
+    #   page. The default is 1000. You cannot specify a number greater than
+    #   1000. If you specify 0, AWS Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateDiscoveredResourceCountsRequest AWS API Documentation
+    #
+    class GetAggregateDiscoveredResourceCountsRequest < Struct.new(
+      :configuration_aggregator_name,
+      :filters,
+      :group_by_key,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] total_discovered_resources
+    #   The total number of resources that are present in an aggregator with
+    #   the filters that you provide.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_by_key
+    #   The key passed into the request object. If `GroupByKey` is not
+    #   provided, the result will be empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouped_resource_counts
+    #   Returns a list of GroupedResourceCount objects.
+    #   @return [Array<Types::GroupedResourceCount>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateDiscoveredResourceCountsResponse AWS API Documentation
+    #
+    class GetAggregateDiscoveredResourceCountsResponse < Struct.new(
+      :total_discovered_resources,
+      :group_by_key,
+      :grouped_resource_counts,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAggregateResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         resource_identifier: { # required
+    #           source_account_id: "AccountId", # required
+    #           source_region: "AwsRegion", # required
+    #           resource_id: "ResourceId", # required
+    #           resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
+    #           resource_name: "ResourceName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   An object that identifies aggregate resource.
+    #   @return [Types::AggregateResourceIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateResourceConfigRequest AWS API Documentation
+    #
+    class GetAggregateResourceConfigRequest < Struct.new(
+      :configuration_aggregator_name,
+      :resource_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_item
+    #   Returns a `ConfigurationItem` object.
+    #   @return [Types::ConfigurationItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateResourceConfigResponse AWS API Documentation
+    #
+    class GetAggregateResourceConfigResponse < Struct.new(
+      :configuration_item)
       include Aws::Structure
     end
 
@@ -2645,6 +3941,120 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetConformancePackComplianceDetailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_name: "ConformancePackName", # required
+    #         filters: {
+    #           config_rule_names: ["StringWithCharLimit64"],
+    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #           resource_type: "StringWithCharLimit256",
+    #           resource_ids: ["StringWithCharLimit256"],
+    #         },
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A `ConformancePackEvaluationFilters` object.
+    #   @return [Types::ConformancePackEvaluationFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of evaluation results returned on each page. If
+    #   you do no specify a number, AWS Config uses the default. The default
+    #   is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceDetailsRequest AWS API Documentation
+    #
+    class GetConformancePackComplianceDetailsRequest < Struct.new(
+      :conformance_pack_name,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_rule_evaluation_results
+    #   Returns a list of `ConformancePackEvaluationResult` objects.
+    #   @return [Array<Types::ConformancePackEvaluationResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceDetailsResponse AWS API Documentation
+    #
+    class GetConformancePackComplianceDetailsResponse < Struct.new(
+      :conformance_pack_name,
+      :conformance_pack_rule_evaluation_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetConformancePackComplianceSummaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_names: ["ConformancePackName"], # required
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_names
+    #   Names of conformance packs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of conformance packs returned on each page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceSummaryRequest AWS API Documentation
+    #
+    class GetConformancePackComplianceSummaryRequest < Struct.new(
+      :conformance_pack_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_compliance_summary_list
+    #   A list of `ConformancePackComplianceSummary` objects.
+    #   @return [Array<Types::ConformancePackComplianceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceSummaryResponse AWS API Documentation
+    #
+    class GetConformancePackComplianceSummaryResponse < Struct.new(
+      :conformance_pack_compliance_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDiscoveredResourceCountsRequest
     #   data as a hash:
     #
@@ -2730,13 +4140,133 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetOrganizationConfigRuleDetailedStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
+    #         filters: {
+    #           account_id: "AccountId",
+    #           member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
+    #         },
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_config_rule_name
+    #   The name of organization config rule for which you want status
+    #   details for member accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A `StatusDetailFilters` object.
+    #   @return [Types::StatusDetailFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of `OrganizationConfigRuleDetailedStatus`
+    #   returned on each page. If you do not specify a number, AWS Config
+    #   uses the default. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConfigRuleDetailedStatusRequest AWS API Documentation
+    #
+    class GetOrganizationConfigRuleDetailedStatusRequest < Struct.new(
+      :organization_config_rule_name,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_config_rule_detailed_status
+    #   A list of `MemberAccountStatus` objects.
+    #   @return [Array<Types::MemberAccountStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConfigRuleDetailedStatusResponse AWS API Documentation
+    #
+    class GetOrganizationConfigRuleDetailedStatusResponse < Struct.new(
+      :organization_config_rule_detailed_status,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetOrganizationConformancePackDetailedStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_conformance_pack_name: "OrganizationConformancePackName", # required
+    #         filters: {
+    #           account_id: "AccountId",
+    #           status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
+    #         },
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_conformance_pack_name
+    #   The name of organization conformance pack for which you want status
+    #   details for member accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   An `OrganizationResourceDetailedStatusFilters` object.
+    #   @return [Types::OrganizationResourceDetailedStatusFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of `OrganizationConformancePackDetailedStatuses`
+    #   returned on each page. If you do not specify a number, AWS Config
+    #   uses the default. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConformancePackDetailedStatusRequest AWS API Documentation
+    #
+    class GetOrganizationConformancePackDetailedStatusRequest < Struct.new(
+      :organization_conformance_pack_name,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_conformance_pack_detailed_statuses
+    #   A list of `OrganizationConformancePackDetailedStatus` objects.
+    #   @return [Array<Types::OrganizationConformancePackDetailedStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConformancePackDetailedStatusResponse AWS API Documentation
+    #
+    class GetOrganizationConformancePackDetailedStatusResponse < Struct.new(
+      :organization_conformance_pack_detailed_statuses,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The input for the GetResourceConfigHistory action.
     #
     # @note When making an API call, you may pass GetResourceConfigHistoryRequest
     #   data as a hash:
     #
     #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         resource_id: "ResourceId", # required
     #         later_time: Time.now,
     #         earlier_time: Time.now,
@@ -2813,11 +4343,99 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # The count of resources that are grouped by the group name.
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group that can be region, account ID, or resource
+    #   type. For example, region1, region2 if the region was chosen as
+    #   `GroupByKey`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_count
+    #   The number of resources in the group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GroupedResourceCount AWS API Documentation
+    #
+    class GroupedResourceCount < Struct.new(
+      :group_name,
+      :resource_count)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAggregateDiscoveredResourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
+    #         filters: {
+    #           account_id: "AccountId",
+    #           resource_id: "ResourceId",
+    #           resource_name: "ResourceName",
+    #           region: "AwsRegion",
+    #         },
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resources that you want AWS Config to list in the
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters the results based on the `ResourceFilters` object.
+    #   @return [Types::ResourceFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of resource identifiers returned on each page.
+    #   The default is 100. You cannot specify a number greater than 100. If
+    #   you specify 0, AWS Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListAggregateDiscoveredResourcesRequest AWS API Documentation
+    #
+    class ListAggregateDiscoveredResourcesRequest < Struct.new(
+      :configuration_aggregator_name,
+      :resource_type,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_identifiers
+    #   Returns a list of `ResourceIdentifiers` objects.
+    #   @return [Array<Types::AggregateResourceIdentifier>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListAggregateDiscoveredResourcesResponse AWS API Documentation
+    #
+    class ListAggregateDiscoveredResourcesResponse < Struct.new(
+      :resource_identifiers,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDiscoveredResourcesRequest
     #   data as a hash:
     #
     #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         resource_ids: ["ResourceId"],
     #         resource_name: "ResourceName",
     #         limit: 1,
@@ -2890,7 +4508,138 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # This object contains regions to setup the aggregator and an IAM role
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   `ConfigRule`, `ConfigurationAggregator` and
+    #   `AggregatorAuthorization`.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of tags returned on each page. The limit maximum
+    #   is 50. You cannot specify a number greater than 50. If you specify
+    #   0, AWS Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Organization config rule creation or deletion status in each member
+    # account. This includes the name of the rule, the status, error code
+    # and error message when the rule creation or deletion failed.
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of a member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of config rule deployed in the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_account_rule_status
+    #   Indicates deployment status for config rule in the member account.
+    #   When master account calls `PutOrganizationConfigRule` action for the
+    #   first time, config rule status is created in the member account.
+    #   When master account calls `PutOrganizationConfigRule` action for the
+    #   second time, config rule status is updated in the member account.
+    #   Config rule status is deleted when the master account deletes
+    #   `OrganizationConfigRule` and disables service access for
+    #   `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the rule to:
+    #
+    #   * `CREATE_SUCCESSFUL` when config rule has been created in the
+    #     member account.
+    #
+    #   * `CREATE_IN_PROGRESS` when config rule is being created in the
+    #     member account.
+    #
+    #   * `CREATE_FAILED` when config rule creation has failed in the member
+    #     account.
+    #
+    #   * `DELETE_FAILED` when config rule deletion has failed in the member
+    #     account.
+    #
+    #   * `DELETE_IN_PROGRESS` when config rule is being deleted in the
+    #     member account.
+    #
+    #   * `DELETE_SUCCESSFUL` when config rule has been deleted in the
+    #     member account.
+    #
+    #   * `UPDATE_SUCCESSFUL` when config rule has been updated in the
+    #     member account.
+    #
+    #   * `UPDATE_IN_PROGRESS` when config rule is being updated in the
+    #     member account.
+    #
+    #   * `UPDATE_FAILED` when config rule deletion has failed in the member
+    #     account.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   An error code that is returned when config rule creation or deletion
+    #   failed in the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message indicating that config rule account creation or
+    #   deletion has failed due to an error in the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The timestamp of the last status update.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/MemberAccountStatus AWS API Documentation
+    #
+    class MemberAccountStatus < Struct.new(
+      :account_id,
+      :config_rule_name,
+      :member_account_rule_status,
+      :error_code,
+      :error_message,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # This object contains regions to set up the aggregator and an IAM role
     # to retrieve organization details.
     #
     # @note When making an API call, you may pass OrganizationAggregationSource
@@ -2903,7 +4652,7 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] role_arn
-    #   ARN of the IAM role used to retreive AWS Organization details
+    #   ARN of the IAM role used to retrieve AWS Organization details
     #   associated with the aggregator account.
     #   @return [String]
     #
@@ -2921,6 +4670,567 @@ module Aws::ConfigService
       :role_arn,
       :aws_regions,
       :all_aws_regions)
+      include Aws::Structure
+    end
+
+    # An organization config rule that has information about config rules
+    # that AWS Config creates in member accounts.
+    #
+    # @!attribute [rw] organization_config_rule_name
+    #   The name that you assign to organization config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_config_rule_arn
+    #   Amazon Resource Name (ARN) of organization config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_managed_rule_metadata
+    #   An `OrganizationManagedRuleMetadata` object.
+    #   @return [Types::OrganizationManagedRuleMetadata]
+    #
+    # @!attribute [rw] organization_custom_rule_metadata
+    #   An `OrganizationCustomRuleMetadata` object.
+    #   @return [Types::OrganizationCustomRuleMetadata]
+    #
+    # @!attribute [rw] excluded_accounts
+    #   A comma-separated list of accounts excluded from organization config
+    #   rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_update_time
+    #   The timestamp of the last update.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConfigRule AWS API Documentation
+    #
+    class OrganizationConfigRule < Struct.new(
+      :organization_config_rule_name,
+      :organization_config_rule_arn,
+      :organization_managed_rule_metadata,
+      :organization_custom_rule_metadata,
+      :excluded_accounts,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # Returns the status for an organization config rule in an organization.
+    #
+    # @!attribute [rw] organization_config_rule_name
+    #   The name that you assign to organization config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_rule_status
+    #   Indicates deployment status of an organization config rule. When
+    #   master account calls PutOrganizationConfigRule action for the first
+    #   time, config rule status is created in all the member accounts. When
+    #   master account calls PutOrganizationConfigRule action for the second
+    #   time, config rule status is updated in all the member accounts.
+    #   Additionally, config rule status is updated when one or more member
+    #   accounts join or leave an organization. Config rule status is
+    #   deleted when the master account deletes OrganizationConfigRule in
+    #   all the member accounts and disables service access for
+    #   `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the rule to:
+    #
+    #   * `CREATE_SUCCESSFUL` when an organization config rule has been
+    #     successfully created in all the member accounts.
+    #
+    #   * `CREATE_IN_PROGRESS` when an organization config rule creation is
+    #     in progress.
+    #
+    #   * `CREATE_FAILED` when an organization config rule creation failed
+    #     in one or more member accounts within that organization.
+    #
+    #   * `DELETE_FAILED` when an organization config rule deletion failed
+    #     in one or more member accounts within that organization.
+    #
+    #   * `DELETE_IN_PROGRESS` when an organization config rule deletion is
+    #     in progress.
+    #
+    #   * `DELETE_SUCCESSFUL` when an organization config rule has been
+    #     successfully deleted from all the member accounts.
+    #
+    #   * `UPDATE_SUCCESSFUL` when an organization config rule has been
+    #     successfully updated in all the member accounts.
+    #
+    #   * `UPDATE_IN_PROGRESS` when an organization config rule update is in
+    #     progress.
+    #
+    #   * `UPDATE_FAILED` when an organization config rule update failed in
+    #     one or more member accounts within that organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   An error code that is returned when organization config rule
+    #   creation or deletion has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message indicating that organization config rule creation
+    #   or deletion failed due to an error.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The timestamp of the last update.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConfigRuleStatus AWS API Documentation
+    #
+    class OrganizationConfigRuleStatus < Struct.new(
+      :organization_config_rule_name,
+      :organization_rule_status,
+      :error_code,
+      :error_message,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # An organization conformance pack that has information about
+    # conformance packs that AWS Config creates in member accounts.
+    #
+    # @!attribute [rw] organization_conformance_pack_name
+    #   The name you assign to an organization conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_conformance_pack_arn
+    #   Amazon Resource Name (ARN) of organization conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_bucket
+    #   Location of an Amazon S3 bucket where AWS Config can deliver
+    #   evaluation results and conformance pack template that is used to
+    #   create a pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_key_prefix
+    #   Any folder structure you want to add to an Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_input_parameters
+    #   A list of `ConformancePackInputParameter` objects.
+    #   @return [Array<Types::ConformancePackInputParameter>]
+    #
+    # @!attribute [rw] excluded_accounts
+    #   A comma-separated list of accounts excluded from organization
+    #   conformance pack.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_update_time
+    #   Last time when organization conformation pack was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConformancePack AWS API Documentation
+    #
+    class OrganizationConformancePack < Struct.new(
+      :organization_conformance_pack_name,
+      :organization_conformance_pack_arn,
+      :delivery_s3_bucket,
+      :delivery_s3_key_prefix,
+      :conformance_pack_input_parameters,
+      :excluded_accounts,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # Organization conformance pack creation or deletion status in each
+    # member account. This includes the name of the conformance pack, the
+    # status, error code and error message when the conformance pack
+    # creation or deletion failed.
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of a member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   The name of conformance pack deployed in the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates deployment status for conformance pack in a member
+    #   account. When master account calls `PutOrganizationConformancePack`
+    #   action for the first time, conformance pack status is created in the
+    #   member account. When master account calls
+    #   `PutOrganizationConformancePack` action for the second time,
+    #   conformance pack status is updated in the member account.
+    #   Conformance pack status is deleted when the master account deletes
+    #   `OrganizationConformancePack` and disables service access for
+    #   `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the conformance pack to:
+    #
+    #   * `CREATE_SUCCESSFUL` when conformance pack has been created in the
+    #     member account.
+    #
+    #   * `CREATE_IN_PROGRESS` when conformance pack is being created in the
+    #     member account.
+    #
+    #   * `CREATE_FAILED` when conformance pack creation has failed in the
+    #     member account.
+    #
+    #   * `DELETE_FAILED` when conformance pack deletion has failed in the
+    #     member account.
+    #
+    #   * `DELETE_IN_PROGRESS` when conformance pack is being deleted in the
+    #     member account.
+    #
+    #   * `DELETE_SUCCESSFUL` when conformance pack has been deleted in the
+    #     member account.
+    #
+    #   * `UPDATE_SUCCESSFUL` when conformance pack has been updated in the
+    #     member account.
+    #
+    #   * `UPDATE_IN_PROGRESS` when conformance pack is being updated in the
+    #     member account.
+    #
+    #   * `UPDATE_FAILED` when conformance pack deletion has failed in the
+    #     member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   An error code that is returned when conformance pack creation or
+    #   deletion failed in the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message indicating that conformance pack account creation
+    #   or deletion has failed due to an error in the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The timestamp of the last status update.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConformancePackDetailedStatus AWS API Documentation
+    #
+    class OrganizationConformancePackDetailedStatus < Struct.new(
+      :account_id,
+      :conformance_pack_name,
+      :status,
+      :error_code,
+      :error_message,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # Returns the status for an organization conformance pack in an
+    # organization.
+    #
+    # @!attribute [rw] organization_conformance_pack_name
+    #   The name that you assign to organization conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates deployment status of an organization conformance pack.
+    #   When master account calls PutOrganizationConformancePack for the
+    #   first time, conformance pack status is created in all the member
+    #   accounts. When master account calls PutOrganizationConformancePack
+    #   for the second time, conformance pack status is updated in all the
+    #   member accounts. Additionally, conformance pack status is updated
+    #   when one or more member accounts join or leave an organization.
+    #   Conformance pack status is deleted when the master account deletes
+    #   OrganizationConformancePack in all the member accounts and disables
+    #   service access for `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the conformance pack to:
+    #
+    #   * `CREATE_SUCCESSFUL` when an organization conformance pack has been
+    #     successfully created in all the member accounts.
+    #
+    #   * `CREATE_IN_PROGRESS` when an organization conformance pack
+    #     creation is in progress.
+    #
+    #   * `CREATE_FAILED` when an organization conformance pack creation
+    #     failed in one or more member accounts within that organization.
+    #
+    #   * `DELETE_FAILED` when an organization conformance pack deletion
+    #     failed in one or more member accounts within that organization.
+    #
+    #   * `DELETE_IN_PROGRESS` when an organization conformance pack
+    #     deletion is in progress.
+    #
+    #   * `DELETE_SUCCESSFUL` when an organization conformance pack has been
+    #     successfully deleted from all the member accounts.
+    #
+    #   * `UPDATE_SUCCESSFUL` when an organization conformance pack has been
+    #     successfully updated in all the member accounts.
+    #
+    #   * `UPDATE_IN_PROGRESS` when an organization conformance pack update
+    #     is in progress.
+    #
+    #   * `UPDATE_FAILED` when an organization conformance pack update
+    #     failed in one or more member accounts within that organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   An error code that is returned when organization conformance pack
+    #   creation or deletion has failed in a member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message indicating that organization conformance pack
+    #   creation or deletion failed due to an error.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The timestamp of the last update.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConformancePackStatus AWS API Documentation
+    #
+    class OrganizationConformancePackStatus < Struct.new(
+      :organization_conformance_pack_name,
+      :status,
+      :error_code,
+      :error_message,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # An object that specifies organization custom rule metadata such as
+    # resource type, resource ID of AWS resource, Lamdba function ARN, and
+    # organization trigger types that trigger AWS Config to evaluate your
+    # AWS resources against a rule. It also provides the frequency with
+    # which you want AWS Config to run evaluations for the rule if the
+    # trigger type is periodic.
+    #
+    # @note When making an API call, you may pass OrganizationCustomRuleMetadata
+    #   data as a hash:
+    #
+    #       {
+    #         description: "StringWithCharLimit256Min0",
+    #         lambda_function_arn: "StringWithCharLimit256", # required
+    #         organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # required, accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification, ScheduledNotification
+    #         input_parameters: "StringWithCharLimit2048",
+    #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
+    #         resource_types_scope: ["StringWithCharLimit256"],
+    #         resource_id_scope: "StringWithCharLimit768",
+    #         tag_key_scope: "StringWithCharLimit128",
+    #         tag_value_scope: "StringWithCharLimit256",
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The description that you provide for organization config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The lambda function ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_config_rule_trigger_types
+    #   The type of notification that triggers AWS Config to run an
+    #   evaluation for a rule. You can specify the following notification
+    #   types:
+    #
+    #   * `ConfigurationItemChangeNotification` - Triggers an evaluation
+    #     when AWS Config delivers a configuration item as a result of a
+    #     resource change.
+    #
+    #   * `OversizedConfigurationItemChangeNotification` - Triggers an
+    #     evaluation when AWS Config delivers an oversized configuration
+    #     item. AWS Config may generate this notification type when a
+    #     resource changes and the notification exceeds the maximum size
+    #     allowed by Amazon SNS.
+    #
+    #   * `ScheduledNotification` - Triggers a periodic evaluation at the
+    #     frequency specified for `MaximumExecutionFrequency`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] input_parameters
+    #   A string, in JSON format, that is passed to organization config rule
+    #   Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_execution_frequency
+    #   The maximum frequency with which AWS Config runs evaluations for a
+    #   rule. Your custom rule is triggered when AWS Config delivers the
+    #   configuration snapshot. For more information, see
+    #   ConfigSnapshotDeliveryProperties.
+    #
+    #   <note markdown="1"> By default, rules with a periodic trigger are evaluated every 24
+    #   hours. To change the frequency, specify a valid value for the
+    #   `MaximumExecutionFrequency` parameter.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_types_scope
+    #   The type of the AWS resource that was evaluated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_id_scope
+    #   The ID of the AWS resource that was evaluated.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key_scope
+    #   One part of a key-value pair that make up a tag. A key is a general
+    #   label that acts like a category for more specific tag values.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value_scope
+    #   The optional part of a key-value pair that make up a tag. A value
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationCustomRuleMetadata AWS API Documentation
+    #
+    class OrganizationCustomRuleMetadata < Struct.new(
+      :description,
+      :lambda_function_arn,
+      :organization_config_rule_trigger_types,
+      :input_parameters,
+      :maximum_execution_frequency,
+      :resource_types_scope,
+      :resource_id_scope,
+      :tag_key_scope,
+      :tag_value_scope)
+      include Aws::Structure
+    end
+
+    # An object that specifies organization managed rule metadata such as
+    # resource type and ID of AWS resource along with the rule identifier.
+    # It also provides the frequency with which you want AWS Config to run
+    # evaluations for the rule if the trigger type is periodic.
+    #
+    # @note When making an API call, you may pass OrganizationManagedRuleMetadata
+    #   data as a hash:
+    #
+    #       {
+    #         description: "StringWithCharLimit256Min0",
+    #         rule_identifier: "StringWithCharLimit256", # required
+    #         input_parameters: "StringWithCharLimit2048",
+    #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
+    #         resource_types_scope: ["StringWithCharLimit256"],
+    #         resource_id_scope: "StringWithCharLimit768",
+    #         tag_key_scope: "StringWithCharLimit128",
+    #         tag_value_scope: "StringWithCharLimit256",
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The description that you provide for organization config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_identifier
+    #   For organization config managed rules, a predefined identifier from
+    #   a list. For example, `IAM_PASSWORD_POLICY` is a managed rule. To
+    #   reference a managed rule, see [Using AWS Managed Config Rules][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
+    #   @return [String]
+    #
+    # @!attribute [rw] input_parameters
+    #   A string, in JSON format, that is passed to organization config rule
+    #   Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_execution_frequency
+    #   The maximum frequency with which AWS Config runs evaluations for a
+    #   rule. You are using an AWS managed rule that is triggered at a
+    #   periodic frequency.
+    #
+    #   <note markdown="1"> By default, rules with a periodic trigger are evaluated every 24
+    #   hours. To change the frequency, specify a valid value for the
+    #   `MaximumExecutionFrequency` parameter.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_types_scope
+    #   The type of the AWS resource that was evaluated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_id_scope
+    #   The ID of the AWS resource that was evaluated.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key_scope
+    #   One part of a key-value pair that make up a tag. A key is a general
+    #   label that acts like a category for more specific tag values.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value_scope
+    #   The optional part of a key-value pair that make up a tag. A value
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationManagedRuleMetadata AWS API Documentation
+    #
+    class OrganizationManagedRuleMetadata < Struct.new(
+      :description,
+      :rule_identifier,
+      :input_parameters,
+      :maximum_execution_frequency,
+      :resource_types_scope,
+      :resource_id_scope,
+      :tag_key_scope,
+      :tag_value_scope)
+      include Aws::Structure
+    end
+
+    # Status filter object to filter results based on specific member
+    # account ID or status type for an organization conformance pack.
+    #
+    # @note When making an API call, you may pass OrganizationResourceDetailedStatusFilters
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId",
+    #         status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of the member account within an
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates deployment status for conformance pack in a member
+    #   account. When master account calls `PutOrganizationConformancePack`
+    #   action for the first time, conformance pack status is created in the
+    #   member account. When master account calls
+    #   `PutOrganizationConformancePack` action for the second time,
+    #   conformance pack status is updated in the member account.
+    #   Conformance pack status is deleted when the master account deletes
+    #   `OrganizationConformancePack` and disables service access for
+    #   `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the conformance pack to:
+    #
+    #   * `CREATE_SUCCESSFUL` when conformance pack has been created in the
+    #     member account.
+    #
+    #   * `CREATE_IN_PROGRESS` when conformance pack is being created in the
+    #     member account.
+    #
+    #   * `CREATE_FAILED` when conformance pack creation has failed in the
+    #     member account.
+    #
+    #   * `DELETE_FAILED` when conformance pack deletion has failed in the
+    #     member account.
+    #
+    #   * `DELETE_IN_PROGRESS` when conformance pack is being deleted in the
+    #     member account.
+    #
+    #   * `DELETE_SUCCESSFUL` when conformance pack has been deleted in the
+    #     member account.
+    #
+    #   * `UPDATE_SUCCESSFUL` when conformance pack has been updated in the
+    #     member account.
+    #
+    #   * `UPDATE_IN_PROGRESS` when conformance pack is being updated in the
+    #     member account.
+    #
+    #   * `UPDATE_FAILED` when conformance pack deletion has failed in the
+    #     member account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationResourceDetailedStatusFilters AWS API Documentation
+    #
+    class OrganizationResourceDetailedStatusFilters < Struct.new(
+      :account_id,
+      :status)
       include Aws::Structure
     end
 
@@ -2949,6 +5259,12 @@ module Aws::ConfigService
     #       {
     #         authorized_account_id: "AccountId", # required
     #         authorized_aws_region: "AwsRegion", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] authorized_account_id
@@ -2959,11 +5275,16 @@ module Aws::ConfigService
     #   The region authorized to collect aggregated data.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An array of tag object.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutAggregationAuthorizationRequest AWS API Documentation
     #
     class PutAggregationAuthorizationRequest < Struct.new(
       :authorized_account_id,
-      :authorized_aws_region)
+      :authorized_aws_region,
+      :tags)
       include Aws::Structure
     end
 
@@ -3007,17 +5328,29 @@ module Aws::ConfigService
     #           input_parameters: "StringWithCharLimit1024",
     #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #           config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
+    #           created_by: "StringWithCharLimit256",
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] config_rule
     #   The rule that you want to add to your account.
     #   @return [Types::ConfigRule]
     #
+    # @!attribute [rw] tags
+    #   An array of tag object.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRuleRequest AWS API Documentation
     #
     class PutConfigRuleRequest < Struct.new(
-      :config_rule)
+      :config_rule,
+      :tags)
       include Aws::Structure
     end
 
@@ -3038,6 +5371,12 @@ module Aws::ConfigService
     #           aws_regions: ["String"],
     #           all_aws_regions: false,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] configuration_aggregator_name
@@ -3052,12 +5391,17 @@ module Aws::ConfigService
     #   An OrganizationAggregationSource object.
     #   @return [Types::OrganizationAggregationSource]
     #
+    # @!attribute [rw] tags
+    #   An array of tag object.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationAggregatorRequest AWS API Documentation
     #
     class PutConfigurationAggregatorRequest < Struct.new(
       :configuration_aggregator_name,
       :account_aggregation_sources,
-      :organization_aggregation_source)
+      :organization_aggregation_source,
+      :tags)
       include Aws::Structure
     end
 
@@ -3084,7 +5428,7 @@ module Aws::ConfigService
     #           recording_group: {
     #             all_supported: false,
     #             include_global_resource_types: false,
-    #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
+    #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #           },
     #         },
     #       }
@@ -3098,6 +5442,85 @@ module Aws::ConfigService
     #
     class PutConfigurationRecorderRequest < Struct.new(
       :configuration_recorder)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutConformancePackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_name: "ConformancePackName", # required
+    #         template_s3_uri: "TemplateS3Uri",
+    #         template_body: "TemplateBody",
+    #         delivery_s3_bucket: "DeliveryS3Bucket", # required
+    #         delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
+    #         conformance_pack_input_parameters: [
+    #           {
+    #             parameter_name: "ParameterName", # required
+    #             parameter_value: "ParameterValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   Name of the conformance pack you want to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_s3_uri
+    #   Location of file containing the template body
+    #   (`s3://bucketname/prefix`). The uri must point to the conformance
+    #   pack template (max size: 300 KB) that is located in an Amazon S3
+    #   bucket in the same region as the conformance pack.
+    #
+    #   <note markdown="1"> You must have access to read Amazon S3 bucket.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   A string containing full conformance pack template body. Structure
+    #   containing the template body with a minimum length of 1 byte and a
+    #   maximum length of 51,200 bytes.
+    #
+    #   <note markdown="1"> You can only use a YAML template with one resource type, that is,
+    #   config rule and a remediation action.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_bucket
+    #   AWS Config stores intermediate files while processing conformance
+    #   pack template.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_key_prefix
+    #   The prefix for the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_input_parameters
+    #   A list of `ConformancePackInputParameter` objects.
+    #   @return [Array<Types::ConformancePackInputParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConformancePackRequest AWS API Documentation
+    #
+    class PutConformancePackRequest < Struct.new(
+      :conformance_pack_name,
+      :template_s3_uri,
+      :template_body,
+      :delivery_s3_bucket,
+      :delivery_s3_key_prefix,
+      :conformance_pack_input_parameters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conformance_pack_arn
+    #   ARN of the conformance pack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConformancePackResponse AWS API Documentation
+    #
+    class PutConformancePackResponse < Struct.new(
+      :conformance_pack_arn)
       include Aws::Structure
     end
 
@@ -3193,6 +5616,340 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutOrganizationConfigRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
+    #         organization_managed_rule_metadata: {
+    #           description: "StringWithCharLimit256Min0",
+    #           rule_identifier: "StringWithCharLimit256", # required
+    #           input_parameters: "StringWithCharLimit2048",
+    #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
+    #           resource_types_scope: ["StringWithCharLimit256"],
+    #           resource_id_scope: "StringWithCharLimit768",
+    #           tag_key_scope: "StringWithCharLimit128",
+    #           tag_value_scope: "StringWithCharLimit256",
+    #         },
+    #         organization_custom_rule_metadata: {
+    #           description: "StringWithCharLimit256Min0",
+    #           lambda_function_arn: "StringWithCharLimit256", # required
+    #           organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # required, accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification, ScheduledNotification
+    #           input_parameters: "StringWithCharLimit2048",
+    #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
+    #           resource_types_scope: ["StringWithCharLimit256"],
+    #           resource_id_scope: "StringWithCharLimit768",
+    #           tag_key_scope: "StringWithCharLimit128",
+    #           tag_value_scope: "StringWithCharLimit256",
+    #         },
+    #         excluded_accounts: ["AccountId"],
+    #       }
+    #
+    # @!attribute [rw] organization_config_rule_name
+    #   The name that you assign to an organization config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_managed_rule_metadata
+    #   An `OrganizationManagedRuleMetadata` object.
+    #   @return [Types::OrganizationManagedRuleMetadata]
+    #
+    # @!attribute [rw] organization_custom_rule_metadata
+    #   An `OrganizationCustomRuleMetadata` object.
+    #   @return [Types::OrganizationCustomRuleMetadata]
+    #
+    # @!attribute [rw] excluded_accounts
+    #   A comma-separated list of accounts that you want to exclude from an
+    #   organization config rule.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRuleRequest AWS API Documentation
+    #
+    class PutOrganizationConfigRuleRequest < Struct.new(
+      :organization_config_rule_name,
+      :organization_managed_rule_metadata,
+      :organization_custom_rule_metadata,
+      :excluded_accounts)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_config_rule_arn
+    #   The Amazon Resource Name (ARN) of an organization config rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRuleResponse AWS API Documentation
+    #
+    class PutOrganizationConfigRuleResponse < Struct.new(
+      :organization_config_rule_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutOrganizationConformancePackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_conformance_pack_name: "OrganizationConformancePackName", # required
+    #         template_s3_uri: "TemplateS3Uri",
+    #         template_body: "TemplateBody",
+    #         delivery_s3_bucket: "DeliveryS3Bucket", # required
+    #         delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
+    #         conformance_pack_input_parameters: [
+    #           {
+    #             parameter_name: "ParameterName", # required
+    #             parameter_value: "ParameterValue", # required
+    #           },
+    #         ],
+    #         excluded_accounts: ["AccountId"],
+    #       }
+    #
+    # @!attribute [rw] organization_conformance_pack_name
+    #   Name of the organization conformance pack you want to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_s3_uri
+    #   Location of file containing the template body. The uri must point to
+    #   the conformance pack template (max size: 300 KB).
+    #
+    #   <note markdown="1"> You must have access to read Amazon S3 bucket.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   A string containing full conformance pack template body. Structure
+    #   containing the template body with a minimum length of 1 byte and a
+    #   maximum length of 51,200 bytes.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_bucket
+    #   Location of an Amazon S3 bucket where AWS Config can deliver
+    #   evaluation results. AWS Config stores intermediate files while
+    #   processing conformance pack template.
+    #
+    #   The delivery bucket name should start with awsconfigconforms. For
+    #   example: "Resource": "arn:aws:s3:::your\_bucket\_name/*". For
+    #   more information, see [Permissions for cross account bucket
+    #   access][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_s3_key_prefix
+    #   The prefix for the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_input_parameters
+    #   A list of `ConformancePackInputParameter` objects.
+    #   @return [Array<Types::ConformancePackInputParameter>]
+    #
+    # @!attribute [rw] excluded_accounts
+    #   A list of AWS accounts to be excluded from an organization
+    #   conformance pack while deploying a conformance pack.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConformancePackRequest AWS API Documentation
+    #
+    class PutOrganizationConformancePackRequest < Struct.new(
+      :organization_conformance_pack_name,
+      :template_s3_uri,
+      :template_body,
+      :delivery_s3_bucket,
+      :delivery_s3_key_prefix,
+      :conformance_pack_input_parameters,
+      :excluded_accounts)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_conformance_pack_arn
+    #   ARN of the organization conformance pack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConformancePackResponse AWS API Documentation
+    #
+    class PutOrganizationConformancePackResponse < Struct.new(
+      :organization_conformance_pack_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutRemediationConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         remediation_configurations: [ # required
+    #           {
+    #             config_rule_name: "ConfigRuleName", # required
+    #             target_type: "SSM_DOCUMENT", # required, accepts SSM_DOCUMENT
+    #             target_id: "StringWithCharLimit256", # required
+    #             target_version: "String",
+    #             parameters: {
+    #               "StringWithCharLimit256" => {
+    #                 resource_value: {
+    #                   value: "RESOURCE_ID", # required, accepts RESOURCE_ID
+    #                 },
+    #                 static_value: {
+    #                   values: ["StringWithCharLimit256"], # required
+    #                 },
+    #               },
+    #             },
+    #             resource_type: "String",
+    #             automatic: false,
+    #             execution_controls: {
+    #               ssm_controls: {
+    #                 concurrent_execution_rate_percentage: 1,
+    #                 error_percentage: 1,
+    #               },
+    #             },
+    #             maximum_automatic_attempts: 1,
+    #             retry_attempt_seconds: 1,
+    #             arn: "StringWithCharLimit1024",
+    #             created_by_service: "StringWithCharLimit1024",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] remediation_configurations
+    #   A list of remediation configuration objects.
+    #   @return [Array<Types::RemediationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationConfigurationsRequest AWS API Documentation
+    #
+    class PutRemediationConfigurationsRequest < Struct.new(
+      :remediation_configurations)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_batches
+    #   Returns a list of failed remediation batch objects.
+    #   @return [Array<Types::FailedRemediationBatch>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationConfigurationsResponse AWS API Documentation
+    #
+    class PutRemediationConfigurationsResponse < Struct.new(
+      :failed_batches)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutRemediationExceptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         resource_keys: [ # required
+    #           {
+    #             resource_type: "StringWithCharLimit256",
+    #             resource_id: "StringWithCharLimit1024",
+    #           },
+    #         ],
+    #         message: "StringWithCharLimit1024",
+    #         expiration_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule for which you want to create
+    #   remediation exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_keys
+    #   An exception list of resource exception keys to be processed with
+    #   the current request. AWS Config adds exception for each resource
+    #   key. For example, AWS Config adds 3 exceptions for 3 resource keys.
+    #   @return [Array<Types::RemediationExceptionResourceKey>]
+    #
+    # @!attribute [rw] message
+    #   The message contains an explanation of the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The exception is automatically deleted after the expiration date.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationExceptionsRequest AWS API Documentation
+    #
+    class PutRemediationExceptionsRequest < Struct.new(
+      :config_rule_name,
+      :resource_keys,
+      :message,
+      :expiration_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_batches
+    #   Returns a list of failed remediation exceptions batch objects. Each
+    #   object in the batch consists of a list of failed items and failure
+    #   messages.
+    #   @return [Array<Types::FailedRemediationExceptionBatch>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationExceptionsResponse AWS API Documentation
+    #
+    class PutRemediationExceptionsResponse < Struct.new(
+      :failed_batches)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "ResourceTypeString", # required
+    #         schema_version_id: "SchemaVersionId", # required
+    #         resource_id: "ResourceId", # required
+    #         resource_name: "ResourceName",
+    #         configuration: "Configuration", # required
+    #         tags: {
+    #           "Name" => "Value",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource. The custom resource type must be
+    #   registered with AWS CloudFormation.
+    #
+    #   <note markdown="1"> You cannot use the organization names “aws”, “amzn”, “amazon”,
+    #   “alexa”, “custom” with custom resource types. It is the first part
+    #   of the ResourceType up to the first ::.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version_id
+    #   Version of the schema registered for the ResourceType in AWS
+    #   CloudFormation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Unique identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   Name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration object of the resource in valid JSON format. It
+    #   must match the schema registered with AWS CloudFormation.
+    #
+    #   <note markdown="1"> The configuration JSON must not exceed 64 KB.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutResourceConfigRequest AWS API Documentation
+    #
+    class PutResourceConfigRequest < Struct.new(
+      :resource_type,
+      :schema_version_id,
+      :resource_id,
+      :resource_name,
+      :configuration,
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutRetentionConfigurationRequest
     #   data as a hash:
     #
@@ -3223,6 +5980,19 @@ module Aws::ConfigService
     #
     class PutRetentionConfigurationResponse < Struct.new(
       :retention_configuration)
+      include Aws::Structure
+    end
+
+    # Details about the query.
+    #
+    # @!attribute [rw] select_fields
+    #   Returns a `FieldInfo` object.
+    #   @return [Array<Types::FieldInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/QueryInfo AWS API Documentation
+    #
+    class QueryInfo < Struct.new(
+      :select_fields)
       include Aws::Structure
     end
 
@@ -3264,8 +6034,8 @@ module Aws::ConfigService
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
-    # [2]: http://docs.aws.amazon.com/config/latest/developerguide/select-resources.html
+    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
+    # [2]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html
     #
     # @note When making an API call, you may pass RecordingGroup
     #   data as a hash:
@@ -3273,7 +6043,7 @@ module Aws::ConfigService
     #       {
     #         all_supported: false,
     #         include_global_resource_types: false,
-    #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
+    #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #       }
     #
     # @!attribute [rw] all_supported
@@ -3323,7 +6093,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RecordingGroup AWS API Documentation
@@ -3363,6 +6133,282 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # An object that represents the details about the remediation
+    # configuration that includes the remediation action, parameters, and
+    # data to execute the action.
+    #
+    # @note When making an API call, you may pass RemediationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         target_type: "SSM_DOCUMENT", # required, accepts SSM_DOCUMENT
+    #         target_id: "StringWithCharLimit256", # required
+    #         target_version: "String",
+    #         parameters: {
+    #           "StringWithCharLimit256" => {
+    #             resource_value: {
+    #               value: "RESOURCE_ID", # required, accepts RESOURCE_ID
+    #             },
+    #             static_value: {
+    #               values: ["StringWithCharLimit256"], # required
+    #             },
+    #           },
+    #         },
+    #         resource_type: "String",
+    #         automatic: false,
+    #         execution_controls: {
+    #           ssm_controls: {
+    #             concurrent_execution_rate_percentage: 1,
+    #             error_percentage: 1,
+    #           },
+    #         },
+    #         maximum_automatic_attempts: 1,
+    #         retry_attempt_seconds: 1,
+    #         arn: "StringWithCharLimit1024",
+    #         created_by_service: "StringWithCharLimit1024",
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of the target. Target executes remediation. For example,
+    #   SSM document.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   Target ID is the name of the public document.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version
+    #   Version of the target. For example, version of the SSM document.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An object of the RemediationParameterValue.
+    #   @return [Hash<String,Types::RemediationParameterValue>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] automatic
+    #   The remediation is triggered automatically.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] execution_controls
+    #   An ExecutionControls object.
+    #   @return [Types::ExecutionControls]
+    #
+    # @!attribute [rw] maximum_automatic_attempts
+    #   The maximum number of failed attempts for auto-remediation. If you
+    #   do not select a number, the default is 5.
+    #
+    #   For example, if you specify MaximumAutomaticAttempts as 5 with
+    #   RetryAttemptsSeconds as 50 seconds, AWS Config throws an exception
+    #   after the 5th failed attempt within 50 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retry_attempt_seconds
+    #   Maximum time in seconds that AWS Config runs auto-remediation. If
+    #   you do not select a number, the default is 60 seconds.
+    #
+    #   For example, if you specify RetryAttemptsSeconds as 50 seconds and
+    #   MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations
+    #   5 times within 50 seconds before throwing an exception.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   Amazon Resource Name (ARN) of remediation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by_service
+    #   Name of the service that owns the service linked rule, if
+    #   applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationConfiguration AWS API Documentation
+    #
+    class RemediationConfiguration < Struct.new(
+      :config_rule_name,
+      :target_type,
+      :target_id,
+      :target_version,
+      :parameters,
+      :resource_type,
+      :automatic,
+      :execution_controls,
+      :maximum_automatic_attempts,
+      :retry_attempt_seconds,
+      :arn,
+      :created_by_service)
+      include Aws::Structure
+    end
+
+    # An object that represents the details about the remediation exception.
+    # The details include the rule name, an explanation of an exception, the
+    # time when the exception will be deleted, the resource ID, and resource
+    # type.
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource (for example., sg-xxxxxx).
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An explanation of an remediation exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The time when the remediation exception will be deleted.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationException AWS API Documentation
+    #
+    class RemediationException < Struct.new(
+      :config_rule_name,
+      :resource_type,
+      :resource_id,
+      :message,
+      :expiration_time)
+      include Aws::Structure
+    end
+
+    # The details that identify a resource within AWS Config, including the
+    # resource type and resource ID.
+    #
+    # @note When making an API call, you may pass RemediationExceptionResourceKey
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "StringWithCharLimit256",
+    #         resource_id: "StringWithCharLimit1024",
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource (for example., sg-xxxxxx).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationExceptionResourceKey AWS API Documentation
+    #
+    class RemediationExceptionResourceKey < Struct.new(
+      :resource_type,
+      :resource_id)
+      include Aws::Structure
+    end
+
+    # Provides details of the current status of the invoked remediation
+    # action for that resource.
+    #
+    # @!attribute [rw] resource_key
+    #   The details that identify a resource within AWS Config, including
+    #   the resource type and resource ID.
+    #   @return [Types::ResourceKey]
+    #
+    # @!attribute [rw] state
+    #   ENUM of the values.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_details
+    #   Details of every step.
+    #   @return [Array<Types::RemediationExecutionStep>]
+    #
+    # @!attribute [rw] invocation_time
+    #   Start time when the remediation was executed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the remediation execution was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationExecutionStatus AWS API Documentation
+    #
+    class RemediationExecutionStatus < Struct.new(
+      :resource_key,
+      :state,
+      :step_details,
+      :invocation_time,
+      :last_updated_time)
+      include Aws::Structure
+    end
+
+    # Name of the step from the SSM document.
+    #
+    # @!attribute [rw] name
+    #   The details of the step.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The valid status of the step.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message if the step was interrupted during execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time when the step started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stop_time
+    #   The time when the step stopped.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationExecutionStep AWS API Documentation
+    #
+    class RemediationExecutionStep < Struct.new(
+      :name,
+      :state,
+      :error_message,
+      :start_time,
+      :stop_time)
+      include Aws::Structure
+    end
+
+    # The value is either a dynamic (resource) value or a static value. You
+    # must select either a dynamic value or a static value.
+    #
+    # @note When making an API call, you may pass RemediationParameterValue
+    #   data as a hash:
+    #
+    #       {
+    #         resource_value: {
+    #           value: "RESOURCE_ID", # required, accepts RESOURCE_ID
+    #         },
+    #         static_value: {
+    #           values: ["StringWithCharLimit256"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_value
+    #   The value is dynamic and changes at run-time.
+    #   @return [Types::ResourceValue]
+    #
+    # @!attribute [rw] static_value
+    #   The value is static and does not change at run-time.
+    #   @return [Types::StaticValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationParameterValue AWS API Documentation
+    #
+    class RemediationParameterValue < Struct.new(
+      :resource_value,
+      :static_value)
+      include Aws::Structure
+    end
+
     # An object that contains the resource type and the number of resources.
     #
     # @!attribute [rw] resource_type
@@ -3378,6 +6424,78 @@ module Aws::ConfigService
     class ResourceCount < Struct.new(
       :resource_type,
       :count)
+      include Aws::Structure
+    end
+
+    # Filters the resource count based on account ID, region, and resource
+    # type.
+    #
+    # @note When making an API call, you may pass ResourceCountFilters
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "AWS::EC2::CustomerGateway", # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
+    #         account_id: "AccountId",
+    #         region: "AwsRegion",
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the AWS resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit ID of the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The region where the account is located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceCountFilters AWS API Documentation
+    #
+    class ResourceCountFilters < Struct.new(
+      :resource_type,
+      :account_id,
+      :region)
+      include Aws::Structure
+    end
+
+    # Filters the results by resource account ID, region, resource ID, and
+    # resource name.
+    #
+    # @note When making an API call, you may pass ResourceFilters
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId",
+    #         resource_id: "ResourceId",
+    #         resource_name: "ResourceName",
+    #         region: "AwsRegion",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit source account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The source region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceFilters AWS API Documentation
+    #
+    class ResourceFilters < Struct.new(
+      :account_id,
+      :resource_id,
+      :resource_name,
+      :region)
       include Aws::Structure
     end
 
@@ -3418,7 +6536,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         resource_id: "ResourceId", # required
     #       }
     #
@@ -3435,6 +6553,26 @@ module Aws::ConfigService
     class ResourceKey < Struct.new(
       :resource_type,
       :resource_id)
+      include Aws::Structure
+    end
+
+    # The dynamic value of the resource.
+    #
+    # @note When making an API call, you may pass ResourceValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: "RESOURCE_ID", # required, accepts RESOURCE_ID
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value is a resource ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceValue AWS API Documentation
+    #
+    class ResourceValue < Struct.new(
+      :value)
       include Aws::Structure
     end
 
@@ -3513,6 +6651,59 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SelectResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         expression: "Expression", # required
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] expression
+    #   The SQL query `SELECT` command.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of query results returned on each page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SelectResourceConfigRequest AWS API Documentation
+    #
+    class SelectResourceConfigRequest < Struct.new(
+      :expression,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   Returns the results for the SQL query.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] query_info
+    #   Returns the `QueryInfo` object.
+    #   @return [Types::QueryInfo]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SelectResourceConfigResponse AWS API Documentation
+    #
+    class SelectResourceConfigResponse < Struct.new(
+      :results,
+      :query_info,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Provides the AWS Config rule owner (AWS or customer), the rule
     # identifier, and the events that trigger the evaluation of your AWS
     # resources.
@@ -3548,7 +6739,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
     #   @return [String]
     #
     # @!attribute [rw] source_details
@@ -3639,6 +6830,39 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # AWS Systems Manager (SSM) specific remediation controls.
+    #
+    # @note When making an API call, you may pass SsmControls
+    #   data as a hash:
+    #
+    #       {
+    #         concurrent_execution_rate_percentage: 1,
+    #         error_percentage: 1,
+    #       }
+    #
+    # @!attribute [rw] concurrent_execution_rate_percentage
+    #   The maximum percentage of remediation actions allowed to run in
+    #   parallel on the non-compliant resources for that specific rule. You
+    #   can specify a percentage, such as 10%. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_percentage
+    #   The percentage of errors that are allowed before SSM stops running
+    #   automations on non-compliant resources for that specific rule. You
+    #   can specify a percentage of errors, for example 10%. If you do not
+    #   specifiy a percentage, the default is 50%. For example, if you set
+    #   the ErrorPercentage to 40% for 10 non-compliant resources, then SSM
+    #   stops running the automations when the fifth error is received.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SsmControls AWS API Documentation
+    #
+    class SsmControls < Struct.new(
+      :concurrent_execution_rate_percentage,
+      :error_percentage)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartConfigRulesEvaluationRequest
     #   data as a hash:
     #
@@ -3686,6 +6910,140 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartRemediationExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         resource_keys: [ # required
+    #           {
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
+    #             resource_id: "ResourceId", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The list of names of AWS Config rules that you want to run
+    #   remediation execution for.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_keys
+    #   A list of resource keys to be processed with the current request.
+    #   Each element in the list consists of the resource type and resource
+    #   ID.
+    #   @return [Array<Types::ResourceKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartRemediationExecutionRequest AWS API Documentation
+    #
+    class StartRemediationExecutionRequest < Struct.new(
+      :config_rule_name,
+      :resource_keys)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failure_message
+    #   Returns a failure message. For example, the resource is already
+    #   compliant.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items
+    #   For resources that have failed to start execution, the API returns a
+    #   resource key object.
+    #   @return [Array<Types::ResourceKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartRemediationExecutionResponse AWS API Documentation
+    #
+    class StartRemediationExecutionResponse < Struct.new(
+      :failure_message,
+      :failed_items)
+      include Aws::Structure
+    end
+
+    # The static value of the resource.
+    #
+    # @note When making an API call, you may pass StaticValue
+    #   data as a hash:
+    #
+    #       {
+    #         values: ["StringWithCharLimit256"], # required
+    #       }
+    #
+    # @!attribute [rw] values
+    #   A list of values. For example, the ARN of the assumed role.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StaticValue AWS API Documentation
+    #
+    class StaticValue < Struct.new(
+      :values)
+      include Aws::Structure
+    end
+
+    # Status filter object to filter results based on specific member
+    # account ID or status type for an organization config rule.
+    #
+    # @note When making an API call, you may pass StatusDetailFilters
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId",
+    #         member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of the member account within an
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_account_rule_status
+    #   Indicates deployment status for config rule in the member account.
+    #   When master account calls `PutOrganizationConfigRule` action for the
+    #   first time, config rule status is created in the member account.
+    #   When master account calls `PutOrganizationConfigRule` action for the
+    #   second time, config rule status is updated in the member account.
+    #   Config rule status is deleted when the master account deletes
+    #   `OrganizationConfigRule` and disables service access for
+    #   `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the rule to:
+    #
+    #   * `CREATE_SUCCESSFUL` when config rule has been created in the
+    #     member account.
+    #
+    #   * `CREATE_IN_PROGRESS` when config rule is being created in the
+    #     member account.
+    #
+    #   * `CREATE_FAILED` when config rule creation has failed in the member
+    #     account.
+    #
+    #   * `DELETE_FAILED` when config rule deletion has failed in the member
+    #     account.
+    #
+    #   * `DELETE_IN_PROGRESS` when config rule is being deleted in the
+    #     member account.
+    #
+    #   * `DELETE_SUCCESSFUL` when config rule has been deleted in the
+    #     member account.
+    #
+    #   * `UPDATE_SUCCESSFUL` when config rule has been updated in the
+    #     member account.
+    #
+    #   * `UPDATE_IN_PROGRESS` when config rule is being updated in the
+    #     member account.
+    #
+    #   * `UPDATE_FAILED` when config rule deletion has failed in the member
+    #     account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StatusDetailFilters AWS API Documentation
+    #
+    class StatusDetailFilters < Struct.new(
+      :account_id,
+      :member_account_rule_status)
+      include Aws::Structure
+    end
+
     # The input for the StopConfigurationRecorder action.
     #
     # @note When making an API call, you may pass StopConfigurationRecorderRequest
@@ -3704,6 +7062,97 @@ module Aws::ConfigService
     #
     class StopConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name)
+      include Aws::Structure
+    end
+
+    # The tags for the resource. The metadata that you apply to a resource
+    # to help you categorize and organize them. Each tag consists of a key
+    # and an optional value, both of which you define. Tag keys can have a
+    # maximum character length of 128 characters, and tag values can have a
+    # maximum length of 256 characters.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that make up a tag. A key is a general
+    #   label that acts like a category for more specific tag values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that make up a tag. A value
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   `ConfigRule`, `ConfigurationAggregator` and
+    #   `AggregatorAuthorization`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of tag object.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   `ConfigRule`, `ConfigurationAggregator` and
+    #   `AggregatorAuthorization`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 

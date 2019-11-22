@@ -20,8 +20,16 @@ module Aws::CloudWatch
     AlarmName = Shapes::StringShape.new(name: 'AlarmName')
     AlarmNamePrefix = Shapes::StringShape.new(name: 'AlarmNamePrefix')
     AlarmNames = Shapes::ListShape.new(name: 'AlarmNames')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AnomalyDetector = Shapes::StructureShape.new(name: 'AnomalyDetector')
+    AnomalyDetectorConfiguration = Shapes::StructureShape.new(name: 'AnomalyDetectorConfiguration')
+    AnomalyDetectorExcludedTimeRanges = Shapes::ListShape.new(name: 'AnomalyDetectorExcludedTimeRanges')
+    AnomalyDetectorMetricTimezone = Shapes::StringShape.new(name: 'AnomalyDetectorMetricTimezone')
+    AnomalyDetectors = Shapes::ListShape.new(name: 'AnomalyDetectors')
     AwsQueryErrorMessage = Shapes::StringShape.new(name: 'AwsQueryErrorMessage')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
+    ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    Counts = Shapes::ListShape.new(name: 'Counts')
     DashboardArn = Shapes::StringShape.new(name: 'DashboardArn')
     DashboardBody = Shapes::StringShape.new(name: 'DashboardBody')
     DashboardEntries = Shapes::ListShape.new(name: 'DashboardEntries')
@@ -42,6 +50,8 @@ module Aws::CloudWatch
     Datapoints = Shapes::ListShape.new(name: 'Datapoints')
     DatapointsToAlarm = Shapes::IntegerShape.new(name: 'DatapointsToAlarm')
     DeleteAlarmsInput = Shapes::StructureShape.new(name: 'DeleteAlarmsInput')
+    DeleteAnomalyDetectorInput = Shapes::StructureShape.new(name: 'DeleteAnomalyDetectorInput')
+    DeleteAnomalyDetectorOutput = Shapes::StructureShape.new(name: 'DeleteAnomalyDetectorOutput')
     DeleteDashboardsInput = Shapes::StructureShape.new(name: 'DeleteDashboardsInput')
     DeleteDashboardsOutput = Shapes::StructureShape.new(name: 'DeleteDashboardsOutput')
     DescribeAlarmHistoryInput = Shapes::StructureShape.new(name: 'DescribeAlarmHistoryInput')
@@ -50,6 +60,8 @@ module Aws::CloudWatch
     DescribeAlarmsForMetricOutput = Shapes::StructureShape.new(name: 'DescribeAlarmsForMetricOutput')
     DescribeAlarmsInput = Shapes::StructureShape.new(name: 'DescribeAlarmsInput')
     DescribeAlarmsOutput = Shapes::StructureShape.new(name: 'DescribeAlarmsOutput')
+    DescribeAnomalyDetectorsInput = Shapes::StructureShape.new(name: 'DescribeAnomalyDetectorsInput')
+    DescribeAnomalyDetectorsOutput = Shapes::StructureShape.new(name: 'DescribeAnomalyDetectorsOutput')
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     DimensionFilter = Shapes::StructureShape.new(name: 'DimensionFilter')
     DimensionFilters = Shapes::ListShape.new(name: 'DimensionFilters')
@@ -71,6 +83,8 @@ module Aws::CloudWatch
     GetMetricDataOutput = Shapes::StructureShape.new(name: 'GetMetricDataOutput')
     GetMetricStatisticsInput = Shapes::StructureShape.new(name: 'GetMetricStatisticsInput')
     GetMetricStatisticsOutput = Shapes::StructureShape.new(name: 'GetMetricStatisticsOutput')
+    GetMetricWidgetImageInput = Shapes::StructureShape.new(name: 'GetMetricWidgetImageInput')
+    GetMetricWidgetImageOutput = Shapes::StructureShape.new(name: 'GetMetricWidgetImageOutput')
     HistoryData = Shapes::StringShape.new(name: 'HistoryData')
     HistoryItemType = Shapes::StringShape.new(name: 'HistoryItemType')
     HistorySummary = Shapes::StringShape.new(name: 'HistorySummary')
@@ -80,12 +94,16 @@ module Aws::CloudWatch
     InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     LastModified = Shapes::TimestampShape.new(name: 'LastModified')
+    LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault')
     ListDashboardsInput = Shapes::StructureShape.new(name: 'ListDashboardsInput')
     ListDashboardsOutput = Shapes::StructureShape.new(name: 'ListDashboardsOutput')
     ListMetricsInput = Shapes::StructureShape.new(name: 'ListMetricsInput')
     ListMetricsOutput = Shapes::StructureShape.new(name: 'ListMetricsOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
+    MaxReturnedResultsCount = Shapes::IntegerShape.new(name: 'MaxReturnedResultsCount')
     Message = Shapes::StringShape.new(name: 'Message')
     MessageData = Shapes::StructureShape.new(name: 'MessageData')
     MessageDataCode = Shapes::StringShape.new(name: 'MessageDataCode')
@@ -105,18 +123,27 @@ module Aws::CloudWatch
     MetricLabel = Shapes::StringShape.new(name: 'MetricLabel')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricStat = Shapes::StructureShape.new(name: 'MetricStat')
+    MetricWidget = Shapes::StringShape.new(name: 'MetricWidget')
+    MetricWidgetImage = Shapes::BlobShape.new(name: 'MetricWidgetImage')
     Metrics = Shapes::ListShape.new(name: 'Metrics')
     MissingRequiredParameterException = Shapes::StructureShape.new(name: 'MissingRequiredParameterException')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
     Period = Shapes::IntegerShape.new(name: 'Period')
+    PutAnomalyDetectorInput = Shapes::StructureShape.new(name: 'PutAnomalyDetectorInput')
+    PutAnomalyDetectorOutput = Shapes::StructureShape.new(name: 'PutAnomalyDetectorOutput')
     PutDashboardInput = Shapes::StructureShape.new(name: 'PutDashboardInput')
     PutDashboardOutput = Shapes::StructureShape.new(name: 'PutDashboardOutput')
     PutMetricAlarmInput = Shapes::StructureShape.new(name: 'PutMetricAlarmInput')
     PutMetricDataInput = Shapes::StructureShape.new(name: 'PutMetricDataInput')
+    Range = Shapes::StructureShape.new(name: 'Range')
+    ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ReturnData = Shapes::BooleanShape.new(name: 'ReturnData')
     ScanBy = Shapes::StringShape.new(name: 'ScanBy')
     SetAlarmStateInput = Shapes::StructureShape.new(name: 'SetAlarmStateInput')
@@ -131,10 +158,20 @@ module Aws::CloudWatch
     Statistics = Shapes::ListShape.new(name: 'Statistics')
     StatusCode = Shapes::StringShape.new(name: 'StatusCode')
     StorageResolution = Shapes::IntegerShape.new(name: 'StorageResolution')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Threshold = Shapes::FloatShape.new(name: 'Threshold')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timestamps = Shapes::ListShape.new(name: 'Timestamps')
     TreatMissingData = Shapes::StringShape.new(name: 'TreatMissingData')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    Values = Shapes::ListShape.new(name: 'Values')
 
     AlarmHistoryItem.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
     AlarmHistoryItem.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
@@ -147,6 +184,23 @@ module Aws::CloudWatch
 
     AlarmNames.member = Shapes::ShapeRef.new(shape: AlarmName)
 
+    AnomalyDetector.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
+    AnomalyDetector.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
+    AnomalyDetector.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
+    AnomalyDetector.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, location_name: "Stat"))
+    AnomalyDetector.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "Configuration"))
+    AnomalyDetector.struct_class = Types::AnomalyDetector
+
+    AnomalyDetectorConfiguration.add_member(:excluded_time_ranges, Shapes::ShapeRef.new(shape: AnomalyDetectorExcludedTimeRanges, location_name: "ExcludedTimeRanges"))
+    AnomalyDetectorConfiguration.add_member(:metric_timezone, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricTimezone, location_name: "MetricTimezone"))
+    AnomalyDetectorConfiguration.struct_class = Types::AnomalyDetectorConfiguration
+
+    AnomalyDetectorExcludedTimeRanges.member = Shapes::ShapeRef.new(shape: Range)
+
+    AnomalyDetectors.member = Shapes::ShapeRef.new(shape: AnomalyDetector)
+
+    Counts.member = Shapes::ShapeRef.new(shape: DatapointValue)
+
     DashboardEntries.member = Shapes::ShapeRef.new(shape: DashboardEntry)
 
     DashboardEntry.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, location_name: "DashboardName"))
@@ -155,7 +209,14 @@ module Aws::CloudWatch
     DashboardEntry.add_member(:size, Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
     DashboardEntry.struct_class = Types::DashboardEntry
 
+    DashboardInvalidInputError.add_member(:message, Shapes::ShapeRef.new(shape: DashboardErrorMessage, location_name: "message"))
+    DashboardInvalidInputError.add_member(:dashboard_validation_messages, Shapes::ShapeRef.new(shape: DashboardValidationMessages, location_name: "dashboardValidationMessages"))
+    DashboardInvalidInputError.struct_class = Types::DashboardInvalidInputError
+
     DashboardNames.member = Shapes::ShapeRef.new(shape: DashboardName)
+
+    DashboardNotFoundError.add_member(:message, Shapes::ShapeRef.new(shape: DashboardErrorMessage, location_name: "message"))
+    DashboardNotFoundError.struct_class = Types::DashboardNotFoundError
 
     DashboardValidationMessage.add_member(:data_path, Shapes::ShapeRef.new(shape: DataPath, location_name: "DataPath"))
     DashboardValidationMessage.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -182,6 +243,14 @@ module Aws::CloudWatch
 
     DeleteAlarmsInput.add_member(:alarm_names, Shapes::ShapeRef.new(shape: AlarmNames, required: true, location_name: "AlarmNames"))
     DeleteAlarmsInput.struct_class = Types::DeleteAlarmsInput
+
+    DeleteAnomalyDetectorInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
+    DeleteAnomalyDetectorInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
+    DeleteAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
+    DeleteAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, required: true, location_name: "Stat"))
+    DeleteAnomalyDetectorInput.struct_class = Types::DeleteAnomalyDetectorInput
+
+    DeleteAnomalyDetectorOutput.struct_class = Types::DeleteAnomalyDetectorOutput
 
     DeleteDashboardsInput.add_member(:dashboard_names, Shapes::ShapeRef.new(shape: DashboardNames, required: true, location_name: "DashboardNames"))
     DeleteDashboardsInput.struct_class = Types::DeleteDashboardsInput
@@ -224,6 +293,17 @@ module Aws::CloudWatch
     DescribeAlarmsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeAlarmsOutput.struct_class = Types::DescribeAlarmsOutput
 
+    DescribeAnomalyDetectorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAnomalyDetectorsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxReturnedResultsCount, location_name: "MaxResults"))
+    DescribeAnomalyDetectorsInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
+    DescribeAnomalyDetectorsInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
+    DescribeAnomalyDetectorsInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
+    DescribeAnomalyDetectorsInput.struct_class = Types::DescribeAnomalyDetectorsInput
+
+    DescribeAnomalyDetectorsOutput.add_member(:anomaly_detectors, Shapes::ShapeRef.new(shape: AnomalyDetectors, location_name: "AnomalyDetectors"))
+    DescribeAnomalyDetectorsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAnomalyDetectorsOutput.struct_class = Types::DescribeAnomalyDetectorsOutput
+
     Dimension.add_member(:name, Shapes::ShapeRef.new(shape: DimensionName, required: true, location_name: "Name"))
     Dimension.add_member(:value, Shapes::ShapeRef.new(shape: DimensionValue, required: true, location_name: "Value"))
     Dimension.struct_class = Types::Dimension
@@ -262,6 +342,7 @@ module Aws::CloudWatch
 
     GetMetricDataOutput.add_member(:metric_data_results, Shapes::ShapeRef.new(shape: MetricDataResults, location_name: "MetricDataResults"))
     GetMetricDataOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetMetricDataOutput.add_member(:messages, Shapes::ShapeRef.new(shape: MetricDataResultMessages, location_name: "Messages"))
     GetMetricDataOutput.struct_class = Types::GetMetricDataOutput
 
     GetMetricStatisticsInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
@@ -278,6 +359,31 @@ module Aws::CloudWatch
     GetMetricStatisticsOutput.add_member(:label, Shapes::ShapeRef.new(shape: MetricLabel, location_name: "Label"))
     GetMetricStatisticsOutput.add_member(:datapoints, Shapes::ShapeRef.new(shape: Datapoints, location_name: "Datapoints"))
     GetMetricStatisticsOutput.struct_class = Types::GetMetricStatisticsOutput
+
+    GetMetricWidgetImageInput.add_member(:metric_widget, Shapes::ShapeRef.new(shape: MetricWidget, required: true, location_name: "MetricWidget"))
+    GetMetricWidgetImageInput.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "OutputFormat"))
+    GetMetricWidgetImageInput.struct_class = Types::GetMetricWidgetImageInput
+
+    GetMetricWidgetImageOutput.add_member(:metric_widget_image, Shapes::ShapeRef.new(shape: MetricWidgetImage, location_name: "MetricWidgetImage"))
+    GetMetricWidgetImageOutput.struct_class = Types::GetMetricWidgetImageOutput
+
+    InternalServiceFault.add_member(:message, Shapes::ShapeRef.new(shape: FaultDescription, location_name: "Message"))
+    InternalServiceFault.struct_class = Types::InternalServiceFault
+
+    InvalidFormatFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidFormatFault.struct_class = Types::InvalidFormatFault
+
+    InvalidNextToken.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidNextToken.struct_class = Types::InvalidNextToken
+
+    InvalidParameterCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterCombinationException.struct_class = Types::InvalidParameterCombinationException
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    LimitExceededFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededFault.struct_class = Types::LimitExceededFault
 
     ListDashboardsInput.add_member(:dashboard_name_prefix, Shapes::ShapeRef.new(shape: DashboardNamePrefix, location_name: "DashboardNamePrefix"))
     ListDashboardsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -296,6 +402,12 @@ module Aws::CloudWatch
     ListMetricsOutput.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
     ListMetricsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListMetricsOutput.struct_class = Types::ListMetricsOutput
+
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
     MessageData.add_member(:code, Shapes::ShapeRef.new(shape: MessageDataCode, location_name: "Code"))
     MessageData.add_member(:value, Shapes::ShapeRef.new(shape: MessageDataValue, location_name: "Value"))
@@ -331,6 +443,8 @@ module Aws::CloudWatch
     MetricAlarm.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, location_name: "ComparisonOperator"))
     MetricAlarm.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: TreatMissingData, location_name: "TreatMissingData"))
     MetricAlarm.add_member(:evaluate_low_sample_count_percentile, Shapes::ShapeRef.new(shape: EvaluateLowSampleCountPercentile, location_name: "EvaluateLowSampleCountPercentile"))
+    MetricAlarm.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: "Metrics"))
+    MetricAlarm.add_member(:threshold_metric_id, Shapes::ShapeRef.new(shape: MetricId, location_name: "ThresholdMetricId"))
     MetricAlarm.struct_class = Types::MetricAlarm
 
     MetricAlarms.member = Shapes::ShapeRef.new(shape: MetricAlarm)
@@ -344,6 +458,7 @@ module Aws::CloudWatch
     MetricDataQuery.add_member(:expression, Shapes::ShapeRef.new(shape: MetricExpression, location_name: "Expression"))
     MetricDataQuery.add_member(:label, Shapes::ShapeRef.new(shape: MetricLabel, location_name: "Label"))
     MetricDataQuery.add_member(:return_data, Shapes::ShapeRef.new(shape: ReturnData, location_name: "ReturnData"))
+    MetricDataQuery.add_member(:period, Shapes::ShapeRef.new(shape: Period, location_name: "Period"))
     MetricDataQuery.struct_class = Types::MetricDataQuery
 
     MetricDataResult.add_member(:id, Shapes::ShapeRef.new(shape: MetricId, location_name: "Id"))
@@ -363,6 +478,8 @@ module Aws::CloudWatch
     MetricDatum.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     MetricDatum.add_member(:value, Shapes::ShapeRef.new(shape: DatapointValue, location_name: "Value"))
     MetricDatum.add_member(:statistic_values, Shapes::ShapeRef.new(shape: StatisticSet, location_name: "StatisticValues"))
+    MetricDatum.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
+    MetricDatum.add_member(:counts, Shapes::ShapeRef.new(shape: Counts, location_name: "Counts"))
     MetricDatum.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
     MetricDatum.add_member(:storage_resolution, Shapes::ShapeRef.new(shape: StorageResolution, location_name: "StorageResolution"))
     MetricDatum.struct_class = Types::MetricDatum
@@ -374,6 +491,18 @@ module Aws::CloudWatch
     MetricStat.struct_class = Types::MetricStat
 
     Metrics.member = Shapes::ShapeRef.new(shape: Metric)
+
+    MissingRequiredParameterException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    MissingRequiredParameterException.struct_class = Types::MissingRequiredParameterException
+
+    PutAnomalyDetectorInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
+    PutAnomalyDetectorInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
+    PutAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
+    PutAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, required: true, location_name: "Stat"))
+    PutAnomalyDetectorInput.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "Configuration"))
+    PutAnomalyDetectorInput.struct_class = Types::PutAnomalyDetectorInput
+
+    PutAnomalyDetectorOutput.struct_class = Types::PutAnomalyDetectorOutput
 
     PutDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "DashboardName"))
     PutDashboardInput.add_member(:dashboard_body, Shapes::ShapeRef.new(shape: DashboardBody, required: true, location_name: "DashboardBody"))
@@ -388,26 +517,40 @@ module Aws::CloudWatch
     PutMetricAlarmInput.add_member(:ok_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "OKActions"))
     PutMetricAlarmInput.add_member(:alarm_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "AlarmActions"))
     PutMetricAlarmInput.add_member(:insufficient_data_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "InsufficientDataActions"))
-    PutMetricAlarmInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
-    PutMetricAlarmInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
+    PutMetricAlarmInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
+    PutMetricAlarmInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     PutMetricAlarmInput.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
     PutMetricAlarmInput.add_member(:extended_statistic, Shapes::ShapeRef.new(shape: ExtendedStatistic, location_name: "ExtendedStatistic"))
     PutMetricAlarmInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
-    PutMetricAlarmInput.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "Period"))
+    PutMetricAlarmInput.add_member(:period, Shapes::ShapeRef.new(shape: Period, location_name: "Period"))
     PutMetricAlarmInput.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
     PutMetricAlarmInput.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: EvaluationPeriods, required: true, location_name: "EvaluationPeriods"))
     PutMetricAlarmInput.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: DatapointsToAlarm, location_name: "DatapointsToAlarm"))
-    PutMetricAlarmInput.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, required: true, location_name: "Threshold"))
+    PutMetricAlarmInput.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, location_name: "Threshold"))
     PutMetricAlarmInput.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
     PutMetricAlarmInput.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: TreatMissingData, location_name: "TreatMissingData"))
     PutMetricAlarmInput.add_member(:evaluate_low_sample_count_percentile, Shapes::ShapeRef.new(shape: EvaluateLowSampleCountPercentile, location_name: "EvaluateLowSampleCountPercentile"))
+    PutMetricAlarmInput.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: "Metrics"))
+    PutMetricAlarmInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PutMetricAlarmInput.add_member(:threshold_metric_id, Shapes::ShapeRef.new(shape: MetricId, location_name: "ThresholdMetricId"))
     PutMetricAlarmInput.struct_class = Types::PutMetricAlarmInput
 
     PutMetricDataInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
     PutMetricDataInput.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, required: true, location_name: "MetricData"))
     PutMetricDataInput.struct_class = Types::PutMetricDataInput
 
+    Range.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    Range.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    Range.struct_class = Types::Range
+
     ResourceList.member = Shapes::ShapeRef.new(shape: ResourceName)
+
+    ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFound.struct_class = Types::ResourceNotFound
+
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SetAlarmStateInput.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "AlarmName"))
     SetAlarmStateInput.add_member(:state_value, Shapes::ShapeRef.new(shape: StateValue, required: true, location_name: "StateValue"))
@@ -423,7 +566,29 @@ module Aws::CloudWatch
 
     Statistics.member = Shapes::ShapeRef.new(shape: Statistic)
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
     Timestamps.member = Shapes::ShapeRef.new(shape: Timestamp)
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
+    Values.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
 
     # @api private
@@ -432,10 +597,14 @@ module Aws::CloudWatch
       api.version = "2010-08-01"
 
       api.metadata = {
+        "apiVersion" => "2010-08-01",
         "endpointPrefix" => "monitoring",
         "protocol" => "query",
+        "serviceAbbreviation" => "CloudWatch",
         "serviceFullName" => "Amazon CloudWatch",
+        "serviceId" => "CloudWatch",
         "signatureVersion" => "v4",
+        "uid" => "monitoring-2010-08-01",
         "xmlNamespace" => "http://monitoring.amazonaws.com/doc/2010-08-01/",
       }
 
@@ -446,6 +615,18 @@ module Aws::CloudWatch
         o.input = Shapes::ShapeRef.new(shape: DeleteAlarmsInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:delete_anomaly_detector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAnomalyDetector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAnomalyDetectorInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAnomalyDetectorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
       end)
 
       api.add_operation(:delete_dashboards, Seahorse::Model::Operation.new.tap do |o|
@@ -497,6 +678,17 @@ module Aws::CloudWatch
         o.output = Shapes::ShapeRef.new(shape: DescribeAlarmsForMetricOutput)
       end)
 
+      api.add_operation(:describe_anomaly_detectors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAnomalyDetectors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAnomalyDetectorsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAnomalyDetectorsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
       api.add_operation(:disable_alarm_actions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableAlarmActions"
         o.http_method = "POST"
@@ -531,6 +723,12 @@ module Aws::CloudWatch
         o.input = Shapes::ShapeRef.new(shape: GetMetricDataInput)
         o.output = Shapes::ShapeRef.new(shape: GetMetricDataOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_datapoints",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_metric_statistics, Seahorse::Model::Operation.new.tap do |o|
@@ -545,6 +743,14 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
       end)
 
+      api.add_operation(:get_metric_widget_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetricWidgetImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMetricWidgetImageInput)
+        o.output = Shapes::ShapeRef.new(shape: GetMetricWidgetImageOutput)
+      end)
+
       api.add_operation(:list_dashboards, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDashboards"
         o.http_method = "POST"
@@ -553,6 +759,11 @@ module Aws::CloudWatch
         o.output = Shapes::ShapeRef.new(shape: ListDashboardsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_metrics, Seahorse::Model::Operation.new.tap do |o|
@@ -568,6 +779,29 @@ module Aws::CloudWatch
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+      end)
+
+      api.add_operation(:put_anomaly_detector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAnomalyDetector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAnomalyDetectorInput)
+        o.output = Shapes::ShapeRef.new(shape: PutAnomalyDetectorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
       end)
 
       api.add_operation(:put_dashboard, Seahorse::Model::Operation.new.tap do |o|
@@ -609,6 +843,30 @@ module Aws::CloudWatch
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFormatFault)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
       end)
     end
 

@@ -199,7 +199,7 @@ module Aws::EC2
     #
     #   routetableassociation = route_table_association.replace_subnet({
     #     dry_run: false,
-    #     route_table_id: "String", # required
+    #     route_table_id: "RouteTableId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run

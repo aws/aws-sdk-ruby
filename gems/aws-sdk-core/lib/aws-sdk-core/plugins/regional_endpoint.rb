@@ -26,6 +26,8 @@ a default `:region` is search for in the following locations:
         resolve_region(cfg)
       end
 
+      option(:regional_endpoint, false)
+
       option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
@@ -33,7 +35,14 @@ to test endpoints. This should be avalid HTTP(S) URI.
         DOCS
         endpoint_prefix = cfg.api.metadata['endpointPrefix']
         if cfg.region && endpoint_prefix
-          Aws::Partitions::EndpointProvider.resolve(cfg.region, endpoint_prefix)
+          if cfg.respond_to?(:sts_regional_endpoints)
+            sts_regional = cfg.sts_regional_endpoints
+          end
+          Aws::Partitions::EndpointProvider.resolve(
+            cfg.region,
+            endpoint_prefix,
+            sts_regional
+          )
         end
       end
 

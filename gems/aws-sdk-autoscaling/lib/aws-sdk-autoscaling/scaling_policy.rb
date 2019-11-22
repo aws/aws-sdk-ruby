@@ -43,15 +43,16 @@ module Aws::AutoScaling
       data[:policy_arn]
     end
 
-    # The policy type. Valid values are `SimpleScaling` and `StepScaling`.
+    # The policy type. The valid values are `SimpleScaling`, `StepScaling`,
+    # and `TargetTrackingScaling`.
     # @return [String]
     def policy_type
       data[:policy_type]
     end
 
     # The adjustment type, which specifies how `ScalingAdjustment` is
-    # interpreted. Valid values are `ChangeInCapacity`, `ExactCapacity`, and
-    # `PercentChangeInCapacity`.
+    # interpreted. The valid values are `ChangeInCapacity`, `ExactCapacity`,
+    # and `PercentChangeInCapacity`.
     # @return [String]
     def adjustment_type
       data[:adjustment_type]
@@ -95,7 +96,7 @@ module Aws::AutoScaling
       data[:step_adjustments]
     end
 
-    # The aggregation type for the CloudWatch metrics. Valid values are
+    # The aggregation type for the CloudWatch metrics. The valid values are
     # `Minimum`, `Maximum`, and `Average`.
     # @return [String]
     def metric_aggregation_type
@@ -115,7 +116,7 @@ module Aws::AutoScaling
       data[:alarms]
     end
 
-    # A target tracking policy.
+    # A target tracking scaling policy.
     # @return [Types::TargetTrackingConfiguration]
     def target_tracking_configuration
       data[:target_tracking_configuration]
@@ -280,17 +281,18 @@ module Aws::AutoScaling
     # @option options [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     # @option options [Boolean] :honor_cooldown
-    #   Indicates whether Auto Scaling waits for the cooldown period to
-    #   complete before executing the policy.
+    #   Indicates whether Amazon EC2 Auto Scaling waits for the cooldown
+    #   period to complete before executing the policy.
     #
-    #   This parameter is not supported if the policy type is `StepScaling`.
+    #   This parameter is not supported if the policy type is `StepScaling` or
+    #   `TargetTrackingScaling`.
     #
-    #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-    #   Scaling User Guide*.
+    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
     # @option options [Float] :metric_value
     #   The metric value to compare to `BreachThreshold`. This enables you to
     #   execute a policy of type `StepScaling` and determine which step
@@ -301,13 +303,13 @@ module Aws::AutoScaling
     #   If you specify a metric value that doesn't correspond to a step
     #   adjustment for the policy, the call returns an error.
     #
-    #   This parameter is required if the policy type is `StepScaling` and not
-    #   supported otherwise.
+    #   Conditional: This parameter is required if the policy type is
+    #   `StepScaling` and not supported otherwise.
     # @option options [Float] :breach_threshold
     #   The breach threshold for the alarm.
     #
-    #   This parameter is required if the policy type is `StepScaling` and not
-    #   supported otherwise.
+    #   Conditional: This parameter is required if the policy type is
+    #   `StepScaling` and not supported otherwise.
     # @return [EmptyStructure]
     def execute(options = {})
       options = options.merge(policy_name: @name)

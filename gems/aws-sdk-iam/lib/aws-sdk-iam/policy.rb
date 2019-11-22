@@ -38,12 +38,12 @@ module Aws::IAM
 
     # The stable and unique string identifying the policy.
     #
-    # For more information about IDs, see [IAM Identifiers][1] in the *Using
-    # IAM* guide.
+    # For more information about IDs, see [IAM Identifiers][1] in the *IAM
+    # User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def policy_id
       data[:policy_id]
@@ -51,12 +51,12 @@ module Aws::IAM
 
     # The path to the policy.
     #
-    # For more information about paths, see [IAM Identifiers][1] in the
-    # *Using IAM* guide.
+    # For more information about paths, see [IAM Identifiers][1] in the *IAM
+    # User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
@@ -275,7 +275,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the group to attach the policy
     #   to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -299,7 +299,7 @@ module Aws::IAM
     # @option options [required, String] :role_name
     #   The name (friendly name, not ARN) of the role to attach the policy to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -324,7 +324,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM user to attach the policy
     #   to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -349,6 +349,11 @@ module Aws::IAM
     # @option options [required, String] :policy_document
     #   The JSON policy document that you want to use as the content for this
     #   new version of the policy.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the policy
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
@@ -378,7 +383,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     # @return [PolicyVersion]
     def create_version(options = {})
       options = options.merge(policy_arn: @arn)
@@ -411,7 +416,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM group to detach the
     #   policy from.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -436,7 +441,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM role to detach the policy
     #   from.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -461,7 +466,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM user to detach the policy
     #   from.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -490,7 +495,7 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   entities.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -545,7 +550,7 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   entities.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -600,7 +605,7 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   entities.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL

@@ -172,6 +172,9 @@ module Aws::LexModelBuildingService
     Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::StringShape.new(name: 'Version')
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     BotAliasMetadata.add_member(:name, Shapes::ShapeRef.new(shape: AliasName, location_name: "name"))
     BotAliasMetadata.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     BotAliasMetadata.add_member(:bot_version, Shapes::ShapeRef.new(shape: Version, location_name: "botVersion"))
@@ -232,6 +235,9 @@ module Aws::LexModelBuildingService
     CodeHook.add_member(:message_version, Shapes::ShapeRef.new(shape: MessageVersion, required: true, location_name: "messageVersion"))
     CodeHook.struct_class = Types::CodeHook
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateBotVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "name"))
     CreateBotVersionRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     CreateBotVersionRequest.struct_class = Types::CreateBotVersionRequest
@@ -251,6 +257,7 @@ module Aws::LexModelBuildingService
     CreateBotVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateBotVersionResponse.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     CreateBotVersionResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
+    CreateBotVersionResponse.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     CreateBotVersionResponse.struct_class = Types::CreateBotVersionResponse
 
     CreateIntentVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
@@ -405,6 +412,7 @@ module Aws::LexModelBuildingService
     GetBotResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     GetBotResponse.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetBotResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
+    GetBotResponse.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     GetBotResponse.struct_class = Types::GetBotResponse
 
     GetBotVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "name"))
@@ -577,6 +585,13 @@ module Aws::LexModelBuildingService
 
     IntentUtteranceList.member = Shapes::ShapeRef.new(shape: Utterance)
 
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    LimitExceededException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListOfUtterance.member = Shapes::ShapeRef.new(shape: UtteranceData)
 
     ListsOfUtterances.member = Shapes::ShapeRef.new(shape: UtteranceList)
@@ -589,6 +604,12 @@ module Aws::LexModelBuildingService
     Message.struct_class = Types::Message
 
     MessageList.member = Shapes::ShapeRef.new(shape: Message)
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
+    PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    PreconditionFailedException.struct_class = Types::PreconditionFailedException
 
     Prompt.add_member(:messages, Shapes::ShapeRef.new(shape: MessageList, required: true, location_name: "messages"))
     Prompt.add_member(:max_attempts, Shapes::ShapeRef.new(shape: PromptMaxAttempts, required: true, location_name: "maxAttempts"))
@@ -622,6 +643,7 @@ module Aws::LexModelBuildingService
     PutBotRequest.add_member(:process_behavior, Shapes::ShapeRef.new(shape: ProcessBehavior, location_name: "processBehavior"))
     PutBotRequest.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, required: true, location_name: "locale"))
     PutBotRequest.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "childDirected"))
+    PutBotRequest.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     PutBotRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutBotRequest.struct_class = Types::PutBotRequest
 
@@ -641,6 +663,7 @@ module Aws::LexModelBuildingService
     PutBotResponse.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     PutBotResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
     PutBotResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutBotResponse.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     PutBotResponse.struct_class = Types::PutBotResponse
 
     PutIntentRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
@@ -694,6 +717,10 @@ module Aws::LexModelBuildingService
     PutSlotTypeResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
     PutSlotTypeResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutSlotTypeResponse.struct_class = Types::PutSlotTypeResponse
+
+    ResourceInUseException.add_member(:reference_type, Shapes::ShapeRef.new(shape: ReferenceType, location_name: "referenceType"))
+    ResourceInUseException.add_member(:example_reference, Shapes::ShapeRef.new(shape: ResourceReference, location_name: "exampleReference"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
 
     ResourceReference.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     ResourceReference.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
@@ -762,12 +789,15 @@ module Aws::LexModelBuildingService
       api.version = "2017-04-19"
 
       api.metadata = {
+        "apiVersion" => "2017-04-19",
         "endpointPrefix" => "models.lex",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Lex Model Building Service",
+        "serviceId" => "Lex Model Building Service",
         "signatureVersion" => "v4",
         "signingName" => "lex",
+        "uid" => "lex-models-2017-04-19",
       }
 
       api.add_operation(:create_bot_version, Seahorse::Model::Operation.new.tap do |o|

@@ -12,7 +12,7 @@ module Aws::LambdaPreview
     include Seahorse::Model
 
     AddEventSourceRequest = Shapes::StructureShape.new(name: 'AddEventSourceRequest')
-    Blob = Shapes::BlobShape.new(name: 'Blob')
+    Blob = Shapes::BlobShape.new(name: 'Blob', streaming: true)
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -110,6 +110,14 @@ module Aws::LambdaPreview
     GetFunctionResponse.add_member(:code, Shapes::ShapeRef.new(shape: FunctionCodeLocation, location_name: "Code"))
     GetFunctionResponse.struct_class = Types::GetFunctionResponse
 
+    InvalidParameterValueException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    InvalidRequestContentException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InvalidRequestContentException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidRequestContentException.struct_class = Types::InvalidRequestContentException
+
     InvokeAsyncRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     InvokeAsyncRequest.add_member(:invoke_args, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "InvokeArgs"))
     InvokeAsyncRequest.struct_class = Types::InvokeAsyncRequest
@@ -143,6 +151,14 @@ module Aws::LambdaPreview
     RemoveEventSourceRequest.add_member(:uuid, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "UUID"))
     RemoveEventSourceRequest.struct_class = Types::RemoveEventSourceRequest
 
+    ResourceNotFoundException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ServiceException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceException.struct_class = Types::ServiceException
+
     UpdateFunctionConfigurationRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     UpdateFunctionConfigurationRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, location: "querystring", location_name: "Role"))
     UpdateFunctionConfigurationRequest.add_member(:handler, Shapes::ShapeRef.new(shape: Handler, location: "querystring", location_name: "Handler"))
@@ -171,10 +187,12 @@ module Aws::LambdaPreview
       api.version = "2014-11-11"
 
       api.metadata = {
+        "apiVersion" => "2014-11-11",
         "endpointPrefix" => "lambda",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS Lambda",
         "signatureVersion" => "v4",
+        "uid" => "lambda-2014-11-11",
       }
 
       api.add_operation(:add_event_source, Seahorse::Model::Operation.new.tap do |o|

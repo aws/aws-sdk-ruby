@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +48,215 @@ module Aws::SecretsManager
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -178,10 +276,10 @@ module Aws::SecretsManager
     # `VersionStage` labels in an unexpected state. Depending on what step
     # of the rotation was in progress, you might need to remove the staging
     # label `AWSPENDING` from the partially created version, specified by
-    # the `SecretVersionId` response value. You should also evaluate the
-    # partially rotated new version to see if it should be deleted, which
-    # you can do by removing all staging labels from the new version's
-    # `VersionStage` field.
+    # the `VersionId` response value. You should also evaluate the partially
+    # rotated new version to see if it should be deleted, which you can do
+    # by removing all staging labels from the new version's `VersionStage`
+    # field.
     #
     #  </note>
     #
@@ -220,6 +318,21 @@ module Aws::SecretsManager
     #   Specifies the secret for which you want to cancel a rotation request.
     #   You can specify either the Amazon Resource Name (ARN) or the friendly
     #   name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @return [Types::CancelRotateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -292,10 +405,10 @@ module Aws::SecretsManager
     #   managed customer master key (CMK) with the alias
     #   `aws/secretsmanager`. If this key doesn't already exist in your
     #   account then Secrets Manager creates it for you automatically. All
-    #   users in the same AWS account automatically have access to use the
-    #   default CMK. Note that if an Secrets Manager API call results in AWS
-    #   having to create the account's AWS-managed CMK, it can result in a
-    #   one-time significant delay in returning the result.
+    #   users and roles in the same AWS account automatically have access to
+    #   use the default CMK. Note that if an Secrets Manager API call
+    #   results in AWS having to create the account's AWS-managed CMK, it
+    #   can result in a one-time significant delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -327,6 +440,9 @@ module Aws::SecretsManager
     #   to encrypt the secret. You do not need this permission to use the
     #   account's default AWS managed CMK for Secrets Manager.
     #
+    # * secretsmanager:TagResource - needed only if you include the `Tags`
+    #   parameter.
+    #
     # **Related operations**
     #
     # * To delete a secret, use DeleteSecret.
@@ -351,6 +467,14 @@ module Aws::SecretsManager
     #
     #   The secret name must be ASCII letters, digits, or the following
     #   characters : /\_+=.@-
+    #
+    #   <note markdown="1"> Don't end your secret name with a hyphen followed by six characters.
+    #   If you do so, you risk confusion and unexpected results when searching
+    #   for a secret by partial ARN. This is because Secrets Manager
+    #   automatically adds a hyphen and six random characters at the end of
+    #   the ARN.
+    #
+    #    </note>
     #
     # @option params [String] :client_request_token
     #   (Optional) If you include `SecretString` or `SecretBinary`, then an
@@ -387,7 +511,7 @@ module Aws::SecretsManager
     #     existing version. Instead, use PutSecretValue to create a new
     #     version.
     #
-    #   This value becomes the `SecretVersionId` of the new version.
+    #   This value becomes the `VersionId` of the new version.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -460,7 +584,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) Specifies a list of user-defined tags that are attached to
@@ -511,7 +635,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @return [Types::CreateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -595,6 +719,21 @@ module Aws::SecretsManager
     #   Specifies the secret that you want to delete the attached
     #   resource-based policy for. You can specify either the Amazon Resource
     #   Name (ARN) or the friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @return [Types::DeleteResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -684,11 +823,45 @@ module Aws::SecretsManager
     #   Specifies the secret that you want to delete. You can specify either
     #   the Amazon Resource Name (ARN) or the friendly name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @option params [Integer] :recovery_window_in_days
     #   (Optional) Specifies the number of days that Secrets Manager waits
-    #   before it can delete the secret.
+    #   before it can delete the secret. You can't use both this parameter
+    #   and the `ForceDeleteWithoutRecovery` parameter in the same API call.
     #
     #   This value can range from 7 to 30 days. The default value is 30.
+    #
+    # @option params [Boolean] :force_delete_without_recovery
+    #   (Optional) Specifies that the secret is to be deleted without any
+    #   recovery window. You can't use both this parameter and the
+    #   `RecoveryWindowInDays` parameter in the same API call.
+    #
+    #   An asynchronous background process performs the actual deletion, so
+    #   there can be a short delay before the operation completes. If you
+    #   write code to delete and then immediately recreate a secret with the
+    #   same name, ensure that your code includes appropriate back off and
+    #   retry logic.
+    #
+    #   Use this parameter with caution. This parameter causes the operation
+    #   to skip the normal waiting period before the permanent deletion that
+    #   AWS would normally impose with the `RecoveryWindowInDays` parameter.
+    #   If you delete a secret with the `ForceDeleteWithouRecovery` parameter,
+    #   then you have no opportunity to recover the secret. It is permanently
+    #   lost.
     #
     # @return [Types::DeleteSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -720,6 +893,7 @@ module Aws::SecretsManager
     #   resp = client.delete_secret({
     #     secret_id: "SecretIdType", # required
     #     recovery_window_in_days: 1,
+    #     force_delete_without_recovery: false,
     #   })
     #
     # @example Response structure
@@ -765,6 +939,21 @@ module Aws::SecretsManager
     #   can specify either the Amazon Resource Name (ARN) or the friendly name
     #   of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @return [Types::DescribeSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSecretResponse#arn #arn} => String
@@ -780,6 +969,7 @@ module Aws::SecretsManager
     #   * {Types::DescribeSecretResponse#deleted_date #deleted_date} => Time
     #   * {Types::DescribeSecretResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeSecretResponse#version_ids_to_stages #version_ids_to_stages} => Hash&lt;String,Array&lt;String&gt;&gt;
+    #   * {Types::DescribeSecretResponse#owning_service #owning_service} => String
     #
     #
     # @example Example: To retrieve the details of a secret
@@ -849,6 +1039,7 @@ module Aws::SecretsManager
     #   resp.version_ids_to_stages #=> Hash
     #   resp.version_ids_to_stages["SecretVersionIdType"] #=> Array
     #   resp.version_ids_to_stages["SecretVersionIdType"][0] #=> String
+    #   resp.owning_service #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecret AWS API Documentation
     #
@@ -891,6 +1082,13 @@ module Aws::SecretsManager
     #   Specifies that the generated password should not include punctuation
     #   characters. The default if you do not include this switch parameter is
     #   that punctuation characters can be included.
+    #
+    #   The following are the punctuation characters that *can* be included in
+    #   the generated password if you don't explicitly exclude them with
+    #   `ExcludeCharacters` or `ExcludePunctuation`\:
+    #
+    #   `` ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` \{ | \} ~
+    #   ``
     #
     # @option params [Boolean] :exclude_uppercase
     #   Specifies that the generated password should not include uppercase
@@ -988,6 +1186,21 @@ module Aws::SecretsManager
     #   resource-based policy for. You can specify either the Amazon Resource
     #   Name (ARN) or the friendly name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetResourcePolicyResponse#arn #arn} => String
@@ -1058,11 +1271,26 @@ module Aws::SecretsManager
     #   You can specify either the Amazon Resource Name (ARN) or the friendly
     #   name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @option params [String] :version_id
     #   Specifies the unique identifier of the version of the secret that you
     #   want to retrieve. If you specify this parameter then don't specify
     #   `VersionStage`. If you don't specify either a `VersionStage` or
-    #   `SecretVersionId` then the default is to perform the operation on the
+    #   `VersionId` then the default is to perform the operation on the
     #   version with the `VersionStage` value of `AWSCURRENT`.
     #
     #   This value is typically a [UUID-type][1] value with 32 hexadecimal
@@ -1078,8 +1306,8 @@ module Aws::SecretsManager
     #
     #   Staging labels are used to keep track of different versions during the
     #   rotation process. If you use this parameter then don't specify
-    #   `SecretVersionId`. If you don't specify either a `VersionStage` or
-    #   `SecretVersionId`, then the default is to perform the operation on the
+    #   `VersionId`. If you don't specify either a `VersionStage` or
+    #   `VersionId`, then the default is to perform the operation on the
     #   version with the `VersionStage` value of `AWSCURRENT`.
     #
     # @return [Types::GetSecretValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1176,6 +1404,21 @@ module Aws::SecretsManager
     #   The identifier for the secret containing the versions you want to
     #   list. You can specify either the Amazon Resource Name (ARN) or the
     #   friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [Integer] :max_results
     #   (Optional) Limits the number of results that you want to include in
@@ -1392,6 +1635,7 @@ module Aws::SecretsManager
     #   resp.secret_list[0].secret_versions_to_stages #=> Hash
     #   resp.secret_list[0].secret_versions_to_stages["SecretVersionIdType"] #=> Array
     #   resp.secret_list[0].secret_versions_to_stages["SecretVersionIdType"][0] #=> String
+    #   resp.secret_list[0].owning_service #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListSecrets AWS API Documentation
@@ -1436,11 +1680,26 @@ module Aws::SecretsManager
     #
     #
     # [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #
     # @option params [required, String] :secret_id
     #   Specifies the secret that you want to attach the resource-based policy
     #   to. You can specify either the ARN or the friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [required, String] :resource_policy
     #   A JSON-formatted string that's constructed according to the grammar
@@ -1522,10 +1781,10 @@ module Aws::SecretsManager
     #   moves the staging label `AWSPREVIOUS` to the version that
     #   `AWSCURRENT` was removed from.
     #
-    # * This operation is idempotent. If a version with a `SecretVersionId`
-    #   with the same value as the `ClientRequestToken` parameter already
-    #   exists and you specify the same secret data, the operation succeeds
-    #   but does nothing. However, if the secret data is different, then the
+    # * This operation is idempotent. If a version with a `VersionId` with
+    #   the same value as the `ClientRequestToken` parameter already exists
+    #   and you specify the same secret data, the operation succeeds but
+    #   does nothing. However, if the secret data is different, then the
     #   operation fails because you cannot modify an existing version; you
     #   can only create new ones.
     #
@@ -1536,10 +1795,10 @@ module Aws::SecretsManager
     #   managed customer master key (CMK) with the alias
     #   `aws/secretsmanager`. If this key doesn't already exist in your
     #   account then Secrets Manager creates it for you automatically. All
-    #   users in the same AWS account automatically have access to use the
-    #   default CMK. Note that if an Secrets Manager API call results in AWS
-    #   having to create the account's AWS-managed CMK, it can result in a
-    #   one-time significant delay in returning the result.
+    #   users and roles in the same AWS account automatically have access to
+    #   use the default CMK. Note that if an Secrets Manager API call
+    #   results in AWS having to create the account's AWS-managed CMK, it
+    #   can result in a one-time significant delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -1581,6 +1840,21 @@ module Aws::SecretsManager
     #   specify either the Amazon Resource Name (ARN) or the friendly name of
     #   the secret. The secret must already exist.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @option params [String] :client_request_token
     #   (Optional) Specifies a unique identifier for the new version of the
     #   secret.
@@ -1614,7 +1888,7 @@ module Aws::SecretsManager
     #     existing secret version. You can only create new versions to store
     #     new secret values.
     #
-    #   This value becomes the `SecretVersionId` of the new version.
+    #   This value becomes the `VersionId` of the new version.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1663,7 +1937,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @option params [Array<String>] :version_stages
     #   (Optional) Specifies a list of staging labels that are attached to
@@ -1759,6 +2033,21 @@ module Aws::SecretsManager
     #   scheduled deletion. You can specify either the Amazon Resource Name
     #   (ARN) or the friendly name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @return [Types::RestoreSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreSecretResponse#arn #arn} => String
@@ -1818,6 +2107,14 @@ module Aws::SecretsManager
     # for your protected service, see [Rotating Secrets in AWS Secrets
     # Manager][1] in the *AWS Secrets Manager User Guide*.
     #
+    # Secrets Manager schedules the next rotation when the previous one is
+    # complete. Secrets Manager schedules the date by adding the rotation
+    # interval (number of days) to the actual date of the last rotation. The
+    # service chooses the hour within that 24-hour date window randomly. The
+    # minute is also chosen somewhat randomly, but weighted towards the top
+    # of the hour and influenced by a variety of factors that help
+    # distribute load.
+    #
     # The rotation function must end with the versions of the secret in one
     # of two states:
     #
@@ -1854,11 +2151,26 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
     #
     # @option params [required, String] :secret_id
     #   Specifies the secret that you want to rotate. You can specify either
     #   the Amazon Resource Name (ARN) or the friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [String] :client_request_token
     #   (Optional) Specifies a unique identifier for the new version of the
@@ -1879,21 +2191,8 @@ module Aws::SecretsManager
     #
     #   Secrets Manager uses this value to prevent the accidental creation of
     #   duplicate versions if there are failures and retries during the
-    #   function's processing.
-    #
-    #   * If the `ClientRequestToken` value isn't already associated with a
-    #     version of the secret then a new version of the secret is created.
-    #
-    #   * If a version with this value already exists and that version's
-    #     `SecretString` and `SecretBinary` values are the same as the
-    #     request, then the request is ignored (the operation is idempotent).
-    #
-    #   * If a version with this value already exists and that version's
-    #     `SecretString` and `SecretBinary` values are different from the
-    #     request then an error occurs because you cannot modify an existing
-    #     secret value.
-    #
-    #   This value becomes the `SecretVersionId` of the new version.
+    #   function's processing. This value becomes the `VersionId` of the new
+    #   version.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1993,6 +2292,21 @@ module Aws::SecretsManager
     #   specify either the Amazon Resource Name (ARN) or the friendly name of
     #   the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to attach to the secret. Each element in the list consists of
     #   a `Key` and a `Value`.
@@ -2005,7 +2319,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2080,6 +2394,21 @@ module Aws::SecretsManager
     #   can specify either the Amazon Resource Name (ARN) or the friendly name
     #   of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @option params [required, Array<String>] :tag_keys
     #   A list of tag key names to remove from the secret. You don't specify
     #   the value. Both the key and its associated value are removed.
@@ -2091,7 +2420,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2125,9 +2454,9 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Modifies many of the details of a secret. If you include a
-    # `ClientRequestToken` and either `SecretString` or `SecretBinary` then
-    # it also creates a new version attached to the secret.
+    # Modifies many of the details of the specified secret. If you include a
+    # `ClientRequestToken` and *either* `SecretString` or `SecretBinary`
+    # then it also creates a new version attached to the secret.
     #
     # To modify the rotation configuration of a secret, use RotateSecret
     # instead.
@@ -2139,10 +2468,10 @@ module Aws::SecretsManager
     #
     #  </note>
     #
-    # * If a version with a `SecretVersionId` with the same value as the
-    #   `ClientRequestToken` parameter already exists, the operation
-    #   generates an error. You cannot modify an existing version, you can
-    #   only create new ones.
+    # * If a version with a `VersionId` with the same value as the
+    #   `ClientRequestToken` parameter already exists, the operation results
+    #   in an error. You cannot modify an existing version, you can only
+    #   create a new version.
     #
     # * If you include `SecretString` or `SecretBinary` to create a new
     #   secret version, Secrets Manager automatically attaches the staging
@@ -2155,10 +2484,10 @@ module Aws::SecretsManager
     #   managed customer master key (CMK) with the alias
     #   `aws/secretsmanager`. If this key doesn't already exist in your
     #   account then Secrets Manager creates it for you automatically. All
-    #   users in the same AWS account automatically have access to use the
-    #   default CMK. Note that if an Secrets Manager API call results in AWS
-    #   having to create the account's AWS-managed CMK, it can result in a
-    #   one-time significant delay in returning the result.
+    #   users and roles in the same AWS account automatically have access to
+    #   use the default CMK. Note that if an Secrets Manager API call
+    #   results in AWS having to create the account's AWS-managed CMK, it
+    #   can result in a one-time significant delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -2200,9 +2529,24 @@ module Aws::SecretsManager
     #   ListSecretVersionIds.
     #
     # @option params [required, String] :secret_id
-    #   Specifies the secret that you want to update or to which you want to
+    #   Specifies the secret that you want to modify or to which you want to
     #   add a new version. You can specify either the Amazon Resource Name
     #   (ARN) or the friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [String] :client_request_token
     #   (Optional) If you want to add a new version to the secret, this
@@ -2239,7 +2583,7 @@ module Aws::SecretsManager
     #     request then an error occurs because you cannot modify an existing
     #     secret value.
     #
-    #   This value becomes the `SecretVersionId` of the new version.
+    #   This value becomes the `VersionId` of the new version.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2249,28 +2593,24 @@ module Aws::SecretsManager
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [String] :description
-    #   (Optional) Specifies a user-provided description of the secret.
+    #   (Optional) Specifies an updated user-provided description of the
+    #   secret.
     #
     # @option params [String] :kms_key_id
-    #   (Optional) Specifies the ARN or alias of the AWS KMS customer master
-    #   key (CMK) to be used to encrypt the protected text in the versions of
-    #   this secret.
-    #
-    #   If you don't specify this value, then Secrets Manager defaults to
-    #   using the default CMK in the account (the one named
-    #   `aws/secretsmanager`). If a AWS KMS CMK with that name doesn't exist,
-    #   then Secrets Manager creates it for you automatically the first time
-    #   it needs to encrypt a version's `Plaintext` or `PlaintextString`
-    #   fields.
+    #   (Optional) Specifies an updated ARN or alias of the AWS KMS customer
+    #   master key (CMK) to be used to encrypt the protected text in new
+    #   versions of this secret.
     #
     #   You can only use the account's default CMK to encrypt and decrypt if
     #   you call this operation using credentials from the same account that
     #   owns the secret. If the secret is in a different account, then you
-    #   must create a custom CMK and provide the ARN in this field.
+    #   must create a custom CMK and provide the ARN of that CMK in this
+    #   field. The user making the call must have permissions to both the
+    #   secret and the CMK in their respective accounts.
     #
     # @option params [String, IO] :secret_binary
-    #   (Optional) Specifies binary data that you want to encrypt and store in
-    #   the new version of the secret. To use this parameter in the
+    #   (Optional) Specifies updated binary data that you want to encrypt and
+    #   store in the new version of the secret. To use this parameter in the
     #   command-line tools, we recommend that you store your binary data in a
     #   file and then use the appropriate technique for your tool to pass the
     #   contents of the file as a parameter. Either `SecretBinary` or
@@ -2280,8 +2620,8 @@ module Aws::SecretsManager
     #   This parameter is not accessible using the Secrets Manager console.
     #
     # @option params [String] :secret_string
-    #   (Optional) Specifies text data that you want to encrypt and store in
-    #   this new version of the secret. Either `SecretBinary` or
+    #   (Optional) Specifies updated text data that you want to encrypt and
+    #   store in this new version of the secret. Either `SecretBinary` or
     #   `SecretString` must have a value, but not both. They cannot both be
     #   empty.
     #
@@ -2301,11 +2641,16 @@ module Aws::SecretsManager
     #
     #   If your command-line tool or SDK requires quotation marks around the
     #   parameter, you should use single quotes to avoid confusion with the
-    #   double quotes required in the JSON text.
+    #   double quotes required in the JSON text. You can also 'escape' the
+    #   double quote character in the embedded JSON text by prefacing each
+    #   with a backslash. For example, the following string is surrounded by
+    #   double-quotes. All of the embedded double quotes are escaped:
+    #
+    #   `"[\{"username":"bob"\},\{"password":"abc123xyz456"\}]"`
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @return [Types::UpdateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2433,36 +2778,48 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/terms-concepts.html#term_staging-label
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/terms-concepts.html#term_staging-label
     #
     # @option params [required, String] :secret_id
     #   Specifies the secret with the version whose list of staging labels you
     #   want to modify. You can specify either the Amazon Resource Name (ARN)
     #   or the friendly name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @option params [required, String] :version_stage
-    #   The list of staging labels to add to this version.
+    #   The staging label to add to this version.
     #
     # @option params [String] :remove_from_version_id
-    #   (Optional) Specifies the secret version ID of the version that the
-    #   staging labels are to be removed from.
-    #
-    #   If you want to move a label to a new version, you do not have to
-    #   explicitly remove it with this parameter. Adding a label using the
-    #   `MoveToVersionId` parameter automatically removes it from the old
-    #   version. However, if you do include both the "MoveTo" and
-    #   "RemoveFrom" parameters, then the move is successful only if the
-    #   staging labels are actually present on the "RemoveFrom" version. If
-    #   a staging label was on a different version than "RemoveFrom", then
-    #   the request fails.
+    #   Specifies the secret version ID of the version that the staging label
+    #   is to be removed from. If the staging label you are trying to attach
+    #   to one version is already attached to a different version, then you
+    #   must include this parameter and specify the version that the label is
+    #   to be removed from. If the label is attached and you either do not
+    #   specify this parameter, or the version ID does not match, then the
+    #   operation fails.
     #
     # @option params [String] :move_to_version_id
     #   (Optional) The secret version ID that you want to add the staging
-    #   labels to.
+    #   label to. If you want to remove a label from a version, then do not
+    #   specify this parameter.
     #
-    #   If any of the staging labels are already attached to a different
-    #   version of the secret, then they are removed from that version before
-    #   adding them to this version.
+    #   If the staging label is already attached to a different version of the
+    #   secret, then you must also specify the `RemoveFromVersionId`
+    #   parameter.
     #
     # @return [Types::UpdateSecretVersionStageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2560,7 +2917,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

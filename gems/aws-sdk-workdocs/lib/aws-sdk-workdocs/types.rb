@@ -87,6 +87,14 @@ module Aws::WorkDocs
     #   The timestamp when the action was performed.
     #   @return [Time]
     #
+    # @!attribute [rw] is_indirect_activity
+    #   Indicates whether an activity is indirect or direct. An indirect
+    #   activity results from a direct activity performed on a parent
+    #   resource. For example, sharing a parent folder (the direct activity)
+    #   shares all of the subfolders and documents within the parent folder
+    #   (the indirect activity).
+    #   @return [Boolean]
+    #
     # @!attribute [rw] organization_id
     #   The ID of the organization.
     #   @return [String]
@@ -121,6 +129,7 @@ module Aws::WorkDocs
     class Activity < Struct.new(
       :type,
       :time_stamp,
+      :is_indirect_activity,
       :organization_id,
       :initiator,
       :participants,
@@ -275,6 +284,31 @@ module Aws::WorkDocs
       :created_timestamp,
       :comment_status,
       :recipient_id)
+      include Aws::Structure
+    end
+
+    # The resource hierarchy is changing.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Another operation is in progress on the resource that conflicts with
+    # the current operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ConflictingOperationException AWS API Documentation
+    #
+    class ConflictingOperationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -495,7 +529,7 @@ module Aws::WorkDocs
     #
     # @!attribute [rw] endpoint
     #   The endpoint to receive the notifications. If the protocol is HTTPS,
-    #   the endpoint is a URL that begins with "https://".
+    #   the endpoint is a URL that begins with `https`.
     #   @return [String]
     #
     # @!attribute [rw] protocol
@@ -607,6 +641,19 @@ module Aws::WorkDocs
     #
     class CreateUserResponse < Struct.new(
       :user)
+      include Aws::Structure
+    end
+
+    # The limit has been reached on the number of custom properties for the
+    # specified resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CustomMetadataLimitExceededException AWS API Documentation
+    #
+    class CustomMetadataLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -902,7 +949,10 @@ module Aws::WorkDocs
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         organization_id: "IdType",
+    #         activity_types: "ActivityNamesFilterType",
+    #         resource_id: "IdType",
     #         user_id: "IdType",
+    #         include_indirect_activities: false,
     #         limit: 1,
     #         marker: "MarkerType",
     #       }
@@ -930,11 +980,27 @@ module Aws::WorkDocs
     #   administrative API (SigV4) requests.
     #   @return [String]
     #
+    # @!attribute [rw] activity_types
+    #   Specifies which activity types to include in the response. If this
+    #   field is left empty, all activity types are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The document or folder ID for which to describe activity types.
+    #   @return [String]
+    #
     # @!attribute [rw] user_id
     #   The ID of the user who performed the action. The response includes
     #   activities pertaining to this user. This is an optional parameter
     #   and is only applicable for administrative API (SigV4) requests.
     #   @return [String]
+    #
+    # @!attribute [rw] include_indirect_activities
+    #   Includes indirect activities. An indirect activity results from a
+    #   direct activity performed on a parent resource. For example, sharing
+    #   a parent folder (the direct activity) shares all of the subfolders
+    #   and documents within the parent folder (the indirect activity).
+    #   @return [Boolean]
     #
     # @!attribute [rw] limit
     #   The maximum number of items to return.
@@ -951,7 +1017,10 @@ module Aws::WorkDocs
       :start_time,
       :end_time,
       :organization_id,
+      :activity_types,
+      :resource_id,
       :user_id,
+      :include_indirect_activities,
       :limit,
       :marker)
       include Aws::Structure
@@ -1510,6 +1579,19 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
+    # This exception is thrown when the document is locked for comments and
+    # user tries to create or delete a comment on that document.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DocumentLockedForCommentsException AWS API Documentation
+    #
+    class DocumentLockedForCommentsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the document.
     #
     # @!attribute [rw] id
@@ -1629,6 +1711,62 @@ module Aws::WorkDocs
       :creator_id,
       :thumbnail,
       :source)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when a valid checkout ID is not presented on
+    # document version upload calls for a document that has been checked out
+    # from Web client.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DraftUploadOutOfSyncException AWS API Documentation
+    #
+    class DraftUploadOutOfSyncException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/EntityAlreadyExistsException AWS API Documentation
+    #
+    class EntityAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_ids
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/EntityNotExistsException AWS API Documentation
+    #
+    class EntityNotExistsException < Struct.new(
+      :message,
+      :entity_ids)
+      include Aws::Structure
+    end
+
+    # The AWS Directory Service cannot reach an on-premises instance. Or a
+    # dependency under the control of the organization is failing, such as a
+    # connected Active Directory.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/FailedDependencyException AWS API Documentation
+    #
+    class FailedDependencyException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1996,6 +2134,74 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetResourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType",
+    #         user_id: "IdType",
+    #         collection_type: "SHARED_WITH_ME", # accepts SHARED_WITH_ME
+    #         limit: 1,
+    #         marker: "PageMarkerType",
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   The Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API operation
+    #   using AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The user ID for the resource collection. This is a required field
+    #   for accessing the API operation using IAM credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_type
+    #   The collection type.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of resources to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. This marker was received
+    #   from a previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResourcesRequest AWS API Documentation
+    #
+    class GetResourcesRequest < Struct.new(
+      :authentication_token,
+      :user_id,
+      :collection_type,
+      :limit,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] folders
+    #   The folders in the specified folder.
+    #   @return [Array<Types::FolderMetadata>]
+    #
+    # @!attribute [rw] documents
+    #   The documents in the specified collection.
+    #   @return [Array<Types::DocumentMetadata>]
+    #
+    # @!attribute [rw] marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResourcesResponse AWS API Documentation
+    #
+    class GetResourcesResponse < Struct.new(
+      :folders,
+      :documents,
+      :marker)
+      include Aws::Structure
+    end
+
     # Describes the metadata of a user group.
     #
     # @!attribute [rw] id
@@ -2011,6 +2217,18 @@ module Aws::WorkDocs
     class GroupMetadata < Struct.new(
       :id,
       :name)
+      include Aws::Structure
+    end
+
+    # The user is undergoing transfer of ownership.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/IllegalUserStateException AWS API Documentation
+    #
+    class IllegalUserStateException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2090,6 +2308,68 @@ module Aws::WorkDocs
     class InitiateDocumentVersionUploadResponse < Struct.new(
       :metadata,
       :upload_metadata)
+      include Aws::Structure
+    end
+
+    # The pagination marker or limit fields are not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation is not allowed on the specified comment
+    # object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InvalidCommentOperationException AWS API Documentation
+    #
+    class InvalidCommentOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The password is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InvalidPasswordException AWS API Documentation
+    #
+    class InvalidPasswordException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum of 100,000 folders under the parent folder has been
+    # exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2179,6 +2459,18 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
+    # The specified document version is not in the INITIALIZED state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ProhibitedStateException AWS API Documentation
+    #
+    class ProhibitedStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemoveAllResourcePermissionsRequest
     #   data as a hash:
     #
@@ -2240,6 +2532,31 @@ module Aws::WorkDocs
       :resource_id,
       :principal_id,
       :principal_type)
+      include Aws::Structure
+    end
+
+    # The response is too large to return. The request must include a filter
+    # to reduce the size of the response.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RequestedEntityTooLargeException AWS API Documentation
+    #
+    class RequestedEntityTooLargeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource is already checked out.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ResourceAlreadyCheckedOutException AWS API Documentation
+    #
+    class ResourceAlreadyCheckedOutException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2318,6 +2635,18 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
+    # One or more of the dependencies is unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the recipient type and ID, if available.
     #
     # @note When making an API call, you may pass SharePrincipal
@@ -2356,6 +2685,10 @@ module Aws::WorkDocs
     #   The ID of the principal.
     #   @return [String]
     #
+    # @!attribute [rw] invitee_principal_id
+    #   The ID of the invited user.
+    #   @return [String]
+    #
     # @!attribute [rw] role
     #   The role.
     #   @return [String]
@@ -2376,10 +2709,35 @@ module Aws::WorkDocs
     #
     class ShareResult < Struct.new(
       :principal_id,
+      :invitee_principal_id,
       :role,
       :status,
       :share_id,
       :status_message)
+      include Aws::Structure
+    end
+
+    # The storage limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/StorageLimitExceededException AWS API Documentation
+    #
+    class StorageLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The storage limit will be exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/StorageLimitWillExceedException AWS API Documentation
+    #
+    class StorageLimitWillExceedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2429,6 +2787,44 @@ module Aws::WorkDocs
       :subscription_id,
       :end_point,
       :protocol)
+      include Aws::Structure
+    end
+
+    # The limit has been reached on the number of labels for the specified
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/TooManyLabelsException AWS API Documentation
+    #
+    class TooManyLabelsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You've reached the limit on the number of subscriptions for the
+    # WorkDocs instance.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/TooManySubscriptionsException AWS API Documentation
+    #
+    class TooManySubscriptionsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The caller does not have access to perform the action on the resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UnauthorizedResourceAccessException AWS API Documentation
+    #
+    class UnauthorizedResourceAccessException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

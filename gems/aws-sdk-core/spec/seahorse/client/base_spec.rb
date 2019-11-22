@@ -126,6 +126,13 @@ module Seahorse
           expect(client.operation_names).to eq([:operation_name])
         end
 
+        it 'does not include async operation names' do
+          op = Model::Operation.new
+          op.async = true
+          api.add_operation(:async_op, op)
+          expect(client.operation_names).to eq([:operation_name])
+        end
+
         it 'responds to each operation name' do
           client.operation_names.each do |operation_name|
             expect(client).to respond_to(operation_name)
@@ -289,6 +296,7 @@ module Seahorse
           expect(plugin).to receive(:add_options) do |config|
             config.add_option(:foo, 'bar')
             config.add_option(:endpoint, 'http://foo.com')
+            config.add_option(:regional_endpoint, false)
           end
           client_class.add_plugin(plugin)
           expect(client_class.new.config.foo).to eq('bar')

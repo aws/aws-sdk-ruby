@@ -88,6 +88,11 @@ module Aws::DAX
     #   The parameter group being used by nodes in the cluster.
     #   @return [Types::ParameterGroupStatus]
     #
+    # @!attribute [rw] sse_description
+    #   The description of the server-side encryption status on the
+    #   specified DAX cluster.
+    #   @return [Types::SSEDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -106,7 +111,8 @@ module Aws::DAX
       :subnet_group,
       :security_groups,
       :iam_role_arn,
-      :parameter_group)
+      :parameter_group,
+      :sse_description)
       include Aws::Structure
     end
 
@@ -131,6 +137,9 @@ module Aws::DAX
     #             value: "String",
     #           },
     #         ],
+    #         sse_specification: {
+    #           enabled: false, # required
+    #         },
     #       }
     #
     # @!attribute [rw] cluster_name
@@ -160,8 +169,11 @@ module Aws::DAX
     #   The number of nodes in the DAX cluster. A replication factor of 1
     #   will create a single-node cluster, without any read replicas. For
     #   additional fault tolerance, you can create a multiple node cluster
-    #   with one or more read replicas. To do this, set *ReplicationFactor*
-    #   to 2 or more.
+    #   with one or more read replicas. To do this, set `ReplicationFactor`
+    #   to a number between 3 (one primary and two read replicas) and 10
+    #   (one primary and nine read replicas). `If the AvailabilityZones`
+    #   parameter is provided, its length must equal the
+    #   `ReplicationFactor`.
     #
     #   <note markdown="1"> AWS recommends that you have at least two read replicas per cluster.
     #
@@ -169,10 +181,11 @@ module Aws::DAX
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zones
-    #   The Availability Zones (AZs) in which the cluster nodes will be
-    #   created. All nodes belonging to the cluster are placed in these
-    #   Availability Zones. Use this parameter if you want to distribute the
-    #   nodes across multiple AZs.
+    #   The Availability Zones (AZs) in which the cluster nodes will reside
+    #   after the cluster has been created or updated. If provided, the
+    #   length of this list must equal the `ReplicationFactor` parameter. If
+    #   you omit this parameter, DAX will spread the nodes across
+    #   Availability Zones for the highest availability.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_group_name
@@ -243,6 +256,11 @@ module Aws::DAX
     #   A set of tags to associate with the DAX cluster.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] sse_specification
+    #   Represents the settings used to enable server-side encryption on the
+    #   cluster.
+    #   @return [Types::SSESpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -257,7 +275,8 @@ module Aws::DAX
       :notification_topic_arn,
       :iam_role_arn,
       :parameter_group_name,
-      :tags)
+      :tags,
+      :sse_specification)
       include Aws::Structure
     end
 
@@ -943,6 +962,30 @@ module Aws::DAX
       include Aws::Structure
     end
 
+    # Two or more incompatible parameters were specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidParameterCombinationException AWS API Documentation
+    #
+    class InvalidParameterCombinationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value for a parameter is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsRequest
     #   data as a hash:
     #
@@ -1235,6 +1278,49 @@ module Aws::DAX
       include Aws::Structure
     end
 
+    # The description of the server-side encryption status on the specified
+    # DAX cluster.
+    #
+    # @!attribute [rw] status
+    #   The current state of server-side encryption:
+    #
+    #   * `ENABLING` - Server-side encryption is being enabled.
+    #
+    #   * `ENABLED` - Server-side encryption is enabled.
+    #
+    #   * `DISABLING` - Server-side encryption is being disabled.
+    #
+    #   * `DISABLED` - Server-side encryption is disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SSEDescription AWS API Documentation
+    #
+    class SSEDescription < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # Represents the settings used to enable server-side encryption.
+    #
+    # @note When making an API call, you may pass SSESpecification
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether server-side encryption is enabled (true) or
+    #   disabled (false) on the cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SSESpecification AWS API Documentation
+    #
+    class SSESpecification < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
     # An individual VPC security group and its status.
     #
     # @!attribute [rw] security_group_identifier
@@ -1262,7 +1348,7 @@ module Aws::DAX
     #   @return [String]
     #
     # @!attribute [rw] subnet_availability_zone
-    #   The Availability Zone (AZ) for subnet subnet.
+    #   The Availability Zone (AZ) for the subnet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Subnet AWS API Documentation

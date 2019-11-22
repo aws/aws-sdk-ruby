@@ -72,6 +72,21 @@
         {"shape":"InternalServerError"}
       ]
     },
+    "DeleteLifecyclePolicy":{
+      "name":"DeleteLifecyclePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteLifecyclePolicyInput"},
+      "output":{"shape":"DeleteLifecyclePolicyOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"PolicyNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "DescribeContainer":{
       "name":"DescribeContainer",
       "http":{
@@ -115,6 +130,21 @@
         {"shape":"InternalServerError"}
       ]
     },
+    "GetLifecyclePolicy":{
+      "name":"GetLifecyclePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetLifecyclePolicyInput"},
+      "output":{"shape":"GetLifecyclePolicyOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"PolicyNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "ListContainers":{
       "name":"ListContainers",
       "http":{
@@ -124,6 +154,20 @@
       "input":{"shape":"ListContainersInput"},
       "output":{"shape":"ListContainersOutput"},
       "errors":[
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceInput"},
+      "output":{"shape":"ListTagsForResourceOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
         {"shape":"InternalServerError"}
       ]
     },
@@ -154,6 +198,76 @@
         {"shape":"ContainerInUseException"},
         {"shape":"InternalServerError"}
       ]
+    },
+    "PutLifecyclePolicy":{
+      "name":"PutLifecyclePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutLifecyclePolicyInput"},
+      "output":{"shape":"PutLifecyclePolicyOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "StartAccessLogging":{
+      "name":"StartAccessLogging",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartAccessLoggingInput"},
+      "output":{"shape":"StartAccessLoggingOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "StopAccessLogging":{
+      "name":"StopAccessLogging",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopAccessLoggingInput"},
+      "output":{"shape":"StopAccessLoggingOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceInput"},
+      "output":{"shape":"TagResourceOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceInput"},
+      "output":{"shape":"UntagResourceOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
     }
   },
   "shapes":{
@@ -165,11 +279,15 @@
     },
     "AllowedMethods":{
       "type":"list",
-      "member":{"shape":"MethodName"}
+      "member":{"shape":"MethodName"},
+      "max":4,
+      "min":1
     },
     "AllowedOrigins":{
       "type":"list",
-      "member":{"shape":"Origin"}
+      "member":{"shape":"Origin"},
+      "max":100,
+      "min":1
     },
     "Container":{
       "type":"structure",
@@ -178,15 +296,17 @@
         "CreationTime":{"shape":"TimeStamp"},
         "ARN":{"shape":"ContainerARN"},
         "Name":{"shape":"ContainerName"},
-        "Status":{"shape":"ContainerStatus"}
+        "Status":{"shape":"ContainerStatus"},
+        "AccessLoggingEnabled":{"shape":"ContainerAccessLoggingEnabled"}
       }
     },
     "ContainerARN":{
       "type":"string",
       "max":1024,
       "min":1,
-      "pattern":"arn:aws:mediastore:[a-z]+-[a-z]+-\\d:\\d{12}:container/\\w{1,255}"
+      "pattern":"arn:aws:mediastore:[a-z]+-[a-z]+-\\d:\\d{12}:container/[\\w-]{1,255}"
     },
+    "ContainerAccessLoggingEnabled":{"type":"boolean"},
     "ContainerInUseException":{
       "type":"structure",
       "members":{
@@ -207,7 +327,7 @@
       "type":"string",
       "max":255,
       "min":1,
-      "pattern":"\\w+"
+      "pattern":"[\\w-]+"
     },
     "ContainerNotFoundException":{
       "type":"structure",
@@ -220,7 +340,7 @@
       "type":"string",
       "max":8192,
       "min":1,
-      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+      "pattern":"[\\x00-\\x7F]+"
     },
     "ContainerStatus":{
       "type":"string",
@@ -247,6 +367,10 @@
     },
     "CorsRule":{
       "type":"structure",
+      "required":[
+        "AllowedOrigins",
+        "AllowedHeaders"
+      ],
       "members":{
         "AllowedOrigins":{"shape":"AllowedOrigins"},
         "AllowedMethods":{"shape":"AllowedMethods"},
@@ -259,7 +383,8 @@
       "type":"structure",
       "required":["ContainerName"],
       "members":{
-        "ContainerName":{"shape":"ContainerName"}
+        "ContainerName":{"shape":"ContainerName"},
+        "Tags":{"shape":"TagList"}
       }
     },
     "CreateContainerOutput":{
@@ -305,6 +430,18 @@
       "members":{
       }
     },
+    "DeleteLifecyclePolicyInput":{
+      "type":"structure",
+      "required":["ContainerName"],
+      "members":{
+        "ContainerName":{"shape":"ContainerName"}
+      }
+    },
+    "DeleteLifecyclePolicyOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DescribeContainerInput":{
       "type":"structure",
       "members":{
@@ -320,7 +457,8 @@
     "Endpoint":{
       "type":"string",
       "max":255,
-      "min":1
+      "min":1,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
     },
     "ErrorMessage":{
       "type":"string",
@@ -362,6 +500,20 @@
         "CorsPolicy":{"shape":"CorsPolicy"}
       }
     },
+    "GetLifecyclePolicyInput":{
+      "type":"structure",
+      "required":["ContainerName"],
+      "members":{
+        "ContainerName":{"shape":"ContainerName"}
+      }
+    },
+    "GetLifecyclePolicyOutput":{
+      "type":"structure",
+      "required":["LifecyclePolicy"],
+      "members":{
+        "LifecyclePolicy":{"shape":"LifecyclePolicy"}
+      }
+    },
     "Header":{
       "type":"string",
       "max":8192,
@@ -375,6 +527,12 @@
       },
       "exception":true,
       "fault":true
+    },
+    "LifecyclePolicy":{
+      "type":"string",
+      "max":8192,
+      "min":0,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
     },
     "LimitExceededException":{
       "type":"structure",
@@ -398,6 +556,19 @@
         "NextToken":{"shape":"PaginationToken"}
       }
     },
+    "ListTagsForResourceInput":{
+      "type":"structure",
+      "required":["Resource"],
+      "members":{
+        "Resource":{"shape":"ContainerARN"}
+      }
+    },
+    "ListTagsForResourceOutput":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "MaxAgeSeconds":{
       "type":"integer",
       "max":2147483647,
@@ -414,11 +585,13 @@
     },
     "Origin":{
       "type":"string",
+      "max":2048,
+      "min":1,
       "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
     },
     "PaginationToken":{
       "type":"string",
-      "max":255,
+      "max":1024,
       "min":1,
       "pattern":"[0-9A-Za-z=/+]+"
     },
@@ -461,6 +634,104 @@
       "members":{
       }
     },
-    "TimeStamp":{"type":"timestamp"}
+    "PutLifecyclePolicyInput":{
+      "type":"structure",
+      "required":[
+        "ContainerName",
+        "LifecyclePolicy"
+      ],
+      "members":{
+        "ContainerName":{"shape":"ContainerName"},
+        "LifecyclePolicy":{"shape":"LifecyclePolicy"}
+      }
+    },
+    "PutLifecyclePolicyOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "StartAccessLoggingInput":{
+      "type":"structure",
+      "required":["ContainerName"],
+      "members":{
+        "ContainerName":{"shape":"ContainerName"}
+      }
+    },
+    "StartAccessLoggingOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "StopAccessLoggingInput":{
+      "type":"structure",
+      "required":["ContainerName"],
+      "members":{
+        "ContainerName":{"shape":"ContainerName"}
+      }
+    },
+    "StopAccessLoggingOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "Tag":{
+      "type":"structure",
+      "required":["Key"],
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
+    "TagResourceInput":{
+      "type":"structure",
+      "required":[
+        "Resource",
+        "Tags"
+      ],
+      "members":{
+        "Resource":{"shape":"ContainerARN"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "TagResourceOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
+    "TimeStamp":{"type":"timestamp"},
+    "UntagResourceInput":{
+      "type":"structure",
+      "required":[
+        "Resource",
+        "TagKeys"
+      ],
+      "members":{
+        "Resource":{"shape":"ContainerARN"},
+        "TagKeys":{"shape":"TagKeyList"}
+      }
+    },
+    "UntagResourceOutput":{
+      "type":"structure",
+      "members":{
+      }
+    }
   }
 }
