@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.404 (2019-11-22)
+------------------
+
 * Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
 
 * Feature - Aws::ApplicationAutoScaling - Updated the API for Application Auto Scaling.
