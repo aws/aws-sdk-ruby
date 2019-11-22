@@ -24,9 +24,12 @@ module Aws
             'us-west-2%2Fsts%2Faws4_request&'\
             'X-Amz-Date=20160101T112233Z&X-Amz-Expires=60&'\
             'X-Amz-SignedHeaders=host%3Bx-k8s-aws-id&'\
-            'X-Amz-Signature=b81c2e9bf689d104cd5c04fbdfea0fb7731be75f988c75e83dbf785988d227d2'
+            'X-Amz-Signature=b81c2e9bf689d104cd5c04fbdfea0fb7'\
+            '731be75f988c75e83dbf785988d227d2'
 
-          client = Aws::STS::Client.new(region: region, credentials: credentials)
+          client = Aws::STS::Client.new(
+            region: region, credentials: credentials
+          )
 
           pre = Presigner.new(client: client)
           params = {
