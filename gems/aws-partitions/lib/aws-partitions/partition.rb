@@ -1,7 +1,6 @@
 module Aws
   module Partitions
     class Partition
-
       # @option options [required, String] :name
       # @option options [required, Hash<String,Region>] :regions
       # @option options [required, Hash<String,Service>] :services
@@ -23,7 +22,7 @@ module Aws
           @regions[region_name]
         else
           msg = "invalid region name #{region_name.inspect}; valid region "
-          msg << "names include %s" % [@regions.keys.join(', ')]
+          msg << "names include #{@regions.keys.join(', ')}"
           raise ArgumentError, msg
         end
       end
@@ -31,6 +30,12 @@ module Aws
       # @return [Array<Region>]
       def regions
         @regions.values
+      end
+
+      # @param [String] region_name The name of the region, e.g. "us-east-1".
+      # @return [Boolean] true if the region is in the partition.
+      def region?(region_name)
+        @regions.key?(region_name)
       end
 
       # @param [String] service_name The service module name.
@@ -41,7 +46,7 @@ module Aws
           @services[service_name]
         else
           msg = "invalid service name #{service_name.inspect}; valid service "
-          msg << "names include %s" % [@services.keys.join(', ')]
+          msg << "names include #{@services.keys.join(', ')}"
           raise ArgumentError, msg
         end
       end
@@ -51,14 +56,19 @@ module Aws
         @services.values
       end
 
-      class << self
+      # @param [String] service_name The service module name.
+      # @return [Boolean] true if the service is in the partition.
+      def service?(service_name)
+        @services.key?(service_name)
+      end
 
+      class << self
         # @api private
         def build(partition)
           Partition.new(
             name: partition['partition'],
             regions: build_regions(partition),
-            services: build_services(partition),
+            services: build_services(partition)
           )
         end
 
@@ -67,28 +77,29 @@ module Aws
         # @param [Hash] partition
         # @return [Hash<String,Region>]
         def build_regions(partition)
-          partition['regions'].inject({}) do |regions, (region_name, region)|
-            unless region_name == "#{partition['partition']}-global"
-              regions[region_name] = Region.build(region_name, region, partition)
-            end
-            regions
+          partition['regions'].each_with_object({}) do
+            |(region_name, region), regions|
+            next if region_name == "#{partition['partition']}-global"
+
+            regions[region_name] = Region.build(
+              region_name, region, partition
+            )
           end
         end
 
         # @param [Hash] partition
         # @return [Hash<String,Service>]
         def build_services(partition)
-          Partitions.service_ids.inject({}) do |services, (svc_name, svc_id)|
-            if partition['services'].key?(svc_id)
-              svc_data = partition['services'][svc_id]
-              services[svc_name] = Service.build(svc_name, svc_data, partition)
-            else
-              services[svc_name] = Service.build(svc_name, {'endpoints' => {}}, partition)
-            end
-            services
+          Partitions.service_ids.each_with_object({}) do
+            |(service_name, service), services|
+            service_data = partition['services'].fetch(
+              service, 'endpoints' => {}
+            )
+            services[service_name] = Service.build(
+              service_name, service_data, partition
+            )
           end
         end
-
       end
     end
   end
