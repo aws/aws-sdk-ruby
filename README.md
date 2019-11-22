@@ -359,8 +359,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
-| AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
+| AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS License Manager                                   | Aws::LicenseManager                  | aws-sdk-licensemanager                  | 2018-08-01  |
 | AWS Marketplace Catalog Service                       | Aws::MarketplaceCatalog              | aws-sdk-marketplacecatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
@@ -418,6 +418,7 @@ to be backwards compatible.
 | Amazon Cognito Identity Provider                      | Aws::CognitoIdentityProvider         | aws-sdk-cognitoidentityprovider         | 2016-04-18  |
 | Amazon Cognito Sync                                   | Aws::CognitoSync                     | aws-sdk-cognitosync                     | 2014-06-30  |
 | Amazon Comprehend                                     | Aws::Comprehend                      | aws-sdk-comprehend                      | 2017-11-27  |
+| Amazon Connect Participant Service                    | Aws::ConnectParticipant              | aws-sdk-connectparticipant              | 2018-09-07  |
 | Amazon Connect Service                                | Aws::Connect                         | aws-sdk-connect                         | 2017-08-08  |
 | Amazon Data Lifecycle Manager                         | Aws::DLM                             | aws-sdk-dlm                             | 2018-01-12  |
 | Amazon DocumentDB with MongoDB compatibility          | Aws::DocDB                           | aws-sdk-docdb                           | 2014-10-31  |
@@ -443,8 +444,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Aws::Snowball                        | aws-sdk-snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Aws::Inspector                       | aws-sdk-inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Aws::Kinesis                         | aws-sdk-kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Aws::Firehose                        | aws-sdk-firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | Aws::KinesisVideo                    | aws-sdk-kinesisvideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | Aws::KinesisVideoArchivedMedia       | aws-sdk-kinesisvideoarchivedmedia       | 2017-09-30  |

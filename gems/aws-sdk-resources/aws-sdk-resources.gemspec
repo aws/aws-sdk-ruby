@@ -58,6 +58,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-comprehendmedical', '~> 1')
   spec.add_dependency('aws-sdk-configservice', '~> 1')
   spec.add_dependency('aws-sdk-connect', '~> 1')
+  spec.add_dependency('aws-sdk-connectparticipant', '~> 1')
   spec.add_dependency('aws-sdk-costexplorer', '~> 1')
   spec.add_dependency('aws-sdk-costandusagereportservice', '~> 1')
   spec.add_dependency('aws-sdk-dax', '~> 1')

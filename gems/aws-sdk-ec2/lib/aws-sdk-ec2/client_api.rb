@@ -43,6 +43,7 @@ module Aws::EC2
     AllocationStrategy = Shapes::StringShape.new(name: 'AllocationStrategy')
     AllowedPrincipal = Shapes::StructureShape.new(name: 'AllowedPrincipal')
     AllowedPrincipalSet = Shapes::ListShape.new(name: 'AllowedPrincipalSet')
+    AllowsMultipleInstanceTypes = Shapes::StringShape.new(name: 'AllowsMultipleInstanceTypes')
     ApplySecurityGroupsToClientVpnTargetNetworkRequest = Shapes::StructureShape.new(name: 'ApplySecurityGroupsToClientVpnTargetNetworkRequest')
     ApplySecurityGroupsToClientVpnTargetNetworkResult = Shapes::StructureShape.new(name: 'ApplySecurityGroupsToClientVpnTargetNetworkResult')
     ArchitectureValues = Shapes::StringShape.new(name: 'ArchitectureValues')
@@ -890,6 +891,10 @@ module Aws::EC2
     ImageTypeValues = Shapes::StringShape.new(name: 'ImageTypeValues')
     ImportClientVpnClientCertificateRevocationListRequest = Shapes::StructureShape.new(name: 'ImportClientVpnClientCertificateRevocationListRequest')
     ImportClientVpnClientCertificateRevocationListResult = Shapes::StructureShape.new(name: 'ImportClientVpnClientCertificateRevocationListResult')
+    ImportImageLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'ImportImageLicenseConfigurationRequest')
+    ImportImageLicenseConfigurationResponse = Shapes::StructureShape.new(name: 'ImportImageLicenseConfigurationResponse')
+    ImportImageLicenseSpecificationListRequest = Shapes::ListShape.new(name: 'ImportImageLicenseSpecificationListRequest')
+    ImportImageLicenseSpecificationListResponse = Shapes::ListShape.new(name: 'ImportImageLicenseSpecificationListResponse')
     ImportImageRequest = Shapes::StructureShape.new(name: 'ImportImageRequest')
     ImportImageResult = Shapes::StructureShape.new(name: 'ImportImageResult')
     ImportImageTask = Shapes::StructureShape.new(name: 'ImportImageTask')
@@ -991,7 +996,6 @@ module Aws::EC2
     Ipv6Range = Shapes::StructureShape.new(name: 'Ipv6Range')
     Ipv6RangeList = Shapes::ListShape.new(name: 'Ipv6RangeList')
     Ipv6SupportValue = Shapes::StringShape.new(name: 'Ipv6SupportValue')
-    KernelId = Shapes::StringShape.new(name: 'KernelId')
     KeyNameStringList = Shapes::ListShape.new(name: 'KeyNameStringList')
     KeyPair = Shapes::StructureShape.new(name: 'KeyPair')
     KeyPairInfo = Shapes::StructureShape.new(name: 'KeyPairInfo')
@@ -1279,7 +1283,6 @@ module Aws::EC2
     PurchaseSet = Shapes::ListShape.new(name: 'PurchaseSet')
     PurchasedScheduledInstanceSet = Shapes::ListShape.new(name: 'PurchasedScheduledInstanceSet')
     RIProductDescription = Shapes::StringShape.new(name: 'RIProductDescription')
-    RamdiskId = Shapes::StringShape.new(name: 'RamdiskId')
     ReasonCodesList = Shapes::ListShape.new(name: 'ReasonCodesList')
     RebootInstancesRequest = Shapes::StructureShape.new(name: 'RebootInstancesRequest')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
@@ -1791,7 +1794,8 @@ module Aws::EC2
     AllocateHostsRequest.add_member(:auto_placement, Shapes::ShapeRef.new(shape: AutoPlacement, location_name: "autoPlacement"))
     AllocateHostsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "availabilityZone"))
     AllocateHostsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
-    AllocateHostsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceType"))
+    AllocateHostsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    AllocateHostsRequest.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "InstanceFamily"))
     AllocateHostsRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "quantity"))
     AllocateHostsRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     AllocateHostsRequest.add_member(:host_recovery, Shapes::ShapeRef.new(shape: HostRecovery, location_name: "HostRecovery"))
@@ -2375,7 +2379,7 @@ module Aws::EC2
     CopyImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CopyImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CopyImageRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
-    CopyImageRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    CopyImageRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     CopyImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     CopyImageRequest.add_member(:source_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceImageId"))
     CopyImageRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceRegion"))
@@ -2566,7 +2570,7 @@ module Aws::EC2
     CreateImageRequest.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingRequestList, location_name: "blockDeviceMapping"))
     CreateImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    CreateImageRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
+    CreateImageRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceId"))
     CreateImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     CreateImageRequest.add_member(:no_reboot, Shapes::ShapeRef.new(shape: Boolean, location_name: "noReboot"))
     CreateImageRequest.struct_class = Types::CreateImageRequest
@@ -3277,7 +3281,7 @@ module Aws::EC2
     DeprovisionByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
     DeprovisionByoipCidrResult.struct_class = Types::DeprovisionByoipCidrResult
 
-    DeregisterImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    DeregisterImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
     DeregisterImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeregisterImageRequest.struct_class = Types::DeregisterImageRequest
 
@@ -5102,10 +5106,14 @@ module Aws::EC2
     Host.add_member(:release_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "releaseTime"))
     Host.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Host.add_member(:host_recovery, Shapes::ShapeRef.new(shape: HostRecovery, location_name: "hostRecovery"))
+    Host.add_member(:allows_multiple_instance_types, Shapes::ShapeRef.new(shape: AllowsMultipleInstanceTypes, location_name: "allowsMultipleInstanceTypes"))
+    Host.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    Host.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     Host.struct_class = Types::Host
 
     HostInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     HostInstance.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    HostInstance.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     HostInstance.struct_class = Types::HostInstance
 
     HostInstanceList.member = Shapes::ShapeRef.new(shape: HostInstance, location_name: "item")
@@ -5125,6 +5133,7 @@ module Aws::EC2
 
     HostProperties.add_member(:cores, Shapes::ShapeRef.new(shape: Integer, location_name: "cores"))
     HostProperties.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    HostProperties.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
     HostProperties.add_member(:sockets, Shapes::ShapeRef.new(shape: Integer, location_name: "sockets"))
     HostProperties.add_member(:total_v_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "totalVCpus"))
     HostProperties.struct_class = Types::HostProperties
@@ -5245,6 +5254,16 @@ module Aws::EC2
     ImportClientVpnClientCertificateRevocationListResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ImportClientVpnClientCertificateRevocationListResult.struct_class = Types::ImportClientVpnClientCertificateRevocationListResult
 
+    ImportImageLicenseConfigurationRequest.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn"))
+    ImportImageLicenseConfigurationRequest.struct_class = Types::ImportImageLicenseConfigurationRequest
+
+    ImportImageLicenseConfigurationResponse.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "licenseConfigurationArn"))
+    ImportImageLicenseConfigurationResponse.struct_class = Types::ImportImageLicenseConfigurationResponse
+
+    ImportImageLicenseSpecificationListRequest.member = Shapes::ShapeRef.new(shape: ImportImageLicenseConfigurationRequest, location_name: "item")
+
+    ImportImageLicenseSpecificationListResponse.member = Shapes::ShapeRef.new(shape: ImportImageLicenseConfigurationResponse, location_name: "item")
+
     ImportImageRequest.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "Architecture"))
     ImportImageRequest.add_member(:client_data, Shapes::ShapeRef.new(shape: ClientData, location_name: "ClientData"))
     ImportImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
@@ -5253,10 +5272,11 @@ module Aws::EC2
     ImportImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ImportImageRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
     ImportImageRequest.add_member(:hypervisor, Shapes::ShapeRef.new(shape: String, location_name: "Hypervisor"))
-    ImportImageRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    ImportImageRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     ImportImageRequest.add_member(:license_type, Shapes::ShapeRef.new(shape: String, location_name: "LicenseType"))
     ImportImageRequest.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "Platform"))
     ImportImageRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: String, location_name: "RoleName"))
+    ImportImageRequest.add_member(:license_specifications, Shapes::ShapeRef.new(shape: ImportImageLicenseSpecificationListRequest, location_name: "LicenseSpecifications"))
     ImportImageRequest.struct_class = Types::ImportImageRequest
 
     ImportImageResult.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
@@ -5272,6 +5292,7 @@ module Aws::EC2
     ImportImageResult.add_member(:snapshot_details, Shapes::ShapeRef.new(shape: SnapshotDetailList, location_name: "snapshotDetailSet"))
     ImportImageResult.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     ImportImageResult.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ImportImageResult.add_member(:license_specifications, Shapes::ShapeRef.new(shape: ImportImageLicenseSpecificationListResponse, location_name: "licenseSpecifications"))
     ImportImageResult.struct_class = Types::ImportImageResult
 
     ImportImageTask.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
@@ -5287,6 +5308,7 @@ module Aws::EC2
     ImportImageTask.add_member(:snapshot_details, Shapes::ShapeRef.new(shape: SnapshotDetailList, location_name: "snapshotDetailSet"))
     ImportImageTask.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     ImportImageTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ImportImageTask.add_member(:license_specifications, Shapes::ShapeRef.new(shape: ImportImageLicenseSpecificationListResponse, location_name: "licenseSpecifications"))
     ImportImageTask.struct_class = Types::ImportImageTask
 
     ImportImageTaskList.member = Shapes::ShapeRef.new(shape: ImportImageTask, location_name: "item")
@@ -6035,6 +6057,8 @@ module Aws::EC2
     ModifyHostsRequest.add_member(:auto_placement, Shapes::ShapeRef.new(shape: AutoPlacement, location_name: "autoPlacement"))
     ModifyHostsRequest.add_member(:host_ids, Shapes::ShapeRef.new(shape: RequestHostIdList, required: true, location_name: "hostId"))
     ModifyHostsRequest.add_member(:host_recovery, Shapes::ShapeRef.new(shape: HostRecovery, location_name: "HostRecovery"))
+    ModifyHostsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
+    ModifyHostsRequest.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "InstanceFamily"))
     ModifyHostsRequest.struct_class = Types::ModifyHostsRequest
 
     ModifyHostsResult.add_member(:successful, Shapes::ShapeRef.new(shape: ResponseHostIdList, location_name: "successful"))
@@ -6052,7 +6076,7 @@ module Aws::EC2
 
     ModifyImageAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: String, location_name: "Attribute"))
     ModifyImageAttributeRequest.add_member(:description, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "Description"))
-    ModifyImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    ModifyImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
     ModifyImageAttributeRequest.add_member(:launch_permission, Shapes::ShapeRef.new(shape: LaunchPermissionModifications, location_name: "LaunchPermission"))
     ModifyImageAttributeRequest.add_member(:operation_type, Shapes::ShapeRef.new(shape: OperationType, location_name: "OperationType"))
     ModifyImageAttributeRequest.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeStringList, location_name: "ProductCode"))
@@ -6818,10 +6842,10 @@ module Aws::EC2
     RegisterImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     RegisterImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     RegisterImageRequest.add_member(:ena_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSupport"))
-    RegisterImageRequest.add_member(:kernel_id, Shapes::ShapeRef.new(shape: KernelId, location_name: "kernelId"))
+    RegisterImageRequest.add_member(:kernel_id, Shapes::ShapeRef.new(shape: String, location_name: "kernelId"))
     RegisterImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     RegisterImageRequest.add_member(:billing_products, Shapes::ShapeRef.new(shape: BillingProductList, location_name: "BillingProduct"))
-    RegisterImageRequest.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: RamdiskId, location_name: "ramdiskId"))
+    RegisterImageRequest.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: String, location_name: "ramdiskId"))
     RegisterImageRequest.add_member(:root_device_name, Shapes::ShapeRef.new(shape: String, location_name: "rootDeviceName"))
     RegisterImageRequest.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: String, location_name: "sriovNetSupport"))
     RegisterImageRequest.add_member(:virtualization_type, Shapes::ShapeRef.new(shape: String, location_name: "virtualizationType"))
@@ -7139,7 +7163,7 @@ module Aws::EC2
     ResetFpgaImageAttributeResult.struct_class = Types::ResetFpgaImageAttributeResult
 
     ResetImageAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: ResetImageAttributeName, required: true, location_name: "Attribute"))
-    ResetImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    ResetImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
     ResetImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     ResetImageAttributeRequest.struct_class = Types::ResetImageAttributeRequest
 

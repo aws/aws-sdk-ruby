@@ -849,6 +849,7 @@ module Aws::SSM
     ResourceDataSyncAWSKMSKeyARN = Shapes::StringShape.new(name: 'ResourceDataSyncAWSKMSKeyARN')
     ResourceDataSyncAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceDataSyncAlreadyExistsException')
     ResourceDataSyncAwsOrganizationsSource = Shapes::StructureShape.new(name: 'ResourceDataSyncAwsOrganizationsSource')
+    ResourceDataSyncConflictException = Shapes::StructureShape.new(name: 'ResourceDataSyncConflictException')
     ResourceDataSyncCountExceededException = Shapes::StructureShape.new(name: 'ResourceDataSyncCountExceededException')
     ResourceDataSyncCreatedTime = Shapes::TimestampShape.new(name: 'ResourceDataSyncCreatedTime')
     ResourceDataSyncIncludeFutureRegions = Shapes::BooleanShape.new(name: 'ResourceDataSyncIncludeFutureRegions')
@@ -1008,6 +1009,8 @@ module Aws::SSM
     UpdateOpsItemResponse = Shapes::StructureShape.new(name: 'UpdateOpsItemResponse')
     UpdatePatchBaselineRequest = Shapes::StructureShape.new(name: 'UpdatePatchBaselineRequest')
     UpdatePatchBaselineResult = Shapes::StructureShape.new(name: 'UpdatePatchBaselineResult')
+    UpdateResourceDataSyncRequest = Shapes::StructureShape.new(name: 'UpdateResourceDataSyncRequest')
+    UpdateResourceDataSyncResult = Shapes::StructureShape.new(name: 'UpdateResourceDataSyncResult')
     UpdateServiceSettingRequest = Shapes::StructureShape.new(name: 'UpdateServiceSettingRequest')
     UpdateServiceSettingResult = Shapes::StructureShape.new(name: 'UpdateServiceSettingResult')
     Url = Shapes::StringShape.new(name: 'Url')
@@ -3422,6 +3425,9 @@ module Aws::SSM
     ResourceDataSyncAwsOrganizationsSource.add_member(:organizational_units, Shapes::ShapeRef.new(shape: ResourceDataSyncOrganizationalUnitList, location_name: "OrganizationalUnits"))
     ResourceDataSyncAwsOrganizationsSource.struct_class = Types::ResourceDataSyncAwsOrganizationsSource
 
+    ResourceDataSyncConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceDataSyncConflictException.struct_class = Types::ResourceDataSyncConflictException
+
     ResourceDataSyncCountExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceDataSyncCountExceededException.struct_class = Types::ResourceDataSyncCountExceededException
 
@@ -3899,6 +3905,13 @@ module Aws::SSM
     UpdatePatchBaselineResult.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     UpdatePatchBaselineResult.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
     UpdatePatchBaselineResult.struct_class = Types::UpdatePatchBaselineResult
+
+    UpdateResourceDataSyncRequest.add_member(:sync_name, Shapes::ShapeRef.new(shape: ResourceDataSyncName, required: true, location_name: "SyncName"))
+    UpdateResourceDataSyncRequest.add_member(:sync_type, Shapes::ShapeRef.new(shape: ResourceDataSyncType, required: true, location_name: "SyncType"))
+    UpdateResourceDataSyncRequest.add_member(:sync_source, Shapes::ShapeRef.new(shape: ResourceDataSyncSource, required: true, location_name: "SyncSource"))
+    UpdateResourceDataSyncRequest.struct_class = Types::UpdateResourceDataSyncRequest
+
+    UpdateResourceDataSyncResult.struct_class = Types::UpdateResourceDataSyncResult
 
     UpdateServiceSettingRequest.add_member(:setting_id, Shapes::ShapeRef.new(shape: ServiceSettingId, required: true, location_name: "SettingId"))
     UpdateServiceSettingRequest.add_member(:setting_value, Shapes::ShapeRef.new(shape: ServiceSettingValue, required: true, location_name: "SettingValue"))
@@ -5362,6 +5375,18 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: UpdatePatchBaselineRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePatchBaselineResult)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_resource_data_sync, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateResourceDataSync"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateResourceDataSyncRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateResourceDataSyncResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceDataSyncNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceDataSyncInvalidConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceDataSyncConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

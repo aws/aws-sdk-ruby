@@ -1706,6 +1706,58 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents a replica to be created.
+    #
+    # @note When making an API call, you may pass CreateReplicationGroupMemberAction
+    #   data as a hash:
+    #
+    #       {
+    #         region_name: "RegionName", # required
+    #         kms_master_key_id: "KMSMasterKeyId",
+    #         provisioned_throughput_override: {
+    #           read_capacity_units: 1,
+    #         },
+    #         global_secondary_indexes: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             provisioned_throughput_override: {
+    #               read_capacity_units: 1,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] region_name
+    #   The Region where the new replica will be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   The AWS KMS customer master key (CMK) that should be used for AWS
+    #   KMS encryption in the new replica. To specify a CMK, use its key ID,
+    #   Amazon Resource Name (ARN), alias name, or alias ARN. Note that you
+    #   should only provide this parameter if the key is different from the
+    #   default DynamoDB KMS master key alias/aws/dynamodb.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput_override
+    #   Replica-specific provisioned throughput. If not specified, uses the
+    #   source table's provisioned throughput settings.
+    #   @return [Types::ProvisionedThroughputOverride]
+    #
+    # @!attribute [rw] global_secondary_indexes
+    #   Replica-specific global secondary index settings.
+    #   @return [Array<Types::ReplicaGlobalSecondaryIndex>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateReplicationGroupMemberAction AWS API Documentation
+    #
+    class CreateReplicationGroupMemberAction < Struct.new(
+      :region_name,
+      :kms_master_key_id,
+      :provisioned_throughput_override,
+      :global_secondary_indexes)
+      include Aws::Structure
+    end
+
     # Represents the input of a `CreateTable` operation.
     #
     # @note When making an API call, you may pass CreateTableInput
@@ -1765,7 +1817,7 @@ module Aws::DynamoDB
     #           write_capacity_units: 1, # required
     #         },
     #         stream_specification: {
-    #           stream_enabled: false,
+    #           stream_enabled: false, # required
     #           stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #         },
     #         sse_specification: {
@@ -2442,6 +2494,26 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents a replica to be deleted.
+    #
+    # @note When making an API call, you may pass DeleteReplicationGroupMemberAction
+    #   data as a hash:
+    #
+    #       {
+    #         region_name: "RegionName", # required
+    #       }
+    #
+    # @!attribute [rw] region_name
+    #   The Region where the replica exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteReplicationGroupMemberAction AWS API Documentation
+    #
+    class DeleteReplicationGroupMemberAction < Struct.new(
+      :region_name)
+      include Aws::Structure
+    end
+
     # Represents a request to perform a `DeleteItem` operation on an item.
     #
     # @note When making an API call, you may pass DeleteRequest
@@ -2714,6 +2786,35 @@ module Aws::DynamoDB
     #
     class DescribeTableOutput < Struct.new(
       :table)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTableReplicaAutoScalingInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableReplicaAutoScalingInput AWS API Documentation
+    #
+    class DescribeTableReplicaAutoScalingInput < Struct.new(
+      :table_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_auto_scaling_description
+    #   Represents the auto scaling properties of the table.
+    #   @return [Types::TableAutoScalingDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableReplicaAutoScalingOutput AWS API Documentation
+    #
+    class DescribeTableReplicaAutoScalingOutput < Struct.new(
+      :table_auto_scaling_description)
       include Aws::Structure
     end
 
@@ -3347,6 +3448,48 @@ module Aws::DynamoDB
       :key_schema,
       :projection,
       :provisioned_throughput)
+      include Aws::Structure
+    end
+
+    # Represents the auto scaling settings of a global secondary index for a
+    # global table that will be modified.
+    #
+    # @note When making an API call, you may pass GlobalSecondaryIndexAutoScalingUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "IndexName",
+    #         provisioned_write_capacity_auto_scaling_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_write_capacity_auto_scaling_update
+    #   Represents the auto scaling settings to be modified for a global
+    #   table or global secondary index.
+    #   @return [Types::AutoScalingSettingsUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexAutoScalingUpdate AWS API Documentation
+    #
+    class GlobalSecondaryIndexAutoScalingUpdate < Struct.new(
+      :index_name,
+      :provisioned_write_capacity_auto_scaling_update)
       include Aws::Structure
     end
 
@@ -4678,6 +4821,28 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Replica-specific provisioned throughput settings. If not specified,
+    # uses the source table's provisioned throughput settings.
+    #
+    # @note When making an API call, you may pass ProvisionedThroughputOverride
+    #   data as a hash:
+    #
+    #       {
+    #         read_capacity_units: 1,
+    #       }
+    #
+    # @!attribute [rw] read_capacity_units
+    #   Replica-specific read capacity units. If not specified, uses the
+    #   source table's read capacity settings.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughputOverride AWS API Documentation
+    #
+    class ProvisionedThroughputOverride < Struct.new(
+      :read_capacity_units)
+      include Aws::Structure
+    end
+
     # Represents a request to perform a `PutItem` operation.
     #
     # @note When making an API call, you may pass Put
@@ -5629,16 +5794,297 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents the auto scaling settings of the replica.
+    #
+    # @!attribute [rw] region_name
+    #   The Region where the replica exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_secondary_indexes
+    #   Replica-specific global secondary index auto scaling settings.
+    #   @return [Array<Types::ReplicaGlobalSecondaryIndexAutoScalingDescription>]
+    #
+    # @!attribute [rw] replica_provisioned_read_capacity_auto_scaling_settings
+    #   Represents the auto scaling settings for a global table or global
+    #   secondary index.
+    #   @return [Types::AutoScalingSettingsDescription]
+    #
+    # @!attribute [rw] replica_provisioned_write_capacity_auto_scaling_settings
+    #   Represents the auto scaling settings for a global table or global
+    #   secondary index.
+    #   @return [Types::AutoScalingSettingsDescription]
+    #
+    # @!attribute [rw] replica_status
+    #   The current state of the replica:
+    #
+    #   * `CREATING` - The replica is being created.
+    #
+    #   * `UPDATING` - The replica is being updated.
+    #
+    #   * `DELETING` - The replica is being deleted.
+    #
+    #   * `ACTIVE` - The replica is ready for use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaAutoScalingDescription AWS API Documentation
+    #
+    class ReplicaAutoScalingDescription < Struct.new(
+      :region_name,
+      :global_secondary_indexes,
+      :replica_provisioned_read_capacity_auto_scaling_settings,
+      :replica_provisioned_write_capacity_auto_scaling_settings,
+      :replica_status)
+      include Aws::Structure
+    end
+
+    # Represents the auto scaling settings of a replica that will be
+    # modified.
+    #
+    # @note When making an API call, you may pass ReplicaAutoScalingUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         region_name: "RegionName", # required
+    #         replica_global_secondary_index_updates: [
+    #           {
+    #             index_name: "IndexName",
+    #             provisioned_read_capacity_auto_scaling_update: {
+    #               minimum_units: 1,
+    #               maximum_units: 1,
+    #               auto_scaling_disabled: false,
+    #               auto_scaling_role_arn: "AutoScalingRoleArn",
+    #               scaling_policy_update: {
+    #                 policy_name: "AutoScalingPolicyName",
+    #                 target_tracking_scaling_policy_configuration: { # required
+    #                   disable_scale_in: false,
+    #                   scale_in_cooldown: 1,
+    #                   scale_out_cooldown: 1,
+    #                   target_value: 1.0, # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         replica_provisioned_read_capacity_auto_scaling_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] region_name
+    #   The Region where the replica exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_global_secondary_index_updates
+    #   Represents the auto scaling settings of global secondary indexes
+    #   that will be modified.
+    #   @return [Array<Types::ReplicaGlobalSecondaryIndexAutoScalingUpdate>]
+    #
+    # @!attribute [rw] replica_provisioned_read_capacity_auto_scaling_update
+    #   Represents the auto scaling settings to be modified for a global
+    #   table or global secondary index.
+    #   @return [Types::AutoScalingSettingsUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaAutoScalingUpdate AWS API Documentation
+    #
+    class ReplicaAutoScalingUpdate < Struct.new(
+      :region_name,
+      :replica_global_secondary_index_updates,
+      :replica_provisioned_read_capacity_auto_scaling_update)
+      include Aws::Structure
+    end
+
     # Contains the details of the replica.
     #
     # @!attribute [rw] region_name
     #   The name of the Region.
     #   @return [String]
     #
+    # @!attribute [rw] replica_status
+    #   The current state of the replica:
+    #
+    #   * `CREATING` - The replica is being created.
+    #
+    #   * `UPDATING` - The replica is being updated.
+    #
+    #   * `DELETING` - The replica is being deleted.
+    #
+    #   * `ACTIVE` - The replica is ready for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_status_description
+    #   Detailed information about the replica status.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_status_percent_progress
+    #   Specifies the progress of a Create, Update, or Delete action on the
+    #   replica as a percentage.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   The AWS KMS customer master key (CMK) of the replica that will be
+    #   used for AWS KMS encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput_override
+    #   Replica-specific provisioned throughput. If not described, uses the
+    #   source table's provisioned throughput settings.
+    #   @return [Types::ProvisionedThroughputOverride]
+    #
+    # @!attribute [rw] global_secondary_indexes
+    #   Replica-specific global secondary index settings.
+    #   @return [Array<Types::ReplicaGlobalSecondaryIndexDescription>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaDescription AWS API Documentation
     #
     class ReplicaDescription < Struct.new(
-      :region_name)
+      :region_name,
+      :replica_status,
+      :replica_status_description,
+      :replica_status_percent_progress,
+      :kms_master_key_id,
+      :provisioned_throughput_override,
+      :global_secondary_indexes)
+      include Aws::Structure
+    end
+
+    # Represents the properties of a replica global secondary index.
+    #
+    # @note When making an API call, you may pass ReplicaGlobalSecondaryIndex
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "IndexName", # required
+    #         provisioned_throughput_override: {
+    #           read_capacity_units: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput_override
+    #   Replica table GSI-specific provisioned throughput. If not specified,
+    #   uses the source table GSI's read capacity settings.
+    #   @return [Types::ProvisionedThroughputOverride]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndex AWS API Documentation
+    #
+    class ReplicaGlobalSecondaryIndex < Struct.new(
+      :index_name,
+      :provisioned_throughput_override)
+      include Aws::Structure
+    end
+
+    # Represents the auto scaling configuration for a replica global
+    # secondary index.
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_status
+    #   The current state of the replica global secondary index:
+    #
+    #   * `CREATING` - The index is being created.
+    #
+    #   * `UPDATING` - The index is being updated.
+    #
+    #   * `DELETING` - The index is being deleted.
+    #
+    #   * `ACTIVE` - The index is ready for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_read_capacity_auto_scaling_settings
+    #   Represents the auto scaling settings for a global table or global
+    #   secondary index.
+    #   @return [Types::AutoScalingSettingsDescription]
+    #
+    # @!attribute [rw] provisioned_write_capacity_auto_scaling_settings
+    #   Represents the auto scaling settings for a global table or global
+    #   secondary index.
+    #   @return [Types::AutoScalingSettingsDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexAutoScalingDescription AWS API Documentation
+    #
+    class ReplicaGlobalSecondaryIndexAutoScalingDescription < Struct.new(
+      :index_name,
+      :index_status,
+      :provisioned_read_capacity_auto_scaling_settings,
+      :provisioned_write_capacity_auto_scaling_settings)
+      include Aws::Structure
+    end
+
+    # Represents the auto scaling settings of a global secondary index for a
+    # replica that will be modified.
+    #
+    # @note When making an API call, you may pass ReplicaGlobalSecondaryIndexAutoScalingUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "IndexName",
+    #         provisioned_read_capacity_auto_scaling_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_read_capacity_auto_scaling_update
+    #   Represents the auto scaling settings to be modified for a global
+    #   table or global secondary index.
+    #   @return [Types::AutoScalingSettingsUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexAutoScalingUpdate AWS API Documentation
+    #
+    class ReplicaGlobalSecondaryIndexAutoScalingUpdate < Struct.new(
+      :index_name,
+      :provisioned_read_capacity_auto_scaling_update)
+      include Aws::Structure
+    end
+
+    # Represents the properties of a replica global secondary index.
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput_override
+    #   If not described, uses the source table GSI's read capacity
+    #   settings.
+    #   @return [Types::ProvisionedThroughputOverride]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexDescription AWS API Documentation
+    #
+    class ReplicaGlobalSecondaryIndexDescription < Struct.new(
+      :index_name,
+      :provisioned_throughput_override)
       include Aws::Structure
     end
 
@@ -5942,6 +6388,79 @@ module Aws::DynamoDB
     #
     class ReplicaUpdate < Struct.new(
       :create,
+      :delete)
+      include Aws::Structure
+    end
+
+    # Represents one of the following:
+    #
+    # * A new replica to be added to an existing regional table or global
+    #   table. This request invokes the `CreateTableReplica` action in the
+    #   destination Region.
+    #
+    # * New parameters for an existing replica. This request invokes the
+    #   `UpdateTable` action in the destination Region.
+    #
+    # * An existing replica to be deleted. The request invokes the
+    #   `DeleteTableReplica` action in the destination Region, deleting the
+    #   replica and all if its items in the destination Region.
+    #
+    # @note When making an API call, you may pass ReplicationGroupUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         create: {
+    #           region_name: "RegionName", # required
+    #           kms_master_key_id: "KMSMasterKeyId",
+    #           provisioned_throughput_override: {
+    #             read_capacity_units: 1,
+    #           },
+    #           global_secondary_indexes: [
+    #             {
+    #               index_name: "IndexName", # required
+    #               provisioned_throughput_override: {
+    #                 read_capacity_units: 1,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         update: {
+    #           region_name: "RegionName", # required
+    #           kms_master_key_id: "KMSMasterKeyId",
+    #           provisioned_throughput_override: {
+    #             read_capacity_units: 1,
+    #           },
+    #           global_secondary_indexes: [
+    #             {
+    #               index_name: "IndexName", # required
+    #               provisioned_throughput_override: {
+    #                 read_capacity_units: 1,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         delete: {
+    #           region_name: "RegionName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] create
+    #   The parameters required for creating a replica for the table.
+    #   @return [Types::CreateReplicationGroupMemberAction]
+    #
+    # @!attribute [rw] update
+    #   The parameters required for updating a replica for the table.
+    #   @return [Types::UpdateReplicationGroupMemberAction]
+    #
+    # @!attribute [rw] delete
+    #   The parameters required for deleting a replica for the table.
+    #   @return [Types::DeleteReplicationGroupMemberAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicationGroupUpdate AWS API Documentation
+    #
+    class ReplicationGroupUpdate < Struct.new(
+      :create,
+      :update,
       :delete)
       include Aws::Structure
     end
@@ -6256,7 +6775,7 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_arn
-    #   The KMS customer master key (CMK) ARN used for the AWS KMS
+    #   The AWS KMS customer master key (CMK) ARN used for the AWS KMS
     #   encryption.
     #   @return [String]
     #
@@ -6299,10 +6818,10 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The KMS customer master key (CMK) that should be used for the AWS
-    #   KMS encryption. To specify a CMK, use its key ID, Amazon Resource
-    #   Name (ARN), alias name, or alias ARN. Note that you should only
-    #   provide this parameter if the key is different from the default
+    #   The AWS KMS customer master key (CMK) that should be used for the
+    #   AWS KMS encryption. To specify a CMK, use its key ID, Amazon
+    #   Resource Name (ARN), alias name, or alias ARN. Note that you should
+    #   only provide this parameter if the key is different from the default
     #   DynamoDB customer master key alias/aws/dynamodb.
     #   @return [String]
     #
@@ -6870,7 +7389,7 @@ module Aws::DynamoDB
     #   data as a hash:
     #
     #       {
-    #         stream_enabled: false,
+    #         stream_enabled: false, # required
     #         stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #       }
     #
@@ -6914,6 +7433,37 @@ module Aws::DynamoDB
     #
     class TableAlreadyExistsException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # Represents the auto scaling configuration for a global table.
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_status
+    #   The current state of the table:
+    #
+    #   * `CREATING` - The table is being created.
+    #
+    #   * `UPDATING` - The table is being updated.
+    #
+    #   * `DELETING` - The table is being deleted.
+    #
+    #   * `ACTIVE` - The table is ready for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] replicas
+    #   Represents replicas of the global table.
+    #   @return [Array<Types::ReplicaAutoScalingDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableAutoScalingDescription AWS API Documentation
+    #
+    class TableAutoScalingDescription < Struct.new(
+      :table_name,
+      :table_status,
+      :replicas)
       include Aws::Structure
     end
 
@@ -7168,6 +7718,19 @@ module Aws::DynamoDB
     #   stream for this table.
     #   @return [String]
     #
+    # @!attribute [rw] global_table_version
+    #   Represents the version of [global tables][1] in use, if the table is
+    #   replicated across AWS Regions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
+    #   @return [String]
+    #
+    # @!attribute [rw] replicas
+    #   Represents replicas of the table.
+    #   @return [Array<Types::ReplicaDescription>]
+    #
     # @!attribute [rw] restore_summary
     #   Contains details for the restore.
     #   @return [Types::RestoreSummary]
@@ -7196,6 +7759,8 @@ module Aws::DynamoDB
       :stream_specification,
       :latest_stream_label,
       :latest_stream_arn,
+      :global_table_version,
+      :replicas,
       :restore_summary,
       :sse_description)
       include Aws::Structure
@@ -8688,6 +9253,58 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents a replica to be modified.
+    #
+    # @note When making an API call, you may pass UpdateReplicationGroupMemberAction
+    #   data as a hash:
+    #
+    #       {
+    #         region_name: "RegionName", # required
+    #         kms_master_key_id: "KMSMasterKeyId",
+    #         provisioned_throughput_override: {
+    #           read_capacity_units: 1,
+    #         },
+    #         global_secondary_indexes: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             provisioned_throughput_override: {
+    #               read_capacity_units: 1,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] region_name
+    #   The Region where the replica exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   The AWS KMS customer master key (CMK) of the replica that should be
+    #   used for AWS KMS encryption. To specify a CMK, use its key ID,
+    #   Amazon Resource Name (ARN), alias name, or alias ARN. Note that you
+    #   should only provide this parameter if the key is different from the
+    #   default DynamoDB KMS master key alias/aws/dynamodb.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput_override
+    #   Replica-specific provisioned throughput. If not specified, uses the
+    #   source table's provisioned throughput settings.
+    #   @return [Types::ProvisionedThroughputOverride]
+    #
+    # @!attribute [rw] global_secondary_indexes
+    #   Replica-specific global secondary index settings.
+    #   @return [Array<Types::ReplicaGlobalSecondaryIndex>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateReplicationGroupMemberAction AWS API Documentation
+    #
+    class UpdateReplicationGroupMemberAction < Struct.new(
+      :region_name,
+      :kms_master_key_id,
+      :provisioned_throughput_override,
+      :global_secondary_indexes)
+      include Aws::Structure
+    end
+
     # Represents the input of an `UpdateTable` operation.
     #
     # @note When making an API call, you may pass UpdateTableInput
@@ -8738,7 +9355,7 @@ module Aws::DynamoDB
     #           },
     #         ],
     #         stream_specification: {
-    #           stream_enabled: false,
+    #           stream_enabled: false, # required
     #           stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #         },
     #         sse_specification: {
@@ -8746,6 +9363,43 @@ module Aws::DynamoDB
     #           sse_type: "AES256", # accepts AES256, KMS
     #           kms_master_key_id: "KMSMasterKeyId",
     #         },
+    #         replica_updates: [
+    #           {
+    #             create: {
+    #               region_name: "RegionName", # required
+    #               kms_master_key_id: "KMSMasterKeyId",
+    #               provisioned_throughput_override: {
+    #                 read_capacity_units: 1,
+    #               },
+    #               global_secondary_indexes: [
+    #                 {
+    #                   index_name: "IndexName", # required
+    #                   provisioned_throughput_override: {
+    #                     read_capacity_units: 1,
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             update: {
+    #               region_name: "RegionName", # required
+    #               kms_master_key_id: "KMSMasterKeyId",
+    #               provisioned_throughput_override: {
+    #                 read_capacity_units: 1,
+    #               },
+    #               global_secondary_indexes: [
+    #                 {
+    #                   index_name: "IndexName", # required
+    #                   provisioned_throughput_override: {
+    #                     read_capacity_units: 1,
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             delete: {
+    #               region_name: "RegionName", # required
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] attribute_definitions
@@ -8822,6 +9476,20 @@ module Aws::DynamoDB
     #   The new server-side encryption settings for the specified table.
     #   @return [Types::SSESpecification]
     #
+    # @!attribute [rw] replica_updates
+    #   A list of replica update actions (create, delete, or update) for the
+    #   table.
+    #
+    #   <note markdown="1"> This property only applies to [Version 2019.11.21][1] of global
+    #   tables.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    #   @return [Array<Types::ReplicationGroupUpdate>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableInput AWS API Documentation
     #
     class UpdateTableInput < Struct.new(
@@ -8831,7 +9499,8 @@ module Aws::DynamoDB
       :provisioned_throughput,
       :global_secondary_index_updates,
       :stream_specification,
-      :sse_specification)
+      :sse_specification,
+      :replica_updates)
       include Aws::Structure
     end
 
@@ -8845,6 +9514,129 @@ module Aws::DynamoDB
     #
     class UpdateTableOutput < Struct.new(
       :table_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateTableReplicaAutoScalingInput
+    #   data as a hash:
+    #
+    #       {
+    #         global_secondary_index_updates: [
+    #           {
+    #             index_name: "IndexName",
+    #             provisioned_write_capacity_auto_scaling_update: {
+    #               minimum_units: 1,
+    #               maximum_units: 1,
+    #               auto_scaling_disabled: false,
+    #               auto_scaling_role_arn: "AutoScalingRoleArn",
+    #               scaling_policy_update: {
+    #                 policy_name: "AutoScalingPolicyName",
+    #                 target_tracking_scaling_policy_configuration: { # required
+    #                   disable_scale_in: false,
+    #                   scale_in_cooldown: 1,
+    #                   scale_out_cooldown: 1,
+    #                   target_value: 1.0, # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         table_name: "TableName", # required
+    #         provisioned_write_capacity_auto_scaling_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
+    #         replica_updates: [
+    #           {
+    #             region_name: "RegionName", # required
+    #             replica_global_secondary_index_updates: [
+    #               {
+    #                 index_name: "IndexName",
+    #                 provisioned_read_capacity_auto_scaling_update: {
+    #                   minimum_units: 1,
+    #                   maximum_units: 1,
+    #                   auto_scaling_disabled: false,
+    #                   auto_scaling_role_arn: "AutoScalingRoleArn",
+    #                   scaling_policy_update: {
+    #                     policy_name: "AutoScalingPolicyName",
+    #                     target_tracking_scaling_policy_configuration: { # required
+    #                       disable_scale_in: false,
+    #                       scale_in_cooldown: 1,
+    #                       scale_out_cooldown: 1,
+    #                       target_value: 1.0, # required
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             replica_provisioned_read_capacity_auto_scaling_update: {
+    #               minimum_units: 1,
+    #               maximum_units: 1,
+    #               auto_scaling_disabled: false,
+    #               auto_scaling_role_arn: "AutoScalingRoleArn",
+    #               scaling_policy_update: {
+    #                 policy_name: "AutoScalingPolicyName",
+    #                 target_tracking_scaling_policy_configuration: { # required
+    #                   disable_scale_in: false,
+    #                   scale_in_cooldown: 1,
+    #                   scale_out_cooldown: 1,
+    #                   target_value: 1.0, # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] global_secondary_index_updates
+    #   Represents the auto scaling settings of the global secondary indexes
+    #   of the replica to be updated.
+    #   @return [Array<Types::GlobalSecondaryIndexAutoScalingUpdate>]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the global table to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_write_capacity_auto_scaling_update
+    #   Represents the auto scaling settings to be modified for a global
+    #   table or global secondary index.
+    #   @return [Types::AutoScalingSettingsUpdate]
+    #
+    # @!attribute [rw] replica_updates
+    #   Represents the auto scaling settings of replicas of the table that
+    #   will be modified.
+    #   @return [Array<Types::ReplicaAutoScalingUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableReplicaAutoScalingInput AWS API Documentation
+    #
+    class UpdateTableReplicaAutoScalingInput < Struct.new(
+      :global_secondary_index_updates,
+      :table_name,
+      :provisioned_write_capacity_auto_scaling_update,
+      :replica_updates)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_auto_scaling_description
+    #   Returns information about the auto scaling settings of a table with
+    #   replicas.
+    #   @return [Types::TableAutoScalingDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableReplicaAutoScalingOutput AWS API Documentation
+    #
+    class UpdateTableReplicaAutoScalingOutput < Struct.new(
+      :table_auto_scaling_description)
       include Aws::Structure
     end
 

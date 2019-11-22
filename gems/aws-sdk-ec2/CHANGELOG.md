@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2019-11-21)
+------------------
+
+* Feature - This release adds support for attaching AWS License Manager Configurations to Amazon Machine Image (AMI) using ImportImage API; and adds support for running different instance sizes on EC2 Dedicated Hosts
+
 1.118.0 (2019-11-20)
 ------------------
 

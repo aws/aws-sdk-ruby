@@ -54,6 +54,9 @@ module Aws::Lex
     PutSessionResponse = Shapes::StructureShape.new(name: 'PutSessionResponse')
     RequestTimeoutException = Shapes::StructureShape.new(name: 'RequestTimeoutException')
     ResponseCard = Shapes::StructureShape.new(name: 'ResponseCard')
+    SentimentLabel = Shapes::StringShape.new(name: 'SentimentLabel')
+    SentimentResponse = Shapes::StructureShape.new(name: 'SentimentResponse')
+    SentimentScore = Shapes::StringShape.new(name: 'SentimentScore')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
     StringUrlWithLength = Shapes::StringShape.new(name: 'StringUrlWithLength')
@@ -162,6 +165,7 @@ module Aws::Lex
     PostContentResponse.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, location: "header", location_name: "x-amz-lex-intent-name"))
     PostContentResponse.add_member(:slots, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-slots", metadata: {"jsonvalue"=>true}))
     PostContentResponse.add_member(:session_attributes, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-attributes", metadata: {"jsonvalue"=>true}))
+    PostContentResponse.add_member(:sentiment_response, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-sentiment"))
     PostContentResponse.add_member(:message, Shapes::ShapeRef.new(shape: Text, location: "header", location_name: "x-amz-lex-message"))
     PostContentResponse.add_member(:message_format, Shapes::ShapeRef.new(shape: MessageFormatType, location: "header", location_name: "x-amz-lex-message-format"))
     PostContentResponse.add_member(:dialog_state, Shapes::ShapeRef.new(shape: DialogState, location: "header", location_name: "x-amz-lex-dialog-state"))
@@ -184,6 +188,7 @@ module Aws::Lex
     PostTextResponse.add_member(:slots, Shapes::ShapeRef.new(shape: StringMap, location_name: "slots"))
     PostTextResponse.add_member(:session_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "sessionAttributes"))
     PostTextResponse.add_member(:message, Shapes::ShapeRef.new(shape: Text, location_name: "message"))
+    PostTextResponse.add_member(:sentiment_response, Shapes::ShapeRef.new(shape: SentimentResponse, location_name: "sentimentResponse"))
     PostTextResponse.add_member(:message_format, Shapes::ShapeRef.new(shape: MessageFormatType, location_name: "messageFormat"))
     PostTextResponse.add_member(:dialog_state, Shapes::ShapeRef.new(shape: DialogState, location_name: "dialogState"))
     PostTextResponse.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: String, location_name: "slotToElicit"))
@@ -220,6 +225,10 @@ module Aws::Lex
     ResponseCard.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "contentType"))
     ResponseCard.add_member(:generic_attachments, Shapes::ShapeRef.new(shape: genericAttachmentList, location_name: "genericAttachments"))
     ResponseCard.struct_class = Types::ResponseCard
+
+    SentimentResponse.add_member(:sentiment_label, Shapes::ShapeRef.new(shape: SentimentLabel, location_name: "sentimentLabel"))
+    SentimentResponse.add_member(:sentiment_score, Shapes::ShapeRef.new(shape: SentimentScore, location_name: "sentimentScore"))
+    SentimentResponse.struct_class = Types::SentimentResponse
 
     StringMap.key = Shapes::ShapeRef.new(shape: String)
     StringMap.value = Shapes::ShapeRef.new(shape: String)

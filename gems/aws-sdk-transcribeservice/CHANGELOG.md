@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2019-11-21)
+------------------
+
+* Feature - With this release, Amazon Transcribe now supports transcriptions from audio sources in Hebrew (he-IL), Swiss German (de-CH), Japanese (ja-JP), Turkish (tr-TR), Arabic-Gulf (ar-AE), Malay (ms-MY), Telugu (te-IN)
+
 1.32.0 (2019-11-20)
 ------------------
 

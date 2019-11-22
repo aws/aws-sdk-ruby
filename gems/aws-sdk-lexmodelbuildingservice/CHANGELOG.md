@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2019-11-21)
+------------------
+
+* Feature - Amazon Lex now supports Sentiment Analysis
+
 1.22.0 (2019-10-23)
 ------------------
 

@@ -257,6 +257,7 @@ module Aws::LexModelBuildingService
     CreateBotVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateBotVersionResponse.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     CreateBotVersionResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
+    CreateBotVersionResponse.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     CreateBotVersionResponse.struct_class = Types::CreateBotVersionResponse
 
     CreateIntentVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
@@ -411,6 +412,7 @@ module Aws::LexModelBuildingService
     GetBotResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     GetBotResponse.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetBotResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
+    GetBotResponse.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     GetBotResponse.struct_class = Types::GetBotResponse
 
     GetBotVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "name"))
@@ -641,6 +643,7 @@ module Aws::LexModelBuildingService
     PutBotRequest.add_member(:process_behavior, Shapes::ShapeRef.new(shape: ProcessBehavior, location_name: "processBehavior"))
     PutBotRequest.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, required: true, location_name: "locale"))
     PutBotRequest.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "childDirected"))
+    PutBotRequest.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     PutBotRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutBotRequest.struct_class = Types::PutBotRequest
 
@@ -660,6 +663,7 @@ module Aws::LexModelBuildingService
     PutBotResponse.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     PutBotResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
     PutBotResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutBotResponse.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     PutBotResponse.struct_class = Types::PutBotResponse
 
     PutIntentRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))

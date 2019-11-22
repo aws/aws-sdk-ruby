@@ -265,6 +265,7 @@ module Aws
             'ComprehendMedical' => 'comprehendmedical',
             'ConfigService' => 'config',
             'Connect' => 'connect',
+            'ConnectParticipant' => 'participant.connect',
             'CostExplorer' => 'ce',
             'CostandUsageReportService' => 'cur',
             'DAX' => 'dax',

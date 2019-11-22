@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-11-21)
+------------------
+
+* Feature - AppSync: AWS AppSync now supports the ability to add, configure, and maintain caching for your AWS AppSync GraphQL API.
+
 1.21.0 (2019-10-23)
 ------------------
 

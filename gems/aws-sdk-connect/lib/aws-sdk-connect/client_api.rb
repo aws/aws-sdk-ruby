@@ -22,6 +22,9 @@ module Aws::Connect
     AutoAccept = Shapes::BooleanShape.new(name: 'AutoAccept')
     Channel = Shapes::StringShape.new(name: 'Channel')
     Channels = Shapes::ListShape.new(name: 'Channels')
+    ChatContent = Shapes::StringShape.new(name: 'ChatContent')
+    ChatContentType = Shapes::StringShape.new(name: 'ChatContentType')
+    ChatMessage = Shapes::StructureShape.new(name: 'ChatMessage')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Comparison = Shapes::StringShape.new(name: 'Comparison')
     ContactFlowId = Shapes::StringShape.new(name: 'ContactFlowId')
@@ -52,6 +55,7 @@ module Aws::Connect
     DestinationNotAllowedException = Shapes::StructureShape.new(name: 'DestinationNotAllowedException')
     Dimensions = Shapes::StructureShape.new(name: 'Dimensions')
     DirectoryUserId = Shapes::StringShape.new(name: 'DirectoryUserId')
+    DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     DuplicateResourceException = Shapes::StructureShape.new(name: 'DuplicateResourceException')
     Email = Shapes::StringShape.new(name: 'Email')
     Filters = Shapes::StructureShape.new(name: 'Filters')
@@ -114,6 +118,9 @@ module Aws::Connect
     Message = Shapes::StringShape.new(name: 'Message')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OutboundContactNotPermittedException = Shapes::StructureShape.new(name: 'OutboundContactNotPermittedException')
+    ParticipantDetails = Shapes::StructureShape.new(name: 'ParticipantDetails')
+    ParticipantId = Shapes::StringShape.new(name: 'ParticipantId')
+    ParticipantToken = Shapes::StringShape.new(name: 'ParticipantToken')
     Password = Shapes::StringShape.new(name: 'Password')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
     PhoneNumberCountryCode = Shapes::StringShape.new(name: 'PhoneNumberCountryCode')
@@ -143,6 +150,8 @@ module Aws::Connect
     SecurityProfileSummary = Shapes::StructureShape.new(name: 'SecurityProfileSummary')
     SecurityProfileSummaryList = Shapes::ListShape.new(name: 'SecurityProfileSummaryList')
     SecurityToken = Shapes::StringShape.new(name: 'SecurityToken')
+    StartChatContactRequest = Shapes::StructureShape.new(name: 'StartChatContactRequest')
+    StartChatContactResponse = Shapes::StructureShape.new(name: 'StartChatContactResponse')
     StartOutboundVoiceContactRequest = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactRequest')
     StartOutboundVoiceContactResponse = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactResponse')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
@@ -179,6 +188,10 @@ module Aws::Connect
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
+
+    ChatMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
+    ChatMessage.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, required: true, location_name: "Content"))
+    ChatMessage.struct_class = Types::ChatMessage
 
     ContactFlowSummary.add_member(:id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "Id"))
     ContactFlowSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -470,6 +483,9 @@ module Aws::Connect
     OutboundContactNotPermittedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     OutboundContactNotPermittedException.struct_class = Types::OutboundContactNotPermittedException
 
+    ParticipantDetails.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "DisplayName"))
+    ParticipantDetails.struct_class = Types::ParticipantDetails
+
     PhoneNumberCountryCodes.member = Shapes::ShapeRef.new(shape: PhoneNumberCountryCode)
 
     PhoneNumberSummary.add_member(:id, Shapes::ShapeRef.new(shape: PhoneNumberId, location_name: "Id"))
@@ -517,6 +533,19 @@ module Aws::Connect
     SecurityProfileSummary.struct_class = Types::SecurityProfileSummary
 
     SecurityProfileSummaryList.member = Shapes::ShapeRef.new(shape: SecurityProfileSummary)
+
+    StartChatContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    StartChatContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
+    StartChatContactRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    StartChatContactRequest.add_member(:participant_details, Shapes::ShapeRef.new(shape: ParticipantDetails, required: true, location_name: "ParticipantDetails"))
+    StartChatContactRequest.add_member(:initial_message, Shapes::ShapeRef.new(shape: ChatMessage, location_name: "InitialMessage"))
+    StartChatContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartChatContactRequest.struct_class = Types::StartChatContactRequest
+
+    StartChatContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
+    StartChatContactResponse.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId"))
+    StartChatContactResponse.add_member(:participant_token, Shapes::ShapeRef.new(shape: ParticipantToken, location_name: "ParticipantToken"))
+    StartChatContactResponse.struct_class = Types::StartChatContactResponse
 
     StartOutboundVoiceContactRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
     StartOutboundVoiceContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
@@ -933,6 +962,19 @@ module Aws::Connect
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:start_chat_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartChatContact"
+        o.http_method = "PUT"
+        o.http_request_uri = "/contact/chat"
+        o.input = Shapes::ShapeRef.new(shape: StartChatContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartChatContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:start_outbound_voice_contact, Seahorse::Model::Operation.new.tap do |o|

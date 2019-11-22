@@ -2724,6 +2724,7 @@ module Aws::Glue
     #           },
     #         },
     #         role: "RoleString", # required
+    #         glue_version: "GlueVersionString",
     #         max_capacity: 1.0,
     #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
     #         number_of_workers: 1,
@@ -2751,10 +2752,33 @@ module Aws::Glue
     #
     # @!attribute [rw] role
     #   The name or Amazon Resource Name (ARN) of the IAM role with the
-    #   required permissions. Ensure that this role has permission to your
-    #   Amazon Simple Storage Service (Amazon S3) sources, targets,
-    #   temporary directory, scripts, and any libraries that are used by the
-    #   task run for this transform.
+    #   required permissions. The required permissions include both AWS Glue
+    #   service role permissions to AWS Glue resources, and Amazon S3
+    #   permissions required by the transform.
+    #
+    #   * This role needs AWS Glue service role permissions to allow access
+    #     to resources in AWS Glue. See [Attach a Policy to IAM Users That
+    #     Access AWS Glue][1].
+    #
+    #   * This role needs permission to your Amazon Simple Storage Service
+    #     (Amazon S3) sources, targets, temporary directory, scripts, and
+    #     any libraries used by the task run for this transform.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html
+    #   @return [String]
+    #
+    # @!attribute [rw] glue_version
+    #   This value determines which version of AWS Glue this machine
+    #   learning transform is compatible with. Glue 1.0 is recommended for
+    #   most customers. If the value is not set, the Glue compatibility
+    #   defaults to Glue 0.9. For more information, see [AWS Glue
+    #   Versions][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
@@ -2764,6 +2788,23 @@ module Aws::Glue
     #   processing power that consists of 4 vCPUs of compute capacity and 16
     #   GB of memory. For more information, see the [AWS Glue pricing
     #   page][1].
+    #
+    #   `MaxCapacity` is a mutually exclusive option with `NumberOfWorkers`
+    #   and `WorkerType`.
+    #
+    #   * If either `NumberOfWorkers` or `WorkerType` is set, then
+    #     `MaxCapacity` cannot be set.
+    #
+    #   * If `MaxCapacity` is set then neither `NumberOfWorkers` or
+    #     `WorkerType` can be set.
+    #
+    #   * If `WorkerType` is set, then `NumberOfWorkers` is required (and
+    #     vice versa).
+    #
+    #   * `MaxCapacity` and `NumberOfWorkers` must both be at least 1.
+    #
+    #   When the `WorkerType` field is set to a value other than `Standard`,
+    #   the `MaxCapacity` field is set automatically and becomes read-only.
     #
     #   When the `WorkerType` field is set to a value other than `Standard`,
     #   the `MaxCapacity` field is set automatically and becomes read-only.
@@ -2785,11 +2826,28 @@ module Aws::Glue
     #
     #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
     #     memory and a 128GB disk, and 1 executor per worker.
+    #
+    #   `MaxCapacity` is a mutually exclusive option with `NumberOfWorkers`
+    #   and `WorkerType`.
+    #
+    #   * If either `NumberOfWorkers` or `WorkerType` is set, then
+    #     `MaxCapacity` cannot be set.
+    #
+    #   * If `MaxCapacity` is set then neither `NumberOfWorkers` or
+    #     `WorkerType` can be set.
+    #
+    #   * If `WorkerType` is set, then `NumberOfWorkers` is required (and
+    #     vice versa).
+    #
+    #   * `MaxCapacity` and `NumberOfWorkers` must both be at least 1.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when this task runs.
+    #
+    #   If `WorkerType` is set, then `NumberOfWorkers` is required (and vice
+    #   versa).
     #   @return [Integer]
     #
     # @!attribute [rw] timeout
@@ -2812,6 +2870,7 @@ module Aws::Glue
       :input_record_tables,
       :parameters,
       :role,
+      :glue_version,
       :max_capacity,
       :worker_type,
       :number_of_workers,
@@ -5689,6 +5748,18 @@ module Aws::Glue
     #   required permissions.
     #   @return [String]
     #
+    # @!attribute [rw] glue_version
+    #   This value determines which version of AWS Glue this machine
+    #   learning transform is compatible with. Glue 1.0 is recommended for
+    #   most customers. If the value is not set, the Glue compatibility
+    #   defaults to Glue 0.9. For more information, see [AWS Glue
+    #   Versions][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
+    #   @return [String]
+    #
     # @!attribute [rw] max_capacity
     #   The number of AWS Glue data processing units (DPUs) that are
     #   allocated to task runs for this transform. You can allocate from 2
@@ -5751,6 +5822,7 @@ module Aws::Glue
       :label_count,
       :schema,
       :role,
+      :glue_version,
       :max_capacity,
       :worker_type,
       :number_of_workers,
@@ -5769,6 +5841,7 @@ module Aws::Glue
     #           name: "NameString",
     #           transform_type: "FIND_MATCHES", # accepts FIND_MATCHES
     #           status: "NOT_READY", # accepts NOT_READY, READY, DELETING
+    #           glue_version: "GlueVersionString",
     #           created_before: Time.now,
     #           created_after: Time.now,
     #           last_modified_before: Time.now,
@@ -8304,10 +8377,33 @@ module Aws::Glue
     #
     # @!attribute [rw] role
     #   The name or Amazon Resource Name (ARN) of the IAM role with the
-    #   required permissions. This role needs permission to your Amazon
-    #   Simple Storage Service (Amazon S3) sources, targets, temporary
-    #   directory, scripts, and any libraries used by the task run for this
-    #   transform.
+    #   required permissions. The required permissions include both AWS Glue
+    #   service role permissions to AWS Glue resources, and Amazon S3
+    #   permissions required by the transform.
+    #
+    #   * This role needs AWS Glue service role permissions to allow access
+    #     to resources in AWS Glue. See [Attach a Policy to IAM Users That
+    #     Access AWS Glue][1].
+    #
+    #   * This role needs permission to your Amazon Simple Storage Service
+    #     (Amazon S3) sources, targets, temporary directory, scripts, and
+    #     any libraries used by the task run for this transform.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html
+    #   @return [String]
+    #
+    # @!attribute [rw] glue_version
+    #   This value determines which version of AWS Glue this machine
+    #   learning transform is compatible with. Glue 1.0 is recommended for
+    #   most customers. If the value is not set, the Glue compatibility
+    #   defaults to Glue 0.9. For more information, see [AWS Glue
+    #   Versions][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
@@ -8318,12 +8414,26 @@ module Aws::Glue
     #   GB of memory. For more information, see the [AWS Glue pricing
     #   page][1].
     #
+    #   `MaxCapacity` is a mutually exclusive option with `NumberOfWorkers`
+    #   and `WorkerType`.
+    #
+    #   * If either `NumberOfWorkers` or `WorkerType` is set, then
+    #     `MaxCapacity` cannot be set.
+    #
+    #   * If `MaxCapacity` is set then neither `NumberOfWorkers` or
+    #     `WorkerType` can be set.
+    #
+    #   * If `WorkerType` is set, then `NumberOfWorkers` is required (and
+    #     vice versa).
+    #
+    #   * `MaxCapacity` and `NumberOfWorkers` must both be at least 1.
+    #
     #   When the `WorkerType` field is set to a value other than `Standard`,
     #   the `MaxCapacity` field is set automatically and becomes read-only.
     #
     #
     #
-    #   [1]: https://aws.amazon.com/glue/pricing/
+    #   [1]: http://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
     # @!attribute [rw] worker_type
@@ -8338,11 +8448,28 @@ module Aws::Glue
     #
     #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
     #     memory and a 128GB disk, and 1 executor per worker.
+    #
+    #   `MaxCapacity` is a mutually exclusive option with `NumberOfWorkers`
+    #   and `WorkerType`.
+    #
+    #   * If either `NumberOfWorkers` or `WorkerType` is set, then
+    #     `MaxCapacity` cannot be set.
+    #
+    #   * If `MaxCapacity` is set then neither `NumberOfWorkers` or
+    #     `WorkerType` can be set.
+    #
+    #   * If `WorkerType` is set, then `NumberOfWorkers` is required (and
+    #     vice versa).
+    #
+    #   * `MaxCapacity` and `NumberOfWorkers` must both be at least 1.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when a task of the transform runs.
+    #
+    #   If `WorkerType` is set, then `NumberOfWorkers` is required (and vice
+    #   versa).
     #   @return [Integer]
     #
     # @!attribute [rw] timeout
@@ -8369,6 +8496,7 @@ module Aws::Glue
       :label_count,
       :schema,
       :role,
+      :glue_version,
       :max_capacity,
       :worker_type,
       :number_of_workers,
@@ -10612,6 +10740,7 @@ module Aws::Glue
     #         name: "NameString",
     #         transform_type: "FIND_MATCHES", # accepts FIND_MATCHES
     #         status: "NOT_READY", # accepts NOT_READY, READY, DELETING
+    #         glue_version: "GlueVersionString",
     #         created_before: Time.now,
     #         created_after: Time.now,
     #         last_modified_before: Time.now,
@@ -10638,6 +10767,18 @@ module Aws::Glue
     #   Filters the list of machine learning transforms by the last known
     #   status of the transforms (to indicate whether a transform can be
     #   used or not). One of "NOT\_READY", "READY", or "DELETING".
+    #   @return [String]
+    #
+    # @!attribute [rw] glue_version
+    #   This value determines which version of AWS Glue this machine
+    #   learning transform is compatible with. Glue 1.0 is recommended for
+    #   most customers. If the value is not set, the Glue compatibility
+    #   defaults to Glue 0.9. For more information, see [AWS Glue
+    #   Versions][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
     #   @return [String]
     #
     # @!attribute [rw] created_before
@@ -10670,6 +10811,7 @@ module Aws::Glue
       :name,
       :transform_type,
       :status,
+      :glue_version,
       :created_before,
       :created_after,
       :last_modified_before,
@@ -11545,6 +11687,7 @@ module Aws::Glue
     #           },
     #         },
     #         role: "RoleString",
+    #         glue_version: "GlueVersionString",
     #         max_capacity: 1.0,
     #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
     #         number_of_workers: 1,
@@ -11573,6 +11716,18 @@ module Aws::Glue
     # @!attribute [rw] role
     #   The name or Amazon Resource Name (ARN) of the IAM role with the
     #   required permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] glue_version
+    #   This value determines which version of AWS Glue this machine
+    #   learning transform is compatible with. Glue 1.0 is recommended for
+    #   most customers. If the value is not set, the Glue compatibility
+    #   defaults to Glue 0.9. For more information, see [AWS Glue
+    #   Versions][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
@@ -11630,6 +11785,7 @@ module Aws::Glue
       :description,
       :parameters,
       :role,
+      :glue_version,
       :max_capacity,
       :worker_type,
       :number_of_workers,

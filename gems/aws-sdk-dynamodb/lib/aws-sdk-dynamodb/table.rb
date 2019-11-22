@@ -304,6 +304,23 @@ module Aws::DynamoDB
       data[:latest_stream_arn]
     end
 
+    # Represents the version of [global tables][1] in use, if the table is
+    # replicated across AWS Regions.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
+    # @return [String]
+    def global_table_version
+      data[:global_table_version]
+    end
+
+    # Represents replicas of the table.
+    # @return [Array<Types::ReplicaDescription>]
+    def replicas
+      data[:replicas]
+    end
+
     # Contains details for the restore.
     # @return [Types::RestoreSummary]
     def restore_summary
@@ -1726,7 +1743,7 @@ module Aws::DynamoDB
     #       },
     #     ],
     #     stream_specification: {
-    #       stream_enabled: false,
+    #       stream_enabled: false, # required
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
     #     sse_specification: {
@@ -1734,6 +1751,43 @@ module Aws::DynamoDB
     #       sse_type: "AES256", # accepts AES256, KMS
     #       kms_master_key_id: "KMSMasterKeyId",
     #     },
+    #     replica_updates: [
+    #       {
+    #         create: {
+    #           region_name: "RegionName", # required
+    #           kms_master_key_id: "KMSMasterKeyId",
+    #           provisioned_throughput_override: {
+    #             read_capacity_units: 1,
+    #           },
+    #           global_secondary_indexes: [
+    #             {
+    #               index_name: "IndexName", # required
+    #               provisioned_throughput_override: {
+    #                 read_capacity_units: 1,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         update: {
+    #           region_name: "RegionName", # required
+    #           kms_master_key_id: "KMSMasterKeyId",
+    #           provisioned_throughput_override: {
+    #             read_capacity_units: 1,
+    #           },
+    #           global_secondary_indexes: [
+    #             {
+    #               index_name: "IndexName", # required
+    #               provisioned_throughput_override: {
+    #                 read_capacity_units: 1,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         delete: {
+    #           region_name: "RegionName", # required
+    #         },
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::AttributeDefinition>] :attribute_definitions
@@ -1794,6 +1848,18 @@ module Aws::DynamoDB
     #    </note>
     # @option options [Types::SSESpecification] :sse_specification
     #   The new server-side encryption settings for the specified table.
+    # @option options [Array<Types::ReplicationGroupUpdate>] :replica_updates
+    #   A list of replica update actions (create, delete, or update) for the
+    #   table.
+    #
+    #   <note markdown="1"> This property only applies to [Version 2019.11.21][1] of global
+    #   tables.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     # @return [Table]
     def update(options = {})
       options = options.merge(table_name: @name)

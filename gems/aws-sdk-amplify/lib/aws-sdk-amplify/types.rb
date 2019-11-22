@@ -210,6 +210,46 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Backend environment for an Amplify App.
+    #
+    # @!attribute [rw] backend_environment_arn
+    #   Arn for a backend environment, part of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   Name for a backend environment, part of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   CloudFormation stack name of backend environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_artifacts
+    #   Name of deployment artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   Creation date and time for a backend environment, part of an Amplify
+    #   App.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   Last updated date and time for a backend environment, part of an
+    #   Amplify App.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/BackendEnvironment AWS API Documentation
+    #
+    class BackendEnvironment < Struct.new(
+      :backend_environment_arn,
+      :environment_name,
+      :stack_name,
+      :deployment_artifacts,
+      :create_time,
+      :update_time)
+      include Aws::Structure
+    end
+
     # Exception thrown when a request contains unexpected data.
     #
     # @!attribute [rw] message
@@ -515,6 +555,57 @@ module Aws::Amplify
     #
     class CreateAppResult < Struct.new(
       :app)
+      include Aws::Structure
+    end
+
+    # Request structure for a backend environment create request.
+    #
+    # @note When making an API call, you may pass CreateBackendEnvironmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         environment_name: "EnvironmentName", # required
+    #         stack_name: "StackName",
+    #         deployment_artifacts: "DeploymentArtifacts",
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   Name for the backend environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   CloudFormation stack name of backend environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_artifacts
+    #   Name of deployment artifacts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBackendEnvironmentRequest AWS API Documentation
+    #
+    class CreateBackendEnvironmentRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :stack_name,
+      :deployment_artifacts)
+      include Aws::Structure
+    end
+
+    # Result structure for create backend environment.
+    #
+    # @!attribute [rw] backend_environment
+    #   Backend environment structure for an amplify App.
+    #   @return [Types::BackendEnvironment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBackendEnvironmentResult AWS API Documentation
+    #
+    class CreateBackendEnvironmentResult < Struct.new(
+      :backend_environment)
       include Aws::Structure
     end
 
@@ -887,6 +978,45 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Request structure for delete backend environment request.
+    #
+    # @note When making an API call, you may pass DeleteBackendEnvironmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         environment_name: "EnvironmentName", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   Name of a backend environment of an Amplify App.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBackendEnvironmentRequest AWS API Documentation
+    #
+    class DeleteBackendEnvironmentRequest < Struct.new(
+      :app_id,
+      :environment_name)
+      include Aws::Structure
+    end
+
+    # Result structure of a delete backend environment result.
+    #
+    # @!attribute [rw] backend_environment
+    #   Backend environment structure for an Amplify App.
+    #   @return [Types::BackendEnvironment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBackendEnvironmentResult AWS API Documentation
+    #
+    class DeleteBackendEnvironmentResult < Struct.new(
+      :backend_environment)
+      include Aws::Structure
+    end
+
     # Request structure for delete branch request.
     #
     # @note When making an API call, you may pass DeleteBranchRequest
@@ -1218,6 +1348,45 @@ module Aws::Amplify
     class GetArtifactUrlResult < Struct.new(
       :artifact_id,
       :artifact_url)
+      include Aws::Structure
+    end
+
+    # Request structure for get backend environment request.
+    #
+    # @note When making an API call, you may pass GetBackendEnvironmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         environment_name: "EnvironmentName", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   Name for the backend environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBackendEnvironmentRequest AWS API Documentation
+    #
+    class GetBackendEnvironmentRequest < Struct.new(
+      :app_id,
+      :environment_name)
+      include Aws::Structure
+    end
+
+    # Result structure for get backend environment result.
+    #
+    # @!attribute [rw] backend_environment
+    #   Backend environment structure for an an Amplify App.
+    #   @return [Types::BackendEnvironment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBackendEnvironmentResult AWS API Documentation
+    #
+    class GetBackendEnvironmentResult < Struct.new(
+      :backend_environment)
       include Aws::Structure
     end
 
@@ -1583,6 +1752,66 @@ module Aws::Amplify
     #
     class ListArtifactsResult < Struct.new(
       :artifacts,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Request structure for list backend environments request.
+    #
+    # @note When making an API call, you may pass ListBackendEnvironmentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         environment_name: "EnvironmentName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   Name of the backend environment
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Set to null to start listing backen environments
+    #   from start. If a non-null pagination token is returned in a result,
+    #   then pass its value in here to list more backend environments.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of records to list in a single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBackendEnvironmentsRequest AWS API Documentation
+    #
+    class ListBackendEnvironmentsRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Result structure for list backend environments result.
+    #
+    # @!attribute [rw] backend_environments
+    #   List of backend environments for an Amplify App.
+    #   @return [Array<Types::BackendEnvironment>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. If non-null pagination token is returned in a
+    #   result, then pass its value in another request to fetch more
+    #   entries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBackendEnvironmentsResult AWS API Documentation
+    #
+    class ListBackendEnvironmentsResult < Struct.new(
+      :backend_environments,
       :next_token)
       include Aws::Structure
     end

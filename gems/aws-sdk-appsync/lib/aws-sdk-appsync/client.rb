@@ -254,6 +254,82 @@ module Aws::AppSync
 
     # @!group API Operations
 
+    # Creates a cache for the GraphQL API.
+    #
+    # @option params [required, String] :api_id
+    #   The GraphQL API Id.
+    #
+    # @option params [required, Integer] :ttl
+    #   TTL in seconds for cache entries.
+    #
+    #   Valid values are between 1 and 3600 seconds.
+    #
+    # @option params [Boolean] :transit_encryption_enabled
+    #   Transit encryption flag when connecting to cache. This setting cannot
+    #   be updated after creation.
+    #
+    # @option params [Boolean] :at_rest_encryption_enabled
+    #   At rest encryption flag for cache. This setting cannot be updated
+    #   after creation.
+    #
+    # @option params [required, String] :api_caching_behavior
+    #   Caching behavior.
+    #
+    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #     are cached.
+    #
+    # @option params [required, String] :type
+    #   The cache instance type.
+    #
+    #   * **T2\_SMALL**\: A t2.small instance type.
+    #
+    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #
+    #   * **R4\_LARGE**\: A r4.large instance type.
+    #
+    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #
+    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #
+    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #
+    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #
+    # @return [Types::CreateApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApiCacheResponse#api_cache #api_cache} => Types::ApiCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_api_cache({
+    #     api_id: "String", # required
+    #     ttl: 1, # required
+    #     transit_encryption_enabled: false,
+    #     at_rest_encryption_enabled: false,
+    #     api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
+    #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_cache.ttl #=> Integer
+    #   resp.api_cache.api_caching_behavior #=> String, one of "FULL_REQUEST_CACHING", "PER_RESOLVER_CACHING"
+    #   resp.api_cache.transit_encryption_enabled #=> Boolean
+    #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
+    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE"
+    #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiCache AWS API Documentation
+    #
+    # @overload create_api_cache(params = {})
+    # @param [Hash] params ({})
+    def create_api_cache(params = {}, options = {})
+      req = build_request(:create_api_cache, params)
+      req.send_request(options)
+    end
+
     # Creates a unique key that you can distribute to clients who are
     # executing your API.
     #
@@ -345,6 +421,12 @@ module Aws::AppSync
     #       table_name: "String", # required
     #       aws_region: "String", # required
     #       use_caller_credentials: false,
+    #       delta_sync_config: {
+    #         base_table_ttl: 1,
+    #         delta_sync_table_name: "String",
+    #         delta_sync_table_ttl: 1,
+    #       },
+    #       versioned: false,
     #     },
     #     lambda_config: {
     #       lambda_function_arn: "String", # required
@@ -385,6 +467,10 @@ module Aws::AppSync
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
     #   resp.data_source.dynamodb_config.use_caller_credentials #=> Boolean
+    #   resp.data_source.dynamodb_config.delta_sync_config.base_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_name #=> String
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.versioned #=> Boolean
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
@@ -626,6 +712,12 @@ module Aws::AppSync
     # @option params [Types::PipelineConfig] :pipeline_config
     #   The `PipelineConfig`.
     #
+    # @option params [Types::SyncConfig] :sync_config
+    #   The `SyncConfig` for a resolver attached to a versioned datasource.
+    #
+    # @option params [Types::CachingConfig] :caching_config
+    #   The caching configuration for the resolver.
+    #
     # @return [Types::CreateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverResponse#resolver #resolver} => Types::Resolver
@@ -643,6 +735,17 @@ module Aws::AppSync
     #     pipeline_config: {
     #       functions: ["String"],
     #     },
+    #     sync_config: {
+    #       conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #       conflict_detection: "VERSION", # accepts VERSION, NONE
+    #       lambda_conflict_handler_config: {
+    #         lambda_conflict_handler_arn: "String",
+    #       },
+    #     },
+    #     caching_config: {
+    #       ttl: 1,
+    #       caching_keys: ["String"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -656,6 +759,12 @@ module Aws::AppSync
     #   resp.resolver.kind #=> String, one of "UNIT", "PIPELINE"
     #   resp.resolver.pipeline_config.functions #=> Array
     #   resp.resolver.pipeline_config.functions[0] #=> String
+    #   resp.resolver.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.resolver.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.resolver.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.resolver.caching_config.ttl #=> Integer
+    #   resp.resolver.caching_config.caching_keys #=> Array
+    #   resp.resolver.caching_config.caching_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolver AWS API Documentation
     #
@@ -710,6 +819,28 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def create_type(params = {}, options = {})
       req = build_request(:create_type, params)
+      req.send_request(options)
+    end
+
+    # Deletes an `ApiCache` object.
+    #
+    # @option params [required, String] :api_id
+    #   The API ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_api_cache({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiCache AWS API Documentation
+    #
+    # @overload delete_api_cache(params = {})
+    # @param [Hash] params ({})
+    def delete_api_cache(params = {}, options = {})
+      req = build_request(:delete_api_cache, params)
       req.send_request(options)
     end
 
@@ -869,6 +1000,61 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Flushes an `ApiCache` object.
+    #
+    # @option params [required, String] :api_id
+    #   The API ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.flush_api_cache({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/FlushApiCache AWS API Documentation
+    #
+    # @overload flush_api_cache(params = {})
+    # @param [Hash] params ({})
+    def flush_api_cache(params = {}, options = {})
+      req = build_request(:flush_api_cache, params)
+      req.send_request(options)
+    end
+
+    # Retrieves an `ApiCache` object.
+    #
+    # @option params [required, String] :api_id
+    #   The API ID.
+    #
+    # @return [Types::GetApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApiCacheResponse#api_cache #api_cache} => Types::ApiCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_api_cache({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_cache.ttl #=> Integer
+    #   resp.api_cache.api_caching_behavior #=> String, one of "FULL_REQUEST_CACHING", "PER_RESOLVER_CACHING"
+    #   resp.api_cache.transit_encryption_enabled #=> Boolean
+    #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
+    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE"
+    #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiCache AWS API Documentation
+    #
+    # @overload get_api_cache(params = {})
+    # @param [Hash] params ({})
+    def get_api_cache(params = {}, options = {})
+      req = build_request(:get_api_cache, params)
+      req.send_request(options)
+    end
+
     # Retrieves a `DataSource` object.
     #
     # @option params [required, String] :api_id
@@ -898,6 +1084,10 @@ module Aws::AppSync
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
     #   resp.data_source.dynamodb_config.use_caller_credentials #=> Boolean
+    #   resp.data_source.dynamodb_config.delta_sync_config.base_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_name #=> String
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.versioned #=> Boolean
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
@@ -1086,6 +1276,12 @@ module Aws::AppSync
     #   resp.resolver.kind #=> String, one of "UNIT", "PIPELINE"
     #   resp.resolver.pipeline_config.functions #=> Array
     #   resp.resolver.pipeline_config.functions[0] #=> String
+    #   resp.resolver.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.resolver.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.resolver.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.resolver.caching_config.ttl #=> Integer
+    #   resp.resolver.caching_config.caching_keys #=> Array
+    #   resp.resolver.caching_config.caching_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolver AWS API Documentation
     #
@@ -1253,6 +1449,10 @@ module Aws::AppSync
     #   resp.data_sources[0].dynamodb_config.table_name #=> String
     #   resp.data_sources[0].dynamodb_config.aws_region #=> String
     #   resp.data_sources[0].dynamodb_config.use_caller_credentials #=> Boolean
+    #   resp.data_sources[0].dynamodb_config.delta_sync_config.base_table_ttl #=> Integer
+    #   resp.data_sources[0].dynamodb_config.delta_sync_config.delta_sync_table_name #=> String
+    #   resp.data_sources[0].dynamodb_config.delta_sync_config.delta_sync_table_ttl #=> Integer
+    #   resp.data_sources[0].dynamodb_config.versioned #=> Boolean
     #   resp.data_sources[0].lambda_config.lambda_function_arn #=> String
     #   resp.data_sources[0].elasticsearch_config.endpoint #=> String
     #   resp.data_sources[0].elasticsearch_config.aws_region #=> String
@@ -1431,6 +1631,12 @@ module Aws::AppSync
     #   resp.resolvers[0].kind #=> String, one of "UNIT", "PIPELINE"
     #   resp.resolvers[0].pipeline_config.functions #=> Array
     #   resp.resolvers[0].pipeline_config.functions[0] #=> String
+    #   resp.resolvers[0].sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.resolvers[0].sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.resolvers[0].sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.resolvers[0].caching_config.ttl #=> Integer
+    #   resp.resolvers[0].caching_config.caching_keys #=> Array
+    #   resp.resolvers[0].caching_config.caching_keys[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolvers AWS API Documentation
@@ -1484,6 +1690,12 @@ module Aws::AppSync
     #   resp.resolvers[0].kind #=> String, one of "UNIT", "PIPELINE"
     #   resp.resolvers[0].pipeline_config.functions #=> Array
     #   resp.resolvers[0].pipeline_config.functions[0] #=> String
+    #   resp.resolvers[0].sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.resolvers[0].sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.resolvers[0].sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.resolvers[0].caching_config.ttl #=> Integer
+    #   resp.resolvers[0].caching_config.caching_keys #=> Array
+    #   resp.resolvers[0].caching_config.caching_keys[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunction AWS API Documentation
@@ -1662,6 +1874,72 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Updates the cache for the GraphQL API.
+    #
+    # @option params [required, String] :api_id
+    #   The GraphQL API Id.
+    #
+    # @option params [required, Integer] :ttl
+    #   TTL in seconds for cache entries.
+    #
+    #   Valid values are between 1 and 3600 seconds.
+    #
+    # @option params [required, String] :api_caching_behavior
+    #   Caching behavior.
+    #
+    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #     are cached.
+    #
+    # @option params [required, String] :type
+    #   The cache instance type.
+    #
+    #   * **T2\_SMALL**\: A t2.small instance type.
+    #
+    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #
+    #   * **R4\_LARGE**\: A r4.large instance type.
+    #
+    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #
+    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #
+    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #
+    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #
+    # @return [Types::UpdateApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApiCacheResponse#api_cache #api_cache} => Types::ApiCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_api_cache({
+    #     api_id: "String", # required
+    #     ttl: 1, # required
+    #     api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
+    #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_cache.ttl #=> Integer
+    #   resp.api_cache.api_caching_behavior #=> String, one of "FULL_REQUEST_CACHING", "PER_RESOLVER_CACHING"
+    #   resp.api_cache.transit_encryption_enabled #=> Boolean
+    #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
+    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE"
+    #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiCache AWS API Documentation
+    #
+    # @overload update_api_cache(params = {})
+    # @param [Hash] params ({})
+    def update_api_cache(params = {}, options = {})
+      req = build_request(:update_api_cache, params)
+      req.send_request(options)
+    end
+
     # Updates an API key.
     #
     # @option params [required, String] :api_id
@@ -1753,6 +2031,12 @@ module Aws::AppSync
     #       table_name: "String", # required
     #       aws_region: "String", # required
     #       use_caller_credentials: false,
+    #       delta_sync_config: {
+    #         base_table_ttl: 1,
+    #         delta_sync_table_name: "String",
+    #         delta_sync_table_ttl: 1,
+    #       },
+    #       versioned: false,
     #     },
     #     lambda_config: {
     #       lambda_function_arn: "String", # required
@@ -1793,6 +2077,10 @@ module Aws::AppSync
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
     #   resp.data_source.dynamodb_config.use_caller_credentials #=> Boolean
+    #   resp.data_source.dynamodb_config.delta_sync_config.base_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_name #=> String
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.versioned #=> Boolean
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
@@ -2026,6 +2314,12 @@ module Aws::AppSync
     # @option params [Types::PipelineConfig] :pipeline_config
     #   The `PipelineConfig`.
     #
+    # @option params [Types::SyncConfig] :sync_config
+    #   The `SyncConfig` for a resolver attached to a versioned datasource.
+    #
+    # @option params [Types::CachingConfig] :caching_config
+    #   The caching configuration for the resolver.
+    #
     # @return [Types::UpdateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResolverResponse#resolver #resolver} => Types::Resolver
@@ -2043,6 +2337,17 @@ module Aws::AppSync
     #     pipeline_config: {
     #       functions: ["String"],
     #     },
+    #     sync_config: {
+    #       conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #       conflict_detection: "VERSION", # accepts VERSION, NONE
+    #       lambda_conflict_handler_config: {
+    #         lambda_conflict_handler_arn: "String",
+    #       },
+    #     },
+    #     caching_config: {
+    #       ttl: 1,
+    #       caching_keys: ["String"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -2056,6 +2361,12 @@ module Aws::AppSync
     #   resp.resolver.kind #=> String, one of "UNIT", "PIPELINE"
     #   resp.resolver.pipeline_config.functions #=> Array
     #   resp.resolver.pipeline_config.functions[0] #=> String
+    #   resp.resolver.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.resolver.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.resolver.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.resolver.caching_config.ttl #=> Integer
+    #   resp.resolver.caching_config.caching_keys #=> Array
+    #   resp.resolver.caching_config.caching_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolver AWS API Documentation
     #
@@ -2123,7 +2434,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

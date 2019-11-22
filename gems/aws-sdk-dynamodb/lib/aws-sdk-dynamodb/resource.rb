@@ -287,7 +287,7 @@ module Aws::DynamoDB
     #       write_capacity_units: 1, # required
     #     },
     #     stream_specification: {
-    #       stream_enabled: false,
+    #       stream_enabled: false, # required
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
     #     sse_specification: {
