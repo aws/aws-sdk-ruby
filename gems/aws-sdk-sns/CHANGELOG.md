@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-11-22)
+------------------
+
+* Feature - Added documentation for the dead-letter queue feature.
+
 1.20.0 (2019-10-23)
 ------------------
 

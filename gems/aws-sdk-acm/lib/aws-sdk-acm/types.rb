@@ -592,6 +592,12 @@ module Aws::ACM
     # @!attribute [rw] key_types
     #   Specify one or more algorithms that can be used to generate key
     #   pairs.
+    #
+    #   Default filtering returns only `RSA_2048` certificates. To return
+    #   other certificate types, provide the desired type signatures in a
+    #   comma-separated list. For example, `"keyTypes":
+    #   ["RSA_2048,RSA_4096"]` returns both `RSA_2048` and `RSA_4096`
+    #   certificates.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Filters AWS API Documentation
@@ -656,6 +662,12 @@ module Aws::ACM
     #         certificate: "data", # required
     #         private_key: "data", # required
     #         certificate_chain: "data",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] certificate_arn
@@ -679,13 +691,21 @@ module Aws::ACM
     #   The PEM encoded certificate chain.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more resource tags to associate with the imported
+    #   certificate.
+    #
+    #   Note: You cannot apply tags when reimporting a certificate.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateRequest AWS API Documentation
     #
     class ImportCertificateRequest < Struct.new(
       :certificate_arn,
       :certificate,
       :private_key,
-      :certificate_chain)
+      :certificate_chain,
+      :tags)
       include Aws::Structure
     end
 
@@ -738,6 +758,18 @@ module Aws::ACM
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidDomainValidationOptionsException AWS API Documentation
     #
     class InvalidDomainValidationOptionsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An input parameter was invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -1030,6 +1062,12 @@ module Aws::ACM
     #           certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         certificate_authority_arn: "Arn",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] domain_name
@@ -1039,7 +1077,7 @@ module Aws::ACM
     #   same domain. For example, *.example.com protects www.example.com,
     #   site.example.com, and images.example.com.
     #
-    #   The first domain name you enter cannot exceed 63 octets, including
+    #   The first domain name you enter cannot exceed 64 octets, including
     #   periods. Each subsequent Subject Alternative Name (SAN), however,
     #   can be up to 253 octets in length.
     #   @return [String]
@@ -1132,6 +1170,10 @@ module Aws::ACM
     #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more resource tags to associate with the certificate.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation
     #
     class RequestCertificateRequest < Struct.new(
@@ -1141,7 +1183,8 @@ module Aws::ACM
       :idempotency_token,
       :domain_validation_options,
       :options,
-      :certificate_authority_arn)
+      :certificate_authority_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -1303,6 +1346,19 @@ module Aws::ACM
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # A specified tag did not comply with an existing tag policy and was
+    # rejected.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/TagPolicyException AWS API Documentation
+    #
+    class TagPolicyException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

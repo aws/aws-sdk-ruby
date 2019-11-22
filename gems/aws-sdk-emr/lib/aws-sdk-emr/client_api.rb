@@ -169,10 +169,13 @@ module Aws::EMR
     MarketType = Shapes::StringShape.new(name: 'MarketType')
     MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
     MetricDimensionList = Shapes::ListShape.new(name: 'MetricDimensionList')
+    ModifyClusterInput = Shapes::StructureShape.new(name: 'ModifyClusterInput')
+    ModifyClusterOutput = Shapes::StructureShape.new(name: 'ModifyClusterOutput')
     ModifyInstanceFleetInput = Shapes::StructureShape.new(name: 'ModifyInstanceFleetInput')
     ModifyInstanceGroupsInput = Shapes::StructureShape.new(name: 'ModifyInstanceGroupsInput')
     NewSupportedProductsList = Shapes::ListShape.new(name: 'NewSupportedProductsList')
     NonNegativeDouble = Shapes::FloatShape.new(name: 'NonNegativeDouble')
+    OptionalArnType = Shapes::StringShape.new(name: 'OptionalArnType')
     PlacementType = Shapes::StructureShape.new(name: 'PlacementType')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PortRange = Shapes::StructureShape.new(name: 'PortRange')
@@ -207,6 +210,7 @@ module Aws::EMR
     SpotProvisioningTimeoutAction = Shapes::StringShape.new(name: 'SpotProvisioningTimeoutAction')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     Step = Shapes::StructureShape.new(name: 'Step')
+    StepCancellationOption = Shapes::StringShape.new(name: 'StepCancellationOption')
     StepConfig = Shapes::StructureShape.new(name: 'StepConfig')
     StepConfigList = Shapes::ListShape.new(name: 'StepConfigList')
     StepDetail = Shapes::StructureShape.new(name: 'StepDetail')
@@ -321,8 +325,9 @@ module Aws::EMR
 
     CancelStepsInfoList.member = Shapes::ShapeRef.new(shape: CancelStepsInfo)
 
-    CancelStepsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ClusterId"))
-    CancelStepsInput.add_member(:step_ids, Shapes::ShapeRef.new(shape: StepIdsList, location_name: "StepIds"))
+    CancelStepsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "ClusterId"))
+    CancelStepsInput.add_member(:step_ids, Shapes::ShapeRef.new(shape: StepIdsList, required: true, location_name: "StepIds"))
+    CancelStepsInput.add_member(:step_cancellation_option, Shapes::ShapeRef.new(shape: StepCancellationOption, location_name: "StepCancellationOption"))
     CancelStepsInput.struct_class = Types::CancelStepsInput
 
     CancelStepsOutput.add_member(:cancel_steps_info_list, Shapes::ShapeRef.new(shape: CancelStepsInfoList, location_name: "CancelStepsInfoList"))
@@ -365,6 +370,8 @@ module Aws::EMR
     Cluster.add_member(:repo_upgrade_on_boot, Shapes::ShapeRef.new(shape: RepoUpgradeOnBoot, location_name: "RepoUpgradeOnBoot"))
     Cluster.add_member(:kerberos_attributes, Shapes::ShapeRef.new(shape: KerberosAttributes, location_name: "KerberosAttributes"))
     Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
+    Cluster.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
+    Cluster.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OptionalArnType, location_name: "OutpostArn"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -383,6 +390,7 @@ module Aws::EMR
     ClusterSummary.add_member(:status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "Status"))
     ClusterSummary.add_member(:normalized_instance_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "NormalizedInstanceHours"))
     ClusterSummary.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
+    ClusterSummary.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OptionalArnType, location_name: "OutpostArn"))
     ClusterSummary.struct_class = Types::ClusterSummary
 
     ClusterSummaryList.member = Shapes::ShapeRef.new(shape: ClusterSummary)
@@ -846,6 +854,13 @@ module Aws::EMR
 
     MetricDimensionList.member = Shapes::ShapeRef.new(shape: MetricDimension)
 
+    ModifyClusterInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterId"))
+    ModifyClusterInput.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
+    ModifyClusterInput.struct_class = Types::ModifyClusterInput
+
+    ModifyClusterOutput.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
+    ModifyClusterOutput.struct_class = Types::ModifyClusterOutput
+
     ModifyInstanceFleetInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     ModifyInstanceFleetInput.add_member(:instance_fleet, Shapes::ShapeRef.new(shape: InstanceFleetModifyConfig, required: true, location_name: "InstanceFleet"))
     ModifyInstanceFleetInput.struct_class = Types::ModifyInstanceFleetInput
@@ -917,6 +932,7 @@ module Aws::EMR
     RunJobFlowInput.add_member(:ebs_root_volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeSize"))
     RunJobFlowInput.add_member(:repo_upgrade_on_boot, Shapes::ShapeRef.new(shape: RepoUpgradeOnBoot, location_name: "RepoUpgradeOnBoot"))
     RunJobFlowInput.add_member(:kerberos_attributes, Shapes::ShapeRef.new(shape: KerberosAttributes, location_name: "KerberosAttributes"))
+    RunJobFlowInput.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
@@ -1300,6 +1316,16 @@ module Aws::EMR
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:modify_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: ModifyClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:modify_instance_fleet, Seahorse::Model::Operation.new.tap do |o|

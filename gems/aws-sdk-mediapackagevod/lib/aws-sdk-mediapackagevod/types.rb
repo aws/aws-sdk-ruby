@@ -14,6 +14,10 @@ module Aws::MediaPackageVod
     #   The ARN of the Asset.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The time the Asset was initially submitted for Ingest.
+    #   @return [String]
+    #
     # @!attribute [rw] egress_endpoints
     #   The list of egress endpoints available for the Asset.
     #   @return [Array<Types::EgressEndpoint>]
@@ -42,6 +46,7 @@ module Aws::MediaPackageVod
     #
     class Asset < Struct.new(
       :arn,
+      :created_at,
       :egress_endpoints,
       :id,
       :packaging_group_id,
@@ -109,6 +114,10 @@ module Aws::MediaPackageVod
     #   The ARN of the Asset.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The time the Asset was initially submitted for Ingest.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   The unique identifier for the Asset.
     #   @return [String]
@@ -133,6 +142,7 @@ module Aws::MediaPackageVod
     #
     class AssetShallow < Struct.new(
       :arn,
+      :created_at,
       :id,
       :packaging_group_id,
       :resource_id,
@@ -259,6 +269,9 @@ module Aws::MediaPackageVod
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] egress_endpoints
     #   @return [Array<Types::EgressEndpoint>]
     #
@@ -281,6 +294,7 @@ module Aws::MediaPackageVod
     #
     class CreateAssetResponse < Struct.new(
       :arn,
+      :created_at,
       :egress_endpoints,
       :id,
       :packaging_group_id,
@@ -701,6 +715,9 @@ module Aws::MediaPackageVod
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] egress_endpoints
     #   @return [Array<Types::EgressEndpoint>]
     #
@@ -723,6 +740,7 @@ module Aws::MediaPackageVod
     #
     class DescribeAssetResponse < Struct.new(
       :arn,
+      :created_at,
       :egress_endpoints,
       :id,
       :packaging_group_id,

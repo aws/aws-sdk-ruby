@@ -1240,7 +1240,7 @@ module Aws::CodeBuild
     # @!attribute [rw] next_token
     #   During a previous call, if there are more than 100 items in the
     #   list, only the first 100 items are returned, along with a unique
-    #   string called a *next token*. To get the next batch of items in the
+    #   string called a *nextToken*. To get the next batch of items in the
     #   list, call this operation again, adding the next token to the call.
     #   To get all of the items in the list, keep calling this operation
     #   with each subsequent next token that is returned, until no more next
@@ -1263,9 +1263,9 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] next_token
     #   If there are more than 100 items in the list, only the first 100
-    #   items are returned, along with a unique string called a *next
-    #   token*. To get the next batch of items in the list, call this
-    #   operation again, adding the next token to the call.
+    #   items are returned, along with a unique string called a *nextToken*.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProjectOutput AWS API Documentation
@@ -1295,7 +1295,7 @@ module Aws::CodeBuild
     # @!attribute [rw] next_token
     #   During a previous call, if there are more than 100 items in the
     #   list, only the first 100 items are returned, along with a unique
-    #   string called a *next token*. To get the next batch of items in the
+    #   string called a *nextToken*. To get the next batch of items in the
     #   list, call this operation again, adding the next token to the call.
     #   To get all of the items in the list, keep calling this operation
     #   with each subsequent next token that is returned, until no more next
@@ -1316,9 +1316,9 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] next_token
     #   If there are more than 100 items in the list, only the first 100
-    #   items are returned, along with a unique string called a *next
-    #   token*. To get the next batch of items in the list, call this
-    #   operation again, adding the next token to the call.
+    #   items are returned, along with a unique string called a *nextToken*.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsOutput AWS API Documentation
@@ -1386,7 +1386,7 @@ module Aws::CodeBuild
     # @!attribute [rw] next_token
     #   During a previous call, if there are more than 100 items in the
     #   list, only the first 100 items are returned, along with a unique
-    #   string called a *next token*. To get the next batch of items in the
+    #   string called a *nextToken*. To get the next batch of items in the
     #   list, call this operation again, adding the next token to the call.
     #   To get all of the items in the list, keep calling this operation
     #   with each subsequent next token that is returned, until no more next
@@ -1404,9 +1404,9 @@ module Aws::CodeBuild
 
     # @!attribute [rw] next_token
     #   If there are more than 100 items in the list, only the first 100
-    #   items are returned, along with a unique string called a *next
-    #   token*. To get the next batch of items in the list, call this
-    #   operation again, adding the next token to the call.
+    #   items are returned, along with a unique string called a *nextToken*.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call.
     #   @return [String]
     #
     # @!attribute [rw] projects
@@ -1496,6 +1496,27 @@ module Aws::CodeBuild
     #   The URL to a build log in an S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_watch_logs_arn
+    #   The ARN of Amazon CloudWatch Logs for a build project. Its format is
+    #   `arn:$\{Partition\}:logs:$\{Region\}:$\{Account\}:log-group:$\{LogGroupName\}:log-stream:$\{LogStreamName\}`.
+    #   For more information, see [Resources Defined by Amazon CloudWatch
+    #   Logs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_logs_arn
+    #   The ARN of S3 logs for a build project. Its format is
+    #   `arn:$\{Partition\}:s3:::$\{BucketName\}/$\{ObjectName\}`. For more
+    #   information, see [Resources Defined by Amazon S3][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html#amazons3-resources-for-iam-policies
+    #   @return [String]
+    #
     # @!attribute [rw] cloud_watch_logs
     #   Information about Amazon CloudWatch Logs for a build project.
     #   @return [Types::CloudWatchLogsConfig]
@@ -1511,6 +1532,8 @@ module Aws::CodeBuild
       :stream_name,
       :deep_link,
       :s3_deep_link,
+      :cloud_watch_logs_arn,
+      :s3_logs_arn,
       :cloud_watch_logs,
       :s3_logs)
       include Aws::Structure

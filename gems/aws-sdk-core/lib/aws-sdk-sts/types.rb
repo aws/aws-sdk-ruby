@@ -21,6 +21,13 @@ module Aws::STS
     #         ],
     #         policy: "sessionPolicyDocumentType",
     #         duration_seconds: 1,
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #         transitive_tag_keys: ["tagKeyType"],
     #         external_id: "externalIdType",
     #         serial_number: "serialNumberType",
     #         token_code: "tokenCodeType",
@@ -55,16 +62,16 @@ module Aws::STS
     #
     #   This parameter is optional. You can provide up to 10 managed policy
     #   ARNs. However, the plain text that you use for both inline and
-    #   managed session policies shouldn't exceed 2048 characters. For more
+    #   managed session policies can't exceed 2,048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
     #   Service Namespaces][1] in the AWS General Reference.
     #
-    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
-    #   session policy guideline. However, an AWS conversion compresses the
-    #   session policies into a packed binary format that has a separate
-    #   limit. This is the enforced limit. The `PackedPolicySize` response
-    #   element indicates by percentage how close the policy is to the upper
-    #   size limit.
+    #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
+    #   tags into a packed binary format that has a separate limit. Your
+    #   request can fail for this limit even if your plain text meets the
+    #   other requirements. The `PackedPolicySize` response element
+    #   indicates by percentage how close the policies and tags for your
+    #   request are to the upper size limit.
     #
     #    </note>
     #
@@ -99,18 +106,18 @@ module Aws::STS
     #   Policies][1] in the *IAM User Guide*.
     #
     #   The plain text that you use for both inline and managed session
-    #   policies shouldn't exceed 2048 characters. The JSON policy
-    #   characters can be any ASCII character from the space character to
-    #   the end of the valid character list (\\u0020 through \\u00FF). It
-    #   can also include the tab (\\u0009), linefeed (\\u000A), and carriage
-    #   return (\\u000D) characters.
+    #   policies can't exceed 2,048 characters. The JSON policy characters
+    #   can be any ASCII character from the space character to the end of
+    #   the valid character list (\\u0020 through \\u00FF). It can also
+    #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
+    #   (\\u000D) characters.
     #
-    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
-    #   session policy guideline. However, an AWS conversion compresses the
-    #   session policies into a packed binary format that has a separate
-    #   limit. This is the enforced limit. The `PackedPolicySize` response
-    #   element indicates by percentage how close the policy is to the upper
-    #   size limit.
+    #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
+    #   tags into a packed binary format that has a separate limit. Your
+    #   request can fail for this limit even if your plain text meets the
+    #   other requirements. The `PackedPolicySize` response element
+    #   indicates by percentage how close the policies and tags for your
+    #   request are to the upper size limit.
     #
     #    </note>
     #
@@ -147,6 +154,70 @@ module Aws::STS
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   A list of session tags that you want to pass. Each session tag
+    #   consists of a key name and an associated value. For more information
+    #   about session tags, see [Tagging AWS STS Sessions][1] in the *IAM
+    #   User Guide*.
+    #
+    #   This parameter is optional. You can pass up to 50 session tags. The
+    #   plain text session tag keys can’t exceed 128 characters, and the
+    #   values can’t exceed 256 characters. For these and additional limits,
+    #   see [IAM and STS Character Limits][2] in the *IAM User Guide*.
+    #
+    #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
+    #   tags into a packed binary format that has a separate limit. Your
+    #   request can fail for this limit even if your plain text meets the
+    #   other requirements. The `PackedPolicySize` response element
+    #   indicates by percentage how close the policies and tags for your
+    #   request are to the upper size limit.
+    #
+    #    </note>
+    #
+    #   You can pass a session tag with the same key as a tag that is
+    #   already attached to the role. When you do, session tags override a
+    #   role tag with the same key.
+    #
+    #   Tag key–value pairs are not case sensitive, but case is preserved.
+    #   This means that you cannot have separate `Department` and
+    #   `department` tag keys. Assume that the role has the
+    #   `Department`=`Marketing` tag and you pass the
+    #   `department`=`engineering` session tag. `Department` and
+    #   `department` are not saved as separate tags, and the session tag
+    #   passed in the request takes precedence over the role tag.
+    #
+    #   Additionally, if you used temporary credentials to perform this
+    #   operation, the new session inherits any transitive session tags from
+    #   the calling session. If you pass a session tag with the same key as
+    #   an inherited tag, the operation fails. To view the inherited tags
+    #   for a session, see the AWS CloudTrail logs. For more information,
+    #   see [Viewing Session Tags in CloudTrail][3] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
+    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/session-tags.html#id_session-tags_ctlogs
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] transitive_tag_keys
+    #   A list of keys for session tags that you want to set as transitive.
+    #   If you set a tag key as transitive, the corresponding key and value
+    #   passes to subsequent sessions in a role chain. For more information,
+    #   see [Chaining Roles with Session Tags][1] in the *IAM User Guide*.
+    #
+    #   This parameter is optional. When you set session tags as transitive,
+    #   the session policy and session tags packed binary limit is not
+    #   affected.
+    #
+    #   If you choose not to specify a transitive tag key, then no tags are
+    #   passed from this session to any subsequent sessions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining
+    #   @return [Array<String>]
     #
     # @!attribute [rw] external_id
     #   A unique identifier that might be required when you assume a role in
@@ -206,6 +277,8 @@ module Aws::STS
       :policy_arns,
       :policy,
       :duration_seconds,
+      :tags,
+      :transitive_tag_keys,
       :external_id,
       :serial_number,
       :token_code)
@@ -236,9 +309,10 @@ module Aws::STS
     #   @return [Types::AssumedRoleUser]
     #
     # @!attribute [rw] packed_policy_size
-    #   A percentage value that indicates the size of the policy in packed
-    #   form. The service rejects any policy with a packed size greater than
-    #   100 percent, which means the policy exceeded the allowed space.
+    #   A percentage value that indicates the packed size of the session
+    #   policies and session tags combined passed in the request. The
+    #   request fails if the packed size is greater than 100 percent, which
+    #   means the policies and tags exceeded the allowed space.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleResponse AWS API Documentation
@@ -295,16 +369,16 @@ module Aws::STS
     #
     #   This parameter is optional. You can provide up to 10 managed policy
     #   ARNs. However, the plain text that you use for both inline and
-    #   managed session policies shouldn't exceed 2048 characters. For more
+    #   managed session policies can't exceed 2,048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
     #   Service Namespaces][1] in the AWS General Reference.
     #
-    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
-    #   session policy guideline. However, an AWS conversion compresses the
-    #   session policies into a packed binary format that has a separate
-    #   limit. This is the enforced limit. The `PackedPolicySize` response
-    #   element indicates by percentage how close the policy is to the upper
-    #   size limit.
+    #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
+    #   tags into a packed binary format that has a separate limit. Your
+    #   request can fail for this limit even if your plain text meets the
+    #   other requirements. The `PackedPolicySize` response element
+    #   indicates by percentage how close the policies and tags for your
+    #   request are to the upper size limit.
     #
     #    </note>
     #
@@ -339,18 +413,18 @@ module Aws::STS
     #   Policies][1] in the *IAM User Guide*.
     #
     #   The plain text that you use for both inline and managed session
-    #   policies shouldn't exceed 2048 characters. The JSON policy
-    #   characters can be any ASCII character from the space character to
-    #   the end of the valid character list (\\u0020 through \\u00FF). It
-    #   can also include the tab (\\u0009), linefeed (\\u000A), and carriage
-    #   return (\\u000D) characters.
+    #   policies can't exceed 2,048 characters. The JSON policy characters
+    #   can be any ASCII character from the space character to the end of
+    #   the valid character list (\\u0020 through \\u00FF). It can also
+    #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
+    #   (\\u000D) characters.
     #
-    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
-    #   session policy guideline. However, an AWS conversion compresses the
-    #   session policies into a packed binary format that has a separate
-    #   limit. This is the enforced limit. The `PackedPolicySize` response
-    #   element indicates by percentage how close the policy is to the upper
-    #   size limit.
+    #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
+    #   tags into a packed binary format that has a separate limit. Your
+    #   request can fail for this limit even if your plain text meets the
+    #   other requirements. The `PackedPolicySize` response element
+    #   indicates by percentage how close the policies and tags for your
+    #   request are to the upper size limit.
     #
     #    </note>
     #
@@ -425,9 +499,10 @@ module Aws::STS
     #   @return [Types::AssumedRoleUser]
     #
     # @!attribute [rw] packed_policy_size
-    #   A percentage value that indicates the size of the policy in packed
-    #   form. The service rejects any policy with a packed size greater than
-    #   100 percent, which means the policy exceeded the allowed space.
+    #   A percentage value that indicates the packed size of the session
+    #   policies and session tags combined passed in the request. The
+    #   request fails if the packed size is greater than 100 percent, which
+    #   means the policies and tags exceeded the allowed space.
     #   @return [Integer]
     #
     # @!attribute [rw] subject
@@ -546,16 +621,16 @@ module Aws::STS
     #
     #   This parameter is optional. You can provide up to 10 managed policy
     #   ARNs. However, the plain text that you use for both inline and
-    #   managed session policies shouldn't exceed 2048 characters. For more
+    #   managed session policies can't exceed 2,048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
     #   Service Namespaces][1] in the AWS General Reference.
     #
-    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
-    #   session policy guideline. However, an AWS conversion compresses the
-    #   session policies into a packed binary format that has a separate
-    #   limit. This is the enforced limit. The `PackedPolicySize` response
-    #   element indicates by percentage how close the policy is to the upper
-    #   size limit.
+    #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
+    #   tags into a packed binary format that has a separate limit. Your
+    #   request can fail for this limit even if your plain text meets the
+    #   other requirements. The `PackedPolicySize` response element
+    #   indicates by percentage how close the policies and tags for your
+    #   request are to the upper size limit.
     #
     #    </note>
     #
@@ -590,18 +665,18 @@ module Aws::STS
     #   Policies][1] in the *IAM User Guide*.
     #
     #   The plain text that you use for both inline and managed session
-    #   policies shouldn't exceed 2048 characters. The JSON policy
-    #   characters can be any ASCII character from the space character to
-    #   the end of the valid character list (\\u0020 through \\u00FF). It
-    #   can also include the tab (\\u0009), linefeed (\\u000A), and carriage
-    #   return (\\u000D) characters.
+    #   policies can't exceed 2,048 characters. The JSON policy characters
+    #   can be any ASCII character from the space character to the end of
+    #   the valid character list (\\u0020 through \\u00FF). It can also
+    #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
+    #   (\\u000D) characters.
     #
-    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
-    #   session policy guideline. However, an AWS conversion compresses the
-    #   session policies into a packed binary format that has a separate
-    #   limit. This is the enforced limit. The `PackedPolicySize` response
-    #   element indicates by percentage how close the policy is to the upper
-    #   size limit.
+    #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
+    #   tags into a packed binary format that has a separate limit. Your
+    #   request can fail for this limit even if your plain text meets the
+    #   other requirements. The `PackedPolicySize` response element
+    #   indicates by percentage how close the policies and tags for your
+    #   request are to the upper size limit.
     #
     #    </note>
     #
@@ -687,9 +762,10 @@ module Aws::STS
     #   @return [Types::AssumedRoleUser]
     #
     # @!attribute [rw] packed_policy_size
-    #   A percentage value that indicates the size of the policy in packed
-    #   form. The service rejects any policy with a packed size greater than
-    #   100 percent, which means the policy exceeded the allowed space.
+    #   A percentage value that indicates the packed size of the session
+    #   policies and session tags combined passed in the request. The
+    #   request fails if the packed size is greater than 100 percent, which
+    #   means the policies and tags exceeded the allowed space.
     #   @return [Integer]
     #
     # @!attribute [rw] provider
@@ -730,7 +806,8 @@ module Aws::STS
     # @!attribute [rw] arn
     #   The ARN of the temporary security credentials that are returned from
     #   the AssumeRole action. For more information about ARNs and how to
-    #   use them in policies, see [IAM Identifiers][1] in *Using IAM*.
+    #   use them in policies, see [IAM Identifiers][1] in the *IAM User
+    #   Guide*.
     #
     #
     #
@@ -833,7 +910,7 @@ module Aws::STS
     # @!attribute [rw] arn
     #   The ARN that specifies the federated user that is associated with
     #   the credentials. For more information about ARNs and how to use them
-    #   in policies, see [IAM Identifiers][1] in *Using IAM*.
+    #   in policies, see [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -859,7 +936,7 @@ module Aws::STS
     #   The identifier of an access key.
     #
     #   This parameter allows (through its regex pattern) a string of
-    #   characters that can consist of any upper- or lowercased letter or
+    #   characters that can consist of any upper- or lowercase letter or
     #   digit.
     #   @return [String]
     #
@@ -932,6 +1009,12 @@ module Aws::STS
     #           },
     #         ],
     #         duration_seconds: 1,
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -957,10 +1040,7 @@ module Aws::STS
     #
     #   This parameter is optional. However, if you do not pass any session
     #   policies, then the resulting federated user session has no
-    #   permissions. The only exception is when the credentials are used to
-    #   access a resource that has a resource-based policy that specifically
-    #   references the federated user session in the `Principal` element of
-    #   the policy.
+    #   permissions.
     #
     #   When you pass session policies, the session permissions are the
     #   intersection of the IAM user policies and the session policies that
@@ -970,19 +1050,26 @@ module Aws::STS
     #   the IAM user. For more information, see [Session Policies][1] in the
     #   *IAM User Guide*.
     #
-    #   The plain text that you use for both inline and managed session
-    #   policies shouldn't exceed 2048 characters. The JSON policy
-    #   characters can be any ASCII character from the space character to
-    #   the end of the valid character list (\\u0020 through \\u00FF). It
-    #   can also include the tab (\\u0009), linefeed (\\u000A), and carriage
-    #   return (\\u000D) characters.
+    #   The resulting credentials can be used to access a resource that has
+    #   a resource-based policy. If that policy specifically references the
+    #   federated user session in the `Principal` element of the policy, the
+    #   session has the permissions allowed by the policy. These permissions
+    #   are granted in addition to the permissions that are granted by the
+    #   session policies.
     #
-    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
-    #   session policy guideline. However, an AWS conversion compresses the
-    #   session policies into a packed binary format that has a separate
-    #   limit. This is the enforced limit. The `PackedPolicySize` response
-    #   element indicates by percentage how close the policy is to the upper
-    #   size limit.
+    #   The plain text that you use for both inline and managed session
+    #   policies can't exceed 2,048 characters. The JSON policy characters
+    #   can be any ASCII character from the space character to the end of
+    #   the valid character list (\\u0020 through \\u00FF). It can also
+    #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
+    #   (\\u000D) characters.
+    #
+    #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
+    #   tags into a packed binary format that has a separate limit. Your
+    #   request can fail for this limit even if your plain text meets the
+    #   other requirements. The `PackedPolicySize` response element
+    #   indicates by percentage how close the policies and tags for your
+    #   request are to the upper size limit.
     #
     #    </note>
     #
@@ -1001,17 +1088,14 @@ module Aws::STS
     #   operation. You can pass a single JSON policy document to use as an
     #   inline session policy. You can also specify up to 10 managed
     #   policies to use as managed session policies. The plain text that you
-    #   use for both inline and managed session policies shouldn't exceed
-    #   2048 characters. You can provide up to 10 managed policy ARNs. For
-    #   more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][2] in the AWS General Reference.
+    #   use for both inline and managed session policies can't exceed 2,048
+    #   characters. You can provide up to 10 managed policy ARNs. For more
+    #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
+    #   Service Namespaces][2] in the AWS General Reference.
     #
     #   This parameter is optional. However, if you do not pass any session
     #   policies, then the resulting federated user session has no
-    #   permissions. The only exception is when the credentials are used to
-    #   access a resource that has a resource-based policy that specifically
-    #   references the federated user session in the `Principal` element of
-    #   the policy.
+    #   permissions.
     #
     #   When you pass session policies, the session permissions are the
     #   intersection of the IAM user policies and the session policies that
@@ -1021,12 +1105,19 @@ module Aws::STS
     #   the IAM user. For more information, see [Session Policies][1] in the
     #   *IAM User Guide*.
     #
-    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
-    #   session policy guideline. However, an AWS conversion compresses the
-    #   session policies into a packed binary format that has a separate
-    #   limit. This is the enforced limit. The `PackedPolicySize` response
-    #   element indicates by percentage how close the policy is to the upper
-    #   size limit.
+    #   The resulting credentials can be used to access a resource that has
+    #   a resource-based policy. If that policy specifically references the
+    #   federated user session in the `Principal` element of the policy, the
+    #   session has the permissions allowed by the policy. These permissions
+    #   are granted in addition to the permissions that are granted by the
+    #   session policies.
+    #
+    #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
+    #   tags into a packed binary format that has a separate limit. Your
+    #   request can fail for this limit even if your plain text meets the
+    #   other requirements. The `PackedPolicySize` response element
+    #   indicates by percentage how close the policies and tags for your
+    #   request are to the upper size limit.
     #
     #    </note>
     #
@@ -1046,13 +1137,51 @@ module Aws::STS
     #   obtained by using root user credentials defaults to one hour.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A list of session tags. Each session tag consists of a key name and
+    #   an associated value. For more information about session tags, see
+    #   [Passing Session Tags in STS][1] in the *IAM User Guide*.
+    #
+    #   This parameter is optional. You can pass up to 50 session tags. The
+    #   plain text session tag keys can’t exceed 128 characters and the
+    #   values can’t exceed 256 characters. For these and additional limits,
+    #   see [IAM and STS Character Limits][2] in the *IAM User Guide*.
+    #
+    #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
+    #   tags into a packed binary format that has a separate limit. Your
+    #   request can fail for this limit even if your plain text meets the
+    #   other requirements. The `PackedPolicySize` response element
+    #   indicates by percentage how close the policies and tags for your
+    #   request are to the upper size limit.
+    #
+    #    </note>
+    #
+    #   You can pass a session tag with the same key as a tag that is
+    #   already attached to the user you are federating. When you do,
+    #   session tags override a user tag with the same key.
+    #
+    #   Tag key–value pairs are not case sensitive, but case is preserved.
+    #   This means that you cannot have separate `Department` and
+    #   `department` tag keys. Assume that the role has the
+    #   `Department`=`Marketing` tag and you pass the
+    #   `department`=`engineering` session tag. `Department` and
+    #   `department` are not saved as separate tags, and the session tag
+    #   passed in the request takes precedence over the role tag.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationTokenRequest AWS API Documentation
     #
     class GetFederationTokenRequest < Struct.new(
       :name,
       :policy,
       :policy_arns,
-      :duration_seconds)
+      :duration_seconds,
+      :tags)
       include Aws::Structure
     end
 
@@ -1079,9 +1208,10 @@ module Aws::STS
     #   @return [Types::FederatedUser]
     #
     # @!attribute [rw] packed_policy_size
-    #   A percentage value indicating the size of the policy in packed form.
-    #   The service rejects policies for which the packed size is greater
-    #   than 100 percent of the allowed value.
+    #   A percentage value that indicates the packed size of the session
+    #   policies and session tags combined passed in the request. The
+    #   request fails if the packed size is greater than 100 percent, which
+    #   means the policies and tags exceeded the allowed space.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationTokenResponse AWS API Documentation
@@ -1171,12 +1301,12 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # The request could not be fulfilled because the non-AWS identity
-    # provider (IDP) that was asked to verify the incoming identity token
-    # could not be reached. This is often a transient error caused by
-    # network conditions. Retry the request a limited number of times so
-    # that you don't exceed the request rate. If the error persists, the
-    # non-AWS identity provider might be down or not responding.
+    # The request could not be fulfilled because the identity provider (IDP)
+    # that was asked to verify the incoming identity token could not be
+    # reached. This is often a transient error caused by network conditions.
+    # Retry the request a limited number of times so that you don't exceed
+    # the request rate. If the error persists, the identity provider might
+    # be down or not responding.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1205,7 +1335,7 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # This error is returned if the message passed to
+    # The error returned if the message passed to
     # `DecodeAuthorizationMessage` was invalid. This can happen if the token
     # contains invalid characters, such as linebreaks.
     #
@@ -1246,9 +1376,22 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # The request was rejected because the policy document was too large.
-    # The error message describes how big the policy document is, in packed
-    # form, as a percentage of what the API allows.
+    # The request was rejected because the total packed size of the session
+    # policies and session tags combined was too large. An AWS conversion
+    # compresses the session policy document, session policy ARNs, and
+    # session tags into a packed binary format that has a separate limit.
+    # The error message indicates by percentage how close the policies and
+    # tags are to the upper size limit. For more information, see [Passing
+    # Session Tags in STS][1] in the *IAM User Guide*.
+    #
+    # You could receive this error even though you meet other defined
+    # session policy and session tag limits. For more information, see [IAM
+    # and STS Entity Character Limits][2] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1305,6 +1448,55 @@ module Aws::STS
     #
     class RegionDisabledException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # You can pass custom key-value pair attributes when you assume a role
+    # or federate a user. These are called session tags. You can then use
+    # the session tags to control access to resources. For more information,
+    # see [Tagging AWS STS Sessions][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key for a session tag.
+    #
+    #   You can pass up to 50 session tags. The plain text session tag keys
+    #   can’t exceed 128 characters. For these and additional limits, see
+    #   [IAM and STS Character Limits][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for a session tag.
+    #
+    #   You can pass up to 50 session tags. The plain text session tag
+    #   values can’t exceed 256 characters. For these and additional limits,
+    #   see [IAM and STS Character Limits][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
       include Aws::Structure
     end
 

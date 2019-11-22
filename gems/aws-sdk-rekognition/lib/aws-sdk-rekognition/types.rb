@@ -231,6 +231,7 @@ module Aws::Rekognition
     #           },
     #         },
     #         similarity_threshold: 1.0,
+    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #       }
     #
     # @!attribute [rw] source_image
@@ -260,10 +261,27 @@ module Aws::Rekognition
     #   must meet to be included in the `FaceMatches` array.
     #   @return [Float]
     #
+    # @!attribute [rw] quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't compared. If you specify
+    #   `AUTO`, Amazon Rekognition chooses the quality bar. If you specify
+    #   `LOW`, `MEDIUM`, or `HIGH`, filtering removes all faces that don’t
+    #   meet the chosen quality bar. The default value is `AUTO`. The
+    #   quality bar is based on a variety of common use cases. Low-quality
+    #   detections can occur for a number of reasons. Some examples are an
+    #   object that's misidentified as a face, a face that's too blurry,
+    #   or a face with a pose that's too extreme to use. If you specify
+    #   `NONE`, no filtering is performed.
+    #
+    #   To use quality filtering, the collection you are using must be
+    #   associated with version 3 of the face model or higher.
+    #   @return [String]
+    #
     class CompareFacesRequest < Struct.new(
       :source_image,
       :target_image,
-      :similarity_threshold)
+      :similarity_threshold,
+      :quality_filter)
       include Aws::Structure
     end
 
@@ -1093,7 +1111,7 @@ module Aws::Rekognition
     #   @return [Types::Sunglasses]
     #
     # @!attribute [rw] gender
-    #   Gender of the face and the confidence level in the determination.
+    #   The predicted gender of a detected face.
     #   @return [Types::Gender]
     #
     # @!attribute [rw] beard
@@ -1249,14 +1267,30 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Gender of the face and the confidence level in the determination.
+    # The predicted gender of a detected face.
+    #
+    # Amazon Rekognition makes gender binary (male/female) predictions based
+    # on the physical appearance of a face in a particular image. This kind
+    # of prediction is not designed to categorize a person’s gender
+    # identity, and you shouldn't use Amazon Rekognition to make such a
+    # determination. For example, a male actor wearing a long-haired wig and
+    # earrings for a role might be predicted as female.
+    #
+    # Using Amazon Rekognition to make gender binary predictions is best
+    # suited for use cases where aggregate gender distribution statistics
+    # need to be analyzed without identifying specific users. For example,
+    # the percentage of female users compared to male users on a social
+    # media platform.
+    #
+    # We don't recommend using gender binary predictions to make decisions
+    # that impact  an individual's rights, privacy, or access to services.
     #
     # @!attribute [rw] value
-    #   Gender of the face.
+    #   The predicted gender of the face.
     #   @return [String]
     #
     # @!attribute [rw] confidence
-    #   Level of confidence in the determination.
+    #   Level of confidence in the prediction.
     #   @return [Float]
     #
     class Gender < Struct.new(
@@ -1894,7 +1928,7 @@ module Aws::Rekognition
     #         external_image_id: "ExternalImageId",
     #         detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL
     #         max_faces: 1,
-    #         quality_filter: "NONE", # accepts NONE, AUTO
+    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #       }
     #
     # @!attribute [rw] collection_id
@@ -1953,19 +1987,19 @@ module Aws::Rekognition
     #   @return [Integer]
     #
     # @!attribute [rw] quality_filter
-    #   A filter that specifies how much filtering is done to identify faces
-    #   that are detected with low quality. Filtered faces aren't indexed.
-    #   If you specify `AUTO`, filtering prioritizes the identification of
-    #   faces that don’t meet the required quality bar chosen by Amazon
-    #   Rekognition. The quality bar is based on a variety of common use
-    #   cases. Low-quality detections can occur for a number of reasons.
-    #   Some examples are an object that's misidentified as a face, a face
-    #   that's too blurry, or a face with a pose that's too extreme to
-    #   use. If you specify `NONE`, no filtering is performed. The default
-    #   value is AUTO.
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't indexed. If you specify
+    #   `AUTO`, Amazon Rekognition chooses the quality bar. If you specify
+    #   `LOW`, `MEDIUM`, or `HIGH`, filtering removes all faces that don’t
+    #   meet the chosen quality bar. The default value is `AUTO`. The
+    #   quality bar is based on a variety of common use cases. Low-quality
+    #   detections can occur for a number of reasons. Some examples are an
+    #   object that's misidentified as a face, a face that's too blurry,
+    #   or a face with a pose that's too extreme to use. If you specify
+    #   `NONE`, no filtering is performed.
     #
     #   To use quality filtering, the collection you are using must be
-    #   associated with version 3 of the face model.
+    #   associated with version 3 of the face model or higher.
     #   @return [String]
     #
     class IndexFacesRequest < Struct.new(
@@ -2653,6 +2687,7 @@ module Aws::Rekognition
     #         },
     #         max_faces: 1,
     #         face_match_threshold: 1.0,
+    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #       }
     #
     # @!attribute [rw] collection_id
@@ -2681,11 +2716,28 @@ module Aws::Rekognition
     #   matches is less than 70%. The default value is 80%.
     #   @return [Float]
     #
+    # @!attribute [rw] quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't searched for in the
+    #   collection. If you specify `AUTO`, Amazon Rekognition chooses the
+    #   quality bar. If you specify `LOW`, `MEDIUM`, or `HIGH`, filtering
+    #   removes all faces that don’t meet the chosen quality bar. The
+    #   default value is `AUTO`. The quality bar is based on a variety of
+    #   common use cases. Low-quality detections can occur for a number of
+    #   reasons. Some examples are an object that's misidentified as a
+    #   face, a face that's too blurry, or a face with a pose that's too
+    #   extreme to use. If you specify `NONE`, no filtering is performed.
+    #
+    #   To use quality filtering, the collection you are using must be
+    #   associated with version 3 of the face model or higher.
+    #   @return [String]
+    #
     class SearchFacesByImageRequest < Struct.new(
       :collection_id,
       :image,
       :max_faces,
-      :face_match_threshold)
+      :face_match_threshold,
+      :quality_filter)
       include Aws::Structure
     end
 

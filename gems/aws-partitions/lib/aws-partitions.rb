@@ -236,7 +236,7 @@ module Aws
             'ApplicationInsights' => 'applicationinsights',
             'Athena' => 'athena',
             'AutoScaling' => 'autoscaling',
-            'AutoScalingPlans' => 'autoscaling',
+            'AutoScalingPlans' => 'autoscaling-plans',
             'Backup' => 'backup',
             'Batch' => 'batch',
             'Budgets' => 'budgets',

@@ -269,8 +269,7 @@ module Aws::ForecastService
     # model training. This includes the following:
     #
     # * <i> <code>DataFrequency</code> </i> - How frequently your historical
-    #   time-series data is collected. Amazon Forecast uses this information
-    #   when training the model and generating a forecast.
+    #   time-series data is collected.
     #
     # * <i> <code>Domain</code> </i> and <i> <code>DatasetType</code> </i> -
     #   Each dataset has an associated dataset domain and a type within the
@@ -279,38 +278,49 @@ module Aws::ForecastService
     #   within the domain, Amazon Forecast requires your data to include a
     #   minimum set of predefined fields.
     #
-    # * <i> <code>Schema</code> </i> - A schema specifies the fields of the
+    # * <i> <code>Schema</code> </i> - A schema specifies the fields in the
     #   dataset, including the field name and data type.
     #
-    # After creating a dataset, you import your training data into the
-    # dataset and add the dataset to a dataset group. You then use the
-    # dataset group to create a predictor. For more information, see
+    # After creating a dataset, you import your training data into it and
+    # add the dataset to a dataset group. You use the dataset group to
+    # create a predictor. For more information, see
     # howitworks-datasets-groups.
     #
     # To get a list of all your datasets, use the ListDatasets operation.
+    #
+    # For example Forecast datasets, see the [Amazon Forecast Sample GitHub
+    # repository][1].
     #
     # <note markdown="1"> The `Status` of a dataset must be `ACTIVE` before you can import
     # training data. Use the DescribeDataset operation to get the status.
     #
     #  </note>
     #
+    #
+    #
+    # [1]: https://github.com/aws-samples/amazon-forecast-samples/tree/master/data
+    #
     # @option params [required, String] :dataset_name
     #   A name for the dataset.
     #
     # @option params [required, String] :domain
-    #   The domain associated with the dataset. The `Domain` and `DatasetType`
-    #   that you choose determine the fields that must be present in the
-    #   training data that you import to the dataset. For example, if you
-    #   choose the `RETAIL` domain and `TARGET_TIME_SERIES` as the
-    #   `DatasetType`, Amazon Forecast requires `item_id`, `timestamp`, and
-    #   `demand` fields to be present in your data. For more information, see
-    #   howitworks-datasets-groups.
+    #   The domain associated with the dataset. When you add a dataset to a
+    #   dataset group, this value and the value specified for the `Domain`
+    #   parameter of the CreateDatasetGroup operation must match.
+    #
+    #   The `Domain` and `DatasetType` that you choose determine the fields
+    #   that must be present in the training data that you import to the
+    #   dataset. For example, if you choose the `RETAIL` domain and
+    #   `TARGET_TIME_SERIES` as the `DatasetType`, Amazon Forecast requires
+    #   `item_id`, `timestamp`, and `demand` fields to be present in your
+    #   data. For more information, see howitworks-datasets-groups.
     #
     # @option params [required, String] :dataset_type
     #   The dataset type. Valid values depend on the chosen `Domain`.
     #
     # @option params [String] :data_frequency
-    #   The frequency of data collection.
+    #   The frequency of data collection. This parameter is required for
+    #   RELATED\_TIME\_SERIES datasets.
     #
     #   Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour),
     #   30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5
@@ -367,10 +377,9 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Creates an Amazon Forecast dataset group, which holds a collection of
-    # related datasets. You can add datasets to the dataset group when you
-    # create the dataset group, or you can add datasets later with the
-    # UpdateDatasetGroup operation.
+    # Creates a dataset group, which holds a collection of related datasets.
+    # You can add datasets to the dataset group when you create the dataset
+    # group, or later by using the UpdateDatasetGroup operation.
     #
     # After creating a dataset group and adding datasets, you use the
     # dataset group when you create a predictor. For more information, see
@@ -380,8 +389,8 @@ module Aws::ForecastService
     # operation.
     #
     # <note markdown="1"> The `Status` of a dataset group must be `ACTIVE` before you can create
-    # a predictor using the dataset group. Use the DescribeDatasetGroup
-    # operation to get the status.
+    # use the dataset group to create a predictor. To get the status, use
+    # the DescribeDatasetGroup operation.
     #
     #  </note>
     #
@@ -389,13 +398,16 @@ module Aws::ForecastService
     #   A name for the dataset group.
     #
     # @option params [required, String] :domain
-    #   The domain associated with the dataset group. The `Domain` and
-    #   `DatasetType` that you choose determine the fields that must be
-    #   present in the training data that you import to the dataset. For
-    #   example, if you choose the `RETAIL` domain and `TARGET_TIME_SERIES` as
-    #   the `DatasetType`, Amazon Forecast requires `item_id`, `timestamp`,
-    #   and `demand` fields to be present in your data. For more information,
-    #   see howitworks-datasets-groups.
+    #   The domain associated with the dataset group. When you add a dataset
+    #   to a dataset group, this value and the value specified for the
+    #   `Domain` parameter of the CreateDataset operation must match.
+    #
+    #   The `Domain` and `DatasetType` that you choose determine the fields
+    #   that must be present in training data that you import to a dataset.
+    #   For example, if you choose the `RETAIL` domain and
+    #   `TARGET_TIME_SERIES` as the `DatasetType`, Amazon Forecast requires
+    #   that `item_id`, `timestamp`, and `demand` fields are present in your
+    #   data. For more information, see howitworks-datasets-groups.
     #
     # @option params [Array<String>] :dataset_arns
     #   An array of Amazon Resource Names (ARNs) of the datasets that you want
@@ -435,35 +447,21 @@ module Aws::ForecastService
     # Access Management (IAM) role that Amazon Forecast can assume to access
     # the data. For more information, see aws-forecast-iam-roles.
     #
-    # Two properties of the training data are optionally specified:
+    # The training data must be in CSV format. The delimiter must be a comma
+    # (,).
     #
-    # * The delimiter that separates the data fields.
+    # You can specify the path to a specific CSV file, the S3 bucket, or to
+    # a folder in the S3 bucket. For the latter two cases, Amazon Forecast
+    # imports all files up to the limit of 10,000 files.
     #
-    #   The default delimiter is a comma (,), which is the only supported
-    #   delimiter in this release.
-    #
-    # * The format of timestamps.
-    #
-    #   If the format is not specified, Amazon Forecast expects the format
-    #   to be "yyyy-MM-dd HH:mm:ss".
-    #
-    # When Amazon Forecast uploads your training data, it verifies that the
-    # data was collected at the `DataFrequency` specified when the target
-    # dataset was created. For more information, see CreateDataset and
-    # howitworks-datasets-groups. Amazon Forecast also verifies the
-    # delimiter and timestamp format.
-    #
-    # You can use the ListDatasetImportJobs operation to get a list of all
-    # your dataset import jobs, filtered by specified criteria.
-    #
-    # To get a list of all your dataset import jobs, filtered by the
-    # specified criteria, use the ListDatasetGroups operation.
+    # To get a list of all your dataset import jobs, filtered by specified
+    # criteria, use the ListDatasetImportJobs operation.
     #
     # @option params [required, String] :dataset_import_job_name
-    #   The name for the dataset import job. It is recommended to include the
-    #   current timestamp in the name to guard against getting a
-    #   `ResourceAlreadyExistsException` exception, for example,
-    #   `20190721DatasetImport`.
+    #   The name for the dataset import job. We recommend including the
+    #   current timestamp in the name, for example, `20190721DatasetImport`.
+    #   This can help you avoid getting a `ResourceAlreadyExistsException`
+    #   exception.
     #
     # @option params [required, String] :dataset_arn
     #   The Amazon Resource Name (ARN) of the Amazon Forecast dataset that you
@@ -472,21 +470,30 @@ module Aws::ForecastService
     # @option params [required, Types::DataSource] :data_source
     #   The location of the training data to import and an AWS Identity and
     #   Access Management (IAM) role that Amazon Forecast can assume to access
-    #   the data.
+    #   the data. The training data must be stored in an Amazon S3 bucket.
+    #
+    #   If encryption is used, `DataSource` must include an AWS Key Management
+    #   Service (KMS) key and the IAM role must allow Amazon Forecast
+    #   permission to access the key. The KMS key and IAM role must match
+    #   those specified in the `EncryptionConfig` parameter of the
+    #   CreateDataset operation.
     #
     # @option params [String] :timestamp_format
-    #   The format of timestamps in the dataset. Two formats are supported,
-    #   dependent on the `DataFrequency` specified when the dataset was
-    #   created.
+    #   The format of timestamps in the dataset. The format that you specify
+    #   depends on the `DataFrequency` specified when the dataset was created.
+    #   The following formats are supported
     #
     #   * "yyyy-MM-dd"
     #
-    #     For data frequencies: Y, M, W, and D
+    #     For the following data frequencies: Y, M, W, and D
     #
     #   * "yyyy-MM-dd HH:mm:ss"
     #
-    #     For data frequencies: H, 30min, 15min, and 1min; and optionally,
-    #     for: Y, M, W, and D
+    #     For the following data frequencies: H, 30min, 15min, and 1min; and
+    #     optionally, for: Y, M, W, and D
+    #
+    #   If the format isn't specified, Amazon Forecast expects the format to
+    #   be "yyyy-MM-dd HH:mm:ss".
     #
     # @return [Types::CreateDatasetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -524,19 +531,19 @@ module Aws::ForecastService
     # that was used to train the predictor. This is known as inference. To
     # retrieve the forecast for a single item at low latency, use the
     # operation. To export the complete forecast into your Amazon Simple
-    # Storage Service (Amazon S3), use the CreateForecastExportJob
+    # Storage Service (Amazon S3) bucket, use the CreateForecastExportJob
     # operation.
     #
-    # The range of the forecast is determined by the `ForecastHorizon`,
-    # specified in the CreatePredictor request, multiplied by the
-    # `DataFrequency`, specified in the CreateDataset request. When you
-    # query a forecast, you can request a specific date range within the
-    # complete forecast.
+    # The range of the forecast is determined by the `ForecastHorizon`
+    # value, which you specify in the CreatePredictor request, multiplied by
+    # the `DataFrequency` value, which you specify in the CreateDataset
+    # request. When you query a forecast, you can request a specific date
+    # range within the forecast.
     #
     # To get a list of all your forecasts, use the ListForecasts operation.
     #
-    # <note markdown="1"> The forecasts generated by Amazon Forecast are in the same timezone as
-    # the dataset that was used to create the predictor.
+    # <note markdown="1"> The forecasts generated by Amazon Forecast are in the same time zone
+    # as the dataset that was used to create the predictor.
     #
     #  </note>
     #
@@ -549,11 +556,19 @@ module Aws::ForecastService
     #  </note>
     #
     # @option params [required, String] :forecast_name
-    #   The name for the forecast.
+    #   A name for the forecast.
     #
     # @option params [required, String] :predictor_arn
     #   The Amazon Resource Name (ARN) of the predictor to use to generate the
     #   forecast.
+    #
+    # @option params [Array<String>] :forecast_types
+    #   The quantiles at which probabilistic forecasts are generated. You can
+    #   specify up to 5 quantiles per forecast. Accepted values include `0.01
+    #   to 0.99` (increments of .01 only) and `mean`. The mean forecast is
+    #   different from the median (0.50) when the distribution is not
+    #   symmetric (e.g. Beta, Negative Binomial). The default value is
+    #   `["0.1", "0.5", "0.9"]`.
     #
     # @return [Types::CreateForecastResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -564,6 +579,7 @@ module Aws::ForecastService
     #   resp = client.create_forecast({
     #     forecast_name: "Name", # required
     #     predictor_arn: "Arn", # required
+    #     forecast_types: ["ForecastType"],
     #   })
     #
     # @example Response structure
@@ -580,7 +596,13 @@ module Aws::ForecastService
     end
 
     # Exports a forecast created by the CreateForecast operation to your
-    # Amazon Simple Storage Service (Amazon S3) bucket.
+    # Amazon Simple Storage Service (Amazon S3) bucket. The forecast file
+    # name will match the following conventions:
+    #
+    # &lt;ForecastExportJobName&gt;\_&lt;ExportTimestamp&gt;\_&lt;PageNumber&gt;
+    #
+    # where the &lt;ExportTimestamp&gt; component is in Java
+    # SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ).
     #
     # You must specify a DataDestination object that includes an AWS
     # Identity and Access Management (IAM) role that Amazon Forecast can
@@ -593,8 +615,8 @@ module Aws::ForecastService
     # ListForecastExportJobs operation.
     #
     # <note markdown="1"> The `Status` of the forecast export job must be `ACTIVE` before you
-    # can access the forecast in your Amazon S3 bucket. Use the
-    # DescribeForecastExportJob operation to get the status.
+    # can access the forecast in your Amazon S3 bucket. To get the status,
+    # use the DescribeForecastExportJob operation.
     #
     #  </note>
     #
@@ -606,9 +628,14 @@ module Aws::ForecastService
     #   export.
     #
     # @option params [required, Types::DataDestination] :destination
-    #   The path to the Amazon S3 bucket where you want to save the forecast
-    #   and an AWS Identity and Access Management (IAM) role that Amazon
-    #   Forecast can assume to access the bucket.
+    #   The location where you want to save the forecast and an AWS Identity
+    #   and Access Management (IAM) role that Amazon Forecast can assume to
+    #   access the location. The forecast must be exported to an Amazon S3
+    #   bucket.
+    #
+    #   If encryption is used, `Destination` must include an AWS Key
+    #   Management Service (KMS) key. The IAM role must allow Amazon Forecast
+    #   permission to access the key.
     #
     # @return [Types::CreateForecastExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -659,15 +686,21 @@ module Aws::ForecastService
     # the predictor to generate a forecast.
     #
     # Optionally, you can specify a featurization configuration to fill and
-    # aggragate the data fields in the `TARGET_TIME_SERIES` dataset to
+    # aggregate the data fields in the `TARGET_TIME_SERIES` dataset to
     # improve model training. For more information, see FeaturizationConfig.
+    #
+    # For RELATED\_TIME\_SERIES datasets, `CreatePredictor` verifies that
+    # the `DataFrequency` specified when the dataset was created matches the
+    # `ForecastFrequency`. TARGET\_TIME\_SERIES datasets don't have this
+    # restriction. Amazon Forecast also verifies the delimiter and timestamp
+    # format. For more information, see howitworks-datasets-groups.
     #
     # **AutoML**
     #
-    # If you set `PerformAutoML` to `true`, Amazon Forecast evaluates each
-    # algorithm and chooses the one that minimizes the `objective function`.
-    # The `objective function` is defined as the mean of the weighted p10,
-    # p50, and p90 quantile losses. For more information, see
+    # If you want Amazon Forecast to evaluate each algorithm and choose the
+    # one that minimizes the `objective function`, set `PerformAutoML` to
+    # `true`. The `objective function` is defined as the mean of the
+    # weighted p10, p50, and p90 quantile losses. For more information, see
     # EvaluationResult.
     #
     # When AutoML is enabled, the following properties are disallowed:
@@ -680,12 +713,12 @@ module Aws::ForecastService
     #
     # * `TrainingParameters`
     #
-    # To get a list of all your predictors, use the ListPredictors
+    # To get a list of all of your predictors, use the ListPredictors
     # operation.
     #
-    # <note markdown="1"> The `Status` of the predictor must be `ACTIVE`, signifying that
-    # training has completed, before you can use the predictor to create a
-    # forecast. Use the DescribePredictor operation to get the status.
+    # <note markdown="1"> Before you can use the predictor to create a forecast, the `Status` of
+    # the predictor must be `ACTIVE`, signifying that training has
+    # completed. To get the status, use the DescribePredictor operation.
     #
     #  </note>
     #
@@ -696,13 +729,13 @@ module Aws::ForecastService
     #   The Amazon Resource Name (ARN) of the algorithm to use for model
     #   training. Required if `PerformAutoML` is not set to `true`.
     #
-    #   **Supported algorithms**
+    #   **Supported algorithms:**
     #
     #   * `arn:aws:forecast:::algorithm/ARIMA`
     #
     #   * `arn:aws:forecast:::algorithm/Deep_AR_Plus`
     #
-    #     `- supports hyperparameter optimization (HPO)`
+    #     Supports hyperparameter optimization (HPO)
     #
     #   * `arn:aws:forecast:::algorithm/ETS`
     #
@@ -719,37 +752,46 @@ module Aws::ForecastService
     #   and set the forecast horizon to 10, the model returns predictions for
     #   10 days.
     #
-    # @option params [Boolean] :perform_auto_ml
-    #   Whether to perform AutoML. The default value is `false`. In this case,
-    #   you are required to specify an algorithm.
+    #   The maximum forecast horizon is the lesser of 500 time-steps or 1/3 of
+    #   the TARGET\_TIME\_SERIES dataset length.
     #
-    #   If you want Amazon Forecast to evaluate the algorithms it provides and
-    #   choose the best algorithm and configuration for your training dataset,
-    #   set `PerformAutoML` to `true`. This is a good option if you aren't
-    #   sure which algorithm is suitable for your application.
+    # @option params [Boolean] :perform_auto_ml
+    #   Whether to perform AutoML. When Amazon Forecast performs AutoML, it
+    #   evaluates the algorithms it provides and chooses the best algorithm
+    #   and configuration for your training dataset.
+    #
+    #   The default value is `false`. In this case, you are required to
+    #   specify an algorithm.
+    #
+    #   Set `PerformAutoML` to `true` to have Amazon Forecast perform AutoML.
+    #   This is a good option if you aren't sure which algorithm is suitable
+    #   for your training data. In this case, `PerformHPO` must be false.
     #
     # @option params [Boolean] :perform_hpo
     #   Whether to perform hyperparameter optimization (HPO). HPO finds
     #   optimal hyperparameter values for your training data. The process of
-    #   performing HPO is known as a hyperparameter tuning job.
+    #   performing HPO is known as running a hyperparameter tuning job.
     #
     #   The default value is `false`. In this case, Amazon Forecast uses
     #   default hyperparameter values from the chosen algorithm.
     #
-    #   To override the default values, set `PerformHPO` to `true` and supply
-    #   the HyperParameterTuningJobConfig object. The tuning job specifies an
-    #   objective metric, the hyperparameters to optimize, and the valid range
-    #   for each hyperparameter.
+    #   To override the default values, set `PerformHPO` to `true` and,
+    #   optionally, supply the HyperParameterTuningJobConfig object. The
+    #   tuning job specifies a metric to optimize, which hyperparameters
+    #   participate in tuning, and the valid range for each tunable
+    #   hyperparameter. In this case, you are required to specify an algorithm
+    #   and `PerformAutoML` must be false.
     #
-    #   The following algorithms support HPO:
+    #   The following algorithm supports HPO:
     #
     #   * DeepAR+
     #
     #   ^
     #
     # @option params [Hash<String,String>] :training_parameters
-    #   The training parameters to override for model training. The parameters
-    #   that you can override are listed in the individual algorithms in
+    #   The hyperparameters to override for model training. The
+    #   hyperparameters that you can override are listed in the individual
+    #   algorithms. For the list of supported algorithms, see
     #   aws-forecast-choosing-recipes.
     #
     # @option params [Types::EvaluationParameters] :evaluation_parameters
@@ -764,6 +806,9 @@ module Aws::ForecastService
     #   The individual algorithms specify which hyperparameters support
     #   hyperparameter optimization (HPO). For more information, see
     #   aws-forecast-choosing-recipes.
+    #
+    #   If you included the `HPOConfig` object, you must set `PerformHPO` to
+    #   true.
     #
     # @option params [required, Types::InputDataConfig] :input_data_config
     #   Describes the dataset group that contains the data to use to train the
@@ -867,10 +912,10 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Deletes an Amazon Forecast dataset created using the CreateDataset
-    # operation. To be deleted, the dataset must have a status of `ACTIVE`
-    # or `CREATE_FAILED`. Use the DescribeDataset operation to get the
-    # status.
+    # Deletes an Amazon Forecast dataset that was created using the
+    # CreateDataset operation. You can only delete datasets that have a
+    # status of `ACTIVE` or `CREATE_FAILED`. To get the status use the
+    # DescribeDataset operation.
     #
     # @option params [required, String] :dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset to delete.
@@ -893,11 +938,11 @@ module Aws::ForecastService
     end
 
     # Deletes a dataset group created using the CreateDatasetGroup
-    # operation. To be deleted, the dataset group must have a status of
-    # `ACTIVE`, `CREATE_FAILED`, or `UPDATE_FAILED`. Use the
-    # DescribeDatasetGroup operation to get the status.
+    # operation. You can only delete dataset groups that have a status of
+    # `ACTIVE`, `CREATE_FAILED`, or `UPDATE_FAILED`. To get the status, use
+    # the DescribeDatasetGroup operation.
     #
-    # The operation deletes only the dataset group, not the datasets in the
+    # This operation deletes only the dataset group, not the datasets in the
     # group.
     #
     # @option params [required, String] :dataset_group_arn
@@ -921,9 +966,9 @@ module Aws::ForecastService
     end
 
     # Deletes a dataset import job created using the CreateDatasetImportJob
-    # operation. To be deleted, the import job must have a status of
-    # `ACTIVE` or `CREATE_FAILED`. Use the DescribeDatasetImportJob
-    # operation to get the status.
+    # operation. You can delete only dataset import jobs that have a status
+    # of `ACTIVE` or `CREATE_FAILED`. To get the status, use the
+    # DescribeDatasetImportJob operation.
     #
     # @option params [required, String] :dataset_import_job_arn
     #   The Amazon Resource Name (ARN) of the dataset import job to delete.
@@ -945,11 +990,13 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Deletes a forecast created using the CreateForecast operation. To be
-    # deleted, the forecast must have a status of `ACTIVE` or
-    # `CREATE_FAILED`. Use the DescribeForecast operation to get the status.
+    # Deletes a forecast created using the CreateForecast operation. You can
+    # delete only forecasts that have a status of `ACTIVE` or
+    # `CREATE_FAILED`. To get the status, use the DescribeForecast
+    # operation.
     #
-    # You can't delete a forecast while it is being exported.
+    # You can't delete a forecast while it is being exported. After a
+    # forecast is deleted, you can no longer query the forecast.
     #
     # @option params [required, String] :forecast_arn
     #   The Amazon Resource Name (ARN) of the forecast to delete.
@@ -972,9 +1019,9 @@ module Aws::ForecastService
     end
 
     # Deletes a forecast export job created using the
-    # CreateForecastExportJob operation. To be deleted, the export job must
-    # have a status of `ACTIVE` or `CREATE_FAILED`. Use the
-    # DescribeForecastExportJob operation to get the status.
+    # CreateForecastExportJob operation. You can delete only export jobs
+    # that have a status of `ACTIVE` or `CREATE_FAILED`. To get the status,
+    # use the DescribeForecastExportJob operation.
     #
     # @option params [required, String] :forecast_export_job_arn
     #   The Amazon Resource Name (ARN) of the forecast export job to delete.
@@ -996,12 +1043,10 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Deletes a predictor created using the CreatePredictor operation. To be
-    # deleted, the predictor must have a status of `ACTIVE` or
-    # `CREATE_FAILED`. Use the DescribePredictor operation to get the
-    # status.
-    #
-    # Any forecasts generated by the predictor will no longer be available.
+    # Deletes a predictor created using the CreatePredictor operation. You
+    # can delete only predictor that have a status of `ACTIVE` or
+    # `CREATE_FAILED`. To get the status, use the DescribePredictor
+    # operation.
     #
     # @option params [required, String] :predictor_arn
     #   The Amazon Resource Name (ARN) of the predictor to delete.
@@ -1026,9 +1071,8 @@ module Aws::ForecastService
     # Describes an Amazon Forecast dataset created using the CreateDataset
     # operation.
     #
-    # In addition to listing the properties provided by the user in the
-    # `CreateDataset` request, this operation includes the following
-    # properties:
+    # In addition to listing the parameters specified in the `CreateDataset`
+    # request, this operation includes the following dataset properties:
     #
     # * `CreationTime`
     #
@@ -1086,7 +1130,7 @@ module Aws::ForecastService
     # Describes a dataset group created using the CreateDatasetGroup
     # operation.
     #
-    # In addition to listing the properties provided by the user in the
+    # In addition to listing the parameters provided in the
     # `CreateDatasetGroup` request, this operation includes the following
     # properties:
     #
@@ -1140,7 +1184,7 @@ module Aws::ForecastService
     # Describes a dataset import job created using the
     # CreateDatasetImportJob operation.
     #
-    # In addition to listing the properties provided by the user in the
+    # In addition to listing the parameters provided in the
     # `CreateDatasetImportJob` request, this operation includes the
     # following properties:
     #
@@ -1214,9 +1258,8 @@ module Aws::ForecastService
 
     # Describes a forecast created using the CreateForecast operation.
     #
-    # In addition to listing the properties provided by the user in the
-    # `CreateForecast` request, this operation includes the following
-    # properties:
+    # In addition to listing the properties provided in the `CreateForecast`
+    # request, this operation lists the following properties:
     #
     # * `DatasetGroupArn` - The dataset group that provided the training
     #   data.
@@ -1236,6 +1279,7 @@ module Aws::ForecastService
     #
     #   * {Types::DescribeForecastResponse#forecast_arn #forecast_arn} => String
     #   * {Types::DescribeForecastResponse#forecast_name #forecast_name} => String
+    #   * {Types::DescribeForecastResponse#forecast_types #forecast_types} => Array&lt;String&gt;
     #   * {Types::DescribeForecastResponse#predictor_arn #predictor_arn} => String
     #   * {Types::DescribeForecastResponse#dataset_group_arn #dataset_group_arn} => String
     #   * {Types::DescribeForecastResponse#status #status} => String
@@ -1253,6 +1297,8 @@ module Aws::ForecastService
     #
     #   resp.forecast_arn #=> String
     #   resp.forecast_name #=> String
+    #   resp.forecast_types #=> Array
+    #   resp.forecast_types[0] #=> String
     #   resp.predictor_arn #=> String
     #   resp.dataset_group_arn #=> String
     #   resp.status #=> String
@@ -1273,8 +1319,8 @@ module Aws::ForecastService
     # CreateForecastExportJob operation.
     #
     # In addition to listing the properties provided by the user in the
-    # `CreateForecastExportJob` request, this operation includes the
-    # following properties:
+    # `CreateForecastExportJob` request, this operation lists the following
+    # properties:
     #
     # * `CreationTime`
     #
@@ -1328,15 +1374,15 @@ module Aws::ForecastService
 
     # Describes a predictor created using the CreatePredictor operation.
     #
-    # In addition to listing the properties provided by the user in the
-    # `CreatePredictor` request, this operation includes the following
+    # In addition to listing the properties provided in the
+    # `CreatePredictor` request, this operation lists the following
     # properties:
     #
     # * `DatasetImportJobArns` - The dataset import jobs used to import
     #   training data.
     #
-    # * `AutoMLAlgorithmArns` - If AutoML is performed, the algorithms
-    #   evaluated.
+    # * `AutoMLAlgorithmArns` - If AutoML is performed, the algorithms that
+    #   were evaluated.
     #
     # * `CreationTime`
     #
@@ -1364,6 +1410,7 @@ module Aws::ForecastService
     #   * {Types::DescribePredictorResponse#input_data_config #input_data_config} => Types::InputDataConfig
     #   * {Types::DescribePredictorResponse#featurization_config #featurization_config} => Types::FeaturizationConfig
     #   * {Types::DescribePredictorResponse#encryption_config #encryption_config} => Types::EncryptionConfig
+    #   * {Types::DescribePredictorResponse#predictor_execution_details #predictor_execution_details} => Types::PredictorExecutionDetails
     #   * {Types::DescribePredictorResponse#dataset_import_job_arns #dataset_import_job_arns} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#auto_ml_algorithm_arns #auto_ml_algorithm_arns} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#status #status} => String
@@ -1418,6 +1465,13 @@ module Aws::ForecastService
     #   resp.featurization_config.featurizations[0].featurization_pipeline[0].featurization_method_parameters["ParameterKey"] #=> String
     #   resp.encryption_config.role_arn #=> String
     #   resp.encryption_config.kms_key_arn #=> String
+    #   resp.predictor_execution_details.predictor_executions #=> Array
+    #   resp.predictor_execution_details.predictor_executions[0].algorithm_arn #=> String
+    #   resp.predictor_execution_details.predictor_executions[0].test_windows #=> Array
+    #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].test_window_start #=> Time
+    #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].test_window_end #=> Time
+    #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].status #=> String
+    #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].message #=> String
     #   resp.dataset_import_job_arns #=> Array
     #   resp.dataset_import_job_arns[0] #=> String
     #   resp.auto_ml_algorithm_arns #=> Array
@@ -1439,19 +1493,26 @@ module Aws::ForecastService
     # Provides metrics on the accuracy of the models that were trained by
     # the CreatePredictor operation. Use metrics to see how well the model
     # performed and to decide whether to use the predictor to generate a
-    # forecast.
+    # forecast. For more information, see metrics.
     #
-    # Metrics are generated for each backtest window evaluated. For more
-    # information, see EvaluationParameters.
+    # This operation generates metrics for each backtest window that was
+    # evaluated. The number of backtest windows (`NumberOfBacktestWindows`)
+    # is specified using the EvaluationParameters object, which is
+    # optionally included in the `CreatePredictor` request. If
+    # `NumberOfBacktestWindows` isn't specified, the number defaults to
+    # one.
     #
     # The parameters of the `filling` method determine which items
-    # contribute to the metrics. If `zero` is specified, all items
-    # contribute. If `nan` is specified, only those items that have complete
-    # data in the range being evaluated contribute. For more information,
-    # see FeaturizationMethod.
+    # contribute to the metrics. If you want all items to contribute,
+    # specify `zero`. If you want only those items that have complete data
+    # in the range being evaluated to contribute, specify `nan`. For more
+    # information, see FeaturizationMethod.
     #
-    # For an example of how to train a model and review metrics, see
-    # getting-started.
+    # <note markdown="1"> Before you can get accuracy metrics, the `Status` of the predictor
+    # must be `ACTIVE`, signifying that training has completed. To get the
+    # status, use the DescribePredictor operation.
+    #
+    #  </note>
     #
     # @option params [required, String] :predictor_arn
     #   The Amazon Resource Name (ARN) of the predictor to get metrics for.
@@ -1490,10 +1551,10 @@ module Aws::ForecastService
     end
 
     # Returns a list of dataset groups created using the CreateDatasetGroup
-    # operation. For each dataset group, a summary of its properties,
-    # including its Amazon Resource Name (ARN), is returned. You can
-    # retrieve the complete set of properties by using the ARN with the
-    # DescribeDatasetGroup operation.
+    # operation. For each dataset group, this operation returns a summary of
+    # its properties, including its Amazon Resource Name (ARN). You can
+    # retrieve the complete set of properties by using the dataset group ARN
+    # with the DescribeDatasetGroup operation.
     #
     # @option params [String] :next_token
     #   If the result of the previous request was truncated, the response
@@ -1534,11 +1595,11 @@ module Aws::ForecastService
     end
 
     # Returns a list of dataset import jobs created using the
-    # CreateDatasetImportJob operation. For each import job, a summary of
-    # its properties, including its Amazon Resource Name (ARN), is returned.
-    # You can retrieve the complete set of properties by using the ARN with
-    # the DescribeDatasetImportJob operation. You can filter the list by
-    # providing an array of Filter objects.
+    # CreateDatasetImportJob operation. For each import job, this operation
+    # returns a summary of its properties, including its Amazon Resource
+    # Name (ARN). You can retrieve the complete set of properties by using
+    # the ARN with the DescribeDatasetImportJob operation. You can filter
+    # the list by providing an array of Filter objects.
     #
     # @option params [String] :next_token
     #   If the result of the previous request was truncated, the response
@@ -1551,22 +1612,26 @@ module Aws::ForecastService
     # @option params [Array<Types::Filter>] :filters
     #   An array of filters. For each filter, you provide a condition and a
     #   match statement. The condition is either `IS` or `IS_NOT`, which
-    #   specifies whether to include or exclude, respectively, from the list,
-    #   the predictors that match the statement. The match statement consists
-    #   of a key and a value. In this release, `Name` is the only valid key,
-    #   which filters on the `DatasetImportJobName` property.
+    #   specifies whether to include or exclude the datasets that match the
+    #   statement from the list, respectively. The match statement consists of
+    #   a key and a value.
     #
-    #   * `Condition` - `IS` or `IS_NOT`
+    #   **Filter properties**
     #
-    #   * `Key` - `Name`
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the datasets that match the statement, specify
+    #     `IS`. To exclude matching datasets, specify `IS_NOT`.
     #
-    #   * `Value` - the value to match
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `DatasetArn` and `Status`.
     #
-    #   For example, to list all dataset import jobs named
-    #   *my\_dataset\_import\_job*, you would specify:
+    #   * `Value` - The value to match.
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Name", "Value":
-    #   "my_dataset_import_job" \} ]`
+    #   For example, to list all dataset import jobs whose status is ACTIVE,
+    #   you specify the following filter:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value": "ACTIVE"
+    #   \} ]`
     #
     # @return [Types::ListDatasetImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1612,8 +1677,8 @@ module Aws::ForecastService
 
     # Returns a list of datasets created using the CreateDataset operation.
     # For each dataset, a summary of its properties, including its Amazon
-    # Resource Name (ARN), is returned. You can retrieve the complete set of
-    # properties by using the ARN with the DescribeDataset operation.
+    # Resource Name (ARN), is returned. To retrieve the complete set of
+    # properties, use the ARN with the DescribeDataset operation.
     #
     # @option params [String] :next_token
     #   If the result of the previous request was truncated, the response
@@ -1656,11 +1721,11 @@ module Aws::ForecastService
     end
 
     # Returns a list of forecast export jobs created using the
-    # CreateForecastExportJob operation. For each forecast export job, a
-    # summary of its properties, including its Amazon Resource Name (ARN),
-    # is returned. You can retrieve the complete set of properties by using
-    # the ARN with the DescribeForecastExportJob operation. The list can be
-    # filtered using an array of Filter objects.
+    # CreateForecastExportJob operation. For each forecast export job, this
+    # operation returns a summary of its properties, including its Amazon
+    # Resource Name (ARN). To retrieve the complete set of properties, use
+    # the ARN with the DescribeForecastExportJob operation. You can filter
+    # the list using an array of Filter objects.
     #
     # @option params [String] :next_token
     #   If the result of the previous request was truncated, the response
@@ -1673,22 +1738,28 @@ module Aws::ForecastService
     # @option params [Array<Types::Filter>] :filters
     #   An array of filters. For each filter, you provide a condition and a
     #   match statement. The condition is either `IS` or `IS_NOT`, which
-    #   specifies whether to include or exclude, respectively, from the list,
-    #   the predictors that match the statement. The match statement consists
-    #   of a key and a value. In this release, `Name` is the only valid key,
-    #   which filters on the `ForecastExportJobName` property.
+    #   specifies whether to include or exclude the forecast export jobs that
+    #   match the statement from the list, respectively. The match statement
+    #   consists of a key and a value.
     #
-    #   * `Condition` - `IS` or `IS_NOT`
+    #   **Filter properties**
     #
-    #   * `Key` - `Name`
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the forecast export jobs that match the
+    #     statement, specify `IS`. To exclude matching forecast export jobs,
+    #     specify `IS_NOT`.
     #
-    #   * `Value` - the value to match
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `ForecastArn` and `Status`.
     #
-    #   For example, to list all forecast export jobs named
-    #   *my\_forecast\_export\_job*, you would specify:
+    #   * `Value` - The value to match.
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Name", "Value":
-    #   "my_forecast_export_job" \} ]`
+    #   For example, to list all jobs that export a forecast named
+    #   *electricityforecast*, specify the following filter:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "ForecastArn", "Value":
+    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityforecast" \}
+    #   ]`
     #
     # @return [Types::ListForecastExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1733,10 +1804,10 @@ module Aws::ForecastService
     end
 
     # Returns a list of forecasts created using the CreateForecast
-    # operation. For each forecast, a summary of its properties, including
-    # its Amazon Resource Name (ARN), is returned. You can retrieve the
-    # complete set of properties by using the ARN with the DescribeForecast
-    # operation. The list can be filtered using an array of Filter objects.
+    # operation. For each forecast, this operation returns a summary of its
+    # properties, including its Amazon Resource Name (ARN). To retrieve the
+    # complete set of properties, specify the ARN with the DescribeForecast
+    # operation. You can filter the list using an array of Filter objects.
     #
     # @option params [String] :next_token
     #   If the result of the previous request was truncated, the response
@@ -1749,22 +1820,26 @@ module Aws::ForecastService
     # @option params [Array<Types::Filter>] :filters
     #   An array of filters. For each filter, you provide a condition and a
     #   match statement. The condition is either `IS` or `IS_NOT`, which
-    #   specifies whether to include or exclude, respectively, from the list,
-    #   the predictors that match the statement. The match statement consists
-    #   of a key and a value. In this release, `Name` is the only valid key,
-    #   which filters on the `ForecastName` property.
+    #   specifies whether to include or exclude the forecasts that match the
+    #   statement from the list, respectively. The match statement consists of
+    #   a key and a value.
     #
-    #   * `Condition` - `IS` or `IS_NOT`
+    #   **Filter properties**
     #
-    #   * `Key` - `Name`
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the forecasts that match the statement, specify
+    #     `IS`. To exclude matching forecasts, specify `IS_NOT`.
     #
-    #   * `Value` - the value to match
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `DatasetGroupArn`, `PredictorArn`, and `Status`.
     #
-    #   For example, to list all forecasts named *my\_forecast*, you would
-    #   specify:
+    #   * `Value` - The value to match.
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Name", "Value":
-    #   "my_forecast" \} ]`
+    #   For example, to list all forecasts whose status is not ACTIVE, you
+    #   would specify:
+    #
+    #   `"Filters": [ \{ "Condition": "IS_NOT", "Key": "Status", "Value":
+    #   "ACTIVE" \} ]`
     #
     # @return [Types::ListForecastsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1808,10 +1883,11 @@ module Aws::ForecastService
     end
 
     # Returns a list of predictors created using the CreatePredictor
-    # operation. For each predictor, a summary of its properties, including
-    # its Amazon Resource Name (ARN), is returned. You can retrieve the
-    # complete set of properties by using the ARN with the DescribePredictor
-    # operation. The list can be filtered using an array of Filter objects.
+    # operation. For each predictor, this operation returns a summary of its
+    # properties, including its Amazon Resource Name (ARN). You can retrieve
+    # the complete set of properties by using the ARN with the
+    # DescribePredictor operation. You can filter the list using an array of
+    # Filter objects.
     #
     # @option params [String] :next_token
     #   If the result of the previous request was truncated, the response
@@ -1824,22 +1900,26 @@ module Aws::ForecastService
     # @option params [Array<Types::Filter>] :filters
     #   An array of filters. For each filter, you provide a condition and a
     #   match statement. The condition is either `IS` or `IS_NOT`, which
-    #   specifies whether to include or exclude, respectively, from the list,
-    #   the predictors that match the statement. The match statement consists
-    #   of a key and a value. In this release, `Name` is the only valid key,
-    #   which filters on the `PredictorName` property.
+    #   specifies whether to include or exclude the predictors that match the
+    #   statement from the list, respectively. The match statement consists of
+    #   a key and a value.
     #
-    #   * `Condition` - `IS` or `IS_NOT`
+    #   **Filter properties**
     #
-    #   * `Key` - `Name`
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the predictors that match the statement,
+    #     specify `IS`. To exclude matching predictors, specify `IS_NOT`.
     #
-    #   * `Value` - the value to match
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `DatasetGroupArn` and `Status`.
     #
-    #   For example, to list all predictors named *my\_predictor*, you would
+    #   * `Value` - The value to match.
+    #
+    #   For example, to list all predictors whose status is ACTIVE, you would
     #   specify:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Name", "Value":
-    #   "my_predictor" \} ]`
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value": "ACTIVE"
+    #   \} ]`
     #
     # @return [Types::ListPredictorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1881,11 +1961,10 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Replaces any existing datasets in the dataset group with the specified
-    # datasets.
+    # Replaces the datasets in a dataset group with the specified datasets.
     #
-    # <note markdown="1"> The `Status` of the dataset group must be `ACTIVE` before creating a
-    # predictor using the dataset group. Use the DescribeDatasetGroup
+    # <note markdown="1"> The `Status` of the dataset group must be `ACTIVE` before you can use
+    # the dataset group to create a predictor. Use the DescribeDatasetGroup
     # operation to get the status.
     #
     #  </note>
@@ -1894,8 +1973,8 @@ module Aws::ForecastService
     #   The ARN of the dataset group.
     #
     # @option params [required, Array<String>] :dataset_arns
-    #   An array of Amazon Resource Names (ARNs) of the datasets to add to the
-    #   dataset group.
+    #   An array of the Amazon Resource Names (ARNs) of the datasets to add to
+    #   the dataset group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1928,7 +2007,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

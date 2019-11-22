@@ -85,6 +85,7 @@ module Aws::MediaPackageVod
     __string = Shapes::StringShape.new(name: '__string')
 
     Asset.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    Asset.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     Asset.add_member(:egress_endpoints, Shapes::ShapeRef.new(shape: __listOfEgressEndpoint, location_name: "egressEndpoints"))
     Asset.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     Asset.add_member(:packaging_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "packagingGroupId"))
@@ -105,6 +106,7 @@ module Aws::MediaPackageVod
     AssetList.struct_class = Types::AssetList
 
     AssetShallow.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    AssetShallow.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     AssetShallow.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     AssetShallow.add_member(:packaging_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "packagingGroupId"))
     AssetShallow.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
@@ -128,6 +130,7 @@ module Aws::MediaPackageVod
     CreateAssetRequest.struct_class = Types::CreateAssetRequest
 
     CreateAssetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreateAssetResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     CreateAssetResponse.add_member(:egress_endpoints, Shapes::ShapeRef.new(shape: __listOfEgressEndpoint, location_name: "egressEndpoints"))
     CreateAssetResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     CreateAssetResponse.add_member(:packaging_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "packagingGroupId"))
@@ -193,6 +196,7 @@ module Aws::MediaPackageVod
     DescribeAssetRequest.struct_class = Types::DescribeAssetRequest
 
     DescribeAssetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeAssetResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     DescribeAssetResponse.add_member(:egress_endpoints, Shapes::ShapeRef.new(shape: __listOfEgressEndpoint, location_name: "egressEndpoints"))
     DescribeAssetResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribeAssetResponse.add_member(:packaging_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "packagingGroupId"))

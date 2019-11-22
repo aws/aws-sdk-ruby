@@ -276,6 +276,7 @@ module Aws::Rekognition
     CompareFacesRequest.add_member(:source_image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "SourceImage"))
     CompareFacesRequest.add_member(:target_image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "TargetImage"))
     CompareFacesRequest.add_member(:similarity_threshold, Shapes::ShapeRef.new(shape: Percent, location_name: "SimilarityThreshold"))
+    CompareFacesRequest.add_member(:quality_filter, Shapes::ShapeRef.new(shape: QualityFilter, location_name: "QualityFilter"))
     CompareFacesRequest.struct_class = Types::CompareFacesRequest
 
     CompareFacesResponse.add_member(:source_image_face, Shapes::ShapeRef.new(shape: ComparedSourceImageFace, location_name: "SourceImageFace"))
@@ -714,6 +715,7 @@ module Aws::Rekognition
     SearchFacesByImageRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
     SearchFacesByImageRequest.add_member(:max_faces, Shapes::ShapeRef.new(shape: MaxFaces, location_name: "MaxFaces"))
     SearchFacesByImageRequest.add_member(:face_match_threshold, Shapes::ShapeRef.new(shape: Percent, location_name: "FaceMatchThreshold"))
+    SearchFacesByImageRequest.add_member(:quality_filter, Shapes::ShapeRef.new(shape: QualityFilter, location_name: "QualityFilter"))
     SearchFacesByImageRequest.struct_class = Types::SearchFacesByImageRequest
 
     SearchFacesByImageResponse.add_member(:searched_face_bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "SearchedFaceBoundingBox"))

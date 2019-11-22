@@ -378,6 +378,8 @@ module Aws::CodeBuild
     LogsLocation.add_member(:stream_name, Shapes::ShapeRef.new(shape: String, location_name: "streamName"))
     LogsLocation.add_member(:deep_link, Shapes::ShapeRef.new(shape: String, location_name: "deepLink"))
     LogsLocation.add_member(:s3_deep_link, Shapes::ShapeRef.new(shape: String, location_name: "s3DeepLink"))
+    LogsLocation.add_member(:cloud_watch_logs_arn, Shapes::ShapeRef.new(shape: String, location_name: "cloudWatchLogsArn"))
+    LogsLocation.add_member(:s3_logs_arn, Shapes::ShapeRef.new(shape: String, location_name: "s3LogsArn"))
     LogsLocation.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogsConfig, location_name: "cloudWatchLogs"))
     LogsLocation.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3LogsConfig, location_name: "s3Logs"))
     LogsLocation.struct_class = Types::LogsLocation

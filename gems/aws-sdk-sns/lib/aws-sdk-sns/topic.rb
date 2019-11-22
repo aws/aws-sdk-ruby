@@ -33,30 +33,45 @@ module Aws::SNS
     # A map of the topic's attributes. Attributes in this map include the
     # following:
     #
-    # * `TopicArn` – the topic's ARN
+    # * `DeliveryPolicy` – The JSON serialization of the topic's delivery
+    #   policy.
     #
-    # * `Owner` – the AWS account ID of the topic's owner
+    # * `DisplayName` – The human-readable name used in the `From` field for
+    #   notifications to `email` and `email-json` endpoints.
     #
-    # * `Policy` – the JSON serialization of the topic's access control
-    #   policy
+    # * `Owner` – The AWS account ID of the topic's owner.
     #
-    # * `DisplayName` – the human-readable name used in the "From" field
-    #   for notifications to email and email-json endpoints
+    # * `Policy` – The JSON serialization of the topic's access control
+    #   policy.
     #
-    # * `SubscriptionsPending` – the number of subscriptions pending
-    #   confirmation on this topic
+    # * `SubscriptionsConfirmed` – The number of confirmed subscriptions for
+    #   the topic.
     #
-    # * `SubscriptionsConfirmed` – the number of confirmed subscriptions on
-    #   this topic
+    # * `SubscriptionsDeleted` – The number of deleted subscriptions for the
+    #   topic.
     #
-    # * `SubscriptionsDeleted` – the number of deleted subscriptions on this
-    #   topic
+    # * `SubscriptionsPending` – The number of subscriptions pending
+    #   confirmation for the topic.
     #
-    # * `DeliveryPolicy` – the JSON serialization of the topic's delivery
-    #   policy
+    # * `TopicArn` – The topic's ARN.
     #
-    # * `EffectiveDeliveryPolicy` – the JSON serialization of the effective
-    #   delivery policy that takes into account system defaults
+    # * `EffectiveDeliveryPolicy` – Yhe JSON serialization of the effective
+    #   delivery policy, taking system defaults into account.
+    #
+    # The following attribute applies only to [server-side-encryption][1]\:
+    #
+    # * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
+    #   Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #   Management Service API Reference*.
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    # [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     # @return [Hash<String,String>]
     def attributes
       data[:attributes]
@@ -116,7 +131,7 @@ module Aws::SNS
     # @option options [required, Array<String>] :action_name
     #   The action you want to allow for the specified principal(s).
     #
-    #   Valid values: any Amazon SNS action name.
+    #   Valid values: Any Amazon SNS action name, for example `Publish`.
     # @return [EmptyStructure]
     def add_permission(options = {})
       options = options.merge(topic_arn: @arn)
@@ -188,10 +203,6 @@ module Aws::SNS
     #   must specify a value for the `TargetArn` or `TopicArn` parameters.
     # @option options [required, String] :message
     #   The message you want to send.
-    #
-    #   The `Message` parameter is always a string. If you set
-    #   `MessageStructure` to `json`, you must string-encode the `Message`
-    #   parameter.
     #
     #   If you are publishing to a topic and you want to send the same message
     #   to all transport protocols, include the text of the message as a
@@ -268,16 +279,7 @@ module Aws::SNS
     #   You can define other top-level keys that define the message you want
     #   to send to a specific transport protocol (e.g., "http").
     #
-    #   For information about sending different messages for each protocol
-    #   using the AWS Management Console, go to [Create Different Messages for
-    #   Each Protocol][1] in the *Amazon Simple Notification Service Getting
-    #   Started Guide*.
-    #
     #   Valid value: `json`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
     # @option options [Hash<String,Types::MessageAttributeValue>] :message_attributes
     #   Message attributes for Publish action.
     # @return [Types::PublishResponse]
@@ -376,17 +378,17 @@ module Aws::SNS
     #   * `application` – delivery of JSON-encoded message to an EndpointArn
     #     for a mobile app and device.
     #
-    #   * `lambda` – delivery of JSON-encoded message to an AWS Lambda
+    #   * `lambda` – delivery of JSON-encoded message to an Amazon Lambda
     #     function.
     # @option options [String] :endpoint
     #   The endpoint that you want to receive notifications. Endpoints vary by
     #   protocol:
     #
     #   * For the `http` protocol, the endpoint is an URL beginning with
-    #     "https://"
+    #     `http://`
     #
     #   * For the `https` protocol, the endpoint is a URL beginning with
-    #     "https://"
+    #     `https://`
     #
     #   * For the `email` protocol, the endpoint is an email address
     #
@@ -401,8 +403,8 @@ module Aws::SNS
     #   * For the `application` protocol, the endpoint is the EndpointArn of a
     #     mobile app and device.
     #
-    #   * For the `lambda` protocol, the endpoint is the ARN of an AWS Lambda
-    #     function.
+    #   * For the `lambda` protocol, the endpoint is the ARN of an Amazon
+    #     Lambda function.
     # @option options [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
     #
@@ -420,18 +422,27 @@ module Aws::SNS
     #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
     #     for the endpoints to process JSON formatting, which is otherwise
     #     created for Amazon SNS metadata.
+    #
+    #   * `RedrivePolicy` – When specified, sends undeliverable messages to
+    #     the specified Amazon SQS dead-letter queue. Messages that can't be
+    #     delivered due to client errors (for example, when the subscribed
+    #     endpoint is unreachable) or server errors (for example, when the
+    #     service that powers the subscribed endpoint becomes unavailable) are
+    #     held in the dead-letter queue for further analysis or reprocessing.
     # @option options [Boolean] :return_subscription_arn
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
     #
-    #   If you set this parameter to `false`, the response includes the ARN
-    #   for confirmed subscriptions, but it includes an ARN value of "pending
-    #   subscription" for subscriptions that are not yet confirmed. A
-    #   subscription becomes confirmed when the subscriber calls the
-    #   `ConfirmSubscription` action with a confirmation token.
+    #   * If you have the subscription ARN returned, the response includes the
+    #     ARN in all cases, even if the subscription is not yet confirmed.
     #
-    #   If you set this parameter to `true`, the response includes the ARN in
-    #   all cases, even if the subscription is not yet confirmed.
+    #   * If you don't have the subscription ARN returned, in addition to the
+    #     ARN for confirmed subscriptions, the response also includes the
+    #     `pending subscription` ARN value for subscriptions that aren't yet
+    #     confirmed. A subscription becomes confirmed when the subscriber
+    #     calls the `ConfirmSubscription` action with a confirmation token.
+    #
+    #   If you set this parameter to `true`, .
     #
     #   The default value is `false`.
     # @return [Subscription]

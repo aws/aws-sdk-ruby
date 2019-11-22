@@ -58,6 +58,22 @@ module Aws::ACM
 
     end
 
+    class InvalidParameterException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ACM::Types::InvalidParameterException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class InvalidStateException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -143,6 +159,22 @@ module Aws::ACM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ACM::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class TagPolicyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ACM::Types::TagPolicyException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -269,6 +269,7 @@ module Aws::MediaPackageVod
     # @return [Types::CreateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssetResponse#arn #arn} => String
+    #   * {Types::CreateAssetResponse#created_at #created_at} => String
     #   * {Types::CreateAssetResponse#egress_endpoints #egress_endpoints} => Array&lt;Types::EgressEndpoint&gt;
     #   * {Types::CreateAssetResponse#id #id} => String
     #   * {Types::CreateAssetResponse#packaging_group_id #packaging_group_id} => String
@@ -289,6 +290,7 @@ module Aws::MediaPackageVod
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created_at #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].packaging_configuration_id #=> String
     #   resp.egress_endpoints[0].url #=> String
@@ -602,6 +604,7 @@ module Aws::MediaPackageVod
     # @return [Types::DescribeAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAssetResponse#arn #arn} => String
+    #   * {Types::DescribeAssetResponse#created_at #created_at} => String
     #   * {Types::DescribeAssetResponse#egress_endpoints #egress_endpoints} => Array&lt;Types::EgressEndpoint&gt;
     #   * {Types::DescribeAssetResponse#id #id} => String
     #   * {Types::DescribeAssetResponse#packaging_group_id #packaging_group_id} => String
@@ -618,6 +621,7 @@ module Aws::MediaPackageVod
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created_at #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].packaging_configuration_id #=> String
     #   resp.egress_endpoints[0].url #=> String
@@ -779,6 +783,7 @@ module Aws::MediaPackageVod
     #
     #   resp.assets #=> Array
     #   resp.assets[0].arn #=> String
+    #   resp.assets[0].created_at #=> String
     #   resp.assets[0].id #=> String
     #   resp.assets[0].packaging_group_id #=> String
     #   resp.assets[0].resource_id #=> String
@@ -934,7 +939,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

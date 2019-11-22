@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-11-22)
+------------------
+
+* Feature - This release adds enhanced face filtering support to the IndexFaces API operation, and introduces face filtering for CompareFaces and SearchFacesByImage API operations.
+
 1.31.0 (2019-10-23)
 ------------------
 

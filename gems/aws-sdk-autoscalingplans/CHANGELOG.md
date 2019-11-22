@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-11-22)
+------------------
+
+* Feature - Update default endpoint for AWS Auto Scaling.
+
 1.19.0 (2019-10-23)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-11-22)
+------------------
+
+* Feature - This release adds support for Tag-Based IAM for AWS Certificate Manager and adding tags to certificates upon creation.
+
 1.26.0 (2019-10-23)
 ------------------
 

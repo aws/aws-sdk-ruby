@@ -271,7 +271,7 @@ module Aws::SNS
     # @option params [required, Array<String>] :action_name
     #   The action you want to allow for the specified principal(s).
     #
-    #   Valid values: any Amazon SNS action name.
+    #   Valid values: Any Amazon SNS action name, for example `Publish`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -376,7 +376,7 @@ module Aws::SNS
     # PlatformCredential attributes when using the
     # `CreatePlatformApplication` action. The PlatformPrincipal is received
     # from the notification service. For APNS/APNS\_SANDBOX,
-    # PlatformPrincipal is "SSL certificate". For GCM, PlatformPrincipal
+    # PlatformPrincipal is "SSL certificate". For FCM, PlatformPrincipal
     # is not applicable. For ADM, PlatformPrincipal is "client id". The
     # PlatformCredential is also received from the notification service. For
     # WNS, PlatformPrincipal is "Package Security Identifier". For MPNS,
@@ -384,30 +384,12 @@ module Aws::SNS
     # is "API key".
     #
     # For APNS/APNS\_SANDBOX, PlatformCredential is "private key". For
-    # GCM, PlatformCredential is "API key". For ADM, PlatformCredential is
+    # FCM, PlatformCredential is "API key". For ADM, PlatformCredential is
     # "client secret". For WNS, PlatformCredential is "secret key". For
     # MPNS, PlatformCredential is "private key". For Baidu,
     # PlatformCredential is "secret key". The PlatformApplicationArn that
     # is returned when using `CreatePlatformApplication` is then used as an
-    # attribute for the `CreatePlatformEndpoint` action. For more
-    # information, see [Using Amazon SNS Mobile Push Notifications][1]. For
-    # more information about obtaining the PlatformPrincipal and
-    # PlatformCredential for each of the supported push notification
-    # services, see [Getting Started with Apple Push Notification
-    # Service][2], [Getting Started with Amazon Device Messaging][3],
-    # [Getting Started with Baidu Cloud Push][4], [Getting Started with
-    # Google Cloud Messaging for Android][5], [Getting Started with
-    # MPNS][6], or [Getting Started with WNS][7].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
-    # [2]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-apns.html
-    # [3]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-adm.html
-    # [4]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-baidu.html
-    # [5]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-gcm.html
-    # [6]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-mpns.html
-    # [7]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-wns.html
+    # attribute for the `CreatePlatformEndpoint` action.
     #
     # @option params [required, String] :name
     #   Application names must be made up of only uppercase and lowercase
@@ -416,8 +398,8 @@ module Aws::SNS
     #
     # @option params [required, String] :platform
     #   The following platforms are supported: ADM (Amazon Device Messaging),
-    #   APNS (Apple Push Notification Service), APNS\_SANDBOX, and GCM (Google
-    #   Cloud Messaging).
+    #   APNS (Apple Push Notification Service), APNS\_SANDBOX, and FCM
+    #   (Firebase Cloud Messaging).
     #
     # @option params [required, Hash<String,String>] :attributes
     #   For a list of attributes, see [SetPlatformApplicationAttributes][1]
@@ -454,7 +436,7 @@ module Aws::SNS
     end
 
     # Creates an endpoint for a device and mobile app on one of the
-    # supported push notification services, such as GCM and APNS.
+    # supported push notification services, such as FCM and APNS.
     # `CreatePlatformEndpoint` requires the PlatformApplicationArn that is
     # returned from `CreatePlatformApplication`. The EndpointArn that is
     # returned when using `CreatePlatformEndpoint` can then be used by the
@@ -484,7 +466,7 @@ module Aws::SNS
     #   device. The specific name for Token will vary, depending on which
     #   notification service is being used. For example, when using APNS as
     #   the notification service, you need the device token. Alternatively,
-    #   when using GCM or ADM, the device token equivalent is called the
+    #   when using FCM or ADM, the device token equivalent is called the
     #   registration ID.
     #
     # @option params [String] :custom_user_data
@@ -576,6 +558,11 @@ module Aws::SNS
     # @option params [Array<Types::Tag>] :tags
     #   The list of tags to add to a new topic.
     #
+    #   <note markdown="1"> To be able to tag a topic on creation, you must have the
+    #   `sns:CreateTopic` and `sns:TagResource` permissions.
+    #
+    #    </note>
+    #
     # @return [Types::CreateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTopicResponse#topic_arn #topic_arn} => String
@@ -640,7 +627,7 @@ module Aws::SNS
     end
 
     # Deletes a platform application object for one of the supported push
-    # notification services, such as APNS and GCM. For more information, see
+    # notification services, such as APNS and FCM. For more information, see
     # [Using Amazon SNS Mobile Push Notifications][1].
     #
     #
@@ -693,7 +680,7 @@ module Aws::SNS
     end
 
     # Retrieves the endpoint attributes for a device on one of the supported
-    # push notification services, such as GCM and APNS. For more
+    # push notification services, such as FCM and APNS. For more
     # information, see [Using Amazon SNS Mobile Push Notifications][1].
     #
     #
@@ -728,7 +715,7 @@ module Aws::SNS
     end
 
     # Retrieves the attributes of the platform application object for the
-    # supported push notification services, such as APNS and GCM. For more
+    # supported push notification services, such as APNS and FCM. For more
     # information, see [Using Amazon SNS Mobile Push Notifications][1].
     #
     #
@@ -863,7 +850,7 @@ module Aws::SNS
     end
 
     # Lists the endpoints and endpoint attributes for devices in a supported
-    # push notification service, such as GCM and APNS. The results for
+    # push notification service, such as FCM and APNS. The results for
     # `ListEndpointsByPlatformApplication` are paginated and return a
     # limited list of endpoints, up to 100. If additional records are
     # available after the first page results, then a NextToken string will
@@ -960,7 +947,7 @@ module Aws::SNS
     end
 
     # Lists the platform application objects for the supported push
-    # notification services, such as APNS and GCM. The results for
+    # notification services, such as APNS and FCM. The results for
     # `ListPlatformApplications` are paginated and return a limited list of
     # applications, up to 100. If additional records are available after the
     # first page results, then a NextToken string will be returned. To
@@ -1234,10 +1221,6 @@ module Aws::SNS
     # @option params [required, String] :message
     #   The message you want to send.
     #
-    #   The `Message` parameter is always a string. If you set
-    #   `MessageStructure` to `json`, you must string-encode the `Message`
-    #   parameter.
-    #
     #   If you are publishing to a topic and you want to send the same message
     #   to all transport protocols, include the text of the message as a
     #   String value. If you want to send different messages for each
@@ -1315,16 +1298,7 @@ module Aws::SNS
     #   You can define other top-level keys that define the message you want
     #   to send to a specific transport protocol (e.g., "http").
     #
-    #   For information about sending different messages for each protocol
-    #   using the AWS Management Console, go to [Create Different Messages for
-    #   Each Protocol][1] in the *Amazon Simple Notification Service Getting
-    #   Started Guide*.
-    #
     #   Valid value: `json`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
     #
     # @option params [Hash<String,Types::MessageAttributeValue>] :message_attributes
     #   Message attributes for Publish action.
@@ -1391,7 +1365,7 @@ module Aws::SNS
     end
 
     # Sets the attributes for an endpoint for a device on one of the
-    # supported push notification services, such as GCM and APNS. For more
+    # supported push notification services, such as FCM and APNS. For more
     # information, see [Using Amazon SNS Mobile Push Notifications][1].
     #
     #
@@ -1440,7 +1414,7 @@ module Aws::SNS
     end
 
     # Sets the attributes of the platform application object for the
-    # supported push notification services, such as APNS and GCM. For more
+    # supported push notification services, such as APNS and FCM. For more
     # information, see [Using Amazon SNS Mobile Push Notifications][1]. For
     # information on configuring attributes for message delivery status, see
     # [Using Amazon SNS Application Attributes for Message Delivery
@@ -1460,12 +1434,12 @@ module Aws::SNS
     #
     #   * `PlatformCredential` – The credential received from the notification
     #     service. For APNS/APNS\_SANDBOX, PlatformCredential is private key.
-    #     For GCM, PlatformCredential is "API key". For ADM,
+    #     For FCM, PlatformCredential is "API key". For ADM,
     #     PlatformCredential is "client secret".
     #
     #   * `PlatformPrincipal` – The principal received from the notification
     #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
-    #     certificate. For GCM, PlatformPrincipal is not applicable. For ADM,
+    #     certificate. For FCM, PlatformPrincipal is not applicable. For ADM,
     #     PlatformPrincipal is "client id".
     #
     #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
@@ -1649,6 +1623,13 @@ module Aws::SNS
     #     for the endpoints to process JSON formatting, which is otherwise
     #     created for Amazon SNS metadata.
     #
+    #   * `RedrivePolicy` – When specified, sends undeliverable messages to
+    #     the specified Amazon SQS dead-letter queue. Messages that can't be
+    #     delivered due to client errors (for example, when the subscribed
+    #     endpoint is unreachable) or server errors (for example, when the
+    #     service that powers the subscribed endpoint becomes unavailable) are
+    #     held in the dead-letter queue for further analysis or reprocessing.
+    #
     # @option params [String] :attribute_value
     #   The new value for the attribute in JSON format.
     #
@@ -1757,7 +1738,7 @@ module Aws::SNS
     #   * `application` – delivery of JSON-encoded message to an EndpointArn
     #     for a mobile app and device.
     #
-    #   * `lambda` – delivery of JSON-encoded message to an AWS Lambda
+    #   * `lambda` – delivery of JSON-encoded message to an Amazon Lambda
     #     function.
     #
     # @option params [String] :endpoint
@@ -1765,10 +1746,10 @@ module Aws::SNS
     #   protocol:
     #
     #   * For the `http` protocol, the endpoint is an URL beginning with
-    #     "https://"
+    #     `http://`
     #
     #   * For the `https` protocol, the endpoint is a URL beginning with
-    #     "https://"
+    #     `https://`
     #
     #   * For the `email` protocol, the endpoint is an email address
     #
@@ -1783,8 +1764,8 @@ module Aws::SNS
     #   * For the `application` protocol, the endpoint is the EndpointArn of a
     #     mobile app and device.
     #
-    #   * For the `lambda` protocol, the endpoint is the ARN of an AWS Lambda
-    #     function.
+    #   * For the `lambda` protocol, the endpoint is the ARN of an Amazon
+    #     Lambda function.
     #
     # @option params [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
@@ -1804,18 +1785,27 @@ module Aws::SNS
     #     for the endpoints to process JSON formatting, which is otherwise
     #     created for Amazon SNS metadata.
     #
+    #   * `RedrivePolicy` – When specified, sends undeliverable messages to
+    #     the specified Amazon SQS dead-letter queue. Messages that can't be
+    #     delivered due to client errors (for example, when the subscribed
+    #     endpoint is unreachable) or server errors (for example, when the
+    #     service that powers the subscribed endpoint becomes unavailable) are
+    #     held in the dead-letter queue for further analysis or reprocessing.
+    #
     # @option params [Boolean] :return_subscription_arn
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
     #
-    #   If you set this parameter to `false`, the response includes the ARN
-    #   for confirmed subscriptions, but it includes an ARN value of "pending
-    #   subscription" for subscriptions that are not yet confirmed. A
-    #   subscription becomes confirmed when the subscriber calls the
-    #   `ConfirmSubscription` action with a confirmation token.
+    #   * If you have the subscription ARN returned, the response includes the
+    #     ARN in all cases, even if the subscription is not yet confirmed.
     #
-    #   If you set this parameter to `true`, the response includes the ARN in
-    #   all cases, even if the subscription is not yet confirmed.
+    #   * If you don't have the subscription ARN returned, in addition to the
+    #     ARN for confirmed subscriptions, the response also includes the
+    #     `pending subscription` ARN value for subscriptions that aren't yet
+    #     confirmed. A subscription becomes confirmed when the subscriber
+    #     calls the `ConfirmSubscription` action with a confirmation token.
+    #
+    #   If you set this parameter to `true`, .
     #
     #   The default value is `false`.
     #
@@ -1863,18 +1853,14 @@ module Aws::SNS
     # * A new tag with a key identical to that of an existing tag overwrites
     #   the existing tag.
     #
-    # * Tagging actions are limited to 10 TPS per AWS account. If your
-    #   application requires a higher throughput, file a [technical support
-    #   request][2].
-    #
-    # For a full list of tag restrictions, see [Limits Related to Topics][3]
-    # in the *Amazon SNS Developer Guide*.
+    # * Tagging actions are limited to 10 TPS per AWS account, per AWS
+    #   region. If your application requires a higher throughput, file a
+    #   [technical support request][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html
     # [2]: https://console.aws.amazon.com/support/home#/case/create?issueType=technical
-    # [3]: https://docs.aws.amazon.com/sns/latest/dg/sns-limits.html#limits-topics
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the topic to which to add tags.
@@ -1980,7 +1966,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

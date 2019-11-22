@@ -646,6 +646,8 @@ module Aws::CodeBuild
     #   resp.builds[0].logs.stream_name #=> String
     #   resp.builds[0].logs.deep_link #=> String
     #   resp.builds[0].logs.s3_deep_link #=> String
+    #   resp.builds[0].logs.cloud_watch_logs_arn #=> String
+    #   resp.builds[0].logs.s3_logs_arn #=> String
     #   resp.builds[0].logs.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.builds[0].logs.cloud_watch_logs.group_name #=> String
     #   resp.builds[0].logs.cloud_watch_logs.stream_name #=> String
@@ -1232,7 +1234,8 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Deletes a build project.
+    # Deletes a build project. When you delete a project, its builds are not
+    # deleted.
     #
     # @option params [required, String] :name
     #   The name of the build project.
@@ -1398,9 +1401,9 @@ module Aws::CodeBuild
     # @option params [String] :next_token
     #   During a previous call, if there are more than 100 items in the list,
     #   only the first 100 items are returned, along with a unique string
-    #   called a *next token*. To get the next batch of items in the list,
-    #   call this operation again, adding the next token to the call. To get
-    #   all of the items in the list, keep calling this operation with each
+    #   called a *nextToken*. To get the next batch of items in the list, call
+    #   this operation again, adding the next token to the call. To get all of
+    #   the items in the list, keep calling this operation with each
     #   subsequent next token that is returned, until no more next tokens are
     #   returned.
     #
@@ -1447,9 +1450,9 @@ module Aws::CodeBuild
     # @option params [String] :next_token
     #   During a previous call, if there are more than 100 items in the list,
     #   only the first 100 items are returned, along with a unique string
-    #   called a *next token*. To get the next batch of items in the list,
-    #   call this operation again, adding the next token to the call. To get
-    #   all of the items in the list, keep calling this operation with each
+    #   called a *nextToken*. To get the next batch of items in the list, call
+    #   this operation again, adding the next token to the call. To get all of
+    #   the items in the list, keep calling this operation with each
     #   subsequent next token that is returned, until no more next tokens are
     #   returned.
     #
@@ -1539,9 +1542,9 @@ module Aws::CodeBuild
     # @option params [String] :next_token
     #   During a previous call, if there are more than 100 items in the list,
     #   only the first 100 items are returned, along with a unique string
-    #   called a *next token*. To get the next batch of items in the list,
-    #   call this operation again, adding the next token to the call. To get
-    #   all of the items in the list, keep calling this operation with each
+    #   called a *nextToken*. To get the next batch of items in the list, call
+    #   this operation again, adding the next token to the call. To get all of
+    #   the items in the list, keep calling this operation with each
     #   subsequent next token that is returned, until no more next tokens are
     #   returned.
     #
@@ -1948,6 +1951,8 @@ module Aws::CodeBuild
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
     #   resp.build.logs.s3_deep_link #=> String
+    #   resp.build.logs.cloud_watch_logs_arn #=> String
+    #   resp.build.logs.s3_logs_arn #=> String
     #   resp.build.logs.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.cloud_watch_logs.group_name #=> String
     #   resp.build.logs.cloud_watch_logs.stream_name #=> String
@@ -2073,6 +2078,8 @@ module Aws::CodeBuild
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
     #   resp.build.logs.s3_deep_link #=> String
+    #   resp.build.logs.cloud_watch_logs_arn #=> String
+    #   resp.build.logs.s3_logs_arn #=> String
     #   resp.build.logs.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.cloud_watch_logs.group_name #=> String
     #   resp.build.logs.cloud_watch_logs.stream_name #=> String
@@ -2539,7 +2546,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

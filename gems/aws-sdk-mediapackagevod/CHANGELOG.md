@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2019-11-22)
+------------------
+
+* Feature - Includes the submission time of Asset ingestion request in the API response for Create/List/Describe Assets.
+
 1.6.0 (2019-10-23)
 ------------------
 

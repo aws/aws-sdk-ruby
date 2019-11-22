@@ -5542,6 +5542,12 @@ module Aws::SSM
     #   in the patch baseline.
     #   @return [Integer]
     #
+    # @!attribute [rw] instances_with_installed_pending_reboot_patches
+    #   The number of instances with patches installed that have not been
+    #   rebooted after the patch installation. The status of these instances
+    #   is NON\_COMPLIANT.
+    #   @return [Integer]
+    #
     # @!attribute [rw] instances_with_installed_rejected_patches
     #   The number of instances with patches installed that are specified in
     #   a RejectedPatches list. Patches with a status of
@@ -5581,6 +5587,7 @@ module Aws::SSM
       :instances,
       :instances_with_installed_patches,
       :instances_with_installed_other_patches,
+      :instances_with_installed_pending_reboot_patches,
       :instances_with_installed_rejected_patches,
       :instances_with_missing_patches,
       :instances_with_failed_patches,
@@ -8481,6 +8488,11 @@ module Aws::SSM
     #   installed on the instance.
     #   @return [Integer]
     #
+    # @!attribute [rw] installed_pending_reboot_count
+    #   The number of patches installed since the last time the instance was
+    #   rebooted.
+    #   @return [Integer]
+    #
     # @!attribute [rw] installed_rejected_count
     #   The number of instances with patches installed that are specified in
     #   a RejectedPatches list. Patches with a status of *InstalledRejected*
@@ -8534,6 +8546,29 @@ module Aws::SSM
     #   patch compliance state) or INSTALL (install missing patches).
     #   @return [String]
     #
+    # @!attribute [rw] last_no_reboot_install_operation_time
+    #   The time of the last attempt to patch the instance with `NoReboot`
+    #   specified as the reboot option.
+    #   @return [Time]
+    #
+    # @!attribute [rw] reboot_option
+    #   Indicates the reboot option specified in the patch baseline.
+    #
+    #   <note markdown="1"> Reboot options apply to `Install` operations only. Reboots are not
+    #   attempted for Patch Manager `Scan` operations.
+    #
+    #    </note>
+    #
+    #   * **RebootIfNeeded**\: Patch Manager tries to reboot the instance if
+    #     it installed any patches, or if any patches are detected with a
+    #     status of `InstalledPendingReboot`.
+    #
+    #   * **NoReboot**\: Patch Manager attempts to install missing packages
+    #     without trying to reboot the system. Patches installed with this
+    #     option are assigned a status of `InstalledPendingReboot`. These
+    #     patches might not be in effect until a reboot is performed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePatchState AWS API Documentation
     #
     class InstancePatchState < Struct.new(
@@ -8545,6 +8580,7 @@ module Aws::SSM
       :owner_information,
       :installed_count,
       :installed_other_count,
+      :installed_pending_reboot_count,
       :installed_rejected_count,
       :missing_count,
       :failed_count,
@@ -8552,7 +8588,9 @@ module Aws::SSM
       :not_applicable_count,
       :operation_start_time,
       :operation_end_time,
-      :operation)
+      :operation,
+      :last_no_reboot_install_operation_time,
+      :reboot_option)
       include Aws::Structure
     end
 
@@ -12944,7 +12982,11 @@ module Aws::SSM
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
     #   maximum length for the fully qualified parameter name is 1011
-    #   characters.
+    #   characters, including the full length of the parameter ARN. For
+    #   example, the following fully qualified parameter name is 65
+    #   characters, not 20 characters:
+    #
+    #    `arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName`
     #
     #    </note>
     #

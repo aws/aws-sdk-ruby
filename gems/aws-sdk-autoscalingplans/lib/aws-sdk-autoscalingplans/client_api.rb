@@ -281,7 +281,7 @@ module Aws::AutoScalingPlans
 
       api.metadata = {
         "apiVersion" => "2018-01-06",
-        "endpointPrefix" => "autoscaling",
+        "endpointPrefix" => "autoscaling-plans",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Auto Scaling Plans",

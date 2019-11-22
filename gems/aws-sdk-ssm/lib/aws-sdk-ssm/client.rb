@@ -2832,6 +2832,7 @@ module Aws::SSM
     #   resp.instance_patch_states[0].owner_information #=> String
     #   resp.instance_patch_states[0].installed_count #=> Integer
     #   resp.instance_patch_states[0].installed_other_count #=> Integer
+    #   resp.instance_patch_states[0].installed_pending_reboot_count #=> Integer
     #   resp.instance_patch_states[0].installed_rejected_count #=> Integer
     #   resp.instance_patch_states[0].missing_count #=> Integer
     #   resp.instance_patch_states[0].failed_count #=> Integer
@@ -2840,6 +2841,8 @@ module Aws::SSM
     #   resp.instance_patch_states[0].operation_start_time #=> Time
     #   resp.instance_patch_states[0].operation_end_time #=> Time
     #   resp.instance_patch_states[0].operation #=> String, one of "Scan", "Install"
+    #   resp.instance_patch_states[0].last_no_reboot_install_operation_time #=> Time
+    #   resp.instance_patch_states[0].reboot_option #=> String, one of "RebootIfNeeded", "NoReboot"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStates AWS API Documentation
@@ -2905,6 +2908,7 @@ module Aws::SSM
     #   resp.instance_patch_states[0].owner_information #=> String
     #   resp.instance_patch_states[0].installed_count #=> Integer
     #   resp.instance_patch_states[0].installed_other_count #=> Integer
+    #   resp.instance_patch_states[0].installed_pending_reboot_count #=> Integer
     #   resp.instance_patch_states[0].installed_rejected_count #=> Integer
     #   resp.instance_patch_states[0].missing_count #=> Integer
     #   resp.instance_patch_states[0].failed_count #=> Integer
@@ -2913,6 +2917,8 @@ module Aws::SSM
     #   resp.instance_patch_states[0].operation_start_time #=> Time
     #   resp.instance_patch_states[0].operation_end_time #=> Time
     #   resp.instance_patch_states[0].operation #=> String, one of "Scan", "Install"
+    #   resp.instance_patch_states[0].last_no_reboot_install_operation_time #=> Time
+    #   resp.instance_patch_states[0].reboot_option #=> String, one of "RebootIfNeeded", "NoReboot"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesForPatchGroup AWS API Documentation
@@ -2970,7 +2976,7 @@ module Aws::SSM
     #   resp.patches[0].kb_id #=> String
     #   resp.patches[0].classification #=> String
     #   resp.patches[0].severity #=> String
-    #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "INSTALLED_REJECTED", "MISSING", "NOT_APPLICABLE", "FAILED"
+    #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "INSTALLED_PENDING_REBOOT", "INSTALLED_REJECTED", "MISSING", "NOT_APPLICABLE", "FAILED"
     #   resp.patches[0].installed_time #=> Time
     #   resp.next_token #=> String
     #
@@ -3828,6 +3834,7 @@ module Aws::SSM
     #   * {Types::DescribePatchGroupStateResult#instances #instances} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_installed_patches #instances_with_installed_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_installed_other_patches #instances_with_installed_other_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_installed_pending_reboot_patches #instances_with_installed_pending_reboot_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_installed_rejected_patches #instances_with_installed_rejected_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_missing_patches #instances_with_missing_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_failed_patches #instances_with_failed_patches} => Integer
@@ -3845,6 +3852,7 @@ module Aws::SSM
     #   resp.instances #=> Integer
     #   resp.instances_with_installed_patches #=> Integer
     #   resp.instances_with_installed_other_patches #=> Integer
+    #   resp.instances_with_installed_pending_reboot_patches #=> Integer
     #   resp.instances_with_installed_rejected_patches #=> Integer
     #   resp.instances_with_missing_patches #=> Integer
     #   resp.instances_with_failed_patches #=> Integer
@@ -6554,7 +6562,11 @@ module Aws::SSM
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
     #   maximum length for the fully qualified parameter name is 1011
-    #   characters.
+    #   characters, including the full length of the parameter ARN. For
+    #   example, the following fully qualified parameter name is 65
+    #   characters, not 20 characters:
+    #
+    #    `arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName`
     #
     #    </note>
     #
@@ -9083,7 +9095,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -334,7 +334,7 @@ module Aws::ApplicationAutoScaling
 
       api.metadata = {
         "apiVersion" => "2016-02-06",
-        "endpointPrefix" => "autoscaling",
+        "endpointPrefix" => "application-autoscaling",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Application Auto Scaling",

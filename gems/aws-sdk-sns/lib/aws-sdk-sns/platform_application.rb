@@ -101,7 +101,7 @@ module Aws::SNS
     #   device. The specific name for Token will vary, depending on which
     #   notification service is being used. For example, when using APNS as
     #   the notification service, you need the device token. Alternatively,
-    #   when using GCM or ADM, the device token equivalent is called the
+    #   when using FCM or ADM, the device token equivalent is called the
     #   registration ID.
     # @option options [String] :custom_user_data
     #   Arbitrary user data to associate with the endpoint. Amazon SNS does
@@ -147,12 +147,12 @@ module Aws::SNS
     #
     #   * `PlatformCredential` – The credential received from the notification
     #     service. For APNS/APNS\_SANDBOX, PlatformCredential is private key.
-    #     For GCM, PlatformCredential is "API key". For ADM,
+    #     For FCM, PlatformCredential is "API key". For ADM,
     #     PlatformCredential is "client secret".
     #
     #   * `PlatformPrincipal` – The principal received from the notification
     #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
-    #     certificate. For GCM, PlatformPrincipal is not applicable. For ADM,
+    #     certificate. For FCM, PlatformPrincipal is not applicable. For ADM,
     #     PlatformPrincipal is "client id".
     #
     #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event

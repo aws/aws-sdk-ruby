@@ -45,6 +45,7 @@ module Aws::STS
     SAMLAssertionType = Shapes::StringShape.new(name: 'SAMLAssertionType')
     Subject = Shapes::StringShape.new(name: 'Subject')
     SubjectType = Shapes::StringShape.new(name: 'SubjectType')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
     accessKeyIdType = Shapes::StringShape.new(name: 'accessKeyIdType')
     accessKeySecretType = Shapes::StringShape.new(name: 'accessKeySecretType')
     accountType = Shapes::StringShape.new(name: 'accountType')
@@ -71,6 +72,10 @@ module Aws::STS
     roleSessionNameType = Shapes::StringShape.new(name: 'roleSessionNameType')
     serialNumberType = Shapes::StringShape.new(name: 'serialNumberType')
     sessionPolicyDocumentType = Shapes::StringShape.new(name: 'sessionPolicyDocumentType')
+    tagKeyListType = Shapes::ListShape.new(name: 'tagKeyListType')
+    tagKeyType = Shapes::StringShape.new(name: 'tagKeyType')
+    tagListType = Shapes::ListShape.new(name: 'tagListType')
+    tagValueType = Shapes::StringShape.new(name: 'tagValueType')
     tokenCodeType = Shapes::StringShape.new(name: 'tokenCodeType')
     tokenType = Shapes::StringShape.new(name: 'tokenType')
     urlType = Shapes::StringShape.new(name: 'urlType')
@@ -83,6 +88,8 @@ module Aws::STS
     AssumeRoleRequest.add_member(:policy_arns, Shapes::ShapeRef.new(shape: policyDescriptorListType, location_name: "PolicyArns"))
     AssumeRoleRequest.add_member(:policy, Shapes::ShapeRef.new(shape: sessionPolicyDocumentType, location_name: "Policy"))
     AssumeRoleRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: roleDurationSecondsType, location_name: "DurationSeconds"))
+    AssumeRoleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
+    AssumeRoleRequest.add_member(:transitive_tag_keys, Shapes::ShapeRef.new(shape: tagKeyListType, location_name: "TransitiveTagKeys"))
     AssumeRoleRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: externalIdType, location_name: "ExternalId"))
     AssumeRoleRequest.add_member(:serial_number, Shapes::ShapeRef.new(shape: serialNumberType, location_name: "SerialNumber"))
     AssumeRoleRequest.add_member(:token_code, Shapes::ShapeRef.new(shape: tokenCodeType, location_name: "TokenCode"))
@@ -168,6 +175,7 @@ module Aws::STS
     GetFederationTokenRequest.add_member(:policy, Shapes::ShapeRef.new(shape: sessionPolicyDocumentType, location_name: "Policy"))
     GetFederationTokenRequest.add_member(:policy_arns, Shapes::ShapeRef.new(shape: policyDescriptorListType, location_name: "PolicyArns"))
     GetFederationTokenRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: durationSecondsType, location_name: "DurationSeconds"))
+    GetFederationTokenRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     GetFederationTokenRequest.struct_class = Types::GetFederationTokenRequest
 
     GetFederationTokenResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
@@ -207,7 +215,15 @@ module Aws::STS
     RegionDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: regionDisabledMessage, location_name: "message"))
     RegionDisabledException.struct_class = Types::RegionDisabledException
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: tagKeyType, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: tagValueType, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
     policyDescriptorListType.member = Shapes::ShapeRef.new(shape: PolicyDescriptorType)
+
+    tagKeyListType.member = Shapes::ShapeRef.new(shape: tagKeyType)
+
+    tagListType.member = Shapes::ShapeRef.new(shape: Tag)
 
 
     # @api private

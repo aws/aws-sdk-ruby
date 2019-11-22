@@ -654,8 +654,9 @@ module Aws::EMR
     #   data as a hash:
     #
     #       {
-    #         cluster_id: "XmlStringMaxLen256",
-    #         step_ids: ["XmlStringMaxLen256"],
+    #         cluster_id: "XmlStringMaxLen256", # required
+    #         step_ids: ["XmlStringMaxLen256"], # required
+    #         step_cancellation_option: "SEND_INTERRUPT", # accepts SEND_INTERRUPT, TERMINATE_PROCESS
     #       }
     #
     # @!attribute [rw] cluster_id
@@ -668,11 +669,17 @@ module Aws::EMR
     #   their states for the specified cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] step_cancellation_option
+    #   The option to choose for cancelling `RUNNING` steps. By default, the
+    #   value is `SEND_INTERRUPT`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelStepsInput AWS API Documentation
     #
     class CancelStepsInput < Struct.new(
       :cluster_id,
-      :step_ids)
+      :step_ids,
+      :step_cancellation_option)
       include Aws::Structure
     end
 
@@ -952,6 +959,15 @@ module Aws::EMR
     #   The Amazon Resource Name of the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] step_concurrency_level
+    #   Specifies the number of steps that can be executed concurrently.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost where the cluster is
+    #   launched.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -980,7 +996,9 @@ module Aws::EMR
       :ebs_root_volume_size,
       :repo_upgrade_on_boot,
       :kerberos_attributes,
-      :cluster_arn)
+      :cluster_arn,
+      :step_concurrency_level,
+      :outpost_arn)
       include Aws::Structure
     end
 
@@ -1054,6 +1072,11 @@ module Aws::EMR
     #   The Amazon Resource Name of the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost where the cluster is
+    #   launched.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterSummary AWS API Documentation
     #
     class ClusterSummary < Struct.new(
@@ -1061,7 +1084,8 @@ module Aws::EMR
       :name,
       :status,
       :normalized_instance_hours,
-      :cluster_arn)
+      :cluster_arn,
+      :outpost_arn)
       include Aws::Structure
     end
 
@@ -3997,6 +4021,42 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyClusterInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "String", # required
+    #         step_concurrency_level: 1,
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   The unique identifier of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_concurrency_level
+    #   The number of steps that can be executed concurrently. You can
+    #   specify a maximum of 256 steps.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyClusterInput AWS API Documentation
+    #
+    class ModifyClusterInput < Struct.new(
+      :cluster_id,
+      :step_concurrency_level)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] step_concurrency_level
+    #   The number of steps that can be executed concurrently.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyClusterOutput AWS API Documentation
+    #
+    class ModifyClusterOutput < Struct.new(
+      :step_concurrency_level)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyInstanceFleetInput
     #   data as a hash:
     #
@@ -4568,6 +4628,7 @@ module Aws::EMR
     #           ad_domain_join_user: "XmlStringMaxLen256",
     #           ad_domain_join_password: "XmlStringMaxLen256",
     #         },
+    #         step_concurrency_level: 1,
     #       }
     #
     # @!attribute [rw] name
@@ -4790,6 +4851,11 @@ module Aws::EMR
     #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #   @return [Types::KerberosAttributes]
     #
+    # @!attribute [rw] step_concurrency_level
+    #   Specifies the number of steps that can be executed concurrently. The
+    #   default value is `1`. The maximum value is `256`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -4815,7 +4881,8 @@ module Aws::EMR
       :custom_ami_id,
       :ebs_root_volume_size,
       :repo_upgrade_on_boot,
-      :kerberos_attributes)
+      :kerberos_attributes,
+      :step_concurrency_level)
       include Aws::Structure
     end
 

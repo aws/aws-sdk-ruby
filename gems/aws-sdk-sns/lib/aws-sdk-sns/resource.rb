@@ -37,8 +37,8 @@ module Aws::SNS
     #   between 1 and 256 characters long.
     # @option options [required, String] :platform
     #   The following platforms are supported: ADM (Amazon Device Messaging),
-    #   APNS (Apple Push Notification Service), APNS\_SANDBOX, and GCM (Google
-    #   Cloud Messaging).
+    #   APNS (Apple Push Notification Service), APNS\_SANDBOX, and FCM
+    #   (Firebase Cloud Messaging).
     # @option options [required, Hash<String,String>] :attributes
     #   For a list of attributes, see [SetPlatformApplicationAttributes][1]
     #
@@ -106,6 +106,11 @@ module Aws::SNS
     #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     # @option options [Array<Types::Tag>] :tags
     #   The list of tags to add to a new topic.
+    #
+    #   <note markdown="1"> To be able to tag a topic on creation, you must have the
+    #   `sns:CreateTopic` and `sns:TagResource` permissions.
+    #
+    #    </note>
     # @return [Topic]
     def create_topic(options = {})
       resp = @client.create_topic(options)

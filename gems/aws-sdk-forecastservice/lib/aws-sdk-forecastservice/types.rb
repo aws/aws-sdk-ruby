@@ -62,9 +62,7 @@ module Aws::ForecastService
     #
     # @!attribute [rw] scaling_type
     #   The scale that hyperparameter tuning uses to search the
-    #   hyperparameter range. For information about choosing a
-    #   hyperparameter scale, see [Hyperparameter Scaling][1]. One of the
-    #   following values:
+    #   hyperparameter range. Valid values:
     #
     #   Auto
     #
@@ -81,16 +79,19 @@ module Aws::ForecastService
     #   : Hyperparameter tuning searches the values in the hyperparameter
     #     range by using a logarithmic scale.
     #
-    #     Logarithmic scaling works only for ranges that have only values
-    #     greater than 0.
+    #     Logarithmic scaling works only for ranges that have values greater
+    #     than 0.
     #
     #   ReverseLogarithmic
     #
-    #   : Hyperparemeter tuning searches the values in the hyperparameter
+    #   : hyperparameter tuning searches the values in the hyperparameter
     #     range by using a reverse logarithmic scale.
     #
     #     Reverse logarithmic scaling works only for ranges that are
     #     entirely within the range 0 &lt;= x &lt; 1.0.
+    #
+    #   For information about choosing a hyperparameter scale, see
+    #   [Hyperparameter Scaling][1]. One of the following values:
     #
     #
     #
@@ -121,13 +122,16 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The domain associated with the dataset group. The `Domain` and
-    #   `DatasetType` that you choose determine the fields that must be
-    #   present in the training data that you import to the dataset. For
-    #   example, if you choose the `RETAIL` domain and `TARGET_TIME_SERIES`
-    #   as the `DatasetType`, Amazon Forecast requires `item_id`,
-    #   `timestamp`, and `demand` fields to be present in your data. For
-    #   more information, see howitworks-datasets-groups.
+    #   The domain associated with the dataset group. When you add a dataset
+    #   to a dataset group, this value and the value specified for the
+    #   `Domain` parameter of the CreateDataset operation must match.
+    #
+    #   The `Domain` and `DatasetType` that you choose determine the fields
+    #   that must be present in training data that you import to a dataset.
+    #   For example, if you choose the `RETAIL` domain and
+    #   `TARGET_TIME_SERIES` as the `DatasetType`, Amazon Forecast requires
+    #   that `item_id`, `timestamp`, and `demand` fields are present in your
+    #   data. For more information, see howitworks-datasets-groups.
     #   @return [String]
     #
     # @!attribute [rw] dataset_arns
@@ -172,10 +176,10 @@ module Aws::ForecastService
     #       }
     #
     # @!attribute [rw] dataset_import_job_name
-    #   The name for the dataset import job. It is recommended to include
-    #   the current timestamp in the name to guard against getting a
-    #   `ResourceAlreadyExistsException` exception, for example,
-    #   `20190721DatasetImport`.
+    #   The name for the dataset import job. We recommend including the
+    #   current timestamp in the name, for example, `20190721DatasetImport`.
+    #   This can help you avoid getting a `ResourceAlreadyExistsException`
+    #   exception.
     #   @return [String]
     #
     # @!attribute [rw] dataset_arn
@@ -186,22 +190,32 @@ module Aws::ForecastService
     # @!attribute [rw] data_source
     #   The location of the training data to import and an AWS Identity and
     #   Access Management (IAM) role that Amazon Forecast can assume to
-    #   access the data.
+    #   access the data. The training data must be stored in an Amazon S3
+    #   bucket.
+    #
+    #   If encryption is used, `DataSource` must include an AWS Key
+    #   Management Service (KMS) key and the IAM role must allow Amazon
+    #   Forecast permission to access the key. The KMS key and IAM role must
+    #   match those specified in the `EncryptionConfig` parameter of the
+    #   CreateDataset operation.
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] timestamp_format
-    #   The format of timestamps in the dataset. Two formats are supported,
-    #   dependent on the `DataFrequency` specified when the dataset was
-    #   created.
+    #   The format of timestamps in the dataset. The format that you specify
+    #   depends on the `DataFrequency` specified when the dataset was
+    #   created. The following formats are supported
     #
     #   * "yyyy-MM-dd"
     #
-    #     For data frequencies: Y, M, W, and D
+    #     For the following data frequencies: Y, M, W, and D
     #
     #   * "yyyy-MM-dd HH:mm:ss"
     #
-    #     For data frequencies: H, 30min, 15min, and 1min; and optionally,
-    #     for: Y, M, W, and D
+    #     For the following data frequencies: H, 30min, 15min, and 1min; and
+    #     optionally, for: Y, M, W, and D
+    #
+    #   If the format isn't specified, Amazon Forecast expects the format
+    #   to be "yyyy-MM-dd HH:mm:ss".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateDatasetImportJobRequest AWS API Documentation
@@ -252,13 +266,16 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The domain associated with the dataset. The `Domain` and
-    #   `DatasetType` that you choose determine the fields that must be
-    #   present in the training data that you import to the dataset. For
-    #   example, if you choose the `RETAIL` domain and `TARGET_TIME_SERIES`
-    #   as the `DatasetType`, Amazon Forecast requires `item_id`,
-    #   `timestamp`, and `demand` fields to be present in your data. For
-    #   more information, see howitworks-datasets-groups.
+    #   The domain associated with the dataset. When you add a dataset to a
+    #   dataset group, this value and the value specified for the `Domain`
+    #   parameter of the CreateDatasetGroup operation must match.
+    #
+    #   The `Domain` and `DatasetType` that you choose determine the fields
+    #   that must be present in the training data that you import to the
+    #   dataset. For example, if you choose the `RETAIL` domain and
+    #   `TARGET_TIME_SERIES` as the `DatasetType`, Amazon Forecast requires
+    #   `item_id`, `timestamp`, and `demand` fields to be present in your
+    #   data. For more information, see howitworks-datasets-groups.
     #   @return [String]
     #
     # @!attribute [rw] dataset_type
@@ -266,7 +283,8 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] data_frequency
-    #   The frequency of data collection.
+    #   The frequency of data collection. This parameter is required for
+    #   RELATED\_TIME\_SERIES datasets.
     #
     #   Valid intervals are Y (Year), M (Month), W (Week), D (Day), H
     #   (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes),
@@ -336,9 +354,14 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The path to the Amazon S3 bucket where you want to save the forecast
-    #   and an AWS Identity and Access Management (IAM) role that Amazon
-    #   Forecast can assume to access the bucket.
+    #   The location where you want to save the forecast and an AWS Identity
+    #   and Access Management (IAM) role that Amazon Forecast can assume to
+    #   access the location. The forecast must be exported to an Amazon S3
+    #   bucket.
+    #
+    #   If encryption is used, `Destination` must include an AWS Key
+    #   Management Service (KMS) key. The IAM role must allow Amazon
+    #   Forecast permission to access the key.
     #   @return [Types::DataDestination]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateForecastExportJobRequest AWS API Documentation
@@ -367,10 +390,11 @@ module Aws::ForecastService
     #       {
     #         forecast_name: "Name", # required
     #         predictor_arn: "Arn", # required
+    #         forecast_types: ["ForecastType"],
     #       }
     #
     # @!attribute [rw] forecast_name
-    #   The name for the forecast.
+    #   A name for the forecast.
     #   @return [String]
     #
     # @!attribute [rw] predictor_arn
@@ -378,11 +402,21 @@ module Aws::ForecastService
     #   the forecast.
     #   @return [String]
     #
+    # @!attribute [rw] forecast_types
+    #   The quantiles at which probabilistic forecasts are generated. You
+    #   can specify up to 5 quantiles per forecast. Accepted values include
+    #   `0.01 to 0.99` (increments of .01 only) and `mean`. The mean
+    #   forecast is different from the median (0.50) when the distribution
+    #   is not symmetric (e.g. Beta, Negative Binomial). The default value
+    #   is `["0.1", "0.5", "0.9"]`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateForecastRequest AWS API Documentation
     #
     class CreateForecastRequest < Struct.new(
       :forecast_name,
-      :predictor_arn)
+      :predictor_arn,
+      :forecast_types)
       include Aws::Structure
     end
 
@@ -479,13 +513,13 @@ module Aws::ForecastService
     #   The Amazon Resource Name (ARN) of the algorithm to use for model
     #   training. Required if `PerformAutoML` is not set to `true`.
     #
-    #   **Supported algorithms**
+    #   **Supported algorithms:**
     #
     #   * `arn:aws:forecast:::algorithm/ARIMA`
     #
     #   * `arn:aws:forecast:::algorithm/Deep_AR_Plus`
     #
-    #     `- supports hyperparameter optimization (HPO)`
+    #     Supports hyperparameter optimization (HPO)
     #
     #   * `arn:aws:forecast:::algorithm/ETS`
     #
@@ -502,32 +536,41 @@ module Aws::ForecastService
     #   (using the `DataFrequency` parameter of the CreateDataset operation)
     #   and set the forecast horizon to 10, the model returns predictions
     #   for 10 days.
+    #
+    #   The maximum forecast horizon is the lesser of 500 time-steps or 1/3
+    #   of the TARGET\_TIME\_SERIES dataset length.
     #   @return [Integer]
     #
     # @!attribute [rw] perform_auto_ml
-    #   Whether to perform AutoML. The default value is `false`. In this
-    #   case, you are required to specify an algorithm.
+    #   Whether to perform AutoML. When Amazon Forecast performs AutoML, it
+    #   evaluates the algorithms it provides and chooses the best algorithm
+    #   and configuration for your training dataset.
     #
-    #   If you want Amazon Forecast to evaluate the algorithms it provides
-    #   and choose the best algorithm and configuration for your training
-    #   dataset, set `PerformAutoML` to `true`. This is a good option if you
-    #   aren't sure which algorithm is suitable for your application.
+    #   The default value is `false`. In this case, you are required to
+    #   specify an algorithm.
+    #
+    #   Set `PerformAutoML` to `true` to have Amazon Forecast perform
+    #   AutoML. This is a good option if you aren't sure which algorithm is
+    #   suitable for your training data. In this case, `PerformHPO` must be
+    #   false.
     #   @return [Boolean]
     #
     # @!attribute [rw] perform_hpo
     #   Whether to perform hyperparameter optimization (HPO). HPO finds
     #   optimal hyperparameter values for your training data. The process of
-    #   performing HPO is known as a hyperparameter tuning job.
+    #   performing HPO is known as running a hyperparameter tuning job.
     #
     #   The default value is `false`. In this case, Amazon Forecast uses
     #   default hyperparameter values from the chosen algorithm.
     #
-    #   To override the default values, set `PerformHPO` to `true` and
-    #   supply the HyperParameterTuningJobConfig object. The tuning job
-    #   specifies an objective metric, the hyperparameters to optimize, and
-    #   the valid range for each hyperparameter.
+    #   To override the default values, set `PerformHPO` to `true` and,
+    #   optionally, supply the HyperParameterTuningJobConfig object. The
+    #   tuning job specifies a metric to optimize, which hyperparameters
+    #   participate in tuning, and the valid range for each tunable
+    #   hyperparameter. In this case, you are required to specify an
+    #   algorithm and `PerformAutoML` must be false.
     #
-    #   The following algorithms support HPO:
+    #   The following algorithm supports HPO:
     #
     #   * DeepAR+
     #
@@ -535,9 +578,10 @@ module Aws::ForecastService
     #   @return [Boolean]
     #
     # @!attribute [rw] training_parameters
-    #   The training parameters to override for model training. The
-    #   parameters that you can override are listed in the individual
-    #   algorithms in aws-forecast-choosing-recipes.
+    #   The hyperparameters to override for model training. The
+    #   hyperparameters that you can override are listed in the individual
+    #   algorithms. For the list of supported algorithms, see
+    #   aws-forecast-choosing-recipes.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] evaluation_parameters
@@ -554,6 +598,9 @@ module Aws::ForecastService
     #   The individual algorithms specify which hyperparameters support
     #   hyperparameter optimization (HPO). For more information, see
     #   aws-forecast-choosing-recipes.
+    #
+    #   If you included the `HPOConfig` object, you must set `PerformHPO` to
+    #   true.
     #   @return [Types::HyperParameterTuningJobConfig]
     #
     # @!attribute [rw] input_data_config
@@ -599,9 +646,10 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # The destination of an exported forecast and credentials to access the
-    # location. This object is submitted in the CreateForecastExportJob
-    # request.
+    # The destination for an exported forecast, an AWS Identity and Access
+    # Management (IAM) role that allows Amazon Forecast to access the
+    # location and, optionally, an AWS Key Management Service (KMS) key.
+    # This object is submitted in the CreateForecastExportJob request.
     #
     # @note When making an API call, you may pass DataDestination
     #   data as a hash:
@@ -626,8 +674,10 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # The source of your training data and credentials to access the data.
-    # This object is submitted in the CreateDatasetImportJob request.
+    # The source of your training data, an AWS Identity and Access
+    # Management (IAM) role that allows Amazon Forecast to access the data
+    # and, optionally, an AWS Key Management Service (KMS) key. This object
+    # is submitted in the CreateDatasetImportJob request.
     #
     # @note When making an API call, you may pass DataSource
     #   data as a hash:
@@ -655,7 +705,7 @@ module Aws::ForecastService
 
     # Provides a summary of the dataset group properties used in the
     # ListDatasetGroups operation. To get the complete set of properties,
-    # call the DescribeDatasetGroup operation, and provide the listed
+    # call the DescribeDatasetGroup operation, and provide the
     # `DatasetGroupArn`.
     #
     # @!attribute [rw] dataset_group_arn
@@ -667,13 +717,14 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   When the datase group was created.
+    #   When the dataset group was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
     #   When the dataset group was created or last updated from a call to
     #   the UpdateDatasetGroup operation. While the dataset group is being
-    #   updated, `LastModificationTime` is the current query time.
+    #   updated, `LastModificationTime` is the current time of the
+    #   `ListDatasetGroups` call.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DatasetGroupSummary AWS API Documentation
@@ -689,7 +740,7 @@ module Aws::ForecastService
     # Provides a summary of the dataset import job properties used in the
     # ListDatasetImportJobs operation. To get the complete set of
     # properties, call the DescribeDatasetImportJob operation, and provide
-    # the listed `DatasetImportJobArn`.
+    # the `DatasetImportJobArn`.
     #
     # @!attribute [rw] dataset_import_job_arn
     #   The Amazon Resource Name (ARN) of the dataset import job.
@@ -700,8 +751,13 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] data_source
-    #   The location of the Amazon S3 bucket that contains the training
-    #   data.
+    #   The location of the training data to import and an AWS Identity and
+    #   Access Management (IAM) role that Amazon Forecast can assume to
+    #   access the data. The training data must be stored in an Amazon S3
+    #   bucket.
+    #
+    #   If encryption is used, `DataSource` includes an AWS Key Management
+    #   Service (KMS) key.
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] status
@@ -726,13 +782,14 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   Dependent on the status as follows:
+    #   The last time that the dataset was modified. The time depends on the
+    #   status of the job, as follows:
     #
-    #   * `CREATE_PENDING` - same as `CreationTime`
+    #   * `CREATE_PENDING` - The same time as `CreationTime`.
     #
-    #   * `CREATE_IN_PROGRESS` - the current timestamp
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
     #
-    #   * `ACTIVE` or `CREATE_FAILED` - when the job finished or failed
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DatasetImportJobSummary AWS API Documentation
@@ -750,7 +807,7 @@ module Aws::ForecastService
 
     # Provides a summary of the dataset properties used in the ListDatasets
     # operation. To get the complete set of properties, call the
-    # DescribeDataset operation, and provide the listed `DatasetArn`.
+    # DescribeDataset operation, and provide the `DatasetArn`.
     #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset.
@@ -773,11 +830,11 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   When the dataset is created, `LastModificationTime` is the same as
-    #   `CreationTime`. After a CreateDatasetImportJob operation is called,
-    #   `LastModificationTime` is when the import job finished or failed.
-    #   While data is being imported to the dataset, `LastModificationTime`
-    #   is the current query time.
+    #   When you create a dataset, `LastModificationTime` is the same as
+    #   `CreationTime`. While data is being imported to the dataset,
+    #   `LastModificationTime` is the current time of the `ListDatasets`
+    #   call. After a CreateDatasetImportJob operation has finished,
+    #   `LastModificationTime` is when the import job completed or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DatasetSummary AWS API Documentation
@@ -932,13 +989,7 @@ module Aws::ForecastService
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain
-    #   The domain associated with the dataset group. The `Domain` and
-    #   `DatasetType` that you choose determine the fields that must be
-    #   present in the training data that you import to the dataset. For
-    #   example, if you choose the `RETAIL` domain and `TARGET_TIME_SERIES`
-    #   as the `DatasetType`, Amazon Forecast requires `item_id`,
-    #   `timestamp`, and `demand` fields to be present in your data. For
-    #   more information, see howitworks-datasets-groups.
+    #   The domain associated with the dataset group.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -952,11 +1003,11 @@ module Aws::ForecastService
     #
     #   * `UPDATE_PENDING`, `UPDATE_IN_PROGRESS`, `UPDATE_FAILED`
     #
-    #   The `UPDATE` states apply when the UpdateDatasetGroup operation is
-    #   called.
+    #   The `UPDATE` states apply when you call the UpdateDatasetGroup
+    #   operation.
     #
-    #   <note markdown="1"> The `Status` of the dataset group must be `ACTIVE` before creating a
-    #   predictor using the dataset group.
+    #   <note markdown="1"> The `Status` of the dataset group must be `ACTIVE` before you can
+    #   use the dataset group to create a predictor.
     #
     #    </note>
     #   @return [String]
@@ -968,7 +1019,8 @@ module Aws::ForecastService
     # @!attribute [rw] last_modification_time
     #   When the dataset group was created or last updated from a call to
     #   the UpdateDatasetGroup operation. While the dataset group is being
-    #   updated, `LastModificationTime` is the current query time.
+    #   updated, `LastModificationTime` is the current time of the
+    #   `DescribeDatasetGroup` call.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeDatasetGroupResponse AWS API Documentation
@@ -1016,23 +1068,27 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] timestamp_format
-    #   The format of timestamps in the dataset. Two formats are supported
-    #   dependent on the `DataFrequency` specified when the dataset was
-    #   created.
+    #   The format of timestamps in the dataset. The format that you specify
+    #   depends on the `DataFrequency` specified when the dataset was
+    #   created. The following formats are supported
     #
     #   * "yyyy-MM-dd"
     #
-    #     For data frequencies: Y, M, W, and D
+    #     For the following data frequencies: Y, M, W, and D
     #
     #   * "yyyy-MM-dd HH:mm:ss"
     #
-    #     For data frequencies: H, 30min, 15min, and 1min; and optionally,
-    #     for: Y, M, W, and D
+    #     For the following data frequencies: H, 30min, 15min, and 1min; and
+    #     optionally, for: Y, M, W, and D
     #   @return [String]
     #
     # @!attribute [rw] data_source
-    #   The location of the training data to import. The training data must
-    #   be stored in an Amazon S3 bucket.
+    #   The location of the training data to import and an AWS Identity and
+    #   Access Management (IAM) role that Amazon Forecast can assume to
+    #   access the data.
+    #
+    #   If encryption is used, `DataSource` includes an AWS Key Management
+    #   Service (KMS) key.
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] field_statistics
@@ -1040,8 +1096,8 @@ module Aws::ForecastService
     #   @return [Hash<String,Types::Statistics>]
     #
     # @!attribute [rw] data_size
-    #   The size of the dataset in gigabytes (GB) after completion of the
-    #   import job.
+    #   The size of the dataset in gigabytes (GB) after the import job has
+    #   finished.
     #   @return [Float]
     #
     # @!attribute [rw] status
@@ -1066,13 +1122,14 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   Dependent on the status as follows:
+    #   The last time that the dataset was modified. The time depends on the
+    #   status of the job, as follows:
     #
-    #   * `CREATE_PENDING` - same as `CreationTime`
+    #   * `CREATE_PENDING` - The same time as `CreationTime`.
     #
-    #   * `CREATE_IN_PROGRESS` - the current timestamp
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
     #
-    #   * `ACTIVE` or `CREATE_FAILED` - when the job finished or failed
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeDatasetImportJobResponse AWS API Documentation
@@ -1119,7 +1176,7 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The dataset domain.
+    #   The domain associated with the dataset.
     #   @return [String]
     #
     # @!attribute [rw] dataset_type
@@ -1142,7 +1199,7 @@ module Aws::ForecastService
     #   @return [Types::Schema]
     #
     # @!attribute [rw] encryption_config
-    #   An AWS Key Management Service (KMS) key and the AWS Identity and
+    #   The AWS Key Management Service (KMS) key and the AWS Identity and
     #   Access Management (IAM) role that Amazon Forecast can assume to
     #   access the key.
     #   @return [Types::EncryptionConfig]
@@ -1159,10 +1216,10 @@ module Aws::ForecastService
     #   * `UPDATE_PENDING`, `UPDATE_IN_PROGRESS`, `UPDATE_FAILED`
     #
     #   The `UPDATE` states apply while data is imported to the dataset from
-    #   a call to the CreateDatasetImportJob operation. During this time,
-    #   the status reflects the status of the dataset import job. For
-    #   example, when the import job status is `CREATE_IN_PROGRESS`, the
-    #   status of the dataset is `UPDATE_IN_PROGRESS`.
+    #   a call to the CreateDatasetImportJob operation and reflect the
+    #   status of the dataset import job. For example, when the import job
+    #   status is `CREATE_IN_PROGRESS`, the status of the dataset is
+    #   `UPDATE_IN_PROGRESS`.
     #
     #   <note markdown="1"> The `Status` of the dataset must be `ACTIVE` before you can import
     #   training data.
@@ -1175,11 +1232,11 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   When the dataset is created, `LastModificationTime` is the same as
-    #   `CreationTime`. After a CreateDatasetImportJob operation is called,
-    #   `LastModificationTime` is when the import job finished or failed.
-    #   While data is being imported to the dataset, `LastModificationTime`
-    #   is the current query time.
+    #   When you create a dataset, `LastModificationTime` is the same as
+    #   `CreationTime`. While data is being imported to the dataset,
+    #   `LastModificationTime` is the current time of the `DescribeDataset`
+    #   call. After a CreateDatasetImportJob operation has finished,
+    #   `LastModificationTime` is when the import job completed or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeDatasetResponse AWS API Documentation
@@ -1229,7 +1286,8 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The path to the AWS S3 bucket where the forecast is exported.
+    #   The path to the Amazon Simple Storage Service (Amazon S3) bucket
+    #   where the forecast is exported.
     #   @return [Types::DataDestination]
     #
     # @!attribute [rw] message
@@ -1237,7 +1295,7 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the forecast export job. One of the following states:
+    #   The status of the forecast export job. States include:
     #
     #   * `ACTIVE`
     #
@@ -1246,7 +1304,7 @@ module Aws::ForecastService
     #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #
     #   <note markdown="1"> The `Status` of the forecast export job must be `ACTIVE` before you
-    #   can access the forecast in your Amazon S3 bucket.
+    #   can access the forecast in your S3 bucket.
     #
     #    </note>
     #   @return [String]
@@ -1292,12 +1350,16 @@ module Aws::ForecastService
     end
 
     # @!attribute [rw] forecast_arn
-    #   The same forecast ARN as given in the request.
+    #   The forecast ARN as specified in the request.
     #   @return [String]
     #
     # @!attribute [rw] forecast_name
     #   The name of the forecast.
     #   @return [String]
+    #
+    # @!attribute [rw] forecast_types
+    #   The quantiles at which proababilistic forecasts were generated.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] predictor_arn
     #   The ARN of the predictor used to generate the forecast.
@@ -1344,6 +1406,7 @@ module Aws::ForecastService
     class DescribeForecastResponse < Struct.new(
       :forecast_arn,
       :forecast_name,
+      :forecast_types,
       :predictor_arn,
       :dataset_group_arn,
       :status,
@@ -1395,13 +1458,16 @@ module Aws::ForecastService
     #   @return [Boolean]
     #
     # @!attribute [rw] perform_hpo
-    #   Whether the predictor is set to perform HPO.
+    #   Whether the predictor is set to perform hyperparameter optimization
+    #   (HPO).
     #   @return [Boolean]
     #
     # @!attribute [rw] training_parameters
-    #   The training parameters to override for model training. The
-    #   parameters that you can override are listed in the individual
-    #   algorithms in aws-forecast-choosing-recipes.
+    #   The default training parameters or overrides selected during model
+    #   training. If using the AutoML algorithm or if HPO is turned on while
+    #   using the DeepAR+ algorithms, the optimized values for the chosen
+    #   hyperparameters are returned. For more information, see
+    #   aws-forecast-choosing-recipes.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] evaluation_parameters
@@ -1431,9 +1497,15 @@ module Aws::ForecastService
     #   access the key.
     #   @return [Types::EncryptionConfig]
     #
+    # @!attribute [rw] predictor_execution_details
+    #   Details on the the status and results of the backtests performed to
+    #   evaluate the accuracy of the predictor. You specify the number of
+    #   backtests to perform when you call the operation.
+    #   @return [Types::PredictorExecutionDetails]
+    #
     # @!attribute [rw] dataset_import_job_arns
-    #   An array of ARNs of the dataset import jobs used to import training
-    #   data for the predictor.
+    #   An array of the ARNs of the dataset import jobs used to import
+    #   training data for the predictor.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_ml_algorithm_arns
@@ -1451,8 +1523,8 @@ module Aws::ForecastService
     #
     #   * `UPDATE_PENDING`, `UPDATE_IN_PROGRESS`, `UPDATE_FAILED`
     #
-    #   <note markdown="1"> The `Status` of the predictor must be `ACTIVE` before using the
-    #   predictor to create a forecast.
+    #   <note markdown="1"> The `Status` of the predictor must be `ACTIVE` before you can use
+    #   the predictor to create a forecast.
     #
     #    </note>
     #   @return [String]
@@ -1466,10 +1538,11 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   Initially, the same as `CreationTime` (status is `CREATE_PENDING`).
-    #   Updated when training starts (status changed to
-    #   `CREATE_IN_PROGRESS`), and when training is complete (status changed
-    #   to `ACTIVE`) or fails (status changed to `CREATE_FAILED`).
+    #   Initially, the same as `CreationTime` (when the status is
+    #   `CREATE_PENDING`). This value is updated when training starts (when
+    #   the status changes to `CREATE_IN_PROGRESS`), and when training has
+    #   completed (when the status changes to `ACTIVE`) or fails (when the
+    #   status changes to `CREATE_FAILED`).
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictorResponse AWS API Documentation
@@ -1487,6 +1560,7 @@ module Aws::ForecastService
       :input_data_config,
       :featurization_config,
       :encryption_config,
+      :predictor_execution_details,
       :dataset_import_job_arns,
       :auto_ml_algorithm_arns,
       :status,
@@ -1498,7 +1572,7 @@ module Aws::ForecastService
 
     # An AWS Key Management Service (KMS) key and an AWS Identity and Access
     # Management (IAM) role that Amazon Forecast can assume to access the
-    # key. This object is optionally submitted in the CreateDataset and
+    # key. You can specify this optional object in the CreateDataset and
     # CreatePredictor requests.
     #
     # @note When making an API call, you may pass EncryptionConfig
@@ -1510,17 +1584,16 @@ module Aws::ForecastService
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS Identity and Access Management (IAM) role that
-    #   Amazon Forecast can assume to access the AWS KMS key.
+    #   The ARN of the IAM role that Amazon Forecast can assume to access
+    #   the AWS KMS key.
     #
-    #   Cross-account pass role is not allowed. If you pass a role that
-    #   doesn't belong to your account, an `InvalidInputException` is
-    #   thrown.
+    #   Passing a role across AWS accounts is not allowed. If you pass a
+    #   role that isn't in your account, you get an `InvalidInputException`
+    #   error.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of an AWS Key Management Service
-    #   (KMS) key.
+    #   The Amazon Resource Name (ARN) of the KMS key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/EncryptionConfig AWS API Documentation
@@ -1533,18 +1606,8 @@ module Aws::ForecastService
 
     # Parameters that define how to split a dataset into training data and
     # testing data, and the number of iterations to perform. These
-    # parameters are specified in the predefined algorithms and can be
-    # overridden in the CreatePredictor request.
-    #
-    # For example, suppose that you have a dataset with data collection
-    # frequency set to every day and you have 200 days worth of data (that
-    # is, 200 data points). Now suppose that you set the
-    # `NumberOfBacktestWindows` to 2 and the `BackTestWindowOffset`
-    # parameter to 20. The algorithm splits the data twice. The first time,
-    # the algorithm trains the model using the first 180 data points and
-    # uses the last 20 data points for evaluation. The second time, the
-    # algorithm trains the model using the first 160 data points and uses
-    # the last 40 data points for evaluation.
+    # parameters are specified in the predefined algorithms but you can
+    # override them in the CreatePredictor request.
     #
     # @note When making an API call, you may pass EvaluationParameters
     #   data as a hash:
@@ -1555,14 +1618,21 @@ module Aws::ForecastService
     #       }
     #
     # @!attribute [rw] number_of_backtest_windows
-    #   The number of times to split the input data. The default is 1. The
-    #   range is 1 through 5.
+    #   The number of times to split the input data. The default is 1. Valid
+    #   values are 1 through 5.
     #   @return [Integer]
     #
     # @!attribute [rw] back_test_window_offset
     #   The point from the end of the dataset where you want to split the
-    #   data for model training and evaluation. The value is specified as
-    #   the number of data points.
+    #   data for model training and testing (evaluation). Specify the value
+    #   as the number of data points. The default is the value of the
+    #   forecast horizon. `BackTestWindowOffset` can be used to mimic a past
+    #   virtual forecast start date. This value must be greater than or
+    #   equal to the forecast horizon and less than half of the
+    #   TARGET\_TIME\_SERIES dataset length.
+    #
+    #   `ForecastHorizon` &lt;= `BackTestWindowOffset` &lt; 1/2 *
+    #   TARGET\_TIME\_SERIES dataset length
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/EvaluationParameters AWS API Documentation
@@ -1630,17 +1700,16 @@ module Aws::ForecastService
     #       }
     #
     # @!attribute [rw] attribute_name
-    #   The name of the schema attribute specifying the data field to be
-    #   featurized. In this release, only the `target` field of the
-    #   `TARGET_TIME_SERIES` dataset type is supported. For example, for the
-    #   `RETAIL` domain, the target is `demand`, and for the `CUSTOM`
-    #   domain, the target is `target_value`.
+    #   The name of the schema attribute that specifies the data field to be
+    #   featurized. Only the `target` field of the `TARGET_TIME_SERIES`
+    #   dataset type is supported. For example, for the `RETAIL` domain, the
+    #   target is `demand`, and for the `CUSTOM` domain, the target is
+    #   `target_value`.
     #   @return [String]
     #
     # @!attribute [rw] featurization_pipeline
-    #   An array `FeaturizationMethod` objects that specifies the feature
-    #   transformation methods. For this release, the number of methods is
-    #   limited to one.
+    #   An array of one `FeaturizationMethod` object that specifies the
+    #   feature transformation method.
     #   @return [Array<Types::FeaturizationMethod>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Featurization AWS API Documentation
@@ -1658,9 +1727,10 @@ module Aws::ForecastService
     #
     # You define featurization using the `FeaturizationConfig` object. You
     # specify an array of transformations, one for each field that you want
-    # to featurize. You then include the `FeaturizationConfig` in your
-    # `CreatePredictor` request. Amazon Forecast applies the featurization
-    # to the `TARGET_TIME_SERIES` dataset before model training.
+    # to featurize. You then include the `FeaturizationConfig` object in
+    # your `CreatePredictor` request. Amazon Forecast applies the
+    # featurization to the `TARGET_TIME_SERIES` dataset before model
+    # training.
     #
     # You can create multiple featurization configurations. For example, you
     # might call the `CreatePredictor` operation twice by specifying
@@ -1694,6 +1764,12 @@ module Aws::ForecastService
     #   (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes),
     #   5min (5 minutes), and 1min (1 minute). For example, "Y" indicates
     #   every year and "5min" indicates every five minutes.
+    #
+    #   The frequency must be greater than or equal to the
+    #   TARGET\_TIME\_SERIES dataset frequency.
+    #
+    #   When a RELATED\_TIME\_SERIES dataset is provided, the frequency must
+    #   be equal to the RELATED\_TIME\_SERIES dataset frequency.
     #   @return [String]
     #
     # @!attribute [rw] forecast_dimensions
@@ -1704,12 +1780,17 @@ module Aws::ForecastService
     #   sales across all of your stores, and your dataset contains a
     #   `store_id` field. If you want the sales forecast for each item by
     #   store, you would specify `store_id` as the dimension.
+    #
+    #   All forecast dimensions specified in the `TARGET_TIME_SERIES`
+    #   dataset don't need to be specified in the `CreatePredictor`
+    #   request. All forecast dimensions specified in the
+    #   `RELATED_TIME_SERIES` dataset must be specified in the
+    #   `CreatePredictor` request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] featurizations
     #   An array of featurization (transformation) information for the
-    #   fields of a dataset. In this release, only a single featurization is
-    #   supported.
+    #   fields of a dataset. Only a single featurization is supported.
     #   @return [Array<Types::Featurization>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/FeaturizationConfig AWS API Documentation
@@ -1721,12 +1802,14 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # Provides information about a method that featurizes (transforms) a
+    # Provides information about the method that featurizes (transforms) a
     # dataset field. The method is part of the `FeaturizationPipeline` of
-    # the Featurization object. If `FeaturizationMethodParameters` isn't
-    # specified, Amazon Forecast uses default parameters.
+    # the Featurization object. If you don't specify
+    # `FeaturizationMethodParameters`, Amazon Forecast uses default
+    # parameters.
     #
-    # For example:
+    # The following is an example of how you specify a `FeaturizationMethod`
+    # object.
     #
     # `\{`
     #
@@ -1748,14 +1831,14 @@ module Aws::ForecastService
     #       }
     #
     # @!attribute [rw] featurization_method_name
-    #   The name of the method. In this release, "filling" is the only
-    #   supported method.
+    #   The name of the method. The "filling" method is the only supported
+    #   method.
     #   @return [String]
     #
     # @!attribute [rw] featurization_method_parameters
-    #   The method parameters (key-value pairs). Specify these to override
-    #   the default values. The following list shows the parameters and
-    #   their valid values. Bold signifies the default value.
+    #   The method parameters (key-value pairs). Specify these parameters to
+    #   override the default values. The following list shows the parameters
+    #   and their valid values. Bold signifies the default value.
     #
     #   * `aggregation`\: **sum**, `avg`, `first`, `min`, `max`
     #
@@ -1776,9 +1859,9 @@ module Aws::ForecastService
 
     # Describes a filter for choosing a subset of objects. Each filter
     # consists of a condition and a match statement. The condition is either
-    # `IS` or `IS_NOT`, which specifies whether to include or exclude,
-    # respectively, the objects that match the statement. The match
-    # statement consists of a key and a value.
+    # `IS` or `IS_NOT`, which specifies whether to include or exclude the
+    # objects that match the statement, respectively. The match statement
+    # consists of a key and a value.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -1794,11 +1877,13 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   A valid value for `Key`.
+    #   The value to match.
     #   @return [String]
     #
     # @!attribute [rw] condition
-    #   The condition to apply.
+    #   The condition to apply. To include the objects that match the
+    #   statement, specify `IS`. To exclude matching objects, specify
+    #   `IS_NOT`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Filter AWS API Documentation
@@ -1824,11 +1909,12 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The path to the S3 bucket where the forecast is stored.
+    #   The path to the Amazon Simple Storage Service (Amazon S3) bucket
+    #   where the forecast is exported.
     #   @return [Types::DataDestination]
     #
     # @!attribute [rw] status
-    #   The status of the forecast export job. One of the following states:
+    #   The status of the forecast export job. States include:
     #
     #   * `ACTIVE`
     #
@@ -1837,7 +1923,7 @@ module Aws::ForecastService
     #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #
     #   <note markdown="1"> The `Status` of the forecast export job must be `ACTIVE` before you
-    #   can access the forecast in your Amazon S3 bucket.
+    #   can access the forecast in your S3 bucket.
     #
     #    </note>
     #   @return [String]
@@ -1869,7 +1955,8 @@ module Aws::ForecastService
 
     # Provides a summary of the forecast properties used in the
     # ListForecasts operation. To get the complete set of properties, call
-    # the DescribeForecast operation, and provide the listed `ForecastArn`.
+    # the DescribeForecast operation, and provide the `ForecastArn` that is
+    # listed in the summary.
     #
     # @!attribute [rw] forecast_arn
     #   The ARN of the forecast.
@@ -1962,19 +2049,20 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # Configuration information for a hyperparameter tuning job. This object
-    # is specified in the CreatePredictor request.
+    # Configuration information for a hyperparameter tuning job. You specify
+    # this object in the CreatePredictor request.
     #
-    # A hyperparameter is a parameter that governs the model training
-    # process and is set before training starts. This is as opposed to a
-    # model parameter that is determined during training. The values of the
-    # hyperparameters have an effect on the chosen model parameters.
+    # A *hyperparameter* is a parameter that governs the model training
+    # process. You set hyperparameters before training starts, unlike model
+    # parameters, which are determined during training. The values of the
+    # hyperparameters effect which values are chosen for the model
+    # parameters.
     #
-    # A hyperparameter tuning job is the process of choosing the optimum set
-    # of hyperparameter values that optimize a specified metric. This is
-    # accomplished by running many training jobs over a range of
-    # hyperparameter values. The optimum set of values is dependent on the
-    # algorithm, the training data, and the given metric objective.
+    # In a *hyperparameter tuning job*, Amazon Forecast chooses the set of
+    # hyperparameter values that optimize a specified metric. Forecast
+    # accomplishes this by running many training jobs over a range of
+    # hyperparameter values. The optimum set of values depends on the
+    # algorithm, the training data, and the specified metric objective.
     #
     # @note When making an API call, you may pass HyperParameterTuningJobConfig
     #   data as a hash:
@@ -2018,7 +2106,7 @@ module Aws::ForecastService
     end
 
     # The data used to train a predictor. The data includes a dataset group
-    # and any supplementary features. This object is specified in the
+    # and any supplementary features. You specify this object in the
     # CreatePredictor request.
     #
     # @note When making an API call, you may pass InputDataConfig
@@ -2039,8 +2127,8 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] supplementary_features
-    #   An array of supplementary features. For this release, the only
-    #   supported feature is a holiday calendar.
+    #   An array of supplementary features. The only supported feature is a
+    #   holiday calendar.
     #   @return [Array<Types::SupplementaryFeature>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/InputDataConfig AWS API Documentation
@@ -2078,9 +2166,7 @@ module Aws::ForecastService
     #
     # @!attribute [rw] scaling_type
     #   The scale that hyperparameter tuning uses to search the
-    #   hyperparameter range. For information about choosing a
-    #   hyperparameter scale, see [Hyperparameter Scaling][1]. One of the
-    #   following values:
+    #   hyperparameter range. Valid values:
     #
     #   Auto
     #
@@ -2097,8 +2183,8 @@ module Aws::ForecastService
     #   : Hyperparameter tuning searches the values in the hyperparameter
     #     range by using a logarithmic scale.
     #
-    #     Logarithmic scaling works only for ranges that have only values
-    #     greater than 0.
+    #     Logarithmic scaling works only for ranges that have values greater
+    #     than 0.
     #
     #   ReverseLogarithmic
     #
@@ -2106,6 +2192,9 @@ module Aws::ForecastService
     #
     #     Reverse logarithmic scaling works only for ranges that are
     #     entirely within the range 0 &lt;= x &lt; 1.0.
+    #
+    #   For information about choosing a hyperparameter scale, see
+    #   [Hyperparameter Scaling][1]. One of the following values:
     #
     #
     #
@@ -2147,7 +2236,7 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # The limit on the number of requests per second has been exceeded.
+    # The limit on the number of resources per account has been exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2230,22 +2319,26 @@ module Aws::ForecastService
     # @!attribute [rw] filters
     #   An array of filters. For each filter, you provide a condition and a
     #   match statement. The condition is either `IS` or `IS_NOT`, which
-    #   specifies whether to include or exclude, respectively, from the
-    #   list, the predictors that match the statement. The match statement
-    #   consists of a key and a value. In this release, `Name` is the only
-    #   valid key, which filters on the `DatasetImportJobName` property.
+    #   specifies whether to include or exclude the datasets that match the
+    #   statement from the list, respectively. The match statement consists
+    #   of a key and a value.
     #
-    #   * `Condition` - `IS` or `IS_NOT`
+    #   **Filter properties**
     #
-    #   * `Key` - `Name`
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the datasets that match the statement,
+    #     specify `IS`. To exclude matching datasets, specify `IS_NOT`.
     #
-    #   * `Value` - the value to match
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `DatasetArn` and `Status`.
     #
-    #   For example, to list all dataset import jobs named
-    #   *my\_dataset\_import\_job*, you would specify:
+    #   * `Value` - The value to match.
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Name", "Value":
-    #   "my_dataset_import_job" \} ]`
+    #   For example, to list all dataset import jobs whose status is ACTIVE,
+    #   you specify the following filter:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value":
+    #   "ACTIVE" \} ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListDatasetImportJobsRequest AWS API Documentation
@@ -2346,22 +2439,28 @@ module Aws::ForecastService
     # @!attribute [rw] filters
     #   An array of filters. For each filter, you provide a condition and a
     #   match statement. The condition is either `IS` or `IS_NOT`, which
-    #   specifies whether to include or exclude, respectively, from the
-    #   list, the predictors that match the statement. The match statement
-    #   consists of a key and a value. In this release, `Name` is the only
-    #   valid key, which filters on the `ForecastExportJobName` property.
+    #   specifies whether to include or exclude the forecast export jobs
+    #   that match the statement from the list, respectively. The match
+    #   statement consists of a key and a value.
     #
-    #   * `Condition` - `IS` or `IS_NOT`
+    #   **Filter properties**
     #
-    #   * `Key` - `Name`
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the forecast export jobs that match the
+    #     statement, specify `IS`. To exclude matching forecast export jobs,
+    #     specify `IS_NOT`.
     #
-    #   * `Value` - the value to match
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `ForecastArn` and `Status`.
     #
-    #   For example, to list all forecast export jobs named
-    #   *my\_forecast\_export\_job*, you would specify:
+    #   * `Value` - The value to match.
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Name", "Value":
-    #   "my_forecast_export_job" \} ]`
+    #   For example, to list all jobs that export a forecast named
+    #   *electricityforecast*, specify the following filter:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "ForecastArn", "Value":
+    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityforecast"
+    #   \} ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListForecastExportJobsRequest AWS API Documentation
@@ -2418,22 +2517,26 @@ module Aws::ForecastService
     # @!attribute [rw] filters
     #   An array of filters. For each filter, you provide a condition and a
     #   match statement. The condition is either `IS` or `IS_NOT`, which
-    #   specifies whether to include or exclude, respectively, from the
-    #   list, the predictors that match the statement. The match statement
-    #   consists of a key and a value. In this release, `Name` is the only
-    #   valid key, which filters on the `ForecastName` property.
+    #   specifies whether to include or exclude the forecasts that match the
+    #   statement from the list, respectively. The match statement consists
+    #   of a key and a value.
     #
-    #   * `Condition` - `IS` or `IS_NOT`
+    #   **Filter properties**
     #
-    #   * `Key` - `Name`
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the forecasts that match the statement,
+    #     specify `IS`. To exclude matching forecasts, specify `IS_NOT`.
     #
-    #   * `Value` - the value to match
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `DatasetGroupArn`, `PredictorArn`, and `Status`.
     #
-    #   For example, to list all forecasts named *my\_forecast*, you would
-    #   specify:
+    #   * `Value` - The value to match.
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Name", "Value":
-    #   "my_forecast" \} ]`
+    #   For example, to list all forecasts whose status is not ACTIVE, you
+    #   would specify:
+    #
+    #   `"Filters": [ \{ "Condition": "IS_NOT", "Key": "Status", "Value":
+    #   "ACTIVE" \} ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListForecastsRequest AWS API Documentation
@@ -2490,22 +2593,26 @@ module Aws::ForecastService
     # @!attribute [rw] filters
     #   An array of filters. For each filter, you provide a condition and a
     #   match statement. The condition is either `IS` or `IS_NOT`, which
-    #   specifies whether to include or exclude, respectively, from the
-    #   list, the predictors that match the statement. The match statement
-    #   consists of a key and a value. In this release, `Name` is the only
-    #   valid key, which filters on the `PredictorName` property.
+    #   specifies whether to include or exclude the predictors that match
+    #   the statement from the list, respectively. The match statement
+    #   consists of a key and a value.
     #
-    #   * `Condition` - `IS` or `IS_NOT`
+    #   **Filter properties**
     #
-    #   * `Key` - `Name`
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the predictors that match the statement,
+    #     specify `IS`. To exclude matching predictors, specify `IS_NOT`.
     #
-    #   * `Value` - the value to match
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `DatasetGroupArn` and `Status`.
     #
-    #   For example, to list all predictors named *my\_predictor*, you would
-    #   specify:
+    #   * `Value` - The value to match.
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Name", "Value":
-    #   "my_predictor" \} ]`
+    #   For example, to list all predictors whose status is ACTIVE, you
+    #   would specify:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value":
+    #   "ACTIVE" \} ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListPredictorsRequest AWS API Documentation
@@ -2534,8 +2641,8 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # Provides metrics used to evaluate the performance of a predictor. This
-    # object is part of the WindowSummary object.
+    # Provides metrics that are used to evaluate the performance of a
+    # predictor. This object is part of the WindowSummary object.
     #
     # @!attribute [rw] rmse
     #   The root mean square error (RMSE).
@@ -2610,7 +2717,47 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # Provides a summary of the predictor properties used in the
+    # The algorithm used to perform a backtest and the status of those
+    # tests.
+    #
+    # @!attribute [rw] algorithm_arn
+    #   The ARN of the algorithm used to test the predictor.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_windows
+    #   An array of test windows used to evaluate the algorithm. The
+    #   `NumberOfBacktestWindows` from the object determines the number of
+    #   windows in the array.
+    #   @return [Array<Types::TestWindowSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/PredictorExecution AWS API Documentation
+    #
+    class PredictorExecution < Struct.new(
+      :algorithm_arn,
+      :test_windows)
+      include Aws::Structure
+    end
+
+    # Contains details on the backtests performed to evaluate the accuracy
+    # of the predictor. The tests are returned in descending order of
+    # accuracy, with the most accurate backtest appearing first. You specify
+    # the number of backtests to perform when you call the operation.
+    #
+    # @!attribute [rw] predictor_executions
+    #   An array of the backtests performed to evaluate the accuracy of the
+    #   predictor against a particular algorithm. The
+    #   `NumberOfBacktestWindows` from the object determines the number of
+    #   windows in the array.
+    #   @return [Array<Types::PredictorExecution>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/PredictorExecutionDetails AWS API Documentation
+    #
+    class PredictorExecutionDetails < Struct.new(
+      :predictor_executions)
+      include Aws::Structure
+    end
+
+    # Provides a summary of the predictor properties that are used in the
     # ListPredictors operation. To get the complete set of properties, call
     # the DescribePredictor operation, and provide the listed
     # `PredictorArn`.
@@ -2639,8 +2786,8 @@ module Aws::ForecastService
     #
     #   * `UPDATE_PENDING`, `UPDATE_IN_PROGRESS`, `UPDATE_FAILED`
     #
-    #   <note markdown="1"> The `Status` of the predictor must be `ACTIVE` before using the
-    #   predictor to create a forecast.
+    #   <note markdown="1"> The `Status` of the predictor must be `ACTIVE` before you can use
+    #   the predictor to create a forecast.
     #
     #    </note>
     #   @return [String]
@@ -2673,8 +2820,8 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # There is already a resource with that Amazon Resource Name (ARN). Try
-    # again with a different ARN.
+    # There is already a resource with this name. Try again with a different
+    # name.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2714,8 +2861,10 @@ module Aws::ForecastService
     # The path to the file(s) in an Amazon Simple Storage Service (Amazon
     # S3) bucket, and an AWS Identity and Access Management (IAM) role that
     # Amazon Forecast can assume to access the file(s). Optionally, includes
-    # an AWS Key Management Service (KMS) key. This object is submitted in
-    # the CreateDatasetImportJob and CreateForecastExportJob requests.
+    # an AWS Key Management Service (KMS) key. This object is part of the
+    # DataSource object that is submitted in the CreateDatasetImportJob
+    # request, and part of the DataDestination object that is submitted in
+    # the CreateForecastExportJob request.
     #
     # @note When making an API call, you may pass S3Config
     #   data as a hash:
@@ -2733,12 +2882,13 @@ module Aws::ForecastService
     #
     # @!attribute [rw] role_arn
     #   The ARN of the AWS Identity and Access Management (IAM) role that
-    #   Amazon Forecast can assume to access the Amazon S3 bucket or
-    #   file(s).
+    #   Amazon Forecast can assume to access the Amazon S3 bucket or files.
+    #   If you provide a value for the `KMSKeyArn` key, the role must allow
+    #   access to the key.
     #
-    #   Cross-account pass role is not allowed. If you pass a role that
-    #   doesn't belong to your account, an `InvalidInputException` is
-    #   thrown.
+    #   Passing a role across AWS accounts is not allowed. If you pass a
+    #   role that isn't in your account, you get an `InvalidInputException`
+    #   error.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
@@ -2755,7 +2905,7 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # Defines the fields of a dataset. This object is specified in the
+    # Defines the fields of a dataset. You specify this object in the
     # CreateDataset request.
     #
     # @note When making an API call, you may pass Schema
@@ -2782,7 +2932,7 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # An attribute of a schema, which defines a field of a dataset. A schema
+    # An attribute of a schema, which defines a dataset field. A schema
     # attribute is required for every field in a dataset. The Schema object
     # contains an array of `SchemaAttribute` objects.
     #
@@ -2810,8 +2960,8 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # Provides statistics for each data field imported to an Amazon Forecast
-    # dataset with the CreateDatasetImportJob operation.
+    # Provides statistics for each data field imported into to an Amazon
+    # Forecast dataset with the CreateDatasetImportJob operation.
     #
     # @!attribute [rw] count
     #   The number of values in the field.
@@ -2862,10 +3012,10 @@ module Aws::ForecastService
     # Describes a supplementary feature of a dataset group. This object is
     # part of the InputDataConfig object.
     #
-    # For this release, the only supported feature is a holiday calendar. If
-    # the calendar is used, all data should belong to the same country as
-    # the calendar. For the calendar data, see
-    # [http://jollyday.sourceforge.net/data.html][1].
+    # The only supported feature is a holiday calendar. If you use the
+    # calendar, all data in the datasets should belong to the same country
+    # as the calendar. For the holiday calendar data, see the [Jollyday][1]
+    # web site.
     #
     #
     #
@@ -2905,6 +3055,41 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # The status, start time, and end time of a backtest, as well as a
+    # failure reason if applicable.
+    #
+    # @!attribute [rw] test_window_start
+    #   The time at which the test began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] test_window_end
+    #   The time at which the test ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the test. Possible status values are:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_IN_PROGRESS`
+    #
+    #   * `CREATE_FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If the test failed, the reason why it failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/TestWindowSummary AWS API Documentation
+    #
+    class TestWindowSummary < Struct.new(
+      :test_window_start,
+      :test_window_end,
+      :status,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateDatasetGroupRequest
     #   data as a hash:
     #
@@ -2918,8 +3103,8 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] dataset_arns
-    #   An array of Amazon Resource Names (ARNs) of the datasets to add to
-    #   the dataset group.
+    #   An array of the Amazon Resource Names (ARNs) of the datasets to add
+    #   to the dataset group.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/UpdateDatasetGroupRequest AWS API Documentation
@@ -2945,8 +3130,8 @@ module Aws::ForecastService
     #   @return [Float]
     #
     # @!attribute [rw] loss_value
-    #   The difference between the predicted value and actual value over the
-    #   quantile, weighted (normalized) by dividing by the sum over all
+    #   The difference between the predicted value and the actual value over
+    #   the quantile, weighted (normalized) by dividing by the sum over all
     #   quantiles.
     #   @return [Float]
     #
@@ -2987,7 +3172,6 @@ module Aws::ForecastService
     #
     # @!attribute [rw] metrics
     #   Provides metrics used to evaluate the performance of a predictor.
-    #   This object is part of the WindowSummary object.
     #   @return [Types::Metrics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/WindowSummary AWS API Documentation

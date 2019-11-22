@@ -46,6 +46,8 @@ module Aws::EC2
     AllowsMultipleInstanceTypes = Shapes::StringShape.new(name: 'AllowsMultipleInstanceTypes')
     ApplySecurityGroupsToClientVpnTargetNetworkRequest = Shapes::StructureShape.new(name: 'ApplySecurityGroupsToClientVpnTargetNetworkRequest')
     ApplySecurityGroupsToClientVpnTargetNetworkResult = Shapes::StructureShape.new(name: 'ApplySecurityGroupsToClientVpnTargetNetworkResult')
+    ArchitectureType = Shapes::StringShape.new(name: 'ArchitectureType')
+    ArchitectureTypeList = Shapes::ListShape.new(name: 'ArchitectureTypeList')
     ArchitectureValues = Shapes::StringShape.new(name: 'ArchitectureValues')
     AssignIpv6AddressesRequest = Shapes::StructureShape.new(name: 'AssignIpv6AddressesRequest')
     AssignIpv6AddressesResult = Shapes::StructureShape.new(name: 'AssignIpv6AddressesResult')
@@ -94,6 +96,7 @@ module Aws::EC2
     AuthorizeSecurityGroupIngressRequest = Shapes::StructureShape.new(name: 'AuthorizeSecurityGroupIngressRequest')
     AutoAcceptSharedAttachmentsValue = Shapes::StringShape.new(name: 'AutoAcceptSharedAttachmentsValue')
     AutoPlacement = Shapes::StringShape.new(name: 'AutoPlacement')
+    AutoRecoveryFlag = Shapes::BooleanShape.new(name: 'AutoRecoveryFlag')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     AvailabilityZoneMessage = Shapes::StructureShape.new(name: 'AvailabilityZoneMessage')
@@ -102,6 +105,7 @@ module Aws::EC2
     AvailabilityZoneStringList = Shapes::ListShape.new(name: 'AvailabilityZoneStringList')
     AvailableCapacity = Shapes::StructureShape.new(name: 'AvailableCapacity')
     AvailableInstanceCapacityList = Shapes::ListShape.new(name: 'AvailableInstanceCapacityList')
+    BareMetalFlag = Shapes::BooleanShape.new(name: 'BareMetalFlag')
     BatchState = Shapes::StringShape.new(name: 'BatchState')
     BillingProductList = Shapes::ListShape.new(name: 'BillingProductList')
     Blob = Shapes::BlobShape.new(name: 'Blob')
@@ -117,6 +121,7 @@ module Aws::EC2
     BundleTaskError = Shapes::StructureShape.new(name: 'BundleTaskError')
     BundleTaskList = Shapes::ListShape.new(name: 'BundleTaskList')
     BundleTaskState = Shapes::StringShape.new(name: 'BundleTaskState')
+    BurstablePerformanceFlag = Shapes::BooleanShape.new(name: 'BurstablePerformanceFlag')
     ByoipCidr = Shapes::StructureShape.new(name: 'ByoipCidr')
     ByoipCidrSet = Shapes::ListShape.new(name: 'ByoipCidrSet')
     ByoipCidrState = Shapes::StringShape.new(name: 'ByoipCidrState')
@@ -211,6 +216,8 @@ module Aws::EC2
     CopySnapshotRequest = Shapes::StructureShape.new(name: 'CopySnapshotRequest')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
     CopyTagsFromSource = Shapes::StringShape.new(name: 'CopyTagsFromSource')
+    CoreCount = Shapes::IntegerShape.new(name: 'CoreCount')
+    CoreCountList = Shapes::ListShape.new(name: 'CoreCountList')
     CpuOptions = Shapes::StructureShape.new(name: 'CpuOptions')
     CpuOptionsRequest = Shapes::StructureShape.new(name: 'CpuOptionsRequest')
     CreateCapacityReservationRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationRequest')
@@ -315,12 +322,16 @@ module Aws::EC2
     CreditSpecification = Shapes::StructureShape.new(name: 'CreditSpecification')
     CreditSpecificationRequest = Shapes::StructureShape.new(name: 'CreditSpecificationRequest')
     CurrencyCodeValues = Shapes::StringShape.new(name: 'CurrencyCodeValues')
+    CurrentGenerationFlag = Shapes::BooleanShape.new(name: 'CurrentGenerationFlag')
     CustomerGateway = Shapes::StructureShape.new(name: 'CustomerGateway')
     CustomerGatewayId = Shapes::StringShape.new(name: 'CustomerGatewayId')
     CustomerGatewayIdStringList = Shapes::ListShape.new(name: 'CustomerGatewayIdStringList')
     CustomerGatewayList = Shapes::ListShape.new(name: 'CustomerGatewayList')
+    DITMaxResults = Shapes::IntegerShape.new(name: 'DITMaxResults')
+    DITOMaxResults = Shapes::IntegerShape.new(name: 'DITOMaxResults')
     DatafeedSubscriptionState = Shapes::StringShape.new(name: 'DatafeedSubscriptionState')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DedicatedHostFlag = Shapes::BooleanShape.new(name: 'DedicatedHostFlag')
     DefaultRouteTableAssociationValue = Shapes::StringShape.new(name: 'DefaultRouteTableAssociationValue')
     DefaultRouteTablePropagationValue = Shapes::StringShape.new(name: 'DefaultRouteTablePropagationValue')
     DefaultTargetCapacityType = Shapes::StringShape.new(name: 'DefaultTargetCapacityType')
@@ -508,6 +519,10 @@ module Aws::EC2
     DescribeInstanceCreditSpecificationsResult = Shapes::StructureShape.new(name: 'DescribeInstanceCreditSpecificationsResult')
     DescribeInstanceStatusRequest = Shapes::StructureShape.new(name: 'DescribeInstanceStatusRequest')
     DescribeInstanceStatusResult = Shapes::StructureShape.new(name: 'DescribeInstanceStatusResult')
+    DescribeInstanceTypeOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceTypeOfferingsRequest')
+    DescribeInstanceTypeOfferingsResult = Shapes::StructureShape.new(name: 'DescribeInstanceTypeOfferingsResult')
+    DescribeInstanceTypesRequest = Shapes::StructureShape.new(name: 'DescribeInstanceTypesRequest')
+    DescribeInstanceTypesResult = Shapes::StructureShape.new(name: 'DescribeInstanceTypesResult')
     DescribeInstancesRequest = Shapes::StructureShape.new(name: 'DescribeInstancesRequest')
     DescribeInstancesResult = Shapes::StructureShape.new(name: 'DescribeInstancesResult')
     DescribeInternetGatewaysMaxResults = Shapes::IntegerShape.new(name: 'DescribeInternetGatewaysMaxResults')
@@ -694,12 +709,17 @@ module Aws::EC2
     DisassociateTransitGatewayRouteTableResult = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayRouteTableResult')
     DisassociateVpcCidrBlockRequest = Shapes::StructureShape.new(name: 'DisassociateVpcCidrBlockRequest')
     DisassociateVpcCidrBlockResult = Shapes::StructureShape.new(name: 'DisassociateVpcCidrBlockResult')
+    DiskCount = Shapes::IntegerShape.new(name: 'DiskCount')
     DiskImage = Shapes::StructureShape.new(name: 'DiskImage')
     DiskImageDescription = Shapes::StructureShape.new(name: 'DiskImageDescription')
     DiskImageDetail = Shapes::StructureShape.new(name: 'DiskImageDetail')
     DiskImageFormat = Shapes::StringShape.new(name: 'DiskImageFormat')
     DiskImageList = Shapes::ListShape.new(name: 'DiskImageList')
     DiskImageVolumeDescription = Shapes::StructureShape.new(name: 'DiskImageVolumeDescription')
+    DiskInfo = Shapes::StructureShape.new(name: 'DiskInfo')
+    DiskInfoList = Shapes::ListShape.new(name: 'DiskInfoList')
+    DiskSize = Shapes::IntegerShape.new(name: 'DiskSize')
+    DiskType = Shapes::StringShape.new(name: 'DiskType')
     DnsEntry = Shapes::StructureShape.new(name: 'DnsEntry')
     DnsEntrySet = Shapes::ListShape.new(name: 'DnsEntrySet')
     DnsServersOptionsModifyStructure = Shapes::StructureShape.new(name: 'DnsServersOptionsModifyStructure')
@@ -707,8 +727,11 @@ module Aws::EC2
     DomainType = Shapes::StringShape.new(name: 'DomainType')
     Double = Shapes::FloatShape.new(name: 'Double')
     EbsBlockDevice = Shapes::StructureShape.new(name: 'EbsBlockDevice')
+    EbsEncryptionSupport = Shapes::StringShape.new(name: 'EbsEncryptionSupport')
+    EbsInfo = Shapes::StructureShape.new(name: 'EbsInfo')
     EbsInstanceBlockDevice = Shapes::StructureShape.new(name: 'EbsInstanceBlockDevice')
     EbsInstanceBlockDeviceSpecification = Shapes::StructureShape.new(name: 'EbsInstanceBlockDeviceSpecification')
+    EbsOptimizedSupport = Shapes::StringShape.new(name: 'EbsOptimizedSupport')
     EgressOnlyInternetGateway = Shapes::StructureShape.new(name: 'EgressOnlyInternetGateway')
     EgressOnlyInternetGatewayId = Shapes::StringShape.new(name: 'EgressOnlyInternetGatewayId')
     EgressOnlyInternetGatewayIdList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayIdList')
@@ -730,6 +753,7 @@ module Aws::EC2
     ElasticInferenceAcceleratorAssociation = Shapes::StructureShape.new(name: 'ElasticInferenceAcceleratorAssociation')
     ElasticInferenceAcceleratorAssociationList = Shapes::ListShape.new(name: 'ElasticInferenceAcceleratorAssociationList')
     ElasticInferenceAccelerators = Shapes::ListShape.new(name: 'ElasticInferenceAccelerators')
+    EnaSupport = Shapes::StringShape.new(name: 'EnaSupport')
     EnableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultRequest')
     EnableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultResult')
     EnableFastSnapshotRestoreErrorItem = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoreErrorItem')
@@ -806,6 +830,13 @@ module Aws::EC2
     FlowLog = Shapes::StructureShape.new(name: 'FlowLog')
     FlowLogSet = Shapes::ListShape.new(name: 'FlowLogSet')
     FlowLogsResourceType = Shapes::StringShape.new(name: 'FlowLogsResourceType')
+    FpgaDeviceCount = Shapes::IntegerShape.new(name: 'FpgaDeviceCount')
+    FpgaDeviceInfo = Shapes::StructureShape.new(name: 'FpgaDeviceInfo')
+    FpgaDeviceInfoList = Shapes::ListShape.new(name: 'FpgaDeviceInfoList')
+    FpgaDeviceManufacturerName = Shapes::StringShape.new(name: 'FpgaDeviceManufacturerName')
+    FpgaDeviceMemoryInfo = Shapes::StructureShape.new(name: 'FpgaDeviceMemoryInfo')
+    FpgaDeviceMemorySize = Shapes::IntegerShape.new(name: 'FpgaDeviceMemorySize')
+    FpgaDeviceName = Shapes::StringShape.new(name: 'FpgaDeviceName')
     FpgaImage = Shapes::StructureShape.new(name: 'FpgaImage')
     FpgaImageAttribute = Shapes::StructureShape.new(name: 'FpgaImageAttribute')
     FpgaImageAttributeName = Shapes::StringShape.new(name: 'FpgaImageAttributeName')
@@ -814,6 +845,8 @@ module Aws::EC2
     FpgaImageList = Shapes::ListShape.new(name: 'FpgaImageList')
     FpgaImageState = Shapes::StructureShape.new(name: 'FpgaImageState')
     FpgaImageStateCode = Shapes::StringShape.new(name: 'FpgaImageStateCode')
+    FpgaInfo = Shapes::StructureShape.new(name: 'FpgaInfo')
+    FreeTierEligibleFlag = Shapes::BooleanShape.new(name: 'FreeTierEligibleFlag')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
     GetCapacityReservationUsageRequest = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageRequest')
     GetCapacityReservationUsageRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityReservationUsageRequestMaxResults')
@@ -840,12 +873,21 @@ module Aws::EC2
     GetTransitGatewayRouteTableAssociationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTableAssociationsResult')
     GetTransitGatewayRouteTablePropagationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTablePropagationsRequest')
     GetTransitGatewayRouteTablePropagationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTablePropagationsResult')
+    GpuDeviceCount = Shapes::IntegerShape.new(name: 'GpuDeviceCount')
+    GpuDeviceInfo = Shapes::StructureShape.new(name: 'GpuDeviceInfo')
+    GpuDeviceInfoList = Shapes::ListShape.new(name: 'GpuDeviceInfoList')
+    GpuDeviceManufacturerName = Shapes::StringShape.new(name: 'GpuDeviceManufacturerName')
+    GpuDeviceMemoryInfo = Shapes::StructureShape.new(name: 'GpuDeviceMemoryInfo')
+    GpuDeviceMemorySize = Shapes::IntegerShape.new(name: 'GpuDeviceMemorySize')
+    GpuDeviceName = Shapes::StringShape.new(name: 'GpuDeviceName')
+    GpuInfo = Shapes::StructureShape.new(name: 'GpuInfo')
     GroupIdStringList = Shapes::ListShape.new(name: 'GroupIdStringList')
     GroupIdentifier = Shapes::StructureShape.new(name: 'GroupIdentifier')
     GroupIdentifierList = Shapes::ListShape.new(name: 'GroupIdentifierList')
     GroupIdentifierSet = Shapes::ListShape.new(name: 'GroupIdentifierSet')
     GroupIds = Shapes::ListShape.new(name: 'GroupIds')
     GroupNameStringList = Shapes::ListShape.new(name: 'GroupNameStringList')
+    HibernationFlag = Shapes::BooleanShape.new(name: 'HibernationFlag')
     HibernationOptions = Shapes::StructureShape.new(name: 'HibernationOptions')
     HibernationOptionsRequest = Shapes::StructureShape.new(name: 'HibernationOptionsRequest')
     HistoryRecord = Shapes::StructureShape.new(name: 'HistoryRecord')
@@ -973,8 +1015,15 @@ module Aws::EC2
     InstanceStatusEventList = Shapes::ListShape.new(name: 'InstanceStatusEventList')
     InstanceStatusList = Shapes::ListShape.new(name: 'InstanceStatusList')
     InstanceStatusSummary = Shapes::StructureShape.new(name: 'InstanceStatusSummary')
+    InstanceStorageFlag = Shapes::BooleanShape.new(name: 'InstanceStorageFlag')
+    InstanceStorageInfo = Shapes::StructureShape.new(name: 'InstanceStorageInfo')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
+    InstanceTypeHypervisor = Shapes::StringShape.new(name: 'InstanceTypeHypervisor')
+    InstanceTypeInfo = Shapes::StructureShape.new(name: 'InstanceTypeInfo')
+    InstanceTypeInfoList = Shapes::ListShape.new(name: 'InstanceTypeInfoList')
     InstanceTypeList = Shapes::ListShape.new(name: 'InstanceTypeList')
+    InstanceTypeOffering = Shapes::StructureShape.new(name: 'InstanceTypeOffering')
+    InstanceTypeOfferingsList = Shapes::ListShape.new(name: 'InstanceTypeOfferingsList')
     InstanceUsage = Shapes::StructureShape.new(name: 'InstanceUsage')
     InstanceUsageSet = Shapes::ListShape.new(name: 'InstanceUsageSet')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -993,6 +1042,7 @@ module Aws::EC2
     Ipv6AddressList = Shapes::ListShape.new(name: 'Ipv6AddressList')
     Ipv6CidrBlock = Shapes::StructureShape.new(name: 'Ipv6CidrBlock')
     Ipv6CidrBlockSet = Shapes::ListShape.new(name: 'Ipv6CidrBlockSet')
+    Ipv6Flag = Shapes::BooleanShape.new(name: 'Ipv6Flag')
     Ipv6Range = Shapes::StructureShape.new(name: 'Ipv6Range')
     Ipv6RangeList = Shapes::ListShape.new(name: 'Ipv6RangeList')
     Ipv6SupportValue = Shapes::StringShape.new(name: 'Ipv6SupportValue')
@@ -1071,9 +1121,16 @@ module Aws::EC2
     LoadPermissionListRequest = Shapes::ListShape.new(name: 'LoadPermissionListRequest')
     LoadPermissionModifications = Shapes::StructureShape.new(name: 'LoadPermissionModifications')
     LoadPermissionRequest = Shapes::StructureShape.new(name: 'LoadPermissionRequest')
+    Location = Shapes::StringShape.new(name: 'Location')
+    LocationType = Shapes::StringShape.new(name: 'LocationType')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MarketType = Shapes::StringShape.new(name: 'MarketType')
+    MaxIpv4AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv4AddrPerInterface')
+    MaxIpv6AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv6AddrPerInterface')
+    MaxNetworkInterfaces = Shapes::IntegerShape.new(name: 'MaxNetworkInterfaces')
+    MemoryInfo = Shapes::StructureShape.new(name: 'MemoryInfo')
+    MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
     MillisecondDateTime = Shapes::TimestampShape.new(name: 'MillisecondDateTime')
     ModifyCapacityReservationRequest = Shapes::StructureShape.new(name: 'ModifyCapacityReservationRequest')
     ModifyCapacityReservationResult = Shapes::StructureShape.new(name: 'ModifyCapacityReservationResult')
@@ -1165,6 +1222,7 @@ module Aws::EC2
     NetworkAclEntryList = Shapes::ListShape.new(name: 'NetworkAclEntryList')
     NetworkAclId = Shapes::StringShape.new(name: 'NetworkAclId')
     NetworkAclList = Shapes::ListShape.new(name: 'NetworkAclList')
+    NetworkInfo = Shapes::StructureShape.new(name: 'NetworkInfo')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceAssociation = Shapes::StructureShape.new(name: 'NetworkInterfaceAssociation')
     NetworkInterfaceAttachment = Shapes::StructureShape.new(name: 'NetworkInterfaceAttachment')
@@ -1185,6 +1243,7 @@ module Aws::EC2
     NetworkInterfacePrivateIpAddressList = Shapes::ListShape.new(name: 'NetworkInterfacePrivateIpAddressList')
     NetworkInterfaceStatus = Shapes::StringShape.new(name: 'NetworkInterfaceStatus')
     NetworkInterfaceType = Shapes::StringShape.new(name: 'NetworkInterfaceType')
+    NetworkPerformance = Shapes::StringShape.new(name: 'NetworkPerformance')
     NewDhcpConfiguration = Shapes::StructureShape.new(name: 'NewDhcpConfiguration')
     NewDhcpConfigurationList = Shapes::ListShape.new(name: 'NewDhcpConfigurationList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -1229,9 +1288,12 @@ module Aws::EC2
     Phase2IntegrityAlgorithmsRequestListValue = Shapes::StructureShape.new(name: 'Phase2IntegrityAlgorithmsRequestListValue')
     Placement = Shapes::StructureShape.new(name: 'Placement')
     PlacementGroup = Shapes::StructureShape.new(name: 'PlacementGroup')
+    PlacementGroupInfo = Shapes::StructureShape.new(name: 'PlacementGroupInfo')
     PlacementGroupList = Shapes::ListShape.new(name: 'PlacementGroupList')
     PlacementGroupName = Shapes::StringShape.new(name: 'PlacementGroupName')
     PlacementGroupState = Shapes::StringShape.new(name: 'PlacementGroupState')
+    PlacementGroupStrategy = Shapes::StringShape.new(name: 'PlacementGroupStrategy')
+    PlacementGroupStrategyList = Shapes::ListShape.new(name: 'PlacementGroupStrategyList')
     PlacementGroupStringList = Shapes::ListShape.new(name: 'PlacementGroupStringList')
     PlacementResponse = Shapes::StructureShape.new(name: 'PlacementResponse')
     PlacementStrategy = Shapes::StringShape.new(name: 'PlacementStrategy')
@@ -1256,6 +1318,8 @@ module Aws::EC2
     PrivateIpAddressSpecification = Shapes::StructureShape.new(name: 'PrivateIpAddressSpecification')
     PrivateIpAddressSpecificationList = Shapes::ListShape.new(name: 'PrivateIpAddressSpecificationList')
     PrivateIpAddressStringList = Shapes::ListShape.new(name: 'PrivateIpAddressStringList')
+    ProcessorInfo = Shapes::StructureShape.new(name: 'ProcessorInfo')
+    ProcessorSustainedClockSpeed = Shapes::FloatShape.new(name: 'ProcessorSustainedClockSpeed')
     ProductCode = Shapes::StructureShape.new(name: 'ProductCode')
     ProductCodeList = Shapes::ListShape.new(name: 'ProductCodeList')
     ProductCodeStringList = Shapes::ListShape.new(name: 'ProductCodeStringList')
@@ -1317,6 +1381,7 @@ module Aws::EC2
     ReportStatusType = Shapes::StringShape.new(name: 'ReportStatusType')
     RequestHostIdList = Shapes::ListShape.new(name: 'RequestHostIdList')
     RequestHostIdSet = Shapes::ListShape.new(name: 'RequestHostIdSet')
+    RequestInstanceTypeList = Shapes::ListShape.new(name: 'RequestInstanceTypeList')
     RequestLaunchTemplateData = Shapes::StructureShape.new(name: 'RequestLaunchTemplateData')
     RequestSpotFleetRequest = Shapes::StructureShape.new(name: 'RequestSpotFleetRequest')
     RequestSpotFleetResponse = Shapes::StructureShape.new(name: 'RequestSpotFleetResponse')
@@ -1374,6 +1439,8 @@ module Aws::EC2
     RevokeClientVpnIngressResult = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressResult')
     RevokeSecurityGroupEgressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupEgressRequest')
     RevokeSecurityGroupIngressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupIngressRequest')
+    RootDeviceType = Shapes::StringShape.new(name: 'RootDeviceType')
+    RootDeviceTypeList = Shapes::ListShape.new(name: 'RootDeviceTypeList')
     Route = Shapes::StructureShape.new(name: 'Route')
     RouteList = Shapes::ListShape.new(name: 'RouteList')
     RouteOrigin = Shapes::StringShape.new(name: 'RouteOrigin')
@@ -1528,6 +1595,8 @@ module Aws::EC2
     TerminateConnectionStatusSet = Shapes::ListShape.new(name: 'TerminateConnectionStatusSet')
     TerminateInstancesRequest = Shapes::StructureShape.new(name: 'TerminateInstancesRequest')
     TerminateInstancesResult = Shapes::StructureShape.new(name: 'TerminateInstancesResult')
+    ThreadsPerCore = Shapes::IntegerShape.new(name: 'ThreadsPerCore')
+    ThreadsPerCoreList = Shapes::ListShape.new(name: 'ThreadsPerCoreList')
     TrafficDirection = Shapes::StringShape.new(name: 'TrafficDirection')
     TrafficMirrorFilter = Shapes::StructureShape.new(name: 'TrafficMirrorFilter')
     TrafficMirrorFilterId = Shapes::StringShape.new(name: 'TrafficMirrorFilterId')
@@ -1612,6 +1681,8 @@ module Aws::EC2
     UpdateSecurityGroupRuleDescriptionsEgressResult = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsEgressResult')
     UpdateSecurityGroupRuleDescriptionsIngressRequest = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsIngressRequest')
     UpdateSecurityGroupRuleDescriptionsIngressResult = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsIngressResult')
+    UsageClassType = Shapes::StringShape.new(name: 'UsageClassType')
+    UsageClassTypeList = Shapes::ListShape.new(name: 'UsageClassTypeList')
     UserBucket = Shapes::StructureShape.new(name: 'UserBucket')
     UserBucketDetails = Shapes::StructureShape.new(name: 'UserBucketDetails')
     UserData = Shapes::StructureShape.new(name: 'UserData')
@@ -1620,6 +1691,8 @@ module Aws::EC2
     UserIdGroupPairList = Shapes::ListShape.new(name: 'UserIdGroupPairList')
     UserIdGroupPairSet = Shapes::ListShape.new(name: 'UserIdGroupPairSet')
     UserIdStringList = Shapes::ListShape.new(name: 'UserIdStringList')
+    VCpuCount = Shapes::IntegerShape.new(name: 'VCpuCount')
+    VCpuInfo = Shapes::StructureShape.new(name: 'VCpuInfo')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VersionDescription = Shapes::StringShape.new(name: 'VersionDescription')
     VersionStringList = Shapes::ListShape.new(name: 'VersionStringList')
@@ -1706,6 +1779,8 @@ module Aws::EC2
     ZoneIdStringList = Shapes::ListShape.new(name: 'ZoneIdStringList')
     ZoneNameStringList = Shapes::ListShape.new(name: 'ZoneNameStringList')
     scope = Shapes::StringShape.new(name: 'scope')
+    totalFpgaMemory = Shapes::IntegerShape.new(name: 'totalFpgaMemory')
+    totalGpuMemory = Shapes::IntegerShape.new(name: 'totalGpuMemory')
 
     AcceptReservedInstancesExchangeQuoteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     AcceptReservedInstancesExchangeQuoteRequest.add_member(:reserved_instance_ids, Shapes::ShapeRef.new(shape: ReservedInstanceIdSet, required: true, location_name: "ReservedInstanceId"))
@@ -1820,6 +1895,8 @@ module Aws::EC2
 
     ApplySecurityGroupsToClientVpnTargetNetworkResult.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "securityGroupIds"))
     ApplySecurityGroupsToClientVpnTargetNetworkResult.struct_class = Types::ApplySecurityGroupsToClientVpnTargetNetworkResult
+
+    ArchitectureTypeList.member = Shapes::ShapeRef.new(shape: ArchitectureType, location_name: "item")
 
     AssignIpv6AddressesRequest.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6AddressCount"))
     AssignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
@@ -2403,6 +2480,8 @@ module Aws::EC2
     CopySnapshotResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     CopySnapshotResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     CopySnapshotResult.struct_class = Types::CopySnapshotResult
+
+    CoreCountList.member = Shapes::ShapeRef.new(shape: CoreCount, location_name: "item")
 
     CpuOptions.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "coreCount"))
     CpuOptions.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "threadsPerCore"))
@@ -3710,6 +3789,28 @@ module Aws::EC2
     DescribeInstanceStatusResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeInstanceStatusResult.struct_class = Types::DescribeInstanceStatusResult
 
+    DescribeInstanceTypeOfferingsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeInstanceTypeOfferingsRequest.add_member(:location_type, Shapes::ShapeRef.new(shape: LocationType, location_name: "LocationType"))
+    DescribeInstanceTypeOfferingsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeInstanceTypeOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DITOMaxResults, location_name: "MaxResults"))
+    DescribeInstanceTypeOfferingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstanceTypeOfferingsRequest.struct_class = Types::DescribeInstanceTypeOfferingsRequest
+
+    DescribeInstanceTypeOfferingsResult.add_member(:instance_type_offerings, Shapes::ShapeRef.new(shape: InstanceTypeOfferingsList, location_name: "instanceTypeOfferingSet"))
+    DescribeInstanceTypeOfferingsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeInstanceTypeOfferingsResult.struct_class = Types::DescribeInstanceTypeOfferingsResult
+
+    DescribeInstanceTypesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeInstanceTypesRequest.add_member(:instance_types, Shapes::ShapeRef.new(shape: RequestInstanceTypeList, location_name: "InstanceType"))
+    DescribeInstanceTypesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeInstanceTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DITMaxResults, location_name: "MaxResults"))
+    DescribeInstanceTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstanceTypesRequest.struct_class = Types::DescribeInstanceTypesRequest
+
+    DescribeInstanceTypesResult.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeInfoList, location_name: "instanceTypeSet"))
+    DescribeInstanceTypesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeInstanceTypesResult.struct_class = Types::DescribeInstanceTypesResult
+
     DescribeInstancesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
     DescribeInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -4550,6 +4651,13 @@ module Aws::EC2
     DiskImageVolumeDescription.add_member(:size, Shapes::ShapeRef.new(shape: Long, location_name: "size"))
     DiskImageVolumeDescription.struct_class = Types::DiskImageVolumeDescription
 
+    DiskInfo.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: DiskSize, location_name: "sizeInGB"))
+    DiskInfo.add_member(:count, Shapes::ShapeRef.new(shape: DiskCount, location_name: "count"))
+    DiskInfo.add_member(:type, Shapes::ShapeRef.new(shape: DiskType, location_name: "type"))
+    DiskInfo.struct_class = Types::DiskInfo
+
+    DiskInfoList.member = Shapes::ShapeRef.new(shape: DiskInfo, location_name: "item")
+
     DnsEntry.add_member(:dns_name, Shapes::ShapeRef.new(shape: String, location_name: "dnsName"))
     DnsEntry.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "hostedZoneId"))
     DnsEntry.struct_class = Types::DnsEntry
@@ -4568,6 +4676,10 @@ module Aws::EC2
     EbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     EbsBlockDevice.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     EbsBlockDevice.struct_class = Types::EbsBlockDevice
+
+    EbsInfo.add_member(:ebs_optimized_support, Shapes::ShapeRef.new(shape: EbsOptimizedSupport, location_name: "ebsOptimizedSupport"))
+    EbsInfo.add_member(:encryption_support, Shapes::ShapeRef.new(shape: EbsEncryptionSupport, location_name: "encryptionSupport"))
+    EbsInfo.struct_class = Types::EbsInfo
 
     EbsInstanceBlockDevice.add_member(:attach_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "attachTime"))
     EbsInstanceBlockDevice.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
@@ -4906,6 +5018,17 @@ module Aws::EC2
 
     FlowLogSet.member = Shapes::ShapeRef.new(shape: FlowLog, location_name: "item")
 
+    FpgaDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: FpgaDeviceName, location_name: "name"))
+    FpgaDeviceInfo.add_member(:manufacturer, Shapes::ShapeRef.new(shape: FpgaDeviceManufacturerName, location_name: "manufacturer"))
+    FpgaDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: FpgaDeviceCount, location_name: "count"))
+    FpgaDeviceInfo.add_member(:memory_info, Shapes::ShapeRef.new(shape: FpgaDeviceMemoryInfo, location_name: "memoryInfo"))
+    FpgaDeviceInfo.struct_class = Types::FpgaDeviceInfo
+
+    FpgaDeviceInfoList.member = Shapes::ShapeRef.new(shape: FpgaDeviceInfo, location_name: "item")
+
+    FpgaDeviceMemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: FpgaDeviceMemorySize, location_name: "sizeInMiB"))
+    FpgaDeviceMemoryInfo.struct_class = Types::FpgaDeviceMemoryInfo
+
     FpgaImage.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, location_name: "fpgaImageId"))
     FpgaImage.add_member(:fpga_image_global_id, Shapes::ShapeRef.new(shape: String, location_name: "fpgaImageGlobalId"))
     FpgaImage.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -4937,6 +5060,10 @@ module Aws::EC2
     FpgaImageState.add_member(:code, Shapes::ShapeRef.new(shape: FpgaImageStateCode, location_name: "code"))
     FpgaImageState.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     FpgaImageState.struct_class = Types::FpgaImageState
+
+    FpgaInfo.add_member(:fpgas, Shapes::ShapeRef.new(shape: FpgaDeviceInfoList, location_name: "fpgas"))
+    FpgaInfo.add_member(:total_fpga_memory_in_mi_b, Shapes::ShapeRef.new(shape: totalFpgaMemory, location_name: "totalFpgaMemoryInMiB"))
+    FpgaInfo.struct_class = Types::FpgaInfo
 
     GetCapacityReservationUsageRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     GetCapacityReservationUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -5058,6 +5185,21 @@ module Aws::EC2
     GetTransitGatewayRouteTablePropagationsResult.add_member(:transit_gateway_route_table_propagations, Shapes::ShapeRef.new(shape: TransitGatewayRouteTablePropagationList, location_name: "transitGatewayRouteTablePropagations"))
     GetTransitGatewayRouteTablePropagationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetTransitGatewayRouteTablePropagationsResult.struct_class = Types::GetTransitGatewayRouteTablePropagationsResult
+
+    GpuDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: GpuDeviceName, location_name: "name"))
+    GpuDeviceInfo.add_member(:manufacturer, Shapes::ShapeRef.new(shape: GpuDeviceManufacturerName, location_name: "manufacturer"))
+    GpuDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: GpuDeviceCount, location_name: "count"))
+    GpuDeviceInfo.add_member(:memory_info, Shapes::ShapeRef.new(shape: GpuDeviceMemoryInfo, location_name: "memoryInfo"))
+    GpuDeviceInfo.struct_class = Types::GpuDeviceInfo
+
+    GpuDeviceInfoList.member = Shapes::ShapeRef.new(shape: GpuDeviceInfo, location_name: "item")
+
+    GpuDeviceMemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: GpuDeviceMemorySize, location_name: "sizeInMiB"))
+    GpuDeviceMemoryInfo.struct_class = Types::GpuDeviceMemoryInfo
+
+    GpuInfo.add_member(:gpus, Shapes::ShapeRef.new(shape: GpuDeviceInfoList, location_name: "gpus"))
+    GpuInfo.add_member(:total_gpu_memory_in_mi_b, Shapes::ShapeRef.new(shape: totalGpuMemory, location_name: "totalGpuMemoryInMiB"))
+    GpuInfo.struct_class = Types::GpuInfo
 
     GroupIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "groupId")
 
@@ -5651,7 +5793,43 @@ module Aws::EC2
     InstanceStatusSummary.add_member(:status, Shapes::ShapeRef.new(shape: SummaryStatus, location_name: "status"))
     InstanceStatusSummary.struct_class = Types::InstanceStatusSummary
 
+    InstanceStorageInfo.add_member(:total_size_in_gb, Shapes::ShapeRef.new(shape: DiskSize, location_name: "totalSizeInGB"))
+    InstanceStorageInfo.add_member(:disks, Shapes::ShapeRef.new(shape: DiskInfoList, location_name: "disks"))
+    InstanceStorageInfo.struct_class = Types::InstanceStorageInfo
+
+    InstanceTypeInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
+    InstanceTypeInfo.add_member(:current_generation, Shapes::ShapeRef.new(shape: CurrentGenerationFlag, location_name: "currentGeneration"))
+    InstanceTypeInfo.add_member(:free_tier_eligible, Shapes::ShapeRef.new(shape: FreeTierEligibleFlag, location_name: "freeTierEligible"))
+    InstanceTypeInfo.add_member(:supported_usage_classes, Shapes::ShapeRef.new(shape: UsageClassTypeList, location_name: "supportedUsageClasses"))
+    InstanceTypeInfo.add_member(:supported_root_devices, Shapes::ShapeRef.new(shape: RootDeviceTypeList, location_name: "supportedRootDevices"))
+    InstanceTypeInfo.add_member(:bare_metal, Shapes::ShapeRef.new(shape: BareMetalFlag, location_name: "bareMetal"))
+    InstanceTypeInfo.add_member(:hypervisor, Shapes::ShapeRef.new(shape: InstanceTypeHypervisor, location_name: "hypervisor"))
+    InstanceTypeInfo.add_member(:processor_info, Shapes::ShapeRef.new(shape: ProcessorInfo, location_name: "processorInfo"))
+    InstanceTypeInfo.add_member(:v_cpu_info, Shapes::ShapeRef.new(shape: VCpuInfo, location_name: "vCpuInfo"))
+    InstanceTypeInfo.add_member(:memory_info, Shapes::ShapeRef.new(shape: MemoryInfo, location_name: "memoryInfo"))
+    InstanceTypeInfo.add_member(:instance_storage_supported, Shapes::ShapeRef.new(shape: InstanceStorageFlag, location_name: "instanceStorageSupported"))
+    InstanceTypeInfo.add_member(:instance_storage_info, Shapes::ShapeRef.new(shape: InstanceStorageInfo, location_name: "instanceStorageInfo"))
+    InstanceTypeInfo.add_member(:ebs_info, Shapes::ShapeRef.new(shape: EbsInfo, location_name: "ebsInfo"))
+    InstanceTypeInfo.add_member(:network_info, Shapes::ShapeRef.new(shape: NetworkInfo, location_name: "networkInfo"))
+    InstanceTypeInfo.add_member(:gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "gpuInfo"))
+    InstanceTypeInfo.add_member(:fpga_info, Shapes::ShapeRef.new(shape: FpgaInfo, location_name: "fpgaInfo"))
+    InstanceTypeInfo.add_member(:placement_group_info, Shapes::ShapeRef.new(shape: PlacementGroupInfo, location_name: "placementGroupInfo"))
+    InstanceTypeInfo.add_member(:hibernation_supported, Shapes::ShapeRef.new(shape: HibernationFlag, location_name: "hibernationSupported"))
+    InstanceTypeInfo.add_member(:burstable_performance_supported, Shapes::ShapeRef.new(shape: BurstablePerformanceFlag, location_name: "burstablePerformanceSupported"))
+    InstanceTypeInfo.add_member(:dedicated_hosts_supported, Shapes::ShapeRef.new(shape: DedicatedHostFlag, location_name: "dedicatedHostsSupported"))
+    InstanceTypeInfo.add_member(:auto_recovery_supported, Shapes::ShapeRef.new(shape: AutoRecoveryFlag, location_name: "autoRecoverySupported"))
+    InstanceTypeInfo.struct_class = Types::InstanceTypeInfo
+
+    InstanceTypeInfoList.member = Shapes::ShapeRef.new(shape: InstanceTypeInfo, location_name: "item")
+
     InstanceTypeList.member = Shapes::ShapeRef.new(shape: InstanceType)
+
+    InstanceTypeOffering.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
+    InstanceTypeOffering.add_member(:location_type, Shapes::ShapeRef.new(shape: LocationType, location_name: "locationType"))
+    InstanceTypeOffering.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
+    InstanceTypeOffering.struct_class = Types::InstanceTypeOffering
+
+    InstanceTypeOfferingsList.member = Shapes::ShapeRef.new(shape: InstanceTypeOffering, location_name: "item")
 
     InstanceUsage.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
     InstanceUsage.add_member(:used_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "usedInstanceCount"))
@@ -6000,6 +6178,9 @@ module Aws::EC2
     LoadPermissionRequest.add_member(:group, Shapes::ShapeRef.new(shape: PermissionGroup, location_name: "Group"))
     LoadPermissionRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "UserId"))
     LoadPermissionRequest.struct_class = Types::LoadPermissionRequest
+
+    MemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: MemorySize, location_name: "sizeInMiB"))
+    MemoryInfo.struct_class = Types::MemoryInfo
 
     ModifyCapacityReservationRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     ModifyCapacityReservationRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
@@ -6458,6 +6639,14 @@ module Aws::EC2
 
     NetworkAclList.member = Shapes::ShapeRef.new(shape: NetworkAcl, location_name: "item")
 
+    NetworkInfo.add_member(:network_performance, Shapes::ShapeRef.new(shape: NetworkPerformance, location_name: "networkPerformance"))
+    NetworkInfo.add_member(:maximum_network_interfaces, Shapes::ShapeRef.new(shape: MaxNetworkInterfaces, location_name: "maximumNetworkInterfaces"))
+    NetworkInfo.add_member(:ipv_4_addresses_per_interface, Shapes::ShapeRef.new(shape: MaxIpv4AddrPerInterface, location_name: "ipv4AddressesPerInterface"))
+    NetworkInfo.add_member(:ipv_6_addresses_per_interface, Shapes::ShapeRef.new(shape: MaxIpv6AddrPerInterface, location_name: "ipv6AddressesPerInterface"))
+    NetworkInfo.add_member(:ipv_6_supported, Shapes::ShapeRef.new(shape: Ipv6Flag, location_name: "ipv6Supported"))
+    NetworkInfo.add_member(:ena_support, Shapes::ShapeRef.new(shape: EnaSupport, location_name: "enaSupport"))
+    NetworkInfo.struct_class = Types::NetworkInfo
+
     NetworkInterface.add_member(:association, Shapes::ShapeRef.new(shape: NetworkInterfaceAssociation, location_name: "association"))
     NetworkInterface.add_member(:attachment, Shapes::ShapeRef.new(shape: NetworkInterfaceAttachment, location_name: "attachment"))
     NetworkInterface.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -6650,7 +6839,12 @@ module Aws::EC2
     PlacementGroup.add_member(:partition_count, Shapes::ShapeRef.new(shape: Integer, location_name: "partitionCount"))
     PlacementGroup.struct_class = Types::PlacementGroup
 
+    PlacementGroupInfo.add_member(:supported_strategies, Shapes::ShapeRef.new(shape: PlacementGroupStrategyList, location_name: "supportedStrategies"))
+    PlacementGroupInfo.struct_class = Types::PlacementGroupInfo
+
     PlacementGroupList.member = Shapes::ShapeRef.new(shape: PlacementGroup, location_name: "item")
+
+    PlacementGroupStrategyList.member = Shapes::ShapeRef.new(shape: PlacementGroupStrategy, location_name: "item")
 
     PlacementGroupStringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -6712,6 +6906,10 @@ module Aws::EC2
     PrivateIpAddressSpecificationList.member = Shapes::ShapeRef.new(shape: PrivateIpAddressSpecification, location_name: "item")
 
     PrivateIpAddressStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "PrivateIpAddress")
+
+    ProcessorInfo.add_member(:supported_architectures, Shapes::ShapeRef.new(shape: ArchitectureTypeList, location_name: "supportedArchitectures"))
+    ProcessorInfo.add_member(:sustained_clock_speed_in_ghz, Shapes::ShapeRef.new(shape: ProcessorSustainedClockSpeed, location_name: "sustainedClockSpeedInGhz"))
+    ProcessorInfo.struct_class = Types::ProcessorInfo
 
     ProductCode.add_member(:product_code_id, Shapes::ShapeRef.new(shape: String, location_name: "productCode"))
     ProductCode.add_member(:product_code_type, Shapes::ShapeRef.new(shape: ProductCodeValues, location_name: "type"))
@@ -6958,6 +7156,8 @@ module Aws::EC2
     RequestHostIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     RequestHostIdSet.member = Shapes::ShapeRef.new(shape: HostId, location_name: "item")
+
+    RequestInstanceTypeList.member = Shapes::ShapeRef.new(shape: InstanceType)
 
     RequestLaunchTemplateData.add_member(:kernel_id, Shapes::ShapeRef.new(shape: String, location_name: "KernelId"))
     RequestLaunchTemplateData.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "EbsOptimized"))
@@ -7263,6 +7463,8 @@ module Aws::EC2
     RevokeSecurityGroupIngressRequest.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "ToPort"))
     RevokeSecurityGroupIngressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     RevokeSecurityGroupIngressRequest.struct_class = Types::RevokeSecurityGroupIngressRequest
+
+    RootDeviceTypeList.member = Shapes::ShapeRef.new(shape: RootDeviceType, location_name: "item")
 
     Route.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
     Route.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpv6CidrBlock"))
@@ -7953,6 +8155,8 @@ module Aws::EC2
     TerminateInstancesResult.add_member(:terminating_instances, Shapes::ShapeRef.new(shape: InstanceStateChangeList, location_name: "instancesSet"))
     TerminateInstancesResult.struct_class = Types::TerminateInstancesResult
 
+    ThreadsPerCoreList.member = Shapes::ShapeRef.new(shape: ThreadsPerCore, location_name: "item")
+
     TrafficMirrorFilter.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorFilterId"))
     TrafficMirrorFilter.add_member(:ingress_filter_rules, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleList, location_name: "ingressFilterRuleSet"))
     TrafficMirrorFilter.add_member(:egress_filter_rules, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleList, location_name: "egressFilterRuleSet"))
@@ -8229,6 +8433,8 @@ module Aws::EC2
     UpdateSecurityGroupRuleDescriptionsIngressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     UpdateSecurityGroupRuleDescriptionsIngressResult.struct_class = Types::UpdateSecurityGroupRuleDescriptionsIngressResult
 
+    UsageClassTypeList.member = Shapes::ShapeRef.new(shape: UsageClassType, location_name: "item")
+
     UserBucket.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: String, location_name: "S3Bucket"))
     UserBucket.add_member(:s3_key, Shapes::ShapeRef.new(shape: String, location_name: "S3Key"))
     UserBucket.struct_class = Types::UserBucket
@@ -8256,6 +8462,13 @@ module Aws::EC2
     UserIdGroupPairSet.member = Shapes::ShapeRef.new(shape: UserIdGroupPair, location_name: "item")
 
     UserIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "UserId")
+
+    VCpuInfo.add_member(:default_v_cpus, Shapes::ShapeRef.new(shape: VCpuCount, location_name: "defaultVCpus"))
+    VCpuInfo.add_member(:default_cores, Shapes::ShapeRef.new(shape: CoreCount, location_name: "defaultCores"))
+    VCpuInfo.add_member(:default_threads_per_core, Shapes::ShapeRef.new(shape: ThreadsPerCore, location_name: "defaultThreadsPerCore"))
+    VCpuInfo.add_member(:valid_cores, Shapes::ShapeRef.new(shape: CoreCountList, location_name: "validCores"))
+    VCpuInfo.add_member(:valid_threads_per_core, Shapes::ShapeRef.new(shape: ThreadsPerCoreList, location_name: "validThreadsPerCore"))
+    VCpuInfo.struct_class = Types::VCpuInfo
 
     ValueStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
@@ -10077,6 +10290,22 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_instance_type_offerings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceTypeOfferings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceTypeOfferingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceTypeOfferingsResult)
+      end)
+
+      api.add_operation(:describe_instance_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceTypes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceTypesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceTypesResult)
       end)
 
       api.add_operation(:describe_instances, Seahorse::Model::Operation.new.tap do |o|

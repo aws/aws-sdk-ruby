@@ -583,13 +583,17 @@ module Aws::EMR
     # step will be canceled, even if the request is successfully submitted.
     # You can only cancel steps that are in a `PENDING` state.
     #
-    # @option params [String] :cluster_id
+    # @option params [required, String] :cluster_id
     #   The `ClusterID` for which specified steps will be canceled. Use
     #   RunJobFlow and ListClusters to get ClusterIDs.
     #
-    # @option params [Array<String>] :step_ids
+    # @option params [required, Array<String>] :step_ids
     #   The list of `StepIDs` to cancel. Use ListSteps to get steps and their
     #   states for the specified cluster.
+    #
+    # @option params [String] :step_cancellation_option
+    #   The option to choose for cancelling `RUNNING` steps. By default, the
+    #   value is `SEND_INTERRUPT`.
     #
     # @return [Types::CancelStepsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -598,8 +602,9 @@ module Aws::EMR
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_steps({
-    #     cluster_id: "XmlStringMaxLen256",
-    #     step_ids: ["XmlStringMaxLen256"],
+    #     cluster_id: "XmlStringMaxLen256", # required
+    #     step_ids: ["XmlStringMaxLen256"], # required
+    #     step_cancellation_option: "SEND_INTERRUPT", # accepts SEND_INTERRUPT, TERMINATE_PROCESS
     #   })
     #
     # @example Response structure
@@ -760,6 +765,8 @@ module Aws::EMR
     #   resp.cluster.kerberos_attributes.ad_domain_join_user #=> String
     #   resp.cluster.kerberos_attributes.ad_domain_join_password #=> String
     #   resp.cluster.cluster_arn #=> String
+    #   resp.cluster.step_concurrency_level #=> Integer
+    #   resp.cluster.outpost_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeCluster AWS API Documentation
     #
@@ -1098,6 +1105,7 @@ module Aws::EMR
     #   resp.clusters[0].status.timeline.end_date_time #=> Time
     #   resp.clusters[0].normalized_instance_hours #=> Integer
     #   resp.clusters[0].cluster_arn #=> String
+    #   resp.clusters[0].outpost_arn #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClusters AWS API Documentation
@@ -1454,6 +1462,40 @@ module Aws::EMR
     # @param [Hash] params ({})
     def list_steps(params = {}, options = {})
       req = build_request(:list_steps, params)
+      req.send_request(options)
+    end
+
+    # Modifies the number of steps that can be executed concurrently for the
+    # cluster specified using ClusterID.
+    #
+    # @option params [required, String] :cluster_id
+    #   The unique identifier of the cluster.
+    #
+    # @option params [Integer] :step_concurrency_level
+    #   The number of steps that can be executed concurrently. You can specify
+    #   a maximum of 256 steps.
+    #
+    # @return [Types::ModifyClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyClusterOutput#step_concurrency_level #step_concurrency_level} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_cluster({
+    #     cluster_id: "String", # required
+    #     step_concurrency_level: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.step_concurrency_level #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyCluster AWS API Documentation
+    #
+    # @overload modify_cluster(params = {})
+    # @param [Hash] params ({})
+    def modify_cluster(params = {}, options = {})
+      req = build_request(:modify_cluster, params)
       req.send_request(options)
     end
 
@@ -2002,6 +2044,10 @@ module Aws::EMR
     #
     #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #
+    # @option params [Integer] :step_concurrency_level
+    #   Specifies the number of steps that can be executed concurrently. The
+    #   default value is `1`. The maximum value is `256`.
+    #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
@@ -2230,6 +2276,7 @@ module Aws::EMR
     #       ad_domain_join_user: "XmlStringMaxLen256",
     #       ad_domain_join_password: "XmlStringMaxLen256",
     #     },
+    #     step_concurrency_level: 1,
     #   })
     #
     # @example Response structure
@@ -2382,7 +2429,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -298,6 +298,20 @@ module Aws::Rekognition
     # information about the face in the source image, including the bounding
     # box of the face and confidence value.
     #
+    # The `QualityFilter` input parameter allows you to filter out detected
+    # faces that don’t meet a required quality bar. The quality bar is based
+    # on a variety of common use cases. By default, `CompareFaces` chooses
+    # the quality bar that's used to filter faces. You can also explicitly
+    # choose the quality bar. Use `QualityFilter`, to set the quality bar by
+    # specifying `LOW`, `MEDIUM`, or `HIGH`. If you do not want to filter
+    # detected faces, specify `NONE`.
+    #
+    # <note markdown="1"> To use quality filtering, you need a collection associated with
+    # version 3 of the face model or higher. To get the version of the face
+    # model associated with a collection, call DescribeCollection.
+    #
+    #  </note>
+    #
     # If the image doesn't contain Exif metadata, `CompareFaces` returns
     # orientation information for the source and target images. Use these
     # values to display the images with the correct image orientation.
@@ -339,6 +353,21 @@ module Aws::Rekognition
     # @option params [Float] :similarity_threshold
     #   The minimum level of confidence in the face matches that a match must
     #   meet to be included in the `FaceMatches` array.
+    #
+    # @option params [String] :quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't compared. If you specify
+    #   `AUTO`, Amazon Rekognition chooses the quality bar. If you specify
+    #   `LOW`, `MEDIUM`, or `HIGH`, filtering removes all faces that don’t
+    #   meet the chosen quality bar. The default value is `AUTO`. The quality
+    #   bar is based on a variety of common use cases. Low-quality detections
+    #   can occur for a number of reasons. Some examples are an object that's
+    #   misidentified as a face, a face that's too blurry, or a face with a
+    #   pose that's too extreme to use. If you specify `NONE`, no filtering
+    #   is performed.
+    #
+    #   To use quality filtering, the collection you are using must be
+    #   associated with version 3 of the face model or higher.
     #
     # @return [Types::CompareFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -416,6 +445,7 @@ module Aws::Rekognition
     #       },
     #     },
     #     similarity_threshold: 1.0,
+    #     quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #   })
     #
     # @example Response structure
@@ -823,8 +853,8 @@ module Aws::Rekognition
     # face detected, the operation returns face details. These details
     # include a bounding box of the face, a confidence value (that the
     # bounding box contains a face), and a fixed set of attributes such as
-    # facial landmarks (for example, coordinates of eye and mouth), gender,
-    # presence of beard, sunglasses, and so on.
+    # facial landmarks (for example, coordinates of eye and mouth), presence
+    # of beard, sunglasses, and so on.
     #
     # The face-detection algorithm is most effective on frontal faces. For
     # non-frontal or obscured faces, the algorithm might not detect the
@@ -2174,16 +2204,16 @@ module Aws::Rekognition
     # as those belonging to people standing in the background.
     #
     # The `QualityFilter` input parameter allows you to filter out detected
-    # faces that don’t meet the required quality bar chosen by Amazon
-    # Rekognition. The quality bar is based on a variety of common use
-    # cases. By default, `IndexFaces` filters detected faces. You can also
-    # explicitly filter detected faces by specifying `AUTO` for the value of
-    # `QualityFilter`. If you do not want to filter detected faces, specify
-    # `NONE`.
+    # faces that don’t meet a required quality bar. The quality bar is based
+    # on a variety of common use cases. By default, `IndexFaces` chooses the
+    # quality bar that's used to filter faces. You can also explicitly
+    # choose the quality bar. Use `QualityFilter`, to set the quality bar by
+    # specifying `LOW`, `MEDIUM`, or `HIGH`. If you do not want to filter
+    # detected faces, specify `NONE`.
     #
     # <note markdown="1"> To use quality filtering, you need a collection associated with
-    # version 3 of the face model. To get the version of the face model
-    # associated with a collection, call DescribeCollection.
+    # version 3 of the face model or higher. To get the version of the face
+    # model associated with a collection, call DescribeCollection.
     #
     #  </note>
     #
@@ -2202,6 +2232,8 @@ module Aws::Rekognition
     #
     # * The face has an extreme pose.
     #
+    # * The face doesn’t have enough detail to be suitable for face search.
+    #
     # In response, the `IndexFaces` operation returns an array of metadata
     # for all detected faces, `FaceRecords`. This includes:
     #
@@ -2218,10 +2250,10 @@ module Aws::Rekognition
     # If you request all facial attributes (by using the
     # `detectionAttributes` parameter), Amazon Rekognition returns detailed
     # facial attributes, such as facial landmarks (for example, location of
-    # eye and mouth) and other facial attributes like gender. If you provide
-    # the same image, specify the same collection, and use the same external
-    # ID in the `IndexFaces` operation, Amazon Rekognition doesn't save
-    # duplicate face metadata.
+    # eye and mouth) and other facial attributes. If you provide the same
+    # image, specify the same collection, and use the same external ID in
+    # the `IndexFaces` operation, Amazon Rekognition doesn't save duplicate
+    # face metadata.
     #
     #
     #
@@ -2283,18 +2315,19 @@ module Aws::Rekognition
     #   of the face model.
     #
     # @option params [String] :quality_filter
-    #   A filter that specifies how much filtering is done to identify faces
-    #   that are detected with low quality. Filtered faces aren't indexed. If
-    #   you specify `AUTO`, filtering prioritizes the identification of faces
-    #   that don’t meet the required quality bar chosen by Amazon Rekognition.
-    #   The quality bar is based on a variety of common use cases. Low-quality
-    #   detections can occur for a number of reasons. Some examples are an
-    #   object that's misidentified as a face, a face that's too blurry, or
-    #   a face with a pose that's too extreme to use. If you specify `NONE`,
-    #   no filtering is performed. The default value is AUTO.
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't indexed. If you specify
+    #   `AUTO`, Amazon Rekognition chooses the quality bar. If you specify
+    #   `LOW`, `MEDIUM`, or `HIGH`, filtering removes all faces that don’t
+    #   meet the chosen quality bar. The default value is `AUTO`. The quality
+    #   bar is based on a variety of common use cases. Low-quality detections
+    #   can occur for a number of reasons. Some examples are an object that's
+    #   misidentified as a face, a face that's too blurry, or a face with a
+    #   pose that's too extreme to use. If you specify `NONE`, no filtering
+    #   is performed.
     #
     #   To use quality filtering, the collection you are using must be
-    #   associated with version 3 of the face model.
+    #   associated with version 3 of the face model or higher.
     #
     # @return [Types::IndexFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2459,7 +2492,7 @@ module Aws::Rekognition
     #     external_image_id: "ExternalImageId",
     #     detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL
     #     max_faces: 1,
-    #     quality_filter: "NONE", # accepts NONE, AUTO
+    #     quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #   })
     #
     # @example Response structure
@@ -2512,7 +2545,7 @@ module Aws::Rekognition
     #   resp.face_model_version #=> String
     #   resp.unindexed_faces #=> Array
     #   resp.unindexed_faces[0].reasons #=> Array
-    #   resp.unindexed_faces[0].reasons[0] #=> String, one of "EXCEEDS_MAX_FACES", "EXTREME_POSE", "LOW_BRIGHTNESS", "LOW_SHARPNESS", "LOW_CONFIDENCE", "SMALL_BOUNDING_BOX"
+    #   resp.unindexed_faces[0].reasons[0] #=> String, one of "EXCEEDS_MAX_FACES", "EXTREME_POSE", "LOW_BRIGHTNESS", "LOW_SHARPNESS", "LOW_CONFIDENCE", "SMALL_BOUNDING_BOX", "LOW_FACE_QUALITY"
     #   resp.unindexed_faces[0].face_detail.bounding_box.width #=> Float
     #   resp.unindexed_faces[0].face_detail.bounding_box.height #=> Float
     #   resp.unindexed_faces[0].face_detail.bounding_box.left #=> Float
@@ -3126,6 +3159,20 @@ module Aws::Rekognition
     # For an example, Searching for a Face Using an Image in the Amazon
     # Rekognition Developer Guide.
     #
+    # The `QualityFilter` input parameter allows you to filter out detected
+    # faces that don’t meet a required quality bar. The quality bar is based
+    # on a variety of common use cases. By default, Amazon Rekognition
+    # chooses the quality bar that's used to filter faces. You can also
+    # explicitly choose the quality bar. Use `QualityFilter`, to set the
+    # quality bar for filtering by specifying `LOW`, `MEDIUM`, or `HIGH`. If
+    # you do not want to filter detected faces, specify `NONE`.
+    #
+    # <note markdown="1"> To use quality filtering, you need a collection associated with
+    # version 3 of the face model or higher. To get the version of the face
+    # model associated with a collection, call DescribeCollection.
+    #
+    #  </note>
+    #
     # This operation requires permissions to perform the
     # `rekognition:SearchFacesByImage` action.
     #
@@ -3150,6 +3197,21 @@ module Aws::Rekognition
     #   (Optional) Specifies the minimum confidence in the face match to
     #   return. For example, don't return any matches where confidence in
     #   matches is less than 70%. The default value is 80%.
+    #
+    # @option params [String] :quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't searched for in the
+    #   collection. If you specify `AUTO`, Amazon Rekognition chooses the
+    #   quality bar. If you specify `LOW`, `MEDIUM`, or `HIGH`, filtering
+    #   removes all faces that don’t meet the chosen quality bar. The default
+    #   value is `AUTO`. The quality bar is based on a variety of common use
+    #   cases. Low-quality detections can occur for a number of reasons. Some
+    #   examples are an object that's misidentified as a face, a face that's
+    #   too blurry, or a face with a pose that's too extreme to use. If you
+    #   specify `NONE`, no filtering is performed.
+    #
+    #   To use quality filtering, the collection you are using must be
+    #   associated with version 3 of the face model or higher.
     #
     # @return [Types::SearchFacesByImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3216,6 +3278,7 @@ module Aws::Rekognition
     #     },
     #     max_faces: 1,
     #     face_match_threshold: 1.0,
+    #     quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #   })
     #
     # @example Response structure
@@ -3767,7 +3830,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

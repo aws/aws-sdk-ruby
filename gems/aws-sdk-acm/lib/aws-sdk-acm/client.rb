@@ -425,7 +425,7 @@ module Aws::ACM
     #   resp.certificate.signature_algorithm #=> String
     #   resp.certificate.in_use_by #=> Array
     #   resp.certificate.in_use_by[0] #=> String
-    #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "DOMAIN_VALIDATION_DENIED", "CAA_ERROR", "PCA_LIMIT_EXCEEDED", "PCA_INVALID_ARN", "PCA_INVALID_STATE", "PCA_REQUEST_FAILED", "PCA_RESOURCE_NOT_FOUND", "PCA_INVALID_ARGS", "PCA_INVALID_DURATION", "PCA_ACCESS_DENIED", "OTHER"
+    #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "DOMAIN_VALIDATION_DENIED", "CAA_ERROR", "PCA_LIMIT_EXCEEDED", "PCA_INVALID_ARN", "PCA_INVALID_STATE", "PCA_REQUEST_FAILED", "PCA_NAME_CONSTRAINTS_VALIDATION", "PCA_RESOURCE_NOT_FOUND", "PCA_INVALID_ARGS", "PCA_INVALID_DURATION", "PCA_ACCESS_DENIED", "OTHER"
     #   resp.certificate.type #=> String, one of "IMPORTED", "AMAZON_ISSUED", "PRIVATE"
     #   resp.certificate.renewal_summary.renewal_status #=> String, one of "PENDING_AUTO_RENEWAL", "PENDING_VALIDATION", "SUCCESS", "FAILED"
     #   resp.certificate.renewal_summary.domain_validation_options #=> Array
@@ -438,7 +438,7 @@ module Aws::ACM
     #   resp.certificate.renewal_summary.domain_validation_options[0].resource_record.type #=> String, one of "CNAME"
     #   resp.certificate.renewal_summary.domain_validation_options[0].resource_record.value #=> String
     #   resp.certificate.renewal_summary.domain_validation_options[0].validation_method #=> String, one of "EMAIL", "DNS"
-    #   resp.certificate.renewal_summary.renewal_status_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "DOMAIN_VALIDATION_DENIED", "CAA_ERROR", "PCA_LIMIT_EXCEEDED", "PCA_INVALID_ARN", "PCA_INVALID_STATE", "PCA_REQUEST_FAILED", "PCA_RESOURCE_NOT_FOUND", "PCA_INVALID_ARGS", "PCA_INVALID_DURATION", "PCA_ACCESS_DENIED", "OTHER"
+    #   resp.certificate.renewal_summary.renewal_status_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "DOMAIN_VALIDATION_DENIED", "CAA_ERROR", "PCA_LIMIT_EXCEEDED", "PCA_INVALID_ARN", "PCA_INVALID_STATE", "PCA_REQUEST_FAILED", "PCA_NAME_CONSTRAINTS_VALIDATION", "PCA_RESOURCE_NOT_FOUND", "PCA_INVALID_ARGS", "PCA_INVALID_DURATION", "PCA_ACCESS_DENIED", "OTHER"
     #   resp.certificate.renewal_summary.updated_at #=> Time
     #   resp.certificate.key_usages #=> Array
     #   resp.certificate.key_usages[0].name #=> String, one of "DIGITAL_SIGNATURE", "NON_REPUDIATION", "KEY_ENCIPHERMENT", "DATA_ENCIPHERMENT", "KEY_AGREEMENT", "CERTIFICATE_SIGNING", "CRL_SIGNING", "ENCIPHER_ONLY", "DECIPHER_ONLY", "ANY", "CUSTOM"
@@ -459,15 +459,18 @@ module Aws::ACM
     end
 
     # Exports a private certificate issued by a private certificate
-    # authority (CA) for use anywhere. You can export the certificate, the
-    # certificate chain, and the encrypted private key associated with the
-    # public key embedded in the certificate. You must store the private key
-    # securely. The private key is a 2048 bit RSA key. You must provide a
-    # passphrase for the private key when exporting it. You can use the
-    # following OpenSSL command to decrypt it later. Provide the passphrase
-    # when prompted.
+    # authority (CA) for use anywhere. The exported file contains the
+    # certificate, the certificate chain, and the encrypted private 2048-bit
+    # RSA key associated with the public key that is embedded in the
+    # certificate. For security, you must assign a passphrase for the
+    # private key when exporting it.
     #
-    # `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
+    # For information about exporting and formatting a certificate using the
+    # ACM console or CLI, see [Export a Private Certificate][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html
     #
     # @option params [required, String] :certificate_arn
     #   An Amazon Resource Name (ARN) of the issued certificate. This must be
@@ -595,7 +598,7 @@ module Aws::ACM
     #
     # * To import a new certificate, omit the `CertificateArn` argument.
     #   Include this argument only when you want to replace a previously
-    #   imported certificate.
+    #   imported certifica
     #
     # * When you import a certificate by using the CLI, you must specify the
     #   certificate, the certificate chain, and the private key by their
@@ -607,6 +610,10 @@ module Aws::ACM
     # * When you import a certificate by using an SDK, you must specify the
     #   certificate, the certificate chain, and the private key files in the
     #   manner required by the programming language you're using.
+    #
+    # * The cryptographic algorithm of an imported certificate must match
+    #   the algorithm of the signing CA. For example, if the signing CA key
+    #   type is RSA, then the certificate key type must also be RSA.
     #
     # This operation returns the [Amazon Resource Name (ARN)][4] of the
     # imported certificate.
@@ -635,6 +642,11 @@ module Aws::ACM
     # @option params [String, IO] :certificate_chain
     #   The PEM encoded certificate chain.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more resource tags to associate with the imported certificate.
+    #
+    #   Note: You cannot apply tags when reimporting a certificate.
+    #
     # @return [Types::ImportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportCertificateResponse#certificate_arn #certificate_arn} => String
@@ -646,6 +658,12 @@ module Aws::ACM
     #     certificate: "data", # required
     #     private_key: "data", # required
     #     certificate_chain: "data",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -663,7 +681,9 @@ module Aws::ACM
 
     # Retrieves a list of certificate ARNs and domain names. You can request
     # that only certificates that match a specific status be listed. You can
-    # also filter by specific attributes of the certificate.
+    # also filter by specific attributes of the certificate. Default
+    # filtering returns only `RSA_2048` certificates. For more information,
+    # see Filters.
     #
     # @option params [Array<String>] :certificate_statuses
     #   Filter the certificate list by status value.
@@ -876,7 +896,7 @@ module Aws::ACM
     #   For example, *.example.com protects www.example.com,
     #   site.example.com, and images.example.com.
     #
-    #   The first domain name you enter cannot exceed 63 octets, including
+    #   The first domain name you enter cannot exceed 64 octets, including
     #   periods. Each subsequent Subject Alternative Name (SAN), however, can
     #   be up to 253 octets in length.
     #
@@ -960,6 +980,9 @@ module Aws::ACM
     #
     #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more resource tags to associate with the certificate.
+    #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RequestCertificateResponse#certificate_arn #certificate_arn} => String
@@ -981,6 +1004,12 @@ module Aws::ACM
     #       certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     certificate_authority_arn: "Arn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1121,7 +1150,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

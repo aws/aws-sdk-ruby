@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2019-11-22)
+------------------
+
+* Feature - Update default endpoint for Application Auto Scaling.
+
 1.32.0 (2019-10-23)
 ------------------
 

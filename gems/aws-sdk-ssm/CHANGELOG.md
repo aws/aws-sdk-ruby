@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2019-11-22)
+------------------
+
+* Feature - Add RebootOption and LastNoRebootInstallOperationTime for DescribeInstancePatchStates and DescribeInstancePatchStatesForPatchGroup API
+
 1.63.0 (2019-11-21)
 ------------------
 

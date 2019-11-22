@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2019-11-22)
+------------------
+
+* Feature - Add Canonical ARN to LogsLocation.
+
 1.43.0 (2019-11-19)
 ------------------
 

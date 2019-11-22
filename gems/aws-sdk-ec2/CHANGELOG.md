@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2019-11-22)
+------------------
+
+* Feature - This release adds two new APIs (DescribeInstanceTypes and DescribeInstanceTypeOfferings) that give customers access to instance type attributes and regional and zonal offerings.
+
 1.119.0 (2019-11-21)
 ------------------
 

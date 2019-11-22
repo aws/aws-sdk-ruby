@@ -80,6 +80,8 @@ module Aws::ForecastService
     ForecastExportJobSummary = Shapes::StructureShape.new(name: 'ForecastExportJobSummary')
     ForecastExportJobs = Shapes::ListShape.new(name: 'ForecastExportJobs')
     ForecastSummary = Shapes::StructureShape.new(name: 'ForecastSummary')
+    ForecastType = Shapes::StringShape.new(name: 'ForecastType')
+    ForecastTypes = Shapes::ListShape.new(name: 'ForecastTypes')
     Forecasts = Shapes::ListShape.new(name: 'Forecasts')
     Frequency = Shapes::StringShape.new(name: 'Frequency')
     GetAccuracyMetricsRequest = Shapes::StructureShape.new(name: 'GetAccuracyMetricsRequest')
@@ -114,6 +116,9 @@ module Aws::ForecastService
     ParameterRanges = Shapes::StructureShape.new(name: 'ParameterRanges')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PredictorEvaluationResults = Shapes::ListShape.new(name: 'PredictorEvaluationResults')
+    PredictorExecution = Shapes::StructureShape.new(name: 'PredictorExecution')
+    PredictorExecutionDetails = Shapes::StructureShape.new(name: 'PredictorExecutionDetails')
+    PredictorExecutions = Shapes::ListShape.new(name: 'PredictorExecutions')
     PredictorSummary = Shapes::StructureShape.new(name: 'PredictorSummary')
     Predictors = Shapes::ListShape.new(name: 'Predictors')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
@@ -130,6 +135,8 @@ module Aws::ForecastService
     String = Shapes::StringShape.new(name: 'String')
     SupplementaryFeature = Shapes::StructureShape.new(name: 'SupplementaryFeature')
     SupplementaryFeatures = Shapes::ListShape.new(name: 'SupplementaryFeatures')
+    TestWindowDetails = Shapes::ListShape.new(name: 'TestWindowDetails')
+    TestWindowSummary = Shapes::StructureShape.new(name: 'TestWindowSummary')
     TestWindows = Shapes::ListShape.new(name: 'TestWindows')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampFormat = Shapes::StringShape.new(name: 'TimestampFormat')
@@ -196,6 +203,7 @@ module Aws::ForecastService
 
     CreateForecastRequest.add_member(:forecast_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ForecastName"))
     CreateForecastRequest.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PredictorArn"))
+    CreateForecastRequest.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     CreateForecastRequest.struct_class = Types::CreateForecastRequest
 
     CreateForecastResponse.add_member(:forecast_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ForecastArn"))
@@ -331,6 +339,7 @@ module Aws::ForecastService
 
     DescribeForecastResponse.add_member(:forecast_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ForecastArn"))
     DescribeForecastResponse.add_member(:forecast_name, Shapes::ShapeRef.new(shape: Name, location_name: "ForecastName"))
+    DescribeForecastResponse.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     DescribeForecastResponse.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PredictorArn"))
     DescribeForecastResponse.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DatasetGroupArn"))
     DescribeForecastResponse.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
@@ -354,6 +363,7 @@ module Aws::ForecastService
     DescribePredictorResponse.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
     DescribePredictorResponse.add_member(:featurization_config, Shapes::ShapeRef.new(shape: FeaturizationConfig, location_name: "FeaturizationConfig"))
     DescribePredictorResponse.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
+    DescribePredictorResponse.add_member(:predictor_execution_details, Shapes::ShapeRef.new(shape: PredictorExecutionDetails, location_name: "PredictorExecutionDetails"))
     DescribePredictorResponse.add_member(:dataset_import_job_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "DatasetImportJobArns"))
     DescribePredictorResponse.add_member(:auto_ml_algorithm_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "AutoMLAlgorithmArns"))
     DescribePredictorResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
@@ -426,6 +436,8 @@ module Aws::ForecastService
     ForecastSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     ForecastSummary.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
     ForecastSummary.struct_class = Types::ForecastSummary
+
+    ForecastTypes.member = Shapes::ShapeRef.new(shape: ForecastType)
 
     Forecasts.member = Shapes::ShapeRef.new(shape: ForecastSummary)
 
@@ -522,6 +534,15 @@ module Aws::ForecastService
 
     PredictorEvaluationResults.member = Shapes::ShapeRef.new(shape: EvaluationResult)
 
+    PredictorExecution.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlgorithmArn"))
+    PredictorExecution.add_member(:test_windows, Shapes::ShapeRef.new(shape: TestWindowDetails, location_name: "TestWindows"))
+    PredictorExecution.struct_class = Types::PredictorExecution
+
+    PredictorExecutionDetails.add_member(:predictor_executions, Shapes::ShapeRef.new(shape: PredictorExecutions, location_name: "PredictorExecutions"))
+    PredictorExecutionDetails.struct_class = Types::PredictorExecutionDetails
+
+    PredictorExecutions.member = Shapes::ShapeRef.new(shape: PredictorExecution)
+
     PredictorSummary.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PredictorArn"))
     PredictorSummary.add_member(:predictor_name, Shapes::ShapeRef.new(shape: Name, location_name: "PredictorName"))
     PredictorSummary.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DatasetGroupArn"))
@@ -571,6 +592,14 @@ module Aws::ForecastService
     SupplementaryFeature.struct_class = Types::SupplementaryFeature
 
     SupplementaryFeatures.member = Shapes::ShapeRef.new(shape: SupplementaryFeature)
+
+    TestWindowDetails.member = Shapes::ShapeRef.new(shape: TestWindowSummary)
+
+    TestWindowSummary.add_member(:test_window_start, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TestWindowStart"))
+    TestWindowSummary.add_member(:test_window_end, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TestWindowEnd"))
+    TestWindowSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    TestWindowSummary.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TestWindowSummary.struct_class = Types::TestWindowSummary
 
     TestWindows.member = Shapes::ShapeRef.new(shape: WindowSummary)
 

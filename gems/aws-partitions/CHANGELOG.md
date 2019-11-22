@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.244.0 (2019-11-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AutoScalingPlans`.
+
 * Feature - Added `Partition#region?` and `Partition#service?` methods.
 
 1.243.0 (2019-11-21)
