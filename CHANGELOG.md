@@ -1,6 +1,30 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
+
+* Feature - Aws::ApplicationAutoScaling - Updated the API for Application Auto Scaling.
+
+* Feature - Aws::AutoScalingPlans - Updated the API for AWS Auto Scaling Plans.
+
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::ForecastService - Updated the API, and documentation for Amazon Forecast Service.
+
+* Feature - Aws::MediaPackageVod - Updated the API, and documentation for AWS Elemental MediaPackage VOD.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
+* Feature - Aws::SNS - Updated the documentation for Amazon Simple Notification Service.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::STS - Updated the API, and documentation for AWS Security Token Service.
+
 2.11.403 (2019-11-21)
 ------------------
 
