@@ -35,6 +35,8 @@ matrix:
       env: OLD_OX=1
     - rvm: 2.5
       env: NO_H2=1
+    - rvm: jruby
+      env: PURE_RUBY=0
   allow_failures:
     - rvm: jruby
 
