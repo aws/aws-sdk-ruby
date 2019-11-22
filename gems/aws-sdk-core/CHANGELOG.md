@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add STS Presigner module with a method to generate a presigned EKS token.
+
 3.81.0 (2019-11-22)
 ------------------
 
@@ -432,6 +434,7 @@ Unreleased Changes
 ------------------
 
 * Issue - Update `ca-bundle.crt` file with newer root certificate authorities.
+
 
 3.24.0 (2018-08-03)
 ------------------
