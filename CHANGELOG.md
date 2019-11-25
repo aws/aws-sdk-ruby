@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.405 (2019-11-25)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
