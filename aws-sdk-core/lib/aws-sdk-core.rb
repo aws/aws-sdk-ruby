@@ -30,6 +30,7 @@ module Aws
     Amplify
     ApiGatewayManagementApi
     ApiGatewayV2
+    AppConfig
     AppMesh
     AppStream
     AppSync
@@ -121,6 +122,7 @@ module Aws
     IoTEvents
     IoTEventsData
     IoTJobsDataPlane
+    IoTSecureTunneling
     IoTThingsGraph
     KMS
     Kafka
@@ -218,6 +220,7 @@ module Aws
     Translate
     WAF
     WAFRegional
+    WAFV2
     WorkDocs
     WorkLink
     WorkMail

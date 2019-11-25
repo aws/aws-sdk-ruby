@@ -27,6 +27,10 @@
     "models": "apigatewayv2/2018-11-29",
     "endpoint": "apigateway"
   },
+  "AppConfig": {
+    "models": "appconfig/2019-10-09",
+    "endpoint": "appconfig"
+  },
   "AppMesh": {
     "models": "appmesh/2019-01-25",
     "endpoint": "appmesh"
@@ -389,6 +393,10 @@
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29",
     "endpoint": "data.jobs.iot"
+  },
+  "IoTSecureTunneling": {
+    "models": "iotsecuretunneling/2018-10-05",
+    "endpoint": "api.tunneling.iot"
   },
   "IoTThingsGraph": {
     "models": "iotthingsgraph/2018-09-06",
@@ -777,6 +785,10 @@
   "WAFRegional": {
     "models": "waf-regional/2016-11-28",
     "endpoint": "waf-regional"
+  },
+  "WAFV2": {
+    "models": "wafv2/2019-07-29",
+    "endpoint": "wafv2"
   },
   "WorkDocs": {
     "models": "workdocs/2016-05-01",
