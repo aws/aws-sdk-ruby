@@ -27,12 +27,12 @@ Feature: S3 Buckets
     When I create a bucket with the location constraint "EU"
     Then the bucket should have a location constraint of "EU"
 
-  Scenario: Working with bucket names that contain '.'
+  Scenario: Working with bucket names that contain '.' using HTTPS
     Given I am using the S3 "https://s3.amazonaws.com" endpoint
     When I create a bucket with a DNS compatible name that contains a dot
     Then I should be able to delete the bucket
 
-  Scenario: Working with bucket names that contain '.'
+  Scenario: Working with bucket names that contain '.' using HTTP
     Given I am using the S3 "http://s3.amazonaws.com" endpoint
     When I create a bucket with a DNS compatible name that contains a dot
     Then I should be able to delete the bucket

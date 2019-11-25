@@ -24,7 +24,7 @@ group :test do
     # oj drop support for Ruby under 2.0 since 3.3.5
     gem 'oj', '<= 3.3.4'
     # cucumber drop support for Ruby under 2.1 after 3.0.0
-    gem 'cucumber', '3.0.0'
+    gem 'cucumber', '2.99.0'
     # hashdiff drop support for Ruby under 2.0 since 0.3.9
     gem 'hashdiff', '0.3.8'
   elsif RUBY_VERSION == '2.0.0'
@@ -34,12 +34,12 @@ group :test do
     gem 'addressable', '2.5.2'
     gem 'webmock'
     # cucumber drop support for Ruby under 2.2 after 3.0.0
-    gem 'cucumber', '3.0.0'
+    gem 'cucumber', '2.99.0'
   elsif RUBY_VERSION < '2.2'
     gem 'addressable'
     gem 'webmock'
     # cucumber drop support for Ruby under 2.2 after 3.0.0
-    gem 'cucumber', '3.0.0'
+    gem 'cucumber', '2.99.0'
   else
     gem 'addressable'
     gem 'webmock'
